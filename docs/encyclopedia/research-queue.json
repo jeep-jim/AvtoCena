@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T02:17:29.580694+07:00",
+  "updatedAt": "2026-10-22T02:37:14.376259+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -533,7 +533,11 @@
         2017
       ],
       "variants": 37,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 5,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "1c7928819e7d7d0ab2e5a18d",
@@ -546,7 +550,11 @@
         2023
       ],
       "variants": 16,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 5,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "d9beb45b880f70fa01286ee4",
@@ -557,7 +565,11 @@
         2013
       ],
       "variants": 2,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 1,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "a49dff8aecc0f27d5149f172",
@@ -576,7 +588,11 @@
         2011
       ],
       "variants": 20,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 3,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "41c41db2719c2d3b75470cd9",
@@ -592,7 +608,11 @@
         2020
       ],
       "variants": 45,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 9,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "49f0712914bb0925bd328b09",
@@ -605,7 +625,11 @@
         2022
       ],
       "variants": 8,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 2,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "62f2bf675810869f68e70d2e",
@@ -618,7 +642,11 @@
         2014
       ],
       "variants": 6,
-      "status": "pending"
+      "status": "needs_exact_source",
+      "researchedVariants": 0,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "95f7940568d492384daba7df",
@@ -629,7 +657,11 @@
         2016
       ],
       "variants": 2,
-      "status": "pending"
+      "status": "needs_exact_source",
+      "researchedVariants": 0,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "449cc595c6ad47ddfa1b0e46",
@@ -644,7 +676,11 @@
         2020
       ],
       "variants": 14,
-      "status": "pending"
+      "status": "needs_exact_source",
+      "researchedVariants": 0,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "004233a68dabf0652a7f0416",
@@ -654,7 +690,11 @@
         2026
       ],
       "variants": 1,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 1,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "6311069a3ae15cc6b5c54e8a",
@@ -669,7 +709,11 @@
         2014
       ],
       "variants": 13,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 4,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "0f90ccb1a0cf0280fa416811",
@@ -689,7 +733,11 @@
         2013
       ],
       "variants": 35,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 2,
+      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
     {
       "id": "d5a8af35e3698aa33eaea9a9",

@@ -1,0 +1,1466 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+  "inspectedVariants": 199,
+  "untouchedVariants": 167,
+  "models": [
+    {
+      "modelId": "a49dff8aecc0f27d5149f172",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "records": [
+        {
+          "variantId": "ce9690d6322e2160296b63e2",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "8168c5d336ec3b94f27d9d82",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "c079d97c2c50b2ad223be668",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "2e47b609d1bd56cbf49740c7",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "d50e1c190bc2ff0de11b5f32",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "7550086389b8c8718e7c0797",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "9e1c994cabb4082e4c440e41",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "88bbd3aa01a7d88295deb415",
+          "year": 2020,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "d20fdf8f17cd270929b37d2d",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "7d5bf0884f5dc3bf40618780",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "e83469d2616faea4e9ff9f31",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "7c3e1d0e2fb850cb818d955c",
+          "year": 2021,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "14f6f5916cdf751e0a6c51af",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "3471886e746465ac70ba7395",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "b6c8d38bc9d58e621117adce",
+          "year": 2013,
+          "reason": "exact_derivative_year_needed",
+          "detail": "DBS Ultimate2013 требует точного документа; архив прежнего DBS заканчивается2012. Без доказательства год не переносить."
+        },
+        {
+          "variantId": "4c12062a25e5e5702be1e7d9",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "932911021d9a126e30becd62",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        }
+      ],
+      "processedFieldGaps": [
+        {
+          "variantId": "a0bf5c54a10cf027725c5051",
+          "year": 2011,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "drive",
+            "transmission",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "114058ed6335e57aecdcddb4",
+          "year": 2012,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "drive",
+            "transmission",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "6509e664748312b359eff602",
+          "year": 2019,
+          "unconfirmedFields": [
+            "engineCode",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        }
+      ]
+    },
+    {
+      "modelId": "49f0712914bb0925bd328b09",
+      "make": "Aston Martin",
+      "model": "DBX707",
+      "records": [
+        {
+          "variantId": "7df2e931041dac81d7b46324",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "44f444b99d4c2dfb781c25b6",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "9a7e45f3350e92d9cfaf9aee",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "d223508bb132986da66cbc2c",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "7646357baff023e4fb9efa7b",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "6673882395f061b6c29d863c",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        }
+      ],
+      "processedFieldGaps": [
+        {
+          "variantId": "9e40a81ab042b39f73db19d9",
+          "year": 2023,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "d5e7a289b736984be63f519a",
+          "year": 2025,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        }
+      ]
+    },
+    {
+      "modelId": "62f2bf675810869f68e70d2e",
+      "make": "Aston Martin",
+      "model": "Rapide",
+      "records": [
+        {
+          "variantId": "41853604678a790e8c71fc05",
+          "year": 2014,
+          "reason": "rapide_s_identity_unresolved",
+          "detail": "Найденные руководства 14MY/16MY относятся к Rapide S; строка STANDARD не содержит S. До точного соответствия не назначать мощность/КПП S."
+        },
+        {
+          "variantId": "5c55611e6a1d0fc792ffa231",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "f852f5d8744986a089312ccf",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "a792939c0ec8d4d778060915",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "adb231fea702a899080be78f",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "f7cf3525e92a0d195ec4bad1",
+          "year": 2016,
+          "reason": "rapide_s_identity_unresolved",
+          "detail": "Найденные руководства 14MY/16MY относятся к Rapide S; строка STANDARD не содержит S. До точного соответствия не назначать мощность/КПП S."
+        }
+      ],
+      "processedFieldGaps": []
+    },
+    {
+      "modelId": "95f7940568d492384daba7df",
+      "make": "Aston Martin",
+      "model": "V12 Vantage",
+      "records": [
+        {
+          "variantId": "e399d8f01e9c22333fa6d761",
+          "year": 2023,
+          "reason": "exact_generation_or_model_year_needed",
+          "detail": "2016 Other не подтверждает V12 Vantage S; Roadster 2023 требует точного MY-документа, публикация запуска относится к 2022."
+        },
+        {
+          "variantId": "6e0817e616652c898d1abfd3",
+          "year": 2016,
+          "reason": "exact_generation_or_model_year_needed",
+          "detail": "2016 Other не подтверждает V12 Vantage S; Roadster 2023 требует точного MY-документа, публикация запуска относится к 2022."
+        }
+      ],
+      "processedFieldGaps": []
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "records": [
+        {
+          "variantId": "997cbc8202089635e6c0c68b",
+          "year": 2026,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "860e6a41405fc3037c99f39c",
+          "year": 2026,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "42c0b86854e14569c8d82655",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "e1955cca26ca1dc35f77ef0b",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "433cc27aaa8b8649123505a6",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "e92d95f1191175b834440dd1",
+          "year": 2021,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "b3efe3c9ed26fea9d3004b80",
+          "year": 2021,
+          "reason": "dbx_derivative_year_or_display_unresolved",
+          "detail": "Нужны точные V8/707/Straight-Six и год; 2024 с 2023 в названии конфликтует. Декоративные названия и оставшийся китайский суффикс требуют подтверждённого перевода. Руководства DBX22MY/23MY не найдены."
+        },
+        {
+          "variantId": "c4eafeab8990f6e90fb9cf4d",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "8142415069a0bd0283bda023",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "d6ecc443cdd77d8668a02c40",
+          "year": 2020,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "c5c7fb8e4b43cb2370fb6c2d",
+          "year": 2020,
+          "reason": "dbx_derivative_year_or_display_unresolved",
+          "detail": "Нужны точные V8/707/Straight-Six и год; 2024 с 2023 в названии конфликтует. Декоративные названия и оставшийся китайский суффикс требуют подтверждённого перевода. Руководства DBX22MY/23MY не найдены."
+        },
+        {
+          "variantId": "7360f8b75d7f7764417c1635",
+          "year": 2023,
+          "reason": "dbx_derivative_year_or_display_unresolved",
+          "detail": "Нужны точные V8/707/Straight-Six и год; 2024 с 2023 в названии конфликтует. Декоративные названия и оставшийся китайский суффикс требуют подтверждённого перевода. Руководства DBX22MY/23MY не найдены."
+        },
+        {
+          "variantId": "af76a0732ab2e30943946e67",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "0d0e5f857071f3172570c67d",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "79fd81e2636890d5790b98e6",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "8d95bd0a69d8c6fc652e3217",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "5825219d877fd9e301c25da1",
+          "year": 2023,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "ff97d8f89861ab4107a96439",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "83f6a6f1fdd32338c00a6572",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "54c513c3c47e1f45943efe79",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "eed13c0c2367e9a27f61f3ce",
+          "year": 2024,
+          "reason": "dbx_derivative_year_or_display_unresolved",
+          "detail": "Нужны точные V8/707/Straight-Six и год; 2024 с 2023 в названии конфликтует. Декоративные названия и оставшийся китайский суффикс требуют подтверждённого перевода. Руководства DBX22MY/23MY не найдены."
+        },
+        {
+          "variantId": "243d5aa7d9c10ba9c63281b9",
+          "year": 2024,
+          "reason": "dbx_derivative_year_or_display_unresolved",
+          "detail": "Нужны точные V8/707/Straight-Six и год; 2024 с 2023 в названии конфликтует. Декоративные названия и оставшийся китайский суффикс требуют подтверждённого перевода. Руководства DBX22MY/23MY не найдены."
+        },
+        {
+          "variantId": "81af37ff02211e3c2a3aa38a",
+          "year": 2024,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "ffe11c4dbc0d8c5fda5b1b6a",
+          "year": 2024,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "6d07e3ac08909769c4b5d646",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "42af68b6fd3f7e6edc434d85",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "d09b3ee24138f975411ce12c",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "cb701ecd07230947c7412c84",
+          "year": 2022,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "ec97de94e7eb371ee3e755b9",
+          "year": 2022,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "44aaaff002e2e52a1ad05921",
+          "year": 2022,
+          "reason": "dbx_derivative_year_or_display_unresolved",
+          "detail": "Нужны точные V8/707/Straight-Six и год; 2024 с 2023 в названии конфликтует. Декоративные названия и оставшийся китайский суффикс требуют подтверждённого перевода. Руководства DBX22MY/23MY не найдены."
+        },
+        {
+          "variantId": "193ecea96f74a447c15416cb",
+          "year": 2022,
+          "reason": "dbx_derivative_year_or_display_unresolved",
+          "detail": "Нужны точные V8/707/Straight-Six и год; 2024 с 2023 в названии конфликтует. Декоративные названия и оставшийся китайский суффикс требуют подтверждённого перевода. Руководства DBX22MY/23MY не найдены."
+        },
+        {
+          "variantId": "3f7736a676491b6261fb183a",
+          "year": 2022,
+          "reason": "dbx_derivative_year_or_display_unresolved",
+          "detail": "Нужны точные V8/707/Straight-Six и год; 2024 с 2023 в названии конфликтует. Декоративные названия и оставшийся китайский суффикс требуют подтверждённого перевода. Руководства DBX22MY/23MY не найдены."
+        },
+        {
+          "variantId": "feb39b4751c0ee73ea29a1d2",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "aa1bc2f15b4908994ea1c264",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "297cb3c886b91599c3dc62ea",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "0f809dee4b4fc03793c69f0f",
+          "year": 2025,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        }
+      ],
+      "processedFieldGaps": [
+        {
+          "variantId": "4be346e48f8709af4b78060d",
+          "year": 2026,
+          "unconfirmedFields": [
+            "engineCode",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "a09d48777947968bd2e32fb8",
+          "year": 2021,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "grossVehicleWeightKg",
+            "powerHp"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "0203e88659df16808979e285",
+          "year": 2021,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "grossVehicleWeightKg",
+            "powerHp"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "a4e9b332a53343a503c52d16",
+          "year": 2021,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "grossVehicleWeightKg",
+            "powerHp"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "4294cfbf51b561a2f3460d0b",
+          "year": 2021,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "grossVehicleWeightKg",
+            "powerHp"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "b0c5edd1916f0437fdbdbea2",
+          "year": 2023,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "87fb2ca2e0a6e197935d2306",
+          "year": 2023,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "9acbe89a8a72ed83714004a7",
+          "year": 2022,
+          "unconfirmedFields": [
+            "engineCc",
+            "engineCode",
+            "bodyType",
+            "drive",
+            "transmission",
+            "grossVehicleWeightKg",
+            "icePowerKw",
+            "systemPowerKw",
+            "power30MinKw",
+            "batteryKwh"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "14ee4deb1e3adfe292d98570",
+          "year": 2025,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        }
+      ]
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "records": [
+        {
+          "variantId": "20cb0fdaac50aecc77a6fd6e",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "3421a7a711a63e031f98c915",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "c5fec45cec8b28d6e7e785c5",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "3ef8c4b4303c7305ba38cd9b",
+          "year": 2024,
+          "reason": "model_year_power_or_trim_conflict",
+          "detail": "STANDARD: не установлен V8/V12; MY2022 изменены мощность V8 и обозначение AMR. Не переносить данные MY2021 или по одному числу мощности; для 2024 нужен год производства."
+        },
+        {
+          "variantId": "3a5a0a26f7385ad2f8b53140",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "360557de28bffc91d1be208f",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "b6e0bfb5fc71b5739aae9f74",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "f840a81fa9d18578f1364c4e",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "406ac34dee314b5095402754",
+          "year": 2021,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "e493f8422007c82a198d54b1",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "28701d8088653127a55d777f",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "fa202d047f79fbd97c4b80ee",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "e17c865a3d24b2c2f948dade",
+          "year": 2023,
+          "reason": "model_year_power_or_trim_conflict",
+          "detail": "STANDARD: не установлен V8/V12; MY2022 изменены мощность V8 и обозначение AMR. Не переносить данные MY2021 или по одному числу мощности; для 2024 нужен год производства."
+        },
+        {
+          "variantId": "44e3b8a6b38abf17cae129d3",
+          "year": 2023,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "0c2851830383b69f446e0ae0",
+          "year": 2018,
+          "reason": "model_year_power_or_trim_conflict",
+          "detail": "STANDARD: не установлен V8/V12; MY2022 изменены мощность V8 и обозначение AMR. Не переносить данные MY2021 или по одному числу мощности; для 2024 нужен год производства."
+        },
+        {
+          "variantId": "e752ca34634c56d543fc9f7a",
+          "year": 2017,
+          "reason": "model_year_power_or_trim_conflict",
+          "detail": "STANDARD: не установлен V8/V12; MY2022 изменены мощность V8 и обозначение AMR. Не переносить данные MY2021 или по одному числу мощности; для 2024 нужен год производства."
+        },
+        {
+          "variantId": "5c11b530af3bb11e204269b9",
+          "year": 2022,
+          "reason": "model_year_power_or_trim_conflict",
+          "detail": "STANDARD: не установлен V8/V12; MY2022 изменены мощность V8 и обозначение AMR. Не переносить данные MY2021 или по одному числу мощности; для 2024 нужен год производства."
+        },
+        {
+          "variantId": "46f25fbe5ccf8375606f46b1",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "fec9802d0d8e9dfe084bd9bb",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "0a5dc35935ce1477384d8220",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "bf95ac66003e0a233c8ff91b",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "70d5fe5e4eb2d9e663915b10",
+          "year": 2022,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "a15fb4c4cda2ca2443ee72bf",
+          "year": 2022,
+          "reason": "model_year_power_or_trim_conflict",
+          "detail": "STANDARD: не установлен V8/V12; MY2022 изменены мощность V8 и обозначение AMR. Не переносить данные MY2021 или по одному числу мощности; для 2024 нужен год производства."
+        },
+        {
+          "variantId": "9a88a4f08e140892135d3b31",
+          "year": 2022,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "481f7b2c95180bf9e2cc9d55",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "d56e1bf6bc695d025390a6a7",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "05ce7e65f23205b3fdbc985e",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "585a7843dfc55d4c78ef4146",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "e716490de7d916f8928db1cd",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "5932fddfa7ff0c59a6c1b9f8",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "890cda39f85e59c986f1c62c",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "1a9907f664318108eab46669",
+          "year": 2020,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        }
+      ],
+      "processedFieldGaps": [
+        {
+          "variantId": "537c263761fa5bb21e110f8e",
+          "year": 2021,
+          "unconfirmedFields": [
+            "engineCode",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "8e54f7559ccab1bdc0b0a058",
+          "year": 2021,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "a63ddc52ab2cf3a250a24308",
+          "year": 2021,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "3c5a436c03a29ed0f91c5310",
+          "year": 2018,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "ef2530cf833a5466363769f7",
+          "year": 2019,
+          "unconfirmedFields": [
+            "engineCode",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        }
+      ]
+    },
+    {
+      "modelId": "d9beb45b880f70fa01286ee4",
+      "make": "Aston Martin",
+      "model": "DB9",
+      "records": [
+        {
+          "variantId": "0bbac4b2ad10aa4b800633cf",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        }
+      ],
+      "processedFieldGaps": [
+        {
+          "variantId": "8288d56d5bf0dc735e8be99e",
+          "year": 2013,
+          "unconfirmedFields": [
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        }
+      ]
+    },
+    {
+      "modelId": "449cc595c6ad47ddfa1b0e46",
+      "make": "Aston Martin",
+      "model": "V8",
+      "records": [
+        {
+          "variantId": "b02015cbe116eaaa349b33cb",
+          "year": 2022,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "265168517c6e2c5f24b4d084",
+          "year": 2022,
+          "reason": "canonical_model_alias_unresolved",
+          "detail": "V8 может быть псевдонимом Vantage, но каноническое соответствие не установлено. Нельзя переносить поля соседней модели; F1 Edition 2025 требует года производства."
+        },
+        {
+          "variantId": "b2bc3550d1ca38e86d4e14d4",
+          "year": 2022,
+          "reason": "canonical_model_alias_unresolved",
+          "detail": "V8 может быть псевдонимом Vantage, но каноническое соответствие не установлено. Нельзя переносить поля соседней модели; F1 Edition 2025 требует года производства."
+        },
+        {
+          "variantId": "79ee14e4609616789635ff91",
+          "year": 2022,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "f67e9c5c221070fe2b2aa798",
+          "year": 2022,
+          "reason": "canonical_model_alias_unresolved",
+          "detail": "V8 может быть псевдонимом Vantage, но каноническое соответствие не установлено. Нельзя переносить поля соседней модели; F1 Edition 2025 требует года производства."
+        },
+        {
+          "variantId": "a93cbd53b78efdd1a6d7dab4",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "2b8430233ad89cf5a628b04f",
+          "year": 2020,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "2cacea7bf8d13a0d70c6672a",
+          "year": 2024,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "0a3e08dfe9b091b58d7b4ed0",
+          "year": 2023,
+          "reason": "canonical_model_alias_unresolved",
+          "detail": "V8 может быть псевдонимом Vantage, но каноническое соответствие не установлено. Нельзя переносить поля соседней модели; F1 Edition 2025 требует года производства."
+        },
+        {
+          "variantId": "6b87f30b3affc76aa2450158",
+          "year": 2023,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "841ade7c525a558ed733896c",
+          "year": 2023,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "a3eb32add4fd4560c75fd786",
+          "year": 2025,
+          "reason": "canonical_model_alias_unresolved",
+          "detail": "V8 может быть псевдонимом Vantage, но каноническое соответствие не установлено. Нельзя переносить поля соседней модели; F1 Edition 2025 требует года производства."
+        },
+        {
+          "variantId": "0f997a521879b0d188ddefcc",
+          "year": 2021,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "e3468664c1dd1b615217ec9c",
+          "year": 2021,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        }
+      ],
+      "processedFieldGaps": []
+    },
+    {
+      "modelId": "0f90ccb1a0cf0280fa416811",
+      "make": "Aston Martin",
+      "model": "Vantage",
+      "records": [
+        {
+          "variantId": "844608cad7ad0f2bceb433a9",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "fe0c6d71a8a63c076121a6f6",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "f83ea2fc8ed01ea738e27f5a",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "5a1a802635a489c8a5526bf6",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "23c7db4696cf6ad665b29278",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "3c43bf495f7f7d612e8b239d",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "0c33e236e938e80b21ab6593",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "4a8375f4ea57c69594a475c2",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "f44596725402e00df29c1af0",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "0205cfd8ee41dc61fb6ee209",
+          "year": 2022,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "8e31a9179e69321c68b57bcb",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "6206d8550c09bf65e5066f76",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "2072661ef8336a5c95435830",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "5252065e149c0e1ded7ecfe2",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "37cd3aacf4e0b8a66764727b",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "b4c2c6d450a0d50be7b6c0ad",
+          "year": 2021,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "eb145319ae5090104e407896",
+          "year": 2013,
+          "reason": "engine_or_derivative_ambiguous",
+          "detail": "Старые STANDARD/S могут относиться к V8/V12; 2023 V8 может быть базовым/F1 Edition. Нужен точный двигатель и MY, не одна наблюдавшаяся мощность."
+        },
+        {
+          "variantId": "b4cee746cf99ae2c1c663a41",
+          "year": 2014,
+          "reason": "engine_or_derivative_ambiguous",
+          "detail": "Старые STANDARD/S могут относиться к V8/V12; 2023 V8 может быть базовым/F1 Edition. Нужен точный двигатель и MY, не одна наблюдавшаяся мощность."
+        },
+        {
+          "variantId": "287275fd103e80ebd1ec01cd",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "a05e34979027606cc5787ad8",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "cafc6dd89c98b147db8fcaca",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "abdd119f2c417698dcddb81c",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "b747e8a182eba37d6bb93794",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "bcd588c10bf1edf42fb9ec71",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "fd43dcba0edb6cbb91a37a00",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "827f2301cf4cb4230bc668e2",
+          "year": 2016,
+          "reason": "engine_or_derivative_ambiguous",
+          "detail": "Старые STANDARD/S могут относиться к V8/V12; 2023 V8 может быть базовым/F1 Edition. Нужен точный двигатель и MY, не одна наблюдавшаяся мощность."
+        },
+        {
+          "variantId": "487c8b10f6853add40a39ee3",
+          "year": 2016,
+          "reason": "engine_or_derivative_ambiguous",
+          "detail": "Старые STANDARD/S могут относиться к V8/V12; 2023 V8 может быть базовым/F1 Edition. Нужен точный двигатель и MY, не одна наблюдавшаяся мощность."
+        },
+        {
+          "variantId": "48adda295d1a41607b00054f",
+          "year": 2015,
+          "reason": "engine_or_derivative_ambiguous",
+          "detail": "Старые STANDARD/S могут относиться к V8/V12; 2023 V8 может быть базовым/F1 Edition. Нужен точный двигатель и MY, не одна наблюдавшаяся мощность."
+        },
+        {
+          "variantId": "f56f48b10b05e45b7bbe4a60",
+          "year": 2023,
+          "reason": "engine_or_derivative_ambiguous",
+          "detail": "Старые STANDARD/S могут относиться к V8/V12; 2023 V8 может быть базовым/F1 Edition. Нужен точный двигатель и MY, не одна наблюдавшаяся мощность."
+        },
+        {
+          "variantId": "1b14f93c24e20508c93f9fdc",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "551353440ff3e0403fc7ffe4",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "6bb8478b9951d891680b3a16",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "f409b6759d8f62b2e1a97307",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        }
+      ],
+      "processedFieldGaps": [
+        {
+          "variantId": "deadae0c5da696139ca0328d",
+          "year": 2025,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "6d512d1290f58497b05f4b3f",
+          "year": 2019,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "drive",
+            "grossVehicleWeightKg",
+            "powerHp"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        }
+      ]
+    },
+    {
+      "modelId": "6311069a3ae15cc6b5c54e8a",
+      "make": "Aston Martin",
+      "model": "Vanquish",
+      "records": [
+        {
+          "variantId": "9831a1ba41ad4b74096049d3",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "84dc23452ded72d72bc93bab",
+          "year": 2014,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "5f03b4eeb23d0c1ca9489b0a",
+          "year": 2014,
+          "reason": "vanquish_body_or_year_unresolved",
+          "detail": "Для Volante2014 найдено только руководство купе; нельзя исправлять конфликт кузова без точного документа. 2020 справочный год требует проверки производства."
+        },
+        {
+          "variantId": "7e43fd552d016963d8a3d30d",
+          "year": 2025,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "b8e0b873d3feedf591345ff9",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "bd7e5f01a2f0edf0cfdcc253",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "9bce249cb6511a512d34a06e",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "71a3a9cd9cdaa9163507e1b6",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "5c004d69934cd84f9a3d5b1d",
+          "year": 2020,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        }
+      ],
+      "processedFieldGaps": [
+        {
+          "variantId": "dcc9e9b88e068c04dba9f85d",
+          "year": 2017,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "drive",
+            "grossVehicleWeightKg",
+            "icePowerKw",
+            "powerHp",
+            "powerKw"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "445aa16d2a4103230edf046c",
+          "year": 2017,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "drive",
+            "grossVehicleWeightKg",
+            "icePowerKw",
+            "powerHp",
+            "powerKw"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "2cd77f806912a89cf825920b",
+          "year": 2015,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "drive",
+            "grossVehicleWeightKg",
+            "icePowerKw",
+            "powerHp",
+            "powerKw"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "2edaf57e01f731796bf56ebc",
+          "year": 2025,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        }
+      ]
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "records": [
+        {
+          "variantId": "f04fe58205da7fff1e9e35d5",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "3980b140ecccff48a2f065f0",
+          "year": 2023,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "b6f71f35609f320b1e631503",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "1cd5dff6d83c2137f81b93fd",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "60d10d5d729a7425295ab99d",
+          "year": 2024,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "cdf04d6b3265d60d4837e48e",
+          "year": 2024,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        },
+        {
+          "variantId": "94a2e4b4c25beb160a4d791b",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "78ed5a25832f5c48f894f3bc",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "0fdae907a926da7b83ce0d81",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "c6c7a995f538359915d8228a",
+          "year": 2025,
+          "reason": "protected_review_or_reference",
+          "detail": "Строка review/справочная; без точной модификации не перезаписывать и не выводить комплектацию из мощности."
+        },
+        {
+          "variantId": "0a703c6b698d7d41426406c8",
+          "year": 2025,
+          "reason": "missing_exact_trim",
+          "detail": "Нет точной комплектации; нужен первичный идентификатор исполнения."
+        }
+      ],
+      "processedFieldGaps": [
+        {
+          "variantId": "94f674fd816c43ce5d8de6c5",
+          "year": 2026,
+          "unconfirmedFields": [
+            "engineCc",
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg",
+            "icePowerKw",
+            "powerKw"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "f3ce66b1dce663d80b2bc58d",
+          "year": 2024,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "f7fe93cdc70d6d04b466a4f2",
+          "year": 2024,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "55f6c826f8e093d1925bd5b1",
+          "year": 2024,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        },
+        {
+          "variantId": "7d0a07a3b06b978a92c1560c",
+          "year": 2024,
+          "unconfirmedFields": [
+            "engineCode",
+            "drive"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        }
+      ]
+    },
+    {
+      "modelId": "004233a68dabf0652a7f0416",
+      "make": "Aston Martin",
+      "model": "Valhalla",
+      "records": [],
+      "processedFieldGaps": [
+        {
+          "variantId": "8f3abae56b6868c770fac771",
+          "year": 2026,
+          "unconfirmedFields": [
+            "engineCode",
+            "bodyType",
+            "power30MinKw",
+            "batteryKwh"
+          ],
+          "detail": "Это отсутствие полевого подтверждения, а не обязательно пустая ячейка. Сохранять ручные и наблюдавшиеся значения до новых доказательств."
+        }
+      ]
+    }
+  ],
+  "sourceNotes": [
+    "Rapide S: DD43-19A321-AA.pdf (14MY), GD43-19A321-AA.pdf (16MY); требуют точного соответствия STANDARD.",
+    "Vanquish S 17.5MY: 444/433кВт зависят от каталитического исполнения.",
+    "Vantage MY25: заводское округление 490кВт; не переписывать автоматически на489.",
+    "Valhalla NonEU26MY: 609кВт ДВС/793кВт системы; 185кВт максимум электромоторов не является30-минутной мощностью."
+  ]
+}

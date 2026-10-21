@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+  "reviewedModels": 12,
+  "inspectedVariants": 199,
+  "savedVariants": 32,
+  "confirmedFieldAssertions": 237,
+  "untouchedVariants": 167,
+  "batches": [
+    {
+      "id": "research-2026-10-22-aston-first",
+      "commit": "7fdbe138efa81b0b322597cc8bc0cd6445756662",
+      "workflowRun": 39661186226,
+      "job": 119434288724,
+      "savedVariants": 14,
+      "fields": 121
+    },
+    {
+      "id": "research-2026-10-22-aston-rest",
+      "commit": "32db773353498f20f562198fd81b4e7e4b82fa18",
+      "workflowRun": 39662752109,
+      "job": 119439763801,
+      "savedVariants": 18,
+      "fields": 116
+    }
+  ],
+  "status": "success",
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
+  "integration": {
+    "status": "not_implemented",
+    "visitorRequestSearchOrSyncAdded": false
+  },
+  "notes": [
+    "32/32 строки повторно прочитаны после завершения соответствующего workflow; проверены все237 значения, batchId, evidence и review.",
+    "Счётчик включает подтверждения уже наблюдавшихся значений; не237 заполненных пустых ячеек.",
+    "Первое чтение второй партии началось до окончания workflow и обнаружило ещё старую Vantage. После SUCCESS выполнен полный повторный readback18/18."
+  ]
+}
