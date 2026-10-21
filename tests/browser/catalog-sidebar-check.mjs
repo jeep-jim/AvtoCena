@@ -97,6 +97,7 @@ try{
   const visible=await page.locator('.ac-catalog-market-rail > div').evaluateAll(els=>els.filter(el=>getComputedStyle(el).display!=='none').length);
   assert.equal(visible,width<768?6:5);
   assert.equal(await page.locator('.ac-catalog-card:visible').count(),width<768?6:5);
+  // Count actual published cards, not only their grid wrappers.
   const cards=await page.locator('.ac-catalog-card:visible').evaluateAll(els=>els.map(el=>el.getBoundingClientRect().top));
   assert.ok(cards.every(top=>Math.abs(top-cards[0])<2),'preview cards occupy one row');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);

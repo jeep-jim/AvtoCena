@@ -9,7 +9,7 @@ import {MarketResultCount} from '../../apps/web/components/catalog/MarketResultC
 import {JapanSectionTabs} from '../../apps/web/components/catalog/JapanSectionTabs';
 import {GreenCornerRail} from '../../apps/web/components/catalog/GreenCornerRail';
 const preview=new URLSearchParams(location.search).has('marketPreview');
-const previewItems=Array.from({length:6},(_,i)=>({id:'ajes-stats-fixture'+i,sourceId:'ajes_japan_feed',sourcePrice:1500000,sourceCurrency:'JPY',totalRub:1000000,market:'japan',make:'Toyota',model:'Corolla',year:2023,images:[],sellerPriceRub:1000000,catalogPricingMode:'seller'}));
+const previewItems=Array.from({length:6},(_,i)=>({id:'ajes-stats-fixture'+i,sourceId:'ajes_japan_feed',sourcePrice:1500000,sourceCurrency:'JPY',calculationStatus:'needs_data',calculationSnapshot:{currencyRate:{rateSource:'cbr',currency:'JPY',sourcePrice:1500000,effectiveRate:2/3}},market:'japan',make:'Toyota',model:'Corolla',year:2023,images:[],sellerPriceRub:1000000,catalogPricingMode:'seller'}));
 const dealer = new URLSearchParams(location.search).get('dealer')==='1';
 const market = new URLSearchParams(location.search).get('market')||'';
 const initial = {market,bodyType:'suv',yearTo:'2026',make:new URLSearchParams(location.search).get('make')||''};

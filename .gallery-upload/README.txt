@@ -1,1 +1,0 @@
-Staging directory for one-shot buyer gallery ZIP import. The binary ZIP is attached to the same commit via Git tree and removed automatically after import.
