@@ -1,5 +1,8 @@
 name: Verify dealer selection sharing
 on:
+  push:
+    branches: [main]
+    paths: ['tests/browser/dealer-selection.mjs', 'apps/web/components/dealers/DealerSelectionShare.tsx']
   pull_request:
     paths:
       - 'apps/web/components/catalog/*Share*'
@@ -30,6 +33,7 @@ jobs:
         with:
           node-version: 24
           cache: npm
+      - run: python3 tests/regcloud-social-previews.test.py
       - run: npm ci
       - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-multiselect.test.ts tests/offer-share.test.ts tests/short-share.test.ts tests/dealer-selection-share.test.ts tests/dealer-selection-performance.test.ts tests/catalog-market-brand-projection.test.ts tests/catalog-projection-reuse.test.ts tests/photo-proxy.test.ts tests/dealer-market-settings.test.ts
       - run: node node_modules/typescript/bin/tsc --project apps/web/tsconfig.json --noEmit --incremental false

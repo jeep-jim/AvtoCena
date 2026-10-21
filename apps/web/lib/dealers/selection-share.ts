@@ -16,3 +16,8 @@ export function selectionTarget(dealerId:string,query:string){
  const params=selectionQuery(new URLSearchParams(query));params.set('selection','1');
  return `/dealers/${dealerId}?${params}#catalog`;
 }
+
+export function selectionTitle(value:unknown){
+ if(typeof value!=='string')return '';
+ return value.replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim().slice(0,160);
+}

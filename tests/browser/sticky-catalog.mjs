@@ -67,7 +67,7 @@ try{
   assert.equal(new URL(page.url()).searchParams.get('stock'),'green');
   await page.screenshot({path:`${out}/${width}-${theme}.png`});
   await bar.getByRole('button',{name:'Убрать Corolla Cross',exact:true}).click();await page.waitForFunction(()=>!new URLSearchParams(location.search).has('model'));
-  await bar.getByRole('button',{name:'Наверх к фильтрам',exact:true}).click();await page.waitForFunction(()=>scrollY<2);await bar.waitFor({state:'hidden'});
+  await bar.getByRole('button',{name:'Открыть фильтры каталога',exact:true}).click();if(width<1024){await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor();await page.keyboard.press('Escape');}else{await page.waitForFunction(()=>scrollY<200);}
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   if(width<1024){
    await page.goto(`${origin}/cars?theme=${theme}&empty=1`);

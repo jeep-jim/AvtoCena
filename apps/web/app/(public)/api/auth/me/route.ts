@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import {canManageDealer} from '@/lib/dealers/access';
 import { getCurrentUser } from "@/lib/auth";
 
 export async function GET() {
@@ -16,7 +17,8 @@ export async function GET() {
       displayName: user.displayName,
       avatarUrl: user.avatarUrl || null,
       role: user.role,
-      partnerCode: user.partnerCode || null
+      partnerCode: user.partnerCode || null,
+      canCreateSelection: await canManageDealer(user,"dealer_topavto")
     }
   }, {headers:{"Cache-Control":"no-store"}});
 }

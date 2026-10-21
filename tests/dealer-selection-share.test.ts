@@ -64,3 +64,17 @@ test('shared green and auction selections retain their source and query',()=>{
  for(const [key,value] of input)assert.equal(output.get(key),value);
  }
 });
+
+
+test('custom selection title survives storage and changes link identity; blank keeps legacy links',async()=>{
+ const records=new Map();const storage:any={readJson:async(k:string,f:any)=>records.get(k)??f,writeJson:async(k:string,v:any)=>records.set(k,v)};
+ const path=selectionTarget('dealer_topavto','make=Audi&market=china');
+ const original=cleanShareTarget(path,false);
+ const blank=cleanShareTarget(path,false,'   ');assert.deepEqual(blank,original);
+ const titled=cleanShareTarget(path,false,'  Для Николая\n Audi  ');
+ assert.equal(titled.version===2&&titled.title,'Для Николая Audi');
+ const url=await createShortShare(titled,storage);assert.deepEqual(await readShortShare(url.slice(3),storage),titled);
+ assert.notEqual(url,await createShortShare(original,storage));
+ assert.equal(cleanShareTarget(path,false,'я'.repeat(200)).version,2);
+ assert.equal(cleanShareTarget('/cars/offer/car',false,'not a car title').version,1);
+});

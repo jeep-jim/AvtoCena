@@ -9,7 +9,7 @@ import type {CrmNotice} from "../../lib/crm-unified-notifications";
 import { StaffHeartbeat } from "./StaffPresence";
 import { CrmPushControl, unsubscribeStaffPush } from "./CrmPushControl";
 import { useEffect, useRef, useState } from "react";
-import { Bell, UserRound, Volume2, VolumeX, Settings, ClipboardList, ChevronDown, AlarmClock, X } from "lucide-react";
+import { Share2, Bell, UserRound, Volume2, VolumeX, Settings, ClipboardList, ChevronDown, AlarmClock, X } from "lucide-react";
 import { canMigrateLegacyAcknowledgement, type AlertLead } from "../../lib/crm-alert-state";
 const ENABLED_KEY="avtocena_crm_notifications_enabled";
 const get=(key:string)=>{try{return localStorage.getItem(key);}catch{return null;}};
@@ -37,7 +37,7 @@ function beep(){
   }catch{}
 }
 type InboxLead = AlertLead & {unread:boolean;assignmentUnread?:boolean;hasReadReceipt?:boolean;assignmentAt?:string;eventKey:string;name?:string;phone?:string;telegram?:string;car?:string;offerTitle?:string;selectedOffers?:{title:string}[]};
-export function CrmLiveAlerts({userId, role="manager", displayName="Кабинет", header=false,crm=false,avatar}:{userId:string;role?:string;displayName?:string;header?:boolean;crm?:boolean;avatar?:string}) {
+export function CrmLiveAlerts({userId, role="manager", displayName="Кабинет", header=false,crm=false,avatar,canCreateSelection=false}:{userId:string;role?:string;displayName?:string;header?:boolean;crm?:boolean;avatar?:string;canCreateSelection?:boolean}) {
   const [enabled,setEnabled]=useState(false),[pending,setPending]=useState<InboxLead[]>([]),[authorized,setAuthorized]=useState(true);
   const [recent,setRecent]=useState<InboxLead[]>([]),[leadsOpen,setLeadsOpen]=useState(false);
   const [notifications,setNotifications]=useState<CrmNotice[]>([]),[reminders,setReminders]=useState<CrmReminder[]>([]),[notificationsOpen,setNotificationsOpen]=useState(false);
@@ -196,6 +196,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       {crm?<form onSubmit={event=>{event.preventDefault();const form=event.currentTarget;put(soundKey,"0");void unsubscribeStaffPush(userId).finally(()=>form.submit());}} action="/api/auth/logout?redirect=/login" method="post"><button type="submit" className="w-full min-h-11 px-2 text-left text-sm">Выйти</button></form>:null}
       <CrmPushControl userId={userId}/>
       </div>
+      {canCreateSelection&&<a className="ac-staff-selection" href="/dealers/dealer_topavto?selection=1&filters=1#catalog"><Share2 size={18}/>Подборка для клиента</a>}
     </div>
     {!notificationsOpen&&hasAlert?<div role="status" className="ac-staff-notice">
       <button type="button" className="ac-staff-notice-close" aria-label="Закрыть и остановить звук" onClick={dismissAlert}><X size={20}/></button>
@@ -208,7 +209,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     <style dangerouslySetInnerHTML={{__html:`
       .ac-unified-badge{position:absolute;right:-5px;top:-5px}.ac-unified-notifications{position:absolute;right:0;top:calc(100% + 12px);width:440px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 100px);overflow:auto;overscroll-behavior:contain;padding:16px;background:var(--ac-surface,#1e293b);border:1px solid var(--ac-border);border-radius:18px;z-index:145;box-shadow:0 16px 50px #0003;color:var(--ac-text)}.ac-notifications-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.ac-notifications-heading>button{width:36px;height:36px;display:grid;place-items:center}.ac-notification{display:block;padding:12px;border-radius:12px;background:var(--ac-surface-2);border:1px solid var(--ac-border);margin-top:8px;font-size:13px}.ac-notification.is-unread{border-left:3px solid #ff353d}.ac-notification strong,.ac-notification span{display:block;overflow-wrap:anywhere}.ac-notification span{margin-top:5px;color:var(--ac-muted);white-space:pre-wrap}.ac-notification>button,.ac-notifications-read{font-size:12px;text-decoration:underline;margin-top:8px;min-height:32px}.ac-notifications-empty{font-size:13px;color:var(--ac-muted);margin:10px 0}.ac-notifications-subtitle{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;margin-top:18px}.ac-unified-notifications .crm-reminder-row{display:flex;gap:10px;border-top:1px solid var(--ac-border);padding:12px 0;font-size:13px}.crm-reminder-copy{flex:1;min-width:0}.crm-reminder-copy>*{display:block;overflow-wrap:anywhere}.crm-reminder-copy time,.crm-reminder-copy small{font-size:11px;color:var(--ac-muted);margin-top:5px}.crm-reminder-row>button{flex:none;width:36px;height:36px;border-radius:10px;background:var(--ac-surface-2);display:grid;place-items:center}.ac-staff-tools--header .ac-unified-notifications{position:fixed;top:68px;right:max(24px,calc((100vw - 1500px)/2 + 32px))}@media(max-width:767px){.ac-unified-notifications,.ac-staff-tools--header .ac-unified-notifications{position:fixed;top:76px;right:12px;width:calc(100vw - 24px)}}
       .ac-staff-notice{padding-right:58px!important}.ac-staff-notice-close{position:absolute;top:8px;right:8px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--ac-border,#526074);background:var(--ac-surface,#1e293b);color:inherit;cursor:pointer}.ac-staff-notice-close:focus-visible{outline:2px solid currentColor;outline-offset:2px}
-      .ac-staff-tools{position:relative;display:flex;align-items:center;gap:6px;color:var(--ac-text,#fff)}
+      .ac-staff-menu a.ac-staff-selection{background:#1689df!important;color:#fff!important;-webkit-text-fill-color:#fff!important;margin-top:8px;border-radius:12px;justify-content:center;font-weight:700}.ac-staff-tools{position:relative;display:flex;align-items:center;gap:6px;color:var(--ac-text,#fff)}
       .ac-staff-leads,.ac-staff-account{display:flex;align-items:center;justify-content:center;gap:7px;height:44px;border-radius:12px;background:var(--ac-surface-2,#273343);color:inherit;font-size:12px;font-weight:700}
       .ac-staff-leads{padding:0 12px}.ac-staff-account{width:40px;position:relative}.ac-staff-mobile-badge{display:none}
       .ac-staff-tools--crm .ac-staff-mobile-badge{display:block;position:absolute;right:-4px;top:-4px}

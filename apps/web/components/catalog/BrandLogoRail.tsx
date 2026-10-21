@@ -130,7 +130,13 @@ function BrandDirectoryTile({
   </Link>;
 }
 
-export function BrandLogoRail({
+export function BrandLogoRail(props: Parameters<typeof BrandLogoRailContent>[0]) {
+ const query=useSearchParams();
+ const selected=query.get("make")||query.get("brand")||props.initial?.make||props.initial?.brand;
+ return !props.directoryMode && selected?.trim() ? null : <BrandLogoRailContent {...props}/>;
+}
+
+function BrandLogoRailContent({
   brands,
   resultCount,
   initial = {},

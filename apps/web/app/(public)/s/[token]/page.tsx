@@ -14,8 +14,8 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
  if(!record)return {title:'Ссылка не найдена',robots:{index:false,follow:false}};
  if(record.version===2){
   const selection=await readDealerSelection(record);if(!selection)return {title:'Подборка недоступна',robots:{index:false,follow:false}};
-  const url=`https://avtocena.com/s/${token}`;
-  return {title:SELECTION_TITLE,description:selection.description,robots:{index:false,follow:true},alternates:{canonical:url},openGraph:{type:'website',title:SELECTION_TITLE,description:selection.description,url,images:selection.images},twitter:{card:selection.images.length?'summary_large_image':'summary',title:SELECTION_TITLE,description:selection.description,images:selection.images}};
+  const url=`https://avtocena.com/s/${token}`,title=record.title||SELECTION_TITLE;
+  return {title,description:selection.description,robots:{index:false,follow:true},alternates:{canonical:url},openGraph:{type:'website',title,description:selection.description,url,images:selection.images},twitter:{card:selection.images.length?'summary_large_image':'summary',title,description:selection.description,images:selection.images}};
  }
  const target=new URL(record.path,'https://avtocena.com');
  const metadata=await generateOfferMetadata({params:Promise.resolve({id:target.pathname.slice('/cars/offer/'.length)}),searchParams:Promise.resolve(Object.fromEntries(target.searchParams))});

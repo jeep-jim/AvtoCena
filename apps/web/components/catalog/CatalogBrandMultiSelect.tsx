@@ -121,13 +121,13 @@ export function CatalogBrandMultiSelect({
     const needle = query.trim().toLocaleLowerCase("ru-RU");
     return [...seen.values()]
       .filter((option) => !needle || option.label.toLocaleLowerCase("ru-RU").includes(needle))
-      .sort((left, right) => left.label.localeCompare(right.label, "ru"));
+      .sort((left, right) => Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===right.value.toLocaleLowerCase("ru-RU")))-Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===left.value.toLocaleLowerCase("ru-RU"))) || left.label.localeCompare(right.label, "ru"));
   }, [options, query, selected, stats.counts]);
 
   const choose = (make: string) => {
     setOpen(false);
     setQuery("");
-    onChange(!make ? "" : (selected.includes(make) ? selected.filter(item => item !== make) : [...selected, make]).join(","));
+    onChange(!make ? "" : (selected.some(item=>item.toLowerCase()===make.toLowerCase()) ? selected.filter(item => item.toLowerCase() !== make.toLowerCase()) : [...selected, make]).join(","));
   };
 
   const triggerLabel = selected.length === 0
@@ -151,10 +151,10 @@ export function CatalogBrandMultiSelect({
         {brands.map((option) => {
           const active = selected.some(make => make.toLocaleLowerCase("ru-RU") === option.value.toLocaleLowerCase("ru-RU"));
           const modelCount = Number(stats.modelCounts[option.value] || 0);
-          return <button key={option.value} type="button" data-facet-value={option.value} onPointerDown={(event) => event.preventDefault()} onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-12 w-full items-center gap-2 rounded-xl px-2.5 py-1.5 text-left ${active ? "is-active" : ""}`} aria-pressed={active}>
+          return <button key={option.value} type="button" data-facet-value={option.value} onPointerDown={(event) => event.preventDefault()} onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-12 w-full items-center gap-2 rounded-xl px-2.5 py-1.5 text-left ${active ? "is-brand-selected" : ""}`} aria-pressed={active}>
             <BrandLogoVisual brand={option.value} className="h-8 w-12 shrink-0" />
             <span className="min-w-0 flex-1 truncate text-sm font-black">{option.label}<span className="ml-1.5 text-[11px] font-bold text-[var(--ac-muted)]">· {modelCount ? modelCountLabel(modelCount) : "…"}</span></span>
-            <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[12px] font-black transition ${active ? "bg-red-500 text-white" : "border border-[var(--ac-border)] text-transparent"}`}>✓</span>
+            <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[12px] font-black transition ${active ? "text-red-500" : "border border-[var(--ac-border)] text-transparent"}`}>✓</span>
           </button>;
         })}
         {!brands.length ? <div className="px-3 py-5 text-center text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}

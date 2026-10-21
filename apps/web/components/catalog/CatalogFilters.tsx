@@ -423,6 +423,13 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     window.addEventListener(OPEN_SELECTION_FILTERS,open);return()=>window.removeEventListener(OPEN_SELECTION_FILTERS,open);
   },[dealer?.id]);
 
+  useEffect(()=>{
+    if(!dealer || new URLSearchParams(window.location.search).get('filters')!=='1')return;
+    if(window.matchMedia('(max-width:1023px)').matches)setMobileOpen(true);
+    else document.querySelector('.dealer-shared-catalog .ac-catalog-filter-panel')?.scrollIntoView({block:'start'});
+    const url=new URL(window.location.href);url.searchParams.delete('filters');window.history.replaceState(window.history.state,'',url.pathname+url.search+url.hash);
+  },[dealer?.id]);
+
   const activeFacets = electricOnly && draft.stock !== "green" ? electricFacets || facets : facets;
   const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);
   const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);
@@ -526,7 +533,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
 
     <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>Фильтры</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
 
-    <StickyCatalogControls hidePrice={false} chips={chips} onRemove={removeFilter} sort={sortParam(sortKey,sortDirection)} onSort={value=>{const next=initialSort(value);setSortKey(next.key);setSortDirection(next.direction);}} hidden={mobileOpen}/>
+    <StickyCatalogControls onOpenFilters={()=>{if(window.matchMedia("(max-width:1023px)").matches)setMobileOpen(true);else document.querySelector(".ac-catalog-filter-panel")?.scrollIntoView({block:"start",behavior:"smooth"});}} hidePrice={false} chips={chips} onRemove={removeFilter} sort={sortParam(sortKey,sortDirection)} onSort={value=>{const next=initialSort(value);setSortKey(next.key);setSortDirection(next.direction);}} hidden={mobileOpen}/>
 
     {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
       <div className="ac-mobile-filter-header shrink-0 px-4 pt-1"><div className="mx-auto h-1 w-10 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-2 py-2"><div className="min-w-0 flex items-center gap-2" role="status" aria-live="polite" aria-busy={updating}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span className="text-sm font-black tabular-nums">{updating ? "Обновляем…" : typeof resultCount === "number" ? `Найдено: ${resultCount.toLocaleString("ru-RU")}` : "Каталог"}</span></div><button type="button" data-ac-react-close="1" data-ac-mobile-close="1" onClick={() => setMobileOpen(false)} className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl ${chips.length || sortKey ? "ac-mobile-apply" : ""}`} aria-label={chips.length || sortKey ? "Применить фильтры" : "Закрыть"}>{chips.length || sortKey ? "ОК" : "×"}</button></div></div>

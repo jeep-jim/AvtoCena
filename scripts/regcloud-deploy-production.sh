@@ -140,6 +140,18 @@ if '# AvtoCena bounded crawler rendering' not in s:
     assert s.count(ending)==1
     s=s.replace(ending,'    proxy_send_timeout 120s;\n  }\n  location @avtocena_crawler_wait {\n    add_header Retry-After 5 always;\n    add_header Cache-Control no-store always;\n    return 429;\n  }\n}')
     s=maps+s
+# Social previews must not compete with search crawlers for one global budget.
+# Keep an independent per-address limit: a User-Agent is not authentication.
+if '# AvtoCena bounded social previews' not in s:
+    social = r'~*(TelegramBot|TwitterBot|WhatsApp|facebookexternalhit|Facebot|vkShare|vkbot|Viber|TamTam|OdklBot|Pinterest|Snapchat|MaxBot)'
+    anchor='map $http_user_agent $ac_catalog_robot {\n  default 0;'
+    assert s.count(anchor)==1
+    s=s.replace(anchor,anchor+'\n  '+social+' 0;')
+    maps = '# AvtoCena bounded social previews\nmap $http_user_agent $ac_social_preview_budget {\n  default "";\n  '+social+' $binary_remote_addr;\n}\nlimit_req_zone $ac_social_preview_budget zone=avtocena_social_previews:1m rate=60r/m;\nlimit_conn_zone $ac_social_preview_budget zone=avtocena_social_connections:1m;\n'
+    anchor='    limit_req zone=avtocena_catalog_robots burst=4 nodelay;'
+    assert s.count(anchor)==1
+    s=s.replace(anchor,anchor+'\n    limit_req zone=avtocena_social_previews burst=12 nodelay;\n    limit_conn avtocena_social_connections 4;')
+    s=maps+s
 p.write_text(s)
 PY
 switched=1

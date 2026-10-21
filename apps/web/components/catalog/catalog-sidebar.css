@@ -117,3 +117,11 @@ html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) input.ac-quick-c
 
 /* Keep the owner reference: readable title above the small red explanation. */
 .ac-power-limit .ac-power-copy>span:first-child{color:var(--ac-text)}
+
+/* Selected brands retain the normal row; only their checkmark is red. */
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) .ac-brand-options .is-brand-selected{background:var(--ac-surface-2)!important;color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text)!important}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) .ac-brand-options .is-brand-selected>span:last-child{color:#ff353d!important;-webkit-text-fill-color:#ff353d!important;background:transparent!important}
+@media(min-width:1024px){
+ html body .ac-catalog-sidebar .ac-filter-dropdown>.ac-hide-scrollbar{max-height:min(440px,60dvh)}
+ html body .ac-catalog-sidebar .ac-filter-dropdown.ac-model-dropdown{max-height:min(520px,70dvh)}
+}

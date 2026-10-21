@@ -38,6 +38,17 @@ async function contextFor(width){const c=await browser.newContext({viewport:{wid
 async function openSheet(page){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();const sheet=page.locator('.ac-mobile-filter-sheet');await sheet.waitFor();if(!live){assert.equal(await sheet.evaluate(el=>el.parentElement.parentElement===document.body),true,'filter must escape dealer stacking contexts');assert.equal(await page.evaluate(()=>[20,innerHeight-20].every(y=>document.elementFromPoint(innerWidth/2,y)?.closest('.ac-mobile-filter-backdrop'))),true,'filter overlay must cover header and bottom dock');}await page.waitForTimeout(350);const headingColor=await sheet.locator('.ac-mobile-filter-header [role="status"]').evaluate(el=>getComputedStyle(el).color);if(await page.evaluate(()=>document.documentElement.dataset.theme==='light'))assert.notEqual(headingColor,'rgb(255, 255, 255)','light filter heading must remain readable outside page wrapper');if(!page.url().includes('baseline=1'))assert.equal(await page.locator('.ac-notice-stack').isVisible(),false,'notices must not cover the modal filter controls');return sheet;}
 async function positions(scope){return scope.locator('.ac-filter-control,.ac-sort-control,.ac-range-card').evaluateAll(els=>els.filter(el=>el.getClientRects().length>0).map(el=>{const s=el.closest('.ac-mobile-filter-sheet')?.querySelector(':scope > .ac-hide-scrollbar');const r=el.getBoundingClientRect();return [Math.round(r.x),Math.round(r.y+(s?.scrollTop||0)),Math.round(r.width),Math.round(r.height)];}));}
 async function menuGeometry(page,root,menu,expectedWidth){const r=await root.boundingBox(),m=await menu.boundingBox();assert.ok(r&&m);assert.equal(await menu.evaluate(el=>getComputedStyle(el).position),'absolute');assert.ok(Math.abs(m.width-expectedWidth)<3,`width ${JSON.stringify({r,m,expectedWidth})}`);assert.ok(m.x>=-1&&m.x+m.width<=page.viewportSize().width+1);assert.ok(m.y>=r.y+r.height&&m.y-r.y-r.height<=13);return {width:m.width,height:m.height,gap:m.y-r.y-r.height};}
+async function verifyBrandSelection(page,scope){
+ await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();
+ const options=scope.locator('.ac-brand-options [data-facet-value]');
+ assert.equal(await options.first().getAttribute('aria-pressed'),'true','selected brand is first');
+ for(const theme of ['light','dark']){
+  await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
+  const colors=await options.first().evaluate(el=>({background:getComputedStyle(el).backgroundColor,color:getComputedStyle(el).color,check:getComputedStyle(el.lastElementChild).color}));
+  assert.notEqual(colors.background,'rgb(255, 53, 61)');assert.equal(colors.check,'rgb(255, 53, 61)');assert.notEqual(colors.color,colors.check);
+ }
+ await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();
+}
 async function verifyControls(page,scope){
  const sort=scope.locator('.ac-sort-select');
  assert.equal(await sort.locator('input[name="sort"]').inputValue(),'');
@@ -83,7 +94,7 @@ try{
  await page.route('**/api/catalog/brand-counts**',route=>route.fulfill({json:{counts:{Toyota:10,BMW:8}}}));
  const errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error('PAGE_ERROR',String(e));});await page.goto(origin+'/cars');await page.waitForTimeout(1000);assert.deepEqual(errors,[]);
  const sidebar=page.locator('.ac-catalog-sidebar');
- assert.deepEqual(await page.locator('.ac-brand-rail a').allTextContents(),['Toyota']);
+ assert.equal(await page.locator('.ac-brand-rail a').count(),0,'selected makes hide the duplicate brand rail');
  if(width>=1024){
  const b=await sidebar.boundingBox(),r=await page.locator('.ac-catalog-results').boundingBox(),h=await page.locator('.ac-catalog-heading').boundingBox();assert.ok(b.x+b.width<=r.x,'filters remain left of results');assert.ok(b.y<=h.y+1,'sidebar starts with the heading');
  assert.equal(await sidebar.evaluate(el=>getComputedStyle(el).scrollbarWidth),'none');
@@ -96,6 +107,7 @@ try{
  const brandSearch=await brandMenu.locator('input').boundingBox();
  assert.ok(brandSearch.x>=menuBounds.x&&brandSearch.x+brandSearch.width<=menuBounds.x+menuBounds.width,'whole search field is visible');
  await page.keyboard.press('Escape');
+ await verifyBrandSelection(page,sidebar);
 
  assert.equal(await sidebar.getByRole('button',{name:/Выбрать город. Сейчас/}).count(),1);
  assert.equal(await sidebar.locator('.ac-catalog-filter-panel .ac-filter-control').first().getAttribute('aria-haspopup'),'dialog');
@@ -118,8 +130,8 @@ try{
    assert.equal(await page.locator('.ac-catalog-card').count(),6);
    assert.equal(await page.locator('[data-catalog-view]').getAttribute('data-catalog-view'),'grid');
    await page.screenshot({path:out+'/sidebar-'+width+'.png'});
-   const sheet=await openSheet(page);await verifyControls(page,sheet);await page.screenshot({path:out+'/controls-mobile.png'});
-   console.log('MOBILE_GRID_ONLY_OK',width);await context.close();continue;
+   const sheet=await openSheet(page);await verifyBrandSelection(page,sheet);await verifyControls(page,sheet);await page.screenshot({path:out+'/controls-mobile.png'});
+   await page.keyboard.press('Escape');await page.evaluate(()=>scrollTo(0,900));const sticky=page.getByRole('button',{name:'Открыть фильтры каталога',exact:true});await sticky.waitFor();await sticky.click();await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor();await page.keyboard.press('Escape');console.log('MOBILE_GRID_ONLY_OK',width);await context.close();continue;
  }
  await page.getByRole('button',{name:'Список',exact:true}).click();
  await page.locator('.ac-catalog-list-row').first().waitFor();assert.equal(await page.locator('.ac-catalog-list-row').count(),6);
