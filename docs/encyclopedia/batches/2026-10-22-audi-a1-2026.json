@@ -1,0 +1,3192 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a1-2026",
+  "entries": [
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "20587ab0c761db0acda4c31b",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI PDC plus Carplay Sitzheizun",
+      "expectedDigest": "808953d6aace193b177841b43aa76cd6c9974f4184b55d8ba3057349a9070389",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1630
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1630 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "527d35d32668be81b2ed7623192e210ca54b742cab1863db98fad3a3d72eb0d7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "a14be282912f01ee41529e44",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI Aps Plus Carplay Klima Sh",
+      "expectedDigest": "c81e57572a4da7a5e14a6a26b181d05268e3b705c7f700ba199bc4230e8c8302",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1630
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1630 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "527d35d32668be81b2ed7623192e210ca54b742cab1863db98fad3a3d72eb0d7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "8637e66e9c9e0f8e2f717749",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback advanced 25 TFSI*SHZ*LED*EPH*2Zonen",
+      "expectedDigest": "21b5683819edd8c9b328fdb462dd7b3a9d52cbdb3c7e14857f3eb95cf2fe6e6a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1630
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1630 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "527d35d32668be81b2ed7623192e210ca54b742cab1863db98fad3a3d72eb0d7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "15d1f3469126d259f95e9630",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI S LINE SMARTPH-INTERFC SOUN",
+      "expectedDigest": "c35fb031685409ce9f116775893d92308dcaca860d106965fc692bdf5686f2f1",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1675
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1675 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c2663c9cb118962217d9e3e09443a180d1b9f4b558982d246ab24ff673e259db",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "d206f430c6815b6a25d6b4f4",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback advanced 25 TFSI*SHZ*LED*EPH*2Zonen",
+      "expectedDigest": "30db6802badc6d165eb46a6a78264d729288ba6d4573f7e36dc8caaa8e2761d3",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1675
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1675 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c2663c9cb118962217d9e3e09443a180d1b9f4b558982d246ab24ff673e259db",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "7e7239bfd7053ada20136e56",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI S LINE LM18 TEILLEDER",
+      "expectedDigest": "edda55c0191afea5e9e9182d0eaed38f0648c3697ab202d1a67fa8d3ea80bf2b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1675
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1675 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c2663c9cb118962217d9e3e09443a180d1b9f4b558982d246ab24ff673e259db",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "a8e9afcbbd8d128254405145",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI LED SHZ Smart Interface",
+      "expectedDigest": "6cbe1bd4bee40bbc40f9f95d6e9b842f82298e3f22c3651cd024f5f1a3697ad7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1630
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1630 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "527d35d32668be81b2ed7623192e210ca54b742cab1863db98fad3a3d72eb0d7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "0607a71ca39a94c0d0c728e6",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI S LINE LM18 TEILLEDER SPORT",
+      "expectedDigest": "4ca922d4ab4aad04ec0dce2eed41d02723aaa142cbf0e7756845c20147ae3836",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1675
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1675 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c2663c9cb118962217d9e3e09443a180d1b9f4b558982d246ab24ff673e259db",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "de97a6a833d7a16af14dbb80",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI advanced OPTIK 17\" LED",
+      "expectedDigest": "b986679bb318b41e97e12a36b8ced447223b020a06bfd071bde9e8df42bf874e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1630
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1630 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "527d35d32668be81b2ed7623192e210ca54b742cab1863db98fad3a3d72eb0d7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "3a8c7859b6f9a67f7e759974",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI advanced LED SPORTSITZE 17\"",
+      "expectedDigest": "220d1f81769810d7bddbdbaa617a2097496595578e0d63bfbc6487f464cc68b5",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1630
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1630 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "527d35d32668be81b2ed7623192e210ca54b742cab1863db98fad3a3d72eb0d7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "89efd723cbb1cbe8ed9b84d0",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI advanced OPTIK LED 17\"",
+      "expectedDigest": "5208ea8808582cfcc17e4dc272f591db33d3e0a2137fddc1910dace7bf94382c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1630
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1630 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "527d35d32668be81b2ed7623192e210ca54b742cab1863db98fad3a3d72eb0d7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "11aaddbb47b542dad43c1a01",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI advanced OPTIK LED 17\" GRA",
+      "expectedDigest": "91ff2717a72f62be62163692f0fba72149186b4dc6382c1f34f75318bc54c4a6",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1630
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1630 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/836/file_en/c3f2a4a26d3756035f8e8169b65605e9d8adeb2e/eTD-Audi-A1-Sportback-25-TFSI-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "527d35d32668be81b2ed7623192e210ca54b742cab1863db98fad3a3d72eb0d7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "fbf7bf46a20d42b57dea739d",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI 2x S LINE LM17 LED SOUND SP",
+      "expectedDigest": "3ac292ec558fa95a3b03294f7014adcb95d56b96b736141775a2967b664efae7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1675
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1675 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c2663c9cb118962217d9e3e09443a180d1b9f4b558982d246ab24ff673e259db",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "efa0e43dbdcb1f7b72077009",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 25 TFSI S line LED smartphone inter",
+      "expectedDigest": "6099a03dc6c75bab255ce6f289bfeaa313017f5f64c992996ea481f40bc536d6",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1675
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 25 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 95 PS / 70 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1675 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1077/file_en/4b8898b93889763e4c02f654521bf2bc28b62b92/eTD-Audi-A1-Sportback-25-TFSI-S_tronic-70kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c2663c9cb118962217d9e3e09443a180d1b9f4b558982d246ab24ff673e259db",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "71c9606a90c4eb97c36cf46d",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI advanced LED APP SHZ PDC",
+      "expectedDigest": "c3273a2df9dadf70419dab7128c7b418a36c543f6f501b6b2a6a009bc1db3cb7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1660
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1660 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "74a4f68ae56ae1745b155d0d7dd98929ed21084375acad2e213be913d315c91e",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "39285c2dddcc3fb7d14af5e0",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback advanced 30TFSI NAVI PDC SHZ GRA VC",
+      "expectedDigest": "acf9a605614e89cac14811395e8f4f4fb4a57e94810b7fd8a56294137e26af77",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1660
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1660 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "74a4f68ae56ae1745b155d0d7dd98929ed21084375acad2e213be913d315c91e",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "a1d04c1ae14e853f9a4475a2",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S tronic advanced LED APP S",
+      "expectedDigest": "26cfc7c0161dd3883353802371536ad07679c9f9f2faf5642ef560c010f8d690",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "18f0c957e27f7461072bde33",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback S line 30TFSI LED PDC SHZ GRA",
+      "expectedDigest": "ab251bd9d528eacb104a752bf57fbf660707a1fb8c33b13c84cee65856e57f1d",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1660
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1660 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "74a4f68ae56ae1745b155d0d7dd98929ed21084375acad2e213be913d315c91e",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "aea5b4214f217eb0a432282f",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S-Line, LED,Smartphone",
+      "expectedDigest": "ebfaaf8882d2514d6f38f91b6d0f2daded8efec97cc0881390641e2c6580fb59",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1660
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1660 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "74a4f68ae56ae1745b155d0d7dd98929ed21084375acad2e213be913d315c91e",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "427a06fc9613c3a2b2a39f02",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S LINE LM17 SOUND SPORTSITZ",
+      "expectedDigest": "1afecc86df72addc458bdfd12e5129dbaadfbaf61ba13a709a205d8a35445911",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1660
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1660 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "74a4f68ae56ae1745b155d0d7dd98929ed21084375acad2e213be913d315c91e",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "b1259503edcde1f4b9a70357",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "allstreet 30 TFSI 30 TFSI LED NAVI TEILLEDER",
+      "expectedDigest": "d7b47195629e068a01bcb7abacae2ad82266fd3822e7b4d5d8f6e8f51d570f28",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1675
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/941/file_en/fbf63ddace61ef4bfa42ccd744b97952ac16ebbf/eTD-Audi-A1-allstreet-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 allstreet 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1675 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/941/file_en/fbf63ddace61ef4bfa42ccd744b97952ac16ebbf/eTD-Audi-A1-allstreet-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "39065cc4991ebb13fb80fabdc7365f514ffdfdc940f4c5a1fc2d2b5cb8b9c02d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "5f2bf237654950afe326860d",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "allstreet 30 TFSI LEDER ACC NAVI+ LM18",
+      "expectedDigest": "bdda535534a3a443663227bc13d41fa1d6931b8c082802cdaf6afa578fd6744f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1675
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/941/file_en/fbf63ddace61ef4bfa42ccd744b97952ac16ebbf/eTD-Audi-A1-allstreet-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 allstreet 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1675 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/941/file_en/fbf63ddace61ef4bfa42ccd744b97952ac16ebbf/eTD-Audi-A1-allstreet-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "39065cc4991ebb13fb80fabdc7365f514ffdfdc940f4c5a1fc2d2b5cb8b9c02d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "f2f807ca6479e358718aa7d6",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "SPORTBACK S-LINE EDITION 30 TFSI S-TRONIC 116CV *TELECAMERA+LED PLUS* ONLY PROMO",
+      "expectedDigest": "aea14c1ca884e68ad0bdd1b59982da87d03fb0097f8a3cd6e3707a042d39e64f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "63a1ee96cf6bd28cc24c733b",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI ADVANCED LED LM17 NAVI KEYL",
+      "expectedDigest": "15e430d4c60d8d4718da62760784d9a6ebbef99576688987bd1e1ed74b31b878",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "a5d98a72007d2481a411b300",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S line 6-Gang LED PDC Temp.",
+      "expectedDigest": "4a986317b93b7bff549e81021097e887ff8796d7078cd9e032b04fb7a310a493",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1660
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1660 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "74a4f68ae56ae1745b155d0d7dd98929ed21084375acad2e213be913d315c91e",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "bd444e3e206bc330e337d21f",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "allstreet 30 TFSI S tronic",
+      "expectedDigest": "e915e08df8cff9a297b7aad3fd703ea272d19ef65fd44cf7d5415c4fdfe5cff3",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1695
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1127/file_en/8c7eba80909f4771553c6ee4c3f85a77a53a36de/eTD-Audi-A1-allstreet-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 allstreet 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1695 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1127/file_en/8c7eba80909f4771553c6ee4c3f85a77a53a36de/eTD-Audi-A1-allstreet-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "08193dfb72d11784bc220bf8167c30390ae2d21364f8f01795b2c30cccdf69e3",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "726dbf5531eda2b14dab6bb0",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback S line 30TFSI GRA PDC SHZ",
+      "expectedDigest": "d9bb39eb8b928603716d7ae70a7cb1c1124308f2210b1856837494fd9faee71e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1660
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1660 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "74a4f68ae56ae1745b155d0d7dd98929ed21084375acad2e213be913d315c91e",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "2e5bb3781580a23f70e82047",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI advanced LED KAMERA SHZ PDC",
+      "expectedDigest": "b3ef207e31ac7dc96e2e9ab669eb4a4d22708a8cb07595134d1a1fda93bd3af1",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "f1e84adc033f366b3abae15c",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback advanced 30 TFSI All-Season*16*LED*",
+      "expectedDigest": "a00e9f60387535f8b51d6ddd78b34aa0c291f1a8137c60f9518a54b0bf935b4a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "52bb6da44140e88bf805285d",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback advanced 30 TFSI Sportsitze Smartph",
+      "expectedDigest": "c74a4b090b8b677b459302534498363b520b1469ae7c782dac9a85c43c0d8308",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "2c00f152758f6b68a59b1fcf",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S LINE LED LM18 KAMERA",
+      "expectedDigest": "db710e835fc7355a4b8a63e92e4dcec8f11fc89335c1f4e72b6a41d07efb78b0",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1660
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1660 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "74a4f68ae56ae1745b155d0d7dd98929ed21084375acad2e213be913d315c91e",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "84e34cb95a08a588bbf31337",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback advanced 30 TFSI LED*ALL-Season**",
+      "expectedDigest": "5a030e8d4f5ef35a15ddacd732beb25d4b385f7b9fad0147a846e5d21a62367f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "1dd7b77b047c701336bb3718",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "allstreet 30 TFSI LEDER LM18 NAVI ACC SOUND",
+      "expectedDigest": "c243017775591ea3d39fb5bcb01a8268fa7ba516aa004b43fda19e651b8179ec",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1675
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/941/file_en/fbf63ddace61ef4bfa42ccd744b97952ac16ebbf/eTD-Audi-A1-allstreet-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 allstreet 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1675 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/941/file_en/fbf63ddace61ef4bfa42ccd744b97952ac16ebbf/eTD-Audi-A1-allstreet-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "39065cc4991ebb13fb80fabdc7365f514ffdfdc940f4c5a1fc2d2b5cb8b9c02d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "8aec8b8522e76abffa38974f",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 1.0 tfsi Advanced s-tronic *PREZZO REALE NO VINCOLI*",
+      "expectedDigest": "2d2b502dee31c709b896042fab72acdc77122e1f13b8c93c5323dc37b3d96614",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "9145cf8427afbb9796ac91fd",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S tronic advanced GARANTIE",
+      "expectedDigest": "f3d01b63aad04141a54ef748e0f7bf1dba62bbb367ed955ab7e86093511bcc5c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "ef35f50a5c124218bf0cdee7",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S line LED*Sound*Virtual*EP",
+      "expectedDigest": "183e6b4f7d9e1e5a1c79f0002d8b8c09d762959964ffc26142c48b310e6b376b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "6fddf8b6bfc9ad032d63536b",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S LINE LM18 LED ALCANTARA K",
+      "expectedDigest": "38537692a7cce4d7884e42a10e4d1a71ab33066f926df8dc1dbbac1aa9e7cc71",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "9d4a4dda8632c78dd9938b60",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S line PDC+ LED Optik-schw.",
+      "expectedDigest": "eea0196e47a68abd904bc3c5e55d0c925e1eda9ad9d90f9026e390f92aa2f74b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1660
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, МКПП. Полная допустимая масса 1660 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/443/file_en/ceb80007c014f88175b0d4ebf7719aa47d319a39/eTD-Audi-A1-Sportback-30-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "74a4f68ae56ae1745b155d0d7dd98929ed21084375acad2e213be913d315c91e",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "a43b89e181dfe6c33f237ba7",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "A1 SPB 30 TFSI S tronic S line edition",
+      "expectedDigest": "2976afb81ce370cdb5fc0af103eeaa897b5cc41f25601deb0abad898f13d19c1",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "1276e4f91908c6daa689ada0",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30TFSI Adv. S-Line S-Tronic LED/18'",
+      "expectedDigest": "5ab15a594830a0c7e4830cfb14d7c47669556e0b3114bcb2e677675a83f72782",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "22c6bc968503ab410090e116",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S LINE LED+OPTIK+SONOS+NAVI",
+      "expectedDigest": "625dc6e2769ae40ca25399a060c8d346d7ef90c968f82ace503459d7068fb8a8",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "a3fc5a5cf936d04d381764ab",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S line LED*ACC*Virtual*",
+      "expectedDigest": "e53dec68cb91bac8a7bffe5f1b19cea31dcae7c33f63c1348fea164193337b00",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "fef4d92a275ba0921167c665",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S LINE LED+SONOS+OPTIK+VCP+",
+      "expectedDigest": "d168e4c6aad1e16054da1845755fd553c70389fadffd4dbfb4615b2bc05aa99f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "5584508ae283900f569fa082",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI advanced LED SHZ Carplay",
+      "expectedDigest": "61f1b8095a65f49098085603e2a2f6c1295f116fdfddf2744232d4edaeeb8bec",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "4313db832aa2dadbfd0561ce",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI S line LED Optik-schw+ PDC+",
+      "expectedDigest": "7e84c7a4958f54127a3e187f5faaedb8b7c09d9c50e294f3d9d43aa1761b5e04",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "1976b5ded5423083df514a61",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 30 1.0 tfsi Business 116cv s-tronic",
+      "expectedDigest": "15a810a51c15b642202fc2112f16770b746a6b8e49c87a9f6ff3c0165b926718",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1680
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1680 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/23/file_en/f758eb0e21732c5565365838957dd3d7f6eb954b/eTD-Audi-A1-Sportback-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "40236bdf7f37f587bdc960f9cf74c91a98812ce7d3aab27a7f3abd10c73e204f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "1882cb03610b68370440b98e",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "A1 allstreet 30 TFSI S tronic Identity Contrast",
+      "expectedDigest": "7fb61991267e3691d8ad187679213251c2881c8d32e4ae13adf94b0ae21dea81",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1695
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1127/file_en/8c7eba80909f4771553c6ee4c3f85a77a53a36de/eTD-Audi-A1-allstreet-30-TFSI-S_tronic-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 allstreet 30 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 999 см³, 116 PS / 85 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1695 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1127/file_en/8c7eba80909f4771553c6ee4c3f85a77a53a36de/eTD-Audi-A1-allstreet-30-TFSI-S_tronic-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "08193dfb72d11784bc220bf8167c30390ae2d21364f8f01795b2c30cccdf69e3",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "916a457fcaa7868aeaaad701",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 35 1.5 TFSI S-tronic S-line RFK Nav",
+      "expectedDigest": "3d132d4cba8b4e5c89e9824e057aa6bb49460e9232a91fe976b581d8bed71c53",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1710
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/810/file_en/8d0168651fe36ecb3a6998adc48c150f046b561b/eTD-Audi-A1-Sportback-35-TFSI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 35 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 1498 см³, 150 PS / 110 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1710 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/810/file_en/8d0168651fe36ecb3a6998adc48c150f046b561b/eTD-Audi-A1-Sportback-35-TFSI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "9fea5e14ecb47d07cf080f8e281d33e6ac09ca22895b9d17c46fbffef25b2e3f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "054ccebfdcb47e3eef77d1bb",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback S line 35 TFSI S tronic *LED*Optik",
+      "expectedDigest": "735f0b1fa9f67920efd841ae772f508733b13f9604a10b24a678f6c88ae63706",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1710
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/810/file_en/8d0168651fe36ecb3a6998adc48c150f046b561b/eTD-Audi-A1-Sportback-35-TFSI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 35 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 1498 см³, 150 PS / 110 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1710 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/810/file_en/8d0168651fe36ecb3a6998adc48c150f046b561b/eTD-Audi-A1-Sportback-35-TFSI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "9fea5e14ecb47d07cf080f8e281d33e6ac09ca22895b9d17c46fbffef25b2e3f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "f21465d38f6d880073b90f1f",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 40 TFSI S line ACC LED KAMERA SONOS",
+      "expectedDigest": "5da1b30581faf0c7a7d41575cb475d22e7062c0cc3c37f7f48dbe49d4e049e74",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1984,
+        "powerHp": 207,
+        "powerKw": 152,
+        "icePowerKw": 152,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 40 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 1984 см³, 207 PS / 152 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1775 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7cd04baffdab45f0c0f4f38fa58c16bc983bc7ee02a8f239dd356a14189661cc",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "d6f62d4bd4b7d8db6d2ec762",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback S line 40 TFSI S tronic LED*NAV*SHZ",
+      "expectedDigest": "7ba2460571c360b0ad2195413f18265e06f2132bbdce0041b27426ea3d602371",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1984,
+        "powerHp": 207,
+        "powerKw": 152,
+        "icePowerKw": 152,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 40 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 1984 см³, 207 PS / 152 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1775 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7cd04baffdab45f0c0f4f38fa58c16bc983bc7ee02a8f239dd356a14189661cc",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "0157526fd5057cf5bcea3c43",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback S line 40 TFSI 152(207) S tronic Ca",
+      "expectedDigest": "fdf9a625e2f0dbb715f29bd5273da76ca0b72be32c0f3d29ba86efb7dc216dd4",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1984,
+        "powerHp": 207,
+        "powerKw": 152,
+        "icePowerKw": 152,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 40 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 1984 см³, 207 PS / 152 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1775 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7cd04baffdab45f0c0f4f38fa58c16bc983bc7ee02a8f239dd356a14189661cc",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "1184847a52638c71496f975f",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback 40 TFSI S tronic 2x S line Navi+/Vi",
+      "expectedDigest": "cc4cbe7bf01561ccdebb9fc0b0dca1eda9d0069ac003f5cac5adfa88b1ff2e4a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1984,
+        "powerHp": 207,
+        "powerKw": 152,
+        "icePowerKw": 152,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 40 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 1984 см³, 207 PS / 152 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1775 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7cd04baffdab45f0c0f4f38fa58c16bc983bc7ee02a8f239dd356a14189661cc",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variantId": "459f7303cdc27baef168a7ee",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2026,
+      "trim": "Sportback S line 40 TFSI 152(207) kW(PS) S tr",
+      "expectedDigest": "a8af0d091eedf395b449e9913c2cc6626cf21e8f0bb36d87bf62e534a4f0e36e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1984,
+        "powerHp": 207,
+        "powerKw": 152,
+        "icePowerKw": 152,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A1 Sportback 40 TFSI, 2026: заводская таблица от 2026-02-03. Сопоставлены год, семейство кузова, индекс двигателя и указанная КПП. 1984 см³, 207 PS / 152 кВт; бензин, передний привод, S tronic. Полная допустимая масса 1775 кг взята из третьего значения строки весов, не из снаряжённой массы. Максимум генератора 12 В не является тяговой или 30-минутной мощностью. Код двигателя и рекламные опции комплектации не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/811/file_en/5f081ba3b41775838d1f47cd78f5cee850d78b2d/eTD-Audi-A1-Sportback-40-TFSI-S_tronic-152kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7cd04baffdab45f0c0f4f38fa58c16bc983bc7ee02a8f239dd356a14189661cc",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
