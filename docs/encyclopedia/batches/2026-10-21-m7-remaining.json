@@ -1,0 +1,618 @@
+{
+  "version": 1,
+  "id": "research-2026-10-21-m7-remaining",
+  "entries": [
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "8844cb6938e4eb41e4b65d65",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Max长续航版 5座（896线激光雷达）",
+      "expectedDigest": "da7c35625431e3721898338b599d95f346d34a9957203a6c444dcbbe78f66317",
+      "patch": {
+        "trim": "2026 EREV Max Long Range 5-seat LiDAR 896",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Max, 5 мест, последовательный гибрид, задний привод. Проверена отдельная секция LiDAR896. Батарея 53.4 кВт·ч. Пиковая мощность заднего электромотора227кВт. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "611ae7061aafc8a3be3e7dd9",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Ultra四驱版 6座（896线激光雷达）",
+      "expectedDigest": "07b629a10039107ffa55b8f62cf4515166b36206e3df3eddb3161bc07196f292",
+      "patch": {
+        "trim": "2026 EREV Ultra AWD 6-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Ultra, 6 мест, последовательный гибрид, полный привод. Проверена отдельная секция LiDAR896. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "db3ccc19853f8fd43c8dfce5",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Pro+四驱版 5座",
+      "expectedDigest": "996ce58feb876480ec4bd213a77a11ddfb9bfc537f5959a250e0cedb3de2be6a",
+      "patch": {
+        "trim": "2026 EREV Pro+ AWD 5-seat",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Pro+, 5 мест, последовательный гибрид, полный привод. Версия лидара не приписывается: сохранены только одинаковые технические параметры всех соответствующих вариантов таблицы. Батарея 37 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "d56311185f3cc1d81858ea89",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Pro+四驱版 6座",
+      "expectedDigest": "c2fd01717c7b0a83a3e269dba080ee7fe89a98032ad423ca8230dbf1705ab31c",
+      "patch": {
+        "trim": "2026 EREV Pro+ AWD 6-seat",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Pro+, 6 мест, последовательный гибрид, полный привод. Версия лидара не приписывается: сохранены только одинаковые технические параметры всех соответствующих вариантов таблицы. Батарея 37 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ebde5c21ef711fe840e244a1",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Max四驱版 6座（896线激光雷达）",
+      "expectedDigest": "160dd217721533b88b65f11c2b46623ecc0a636a86a283b2e01cd5ec0b48587c",
+      "patch": {
+        "trim": "2026 EREV Max AWD 6-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Max, 6 мест, последовательный гибрид, полный привод. Проверена отдельная секция LiDAR896. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "b095d411875409dc37cc1f6c",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Max四驱版 5座（896线激光雷达）",
+      "expectedDigest": "987c283f7d56c9267a964cb0d289f335b32c534f8860b710c55284cb5393ff9a",
+      "patch": {
+        "trim": "2026 EREV Max AWD 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Max, 5 мест, последовательный гибрид, полный привод. Проверена отдельная секция LiDAR896. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "097dcadfb607af8e54eb4e4d",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Max长续航版 6座（896线激光雷达）",
+      "expectedDigest": "f04b8aeb3103e6eeff8ad6b557fadf65f1207a55e4766b12113ffd07848c711d",
+      "patch": {
+        "trim": "2026 EV Max Long Range 6-seat LiDAR 896",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Max, 6 мест, электрическая версия, задний привод. Проверена отдельная секция LiDAR896. Батарея 100 кВт·ч. Пиковая мощность заднего электромотора227кВт. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "4df70c968eab41147a02a334",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Max长续航版 5座（896线激光雷达）",
+      "expectedDigest": "30cf4e72b429072a84d040d7181e55adce06e38e4d1c63722720c00363f6c199",
+      "patch": {
+        "trim": "2026 EV Max Long Range 5-seat LiDAR 896",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Max, 5 мест, электрическая версия, задний привод. Проверена отдельная секция LiDAR896. Батарея 100 кВт·ч. Пиковая мощность заднего электромотора227кВт. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "d25278cc010a438f4fbae188",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Max四驱版 5座（896线激光雷达）",
+      "expectedDigest": "abf5b89ee403c8ed526149f4042e46fb0a0fad889b555e698de50e637e69fb06",
+      "patch": {
+        "trim": "2026 EV Max AWD 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Max, 5 мест, электрическая версия, полный привод. Проверена отдельная секция LiDAR896. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ee0f26fba393e9985fda81a7",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Ultra四驱版 5座（896线激光雷达）",
+      "expectedDigest": "dc1e9db32d0f87e73bd3af349d12f2f3ad6ca31b33d9bdac25a49704d43e9be7",
+      "patch": {
+        "trim": "2026 EV Ultra AWD 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Ultra, 5 мест, электрическая версия, полный привод. Проверена отдельная секция LiDAR896. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "c86d6e83d0fbf5838aa57d91",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Ultra四驱版 5座（896线激光雷达）",
+      "expectedDigest": "68f3400e931f632a5259a84c2c43b1ec2b9262f5d089d7a2852fbac8d62e33a6",
+      "patch": {
+        "trim": "2026 EREV Ultra AWD 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Ultra, 5 мест, последовательный гибрид, полный привод. Проверена отдельная секция LiDAR896. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "d9d9afb4d238d8e1909d6689",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Max长续航版 6座（896线激光雷达）",
+      "expectedDigest": "0fc217a0c8f32983600bf8bae99c8f31cb4bf7bccfa0b14faf8c94b22c214839",
+      "patch": {
+        "trim": "2026 EREV Max Long Range 6-seat LiDAR 896",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Max, 6 мест, последовательный гибрид, задний привод. Проверена отдельная секция LiDAR896. Батарея 53.4 кВт·ч. Пиковая мощность заднего электромотора227кВт. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ed37cf8014b9ffbe528cffff",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Max四驱版 6座（896线激光雷达）",
+      "expectedDigest": "d7d98bf5c8ef5b22d18cb41ea71a38c3807edc65de29aa1b10adf91cfbecc6d7",
+      "patch": {
+        "trim": "2026 EV Max AWD 6-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Max, 6 мест, электрическая версия, полный привод. Проверена отдельная секция LiDAR896. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "e5ea1bada438e625b02c9fe1",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 Extended Range Max AWD 5-seater",
+      "expectedDigest": "efd35c18fe0140580a88eeb9d00127c46cd04cecd98404aabc202f129d4c2cc9",
+      "patch": {
+        "trim": "2026 Extended Range Max AWD 5-seater",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Max, 5 мест, последовательный гибрид, полный привод. Версия лидара не приписывается: сохранены только одинаковые технические параметры всех соответствующих вариантов таблицы. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "6969142102e407c8e7e5d305",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 Extended Range Ultra AWD 5-Seater",
+      "expectedDigest": "01f52003a7a263b28485aca1e071825d62a773588f0dfe5a3ab55aa8625f6f6b",
+      "patch": {
+        "trim": "2026 Extended Range Ultra AWD 5-Seater",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Ultra, 5 мест, последовательный гибрид, полный привод. Версия лидара не приписывается: сохранены только одинаковые технические параметры всех соответствующих вариантов таблицы. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "8cdc6e3e5110f7821dcc8738",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "纯电 Ultra四驱版 5座（896线激光雷达）",
+      "expectedDigest": "1f2839e3a0f301627b428aa614a730d5c02ebf66032651ffbb96726f58dbcc35",
+      "patch": {
+        "trim": "EV Ultra AWD 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Ultra, 5 мест, электрическая версия, полный привод. Проверена отдельная секция LiDAR896. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "b1cec157f00bb7485dcad1c3",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EREV Pro+ 4WD Edition 5 seats",
+      "expectedDigest": "1a09d69522e378498773afccbdb2b9dd65cd6372271b81433eb6451eade06c0a",
+      "patch": {
+        "trim": "EREV Pro+ 4WD Edition 5 seats",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Pro+, 5 мест, последовательный гибрид, полный привод. Версия лидара не приписывается: сохранены только одинаковые технические параметры всех соответствующих вариантов таблицы. Батарея 37 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "1d3bacc32b458d473a645533",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "增程 Ultra四驱版 5座（896线激光雷达）",
+      "expectedDigest": "13b047673a6847b94fdbabc91ff144ec9310fb4efa82a1725d1f6a860c0489c5",
+      "patch": {
+        "trim": "EREV Ultra AWD 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M7 2026 Ultra, 5 мест, последовательный гибрид, полный привод. Проверена отдельная секция LiDAR896. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165кВт, задний227кВт; сумма не подставлена как мощность системы. 30-минутная мощность не найдена; точный объём/мощность ДВС и разрешённая масса этой таблицей не подтверждены. Перевод названия КПП не повышает доверие к исходному наблюдению."
+      }
+    }
+  ]
+}
