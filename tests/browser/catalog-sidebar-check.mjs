@@ -105,6 +105,19 @@ try{
   for(const theme of ['light','dark']){await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.screenshot({path:out+'/market-preview-'+width+'-'+theme+'.png'});}
   await context.close();
  }
+ if(!live)for(const width of [390,1024,1280,1440,1600]){
+  const context=await contextFor(width),page=await context.newPage();
+  await page.goto(origin+'/cars?marketPreview=1&sidebar=1');
+  await page.locator('[data-test-overall-count]').waitFor();
+  assert.equal(await page.locator('[data-test-overall-count]').getByText('Найдено:',{exact:true}).isVisible(),true);
+  assert.equal(await page.locator('.ac-catalog-card:visible').count(),6);
+  const tops=await page.locator('.ac-catalog-card:visible').evaluateAll(els=>els.map(el=>Math.round(el.getBoundingClientRect().top)));
+  assert.equal(new Set(tops).size,width>=1024?2:1);
+  if(width>=1024){assert.equal(tops.filter(t=>t===tops[0]).length,3);assert.equal(tops.filter(t=>t===tops[3]).length,3);}
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  for(const theme of ['light','dark']){await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.screenshot({path:out+'/sidebar-preview-'+width+'-'+theme+'.png'});}
+  await context.close();
+ }
  if(!live)for(const width of [390,1280]){
   const context=await contextFor(width),page=await context.newPage();
   await page.goto(origin+'/cars?market=japan');

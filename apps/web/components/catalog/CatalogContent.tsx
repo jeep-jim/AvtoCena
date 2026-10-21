@@ -1,3 +1,4 @@
+import {CatalogCountLabel} from "./CatalogCountLabel";
 import {MarketResultCount} from './MarketResultCount';
 import {normalizedCatalogSort} from '@/lib/catalog/catalog-sort';
 import {CatalogSidebar} from './CatalogSidebar';
@@ -227,9 +228,6 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   </Container>;
 }
 
-function CatalogCountLabel({total,countIncomplete}:{total:number;countIncomplete?:boolean}){
- return <span><span className="hidden md:inline">Найдено: </span> {countIncomplete?'не менее ':''}<span className="whitespace-nowrap tabular-nums" data-catalog-result-value>{formatCatalogCount(total)}</span></span>;
-}
 async function ResolvedCatalogCount({summary}:{summary:{total:number;countIncomplete?:boolean}|Promise<{total:number;countIncomplete?:boolean}>}){
  return <CatalogCountLabel {...await summary}/>;
 }

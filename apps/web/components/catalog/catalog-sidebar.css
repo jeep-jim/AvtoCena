@@ -20,6 +20,8 @@
  .ac-catalog-sidebar .ac-sort-control{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));height:auto!important}
  .ac-catalog-sidebar .ac-sort-control button{min-height:36px}
  .ac-catalog-results .ac-catalog-market-rail{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ /* Sidebar previews have three columns: retain all six cards. */
+ .ac-catalog-results .ac-catalog-market-rail>div:nth-child(n+6){display:block!important}
  .ac-catalog-results [data-catalog-batch]{grid-template-columns:repeat(3,minmax(0,1fr))!important}
  body:has(.ac-catalog-layout) .ac-catalog-sticky{display:none}
 }
