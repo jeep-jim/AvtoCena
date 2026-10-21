@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T02:37:14.376259+07:00",
+  "updatedAt": "2026-10-22T02:59:28.205619+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -753,7 +753,22 @@
         2020
       ],
       "variants": 394,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 30,
+      "checkedAt": "2026-10-22T02:59:28.205619+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a1.json",
+      "researchedYears": [
+        2025
+      ],
+      "pendingYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2026
+      ],
+      "nextAction": "Сначала исследовать оставшиеся годыA1:2020–2024/2026; затем37 пропусков2025. Не считать364 оставшиеся строки ненайденными:327 ещё не исследованы. Далее Audi A3."
     },
     {
       "id": "f40e34e905b8ca09f3636eda",
