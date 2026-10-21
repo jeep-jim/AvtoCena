@@ -1,0 +1,3997 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a6-2022-history-2",
+  "entries": [
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9581a99a2085b6091fe2d1d5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Lim. 45 TDI quattro sport*ACC*LED*KAMERA*ASG*",
+      "expectedDigest": "4cad72f8668ce1ad5cd6b420821a474b42a17528cf240b69221ca7c1aa554952",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ec74f137735918aa5cfd410f",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TDI q. S-Tronic, sport, S-Line, AHK",
+      "expectedDigest": "a8e1e46e704c2d37031dd01d88f892c0d11490dcacead307d554510ee69d1615",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "a649546182e2452f1652e8df",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TDI S tronic quattro S line HeadUp",
+      "expectedDigest": "cf5f389e4c20026476566d6b584cd7003d881ee144486ea687f8f570c3784f57",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "443c6c7bf6e2e20006591554",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TDI quattro S line Sport Plus Paket",
+      "expectedDigest": "4cfc49abf3dd06098023ddaae671d737037e53312a0cd96f408e583bcaa6fe28",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "1bfad6a12347fab00ea7f625",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TDI quattro Sport/S-Line*20Zoll*LUFT",
+      "expectedDigest": "fd5b23e7821b811d02a55e20a01d4ab73a0c1e841816660991bb17c62d068473",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "a4a4ad501693027dc026e9d2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI sport S tronicKameraNaviLED,1Hd",
+      "expectedDigest": "218fa55be3f832101d587741ba67ee9e247d7a93e6ac7b283f3c723057fe8b0c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "53b801d2db533e2d9baaaaf5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Lim. 45 TFSI Tourpaket/VC+/Cam/Memory/Navi+",
+      "expectedDigest": "5fb53aff6f0efeb0dff48486ba34407462853d1d03dff5ca7f0167baef4647c6",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "cc83003455017a643084ad47",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI design S tronic LED Navi DAB VC",
+      "expectedDigest": "14e02b83bde3ffae458c0f3054b163468d0b7171ddd7ce338126e7db25a1aaf7",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "79859258b92f7c864d3a0f90",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI S tronic Sitzlüft Memory ACC Na",
+      "expectedDigest": "9e6a1a0c24b6b60d892d1f908bb487e9872a43072d333be4956a049145794d8c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "4d74c97d4efd57e8bfc40931",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant sport 2.0 45 TFSI S tronic Leder Valcon",
+      "expectedDigest": "254911439a0e8856faa4765309eb53f250ccef6ac9140bc53337bbecd5e7f492",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f4155b7febc2547802cf3ed8",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant Design 45 TFSI Stronic,LED,ACC,Leder,",
+      "expectedDigest": "e9cd2c82d66b79a8e8d0a0b2dc6476e0726b39b2edf3bcb15e03dc1c4a8b5b3f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "25a8a666f3f9196b229fa7c8",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI Sport ACC Leder LM19 Sports. Ka",
+      "expectedDigest": "5a66daa5b62e46063179734b651015e85defd866fb3466a8e2ab91b666a94d5e",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2469602a36dd8369eff1260d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant Sport 45 TFSI LED ACC Memory Navi RearV",
+      "expectedDigest": "b9b0eebd0c8befebf3cb711877e4ac02815918b6b9d4e71b72a8fcb11ede0433",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "4df2484e3d848c0c8b98f090",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45TFSI 320,-ohne Anzahlung Navi Kamera",
+      "expectedDigest": "a1d198d8681e6d7d51f251d48f9e41d2ca0e5168795748fa091c2f02602db273",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "741a7d0f6f6f14ef3305e380",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSi Sport S-line LED Navi Pano B&O",
+      "expectedDigest": "7f74ce72bf51271fac3d452f0013f65f3dfe0c0b63f59de595b6f1bf6515978a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9d098a446ea07c33a1adceff",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI sport S tronic LED Panorama Nav",
+      "expectedDigest": "04689772c449feee2cfa838b74c3d88235387b122e7ffb1584b1d69c885ffb3a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d47eb6cc2ef382b635f13aa0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant sport 45 TFSI",
+      "expectedDigest": "3d2e95b206e4c206731b142b4040694f41aa9f0d6d6bac614cd38115db37e6c3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "b73833be45353ed18af870a4",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI S tronic design VirtualCockpit+",
+      "expectedDigest": "562b674d104f290d8332c6e55702fed586a7aaa11948fc704c14ff21589c46cf",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "15190e5e911059192f65a7c6",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI Sport ACC Pano LM19 Kamera Mem.",
+      "expectedDigest": "768bfbf33b9d9b7d4efcb03427c55c749fd5f9075f30f09c9c23dd58d7b2ea58",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "330cd9351aeec24f7774b62d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI S tronic Navi RearView Memory",
+      "expectedDigest": "3a91c008a4b8fc1f1f7c1dcee0163e5ae90bfa5374c4bfe2d1b0b4bb1e8dfdde",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7a2ae2123b4581a90f99d787",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSIsport|PANO|VIRTUAL|4ZONE|ACC|MEM",
+      "expectedDigest": "2b491fd353090fbecadf095318ace6e78ebf750bb599f57bfc49f5a0cbd53a2c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "4d5ee7285616e04da3ce6c2f",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Lim. 45 TFSI quattro design EXP € 23250.--",
+      "expectedDigest": "2234fdff86d8d7580763c540ae2d185a8d8e2346dc5afd9254d38c504a9cd095",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "994f60e9d7ab2fb973b2c48f",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI design Leder|Verkehrsze.-erk.|S",
+      "expectedDigest": "afb45497687b9bed0765e187ec16f492aad2e97196cc9d66b5cf6c0fe9adb5fc",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "0be1140db35acf6ab5d26d7b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant design 45TFSI quat. S-tron ACC/RFK/LEDE",
+      "expectedDigest": "b919f755e76443f2532af9d5a70b4ece08763eba254fc5f82140b706b5d51b91",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ae228303e0c2d1ae453a3f3a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant Sport 2.0 45 TFSI Teilleder/Kamera/ACC/",
+      "expectedDigest": "94c4afc5ea1af1f38d74767bcdaa277780d94fff9a12a54fdb99cb5e3158adb1",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "cc958a1af36c19ae38ae2b61",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant design 45 TFSI quattro Virtual RFK",
+      "expectedDigest": "d0c18b76499a46ea8f029ea500886e673ab27176eec12257e1b9b079a35be1eb",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c82f2466d8611fe0e637ffee",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI design ACC/Leder/RFK/LED",
+      "expectedDigest": "de924d03b2314c4332bddce04360805104779e80ebd6e95f6cc503cdb43e011f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "3c339c71beb5983cb085312c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro Nav Matrix AHK B&O Virt",
+      "expectedDigest": "8e21b779df98caea142b502b5dd29567fa1ec06e91df9dbecdf0b2f1ebe29f92",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "12849c0f3ab8599e1d50f9d1",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Lim.45 TFSI sport 19\"NAVI*VIRTUAL*R-CAM*ACC*P",
+      "expectedDigest": "d96f7912d3aa61c440f9935b2efdd72857ac41bcee52247e1ed10327bf2ce511",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "61509151aea816af1bf42c2a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45TFSI|ACC|NAV|RFK|",
+      "expectedDigest": "656ddf7aa4489584513feba4cd6a113fb16be6206d525c752e668ada0befed64",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7645a998c111e631d90b4a0d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI PANO MEMORY ACC KAMERA KEYLESS",
+      "expectedDigest": "c706fdfe60617276cadd91c3ffd22acba3aa2f3aff4f0393e949bc3275c1db9f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c3713f2d56cfaf6440b7955d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI SPORT+ PANO+GRA+PDC PLUS",
+      "expectedDigest": "a7feaeb51687a9fc118daaa5fdd86d7fc8cef1b6fc067155bead6f45d42cedd6",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d942eb634a974625289f50e2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI sport S tronic LED Navi Panoram",
+      "expectedDigest": "437b8178161fa427f780c6d8c418fcc12aac3ac239db597d5ac8ae5979a124d3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "19d609b7b979bc6a6973f9ee",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "AVANT 45 TFSI S tronic SPORT LED+NAVI+LEDER",
+      "expectedDigest": "1169b0e294a4a039ff7a5736521cd56e671f202539b7ae08ff8cde050bd8671c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "b441c0c0a63803cb6295c702",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI sport",
+      "expectedDigest": "ce61c26a65c81058d5446878f0c4ffbca3a85ca5649e290d0c297f3d4db396e5",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7e851e71810516297b559209",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI S LINE 19Z VIRTUAL,KEYLESS,ACC",
+      "expectedDigest": "c97e455f5d6abc3b6781b17503a2d7b9389ab87e54afc62249d64a7a51e2082d",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "247d7b8b8087a0fce6e36720",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI sport S-tronic LED Navi ACC Pan",
+      "expectedDigest": "f593184b46c73347fd20c03fd7a5aaab530ed7fa4f28dc143d4889b3578ab563",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "22124113d3d6d10845d30d25",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant sport 45 TFSI ACC RFK SHZ Navi",
+      "expectedDigest": "28b02d5d838b222a0d305d3bab1e0558f6e75df37b6fb06649352a855ca1adc3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "23bd6e06f1a5679de7078926",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "AVANT 45 TFSI S tronic SPORT LED+LEDER+NAVI",
+      "expectedDigest": "da0c7f35c2170ebfe48db59db9807306f7340f4cda50da021cc00e957f0e180b",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "bbb60014b5ec69f338ef13ab",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI QUATTRO ACC KAMERA SMARTPHONE V",
+      "expectedDigest": "c45ff75733a7c710aa2c69f928e3dc9d4483dbf6bc5513600f43f5e4d82473f9",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "da1b45e80667127cfc4ce9c3",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Limousine 45 TFSI qu VIRTUAL,KEYLESS,KAMERA",
+      "expectedDigest": "5900c5a03289b28cb9393cba733288ea47de8e640774fc88b072c6b87d0f0e7f",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "53c8c015cd90342a078f5925",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45TFSI AHK TOUR PARKEN S LINE EXTERIEUR",
+      "expectedDigest": "237ed2cdc870f72465c90e9e859522a52d47ca590d5c907e650e0faf4b0be1d3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7a2fb9f6e92f3e0a5322fc12",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "AVANT 45TFSi Q LED/ACC/SIDE/KAMERA/BELÜFTUNG",
+      "expectedDigest": "24d6653e0959146f733c2676d884b2f5d453ca5e1c2f0503c9f77ce4ca0058b8",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d114d78a562d8bd01d366cdb",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI AHZV GRA LED Navi",
+      "expectedDigest": "70c24baf3e34161645f0d8f9d4246b3000a29daec540eab112e81fbd6eea7e4f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "5c288d57f07171104a01d2e9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S tronic design | NAVI",
+      "expectedDigest": "6f5f81e0fb7d5b5f0f9d184bafe078e55a321c7d6daef0bf4fef8fb72de9dc4f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "71a7130c6265d47aa9c8565f",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Lim. 45 TFSI quattro 2.0*ACC*RfK*Leder",
+      "expectedDigest": "b7de1dea77cf5537a3975c75d70b71bdd6414a3aa7bf4ab44d49a0a7ef38e0ef",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "84d8b498ff20a4d7b00d4947",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI sport S tronic Navi Pano LED VC",
+      "expectedDigest": "e9ea55d11d0043c4ded9f96418b3ed1dca3094a64e58cc02ec4fad92e90e324a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2596c668ed10cc42c26d81f9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI sport Navi,Pano,Kamera,LED",
+      "expectedDigest": "a81e728a85cf16c82b3020bf6035c771750cfb4271db2eef9cb4e387a1aaade2",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "eec8f8a42b3926b875d28cc0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S tronic S line | AHK |",
+      "expectedDigest": "d59dfd6ae4b9ba512862894629f467509d9edbf54b2f93e4ef5da2f46c05818d",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "e37b3ada057780faa768c638",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro sport",
+      "expectedDigest": "d18fed18694cf991e5600e999cfc64971a42e7c457690e2c858b9078a574c521",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "524f53783770a3dec8065752",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45TFSI quattro design LED ACC Leder",
+      "expectedDigest": "ddd7966ad56bde755968dad7153c7c642434b659ca7369f0512f2b471f2d32e7",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "287795b9bcd629d2b3a8e38c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant S LINE 45 TFSI QUATTRO+WINTERRÄDER+AHK+",
+      "expectedDigest": "5ff17a5b543777a2714419c210e7effe9fbff3078607017aa067bc1ba9c399e4",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "68616a104c7042fa0fbd0058",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45TFSI qu S Line AHK,StandHz.,Kamera",
+      "expectedDigest": "3500edcd5a17e4f026703b3be6194dab61471349fd6dc3121e8689bb6808e24c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ba7875c859289af6d438f6c0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI qu. S line S tronic *PANO*HuD*",
+      "expectedDigest": "02c528c53e54cc5b46ba66ee5144c518948c40b988914cc81f1b3b929171da17",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "defff96cff34e1bcc0bea579",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI S tronic sport 8-fach",
+      "expectedDigest": "f33496e7f405947105c2e5894fc93669b39c7ef3a7cfcd57e3db54fa066c1fb4",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "e5707662c03adb0702078a08",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S tronic design S line",
+      "expectedDigest": "6929b26485eb6e6671e40161b3cf4f9dfc45e1c75809118ac529d2760b3dde0c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "0fb68082cda62612c05bb999",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "45 TFSI quattro S tronic S line Avant S line",
+      "expectedDigest": "5d9eb1c07d85be63083f856a9c206efc2eef89ab07bcac04dee6a0df2b42bdac",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6cc00bc4e5f5a69266521f06",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI QU 2xS-LINE LED+NAV+HuD+ACC+AHK",
+      "expectedDigest": "656b3f90449f2877cb93ffab10963d32b8a86120ce75f1bc8dc48303a2cab69c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f55307a11c02dcc85332e27a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S tronic sport 8-fach",
+      "expectedDigest": "362d31193f2645a37fcaf47549fafa70b9b4d847f5df8ae8fb5249d3819802d6",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "77b22206ef9b3317bd57d87b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S Line Optik Paket AHK",
+      "expectedDigest": "04217f3020b00768752a2586b9fe1b041a607b2bfaa2c20385a54aaa7b9a1df7",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "565c39970f333bdc82c22b2d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro Design",
+      "expectedDigest": "9d76bd2361bec18f2ce7580f6289f6deef2a85beaad281dda928ff53254e1d7f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6d4b84a832fab21ff823abdf",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Av.45 TFSI quat. AHK HUD Lane 360° Matrix ACC",
+      "expectedDigest": "b1d64b9e4727ba6b4c539149427ce1cb74f14ec68ca945ef53462e8bb5cccff3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "fbadec88e6a1d330263770de",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI S line quattro S-tronic AHK Nav",
+      "expectedDigest": "2b941b66b2554b526ddb7084875e52c0aab64527424d3d1f2b8b546beb884fc7",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "dd01a6f14b99cfde0de0e0a9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant S line 45 TFSI qu. AHK, B&O, Assist, St",
+      "expectedDigest": "b47799aa2a4dcaf61e328a7a2ee36b22dcae830d85b4699216526f6654169ac0",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    }
+  ]
+}

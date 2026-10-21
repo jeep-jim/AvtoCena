@@ -1,0 +1,761 @@
+{
+  "batch": "research-2026-10-22-audi-a6-2024-c8-1",
+  "dryRun": false,
+  "models": [
+    {
+      "id": "00624e6c77b6541109a32d66",
+      "changes": [
+        {
+          "variantId": "9b27413c4eead213c16c659a",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "8811c9025e52cacaf74b83d5",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "8a5e1a1100f18e1ad0f05702",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "c438c2669e938e244e5d7cfe",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "965921d615f4d2c7668b7876",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "8e03ca55331d0e38fc45603e",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "37b16161939891caa4ebbe64",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "8fce7c76ad06db72a7c95bf6",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "bd772453c3dd26f2de0835be",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "ea60fc77394988997c70aa24",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "8fc2d5289d51c38df2961bfd",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "c0f141b2751c96b28cc3c221",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "bc77c49adb8a3d5c767258f7",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "356d9d997dd57b33fa713d78",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "6365da3fb8f50aca04f06bf4",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "3c085e9ab3216e372201f7cb",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "8f6a66c2064afce70c367790",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "d62c6c05a7cb3aba81f5304d",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "74d4002bbf51dbde50c82aa8",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "2354c88af0a312aaa4250d25",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "fcf8181f457d23279a5ec80c",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "b4e428032a97ba3fd60449d4",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "8eab37175873d168eda0d55e",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "8c500e7c0b3ca8a71293c1a8",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "411734451e1b5a57f30b2cc0",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "542f9aa871cb358e4f241159",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "239e4958f3353e139e843e27",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "0055541c106c8d38cb427535",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "707a86ee8c127d6ccb6fe421",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "8f9bd70bfaaf2c88a1c17688",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "585fc4ccd0f3825df91425fa",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "03cd9a3fd6e21edd1a437312",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "86333261f17c6a9bcbbe9d30",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "81882c7f113afa407c6365d3",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "01d3a9f3c3382a53ed50225b",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "08edfb49e15d5c098e896fbb",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "4b129cd63cc5c4590e5d86c7",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "5a9098316d145bcba547eb14",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "357663f1d6d395f503325f4d",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "3679e2ad190457d784345cee",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "11578636baeb9a7789d4b913",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "749e11f694e7ad0b95afae34",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "f7f1b8db85f09f826719f4fa",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "e9ddcfa23d60ae07d48b6ce5",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "8e419ad58186347c8206c13a",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "55870768968a343d208f4a84",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "d283a4f783b2c9c7a072fcb7",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "fcb1fae221f49b0bb2ccbfd9",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "1af941a62f2c6ec20a17776c",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "6312a5bdad9ea3751ca571f5",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "8155fc8df9362964cfadfa2b",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "064a4088d7c478b700894791",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "5fd70b6a3efba1f9faa960e0",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "startedAt": "2026-10-21T23:09:54.172Z",
+  "finishedAt": "2026-10-21T23:10:01.163Z"
+}
