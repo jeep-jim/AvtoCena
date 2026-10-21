@@ -1,0 +1,929 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aston-rest",
+  "entries": [
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "variantId": "a09d48777947968bd2e32fb8",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2021,
+      "trim": "STANDARD",
+      "expectedDigest": "aa7d11be7edb150d1e3d647c7996536457b0dd8820d5f93f3e281ed9be014ab7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 3982,
+        "powerKw": 405,
+        "icePowerKw": 405,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DBX MY2021 V8: официальный каталог назначает это руководство именно 21MY. Объём 3982 см³, мощность 405 кВт, полный привод и АКПП9. Наблюдавшиеся 404.52 кВт заменены заводским значением. Число 542 bhp не записывается как метрические л.с. Название декоративной серии, мощность PS и полная масса пока отдельно не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+            "pages": [
+              212,
+              236,
+              237,
+              238
+            ],
+            "sha256": "34a1e97a465a996e92ed197a37665d411e0c26c952a1f6c934061aea7420b8ab",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX&year=21MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "variantId": "0203e88659df16808979e285",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2021,
+      "trim": "4.0T V8 Silk Road of Swan",
+      "expectedDigest": "e984b542234eb092f1e3f2d64b7c501fa9f6f63adc034c4fdaf5651f2d13d677",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 3982,
+        "powerKw": 405,
+        "icePowerKw": 405,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DBX MY2021 V8: официальный каталог назначает это руководство именно 21MY. Объём 3982 см³, мощность 405 кВт, полный привод и АКПП9. Наблюдавшиеся 404.52 кВт заменены заводским значением. Число 542 bhp не записывается как метрические л.с. Название декоративной серии, мощность PS и полная масса пока отдельно не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+            "pages": [
+              212,
+              236,
+              237,
+              238
+            ],
+            "sha256": "34a1e97a465a996e92ed197a37665d411e0c26c952a1f6c934061aea7420b8ab",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX&year=21MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "variantId": "a4e9b332a53343a503c52d16",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2021,
+      "trim": "First Edition Limited Edition",
+      "expectedDigest": "8b486261540065cbca893c72d49be338a7cd2668013e8868f1a1b358ebdaab53",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 3982,
+        "powerKw": 405,
+        "icePowerKw": 405,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DBX MY2021 V8: официальный каталог назначает это руководство именно 21MY. Объём 3982 см³, мощность 405 кВт, полный привод и АКПП9. Наблюдавшиеся 404.52 кВт заменены заводским значением. Число 542 bhp не записывается как метрические л.с. Название декоративной серии, мощность PS и полная масса пока отдельно не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+            "pages": [
+              212,
+              236,
+              237,
+              238
+            ],
+            "sha256": "34a1e97a465a996e92ed197a37665d411e0c26c952a1f6c934061aea7420b8ab",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX&year=21MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "variantId": "4294cfbf51b561a2f3460d0b",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2021,
+      "trim": "1 OWNER*14m ASTON WARRANTY*FULL SERVICE BOOK*TOP CONDITION*",
+      "expectedDigest": "d33f562cc2f2a84cf5a906492c2f606ba4ae4ec4cce40c2a77b65f1a718b268e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 3982,
+        "powerKw": 405,
+        "icePowerKw": 405,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DBX MY2021 V8: официальный каталог назначает это руководство именно 21MY. Объём 3982 см³, мощность 405 кВт, полный привод и АКПП9. Наблюдавшиеся 404.52 кВт заменены заводским значением. Число 542 bhp не записывается как метрические л.с. Название декоративной серии, мощность PS и полная масса пока отдельно не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+            "pages": [
+              212,
+              236,
+              237,
+              238
+            ],
+            "sha256": "34a1e97a465a996e92ed197a37665d411e0c26c952a1f6c934061aea7420b8ab",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX&year=21MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "variantId": "b0c5edd1916f0437fdbdbea2",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2023,
+      "trim": "707",
+      "expectedDigest": "915cd8de0c4d19df19237159c734330246e75079530f310e71c7c70bad159971",
+      "patch": {
+        "engineCc": 3982,
+        "powerHp": 707,
+        "powerKw": 520,
+        "icePowerKw": 520,
+        "transmission": "automatic",
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.astonmartin.com/aston-martin-dbx707-apex-grey-full-specification/?lang=eng",
+        "checkedAt": "2026-10-22",
+        "statement": "Точная версия DBX707: заводская спецификация 31.03.2022 подтверждает 3982 см³, 707 PS / 520 кВт, АКПП9 и SUV; заводская кампания DBX707-2023 подтверждает версию в 2023 году. Не стандартный DBX550 и не DBX S. Полная масса и код двигателя не установлены.",
+        "additionalSources": [
+          {
+            "url": "https://media.astonmartin.com/aston-martin-dbx707-apex-grey-full-specification/?lang=eng",
+            "fields": [
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission",
+              "bodyType"
+            ]
+          },
+          {
+            "url": "https://www.astonmartin.com/en-us/campaigns/us-testdrive-dbx707-2023",
+            "fields": [],
+            "purpose": "Exact model availability in 2023"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "variantId": "87fb2ca2e0a6e197935d2306",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2023,
+      "trim": "Aston Martin DBX707",
+      "expectedDigest": "9f3e6fd4de7a00e5c5ed81750e9722a07d6f979e61eb30b060ff71b577372194",
+      "patch": {
+        "engineCc": 3982,
+        "powerHp": 707,
+        "powerKw": 520,
+        "icePowerKw": 520,
+        "transmission": "automatic",
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.astonmartin.com/aston-martin-dbx707-apex-grey-full-specification/?lang=eng",
+        "checkedAt": "2026-10-22",
+        "statement": "Точная версия DBX707: заводская спецификация 31.03.2022 подтверждает 3982 см³, 707 PS / 520 кВт, АКПП9 и SUV; заводская кампания DBX707-2023 подтверждает версию в 2023 году. Не стандартный DBX550 и не DBX S. Полная масса и код двигателя не установлены.",
+        "additionalSources": [
+          {
+            "url": "https://media.astonmartin.com/aston-martin-dbx707-apex-grey-full-specification/?lang=eng",
+            "fields": [
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission",
+              "bodyType"
+            ]
+          },
+          {
+            "url": "https://www.astonmartin.com/en-us/campaigns/us-testdrive-dbx707-2023",
+            "fields": [],
+            "purpose": "Exact model availability in 2023"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "49f0712914bb0925bd328b09",
+      "variantId": "9e40a81ab042b39f73db19d9",
+      "make": "Aston Martin",
+      "model": "DBX707",
+      "year": 2023,
+      "trim": "STANDARD",
+      "expectedDigest": "290565c0957d0bb0de5260f625439392769faa29a562db462da814f776526071",
+      "patch": {
+        "engineCc": 3982,
+        "powerHp": 707,
+        "powerKw": 520,
+        "icePowerKw": 520,
+        "transmission": "automatic",
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.astonmartin.com/aston-martin-dbx707-apex-grey-full-specification/?lang=eng",
+        "checkedAt": "2026-10-22",
+        "statement": "Точная версия DBX707: заводская спецификация 31.03.2022 подтверждает 3982 см³, 707 PS / 520 кВт, АКПП9 и SUV; заводская кампания DBX707-2023 подтверждает версию в 2023 году. Не стандартный DBX550 и не DBX S. Полная масса и код двигателя не установлены.",
+        "additionalSources": [
+          {
+            "url": "https://media.astonmartin.com/aston-martin-dbx707-apex-grey-full-specification/?lang=eng",
+            "fields": [
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission",
+              "bodyType"
+            ]
+          },
+          {
+            "url": "https://www.astonmartin.com/en-us/campaigns/us-testdrive-dbx707-2023",
+            "fields": [],
+            "purpose": "Exact model availability in 2023"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "variantId": "14ee4deb1e3adfe292d98570",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2025,
+      "trim": "707",
+      "expectedDigest": "6b3058b0d76495f3f5d77cd1fe0016674a9d38624f0e0e446993f993ad67d3f6",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 3982,
+        "powerHp": 707,
+        "powerKw": 520,
+        "icePowerKw": 520,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20Owner%20Guide.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DBX707 MY2025: официальный каталог руководств 25MY, страницы 262–263, 3982 см³, 707 PS / 520 кВт, полный привод и АКПП9 с мокрым сцеплением. Не подставлять эти данные в DBX550 или Straight-Six. Региональная полная масса пока не подтверждена.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20Owner%20Guide.pdf",
+            "pages": [
+              234,
+              262,
+              263
+            ],
+            "sha256": "7091224b18bfe136ee79e87082137025fc361710011a83efde25b443e989a843",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX&year=25MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "49f0712914bb0925bd328b09",
+      "variantId": "d5e7a289b736984be63f519a",
+      "make": "Aston Martin",
+      "model": "DBX707",
+      "year": 2025,
+      "trim": "STANDARD",
+      "expectedDigest": "60ebc340b0883beb6d2208ae28cd2a9b696f24d6354dad51815a5d373db55be9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 3982,
+        "powerHp": 707,
+        "powerKw": 520,
+        "icePowerKw": 520,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20Owner%20Guide.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DBX707 MY2025: официальный каталог руководств 25MY, страницы 262–263, 3982 см³, 707 PS / 520 кВт, полный привод и АКПП9 с мокрым сцеплением. Не подставлять эти данные в DBX550 или Straight-Six. Региональная полная масса пока не подтверждена.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20Owner%20Guide.pdf",
+            "pages": [
+              234,
+              262,
+              263
+            ],
+            "sha256": "7091224b18bfe136ee79e87082137025fc361710011a83efde25b443e989a843",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX&year=25MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "variantId": "4be346e48f8709af4b78060d",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2026,
+      "trim": "4.0T V8 707",
+      "expectedDigest": "820afbababe9b7da73a7712cfea1c8e5908bebea80075753cb16c151ebaab930",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 3982,
+        "powerHp": 707,
+        "powerKw": 520,
+        "icePowerKw": 520,
+        "drive": "awd",
+        "transmission": "automatic",
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/en-us/models/dbx707",
+        "checkedAt": "2026-10-22",
+        "statement": "DBX707 2026: действующая заводская страница именно DBX707 подтверждает бензиновый V8, 3982 см³, 707 PS / 520 кВт, полный привод и АКПП9. Не DBX S с иной мощностью. Региональная полная масса и код двигателя не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/en-us/models/dbx707",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "bodyType"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "variantId": "9acbe89a8a72ed83714004a7",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2022,
+      "trim": "3.0T STRAIGHT-SIX",
+      "expectedDigest": "306dadd74c0c5ca5c64e29bc93a41166ad07faea719b58853bb31867ff582eec",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "mhev"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/en-us/our-world/news/2022/2/28/aston-martin-strengthens-regional-leadership-in-apac-following-record-sales",
+        "checkedAt": "2026-10-22",
+        "statement": "DBX Straight-Six: заводская публикация 28.02.2022 подтверждает мягкий гибрид, представленный в ноябре 2021. Объём, мощность ДВС, электромотора и полная масса этим источником не подтверждаются; наблюдавшиеся 435 л.с. не используются как доказательство.",
+        "additionalSources": []
+      }
+    },
+    {
+      "modelId": "004233a68dabf0652a7f0416",
+      "variantId": "8f3abae56b6868c770fac771",
+      "make": "Aston Martin",
+      "model": "Valhalla",
+      "year": 2026,
+      "trim": "STANDARD",
+      "expectedDigest": "bb29f1b741d9a51896ed079d876743437f70ff89e159d5080fd816b9d49ae62b",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 3982,
+        "icePowerKw": 609,
+        "systemPowerKw": 793,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2115
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/Valhalla/SY9Y-19A322-AA-EnNonEU-B6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Valhalla MY2026: официальный каталог отдельно назначает руководство Non EU. Стр. 205–207: 3982 см³, ДВС 609 кВт, гибридная установка 793 кВт, GVW 2115 кг (не масса 1885 кг). Заводской выпуск подтверждает PHEV и электрический полный привод. Максимум электромоторов 185 кВт не выдан за 30-минутную мощность. Общие powerHp/powerKw не переопределены; мощность системы взята из таблицы, не из суммы округлённых компонентов.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/Valhalla/SY9Y-19A322-AA-EnNonEU-B6.pdf",
+            "pages": [
+              205,
+              206,
+              207
+            ],
+            "sha256": "04bb5ef76ee96c1ef685f797106e2267c9a027a4dd73a30803822547e459507c",
+            "fields": [
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "transmission",
+              "grossVehicleWeightKg"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=Valhalla&year=26MY&language=English"
+          },
+          {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2024/12/11/valhalla-the-ultimate-drivers-supercar",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "6311069a3ae15cc6b5c54e8a",
+      "variantId": "dcc9e9b88e068c04dba9f85d",
+      "make": "Aston Martin",
+      "model": "Vanquish",
+      "year": 2017,
+      "trim": "S",
+      "expectedDigest": "f7b503e5ef2820b1e442d5f2f994ccef3b6be7ab406cc2e659c951cf49eae430",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 5935,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/HD33-19A321-AB.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Vanquish S 2017: руководство 17.5MY подтверждает 5935 см³, бензиновый V12 и Touchtronic III 8-speed. Таблица различает 444 кВт (4 катализатора) и 433 кВт (6 катализаторов): без конкретного исполнения мощность не заполняется. Кузов и региональная полная масса требуют отдельного подтверждения.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/HD33-19A321-AB.pdf",
+            "pages": [
+              160,
+              161
+            ],
+            "sha256": "c98153ce54c924378e722cd013d5497c62a04e4a65b3cff1aaa467241e5b99b8",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=VanquishS&year=17.5MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "6311069a3ae15cc6b5c54e8a",
+      "variantId": "445aa16d2a4103230edf046c",
+      "make": "Aston Martin",
+      "model": "Vanquish",
+      "year": 2017,
+      "trim": "S",
+      "expectedDigest": "9405f89dee120904ddbe7b474bc306d180147e3dad61536d05bf2288eff5b2a8",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 5935,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/HD33-19A321-AB.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Vanquish S 2017: руководство 17.5MY подтверждает 5935 см³, бензиновый V12 и Touchtronic III 8-speed. Таблица различает 444 кВт (4 катализатора) и 433 кВт (6 катализаторов): без конкретного исполнения мощность не заполняется. Кузов и региональная полная масса требуют отдельного подтверждения.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/HD33-19A321-AB.pdf",
+            "pages": [
+              160,
+              161
+            ],
+            "sha256": "c98153ce54c924378e722cd013d5497c62a04e4a65b3cff1aaa467241e5b99b8",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=VanquishS&year=17.5MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "6311069a3ae15cc6b5c54e8a",
+      "variantId": "2cd77f806912a89cf825920b",
+      "make": "Aston Martin",
+      "model": "Vanquish",
+      "year": 2015,
+      "trim": "STANDARD",
+      "expectedDigest": "dd664ffc804cf95563ea9e6657516e232c5df2b16cee24c0fee5fbc3a41d0c1e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 5935,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/FD33-19A321-AA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Vanquish MY2015: руководство выбранного модельного года подтверждает 5935 см³, бензиновый V12 и Touchtronic III 8-speed. Число 568 bhp не записано как PS; точные метрические мощности и полная масса пока не подтверждаются. Данные не перенесены с MY2014 с шестиступенчатой КПП.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/FD33-19A321-AA.pdf",
+            "pages": [
+              160,
+              161
+            ],
+            "sha256": "22226d7e550b3e588be6349f2ed93484f8dd52b9467b5fb35d1a8531cd50bba3",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=Vanquish&year=15MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "6311069a3ae15cc6b5c54e8a",
+      "variantId": "2edaf57e01f731796bf56ebc",
+      "make": "Aston Martin",
+      "model": "Vanquish",
+      "year": 2025,
+      "trim": "COUPE - BOWERS & WILKINS - TITANIUM EXHAUST",
+      "expectedDigest": "454c321b0fe9f910859543ed859f6d886b423fa1f1d30e25bdb5cdd04ced122b",
+      "patch": {
+        "trim": "V12 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 5204,
+        "powerHp": 835,
+        "powerKw": 614,
+        "icePowerKw": 614,
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2315
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/Vanquish/25MY/25MY%20Vanquish%20English%20Owner%20Guide.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Vanquish Coupe MY2025: 5204 см³, 835 PS / 614 кВт, АКПП8. Европейское руководство подтверждает GVW 2315 кг, не массу 1910 кг. Рекламные опции убраны из технического названия купе. Не прежний 5935 см³ Vanquish и не Volante.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/Vanquish/25MY/25MY%20Vanquish%20English%20Owner%20Guide.pdf",
+            "pages": [
+              211,
+              238,
+              239,
+              240
+            ],
+            "sha256": "6481900213b51f1756b4e42b2336b739d1146460efcac40ed9fdd378ac27c16c",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission",
+              "grossVehicleWeightKg"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=Vanquish&year=25MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0f90ccb1a0cf0280fa416811",
+      "variantId": "6d512d1290f58497b05f4b3f",
+      "make": "Aston Martin",
+      "model": "Vantage",
+      "year": 2019,
+      "trim": "STANDARD",
+      "expectedDigest": "4752eb6842a5342ecd8a799b822b46971f2aed6f04690b7277c989586d9ed055",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 3982,
+        "powerKw": 375,
+        "icePowerKw": 375,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/KY63-19A321-AA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Vantage MY2019: заводское руководство 19MY подтверждает бензиновый V8, 3982 см³, 375 кВт и АКПП8. Число 503 bhp не записывается как метрические л.с. Не прежний V8 4735 см³ и не V12. Региональная полная масса отдельно не подтверждена.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/KY63-19A321-AA.pdf",
+            "pages": [
+              208,
+              232,
+              233,
+              234
+            ],
+            "sha256": "e04eecd0ffeb6130d6879b6ee26a9895cd14b09f98b1691636fcf9f830d373b6",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=Vantage&year=19MY&language=English"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0f90ccb1a0cf0280fa416811",
+      "variantId": "deadae0c5da696139ca0328d",
+      "make": "Aston Martin",
+      "model": "Vantage",
+      "year": 2025,
+      "trim": "STANDARD",
+      "expectedDigest": "313f8e31c858fc6904acbf1c2f0052e72456212be70eecaab6c26ec9fbf27e81",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 3982,
+        "powerHp": 665,
+        "powerKw": 490,
+        "icePowerKw": 490,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/Vantage/25MY/25MY%20Vantage%20English%20Owner%20Guide.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Vantage MY2025: официальный каталог 25MY, 3982 см³, 665 PS, АКПП8. Руководство прямо печатает 490 кВт; это опубликованное округление, не вычисленные 489 кВт. Не Vantage S 680 PS и не F1 Edition. Полная масса исполнения UAE требует отдельного подтверждения.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/Vantage/25MY/25MY%20Vantage%20English%20Owner%20Guide.pdf",
+            "pages": [
+              210,
+              234,
+              235,
+              236
+            ],
+            "sha256": "0ee17eba7dc67df44d691f13567bf43ecdda9436cbcc921082724ac0e572bdba",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=Vantage&year=25MY&language=English"
+          }
+        ]
+      }
+    }
+  ]
+}
