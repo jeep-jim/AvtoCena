@@ -1,7 +1,6 @@
 import { isCalculationOriginAllowed } from "@/lib/catalog/calculation-request-origin";
-import { getOfferForPage } from "@/lib/catalog/offer-page-data";
+import { readOfferDetailForPage } from "@/lib/catalog/offer-page-data";
 import { NextResponse } from "next/server";
-import { getOfferFromCurrentShard } from "@/lib/catalog/storage";
 import { validateCustomerParameters } from "@/lib/catalog/customer-parameters";
 import { calculateOfferWithCustomerParametersDetailed } from "@/lib/catalog/customs-pricing";
 export async function POST(request: Request, {params}:{params: Promise<{id:string}>}) {
@@ -12,7 +11,9 @@ export async function POST(request: Request, {params}:{params: Promise<{id:strin
   let parameters;
   try { parameters = validateCustomerParameters(JSON.parse(body)); }
   catch(error) { return NextResponse.json({error:error instanceof Error?error.message:"Проверьте параметры"},{status:400,headers}); }
-  const offer = await getOfferForPage((await params).id) || await getOfferFromCurrentShard((await params).id);
+  const detail = await readOfferDetailForPage((await params).id);
+  if (detail.unavailable) return NextResponse.json({error:'disabled' in detail ? "Карточка недоступна. Выберите автомобиль в каталоге." : "Не удалось получить данные автомобиля. Попробуйте позже."},{status:'disabled' in detail?410:503,headers});
+  const offer = detail.offer;
   if (!offer) return NextResponse.json({error:"Объявление не найдено"},{status:404,headers});
   const result = await calculateOfferWithCustomerParametersDetailed(offer,parameters);
   if (!result.ok) return NextResponse.json({error:result.error,missing:result.missing},{status:422,headers});

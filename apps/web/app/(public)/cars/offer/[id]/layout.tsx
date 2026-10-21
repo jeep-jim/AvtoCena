@@ -9,7 +9,7 @@ import type { ReactNode } from "react";
 import { OfferSpecGridStabilizer } from "@/components/catalog/OfferSpecGridStabilizer";
 import { money } from "@/lib/avtocena";
 import { absoluteAvtocenaUrl, catalogOfferUrl } from "@/lib/ai-discovery";
-import { getOfferForPage } from "@/lib/catalog/offer-page-data";
+import { readOfferDetailForPage } from "@/lib/catalog/offer-page-data";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
@@ -78,7 +78,7 @@ function safeJsonLd(value: unknown) {
 export default async function OfferLayout({ children, params }: { children: ReactNode; params: Promise<{ id: string }> }) {
   const id = offerRouteId((await params).id);
   if (parseSpecialId(id)) return <>{children}</>;
-  const storedOffer = await getOfferForPage(id).catch(error=>{if(id.startsWith('ajes-stats-'))return null;throw error;});
+  const {offer:storedOffer} = await readOfferDetailForPage(id);
   const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
   const saved = storedOffer ? await getSavedOfferCalculation(storedOffer) : null;
   const structuredData = offer ? offerStructuredData(id, offer) : null;
