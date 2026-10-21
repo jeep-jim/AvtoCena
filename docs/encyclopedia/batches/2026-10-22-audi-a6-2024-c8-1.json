@@ -1,0 +1,3861 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a6-2024-c8-1",
+  "entries": [
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9b27413c4eead213c16c659a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 35 TDI LED/Navi/AHK/R-Kamera/Memory/17\"",
+      "expectedDigest": "ce4008fb2041bbf01ddd4cb080dd69c1c0e05710b716699eb2856f2aec71e9b0",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2330
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Передний привод подтверждён. Разрешённая полная масса 2330 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8811c9025e52cacaf74b83d5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Limousine 35 TDI S tronic - Kamera - ACC -",
+      "expectedDigest": "c4d3ace087882b73d3f85a2c04766aeb59444b3a1688e6e2b707c543912bcbb4",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2255
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Sedan 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Передний привод подтверждён. Разрешённая полная масса 2255 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "a7d3a4002bf64c00962c61a2bad896d5c86c1f16378011703269dea67210e330",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-40",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8a5e1a1100f18e1ad0f05702",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant advanced 35 TDI Matrix Pano AHK Carplay",
+      "expectedDigest": "bcb961406c751d125a437789d66d7043bd9289087077b9b7a552da63e16ee18a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2330
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Передний привод подтверждён. Разрешённая полная масса 2330 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c438c2669e938e244e5d7cfe",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI S tronic LED*SHZ*KAM",
+      "expectedDigest": "3d6d9416bc4ae386203d112b8909f92e6f1fcc58b60e036c7c85aa23dd3fb039",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "426269715c03f5fe3cfd77b265fdb7ae0f36338a63557a68ce75e5de27681b96",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "965921d615f4d2c7668b7876",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI B&O LED MMI SHZ VIRTUAL",
+      "expectedDigest": "30c4c472c73c67f5fc6d58c03a9eb548e45ffe305142defb9148d85ef8a488e4",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "426269715c03f5fe3cfd77b265fdb7ae0f36338a63557a68ce75e5de27681b96",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8e03ca55331d0e38fc45603e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI S tronic MMI Matrix-LED ACC",
+      "expectedDigest": "4eb467185e94f0f9c157199799fd3789c1260c74bc7cf658118c5c931d4f1e27",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "426269715c03f5fe3cfd77b265fdb7ae0f36338a63557a68ce75e5de27681b96",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "37b16161939891caa4ebbe64",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI S tronic Business AHK Navi conne",
+      "expectedDigest": "4a602cd7b4d476557dff7cf1fac78b081d00d05743715582cafe1abd22fa4271",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "426269715c03f5fe3cfd77b265fdb7ae0f36338a63557a68ce75e5de27681b96",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8fce7c76ad06db72a7c95bf6",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI S line LED GRA AHK Einparkhilfe",
+      "expectedDigest": "a8aa3a6f9f07e55e0e815579a029fe570ed0cfa4e01732014c49b6e4ab06fdd9",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "426269715c03f5fe3cfd77b265fdb7ae0f36338a63557a68ce75e5de27681b96",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "bd772453c3dd26f2de0835be",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant Sport 40 TDI S line*Navi*Matrix*Virtual",
+      "expectedDigest": "82f9aae51ce1621ecce63177488842879f1ae76906a8cd0d6a84e2745dce3998",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "426269715c03f5fe3cfd77b265fdb7ae0f36338a63557a68ce75e5de27681b96",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ea60fc77394988997c70aa24",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "40TDI Avant quattro AHK 360° Kamera Assistenz",
+      "expectedDigest": "b6821506ce4a13a820f8b808742da6d26ec01b6ebc0770e8ee86cfbdc79d769f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2425
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2425 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8fc2d5289d51c38df2961bfd",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI quattro advanced AHK ACC PANO",
+      "expectedDigest": "66a4f37ba2f212c1ed0e41d0b647691aee95a5439e621064cd657421ddae6e08",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2425
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2425 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c0f141b2751c96b28cc3c221",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI advanced APP+DAB+AHK+PANO+VIRT",
+      "expectedDigest": "937d090f28338f43ad9619844ea16ce8873689362c32cc755a66920ab90da692",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "426269715c03f5fe3cfd77b265fdb7ae0f36338a63557a68ce75e5de27681b96",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "bc77c49adb8a3d5c767258f7",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI quattro Matrix/Kam/Memory/ACC",
+      "expectedDigest": "7590fda1fc8b95280e91a72bbfc95cb241abf20ff44806c606af39139efc148c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2425
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2425 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "356d9d997dd57b33fa713d78",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI S line Matrix+PDC+SitzH+MMI-Plus",
+      "expectedDigest": "af22c7db148b05dc88261c28f90484f57f2eb3c9ef8c258e1f325e7e6dec7763",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "426269715c03f5fe3cfd77b265fdb7ae0f36338a63557a68ce75e5de27681b96",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6365da3fb8f50aca04f06bf4",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Limousine 40 TDI S tronic advanced Pano/B&O/H",
+      "expectedDigest": "464c56b7041828500e02141ea558841a30bd3ace811e31bb83be98cdd49738cd",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1133/file_en/227859ac1c4e791eef61fb926e5ffd060356ea6c/eTD-Audi-A6-Sedan-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Sedan 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1133/file_en/227859ac1c4e791eef61fb926e5ffd060356ea6c/eTD-Audi-A6-Sedan-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "b433d04e6f5598329a2ab5219e5e0c964a96ef738ed990aa14551d93d61496a9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/825/file_en/e8f97084df1d052eeafbe98357f51fc91dd11620/eTD-Audi-A6-Sedan-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6f2cd2399cfe58b5dbe66461c3b0386a6ec6c865b0af2c89f9f33e8b09b7d7d9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-40",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "3c085e9ab3216e372201f7cb",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI quattro Standheizung",
+      "expectedDigest": "ea9fbcb1b84bb1c5af629cf7881dd415b59083282aa4260584905c121153afa9",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2425
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2425 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8f6a66c2064afce70c367790",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI S-Line MATRIX B&O 360° ACC AHK",
+      "expectedDigest": "9aeed1613ae93ae9474b36a698bdb6a34b3dc9db10228dc74eff1cc8b8488a97",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/307/file_en/6cef1887137d6b9847d66c4409ac00809ac12971/eTD-Audi-A6-Avant-40-TDI-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "426269715c03f5fe3cfd77b265fdb7ae0f36338a63557a68ce75e5de27681b96",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d62c6c05a7cb3aba81f5304d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI Q ST.HEIZ 360° AHK AFA MASSAGE+K",
+      "expectedDigest": "1e266a94d413480ac643fb699f9be2abde724c160ffcc8dda73f7fd0275cd1db",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2425
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2425 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "74d4002bbf51dbde50c82aa8",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 40 TDI quattro S tronic S line | PANO",
+      "expectedDigest": "c5f5e88059809bb879f27d534664644914182d98ca1756bc420dfca14e6df04f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2425
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2425 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/828/file_en/6671ce8867ad8b952a23b450932d7c19d1102fce/eTD-Audi-A6-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "927ae0a034f38702bdfa35c87894db734cc4cbe502b1a5068a85bd9a4cbf883d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2354c88af0a312aaa4250d25",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TDI quattro advanced+ACC+Virtual coc",
+      "expectedDigest": "ce474e6945b10190d004fdcb68b54de775ddc9b25e29b00b9b374943434276c5",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "fcf8181f457d23279a5ec80c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TDI S tronic advanced NaviPlus Matri",
+      "expectedDigest": "15d17ba5d810be7f424c49c31ad61d307efd9617095604707a58b49abced0901",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "b4e428032a97ba3fd60449d4",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TDI S tronic LED Navi quattro DAB+ P",
+      "expectedDigest": "dc8fdbd21890af4400a2513e0f8bcc73a8586b7d2c98454810817be7ff4b6268",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8eab37175873d168eda0d55e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TDI quattro Leder AHK ACC Tour 8fach",
+      "expectedDigest": "0dd5ede12a16c27c4b4da8e57163492c453ceb3312e033a57adeb8073ec4396a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8c500e7c0b3ca8a71293c1a8",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TDI Qu S-Line Black NAV+LED+VCOCK",
+      "expectedDigest": "9a79a3c33c1314bb2cc98118b179bd6c2a898359afbd0cfaf6dbb7375bc746ae",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "411734451e1b5a57f30b2cc0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant advanced 45 TDI quattro 180(245) S tron",
+      "expectedDigest": "d1a46d1660feeba4adfde2f1187ab75f3ee49b7095caa06fe89dc0ed33c23499",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "542f9aa871cb358e4f241159",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TDI quattro S line HeadUp AHK Navi",
+      "expectedDigest": "1a3b2c4f3e152425315c5ab374097dc0bf54e5c8759d126a9c8afa3e66712e47",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "239e4958f3353e139e843e27",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI S tronic advanced | ACC | AHK",
+      "expectedDigest": "ed0685dd24a15d38827df11cd53d2f4f45ac19ed639ff58d8b307cc62a854c24",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1ba686d44c94f7e997b70d37f032707750634756ce441da648f400571b982e64",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "0055541c106c8d38cb427535",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant Sport 45 TFSI S-LINE S-TRONIC NAV SHZ",
+      "expectedDigest": "3de5f4310edeccee88a12a1a2efef87fcff7e00dd99b6bf049559f4a9b535f40",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1ba686d44c94f7e997b70d37f032707750634756ce441da648f400571b982e64",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "707a86ee8c127d6ccb6fe421",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI LED/ACC/LEDER",
+      "expectedDigest": "3dc48cd6f4a1511595b5c57dab17e9e246b1ba6648bad70a9614d4c9812e41fd",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1ba686d44c94f7e997b70d37f032707750634756ce441da648f400571b982e64",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8f9bd70bfaaf2c88a1c17688",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Lim. 45 TFSI quattro /HUD /360°KAMERA /MEMORY",
+      "expectedDigest": "47854b38fa23bc481b1e192efeedbe15b91277b54cc2f1734b91ddef2e0e11a4",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2340
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Sedan 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2340 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "2cb83748f6efb1bf5f5f7f19e2c3465f5850734990ac6a146143668d1670d55d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-40",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "585fc4ccd0f3825df91425fa",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant Sport 45 TFSI quattro S tronic LED MMI",
+      "expectedDigest": "ad35a1f124e54b81674ccf3401a7dbe20f993ee2f3ba6cefe4f04fa4b54d4c63",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2405
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2405 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "03cd9a3fd6e21edd1a437312",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI ACC MATRIX PANO RFK",
+      "expectedDigest": "ea23386a0f0a1221bf16896a0d8e6bbf0bebb97d65dbc4fc15bcdeda724a165e",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1ba686d44c94f7e997b70d37f032707750634756ce441da648f400571b982e64",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "86333261f17c6a9bcbbe9d30",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI 2x S line S tro*B&O*LED*Navi+*S",
+      "expectedDigest": "74ac069b1217c2aa0ce146cf78f7356fddc6815b21905d7815dbc2c86be72e7e",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1ba686d44c94f7e997b70d37f032707750634756ce441da648f400571b982e64",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "81882c7f113afa407c6365d3",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI basis",
+      "expectedDigest": "a6c21ed102ca56cabd9be391e2e18da4d4af9b0a8f20d7362353ca192a543b95",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1ba686d44c94f7e997b70d37f032707750634756ce441da648f400571b982e64",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "01d3a9f3c3382a53ed50225b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45TFSI Quattro *S-line*PanSD*ACC*AHK",
+      "expectedDigest": "eacc17486559fce7300753150ab437817f065d270e383bd904e525bafd14ba94",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2405
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2405 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "08edfb49e15d5c098e896fbb",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Limousine 45 TFSI quattro S tronic design ACC",
+      "expectedDigest": "9127e5e2f2e27bd1d21de1795e8c9c89a05fa06b8b48a705d1a6deac3c025316",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2340
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Sedan 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2340 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "2cb83748f6efb1bf5f5f7f19e2c3465f5850734990ac6a146143668d1670d55d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-40",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "4b129cd63cc5c4590e5d86c7",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Lim. 45TFSI qu BLACK AHK KAMERA TOUR MATRIX",
+      "expectedDigest": "dda1438a53bb43eae597dd181d9de7913313da74368a5bf329111a4c14c927b8",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2340
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Sedan 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2340 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "2cb83748f6efb1bf5f5f7f19e2c3465f5850734990ac6a146143668d1670d55d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-40",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "5a9098316d145bcba547eb14",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI Q.sport advanced Standhzg. AHZV",
+      "expectedDigest": "b03e63768191476f91e356ef8974e060332efca510864c920c3af073122f6335",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2405
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2405 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "357663f1d6d395f503325f4d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "AVANT 45TFSi S LINE LED/TEMPO./PANO/KAM./DSP",
+      "expectedDigest": "4b975c356f175e47e6441eacd55f21cb7bfd12f94f51c0734ffcbdc7eab75986",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1ba686d44c94f7e997b70d37f032707750634756ce441da648f400571b982e64",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "3679e2ad190457d784345cee",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI quattro S tronic advanced MATRI",
+      "expectedDigest": "622a25299dd93096c2afb37387ed5bcfdaf2e89551c2d8d95123403f3a76f6ec",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2405
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2405 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "11578636baeb9a7789d4b913",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI qu. S line S tronic *PANO*HuD*",
+      "expectedDigest": "a5a4a0354448d4d80ca6dda4da1ac0f238feaba2031cb5514262ecb4fdb36f53",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2405
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2405 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "749e11f694e7ad0b95afae34",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI S tronic advanced ACC AHK Pano",
+      "expectedDigest": "2bf2eaf96b875037d930964ded32a0dabc4094c4dfd5399cd32a2d71b35c685a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Привод не определён: подтверждены только поля, одинаковые в обеих заводских таблицах FWD и quattro; привод и масса не заполнены.  Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/830/file_en/e3c857b68937eee58fb68691d3640ec376b5f1c5/eTD-Audi-A6-Avant-45-TFSI-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1ba686d44c94f7e997b70d37f032707750634756ce441da648f400571b982e64",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f7f1b8db85f09f826719f4fa",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI q. S-Tronic. S-Line, Matrix-LED",
+      "expectedDigest": "f0de1bb626bb6713cf1dcb81950efa0a6eaf5e7904e4cc2f2b81db44b723188a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2405
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2405 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "e9ddcfa23d60ae07d48b6ce5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI QUATTRO S-LINE+KAMERA+AHK+WR",
+      "expectedDigest": "7b3d1141d0fc093e8fd0a1710a3834ee737300099eb3c45e69542d8d4447ba78",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2405
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2405 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8e419ad58186347c8206c13a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Lim. 45 TFSI quattro S line*PANO*HUD*SBL*MATR",
+      "expectedDigest": "b1214ffd20fffa53bb43f3cf5caabaf9ae6ed98cb3c040704705cfec891078d3",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2340
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Sedan 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2340 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "2cb83748f6efb1bf5f5f7f19e2c3465f5850734990ac6a146143668d1670d55d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-40",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "55870768968a343d208f4a84",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI Qu S line PANO+AHK+MATRIX+MEMOR",
+      "expectedDigest": "cc3601f98d43c8fb0c3a3558b0348fbbbb6c0d1382ddb3127477b3096bed6d4a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2405
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2405 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d283a4f783b2c9c7a072fcb7",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 45 TFSI qu S line PANO+AHK+21Z+STANDH+",
+      "expectedDigest": "adde03ce5254ad79fd18fc327fdbe6068fe4a6b9efe3b4173716832ecf520617",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2405
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2405 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/829/file_en/0896f9fd81a9437d4c8d0955d60d81aab37ae17d/eTD-Audi-A6-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7e1405bfda1674a41b3d0604bd506a0285a2638e34d40c824cdb66beabf50a75",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "fcb1fae221f49b0bb2ccbfd9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Lim 45 TFSI quattro HD Matrix Std-Hzg B&O HUD",
+      "expectedDigest": "737df38c6a10b2cb6ab980a697f5d33d96d608b108e543b820c7064d445c571f",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2340
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Sedan 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Разрешённая полная масса 2340 кг. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/826/file_en/70dc72176f74e5f1cd5bb1a80f5c8681a7949a84/eTD-Audi-A6-Sedan-45-TFSI-quattro-S_tronic-195kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "2cb83748f6efb1bf5f5f7f19e2c3465f5850734990ac6a146143668d1670d55d",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-40",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "1af941a62f2c6ec20a17776c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "AVANT 50 TDI QUATTRO | ACC | MATRIX LED | RFK",
+      "expectedDigest": "bf7b2f8b5a302c3b5d1def23d16cfbc00de6211c486f16e3da2f76e8c8831472",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6312a5bdad9ea3751ca571f5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 50 TDI S-TR QU S-LINE MATRIX+ACC+PANO",
+      "expectedDigest": "dee1907b5b4461aef2cb54a851b66b248401161339126b5391da60a9ad6a5583",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8155fc8df9362964cfadfa2b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "AVANT 50TDi Q S LINE 21Z/LED/TEMPO./360°/DSP",
+      "expectedDigest": "90252f5cdde0eea586e70ee38c6d804d8945e27b4c3edfe55febc65c58dd4757",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "064a4088d7c478b700894791",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 50 TDI qu. S-line*Pano*Virtual*Matrix*R",
+      "expectedDigest": "97fb5e309cb04bca47ffe2a66848697710ff681b42b63c837bd9c2bb781de054",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "5fd70b6a3efba1f9faa960e0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Limousine 50 TDI quattro tiptronic LED Navi",
+      "expectedDigest": "df7dc9a4a01de76be6d4cb14e737f206102c09eaf7363cd339e708b6487bb7d9",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/747/file_en/86dc212dfb58ecc0c63b0edf3afbb43b21d381b2/eTD-Audi-A6-Sedan-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C8 Sedan 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Таблица 2024-08-29; заводской архив поколения обозначен until2025, применён к записи2024. Полный привод подтверждён. Завод приводит диапазон разрешённой полной массы; точное значение не выбрано. Совпадают кузов, цифровой индекс, объём и мощность. Код двигателя, тяговая электрическая и30-минутная мощности не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/747/file_en/86dc212dfb58ecc0c63b0edf3afbb43b21d381b2/eTD-Audi-A6-Sedan-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "date": "2024-08-29",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "d16913a7248c7ab3d02bc41716a6b4890af63243c05c99916fdac967e981aa6b",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.audi.com/en/audi-a6-40",
+            "fields": [
+              "model-year applicability"
+            ],
+            "note": "Factory archive explicitly labels generation until 2025"
+          }
+        ]
+      }
+    }
+  ]
+}
