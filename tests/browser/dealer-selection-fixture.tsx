@@ -1,3 +1,5 @@
+import {CatalogSidebar} from '../../apps/web/components/catalog/CatalogSidebar';
+import {CatalogFilterUiEnhancer} from '../../apps/web/components/catalog/CatalogFilterUiEnhancer';
 import {PublicLegalFooter} from '../../apps/web/components/layout/PublicLegalFooter';
 import {OverlayBackHistory} from '../../apps/web/components/layout/OverlayBackHistory';
 import React,{useEffect,useState} from 'react';
@@ -12,6 +14,6 @@ function Fixture(){
  const [initial,setInitial]=useState(()=>Object.fromEntries(new URLSearchParams(location.search)));const city=useSelectedCity();
  useEffect(()=>{const update=()=>setInitial(Object.fromEntries(new URLSearchParams(location.search)));window.addEventListener('fixture:navigate',update);return()=>window.removeEventListener('fixture:navigate',update);},[]);
  const staff=new URLSearchParams(location.search).get('visitor')!=='1';
- return <DealerBrowsingProvider dealer={dealer} profile><OverlayBackHistory/><DealerProfileContent s={profile} canShareSelection={staff} initialSelectionQuery={new URLSearchParams(initial).toString()} catalog={<div className="dealer-shared-catalog"><CatalogFilters initial={initial} resultCount={12} facets={{makes:['Audi','Honda'],models:[{make:'Audi',model:'Q5'},{make:'Honda',model:'Fit'}],markets:['china','japan'],bodyTypes:['sedan','hatchback'],transmissions:['automatic','cvt'],fuels:['petrol','diesel','electric','hybrid'],drives:['fwd','awd']}}/><p data-city>{city}</p><div style={{height:1400}}>Каталог: Audi Q5 — тестовое предложение</div></div>}/><PublicLegalFooter/></DealerBrowsingProvider>;
+ return <DealerBrowsingProvider dealer={dealer} profile><OverlayBackHistory/><DealerProfileContent s={profile} canShareSelection={staff} initialSelectionQuery={new URLSearchParams(initial).toString()} catalog={<div className="dealer-shared-catalog ac-catalog-page"><CatalogSidebar filters={<CatalogFilters initial={initial} resultCount={12} facets={{makes:['Audi','Honda'],models:[{make:'Audi',model:'Q5'},{make:'Honda',model:'Fit'}],markets:['china','japan'],bodyTypes:['sedan','hatchback'],transmissions:['automatic','cvt'],fuels:['petrol','diesel','electric','hybrid'],drives:['fwd','awd']}}/>}><p data-city>{city}</p><div style={{height:1400}}>Каталог: Audi Q5 — тестовое предложение</div></CatalogSidebar><CatalogFilterUiEnhancer/></div>}/><PublicLegalFooter/></DealerBrowsingProvider>;
 }
 createRoot(document.getElementById('root')!).render(<Fixture/>);
