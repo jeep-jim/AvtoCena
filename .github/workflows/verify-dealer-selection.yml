@@ -2,7 +2,7 @@ name: Verify dealer selection sharing
 on:
   push:
     branches: [main]
-    paths: ['tests/browser/dealer-selection.mjs', 'apps/web/components/dealers/DealerSelectionShare.tsx']
+    paths: ['tests/browser/dealer-selection.mjs', 'apps/web/components/dealers/DealerSelectionShare.tsx', 'tests/offer-share.test.ts', '.github/workflows/verify-dealer-selection.yml']
   pull_request:
     paths:
       - 'apps/web/components/catalog/*Share*'

@@ -27,7 +27,7 @@ test('metadata uses displayed calculation, archived client version and proxy ima
  const mocks:Record<string,string>={
   'shared-offer-scenario':`export const sharedOfferScenario=async()=>globalThis.__shareTest.automatic||null;`,
   'offer-parameter-draft':`export const offerParameterDraft=()=>({});`,
-  'offer-page-data':`export const getOfferDetailRecord=async()=>globalThis.__shareTest.offer;`,
+  'offer-page-data':`export const getOfferDetailRecord=async()=>globalThis.__shareTest.offer;export const readOfferDetailForPage=async()=>({offer:globalThis.__shareTest.offer,unavailable:false});`,
   'offer-display-data':`export const resolveOfferDisplay=async(offer,power,modification)=>{globalThis.__shareTest.queryCalls.push([power,modification]);return {offer,raw:offer,pricedOffer:offer,visibleRub:globalThis.__shareTest.visible,sellerPricing:!!globalThis.__shareTest.seller,selectionRequired:false}};`,
   'saved-offer-calculation':`export const getSavedOfferCalculation=async(offer,version)=>version==='11111111-1111-1111-1111-111111111111'?globalThis.__shareTest.client:null;`,
   'yandex-direct-scenario':`export const directOfferScenario=async()=>null;`,
