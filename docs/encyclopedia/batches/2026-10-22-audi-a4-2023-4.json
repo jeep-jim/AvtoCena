@@ -1,0 +1,1501 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a4-2023-4",
+  "entries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "42639663b23f700877358d24",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. S tronic S line Competition",
+      "expectedDigest": "cc13257863f906c16f82c721fa9dde184036113f56d06a47a33970096891c305",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "08281248f7b7d443e81bc376",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S-tronic S-Line Navi",
+      "expectedDigest": "26466e1746c14706dd91dfa8cbe45fea51d2dc65661e7ff6e98d47705420a815",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2c0f6e0952ea5e366a3d8548",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu 2x S Line AHK,B&O,HUD,Matrix",
+      "expectedDigest": "3bfe9392977f44be9ca11e278dee82200972df0f4ef903f67698fa79f8e3e506",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "05f80dc150a4a7b877b494ef",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. Matrix Pano HuD 360° Navi",
+      "expectedDigest": "1e03caf077e37e9dd2e9213481f9ed0b75b9d98b0fd7bb0b1325bc0d76f286e2",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "74a46d9592600e9530bb271d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI Qu S-Line Black NAV+LED+PANO",
+      "expectedDigest": "8f3126b247d12d1fcfa9ecf92f5914a765d3e9dcc2bf275c4f93fc57a8d654c5",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a4103cc98f2007614660c47e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. S tronic 2x S line Pano/AHK",
+      "expectedDigest": "4432116d34e6a581709826e1779e48f4e3bf0c1004036d762ef07de987a644de",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "99db0824d76ccc375fbd7977",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45TFSI qu S Line Int AHK,LED,Navi,Leder",
+      "expectedDigest": "2c9438147823581ae5da39e0970642985d16ef8cefaec16294f2b00ffe943ab9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "c84ce7b615256b78a57ad49d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu S Line Int AHK,LED,Navi,Lede",
+      "expectedDigest": "4b4a2122a1aefebdad8de65a8ab7a59a758ec9cff22f2e0e15b90d4b8f5abe34",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "74ec1976325709272b62f729",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI QU S LINE LED+AHK+KAMERA+NAVI",
+      "expectedDigest": "681ca56192e5fbe95deb1426c2c8352205a372cfb2623ca8491b37ed266e3ab1",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "529c26bafba5dfc4a3552d0b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S line *AHK*MATRIX*KAME",
+      "expectedDigest": "57c7436bd4f3be124b7608b3478e3b51115ac5a97df7d30e88b78c69b9cdefbc",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "406b27144a6c37ff005066d3",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S tronic S-Line Kamera",
+      "expectedDigest": "427a23aa1e941da71c572d867947b201669a649c187c10f029b4a20519dffcf8",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7d15027fd09f23a0280522ad",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. S tronic 2x S line AHK/Navi",
+      "expectedDigest": "3cf3a62337f004c1db75a2bbe58413e964e1e7db8c9700e38d5eee4f0ce7600d",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9a938163eb674e2f63a2d442",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S line *MATRIX*KAMERA*N",
+      "expectedDigest": "f0b50dd3e1bbe7915ebe789966a57df859e5452f990a608c4107932353cbde9e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e5aba172915c897def1efe68",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. 2xS line LED ACC AHK Navi",
+      "expectedDigest": "2e2a327b2c3331a3c4eba2554d825381bd2c49da4f7ae3ba298820d5c042e7ac",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "cb4a3ab8de07376301e179a8",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro Advanced PANO LHZ ELHEC",
+      "expectedDigest": "caa94a74666bf1ba9d3d1c4c31a838daa6819101a7863bdcd06346957fe78dfd",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "bd917b137d07413838038497",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu S Line Int Pano,Matrix,B&O,K",
+      "expectedDigest": "9858d63282429995df48a1b5068b05634b83f5f07d8fc3f5c3d0321d5cc225a7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9835ca298eabf202e7f0d578",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. S tronic S line Navi+",
+      "expectedDigest": "f997b3fded1cfbb59340db2cd088ab334c2b3f6e1bc3c7d474eb253b9b92c655",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e598556b00ce2df1b6dfa61e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu S LINE 360°,KEYLESS,BANG+O",
+      "expectedDigest": "a9493ec574ad8246b731bbe34c4ffd82b14bc01afe6a7c47d8073fb976911770",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "188f90a97683f968a376ec25",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S-tronic S-Line Matrix",
+      "expectedDigest": "21089fcf6502f10f5492cdbe39e59ee08e162ce10aa4dbdd65e2020520ea3bf4",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "824eaa8dc73d8d2128db38a8",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S Line PANO/STANDHZG/LE",
+      "expectedDigest": "f1b76cb10e468975b19795557815f7df2164e2bfe3125385249302912bf25556",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "40c2143475e283390d99d825",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. S tronic S line Pano/StdHzg",
+      "expectedDigest": "575cae1fa9b340b1e30f461bc290150331818bc2c1a246b67df1592718985180",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a93c50fc128399025557b55a",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S-Line ACC Leder AHK",
+      "expectedDigest": "e39bfa934e28328d6905397ac1a57979ba78009628019dba80949bd8aef3116b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "1a14aaf749c3679b5fd8f2ce",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. S line 19Z*STAND*B&O*HuD*RF",
+      "expectedDigest": "15982da3bf30483484a9ead140a28b8d32b59d9499b3050e0559839be998ab97",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

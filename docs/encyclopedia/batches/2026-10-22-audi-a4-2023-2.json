@@ -1,0 +1,4166 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a4-2023-2",
+  "entries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "1087adc5677b3614679011ff",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI advanced AHK LED ACC NAVI KAMERA",
+      "expectedDigest": "019b0341821bf7322f4b244ec7d7b56f7bec153b1eebe619dc6cc80f6841ac4c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "c55235393cbce7d6bfff9d64",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant Advanced 35 TDI S tronic RFK Navi PDC+",
+      "expectedDigest": "2ff5fbd329dce4d0c2b64be6a84ad5716df5516ce01bf40704eafc31961f919d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "1813f6f2b73c49e365768a1f",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant Advanced 35 TDI S tronic AHK LED Navi",
+      "expectedDigest": "e4a264a55b50b44b7ce1d8e9a443592816ce5ba1d64408498dc3c894024c8a9e",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "78771e004ec8156eca8bc69c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S tronic advanced AHK ACC Navi S",
+      "expectedDigest": "27dc499c7ae8acc51c620be88c72edb6f1e531061ea97c200221e4245fa63dca",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "550586386a08dca9d022ad78",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S-TR ADVANCED LED+NAVI+RFK+AHK",
+      "expectedDigest": "39c565de7b6193bd2ca9af0b7fc053c32b94c2dbac4ce11223fda64ff04ef097",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3f1a50c248a690153a322b72",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S-TR ADVANCED NAVI+RFK+ACC+SHZ",
+      "expectedDigest": "dc4e482a7a6016af8a27cc0c91c0bbac7cd846a95a391e57cc9010ec905f4342",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f7103583959f2f31d3feb929",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35TDI S tronic advanced AHK AssistTour",
+      "expectedDigest": "66997cd9075ea0ff027c8c7761e9a9a4b39d8fa9a90f00e52040c34f2793d372",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a6a1c41c1c0ba967dfa30b97",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI Alu 16\" GRA Navi PDC Sitzh.",
+      "expectedDigest": "902338d3c30971fb8198f77134151388dd3722b63b081f3ccb5c70d3257fccb5",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "11b47c7699c3fd0c513bec27",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S line Int. LED Navi Sitzh. 17\"",
+      "expectedDigest": "de0224a954dc94d592f21b954409385c7e760e267a4fac5cbf7d5eba451409df",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "8d7434af47416fea1ba26d27",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI LED AHK Navi Kamera Carplay",
+      "expectedDigest": "b7acadc3d3c629049424cd495c15d6af0e26ccb6d4f504ffe50e34676334d8fd",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e49d06d731763d9e1a452423",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI LED PDC+ StandHZG Navi Ambiente",
+      "expectedDigest": "3bbd50a9333b591842e737562d383525b153b99e074f9b07073a00e56cc7653c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "387d311f7f921cd5bacdd22b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S Line Ext LED,Navi,Kamera,Sport",
+      "expectedDigest": "0e0701989a45e4dcc72ff290da7287c05d6a919a26f99d536161552eae806c59",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7d16b40dca0bf9c7b6769f95",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI LED, Navi, PDC, Sitzheizung",
+      "expectedDigest": "254e02f63ed6b0faa1fc9ce6c249b9ff3f16a1a395096ceb43ebf372c9824f94",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "16ccc972dbe5307a7f209fa8",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S tronic LED,Navi,Kameras,Sporzs",
+      "expectedDigest": "a8b8d9a1f23859a36b729aef822b06ff2b2baf43a3450a771733b782a9afcd3d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "1eeb89cfb1d8dd098a11aa0d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S-TR ADVANCED NAVI+PDC+GRA+17\"LM",
+      "expectedDigest": "4ea8cc75126c53e6e076db63c9166c40aaa2521db3fccd924c82be676304a7a6",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "dae5684b12ee33a1d4ae8c24",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S tronic S-Line LED Navi Kamera",
+      "expectedDigest": "ee416c1937398ebb8a63c02bd8c2e19277bb34d5a0975696d90b3d105b01454d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9ead4c5526f8c2c8d8547de9",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI 2x S line ACC Matrix Navi RüKa",
+      "expectedDigest": "0f25489f63473682a76c35b2e6b74137001d96ef212350bbb539d92db32f0e50",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "83615c3e1437cc4605933acf",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35TDI Stronic Navi LED GRA EPH",
+      "expectedDigest": "6e3119cea667d8b88c0dbfc70111fdcaaadebe280b1f07931cdf47f986cbad8b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "bb71aa4128bf5ad6be3cb742",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35TDI S-Tr. AHK Business-Paket",
+      "expectedDigest": "93ade5ec26b840a7411991ff1a7752dde926264b003c607ecd57ad05d3de60b9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "68617792c4e231125a5a5a09",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant Advanced 35TDI S-Tr. Business-Paket",
+      "expectedDigest": "e75dbb042fa72f99102966246c74cd77a0b17589c3bc00cb442e0c05725fd578",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "04244f713335e8e53007d735",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI advanced AHK B&O Matrix Nav RüKa",
+      "expectedDigest": "c780baa7179ab50aa5af52c18282f3918fa81efa9cb1716419483780c9e3a3d5",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a7d2c0cb19ec0c5449d634a4",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S tronic S Line Int Navi,Sitzhzg",
+      "expectedDigest": "b1f841df09ad9d55592f9f386ddf114f7427d4d177f5d3184188f5dbdbc58e46",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "355d1403a2569a2f8968b138",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35 TDI AHK 360° Virtual Navi SHZ",
+      "expectedDigest": "a1b7515ac504d697d3c304f26a1ecee477c9c05fea08b0e9f9d8325ac9ada90b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "92c15683ab44fed41aef3ef9",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI Matrix AHK Navi Kamera",
+      "expectedDigest": "2c20e94610e8a68313d2e526decb3bcf2d18bc99d61e5c5a64062ce7f8c2ad17",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "ac9846c33621eee788b86887",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "35 TDI basis Avant *Navi*PDC*Alu*Klima*",
+      "expectedDigest": "fcb82aff89d63fa7efd0d3a33bd0c5246da9a11ce3743621364048265fc4be07",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "eea71cc4b64ea4bb65ebb546",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S line NAVI SHZ PDC KLIMA",
+      "expectedDigest": "472d398ad46007d0fddefe8091bfd3959607154b99f6b1d94930a7728d0af407",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "86658935d62bd12476f18f25",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI HUD,Matrix,Navi+,Pano,Kamera,Spo",
+      "expectedDigest": "423b1f76aed9694e5e131218b202a3abebbd9c54ada0567a306a61dbcbd2697f",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "c27ea8cf085d956b67ee639a",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35TDI Stronic NAVI LED PDC SHZ",
+      "expectedDigest": "2929fbc629f6c36f8a48ff5bbebe536378e727f2cc0fd500d42ff21f37185564",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "df2c883e9b89c97e74c5bb61",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI ADVANCED LED+AHK+MMI NAVI+B&O+LM",
+      "expectedDigest": "e671ff7555e02d5f631785c6f716f7f8a363b4b4f71a197d7022b1f8f42078f2",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e7c5cb790f90529d7adbaded",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "35 TDI Avant advanced Pano/LED/ B&O/Head up/",
+      "expectedDigest": "1a78478956bb2b40f73de6023ff034371159e2baa45678bbad8148e92e090ba5",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "73ffad5d15f2b710e6a52c6c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S tronic Navi APP PDC SHZ GRA",
+      "expectedDigest": "0395e6d92c619a17b7810d3182e38a75f27c495dc26b72da689d9e5386f18a7b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e86977ba250fb186c5256ff7",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant Advanced 35 TDI S tronic Virtual*Kamera",
+      "expectedDigest": "e83dc15df17770f73255a035ac46afc0aeefdaa282eb22b145a95de164077220",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "244d71c93b00104a5c88def4",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "35 2.0 TDI Avant basis Matrix SpoSi El.Heckkl. LED",
+      "expectedDigest": "47096e5708f228959c85c524d6bb2926333ef680634af7644863dc38b40dafc5",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "52203819812a69b33618b770",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant advanced 35 TDI S tronic LED PANO NAVI",
+      "expectedDigest": "477654e2184c337ac55c7288a5f10fb496a6076c26995aeced9a814ac42a5f14",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "72600754ac554045bf5407c9",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35 TDI S tronic Navi SHZ RFK",
+      "expectedDigest": "004dbfa6b0d24825d93b6f05356d30b371f51959d0320f47dc9f710d243572e9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "db0608def3de3a7fd14551ee",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35 TDI tronic MATRIX/STHZ/LEDER/",
+      "expectedDigest": "5fef3704c35c5d934ed26f04d9e27bc0bbacfd80e9cc67853107ad5317175e3e",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0b9fdefde6512c0b94c09cce",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35 TDI S tronic Navi/Matrix/AHK/",
+      "expectedDigest": "84266c98a3b60ae8889104a662c656354c1deed786a464ea44280ceb410f14c5",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f163c9cf0df1b20fadb3c1f0",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35 TDI RFK Navi LED SHZ 3-Zone",
+      "expectedDigest": "c68612e7ad578ea14db08016740e618674b4319c966e4d6ef1844d3e3089106d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "cadd96445461fa49f0487316",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI 2x S line AHK Matrix Navi Sitzh.",
+      "expectedDigest": "499b9c90c2d7314f8d35352e6a3cdef3e178b089e621c59b8da2f78f8502c3ad",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9950c5b530d61b9180f1c95f",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35 TDI Tour, AHK, Sound, Busines",
+      "expectedDigest": "3cc2e70d61a92d50837d43fe6c3af2510fb5c59e421c55b2e4c6d353a6f4a3b1",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a8f9201d08a0a4faba70641a",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S LINE AHK PANO NAVI+ PDC",
+      "expectedDigest": "d34037708dd3ea03af239c25226e9eacc9d97c347a535692b62e43bb4a57401a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f04b6fc1b4479dc97a6fb0e3",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35 TDI S tronic Navi Plus/17\"",
+      "expectedDigest": "5a4d5d54a064004827fdb06fa9390a1624ccd0cd56404a67549f8fb58e3cb869",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "eea309f7bec0dce85881f77a",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S-tronic LED Smartphone Interfac",
+      "expectedDigest": "86eb2d742cb880c8b570c054ad19cff4b40cb9f1200cb754a1e638e9ef0dd094",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "311fd8462bde02700ee03dd3",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 35 TDI virt.Cockpit/ Pano/Marix/",
+      "expectedDigest": "02ccbbb2b48aebcc7f17106a428a14c288ab2c0de559bad1e80d76a654d767f7",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "878dca80772e07c82907f239",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI 2x S LINE AHK LM18 NAVI+ VIRTUAL",
+      "expectedDigest": "fff7cf67c3651c681ce554725e28db30aa370fa5869e3f3199537fb282069f57",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "58f4336372ba25633da674b6",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S line Matrix/B&O/PANO/ACC/Kame",
+      "expectedDigest": "e33d5265e4b27c4c405524f6d2ac8e4875824e888316e373a159a825f44ffcd4",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "fd5162e981aea948c75b3dde",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S line *AUT*MATRIX*AHK*",
+      "expectedDigest": "04ca22c1ee87dcac5b071f1fdbf92e4b098b1b3367fa4c91f90a3c0644706952",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "d63fa74f1a1b7d94dc641962",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S line PANO DAB+ ACC NAVI SOUND",
+      "expectedDigest": "17027844b617fc90d790bb390794fb5458efe2044ae4724631cc80efbe27408d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a6fee4e61405a705022ccedb",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 35 TDI S-Tronic advanced*1HD*KAM*MATRI",
+      "expectedDigest": "53b82d26614f818a20b150d2b6faaeb31d3d2c6ae8b516d579d8de9931cd3e96",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0ba2ec48688ad1f6dc0b5bd7",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "35 2.0 tdi mhev S line SEDAN REAR|ACC|CARPLAY|18'",
+      "expectedDigest": "b149e9a14dff94c522769bb6388fda1a63cf815d3bd8e924580c2581a3f639a5",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Sedan 35 TDI, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9ccfb9c1ea42b4a05e6a853f",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDi Advcanced quattro ACC LED Navi",
+      "expectedDigest": "79c23abdd11345bf0235e70294ef1ab631d12bd38310ad385b1acc6b80c76109",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a98a0472319f5f645e32157e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S tronic advanced",
+      "expectedDigest": "2a8bbc8a613902a89434f8fcfb5c56d7fb717e079f92d985fe5f389d58dad96a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "1c0ac699865f960c336f85bd",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S tronic Navi LED PDC Si",
+      "expectedDigest": "c878e3b053aa4a0432b682be3504460e826dc706a73664820d72e18db10810f6",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "29ecacc7b8a16a4fa36840ab",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40TDI quattro Advanced Matrix LED Schei",
+      "expectedDigest": "c1e3ff6b7c723135afe6bf5102a81e45340cc358c3ced54674ebb727fcbbbefb",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "80d78c52da005fae2f46597e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Limousine 40 TDI qu S LINE 18 Z. KEYLESS,ACC",
+      "expectedDigest": "46ef79f2b3405d461cd216008eda6c37f352825359a949168154a53536b3c7ce",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Sedan 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "16226ac6f3158a2249d36b01",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40TDI quattro Stronic NAVI LED PDC SHZ",
+      "expectedDigest": "6a2302469939a1d29b4c33d41586e5c0c34616f267f914a1f47c575b15768f17",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "b07b3748246239bbcf727c66",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S tronic Navi Tempomat D",
+      "expectedDigest": "a366adb830c07967ed6270ec97a6634e0a94d978fd7570d193629727c98d2c10",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "468a994c459200730d0c9e84",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI quattro basis LED Navi Kamera",
+      "expectedDigest": "26b87298a2817c6a426de453673acde5e35e0b582195c69f002733644abb1c54",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3366ff06f1e84ffaf165429b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI quattro S line",
+      "expectedDigest": "705f560e05f0518380449a47fe2094397186906bd14783986bf9ea482222fead",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0b4f29ccb04e68fbf34c3354",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant advanced 40 TDI quattro",
+      "expectedDigest": "4c33a00b2c906e42bd6972d07b94144f2381028f1ac5263dd975a1d2b406e3a7",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f68daa4cb9fb1c07883fb2be",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S tronic S line",
+      "expectedDigest": "f6249459fd419ed542e9458de8506077b95ee3cebadc4f0380c06d25f4f531dd",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "ac811e9342ddf089375d75b4",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40TFSI qu./adv./Matrix/AHK/Kamera/Navi+",
+      "expectedDigest": "839dbabc119758c905738af8529947c5f8cb4d1b0f7683419b6bf44b6c88e645",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "8f8491bbc4984e32aa5fd468",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI qu./MATRIX/AMBIENTE/RFK/NAVI/AHK",
+      "expectedDigest": "11eb6ec0c25c6cb4dd5bf0fafb264ac13c3a929aff917877ef8053c1b40a4f2c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9a6693beea506ca4432b50ae",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro*LED*Einparkhilfe*AHK*Nav",
+      "expectedDigest": "a761dd7161d5cf3fb59799cd794314bf73548637b4a42795913e01b04e67d338",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
