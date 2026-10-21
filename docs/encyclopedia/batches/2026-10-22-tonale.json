@@ -1,0 +1,2285 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-tonale",
+  "entries": [
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "5fb1cf53036ee22e0523d6e3",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "trim": "1.5 MHEV Edizione Speciale / Gps / Carplay / Full Led / Camera / Capteurs / Cuir",
+      "expectedDigest": "84a238034e5879ca60801518707d9848b5e6bf83c79502d870b07260e50f53f4",
+      "patch": {
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/220506_listinoartonale_listino-628bb5a9aaac0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводская таблица 06.05.2022; 1469 см³, бензиновый 48V гибрид,TCT7. Точное оснащение не подтверждено; название сохранено. 130/160PS неоднозначны: мощность не подтверждается. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/220506_listinoartonale_listino-628bb5a9aaac0.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "905e75a6e295a31ff95d6b16e3653d454a6bb811eaea2571c496ca1bef6c7bde",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "101291eca6687a1447e59f2b",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "trim": "Tonale 1.5 hybrid Speciale 130cv tct7",
+      "expectedDigest": "ef6aea128c936aa3331c4bfa87874ff0326d1d85d89a2c7ac3a9ff55ab1ff0d1",
+      "patch": {
+        "trim": "1.5 Hybrid 130 PS TCT7 Edizione Speciale",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/220506_listinoartonale_listino-628bb5a9aaac0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводская таблица 06.05.2022; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 96кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/220506_listinoartonale_listino-628bb5a9aaac0.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "905e75a6e295a31ff95d6b16e3653d454a6bb811eaea2571c496ca1bef6c7bde",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "f9e038e46819ea45e9919181",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "trim": "1.5 130 CV HYBRID TCT7 SPRINT SUV",
+      "expectedDigest": "1dd73fa9962af75c5f506ab9c8469301cfa34f982dba99d19b98a0eb286b18db",
+      "patch": {
+        "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/220506_listinoartonale_listino-628bb5a9aaac0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводская таблица 06.05.2022; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 96кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/220506_listinoartonale_listino-628bb5a9aaac0.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "905e75a6e295a31ff95d6b16e3653d454a6bb811eaea2571c496ca1bef6c7bde",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "fd0ea61af46a2424e1d29bed",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "1.6 Sprint 130cv tct6",
+      "expectedDigest": "0e6cb7c78a13f4a18889198510f5ce4ab4fa74a58baafb4c0b6af14446943093",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "1d79e547243db385c5966f4d",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "Tonale 1.6 diesel 130 CV TCT6 Sprint",
+      "expectedDigest": "caccbb0a8641791654140ce67fe1e117f6d83d211cfe4bb7d1c24b5284dc1a41",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "2347b3dc16d926aaa45f8d46",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "Tonale 1.6 Sprint 130cv tct6",
+      "expectedDigest": "5c086eecf70e47201153c162e341c2f0be9c846d6e3e5d2af7af9e08f0648f44",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "886e71c8eb6e86cd6f8388cf",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "1.6 DIESEL 130 CV TCT6 SPRINT SUV",
+      "expectedDigest": "cf03c63c8c695110407aec480975dd690cf2012643bac4a8815c8ee9ba902dd9",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "6afe5929e36f28f2352577f8",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "1.6 Super",
+      "expectedDigest": "689ed4d51fc8c797e9d2340a07d219d341b7a511351f01861c5ffc82c209a893",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Super",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "4403b52e952b76359cb05e1b",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "1.6 Ti 130cv tct6",
+      "expectedDigest": "0b6b19d8ed9e2973fd3923304ac34397ce04dc7b220e4a7a0d8e013a107084e8",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Ti",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "2637e15ab8dd9e26bfa353f2",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "1.5T Hybrid Edizione Speciale | NL-auto | Apple Ca",
+      "expectedDigest": "3d4117c7a5cf422c0c03c581501bee99c20d4b77953ce1b4f894723f937f0da0",
+      "patch": {
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1469 см³, бензиновый 48V гибрид,TCT7. Точное оснащение не подтверждено; название сохранено. 130/160PS неоднозначны: мощность не подтверждается. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "6dea545f17acb6f2822d8ba7",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "1.5 Hybrid SPRINT / Automaat / 130 pk / Camera / Trekhaak",
+      "expectedDigest": "06a24db5bcfc5ad371a326416c1c5c255d70747b11d130f00812c0641247b08e",
+      "patch": {
+        "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 96кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "64b9c6c34b3a67a8ebbb167e",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "Tonale 1.5 hybrid Sprint 130cv tct7 \"PROMO ERREFFE\"",
+      "expectedDigest": "bb85139d9edb4c8925d79ef1b88b51551a3e2937e1df281c4088cee263039faf",
+      "patch": {
+        "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 96кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "353ed9d393383082bc2475f9",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "1.5 Pack Performance, Échappements Sport, Toit panoramique/ouvrant",
+      "expectedDigest": "35aaa7e40c9c4f8daca6b2936af3d83572436aec76fb73e8251ae1bedbf38c60",
+      "patch": {
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1469 см³, бензиновый 48V гибрид,TCT7. Точное оснащение не подтверждено; название сохранено. 130/160PS неоднозначны: мощность не подтверждается. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "828167d420b0a4795d869276",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "Ti 1.5 NAVI LED R-Kam Klima PDC Tempo",
+      "expectedDigest": "515ef9581edb49c238f34b6c1fad51c3e33c5c283ded971a5c6f44ed093589cf",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Ti",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "959f3a557c44e078c991a799",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "Tonale 1.5 160 CV MHEV TCT7 Veloce",
+      "expectedDigest": "070b88b7501b0eed73f05c3386aa30d100ae61d8b86182400b275ab0660c799c",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "4159764dd2b742fc785f69fc",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "Tonale 1.5 hybrid Veloce 160cv tct7",
+      "expectedDigest": "61eee15a0ba6f5c5910368dccaf8231e0d18a019e02978e3968dc90d18442b9f",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 01.09.2023, MY23; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "pages": [
+              2,
+              13
+            ],
+            "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "78953519053fa6eabc187f8c",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "trim": "VELOCE Plug-in Hybrid Q4 / 280 / TOIT OUVRANT PANO",
+      "expectedDigest": "c314b6b7bdea453252db819a7c617af985b21d205c666737e049e1669ee42dc5",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+        "engineCc": 1332,
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "transmission": "automatic",
+        "icePowerKw": 132,
+        "drive": "awd",
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: заводская таблица 20.01.2023; 1332 см³, заряжаемый гибрид Q4,AT6,батарея15.5кВт·ч,ДВС132кВт (180PS),версия280PS совокупной мощности, максимальная мощность ДВС 132кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "pages": [
+              8,
+              9,
+              10
+            ],
+            "sha256": "07b7f935b6000e82872290f524748a33a5b9e18dc45abf1dbfc38fdd7a880093",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive",
+              "batteryKwh"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "4550d88e73a8247a9500d15d",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "1.5 Hybrid Sprint LED/ACC/LANE/NAVI",
+      "expectedDigest": "17f0c06e068f1eee5a2fff3d42682c38d3f412312f7f0a1d9c81de3e1a69a78d",
+      "patch": {
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1469 см³, бензиновый 48V гибрид,TCT7. Точное оснащение не подтверждено; название сохранено. 130/160PS неоднозначны: мощность не подтверждается. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "d2729bfd1dc8d40bdbcca827",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "Tonale 1.6 Sprint 130cv tct6",
+      "expectedDigest": "0d4435441f306eec705bdb17da0ad931fa98383c370a14c8691d3c1696b0c462",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "66eeb9976ccf456dbdc5c2af",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "1.6 diesel 130cv Sprint PACK TECHNO",
+      "expectedDigest": "d71101bc2fcb708b3db9b80e94b53d12cfc9177bae33b63a0c95ca2a0e6a8ae6",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "4b2f4613b7f8e48464e6c8bb",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "1.6 Sprint",
+      "expectedDigest": "cc4b503f53720c5e282aa381aa3599f79e036530afcc4d7c9d7ff10239ccb78e",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "423e034c6c863a78742e5b19",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "My24 Diesel 130cv Sprint",
+      "expectedDigest": "9c6e75c1d2b2aee93d237d8e8be6ac34d53f258bc3d5397cc9c50921c5f34465",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "c2db4f070fed0cd2078e18e3",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "1.6 Veloce",
+      "expectedDigest": "0822ad770200f4d9be6ee11f99361d52b9620f6c0c7e312a3b7d602b49c0533d",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Veloce",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "16619e5acedc343266d0d480",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "1.5 Veloce 1,5 T4 Aut. ACC+Navi+SHZ+Kam.",
+      "expectedDigest": "4b759c9a86dc709df55c9718a2933bdee91fbd3eae3be9b850d25b3a0ad27a7c",
+      "patch": {
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1469 см³, бензиновый 48V гибрид,TCT7. Точное оснащение не подтверждено; название сохранено. 130/160PS неоднозначны: мощность не подтверждается. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "df6078a4a1011c6814eedc57",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "Tonale 1.5 160 CV MHEV TCT7 Veloce",
+      "expectedDigest": "7880f459476304cdc9cf8d4f646ff7e282985ac623820f3fc2b9386c0138b2b0",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "b4f5d64b8656d8cd2366e7ab",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "Tonale 1.5 hybrid Veloce 160cv tct7",
+      "expectedDigest": "774ee3c7c1e0c48ad0c5c21350b088baf38c0d0d09d5718240164ece5b8c0509",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "7b9fd43d85d7db75260aeaa9",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2024,
+      "trim": "Tonale 1.5 hybrid Veloce 160cv tct7 my24",
+      "expectedDigest": "6a7a64714426bf4e49e8b5063bb40c184af26be002d74dbf4dabedd210d96cca",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2024: заводская таблица 16.02.2024; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del16febbraio2024-65d4b01164098.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "a754674901583fb302cf0bac",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "1.6 Veloce 130cv tct6",
+      "expectedDigest": "8dbc41e5ab929401523571be96b920b393ea3b6e6bdb8936f14a4283e4e8fa03",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Veloce",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "1ccda2431324a696ff0342bc",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "Tonale 1.5 Hybrid 160cv TCT Veloce",
+      "expectedDigest": "604cae335a8a2f2efe382ba648051e9801338262885cc52b04492019c986e071",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "5faf372fe3295ed6d4b10c17",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "Tonale 1.5 160 CV MHEV TCT7 Veloce",
+      "expectedDigest": "5a54f270d3c9ab81d656ea9ab2fda531ae703a6920bb9173b5443ad7dda2594e",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "fc4d713698622a9256da2d3e",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "Tonale 1.5 hybrid Veloce 160cv tct7",
+      "expectedDigest": "3a2ecf97dcb2f8549b755f0d48e7f40890e34cd663ab87b27ddafb6400ee9c93",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "7f07bc242a678b1a6cfdaaee",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "1.5 Hybrid 160CV Veloce TCT7",
+      "expectedDigest": "c4cae6976e52db3dd75b41e169f8b07d04b20804a7426ab8e6cf8f8f34bd6357",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "engineCc": 1469,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "icePowerKw": 118,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1469 см³, бензиновый 48V гибрид,TCT7, максимальная мощность ДВС 118кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "fields": [
+              "powertrainKind",
+              "transmission"
+            ],
+            "statement": "Техническая архитектура 1.5 48V P2 и DCT7; мощность конкретного года берётся только из соответствующего прайса."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "db3a79c586dda64afa90b2fb",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "1.3 PHEV Sprint Q4 280cv AT6 *PROMO AZZURRA*",
+      "expectedDigest": "b412b41e3ab3cb8b01ab49b2862d323d8b69b0f278e4293e8ac26c6235956b4a",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+        "engineCc": 1332,
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "transmission": "automatic",
+        "icePowerKw": 132,
+        "drive": "awd",
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1332 см³, заряжаемый гибрид Q4,AT6,батарея15.5кВт·ч,ДВС132кВт (180PS),версия280PS совокупной мощности, максимальная мощность ДВС 132кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive",
+              "batteryKwh"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "2942b298f51f11157dbb63a8",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "1.3 280 CV PHEV AT6 Q4 Sprint - PREZZO REALE",
+      "expectedDigest": "6f727109c10767444f9628331a149ac2f4d4f5e136e58c08d0be95501bfe6ef3",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+        "engineCc": 1332,
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "transmission": "automatic",
+        "icePowerKw": 132,
+        "drive": "awd",
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1332 см³, заряжаемый гибрид Q4,AT6,батарея15.5кВт·ч,ДВС132кВт (180PS),версия280PS совокупной мощности, максимальная мощность ДВС 132кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive",
+              "batteryKwh"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "a5c91477c82398a7786e7c0d",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "1.3 PHEV PLUG-IN Sprint Q4 280cv at6 *KM0*",
+      "expectedDigest": "ff81969fbf4cc5655af08ec535f38b20e915ae89adb9edc46c82a6bcea801e71",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+        "engineCc": 1332,
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "transmission": "automatic",
+        "icePowerKw": 132,
+        "drive": "awd",
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1332 см³, заряжаемый гибрид Q4,AT6,батарея15.5кВт·ч,ДВС132кВт (180PS),версия280PS совокупной мощности, максимальная мощность ДВС 132кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive",
+              "batteryKwh"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "946ac760fe1e094503bb7868",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "Tonale 1.3 phev Sprint Q4 280cv at6",
+      "expectedDigest": "fe1dc589bc69d7f9e0fa3ba5ebb1bfd21e7eb2bb274ed0b18ea94080fd19a746",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+        "engineCc": 1332,
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "transmission": "automatic",
+        "icePowerKw": 132,
+        "drive": "awd",
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1332 см³, заряжаемый гибрид Q4,AT6,батарея15.5кВт·ч,ДВС132кВт (180PS),версия280PS совокупной мощности, максимальная мощность ДВС 132кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive",
+              "batteryKwh"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "f6f934ef4465c10af7c83a68",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "Tonale 1.3 phev Sprint Q4 280cv at6 MY25",
+      "expectedDigest": "50cc0130dccad40a2115c92a0be46d36955094167b51dce7161b5c12c2f8ba1a",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+        "engineCc": 1332,
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "transmission": "automatic",
+        "icePowerKw": 132,
+        "drive": "awd",
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1332 см³, заряжаемый гибрид Q4,AT6,батарея15.5кВт·ч,ДВС132кВт (180PS),версия280PS совокупной мощности, максимальная мощность ДВС 132кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive",
+              "batteryKwh"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "e69b176bba31da91cceefcda",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "1.3 280CV AT6 Q4 SPRINT",
+      "expectedDigest": "4511a781bf076850ea2e96ff6b91abc9673d44338d67a150fb255e774f88c56a",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+        "engineCc": 1332,
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "transmission": "automatic",
+        "icePowerKw": 132,
+        "drive": "awd",
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1332 см³, заряжаемый гибрид Q4,AT6,батарея15.5кВт·ч,ДВС132кВт (180PS),версия280PS совокупной мощности, максимальная мощность ДВС 132кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive",
+              "batteryKwh"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "10ef9b738515ea378d0d82fa",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2025,
+      "trim": "1.3 280cv Plug-in Hybrid AT6 Veloce Q4 MY25",
+      "expectedDigest": "8182f156fe71002965e99b418f08158c79c27b2bc63b2f07208a38fe89ce3a51",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+        "engineCc": 1332,
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "transmission": "automatic",
+        "icePowerKw": 132,
+        "drive": "awd",
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "drive",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2025: заводская таблица 01.04.2025; 1332 см³, заряжаемый гибрид Q4,AT6,батарея15.5кВт·ч,ДВС132кВт (180PS),версия280PS совокупной мощности, максимальная мощность ДВС 132кВт. Generic powerHp/powerKw не повышены до подтверждённых: мощность ДВС и системы различаются. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              12,
+              13,
+              14
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "drive",
+              "batteryKwh"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "variantId": "373bb189855c9d0053e53a6b",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2026,
+      "trim": "Tonale 1.6 Sprint 130cv tct6",
+      "expectedDigest": "5dab688e70079ee6f014381bc19c7611ca0706ff4fee35deff66b8bee115e9f4",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "engineCc": 1598,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "dct",
+        "icePowerKw": 96,
+        "powerHp": 130,
+        "powerKw": 96,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "icePowerKw",
+        "powerHp",
+        "powerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy26del1maggio2026-6a046a7c25a99.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2026: заводская таблица 01.05.2026; 1598 см³, дизельный ДВС,130 метрических л.с.,96кВт,TCT6. 30-минутная мощность,код двигателя и разрешённая полная масса не найдены. Номинальная/пиковая мощность и масса в снаряжённом состоянии не заменяют их.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy26del1maggio2026-6a046a7c25a99.pdf",
+            "pages": [
+              2,
+              3,
+              10
+            ],
+            "sha256": "7b2591ea293c6acaee80070a259bf2ef643114325a7dd2ba33c5cf7b3be17cf9",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "icePowerKw",
+              "powerHp",
+              "powerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
