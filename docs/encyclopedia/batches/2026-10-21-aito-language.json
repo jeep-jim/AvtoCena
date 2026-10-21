@@ -1,0 +1,510 @@
+{
+  "version": 1,
+  "id": "research-2026-10-21-aito-language",
+  "entries": [
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "7761daf043ee821f6861de4b",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EREV Ultra RWD",
+      "expectedDigest": "a49fd85073207929bf7b7312632073787bb53bb529ad9ec97ebeebc1a8fb18ab",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/f3b493df24bd29a5aaa645d3",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "bde50e54f36fc9e725f79c70",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EV Ultra RWD",
+      "expectedDigest": "f8759e24628338419148ad6f9f829c1812685195c44e5f256027b83bb370cf4a",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/136dff35982c41bc615ae4c6",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "84bab1d39cdd153b11cc0070",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EREV Ultra AWD",
+      "expectedDigest": "e3e6e670da00e0e79f37c5788ac2f554dbff3503e2762c5ad963f819ce39a258",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/8aba3aba539ac62acb876c25",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "f95ceb79d43685224a299759",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EREV Max",
+      "expectedDigest": "08f4ff947a102eff4b2ce53b5d61857ff4d4123c13d0afb7e0b25b7648e181ee",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/19fe95af5a5bfb3d42d70fd6",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "90641a1cfb521cd2c45d7689",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EREV Ultra",
+      "expectedDigest": "6dba11b81e768128cf3400b47868dd6c050bf3ecfea5ffb5e3b6dfa547405c9d",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/679d33ad4c1889a258f00229",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "8c34f3907fa45adb900ed6c0",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EV Ultra",
+      "expectedDigest": "69565d8a59b6e00ef82f3fb41f5ff568c0df2f68794e46338b5f08d4a8ed10f4",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/363deeff512e5229db2789bd",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "478432305a9118c46fd3e4f7",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EV Max",
+      "expectedDigest": "38c1c4a781ea9f557777a5a19cba9ea799bcbc82e2d6deed0ba9bd7b04f7bbe4",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/dd52409d47ec405dfdf6984c",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "77adb4c03bdb1412a28109c8",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EV Max+ Long Range",
+      "expectedDigest": "1f3dd8ca34bbd4fbbbe0207dcd9a1b70e95fee922f07a5bf3a6edc48e89da53c",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/b65e3c39eb5c56dd2adf5d67",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "235609122d33377c27a6c21a",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EREV Max+ Long Range",
+      "expectedDigest": "adb90b01369bf54cf88e34eba22a79d3627d4a5fece189b64b4fd05404729084",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/f0dca81c82241add2407d1f4",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "3cd385712d7cdcfdcf005fcd",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max Long Range 5-seat LiDAR 192",
+      "expectedDigest": "d0f4839aaba15055b490a7f8930bbe462ae7a2d7aa754381070429625df6f420",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/8465df4b2591dd2fc73c240d",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "79dccb46a2af3ff4cfbcdc6b",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Ultra AWD 5-seat LiDAR 192",
+      "expectedDigest": "30b34d2d6e0017f093b785d843c2b3b3e2ee91439e9436cf1daa04b74dafd228",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/5e85cf6224ef47190bb8ef53",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "328e58843d29c89899e9f9c0",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Ultra AWD 6-seat LiDAR 192",
+      "expectedDigest": "e13ecbf08f883b7df40e59cb3dccecff8f0c026540e499058434c9d1c6cc1528",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/4aef49ac6207214365f2730f",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "62b8c0ab6d11c7bfc351dbfb",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max AWD 5-seat LiDAR 192",
+      "expectedDigest": "bdf18ca83f44ecf956218d88d600f4b273380613e454a5eeb40d1842d22a32f3",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/1733e0d4575b41f28b158949",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "3b2a809664158930b0b85fde",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max AWD 6-seat LiDAR 192",
+      "expectedDigest": "df05c7cc2542ced09e05a15e39ad665f12b17b549c76ae7235378189bb842139",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/07cdeb60be8d087c6d6e5dd8",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ab30f971974965e74784373f",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max Long Range 6-seat LiDAR 192",
+      "expectedDigest": "28851a870eabca44a7c8fa4983c8b1eab922562ed6cc114a64a065bb3e09a6e1",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/9761ca3c5ee04c2ba5a77994",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "93f79f09209f894817fb2fbc",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max Long Range 5-seat LiDAR 192",
+      "expectedDigest": "6e67efc81f618d149aeb75f0b2cf7b3ec915d8fbaa6ae90cdf850c381db8ce98",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/6d4b59ddf685eba32f7833d4",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "a8305fe6ea3a1fceb02c6d81",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max AWD 5-seat LiDAR 192",
+      "expectedDigest": "b95e5547ca22f90c43df3f3a866b6538abdac87af96a79fefdded592a7ba61d4",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/d4ca1ec7071367fe37a5de28",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "cc14dd5326c8787de6446212",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max AWD 6-seat LiDAR 192",
+      "expectedDigest": "5344e06d285409b07e506c776a4bc4065a6bd8a06f768a2f28b115174bef4f9d",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/c165342c5295abfb540eb2fa",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "77407251de0073fa6c1130ca",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Ultra AWD 5-seat LiDAR 192",
+      "expectedDigest": "42d756cc8797d94b0b687867b42c2fb09aa4413bcd7df281ecbc109c273ef143",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/ef3bb9078f4cf1d85e627951",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "07ead93690545d973ff40e98",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Ultra AWD 6-seat LiDAR 192",
+      "expectedDigest": "44f219662bc9fd62ccdc6be866780c2e99e7cd922b9031184abd46b95c013b2a",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/79a9f87d7cac8d6d3c881499",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ebbea5c2429da5a1b9b6e9da",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max Long Range 6-seat LiDAR 192",
+      "expectedDigest": "aaf05ade7534de124db1c9dae9d70b7664285c3bbe8b7c46d8ebe623830438b8",
+      "patch": {
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "observation_translation",
+        "url": "https://avtocena.com/cars/offer/4fe888be9be6b0a39ab05293",
+        "checkedAt": "2026-10-21",
+        "statement": "Буквальный перевод исходного обозначения КПП на русский: одноступенчатый редуктор. Это перевод наблюдения, а не новое подтверждение характеристики заводом."
+      }
+    }
+  ]
+}

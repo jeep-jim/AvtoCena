@@ -35,3 +35,13 @@ test('a later research batch retains prior field sources',()=>{
  assert.equal(second.variants[0].researchEvidenceHistory[0].values.batteryKwh,81);
  assert.equal(second.variants[0].researchEvidence.values.engineCode,'E123');
 });
+test('literal translation changes display text without promoting an observed specification',()=>{
+ const observed={...v,transmission:'电动车单速变速箱'};
+ const e={...entry,expectedDigest:digest(observed),patch:{transmission:'Одноступенчатый редуктор'},confirmedFields:[],translations:{transmission:{from:observed.transmission}},source:{...entry.source,type:'observation_translation'}};
+ validateBatch({...batch,entries:[e]});const result=planModelResearch({...current,variants:[observed]},[e],batch);
+ assert.equal(result.record.variants[0].transmission,'Одноступенчатый редуктор');
+ assert.deepEqual(result.record.variants[0].researchEvidence.values,{});
+ assert.deepEqual(result.record.variants[0].researchEvidence.fields,[]);
+ assert.throws(()=>validateBatch({...batch,entries:[{...e,confirmedFields:['transmission']}]}));
+ assert.throws(()=>validateBatch({...batch,entries:[{...e,patch:{transmission:'automatic'}}]}));
+});
