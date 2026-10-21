@@ -1,0 +1,981 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a5-2023-1",
+  "entries": [
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "e088f3c8423c7911e65070bb",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Cabriolet 35 TFSI S-Tronic*Navi*Leder*LED*Win",
+      "expectedDigest": "6f5aac4cf121ae3542f6f1000a4af5bccf4760211c18ae3564b9ed94411ae956",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Cabriolet 35 TFSI, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "06cf38f6bfedea5f6103d8eb",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback 35 TDI S-line LED*VIRTUAL*ACC*KAM",
+      "expectedDigest": "9a48aaaef42e2d61070c5391deadc400000b388ef97e5d2d9cc89974c9e3d480",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "8911f503e52eee08146d56dd",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback 35 TDI APP+DAB+LED+NAVI+PDC+KAMERA",
+      "expectedDigest": "b0f43491cd5b7a588b5b7bcc523be2c720f6182138136dc9fcc2f1ea8ce730b9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "2025abf9690e885f6c906ae4",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback 35 TDI S-Tronic S-Line 2x, Pano",
+      "expectedDigest": "3286477b584a93653e7675284aa622cf7f203dc5bcb37f951232d25ba7dae1ef",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "ee745ab950308fb9fe1d40e7",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "A5 SPB 35 TDI S tronic Business Advanced",
+      "expectedDigest": "8e8f42aee5a8715a438189e653b754f6eb2432e828a499709e396dd7239b4814",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "f04ecc9da397641de029a089",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback 40TFSI qu Navi LED GRA DAB EPH",
+      "expectedDigest": "a30ae4721e17463d6ded5551c96381bc081d8a1c3d6e0b23f350b42b062475b0",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TFSI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "569a528722ab95a2d5970e59",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback 40 TDI qu. S line business*Navi*Mat",
+      "expectedDigest": "f0252fdd6e9e276ce07d1bd2c733b9fded8b35d5cc72c0b49a0e4fdb1e7c7061",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "ae799ade7925c729da94b3a1",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback S-Line 45 TFSI quattro S tronic B&O",
+      "expectedDigest": "b75d7f3fed6101dcb4816e69c9687760d73369796b214aabb9d93f9b4076f6ce",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "12abb69c43cc917d146b17ff",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback 45 TFSI S line quattro #Black#19Z#",
+      "expectedDigest": "4c1192563661b8a64d62343b17bc01d10b8853a501f4d7922de4bc2a4549b9b3",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c60db646a7f8d536f8aaabd7",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Coupe 45 TFSI qu. S line 360° MATRIX-LED PANO",
+      "expectedDigest": "d412d13c8dabc1cc6831626ca8942b9b1070228b54d98bbd8da960ee5f05f46b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 45 TFSI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "bb8a6b1c865600412dab66d1",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback 45 TFSI QU S-LINE MATRIX+NAVI+AHK",
+      "expectedDigest": "1d90418d78b5ec29c3ac72d87a803f6324f565fa2a3e4c2ef5a4fc7a525b2322",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "2de27c4f830fca4c99408ba4",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback 45 TFSI QU S-LINE MATRIX+NAV+HuD+19",
+      "expectedDigest": "1e8a507c588056be7e4f207ca609f86b930e244f24b4f3997aaeb2d24a860b37",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "837a39a339dfd11364b1cca1",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback S line business 45 TFSI QUATTRO S t",
+      "expectedDigest": "3662b3d84d82f33f02bccbeefc793bf11a72179b6276201f04c906608c81c431",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "fa7476a569b02630ba3b1d32",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback S-Line 45TFSI quattro / Pano, Laser",
+      "expectedDigest": "7e81a9f3ce81d209a39c4191c4055f0c646d994d888a9f1dd8bdc2e4ff418b02",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "3af7f3cd4c1ef982d7afa479",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Sportback 45 TFSI qu. 2x S line Leder Matrix",
+      "expectedDigest": "19fb5544016ffe544615ee84e43486a0956f39e686ef0b5fb4c5e5c6b1222896",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2023. Заводской прайс AUDI AG от06.10.2023, архивная копия заводского PDF: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В не подтверждает 30-минутную мощность. PDF прочитан через веб-индекс; локальный хеш документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/e62696989cf362b65da7e420a53c9815f1cb8f7877e88cd7fb87d8be53704199.pdf",
+            "date": "2023-10-06",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              83,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
