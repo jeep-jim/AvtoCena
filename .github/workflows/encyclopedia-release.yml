@@ -32,6 +32,7 @@ jobs:
           allowed={
             'roadmap.md','apps/web/lib/encyclopedia/records.ts','apps/web/lib/encyclopedia/scope.ts',
             'tests/permanent-encyclopedia.test.ts','docs/encyclopedia/logo-sources-2026-10-21.json',
+            'docs/encyclopedia/research-2026-10-21.md',
             '.github/workflows/encyclopedia-activate-prepared.yml','.github/market-runs/encyclopedia-activate-prepared.json',
             '.github/workflows/encyclopedia-release.yml','.github/market-runs/encyclopedia-release.json',
           }
