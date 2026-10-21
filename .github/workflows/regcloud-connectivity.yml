@@ -1,6 +1,9 @@
 name: Regcloud — diagnose public connectivity
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-connectivity.json']
 permissions:
   contents: read
 jobs:
