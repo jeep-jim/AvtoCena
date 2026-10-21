@@ -88,6 +88,19 @@ async function verifyControls(page,scope){
  }
 }
 try{
+ if(!live)for(const width of [390,1280]){
+  const context=await contextFor(width),page=await context.newPage();
+  await page.goto(origin+'/cars?market=japan');
+  const scope=width<1024?await openSheet(page):page.locator('.ac-catalog-sidebar');
+  const power=scope.locator('.ac-power-limit input[type=checkbox]');
+  await power.check();await page.waitForTimeout(350);
+  if(width<1024)await page.getByRole('button',{name:/Показать/}).last().click();
+  await page.waitForTimeout(400);
+  assert.equal(new URL(page.url()).searchParams.get('powerTo'),'160');
+  assert.equal(new URL(page.url()).searchParams.get('market'),'japan');
+  await page.screenshot({path:out+'/japan-power-'+width+'.png'});
+  await context.close();
+ }
  for(const width of [390,1280,1600]){
  const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
  await page.route('**/api/catalog/colors**',route=>route.fulfill({json:{ok:true,colors:['Белый','Чёрный','Особый'],partial:false}}));
