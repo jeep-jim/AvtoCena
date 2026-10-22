@@ -1,0 +1,386 @@
+{
+  "checkedAt": "2026-10-22T09:17:41.618Z",
+  "scope": "Independent compilation of public API records with unchanged production compiler; deployed private index checked separately",
+  "models": [
+    {
+      "id": "76763ca9fc792df61980328c",
+      "model": "Junior",
+      "revision": "cd1d39ad-d843-4fbb-a33e-4af861990cf7",
+      "variants": 36
+    },
+    {
+      "id": "81a4b290257d227a5fd86ee6",
+      "model": "Mito",
+      "revision": "fccd8f56-e1a5-4ea0-acf6-c3b490ee75c1",
+      "variants": 31
+    }
+  ],
+  "variants": 40,
+  "calculationFields": 277,
+  "referenceOnlyFields": 20,
+  "referenceOnly": [
+    {
+      "variantId": "58645f264bd08a007a4d9a6f",
+      "field": "batteryKwh",
+      "value": 0.89,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "ea675e6b95040cf3389c4786",
+      "field": "batteryKwh",
+      "value": 0.89,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "a57f01927175db82a8c3182d",
+      "field": "motorPeakKw",
+      "value": 115,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "a57f01927175db82a8c3182d",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "523399157766b5751aab30a1",
+      "field": "motorPeakKw",
+      "value": 115,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "523399157766b5751aab30a1",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "864ae2ec77c77a094f624a5a",
+      "field": "motorPeakKw",
+      "value": 207,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "864ae2ec77c77a094f624a5a",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "00a9036131756667c956de87",
+      "field": "systemPowerKw",
+      "value": 107,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "00a9036131756667c956de87",
+      "field": "batteryKwh",
+      "value": 0.89,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "233c647bfd301d783d8b3e50",
+      "field": "systemPowerKw",
+      "value": 107,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "233c647bfd301d783d8b3e50",
+      "field": "batteryKwh",
+      "value": 0.89,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "0c5ab2d030f2729733b412fa",
+      "field": "systemPowerKw",
+      "value": 107,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "0c5ab2d030f2729733b412fa",
+      "field": "batteryKwh",
+      "value": 0.89,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "2e0e332e26857edb84ff7c54",
+      "field": "systemPowerKw",
+      "value": 107,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "2e0e332e26857edb84ff7c54",
+      "field": "batteryKwh",
+      "value": 0.89,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "2e4fef107b3fa714a433968b",
+      "field": "motorPeakKw",
+      "value": 115,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "2e4fef107b3fa714a433968b",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "33a960927a95b7fdf6efd7eb",
+      "field": "motorPeakKw",
+      "value": 115,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "33a960927a95b7fdf6efd7eb",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    }
+  ],
+  "passed": true,
+  "rows": [
+    {
+      "variantId": "58645f264bd08a007a4d9a6f",
+      "year": 2024,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "ea675e6b95040cf3389c4786",
+      "year": 2024,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "a57f01927175db82a8c3182d",
+      "year": 2024,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "523399157766b5751aab30a1",
+      "year": 2024,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "864ae2ec77c77a094f624a5a",
+      "year": 2024,
+      "fields": 5,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "00a9036131756667c956de87",
+      "year": 2025,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "233c647bfd301d783d8b3e50",
+      "year": 2025,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "0c5ab2d030f2729733b412fa",
+      "year": 2025,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "2e0e332e26857edb84ff7c54",
+      "year": 2025,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "2e4fef107b3fa714a433968b",
+      "year": 2025,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "33a960927a95b7fdf6efd7eb",
+      "year": 2025,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2024-2025-september"
+    },
+    {
+      "variantId": "7d408d776043fe9850eed932",
+      "year": 2008,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "3da3db8c86208a6f31dfe216",
+      "year": 2008,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "754d116c1ee47270e847e335",
+      "year": 2008,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "bf0ec9b64ec45d4873c1f69b",
+      "year": 2008,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "6b0bd522698d410323b6ca7b",
+      "year": 2008,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "eba05720902742770612b184",
+      "year": 2008,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "ff9009d795a7777c24972acd",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "f505da401a25e554c08a5541",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "d979c0632ab237012d4d0951",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "e162d468eea1d9d24ba9dbab",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "54052d951118d455cb1f501f",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "0b1e29c71a649712ed0caa88",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "d6e32e472813161ae72fa65a",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "bc76a3b28ad957308ee8fda1",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "0442ce1646e643deacc636f6",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "67c919720368983e00b3dcf0",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "523b2514474fb6464e1fef7d",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "c3ce3f77ccfdea3d18cb45ad",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "d7ad25afe77bdc89edb50aa5",
+      "year": 2009,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
+    },
+    {
+      "variantId": "1bbb8422bc1f28900a6f7e4a",
+      "year": 2009,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "1aeb77d251323c78c05e619a",
+      "year": 2009,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "469db545a1e44735462cd0cd",
+      "year": 2010,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "3251301fef989d7e16afa1ec",
+      "year": 2010,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "096a3f2763616c1dede26032",
+      "year": 2010,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "2943f0cbb3c15164705c27df",
+      "year": 2010,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "7f6f9c58b93bd5de30135f22",
+      "year": 2010,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "a7e575384cb5dab52c5e4cad",
+      "year": 2010,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "32847858cf0969b02e083387",
+      "year": 2010,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "040b809591dd1ee320e2c5eb",
+      "year": 2010,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    }
+  ]
+}

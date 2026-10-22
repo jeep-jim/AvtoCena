@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:14:57.654135+07:00",
+  "updatedAt": "2026-10-22T16:18:13.376522+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32610,10 +32610,10 @@
   "activePriority": {
     "updatedAt": "2026-10-22T15:39:36.713910+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "continue_mito_historical",
+    "state": "junior_mito_saved_index_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo MiTo: поздний2009 и2010 MultiAir/JTDM-2 подготовлены10/80; затем остаток2010 и2011+",
+    "nextModel": "Alfa Romeo MiTo: остаток2010 Turismo Sport, затем2011 по заводским таблицам; поздние2009 и прочие пропуски в retry",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32887,6 +32887,16 @@
         "fields": 159,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-mito-2009-2010-multiair": {
+        "batch": "research-2026-10-22-alfa-mito-2009-2010-multiair",
+        "commit": "d583e174654f9a70df883bba2ed81c5ef59c0b8e",
+        "workflow": 39754053860,
+        "variants": 10,
+        "newVariants": 10,
+        "fields": 80,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32907,12 +32917,12 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-mito-2008-2009-launch",
-      "commit": "ab1d51958a64184e6f81403e1aac0a65183d012f",
-      "workflow": 39753037347,
-      "variants": 19,
-      "newVariants": 19,
-      "fields": 159,
+      "batch": "research-2026-10-22-alfa-mito-2009-2010-multiair",
+      "commit": "d583e174654f9a70df883bba2ed81c5ef59c0b8e",
+      "workflow": 39754053860,
+      "variants": 10,
+      "newVariants": 10,
+      "fields": 80,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32932,8 +32942,8 @@
         "workflow": 39720654481
       }
     ],
-    "requestedRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
-    "requestedReleaseWorkflow": 39746709502,
+    "requestedRelease": null,
+    "requestedReleaseWorkflow": null,
     "additionalPreparedResearch": [
       {
         "path": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2011-manual-retry.json",
@@ -33040,23 +33050,53 @@
         "includedInIndex": false
       }
     ],
-    "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-mito-2009-2010-multiair",
-      "state": "prepared_not_applied",
-      "variants": 10,
-      "fields": 80
-    },
+    "inFlightResearch": null,
     "lastCompletedPass": {
-      "report": "docs/encyclopedia/reports/2026-10-22-giulietta-junior-pass.json",
-      "variants": 109,
-      "newVariants": 86,
-      "fields": 711,
+      "checkedAt": "2026-10-22T16:18:13.376522+07:00",
+      "variants": 40,
+      "newVariants": 40,
+      "fields": 337,
+      "calculationFields": 277,
+      "referenceOnlyFields": 20,
+      "identityFields": 40,
       "apiReadback": true,
-      "includedInIndex": true,
-      "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
-      "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
-      "calculationFields": 607,
-      "referenceOnlyFields": 18
+      "guardTests": 24,
+      "preservedOriginalVariants": 27,
+      "includedInIndex": false,
+      "batches": [
+        {
+          "batch": "research-2026-10-22-alfa-junior-2024-2025-september",
+          "commit": "6fb66d917314216285c442794a9e29491ed821f9",
+          "workflow": 39752511359,
+          "variants": 11,
+          "newVariants": 11,
+          "fields": 98,
+          "apiReadback": true,
+          "includedInIndex": false
+        },
+        {
+          "batch": "research-2026-10-22-alfa-mito-2008-2009-launch",
+          "commit": "ab1d51958a64184e6f81403e1aac0a65183d012f",
+          "workflow": 39753037347,
+          "variants": 19,
+          "newVariants": 19,
+          "fields": 159,
+          "apiReadback": true,
+          "includedInIndex": false
+        },
+        {
+          "batch": "research-2026-10-22-alfa-mito-2009-2010-multiair",
+          "commit": "d583e174654f9a70df883bba2ed81c5ef59c0b8e",
+          "workflow": 39754053860,
+          "variants": 10,
+          "newVariants": 10,
+          "fields": 80,
+          "apiReadback": true,
+          "includedInIndex": false
+        }
+      ],
+      "nextCursor": "Alfa Romeo MiTo: остаток2010 Turismo Sport, затем2011 по заводским таблицам; поздние2009 и прочие пропуски в retry",
+      "report": "docs/encyclopedia/reports/2026-10-22-junior-mito-pass.json"
     },
     "failedIndexRelease": {
       "commit": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
@@ -33073,22 +33113,30 @@
     "installedIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
     "catalogFieldsEnriched": 1359,
     "failedConcurrentRelease": {
-      "workflow": 39731564487,
-      "reason": "encyclopedia_changed_during_preparation"
+      "workflow": 39749020662,
+      "commit": "2f19e1c64639b56799883c980692ff5ecdd1c6cb",
+      "reason": "object_storage_GET_unreachable:catalog/import-lock.json",
+      "activated": false
     },
     "technicalReferenceIntake": {
       "previousWorkflow": 39731352531,
       "previousSaved": 3398,
       "previousPending": 365,
       "resumeWorkflow": 39749319614,
-      "state": "in_progress",
+      "state": "failure_checkpoint_saved",
       "referenceOnly": true,
       "previousTotalVisited": 6000,
       "previousConclusion": "success_page_limit",
       "resumeCommit": "70d91b4703b4954113cdeff7f9a9d0194a6e2d2a",
-      "checkedAt": "2026-10-22T15:39:36.713910+07:00"
+      "checkedAt": "2026-10-22T16:18:13.376522+07:00",
+      "lastWorkflow": 39749319614,
+      "lastLoggedVisited": 6530,
+      "lastLoggedSaved": 3902,
+      "lastLoggedPending": 399,
+      "reason": "reference_fetch_stopped_checkpoint_saved",
+      "nextAction": "Read checkpoint failed URL/reason before resume; do not bypass source access errors"
     },
-    "releaseRequestedAt": "2026-10-22T15:17:10.219467+07:00",
+    "releaseRequestedAt": "2026-10-22T16:18:13.376522+07:00",
     "failedAggregateRelease": {
       "workflow": 39733245856,
       "commit": "bb3193f1fd0c37d1afeb23e615e940dadf6758ee",
