@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T11:33:23.658969+07:00",
+  "updatedAt": "2026-10-22T11:37:29.282572+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32434,9 +32434,9 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T11:33:23.658969+07:00",
+    "updatedAt": "2026-10-22T11:37:29.282572+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "index_release_running_next_batch_prepared",
+    "state": "index_release_running_research_continuing",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "AITO M5",
@@ -32488,13 +32488,16 @@
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
     "inFlightResearch": {
-      "state": "prepared_not_applied",
+      "state": "apply_requested",
       "batch": "docs/encyclopedia/batches/2026-10-22-aito-m5-historical-manuals.json",
       "variants": 17,
       "fields": 55,
       "digest": "3f47fa17c2d82a4cfa89b39abf0260db1e1cbfe687a2ff7522003e2fbe73be27",
       "dependsOnReleaseWorkflow": 39720853891,
-      "requiresFreshApiCas": true
+      "requiresFreshApiCas": true,
+      "preflightPassed": true,
+      "preflightAt": "2026-10-22T04:35:25Z",
+      "dependencyResolved": "Immutable encyclopedia index and audit step completed successfully at 04:13:13 UTC; running release reads its frozen index, not current encyclopedia manifest."
     },
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
