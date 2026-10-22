@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T15:35:55.001363+07:00",
+  "updatedAt": "2026-10-22T15:39:36.713910+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32602,7 +32602,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T15:35:55.001363+07:00",
+    "updatedAt": "2026-10-22T15:39:36.713910+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "continue_junior_2024_then_mito",
     "preserveManual": true,
@@ -33052,11 +33052,13 @@
       "previousWorkflow": 39731352531,
       "previousSaved": 3398,
       "previousPending": 365,
-      "resumeWorkflow": null,
-      "state": "resume_requested",
+      "resumeWorkflow": 39749319614,
+      "state": "in_progress",
       "referenceOnly": true,
       "previousTotalVisited": 6000,
-      "previousConclusion": "success_page_limit"
+      "previousConclusion": "success_page_limit",
+      "resumeCommit": "70d91b4703b4954113cdeff7f9a9d0194a6e2d2a",
+      "checkedAt": "2026-10-22T15:39:36.713910+07:00"
     },
     "releaseRequestedAt": "2026-10-22T15:17:10.219467+07:00",
     "failedAggregateRelease": {

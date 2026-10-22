@@ -11873,3 +11873,6 @@ Junior2026 workflow39746380415 SUCCESS,8 guard-тестов PASS, независ
 ### 2026-10-22T15:36 Asia/Krasnoyarsk — возобновление справочного сбора с checkpoint
 
 Technical reference intake39731352531 SUCCESS закончил3000 страниц: суммарно6000 посещено,3398 справочных записей сохранено,365 страниц pending, completed=false. Проверены свежие100 runs: другого активного technical reference intake нет. По явному поручению владельца обновлён только штатный marker для продолжения из knowledge/encyclopedia/reference-intake/v1/state.json. Comparison39743682918 остаётся in_progress и не дублируется. Справочные данные unverified_reference не объявлены заводскими и не включены автоматически в расчёты. Коллектор/лимит/защиты не менялись.
+
+
+2026-10-22T15:39 Asia/Krasnoyarsk: marker справочного продолжения сохранён в70d91b4703b4954113cdeff7f9a9d0194a6e2d2a; workflow39749319614 подтверждён in_progress. Продолжает прежний checkpoint, исходный pending365, без новой автоматизации и без повторного запуска comparison.
