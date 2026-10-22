@@ -1,0 +1,2082 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
+  "entries": [
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2024,
+      "variantId": "e9b306511f082492ca4818e1",
+      "trim": "1.8 Turbo 252 PS DCT",
+      "operation": "create",
+      "expectedRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.8 Turbo 252 PS DCT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 252,
+        "powerKw": 185,
+        "icePowerKw": 185,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Гамма 2024, производство с марта по заводскому анонсу. Брошюра09/2024, PDF22: 1.8 Turbo 252 PS DCT, 252 метрических ch/185 кВт,1798см³,бензиновый ДВС,купе,задний привод,7DCT. Разрешённая полная масса 1360кг,не снаряжённая. Руководство подтверждает тип M5P Turbo без суффикса. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; trim; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b",
+            "identitySources": [
+              {
+                "url": "https://be.media.renaultgroup.com/alpine-presente-sa-gamme-a110-pour-2024-et-ses-tarifs-pour-la-belgique-et-le-luxembourg/?lang=bel",
+                "effectiveAt": "2024-03",
+                "documentDate": "2023-12-04",
+                "selector": "Гамма 2024; производство с марта 2024; A110 252 chevaux, GT/S/R Turini 300 ch",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; engineCc; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "drive": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; drive; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "transmission": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powerHp; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; icePowerKw; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2024,
+      "variantId": "f18982108610100fffbe4a69",
+      "trim": "GT",
+      "operation": "create",
+      "expectedRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "GT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Гамма 2024, производство с марта по заводскому анонсу. Брошюра09/2024, PDF22: GT, 300 метрических ch/221 кВт,1798см³,бензиновый ДВС,купе,задний привод,7DCT. Разрешённая полная масса 1360кг,не снаряжённая. Руководство подтверждает тип M5P Turbo без суффикса. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; trim; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b",
+            "identitySources": [
+              {
+                "url": "https://be.media.renaultgroup.com/alpine-presente-sa-gamme-a110-pour-2024-et-ses-tarifs-pour-la-belgique-et-le-luxembourg/?lang=bel",
+                "effectiveAt": "2024-03",
+                "documentDate": "2023-12-04",
+                "selector": "Гамма 2024; производство с марта 2024; A110 252 chevaux, GT/S/R Turini 300 ch",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; engineCc; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "drive": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; drive; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "transmission": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powerHp; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; icePowerKw; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2024,
+      "variantId": "77778564637d34dbc9f07d5a",
+      "trim": "S",
+      "operation": "create",
+      "expectedRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "S",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Гамма 2024, производство с марта по заводскому анонсу. Брошюра09/2024, PDF22: S, 300 метрических ch/221 кВт,1798см³,бензиновый ДВС,купе,задний привод,7DCT. Разрешённая полная масса 1360кг,не снаряжённая. Руководство подтверждает тип M5P Turbo без суффикса. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; trim; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b",
+            "identitySources": [
+              {
+                "url": "https://be.media.renaultgroup.com/alpine-presente-sa-gamme-a110-pour-2024-et-ses-tarifs-pour-la-belgique-et-le-luxembourg/?lang=bel",
+                "effectiveAt": "2024-03",
+                "documentDate": "2023-12-04",
+                "selector": "Гамма 2024; производство с марта 2024; A110 252 chevaux, GT/S/R Turini 300 ch",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; engineCc; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "drive": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; drive; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "transmission": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; powerHp; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; icePowerKw; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2024,
+      "variantId": "010dffffb5d31fd955185eb2",
+      "trim": "R Turini",
+      "operation": "create",
+      "expectedRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "R Turini",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "grossVehicleWeightKg": 1323
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Гамма 2024, производство с марта по заводскому анонсу. Брошюра09/2024, PDF22: R Turini, 300 метрических ch/221 кВт,1798см³,бензиновый ДВС,купе,задний привод,7DCT. Разрешённая полная масса 1323кг,не снаряжённая. Руководство подтверждает тип M5P Turbo без суффикса. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; trim; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b",
+            "identitySources": [
+              {
+                "url": "https://be.media.renaultgroup.com/alpine-presente-sa-gamme-a110-pour-2024-et-ses-tarifs-pour-la-belgique-et-le-luxembourg/?lang=bel",
+                "effectiveAt": "2024-03",
+                "documentDate": "2023-12-04",
+                "selector": "Гамма 2024; производство с марта 2024; A110 252 chevaux, GT/S/R Turini 300 ch",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; engineCc; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "drive": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; drive; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "transmission": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; powerHp; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; icePowerKw; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/a110_brochure_FR.pdf",
+            "documentDate": "09/2024",
+            "pdfPage": 22,
+            "datePage": 27,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R Turini; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "610ad329d1057ce6f2f38c73450f9d38d087b2a44fefb93fefe5724979cfc84b"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2025,
+      "variantId": "e8ba0960987acc68ec689c1c",
+      "trim": "1.8 Turbo 252 PS DCT",
+      "operation": "create",
+      "expectedRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.8 Turbo 252 PS DCT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 252,
+        "powerKw": 185,
+        "icePowerKw": 185,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+        "checkedAt": "2026-10-23",
+        "statement": "Брошюра03/2025, PDF18: 1.8 Turbo 252 PS DCT,1798см³,185кВт,купе,бензиновый ДВС,задний привод,7DCT,разрешённая полная масса1360кг. Французский заводской анонс13.03.2025 подтверждает 252 метрических chevaux и именно гамму2025. GTS заменяет GT/S; значения прошлых версий не подставлены. Тип M5P Turbo по руководству. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; trim; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf",
+            "identitySources": [
+              {
+                "url": "https://media.renault.ch/fr/article/21971",
+                "effectiveAt": "2025",
+                "documentDate": "2025-03-13",
+                "selector": "A110 252 chevaux; GTS et R 70: 300 chevaux (221 kW)",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "powertrainKind": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "engineCc": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; engineCc; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "drive": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; drive; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "transmission": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "powerHp": {
+            "url": "https://media.renault.ch/fr/article/21971",
+            "effectiveAt": "2025",
+            "documentDate": "2025-03-13",
+            "selector": "A110 252 chevaux; GTS et R 70: 300 chevaux (221 kW)",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerKw": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "icePowerKw": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; icePowerKw; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2025,
+      "variantId": "bac4c0a9e9ccbdcdec8418a8",
+      "trim": "GTS",
+      "operation": "create",
+      "expectedRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "GTS",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+        "checkedAt": "2026-10-23",
+        "statement": "Брошюра03/2025, PDF18: GTS,1798см³,221кВт,купе,бензиновый ДВС,задний привод,7DCT,разрешённая полная масса1360кг. Французский заводской анонс13.03.2025 подтверждает 300 метрических chevaux и именно гамму2025. GTS заменяет GT/S; значения прошлых версий не подставлены. Тип M5P Turbo по руководству. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; trim; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf",
+            "identitySources": [
+              {
+                "url": "https://media.renault.ch/fr/article/21971",
+                "effectiveAt": "2025",
+                "documentDate": "2025-03-13",
+                "selector": "A110 252 chevaux; GTS et R 70: 300 chevaux (221 kW)",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "powertrainKind": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "engineCc": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; engineCc; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "drive": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; drive; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "transmission": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "powerHp": {
+            "url": "https://media.renault.ch/fr/article/21971",
+            "effectiveAt": "2025",
+            "documentDate": "2025-03-13",
+            "selector": "A110 252 chevaux; GTS et R 70: 300 chevaux (221 kW)",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerKw": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "icePowerKw": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; icePowerKw; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+            "documentDate": "03/2025",
+            "pdfPage": 18,
+            "datePage": 22,
+            "sourceNature": "Официальная заводская брошюра Alpine",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2025,
+      "variantId": "ebf9862b5492640329a09cc6",
+      "trim": "R 70",
+      "operation": "create",
+      "expectedRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "R 70",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.renault.ch/fr/article/21971",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводской анонс13.03.2025 подтверждает точную R70 гаммы2025:300 метрических chevaux и221кВт ДВС. Руководство A110 до14.07.2025:1798см³,бензин,M5P Turbo. Масса,кузов,привод икоробка не перенесены с GTS/R Turini; суффикс двигателя неизвестен. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.renault.ch/fr/article/21971",
+            "effectiveAt": "2025",
+            "documentDate": "2025-03-13",
+            "selector": "A110 252 chevaux; GTS et R 70: 300 chevaux (221 kW)",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "fuel": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://media.renault.ch/fr/article/21971",
+            "effectiveAt": "2025",
+            "documentDate": "2025-03-13",
+            "selector": "A110 252 chevaux; GTS et R 70: 300 chevaux (221 kW)",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerKw": {
+            "url": "https://media.renault.ch/fr/article/21971",
+            "effectiveAt": "2025",
+            "documentDate": "2025-03-13",
+            "selector": "A110 252 chevaux; GTS et R 70: 300 chevaux (221 kW)",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "icePowerKw": {
+            "url": "https://media.renault.ch/fr/article/21971",
+            "effectiveAt": "2025",
+            "documentDate": "2025-03-13",
+            "selector": "A110 252 chevaux; GTS et R 70: 300 chevaux (221 kW)",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "9f23c75ab6a73713bf64580a",
+      "make": "Alpine",
+      "model": "A290",
+      "year": 2024,
+      "variantId": "0896f946a70e060131bb0d60",
+      "trim": "GT",
+      "operation": "create",
+      "expectedRevision": "5be3aba9-3f66-4436-9b32-a39da23408e1",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "GT",
+        "fuel": "electric",
+        "powertrainKind": "bev",
+        "bodyType": "hatchback",
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор",
+        "powerHp": 180,
+        "powerKw": 130,
+        "motorPeakKw": 130,
+        "batteryKwh": 52,
+        "grossVehicleWeightKg": 1950
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская брошюра10/2024: комплектация GT сопоставлена на PDF19, таблица PDF22. Максимальная мощность по заводскому обозначению 180ch/130кВт,52кВт·ч,электрический5-дверный хэтчбек,передний привод,редуктор; полная разрешённая масса1950кг. Эти значения мощности не являются30-минутными; они оставлены отдельно. Фактический выпуск2024 подтверждён итогами177регистраций. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "identitySources": [
+              {
+                "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+                "documentDate": "10/2024",
+                "pdfPage": 22,
+                "identityPage": 19,
+                "datePage": 25,
+                "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group",
+                "selector": "GT; trim; точная колонка заводской таблицы",
+                "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+              },
+              {
+                "url": "https://media.alpinecars.com/2024-sales-results-alpine-continues-ahead-of-its-product-offensive/?lang=eng",
+                "documentDate": "2025-01-16",
+                "effectiveAt": "2024",
+                "selector": "A290: фактический дебют в конце 2024, 177 регистраций",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powertrainKind": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "bodyType": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "drive": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; drive; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "transmission": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powerHp": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powerHp; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powerKw": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "motorPeakKw": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; motorPeakKw; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "batteryKwh": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; batteryKwh; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "9f23c75ab6a73713bf64580a",
+      "make": "Alpine",
+      "model": "A290",
+      "year": 2024,
+      "variantId": "df718dea749c9069a112da47",
+      "trim": "GT Premium",
+      "operation": "create",
+      "expectedRevision": "5be3aba9-3f66-4436-9b32-a39da23408e1",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "GT Premium",
+        "fuel": "electric",
+        "powertrainKind": "bev",
+        "bodyType": "hatchback",
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор",
+        "powerHp": 180,
+        "powerKw": 130,
+        "motorPeakKw": 130,
+        "batteryKwh": 52,
+        "grossVehicleWeightKg": 1950
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская брошюра10/2024: комплектация GT Premium сопоставлена на PDF19, таблица PDF22. Максимальная мощность по заводскому обозначению 180ch/130кВт,52кВт·ч,электрический5-дверный хэтчбек,передний привод,редуктор; полная разрешённая масса1950кг. Эти значения мощности не являются30-минутными; они оставлены отдельно. Фактический выпуск2024 подтверждён итогами177регистраций. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "identitySources": [
+              {
+                "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+                "documentDate": "10/2024",
+                "pdfPage": 22,
+                "identityPage": 19,
+                "datePage": 25,
+                "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group",
+                "selector": "GT Premium; trim; точная колонка заводской таблицы",
+                "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+              },
+              {
+                "url": "https://media.alpinecars.com/2024-sales-results-alpine-continues-ahead-of-its-product-offensive/?lang=eng",
+                "documentDate": "2025-01-16",
+                "effectiveAt": "2024",
+                "selector": "A290: фактический дебют в конце 2024, 177 регистраций",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powertrainKind": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "bodyType": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "drive": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; drive; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "transmission": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powerHp": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; powerHp; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powerKw": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "motorPeakKw": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; motorPeakKw; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "batteryKwh": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; batteryKwh; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Premium; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "9f23c75ab6a73713bf64580a",
+      "make": "Alpine",
+      "model": "A290",
+      "year": 2024,
+      "variantId": "f36adb5f5d83a10d549316b8",
+      "trim": "GT Performance",
+      "operation": "create",
+      "expectedRevision": "5be3aba9-3f66-4436-9b32-a39da23408e1",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "GT Performance",
+        "fuel": "electric",
+        "powertrainKind": "bev",
+        "bodyType": "hatchback",
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор",
+        "powerHp": 220,
+        "powerKw": 160,
+        "motorPeakKw": 160,
+        "batteryKwh": 52,
+        "grossVehicleWeightKg": 1950
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская брошюра10/2024: комплектация GT Performance сопоставлена на PDF19, таблица PDF22. Максимальная мощность по заводскому обозначению 220ch/160кВт,52кВт·ч,электрический5-дверный хэтчбек,передний привод,редуктор; полная разрешённая масса1950кг. Эти значения мощности не являются30-минутными; они оставлены отдельно. Фактический выпуск2024 подтверждён итогами177регистраций. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "identitySources": [
+              {
+                "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+                "documentDate": "10/2024",
+                "pdfPage": 22,
+                "identityPage": 19,
+                "datePage": 25,
+                "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group",
+                "selector": "GT Performance; trim; точная колонка заводской таблицы",
+                "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+              },
+              {
+                "url": "https://media.alpinecars.com/2024-sales-results-alpine-continues-ahead-of-its-product-offensive/?lang=eng",
+                "documentDate": "2025-01-16",
+                "effectiveAt": "2024",
+                "selector": "A290: фактический дебют в конце 2024, 177 регистраций",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powertrainKind": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "bodyType": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "drive": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; drive; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "transmission": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powerHp": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; powerHp; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powerKw": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "motorPeakKw": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; motorPeakKw; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "batteryKwh": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; batteryKwh; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT Performance; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "9f23c75ab6a73713bf64580a",
+      "make": "Alpine",
+      "model": "A290",
+      "year": 2024,
+      "variantId": "44328bae3cca8434015b1d21",
+      "trim": "GTS",
+      "operation": "create",
+      "expectedRevision": "5be3aba9-3f66-4436-9b32-a39da23408e1",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "GTS",
+        "fuel": "electric",
+        "powertrainKind": "bev",
+        "bodyType": "hatchback",
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор",
+        "powerHp": 220,
+        "powerKw": 160,
+        "motorPeakKw": 160,
+        "batteryKwh": 52,
+        "grossVehicleWeightKg": 1950
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская брошюра10/2024: комплектация GTS сопоставлена на PDF19, таблица PDF22. Максимальная мощность по заводскому обозначению 220ch/160кВт,52кВт·ч,электрический5-дверный хэтчбек,передний привод,редуктор; полная разрешённая масса1950кг. Эти значения мощности не являются30-минутными; они оставлены отдельно. Фактический выпуск2024 подтверждён итогами177регистраций. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "identitySources": [
+              {
+                "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+                "documentDate": "10/2024",
+                "pdfPage": 22,
+                "identityPage": 19,
+                "datePage": 25,
+                "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group",
+                "selector": "GTS; trim; точная колонка заводской таблицы",
+                "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+              },
+              {
+                "url": "https://media.alpinecars.com/2024-sales-results-alpine-continues-ahead-of-its-product-offensive/?lang=eng",
+                "documentDate": "2025-01-16",
+                "effectiveAt": "2024",
+                "selector": "A290: фактический дебют в конце 2024, 177 регистраций",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; fuel; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powertrainKind": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; powertrainKind; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "bodyType": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; bodyType; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "drive": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; drive; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "transmission": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; transmission; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powerHp": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; powerHp; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "powerKw": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; powerKw; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "motorPeakKw": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; motorPeakKw; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "batteryKwh": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; batteryKwh; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+            "documentDate": "10/2024",
+            "pdfPage": 22,
+            "identityPage": 19,
+            "datePage": 25,
+            "sourceNature": "Оригинальная заводская брошюра Alpine у дилера",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GTS; grossVehicleWeightKg; точная колонка заводской таблицы",
+            "sourceSha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "9f23c75ab6a73713bf64580a",
+      "make": "Alpine",
+      "model": "A290",
+      "year": 2024,
+      "variantId": "0ea6ae73696785eb681bb38c",
+      "trim": "Première Édition",
+      "operation": "create",
+      "expectedRevision": "5be3aba9-3f66-4436-9b32-a39da23408e1",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Première Édition",
+        "fuel": "electric",
+        "powertrainKind": "bev",
+        "bodyType": "hatchback",
+        "powerHp": 220,
+        "batteryKwh": 52
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "bodyType",
+        "powerHp",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводской анонс30.07.2024: Première Édition на базе GTS,220метрическихch,52кВт·ч,электрический5-дверный хэтчбек. Фактический дебютA290 в2024 подтверждён итогамигода. Не переносились масса и мощности кВт других комплектаций,30-минутная мощность неизвестна. Цветовые пакетыBeta/La Bleue/La Grise не созданы как отдельные технические модификации. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "identitySources": [
+              {
+                "url": "https://media.alpinecars.com/2024-sales-results-alpine-continues-ahead-of-its-product-offensive/?lang=eng",
+                "documentDate": "2025-01-16",
+                "effectiveAt": "2024",
+                "selector": "A290: фактический дебют в конце 2024, 177 регистраций",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "batteryKwh": {
+            "url": "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra",
+            "documentDate": "2024-07-30",
+            "effectiveAt": "2024",
+            "selector": "GT/GT Premium 180 ch; GT Performance/GTS/Première Édition 220 ch; électrique, 5 portes, 52 kWh",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    }
+  ]
+}
