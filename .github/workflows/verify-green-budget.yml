@@ -5,6 +5,8 @@ on:
     paths:
       - 'apps/web/**'
       - 'tests/green-corner-filters.test.ts'
+      - 'tests/catalog-filter-ui.test.ts'
+      - 'tests/dubicars-price-on-request-ui.test.ts'
       - 'tests/browser/green-budget*'
       - '.github/workflows/verify-green-budget.yml'
   workflow_run:
@@ -16,6 +18,8 @@ on:
     paths:
       - 'apps/web/**'
       - 'tests/green-corner-filters.test.ts'
+      - 'tests/catalog-filter-ui.test.ts'
+      - 'tests/dubicars-price-on-request-ui.test.ts'
       - 'tests/browser/green-budget*'
       - '.github/workflows/verify-green-budget.yml'
 permissions:
@@ -37,7 +41,7 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/green-corner*.test.ts tests/catalog-filter*.test.ts tests/card-city-delivery*.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/green-corner*.test.ts tests/catalog-filter*.test.ts tests/card-city-delivery*.test.ts tests/dubicars-price-on-request-ui.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/green-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Desktop and mobile price controls
         env:

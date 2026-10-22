@@ -25,12 +25,22 @@ if(!live){
 }
 let pages=[['petrol','/?kind=petrol'],['hybrid','/?kind=hybrid'],['n1','/?kind=n1'],['missing-hybrid','/?kind=missing-hybrid']];
 if(live){
- const response=await fetch(`${origin}/api/catalog/search?market=georgia&fuel=hybrid&pageSize=3`,{signal:AbortSignal.timeout(45000)});
- assert.ok(response.ok,'hybrid discovery must use actual public data');
- const data=await response.json();
- const hybrid=data.items?.find(o=>o.id);
- assert.ok(hybrid,'a real hybrid offer is required for verification');
- pages=[['petrol','/cars/offer/15691a619182935d97aa25c7'],['hybrid','/cars/offer/'+hybrid.id],['electric','/cars/offer/17153b86dd5a6519cf814186']];
+ // Feed inventory changes: discover all three real powertrains instead of
+ // retaining IDs whose detail pages correctly become unavailable after sale.
+ pages=[];
+ const discovery=[];
+ for(const [kind,market] of [['petrol','china'],['hybrid','georgia'],['electric','china']]){
+  const url=`${origin}/api/catalog/search?market=${market}&fuel=${kind}&pageSize=3`;
+  const response=await fetch(url,{signal:AbortSignal.timeout(45000)});
+  const body=await response.text();
+  assert.ok(response.ok,`${kind} discovery HTTP ${response.status}: ${body.slice(0,300)}`);
+  const data=JSON.parse(body);
+  const offer=data.items?.find(o=>o.id&&o.fuel===kind);
+  assert.ok(offer,`a current real ${kind} offer is required for verification`);
+  pages.push([kind,'/cars/offer/'+encodeURIComponent(offer.id)]);
+  discovery.push({kind,market,id:offer.id,fuel:offer.fuel,generation:data.generation??null});
+ }
+ fs.writeFileSync(`${out}/live-discovery.json`,JSON.stringify(discovery,null,2));
  fs.writeFileSync(`${out}/live-pages.json`,JSON.stringify(pages,null,2));
 }
 const browser=process.env.PARAMETER_BROWSER==='webkit' ? await webkit.launch({headless:true}) : await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});

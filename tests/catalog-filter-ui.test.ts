@@ -67,10 +67,10 @@ test("the single public catalog search route owns filtered facets and live rates
   assert.match(route, /hasPrice/);
 });
 
-test("cards show documented power labels and hide unpriced rows unless a qualified selector exists", () => {
+test("cards show documented power labels and only allow qualified unpriced states", () => {
   const card = fs.readFileSync("apps/web/components/catalog/CatalogCard.tsx", "utf8");
   assert.match(card, /catalogPowerDisplay\(normalizedOffer\)/);
   assert.match(card, /powerDisplay\.thirtyMinuteLabel/);
-  assert.match(card, /if \(!retro && !visibleRub && !selectionRequired && !sellerPricing\) return null/);
+  assert.match(card, /if \(!retro && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(normalizedOffer\)\) return null/);
   assert.match(card, /hasModificationSelection\(offer\)/);
 });
