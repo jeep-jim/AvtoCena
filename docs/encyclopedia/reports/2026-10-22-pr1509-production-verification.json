@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-10-22T01:37:42.940752+00:00",
+  "run": 39704586763,
+  "job": 119583601702,
+  "conclusion": "success",
+  "health": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "62f6bb08ea7721d537ff4ee0ef55cf585fb536a5",
+    "calculationVersion": "7aaa7c13f33b3438eb890737c8fab3d1bc798825b8c49a5651feefd304b6489c"
+  },
+  "homeTotal": 902913,
+  "controlCards": [
+    {
+      "id": "56bbcecb51a61b76402371a9",
+      "market": "uae",
+      "totalRub": 3177645,
+      "engineCc": 1498,
+      "powerHp": 150,
+      "drive": "fwd",
+      "transmission": "automatic",
+      "bodyType": "sedan",
+      "calculationStatus": "estimated"
+    },
+    {
+      "id": "061974864a6a9708c3084fc8",
+      "market": "europe",
+      "totalRub": 4175755,
+      "engineCc": 1968,
+      "powerHp": 150,
+      "drive": "",
+      "transmission": "automatic",
+      "bodyType": "",
+      "calculationStatus": "estimated"
+    },
+    {
+      "id": "ajes-korea-6d1ocW5lV5Cl77",
+      "market": "korea",
+      "totalRub": null,
+      "engineCc": 1999,
+      "powerHp": null,
+      "drive": null,
+      "transmission": "automatic",
+      "bodyType": "",
+      "calculationStatus": "needs_data"
+    }
+  ],
+  "uaeBudgetTotal": 1,
+  "filterTotals": {
+    "fwd_auto": 1,
+    "awd": 0,
+    "manual": 0
+  },
+  "detailHtml": {
+    "id": "56bbcecb51a61b76402371a9",
+    "sameTotalRub": 3177645,
+    "drive": "Передний",
+    "transmission": "Автомат",
+    "bodyType": "Седан"
+  }
+}
