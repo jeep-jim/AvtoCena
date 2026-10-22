@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T03:04:00+07:00",
+  "updatedAt": "2026-10-23T03:11:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -821,12 +821,12 @@
         2018,
         2017
       ],
-      "variants": 37,
+      "variants": 45,
       "status": "partial_verified_fields",
-      "researchedVariants": 5,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
-      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
+      "researchedVariants": 13,
+      "checkedAt": "2026-10-23T03:11:00+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-db11-remaining.json",
+      "nextAction": "Основная партия17–21MY сохранена и прочитана;32 неоднозначные исходные строки, ранние/поздние годы и специальные исполнения остаются в retry. Не повторять сохранённую партию."
     },
     {
       "id": "1c7928819e7d7d0ab2e5a18d",
@@ -32658,13 +32658,13 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T03:04:00+07:00",
+    "updatedAt": "2026-10-23T03:11:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "aston_db11_2017_2021_batch_prepared",
+    "state": "db11_saved_db12_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Aston Martin DB11, точные исполнения2017–2024; затем далее по алфавиту. Alpine gaps отдельно в retry.",
-    "lastVerifiedResearch": "alpine-a290-2026",
+    "nextModel": "Aston Martin DB12: партия MY24/MY25 подготовлена, затем DB9. Непроверенные DB11 сохранены в retry.",
+    "lastVerifiedResearch": "aston-db11-2017-2021",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 75,
     "allModelsComplete": false,
@@ -32683,21 +32683,21 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-late-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "alpine-a290-2026",
-      "batch": "research-2026-10-23-alpine-a290-2026",
-      "commit": "5519fe6f29fc8e5466ab01f9f7f86fd188bbd8e6",
-      "workflow": 39837681693,
-      "job": 120030182437,
-      "variants": 4,
-      "newVariants": 4,
-      "updatedVariants": 0,
-      "fields": 40,
-      "compiledCalculationFields": 28,
+      "key": "aston-db11-2017-2021",
+      "batch": "research-2026-10-23-aston-db11-2017-2021",
+      "commit": "29a9428d9cd348b18001d10fda2937f457103c87",
+      "workflow": 39845529032,
+      "job": 120057670665,
+      "variants": 13,
+      "newVariants": 8,
+      "updatedVariants": 5,
+      "fields": 96,
+      "compiledCalculationFields": 88,
       "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
-      "indexMembershipState": "pending_next_index_snapshot_check",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2026-readback.json"
+      "indexMembershipState": "saved_after_active_ac711_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-readback.json"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792660229591_c103ed94",
@@ -32791,15 +32791,32 @@
         "includedInIndex": false,
         "indexMembershipState": "excluded_from_ac711_snapshot_verified",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2026-readback.json"
+      },
+      {
+        "key": "aston-db11-2017-2021",
+        "batch": "research-2026-10-23-aston-db11-2017-2021",
+        "commit": "29a9428d9cd348b18001d10fda2937f457103c87",
+        "workflow": 39845529032,
+        "job": 120057670665,
+        "variants": 13,
+        "newVariants": 8,
+        "updatedVariants": 5,
+        "fields": 96,
+        "compiledCalculationFields": 88,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "saved_after_active_ac711_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-readback.json"
       }
     ],
     "inFlightResearch": [
       {
-        "modelId": "eff6651568e364a8a5a40e97",
-        "batch": "research-2026-10-23-aston-db11-2017-2021",
-        "variants": 13,
-        "newVariants": 8,
-        "fields": 96,
+        "modelId": "1c7928819e7d7d0ab2e5a18d",
+        "batch": "research-2026-10-23-aston-db12-2024-2025",
+        "variants": 5,
+        "newVariants": 2,
+        "fields": 23,
         "apiReadback": false
       }
     ],

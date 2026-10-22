@@ -1,0 +1,701 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T03:06:20.047961+07:00",
+  "modelId": "eff6651568e364a8a5a40e97",
+  "make": "Aston Martin",
+  "model": "DB11",
+  "revision": "293d2810-2e27-44e7-ba93-1921c2a3c383",
+  "batch": "research-2026-10-23-aston-db11-2017-2021",
+  "allFieldsComplete": false,
+  "historicalExpansionComplete": false,
+  "nextAlphabeticalModel": {
+    "id": "1c7928819e7d7d0ab2e5a18d",
+    "make": "Aston Martin",
+    "model": "DB12"
+  },
+  "items": [
+    {
+      "variantId": "e752ca34634c56d543fc9f7a",
+      "year": 2017,
+      "trim": "STANDARD",
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "STANDARD не различает V8 и V12; UAE seller horsepower/volume не использовать."
+    },
+    {
+      "variantId": "0c2851830383b69f446e0ae0",
+      "year": 2018,
+      "trim": "STANDARD",
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "STANDARD не различает V8 и V12; UAE seller horsepower/volume не использовать."
+    },
+    {
+      "variantId": "481f7b2c95180bf9e2cc9d55",
+      "year": 2020,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "d56e1bf6bc695d025390a6a7",
+      "year": 2020,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "05ce7e65f23205b3fdbc985e",
+      "year": 2020,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "585a7843dfc55d4c78ef4146",
+      "year": 2020,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "e716490de7d916f8928db1cd",
+      "year": 2020,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "5932fddfa7ff0c59a6c1b9f8",
+      "year": 2020,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "890cda39f85e59c986f1c62c",
+      "year": 2020,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "1a9907f664318108eab46669",
+      "year": 2020,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "3a5a0a26f7385ad2f8b53140",
+      "year": 2021,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "360557de28bffc91d1be208f",
+      "year": 2021,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "b6e0bfb5fc71b5739aae9f74",
+      "year": 2021,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "f840a81fa9d18578f1364c4e",
+      "year": 2021,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "406ac34dee314b5095402754",
+      "year": 2021,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "5c11b530af3bb11e204269b9",
+      "year": 2022,
+      "trim": "AMR",
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "MY22 заводской релиз снимает обозначение AMR. Требуется установить модельный год/год регистрации и точное исполнение; не переносить данные MY21."
+    },
+    {
+      "variantId": "46f25fbe5ccf8375606f46b1",
+      "year": 2022,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "fec9802d0d8e9dfe084bd9bb",
+      "year": 2022,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "0a5dc35935ce1477384d8220",
+      "year": 2022,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "bf95ac66003e0a233c8ff91b",
+      "year": 2022,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "70d5fe5e4eb2d9e663915b10",
+      "year": 2022,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "a15fb4c4cda2ca2443ee72bf",
+      "year": 2022,
+      "trim": "4.0T V8 Coupe",
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нужно точное подтверждение региональной спецификации и модельного года. MY22 global535PS не подтверждает автоматически China510/534PS или наблюдаемый2024 год."
+    },
+    {
+      "variantId": "9a88a4f08e140892135d3b31",
+      "year": 2022,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "e493f8422007c82a198d54b1",
+      "year": 2023,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "28701d8088653127a55d777f",
+      "year": 2023,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "fa202d047f79fbd97c4b80ee",
+      "year": 2023,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "e17c865a3d24b2c2f948dade",
+      "year": 2023,
+      "trim": "4.0T V8 Coupe",
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нужно точное подтверждение региональной спецификации и модельного года. MY22 global535PS не подтверждает автоматически China510/534PS или наблюдаемый2024 год."
+    },
+    {
+      "variantId": "44e3b8a6b38abf17cae129d3",
+      "year": 2023,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "20cb0fdaac50aecc77a6fd6e",
+      "year": 2024,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "3421a7a711a63e031f98c915",
+      "year": 2024,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "c5fec45cec8b28d6e7e785c5",
+      "year": 2024,
+      "trim": null,
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Точное исполнение отсутствует: объём и мощность наблюдения не доказывают идентичность V8/V12, Coupe/Volante или AMR."
+    },
+    {
+      "variantId": "3ef8c4b4303c7305ba38cd9b",
+      "year": 2024,
+      "trim": "4.0T V8 Coupe",
+      "fields": [
+        "exactIdentity",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нужно точное подтверждение региональной спецификации и модельного года. MY22 global535PS не подтверждает автоматически China510/534PS или наблюдаемый2024 год."
+    },
+    {
+      "year": 2018,
+      "trim": "V8 Volante",
+      "variantId": "3c5a436c03a29ed0f91c5310",
+      "fields": [
+        "grossVehicleWeightKg"
+      ],
+      "reason": "18MY руководство включает только V8 Coupe/V12 Coupe; массу Volante из19MY не переносили."
+    },
+    {
+      "years": [
+        2016,
+        2017
+      ],
+      "trim": "V12 Coupe / V8 Coupe",
+      "fields": [
+        "historicalYearCoverage",
+        "exactIdentity"
+      ],
+      "reason": "Нужно подтвердить отсутствующий календарный2016 год и V8поставки2017: заводские MY17/MY18 не равны автоматически календарному году производства."
+    },
+    {
+      "years": [
+        2018
+      ],
+      "trim": "V12 AMR Coupe / AMR Signature Edition",
+      "fields": [
+        "exactIdentity",
+        "engineCc",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Заводской релиз11.05.2018 подтверждает запуск и639PS/470kW, но точные cc/GVW2018 требуют документа; позднее19.5MY не переносили автоматически."
+    },
+    {
+      "years": [
+        2020,
+        2021
+      ],
+      "trim": "Shadow Edition / региональные специальные исполнения",
+      "fields": [
+        "exactIdentity",
+        "historicalEditionCoverage"
+      ],
+      "reason": "Базовые V8/V12 подтверждены, полный перечень специальных исполнений ещё не проверен."
+    },
+    {
+      "years": [
+        2022,
+        2023
+      ],
+      "trim": "V8 Coupe / V8 Volante / V12 Coupe",
+      "fields": [
+        "exactIdentity",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Первичный релиз21.07.2021 подтверждает22MY V8 535PS и снятие AMRbadge сV12. Требуются годовые технические таблицы; APIруководств возвращает годы только17–21MY. Пустой ответ не означает отсутствие данных."
+    }
+  ],
+  "knownPrimaryLead": {
+    "url": "https://media.astonmartin.com/aston-martin-launches-new-online-configurator-and-reveals-22my-updates-offering-more-power-and-enhanced-choice/?lang=eng",
+    "effectiveAt": "2021-07-21",
+    "facts": "22MY V8 Coupe/Volante535PS; V12 dropsAMRbadge. Не применено к неоднозначным региональным строкам."
+  },
+  "rejectedSearchResults": [
+    {
+      "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10212204-0001.pdf",
+      "reason": "Выдача ошибочно названа DB11: документ DBX, не использовать для DB11."
+    },
+    {
+      "url": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10165855-9999.pdf",
+      "reason": "Документ Vantage, не DB11."
+    }
+  ]
+}
