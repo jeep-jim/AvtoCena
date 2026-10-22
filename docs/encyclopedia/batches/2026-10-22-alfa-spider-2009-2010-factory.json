@@ -1,0 +1,2475 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-spider-2009-2010-factory",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "c286e8684ed58c6ea44206e2",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2009,
+      "trim": "1750 TBi 200 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "1750 TBi 200 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1742,
+        "powerHp": 200,
+        "transmission": "manual",
+        "powerKw": 147,
+        "icePowerKw": 147
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точные исполнения подтверждены заводским прайсом20.10.2009, PDF29–33. PS/CV подтверждены заводским описанием гаммы07.04.2009, а не переименованием неоднозначного HP в греческой таблице. Новые1750/2.0 с ручной6MT подтверждены заводским швейцарским документом04.05.2009 (дата внутриPDF, несмотря на каталог2010 вURL). Коды двигателя и полная масса не перенесены из более позднего руководства. Привод оставлен пустым там, где таблица не различает его явно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; trim",
+            "pdfPage": 29,
+            "effectiveAt": "2009-10-20"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; bodyType",
+            "effectiveAt": "2009-04-07"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; fuel",
+            "effectiveAt": "2009-04-07"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; powertrainKind",
+            "effectiveAt": "2009-04-07"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; engineCc",
+            "pdfPage": 29,
+            "effectiveAt": "2009-10-20"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; powerHp",
+            "effectiveAt": "2009-04-07"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/ch/CH/2010/OTHERS/12E72A94-C29F-7F28-C7728D1064DB6A8F.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Spider1750Turbo200 и2.0JTDM170: оба с6-ступенчатой ручной коробкой",
+            "pdfPage": 2,
+            "effectiveAt": "2009-05-04"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-auf-dem-79-genfer-autosalon-weltpremiere-alfa-romeo-mito-als-240-ps-starkes-gta-concept-neuer-benziner-turbo-triebwerk-mit-benzin-direkteinspritzung-neuer-common-rail-diesel-fur-alfa-brera-alfa-spider-und-alfa-159",
+            "checkedAt": "2026-10-22",
+            "selector": "Серийный1750TurboBenzina200PS:147кВт; не240PS концептMiTo",
+            "effectiveAt": "2009-02-23"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-auf-dem-79-genfer-autosalon-weltpremiere-alfa-romeo-mito-als-240-ps-starkes-gta-concept-neuer-benziner-turbo-triebwerk-mit-benzin-direkteinspritzung-neuer-common-rail-diesel-fur-alfa-brera-alfa-spider-und-alfa-159",
+            "checkedAt": "2026-10-22",
+            "selector": "Серийный1750TurboBenzina200PS:147кВт; не240PS концептMiTo",
+            "effectiveAt": "2009-02-23"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "1d08402387f25139d5819568",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2009,
+      "trim": "2.2 JTS 185 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.2 JTS 185 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2198,
+        "powerHp": 185,
+        "transmission": "manual",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точные исполнения подтверждены заводским прайсом20.10.2009, PDF29–33. PS/CV подтверждены заводским описанием гаммы07.04.2009, а не переименованием неоднозначного HP в греческой таблице. Новые1750/2.0 с ручной6MT подтверждены заводским швейцарским документом04.05.2009 (дата внутриPDF, несмотря на каталог2010 вURL). Коды двигателя и полная масса не перенесены из более позднего руководства. Привод оставлен пустым там, где таблица не различает его явно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS 6MT; trim",
+            "pdfPage": 30,
+            "effectiveAt": "2009-10-20"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS 6MT; bodyType",
+            "effectiveAt": "2009-04-07"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS 6MT; fuel",
+            "effectiveAt": "2009-04-07"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS 6MT; powertrainKind",
+            "effectiveAt": "2009-04-07"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS 6MT; engineCc",
+            "pdfPage": 30,
+            "effectiveAt": "2009-10-20"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS 6MT; powerHp",
+            "effectiveAt": "2009-04-07"
+          },
+          "transmission": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 4x2 man, код177.AS1.1",
+            "pdfPage": 30,
+            "effectiveAt": "2009-10-20"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS 6MT; drive",
+            "pdfPage": 30,
+            "effectiveAt": "2009-10-20"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "8ca43d33858d73b23875c452",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2009,
+      "trim": "2.2 JTS 185 PS Selespeed",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.2 JTS 185 PS Selespeed",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2198,
+        "powerHp": 185,
+        "transmission": "amt",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точные исполнения подтверждены заводским прайсом20.10.2009, PDF29–33. PS/CV подтверждены заводским описанием гаммы07.04.2009, а не переименованием неоднозначного HP в греческой таблице. Новые1750/2.0 с ручной6MT подтверждены заводским швейцарским документом04.05.2009 (дата внутриPDF, несмотря на каталог2010 вURL). Коды двигателя и полная масса не перенесены из более позднего руководства. Привод оставлен пустым там, где таблица не различает его явно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; trim",
+            "pdfPage": 30,
+            "effectiveAt": "2009-10-20"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; bodyType",
+            "effectiveAt": "2009-04-07"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; fuel",
+            "effectiveAt": "2009-04-07"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; powertrainKind",
+            "effectiveAt": "2009-04-07"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; engineCc",
+            "pdfPage": 30,
+            "effectiveAt": "2009-10-20"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; powerHp",
+            "effectiveAt": "2009-04-07"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; transmission",
+            "effectiveAt": "2009-04-07"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; drive",
+            "pdfPage": 30,
+            "effectiveAt": "2009-10-20"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "4faf9d4ca9295ca62f6d19fc",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2009,
+      "trim": "3.2 JTS 260 PS 4x2 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "3.2 JTS 260 PS 4x2 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3195,
+        "powerHp": 260,
+        "transmission": "manual",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точные исполнения подтверждены заводским прайсом20.10.2009, PDF29–33. PS/CV подтверждены заводским описанием гаммы07.04.2009, а не переименованием неоднозначного HP в греческой таблице. Новые1750/2.0 с ручной6MT подтверждены заводским швейцарским документом04.05.2009 (дата внутриPDF, несмотря на каталог2010 вURL). Коды двигателя и полная масса не перенесены из более позднего руководства. Привод оставлен пустым там, где таблица не различает его явно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; trim",
+            "pdfPage": 31,
+            "effectiveAt": "2009-10-20"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; bodyType",
+            "effectiveAt": "2009-04-07"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; fuel",
+            "effectiveAt": "2009-04-07"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; powertrainKind",
+            "effectiveAt": "2009-04-07"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; engineCc",
+            "pdfPage": 31,
+            "effectiveAt": "2009-10-20"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; powerHp",
+            "effectiveAt": "2009-04-07"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; transmission",
+            "effectiveAt": "2009-04-07"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; drive",
+            "pdfPage": 31,
+            "effectiveAt": "2009-10-20"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "f45c0470d85c4df38664ae6d",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2009,
+      "trim": "3.2 JTS 260 PS Q4 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "3.2 JTS 260 PS Q4 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3195,
+        "powerHp": 260,
+        "transmission": "manual",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точные исполнения подтверждены заводским прайсом20.10.2009, PDF29–33. PS/CV подтверждены заводским описанием гаммы07.04.2009, а не переименованием неоднозначного HP в греческой таблице. Новые1750/2.0 с ручной6MT подтверждены заводским швейцарским документом04.05.2009 (дата внутриPDF, несмотря на каталог2010 вURL). Коды двигателя и полная масса не перенесены из более позднего руководства. Привод оставлен пустым там, где таблица не различает его явно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; trim",
+            "pdfPage": 31,
+            "effectiveAt": "2009-10-20"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; bodyType",
+            "effectiveAt": "2009-04-07"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; fuel",
+            "effectiveAt": "2009-04-07"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; powertrainKind",
+            "effectiveAt": "2009-04-07"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; engineCc",
+            "pdfPage": 31,
+            "effectiveAt": "2009-10-20"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; powerHp",
+            "effectiveAt": "2009-04-07"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; transmission",
+            "effectiveAt": "2009-04-07"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; drive",
+            "pdfPage": 31,
+            "effectiveAt": "2009-10-20"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "07a61c27aff23620bd85c9da",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2009,
+      "trim": "3.2 JTS 260 PS Q4 Q-Tronic",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "3.2 JTS 260 PS Q4 Q-Tronic",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3195,
+        "powerHp": 260,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точные исполнения подтверждены заводским прайсом20.10.2009, PDF29–33. PS/CV подтверждены заводским описанием гаммы07.04.2009, а не переименованием неоднозначного HP в греческой таблице. Новые1750/2.0 с ручной6MT подтверждены заводским швейцарским документом04.05.2009 (дата внутриPDF, несмотря на каталог2010 вURL). Коды двигателя и полная масса не перенесены из более позднего руководства. Привод оставлен пустым там, где таблица не различает его явно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 Q-Tronic; trim",
+            "pdfPage": 31,
+            "effectiveAt": "2009-10-20"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 Q-Tronic; bodyType",
+            "effectiveAt": "2009-04-07"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 Q-Tronic; fuel",
+            "effectiveAt": "2009-04-07"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 Q-Tronic; powertrainKind",
+            "effectiveAt": "2009-04-07"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 Q-Tronic; engineCc",
+            "pdfPage": 31,
+            "effectiveAt": "2009-10-20"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 Q-Tronic; powerHp",
+            "effectiveAt": "2009-04-07"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 Q-Tronic; transmission",
+            "effectiveAt": "2009-04-07"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 Q-Tronic; drive",
+            "pdfPage": 31,
+            "effectiveAt": "2009-10-20"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "87d2f2756de90305384a9e44",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2009,
+      "trim": "2.0 JTDM 170 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.0 JTDM 170 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 170,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точные исполнения подтверждены заводским прайсом20.10.2009, PDF29–33. PS/CV подтверждены заводским описанием гаммы07.04.2009, а не переименованием неоднозначного HP в греческой таблице. Новые1750/2.0 с ручной6MT подтверждены заводским швейцарским документом04.05.2009 (дата внутриPDF, несмотря на каталог2010 вURL). Коды двигателя и полная масса не перенесены из более позднего руководства. Привод оставлен пустым там, где таблица не различает его явно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; trim",
+            "pdfPage": 32,
+            "effectiveAt": "2009-10-20"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; bodyType",
+            "effectiveAt": "2009-04-07"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; fuel",
+            "effectiveAt": "2009-04-07"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; powertrainKind",
+            "effectiveAt": "2009-04-07"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; engineCc",
+            "pdfPage": 32,
+            "effectiveAt": "2009-10-20"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; powerHp",
+            "effectiveAt": "2009-04-07"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/ch/CH/2010/OTHERS/12E72A94-C29F-7F28-C7728D1064DB6A8F.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Spider1750Turbo200 и2.0JTDM170: оба с6-ступенчатой ручной коробкой",
+            "pdfPage": 2,
+            "effectiveAt": "2009-05-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "a63354e64ef369218a32b32f",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2009,
+      "trim": "2.4 JTDM 210 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.4 JTDM 210 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2387,
+        "powerHp": 210,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точные исполнения подтверждены заводским прайсом20.10.2009, PDF29–33. PS/CV подтверждены заводским описанием гаммы07.04.2009, а не переименованием неоднозначного HP в греческой таблице. Новые1750/2.0 с ручной6MT подтверждены заводским швейцарским документом04.05.2009 (дата внутриPDF, несмотря на каталог2010 вURL). Коды двигателя и полная масса не перенесены из более позднего руководства. Привод оставлен пустым там, где таблица не различает его явно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; trim",
+            "pdfPage": 33,
+            "effectiveAt": "2009-10-20"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; bodyType",
+            "effectiveAt": "2009-04-07"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; fuel",
+            "effectiveAt": "2009-04-07"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; powertrainKind",
+            "effectiveAt": "2009-04-07"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; engineCc",
+            "pdfPage": 33,
+            "effectiveAt": "2009-10-20"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; powerHp",
+            "effectiveAt": "2009-04-07"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; transmission",
+            "effectiveAt": "2009-04-07"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "f404d5d4d6376d5bbce3b7be",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2009,
+      "trim": "2.4 JTDM 200 PS Q-Tronic",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.4 JTDM 200 PS Q-Tronic",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2387,
+        "powerHp": 200,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точные исполнения подтверждены заводским прайсом20.10.2009, PDF29–33. PS/CV подтверждены заводским описанием гаммы07.04.2009, а не переименованием неоднозначного HP в греческой таблице. Новые1750/2.0 с ручной6MT подтверждены заводским швейцарским документом04.05.2009 (дата внутриPDF, несмотря на каталог2010 вURL). Коды двигателя и полная масса не перенесены из более позднего руководства. Привод оставлен пустым там, где таблица не различает его явно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; trim",
+            "pdfPage": 33,
+            "effectiveAt": "2009-10-20"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; bodyType",
+            "effectiveAt": "2009-04-07"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; fuel",
+            "effectiveAt": "2009-04-07"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; powertrainKind",
+            "effectiveAt": "2009-04-07"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2009/dogana_%20_2009.10.20%20.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; engineCc",
+            "pdfPage": 33,
+            "effectiveAt": "2009-10-20"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; powerHp",
+            "effectiveAt": "2009-04-07"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; transmission",
+            "effectiveAt": "2009-04-07"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "2e4d745d49d4e0c780bb562a",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "1750 TBi 200 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "1750 TBi 200 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1742,
+        "powerHp": 200,
+        "powerKw": 147,
+        "icePowerKw": 147,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939B1000",
+        "grossVehicleWeightKg": 1840,
+        "chassisCode": "939EXN1B 57"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; trim",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "bodyType": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; bodyType",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; powerHp",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; powerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; icePowerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; grossVehicleWeightKg",
+            "pdfPage": 243,
+            "effectiveAt": "2010-04"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT; chassisCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "bdd1a8a4e88f154c8f5cf5ec",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "2.0 JTDM 170 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.0 JTDM 170 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 170,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939B3000",
+        "grossVehicleWeightKg": 1890
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; trim",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "bodyType": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; bodyType",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; powerHp",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; powerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; icePowerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT; grossVehicleWeightKg",
+            "pdfPage": 243,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "6b58d69f1899df5909fa7931",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "2.0 JTDM 163 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.0 JTDM 163 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "844A2000",
+        "grossVehicleWeightKg": 1890
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; trim",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "bodyType": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; bodyType",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; powerHp",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; powerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; icePowerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 163 PS 6MT; grossVehicleWeightKg",
+            "pdfPage": 243,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "103c2c66d5b30702d5ddbdf2",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "3.2 JTS 260 PS 4x2 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "3.2 JTS 260 PS 4x2 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3195,
+        "powerHp": 260,
+        "powerKw": 191,
+        "icePowerKw": 191,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939A000",
+        "grossVehicleWeightKg": 1950
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; trim",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "bodyType": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; bodyType",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; powerHp",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; powerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; icePowerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; grossVehicleWeightKg",
+            "pdfPage": 243,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "263f8b9f09e5baa80696665b",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "3.2 JTS 260 PS Q4 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "3.2 JTS 260 PS Q4 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3195,
+        "powerHp": 260,
+        "powerKw": 191,
+        "icePowerKw": 191,
+        "drive": "awd",
+        "transmission": "manual",
+        "engineCode": "939A000",
+        "grossVehicleWeightKg": 2015,
+        "chassisCode": "939EXG2B 28"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; trim",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "bodyType": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; bodyType",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; powerHp",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; powerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; icePowerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; grossVehicleWeightKg",
+            "pdfPage": 243,
+            "effectiveAt": "2010-04"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT; chassisCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "0cfa5e0da93b9859509b24e9",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "2.4 JTDM 210 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.4 JTDM 210 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2387,
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939A9000",
+        "grossVehicleWeightKg": 1985
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; trim",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "bodyType": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; bodyType",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; powerHp",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; powerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; icePowerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT; grossVehicleWeightKg",
+            "pdfPage": 243,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "39be2252f3a08dd249faca60",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "2.2 JTS 185 PS Selespeed",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.2 JTS 185 PS Selespeed",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2198,
+        "powerHp": 185,
+        "powerKw": 136,
+        "icePowerKw": 136,
+        "transmission": "amt",
+        "engineCode": "939A5000"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; trim",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "bodyType": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; bodyType",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; powerHp",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; powerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS 185 PS Selespeed; icePowerKw",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2JTS: сноскаOnlySelespeedversions в таблице двигателей",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2JTS Selespeed:939A5000 в таблицеEngine",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "254445bc6871fda2cb86ea8e",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "1750 TBi 200 PS 6MT Italia Independent",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "1750 TBi 200 PS 6MT Italia Independent",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1742,
+        "powerHp": 200,
+        "powerKw": 147,
+        "icePowerKw": 147,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; trim",
+            "effectiveAt": "2010-03-17"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; bodyType",
+            "effectiveAt": "2010-03-17"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; powerHp",
+            "effectiveAt": "2010-03-17"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; powerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; icePowerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "1750 TBi 200 PS 6MT Italia Independent; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "f7abd0d6b3974a8f518bc926",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "2.0 JTDM 170 PS 6MT Italia Independent",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.0 JTDM 170 PS 6MT Italia Independent",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 170,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939B3000"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; trim",
+            "effectiveAt": "2010-03-17"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; bodyType",
+            "effectiveAt": "2010-03-17"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; powerHp",
+            "effectiveAt": "2010-03-17"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; powerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; icePowerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.0 JTDM 170 PS 6MT Italia Independent; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "9bf22b3e72556b32b688c240",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "3.2 JTS 260 PS 4x2 6MT Italia Independent",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "3.2 JTS 260 PS 4x2 6MT Italia Independent",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3195,
+        "powerHp": 260,
+        "powerKw": 191,
+        "icePowerKw": 191,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939A000"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; trim",
+            "effectiveAt": "2010-03-17"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; bodyType",
+            "effectiveAt": "2010-03-17"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; powerHp",
+            "effectiveAt": "2010-03-17"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; powerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; icePowerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS 4x2 6MT Italia Independent; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "786bdb118d931a559318068b",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "3.2 JTS 260 PS Q4 6MT Italia Independent",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "3.2 JTS 260 PS Q4 6MT Italia Independent",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3195,
+        "powerHp": 260,
+        "powerKw": 191,
+        "icePowerKw": 191,
+        "drive": "awd",
+        "transmission": "manual",
+        "engineCode": "939A000"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; trim",
+            "effectiveAt": "2010-03-17"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; bodyType",
+            "effectiveAt": "2010-03-17"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; powerHp",
+            "effectiveAt": "2010-03-17"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; powerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; icePowerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "3.2 JTS 260 PS Q4 6MT Italia Independent; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "2d2cf630403d1e28719ea1d2",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "2.4 JTDM 210 PS 6MT Italia Independent",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.4 JTDM 210 PS 6MT Italia Independent",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2387,
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939A9000"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской оригинал Spider60438112,2-я редакция04/2010: PDF232–234,243. Двигатели,объёмы,кВт,PS(EEC),коды,привод и ручная6MT прочитаны по точным колонкам Spider, не Brera.2.0JTDM163PS — отдельное заводское исполнение для определённых рынков; код844A2000 не смешан с170PS/939B3000. Полная допустимая масса взята только для базовых ручных версий, не из снаряжённой массы. Для ItaliaIndependent применение двигателя подтверждено анонсом17.03.2010;2.2 для этой серии относится только кBrera и не создан.30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; trim",
+            "effectiveAt": "2010-03-17"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; bodyType",
+            "effectiveAt": "2010-03-17"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; fuel",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; powertrainKind",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; engineCc",
+            "pdfPage": 233,
+            "effectiveAt": "2010-04"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; powerHp",
+            "effectiveAt": "2010-03-17"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; powerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; icePowerKw",
+            "effectiveAt": "2010-03-17"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; drive",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; transmission",
+            "pdfPage": 234,
+            "effectiveAt": "2010-04"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS/83_177_BRERASPIDER_604.38.112_EN_02_04.10_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 210 PS 6MT Italia Independent; engineCode",
+            "pdfPage": 232,
+            "effectiveAt": "2010-04"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "5a9fa4a15e349dd1ad7030be",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "2.4 JTDM 200 PS Q-Tronic",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.4 JTDM 200 PS Q-Tronic",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 200,
+        "powerKw": 147,
+        "icePowerKw": 147,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+        "checkedAt": "2026-10-22",
+        "statement": "Точная заводская пара Q-Tronic147кВт/200PS подтверждена26.07.2010; не154кВт/210PS ручной версии. ItaliaIndependent Q-Tronic подтверждена17.03.2010. Код двигателя,объём,привод и полная масса оставлены для отдельного документа2010: из колонки ручной210PS не скопированы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; trim",
+            "effectiveAt": "2010-07-26"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; bodyType",
+            "effectiveAt": "2010-07-26"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; fuel",
+            "effectiveAt": "2010-07-26"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; powertrainKind",
+            "effectiveAt": "2010-07-26"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; powerHp",
+            "effectiveAt": "2010-07-26"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; powerKw",
+            "effectiveAt": "2010-07-26"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; icePowerKw",
+            "effectiveAt": "2010-07-26"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; transmission",
+            "effectiveAt": "2010-07-26"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "9bb8186a00761eda75e5542c",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2010,
+      "trim": "2.4 JTDM 200 PS Q-Tronic Italia Independent",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "8307e34c-2e74-4d0c-9fd4-05d3aee0f2b8",
+      "patch": {
+        "trim": "2.4 JTDM 200 PS Q-Tronic Italia Independent",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 200,
+        "powerKw": 147,
+        "icePowerKw": 147,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+        "checkedAt": "2026-10-22",
+        "statement": "Точная заводская пара Q-Tronic147кВт/200PS подтверждена26.07.2010; не154кВт/210PS ручной версии. ItaliaIndependent Q-Tronic подтверждена17.03.2010. Код двигателя,объём,привод и полная масса оставлены для отдельного документа2010: из колонки ручной210PS не скопированы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic Italia Independent; trim",
+            "effectiveAt": "2010-03-17"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic Italia Independent; bodyType",
+            "effectiveAt": "2010-03-17"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic Italia Independent; fuel",
+            "effectiveAt": "2010-07-26"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic Italia Independent; powertrainKind",
+            "effectiveAt": "2010-07-26"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic Italia Independent; powerHp",
+            "effectiveAt": "2010-07-26"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic Italia Independent; powerKw",
+            "effectiveAt": "2010-07-26"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/selbstzundende-idee-alfa-romeo-hat-den-diesel-sportwagen-erfunden",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic Italia Independent; icePowerKw",
+            "effectiveAt": "2010-07-26"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-brera-und-alfa-romeo-spider-sonderserie-italia-independent-jetzt-im-handel",
+            "checkedAt": "2026-10-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic Italia Independent; transmission",
+            "effectiveAt": "2010-03-17"
+          }
+        }
+      }
+    }
+  ]
+}
