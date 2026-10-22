@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aiways-u5-manual-years",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "af6a7cd1cd960b737b731ce2",
+      "variantId": "008689f61d82230a241fd707",
+      "make": "Aiways",
+      "model": "U5",
+      "year": 2019,
+      "trim": "Standard",
+      "expectedRevision": "8794832e-f224-4ad2-9880-be9b083b50c6",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Standard",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 63,
+        "grossVehicleWeightKg": 2135
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "a722b8ffe5c93991b9e64bbe39bd4401b4bb143d364ed6d23872902442cb2408",
+        "pages": [
+          213,
+          214,
+          215
+        ],
+        "statement": "Руководство Aiways U5, PDF-страницы 213–215 (печатные 203–205): Model Year 19_Standard, полная масса 2135 кг, батарея 63 кВт·ч. Год назван явно в заводской таблице. На странице моторов первая колонка Standard имеет противоречивую подпись года; мощности Standard не выбраны. Для Premium однозначно указаны передний привод и пиковые 150 кВт; номинальные 60 кВт не выданы за 30-минутные. Наблюдения без комплектации не объединены с новыми точными версиями.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 213,
+            "selector": "Model Year 19_Standard"
+          },
+          "fuel": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 214,
+            "selector": "Model Year 19_Standard"
+          },
+          "powertrainKind": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 214,
+            "selector": "Model Year 19_Standard"
+          },
+          "batteryKwh": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 214,
+            "selector": "Model Year 19_Standard"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 213,
+            "selector": "Model Year 19_Standard"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "af6a7cd1cd960b737b731ce2",
+      "variantId": "b9abe8eb1a372be51abf8d2c",
+      "make": "Aiways",
+      "model": "U5",
+      "year": 2021,
+      "trim": "Standard",
+      "expectedRevision": "8794832e-f224-4ad2-9880-be9b083b50c6",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Standard",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 63,
+        "grossVehicleWeightKg": 2155,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "a722b8ffe5c93991b9e64bbe39bd4401b4bb143d364ed6d23872902442cb2408",
+        "pages": [
+          213,
+          214,
+          215
+        ],
+        "statement": "Руководство Aiways U5, PDF-страницы 213–215 (печатные 203–205): Model Year 21_Standard, полная масса 2155 кг, батарея 63 кВт·ч. Год назван явно в заводской таблице. На странице моторов первая колонка Standard имеет противоречивую подпись года; мощности Standard не выбраны. Для Premium однозначно указаны передний привод и пиковые 150 кВт; номинальные 60 кВт не выданы за 30-минутные. Наблюдения без комплектации не объединены с новыми точными версиями.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 213,
+            "selector": "Model Year 21_Standard"
+          },
+          "fuel": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 214,
+            "selector": "Model Year 21_Standard"
+          },
+          "powertrainKind": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 214,
+            "selector": "Model Year 21_Standard"
+          },
+          "batteryKwh": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 214,
+            "selector": "Model Year 21_Standard"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 213,
+            "selector": "Model Year 21_Standard"
+          },
+          "drive": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 215,
+            "selector": "Model Year 21_Standard"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "af6a7cd1cd960b737b731ce2",
+      "variantId": "db0d1e5dfb92135d4f882e07",
+      "make": "Aiways",
+      "model": "U5",
+      "year": 2021,
+      "trim": "Premium",
+      "expectedRevision": "8794832e-f224-4ad2-9880-be9b083b50c6",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Premium",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 63,
+        "grossVehicleWeightKg": 2155,
+        "drive": "fwd",
+        "motorPeakKw": 150
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "grossVehicleWeightKg",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "a722b8ffe5c93991b9e64bbe39bd4401b4bb143d364ed6d23872902442cb2408",
+        "pages": [
+          213,
+          214,
+          215
+        ],
+        "statement": "Руководство Aiways U5, PDF-страницы 213–215 (печатные 203–205): Model Year 21_Premium, полная масса 2155 кг, батарея 63 кВт·ч. Год назван явно в заводской таблице. На странице моторов первая колонка Standard имеет противоречивую подпись года; мощности Standard не выбраны. Для Premium однозначно указаны передний привод и пиковые 150 кВт; номинальные 60 кВт не выданы за 30-минутные. Наблюдения без комплектации не объединены с новыми точными версиями.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 213,
+            "selector": "Model Year 21_Premium"
+          },
+          "fuel": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 214,
+            "selector": "Model Year 21_Premium"
+          },
+          "powertrainKind": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 214,
+            "selector": "Model Year 21_Premium"
+          },
+          "batteryKwh": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 214,
+            "selector": "Model Year 21_Premium"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 213,
+            "selector": "Model Year 21_Premium"
+          },
+          "drive": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 215,
+            "selector": "Model Year 21_Premium"
+          },
+          "motorPeakKw": {
+            "url": "https://ai-ways.eu/wp-content/uploads/2025/04/8611_OM_EU_2023.2.16-1.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 215,
+            "selector": "Model Year 21_Premium"
+          }
+        }
+      }
+    }
+  ]
+}

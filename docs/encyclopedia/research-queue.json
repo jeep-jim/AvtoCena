@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T11:49:16.111336+07:00",
+  "updatedAt": "2026-10-22T11:51:49.367262+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -357,9 +357,21 @@
       "status": "partial_verified_fields",
       "researchedVariants": 28,
       "retryFile": "docs/encyclopedia/retry-2026-10-22.json",
-      "nextAction": "После M8: свежий API/CAS, партия 30/45 M9; четыре ошибочные наблюдаемые массы 1500 кг у EV 2025 заменить подтверждёнными 3130 кг. Затем Aiways U5. Остальные 49 строк и поля — retry.",
-      "lastReviewedAt": "2026-10-22T11:43:48.686808+07:00",
-      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m9-generation-fields-plan.json"
+      "nextAction": "Последняя партия сохранена и независимо прочитана; не повторять её. Продолжать ещё не применённые партии из activePriority, затем оставшиеся поля и историческое расширение из retryPlan.",
+      "lastReviewedAt": "2026-10-22T11:51:01.373442+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m9-generation-fields-readback.json",
+      "appliedResearchBatches": [
+        {
+          "batch": "research-2026-10-22-aito-m9-generation-fields",
+          "commit": "1a59a76ad9f152993504af450f2b086e6327decb",
+          "workflow": 39724528014,
+          "variants": 30,
+          "fields": 45,
+          "apiReadback": true,
+          "includedInIndex": false
+        }
+      ],
+      "retryPlan": "docs/encyclopedia/reports/2026-10-22-aito-m9-generation-fields-plan.json"
     },
     {
       "id": "af6a7cd1cd960b737b731ce2",
@@ -32488,12 +32500,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T11:49:16.111336+07:00",
+    "updatedAt": "2026-10-22T11:51:49.367262+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "index_release_running_research_continuing",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "AITO M9",
+    "nextModel": "Aiways U5",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32569,6 +32581,15 @@
         "fields": 49,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "aito-m9-generation-fields": {
+        "batch": "research-2026-10-22-aito-m9-generation-fields",
+        "commit": "1a59a76ad9f152993504af450f2b086e6327decb",
+        "workflow": 39724528014,
+        "variants": 30,
+        "fields": 45,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32586,22 +32607,14 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "inFlightResearch": {
-      "state": "apply_requested",
-      "batch": "docs/encyclopedia/batches/2026-10-22-aito-m9-generation-fields.json",
-      "variants": 30,
-      "fields": 45,
-      "digest": "566d011c91155b68acc6fcf30e7542b4447de9e9de56ca5f646d36005afa295d",
-      "preflightPassed": true
-    },
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-aito-m8-gross-mass",
-      "commit": "d15cdf5d62572f29560cb05098a4eb4dd5be2ada",
-      "workflow": 39724407767,
-      "variants": 49,
-      "fields": 49,
+      "batch": "research-2026-10-22-aito-m9-generation-fields",
+      "commit": "1a59a76ad9f152993504af450f2b086e6327decb",
+      "workflow": 39724528014,
+      "variants": 30,
+      "fields": 45,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32669,8 +32682,25 @@
         "fields": 49,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-aito-m9-generation-fields",
+        "commit": "1a59a76ad9f152993504af450f2b086e6327decb",
+        "workflow": 39724528014,
+        "variants": 30,
+        "fields": 45,
+        "apiReadback": true,
+        "includedInIndex": false
       }
-    ]
+    ],
+    "inFlightResearch": {
+      "state": "apply_requested",
+      "batch": "docs/encyclopedia/batches/2026-10-22-aiways-u5-manual-years.json",
+      "variants": 3,
+      "fields": 18,
+      "digest": "07a6aeb837d062791fd0ddda22a04046edc2601dc241e2dfbde87f184573fce0",
+      "preflightPassed": true
+    }
   },
   "scope": {
     "minimumYear": 2008,

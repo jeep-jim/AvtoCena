@@ -1,0 +1,433 @@
+{
+  "checkedAt": "2026-10-22T04:50:49.225Z",
+  "batch": "research-2026-10-22-aito-m9-generation-fields",
+  "commit": "1a59a76ad9f152993504af450f2b086e6327decb",
+  "workflow": 39724528014,
+  "job": 119645305966,
+  "conclusion": "success",
+  "guards": {
+    "tests": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "runs": [
+    {
+      "batch": "research-2026-10-22-aito-m9-generation-fields",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "06aa61c491bf051c20b852b8",
+          "changes": [
+            {
+              "variantId": "19ce2b0211c3bd3bca6512e1",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "cf1ac4fa2fdac9d45ac59848",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "63e5c07ca8f3a79820520774",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "e7093ec601cf7d0f764ff08f",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "2bd1bb216a1009cab3c1f8df",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "4a2f0bffea5b329b80aa700b",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "653fce9f051facf93fe3432e",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "fee0be61de712e2d67a7e4c7",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "d3467053f8d988d481646311",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "159c2fcb21ce3dc374e35447",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "bea695aba078d9ef6cbbb463",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "752b9e7c1ff6394b12b28ddc",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "26497d10c191ede237b03466",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "613a57415f567ab6890695e2",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "aefce3c9c96778cd5697962d",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "e010789ca87cc2bad3a3de9f",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "6a51b60438b800fc8453336a",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "a3538ffb4b96216512d7ddd6",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "6e291b629236ae5a13f48965",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "c41eff325dd0c5074f119635",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "d744f936b8db2e2d17f50d70",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "f374886ae1a35c9d9266dc82",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "ef382f4d45827c3bb0bc067d",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "47c51c84b5147e3ab691deb9",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "5c7ae5a37f04251702103fe5",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "a0e4a5baf85b2dbf7c2a3f7b",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "9a14ebd0c770550ad1b4eeed",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "77c649cda7da7ee27905a29c",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "3ac01e719c8263a071924864",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "f719b6bcfcc171cf2971e787",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:50:16.049Z",
+      "finishedAt": "2026-10-22T04:50:19.529Z"
+    },
+    {
+      "batch": "research-2026-10-22-aito-m9-generation-fields",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "06aa61c491bf051c20b852b8",
+          "changes": [
+            {
+              "variantId": "19ce2b0211c3bd3bca6512e1",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "cf1ac4fa2fdac9d45ac59848",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "63e5c07ca8f3a79820520774",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "e7093ec601cf7d0f764ff08f",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "2bd1bb216a1009cab3c1f8df",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "4a2f0bffea5b329b80aa700b",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "653fce9f051facf93fe3432e",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "fee0be61de712e2d67a7e4c7",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "d3467053f8d988d481646311",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "159c2fcb21ce3dc374e35447",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "bea695aba078d9ef6cbbb463",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "752b9e7c1ff6394b12b28ddc",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "26497d10c191ede237b03466",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "613a57415f567ab6890695e2",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "aefce3c9c96778cd5697962d",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "e010789ca87cc2bad3a3de9f",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "6a51b60438b800fc8453336a",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "a3538ffb4b96216512d7ddd6",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "6e291b629236ae5a13f48965",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "c41eff325dd0c5074f119635",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "d744f936b8db2e2d17f50d70",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "f374886ae1a35c9d9266dc82",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "ef382f4d45827c3bb0bc067d",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "47c51c84b5147e3ab691deb9",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "5c7ae5a37f04251702103fe5",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "a0e4a5baf85b2dbf7c2a3f7b",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "9a14ebd0c770550ad1b4eeed",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "77c649cda7da7ee27905a29c",
+              "fields": [
+                "engineCc",
+                "engineCode"
+              ]
+            },
+            {
+              "variantId": "3ac01e719c8263a071924864",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "f719b6bcfcc171cf2971e787",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:50:19.773Z",
+      "finishedAt": "2026-10-22T04:50:26.539Z"
+    }
+  ]
+}
