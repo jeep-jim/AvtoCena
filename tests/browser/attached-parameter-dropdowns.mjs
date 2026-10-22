@@ -145,8 +145,12 @@ try{
         const a=await slot.boundingBox(),d=await page.locator('[data-city-delivery]').boundingBox();
         assert.ok(a.y+a.height<=d.y,'the mobile contact slot precedes delivery even while its button is fixed');
         if(await slot.getAttribute('data-stuck')==='true'){
-          const button=await action.boundingBox(),header=await page.locator('.ac-public-header').boundingBox();
-          assert.ok(Math.abs(button.y-Math.max(0,header.y+header.height)-8)<2,'fixed contact stays below the header');
+          const button=await action.boundingBox(),headerElement=page.locator('.ac-public-header'),header=await headerElement.boundingBox();
+          const inHeader=await slot.getAttribute('data-in-header')==='true';
+          assert.equal(inHeader,width<768,'small screens use the existing header contact mode');
+          const expectedTop=Math.max(0,inHeader?header.y:header.y+header.height)+8;
+          assert.ok(Math.abs(button.y-expectedTop)<2,`fixed contact follows its header mode ${JSON.stringify({width,inHeader,button,header,expectedTop})}`);
+          if(inHeader){assert.equal(await headerElement.evaluate(el=>el.inert),true,'covered header cannot receive clicks');assert.ok(await page.getByRole('button',{name:'Закрыть панель заявки и показать шапку',exact:true}).isVisible());}
         }
       }
       const crumbs=await page.getByRole('navigation',{name:'Хлебные крошки'}).textContent();
