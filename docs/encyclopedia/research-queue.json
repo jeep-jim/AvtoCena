@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T10:43:02+07:00",
+  "updatedAt": "2026-10-22T11:07:44.812876+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -185,7 +185,11 @@
         2024
       ],
       "variants": 14,
-      "status": "partial_applied"
+      "status": "partial_applied",
+      "lastReviewedAt": "2026-10-22T11:06:25.536200+07:00",
+      "lastBatch": "research-2026-10-22-aion-i60-field-provenance",
+      "lastReadback": "docs/encyclopedia/reports/2026-10-22-aion-i60-field-provenance-readback.json",
+      "retryFile": "docs/encyclopedia/reports/2026-10-22-aion-i60-field-provenance-plan.json"
     },
     {
       "id": "a633261363cf1e8d1dd97f17",
@@ -210,7 +214,9 @@
         2025
       ],
       "variants": 17,
-      "status": "historical_source_needed"
+      "status": "historical_source_needed",
+      "lastReviewedAt": "2026-10-22T11:07:44.812876+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aion-ut-europe-exact-plan.json"
     },
     {
       "id": "cfb5857e13b7258b88b369f4",
@@ -32409,12 +32415,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T10:43:02+07:00",
+    "updatedAt": "2026-10-22T11:07:44.812876+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "research_saved_index_installed_next_batch_prepared",
+    "state": "research_saved_index_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "AION i60",
+    "nextModel": "AION UT",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32435,6 +32441,11 @@
         "variants": 32,
         "fields": 301,
         "workflow": 39716530594
+      },
+      "aionI60": {
+        "variants": 8,
+        "fields": 51,
+        "workflow": 39720346067
       }
     },
     "rawAuditCalculated": 75,
@@ -32453,26 +32464,25 @@
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
     "inFlightResearch": {
-      "state": "prepared_not_applied",
-      "batch": "docs/encyclopedia/batches/2026-10-22-aion-i60-field-provenance.json",
-      "variants": 8,
-      "fields": 51,
-      "digest": "45c8946796e4617b3c5d4c9701eff56179936a1137a181322e7c6d1d14f1f62d",
-      "dependsOnReleaseWorkflow": 39716807213,
-      "requiresFreshApiCas": true,
-      "dependencyReleaseStatus": "success"
+      "state": "apply_requested",
+      "batch": "docs/encyclopedia/batches/2026-10-22-aion-ut-europe-exact.json",
+      "variants": 2,
+      "fields": 17,
+      "newVariants": 1,
+      "digest": "3edbe537c436454a8fca5ff3d1c9d18d83763a1d552ddfb4e87a8fe3288ea96d",
+      "requiresFreshApiCas": false
     },
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-historical-and-alphabetic-pass",
-      "commit": "fab0c97275e7657ae7a6908966eba90f3104700a",
-      "workflow": 39716530594,
-      "variants": 32,
-      "fields": 301,
+      "batch": "research-2026-10-22-aion-i60-field-provenance",
+      "commit": "c6db2694d4c0cf9749df69219d82a23bcc4b95f4",
+      "workflow": 39720346067,
+      "variants": 8,
+      "fields": 51,
       "apiReadback": true,
-      "newVariants": 26,
-      "includedInIndex": "7d4d2834a0f1a9832927b96b736928799ce3d8c3495ca6fcc3ce2bf32befc508"
+      "newVariants": 0,
+      "includedInIndex": false
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792548716303_1c83fca2"

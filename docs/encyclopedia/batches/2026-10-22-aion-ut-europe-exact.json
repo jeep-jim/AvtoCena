@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aion-ut-europe-exact",
+  "entries": [
+    {
+      "modelId": "d2045d3d36b1b4e4e1130acf",
+      "variantId": "c959b64e2b9527a0b181c839",
+      "make": "AION",
+      "model": "UT",
+      "year": 2026,
+      "trim": "EV 60kWh Luxury",
+      "expectedDigest": "b18df159de59cb986ed5fc78b10b9807cf8f86fcf78042a192372fa94ddf17c1",
+      "patch": {
+        "bodyType": "hatchback",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "transmission": "automatic",
+        "drive": "fwd",
+        "motorPeakKw": 150,
+        "batteryKwh": 62,
+        "grossVehicleWeightKg": 2110
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская европейская таблица, исполнение Luxury: электромобиль, хэтчбек, передний привод, одноступенчатая автоматическая трансмиссия, пиковая мощность 150 кВт, полная масса 2110 кг. Полная ёмкость батареи 62 кВт·ч; полезная 60 кВт·ч сохранена в названии исполнения. Выпуск европейского UT с марта 2026 года подтверждён заводским сообщением от 08.04.2026; число 2024 в URL таблицы не принято за модельный год. Китайские 330/420/530 и их батареи не сопоставлялись с этой версией. Документированной 30-минутной мощности нет.",
+        "supportingUrls": [
+          "https://www.gacgroup.com/en-eu/news/article/gac-to-host-european-premiere-of-the-aion-ut-in-milan-82",
+          "https://www.gacgroup.com/fr-fr/configuration/aion-ut/2025"
+        ],
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.gacgroup.com/en-eu/news/article/gac-to-host-european-premiere-of-the-aion-ut-in-milan-82",
+            "checkedAt": "2026-10-22",
+            "selector": "Luxury"
+          },
+          "fuel": {
+            "url": "https://www.gacgroup.com/en-eu/news/article/gac-to-host-european-premiere-of-the-aion-ut-in-milan-82",
+            "checkedAt": "2026-10-22",
+            "selector": "Luxury"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacgroup.com/en-eu/news/article/gac-to-host-european-premiere-of-the-aion-ut-in-milan-82",
+            "checkedAt": "2026-10-22",
+            "selector": "Luxury"
+          },
+          "transmission": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Luxury"
+          },
+          "drive": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Luxury"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Luxury"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Luxury"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Luxury"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d2045d3d36b1b4e4e1130acf",
+      "variantId": "a2d347ec5139c3529e9552f8",
+      "make": "AION",
+      "model": "UT",
+      "year": 2026,
+      "trim": "EV 60kWh Premium",
+      "expectedRevision": "2a6138bd-25c1-4192-af73-426c576c5e7d",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "EV 60kWh Premium",
+        "bodyType": "hatchback",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "transmission": "automatic",
+        "drive": "fwd",
+        "motorPeakKw": 150,
+        "batteryKwh": 62,
+        "grossVehicleWeightKg": 2110
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская европейская таблица, исполнение Premium: электромобиль, хэтчбек, передний привод, одноступенчатая автоматическая трансмиссия, пиковая мощность 150 кВт, полная масса 2110 кг. Полная ёмкость батареи 62 кВт·ч; полезная 60 кВт·ч сохранена в названии исполнения. Выпуск европейского UT с марта 2026 года подтверждён заводским сообщением от 08.04.2026; число 2024 в URL таблицы не принято за модельный год. Китайские 330/420/530 и их батареи не сопоставлялись с этой версией. Документированной 30-минутной мощности нет.",
+        "supportingUrls": [
+          "https://www.gacgroup.com/en-eu/news/article/gac-to-host-european-premiere-of-the-aion-ut-in-milan-82",
+          "https://www.gacgroup.com/fr-fr/configuration/aion-ut/2025"
+        ],
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Premium"
+          },
+          "bodyType": {
+            "url": "https://www.gacgroup.com/en-eu/news/article/gac-to-host-european-premiere-of-the-aion-ut-in-milan-82",
+            "checkedAt": "2026-10-22",
+            "selector": "Premium"
+          },
+          "fuel": {
+            "url": "https://www.gacgroup.com/en-eu/news/article/gac-to-host-european-premiere-of-the-aion-ut-in-milan-82",
+            "checkedAt": "2026-10-22",
+            "selector": "Premium"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacgroup.com/en-eu/news/article/gac-to-host-european-premiere-of-the-aion-ut-in-milan-82",
+            "checkedAt": "2026-10-22",
+            "selector": "Premium"
+          },
+          "transmission": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Premium"
+          },
+          "drive": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Premium"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Premium"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Premium"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.gacgroup.com/en-eu/configuration/AION%20UT/2024",
+            "checkedAt": "2026-10-22",
+            "selector": "Premium"
+          }
+        }
+      }
+    }
+  ]
+}

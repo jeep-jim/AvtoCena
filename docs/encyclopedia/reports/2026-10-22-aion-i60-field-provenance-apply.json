@@ -1,0 +1,219 @@
+{
+  "workflow": 39720346067,
+  "job": 119632123809,
+  "commit": "c6db2694d4c0cf9749df69219d82a23bcc4b95f4",
+  "conclusion": "success",
+  "testsPassed": 8,
+  "reports": [
+    {
+      "batch": "research-2026-10-22-aion-i60-field-provenance",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "fe5a07120ce3847255f59ed3",
+          "changes": [
+            {
+              "variantId": "0e83ce22f70dcc32dfd6e0f9",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "064ae75338b1c3b86c97a081",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "d58c5b85759b87c67cbef0fc",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "0c211bda85459790af0e9517",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "f21f01158ff7a449e24cb0e9",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "b01a1f0d074fc3f619f22c17",
+              "fields": [
+                "trim",
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "d5ce72c02467858dd751a399",
+              "fields": [
+                "trim",
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "ecf04de90fda2abaf7cde036",
+              "fields": [
+                "trim",
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:05:16.287Z",
+      "finishedAt": "2026-10-22T04:05:18.801Z"
+    },
+    {
+      "batch": "research-2026-10-22-aion-i60-field-provenance",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "fe5a07120ce3847255f59ed3",
+          "changes": [
+            {
+              "variantId": "0e83ce22f70dcc32dfd6e0f9",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "064ae75338b1c3b86c97a081",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "d58c5b85759b87c67cbef0fc",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "0c211bda85459790af0e9517",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "f21f01158ff7a449e24cb0e9",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "b01a1f0d074fc3f619f22c17",
+              "fields": [
+                "trim",
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "d5ce72c02467858dd751a399",
+              "fields": [
+                "trim",
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            },
+            {
+              "variantId": "ecf04de90fda2abaf7cde036",
+              "fields": [
+                "trim",
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:05:18.962Z",
+      "finishedAt": "2026-10-22T04:05:34.139Z"
+    }
+  ]
+}
