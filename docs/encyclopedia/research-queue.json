@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T15:39:36.713910+07:00",
+  "updatedAt": "2026-10-22T16:02:54.958860+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -33017,7 +33017,12 @@
         "includedInIndex": false
       }
     ],
-    "inFlightResearch": null,
+    "inFlightResearch": {
+      "batch": "research-2026-10-22-alfa-junior-2024-2025-september",
+      "variants": 11,
+      "fields": 98,
+      "state": "prepared_not_applied"
+    },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-giulietta-junior-pass.json",
       "variants": 109,

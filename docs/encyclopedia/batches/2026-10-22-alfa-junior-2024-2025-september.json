@@ -1,0 +1,1309 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-junior-2024-2025-september",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "58645f264bd08a007a4d9a6f",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2024,
+      "trim": "1.2 Ibrida 136 PS eDCT6",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.2 Ibrida 136 PS eDCT6",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "engineCode": "EB2LTDH2",
+        "batteryKwh": 0.89,
+        "transmission": "dct",
+        "grossVehicleWeightKg": 1790
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "engineCode",
+        "batteryKwh",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение и год подтверждены заводским каталогом декабря2024 и журналом начала заказов. ДВС1199см³/100кВт и код двигателя — руководство06.2024; полная масса — GVW, не снаряжённая. Для Veloce280 ранние данные240PS не используются. Электрическая мощность пиковая, не30-минутная. Исходные безымянные наблюдения не изменены.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "626.E23.0; 1.2 Ibrida 136 PS eDCT6; год подтверждён журналом начала заказов",
+            "yearEvidence": {
+              "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+              "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+              "publishedAt": "2025-09-19",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 12,
+              "selector": "626.E23.0; начало заказов в2024"
+            }
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/nl-nl/alfa-romeo/press/alfa-romeo-junior-ibrida-nu-te-bestellen",
+            "publishedAt": "2024-08-22",
+            "checkedAt": "2026-10-22",
+            "selector": "Ibrida / Ibrida Speciale; mild hybrid"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/nl-nl/alfa-romeo/press/alfa-romeo-junior-ibrida-nu-te-bestellen",
+            "publishedAt": "2024-08-22",
+            "checkedAt": "2026-10-22",
+            "selector": "Ibrida / Ibrida Speciale; mild hybrid"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 22,
+            "selector": "626.E23.0; 1.2 Ibrida 136 PS eDCT6; engineCc"
+          },
+          "icePowerKw": {
+            "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+            "documentSha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+            "documentRevision": "530.05.129 EN 01 06 24",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 266,
+            "selector": "Ibrida136hp; ДВС100кВт"
+          },
+          "engineCode": {
+            "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+            "documentSha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+            "documentRevision": "530.05.129 EN 01 06 24",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 266,
+            "selector": "Ibrida136hp; EB2LTDH2"
+          },
+          "batteryKwh": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 22,
+            "selector": "626.E23.0; 1.2 Ibrida 136 PS eDCT6; batteryKwh"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/nl-nl/alfa-romeo/press/alfa-romeo-junior-ibrida-nu-te-bestellen",
+            "publishedAt": "2024-08-22",
+            "checkedAt": "2026-10-22",
+            "selector": "Ibrida / Speciale; eDCT6"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+            "documentSha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+            "documentRevision": "530.05.129 EN 01 06 24",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 277,
+            "selector": "Ibrida136hp; GVW1790"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "ea675e6b95040cf3389c4786",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2024,
+      "trim": "1.2 Ibrida 136 PS eDCT6 Speciale",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.2 Ibrida 136 PS eDCT6 Speciale",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "engineCode": "EB2LTDH2",
+        "batteryKwh": 0.89,
+        "transmission": "dct",
+        "grossVehicleWeightKg": 1790
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "engineCode",
+        "batteryKwh",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение и год подтверждены заводским каталогом декабря2024 и журналом начала заказов. ДВС1199см³/100кВт и код двигателя — руководство06.2024; полная масса — GVW, не снаряжённая. Для Veloce280 ранние данные240PS не используются. Электрическая мощность пиковая, не30-минутная. Исходные безымянные наблюдения не изменены.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "626.L23.0; 1.2 Ibrida 136 PS eDCT6 Speciale; год подтверждён журналом начала заказов",
+            "yearEvidence": {
+              "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+              "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+              "publishedAt": "2025-09-19",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 12,
+              "selector": "626.L23.0; начало заказов в2024"
+            }
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/nl-nl/alfa-romeo/press/alfa-romeo-junior-ibrida-nu-te-bestellen",
+            "publishedAt": "2024-08-22",
+            "checkedAt": "2026-10-22",
+            "selector": "Ibrida / Ibrida Speciale; mild hybrid"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/nl-nl/alfa-romeo/press/alfa-romeo-junior-ibrida-nu-te-bestellen",
+            "publishedAt": "2024-08-22",
+            "checkedAt": "2026-10-22",
+            "selector": "Ibrida / Ibrida Speciale; mild hybrid"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 22,
+            "selector": "626.L23.0; 1.2 Ibrida 136 PS eDCT6 Speciale; engineCc"
+          },
+          "icePowerKw": {
+            "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+            "documentSha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+            "documentRevision": "530.05.129 EN 01 06 24",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 266,
+            "selector": "Ibrida136hp; ДВС100кВт"
+          },
+          "engineCode": {
+            "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+            "documentSha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+            "documentRevision": "530.05.129 EN 01 06 24",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 266,
+            "selector": "Ibrida136hp; EB2LTDH2"
+          },
+          "batteryKwh": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 22,
+            "selector": "626.L23.0; 1.2 Ibrida 136 PS eDCT6 Speciale; batteryKwh"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/nl-nl/alfa-romeo/press/alfa-romeo-junior-ibrida-nu-te-bestellen",
+            "publishedAt": "2024-08-22",
+            "checkedAt": "2026-10-22",
+            "selector": "Ibrida / Speciale; eDCT6"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+            "documentSha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+            "documentRevision": "530.05.129 EN 01 06 24",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 277,
+            "selector": "Ibrida136hp; GVW1790"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "a57f01927175db82a8c3182d",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2024,
+      "trim": "156 PS Elettrica 54 kWh",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2040
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение и год подтверждены заводским каталогом декабря2024 и журналом начала заказов. ДВС1199см³/100кВт и код двигателя — руководство06.2024; полная масса — GVW, не снаряжённая. Для Veloce280 ранние данные240PS не используются. Электрическая мощность пиковая, не30-минутная. Исходные безымянные наблюдения не изменены.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "627.E2E.0; 156 PS Elettrica 54 kWh; год подтверждён журналом начала заказов",
+            "yearEvidence": {
+              "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+              "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+              "publishedAt": "2025-09-19",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 12,
+              "selector": "627.E2E.0; начало заказов в2024"
+            }
+          },
+          "fuel": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "Elettrica"
+          },
+          "powertrainKind": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "Elettrica"
+          },
+          "powerHp": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.E2E.0; 156 PS Elettrica 54 kWh; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.E2E.0; 156 PS Elettrica 54 kWh; powerKw"
+          },
+          "motorPeakKw": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.E2E.0; 156 PS Elettrica 54 kWh; motorPeakKw"
+          },
+          "batteryKwh": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.E2E.0; 156 PS Elettrica 54 kWh; batteryKwh"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.ie/content/dam/alfa/ie/pricelists/2024/new-price-guides/AR_Junior_2024_16.10.2024_LMA_ROS.pdf",
+            "documentSha256": "a3dda13833314b6404681c2ed7b8d67aa628db1f57ee160f7aab49631e5514fb",
+            "documentRevision": "October2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "156hp; FWD"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+            "documentSha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+            "documentRevision": "530.05.129 EN 01 06 24",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 277,
+            "selector": "Elettrica156hp; GVW2040"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "523399157766b5751aab30a1",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2024,
+      "trim": "156 PS Elettrica 54 kWh Speciale",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh Speciale",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2040
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение и год подтверждены заводским каталогом декабря2024 и журналом начала заказов. ДВС1199см³/100кВт и код двигателя — руководство06.2024; полная масса — GVW, не снаряжённая. Для Veloce280 ранние данные240PS не используются. Электрическая мощность пиковая, не30-минутная. Исходные безымянные наблюдения не изменены.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "627.L2E.0; 156 PS Elettrica 54 kWh Speciale; год подтверждён журналом начала заказов",
+            "yearEvidence": {
+              "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+              "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+              "publishedAt": "2025-09-19",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 12,
+              "selector": "627.L2E.0; начало заказов в2024"
+            }
+          },
+          "fuel": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "Elettrica"
+          },
+          "powertrainKind": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "Elettrica"
+          },
+          "powerHp": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.L2E.0; 156 PS Elettrica 54 kWh Speciale; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.L2E.0; 156 PS Elettrica 54 kWh Speciale; powerKw"
+          },
+          "motorPeakKw": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.L2E.0; 156 PS Elettrica 54 kWh Speciale; motorPeakKw"
+          },
+          "batteryKwh": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.L2E.0; 156 PS Elettrica 54 kWh Speciale; batteryKwh"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.ie/content/dam/alfa/ie/pricelists/2024/new-price-guides/AR_Junior_2024_16.10.2024_LMA_ROS.pdf",
+            "documentSha256": "a3dda13833314b6404681c2ed7b8d67aa628db1f57ee160f7aab49631e5514fb",
+            "documentRevision": "October2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "156hp; FWD"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+            "documentSha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+            "documentRevision": "530.05.129 EN 01 06 24",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 277,
+            "selector": "Elettrica156hp; GVW2040"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "864ae2ec77c77a094f624a5a",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2024,
+      "trim": "280 PS Elettrica 54 kWh Veloce",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "280 PS Elettrica 54 kWh Veloce",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 280,
+        "powerKw": 207,
+        "motorPeakKw": 207,
+        "batteryKwh": 54,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение и год подтверждены заводским каталогом декабря2024 и журналом начала заказов. ДВС1199см³/100кВт и код двигателя — руководство06.2024; полная масса — GVW, не снаряжённая. Для Veloce280 ранние данные240PS не используются. Электрическая мощность пиковая, не30-минутная. Исходные безымянные наблюдения не изменены.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "627.V2R.0; 280 PS Elettrica 54 kWh Veloce; год подтверждён журналом начала заказов",
+            "yearEvidence": {
+              "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+              "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+              "publishedAt": "2025-09-19",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 12,
+              "selector": "627.V2R.0; начало заказов в2024"
+            }
+          },
+          "fuel": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "Elettrica"
+          },
+          "powertrainKind": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 4,
+            "selector": "Elettrica"
+          },
+          "powerHp": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.V2R.0; 280 PS Elettrica 54 kWh Veloce; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.V2R.0; 280 PS Elettrica 54 kWh Veloce; powerKw"
+          },
+          "motorPeakKw": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.V2R.0; 280 PS Elettrica 54 kWh Veloce; motorPeakKw"
+          },
+          "batteryKwh": {
+            "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+            "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+            "documentRevision": "Dicembre2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 16,
+            "selector": "627.V2R.0; 280 PS Elettrica 54 kWh Veloce; batteryKwh"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.ie/content/dam/alfa/ie/pricelists/2024/new-price-guides/AR_Junior_2024_16.10.2024_LMA_ROS.pdf",
+            "documentSha256": "a3dda13833314b6404681c2ed7b8d67aa628db1f57ee160f7aab49631e5514fb",
+            "documentRevision": "October2024",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "280hp; FWD"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "00a9036131756667c956de87",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Sprint",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Sprint",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "systemPowerKw": 107,
+        "batteryKwh": 0.89,
+        "drive": "fwd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Прайс19.09.2025: точный MVS/SS, таблицы3/11/12 сверены визуально. MY26 — серия, фактическое начало заказов19.09.2025. ДВС100кВт отделён от системы107кВт; электрическая мощность пиковая. Полная ёмкость батареи в кВт·ч; полная масса и30-минутная мощность не вычислялись.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E23.1 JFR; 1.2 Ibrida 145 PS eDCT6 Sprint; 48V hybrid или BEV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E23.1 JFR; 1.2 Ibrida 145 PS eDCT6 Sprint; 48V hybrid или BEV"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E23.1 JFR; 1.2 Ibrida 145 PS eDCT6 Sprint; 48V hybrid или BEV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFR; 1.2 Ibrida 145 PS eDCT6 Sprint; engineCc"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFR; 1.2 Ibrida 145 PS eDCT6 Sprint; icePowerKw"
+          },
+          "systemPowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E23.1 JFR; 1.2 Ibrida 145 PS eDCT6 Sprint; 48V hybrid или BEV"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFR; 1.2 Ibrida 145 PS eDCT6 Sprint; batteryKwh",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 1,
+              "selector": "Battery capacity gross [kWh]; исправление обозначения единицы kW в прайсе"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFR; 1.2 Ibrida 145 PS eDCT6 Sprint; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFR; 1.2 Ibrida 145 PS eDCT6 Sprint; transmission"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "233c647bfd301d783d8b3e50",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Ti",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Ti",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "systemPowerKw": 107,
+        "batteryKwh": 0.89,
+        "drive": "fwd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Прайс19.09.2025: точный MVS/SS, таблицы3/11/12 сверены визуально. MY26 — серия, фактическое начало заказов19.09.2025. ДВС100кВт отделён от системы107кВт; электрическая мощность пиковая. Полная ёмкость батареи в кВт·ч; полная масса и30-минутная мощность не вычислялись.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E23.1 JFS; 1.2 Ibrida 145 PS eDCT6 Ti; 48V hybrid или BEV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E23.1 JFS; 1.2 Ibrida 145 PS eDCT6 Ti; 48V hybrid или BEV"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E23.1 JFS; 1.2 Ibrida 145 PS eDCT6 Ti; 48V hybrid или BEV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFS; 1.2 Ibrida 145 PS eDCT6 Ti; engineCc"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFS; 1.2 Ibrida 145 PS eDCT6 Ti; icePowerKw"
+          },
+          "systemPowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E23.1 JFS; 1.2 Ibrida 145 PS eDCT6 Ti; 48V hybrid или BEV"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFS; 1.2 Ibrida 145 PS eDCT6 Ti; batteryKwh",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 1,
+              "selector": "Battery capacity gross [kWh]; исправление обозначения единицы kW в прайсе"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFS; 1.2 Ibrida 145 PS eDCT6 Ti; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E23.1 JFS; 1.2 Ibrida 145 PS eDCT6 Ti; transmission"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "0c5ab2d030f2729733b412fa",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Sprint",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Sprint",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "systemPowerKw": 107,
+        "batteryKwh": 0.89,
+        "drive": "awd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Прайс19.09.2025: точный MVS/SS, таблицы3/11/12 сверены визуально. MY26 — серия, фактическое начало заказов19.09.2025. ДВС100кВт отделён от системы107кВт; электрическая мощность пиковая. Полная ёмкость батареи в кВт·ч; полная масса и30-минутная мощность не вычислялись.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; 48V hybrid или BEV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; 48V hybrid или BEV"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; 48V hybrid или BEV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; engineCc"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; icePowerKw"
+          },
+          "systemPowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; 48V hybrid или BEV"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; batteryKwh",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 1,
+              "selector": "Battery capacity gross [kWh]; исправление обозначения единицы kW в прайсе"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; transmission"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "2e0e332e26857edb84ff7c54",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Ti",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Ti",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "systemPowerKw": 107,
+        "batteryKwh": 0.89,
+        "drive": "awd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Прайс19.09.2025: точный MVS/SS, таблицы3/11/12 сверены визуально. MY26 — серия, фактическое начало заказов19.09.2025. ДВС100кВт отделён от системы107кВт; электрическая мощность пиковая. Полная ёмкость батареи в кВт·ч; полная масса и30-минутная мощность не вычислялись.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E43.1 JFS; 1.2 Ibrida 145 PS eDCT6 Q4 Ti; 48V hybrid или BEV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E43.1 JFS; 1.2 Ibrida 145 PS eDCT6 Q4 Ti; 48V hybrid или BEV"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E43.1 JFS; 1.2 Ibrida 145 PS eDCT6 Q4 Ti; 48V hybrid или BEV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 JFS; 1.2 Ibrida 145 PS eDCT6 Q4 Ti; engineCc"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 JFS; 1.2 Ibrida 145 PS eDCT6 Q4 Ti; icePowerKw"
+          },
+          "systemPowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "626.E43.1 JFS; 1.2 Ibrida 145 PS eDCT6 Q4 Ti; 48V hybrid или BEV"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 JFS; 1.2 Ibrida 145 PS eDCT6 Q4 Ti; batteryKwh",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 1,
+              "selector": "Battery capacity gross [kWh]; исправление обозначения единицы kW в прайсе"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 JFS; 1.2 Ibrida 145 PS eDCT6 Q4 Ti; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "626.E43.1 JFS; 1.2 Ibrida 145 PS eDCT6 Q4 Ti; transmission"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "2e4fef107b3fa714a433968b",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "156 PS Elettrica 54 kWh Sprint",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh Sprint",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Прайс19.09.2025: точный MVS/SS, таблицы3/11/12 сверены визуально. MY26 — серия, фактическое начало заказов19.09.2025. ДВС100кВт отделён от системы107кВт; электрическая мощность пиковая. Полная ёмкость батареи в кВт·ч; полная масса и30-минутная мощность не вычислялись.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "627.E2E.1 JFR; 156 PS Elettrica 54 kWh Sprint; 48V hybrid или BEV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "627.E2E.1 JFR; 156 PS Elettrica 54 kWh Sprint; 48V hybrid или BEV"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "627.E2E.1 JFR; 156 PS Elettrica 54 kWh Sprint; 48V hybrid или BEV"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFR; 156 PS Elettrica 54 kWh Sprint; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFR; 156 PS Elettrica 54 kWh Sprint; powerKw"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFR; 156 PS Elettrica 54 kWh Sprint; motorPeakKw"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFR; 156 PS Elettrica 54 kWh Sprint; batteryKwh",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 1,
+              "selector": "Battery capacity gross [kWh]; исправление обозначения единицы kW в прайсе"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFR; 156 PS Elettrica 54 kWh Sprint; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFR; 156 PS Elettrica 54 kWh Sprint; transmission"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "33a960927a95b7fdf6efd7eb",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "156 PS Elettrica 54 kWh Ti",
+      "expectedRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh Ti",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Прайс19.09.2025: точный MVS/SS, таблицы3/11/12 сверены визуально. MY26 — серия, фактическое начало заказов19.09.2025. ДВС100кВт отделён от системы107кВт; электрическая мощность пиковая. Полная ёмкость батареи в кВт·ч; полная масса и30-минутная мощность не вычислялись.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "627.E2E.1 JFS; 156 PS Elettrica 54 kWh Ti; 48V hybrid или BEV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "627.E2E.1 JFS; 156 PS Elettrica 54 kWh Ti; 48V hybrid или BEV"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "627.E2E.1 JFS; 156 PS Elettrica 54 kWh Ti; 48V hybrid или BEV"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFS; 156 PS Elettrica 54 kWh Ti; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFS; 156 PS Elettrica 54 kWh Ti; powerKw"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFS; 156 PS Elettrica 54 kWh Ti; motorPeakKw"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFS; 156 PS Elettrica 54 kWh Ti; batteryKwh",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "checkedAt": "2026-10-22",
+              "pdfPage": 1,
+              "selector": "Battery capacity gross [kWh]; исправление обозначения единицы kW в прайсе"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFS; 156 PS Elettrica 54 kWh Ti; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+            "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+            "publishedAt": "2025-09-19",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 11,
+            "selector": "627.E2E.1 JFS; 156 PS Elettrica 54 kWh Ti; transmission"
+          }
+        }
+      }
+    }
+  ]
+}

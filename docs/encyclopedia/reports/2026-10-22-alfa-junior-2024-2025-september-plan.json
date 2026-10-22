@@ -1,0 +1,209 @@
+{
+  "checkedAt": "2026-10-22T09:02:26.440Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-junior-2024-2025-september",
+  "digest": "e291db51e713da466bc26991ea7f772998ad6fe9fc60951d4e3ff891360856cf",
+  "sourceModelRevision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+  "variants": 11,
+  "newVariants": 11,
+  "fields": 98,
+  "plan": {
+    "changes": [
+      {
+        "variantId": "58645f264bd08a007a4d9a6f",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "icePowerKw",
+          "engineCode",
+          "batteryKwh",
+          "transmission",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "ea675e6b95040cf3389c4786",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "icePowerKw",
+          "engineCode",
+          "batteryKwh",
+          "transmission",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "a57f01927175db82a8c3182d",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "523399157766b5751aab30a1",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "864ae2ec77c77a094f624a5a",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive"
+        ]
+      },
+      {
+        "variantId": "00a9036131756667c956de87",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "icePowerKw",
+          "systemPowerKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "233c647bfd301d783d8b3e50",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "icePowerKw",
+          "systemPowerKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "0c5ab2d030f2729733b412fa",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "icePowerKw",
+          "systemPowerKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "2e0e332e26857edb84ff7c54",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "icePowerKw",
+          "systemPowerKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "2e4fef107b3fa714a433968b",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "33a960927a95b7fdf6efd7eb",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "sources": {
+    "dec": {
+      "url": "https://www.alfaromeo.be/content/dam/alfa/it/junior-elettrica/pdf/AR_PDF_TRIMS_JUNIOR_Dicembre2024.pdf",
+      "documentSha256": "c86b88fce17827106f23611ef2d9a0545b5cd437b7fa230dbb27afb8c96b2b80",
+      "documentRevision": "Dicembre2024"
+    },
+    "sep": {
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+      "documentSha256": "5c8fa9f0164151d5dd7652942f474b47a7692a985d4e8dd21dd0b7ea13f43268",
+      "publishedAt": "2025-09-19"
+    },
+    "ie": {
+      "url": "https://www.alfaromeo.ie/content/dam/alfa/ie/pricelists/2024/new-price-guides/AR_Junior_2024_16.10.2024_LMA_ROS.pdf",
+      "documentSha256": "a3dda13833314b6404681c2ed7b8d67aa628db1f57ee160f7aab49631e5514fb",
+      "documentRevision": "October2024"
+    },
+    "manual": {
+      "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+      "documentSha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+      "documentRevision": "530.05.129 EN 01 06 24"
+    },
+    "nl": {
+      "url": "https://www.media.stellantis.com/nl-nl/alfa-romeo/press/alfa-romeo-junior-ibrida-nu-te-bestellen",
+      "publishedAt": "2024-08-22"
+    },
+    "tech": {
+      "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+      "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349"
+    }
+  }
+}
