@@ -1,0 +1,105 @@
+{
+  "checkedAt": "2026-10-22T16:45:37.476870+07:00",
+  "modelId": "81a4b290257d227a5fd86ee6",
+  "year": 2012,
+  "state": "researched_identities_not_applied",
+  "requiresFreshApiPreflight": true,
+  "source": {
+    "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+    "effectiveAt": "2012-11-01",
+    "pdfPage": 2,
+    "visuallyChecked": true
+  },
+  "candidates": [
+    {
+      "sincom": "145 B32 1",
+      "trim": "1.4 MPI MultiAir 105 PS S/S Distinctive",
+      "powerHp": 105,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 K32 1",
+      "trim": "1.4 MPI MultiAir 105 PS S/S SBK",
+      "powerHp": 105,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 E32 1 + 6U3",
+      "trim": "1.4 MPI MultiAir 105 PS S/S Veloce",
+      "powerHp": 105,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 E34 1 + 6U3",
+      "trim": "1.4 TB MultiAir 135 PS S/S TCT Veloce",
+      "powerHp": 135,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 E3A 1 + 6U3",
+      "trim": "1.3 JTDM 95 PS S/S Veloce",
+      "powerHp": 95,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 E33 1",
+      "trim": "1.4 TB MultiAir 135 PS S/S Exclusive",
+      "powerHp": 135,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 E34 1",
+      "trim": "1.4 TB MultiAir 135 PS S/S TCT Exclusive",
+      "powerHp": 135,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 E3A 1",
+      "trim": "1.3 JTDM 95 PS S/S Exclusive",
+      "powerHp": 95,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 E3E 1",
+      "trim": "1.6 JTDM 120 PS S/S Exclusive",
+      "powerHp": 120,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 Q36 1",
+      "trim": "1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde",
+      "powerHp": 170,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    },
+    {
+      "sincom": "145 Q36 1",
+      "trim": "1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition",
+      "powerHp": 170,
+      "units": "ch CEE / metric PS",
+      "missing": "Технический документ точной моторизации2012: engineCc/powerKw/icePowerKw/drive/transmission; не переносить вслепую соседнийгод."
+    }
+  ],
+  "notes": [
+    "Veloce отдельно перечислен с6U3; конец заводскихзаказов30.11.2012.",
+    "QV SBK Limited Edition15экземпляров отдельно отобычнойQV, но одинаковыйSincom; не создавать повтор обычнойQV поцене.",
+    "В прайсе18 строк, включая3Veloce и2QV; рекламное число13 не заменяет точную таблицу.",
+    "Сербский PDF2012 без явной даты содержит73кВт/95KS и70MultiAir, требует дополнительнойпроверки; данные оттуда не применялись."
+  ],
+  "nextSources": [
+    "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-alfa-romeo-mito-serie-speciale-veloce",
+    "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/les-nouvelles-series-speciales-alfa-romeo-arrivent-en-france",
+    "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-mito-now-available-with-multi-award-winning-twinair-engine-technology",
+    "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-romeo-adds-new-sportiva-trim-to-mito-and-giulietta-range"
+  ],
+  "nextCursor": "MiTo: эти11 оставшихсястрок2012, затем ранние/UK2012 и2013; UK2011 и пропуски2008–2011 в retry."
+}

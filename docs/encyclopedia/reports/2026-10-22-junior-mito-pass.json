@@ -1,13 +1,13 @@
 {
-  "checkedAt": "2026-10-22T16:36:43.251034+07:00",
-  "variants": 53,
-  "newVariants": 53,
-  "fields": 474,
-  "calculationFields": 401,
+  "checkedAt": "2026-10-22T16:47:18.250127+07:00",
+  "variants": 69,
+  "newVariants": 69,
+  "fields": 595,
+  "calculationFields": 506,
   "referenceOnlyFields": 20,
-  "identityFields": 53,
+  "identityFields": 69,
   "apiReadback": true,
-  "guardTests": 32,
+  "guardTests": 48,
   "preservedOriginalVariants": 27,
   "includedInIndex": false,
   "batches": [
@@ -51,9 +51,51 @@
       "fields": 137,
       "apiReadback": true,
       "includedInIndex": false
+    },
+    {
+      "batch": "research-2026-10-22-alfa-mito-2011-november",
+      "commit": "33aa38297274bc76a340cdf9f3e6b8a4c14b58f5",
+      "workflow": 39757189903,
+      "variants": 9,
+      "newVariants": 9,
+      "fields": 69,
+      "apiReadback": true,
+      "includedInIndex": false
+    },
+    {
+      "batch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
+      "commit": "c13b40739d0e3579f79ea2b5b3977dda86831b0b",
+      "workflow": 39757749521,
+      "variants": 8,
+      "newVariants": 7,
+      "updatedVariants": 1,
+      "fields": 52,
+      "apiReadback": true,
+      "includedInIndex": false
     }
   ],
-  "nextCursor": "Alfa Romeo MiTo: оставшиеся исполнения2011, затем2012; пропуски в retry",
-  "variantOperations": 63,
-  "updatedExistingVariants": 10
+  "nextCursor": "Alfa Romeo MiTo:11 оставшихся строк прайса01.11.2012 по handoff, затем ранние/UK2012 и2013; UK2011 и прочие пропуски в retry",
+  "variantOperations": 80,
+  "updatedExistingVariants": 11,
+  "integration": {
+    "state": "activation_pending",
+    "requestedRelease": "ad327011321b44aa7e0d59465dded59095067908",
+    "workflow": 39754473141,
+    "lastObservedStep": "Prepare exact price indexes before activating the release",
+    "preparedBeforeLastThreeBatches": true,
+    "queuedRelease": "f3f733172241a35369c270dc4409921ffeaa6fde",
+    "queuedWorkflow": 39755527627,
+    "queuedState": "pending",
+    "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
+    "observedProductionIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+    "newBatchesActivationConfirmed": false,
+    "duplicateReleaseRequested": false
+  },
+  "productionRegressionCheck": {
+    "passed": true,
+    "offers": 4,
+    "sonataTotalRub": 3560003,
+    "scope": "Existing index only; no claim that new MiTo/Junior variants enrich current offers",
+    "report": "docs/encyclopedia/reports/2026-10-22-junior-mito-release-card-search-parity.json"
+  }
 }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:43:38.456693+07:00",
+  "updatedAt": "2026-10-22T16:47:18.250127+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -629,19 +629,19 @@
         2009,
         2008
       ],
-      "variants": 44,
+      "variants": 60,
       "status": "partial_verified_fields",
       "researchedVariants": 0,
       "checkedAt": "2026-10-22T01:36:38.003919+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-mito-remaining.json",
-      "nextAction": "Alfa Romeo MiTo: оставшиеся исполнения2011, затем2012; пропуски в retry",
-      "lastCheckedAt": "2026-10-22T16:36:43.251034+07:00",
-      "lastBatch": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super",
-      "lastBatchVariants": 23,
-      "lastBatchFields": 137,
-      "newVariantsThisBatch": 13,
+      "nextAction": "Alfa Romeo MiTo:11 оставшихся строк прайса01.11.2012 по handoff, затем ранние/UK2012 и2013; UK2011 и прочие пропуски в retry",
+      "lastCheckedAt": "2026-10-22T16:47:18.250127+07:00",
+      "lastBatch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
+      "lastBatchVariants": 8,
+      "lastBatchFields": 52,
+      "newVariantsThisBatch": 7,
       "fullHistoricalCoverage": false,
-      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2008-2011-manual-turismo-super-readback.json"
+      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2012-twinair-mpi-jtdm-readback.json"
     },
     {
       "id": "d9d48f8457c33f7e466d6c6e",
@@ -32613,12 +32613,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T16:36:43.251034+07:00",
+    "updatedAt": "2026-10-22T16:47:18.250127+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "junior_mito_53_new_saved_index_activation_pending",
+    "state": "junior_mito_69_new_saved_index_activation_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "MiTo2012: после партии8/52 остальные11 строк прайса01.11.2012; UK2011 в retry, затем2013",
+    "nextModel": "Alfa Romeo MiTo:11 оставшихся строк прайса01.11.2012 по handoff, затем ранние/UK2012 и2013; UK2011 и прочие пропуски в retry",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32923,6 +32923,17 @@
         "fields": 69,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-mito-2012-twinair-mpi-jtdm": {
+        "batch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
+        "commit": "c13b40739d0e3579f79ea2b5b3977dda86831b0b",
+        "workflow": 39757749521,
+        "variants": 8,
+        "newVariants": 7,
+        "updatedVariants": 1,
+        "fields": 52,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32943,12 +32954,13 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-mito-2011-november",
-      "commit": "33aa38297274bc76a340cdf9f3e6b8a4c14b58f5",
-      "workflow": 39757189903,
-      "variants": 9,
-      "newVariants": 9,
-      "fields": 69,
+      "batch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
+      "commit": "c13b40739d0e3579f79ea2b5b3977dda86831b0b",
+      "workflow": 39757749521,
+      "variants": 8,
+      "newVariants": 7,
+      "updatedVariants": 1,
+      "fields": 52,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32998,6 +33010,12 @@
         "requiresFreshApiPreflight": true,
         "appliedBatch": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super",
         "workflow": 39756015851
+      },
+      {
+        "path": "docs/encyclopedia/research-handoff-2026-10-22-mito-2012-remaining.json",
+        "state": "researched_identities_not_applied",
+        "variants": 11,
+        "requiresFreshApiPreflight": true
       }
     ],
     "pendingNextIndexBatches": [
@@ -33114,25 +33132,30 @@
         "fields": 69,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
+        "commit": "c13b40739d0e3579f79ea2b5b3977dda86831b0b",
+        "workflow": 39757749521,
+        "variants": 8,
+        "newVariants": 7,
+        "updatedVariants": 1,
+        "fields": 52,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
-    "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
-      "state": "prepared_not_applied",
-      "variants": 8,
-      "newVariants": 7,
-      "fields": 52
-    },
+    "inFlightResearch": null,
     "lastCompletedPass": {
-      "checkedAt": "2026-10-22T16:36:43.251034+07:00",
-      "variants": 53,
-      "newVariants": 53,
-      "fields": 474,
-      "calculationFields": 401,
+      "checkedAt": "2026-10-22T16:47:18.250127+07:00",
+      "variants": 69,
+      "newVariants": 69,
+      "fields": 595,
+      "calculationFields": 506,
       "referenceOnlyFields": 20,
-      "identityFields": 53,
+      "identityFields": 69,
       "apiReadback": true,
-      "guardTests": 32,
+      "guardTests": 48,
       "preservedOriginalVariants": 27,
       "includedInIndex": false,
       "batches": [
@@ -33176,11 +33199,53 @@
           "fields": 137,
           "apiReadback": true,
           "includedInIndex": false
+        },
+        {
+          "batch": "research-2026-10-22-alfa-mito-2011-november",
+          "commit": "33aa38297274bc76a340cdf9f3e6b8a4c14b58f5",
+          "workflow": 39757189903,
+          "variants": 9,
+          "newVariants": 9,
+          "fields": 69,
+          "apiReadback": true,
+          "includedInIndex": false
+        },
+        {
+          "batch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
+          "commit": "c13b40739d0e3579f79ea2b5b3977dda86831b0b",
+          "workflow": 39757749521,
+          "variants": 8,
+          "newVariants": 7,
+          "updatedVariants": 1,
+          "fields": 52,
+          "apiReadback": true,
+          "includedInIndex": false
         }
       ],
-      "nextCursor": "Alfa Romeo MiTo: оставшиеся исполнения2011, затем2012; пропуски в retry",
-      "variantOperations": 63,
-      "updatedExistingVariants": 10,
+      "nextCursor": "Alfa Romeo MiTo:11 оставшихся строк прайса01.11.2012 по handoff, затем ранние/UK2012 и2013; UK2011 и прочие пропуски в retry",
+      "variantOperations": 80,
+      "updatedExistingVariants": 11,
+      "integration": {
+        "state": "activation_pending",
+        "requestedRelease": "ad327011321b44aa7e0d59465dded59095067908",
+        "workflow": 39754473141,
+        "lastObservedStep": "Prepare exact price indexes before activating the release",
+        "preparedBeforeLastThreeBatches": true,
+        "queuedRelease": "f3f733172241a35369c270dc4409921ffeaa6fde",
+        "queuedWorkflow": 39755527627,
+        "queuedState": "pending",
+        "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
+        "observedProductionIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+        "newBatchesActivationConfirmed": false,
+        "duplicateReleaseRequested": false
+      },
+      "productionRegressionCheck": {
+        "passed": true,
+        "offers": 4,
+        "sonataTotalRub": 3560003,
+        "scope": "Existing index only; no claim that new MiTo/Junior variants enrich current offers",
+        "report": "docs/encyclopedia/reports/2026-10-22-junior-mito-release-card-search-parity.json"
+      },
       "report": "docs/encyclopedia/reports/2026-10-22-junior-mito-pass.json"
     },
     "failedIndexRelease": {
@@ -33235,13 +33300,14 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-mito-2011.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-mito-2012-remaining.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39743682918,
       "state": "in_progress",
       "referenceOnly": true
-    }
+    },
+    "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6"
   },
   "scope": {
     "minimumYear": 2008,

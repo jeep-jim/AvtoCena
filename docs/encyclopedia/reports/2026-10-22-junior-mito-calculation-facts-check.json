@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-22T09:35:14.266Z",
+  "checkedAt": "2026-10-22T09:46:04.134Z",
   "scope": "Independent compilation of public API records with unchanged production compiler; deployed private index checked separately",
   "models": [
     {
@@ -11,13 +11,13 @@
     {
       "id": "81a4b290257d227a5fd86ee6",
       "model": "Mito",
-      "revision": "6ddb6cfc-d676-41b4-a374-d4c6e0a54939",
-      "variants": 44
+      "revision": "73f51ac4-a510-428a-a97f-d1471836853b",
+      "variants": 60
     }
   ],
-  "variantOperations": 63,
-  "uniqueVariants": 53,
-  "calculationFields": 401,
+  "variantOperations": 80,
+  "uniqueVariants": 69,
+  "calculationFields": 506,
   "referenceOnlyFields": 20,
   "referenceOnly": [
     {
@@ -520,6 +520,108 @@
       "year": 2011,
       "fields": 8,
       "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "ad05d5a2f85d852ce0faff91",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2011-november"
+    },
+    {
+      "variantId": "b1452eb8a0eaacabbd88d715",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2011-november"
+    },
+    {
+      "variantId": "b4982b03262158737c50ebd1",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2011-november"
+    },
+    {
+      "variantId": "4a29531f15c7f1c38c1b31cd",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2011-november"
+    },
+    {
+      "variantId": "0a9dd634cb9980bb63c18946",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2011-november"
+    },
+    {
+      "variantId": "cd2c7396eb82d0628ac9c912",
+      "year": 2011,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2011-november"
+    },
+    {
+      "variantId": "23852508be0082b46c8e420b",
+      "year": 2011,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2011-november"
+    },
+    {
+      "variantId": "9538b54ad38f2387274af09c",
+      "year": 2011,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2011-november"
+    },
+    {
+      "variantId": "72d90497e8b2bdeb154657fe",
+      "year": 2011,
+      "fields": 3,
+      "batchId": "research-2026-10-22-alfa-mito-2011-november"
+    },
+    {
+      "variantId": "52da0b4c05255459405cdcff",
+      "year": 2012,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm"
+    },
+    {
+      "variantId": "8dd09115f59af21549ba0d3c",
+      "year": 2012,
+      "fields": 3,
+      "batchId": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm"
+    },
+    {
+      "variantId": "f56fcc74d7462e2179139fd7",
+      "year": 2012,
+      "fields": 3,
+      "batchId": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm"
+    },
+    {
+      "variantId": "ddbae224f7507c6ff90f62e5",
+      "year": 2012,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm"
+    },
+    {
+      "variantId": "5888a53c76de3d3ffe0f5307",
+      "year": 2012,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm"
+    },
+    {
+      "variantId": "623fdab277146fc3645cf674",
+      "year": 2012,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm"
+    },
+    {
+      "variantId": "6788dcd2e7b115c57f612694",
+      "year": 2012,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm"
+    },
+    {
+      "variantId": "9538b54ad38f2387274af09c",
+      "year": 2011,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm"
     }
   ]
 }
