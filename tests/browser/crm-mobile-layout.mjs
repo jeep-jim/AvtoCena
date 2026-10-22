@@ -212,19 +212,29 @@ try{
     await leadDate.fill('2026-10-01');assert.equal(await leadFilters.locator('form').evaluate(form=>new FormData(form).get('date')),'2026-10-01');
     assert.ok(await leadFilters.evaluate(e=>e.scrollWidth<=e.clientWidth+1),'lead date and search controls fit the dialog');
     await page.keyboard.press('Escape');await leadFilters.waitFor({state:'hidden'});
-    if(width<768){for(const card of await page.locator('.crm-lead-summary').all()){const manager=await card.locator('.crm-lead-manager').boundingBox(),status=await card.locator('.crm-lead-status>span').boundingBox();assert.ok(manager.y>=status.y+status.height,'manager has its own row below status');assert.ok(manager.width>240,'manager uses full card width');}}
+    if(width<768){for(const summary of await page.locator('.crm-lead-summary').all()){
+     assert.equal(await summary.locator('.crm-lead-manager').isVisible(),false,'compact closed card hides secondary details');
+     assert.equal(await summary.locator('.crm-lead-contact-row').isVisible(),false);
+    }}
     if(width<=390){const height=await page.locator('.crm-lead-summary').first().evaluate(e=>e.getBoundingClientRect().height);assert.ok(height<265,`lead summary is compact (${height}px)`);}
-    for(const summary of await page.locator('.crm-lead-summary').all()){assert.ok(await summary.locator('.crm-lead-channel-icon').isVisible(),'channel icons on desktop and mobile');assert.equal(await summary.locator('.crm-contact-text').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','no contact badge background');}
-    assert.ok(await page.locator('.crm-phone-icon').first().isVisible(),'modern handset icon');
-    if(width<768){const summary=page.locator('.crm-lead-summary').first();const icon=await summary.locator('.crm-lead-channel-icon').boundingBox(),car=await summary.locator('.crm-lead-car-image').boundingBox();assert.equal(icon.x,car.x,'channel and car images aligned');assert.ok(car.y>icon.y);assert.ok(await summary.locator('.crm-lead-channel-icon img').evaluate(img=>img.complete&&img.naturalWidth===80),'Figma asset loaded');}
     await page.locator('.crm-lead-summary').first().click();assert.ok(await page.getByRole('combobox',{name:'Статус заявки',exact:true}).first().isVisible());
+    const expandedSummary=page.locator('.crm-lead-summary').first();
+    assert.ok(await expandedSummary.locator('.crm-lead-channel-icon').isVisible(),'opened card shows contact channel');
+    assert.equal(await expandedSummary.locator('.crm-contact-text').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','no contact badge background');
+    assert.ok(await expandedSummary.locator('.crm-phone-icon').isVisible(),'modern handset icon');
+    if(width<768){
+     const manager=await expandedSummary.locator('.crm-lead-manager').boundingBox(),status=await expandedSummary.locator('.crm-lead-status>span').boundingBox();
+     assert.ok(manager&&status&&manager.y>=status.y+status.height,'opened card puts manager below status');
+     assert.ok(await expandedSummary.evaluate(e=>e.scrollWidth<=e.clientWidth+1),'opened card fits width');
+     assert.ok(await expandedSummary.locator('.crm-lead-channel-icon img').evaluate(img=>img.complete&&img.naturalWidth===80),'Figma asset loaded');
+    }
     const detail=page.locator('.crm-lead-card').first(),infoBox=await detail.locator('.crm-lead-detail-info').boundingBox(),chatBox=await detail.locator('.crm-lead-detail-chat').boundingBox();if(width>=1024){assert.ok(Math.abs(infoBox.y-chatBox.y)<2,'columns share top edge');assert.ok(chatBox.x>=infoBox.x+infoBox.width,'discussion on the right');}else assert.ok(chatBox.y>=infoBox.y+infoBox.height,'stacked on mobile');if(width===390||width===1440){await detail.locator('.crm-lead-detail-grid').screenshot({path:`${out}/lead-discussion-${theme}-${width}.png`});}
     const chat=page.locator('.crm-contact-action').first();assert.equal(await chat.getAttribute('href'),'https://t.me/+79991234567');
     await page.context().route('https://t.me/**',r=>r.fulfill({contentType:'text/html',body:'Telegram link test'}));
     const opened=page.waitForEvent('popup');await chat.click();const popup=await opened;await popup.waitForLoadState();assert.equal(popup.url(),'https://t.me/+79991234567');await popup.close();
     if(width===390||width===1440){
      await page.locator('.crm-lead-card').first().evaluate(e=>e.open=false);
-     await page.locator('.crm-lead-date-filter').evaluate(e=>window.scrollBy(0,e.getBoundingClientRect().top-180));
+     await page.locator('.crm-lead-summary').first().evaluate(e=>window.scrollBy(0,e.getBoundingClientRect().top-180));
      await page.screenshot({path:`${out}/contact-summary-${theme}-${width}.png`});
     }
    }
@@ -356,7 +366,7 @@ try{
     await page.getByRole('button',{name:'Очистить',exact:true}).click();await page.waitForURL(url=>!url.searchParams.has('date'));await page.locator('.crm-lead-card').first().waitFor();assert.equal(await page.locator('#lead-date').inputValue(),'');
    }
    assert.deepEqual(errors,[]);results.push({kind,width,theme,passed:true});
-  }catch(e){fs.writeFileSync(`${out}/failure-${kind}-${theme}-${width}.json`,JSON.stringify({kind,width,theme,error:String(e),errors},null,2));await page.screenshot({path:`${out}/failure-${kind}-${theme}-${width}.png`,fullPage:true}).catch(()=>{});failures.push({kind,width,theme,error:String(e),errors});console.error(JSON.stringify({kind,width,theme,error:String(e),errors}));}finally{await page.close();}
+  }catch(e){fs.writeFileSync(`${out}/failure-${kind}-${theme}-${width}.json`,JSON.stringify({kind,width,theme,error:e?.stack||String(e),errors},null,2));await page.screenshot({path:`${out}/failure-${kind}-${theme}-${width}.png`,fullPage:true}).catch(()=>{});failures.push({kind,width,theme,error:e?.stack||String(e),errors});console.error(JSON.stringify({kind,width,theme,error:e?.stack||String(e),errors}));}finally{await page.close();}
  }
  fs.writeFileSync(out+'/results.json',JSON.stringify({results,failures},null,2));assert.deepEqual(failures,[]);console.log(JSON.stringify({cases:results.length,passed:true}));
 }finally{await browser.close();server.close();}
