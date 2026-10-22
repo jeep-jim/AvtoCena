@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T13:25:04.781379+07:00",
+  "updatedAt": "2026-10-22T13:43:47.032622+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32585,12 +32585,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T13:18:41.636595+07:00",
+    "updatedAt": "2026-10-22T13:43:47.032622+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "verified_giulia_batches_wait_build_fix_release",
+    "state": "continue_alphabetic_giulietta_2010",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulietta: first documented year 2010, then later years; Giulia retries remain separate",
+    "nextModel": "Alfa Romeo Giulietta 2010, затем последующие подтверждённые годы; пропуски Giulia отдельно",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32723,7 +32723,10 @@
         "fields": 154,
         "newVariants": 20,
         "apiReadback": true,
-        "includedInIndex": false
+        "includedInIndex": true,
+        "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
+        "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
+        "activationReport": "docs/encyclopedia/reports/2026-10-22-index-acb9cee-activation.json"
       },
       "alfa-giulia-2020-2022": {
         "batch": "research-2026-10-22-alfa-giulia-2020-2022",
@@ -32733,7 +32736,10 @@
         "fields": 327,
         "newVariants": 35,
         "apiReadback": true,
-        "includedInIndex": false
+        "includedInIndex": true,
+        "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
+        "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
+        "activationReport": "docs/encyclopedia/reports/2026-10-22-index-acb9cee-activation.json"
       },
       "alfa-giulia-2023-2026": {
         "batch": "research-2026-10-22-alfa-giulia-2023-2026",
@@ -32743,17 +32749,20 @@
         "fields": 292,
         "newVariants": 35,
         "apiReadback": true,
-        "includedInIndex": false
+        "includedInIndex": true,
+        "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
+        "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
+        "activationReport": "docs/encyclopedia/reports/2026-10-22-index-acb9cee-activation.json"
       }
     },
     "rawAuditCalculated": 75,
     "publicSerializationParity": 75,
     "allModelsComplete": false,
-    "installedRelease": "75fbb8b63dcb1ea2c5fe817bea7e687df57f8e0f",
-    "installedWorkflow": 39729118728,
-    "indexDigest": "7d4d2834a0f1a9832927b96b736928799ce3d8c3495ca6fcc3ce2bf32befc508",
-    "catalogRowsEnriched": 798,
-    "catalogFieldsFilled": 814,
+    "installedRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
+    "installedWorkflow": 39734109605,
+    "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
+    "catalogRowsEnriched": 800,
+    "catalogFieldsFilled": 1359,
     "remaining": [
       "Exact edition/year/trim identity gaps across the encyclopedia",
       "Certified30-minute power, vehicle category and gross mass where required",
@@ -32771,7 +32780,9 @@
       "fields": 292,
       "newVariants": 35,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
+      "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
@@ -32789,8 +32800,8 @@
         "workflow": 39720654481
       }
     ],
-    "requestedRelease": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
-    "requestedReleaseWorkflow": 39720853891,
+    "requestedRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
+    "requestedReleaseWorkflow": 39734109605,
     "additionalPreparedResearch": [],
     "pendingNextIndexBatches": [
       {
@@ -32885,36 +32896,6 @@
         "newVariants": 11,
         "apiReadback": true,
         "includedInIndex": false
-      },
-      {
-        "batch": "research-2026-10-22-alfa-giulia-2019",
-        "commit": "fc8939c0402e47d8a9cf5efd90e6c9a63a259eb6",
-        "workflow": 39731849226,
-        "variants": 20,
-        "fields": 154,
-        "newVariants": 20,
-        "apiReadback": true,
-        "includedInIndex": false
-      },
-      {
-        "batch": "research-2026-10-22-alfa-giulia-2020-2022",
-        "commit": "9e1965fc4e26a253e6321e8038695d9ac7cd999e",
-        "workflow": 39732328006,
-        "variants": 38,
-        "fields": 327,
-        "newVariants": 35,
-        "apiReadback": true,
-        "includedInIndex": false
-      },
-      {
-        "batch": "research-2026-10-22-alfa-giulia-2023-2026",
-        "commit": "4da0310796f6763c011b534635e63bd573224f33",
-        "workflow": 39732875758,
-        "variants": 35,
-        "fields": 292,
-        "newVariants": 35,
-        "apiReadback": true,
-        "includedInIndex": false
       }
     ],
     "inFlightResearch": null,
@@ -32936,8 +32917,8 @@
       "nextAction": "Check publication completion before requesting one aggregate index release; do not clear lock or duplicate collectors"
     },
     "concurrentRelease": null,
-    "installedIndexDigest": "23492c2fd0b0111bc71c084df08eec4ce0b2fe4218d12f5e80cf901e39bae377",
-    "catalogFieldsEnriched": 1357,
+    "installedIndexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
+    "catalogFieldsEnriched": 1359,
     "failedConcurrentRelease": {
       "workflow": 39731564487,
       "reason": "encyclopedia_changed_during_preparation"
@@ -32959,7 +32940,8 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-giulietta.json"
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-giulietta.json",
+    "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-acb9cee-activation.json"
   },
   "scope": {
     "minimumYear": 2008,

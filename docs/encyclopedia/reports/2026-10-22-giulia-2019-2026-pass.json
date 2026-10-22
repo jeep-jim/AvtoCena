@@ -11,7 +11,8 @@
       "fields": 154,
       "newVariants": 20,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c"
     },
     {
       "name": "alfa-giulia-2020-2022",
@@ -22,7 +23,8 @@
       "fields": 327,
       "newVariants": 35,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c"
     },
     {
       "name": "alfa-giulia-2023-2026",
@@ -33,7 +35,8 @@
       "fields": 292,
       "newVariants": 35,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c"
     }
   ],
   "variants": 93,
@@ -51,5 +54,8 @@
     "docs/encyclopedia/retry-2026-10-22-alfa-giulia-2020-2022.json",
     "docs/encyclopedia/retry-2026-10-22-alfa-giulia-2023-2026.json"
   ],
-  "releaseState": "new_aggregate_index_requested_after_readback"
+  "releaseState": "installed_and_public_readback_pass",
+  "activationReport": "docs/encyclopedia/reports/2026-10-22-index-acb9cee-activation.json",
+  "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
+  "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd"
 }

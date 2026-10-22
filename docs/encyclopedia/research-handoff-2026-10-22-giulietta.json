@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-22T13:26:36.172909+07:00",
+  "checkedAt": "2026-10-22T13:36:38.849599+07:00",
   "status": "research_handoff_not_applied",
   "modelId": "cb49c6bb46e8dd8caf106b34",
   "make": "Alfa Romeo",
@@ -12,7 +12,7 @@
       "id": "it-2010-launch",
       "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta",
       "publishedAt": "2010-04-13",
-      "purpose": "Подтверждён запуск новой Giulietta в 2010 году, кузов пятидверный хэтчбек; не создавать 2008/2009 для этого поколения."
+      "purpose": "Подтверждён запуск новой Giulietta в 2010 году, кузов пятидверный хэтчбек; не создавать 2008/2009 для этого поколения. Раздел двигателей прямо подтверждает шестиступенчатую механическую коробку всех стартовых двигателей."
     },
     {
       "id": "de-2010-launch",
@@ -25,7 +25,7 @@
       "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-giulietta-in-uk-press-pack",
       "publishedAt": "2010-06-23",
       "sha256": "75d1a703f0d1154fcc5ff985bf8039be5322fc0c7c1162699c1e12481ba3c334",
-      "purpose": "Таблица рабочего объёма: 1368/1368/1742/1598/1956 см³; привод Front и 6+1R — объединённые ячейки на все 5 двигателей. UK bhp не переносить как PS; 235-версия имеет 172.5 kW, а DE — 173 kW. Не смешивать округления."
+      "purpose": "Таблица рабочего объёма: 1368/1368/1742/1598/1956 см³; привод Front и 6+1R — объединённые ячейки на все 5 двигателей. UK bhp не переносить как PS; 235-версия имеет 172.5 kW, а DE — 173 kW. Не смешивать округления. Текст также подтверждает механическую 6-ступенчатую КПП всех 5 стартовых двигателей; двойное сцепление планируется с начала 2011."
     },
     {
       "id": "at-2010-140-diesel",
@@ -40,6 +40,18 @@
       "sha256": "620b1c2184cad8ab1f803b5cd1633d2ea195a04072944c8ca2fc4fca5c3bfce3",
       "page": 2,
       "purpose": "23 исполнения в 8 группах; проверить визуально и свежий API перед созданием. Отсутствие TCT в названии само по себе не доказывает тип коробки."
+    },
+    {
+      "id": "it-2010-140-launch",
+      "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-la-nuova-alfa-romeo-giulietta-2-0-jtdm-2-da-140-cv",
+      "publishedAt": "2010-11-12",
+      "purpose": "Заказ 2.0 JTDM-2 140 CV подтверждён для Progression и Distinctive."
+    },
+    {
+      "id": "it-2010-140-technical",
+      "url": "https://www.media.stellantis.com/uploads/it/2010/ALFA_ROMEO/SCHEDE_TECNICHE/100913_AR_Giulietta20JTDM_ST_ITA.pdf",
+      "sha256": "4466fad0df899209897c763804998f2bb61041707958b2a0049980ae1ccb21ee",
+      "purpose": "Таблица: 1956 см³, 103 кВт / 140 CV, передний привод, механическая 6-ступенчатая коробка. Не переносить опечатку оборотов 4001 или CO1."
     }
   ],
   "candidate2011Rows": [
@@ -301,6 +313,241 @@
     "Проверить актуальный API всех лет и отсутствие дублирующих технических исполнений.",
     "Визуально сверить прайс и сопоставить точные коробки/привод; свежие SHA256/CAS.",
     "Начать с 2010, потом 2011: эти кандидаты ещё не сохранены в постоянной базе.",
-    "Не принимать выставку TCT в 2010 за подтверждение годового исполнения; заводской материал France указывает начало продаж весной 2011."
+    "Не принимать выставку TCT в 2010 за подтверждение годового исполнения; заводской материал France указывает начало продаж весной 2011.",
+    "Сопоставить глобальную техническую идентичность Turismo между DE и UK, не создавать региональные дубли. UK Lusso/Veloce/Cloverleaf требуют отдельной проверки имени и единиц мощности."
+  ],
+  "candidate2010Rows": [
+    {
+      "year": 2010,
+      "engine": "1.4 TB",
+      "trim": "Giulietta",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "powerPS": 120,
+      "fuel": "petrol",
+      "transmission": "MT",
+      "drive": "FWD",
+      "bodyType": "hatchback",
+      "sources": {
+        "identity": "de-2010-launch",
+        "power": "de-2010-launch",
+        "engineCc": "uk-2010-technical",
+        "drive": "uk-2010-technical",
+        "transmission": "it-2010-launch",
+        "bodyType": "it-2010-launch"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "1.4 TB MultiAir",
+      "trim": "Giulietta",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "petrol",
+      "transmission": "MT",
+      "drive": "FWD",
+      "bodyType": "hatchback",
+      "sources": {
+        "identity": "de-2010-launch",
+        "power": "de-2010-launch",
+        "engineCc": "uk-2010-technical",
+        "drive": "uk-2010-technical",
+        "transmission": "it-2010-launch",
+        "bodyType": "it-2010-launch"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "1.6 JTDM",
+      "trim": "Giulietta",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "powerPS": 105,
+      "fuel": "diesel",
+      "transmission": "MT",
+      "drive": "FWD",
+      "bodyType": "hatchback",
+      "sources": {
+        "identity": "de-2010-launch",
+        "power": "de-2010-launch",
+        "engineCc": "uk-2010-technical",
+        "drive": "uk-2010-technical",
+        "transmission": "it-2010-launch",
+        "bodyType": "it-2010-launch"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "2.0 JTDM",
+      "trim": "Giulietta",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "diesel",
+      "transmission": "MT",
+      "drive": "FWD",
+      "bodyType": "hatchback",
+      "sources": {
+        "identity": "de-2010-launch",
+        "power": "de-2010-launch",
+        "engineCc": "uk-2010-technical",
+        "drive": "uk-2010-technical",
+        "transmission": "it-2010-launch",
+        "bodyType": "it-2010-launch"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "1.4 TB",
+      "trim": "Turismo",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "powerPS": 120,
+      "fuel": "petrol",
+      "transmission": "MT",
+      "drive": "FWD",
+      "bodyType": "hatchback",
+      "sources": {
+        "identity": "de-2010-launch",
+        "power": "de-2010-launch",
+        "engineCc": "uk-2010-technical",
+        "drive": "uk-2010-technical",
+        "transmission": "it-2010-launch",
+        "bodyType": "it-2010-launch"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "1.4 TB MultiAir",
+      "trim": "Turismo",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "petrol",
+      "transmission": "MT",
+      "drive": "FWD",
+      "bodyType": "hatchback",
+      "sources": {
+        "identity": "de-2010-launch",
+        "power": "de-2010-launch",
+        "engineCc": "uk-2010-technical",
+        "drive": "uk-2010-technical",
+        "transmission": "it-2010-launch",
+        "bodyType": "it-2010-launch"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "1.6 JTDM",
+      "trim": "Turismo",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "powerPS": 105,
+      "fuel": "diesel",
+      "transmission": "MT",
+      "drive": "FWD",
+      "bodyType": "hatchback",
+      "sources": {
+        "identity": "de-2010-launch",
+        "power": "de-2010-launch",
+        "engineCc": "uk-2010-technical",
+        "drive": "uk-2010-technical",
+        "transmission": "it-2010-launch",
+        "bodyType": "it-2010-launch"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "2.0 JTDM",
+      "trim": "Turismo",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "diesel",
+      "transmission": "MT",
+      "drive": "FWD",
+      "bodyType": "hatchback",
+      "sources": {
+        "identity": "de-2010-launch",
+        "power": "de-2010-launch",
+        "engineCc": "uk-2010-technical",
+        "drive": "uk-2010-technical",
+        "transmission": "it-2010-launch",
+        "bodyType": "it-2010-launch"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "1750 TBi",
+      "trim": "Quadrifoglio Verde",
+      "engineCc": 1742,
+      "powerKw": 173,
+      "powerPS": 235,
+      "fuel": "petrol",
+      "transmission": "MT",
+      "drive": "FWD",
+      "bodyType": "hatchback",
+      "sources": {
+        "identity": "de-2010-launch",
+        "power": "de-2010-launch",
+        "engineCc": "uk-2010-technical",
+        "drive": "uk-2010-technical",
+        "transmission": "it-2010-launch",
+        "bodyType": "it-2010-launch"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "2.0 JTDM-2",
+      "trim": "Progression",
+      "engineCc": 1956,
+      "powerKw": 103,
+      "powerPS": 140,
+      "fuel": "diesel",
+      "transmission": "MT",
+      "drive": "FWD",
+      "sources": {
+        "identity": "it-2010-140-launch",
+        "technical": "it-2010-140-technical"
+      }
+    },
+    {
+      "year": 2010,
+      "engine": "2.0 JTDM-2",
+      "trim": "Distinctive",
+      "engineCc": 1956,
+      "powerKw": 103,
+      "powerPS": 140,
+      "fuel": "diesel",
+      "transmission": "MT",
+      "drive": "FWD",
+      "sources": {
+        "identity": "it-2010-140-launch",
+        "technical": "it-2010-140-technical"
+      }
+    }
+  ],
+  "laterSourceLeads": [
+    {
+      "year": 2012,
+      "url": "https://www.media.stellantis.com/uploads/it/2013/Listini/121221_AR_Giulietta.pdf",
+      "note": "Судя по поиску дата внутри 21.12.2012; год пути 2013 не использовать вместо даты документа. Ещё не прочитан."
+    },
+    {
+      "year": 2019,
+      "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+      "note": "Ещё не прочитан."
+    },
+    {
+      "year": 2020,
+      "url": "https://www.media.stellantis.com/uploads/ch/model-pricelist/alfa_giulietta_my20_inflation_it-5f0433085d4ef.pdf",
+      "note": "Ещё не прочитан, поиск показывает 01.07.2020."
+    },
+    {
+      "year": 2021,
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/210107_listinoargiuliettamy2001gennaio2021-5ff7530cc86b4.pdf",
+      "note": "Ещё не прочитан. Прайс 01.01.2021 / MY2020 сам по себе не доказывает производство в 2021; проверить связь модельного и календарного года."
+    }
   ]
 }

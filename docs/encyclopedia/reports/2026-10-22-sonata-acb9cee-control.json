@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-22T06:43:35.130873+00:00",
+  "id": "ajes-korea-6d1ocW5lV5Cl77",
+  "passed": true,
+  "checks": {
+    "engineCc": {
+      "card": 1999,
+      "search": 1999,
+      "equal": true
+    },
+    "powerHp": {
+      "card": 160,
+      "search": 160,
+      "equal": true
+    },
+    "totalRub": {
+      "card": 3560003,
+      "search": 3560003,
+      "equal": true
+    },
+    "powerDataSource": {
+      "card": "permanent_encyclopedia:78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
+      "search": "permanent_encyclopedia:78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
+      "equal": true
+    },
+    "calculationStatus": {
+      "card": "estimated",
+      "search": "estimated",
+      "equal": true
+    }
+  },
+  "expectedPriorTotal": 3560003,
+  "samePriorTotal": true
+}
