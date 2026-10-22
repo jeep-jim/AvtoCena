@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T21:15:00+07:00",
+  "updatedAt": "2026-10-22T22:10:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -725,15 +725,19 @@
         2010,
         2011,
         2013,
+        2015,
+        2016,
+        2017,
+        2018,
         2026
       ],
-      "variants": 21,
+      "variants": 33,
       "status": "partially_researched",
-      "researchedVariants": 20,
-      "checkedAt": "2026-10-22T21:15:00+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-early-remaining.json",
-      "nextAction": "Alpina D3 F30/F31 с2013, затем поздние D3/D3S, D5 и Alpine",
-      "previousRetryFile": "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json",
+      "researchedVariants": 32,
+      "checkedAt": "2026-10-22T22:10:00+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-2013-2019-remaining.json",
+      "nextAction": "Alpina D3S с 2020 по датированным заводским таблицам; затем D5 и Alpine. Пропуски D3 2014/2019 и остальные поля — отдельный retry.",
+      "previousRetryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-early-remaining.json",
       "historicalExpansionComplete": false
     },
     {
@@ -32636,12 +32640,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T21:15:00+07:00",
+    "updatedAt": "2026-10-22T22:10:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "alpina_d3_early_20_new_saved_pending_index",
+    "state": "alpina_d3_2013_2018_12_new_saved_pending_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alpina D3 F30/F31 с2013, затем поздние D3/D3S, D5 и Alpine",
+    "nextModel": "Alpina D3S с 2020 по датированным заводским таблицам; затем D5 и Alpine. Пропуски D3 2014/2019 и остальные поля — отдельный retry.",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -33271,26 +33275,23 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-early-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-2013-2019-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "alpina-d3-2010-2011-2013-official-tables",
-      "commit": "ed3eed26d1f5d66fc2847cea0cc1d1b549c673e1",
-      "workflow": 39792747303,
-      "job": 119872582899,
+      "key": "alpina-d3-2013-2018-dated-factory",
+      "commit": "f6932b87eeb4b0238aacbe5df2f31bc9ead270be",
+      "workflow": 39800817651,
+      "job": 119900651053,
       "variants": 12,
       "newVariants": 12,
-      "fields": 108,
+      "fields": 115,
       "workflowStatus": "completed",
       "workflowConclusion": "success",
-      "applyStepConclusion": "success",
-      "allReportedStepsConclusion": "success",
-      "terminalStatusPending": false,
-      "batch": "research-2026-10-22-alpina-d3-2010-2011-2013-official-tables",
+      "batch": "research-2026-10-22-alpina-d3-2013-2018-dated-factory",
       "apiReadback": true,
       "includedInIndex": false,
       "indexMembershipState": "applied_after_active_release_index_snapshot",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2010-2011-2013-official-tables-readback.json"
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2013-2018-dated-factory-readback.json"
     },
     "indexReleaseRequested": true,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
@@ -33769,85 +33770,83 @@
         "includedInIndex": false,
         "indexMembershipState": "applied_after_active_release_index_snapshot",
         "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2010-2011-2013-official-tables-readback.json"
+      },
+      {
+        "key": "alpina-d3-2013-2018-dated-factory",
+        "commit": "f6932b87eeb4b0238aacbe5df2f31bc9ead270be",
+        "workflow": 39800817651,
+        "job": 119900651053,
+        "variants": 12,
+        "newVariants": 12,
+        "fields": 115,
+        "workflowStatus": "completed",
+        "workflowConclusion": "success",
+        "batch": "research-2026-10-22-alpina-d3-2013-2018-dated-factory",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "applied_after_active_release_index_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2013-2018-dated-factory-readback.json"
       }
     ],
     "inFlightResearch": null,
     "lastCompletedPass": {
       "version": 1,
-      "checkedAt": "2026-10-22T21:15:00+07:00",
+      "checkedAt": "2026-10-22T22:10:00+07:00",
       "model": "Alpina D3",
       "modelId": "5dfcc65f1b57038636b1cce6",
-      "scope": "Проверенные ранние годовые исполнения, не полнота модели",
+      "scope": "Датированные заводские исполнения 2013, 2015, 2016, 2017, 2018; не полнота поколения",
       "state": "saved_api_readback_pass_pending_index",
-      "operations": 20,
-      "newVariants": 20,
+      "operations": 12,
+      "newVariants": 12,
       "updatedVariants": 0,
-      "confirmedFields": 184,
+      "confirmedFields": 115,
       "newByYear": {
-        "2008": 2,
-        "2009": 6,
-        "2010": 6,
-        "2011": 4,
-        "2013": 2
+        "2013": 3,
+        "2015": 2,
+        "2016": 2,
+        "2017": 3,
+        "2018": 2
       },
-      "finalVariants": 21,
-      "researchedVariants": 20,
-      "revision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "finalVariants": 33,
+      "researchedVariants": 32,
+      "revision": "28deda50-e687-4fdc-801a-109e5a5a2237",
       "batches": [
         {
-          "key": "alpina-d3-2008-2009-factory",
-          "commit": "055b642d9d636b7a9e5b0a28affd08c860a234e9",
-          "workflow": 39792096245,
-          "job": 119870452619,
-          "variants": 8,
-          "newVariants": 8,
-          "fields": 76,
-          "workflowStatus": "completed",
-          "workflowConclusion": "success",
-          "batch": "research-2026-10-22-alpina-d3-2008-2009-factory",
-          "apiReadback": true,
-          "includedInIndex": false,
-          "indexMembershipState": "applied_after_active_release_index_snapshot",
-          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2008-2009-factory-readback.json"
-        },
-        {
-          "key": "alpina-d3-2010-2011-2013-official-tables",
-          "commit": "ed3eed26d1f5d66fc2847cea0cc1d1b549c673e1",
-          "workflow": 39792747303,
-          "job": 119872582899,
+          "key": "alpina-d3-2013-2018-dated-factory",
+          "commit": "f6932b87eeb4b0238aacbe5df2f31bc9ead270be",
+          "workflow": 39800817651,
+          "job": 119900651053,
           "variants": 12,
           "newVariants": 12,
-          "fields": 108,
+          "fields": 115,
           "workflowStatus": "completed",
           "workflowConclusion": "success",
-          "applyStepConclusion": "success",
-          "allReportedStepsConclusion": "success",
-          "terminalStatusPending": false,
-          "batch": "research-2026-10-22-alpina-d3-2010-2011-2013-official-tables",
+          "batch": "research-2026-10-22-alpina-d3-2013-2018-dated-factory",
           "apiReadback": true,
           "includedInIndex": false,
           "indexMembershipState": "applied_after_active_release_index_snapshot",
-          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2010-2011-2013-official-tables-readback.json"
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2013-2018-dated-factory-readback.json"
         }
       ],
       "validation": {
         "guards": "8/8 PASS",
-        "independentApiReadback": "20/184 PASS",
-        "preservedExistingVariants": 1,
+        "independentApiReadback": "12/115 PASS",
+        "preservedExistingVariants": 21,
         "manualWrites": 0,
         "duplicatesAdded": 0,
-        "calculationFieldsCompiled": 164,
-        "identityFields": 20,
+        "calculationFieldsCompiled": 99,
+        "identityFields": 12,
+        "referenceOnlyChassisFields": 4,
         "productionCompilerChanged": false,
-        "preservationReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-preservation-and-compiler.json",
+        "preservationReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2013-2018-preservation-and-compiler.json",
         "freshCardSearchParityConfirmed": false
       },
       "sourceScope": {
-        "factory": "Заводской анонс05.03.2008, оригинальная брошюраALPINA April2009 на архивных хостах; автор и хост различаются.",
-        "officialReference": "TCS/EnergieSchweiz/BFE, срезы05/2010,09/2011,09/2013. official_registry, не заводские факты и не индивидуальная омологация. Каталог2014 со срезом2013 создаёт только2013."
+        "factory": "ALPINA, заводские анонсы 10.09.2013/25.11.2015 и оригинальные PDF с датами 01.11.2016, 09/2017, 01.02.2018. Архивный хост отделён от автора; имена файлов не использованы как доказательство года.",
+        "pdfVisualInspection": "Технические таблицы и выходные даты сверены визуально. Японская строка полной массы 1935/2005 отличается от снаряжённой 1660/1730. ECU DDE/DME не назван кодом двигателя."
       },
       "integration": {
-        "checkedAt": "2026-10-22T21:15:00+07:00",
+        "checkedAt": "2026-10-22T22:10:00+07:00",
         "state": "saved_and_compiled_pending_next_immutable_index",
         "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
         "healthCalculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5",
@@ -33860,22 +33859,24 @@
         },
         "duplicateReleaseRequested": false,
         "visitorRequestSearchOrSyncAdded": false,
-        "nextAction": "Один совокупный защищённый индекс после уже сопровождаемой отдельной задачей публикации Китая; проверить членство новых записей и активацию. Не дублировать выпуск."
+        "nextAction": "После уже сопровождаемой отдельной задачей retained-China publication включить все pending в один штатный неизменяемый индекс; проверить членство, активацию, карточки и выдачу. Не дублировать выпуск."
       },
       "remaining": [
-        "2008: ранняя одноступенчатая D3 200 PS и фактические даты появления Bi-Turbo Saloon/Touring требуют отдельного годового подтверждения; анонс будущего выпуска не принят за наличие.",
-        "Купе2008: точные1995см³, разрешённая полная масса, привод и коды не перенесены из таблицы2009 без подтверждения.",
-        "2011 Saloon и вся гамма2012: отсутствуют проверенные годовые таблицы. 403/robots у архивов2011/2012 не означает отсутствия моделей; доступ не обходился.",
-        "2010/2011/2013: привод, коды двигателя/кузова, ступени коробки и разрешённая полная масса не подтверждены; колонка снаряжённой массы не использована.",
-        "2009: привод и точные коды двигателя/кузова требуют руководства/омологации.",
-        "D3 F30/F31 с2013, последующие годы и D3S2020+ ещё не пройдены; исходная запись2026 сохранена, её год и идентичность не подтверждены.",
-        "Исторические D3 не проверены в действующих карточках/выдаче: новые партии ещё не активированы в индексе; прежние каталожные проверки не выданы за новые."
+        "2014: доступная точная датированная техническая таблица пока не подтверждена; год не создан переносом данных 2013/2015.",
+        "2013: точный объём двигателя, коды и разрешённая полная масса не подтверждены анонсом; округлённые 3 литра не преобразованы в 2993 см³.",
+        "2015: привод, точные коды и разрешённая полная масса требуют отдельного подтверждения; дополнительные региональные/AWD исполнения не выведены из соседнего года.",
+        "2016 и 2018: подтверждены только датированные японские FDA-3P10 с 2992 см³ и полной массой 1935/2005 кг. Международные 2993 см³ не распространены на эти записи; привод и engineCode остаются неизвестны.",
+        "2017: международный прайс печатает Touring 2990 см³ против 2992/2993 в других заводских документах. Объём Touring и Touring AWD не записан до разрешения противоречия. Для Saloon 2993 подтверждено отдельно. Привод обычных версий, коды и полная масса не угаданы.",
+        "2019: найден датированный японский список опций, подтверждающий названия/8AT, но не технические поля двигателя. Требуются таблица и фактические годы перехода к D3S.",
+        "D3S 2020+ ещё не записаны: проверять год на странице издания, MHEV, мощность ДВС отдельно от электромашины/системы; документированная 30-минутная мощность отсутствует в просмотренном тексте 2020.",
+        "Исходная наблюдаемая D3S 2026 сохранена без подтверждения её года/полей. Старые пробелы 2008–2013 остаются в предыдущем retry.",
+        "Новые исторические строки ещё не активированы в неизменяемом индексе и не проверены в карточках/выдаче. Полнота D3 и базы не заявлена."
       ],
-      "next": "Alpina D3 F30/F31 с2013, затем поздние D3/D3S, D5 и Alpine",
+      "next": "Alpina D3S с 2020 по датированным заводским таблицам; затем D5 и Alpine. Пропуски D3 2014/2019 и остальные поля — отдельный retry.",
       "allModelsComplete": false,
       "historicalExpansionComplete": false,
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-early-remaining.json",
-      "handoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-d3-2013.json"
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-2013-2019-remaining.json",
+      "handoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-d3s-2020.json"
     },
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
@@ -33921,7 +33922,7 @@
       "previousTotalVisited": 6000,
       "previousConclusion": "success_page_limit",
       "resumeCommit": "70d91b4703b4954113cdeff7f9a9d0194a6e2d2a",
-      "checkedAt": "2026-10-22T20:23:19.000+07:00",
+      "checkedAt": "2026-10-22T22:10:00+07:00",
       "lastWorkflow": 39781954229,
       "lastLoggedVisited": 6530,
       "lastLoggedSaved": 3902,
@@ -33938,13 +33939,13 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-d3-2013.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-d3s-2020.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
       "state": "in_progress",
       "referenceOnly": true,
-      "checkedAt": "2026-10-22T20:23:19.000+07:00",
+      "checkedAt": "2026-10-22T22:10:00+07:00",
       "lastLoggedFetched": 2070,
       "lastLoggedVisited": 4960,
       "lastLoggedSaved": 285,
@@ -34863,6 +34864,95 @@
       "historicalExpansionComplete": false,
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-early-remaining.json",
       "handoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-d3-2013.json"
+    },
+    "alpinaD3GenerationPass": {
+      "version": 1,
+      "checkedAt": "2026-10-22T22:10:00+07:00",
+      "model": "Alpina D3",
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "scope": "Датированные заводские исполнения 2013, 2015, 2016, 2017, 2018; не полнота поколения",
+      "state": "saved_api_readback_pass_pending_index",
+      "operations": 12,
+      "newVariants": 12,
+      "updatedVariants": 0,
+      "confirmedFields": 115,
+      "newByYear": {
+        "2013": 3,
+        "2015": 2,
+        "2016": 2,
+        "2017": 3,
+        "2018": 2
+      },
+      "finalVariants": 33,
+      "researchedVariants": 32,
+      "revision": "28deda50-e687-4fdc-801a-109e5a5a2237",
+      "batches": [
+        {
+          "key": "alpina-d3-2013-2018-dated-factory",
+          "commit": "f6932b87eeb4b0238aacbe5df2f31bc9ead270be",
+          "workflow": 39800817651,
+          "job": 119900651053,
+          "variants": 12,
+          "newVariants": 12,
+          "fields": 115,
+          "workflowStatus": "completed",
+          "workflowConclusion": "success",
+          "batch": "research-2026-10-22-alpina-d3-2013-2018-dated-factory",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "indexMembershipState": "applied_after_active_release_index_snapshot",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2013-2018-dated-factory-readback.json"
+        }
+      ],
+      "validation": {
+        "guards": "8/8 PASS",
+        "independentApiReadback": "12/115 PASS",
+        "preservedExistingVariants": 21,
+        "manualWrites": 0,
+        "duplicatesAdded": 0,
+        "calculationFieldsCompiled": 99,
+        "identityFields": 12,
+        "referenceOnlyChassisFields": 4,
+        "productionCompilerChanged": false,
+        "preservationReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2013-2018-preservation-and-compiler.json",
+        "freshCardSearchParityConfirmed": false
+      },
+      "sourceScope": {
+        "factory": "ALPINA, заводские анонсы 10.09.2013/25.11.2015 и оригинальные PDF с датами 01.11.2016, 09/2017, 01.02.2018. Архивный хост отделён от автора; имена файлов не использованы как доказательство года.",
+        "pdfVisualInspection": "Технические таблицы и выходные даты сверены визуально. Японская строка полной массы 1935/2005 отличается от снаряжённой 1660/1730. ECU DDE/DME не назван кодом двигателя."
+      },
+      "integration": {
+        "checkedAt": "2026-10-22T22:10:00+07:00",
+        "state": "saved_and_compiled_pending_next_immutable_index",
+        "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+        "healthCalculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5",
+        "lastKnownActiveIndexDigest": "9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+        "newBatchesActivationConfirmed": false,
+        "existingChinaPublication": {
+          "id": 39788307780,
+          "status": "queued",
+          "conclusion": null
+        },
+        "duplicateReleaseRequested": false,
+        "visitorRequestSearchOrSyncAdded": false,
+        "nextAction": "После уже сопровождаемой отдельной задачей retained-China publication включить все pending в один штатный неизменяемый индекс; проверить членство, активацию, карточки и выдачу. Не дублировать выпуск."
+      },
+      "remaining": [
+        "2014: доступная точная датированная техническая таблица пока не подтверждена; год не создан переносом данных 2013/2015.",
+        "2013: точный объём двигателя, коды и разрешённая полная масса не подтверждены анонсом; округлённые 3 литра не преобразованы в 2993 см³.",
+        "2015: привод, точные коды и разрешённая полная масса требуют отдельного подтверждения; дополнительные региональные/AWD исполнения не выведены из соседнего года.",
+        "2016 и 2018: подтверждены только датированные японские FDA-3P10 с 2992 см³ и полной массой 1935/2005 кг. Международные 2993 см³ не распространены на эти записи; привод и engineCode остаются неизвестны.",
+        "2017: международный прайс печатает Touring 2990 см³ против 2992/2993 в других заводских документах. Объём Touring и Touring AWD не записан до разрешения противоречия. Для Saloon 2993 подтверждено отдельно. Привод обычных версий, коды и полная масса не угаданы.",
+        "2019: найден датированный японский список опций, подтверждающий названия/8AT, но не технические поля двигателя. Требуются таблица и фактические годы перехода к D3S.",
+        "D3S 2020+ ещё не записаны: проверять год на странице издания, MHEV, мощность ДВС отдельно от электромашины/системы; документированная 30-минутная мощность отсутствует в просмотренном тексте 2020.",
+        "Исходная наблюдаемая D3S 2026 сохранена без подтверждения её года/полей. Старые пробелы 2008–2013 остаются в предыдущем retry.",
+        "Новые исторические строки ещё не активированы в неизменяемом индексе и не проверены в карточках/выдаче. Полнота D3 и базы не заявлена."
+      ],
+      "next": "Alpina D3S с 2020 по датированным заводским таблицам; затем D5 и Alpine. Пропуски D3 2014/2019 и остальные поля — отдельный retry.",
+      "allModelsComplete": false,
+      "historicalExpansionComplete": false,
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-2013-2019-remaining.json",
+      "handoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-d3s-2020.json"
     }
   },
   "scope": {

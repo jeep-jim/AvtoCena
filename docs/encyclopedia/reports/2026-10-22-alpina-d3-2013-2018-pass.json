@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T22:10:00+07:00",
+  "model": "Alpina D3",
+  "modelId": "5dfcc65f1b57038636b1cce6",
+  "scope": "Датированные заводские исполнения 2013, 2015, 2016, 2017, 2018; не полнота поколения",
+  "state": "saved_api_readback_pass_pending_index",
+  "operations": 12,
+  "newVariants": 12,
+  "updatedVariants": 0,
+  "confirmedFields": 115,
+  "newByYear": {
+    "2013": 3,
+    "2015": 2,
+    "2016": 2,
+    "2017": 3,
+    "2018": 2
+  },
+  "finalVariants": 33,
+  "researchedVariants": 32,
+  "revision": "28deda50-e687-4fdc-801a-109e5a5a2237",
+  "batches": [
+    {
+      "key": "alpina-d3-2013-2018-dated-factory",
+      "commit": "f6932b87eeb4b0238aacbe5df2f31bc9ead270be",
+      "workflow": 39800817651,
+      "job": 119900651053,
+      "variants": 12,
+      "newVariants": 12,
+      "fields": 115,
+      "workflowStatus": "completed",
+      "workflowConclusion": "success",
+      "batch": "research-2026-10-22-alpina-d3-2013-2018-dated-factory",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2013-2018-dated-factory-readback.json"
+    }
+  ],
+  "validation": {
+    "guards": "8/8 PASS",
+    "independentApiReadback": "12/115 PASS",
+    "preservedExistingVariants": 21,
+    "manualWrites": 0,
+    "duplicatesAdded": 0,
+    "calculationFieldsCompiled": 99,
+    "identityFields": 12,
+    "referenceOnlyChassisFields": 4,
+    "productionCompilerChanged": false,
+    "preservationReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2013-2018-preservation-and-compiler.json",
+    "freshCardSearchParityConfirmed": false
+  },
+  "sourceScope": {
+    "factory": "ALPINA, заводские анонсы 10.09.2013/25.11.2015 и оригинальные PDF с датами 01.11.2016, 09/2017, 01.02.2018. Архивный хост отделён от автора; имена файлов не использованы как доказательство года.",
+    "pdfVisualInspection": "Технические таблицы и выходные даты сверены визуально. Японская строка полной массы 1935/2005 отличается от снаряжённой 1660/1730. ECU DDE/DME не назван кодом двигателя."
+  },
+  "integration": {
+    "checkedAt": "2026-10-22T22:10:00+07:00",
+    "state": "saved_and_compiled_pending_next_immutable_index",
+    "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "healthCalculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5",
+    "lastKnownActiveIndexDigest": "9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+    "newBatchesActivationConfirmed": false,
+    "existingChinaPublication": {
+      "id": 39788307780,
+      "status": "queued",
+      "conclusion": null
+    },
+    "duplicateReleaseRequested": false,
+    "visitorRequestSearchOrSyncAdded": false,
+    "nextAction": "После уже сопровождаемой отдельной задачей retained-China publication включить все pending в один штатный неизменяемый индекс; проверить членство, активацию, карточки и выдачу. Не дублировать выпуск."
+  },
+  "remaining": [
+    "2014: доступная точная датированная техническая таблица пока не подтверждена; год не создан переносом данных 2013/2015.",
+    "2013: точный объём двигателя, коды и разрешённая полная масса не подтверждены анонсом; округлённые 3 литра не преобразованы в 2993 см³.",
+    "2015: привод, точные коды и разрешённая полная масса требуют отдельного подтверждения; дополнительные региональные/AWD исполнения не выведены из соседнего года.",
+    "2016 и 2018: подтверждены только датированные японские FDA-3P10 с 2992 см³ и полной массой 1935/2005 кг. Международные 2993 см³ не распространены на эти записи; привод и engineCode остаются неизвестны.",
+    "2017: международный прайс печатает Touring 2990 см³ против 2992/2993 в других заводских документах. Объём Touring и Touring AWD не записан до разрешения противоречия. Для Saloon 2993 подтверждено отдельно. Привод обычных версий, коды и полная масса не угаданы.",
+    "2019: найден датированный японский список опций, подтверждающий названия/8AT, но не технические поля двигателя. Требуются таблица и фактические годы перехода к D3S.",
+    "D3S 2020+ ещё не записаны: проверять год на странице издания, MHEV, мощность ДВС отдельно от электромашины/системы; документированная 30-минутная мощность отсутствует в просмотренном тексте 2020.",
+    "Исходная наблюдаемая D3S 2026 сохранена без подтверждения её года/полей. Старые пробелы 2008–2013 остаются в предыдущем retry.",
+    "Новые исторические строки ещё не активированы в неизменяемом индексе и не проверены в карточках/выдаче. Полнота D3 и базы не заявлена."
+  ],
+  "next": "Alpina D3S с 2020 по датированным заводским таблицам; затем D5 и Alpine. Пропуски D3 2014/2019 и остальные поля — отдельный retry.",
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false,
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-2013-2019-remaining.json",
+  "handoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-d3s-2020.json"
+}
