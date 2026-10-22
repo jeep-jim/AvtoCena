@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T14:09:43.088065+07:00",
+  "updatedAt": "2026-10-22T14:13:48.107340+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -575,16 +575,17 @@
         2022,
         2021,
         2020,
+        2014,
         2013,
         2012,
         2011,
         2010
       ],
-      "variants": 93,
+      "variants": 137,
       "status": "partial_verified_fields",
-      "researchedVariants": 63,
-      "checkedAt": "2026-10-22T14:09:43.088065+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2010-2012.json",
+      "researchedVariants": 107,
+      "checkedAt": "2026-10-22T14:12:12.990659+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2013-2014.json",
       "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
@@ -32588,12 +32589,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T14:09:43.088065+07:00",
+    "updatedAt": "2026-10-22T14:13:48.107340+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "giulietta_2013_2014_prepared",
+    "state": "giulietta_2014_special_2015_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulietta 2014 — оставшиеся Sprint/Quadrifoglio Verde/Launch Edition; затем 2015",
+    "nextModel": "Alfa Romeo Giulietta 2015 — Collezione/Sprint Speciale и ранние исполнения, затем 2016",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32766,6 +32767,16 @@
         "fields": 482,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-giulietta-2013-2014": {
+        "batch": "research-2026-10-22-alfa-giulietta-2013-2014",
+        "commit": "3e82207bce47632ff6fd3e2b8687a3bd76c2ff4f",
+        "workflow": 39738685028,
+        "variants": 44,
+        "newVariants": 44,
+        "fields": 312,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32786,12 +32797,12 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-giulietta-2010-2012",
-      "commit": "9a68b9591dc9b7c082a51f17985d838ed6d23038",
-      "workflow": 39738308666,
-      "variants": 62,
-      "newVariants": 62,
-      "fields": 482,
+      "batch": "research-2026-10-22-alfa-giulietta-2013-2014",
+      "commit": "3e82207bce47632ff6fd3e2b8687a3bd76c2ff4f",
+      "workflow": 39738685028,
+      "variants": 44,
+      "newVariants": 44,
+      "fields": 312,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32917,19 +32928,29 @@
         "fields": 482,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-giulietta-2013-2014",
+        "commit": "3e82207bce47632ff6fd3e2b8687a3bd76c2ff4f",
+        "workflow": 39738685028,
+        "variants": 44,
+        "newVariants": 44,
+        "fields": 312,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-giulietta-2013-2014",
+      "batch": "research-2026-10-22-alfa-giulietta-2014-special-2015",
       "modelId": "cb49c6bb46e8dd8caf106b34",
       "years": [
-        2013,
-        2014
+        2014,
+        2015
       ],
-      "variants": 44,
-      "fields": 312,
+      "variants": 32,
+      "fields": 230,
       "state": "prepared_not_applied",
-      "claimedAt": "2026-10-22T14:09:43.088065+07:00"
+      "claimedAt": "2026-10-22T14:13:48.107340+07:00"
     },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-giulia-2019-2026-pass.json",

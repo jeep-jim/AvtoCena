@@ -1,0 +1,3001 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-giulietta-2014-special-2015",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "781838ad0b7b3e0d9c3b2f65",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "1.4 Turbo Benzina 120 PS Riders",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Riders",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/jorge-lorenzo-presenta-la-nuova-alfa-romeo-giulietta-riders",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 2014 года подтверждает исполнение и точный мотор. Объём и мощность сопоставлены с тем же двигателем, топливом и мощностной версией в заводском прайсе Giulietta 04.02.2014; отдельные полевые источники сохранены. Неизвестные коробки/привод/масса не выводятся из названия. Для 175 PS конфликт кВт оставлен в retry.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/jorge-lorenzo-presenta-la-nuova-alfa-romeo-giulietta-riders",
+            "checkedAt": "2026-10-22",
+            "selector": "2014 Riders; 1.4 Turbo Benzina 120 CV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5E.1; 1.4 Turbo Benzina EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5E.1; 1.4 Turbo Benzina EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5E.1; 1.4 Turbo Benzina EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5E.1; 1.4 Turbo Benzina EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5E.1; 1.4 Turbo Benzina EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5E.1; 1.4 Turbo Benzina EU6; 120 CV; Progression; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "2a84ed37ee12fe174e1d29fd",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "1.6 JTDM 105 PS Riders",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 105 PS Riders",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 105,
+        "powerKw": 77,
+        "icePowerKw": 77
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/jorge-lorenzo-presenta-la-nuova-alfa-romeo-giulietta-riders",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 2014 года подтверждает исполнение и точный мотор. Объём и мощность сопоставлены с тем же двигателем, топливом и мощностной версией в заводском прайсе Giulietta 04.02.2014; отдельные полевые источники сохранены. Неизвестные коробки/привод/масса не выводятся из названия. Для 175 PS конфликт кВт оставлен в retry.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/jorge-lorenzo-presenta-la-nuova-alfa-romeo-giulietta-riders",
+            "checkedAt": "2026-10-22",
+            "selector": "2014 Riders; 1.6 JTDM 105 CV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "c7fd3af9751f710c4206a536",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "1.4 Turbo Benzina GPL 120 PS Riders",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina GPL 120 PS Riders",
+        "fuel": "lpg",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/jorge-lorenzo-presenta-la-nuova-alfa-romeo-giulietta-riders",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 2014 года подтверждает исполнение и точный мотор. Объём и мощность сопоставлены с тем же двигателем, топливом и мощностной версией в заводском прайсе Giulietta 04.02.2014; отдельные полевые источники сохранены. Неизвестные коробки/привод/масса не выводятся из названия. Для 175 PS конфликт кВт оставлен в retry.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/jorge-lorenzo-presenta-la-nuova-alfa-romeo-giulietta-riders",
+            "checkedAt": "2026-10-22",
+            "selector": "2014 Riders; 1.4 Turbo Benzina GPL 120 CV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "99e7071ae2ddadcf61f51cde",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "1.4 Turbo MultiAir TCT 170 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo MultiAir TCT 170 PS Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 170,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 2014 года подтверждает исполнение и точный мотор. Объём и мощность сопоставлены с тем же двигателем, топливом и мощностной версией в заводском прайсе Giulietta 04.02.2014; отдельные полевые источники сохранены. Неизвестные коробки/привод/масса не выводятся из названия. Для 175 PS конфликт кВт оставлен в retry.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+            "checkedAt": "2026-10-22",
+            "selector": "2014 Sprint 1.4 MultiAir 170 CV Alfa TCT"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir EU6; 170 CV; Distinctive; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir EU6; 170 CV; Distinctive; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir EU6; 170 CV; Distinctive; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir EU6; 170 CV; Distinctive; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir EU6; 170 CV; Distinctive; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir EU6; 170 CV; Distinctive; 1368 cm3"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+            "checkedAt": "2026-10-22",
+            "selector": "Automatic dual-clutch Alfa TCT 170 CV"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "466444b5e15a0d8905fa0882",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "1.6 JTDM 105 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 105 PS Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 105,
+        "powerKw": 77,
+        "icePowerKw": 77
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 2014 года подтверждает исполнение и точный мотор. Объём и мощность сопоставлены с тем же двигателем, топливом и мощностной версией в заводском прайсе Giulietta 04.02.2014; отдельные полевые источники сохранены. Неизвестные коробки/привод/масса не выводятся из названия. Для 175 PS конфликт кВт оставлен в retry.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+            "checkedAt": "2026-10-22",
+            "selector": "2014 Sprint; 1.6 JTDM 105 CV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.B5H.1; 1.6 JTDM EU5+; 105 CV; Progression; 1598 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "e9db2451be0fc7da1ed6d463",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "2.0 JTDM 150 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM 150 PS Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 2014 года подтверждает исполнение и точный мотор. Объём и мощность сопоставлены с тем же двигателем, топливом и мощностной версией в заводском прайсе Giulietta 04.02.2014; отдельные полевые источники сохранены. Неизвестные коробки/привод/масса не выводятся из названия. Для 175 PS конфликт кВт оставлен в retry.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+            "checkedAt": "2026-10-22",
+            "selector": "2014 Sprint; 2.0 JTDM 150 CV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5L.1; 2.0 JTDM EU5+; 150 CV; Distinctive; 1956 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5L.1; 2.0 JTDM EU5+; 150 CV; Distinctive; 1956 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5L.1; 2.0 JTDM EU5+; 150 CV; Distinctive; 1956 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5L.1; 2.0 JTDM EU5+; 150 CV; Distinctive; 1956 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5L.1; 2.0 JTDM EU5+; 150 CV; Distinctive; 1956 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5L.1; 2.0 JTDM EU5+; 150 CV; Distinctive; 1956 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "33acfc6bf009896bf48eca20",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "2.0 JTDM TCT 175 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM TCT 175 PS Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 175,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 2014 года подтверждает исполнение и точный мотор. Объём и мощность сопоставлены с тем же двигателем, топливом и мощностной версией в заводском прайсе Giulietta 04.02.2014; отдельные полевые источники сохранены. Неизвестные коробки/привод/масса не выводятся из названия. Для 175 PS конфликт кВт оставлен в retry.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+            "checkedAt": "2026-10-22",
+            "selector": "2014 Sprint; 2.0 JTDM TCT 175 CV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5T.1; 2.0 JTDM TCT EU5+; 175 CV; Distinctive; 1956 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5T.1; 2.0 JTDM TCT EU5+; 175 CV; Distinctive; 1956 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5T.1; 2.0 JTDM TCT EU5+; 175 CV; Distinctive; 1956 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5T.1; 2.0 JTDM TCT EU5+; 175 CV; Distinctive; 1956 cm3"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.C5T.1; 2.0 JTDM TCT EU5+; 175 CV; Distinctive; 1956 cm3",
+            "definition": {
+              "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/nuovi-motori-per-alfa-romeo-giulietta-e-mito-model-year-2014",
+              "checkedAt": "2026-10-22",
+              "selector": "Giulietta 2.0 JTDM 175 CV TCT; automatic dry dual clutch"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "8fe03fc080b2b9e3205d39cf",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "1.4 Turbo Benzina GPL 120 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina GPL 120 PS Sprint",
+        "fuel": "lpg",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 2014 года подтверждает исполнение и точный мотор. Объём и мощность сопоставлены с тем же двигателем, топливом и мощностной версией в заводском прайсе Giulietta 04.02.2014; отдельные полевые источники сохранены. Неизвестные коробки/привод/масса не выводятся из названия. Для 175 PS конфликт кВт оставлен в retry.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+            "checkedAt": "2026-10-22",
+            "selector": "2014 Sprint; 1.4 Turbo Benzina GPL 120 CV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2014-02-04",
+            "documentSha256": "2a87adaada68ab55cbc47e64a83e34a8290856207c4be5f4cdcd4520d93662c4",
+            "page": 2,
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL EU6; 120 CV; Progression; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "b1d3afb8d120d93ff4f689d2",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "1.4 Turbo MultiAir 150 PS MT6 Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo MultiAir 150 PS MT6 Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "manual",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Sprint доступно в октябре 2014 по заводскому анонсу. Точная техническая таблица 1.4 TB 150 CV: 1368 см³, 110 кВт/150 CV, передний привод и механическая коробка 6 ступеней. Снаряжённая масса 1290 кг не является полной массой и не перенесена в grossVehicleWeightKg.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+            "checkedAt": "2026-10-22",
+            "selector": "Sprint 1.4 MultiAir TurboBenzina 150 CV, 16.10.2014"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-arriva-negli-showroom-italiani",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TurboBenzina 150 CV"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/schede_tecniche/141027_AR_giulietta_scheda_tecnica.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta 1.4 TB 150 CV S&S; 1368 cm3; 110/150 kW/CV; anteriore; meccanico 6 marce",
+            "documentSha256": "dd716599e134ef704a68ef615d049cc57f7be220453b9230ff0bec5d79914a1f",
+            "page": 1
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/schede_tecniche/141027_AR_giulietta_scheda_tecnica.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta 1.4 TB 150 CV S&S; 1368 cm3; 110/150 kW/CV; anteriore; meccanico 6 marce",
+            "documentSha256": "dd716599e134ef704a68ef615d049cc57f7be220453b9230ff0bec5d79914a1f",
+            "page": 1
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/schede_tecniche/141027_AR_giulietta_scheda_tecnica.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta 1.4 TB 150 CV S&S; 1368 cm3; 110/150 kW/CV; anteriore; meccanico 6 marce",
+            "documentSha256": "dd716599e134ef704a68ef615d049cc57f7be220453b9230ff0bec5d79914a1f",
+            "page": 1
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/schede_tecniche/141027_AR_giulietta_scheda_tecnica.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta 1.4 TB 150 CV S&S; 1368 cm3; 110/150 kW/CV; anteriore; meccanico 6 marce",
+            "documentSha256": "dd716599e134ef704a68ef615d049cc57f7be220453b9230ff0bec5d79914a1f",
+            "page": 1
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/schede_tecniche/141027_AR_giulietta_scheda_tecnica.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta 1.4 TB 150 CV S&S; 1368 cm3; 110/150 kW/CV; anteriore; meccanico 6 marce",
+            "documentSha256": "dd716599e134ef704a68ef615d049cc57f7be220453b9230ff0bec5d79914a1f",
+            "page": 1
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/schede_tecniche/141027_AR_giulietta_scheda_tecnica.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta 1.4 TB 150 CV S&S; 1368 cm3; 110/150 kW/CV; anteriore; meccanico 6 marce",
+            "documentSha256": "dd716599e134ef704a68ef615d049cc57f7be220453b9230ff0bec5d79914a1f",
+            "page": 1
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2014/schede_tecniche/141027_AR_giulietta_scheda_tecnica.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta 1.4 TB 150 CV S&S; 1368 cm3; 110/150 kW/CV; anteriore; meccanico 6 marce",
+            "documentSha256": "dd716599e134ef704a68ef615d049cc57f7be220453b9230ff0bec5d79914a1f",
+            "page": 1
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "260772691ade04b802120258",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "1750 TBi TCT 240 PS Quadrifoglio Verde",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1750 TBi TCT 240 PS Quadrifoglio Verde",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1742,
+        "powerHp": 240,
+        "powerKw": 177,
+        "icePowerKw": 177,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-giulietta-topmodell-quadrifoglio-verde-tct",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 01.04.2014 подтверждает QV и Launch Edition с одинаковым двигателем 177 кВт/240 PS и TCT. Техническая таблица точного QV E6: рабочий объём 1742 см³ и передний привод. Округлённые 1750 см³ из рекламного текста не использованы. Снаряжённая масса 1320 кг не перенесена как полная.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-giulietta-topmodell-quadrifoglio-verde-tct",
+            "checkedAt": "2026-10-22",
+            "selector": "01.04.2014 Quadrifoglio Verde; Launch Edition explicitly motor-identical to standard QV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-giulietta-topmodell-quadrifoglio-verde-tct",
+            "checkedAt": "2026-10-22",
+            "selector": "177 kW (240 PS), exact metric PS"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "3ef0e99bb3e837cc82633d27",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2014,
+      "trim": "1750 TBi TCT 240 PS Quadrifoglio Verde Launch Edition",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1750 TBi TCT 240 PS Quadrifoglio Verde Launch Edition",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1742,
+        "powerHp": 240,
+        "powerKw": 177,
+        "icePowerKw": 177,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-giulietta-topmodell-quadrifoglio-verde-tct",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс 01.04.2014 подтверждает QV и Launch Edition с одинаковым двигателем 177 кВт/240 PS и TCT. Техническая таблица точного QV E6: рабочий объём 1742 см³ и передний привод. Округлённые 1750 см³ из рекламного текста не использованы. Снаряжённая масса 1320 кг не перенесена как полная.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-giulietta-topmodell-quadrifoglio-verde-tct",
+            "checkedAt": "2026-10-22",
+            "selector": "01.04.2014 Quadrifoglio Verde Launch Edition; Launch Edition explicitly motor-identical to standard QV"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-giulietta-topmodell-quadrifoglio-verde-tct",
+            "checkedAt": "2026-10-22",
+            "selector": "177 kW (240 PS), exact metric PS"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/em/2014/schede_tecniche/Technical-Specification-Giulietta-QV.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Giulietta Quadrifoglio Verde 1750 TP 240 HP E6; 1742 cm3; 177 kW; front; twin clutch",
+            "documentSha256": "2a774484d6223652946b99f9771975a465c6293bdafd5e049f82288d7a50e51b",
+            "page": 1
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "d8bca64b28613074173b1825",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.4 Turbo Benzina 105 PS Impression",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 105 PS Impression",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 105,
+        "powerKw": 77,
+        "icePowerKw": 77
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.G5A.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5A.1; 1.4 Turbo Benzina; 105 CV; Impression; 1368 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5A.1; 1.4 Turbo Benzina; 105 CV; Impression; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5A.1; 1.4 Turbo Benzina; 105 CV; Impression; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5A.1; 1.4 Turbo Benzina; 105 CV; Impression; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5A.1; 1.4 Turbo Benzina; 105 CV; Impression; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5A.1; 1.4 Turbo Benzina; 105 CV; Impression; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5A.1; 1.4 Turbo Benzina; 105 CV; Impression; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "01ada968d6c1bf52a270b4bb",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.4 Turbo Benzina 105 PS Progression",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 105 PS Progression",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 105,
+        "powerKw": 77,
+        "icePowerKw": 77
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.B5A.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5A.1; 1.4 Turbo Benzina; 105 CV; Progression; 1368 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5A.1; 1.4 Turbo Benzina; 105 CV; Progression; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5A.1; 1.4 Turbo Benzina; 105 CV; Progression; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5A.1; 1.4 Turbo Benzina; 105 CV; Progression; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5A.1; 1.4 Turbo Benzina; 105 CV; Progression; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5A.1; 1.4 Turbo Benzina; 105 CV; Progression; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5A.1; 1.4 Turbo Benzina; 105 CV; Progression; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "936d022c7a6f212bb1ea722d",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.4 Turbo Benzina 120 PS Distinctive",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Distinctive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.C5E.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5E.1; 1.4 Turbo Benzina; 120 CV; Distinctive; 1368 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5E.1; 1.4 Turbo Benzina; 120 CV; Distinctive; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5E.1; 1.4 Turbo Benzina; 120 CV; Distinctive; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5E.1; 1.4 Turbo Benzina; 120 CV; Distinctive; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5E.1; 1.4 Turbo Benzina; 120 CV; Distinctive; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5E.1; 1.4 Turbo Benzina; 120 CV; Distinctive; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5E.1; 1.4 Turbo Benzina; 120 CV; Distinctive; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "da9320bb0035b7ee9d4838f8",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.4 Turbo MultiAir 150 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo MultiAir 150 PS Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.S5N.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5N.1; 1.4 Turbo MultiAir; 150 CV; Sprint; 1368 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5N.1; 1.4 Turbo MultiAir; 150 CV; Sprint; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5N.1; 1.4 Turbo MultiAir; 150 CV; Sprint; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5N.1; 1.4 Turbo MultiAir; 150 CV; Sprint; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5N.1; 1.4 Turbo MultiAir; 150 CV; Sprint; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5N.1; 1.4 Turbo MultiAir; 150 CV; Sprint; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5N.1; 1.4 Turbo MultiAir; 150 CV; Sprint; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "8a7265210c85a19afbf137f9",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.4 Turbo MultiAir 170 PS Distinctive",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo MultiAir 170 PS Distinctive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 170,
+        "powerKw": 125,
+        "icePowerKw": 125
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.C5F.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir; 170 CV; Distinctive; 1368 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir; 170 CV; Distinctive; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir; 170 CV; Distinctive; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir; 170 CV; Distinctive; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir; 170 CV; Distinctive; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir; 170 CV; Distinctive; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5F.1; 1.4 Turbo MultiAir; 170 CV; Distinctive; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "037cba6824b5b48aef3c56e3",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.4 Turbo MultiAir TCT 170 PS Exclusive",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo MultiAir TCT 170 PS Exclusive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 170,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.D5G.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5G.1; 1.4 Turbo MultiAir TCT; 170 CV; Exclusive; 1368 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5G.1; 1.4 Turbo MultiAir TCT; 170 CV; Exclusive; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5G.1; 1.4 Turbo MultiAir TCT; 170 CV; Exclusive; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5G.1; 1.4 Turbo MultiAir TCT; 170 CV; Exclusive; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5G.1; 1.4 Turbo MultiAir TCT; 170 CV; Exclusive; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5G.1; 1.4 Turbo MultiAir TCT; 170 CV; Exclusive; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5G.1; 1.4 Turbo MultiAir TCT; 170 CV; Exclusive; 1368 cm3"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5G.1; 1.4 Turbo MultiAir TCT; 170 CV; Exclusive; 1368 cm3",
+            "definition": {
+              "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/nuovi-motori-per-alfa-romeo-giulietta-e-mito-model-year-2014",
+              "checkedAt": "2026-10-22",
+              "selector": "Alfa TCT automatic dual-clutch"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "07f4ad9062fce797ed03fe5a",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1750 Turbo Benzina TCT 240 PS Quadrifoglio Verde",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1750 Turbo Benzina TCT 240 PS Quadrifoglio Verde",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1742,
+        "powerHp": 240,
+        "powerKw": 177,
+        "icePowerKw": 177,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.C5C.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5C.1; 1750 Turbo Benzina TCT; 240 CV; Quadrifoglio Verde; 1742 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5C.1; 1750 Turbo Benzina TCT; 240 CV; Quadrifoglio Verde; 1742 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5C.1; 1750 Turbo Benzina TCT; 240 CV; Quadrifoglio Verde; 1742 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5C.1; 1750 Turbo Benzina TCT; 240 CV; Quadrifoglio Verde; 1742 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5C.1; 1750 Turbo Benzina TCT; 240 CV; Quadrifoglio Verde; 1742 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5C.1; 1750 Turbo Benzina TCT; 240 CV; Quadrifoglio Verde; 1742 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5C.1; 1750 Turbo Benzina TCT; 240 CV; Quadrifoglio Verde; 1742 cm3"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5C.1; 1750 Turbo Benzina TCT; 240 CV; Quadrifoglio Verde; 1742 cm3",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-giulietta-topmodell-quadrifoglio-verde-tct",
+              "checkedAt": "2026-10-22",
+              "selector": "Alfa TCT automatic dual-clutch"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "13256503e98ab6cb77a55494",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.4 Turbo Benzina GPL 120 PS Progression",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina GPL 120 PS Progression",
+        "fuel": "lpg",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.BGE.1: точное исполнение, объём см³, мощность CV/PS и кВт. Двухтопливная версия бензин/GPL, штатный fuel=lpg. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL; 120 CV; Progression; 1368 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL; 120 CV; Progression; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL; 120 CV; Progression; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL; 120 CV; Progression; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL; 120 CV; Progression; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL; 120 CV; Progression; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.BGE.1; 1.4 Turbo Benzina GPL; 120 CV; Progression; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "da31d7efc38610bc25fd57cd",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.4 Turbo Benzina GPL 120 PS Distinctive",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina GPL 120 PS Distinctive",
+        "fuel": "lpg",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.CGE.1: точное исполнение, объём см³, мощность CV/PS и кВт. Двухтопливная версия бензин/GPL, штатный fuel=lpg. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.CGE.1; 1.4 Turbo Benzina GPL; 120 CV; Distinctive; 1368 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.CGE.1; 1.4 Turbo Benzina GPL; 120 CV; Distinctive; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.CGE.1; 1.4 Turbo Benzina GPL; 120 CV; Distinctive; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.CGE.1; 1.4 Turbo Benzina GPL; 120 CV; Distinctive; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.CGE.1; 1.4 Turbo Benzina GPL; 120 CV; Distinctive; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.CGE.1; 1.4 Turbo Benzina GPL; 120 CV; Distinctive; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.CGE.1; 1.4 Turbo Benzina GPL; 120 CV; Distinctive; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "072f0994ffbdc2c8748e3d79",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.4 Turbo Benzina GPL 120 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina GPL 120 PS Sprint",
+        "fuel": "lpg",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.SGE.1: точное исполнение, объём см³, мощность CV/PS и кВт. Двухтопливная версия бензин/GPL, штатный fuel=lpg. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.SGE.1; 1.4 Turbo Benzina GPL; 120 CV; Sprint; 1368 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.SGE.1; 1.4 Turbo Benzina GPL; 120 CV; Sprint; 1368 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.SGE.1; 1.4 Turbo Benzina GPL; 120 CV; Sprint; 1368 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.SGE.1; 1.4 Turbo Benzina GPL; 120 CV; Sprint; 1368 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.SGE.1; 1.4 Turbo Benzina GPL; 120 CV; Sprint; 1368 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.SGE.1; 1.4 Turbo Benzina GPL; 120 CV; Sprint; 1368 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.SGE.1; 1.4 Turbo Benzina GPL; 120 CV; Sprint; 1368 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "4926c7198f70c4b52b80adec",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.6 JTDM 120 PS Progression",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Progression",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.B5R.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5R.1; 1.6 JTDM; 120 CV; Progression; 1598 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5R.1; 1.6 JTDM; 120 CV; Progression; 1598 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5R.1; 1.6 JTDM; 120 CV; Progression; 1598 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5R.1; 1.6 JTDM; 120 CV; Progression; 1598 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5R.1; 1.6 JTDM; 120 CV; Progression; 1598 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5R.1; 1.6 JTDM; 120 CV; Progression; 1598 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5R.1; 1.6 JTDM; 120 CV; Progression; 1598 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "e6c44de5b82463f66497edf6",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.6 JTDM 120 PS Distinctive",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Distinctive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.C5R.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5R.1; 1.6 JTDM; 120 CV; Distinctive; 1598 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5R.1; 1.6 JTDM; 120 CV; Distinctive; 1598 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5R.1; 1.6 JTDM; 120 CV; Distinctive; 1598 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5R.1; 1.6 JTDM; 120 CV; Distinctive; 1598 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5R.1; 1.6 JTDM; 120 CV; Distinctive; 1598 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5R.1; 1.6 JTDM; 120 CV; Distinctive; 1598 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5R.1; 1.6 JTDM; 120 CV; Distinctive; 1598 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "449bc556465e1538e75881ae",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.6 JTDM 120 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.S5R.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5R.1; 1.6 JTDM; 120 CV; Sprint; 1598 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5R.1; 1.6 JTDM; 120 CV; Sprint; 1598 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5R.1; 1.6 JTDM; 120 CV; Sprint; 1598 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5R.1; 1.6 JTDM; 120 CV; Sprint; 1598 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5R.1; 1.6 JTDM; 120 CV; Sprint; 1598 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5R.1; 1.6 JTDM; 120 CV; Sprint; 1598 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5R.1; 1.6 JTDM; 120 CV; Sprint; 1598 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "db1fb73dc4cccacbd8e4d9dc",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.6 JTDM 120 PS Exclusive",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Exclusive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.D5R.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5R.1; 1.6 JTDM; 120 CV; Exclusive; 1598 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5R.1; 1.6 JTDM; 120 CV; Exclusive; 1598 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5R.1; 1.6 JTDM; 120 CV; Exclusive; 1598 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5R.1; 1.6 JTDM; 120 CV; Exclusive; 1598 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5R.1; 1.6 JTDM; 120 CV; Exclusive; 1598 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5R.1; 1.6 JTDM; 120 CV; Exclusive; 1598 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5R.1; 1.6 JTDM; 120 CV; Exclusive; 1598 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "efaf854d01e02785229821d0",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "1.6 JTDM 120 PS Business",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Business",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.G5R.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5R.1; 1.6 JTDM; 120 CV; Business; 1598 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5R.1; 1.6 JTDM; 120 CV; Business; 1598 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5R.1; 1.6 JTDM; 120 CV; Business; 1598 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5R.1; 1.6 JTDM; 120 CV; Business; 1598 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5R.1; 1.6 JTDM; 120 CV; Business; 1598 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5R.1; 1.6 JTDM; 120 CV; Business; 1598 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.G5R.1; 1.6 JTDM; 120 CV; Business; 1598 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "0a14f58af71fbe436e5e17b2",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "2.0 JTDM 150 PS Distinctive",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM 150 PS Distinctive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.C5S.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5S.1; 2.0 JTDM; 150 CV; Distinctive; 1956 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5S.1; 2.0 JTDM; 150 CV; Distinctive; 1956 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5S.1; 2.0 JTDM; 150 CV; Distinctive; 1956 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5S.1; 2.0 JTDM; 150 CV; Distinctive; 1956 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5S.1; 2.0 JTDM; 150 CV; Distinctive; 1956 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5S.1; 2.0 JTDM; 150 CV; Distinctive; 1956 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.C5S.1; 2.0 JTDM; 150 CV; Distinctive; 1956 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "7ca508fdf2925e87e2ab0002",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "2.0 JTDM 150 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM 150 PS Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.S5S.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5S.1; 2.0 JTDM; 150 CV; Sprint; 1956 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5S.1; 2.0 JTDM; 150 CV; Sprint; 1956 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5S.1; 2.0 JTDM; 150 CV; Sprint; 1956 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5S.1; 2.0 JTDM; 150 CV; Sprint; 1956 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5S.1; 2.0 JTDM; 150 CV; Sprint; 1956 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5S.1; 2.0 JTDM; 150 CV; Sprint; 1956 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5S.1; 2.0 JTDM; 150 CV; Sprint; 1956 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "dd871b5bba2f18b0b4c8d590",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "2.0 JTDM 150 PS Exclusive",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM 150 PS Exclusive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.D5S.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5S.1; 2.0 JTDM; 150 CV; Exclusive; 1956 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5S.1; 2.0 JTDM; 150 CV; Exclusive; 1956 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5S.1; 2.0 JTDM; 150 CV; Exclusive; 1956 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5S.1; 2.0 JTDM; 150 CV; Exclusive; 1956 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5S.1; 2.0 JTDM; 150 CV; Exclusive; 1956 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5S.1; 2.0 JTDM; 150 CV; Exclusive; 1956 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5S.1; 2.0 JTDM; 150 CV; Exclusive; 1956 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "68dcec0e69b79e333aceb976",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "2.0 JTDM 150 PS Business",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM 150 PS Business",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.B5S.1: точное исполнение, объём см³, мощность CV/PS и кВт. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5S.1; 2.0 JTDM; 150 CV; Business; 1956 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5S.1; 2.0 JTDM; 150 CV; Business; 1956 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5S.1; 2.0 JTDM; 150 CV; Business; 1956 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5S.1; 2.0 JTDM; 150 CV; Business; 1956 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5S.1; 2.0 JTDM; 150 CV; Business; 1956 cm3"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5S.1; 2.0 JTDM; 150 CV; Business; 1956 cm3"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.B5S.1; 2.0 JTDM; 150 CV; Business; 1956 cm3"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "ad71eda71acd60bd1d49df3d",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "2.0 JTDM TCT 175 PS Sprint",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM TCT 175 PS Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 175,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.S5T.1: точное исполнение, объём см³, мощность CV/PS. Конфликт 128/129 кВт для 175 PS оставлен в retry. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5T.1; 2.0 JTDM TCT; 175 CV; Sprint; 1956 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5T.1; 2.0 JTDM TCT; 175 CV; Sprint; 1956 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5T.1; 2.0 JTDM TCT; 175 CV; Sprint; 1956 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5T.1; 2.0 JTDM TCT; 175 CV; Sprint; 1956 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5T.1; 2.0 JTDM TCT; 175 CV; Sprint; 1956 cm3"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.S5T.1; 2.0 JTDM TCT; 175 CV; Sprint; 1956 cm3",
+            "definition": {
+              "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/nuovi-motori-per-alfa-romeo-giulietta-e-mito-model-year-2014",
+              "checkedAt": "2026-10-22",
+              "selector": "Alfa TCT automatic dual-clutch"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "f6c27fd92147e0dc1856b2ae",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2015,
+      "trim": "2.0 JTDM TCT 175 PS Exclusive",
+      "expectedRevision": "b1908990-db87-4855-8fa3-16afe5473b41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM TCT 175 PS Exclusive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 175,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 23.07.2015, страница 2, MVS 191.D5T.1: точное исполнение, объём см³, мощность CV/PS. Конфликт 128/129 кВт для 175 PS оставлен в retry. TCT — автоматическая коробка. Остальные неподтверждённые характеристики не перенесены из другого года.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5T.1; 2.0 JTDM TCT; 175 CV; Exclusive; 1956 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5T.1; 2.0 JTDM TCT; 175 CV; Exclusive; 1956 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5T.1; 2.0 JTDM TCT; 175 CV; Exclusive; 1956 cm3"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5T.1; 2.0 JTDM TCT; 175 CV; Exclusive; 1956 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5T.1; 2.0 JTDM TCT; 175 CV; Exclusive; 1956 cm3"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "233d4d3c07292820143c872de291fdcb889a55224e16841536c43e7c34ed9f38",
+            "page": 2,
+            "publishedAt": "2015-07-23",
+            "selector": "MVS 191.D5T.1; 2.0 JTDM TCT; 175 CV; Exclusive; 1956 cm3",
+            "definition": {
+              "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/nuovi-motori-per-alfa-romeo-giulietta-e-mito-model-year-2014",
+              "checkedAt": "2026-10-22",
+              "selector": "Alfa TCT automatic dual-clutch"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
