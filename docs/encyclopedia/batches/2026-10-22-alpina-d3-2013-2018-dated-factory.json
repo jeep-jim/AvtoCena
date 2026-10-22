@@ -1,0 +1,1616 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alpina-d3-2013-2018-dated-factory",
+  "entries": [
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2013,
+      "operation": "create",
+      "variantId": "d127c8bddd6ef46fcbdb5d93",
+      "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC RWD",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC RWD",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-релиз ALPINA от10.09.2013 сохранён в Bimmerarchiv; автор ALPINA, хост архивный. Дизель350PS/257кВт, 8-ступенчатая SWITCH-TRONIC, задний привод; Touring также с полным приводом. Точный объём в см³, масса и коды здесь не указаны и не перенесены из других лет. Подтверждение2013 также согласуется с текущей доступностью Limousine в официальном каталоге Tokyo Motor Show2013.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=trim",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=bodyType",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=fuel",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=powertrainKind",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=powerHp",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=powerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=icePowerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=transmission",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "drive": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=drive",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2013,
+      "operation": "create",
+      "variantId": "0a47098c472cd54f7d1e1dff",
+      "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC RWD",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC RWD",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-релиз ALPINA от10.09.2013 сохранён в Bimmerarchiv; автор ALPINA, хост архивный. Дизель350PS/257кВт, 8-ступенчатая SWITCH-TRONIC, задний привод; Touring также с полным приводом. Точный объём в см³, масса и коды здесь не указаны и не перенесены из других лет. Подтверждение2013 также согласуется с текущей доступностью Limousine в официальном каталоге Tokyo Motor Show2013.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=trim",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=bodyType",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=fuel",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=powertrainKind",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=powerHp",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=powerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=icePowerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=transmission",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "drive": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=drive",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2013,
+      "operation": "create",
+      "variantId": "02774eec94b56b8bf5b75551",
+      "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC AWD",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC AWD",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-релиз ALPINA от10.09.2013 сохранён в Bimmerarchiv; автор ALPINA, хост архивный. Дизель350PS/257кВт, 8-ступенчатая SWITCH-TRONIC, задний привод; Touring также с полным приводом. Точный объём в см³, масса и коды здесь не указаны и не перенесены из других лет. Подтверждение2013 также согласуется с текущей доступностью Limousine в официальном каталоге Tokyo Motor Show2013.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=trim",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=bodyType",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=fuel",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=powertrainKind",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=powerHp",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=powerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=icePowerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=transmission",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "drive": {
+            "url": "https://www.bimmerarchiv.de/artikel/2013-09-10-der-neue-bmw-alpina-d3-biturbo.html",
+            "effectiveAt": "2013-09-10",
+            "selector": "ALPINA press release: Antrieb, Kraftuebertragung, Allrad, Design; field=drive",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2015,
+      "operation": "create",
+      "variantId": "b45ee9d86d7fc3df923157ef",
+      "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC LCI",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC LCI",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "engineCc": 2993
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+        "checkedAt": "2026-10-22",
+        "statement": "Первичный пресс-релиз ALPINA GB через пресс-агентство Market Engineering,25.11.2015: обновлённые Saloon/Touring уже доступны. Таблица D3:2993см³,257кВт/350hp; это метрическая пара350PS, не350bhp. Коробка8-ступенчатая автоматическая SWITCH-TRONIC. Снаряжённая масса1660/1730кг не записана как полная. Привод и коды не назначены без точного подтверждения.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=trim",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=bodyType",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=fuel",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=powertrainKind",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=powerHp",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=powerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=icePowerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=transmission",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "engineCc": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=engineCc",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2015,
+      "operation": "create",
+      "variantId": "e6579fd5cc90ec45471a0b69",
+      "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC LCI",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC LCI",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "engineCc": 2993
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+        "checkedAt": "2026-10-22",
+        "statement": "Первичный пресс-релиз ALPINA GB через пресс-агентство Market Engineering,25.11.2015: обновлённые Saloon/Touring уже доступны. Таблица D3:2993см³,257кВт/350hp; это метрическая пара350PS, не350bhp. Коробка8-ступенчатая автоматическая SWITCH-TRONIC. Снаряжённая масса1660/1730кг не записана как полная. Привод и коды не назначены без точного подтверждения.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=trim",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=bodyType",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=fuel",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=powertrainKind",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=powerHp",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=powerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=icePowerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=transmission",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "engineCc": {
+            "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+            "effectiveAt": "2015-11-25",
+            "selector": "ALPINA GB press release: D3 powertrain and TECHNICAL DATA, Saloon/Touring; field=engineCc",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA GB via Market Engineering",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2016,
+      "operation": "create",
+      "variantId": "66deac9dcd965a7fe7001533",
+      "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC FDA-3P10",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC FDA-3P10",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "engineCc": 2992,
+        "chassisCode": "FDA-3P10",
+        "grossVehicleWeightKg": 1935
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Архив оригинального каталога ALPINA/Nicole, фактическая дата2016-11-01 наPDF16, техническая таблицаPDF14 визуально проверена. Тип FDA-3P10,2992см³,257кВт/350PS,8AT ZF8HP70. Полная масса1935кг Limousine/2005кг Touring из отдельной строки полной массы; снаряжённая1660/1730кг и нагрузка550кг не подставлены. Эти значения относятся к указанному типу FDA-3P10; не заменяют европейские2993см³. Файл с2017 в названии фактически датирован2016 и создаёт только2016. Код блока DDE/DME7.31 не принят за код двигателя. Привод не угадан. Это заводская брошюра, не сертификат.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=trim",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=bodyType",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=fuel",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=powertrainKind",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=powerHp",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=powerKw",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=icePowerKw",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=transmission",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "engineCc": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=engineCc",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "chassisCode": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=chassisCode",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=grossVehicleWeightKg",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2016,
+      "operation": "create",
+      "variantId": "5db69d6f916f21f57d7f522f",
+      "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC FDA-3P10",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC FDA-3P10",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "engineCc": 2992,
+        "chassisCode": "FDA-3P10",
+        "grossVehicleWeightKg": 2005
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Архив оригинального каталога ALPINA/Nicole, фактическая дата2016-11-01 наPDF16, техническая таблицаPDF14 визуально проверена. Тип FDA-3P10,2992см³,257кВт/350PS,8AT ZF8HP70. Полная масса1935кг Limousine/2005кг Touring из отдельной строки полной массы; снаряжённая1660/1730кг и нагрузка550кг не подставлены. Эти значения относятся к указанному типу FDA-3P10; не заменяют европейские2993см³. Файл с2017 в названии фактически датирован2016 и создаёт только2016. Код блока DDE/DME7.31 не принят за код двигателя. Привод не угадан. Это заводская брошюра, не сертификат.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=trim",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=bodyType",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=fuel",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=powertrainKind",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=powerHp",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=powerKw",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=icePowerKw",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=transmission",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "engineCc": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=engineCc",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "chassisCode": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=chassisCode",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2016-11-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "57fbaa41d2adf944635f272bcf74bfbed179a12ffda63e129bc27a2a895c6c2a",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=grossVehicleWeightKg",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2018,
+      "operation": "create",
+      "variantId": "67c6958dfcc02af4f7f078cb",
+      "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC FDA-3P10",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC FDA-3P10",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "engineCc": 2992,
+        "chassisCode": "FDA-3P10",
+        "grossVehicleWeightKg": 1935
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Архив оригинального каталога ALPINA/Nicole, фактическая дата2018-02-01 наPDF16, техническая таблицаPDF14 визуально проверена. Тип FDA-3P10,2992см³,257кВт/350PS,8AT ZF8HP70. Полная масса1935кг Limousine/2005кг Touring из отдельной строки полной массы; снаряжённая1660/1730кг и нагрузка550кг не подставлены. Эти значения относятся к указанному типу FDA-3P10; не заменяют европейские2993см³. Файл с2017 в названии фактически датирован2016 и создаёт только2016. Код блока DDE/DME7.31 не принят за код двигателя. Привод не угадан. Это заводская брошюра, не сертификат.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=trim",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=bodyType",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=fuel",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=powertrainKind",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=powerHp",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=powerKw",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=icePowerKw",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=transmission",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "engineCc": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=engineCc",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "chassisCode": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=chassisCode",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Saloon, technical table; field=grossVehicleWeightKg",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2018,
+      "operation": "create",
+      "variantId": "46dadc65f14891fcab06a950",
+      "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC FDA-3P10",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC FDA-3P10",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "engineCc": 2992,
+        "chassisCode": "FDA-3P10",
+        "grossVehicleWeightKg": 2005
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Архив оригинального каталога ALPINA/Nicole, фактическая дата2018-02-01 наPDF16, техническая таблицаPDF14 визуально проверена. Тип FDA-3P10,2992см³,257кВт/350PS,8AT ZF8HP70. Полная масса1935кг Limousine/2005кг Touring из отдельной строки полной массы; снаряжённая1660/1730кг и нагрузка550кг не подставлены. Эти значения относятся к указанному типу FDA-3P10; не заменяют европейские2993см³. Файл с2017 в названии фактически датирован2016 и создаёт только2016. Код блока DDE/DME7.31 не принят за код двигателя. Привод не угадан. Это заводская брошюра, не сертификат.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=trim",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=bodyType",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=fuel",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=powertrainKind",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=powerHp",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=powerKw",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=icePowerKw",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=transmission",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "engineCc": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=engineCc",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "chassisCode": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=chassisCode",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2018_Alpina_D3_Biturbo_Saloon_Touring_catalog.pdf",
+            "effectiveAt": "2018-02-01",
+            "pdfPage": 14,
+            "datePage": 16,
+            "sourceSha256": "d3323888a1cb0f6d1318aff372da410d6f134c20c47a6b3e5803ab8b77ef211d",
+            "checkedAt": "2026-10-22",
+            "selector": "ALPINA FDA-3P10 Touring, technical table; field=grossVehicleWeightKg",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2017,
+      "operation": "create",
+      "variantId": "f69e85db45318be64507fcfa",
+      "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Saloon 8AT SWITCH-TRONIC",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "engineCc": 2993
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Архивная копия оригинального прайса ALPINA International09/2017, PDF3; таблица визуально сверена. Дизель257кВт/350метрическихPS,8AT SWITCH-TRONIC; отдельная TouringAWD. У Saloon2993см³, у Touring напечатано2990см³: противоречивый объём Touring не сохранён и отправлен на повторную проверку. Привод обычных версий, масса и коды не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=trim",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=bodyType",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=fuel",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=powertrainKind",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=powerHp",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=powerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=icePowerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=transmission",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "engineCc": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=engineCc",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2017,
+      "operation": "create",
+      "variantId": "75d01bf60f547bfabb745e6a",
+      "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Архивная копия оригинального прайса ALPINA International09/2017, PDF3; таблица визуально сверена. Дизель257кВт/350метрическихPS,8AT SWITCH-TRONIC; отдельная TouringAWD. У Saloon2993см³, у Touring напечатано2990см³: противоречивый объём Touring не сохранён и отправлен на повторную проверку. Привод обычных версий, масса и коды не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=trim",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=bodyType",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=fuel",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=powertrainKind",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=powerHp",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=powerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=icePowerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=transmission",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2017,
+      "operation": "create",
+      "variantId": "df74c029c0072d8b322ddd06",
+      "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC AWD",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC AWD",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Архивная копия оригинального прайса ALPINA International09/2017, PDF3; таблица визуально сверена. Дизель257кВт/350метрическихPS,8AT SWITCH-TRONIC; отдельная TouringAWD. У Saloon2993см³, у Touring напечатано2990см³: противоречивый объём Touring не сохранён и отправлен на повторную проверку. Привод обычных версий, масса и коды не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=trim",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=bodyType",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=fuel",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=powertrainKind",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerHp": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=powerHp",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "powerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=powerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=icePowerKw",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=transmission",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          },
+          "drive": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2017_Alpina_D3_Biturbo_Saloon_Touring_optionlist.pdf",
+            "effectiveAt": "2017-09",
+            "pdfPage": 3,
+            "sourceSha256": "d6808e5b62bd6fe1a1d352226b37b8ea01bcb3c6f570891d603f208b6ff85f23",
+            "selector": "ALPINA international export price list09/2017, printed page2, model pricing and technical data; field=drive",
+            "checkedAt": "2026-10-22",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen",
+            "sourceNature": "manufacturer-authored source hosted by archive or press agency"
+          }
+        }
+      }
+    }
+  ]
+}
