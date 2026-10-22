@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T01:04:00+07:00",
+  "updatedAt": "2026-10-23T01:11:32+07:00",
   "next": "Alpine A110 2023–2026: точные заводские исполнения и спецсерии; затем A290. Пробелы 2017–2022 отдельно.",
   "currentModelId": "cc5a28958f2b1bd3eac176d4",
   "nextModelId": "9f23c75ab6a73713bf64580a",
@@ -30,8 +30,50 @@
     {
       "url": "https://media.alpinecars.com/triple-digit-growth-for-alpine-in-2025/?lang=eng",
       "note": "A390 missing-family discovery needed; deliverieslate2025 not equal2026publicationdate."
+    },
+    {
+      "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+      "sha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a",
+      "tablePage": 54,
+      "datePage": 64,
+      "documentDate": "12/2022",
+      "visualChecked": true,
+      "note": "Заводская брошюра у дилера. A110/GT/S/R, 1798 см³;185/252 или221/300;RWD,7DCT,coupe;полная масса1360кг кромеR1316кг. Для2023 сверить фактический год, а не URL; не сохранено в БД."
+    },
+    {
+      "url": "https://media.alpinecars.com/alpine-a110-r-tarifs-et-ouverture-des-commandes-en-france/?lang=fra",
+      "note": "Первичный анонс поставок R/FernandoAlonso с весны2023; не создавать2022 по дате анонса."
+    },
+    {
+      "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+      "sha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf",
+      "tablePage": 18,
+      "datePage": 22,
+      "documentDate": "03/2025",
+      "visualChecked": true,
+      "note": "Официальный PDF:base185kW/252HP,GTS221kW/300HP;1798,RWD,7DCT,coupe,GVW1360. Единицу HP сверить с французским ch;не сохранено вБД."
+    },
+    {
+      "url": "https://media.alpinecars.com/alpine-to-celebrate-its-70th-anniversary-with-a-limited-edition-a110-r-70-and-a-revamp-of-its-a110-range/?lang=fra",
+      "documentDate": "2025-02-26",
+      "note": "Анонс GTS/R70, заказы с начала марта2025; страница поfra фактическианглийская."
+    },
+    {
+      "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+      "sha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b",
+      "tablePage": 22,
+      "datePage": 25,
+      "documentDate": "10/2024",
+      "visualChecked": true,
+      "note": "Заводская брошюра у дилера:максимальная180ch/130kW или220ch/160kW;52kWh,FWD,редуктор,5-дверныйхэтчбек,GVW1950. 30-минутной мощности нет. Перед переносомточно сопоставить GT/GT Premium/GT Performance/GTS постраницамоборудования. НичегоизэтоговБДещёне записано."
     }
   ],
   "integration": "Единый штатный выпуск запрошен; успех, индекс и activation ещё проверить. Не дублировать.",
-  "allModelsComplete": false
+  "allModelsComplete": false,
+  "release": {
+    "commit": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+    "workflow": 39828240506,
+    "state": "in_progress",
+    "noDuplicateRelease": true
+  }
 }

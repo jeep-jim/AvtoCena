@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T01:04:00+07:00",
+  "updatedAt": "2026-10-23T01:11:32+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32656,7 +32656,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T01:04:00+07:00",
+    "updatedAt": "2026-10-23T01:11:32+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "alpine_a110_2017_2022_saved_aggregate_release_requested",
     "preserveManual": true,
@@ -33375,8 +33375,8 @@
         "workflow": 39720654481
       }
     ],
-    "requestedRelease": "4fac75d1846655c4528ccbe55ef551c2bb888f25",
-    "requestedReleaseWorkflow": 39774518003,
+    "requestedRelease": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+    "requestedReleaseWorkflow": 39828240506,
     "additionalPreparedResearch": [
       {
         "path": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2011-manual-retry.json",
@@ -33939,120 +33939,77 @@
     "inFlightResearch": [],
     "lastCompletedPass": {
       "version": 1,
-      "checkedAt": "2026-10-23T00:11:00+07:00",
-      "state": "saved_api_readback_pass_pending_index",
-      "scope": "Alpina D5: 2014, 2015, 2016, 2017, 2019, 2021",
-      "newVariants": 10,
-      "confirmedFields": 97,
-      "compiledCalculationFields": 84,
-      "totalVariants": 13,
-      "researchedVariants": 13,
-      "preservedExistingVariants": 3,
-      "manualWrites": 0,
-      "duplicatesAdded": 0,
+      "checkedAt": "2026-10-23T01:11:32+07:00",
+      "state": "saved_api_readback_pass_release_in_progress",
+      "scope": "Alpine A110 2017–2022: отдельные подтверждённые годовые исполнения",
+      "operations": 16,
+      "newVariants": 15,
+      "updatedVariants": 1,
+      "confirmedFields": 155,
+      "compiledCalculationFields": 140,
       "batches": [
         {
-          "key": "alpina-d5-2014-2021-factory",
-          "commit": "10d5c2a6b1c86a4ab462c9fc3a6f115dfb3f785c",
-          "workflow": 39819009602,
-          "job": 119964937299,
-          "variants": 10,
-          "newVariants": 10,
-          "fields": 97,
-          "batch": "research-2026-10-22-alpina-d5-2014-2021-factory",
-          "workflowStatus": "completed",
+          "key": "alpine-a110-2017-2022",
+          "batch": "research-2026-10-23-alpine-a110-2017-2022",
+          "commit": "2404454672d5c2a9753c977d9e4a7be0d1543079",
+          "workflow": 39827707552,
+          "job": 119995305092,
+          "variants": 16,
+          "newVariants": 15,
+          "updatedVariants": 1,
+          "fields": 155,
+          "compiledCalculationFields": 140,
           "workflowConclusion": "success",
           "apiReadback": true,
           "includedInIndex": false,
-          "indexMembershipState": "pending_next_immutable_index",
-          "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpina-d5-2014-2021-readback.json"
-        },
-        {
-          "key": "alpina-d5-2016-source-page",
-          "commit": "d96072d51d43e396969d574f71a4c1add5cedf19",
-          "workflow": 39820089587,
-          "variants": 2,
-          "newVariants": 0,
-          "fields": 18,
-          "newTechnicalValues": 0,
-          "evidenceOnlyCorrection": true,
-          "batch": "research-2026-10-23-alpina-d5-2016-source-page",
-          "workflowStatus": "completed",
-          "apiReadback": true,
-          "includedInIndex": false,
-          "indexMembershipState": "pending_next_immutable_index",
-          "job": 119968766518,
-          "workflowConclusion": "success",
-          "readbackReport": "docs/encyclopedia/reports/2026-10-23-d5-source-page-readback.json"
+          "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2017-2022-readback.json"
         }
       ],
-      "sourceCorrectionCountsAsNewFields": false,
+      "revision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+      "totalVariants": 40,
+      "researchedVariants": 18,
+      "preservedExistingVariants": 24,
       "validation": {
-        "guards": "8/8 PASS plus protected workflow",
-        "independentApiReadback": "10/97 PASS",
-        "unchangedProductionCompiler": true,
-        "partialReviewStatusPreserved": true,
-        "preservationReport": "docs/encyclopedia/reports/2026-10-23-d5-preservation-and-compiler.json",
-        "sourcePageCorrection": "Две записи 2016: datePage 20 -> 16. Дата также подтверждена на PDF3; все технические значения неизменны. Коррекция успешно сохранена, API-readback и история PASS; остальные 11 строк не менялись.",
-        "sourceCorrectionReadback": true
-      },
-      "sourceScope": {
-        "early": "Оригинальные заводские прайсы ALPINA 07/2014, 03/2015, 03/2016, архив auto-preisliste.de; PDF3 визуально проверены. Штатная форма загрузки сработала; только факты и ссылки сохранены, PDF не публиковались.",
-        "later": "ALPINA 07/2017 LHD и Nicole 01.01.2019 RHD из архива kurumacatalog.com; официальный PDF 03.03.2021 с alpina.co.jp совпал SHA256 с архивной копией. Технические страницы 3/18/14 визуально проверены; 2021 MHEV PDF9/13 и дата PDF16.",
-        "provisional2020NotApplied": "Официальный пресс-релиз июня 2020 указывает начало поставок японской версии весной 2021. Предварительные 2993 см³ из 2020 не смешаны с типом 7CA-5U40 2992 см³ в окончательной таблице 2021."
+        "guards": "8/8 PASS",
+        "apiReadback": "16 записей /155 полей PASS",
+        "manualWrites": 0,
+        "duplicatesAdded": 0,
+        "previousSourcesPreserved": true,
+        "productionCompilerChanged": false,
+        "preservationReport": "docs/encyclopedia/reports/2026-10-23-a110-preservation-and-compiler.json"
       },
       "integration": {
-        "checkedAt": "2026-10-23T00:10:00+07:00",
-        "state": "saved_and_compiled_not_activated",
-        "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
-        "healthCalculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5",
-        "newBatchesActivationConfirmed": false,
-        "existingChinaPublication": {
-          "id": 39788307780,
-          "job": 119858108394,
-          "status": "completed",
-          "conclusion": "failure",
-          "failedStep": "Publish markets through calculation and retention guards",
-          "reasonVerified": false,
-          "logsError": "Transport closed twice",
-          "lastOwnerMetadataReadAt": "2026-10-22T16:50:32.436Z",
-          "lastOwnerHeartbeatAt": "2026-10-22T16:46:51.642Z",
-          "lastOwnerLeaseUntil": "2026-10-22T17:16:51.642Z",
-          "freshWriterStateAfterFailureConfirmed": false
-        },
-        "duplicateReleaseRequested": false,
-        "nextAction": "Уточнить terminal-причину и свежие manifest/import-lock в отдельно сопровождаемой публикации. Не считать GitHub failure доказательством завершения удалённого writer. После проверки безопасного освобождения включить все pending в один штатный неизменяемый индекс и проверить членство/активацию."
+        "state": "aggregate_release_in_progress",
+        "release": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+        "workflow": 39828240506,
+        "job": 119997158321,
+        "activationConfirmed": false,
+        "priorRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+        "pendingNextIndexBatches": 41,
+        "writerReadAt": "2026-10-22T17:56:19.144Z",
+        "writerWasActive": false,
+        "writerMetadataWorkflow": 39826910145,
+        "duplicateReleaseRequested": false
       },
       "regressionCheck": {
-        "report": "docs/encyclopedia/reports/2026-10-23-d5-pass-repeated-card-search-parity.json",
+        "report": "docs/encyclopedia/reports/2026-10-23-a110-pass-repeated-card-search-parity.json",
         "passed": true,
         "offers": 3,
         "fieldsPerOffer": 11,
         "allRemainNeedsData": true,
-        "newAlpinaActivationProved": false
+        "newAlpineActivationProved": false
       },
       "technicalReferenceIntake": {
         "workflow": 39809543570,
         "state": "in_progress",
         "duplicated": false,
-        "referenceOnly": true,
-        "newSavedCountNotYetKnown": true
+        "referenceOnly": true
       },
-      "remaining": [
-        "Ранние D5 2011–2013: проверить фактические годы доступности и прежние пропуски; источники и очередь предыдущего прохода сохранены.",
-        "D5 Bi-Turbo 2014–2016: подтверждены Limousine/Touring по отдельным датированным таблицам. Привод, engineCode/chassisCode и разрешённая полная масса не подтверждены; перенос из других лет не применялся.",
-        "D5 S 2018 и европейские исполнения 2019–2021 требуют собственных годовых таблиц. 2017 LHD 2993 см³ / 285 кВт / 388 PS не распространена на японскую RHD 2019 FDA-5U20: 2992 см³ / 240 кВт / 326 PS.",
-        "Японская обновлённая D5 S: анонс июня 2020 указывает ввод весной 2021; по дате публикации 2020 запись не создана. В 2021 подтверждена отдельная таблица 7CA-5U40 с 2992 см³ и полной массой 2235 кг. ДВС 255 кВт и максимальный boost 8 кВт не являются документированной 30-минутной мощностью; она, мощность системы, ёмкость батареи и точный engineCode остаются неизвестны.",
-        "D5 S 2022–2023: оригинальные прайсы обнаружены, но локальная загрузка архивных PDF вернула 403. Поисковые выдержки не применены как полная проверенная таблица. Отказ не обходился; временная недоступность не считается отсутствием данных. Существующая строка 2022 сохранена без изменений и без переноса на неё японского типа гибридизации.",
-        "D5 S 2024–2026: реальное продолжение выпуска, годы и исполнения требуют первичного подтверждения; не создавать автоматически по текущему календарю. Найденные уведомления об отзыве не подтверждают год выпуска автомобиля.",
-        "Полнота Alpina не заявлена: в каноническом каталоге только D3/D5; отсутствующие семейства B3/B4/B5/B7/B8/D4/XD3/XD4/XB7 остаются отдельной задачей обнаружения и штатного создания."
-      ],
-      "next": "Alpine A110: исторические годы с 2008 включительно только по фактической доступности поколения, затем A290. Поздние D5 и пропуски — отдельный retry; не повторять сохранённую партию D5 2014–2021.",
+      "next": "Alpine A110 2023–2026: точные заводские исполнения и спецсерии; затем A290. Пробелы 2017–2022 отдельно.",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
+      "handoff": "docs/encyclopedia/research-handoff-2026-10-23-alpine-a110-2023.json",
       "allModelsComplete": false,
-      "historicalExpansionComplete": false,
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-alpina-d5-remaining.json",
-      "handoff": "docs/encyclopedia/research-handoff-2026-10-23-alpine.json",
-      "revision": "3422d7c1-71b0-42ef-83da-5ed2229b9d4a"
+      "historicalExpansionComplete": false
     },
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
@@ -35430,6 +35387,80 @@
       "retryFile": "docs/encyclopedia/retry-2026-10-23-alpina-d5-remaining.json",
       "handoff": "docs/encyclopedia/research-handoff-2026-10-23-alpine.json",
       "revision": "3422d7c1-71b0-42ef-83da-5ed2229b9d4a"
+    },
+    "alpineA110Pass": {
+      "version": 1,
+      "checkedAt": "2026-10-23T01:11:32+07:00",
+      "state": "saved_api_readback_pass_release_in_progress",
+      "scope": "Alpine A110 2017–2022: отдельные подтверждённые годовые исполнения",
+      "operations": 16,
+      "newVariants": 15,
+      "updatedVariants": 1,
+      "confirmedFields": 155,
+      "compiledCalculationFields": 140,
+      "batches": [
+        {
+          "key": "alpine-a110-2017-2022",
+          "batch": "research-2026-10-23-alpine-a110-2017-2022",
+          "commit": "2404454672d5c2a9753c977d9e4a7be0d1543079",
+          "workflow": 39827707552,
+          "job": 119995305092,
+          "variants": 16,
+          "newVariants": 15,
+          "updatedVariants": 1,
+          "fields": 155,
+          "compiledCalculationFields": 140,
+          "workflowConclusion": "success",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2017-2022-readback.json"
+        }
+      ],
+      "revision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+      "totalVariants": 40,
+      "researchedVariants": 18,
+      "preservedExistingVariants": 24,
+      "validation": {
+        "guards": "8/8 PASS",
+        "apiReadback": "16 записей /155 полей PASS",
+        "manualWrites": 0,
+        "duplicatesAdded": 0,
+        "previousSourcesPreserved": true,
+        "productionCompilerChanged": false,
+        "preservationReport": "docs/encyclopedia/reports/2026-10-23-a110-preservation-and-compiler.json"
+      },
+      "integration": {
+        "state": "aggregate_release_in_progress",
+        "release": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+        "workflow": 39828240506,
+        "job": 119997158321,
+        "activationConfirmed": false,
+        "priorRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+        "pendingNextIndexBatches": 41,
+        "writerReadAt": "2026-10-22T17:56:19.144Z",
+        "writerWasActive": false,
+        "writerMetadataWorkflow": 39826910145,
+        "duplicateReleaseRequested": false
+      },
+      "regressionCheck": {
+        "report": "docs/encyclopedia/reports/2026-10-23-a110-pass-repeated-card-search-parity.json",
+        "passed": true,
+        "offers": 3,
+        "fieldsPerOffer": 11,
+        "allRemainNeedsData": true,
+        "newAlpineActivationProved": false
+      },
+      "technicalReferenceIntake": {
+        "workflow": 39809543570,
+        "state": "in_progress",
+        "duplicated": false,
+        "referenceOnly": true
+      },
+      "next": "Alpine A110 2023–2026: точные заводские исполнения и спецсерии; затем A290. Пробелы 2017–2022 отдельно.",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
+      "handoff": "docs/encyclopedia/research-handoff-2026-10-23-alpine-a110-2023.json",
+      "allModelsComplete": false,
+      "historicalExpansionComplete": false
     }
   },
   "scope": {

@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T01:11:32+07:00",
+  "state": "saved_api_readback_pass_release_in_progress",
+  "scope": "Alpine A110 2017–2022: отдельные подтверждённые годовые исполнения",
+  "operations": 16,
+  "newVariants": 15,
+  "updatedVariants": 1,
+  "confirmedFields": 155,
+  "compiledCalculationFields": 140,
+  "batches": [
+    {
+      "key": "alpine-a110-2017-2022",
+      "batch": "research-2026-10-23-alpine-a110-2017-2022",
+      "commit": "2404454672d5c2a9753c977d9e4a7be0d1543079",
+      "workflow": 39827707552,
+      "job": 119995305092,
+      "variants": 16,
+      "newVariants": 15,
+      "updatedVariants": 1,
+      "fields": 155,
+      "compiledCalculationFields": 140,
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2017-2022-readback.json"
+    }
+  ],
+  "revision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+  "totalVariants": 40,
+  "researchedVariants": 18,
+  "preservedExistingVariants": 24,
+  "validation": {
+    "guards": "8/8 PASS",
+    "apiReadback": "16 записей /155 полей PASS",
+    "manualWrites": 0,
+    "duplicatesAdded": 0,
+    "previousSourcesPreserved": true,
+    "productionCompilerChanged": false,
+    "preservationReport": "docs/encyclopedia/reports/2026-10-23-a110-preservation-and-compiler.json"
+  },
+  "integration": {
+    "state": "aggregate_release_in_progress",
+    "release": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+    "workflow": 39828240506,
+    "job": 119997158321,
+    "activationConfirmed": false,
+    "priorRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "pendingNextIndexBatches": 41,
+    "writerReadAt": "2026-10-22T17:56:19.144Z",
+    "writerWasActive": false,
+    "writerMetadataWorkflow": 39826910145,
+    "duplicateReleaseRequested": false
+  },
+  "regressionCheck": {
+    "report": "docs/encyclopedia/reports/2026-10-23-a110-pass-repeated-card-search-parity.json",
+    "passed": true,
+    "offers": 3,
+    "fieldsPerOffer": 11,
+    "allRemainNeedsData": true,
+    "newAlpineActivationProved": false
+  },
+  "technicalReferenceIntake": {
+    "workflow": 39809543570,
+    "state": "in_progress",
+    "duplicated": false,
+    "referenceOnly": true
+  },
+  "next": "Alpine A110 2023–2026: точные заводские исполнения и спецсерии; затем A290. Пробелы 2017–2022 отдельно.",
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
+  "handoff": "docs/encyclopedia/research-handoff-2026-10-23-alpine-a110-2023.json",
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false
+}
