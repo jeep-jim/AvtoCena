@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T12:07:18.580097+07:00",
+  "updatedAt": "2026-10-22T12:11:04.265472+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -538,9 +538,19 @@
       "variants": 132,
       "status": "partial_verified_fields",
       "researchedVariants": 16,
-      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
-      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
+      "checkedAt": "2026-10-22T12:11:04.218089+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulia-2016-2017.json",
+      "nextAction": "Alfa Romeo Giulia 2018",
+      "lastVerifiedBatch": {
+        "batch": "research-2026-10-22-alfa-giulia-2016-2017",
+        "commit": "98ce4ad3286e0fdb0b50eaba76164252bff507e7",
+        "workflow": 39726355486,
+        "variants": 43,
+        "fields": 379,
+        "newVariants": 43,
+        "apiReadback": true,
+        "includedInIndex": false
+      }
     },
     {
       "id": "cb49c6bb46e8dd8caf106b34",
@@ -32563,12 +32573,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T12:07:18.580097+07:00",
+    "updatedAt": "2026-10-22T12:11:04.265472+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "research_in_flight_index_blocked_by_publication_lock",
+    "state": "verified_batches_wait_next_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulia",
+    "nextModel": "Alfa Romeo Giulia 2018",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32672,6 +32682,16 @@
         "newVariants": 8,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-giulia-2016-2017": {
+        "batch": "research-2026-10-22-alfa-giulia-2016-2017",
+        "commit": "98ce4ad3286e0fdb0b50eaba76164252bff507e7",
+        "workflow": 39726355486,
+        "variants": 43,
+        "fields": 379,
+        "newVariants": 43,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32692,12 +32712,12 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-4c-8c-historical",
-      "commit": "a8ddd17bb3834a539d350a37bf5acc9d956e6ce8",
-      "workflow": 39725832995,
-      "variants": 9,
-      "fields": 77,
-      "newVariants": 8,
+      "batch": "research-2026-10-22-alfa-giulia-2016-2017",
+      "commit": "98ce4ad3286e0fdb0b50eaba76164252bff507e7",
+      "workflow": 39726355486,
+      "variants": 43,
+      "fields": 379,
+      "newVariants": 43,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32793,14 +32813,24 @@
         "newVariants": 8,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-giulia-2016-2017",
+        "commit": "98ce4ad3286e0fdb0b50eaba76164252bff507e7",
+        "workflow": 39726355486,
+        "variants": 43,
+        "fields": 379,
+        "newVariants": 43,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-giulia-2016-2017",
-      "variants": 43,
-      "fields": 379,
-      "newVariants": 43,
-      "status": "prepared_pending_submission"
+      "batch": "research-2026-10-22-alfa-giulia-2018",
+      "variants": 12,
+      "fields": 115,
+      "newVariants": 11,
+      "status": "submitted_pending_workflow_readback"
     },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-aion-aito-aiways-pass.json",
@@ -32820,6 +32850,14 @@
       "lastObservedLockUntil": "2026-10-22T05:25:24.872Z",
       "activationOccurred": false,
       "nextAction": "Check publication completion before requesting one aggregate index release; do not clear lock or duplicate collectors"
+    },
+    "concurrentRelease": {
+      "commit": "5b340a0be566f32825479d0564b2a236614cbb69",
+      "workflow": 39725951294,
+      "indexPreparedAt": "2026-10-22T05:08:09Z",
+      "status": "in_progress",
+      "activated": false,
+      "note": "Separate owner change; encyclopedia mutations paused until index preparation succeeded. Giulia batches applied after index freeze require next index."
     }
   },
   "scope": {

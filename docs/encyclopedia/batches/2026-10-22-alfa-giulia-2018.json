@@ -1,0 +1,1387 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-giulia-2018",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "961b49a40d36279afd24801c",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.0 Turbo 200 PS AT8 Giulia",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Giulia",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "rwd",
+        "engineCc": 1995,
+        "powerHp": 200,
+        "powerKw": 147,
+        "icePowerKw": 147,
+        "grossVehicleWeightKg": 2005
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.GR9.0; 2.0 Turbo 200 PS AT8 Giulia"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "54cead1b73f0a520fe7aad5e",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.0 Turbo 200 PS AT8 Super",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Super",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "rwd",
+        "engineCc": 1995,
+        "powerHp": 200,
+        "powerKw": 147,
+        "icePowerKw": 147,
+        "grossVehicleWeightKg": 2005
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.PR9.0; 2.0 Turbo 200 PS AT8 Super"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "9cb297ff28615a7a0c625a59",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "grossVehicleWeightKg": 2105
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "620.DA1.0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "517ed400a20acb3654140dd2",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 136 PS MT6 Giulia",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 136 PS MT6 Giulia",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "manual",
+        "drive": "rwd",
+        "engineCc": 2143,
+        "powerHp": 136,
+        "powerKw": 100,
+        "icePowerKw": 100,
+        "grossVehicleWeightKg": 1940
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRC.0; 2.2 Turbo Diesel 136 PS MT6 Giulia"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "64ab9df38c8c7dafcc484c45",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 150 PS MT6 Super",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 150 PS MT6 Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "manual",
+        "drive": "rwd",
+        "engineCc": 2143,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "grossVehicleWeightKg": 1940
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRE.0; 2.2 Turbo Diesel 150 PS MT6 Super"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "53461018191724b74fe4aca0",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 150 PS AT8 Giulia",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 150 PS AT8 Giulia",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "rwd",
+        "engineCc": 2143,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "grossVehicleWeightKg": 2020
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRG.0; 2.2 Turbo Diesel 150 PS AT8 Giulia"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "f175acbe319da5d375fd9b22",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 150 PS AT8 Super",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 150 PS AT8 Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "rwd",
+        "engineCc": 2143,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "grossVehicleWeightKg": 2020
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRG.0; 2.2 Turbo Diesel 150 PS AT8 Super"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "dcdb3a312c69dd38390b4e7e",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 180 PS AT8 Super",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 180 PS AT8 Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "rwd",
+        "engineCc": 2143,
+        "powerHp": 180,
+        "powerKw": 132,
+        "icePowerKw": 132,
+        "grossVehicleWeightKg": 2020
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRL.0; 2.2 Turbo Diesel 180 PS AT8 Super"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "402e4c9b50d3b27be8f3687d",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "rwd",
+        "engineCc": 2143,
+        "powerHp": 180,
+        "powerKw": 132,
+        "icePowerKw": 132,
+        "grossVehicleWeightKg": 2020
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.GRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Giulia"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "b29878a735fc17b8433fdf1d",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "rwd",
+        "engineCc": 2143,
+        "powerHp": 180,
+        "powerKw": 132,
+        "icePowerKw": 132,
+        "grossVehicleWeightKg": 2020
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.PRM.0; 2.2 Turbo Diesel 180 PS AT8 Advanced Efficiency Super"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "e5db57687bb6dbb20cc5268b",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+      "expectedRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "grossVehicleWeightKg": 2110
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 25,
+            "selector": "620.DAP.0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "a548bee472830fbe53dde94a",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2018,
+      "trim": "QUADRIFOGLIO",
+      "expectedDigest": "72ac2baebdb2fbde9d3a51080a5d79b27dfbce0f1b0680c20727fb0a7eda3a2e",
+      "patch": {
+        "engineCc": 2891,
+        "powerHp": 510,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+        "pages": [
+          2,
+          24,
+          25
+        ],
+        "statement": "Заводской прайс Giulia, январь 2018: стр. 2 задаёт точные сочетания версии и комплектации; стр. 24–25 — технические параметры. Max. toelaatbaar gewicht — допустимая полная масса, отдельно от Kentekengewicht. Для Quadrifoglio прайс и техническая таблица расходятся (374/375 кВт), поэтому кВт не подтверждаются; для исходной записи без кода омологации полная масса не переносится. Метрическая мощность pk/PS подтверждается отдельно.",
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "Giulia Quadrifoglio 2.9 V6 510 pk AT; 2018; 2891 cm3"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "Giulia Quadrifoglio 2.9 V6 510 pk AT; 2018; 2891 cm3"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "Giulia Quadrifoglio 2.9 V6 510 pk AT; 2018; 2891 cm3"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 2,
+            "selector": "Giulia Quadrifoglio 2.9 V6 510 pk AT; 2018; 2891 cm3"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/nl/NL/2018/Alfa_Romeo/Prijslijsten/180101_Prijslijst_Giulia_per_januari_2018_PRINT.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "cdb0ac6db6d856a8285c89b71687374b49b6071397c511474fbef8b9dc3c479f",
+            "page": 24,
+            "selector": "Giulia Quadrifoglio 2.9 V6 510 pk AT; 2018; 2891 cm3"
+          }
+        }
+      }
+    }
+  ]
+}
