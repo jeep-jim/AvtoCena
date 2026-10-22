@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-22T14:16:41.446342+07:00",
+  "checkedAt": "2026-10-22T14:33:31.836665+07:00",
   "batches": [
     {
       "batch": "research-2026-10-22-alfa-giulietta-2010-2012",
@@ -9,7 +9,10 @@
       "newVariants": 62,
       "fields": 482,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
+      "indexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-6df5eec-activation.json"
     },
     {
       "batch": "research-2026-10-22-alfa-giulietta-2013-2014",
@@ -19,7 +22,10 @@
       "newVariants": 44,
       "fields": 312,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
+      "indexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-6df5eec-activation.json"
     },
     {
       "batch": "research-2026-10-22-alfa-giulietta-2014-special-2015",
@@ -29,7 +35,10 @@
       "newVariants": 32,
       "fields": 230,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
+      "indexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-6df5eec-activation.json"
     }
   ],
   "variants": 138,
@@ -37,8 +46,8 @@
   "fields": 1024,
   "apiReadbackPassed": 3,
   "guardTestsPassedPerBatch": 8,
-  "includedInIndex": false,
-  "indexReleaseRequested": true,
+  "includedInIndex": true,
+  "indexReleaseRequested": false,
   "nextCursor": "Alfa Romeo Giulietta 2015 — Collezione/Sprint Speciale и ранние исполнения, затем 2016",
   "allModelsComplete": false,
   "retryFiles": [
@@ -56,5 +65,8 @@
   "requestedRelease": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
   "requestedReleaseWorkflow": 39739467523,
   "sourceRecordsPreserved": 31,
-  "calculationFieldsCompiled": 886
+  "calculationFieldsCompiled": 886,
+  "activationReport": "docs/encyclopedia/reports/2026-10-22-index-6df5eec-activation.json",
+  "indexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+  "cardSearchParityReport": "docs/encyclopedia/reports/2026-10-22-giulietta-release-card-search-parity.json"
 }

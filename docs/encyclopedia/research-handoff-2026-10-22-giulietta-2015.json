@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-22T14:20:55.266544+07:00",
+  "checkedAt": "2026-10-22T14:30:15.994790+07:00",
   "status": "research_handoff_not_applied",
   "modelId": "cb49c6bb46e8dd8caf106b34",
   "make": "Alfa Romeo",
@@ -40,13 +40,231 @@
     {
       "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
       "publishedAt": "2015-07-23",
-      "note": "Базовые 21 строка проверены визуально и находятся в третьей партии текущего прохода. Страница 6: колёса с пакетом Collezione / Sprint Speciale; нужна проверка таблицы пакетов для технической идентичности."
+      "note": "PDF стр.3 визуально проверена 22.10.2026: Sprint Speciale — пакет88N только у Sprint; Collezione — пакет88M только у Exclusive. Базовые21 строки уже сохранены. Отдельное новое техническое исполнение нельзя выводить только из пакета; сохранить связку исходного MVS+пакет, проверить возможность отдельной идентичности/alias перед записью. Стр.6 подтверждает связанные колёса."
     },
     {
       "url": "https://www.media.stellantis.com/uploads/it/2016/ALFA-ROMEO/Listini/160601_Alfa_Romeo_Giulietta_Listino.pdf",
       "publishedAt": "2016-06-01",
       "documentSha256": "12667e8fae1806c7764808beeda0baf468e89b33cdbb49a833fa6e351db82811",
-      "note": "Текст прочитан: точные MVS/объёмы/мощность на PDF стр.3; диапазон Giulietta/Super/Veloce/Business, включая 1.6 JTDM 120 TCT. Перед новой партией обязательна визуальная сверка, API и CAS. Пока не применён."
+      "note": "PDF стр.3 визуально проверена 22.10.2026: 18 точных строк MY16. MVS+SS сохранять совместно: Business имеет тот же MVS, но SS111. 2.0 JTDM175 TCT указан128кВт; перед записью сверить конфликт128/129/128.5 по точному мотору/режиму. Не переносить механическую КПП или привод по отсутствию TCT. Ещё НЕ сохранено в базе; свежие API/CAS и проверка дублей обязательны.",
+      "candidates": [
+        {
+          "year": 2016,
+          "engine": "1.4 Turbo Benzina 120 CV",
+          "trim": "Giulietta",
+          "mvs": "191.B5E.2",
+          "ss": "000",
+          "engineCc": 1368,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "petrol",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.4 Turbo Benzina 120 CV",
+          "trim": "Super",
+          "mvs": "191.C5E.2",
+          "ss": "000",
+          "engineCc": 1368,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "petrol",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.4 MultiAir 150 CV",
+          "trim": "Giulietta",
+          "mvs": "191.B5N.2",
+          "ss": "000",
+          "engineCc": 1368,
+          "powerHp": 150,
+          "documentPowerKw": 110,
+          "fuel": "petrol",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.4 MultiAir 150 CV",
+          "trim": "Super",
+          "mvs": "191.C5N.2",
+          "ss": "000",
+          "engineCc": 1368,
+          "powerHp": 150,
+          "documentPowerKw": 110,
+          "fuel": "petrol",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.4 MultiAir 170 CV TCT",
+          "trim": "Super",
+          "mvs": "191.C5G.2",
+          "ss": "000",
+          "engineCc": 1368,
+          "powerHp": 170,
+          "documentPowerKw": 125,
+          "fuel": "petrol",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1750 Turbo Benzina 240 CV TCT",
+          "trim": "Veloce",
+          "mvs": "191.V5C.2",
+          "ss": "000",
+          "engineCc": 1742,
+          "powerHp": 240,
+          "documentPowerKw": 177,
+          "fuel": "petrol",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.4 Turbo Benzina GPL 120 CV",
+          "trim": "Giulietta",
+          "mvs": "191.BGE.2",
+          "ss": "000",
+          "engineCc": 1368,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "lpg",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.4 Turbo Benzina GPL 120 CV",
+          "trim": "Super",
+          "mvs": "191.CGE.2",
+          "ss": "000",
+          "engineCc": 1368,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "lpg",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.6 JTDM 120 CV",
+          "trim": "Giulietta",
+          "mvs": "191.B5R.2",
+          "ss": "000",
+          "engineCc": 1598,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "diesel",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.6 JTDM 120 CV",
+          "trim": "Super",
+          "mvs": "191.C5R.2",
+          "ss": "000",
+          "engineCc": 1598,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "diesel",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.6 JTDM 120 CV",
+          "trim": "Business",
+          "mvs": "191.B5R.2",
+          "ss": "111",
+          "engineCc": 1598,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "diesel",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.6 JTDM 120 CV TCT",
+          "trim": "Giulietta",
+          "mvs": "191.B59.2",
+          "ss": "000",
+          "engineCc": 1598,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "diesel",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.6 JTDM 120 CV TCT",
+          "trim": "Super",
+          "mvs": "191.C59.2",
+          "ss": "000",
+          "engineCc": 1598,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "diesel",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "1.6 JTDM 120 CV TCT",
+          "trim": "Business",
+          "mvs": "191.B59.2",
+          "ss": "111",
+          "engineCc": 1598,
+          "powerHp": 120,
+          "documentPowerKw": 88,
+          "fuel": "diesel",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "2.0 JTDM 150 CV",
+          "trim": "Giulietta",
+          "mvs": "191.B5S.2",
+          "ss": "000",
+          "engineCc": 1956,
+          "powerHp": 150,
+          "documentPowerKw": 110,
+          "fuel": "diesel",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "2.0 JTDM 150 CV",
+          "trim": "Super",
+          "mvs": "191.C5S.2",
+          "ss": "000",
+          "engineCc": 1956,
+          "powerHp": 150,
+          "documentPowerKw": 110,
+          "fuel": "diesel",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "2.0 JTDM 150 CV",
+          "trim": "Business",
+          "mvs": "191.B5S.2",
+          "ss": "111",
+          "engineCc": 1956,
+          "powerHp": 150,
+          "documentPowerKw": 110,
+          "fuel": "diesel",
+          "status": "not_applied"
+        },
+        {
+          "year": 2016,
+          "engine": "2.0 JTDM 175 CV TCT",
+          "trim": "Super",
+          "mvs": "191.C5T.2",
+          "ss": "000",
+          "engineCc": 1956,
+          "powerHp": 175,
+          "documentPowerKw": 128,
+          "fuel": "diesel",
+          "status": "not_applied"
+        }
+      ]
     },
     {
       "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
