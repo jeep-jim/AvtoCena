@@ -10,6 +10,7 @@ import {compileModelFacts,applyEncyclopediaCalculation,checksum,modelKey,hasEncy
 import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specification-evidence-audit';
 import {specificationEvidenceComplete} from '../apps/web/lib/catalog/modification-matching';
 import {applyUaeManualSpecifications} from '../apps/web/lib/catalog/uae-manual-specifications';
+import {japanPreviewParameters} from '../apps/web/lib/catalog/japan-preview-parameters';
 const record=(variants:any[])=>({id:'model',make:'Audi',model:'A6',revision:'r1',variants});
 const base={id:'v1',year:2023,trim:'40 TDI S tronic',status:'observed',markets:['europe'],fuel:'diesel',powertrainKind:'combustion',engineCc:1968,powerHp:204,powerKw:150,transmission:'dct',drive:'fwd'};
 const offer=()=>({make:'Audi',model:'A6',year:2023,trim:base.trim,market:'korea',sourceId:'ajes_korea_feed',sourceOfferId:'1',id:'1',fuel:'diesel',transmission:'dct',drive:'fwd',operational:{}});
@@ -60,6 +61,17 @@ test('no index means no inference; original records are immutable and repeated e
  const input=offer(),before=JSON.stringify(input);assert.equal(applyEncyclopediaCalculation(input,null),input);
  const i=index([base]),result=applyEncyclopediaCalculation(input,i);assert.equal(JSON.stringify(input),before);assert.equal(applyEncyclopediaCalculation(result,i),result);
 });
+test('auction preview uses exact encyclopedia fields while unknown electric certification stays missing',()=>{
+ const input:any={...offer(),id:'ajes-stats-123',market:'japan',sourceId:'ajes_japan_feed',catalogPricingMode:'seller',bodyType:'sedan',vehicleCategory:'M1'};
+ const matched:any=applyEncyclopediaCalculation(input,index([base]));
+ const parameters=japanPreviewParameters(matched);
+ assert.equal(parameters.engineCc,1968);assert.equal(parameters.powerHp,204);
+ assert.equal(hasEncyclopediaCalculationEvidence(matched),true);
+ assert.equal(input.powerHp,undefined);
+ const electric={...base,fuel:'electric',powertrainKind:'electric',engineCc:undefined,powerHp:340,powerKw:250};
+ const ev:any=applyEncyclopediaCalculation({...input,fuel:'electric'},index([electric]));
+ assert.equal(ev.power30MinKw,undefined);assert.throws(()=>japanPreviewParameters(ev));
+});
 test('an exact encyclopedia match upgrades a seller card through the real engine and agrees with detail replay',async()=>{
  const today=new Date().toISOString(),markets=JSON.parse(fs.readFileSync('data/markets/markets.json','utf8'));
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED='true';resetCatalogRateCache();invalidateEffectiveMarketsCache();
@@ -68,9 +80,14 @@ test('an exact encyclopedia match upgrades a seller card through the real engine
   for(const market of ['europe','uae']){
    const input:any={...offer(),market,sourcePrice:10000,sourceCurrency:'EUR',catalogPricingMode:'seller',sellerPriceRub:950000,totalRub:null,calculationStatus:'needs_data',bodyType:'sedan',images:[],status:'active',offerType:'fixed'};
    const matched=applyEncyclopediaCalculation(input,index([base]));
+   const publicPending=publicOffer(matched as any);
+   assert.equal((publicPending as any).operational,undefined);
+   assert.equal(specificationEvidenceComplete(publicPending),true,'serialized search rows retain field-level calculation evidence');
+   const [publicPriced]=await applyActiveBusinessPriceBatch([publicPending],{readOnly:true});
    const [card]=await applyActiveBusinessPriceBatch([matched],{readOnly:true});
    assert.ok(Number(card.totalRub)>950000,JSON.stringify(card.calculationSnapshot));
    assert.equal(card.catalogPricingMode,undefined);assert.equal(card.calculationSnapshot.customs.status,'ready');
+   assert.equal(publicPriced.totalRub,card.totalRub,'public search and raw/detail calculations agree');
    assert.equal((await applyActiveBusinessPricing(matched)).totalRub,card.totalRub);
    const publicCard=publicOffer(card as any);
    assert.equal(applyUaeManualSpecifications(publicCard).powerHp,204,'browser-safe public card retains independently sourced power');

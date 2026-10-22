@@ -4,6 +4,7 @@ import 'server-only';
 import {resolveAjesModelSelection} from './ajes-model-resolution';
 import {ajesResultFilter} from './ajes-result-filter';
 import {applyActiveBusinessPricingBatch} from './live-business-pricing';
+import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-evidence';
 import {assertCollectionEnabled} from './collection-controls';
 import {headers} from 'next/headers';
 import {cache} from 'react';
@@ -62,7 +63,14 @@ export async function readAjesCatalogPage(params:Record<string,unknown>){
  const totalPromise=readAjesCountSummary(JSON.stringify(params)).catch(()=>null);
  const read=async(sourcePage:number)=>{
   const page=await readAjesPublic({...query,page:sourcePage});
-  const priced=query.table==='china'||query.table==='korea'||filter.priceFilter?await applyActiveBusinessPricingBatch(page.items):page.items;
+  let priced=page.items;
+  if(query.table==='china'||query.table==='korea'||filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);
+  else {
+   // Only newly attested auction cards need the existing delivered-preview path.
+   // Leave unmatched supplier rows on their current inexpensive path.
+   const matched=page.items.filter(hasEncyclopediaCalculationEvidence);
+   if(matched.length){const updated=new Map((await applyActiveBusinessPricingBatch(matched)).map(v=>[v.id,v]));priced=page.items.map(v=>updated.get(v.id)||v);}
+  }
   return {...page,items:priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v))};
  };
  const firstPromise=params.after?null:read(query.page||1);

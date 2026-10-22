@@ -1,6 +1,7 @@
 import { isGreenCornerOffer } from "./green-corner-contract";
 import type { VehicleOffer } from "./types";
 import { catalogPowerSanity } from "./power-sanity";
+import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-evidence';
 
 export const SPECIFICATION_AUDIT_FIELDS = [
   "year",
@@ -44,6 +45,10 @@ function explicitEvidenceState(offer: Partial<VehicleOffer>, keys: string[]) {
   if (states.includes("ambiguous")) return "ambiguous" as const;
   if (states.includes("missing")) return "missing" as const;
   if (states.includes("exact") || states.includes("verified")) return "exact" as const;
+  // Public cards omit private operational provenance. Their field-scoped
+  // attestation must remain usable by the same calculator after serialization.
+  const attestation=(offer.operational as any)?.encyclopediaCalculation||offer.encyclopediaCalculation;
+  if(hasEncyclopediaCalculationEvidence(offer)&&keys.some(key=>Object.prototype.hasOwnProperty.call(attestation.values,key)))return "exact" as const;
   return undefined;
 }
 

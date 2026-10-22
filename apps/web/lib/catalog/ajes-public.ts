@@ -1,6 +1,7 @@
 import {newerKoreaDetail} from './ajes-korea-detail-cache';
 import {DetailReadCache} from './detail-read-cache';
 import {getJsonStorage} from '../data';
+import {applyEncyclopediaCalculation} from '../encyclopedia/calculation-index';
 const openedKoreaDetails=new DetailReadCache<any>({maxEntries:100,maxBytes:4*1024*1024,ttlMs:15000,concurrency:4});
 import 'server-only';
 import {ajesChinaPriceAllowed,ajesChinaSourceCeiling} from './ajes-price-policy';
@@ -37,6 +38,9 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
   if(!rate)throw Error('ajes_currency_unavailable');
   let offer=ajesOffer(lot,rate,result.observedAt);
+  // Exact local release facts also cover auction records. No supplier/detail
+  // request or legacy approximate matching is needed for this lookup.
+  offer=applyEncyclopediaCalculation(offer);
   if(lot.table==='china'||lot.table==='korea'){
    const [{enrichOfferWithKnowledgeCore},{normalizeVehicleOfferSpecs}]=await Promise.all([import('./knowledge-core'),import('./spec-normalization')]);
    offer=normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
