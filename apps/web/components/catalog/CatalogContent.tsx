@@ -167,7 +167,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   const countSummary=overviewEligible&&(!dealer||dealer.markets.includes('japan'))?withAjesCount({total:localTotal,marketCounts:Object.fromEntries(groupedMarkets.map(m=>[m.id,m.total]))}):{total:localTotal,countIncomplete:groupedMarkets.some(m=>liveMarket(m.id)||m.id==='japan')};
   const total=localTotal,countIncomplete=overviewEligible||groupedMarkets.some(m=>liveMarket(m.id)||m.id==='japan');
 
-  const initialKeys = ["color","source", "stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
+  const initialKeys = ["salePeriod","color","source", "stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
   initial.market=selectedMarkets.join("|");
   const brandNames = facets.makes || [];

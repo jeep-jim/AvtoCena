@@ -1,3 +1,4 @@
+import {AUCTION_SALE_PERIODS} from "@/lib/catalog/auction-sale-period";
 "use client";
 import {CatalogChevron as Chevron} from "./CatalogChevron";
 import {CatalogColorSelect} from "./CatalogColorSelect";
@@ -40,6 +41,7 @@ type Facets = { makes: string[]; models: Array<{ make: string; model: string; al
 type SortKey = string;
 type SortDir = "asc" | "desc";
 type FilterDraft = {
+  salePeriod:string;
   color: string;
   make: string;
   model: string;
@@ -108,7 +110,7 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
   const root = useRef<HTMLDivElement>(null);
   const close = () => setOpen(false);
   useDropdown(open, root, close);
-  const multiple=["market","bodyType","transmission","fuel","drive"].includes(name);
+  const multiple=["salePeriod","market","bodyType","transmission","fuel","drive"].includes(name);
   const selected=filterSelections(value);
   const active=options.find(item=>item.value===value);
   const chosen=(item:string)=>item?selected.includes(item):!selected.length;
@@ -150,6 +152,7 @@ function optionLabel(options: Option[], value: string) { return filterSelections
 function formatNumber(value: number) { return new Intl.NumberFormat("ru-RU").format(Math.round(value)); }
 function draftFromInitial(initial: Record<string, string>): FilterDraft {
   return {
+    salePeriod:initial.salePeriod||"",
     color: initial.color || "",
     stock: initial.stock || "",
     chassis:initial.chassis||"",frameNumber:initial.frameNumber||"",lotNumber:initial.lotNumber||"",
@@ -171,6 +174,7 @@ function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortD
   const params = new URLSearchParams();
   const add = (key: string, value: string) => { if (clean(value)) params.set(key, clean(value)); };
   if (draft.market === "japan") { add("chassis",draft.chassis);add("frameNumber",draft.frameNumber);add("lotNumber",draft.lotNumber);add("auctionGrade", draft.auctionGrade); add("stock", draft.stock); }
+  if(filterSelections(draft.market).includes("japan")&&draft.stock!=="green")add("salePeriod",draft.salePeriod);
   add("color", draft.color); add("make", draft.make); add("model", draft.model); add("market", draft.market);
   add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
   add("yearFrom", draft.yearFrom); add("yearTo", draft.yearTo);
@@ -309,6 +313,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
     </div>}
     <div className="ac-range-fields-shell mt-2.5">
       <div className={`grid gap-3 md:grid-cols-2 xl:grid-cols-4`}>
+        {filterSelections(draft.market).includes("japan")&&draft.stock!=="green"&&<div className="mb-3"><p className="mb-2 text-xs font-semibold text-[var(--ac-muted)]">Дата продажи на аукционе</p><SimpleSelect name="salePeriod" value={draft.salePeriod} placeholder="За всё время" options={[{value:"",label:"За всё время"},...AUCTION_SALE_PERIODS]} onChange={value=>setField("salePeriod",value)}/></div>}
         <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={!draft.market || draft.market.includes("|") || draft.market === "uae" ? 1886 : draft.market === "china" ? CHINA_MIN_MODEL_YEAR : draft.market === "japan" ? JAPAN_MIN_MODEL_YEAR : new Date().getFullYear() - 6} max={new Date().getFullYear() + (!draft.market || draft.market === "uae" ? 1 : 0)} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
         {<DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />}
         <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
@@ -460,6 +465,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const chips = useMemo<FilterChip[]>(() => {
     const rows: FilterChip[] = [];
     if(draft.color) rows.push({key:"color",label:`Цвет: ${draft.color}`});
+    if(draft.salePeriod&&filterSelections(draft.market).includes("japan")&&draft.stock!=="green")rows.push({key:"salePeriod",label:filterSelections(draft.salePeriod).map(v=>AUCTION_SALE_PERIODS.find(p=>p.value===v)?.label||v).join(", ")});
     if(draft.market==='japan'&&draft.frameNumber)rows.push({key:'frameNumber',label:`Номер кузова ${draft.frameNumber}`});
     if(draft.market==='japan'&&draft.chassis)rows.push({key:'chassis',label:`Кузов ${draft.chassis}`});
     if(draft.market==='japan'&&draft.lotNumber)rows.push({key:'lotNumber',label:`Лот ${draft.lotNumber}`});

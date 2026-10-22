@@ -1,3 +1,4 @@
+import {auctionSaleDateLabel} from "@/lib/catalog/auction-sale-period";
 "use client";
 import {useState} from "react";
 import {useCatalogView} from "./CatalogSelectionContext";
@@ -120,7 +121,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
       <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel}</span>{(o.operational?.chassisCode||o.chassisCode)?<ChassisCopy code={String(o.operational?.chassisCode||o.chassisCode)}/>:<small>{o.bodyLabel||"Кузов уточняется"}</small>}</div>
       <div className="ac-list-engine"><span>{engineLabel}</span><small>{powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:powerDisplay?.thirtyMinuteLabel||"Мощность уточняется"}</small><small>{o.driveLabel}</small></div>
       <div className="ac-list-mileage"><span>{Number.isFinite(o.mileageKm)?`${Number(o.mileageKm).toLocaleString("ru-RU")} км`:"Пробег уточняется"}</span></div>
-      <div className="ac-list-price">{selectionRequired?<strong>Выбрать модификацию</strong>:<CatalogPrice offer={displayOffer} label="" dense priceClassName="text-[18px]"/>}</div>
+      <div className="ac-list-price">{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)&&auctionSaleDateLabel(o.auctionDate)&&<time className="hidden text-xs font-semibold text-[var(--ac-muted)] md:block" dateTime={String(o.auctionDate).slice(0,10)}>{auctionSaleDateLabel(o.auctionDate)}</time>}{selectionRequired?<strong>Выбрать модификацию</strong>:<CatalogPrice offer={displayOffer} label="" dense priceClassName="text-[18px]"/>}</div>
     </div><FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-list-favorite"/>
   </article>;
   return (
