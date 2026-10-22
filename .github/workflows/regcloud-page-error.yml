@@ -35,4 +35,12 @@ jobs:
           docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,re,json; lines=sys.stdin.read().splitlines(); out=[]; [(out.append([re.sub(r"https?://[^ \n]+", "[url]", x)[:260] for x in lines[max(0,i-12):i+1] if re.search(r"Error| at |reason:|digest:",x)])) for i,line in enumerate(lines) if "digest:" in line]; print("DIGEST_STACKS",json.dumps(out[-12:]))'
           docker exec avtocena-production node -e 'const fs=require("fs");for(const [name,pos] of [["4678",11993],["8115",2169]]){const s=fs.readFileSync("apps/web/.next/server/chunks/"+name+".js","utf8");console.log("STATIC_CODE",name,s.slice(pos-200,pos+250))}' || true
           docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
+          docker inspect --format 'started={{.State.StartedAt}} finished={{.State.FinishedAt}} exit={{.State.ExitCode}} memoryLimit={{.HostConfig.Memory}}' avtocena-production
+          docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          free -m
+          uptime
+          # Only aggregate categories: do not print addresses, URLs or customer requests.
+          tail -n 3000 /var/log/nginx/error.log | python3 -c 'import sys,json; s=sys.stdin.read(); print("NGINX_ERROR_CATEGORIES_LAST_3000",json.dumps({p:s.count(p) for p in ["connect() failed", "Connection refused", "upstream timed out", "upstream prematurely closed", "no live upstreams", "worker_connections are not enough"]}))'
+          docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,json; s=sys.stdin.read(); print("RUNTIME_FATAL_CATEGORIES",json.dumps({p:s.count(p) for p in ["heap out of memory", "Reached heap limit", "FATAL ERROR", "Killed", "ENOMEM"]}))'
+
           REMOTE
