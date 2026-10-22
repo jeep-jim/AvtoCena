@@ -22,9 +22,13 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Resolve requested application release
+        run: echo "EXPECTED_RELEASE=$(git log -1 --format=%H -- .github/market-runs/regcloud-deploy.json)" >> "$GITHUB_ENV"
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -54,7 +58,6 @@ jobs:
       - name: Isolated browser dependencies
         run: |
           npm install --prefix "$RUNNER_TEMP/filter-browser" --no-package-lock --ignore-scripts playwright@1.55.0
-          "$RUNNER_TEMP/filter-browser/node_modules/.bin/playwright" install --with-deps webkit
       - name: Chromium overlays, closed-layout parity and selections
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
@@ -63,6 +66,17 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-multi-photo.mjs
+      - name: Install WebKit from signed Ubuntu packages
+        timeout-minutes: 8
+        run: |
+          # The runner Azure mirror stalled for 17 minutes before any browser ran.
+          # Keep Ubuntu signatures and package checks; use the official archive.
+          for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources; do
+            if [ -f "$source" ]; then
+              sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' "$source"
+            fi
+          done
+          "$RUNNER_TEMP/filter-browser/node_modules/.bin/playwright" install --with-deps webkit
       - name: WebKit mobile overlays and selections
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
@@ -72,7 +86,6 @@ jobs:
         if: github.ref == 'refs/heads/main'
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
-          EXPECTED_RELEASE: ${{ github.sha }}
           GITHUB_TOKEN: ${{ github.token }}
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-budget-live.mjs
       - name: Record reviewed import and roadmap on the review branch only
@@ -94,7 +107,6 @@ jobs:
       - name: Confirm exact published release
         if: github.ref == 'refs/heads/main'
         env:
-          EXPECTED_RELEASE: ${{ github.sha }}
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           node scripts/wait-published-release.mjs

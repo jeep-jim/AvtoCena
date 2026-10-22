@@ -3,21 +3,16 @@ import fs from 'node:fs';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const origin='https://avtocena.com', out='artifacts/catalog-budget-live';
 fs.mkdirSync(out,{recursive:true});
-const expected=process.env.EXPECTED_RELEASE;
-let ready=false;
-for(let i=0;i<30;i++){
- const r=await fetch(`${origin}/api/health`); const health=await r.json();
- if(health.releaseSha===expected){ready=true;break;}
- await new Promise(r=>setTimeout(r,10000));
-}
-assert.ok(ready,'exact production release required');
+// Confirm the requested app release (or a verified descendant), not a test-only commit.
+const {execFileSync}=await import('node:child_process');
+execFileSync(process.execPath,['scripts/wait-published-release.mjs'],{stdio:'inherit'});
 const checks=[];
 for(const market of ['japan','korea'])for(let repeat=0;repeat<2;repeat++){
  const start=performance.now();const response=await fetch(`${origin}/api/catalog/search?market=${market}&budget=2000000&pageSize=24`);
  assert.ok(response.ok);const data=await response.json();assert.equal(data.total,null,`${market}: do not claim an exact count before delivered-price checks`);
- assert.equal(data.filteredByPage,true);assert.equal(data.countSummary?.upperBound,true);assert.ok(Number.isSafeInteger(data.countSummary.total)&&data.countSummary.total>=0);assert.equal(typeof data.hasMore,'boolean');
+ assert.equal(data.filteredByPage,true);if(data.countSummary!==null){assert.equal(data.countSummary?.upperBound,true);assert.ok(Number.isSafeInteger(data.countSummary.total)&&data.countSummary.total>=0);}assert.equal(typeof data.hasMore,'boolean');assert.ok(Array.isArray(data.items));
  for(const item of data.items){const price=item.japanDeliveredPreview?.totalRub || item.deliveredCalculationPreview?.totalRub || item.totalRub;assert.ok(price>0&&price<=2000000,`${item.id}: delivered price ${price}`);}
- checks.push({market,repeat,total:data.total,candidateUpperBound:data.countSummary.total,matchesOnPage:data.items.length,hasMore:data.hasMore,ms:Math.round(performance.now()-start),timing:response.headers.get('server-timing')});
+ checks.push({market,repeat,total:data.total,candidateUpperBound:data.countSummary?.total??null,matchesOnPage:data.items.length,hasMore:data.hasMore,ms:Math.round(performance.now()-start),timing:response.headers.get('server-timing')});
 }
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
 try{

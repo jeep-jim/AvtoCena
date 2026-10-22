@@ -3,14 +3,17 @@ import fs from "node:fs";
 import test from "node:test";
 import { catalogMinYearForMarket, isCatalogYearAllowed } from "../apps/web/lib/catalog/offer-quality";
 
-test("production year gates keep Japan at 2010+ and every other market at 2020+", () => {
-  assert.equal(catalogMinYearForMarket("japan"), 2010);
-  assert.equal(isCatalogYearAllowed(2009, "japan"), false);
-  assert.equal(isCatalogYearAllowed(2010, "japan"), true);
-  for (const market of ["korea", "china", "uae", "europe", "georgia"]) {
-    assert.equal(catalogMinYearForMarket(market), 2020, market);
-    assert.equal(isCatalogYearAllowed(2019, market), false, market);
-    assert.equal(isCatalogYearAllowed(2020, market), true, market);
+test("production year gates keep Japan 2008+, China 2014+, and other markets at six years", () => {
+  for (const [market, minimum] of [["japan", 2008], ["china", 2014]] as const) {
+    assert.equal(catalogMinYearForMarket(market), minimum);
+    assert.equal(isCatalogYearAllowed(minimum - 1, market), false);
+    assert.equal(isCatalogYearAllowed(minimum, market), true);
+  }
+  const minimum = new Date(Date.now() + 7 * 3600000).getUTCFullYear() - 6;
+  for (const market of ["korea", "uae", "europe", "georgia"]) {
+    assert.equal(catalogMinYearForMarket(market), minimum, market);
+    assert.equal(isCatalogYearAllowed(minimum - 1, market), false, market);
+    assert.equal(isCatalogYearAllowed(minimum, market), true, market);
   }
 });
 
