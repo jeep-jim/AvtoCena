@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T02:16:30+07:00",
+  "state": "ready_for_fresh_api_and_primary_research",
+  "cursor": {
+    "make": "Aston Martin",
+    "model": "DB11",
+    "modelId": "eff6651568e364a8a5a40e97",
+    "years": [
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "queueVariants": 37,
+    "queueResearchedVariants": 5,
+    "queueCountsRequireFreshApi": true
+  },
+  "previousPass": {
+    "version": 1,
+    "checkedAt": "2026-10-23T02:16:30+07:00",
+    "state": "three_batches_saved_api_readback_pass_activation_pending",
+    "scope": "Alpine A110 2024–2025, A290 2024–2026: отдельные подтверждённые годовые исполнения",
+    "operations": 20,
+    "newVariants": 19,
+    "updatedVariants": 1,
+    "confirmedFields": 207,
+    "compiledCalculationFields": 165,
+    "identityNameFields": 19,
+    "motorPeakReferenceFields": 11,
+    "batteryReferenceFields": 12,
+    "batches": [
+      {
+        "key": "alpine-a110-2024-2025-a290-2024",
+        "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
+        "commit": "e5cb3235dfdadb8ec14f66bf6e50ffe7adfd0ba3",
+        "workflow": 39836589326,
+        "job": 120026421635,
+        "variants": 12,
+        "newVariants": 12,
+        "updatedVariants": 0,
+        "fields": 130,
+        "compiledCalculationFields": 109,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "pending_current_release_snapshot_check",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-late-readback.json"
+      },
+      {
+        "key": "alpine-a290-2025",
+        "batch": "research-2026-10-23-alpine-a290-2025",
+        "commit": "2db00741beddbf0d36481c07cb2f7954bfbaf73d",
+        "workflow": 39837140373,
+        "job": 120028307169,
+        "variants": 4,
+        "newVariants": 3,
+        "updatedVariants": 1,
+        "fields": 37,
+        "compiledCalculationFields": 28,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "pending_current_release_snapshot_check",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2025-readback.json"
+      },
+      {
+        "key": "alpine-a290-2026",
+        "batch": "research-2026-10-23-alpine-a290-2026",
+        "commit": "5519fe6f29fc8e5466ab01f9f7f86fd188bbd8e6",
+        "workflow": 39837681693,
+        "job": 120030182437,
+        "variants": 4,
+        "newVariants": 4,
+        "updatedVariants": 0,
+        "fields": 40,
+        "compiledCalculationFields": 28,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "pending_next_index_snapshot_check",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2026-readback.json"
+      }
+    ],
+    "models": [
+      {
+        "id": "cc5a28958f2b1bd3eac176d4",
+        "model": "A110",
+        "beforeVariants": 44,
+        "afterVariants": 51,
+        "researchedVariants": 29,
+        "revision": "07fc41a8-9194-4b42-b00c-ba429ce20b56"
+      },
+      {
+        "id": "9f23c75ab6a73713bf64580a",
+        "model": "A290",
+        "beforeVariants": 7,
+        "afterVariants": 19,
+        "researchedVariants": 13,
+        "revision": "0432d522-a1b4-4f4a-92ec-eab41abf64a2"
+      }
+    ],
+    "validation": {
+      "guards": "8/8 PASS",
+      "apiReadback": "12/130, 4/37, 4/40 PASS",
+      "manualWrites": 0,
+      "duplicatesAdded": 0,
+      "previousEvidenceRetained": true,
+      "wholeRowVerified": false,
+      "productionCompilerChanged": false,
+      "calculationRulesChanged": false,
+      "collectorsChanged": false,
+      "perBatchPreservedUnchanged": [
+        {
+          "A110": 44,
+          "A290": 7
+        },
+        {
+          "A290": 11
+        },
+        {
+          "A290": 15
+        }
+      ],
+      "compilerReports": [
+        "docs/encyclopedia/reports/2026-10-23-alpine-late-compiler.json",
+        "docs/encyclopedia/reports/2026-10-23-alpine-a290-2025-compiler.json",
+        "docs/encyclopedia/reports/2026-10-23-alpine-a290-2026-compiler.json"
+      ]
+    },
+    "integration": {
+      "checkedAt": "2026-10-23T02:16:30+07:00",
+      "state": "reader_release_in_progress_price_preparation",
+      "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+      "workflow": 39835446552,
+      "job": 120022420382,
+      "privateIndexPreparation": "success",
+      "build": "success",
+      "pricePreparation": "in_progress",
+      "activationConfirmed": false,
+      "newBatchMembershipUnconfirmed": true,
+      "observedActiveRelease": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+      "observedCalculationVersion": "669463ac57d4c4d8890392b1114d8b458e8bdb24729cc397ee5d7f608fedfc27",
+      "duplicateReleaseRequested": false,
+      "nextAction": "После завершения текущего reader-release проверить время и состав неизменяемого снимка по manifest/readback и livehealth. Сопровождение выпуска/публикации Китая уже идёт отдельно; не дублировать. Не вошедшие партии включить в следующий согласованный штатный индекс. Коммит выпуска раньше партии сам по себе не доказывает исключения: индекс читает текущую базу."
+    },
+    "regressionCheck": {
+      "passed": true,
+      "offers": 5,
+      "comparisons": 55,
+      "alpineOffers": 2,
+      "alpineStatuses": [
+        "estimated",
+        "estimated"
+      ],
+      "repeatedTonaleOffers": 3,
+      "tonaleRemainNeedsData": true,
+      "indexMembershipNotProvenByParity": true,
+      "reports": [
+        "docs/encyclopedia/reports/2026-10-23-alpine-late-repeated-parity.json",
+        "docs/encyclopedia/reports/2026-10-23-alpine-late-a110-parity.json"
+      ]
+    },
+    "technicalReferenceIntake": {
+      "previousWorkflow": 39809543570,
+      "previousConclusion": "success_time_limit",
+      "previousFetched": 2804,
+      "previousVisited": 11950,
+      "previousSaved": 7516,
+      "previousPending": 262,
+      "completed": false,
+      "state": "in_progress",
+      "referenceOnly": true,
+      "checkpointReset": false,
+      "checkedAt": "2026-10-23T02:16:30+07:00",
+      "resumeCommit": "0a63873004d9234976478390bd30b7271aefb266",
+      "workflow": 39831884392,
+      "job": 120009865681,
+      "newSavedCountNotYetKnown": true,
+      "duplicateRunStarted": false
+    },
+    "next": "Aston Martin DB11, точные исполнения2017–2024; затем далее по алфавиту. Alpine gaps отдельно в retry.",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-late-remaining.json",
+    "handoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-db11.json",
+    "allModelsComplete": false,
+    "historicalExpansionComplete": false
+  },
+  "requiredNextSteps": [
+    "Прочесть свежие AGENTS.md/roadmap/queue; проверить текущие runs перед записью или выпуском.",
+    "Проверить результат reader-release39835446552, manifest/readback и состав текущего снимка; сохранить pending не вошедших партий, не запускать дубликат.",
+    "Получить свежую DB11 из публичного API для каждого года; не перезаписывать ручные поля и прежние источники.",
+    "Найти точные заводские документы по годам/рынкам: V12/V8, AMR, Coupe/Volante; не переносить cc/power по названию или одному соседнему году.",
+    "Применять <=64 операций через штатный CAS workflow и независимый API-readback; не считать старый частичный проход полным.",
+    "Отсутствующие модели/годы с2008 подтверждать через штатную каноническую идентичность; Alpine A390 отдельно требует modeldiscovery.",
+    "Drom39831884392 продолжает collect; не дублировать. При terminal проверить checkpoint/pending и возобновить существующий marker, если требуется."
+  ],
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-late-remaining.json",
+  "completed": false
+}
