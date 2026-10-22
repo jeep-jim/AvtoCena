@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T00:11:00+07:00",
+  "next": "Alpine A110: исторические годы с 2008 включительно только по фактической доступности поколения, затем A290. Поздние D5 и пропуски — отдельный retry; не повторять сохранённую партию D5 2014–2021.",
+  "models": [
+    {
+      "id": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "knownSnapshotYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "knownSnapshotVariants": 25
+    },
+    {
+      "id": "9f23c75ab6a73713bf64580a",
+      "make": "Alpine",
+      "model": "A290",
+      "knownSnapshotYears": [
+        2024,
+        2025
+      ],
+      "knownSnapshotVariants": 7
+    }
+  ],
+  "scope": "Все фактически существовавшие годы с 2008; прежние записи не удалять. Годы текущего снимка не ограничивают поиск.",
+  "refreshApiBeforeWrite": true,
+  "doNotRepeat": [
+    {
+      "batch": "research-2026-10-22-alpina-d5-2014-2021-factory",
+      "workflow": 39819009602,
+      "apiReadback": true
+    },
+    {
+      "batch": "research-2026-10-23-alpina-d5-2016-source-page",
+      "workflow": 39820089587,
+      "apiReadback": true
+    }
+  ],
+  "previousPass": "docs/encyclopedia/reports/2026-10-23-alpina-d5-pass.json",
+  "retryFiles": [
+    "docs/encyclopedia/retry-2026-10-23-alpina-d5-remaining.json",
+    "docs/encyclopedia/retry-2026-10-22-alpina-d3s-remaining.json"
+  ],
+  "missingModelDiscovery": {
+    "state": "pending",
+    "make": "Alpina",
+    "knownCanonicalModels": [
+      "D3",
+      "D5"
+    ],
+    "scope": "Отсутствующие с2008 модельные семейства и поколения требуют самостоятельного обнаружения; не ограничивать завершение текущими2423моделями.",
+    "source": "https://files.alpina.co.jp/press/2023/index.html"
+  },
+  "integration": {
+    "checkedAt": "2026-10-23T00:10:00+07:00",
+    "state": "saved_and_compiled_not_activated",
+    "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "healthCalculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5",
+    "newBatchesActivationConfirmed": false,
+    "existingChinaPublication": {
+      "id": 39788307780,
+      "job": 119858108394,
+      "status": "completed",
+      "conclusion": "failure",
+      "failedStep": "Publish markets through calculation and retention guards",
+      "reasonVerified": false,
+      "logsError": "Transport closed twice",
+      "lastOwnerMetadataReadAt": "2026-10-22T16:50:32.436Z",
+      "lastOwnerHeartbeatAt": "2026-10-22T16:46:51.642Z",
+      "lastOwnerLeaseUntil": "2026-10-22T17:16:51.642Z",
+      "freshWriterStateAfterFailureConfirmed": false
+    },
+    "duplicateReleaseRequested": false,
+    "nextAction": "Уточнить terminal-причину и свежие manifest/import-lock в отдельно сопровождаемой публикации. Не считать GitHub failure доказательством завершения удалённого writer. После проверки безопасного освобождения включить все pending в один штатный неизменяемый индекс и проверить членство/активацию."
+  },
+  "technicalReferenceIntake": {
+    "workflow": 39809543570,
+    "state": "in_progress",
+    "duplicated": false,
+    "referenceOnly": true,
+    "newSavedCountNotYetKnown": true
+  }
+}
