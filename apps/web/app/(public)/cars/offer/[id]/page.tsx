@@ -1,3 +1,5 @@
+import {isRetroOffer} from "@/lib/catalog/retro-offer";
+import {OfferLeadForm} from "@/components/catalog/OfferLeadForm";
 import {SupplierUnavailableOffer} from '@/components/catalog/SupplierUnavailableOffer';
 import {readOfferDetailForPage} from '@/lib/catalog/offer-page-data';
 import {missingElectrifiedSpecifications} from '@/lib/autobot/missing-specifications';
@@ -280,6 +282,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
     : undefined;
   const directScenario = sharedScenario || (clientScenario ? {draft:clientScenario.draft,calculation:clientScenario.calculation} : (query.direct === "novokuznetsk" ? await directOfferScenario(storedOffer) : null));
   const {offer,sellerPricing,selectionRequired,selectedModification,enrichedOffer,normalizedEnrichedOffer,initialPublic,pricedOffer,raw} = display;
+  const retro=isRetroOffer(offer);
   const sourceUrl = enrichedOffer.market === "japan" && !isGreenCornerOffer(enrichedOffer)
     ? undefined
     : safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
@@ -303,7 +306,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // one last chance to finish an older stored row. If that still cannot produce
   // an admitted delivered price, keep the row internal instead of rendering a
   // public "price on request" page.
-  if (!directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing) return <UnavailableOffer offer={unavailableOfferRecord(offer)} calculationUnavailable />;
+  if (!retro && !directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing) return <UnavailableOffer offer={unavailableOfferRecord(offer)} calculationUnavailable />;
   const specificationGroups = await translatedSpecificationGroups(offerSpecificationGroups(offer, { bodyLabel: presented.bodyLabel }));
   const o = {
     ...presented,
@@ -319,7 +322,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   const updatedTime = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleTimeString("ru-RU");
   const auctionAt = new Date(o.auctionDate || "");
   const auctionDateLabel = Number.isNaN(auctionAt.getTime()) ? "" : auctionAt.toLocaleDateString("ru-RU");
-  const favoriteRub = directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || catalogOfferVisibleRub(initialPublic);
+  const favoriteRub = retro ? 0 : directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || catalogOfferVisibleRub(initialPublic);
   const snapshot = { sourceId: offer.sourceId, offerType: offer.offerType, fuel:offer.fuel,powertrainKind:offer.powertrainKind, catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: initialPublic.calculationStatus, catalogKind: offer.catalogKind, id: o.id, title: o.title, price: favoriteRub || null, totalRub: favoriteRub || null, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: selectionRequired ? {} : initialPublic.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, market: raw.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, auctionGrade: o.auctionGrade, japanExportRestriction: o.japanExportRestriction, href: offerPath(storedOffer) + (directScenario ? "?direct=novokuznetsk" : "") };
   const marketHref = isGreenCornerOffer(offer) ? "/cars/green" : `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
@@ -390,7 +393,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   const editorialSource = canEditCatalog(currentUser) ? await getOfferFromCurrentShard(o.id) : null;
   const updatedStatus = <OfferUpdatedStatus date={updatedDate} time={updatedTime} sourceUrl={sourceUrl} />;
 
-  return <main data-autobot-missing={JSON.stringify(missingElectrifiedSpecifications(offer))} data-offer-id={o.id} data-offer-share-name={o.title} data-offer-share-year={directScenario?.draft.year || savedCalculation?.draft.year || offer.year} data-offer-share-engine-cc={directScenario?.draft.engineCc || savedCalculation?.draft.engineCc || offer.engineCc} data-offer-share-fuel={offer.fuel} data-offer-saved-version={clientScenario?.version} data-offer-price-rub={directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || (sellerPricing ? offer.sellerPriceRub : visibleRub || undefined)} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],fuel:offer.fuel,powertrainKind:offer.powertrainKind,year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
+  return <main data-autobot-missing={JSON.stringify(missingElectrifiedSpecifications(offer))} data-offer-id={o.id} data-offer-share-name={o.title} data-offer-share-year={directScenario?.draft.year || savedCalculation?.draft.year || offer.year} data-offer-share-engine-cc={directScenario?.draft.engineCc || savedCalculation?.draft.engineCc || offer.engineCc} data-offer-share-fuel={offer.fuel} data-offer-saved-version={clientScenario?.version} data-offer-price-rub={retro ? undefined : directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || (sellerPricing ? offer.sellerPriceRub : visibleRub || undefined)} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],fuel:offer.fuel,powertrainKind:offer.powertrainKind,year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="relative z-0 mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <div className="ac-offer-layout grid min-w-0 gap-3 xl:gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">
@@ -401,15 +404,22 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
           </header>
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery editor={canEditCatalog(currentUser)?<CatalogEditorialEditor offerId={o.id} originalTitle={o.title} sourcePrice={editorialSource?.sourcePrice} sourceCurrency={editorialSource?.sourceCurrency} sourcePhotos={rankedCatalogImageUrls(editorialSource)} sourceSpecifications={{bodyType:editorialSource?.bodyType,drive:editorialSource?.drive,transmission:editorialSource?.transmission,color:editorialSource?.color}} initial={(await readCatalogEditorial()).entries[o.id]||null}/>:undefined} images={o.images} title={o.title} offerId={o.id} snapshot={snapshot} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
           <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus || updatedStatus} />
-          <OfferDesktopActions position="below" offerId={o.id} snapshot={snapshot} />
-          {!selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
-          <OfferFinanceCards />
+          {!retro&&<OfferDesktopActions position="below" offerId={o.id} snapshot={snapshot} />}
+          {!retro && !selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
+          {!retro&&<OfferFinanceCards />}
         </div>
 
         <StickyOfferColumn>
           {auctionStatus ? <div className="mb-3 xl:hidden">{auctionStatus}</div> : null}
           <div id="offer-parameters" className="scroll-mt-24"/>
-          <InlineOfferParameters estimatedPowerHp={ajesPowerEstimateHp(offer)} initialCurrencyRate={raw.calculationSnapshot?.currencyRate} localCitySelection={Boolean(currentUser)} initialScenario={directScenario} copyOffer={canCopyOffer(currentUser) ? {title:o.title,mileageKm:o.mileageKm} : undefined} priceIdentity={{id:offer.id,sourceId:offer.sourceId,offerType:offer.offerType,market:offer.market,auctionGrade:offer.auctionGrade}} afterPrice={<OfferMobileActions offerId={o.id} snapshot={snapshot} />} originalBreakdown={!selectionRequired && visibleRub > 0 ? <div className="ac-original-calculation mt-4"><OfferPriceBreakdown offer={o} powerInfo={recyclingPowerInfo(raw)} /></div> : null} canSave={isCrmRole(currentUser?.role)} savedCalculation={savedCalculation ? {version:savedCalculation.version,draft:savedCalculation.draft,calculation:savedCalculation.calculation,savedAt:isCrmRole(currentUser?.role) ? savedCalculation.savedAt : undefined,savedByName} : null} deliveryMarket={offer.market} exportWarning={japanRestrictionDescription(o.japanExportRestriction)} sourcePriceOnly={sellerPricing || (selectionRequired && !selectedModification)} autoCalculate={sellerPricing || (selectionRequired && !selectedModification)} isPickup={commercialParameters(offer).isPickup} researchContext={[offer.make,offer.model,offer.trim,offer.market].filter(Boolean).join(" ")} showCommercial={commercialParameters(offer).showCommercial} key={[offer.id,clientScenario?.version||'',query.estimate||'',query.direct||''].join(':')} offerId={offer.id} reportedVolume={proAuctionsReportedVolume(offer)} initial={offerParameterDraft(offer,raw)} price={sellerPricing ? <SellerPrice hideJapanBadges offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
+          {retro ? <section className="rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)]" data-retro-offer>
+            <span className="inline-flex rounded-full border border-[var(--ac-border)] px-3 py-1 text-xs font-bold">Ретро</span>
+            <h2 className="mt-4 text-3xl font-black">Цена по запросу</h2>
+            <p className="mt-4 text-xl font-bold">Классика вне времени</p>
+            <p className="mt-2 text-sm leading-6 text-[var(--ac-muted)]">Стоимость покупки и доставки уточним индивидуально.</p>
+            <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl}/>
+            <OfferLeadForm offerId={o.id} title="Уточнить стоимость"/>
+          </section> : <InlineOfferParameters estimatedPowerHp={ajesPowerEstimateHp(offer)} initialCurrencyRate={raw.calculationSnapshot?.currencyRate} localCitySelection={Boolean(currentUser)} initialScenario={directScenario} copyOffer={canCopyOffer(currentUser) ? {title:o.title,mileageKm:o.mileageKm} : undefined} priceIdentity={{id:offer.id,sourceId:offer.sourceId,offerType:offer.offerType,market:offer.market,auctionGrade:offer.auctionGrade}} afterPrice={<OfferMobileActions offerId={o.id} snapshot={snapshot} />} originalBreakdown={!selectionRequired && visibleRub > 0 ? <div className="ac-original-calculation mt-4"><OfferPriceBreakdown offer={o} powerInfo={recyclingPowerInfo(raw)} /></div> : null} canSave={isCrmRole(currentUser?.role)} savedCalculation={savedCalculation ? {version:savedCalculation.version,draft:savedCalculation.draft,calculation:savedCalculation.calculation,savedAt:isCrmRole(currentUser?.role) ? savedCalculation.savedAt : undefined,savedByName} : null} deliveryMarket={offer.market} exportWarning={japanRestrictionDescription(o.japanExportRestriction)} sourcePriceOnly={sellerPricing || (selectionRequired && !selectedModification)} autoCalculate={sellerPricing || (selectionRequired && !selectedModification)} isPickup={commercialParameters(offer).isPickup} researchContext={[offer.make,offer.model,offer.trim,offer.market].filter(Boolean).join(" ")} showCommercial={commercialParameters(offer).showCommercial} key={[offer.id,clientScenario?.version||'',query.estimate||'',query.direct||''].join(':')} offerId={offer.id} reportedVolume={proAuctionsReportedVolume(offer)} initial={offerParameterDraft(offer,raw)} price={sellerPricing ? <SellerPrice hideJapanBadges offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
             ? <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5"><p className="text-xs font-bold normal-case">Цена продавца</p><p className={`ac-price mt-2 text-3xl font-black ${electrified ? "ac-price--electrified" : ""}`}>{Number(offer.sourcePrice).toLocaleString("ru-RU")} {offer.sourceCurrency}</p><p className="mt-2 text-xs text-[var(--ac-muted)]">Без доставки и платежей. Уточните параметры ниже для расчёта.</p></div>
             : japanAuction
             ? <AuctionResultPrice offer={{...o,auctionGrade:undefined,japanExportRestriction:undefined}} label="Завершённый аукцион" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
@@ -428,13 +438,13 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
             {!japanAuction ? <div className="mt-3 xl:hidden">{updatedStatus}</div> : null}
             <OfferDesktopActions offerId={o.id} snapshot={snapshot} />
           </aside>
-          </InlineOfferParameters>
+          </InlineOfferParameters>}
         </StickyOfferColumn>
       </div>
 
 
       <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers markets={dealer?.markets} current={{...raw,sourceId:offer.sourceId,offerType:offer.offerType}} /></Suspense>
-      <PageLeadBanner kind="offer" />
+      {!retro&&<PageLeadBanner kind="offer" />}
     </section>
     <OfferContactActionsStyles />
     <style dangerouslySetInnerHTML={{ __html: `

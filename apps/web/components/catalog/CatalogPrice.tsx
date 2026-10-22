@@ -1,4 +1,5 @@
 "use client";
+import {isRetroOffer} from "@/lib/catalog/retro-offer";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useSelectedCity } from "../../lib/location/selected-city";
@@ -66,6 +67,7 @@ function CatalogPriceContent({
 
 export function CatalogPrice(props: Parameters<typeof CatalogPriceContent>[0]) {
  const city = useSelectedCity();
+ if(isRetroOffer(props.offer))return <div data-retro-price>{props.label&&<p className="text-xs text-[var(--ac-muted)]">{props.label}</p>}<p className={`mt-1 font-black ${props.priceClassName||"text-[22px]"}`}>Цена по запросу</p></div>;
  const priced = priceCardForCity(props.offer,city);
  return <CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />;
 }

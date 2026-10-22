@@ -1,4 +1,5 @@
 "use client";
+import {isRetroOffer} from "@/lib/catalog/retro-offer";
 import {useState} from "react";
 import {useCatalogView} from "./CatalogSelectionContext";
 import {publicationWithdrawn} from "@/lib/catalog/publication-policy";
@@ -56,12 +57,13 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
 }
 
 export function CatalogCard({ offer, compact = false, dense = false, eagerPrefetch = false }: { offer: any; compact?: boolean; dense?: boolean; eagerPrefetch?: boolean }) {
+  const retro=isRetroOffer(offer);
   const dealer=useDealerBrowsing();
   const view=useCatalogView();
   const candidatePreview = useSavedCalculationPreview(offer);
   const savedPreview = savedCalculationPreviewRub(candidatePreview) ? candidatePreview : undefined;
   offer = {...offer,savedCalculationPreview:savedPreview};
-  const selectionRequired = !savedPreview && hasModificationSelection(offer);
+  const selectionRequired = !retro && !savedPreview && hasModificationSelection(offer);
   const sellerPricing = !savedPreview && isSellerPricedOffer(offer);
   const normalizedOffer = savedPreview ? offerWithSavedPreview(offer) : selectionRequired || sellerPricing ? offer : normalizeVehicleOfferSpecs(offer);
   const projectedCover = catalogImageDeliveryUrl((offer as any)?.cardImageUrl);
@@ -81,11 +83,11 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
 
   /* Imported prices pass the public gate. The separate manager overlay comes
      only from the saved, server-calculated scenario used by the detail page. */
-  const visibleRub = savedCalculationPreviewRub(savedPreview) || catalogOfferVisibleRub(normalizedOffer);
+  const visibleRub = retro ? 0 : savedCalculationPreviewRub(savedPreview) || catalogOfferVisibleRub(normalizedOffer);
   // Defence in depth for an older immutable generation during deployment: the
   // publication gate removes these rows permanently on the next market write,
   // while the card renderer hides them immediately.
-  if (!visibleRub && !selectionRequired && !sellerPricing) return null;
+  if (!retro && !visibleRub && !selectionRequired && !sellerPricing) return null;
   const displayOffer = {
     ...o,
     japanDeliveredPreview: savedPreview ? undefined : offer.japanDeliveredPreview,
@@ -116,7 +118,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   if(view==="list") return <article className="ac-catalog-list-row" data-green-corner={isGreenCornerOffer(offer)?"true":undefined}>
     <div className="ac-catalog-list-link">
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="ac-list-photo">{imageUrl?<CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch}/>:<span>Нет фото</span>}</IntentPrefetchLink>
-      <div className="ac-list-identity"><IntentPrefetchLink href={href} eager={eagerPrefetch}><strong>{o.title}</strong></IntentPrefetchLink><span>{priceLabel} · {o.marketLabel}</span>{o.auctionDate&&<small>Аукцион · {String(o.auctionDate).slice(0,10)}</small>}</div>
+      <div className="ac-list-identity"><IntentPrefetchLink href={href} eager={eagerPrefetch}><strong>{o.title}</strong></IntentPrefetchLink><span>{retro?"Ретро · ":""}{priceLabel} · {o.marketLabel}</span>{o.auctionDate&&<small>Аукцион · {String(o.auctionDate).slice(0,10)}</small>}</div>
       <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel}</span>{(o.operational?.chassisCode||o.chassisCode)?<ChassisCopy code={String(o.operational?.chassisCode||o.chassisCode)}/>:<small>{o.bodyLabel||"Кузов уточняется"}</small>}</div>
       <div className="ac-list-engine"><span>{engineLabel}</span><small>{powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:powerDisplay?.thirtyMinuteLabel||"Мощность уточняется"}</small><small>{o.driveLabel}</small></div>
       <div className="ac-list-mileage"><span>{Number.isFinite(o.mileageKm)?`${Number(o.mileageKm).toLocaleString("ru-RU")} км`:"Пробег уточняется"}</span></div>
@@ -128,6 +130,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="block overflow-hidden rounded-[1.35rem]">
         <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
           {imageUrl ? <CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch} /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
+          {retro&&<span className="absolute right-3 top-3 z-10 rounded-full bg-[#20242c] px-3 py-1 text-xs font-bold text-white" data-retro-badge>Ретро</span>}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 via-black/42 to-transparent sm:h-24" />
           <div className={`ac-on-image absolute font-black normal-case tracking-normal text-white/90 ${dense ? "left-2 top-2 text-[8px] sm:left-3 sm:top-3 sm:text-[10px]" : "left-3 top-3 text-[10px]"}`}><span className="md:hidden">{isGreenCornerOffer(offer) ? "Зелёный угол" : o.marketLabel}</span><span className="hidden items-center gap-2 md:inline-flex"><CatalogMarketFlag market={normalizedOffer.market} className="h-4 w-6" /><span>{isGreenCornerOffer(offer) ? "Зелёный угол" : o.marketLabel}</span></span></div>
           <div className="ac-on-image absolute bottom-2 left-2 right-2 text-white sm:bottom-3 sm:left-3 sm:right-3">

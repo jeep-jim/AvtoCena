@@ -8,7 +8,7 @@ import {normalizeRuPhone} from "@/lib/ru-phone";
 import { useMemo, useState } from "react";
 import { captureAttributionFromBrowser } from "@/lib/attribution";
 
-type Props = { offerId: string };
+type Props = { offerId: string; title?: string };
 function newUuid() { return crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`; }
 async function copyCurrentUrl() {
   const value = window.location.href;
@@ -17,7 +17,7 @@ async function copyCurrentUrl() {
   const textarea = document.createElement("textarea"); textarea.value = value; textarea.setAttribute("readonly", ""); textarea.style.position = "fixed"; textarea.style.left = "-9999px"; document.body.appendChild(textarea); textarea.select(); const copied = document.execCommand("copy"); document.body.removeChild(textarea); return copied;
 }
 
-export function OfferLeadForm({ offerId }: Props) {
+export function OfferLeadForm({ offerId, title="Запросить точный расчёт" }: Props) {
   const storageKey = useMemo(() => `avtocena_offer_operation_${offerId}`, [offerId]);
   const [consent,setConsent]=useState(false);
   const [name, setName] = useState(""); const [phone, setPhone] = useState("+7");
@@ -35,7 +35,7 @@ export function OfferLeadForm({ offerId }: Props) {
   async function shareLink() { setCopyStatus("idle"); try { setCopyStatus(await copyCurrentUrl() ? "success" : "error"); } catch { setCopyStatus("error"); } }
   if (status === "success") return <div className="mt-6 rounded-2xl bg-emerald-500/10 p-4 text-emerald-100"><div className="text-xs font-black normal-case tracking-normal text-emerald-300">Готово</div><p className="mt-2 text-sm font-bold leading-6">{message}</p><LeadSuccessGames/></div>;
   return <form onSubmit={submit} className="mt-6 grid gap-3 md:grid-cols-2">
-    <div className="mb-1 md:col-span-2"><div className="text-xs font-black normal-case tracking-normal text-red-500">Запросить точный расчёт</div><p className="mt-1 text-sm font-medium leading-6 text-white/48">Оставьте контакты — менеджер подтвердит наличие и итоговую цену.</p></div>
+    <div className="mb-1 md:col-span-2"><div className="text-xs font-black normal-case tracking-normal text-red-500">{title}</div><p className="mt-1 text-sm font-medium leading-6 text-white/48">Оставьте контакты — менеджер подтвердит наличие и итоговую цену.</p></div>
     <label className="block min-w-0"><span className="mb-1.5 block text-[11px] font-black normal-case tracking-normal text-white/55">Имя</span><input value={name} onChange={(e)=>setName(e.target.value)} name="name" placeholder="Как к вам обращаться" className="soft-input w-full rounded-2xl px-4 py-3.5" /></label>
     <label className="block min-w-0"><span className="mb-1.5 block text-[11px] font-black normal-case tracking-normal text-white/55">Телефон</span><PhoneInput value={phone} onChange={setPhone} /></label>
     <div className="md:col-span-2"><ConsentCheckbox checked={consent} onChange={setConsent}/></div>
