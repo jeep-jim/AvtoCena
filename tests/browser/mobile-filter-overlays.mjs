@@ -47,7 +47,9 @@ try{
    const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});if(await cookie.isVisible())await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
    if(width>=1024){
     const desktop=page.locator('.ac-catalog-filter-panel');await desktop.waitFor({state:'visible'});
-    const toggle=desktop.getByRole('button',{name:'Расширенные фильтры',exact:true});if(await toggle.getAttribute('aria-expanded')!=='true')await toggle.click();
+    const toggle=desktop.getByRole('button',{name:'Расширенные фильтры',exact:true});
+    if(await toggle.isVisible()){if(await toggle.getAttribute('aria-expanded')!=='true')await toggle.click();}
+    else {assert.equal(await desktop.locator('..').evaluate(el=>Boolean(el.closest('.ac-catalog-sidebar'))),true,'only the persistent sidebar omits the advanced toggle');await desktop.locator('.ac-advanced-fields').waitFor({state:'visible'});}
     // The enhancer decorates newly mounted ranges on the next animation frame.
     // Measure the ready controls, not the pre-enhancement intermediate layout.
     await page.waitForFunction(()=>{const boxes=[...document.querySelectorAll('.ac-catalog-filter-panel .ac-range-input-box')];return boxes.length>0&&boxes.every(box=>box.querySelector('.ac-range-value-toggle'));});

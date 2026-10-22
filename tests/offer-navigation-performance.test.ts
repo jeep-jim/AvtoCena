@@ -10,7 +10,8 @@ const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
 const preloader = fs.readFileSync("apps/web/components/layout/RoutePreloader.tsx", "utf8");
 const card = fs.readFileSync("apps/web/components/catalog/CatalogCard.tsx", "utf8");
 const intentLink = fs.readFileSync("apps/web/components/catalog/IntentPrefetchLink.tsx", "utf8");
-const deploy = fs.readFileSync(".github/workflows/deploy-yandex.yml", "utf8");
+const deploy = fs.readFileSync(".github/workflows/regcloud-deploy.yml", "utf8");
+const deployRuntime = fs.readFileSync("scripts/regcloud-deploy-production.sh", "utf8");
 const effectiveMarkets = fs.readFileSync("apps/web/lib/effective-market-settings.ts", "utf8");
 const readModelsWorkflow = fs.readFileSync(".github/workflows/catalog-current-read-models.yml", "utf8");
 const readModelsScript = fs.readFileSync("scripts/catalog-publish-current-read-models.mjs", "utf8");
@@ -35,19 +36,19 @@ test("similar offers stream after the primary offer instead of blocking it", () 
   assert.match(page, /Ещё \{modelTitle\}/);
   assert.doesNotMatch(page, /const fillers = diverseSimilarOffers/);
   assert.match(page, /<CatalogMarketFlag market=\{String\(current\.market/);
-  assert.match(page, /· \{marketTotal\}/);
+  assert.match(page, /marketTotal===null\?"—":marketTotal\.toLocaleString\("ru-RU"\)/);
   assert.match(page, /model: familyModel/);
 });
 
 test("metadata and page share one memoized offer lookup per request", () => {
   assert.match(data, /unstable_cache\(/);
-  assert.match(data, /catalog-offer-page-unedited-v3/);
+  assert.match(data, /catalog-offer-page-publication-20261013/);
   assert.match(data, /revalidate: 60/);
   assert.match(data, /async function resilientOfferLookup/);
   assert.match(data, /return getOfferWithoutEditorial\(id\)/);
   assert.match(data, /cache\(async \(id: string\) => \{[\s\S]*resilientOfferLookup\(id\),readCatalogEditorial\(\)/);
   assert.match(data, /getOfferForPage\(id\)/);
-  assert.match(layout, /getOfferForPage\(id\)/);
+  assert.match(layout, /readOfferDetailForPage\(id\)/);
 });
 
 test("offer navigation stays visibly pending and warms only the intended offer", () => {
@@ -74,20 +75,17 @@ test("offer navigation stays visibly pending and warms only the intended offer",
   assert.match(page, /export const revalidate = 0/);
 });
 
-test("production keeps one warm container and serves navigation bursts in-process", () => {
-  assert.match(deploy, /revision-memory: 2Gb/);
-  assert.match(deploy, /revision-concurrency: 4/);
-  assert.match(deploy, /revision-provisioned: 1/);
-  assert.match(deploy, /Warm public catalog and verify AI discovery/);
-  assert.match(deploy, /cars\/offer\/\$offer_id/);
+test("REG production retains bounded resources and warms the candidate before activation", () => {
+  assert.match(deploy, /regcloud-deploy-production\.sh/);
+  assert.match(deployRuntime, /--restart unless-stopped/);
+  assert.match(deployRuntime, /--memory 10g --cpus 6 --pids-limit 512/);
+  assert.match(deployRuntime, /for path in \['\/api\/health','\/','\/cars','\/'\]/);
+  assert.match(deployRuntime, /releaseSha/);
 });
 
 test("non-runtime maintenance and documentation do not rebuild the web container", () => {
-  assert.match(deploy, /paths-ignore:[\s\S]*\.github\/market-runs\/\*\*/);
-  assert.match(deploy, /paths-ignore:[\s\S]*scripts\/\*\*/);
-  assert.match(deploy, /paths-ignore:[\s\S]*tests\/\*\*/);
-  assert.match(deploy, /paths-ignore:[\s\S]*docs\/\*\*/);
-  assert.match(deploy, /paths-ignore:[\s\S]*roadmap\.md/);
+  assert.match(deploy, /push:\s*branches: \[main\]\s*paths: \['\.github\/market-runs\/regcloud-deploy\.json'\]/);
+  assert.doesNotMatch(deploy.slice(0,deploy.indexOf('permissions:')), /apps\/web|scripts\/|tests\/|docs\/|roadmap\.md/);
 });
 
 test("catalog pricing shares one short-lived market-settings read", () => {
@@ -149,10 +147,11 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /if \(projection\.generationId !== manifest\.generationId\)/);
   assert.match(storage, /currentProjectionPath\(projectionScope\)/);
   assert.match(storage, /projection\.generationId !== manifest\.generationId/);
-  assert.match(storage, /return row && !isConfirmedSourceWithdrawn\(row\) \? offerDetailFromProjection\(row\) : null/);
+  assert.match(storage, /return row && !isConfirmedSourceWithdrawn\(row\) && catalogInventoryAgeDecision\(row\)\.eligible && !catalogVehicleExcluded\(row\) \? offerDetailFromProjection\(row\) : null/);
   assert.match(storage, /export function isJapanCatalogOfferId/);
   assert.match(data, /isJapanCatalogOfferId\(id\)/);
-  assert.match(page, /await getOfferDetailRecord\(id\)/);
+  assert.match(page, /await readOfferDetailForPage\(id\)/);
+  assert.match(data, /offer:await getOfferDetailRecord\(id\)/);
   assert.match(data, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferForPage\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
   assert.match(data, /getOfferForPage\(id\)[\s\S]*getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
   assert.match(layout, /normalizeVehicleOfferSpecs\(storedOffer\)/);
@@ -160,26 +159,30 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.doesNotMatch(page, /normalizeVehicleOfferSpecs\(publicOffer\(enrichedOffer\)\)/);
   // Complete-index absence and incomplete-index recovery are exercised with
   // real storage fixtures in catalog-missing-offer-lookup.test.ts.
-  assert.match(storage, /return offer \? \(isConfirmedSourceWithdrawn\(offer\) \? null : offer\) : readProjectionFallback\(\)/);
-  assert.match(page, /<main data-offer-id=\{o\.id\}/);
+  assert.match(storage, /return offer \? \(isConfirmedSourceWithdrawn\(offer\) \|\| !catalogInventoryAgeDecision\(offer\)\.eligible \|\| catalogVehicleExcluded\(offer\) \? null : offer\) : readProjectionFallback\(\)/);
+  assert.match(page, /<main[^>]*data-offer-id=\{o\.id\}/);
   assert.match(page, /decodeURIComponent\(routeId\)/);
-  assert.match(data, /catalog-offer-page-unedited-v3/);
+  assert.match(data, /catalog-offer-page-publication-20261013/);
 });
 
-test("offer actions render in stable page slots without hydration portals", () => {
+test("offer actions retain stable page slots when the mobile contact floats", () => {
   const actions = fs.readFileSync(new URL("../apps/web/components/catalog/OfferContactActions.tsx", import.meta.url), "utf8");
   const carsLayout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/layout.tsx", import.meta.url), "utf8");
-  assert.match(page, /<OfferDesktopActions offerId=/);
+  assert.match(page, /<OfferDesktopActions position="below" offerId=/);
   assert.match(page, /<OfferMobileActions offerId=/);
   assert.match(page, /<OfferCreditCalculator \/>/);
   // Scroll positioning is covered in entrance-flow.mjs; the SSR slot must stay mounted.
-  assert.doesNotMatch(actions, /createPortal|document\.createElement/);
+  assert.match(actions, /ref=\{anchor\} className="ac-offer-contact-anchor"/);
+  assert.match(actions, /\{!floating&&bar\}/);
+  assert.match(actions, /floating&&createPortal/);
+  assert.match(actions, /const rect=node\.getBoundingClientRect\(\)/);
+  assert.doesNotMatch(actions, /document\.createElement/);
   assert.doesNotMatch(carsLayout, /OfferContactActions/);
 });
 
 test("offer page does not re-run source-only publication gates on compact public records", () => {
   assert.match(page, /if \(!storedOffer\) return <UnavailableOffer/);
-  assert.match(page, /if \(!directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing\) return <UnavailableOffer/);
+  assert.match(page, /if \(!retro && !directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(raw\)\) return <UnavailableOffer/);
   assert.doesNotMatch(page, /notFound\(\)/);
   assert.doesNotMatch(page, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
   assert.doesNotMatch(page, /!catalogPublicPriority\(raw\)\.eligible/);
@@ -190,7 +193,9 @@ test("catalog overview and market diversity stay on bounded search projections",
   assert.match(marketPage, /MARKET_DIVERSITY_WINDOW_PAGES = 8/);
   assert.match(marketPage, /readDiverseDefaultMarketPage/);
   assert.match(marketPage, /pageSize: MARKET_PAGE_SIZE \* MARKET_DIVERSITY_WINDOW_PAGES/);
-  assert.match(catalogPage, /readCatalogOverview/);
+  assert.match(catalogPage, /readPublicCatalogOverview/);
+  const overview=fs.readFileSync('apps/web/lib/catalog/editorial-overview.ts','utf8');
+  assert.match(overview, /readCatalogOverview/);
 });
 
 test("desktop offer galleries support mouse-wheel navigation", () => {

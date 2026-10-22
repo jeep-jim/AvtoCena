@@ -91,20 +91,22 @@ try{
  // Real settings controls: permissions are independent of chat-history availability.
  for(const scenario of [
   {name:'owner',status:200,owner:true,control:true},
-  {name:'admin',status:200,owner:false,control:true},
+  {name:'admin-default',status:200,owner:false,control:false},
+  {name:'admin-granted',status:200,owner:false,control:true},
+  {name:'manager-granted',status:200,owner:false,control:true},
   {name:'manager',status:200,owner:false,control:false},
   {name:'signed-out',status:401,control:false},
   {name:'forbidden',status:403,control:false},
   {name:'temporary-error',status:503,control:false},
  ]){
   const staffContext=await browser.newContext({viewport:{width:390,height:844}});
-  let permissionStatus=scenario.status,historyUnavailable=true,savedSetting;
+  let permissionStatus=scenario.status,historyUnavailable=true,savedSetting,pageControl=false;
   await staffContext.route('https://autobot.test/**',route=>{
    const u=new URL(route.request().url());
    if(u.pathname==='/api/crm/assistant'){
     if(u.searchParams.has('capabilities'))return route.fulfill({status:permissionStatus,json:{owner:scenario.owner,canControlPage:scenario.control}});
-    if(route.request().method()==='POST'){savedSetting=route.request().postDataJSON();return route.fulfill({json:{pageControl:savedSetting.enabled}});}
-    return route.fulfill(historyUnavailable?{status:503,json:{}}:{json:{revision:'settings-1',canControlPage:scenario.control,pageControl:false}});
+    if(route.request().method()==='POST'){savedSetting=route.request().postDataJSON();pageControl=savedSetting.enabled;return route.fulfill({json:{pageControl}});}
+    return route.fulfill(historyUnavailable?{status:503,json:{}}:{json:{revision:'settings-1',canControlPage:scenario.control,pageControl}});
    }
    if(u.pathname==='/api/autobot')return route.fulfill({json:{connected:true}});
    if(u.pathname==='/app.js')return route.fulfill({contentType:'text/javascript',body:fs.readFileSync(out+'/app.js','utf8')});
@@ -116,13 +118,19 @@ try{
   await staffPage.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click();
   await staffPage.getByRole('button',{name:'Настройки АвтоБота',exact:true}).click();
   const retry=staffPage.getByRole('button',{name:'Проверить доступ снова',exact:true});await retry.waitFor();
-  const control=staffPage.getByRole('switch',{name:'Помощь с формами и переходами',exact:true});
+  const control=staffPage.getByRole('switch',{name:'Управление сайтом',exact:true});
   assert.equal(await control.count(),scenario.control?1:0,scenario.name);
   if(scenario.control){
    historyUnavailable=false;
    await staffPage.evaluate(()=>window.addEventListener('team-assistant-open',()=>window.__teamOpened=true));
    await control.click();await staffPage.waitForFunction(()=>window.__teamOpened===true);
    assert.deepEqual(savedSetting,{op:'page_control',enabled:true,revision:'settings-1'});
+   await staffPage.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click();
+   await control.waitFor();assert.equal(await control.isChecked(),true,'enabled preference survives reopening');
+   await staffPage.evaluate(()=>window.__teamOpened=false);
+   await control.click();await staffPage.waitForFunction(()=>!document.querySelector('[role="switch"]').checked);
+   assert.deepEqual(savedSetting,{op:'page_control',enabled:false,revision:'settings-1'});
+   assert.equal(await staffPage.evaluate(()=>window.__teamOpened),false,'disabling retains ordinary chat');
   }else if(scenario.status===503){
    permissionStatus=200;historyUnavailable=false;await retry.click();await retry.waitFor({state:'hidden'});
    assert.equal(await control.count(),0,'retry never grants page control to a manager');
