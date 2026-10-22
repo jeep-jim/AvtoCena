@@ -1,3 +1,4 @@
+import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
 import {isRetroOffer} from "@/lib/catalog/retro-offer";
 import {OfferLeadForm} from "@/components/catalog/OfferLeadForm";
 import {SupplierUnavailableOffer} from '@/components/catalog/SupplierUnavailableOffer';
@@ -305,8 +306,8 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // Give current source/CORE knowledge and an explicit customer power scenario
   // one last chance to finish an older stored row. If that still cannot produce
   // an admitted delivered price, keep the row internal instead of rendering a
-  // public "price on request" page.
-  if (!retro && !directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing) return <UnavailableOffer offer={unavailableOfferRecord(offer)} calculationUnavailable />;
+  // public page, except the explicitly admitted unpriced Dubicars inventory.
+  if (!retro && !directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer(raw)) return <UnavailableOffer offer={unavailableOfferRecord(offer)} calculationUnavailable />;
   const specificationGroups = await translatedSpecificationGroups(offerSpecificationGroups(offer, { bodyLabel: presented.bodyLabel }));
   const o = {
     ...presented,

@@ -1,4 +1,5 @@
 "use client";
+import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
 import {isRetroOffer} from "@/lib/catalog/retro-offer";
 import {useState} from "react";
 import {useCatalogView} from "./CatalogSelectionContext";
@@ -87,7 +88,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   // Defence in depth for an older immutable generation during deployment: the
   // publication gate removes these rows permanently on the next market write,
   // while the card renderer hides them immediately.
-  if (!retro && !visibleRub && !selectionRequired && !sellerPricing) return null;
+  if (!retro && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer(normalizedOffer)) return null;
   const displayOffer = {
     ...o,
     japanDeliveredPreview: savedPreview ? undefined : offer.japanDeliveredPreview,

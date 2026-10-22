@@ -1,4 +1,5 @@
 "use client";
+import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
 import {isRetroOffer} from "@/lib/catalog/retro-offer";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
@@ -67,6 +68,7 @@ function CatalogPriceContent({
 
 export function CatalogPrice(props: Parameters<typeof CatalogPriceContent>[0]) {
  const city = useSelectedCity();
+ if(isPriceOnRequestDubicarsOffer(props.offer))return <div data-price-on-request>{props.label&&<p className="text-xs text-[var(--ac-muted)]">{props.label}</p>}<p className={`mt-1 font-black ${props.priceClassName||"text-[22px]"}`}>Цена по запросу</p></div>;
  if(isRetroOffer(props.offer))return <div data-retro-price>{props.label&&<p className="text-xs text-[var(--ac-muted)]">{props.label}</p>}<p className={`mt-1 font-black ${props.priceClassName||"text-[22px]"}`}>Цена по запросу</p></div>;
  const priced = priceCardForCity(props.offer,city);
  return <CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />;

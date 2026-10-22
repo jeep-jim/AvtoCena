@@ -283,7 +283,8 @@ try{
    await page.goto(origin+'/?kind='+kind);await page.waitForTimeout(850);
    assert.equal(calculations,0,'saved quote must not recalculate on open');
    assert.equal(await page.getByRole('button',{name:'Применить к расчёту для клиента'}).count(),0,'no save before edits');
-   assert.equal(await page.getByText(/Расчёт сохранён/).count(),kind==='saved-admin'?1:0,'save metadata is staff only');
+   assert.equal(await page.getByText(/Последнее сохранение расчёта/).count(),kind==='saved-admin'?1:0,'save metadata is staff only');
+   assert.equal(await page.getByText('Предыдущий сотрудник',{exact:true}).count(),kind==='saved-admin'?1:0,'editor name is staff only');
    assert.ok(await page.getByRole('button',{name:'Выбрать город. Сейчас: Новокузнецк'}).isVisible(),'explicit client quote overrides browser city');
    assert.match(await page.locator('.ac-price').first().innerText(),/2[\s\u00a0]500[\s\u00a0]000/);
    await page.getByText('Структура цены',{exact:true}).first().click();

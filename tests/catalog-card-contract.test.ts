@@ -9,11 +9,11 @@ const contract = fs.readFileSync(new URL("../docs/catalog-card-contract.md", imp
 const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
 
 test("catalog card never bypasses the validated public ruble price", () => {
-  assert.match(card, /const visibleRub = savedCalculationPreviewRub\(savedPreview\) \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.match(card, /const visibleRub = retro \? 0 : savedCalculationPreviewRub\(savedPreview\) \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.doesNotMatch(card, /exactTotalRub\s*\|\|/);
   assert.doesNotMatch(card, /Number\(o\.totalRub\s*\|\|\s*0\)/);
   assert.match(card, /totalRub: visibleRub \|\| null/);
-  assert.match(card, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
+  assert.match(card, /if \(!retro && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(normalizedOffer\)\) return null/);
   assert.doesNotMatch(card, /function sourceMoney/);
   assert.doesNotMatch(card, /Цена в объявлении/);
   assert.doesNotMatch(card, /Цена торгов/);
@@ -22,7 +22,7 @@ test("catalog card never bypasses the validated public ruble price", () => {
   assert.doesNotMatch(card, /ориентир под ключ/);
   assert.match(offerPage, /const visibleRub = modificationRub \|\| customerScenarioRub \|\| catalogOfferVisibleRub\(raw\)/);
   assert.match(offerPage, /conditionalModificationRub\(/);
-  assert.match(offerPage, /if \(!directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing\) return <UnavailableOffer/);
+  assert.match(offerPage, /if \(!retro && !directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(raw\)\) return <UnavailableOffer/);
   assert.doesNotMatch(offerPage, /exactTotalRub\s*\|\|/);
 });
 
