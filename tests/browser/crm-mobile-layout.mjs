@@ -222,10 +222,10 @@ try{
     assert.ok(await expandedSummary.locator('.crm-lead-channel-icon').isVisible(),'opened card shows contact channel');
     assert.equal(await expandedSummary.locator('.crm-contact-text').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','no contact badge background');
     const phoneCard=page.locator('.crm-lead-card').filter({has:page.locator('.crm-phone-icon')}).first();
-    await phoneCard.locator('summary').click();
-    assert.ok(await phoneCard.locator('.crm-phone-icon').isVisible(),'call contact shows handset icon');
+    await phoneCard.locator(':scope > .crm-lead-summary').click();
+    assert.ok(await phoneCard.locator(':scope > .crm-lead-summary .crm-phone-icon').isVisible(),'call contact shows handset icon');
     assert.match(await phoneCard.locator('a[href^="tel:"]').first().getAttribute('href'),/^tel:\+7999123456/);
-    await phoneCard.locator('summary').click();
+    await phoneCard.locator(':scope > .crm-lead-summary').click();
     if(width<768){
      const manager=await expandedSummary.locator('.crm-lead-manager').boundingBox(),status=await expandedSummary.locator('.crm-lead-status>span').boundingBox();
      assert.ok(manager&&status&&manager.y>=status.y+status.height,'opened card puts manager below status');
