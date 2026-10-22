@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T13:14:54.510899+07:00",
+  "updatedAt": "2026-10-22T13:18:41.636595+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -541,23 +541,28 @@
         2017,
         2016
       ],
-      "variants": 186,
+      "variants": 276,
       "status": "partial_verified_fields",
-      "researchedVariants": 71,
-      "checkedAt": "2026-10-22T13:12:57.837966+07:00",
+      "researchedVariants": 164,
+      "checkedAt": "2026-10-22T13:18:41.586762+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulia-2016-2017.json",
-      "nextAction": "Alfa Romeo Giulia 2023–2026, then Giulietta",
+      "nextAction": "Giulia retry files remain; alphabetic cursor advanced to Giulietta",
       "lastVerifiedBatch": {
-        "batch": "research-2026-10-22-alfa-giulia-2020-2022",
-        "commit": "9e1965fc4e26a253e6321e8038695d9ac7cd999e",
-        "workflow": 39732328006,
-        "variants": 38,
-        "fields": 327,
+        "batch": "research-2026-10-22-alfa-giulia-2023-2026",
+        "commit": "4da0310796f6763c011b534635e63bd573224f33",
+        "workflow": 39732875758,
+        "variants": 35,
+        "fields": 292,
         "newVariants": 35,
         "apiReadback": true,
         "includedInIndex": false
       },
-      "newAnnualVariantsThisPass": 54
+      "newAnnualVariantsThisPass": 90,
+      "retryFiles": [
+        "docs/encyclopedia/retry-2026-10-22-alfa-giulia-2019.json",
+        "docs/encyclopedia/retry-2026-10-22-alfa-giulia-2020-2022.json",
+        "docs/encyclopedia/retry-2026-10-22-alfa-giulia-2023-2026.json"
+      ]
     },
     {
       "id": "cb49c6bb46e8dd8caf106b34",
@@ -32580,12 +32585,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T13:12:57.837966+07:00",
+    "updatedAt": "2026-10-22T13:18:41.636595+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "verified_batches_wait_next_index",
+    "state": "verified_giulia_batches_wait_aggregate_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulia 2023–2026, then Giulietta",
+    "nextModel": "Alfa Romeo Giulietta: first documented year 2010, then later years; Giulia retries remain separate",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32729,15 +32734,25 @@
         "newVariants": 35,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-giulia-2023-2026": {
+        "batch": "research-2026-10-22-alfa-giulia-2023-2026",
+        "commit": "4da0310796f6763c011b534635e63bd573224f33",
+        "workflow": 39732875758,
+        "variants": 35,
+        "fields": 292,
+        "newVariants": 35,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
     "publicSerializationParity": 75,
     "allModelsComplete": false,
-    "installedRelease": "5b8453f63b8e4af36092f79f86dbe665e557e969",
-    "installedWorkflow": 39716807213,
+    "installedRelease": "75fbb8b63dcb1ea2c5fe817bea7e687df57f8e0f",
+    "installedWorkflow": 39729118728,
     "indexDigest": "7d4d2834a0f1a9832927b96b736928799ce3d8c3495ca6fcc3ce2bf32befc508",
-    "catalogRowsEnriched": 476,
+    "catalogRowsEnriched": 798,
     "catalogFieldsFilled": 814,
     "remaining": [
       "Exact edition/year/trim identity gaps across the encyclopedia",
@@ -32749,11 +32764,11 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-giulia-2020-2022",
-      "commit": "9e1965fc4e26a253e6321e8038695d9ac7cd999e",
-      "workflow": 39732328006,
-      "variants": 38,
-      "fields": 327,
+      "batch": "research-2026-10-22-alfa-giulia-2023-2026",
+      "commit": "4da0310796f6763c011b534635e63bd573224f33",
+      "workflow": 39732875758,
+      "variants": 35,
+      "fields": 292,
       "newVariants": 35,
       "apiReadback": true,
       "includedInIndex": false
@@ -32890,28 +32905,24 @@
         "newVariants": 35,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-giulia-2023-2026",
+        "commit": "4da0310796f6763c011b534635e63bd573224f33",
+        "workflow": 39732875758,
+        "variants": 35,
+        "fields": 292,
+        "newVariants": 35,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
-    "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-giulia-2023-2026",
-      "modelId": "296965c95e42800c757012ac",
-      "years": [
-        2023,
-        2024,
-        2025,
-        2026
-      ],
-      "state": "prepared_preflight_pass",
-      "variants": 35,
-      "fields": 292
-    },
+    "inFlightResearch": null,
     "lastCompletedPass": {
-      "report": "docs/encyclopedia/reports/2026-10-22-alfa-historical-pass.json",
-      "variants": 64,
-      "fields": 571,
-      "newVariants": 62,
-      "apiReadbackPassed": true,
-      "allModelsComplete": false
+      "report": "docs/encyclopedia/reports/2026-10-22-giulia-2019-2026-pass.json",
+      "variants": 93,
+      "fields": 773,
+      "newVariants": 90
     },
     "failedIndexRelease": {
       "commit": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
@@ -32924,14 +32935,22 @@
       "activationOccurred": false,
       "nextAction": "Check publication completion before requesting one aggregate index release; do not clear lock or duplicate collectors"
     },
-    "concurrentRelease": {
-      "commit": "5b340a0be566f32825479d0564b2a236614cbb69",
-      "workflow": 39725951294,
-      "indexPreparedAt": "2026-10-22T05:08:09Z",
-      "status": "preparing_price_indexes",
-      "activated": false,
-      "note": "Separate owner change; encyclopedia mutations paused until index preparation succeeded. Giulia batches applied after index freeze require next index."
-    }
+    "concurrentRelease": null,
+    "installedIndexDigest": "23492c2fd0b0111bc71c084df08eec4ce0b2fe4218d12f5e80cf901e39bae377",
+    "catalogFieldsEnriched": 1357,
+    "failedConcurrentRelease": {
+      "workflow": 39731564487,
+      "reason": "encyclopedia_changed_during_preparation"
+    },
+    "technicalReferenceIntake": {
+      "previousWorkflow": 39713120109,
+      "previousSaved": 1324,
+      "previousPending": 422,
+      "resumeWorkflow": 39731352531,
+      "state": "in_progress",
+      "referenceOnly": true
+    },
+    "releaseRequestedAt": "2026-10-22T13:18:41.636595+07:00"
   },
   "scope": {
     "minimumYear": 2008,
