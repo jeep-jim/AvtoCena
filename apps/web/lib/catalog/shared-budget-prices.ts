@@ -1,3 +1,4 @@
+import {readCalculationIndex} from '../encyclopedia/calculation-index';
 import {readCatalogEditorial} from './editorial';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
@@ -25,7 +26,7 @@ export async function budgetPricingFingerprint(market:string):Promise<string|nul
   catalogRateFingerprintInputs(),getEffectiveMarketVersion(market),
   market==='china'?chinaCnyPriceFingerprint():null,readCatalogEditorial(),
  ]);
- return hash({schema:1,release:calculationCacheVersion(),market,
+ return hash({schema:1,release:calculationCacheVersion(),encyclopedia:readCalculationIndex()?.digest||null,market,
   utcDay:new Date().toISOString().slice(0,10),rates,configured,
   editorialPrices:Object.values(editorial.entries).filter(entry=>entry.market===market&&entry.sellerPrice).map(entry=>[entry.id,entry.sellerPrice]),
   resolved:resolveCatalogMarketConfig(market as CatalogMarket,configured),anchors});

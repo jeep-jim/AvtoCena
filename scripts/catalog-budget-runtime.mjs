@@ -1,3 +1,4 @@
+import {restoreReleaseEncyclopedia} from './encyclopedia/restore-calculation-index.mjs';
 import fs from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
@@ -61,6 +62,7 @@ async function main(){
     if(decision.skip){report.reason='publication_in_progress';throw Error('budget_preparation_deferred_active_publisher');}
     const context={release,generationId:decision.generationId,readState,readRelease:liveBudgetRelease};
     await verifyBudgetContext(context);
+    report.encyclopediaDigest=await restoreReleaseEncyclopedia(storage,root,release);
     const pricing=await import(pathToFileURL(path.join(root,'apps/web/lib/catalog/shared-budget-prices.ts')).href);
     const {budgetPricingFingerprint}=pricing;
     // Import the versioner from the exact deployed checkout, not the newest

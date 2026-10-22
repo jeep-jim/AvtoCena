@@ -34,4 +34,12 @@ const prior=await storage.readJson(key,null);
 if(!prior)await storage.writeJson(key,index,{ifNoneMatch:'*'});
 const saved=await storage.readJson(key,null);
 if(saved?.digest!==index.digest||checksum(saved.models)!==index.digest)throw Error('encyclopedia_index_readback_failed');
+const release=process.env.GITHUB_SHA;
+if(release&&/^[a-f0-9]{40}$/.test(release)){
+ const bindingKey=`knowledge/encyclopedia/calculation-releases/${release}.json`;
+ const old=await storage.readJson(bindingKey,null);
+ if(old&&old.digest!==index.digest)throw Error('release_encyclopedia_binding_changed');
+ if(!old)await storage.writeJson(bindingKey,{version:1,release,digest:index.digest,key},{ifNoneMatch:'*'});
+ if((await storage.readJson(bindingKey,null))?.digest!==index.digest)throw Error('release_encyclopedia_binding_readback_failed');
+}
 console.log(JSON.stringify({stage:'encyclopedia_index_ready',...report,digest:index.digest,manifestDigest,readback:true}));
