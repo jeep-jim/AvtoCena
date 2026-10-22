@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-10-22T19:34:08.115Z",
+  "inspectionRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/39841134049",
+  "installedIndex": {
+    "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "digest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "createdAt": "2026-10-22T18:56:33.442Z",
+    "manifestDigest": "f8b44fa3e303db16530ee0263ba68768650b208bdfbca93a5d296a04489a2e3e",
+    "models": {
+      "alpine:a110": {
+        "variants": 22,
+        "revisions": [
+          "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d"
+        ],
+        "batchCalculationFields": {
+          "research-2026-10-23-alpine-a110-2017-2022": 140,
+          "research-2026-10-22-alpina-alpine": 18,
+          "research-2026-10-23-alpine-a110-2023": 41
+        }
+      },
+      "alpine:a290": {
+        "variants": 1,
+        "revisions": [
+          "5be3aba9-3f66-4436-9b32-a39da23408e1"
+        ],
+        "batchCalculationFields": {
+          "research-2026-10-22-alpina-alpine": 4
+        }
+      }
+    }
+  },
+  "pendingBatches": [
+    {
+      "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
+      "run": 39836589326,
+      "savedFields": 130,
+      "calculationFields": 109
+    },
+    {
+      "batch": "research-2026-10-23-alpine-a290-2025",
+      "run": 39837140373,
+      "savedFields": 37,
+      "calculationFields": 28
+    },
+    {
+      "batch": "research-2026-10-23-alpine-a290-2026",
+      "run": 39837681693,
+      "savedFields": 40,
+      "calculationFields": 28
+    }
+  ],
+  "scope": "Immutable installed index membership only; saved reference fields do not prove every car complete.",
+  "audiA3": {
+    "id": "56bbcecb51a61b76402371a9",
+    "searchHttpStatus": 200,
+    "detailHttpStatus": 200,
+    "searchAndDetail": {
+      "totalRub": 3148247,
+      "drive": "fwd",
+      "transmission": "automatic",
+      "engineCc": 1498,
+      "powerHp": 150,
+      "powerDataSource": "permanent_encyclopedia:ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb"
+    },
+    "detailUrl": "https://avtocena.com/cars/offer/56bbcecb51a61b76402371a9",
+    "verification": "Search JSON matched target-ID full offer object in server-rendered RSC; no browser visual assertion."
+  }
+}
