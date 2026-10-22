@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T17:13:58+07:00",
+  "updatedAt": "2026-10-22T17:17:21+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -623,25 +623,26 @@
       "model": "Mito",
       "years": [
         2014,
+        2013,
         2012,
         2011,
         2010,
         2009,
         2008
       ],
-      "variants": 81,
+      "variants": 108,
       "status": "partial_verified_fields",
       "researchedVariants": 0,
       "checkedAt": "2026-10-22T01:36:38.003919+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-mito-remaining.json",
-      "nextAction": "MiTo: применить подготовленные27 исполнений2013 и3 уточненияTCT2012; затем2013 Live/UKранние и2014",
-      "lastCheckedAt": "2026-10-22T17:13:58+07:00",
-      "lastBatch": "research-2026-10-22-alfa-mito-2012-uk-sprint-sportiva",
-      "lastBatchVariants": 10,
-      "lastBatchFields": 99,
-      "newVariantsThisBatch": 10,
+      "nextAction": "MiTo: Live/TwinAir85Sprint/78Progression2013 подготовлены; далее2014, отдельные ранниеUK2013 и Veloce/QVLimited2013 в retry",
+      "lastCheckedAt": "2026-10-22T17:17:21+07:00",
+      "lastBatch": "research-2026-10-22-alfa-mito-2013-ranges-2012-tct",
+      "lastBatchVariants": 30,
+      "lastBatchFields": 273,
+      "newVariantsThisBatch": 27,
       "fullHistoricalCoverage": false,
-      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2012-uk-sprint-sportiva-readback.json"
+      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2013-ranges-2012-tct-readback.json"
     },
     {
       "id": "d9d48f8457c33f7e466d6c6e",
@@ -32613,12 +32614,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T17:13:58+07:00",
+    "updatedAt": "2026-10-22T17:17:21+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "mito_2012_21_new_verified_2013_prepared",
+    "state": "mito_2012_2013_48_new_verified_live_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "MiTo: применить подготовленные27 исполнений2013 и3 уточненияTCT2012; затем2013 Live/UKранние и2014",
+    "nextModel": "MiTo: Live/TwinAir85Sprint/78Progression2013 подготовлены; далее2014, отдельные ранниеUK2013 и Veloce/QVLimited2013 в retry",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32953,6 +32954,17 @@
         "variants": 10,
         "newVariants": 10,
         "fields": 99,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      "alfa-mito-2013-ranges-2012-tct": {
+        "batch": "research-2026-10-22-alfa-mito-2013-ranges-2012-tct",
+        "commit": "741e663a2c1783843d9de480a84ff66bf93c0cee",
+        "workflow": 39761586526,
+        "variants": 30,
+        "newVariants": 27,
+        "updatedVariants": 3,
+        "fields": 273,
         "apiReadback": true,
         "includedInIndex": false
       }
@@ -33337,10 +33349,10 @@
     },
     "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
     "preparedBatch": {
-      "batch": "research-2026-10-22-alfa-mito-2013-ranges-2012-tct",
-      "variants": 30,
-      "newVariants": 27,
-      "fields": 273,
+      "batch": "research-2026-10-22-alfa-mito-2013-live-early-uk",
+      "variants": 3,
+      "newVariants": 3,
+      "fields": 30,
       "state": "prepared_not_applied",
       "preflightPassed": true
     }
