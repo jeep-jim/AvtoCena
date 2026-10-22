@@ -1,0 +1,1290 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aito-m9-generation-fields",
+  "entries": [
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "26497d10c191ede237b03466",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "2024 Pure Electric Ultra 100kWh 6-Seater",
+      "expectedDigest": "1b907101e868530d20d7f003520314c0d7977894e3eab71741dc0ddcdf9642c7",
+      "patch": {
+        "grossVehicleWeightKg": 3010
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "3fe60ab16840c92c7531e393ee3b6a6cc575df5f4d53d236a0eadcef31a7607a",
+        "pages": [
+          416
+        ],
+        "statement": "Руководство исходного M9 EV, стр. 416: SKE6520SBEVAS / SKE6520SBEVA2S, полная разрешённая масса 3010 кг; снаряжённая 2560 кг не использована. Это исходное поколение, не обновление 2025. Номинальные 62/88 кВт моторов не названы 30-минутными.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 416,
+            "selector": "M9 EV 2024; SKE6520SBEVAS / SKE6520SBEVA2S"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "613a57415f567ab6890695e2",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Ultra Edition 42kWh 6 seats Edition",
+      "expectedDigest": "6420d92ce2c54d9141272e7951e166e9c4f1d405012b0166594f428b0c157383",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 42kWh 6 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 42kWh 6 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "aefce3c9c96778cd5697962d",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "2024 Extended Range Ultra 42kWh 6-Seater",
+      "expectedDigest": "598d34eab55525ae1d597146914769ab8aaa58d3b0fc5ce3cdd86b313b677330",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Extended Range Ultra 42kWh 6-Seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Extended Range Ultra 42kWh 6-Seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "e010789ca87cc2bad3a3de9f",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "2024 Range Extender Max Edition 42kWh 6-seater",
+      "expectedDigest": "2e2ef3b96456ee9e86b0b0057836aa5283fd84a81366efcb19d93013924231e7",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Range Extender Max Edition 42kWh 6-seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Range Extender Max Edition 42kWh 6-seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "6a51b60438b800fc8453336a",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "2024 Model Extended Range Ultra Edition 52kWh 5-Seater",
+      "expectedDigest": "76d4d93c097470525041af5a066d2b440678175aaeaf486e5a75a2457e748ee1",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Model Extended Range Ultra Edition 52kWh 5-Seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Model Extended Range Ultra Edition 52kWh 5-Seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "a3538ffb4b96216512d7ddd6",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "2024 Range Extender Max 52kWh 6-seater",
+      "expectedDigest": "7e9a7724a05d9cb9833b9379894e33933dab0908acd35144e6b2c20ffeb214de",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Range Extender Max 52kWh 6-seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Range Extender Max 52kWh 6-seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "6e291b629236ae5a13f48965",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "2024 Range Extender Ultra 52kWh 6-seater",
+      "expectedDigest": "71c282feedcd3318f3dce42f08c149e5b7963c614df0adfe4ce08999727dd9f3",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Range Extender Ultra 52kWh 6-seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "2024 Range Extender Ultra 52kWh 6-seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "c41eff325dd0c5074f119635",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Max Edition 42kWh 6 seats Edition",
+      "expectedDigest": "d37e6927b6b8da98be1d1476022b09cfa1befe08ef51d4cda23d6710bc4d5331",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 42kWh 6 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 42kWh 6 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "d744f936b8db2e2d17f50d70",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Ultra Edition 52kWh 6 seats Edition",
+      "expectedDigest": "bf839d76ddce8c9016f944c7c00d824f5ccfc93c4438d95d9d764a222530dbc4",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 52kWh 6 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 52kWh 6 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "f374886ae1a35c9d9266dc82",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Ultra Edition 42kWh 6 seats Edition",
+      "expectedDigest": "b3449e7a0e905c5919a704eb5bcded9577ff332871e7e74f672d5476acb91498",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 42kWh 6 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 42kWh 6 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "ef382f4d45827c3bb0bc067d",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Ultra Edition 52kWh 5 seats Edition",
+      "expectedDigest": "38a05027c6ec9220f9184260f86d721ee41f17c0ece71dcf456a6603f3b16996",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 52kWh 5 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 52kWh 5 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "47c51c84b5147e3ab691deb9",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Max Edition 42kWh 5 seats Edition",
+      "expectedDigest": "d8f8ad95b5e5e9c45ec4da56cc95fbc3093696b5948c3b30244f38b9b36c6212",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 42kWh 5 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 42kWh 5 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "5c7ae5a37f04251702103fe5",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Ultra Edition 42kWh 6 seats Edition",
+      "expectedDigest": "e4630298c4f3daba4f3302f551f521ad90ee8a6fc4c9ca9815b08f602b997913",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 42kWh 6 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Ultra Edition 42kWh 6 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "a0e4a5baf85b2dbf7c2a3f7b",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Max Edition 52kWh 5 seats Edition",
+      "expectedDigest": "4c3aa84b4ce400c2ed893152744016b3d2fde37584f4acc9473296a7b7c9337c",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 52kWh 5 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 52kWh 5 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "9a14ebd0c770550ad1b4eeed",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Max Edition 52kWh 6 seats Edition",
+      "expectedDigest": "ce99be2eef89b6dcf1d753588901fc89f1fac8120bbe7df99f6e6ad6f322fc2b",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 52kWh 6 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 52kWh 6 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "77c649cda7da7ee27905a29c",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EREV Max Edition 42kWh 6 seats Edition",
+      "expectedDigest": "cfabe8631fb9e3cc942c466480370206d710eb3c6afee113b65fd11c9c115fdd",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1",
+        "pages": [
+          422
+        ],
+        "statement": "Руководство исходного M9 EREV, стр. 422: H15RT, объём 1499 мл = 1499 см³. Полная масса зависит от технического кода (3010/3060/3080/3100 кг); без точного кода она не выбрана. Нетто 110 кВт и номинальные 112 кВт не перенесены в расчётные поля. Год и исходное исполнение сохранены.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 42kWh 6 seats Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 422,
+            "selector": "EREV Max Edition 42kWh 6 seats Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "3ac01e719c8263a071924864",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EV Ultra Edition 100kWh 6 seats Edition",
+      "expectedDigest": "550833b25b9f168a858c54758f51948a47ac05438af2d929075b6c6831c22375",
+      "patch": {
+        "grossVehicleWeightKg": 3010
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "3fe60ab16840c92c7531e393ee3b6a6cc575df5f4d53d236a0eadcef31a7607a",
+        "pages": [
+          416
+        ],
+        "statement": "Руководство исходного M9 EV, стр. 416: SKE6520SBEVAS / SKE6520SBEVA2S, полная разрешённая масса 3010 кг; снаряжённая 2560 кг не использована. Это исходное поколение, не обновление 2025. Номинальные 62/88 кВт моторов не названы 30-минутными.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 416,
+            "selector": "M9 EV 2024; SKE6520SBEVAS / SKE6520SBEVA2S"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "f719b6bcfcc171cf2971e787",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2024,
+      "trim": "EV Max Edition 100kWh 6 seats Edition",
+      "expectedDigest": "145c2db9881caf23cf2b9b3ef01d0994c16ee1bb78d952a4d6c7c7ce3af98188",
+      "patch": {
+        "grossVehicleWeightKg": 3010
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "3fe60ab16840c92c7531e393ee3b6a6cc575df5f4d53d236a0eadcef31a7607a",
+        "pages": [
+          416
+        ],
+        "statement": "Руководство исходного M9 EV, стр. 416: SKE6520SBEVAS / SKE6520SBEVA2S, полная разрешённая масса 3010 кг; снаряжённая 2560 кг не использована. Это исходное поколение, не обновление 2025. Номинальные 62/88 кВт моторов не названы 30-минутными.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM9%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 416,
+            "selector": "M9 EV 2024; SKE6520SBEVAS / SKE6520SBEVA2S"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "653fce9f051facf93fe3432e",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EV Max 100kWh 6-seat LiDAR 192",
+      "expectedDigest": "199a65b12711d3961607dd490e4c77ec287f0be91938a86aeab5e293f8069cfa",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "c3f5d641328f0d01fe947faceb145c4b4ae31dc674418cf6c513c80a63f753da",
+        "pages": [
+          421
+        ],
+        "statement": "Руководство M9 EV 2025, стр. 421: SKE6520SBEVA4S, полная разрешённая масса 3130 кг для пяти- и шестиместных версий. Снаряжённая масса 2610/2655/2680 кг не использована. Наблюдаемое значение 1500 кг, если присутствует, заменяется этим заводским фактом; прежняя история сохраняется. 30-минутная мощность не подтверждена.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 421,
+            "selector": "M9 EV 2025; SKE6520SBEVA4S; 100 kWh AWD"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "fee0be61de712e2d67a7e4c7",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EV Ultra 100kWh 6-seat LiDAR 192",
+      "expectedDigest": "30dbcbf6ad673823bc8a2c439f797b4fb991f3e8b14f40ad2fc69da3e381d791",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "c3f5d641328f0d01fe947faceb145c4b4ae31dc674418cf6c513c80a63f753da",
+        "pages": [
+          421
+        ],
+        "statement": "Руководство M9 EV 2025, стр. 421: SKE6520SBEVA4S, полная разрешённая масса 3130 кг для пяти- и шестиместных версий. Снаряжённая масса 2610/2655/2680 кг не использована. Наблюдаемое значение 1500 кг, если присутствует, заменяется этим заводским фактом; прежняя история сохраняется. 30-минутная мощность не подтверждена.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 421,
+            "selector": "M9 EV 2025; SKE6520SBEVA4S; 100 kWh AWD"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "d3467053f8d988d481646311",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EV Ultra 100kWh 5-seat LiDAR 192",
+      "expectedDigest": "9aaac3f89f82337054ff8c4db1402cdcc8c064fa143e648a11ea196dc87644e9",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "c3f5d641328f0d01fe947faceb145c4b4ae31dc674418cf6c513c80a63f753da",
+        "pages": [
+          421
+        ],
+        "statement": "Руководство M9 EV 2025, стр. 421: SKE6520SBEVA4S, полная разрешённая масса 3130 кг для пяти- и шестиместных версий. Снаряжённая масса 2610/2655/2680 кг не использована. Наблюдаемое значение 1500 кг, если присутствует, заменяется этим заводским фактом; прежняя история сохраняется. 30-минутная мощность не подтверждена.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 421,
+            "selector": "M9 EV 2025; SKE6520SBEVA4S; 100 kWh AWD"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "159c2fcb21ce3dc374e35447",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EV Ultra Edition 100kWh 5 seats Edition",
+      "expectedDigest": "fad0840955e07b659b8d1e254d7723455adfce67024c58507597fa7a22f7e58d",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "c3f5d641328f0d01fe947faceb145c4b4ae31dc674418cf6c513c80a63f753da",
+        "pages": [
+          421
+        ],
+        "statement": "Руководство M9 EV 2025, стр. 421: SKE6520SBEVA4S, полная разрешённая масса 3130 кг для пяти- и шестиместных версий. Снаряжённая масса 2610/2655/2680 кг не использована. Наблюдаемое значение 1500 кг, если присутствует, заменяется этим заводским фактом; прежняя история сохраняется. 30-минутная мощность не подтверждена.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 421,
+            "selector": "M9 EV 2025; SKE6520SBEVA4S; 100 kWh AWD"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "bea695aba078d9ef6cbbb463",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EV Max Edition 100kWh 6 seats Edition",
+      "expectedDigest": "24b431e193981424cac0b3f75dc9c1b6f0cb967b8537936a9a0549db6586d6f5",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "c3f5d641328f0d01fe947faceb145c4b4ae31dc674418cf6c513c80a63f753da",
+        "pages": [
+          421
+        ],
+        "statement": "Руководство M9 EV 2025, стр. 421: SKE6520SBEVA4S, полная разрешённая масса 3130 кг для пяти- и шестиместных версий. Снаряжённая масса 2610/2655/2680 кг не использована. Наблюдаемое значение 1500 кг, если присутствует, заменяется этим заводским фактом; прежняя история сохраняется. 30-минутная мощность не подтверждена.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 421,
+            "selector": "M9 EV 2025; SKE6520SBEVA4S; 100 kWh AWD"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "752b9e7c1ff6394b12b28ddc",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EV Ultra 100kWh 5-seat LiDAR 896",
+      "expectedDigest": "26ffb3cf045f9fd9f31d5de6201d308b88a17e3ea320cba6703430a6d7d0a119",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "c3f5d641328f0d01fe947faceb145c4b4ae31dc674418cf6c513c80a63f753da",
+        "pages": [
+          421
+        ],
+        "statement": "Руководство M9 EV 2025, стр. 421: SKE6520SBEVA4S, полная разрешённая масса 3130 кг для пяти- и шестиместных версий. Снаряжённая масса 2610/2655/2680 кг не использована. Наблюдаемое значение 1500 кг, если присутствует, заменяется этим заводским фактом; прежняя история сохраняется. 30-минутная мощность не подтверждена.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://hima.auto/wenjie/m9/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 421,
+            "selector": "M9 EV 2025; SKE6520SBEVA4S; 100 kWh AWD"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "19ce2b0211c3bd3bca6512e1",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026 EREV Ultra 5-seat",
+      "expectedDigest": "33a59aae13162fb9ebb5013e4cb322553250ed94deb1c75f12414fd4afb0ac23",
+      "patch": {
+        "grossVehicleWeightKg": 3600
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+        "pages": [
+          465,
+          466,
+          467,
+          469,
+          470
+        ],
+        "statement": "Руководство M9 EREV 2026: полная масса 3600 кг, SKE6530DREEVA2F, стр. 466. Таблица батарей 60/75,4 кВт·ч и кодов — стр. 469–470; стандартный/удлинённый кузов 5285/5402 мм — стр. 465. Батарея и двигатель сверены с прежними заводскими подтверждениями. Снаряжённая масса не использована; категорию автомобиля и расчётные правила не меняли.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/model/m9-new/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 466,
+            "selector": "2026 EREV Ultra 5-seat; SKE6530DREEVA2F; 75.4 kWh"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "cf1ac4fa2fdac9d45ac59848",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026 EREV Max+ 6-seat",
+      "expectedDigest": "3219e821c7ee0ef1fb3c11672b31633977eda37a8ec507e73b1f49f1759c3e5a",
+      "patch": {
+        "grossVehicleWeightKg": 3525
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+        "pages": [
+          465,
+          466,
+          467,
+          469,
+          470
+        ],
+        "statement": "Руководство M9 EREV 2026: полная масса 3525 кг, SKE6530DREEVA1F, стр. 466. Таблица батарей 60/75,4 кВт·ч и кодов — стр. 469–470; стандартный/удлинённый кузов 5285/5402 мм — стр. 465. Батарея и двигатель сверены с прежними заводскими подтверждениями. Снаряжённая масса не использована; категорию автомобиля и расчётные правила не меняли.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/model/m9-new/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 466,
+            "selector": "2026 EREV Max+ 6-seat; SKE6530DREEVA1F; 60 kWh"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "63e5c07ca8f3a79820520774",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026 EREV Ultimate LWB 6-seat",
+      "expectedDigest": "f7d570d893b79c3860ee66ee647d5e51e615a669eb79322e353f500335723948",
+      "patch": {
+        "grossVehicleWeightKg": 3735
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+        "pages": [
+          465,
+          466,
+          467,
+          469,
+          470
+        ],
+        "statement": "Руководство M9 EREV 2026: полная масса 3735 кг, SKE6540DREEVA3F / SKE6540DREEVA2F, стр. 467. Таблица батарей 60/75,4 кВт·ч и кодов — стр. 469–470; стандартный/удлинённый кузов 5285/5402 мм — стр. 465. Батарея и двигатель сверены с прежними заводскими подтверждениями. Снаряжённая масса не использована; категорию автомобиля и расчётные правила не меняли.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/model/m9-new/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 467,
+            "selector": "2026 EREV Ultimate LWB 6-seat; SKE6540DREEVA3F / SKE6540DREEVA2F; 75.4 kWh"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "e7093ec601cf7d0f764ff08f",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026 EREV Ultimate LWB 5-seat",
+      "expectedDigest": "e73994b29fd8304a67ec74f1b95ef3a37b8dbfb8f61461182a91baee2181bdeb",
+      "patch": {
+        "grossVehicleWeightKg": 3735
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+        "pages": [
+          465,
+          466,
+          467,
+          469,
+          470
+        ],
+        "statement": "Руководство M9 EREV 2026: полная масса 3735 кг, SKE6540DREEVA3F / SKE6540DREEVA2F, стр. 467. Таблица батарей 60/75,4 кВт·ч и кодов — стр. 469–470; стандартный/удлинённый кузов 5285/5402 мм — стр. 465. Батарея и двигатель сверены с прежними заводскими подтверждениями. Снаряжённая масса не использована; категорию автомобиля и расчётные правила не меняли.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/model/m9-new/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 467,
+            "selector": "2026 EREV Ultimate LWB 5-seat; SKE6540DREEVA3F / SKE6540DREEVA2F; 75.4 kWh"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "2bd1bb216a1009cab3c1f8df",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026 EREV Ultra 6-seat",
+      "expectedDigest": "bcca279b0514e3ce3ee64aa466a59e396c802fac82d5bc46197cb6f790803588",
+      "patch": {
+        "grossVehicleWeightKg": 3600
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+        "pages": [
+          465,
+          466,
+          467,
+          469,
+          470
+        ],
+        "statement": "Руководство M9 EREV 2026: полная масса 3600 кг, SKE6530DREEVA2F, стр. 466. Таблица батарей 60/75,4 кВт·ч и кодов — стр. 469–470; стандартный/удлинённый кузов 5285/5402 мм — стр. 465. Батарея и двигатель сверены с прежними заводскими подтверждениями. Снаряжённая масса не использована; категорию автомобиля и расчётные правила не меняли.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/model/m9-new/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 466,
+            "selector": "2026 EREV Ultra 6-seat; SKE6530DREEVA2F; 75.4 kWh"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "4a2f0bffea5b329b80aa700b",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026 EREV Max+ 5-seat",
+      "expectedDigest": "5408c278b7f83ba699f6d0b36b755d67eba6b9db69d763aa12b4294a72d455b1",
+      "patch": {
+        "grossVehicleWeightKg": 3525
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+        "pages": [
+          465,
+          466,
+          467,
+          469,
+          470
+        ],
+        "statement": "Руководство M9 EREV 2026: полная масса 3525 кг, SKE6530DREEVA1F, стр. 466. Таблица батарей 60/75,4 кВт·ч и кодов — стр. 469–470; стандартный/удлинённый кузов 5285/5402 мм — стр. 465. Батарея и двигатель сверены с прежними заводскими подтверждениями. Снаряжённая масса не использована; категорию автомобиля и расчётные правила не меняли.",
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/model/m9-new/configuration/"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 466,
+            "selector": "2026 EREV Max+ 5-seat; SKE6530DREEVA1F; 60 kWh"
+          }
+        }
+      }
+    }
+  ]
+}

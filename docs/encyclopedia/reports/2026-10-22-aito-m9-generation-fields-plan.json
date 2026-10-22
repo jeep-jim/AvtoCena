@@ -1,0 +1,544 @@
+{
+  "checkedAt": "2026-10-22T04:43:04.530Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-aito-m9-generation-fields",
+  "digest": "566d011c91155b68acc6fcf30e7542b4447de9e9de56ca5f646d36005afa295d",
+  "sourceModelRevision": "c4e036aa-08f9-4d04-a4dc-ecbe7b78e77d",
+  "recordsRead": 79,
+  "variants": 30,
+  "fields": 45,
+  "correctsObserved1500Kg": [
+    "653fce9f051facf93fe3432e",
+    "fee0be61de712e2d67a7e4c7",
+    "d3467053f8d988d481646311",
+    "752b9e7c1ff6394b12b28ddc"
+  ],
+  "plan": {
+    "changes": [
+      {
+        "variantId": "26497d10c191ede237b03466",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "613a57415f567ab6890695e2",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "aefce3c9c96778cd5697962d",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "e010789ca87cc2bad3a3de9f",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "6a51b60438b800fc8453336a",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "a3538ffb4b96216512d7ddd6",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "6e291b629236ae5a13f48965",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "c41eff325dd0c5074f119635",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "d744f936b8db2e2d17f50d70",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "f374886ae1a35c9d9266dc82",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "ef382f4d45827c3bb0bc067d",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "47c51c84b5147e3ab691deb9",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "5c7ae5a37f04251702103fe5",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "a0e4a5baf85b2dbf7c2a3f7b",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "9a14ebd0c770550ad1b4eeed",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "77c649cda7da7ee27905a29c",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "3ac01e719c8263a071924864",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f719b6bcfcc171cf2971e787",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "653fce9f051facf93fe3432e",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "fee0be61de712e2d67a7e4c7",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "d3467053f8d988d481646311",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "159c2fcb21ce3dc374e35447",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "bea695aba078d9ef6cbbb463",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "752b9e7c1ff6394b12b28ddc",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "19ce2b0211c3bd3bca6512e1",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "cf1ac4fa2fdac9d45ac59848",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "63e5c07ca8f3a79820520774",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "e7093ec601cf7d0f764ff08f",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "2bd1bb216a1009cab3c1f8df",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "4a2f0bffea5b329b80aa700b",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "retry": [
+    {
+      "variantId": "f2509619bc892b9b08707237",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "45054cc1c724866952d071d6",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "3b989c6c87ad0b6ba1c6f7d8",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "99b5a8be7180f2bea0376b9e",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "7473b932a6d04e018c0b5551",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "2011215bed03d94f7156860f",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "769a528459cf859a47f1fc35",
+      "year": 2025,
+      "status": "review",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "c247b502c38825acdfcc1e7f",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "d1ba5008a889c2bf00dd130e",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "79417945064418c945dc0320",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "1aeb450527d3907165dc8589",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "8404ab03c9e35f1976374876",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "f5482b81c1cf4bb071978590",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "edd6cb014e9910beeece6fa2",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "ee13f2918e787e5a812c4dd5",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "979ce5e59e27b8c02034804a",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "a551ad0c5c54892b3ec1544a",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "a138c154622b63d15c2beb8e",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "eccd3b08ec51954acb21ddce",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "b48f1a74d7b062064a69b3a8",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "4fd6c13b996b11e066361c72",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "27240d1fd62bf55e42b9d844",
+      "year": 2025,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "91fe1c2ab1a29d8df51c922f",
+      "year": 2026,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "c044cfddbd24414d1c6df17e",
+      "year": 2026,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "a3360aae7557b06397a0251e",
+      "year": 2026,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "2fc461186ceb1d1dd58e6f1a",
+      "year": 2026,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "a0cc4bd6c0cc574579f4ce8a",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "5218ecf50ea3d0526c4f281e",
+      "year": 2026,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "ebcb6192aca84c4c309d2c50",
+      "year": 2026,
+      "status": "review",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "04c8719873108a19e3656a97",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "f99f8dd1117113947e5cfc61",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "6d47b9e63dc67e246cdc1edb",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "19a2aa5dd140129374db39f8",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "2d4f6cabce17411d5da9baba",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "e285829d3e5b65294f2ede9a",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "edfe35801554baa7a8808b5f",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "814b6e9c27d7a0e7bb2ab959",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "7850c1a1dce6a514e86a012d",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "13e055f9561ef49469e73133",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "878ca0c6aec598b7e2d0ff62",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "71205c7c337556b810e484be",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "7e85bf15af279fd696ecb7ad",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "254e82f0b073bf6a742521d4",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "aa30e1e38dee66c14124a40c",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "736c76708d23326070229bc8",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "89553215b619a9c472b907c7",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "fc56d5465d145bdc7f92d346",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Остальные поля и соответствие поколения/года требуют отдельных источников."
+    },
+    {
+      "variantId": "8d00246c69cbe993fb8d15f4",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    },
+    {
+      "variantId": "3ef29fa3a79f5e9373142b64",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Подозрительная наблюдаемая полная масса 1500 кг: требуется точное поколение/исполнение, значение не подтверждено."
+    }
+  ],
+  "missingFields": [
+    "power30MinKw",
+    "frontMotor30MinKw",
+    "rearMotor30MinKw",
+    "calculation-eligible icePowerKw",
+    "exact 2024 EREV product code for grossVehicleWeightKg",
+    "2026 EV gross mass"
+  ],
+  "manuals": [
+    {
+      "index": 3,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/问界M92025款纯电版使用说明书.pdf",
+      "sha256": "c3f5d641328f0d01fe947faceb145c4b4ae31dc674418cf6c513c80a63f753da"
+    },
+    {
+      "index": 4,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/问界M9增程版使用说明书.pdf",
+      "sha256": "9e56620f8da3a66fb7dea68d5113fa8c7d8aa01f815718566360cb7d9e8febb1"
+    },
+    {
+      "index": 5,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/问界M9纯电版使用说明书.pdf",
+      "sha256": "3fe60ab16840c92c7531e393ee3b6a6cc575df5f4d53d236a0eadcef31a7607a"
+    },
+    {
+      "index": 0,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/问界M92026款增程版使用说明书.pdf",
+      "sha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f"
+    }
+  ],
+  "requiresFreshApiCas": true,
+  "historicalExpansionComplete": false
+}
