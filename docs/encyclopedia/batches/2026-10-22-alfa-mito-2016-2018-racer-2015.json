@@ -1,0 +1,3424 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-mito-2016-2018-racer-2015",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "ee2237cfa6b743b4b0b7bb9f",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "1.4 MPI 78 PS S/S MiTo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 MPI 78 PS S/S MiTo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 78,
+        "engineCc": 1368,
+        "powerKw": 57.3,
+        "icePowerKw": 57.3,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 157,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 157,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 MPI 78 PS S/S MiTo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "933642a17f177daecf913275",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "0.9 TwinAir 105 PS S/S MiTo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S MiTo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S MiTo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "001f480673b377b79487adc3",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "0.9 TwinAir 105 PS S/S Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Super",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Super; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "f67dccd810fb6fa41e32b4ac",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "0.9 TwinAir 105 PS S/S Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Speciale",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 0.9 TwinAir 105 PS S/S Speciale; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "f015989a7301af5425071c93",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Super",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 158,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 158,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Super; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "4c31ac9fe826720543ab9c00",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Speciale",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 158,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 158,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 140 PS S/S TCT Speciale; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "73d2bc0726f5edc0b6eb184d",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "1.4 TB MultiAir 170 PS S/S TCT Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 170 PS S/S TCT Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 170,
+        "engineCc": 1368,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "940A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 159,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 159,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.4 TB MultiAir 170 PS S/S TCT Veloce; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "fa66f221f45466cefff5ff0d",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "1.3 JTDM 95 PS S/S MiTo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.3 JTDM 95 PS S/S MiTo",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 95,
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "330A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S MiTo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "23eeb2fafdd2563bbd616692",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "1.3 JTDM 95 PS S/S Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.3 JTDM 95 PS S/S Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 95,
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "330A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Super; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "5d048984af30414001590b6c",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2016,
+      "trim": "1.3 JTDM 95 PS S/S Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.3 JTDM 95 PS S/S Speciale",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 95,
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "330A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2016 подтверждено заводским запуском 08.09.2016 и брошюрой 10/2016. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-romeo-mito-on-sale-in-the-uk",
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "Заводской запуск08.09.2016; 1.3 JTDM 95 PS S/S Speciale; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "a52f64e6e0c6f5d95ee524b8",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "1.4 MPI 78 PS S/S MiTo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 MPI 78 PS S/S MiTo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 78,
+        "engineCc": 1368,
+        "powerKw": 57.3,
+        "icePowerKw": 57.3,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 157,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 157,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3; 1.4 MPI 78 PS S/S MiTo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "fd0cf56cfbdab08d31622f15",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "0.9 TwinAir 105 PS S/S MiTo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S MiTo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.3; 0.9 TwinAir 105 PS S/S MiTo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "9a33c0b3d3bcf46b73d4ce7a",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "0.9 TwinAir 105 PS S/S Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Super",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3; 0.9 TwinAir 105 PS S/S Super; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "cee24d5b79b671f72f6bcffd",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "0.9 TwinAir 105 PS S/S Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Speciale",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.3.SPC; 0.9 TwinAir 105 PS S/S Speciale; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "4389fd90aeba29220a163872",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Super",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 158,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 158,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3; 1.4 TB MultiAir 140 PS S/S TCT Super; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "eb4041d2a6f04f9258b0f126",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Speciale",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 158,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 158,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.3.SPC; 1.4 TB MultiAir 140 PS S/S TCT Speciale; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "ef5d2de5f7272eb9a9abd76e",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "1.4 TB MultiAir 170 PS S/S TCT Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 170 PS S/S TCT Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 170,
+        "engineCc": 1368,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "940A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 159,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 159,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3; 1.4 TB MultiAir 170 PS S/S TCT Veloce; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "d7f934e7da3f20e8bb124598",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "1.3 JTDM 95 PS S/S MiTo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.3 JTDM 95 PS S/S MiTo",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 95,
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "330A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3; 1.3 JTDM 95 PS S/S MiTo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "a14593be927173446c86319e",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "1.3 JTDM 95 PS S/S Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.3 JTDM 95 PS S/S Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 95,
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "330A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3; 1.3 JTDM 95 PS S/S Super; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "635412d2316f01188c488f8a",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2017,
+      "trim": "1.3 JTDM 95 PS S/S Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.3 JTDM 95 PS S/S Speciale",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 95,
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "330A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2017 подтверждено заводским прайсом 04/2017, таблицы PDF стр.4 и 7. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_04_2017.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3R.3.SPC; 1.3 JTDM 95 PS S/S Speciale; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "76e5b17cd6a8e7965b8ff00e",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2018,
+      "trim": "1.4 MPI 78 PS S/S Urban",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 MPI 78 PS S/S Urban",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 78,
+        "engineCc": 1368,
+        "powerKw": 57,
+        "icePowerKw": 57,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2018 подтверждено заводским прайсом 03.07.2018 (PDF стр.3); TwinAir Urban отдельно сообщением 08.03.2018. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; 1.4 MPI 78 PS S/S Urban; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; 1.4 MPI 78 PS S/S Urban; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; 1.4 MPI 78 PS S/S Urban; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; kW(CV), метрические CV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; 1.4 MPI 78 PS S/S Urban; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; 1.4 MPI 78 PS S/S Urban; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; 1.4 MPI 78 PS S/S Urban; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; 1.4 MPI 78 PS S/S Urban; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; 1.4 MPI 78 PS S/S Urban; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 157,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.3 / SS000; 1.4 MPI 78 PS S/S Urban; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "e297d316fd30af5452266665",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2018,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Urban",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Urban",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2018 подтверждено заводским прайсом 03.07.2018 (PDF стр.3); TwinAir Urban отдельно сообщением 08.03.2018. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; 1.4 TB MultiAir 140 PS S/S TCT Urban; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; 1.4 TB MultiAir 140 PS S/S TCT Urban; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; 1.4 TB MultiAir 140 PS S/S TCT Urban; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; kW(CV), метрические CV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; 1.4 TB MultiAir 140 PS S/S TCT Urban; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; 1.4 TB MultiAir 140 PS S/S TCT Urban; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; 1.4 TB MultiAir 140 PS S/S TCT Urban; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; 1.4 TB MultiAir 140 PS S/S TCT Urban; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 19,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; 1.4 TB MultiAir 140 PS S/S TCT Urban; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 158,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3G.3 / SS000; 1.4 TB MultiAir 140 PS S/S TCT Urban; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "512dca4edfc6615d5fb35d95",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2018,
+      "trim": "1.4 TB MultiAir 170 PS S/S TCT Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 170 PS S/S TCT Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 170,
+        "engineCc": 1368,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "940A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2018 подтверждено заводским прайсом 03.07.2018 (PDF стр.3); TwinAir Urban отдельно сообщением 08.03.2018. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; kW(CV), метрические CV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 19,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 159,
+            "checkedAt": "2026-10-22",
+            "selector": "145.V3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "1e12520d137532407da7dafc",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2018,
+      "trim": "1.4 TB MultiAir 170 PS S/S TCT Veloce S",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 170 PS S/S TCT Veloce S",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 170,
+        "engineCc": 1368,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "940A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2018 подтверждено заводским прайсом 03.07.2018 (PDF стр.3); TwinAir Urban отдельно сообщением 08.03.2018. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce S; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce S; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce S; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; kW(CV), метрические CV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce S; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce S; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce S; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce S; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 19,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce S; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 159,
+            "checkedAt": "2026-10-22",
+            "selector": "145.S3D.3 / SS000; 1.4 TB MultiAir 170 PS S/S TCT Veloce S; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "9414705e81eb110f04cda069",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2018,
+      "trim": "1.4 Turbo LPG 120 PS Urban",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 Turbo LPG 120 PS Urban",
+        "fuel": "lpg",
+        "powertrainKind": "combustion",
+        "powerHp": 120,
+        "engineCc": 1368,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "198A4000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2018 подтверждено заводским прайсом 03.07.2018 (PDF стр.3); TwinAir Urban отдельно сообщением 08.03.2018. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; 1.4 Turbo LPG 120 PS Urban; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; 1.4 Turbo LPG 120 PS Urban; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; 1.4 Turbo LPG 120 PS Urban; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; kW(CV), метрические CV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; 1.4 Turbo LPG 120 PS Urban; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; 1.4 Turbo LPG 120 PS Urban; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; 1.4 Turbo LPG 120 PS Urban; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_06_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; 1.4 Turbo LPG 120 PS Urban; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; 1.4 Turbo LPG 120 PS Urban; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 157,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3U.3 / SS000; 1.4 Turbo LPG 120 PS Urban; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "ed4c9d66b0a4dc160ece9e06",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2018,
+      "trim": "1.3 JTDM 95 PS S/S Urban",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.3 JTDM 95 PS S/S Urban",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 95,
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "330A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2018 подтверждено заводским прайсом 03.07.2018 (PDF стр.3); TwinAir Urban отдельно сообщением 08.03.2018. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; 1.3 JTDM 95 PS S/S Urban; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; 1.3 JTDM 95 PS S/S Urban; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; 1.3 JTDM 95 PS S/S Urban; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; kW(CV), метрические CV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; 1.3 JTDM 95 PS S/S Urban; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; 1.3 JTDM 95 PS S/S Urban; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; 1.3 JTDM 95 PS S/S Urban; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 16,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; 1.3 JTDM 95 PS S/S Urban; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; 1.3 JTDM 95 PS S/S Urban; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS000; 1.3 JTDM 95 PS S/S Urban; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "1f11bccfb944f416ed3b25e2",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2018,
+      "trim": "1.3 JTDM 90 PS S/S Urban",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.3 JTDM 90 PS S/S Urban",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 90,
+        "engineCc": 1248,
+        "powerKw": 66,
+        "icePowerKw": 66,
+        "transmission": "manual",
+        "engineCode": "955B2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2018 подтверждено заводским прайсом 03.07.2018 (PDF стр.3); TwinAir Urban отдельно сообщением 08.03.2018. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS090; 1.3 JTDM 90 PS S/S Urban; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS090; 1.3 JTDM 90 PS S/S Urban; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS090; 1.3 JTDM 90 PS S/S Urban; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS090; kW(CV), метрические CV"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS090; 1.3 JTDM 90 PS S/S Urban; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS090; 1.3 JTDM 90 PS S/S Urban; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS090; 1.3 JTDM 90 PS S/S Urban; icePowerKw"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180705_Listino_Alfa_Romeo_Mito.pdf",
+            "pdfPage": 3,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS090; 1.3 JTDM 90 PS S/S Urban; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 160,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3R.3 / SS090; 1.3 JTDM 90 PS S/S Urban; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "6cb32630fd0b905736e60587",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2018,
+      "trim": "0.9 TwinAir 105 PS S/S Urban",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Urban",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-sondermodell-alfa-romeo-mito-urban-attraktiver-einstieg-in-die-welt-von-alfa-romeo",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение 2018 подтверждено заводским прайсом 03.07.2018 (PDF стр.3); TwinAir Urban отдельно сообщением 08.03.2018. Код двигателя сверён по руководству 60490005 редакции 05/2016, несмотря на 2017 в имени архивного файла. Дизели 90 и 95 PS различены: 955B2000 и 330A1000. Метрическая мощность взята из таблицы EEC/CV, а не переименована из британского bhp. Для 78 PS в UK 2016/2017 оставлены 57,3 кВт собственной таблицы; для Италии 2018 — 57 кВт. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-sondermodell-alfa-romeo-mito-urban-attraktiver-einstieg-in-die-welt-von-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; 0.9 TwinAir 105 PS S/S Urban; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; 0.9 TwinAir 105 PS S/S Urban; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; 0.9 TwinAir 105 PS S/S Urban; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-sondermodell-alfa-romeo-mito-urban-attraktiver-einstieg-in-die-welt-von-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; 0.9 TwinAir 105 PS S/S Urban; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-sondermodell-alfa-romeo-mito-urban-attraktiver-einstieg-in-die-welt-von-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-sondermodell-alfa-romeo-mito-urban-attraktiver-einstieg-in-die-welt-von-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; 0.9 TwinAir 105 PS S/S Urban; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2016_10_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 15,
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; 0.9 TwinAir 105 PS S/S Urban; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2017_83_145_MITO_604.90.005_EN_01_05.16_L_LG.pdf",
+            "pdfPage": 156,
+            "checkedAt": "2026-10-22",
+            "selector": "2018-03-08; TwinAir77kW/105PS; 0.9 TwinAir 105 PS S/S Urban; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "ef99a5cf20a40ff97731abea",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.4 MPI 78 PS S/S Racer",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 MPI 78 PS S/S Racer",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 78,
+        "engineCc": 1368,
+        "powerKw": 57,
+        "icePowerKw": 57,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Racer и 2015 год подтверждены заводским выпуском 11.06.2015; дизель 1.6 — международным сообщением 24.02.2015 о новой серии с выходом в апреле. Точные моторизации сверены с руководством 10/2015 и дополнением TCT 05/2014. Для LPG пока подтверждены только название, топливо, тип силовой установки и 120 PS; остальные поля требуют отдельного документа. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 MPI 78 PS S/S Racer; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "d2a867e51e947066a4e03d5f",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "0.9 TwinAir 105 PS S/S Racer",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Racer",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Racer и 2015 год подтверждены заводским выпуском 11.06.2015; дизель 1.6 — международным сообщением 24.02.2015 о новой серии с выходом в апреле. Точные моторизации сверены с руководством 10/2015 и дополнением TCT 05/2014. Для LPG пока подтверждены только название, топливо, тип силовой установки и 120 PS; остальные поля требуют отдельного документа. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 0.9 TwinAir 105 PS S/S Racer; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "79b70ac1724f570b9580768a",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Racer",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Racer",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Racer и 2015 год подтверждены заводским выпуском 11.06.2015; дизель 1.6 — международным сообщением 24.02.2015 о новой серии с выходом в апреле. Точные моторизации сверены с руководством 10/2015 и дополнением TCT 05/2014. Для LPG пока подтверждены только название, топливо, тип силовой установки и 120 PS; остальные поля требуют отдельного документа. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 20,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 20,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 20,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 20,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 20,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 19,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 19,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 20,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.4 TB MultiAir 140 PS S/S TCT Racer; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "72a24cbe98ac2c527aa4ef15",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.3 JTDM 85 PS S/S Racer",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.3 JTDM 85 PS S/S Racer",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 1248,
+        "powerKw": 62,
+        "icePowerKw": 62,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B4000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Racer и 2015 год подтверждены заводским выпуском 11.06.2015; дизель 1.6 — международным сообщением 24.02.2015 о новой серии с выходом в апреле. Точные моторизации сверены с руководством 10/2015 и дополнением TCT 05/2014. Для LPG пока подтверждены только название, топливо, тип силовой установки и 120 PS; остальные поля требуют отдельного документа. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 208,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 208,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 208,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 208,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 208,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 208,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.3 JTDM 85 PS S/S Racer; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "cdff6ece5173e63be51d85a9",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.6 JTDM 120 PS S/S Racer",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS S/S Racer",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 120,
+        "engineCc": 1598,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A3000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/em-en/alfa-romeo/press/alfa-romeo-at-the-2015-geneva-international-motor-show",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Racer и 2015 год подтверждены заводским выпуском 11.06.2015; дизель 1.6 — международным сообщением 24.02.2015 о новой серии с выходом в апреле. Точные моторизации сверены с руководством 10/2015 и дополнением TCT 05/2014. Для LPG пока подтверждены только название, топливо, тип силовой установки и 120 PS; остальные поля требуют отдельного документа. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/em-en/alfa-romeo/press/alfa-romeo-at-the-2015-geneva-international-motor-show",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 209,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 209,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/em-en/alfa-romeo/press/alfa-romeo-at-the-2015-geneva-international-motor-show",
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 209,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 209,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 209,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 209,
+            "checkedAt": "2026-10-22",
+            "selector": "Racer2015; 1.6 JTDM 120 PS S/S Racer; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "c698d4d1751394cb05d24733",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.4 Turbo LPG 120 PS Racer",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+      "patch": {
+        "trim": "1.4 Turbo LPG 120 PS Racer",
+        "fuel": "lpg",
+        "powertrainKind": "combustion",
+        "powerHp": 120
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Racer и 2015 год подтверждены заводским выпуском 11.06.2015; дизель 1.6 — международным сообщением 24.02.2015 о новой серии с выходом в апреле. Точные моторизации сверены с руководством 10/2015 и дополнением TCT 05/2014. Для LPG пока подтверждены только название, топливо, тип силовой установки и 120 PS; остальные поля требуют отдельного документа. Архив AROC хранит заводские оригиналы. Полная масса и кузовной код без выбора 4/5 мест не угаданы. Мощность ДВС не объявлена 30-минутной; статус всей строки не повышается.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "2015-06-11; MiTo Racer 1.4 GPL Turbo120 CV; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "2015-06-11; MiTo Racer 1.4 GPL Turbo120 CV; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "2015-06-11; MiTo Racer 1.4 GPL Turbo120 CV; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/arriva-in-italia-la-nuova-alfa-romeo-mito-racer",
+            "checkedAt": "2026-10-22",
+            "selector": "2015-06-11; MiTo Racer 1.4 GPL Turbo120 CV; powerHp"
+          }
+        }
+      }
+    }
+  ]
+}
