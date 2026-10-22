@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T22:02:02.485Z",
+  "updatedAt": "2026-10-22T22:04:55.634Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -887,12 +887,15 @@
         2019,
         2013,
         2012,
-        2011
+        2011,
+        2010,
+        2009,
+        2008
       ],
-      "variants": 20,
+      "variants": 37,
       "status": "partial_verified_fields",
-      "researchedVariants": 3,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
+      "researchedVariants": 20,
+      "checkedAt": "2026-10-22T22:04:55.634Z",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
       "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
     },
@@ -32671,7 +32674,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T22:02:02.485Z",
+    "updatedAt": "2026-10-22T22:04:55.634Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "db9_two_batches_saved_api_readback_pass_activation_pending",
     "preserveManual": true,
@@ -32872,17 +32875,34 @@
         "includedInIndex": false,
         "indexMembershipState": "saved_after_active_ac711_snapshot",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db9-gt-readback.json"
+      },
+      {
+        "key": "aston-dbs-2008-2012",
+        "batch": "research-2026-10-23-aston-dbs-2008-2012",
+        "commit": "84840c44dfbd5ceea9c7d2e9154f10f7c2e2bf75",
+        "workflow": 39861914446,
+        "job": 120114462167,
+        "variants": 17,
+        "newVariants": 17,
+        "updatedVariants": 0,
+        "fields": 170,
+        "compiledCalculationFields": 153,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "saved_after_active_ac711_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-dbs-early-readback.json"
       }
     ],
     "inFlightResearch": [
       {
-        "batch": "research-2026-10-23-aston-dbs-2008-2012",
+        "batch": "research-2026-10-23-aston-dbs-superleggera-770",
         "modelId": "a49dff8aecc0f27d5149f172",
         "state": "requested_not_yet_verified",
-        "operations": 17,
-        "fields": 170,
-        "expectedRevision": "70ccade7-bdd0-4e5a-8e25-533b004309f7",
-        "checkedAt": "2026-10-22T22:02:02.485Z"
+        "operations": 5,
+        "fields": 29,
+        "expectedRevision": "07d9067e-a5af-4420-abe6-f388a096a409",
+        "checkedAt": "2026-10-22T22:04:55.634Z"
       }
     ],
     "lastCompletedPass": {

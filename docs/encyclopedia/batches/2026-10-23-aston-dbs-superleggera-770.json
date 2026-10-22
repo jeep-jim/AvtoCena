@@ -1,0 +1,591 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-aston-dbs-superleggera-770",
+  "entries": [
+    {
+      "modelId": "a49dff8aecc0f27d5149f172",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "year": 2019,
+      "variantId": "6509e664748312b359eff602",
+      "trim": "Superleggera Coupe",
+      "expectedDigest": "896d01aee9e8079a6f9e42d58a4449c3b10b5fd56a8877dcb5614fc757ed369e",
+      "patch": {
+        "grossVehicleWeightKg": 2265
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/KY73-19A322-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBS Superleggera 19MY, Superleggera Coupe: год и регион RoW подтверждены каталогом руководств. Подтверждены только перечисленные поля; полная масса — GVW, не снаряжённая. Руководство различает Coupé и Volante. 715 bhp не выданы за PS; старые источники сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/KY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "1450f63373526d7f9c636dd337e74b66da6a65511b2bf81f675c88ced9d7a63a",
+            "pdfPage": 224,
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "19MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera Coupe"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a49dff8aecc0f27d5149f172",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "year": 2020,
+      "variantId": "b2211084a4ab9ee248c8cc8b",
+      "trim": "Superleggera V12 Coupe 8AT",
+      "operation": "create",
+      "expectedRevision": "07d9067e-a5af-4420-abe6-f388a096a409",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Superleggera V12 Coupe 8AT",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "rwd",
+        "engineCc": 5204,
+        "powerKw": 533,
+        "icePowerKw": 533,
+        "grossVehicleWeightKg": 2265
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBS Superleggera 20MY, Superleggera V12 Coupe 8AT: год и регион RoW подтверждены каталогом руководств. Подтверждены только перечисленные поля; полная масса — GVW, не снаряжённая. Руководство различает Coupé и Volante. 715 bhp не выданы за PS; старые источники сохраняются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 215,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT",
+            "supportingPages": [
+              215,
+              239,
+              240,
+              241
+            ]
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 215,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT"
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 213,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT"
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 239,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT"
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 240,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT"
+          },
+          "drive": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 220,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT"
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 239,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT"
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 241,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT",
+            "unit": "kW"
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 241,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT",
+            "unit": "kW"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 241,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Coupe 8AT"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a49dff8aecc0f27d5149f172",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "year": 2020,
+      "variantId": "a508b087b9fb97eb788239ec",
+      "trim": "Superleggera V12 Volante 8AT",
+      "operation": "create",
+      "expectedRevision": "07d9067e-a5af-4420-abe6-f388a096a409",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Superleggera V12 Volante 8AT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "rwd",
+        "engineCc": 5204,
+        "powerKw": 533,
+        "icePowerKw": 533,
+        "grossVehicleWeightKg": 2365
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBS Superleggera 20MY, Superleggera V12 Volante 8AT: год и регион RoW подтверждены каталогом руководств. Подтверждены только перечисленные поля; полная масса — GVW, не снаряжённая. Руководство различает Coupé и Volante. 715 bhp не выданы за PS; старые источники сохраняются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 215,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT",
+            "supportingPages": [
+              215,
+              239,
+              240,
+              241
+            ]
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 215,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT"
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 213,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT"
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 239,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT"
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 240,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT"
+          },
+          "drive": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 220,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT"
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 239,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT"
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 241,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT",
+            "unit": "kW"
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 241,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT",
+            "unit": "kW"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/LY73-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "0ee5e443a40e3f6b2ac0001cbc55a30d10774be6d933d732a14e64f270682a13",
+            "pdfPage": 241,
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera",
+            "modelYearCatalogTitle": "20MY DBS Superleggera English RoW Owner Guide",
+            "selector": "Superleggera V12 Volante 8AT"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a49dff8aecc0f27d5149f172",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "year": 2023,
+      "variantId": "de30c0bfce3a1c631be69f9b",
+      "trim": "770 Ultimate V12 Coupe 8AT",
+      "operation": "create",
+      "expectedRevision": "07d9067e-a5af-4420-abe6-f388a096a409",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "770 Ultimate V12 Coupe 8AT",
+        "bodyType": "coupe",
+        "transmission": "automatic",
+        "powerHp": 770
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "transmission",
+        "powerHp"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+        "checkedAt": "2026-10-23",
+        "statement": "DBS 770 Ultimate Coupé/Volante: заводской выпуск прямо подтверждает кузова, 770 PS и ZF 8AT. Годовой отчёт 2023 подтверждает реальные поставки в 2023 году. Объём 5,2 л не округляется до точного см³; кВт, топливо, привод, масса и коды требуют отдельной технической таблицы. Не обычный Superleggera и не Ultimate раннего поколения.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 18.01.2023",
+            "sourceSha256": "8baab73b01c28a0ea7d3e3ad47d25900f37eaaafd50396baf2da314fe182aafe",
+            "selector": "770 Ultimate V12 Coupe 8AT",
+            "section": "300 Coupes and 199 Volantes",
+            "year": 2023,
+            "yearBasis": "Фактические поставки в 2023 году по годовому отчёту производителя; не вывод из даты регистрации",
+            "yearSource": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/annual-reports/aston-martin-lagonda-annual-report-2023-interactive.pdf?rev=c186b2beb5614c3287a70399e312074e",
+            "yearSourceSha256": "e5db4c3b50f2927b5e660fe2c1e4169002b9b37928db64b0cac88e19ac8b4fa8",
+            "yearSourcePdfPages": [
+              34,
+              40,
+              41
+            ]
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 18.01.2023",
+            "sourceSha256": "8baab73b01c28a0ea7d3e3ad47d25900f37eaaafd50396baf2da314fe182aafe",
+            "selector": "770 Ultimate V12 Coupe 8AT",
+            "section": "300 Coupes and 199 Volantes",
+            "year": 2023,
+            "yearBasis": "Фактические поставки в 2023 году по годовому отчёту производителя; не вывод из даты регистрации",
+            "yearSource": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/annual-reports/aston-martin-lagonda-annual-report-2023-interactive.pdf?rev=c186b2beb5614c3287a70399e312074e",
+            "yearSourceSha256": "e5db4c3b50f2927b5e660fe2c1e4169002b9b37928db64b0cac88e19ac8b4fa8",
+            "yearSourcePdfPages": [
+              34,
+              40,
+              41
+            ]
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 18.01.2023",
+            "sourceSha256": "8baab73b01c28a0ea7d3e3ad47d25900f37eaaafd50396baf2da314fe182aafe",
+            "selector": "770 Ultimate V12 Coupe 8AT",
+            "section": "ZF 8-speed automatic transmission",
+            "year": 2023,
+            "yearBasis": "Фактические поставки в 2023 году по годовому отчёту производителя; не вывод из даты регистрации",
+            "yearSource": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/annual-reports/aston-martin-lagonda-annual-report-2023-interactive.pdf?rev=c186b2beb5614c3287a70399e312074e",
+            "yearSourceSha256": "e5db4c3b50f2927b5e660fe2c1e4169002b9b37928db64b0cac88e19ac8b4fa8",
+            "yearSourcePdfPages": [
+              34,
+              40,
+              41
+            ]
+          },
+          "powerHp": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 18.01.2023",
+            "sourceSha256": "8baab73b01c28a0ea7d3e3ad47d25900f37eaaafd50396baf2da314fe182aafe",
+            "selector": "770 Ultimate V12 Coupe 8AT",
+            "section": "770PS at 6500rpm",
+            "year": 2023,
+            "yearBasis": "Фактические поставки в 2023 году по годовому отчёту производителя; не вывод из даты регистрации",
+            "yearSource": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/annual-reports/aston-martin-lagonda-annual-report-2023-interactive.pdf?rev=c186b2beb5614c3287a70399e312074e",
+            "yearSourceSha256": "e5db4c3b50f2927b5e660fe2c1e4169002b9b37928db64b0cac88e19ac8b4fa8",
+            "yearSourcePdfPages": [
+              34,
+              40,
+              41
+            ],
+            "unit": "PS"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a49dff8aecc0f27d5149f172",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "year": 2023,
+      "variantId": "52ea5a57f7c5632037bb87b8",
+      "trim": "770 Ultimate V12 Volante 8AT",
+      "operation": "create",
+      "expectedRevision": "07d9067e-a5af-4420-abe6-f388a096a409",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "770 Ultimate V12 Volante 8AT",
+        "bodyType": "convertible",
+        "transmission": "automatic",
+        "powerHp": 770
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "transmission",
+        "powerHp"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+        "checkedAt": "2026-10-23",
+        "statement": "DBS 770 Ultimate Coupé/Volante: заводской выпуск прямо подтверждает кузова, 770 PS и ZF 8AT. Годовой отчёт 2023 подтверждает реальные поставки в 2023 году. Объём 5,2 л не округляется до точного см³; кВт, топливо, привод, масса и коды требуют отдельной технической таблицы. Не обычный Superleggera и не Ultimate раннего поколения.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 18.01.2023",
+            "sourceSha256": "8baab73b01c28a0ea7d3e3ad47d25900f37eaaafd50396baf2da314fe182aafe",
+            "selector": "770 Ultimate V12 Volante 8AT",
+            "section": "300 Coupes and 199 Volantes",
+            "year": 2023,
+            "yearBasis": "Фактические поставки в 2023 году по годовому отчёту производителя; не вывод из даты регистрации",
+            "yearSource": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/annual-reports/aston-martin-lagonda-annual-report-2023-interactive.pdf?rev=c186b2beb5614c3287a70399e312074e",
+            "yearSourceSha256": "e5db4c3b50f2927b5e660fe2c1e4169002b9b37928db64b0cac88e19ac8b4fa8",
+            "yearSourcePdfPages": [
+              34,
+              40,
+              41
+            ]
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 18.01.2023",
+            "sourceSha256": "8baab73b01c28a0ea7d3e3ad47d25900f37eaaafd50396baf2da314fe182aafe",
+            "selector": "770 Ultimate V12 Volante 8AT",
+            "section": "300 Coupes and 199 Volantes",
+            "year": 2023,
+            "yearBasis": "Фактические поставки в 2023 году по годовому отчёту производителя; не вывод из даты регистрации",
+            "yearSource": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/annual-reports/aston-martin-lagonda-annual-report-2023-interactive.pdf?rev=c186b2beb5614c3287a70399e312074e",
+            "yearSourceSha256": "e5db4c3b50f2927b5e660fe2c1e4169002b9b37928db64b0cac88e19ac8b4fa8",
+            "yearSourcePdfPages": [
+              34,
+              40,
+              41
+            ]
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 18.01.2023",
+            "sourceSha256": "8baab73b01c28a0ea7d3e3ad47d25900f37eaaafd50396baf2da314fe182aafe",
+            "selector": "770 Ultimate V12 Volante 8AT",
+            "section": "ZF 8-speed automatic transmission",
+            "year": 2023,
+            "yearBasis": "Фактические поставки в 2023 году по годовому отчёту производителя; не вывод из даты регистрации",
+            "yearSource": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/annual-reports/aston-martin-lagonda-annual-report-2023-interactive.pdf?rev=c186b2beb5614c3287a70399e312074e",
+            "yearSourceSha256": "e5db4c3b50f2927b5e660fe2c1e4169002b9b37928db64b0cac88e19ac8b4fa8",
+            "yearSourcePdfPages": [
+              34,
+              40,
+              41
+            ]
+          },
+          "powerHp": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2023/1/18/unleashing-dbs-770-ultimate-a-ferocious-farewell-to-aston-martin-s-super-gt-flagship",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 18.01.2023",
+            "sourceSha256": "8baab73b01c28a0ea7d3e3ad47d25900f37eaaafd50396baf2da314fe182aafe",
+            "selector": "770 Ultimate V12 Volante 8AT",
+            "section": "770PS at 6500rpm",
+            "year": 2023,
+            "yearBasis": "Фактические поставки в 2023 году по годовому отчёту производителя; не вывод из даты регистрации",
+            "yearSource": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/annual-reports/aston-martin-lagonda-annual-report-2023-interactive.pdf?rev=c186b2beb5614c3287a70399e312074e",
+            "yearSourceSha256": "e5db4c3b50f2927b5e660fe2c1e4169002b9b37928db64b0cac88e19ac8b4fa8",
+            "yearSourcePdfPages": [
+              34,
+              40,
+              41
+            ],
+            "unit": "PS"
+          }
+        }
+      }
+    }
+  ]
+}
