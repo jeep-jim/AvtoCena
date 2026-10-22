@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T14:33:31.836665+07:00",
+  "updatedAt": "2026-10-22T14:56:56.101959+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32590,12 +32590,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T14:33:31.836665+07:00",
+    "updatedAt": "2026-10-22T14:56:56.101959+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "continue_alphabetic_giulietta_2015",
+    "state": "giulietta_2016_2017_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulietta 2015 — Collezione/Sprint Speciale и ранние исполнения, затем 2016",
+    "nextModel": "Alfa Romeo Giulietta 2018, затем 2019–2020; отдельный retry специальных пакетов 2015",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32951,7 +32951,13 @@
         "includedInIndex": false
       }
     ],
-    "inFlightResearch": null,
+    "inFlightResearch": {
+      "batch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
+      "variants": 59,
+      "newVariants": 42,
+      "fields": 368,
+      "state": "prepared_not_applied"
+    },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-giulietta-2010-2015-pass.json",
       "variants": 138,
@@ -32973,7 +32979,13 @@
       "activationOccurred": false,
       "nextAction": "Check publication completion before requesting one aggregate index release; do not clear lock or duplicate collectors"
     },
-    "concurrentRelease": null,
+    "concurrentRelease": {
+      "release": "56ce8698f675d0c5b05e56430a5a60576ce75596",
+      "workflow": 39743381721,
+      "state": "in_progress",
+      "indexPreparation": "success",
+      "containsCurrentPass": false
+    },
     "installedIndexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
     "catalogFieldsEnriched": 1359,
     "failedConcurrentRelease": {
@@ -32998,7 +33010,12 @@
       "activated": false
     },
     "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2015.json",
-    "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-6df5eec-activation.json"
+    "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-6df5eec-activation.json",
+    "comparisonReferenceIntake": {
+      "workflow": 39743682918,
+      "state": "in_progress",
+      "referenceOnly": true
+    }
   },
   "scope": {
     "minimumYear": 2008,
