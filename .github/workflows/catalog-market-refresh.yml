@@ -272,6 +272,9 @@ jobs:
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/china-year-policy.test.ts tests/catalog-auto-api-che168.test.ts
       - name: Publish markets through calculation and retention guards
         env:
+          # Reader deployed and health-verified in f4d7d22 (23 October 2026).
+          # Keep the common projection below V8's single-string size limit.
+          CATALOG_CHUNKED_ALL_PROJECTION_WRITE: "1"
           # Full publication index is much larger than request-time shards.
           YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: "300000"
           CATALOG_PUBLISH_MARKETS: ${{ matrix.market }}

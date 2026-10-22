@@ -1,5 +1,6 @@
 {
-  "operation": "restore-china-2014-final-year-gate-20261022-1336",
+  "operation": "restore-china-2014-chunked-projection-20261022-1931",
+  "requestedAt": "2026-10-22 19:30:34 UTC",
   "market": "china",
   "publishMarkets": [
     "china"
@@ -7,5 +8,5 @@
   "reuseRunId": "39680279304",
   "refreshMarkets": [],
   "resetCursors": false,
-  "reason": "Installed 27a073c fixes final China year gate. Restore 2014–2019 from completed saved intake, without source recollection or cursor reset."
+  "reason": "Installed f4d7d22 reader is public-health verified; publish retained completed 2014+ intake using bounded all-market projection parts, with original calculation/index/retention guards and no supplier recollection."
 }
