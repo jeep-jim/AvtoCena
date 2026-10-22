@@ -1,0 +1,56 @@
+{
+  "checkedAt": "2026-10-22T14:16:41.446342+07:00",
+  "batches": [
+    {
+      "batch": "research-2026-10-22-alfa-giulietta-2010-2012",
+      "commit": "9a68b9591dc9b7c082a51f17985d838ed6d23038",
+      "workflow": 39738308666,
+      "variants": 62,
+      "newVariants": 62,
+      "fields": 482,
+      "apiReadback": true,
+      "includedInIndex": false
+    },
+    {
+      "batch": "research-2026-10-22-alfa-giulietta-2013-2014",
+      "commit": "3e82207bce47632ff6fd3e2b8687a3bd76c2ff4f",
+      "workflow": 39738685028,
+      "variants": 44,
+      "newVariants": 44,
+      "fields": 312,
+      "apiReadback": true,
+      "includedInIndex": false
+    },
+    {
+      "batch": "research-2026-10-22-alfa-giulietta-2014-special-2015",
+      "commit": "9ce553fcde93bfb14ab6ea1713860879ce105db3",
+      "workflow": 39739140504,
+      "variants": 32,
+      "newVariants": 32,
+      "fields": 230,
+      "apiReadback": true,
+      "includedInIndex": false
+    }
+  ],
+  "variants": 138,
+  "newVariants": 138,
+  "fields": 1024,
+  "apiReadbackPassed": 3,
+  "guardTestsPassedPerBatch": 8,
+  "includedInIndex": false,
+  "indexReleaseRequested": true,
+  "nextCursor": "Alfa Romeo Giulietta 2015 — Collezione/Sprint Speciale и ранние исполнения, затем 2016",
+  "allModelsComplete": false,
+  "retryFiles": [
+    "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2010-2012.json",
+    "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2013-2014.json",
+    "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2014-special-2015.json"
+  ],
+  "priorConcurrentRelease": {
+    "release": "e74136aa5fb1253ab60ac657c79ab493ce858d36",
+    "workflow": 39737566991,
+    "completed": true,
+    "healthReadback": true,
+    "containsCurrentPass": false
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-22T14:15:39.893931+07:00",
+  "status": "research_handoff_not_applied",
+  "modelId": "cb49c6bb46e8dd8caf106b34",
+  "make": "Alfa Romeo",
+  "model": "Giulietta",
+  "nextCursor": {
+    "year": 2015,
+    "group": "Collezione / Sprint Speciale / ранние исполнения, затем 2016"
+  },
+  "sources": [
+    {
+      "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-via-gli-ordini-della-nuova-alfa-romeo-giulietta-collezione",
+      "publishedAt": "2015-06-08",
+      "candidates": [
+        "1.6 JTDM 120 CV Collezione",
+        "2.0 JTDM 150 CV Collezione",
+        "2.0 JTDM 175 CV TCT Collezione",
+        "1.4 MultiAir 170 CV TCT Collezione"
+      ],
+      "note": "Точный состав моторов прочитан; статья ошибочно говорит altre due перед перечнем трёх. Проверить пакет Exclusive/код 88M в прайсе, не создавать технические дубли."
+    },
+    {
+      "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-speciale-il-massimo-della-sportivita",
+      "publishedAt": "2015-09-21",
+      "candidates": [
+        "1.4 MultiAir 150 CV Sprint Speciale",
+        "1.6 JTDM 120 CV Sprint Speciale",
+        "2.0 JTDM 150 CV Sprint Speciale",
+        "2.0 JTDM 175 CV TCT Sprint Speciale"
+      ],
+      "note": "TCT не распространять на все перечисленные моторы из-за неоднозначной пунктуации. Явно подтверждён у 175 CV; проверить пакет и точный прайс."
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150608_Alfa-Romeo-Giulietta_listino.pdf",
+      "publishedAt": "2015-05-28",
+      "note": "Дата по поисковой выдаче, ещё не прочитан. Проверить ранние 2015: 105 PS дизель и другие отсутствующие строки. Не переносить год из имени файла."
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/2015/Listini/150723_Alfa_Romeo_Giulietta_Listino.pdf",
+      "publishedAt": "2015-07-23",
+      "note": "Базовые 21 строка проверены визуально и находятся в третьей партии текущего прохода. Страница 6: колёса с пакетом Collezione / Sprint Speciale; нужна проверка таблицы пакетов для технической идентичности."
+    }
+  ],
+  "preserveExisting": [
+    "31 исходная запись модели, включая неопределённую DISTINCTIVE 2013 и наблюдения 2021–2025",
+    "2010–2014 уже сохранённые партии не запускать повторно"
+  ],
+  "requiredBeforeApply": [
+    "Проверить свежие main/roadmap/очередь и завершение третьей партии/выпуска индекса.",
+    "Новый API-readback, SHA256 и CAS; не использовать старую ревизию.",
+    "Не писать в модель во время подготовки её снимка индекса.",
+    "Нет 2008/2009 для поколения, запущенного в 2010; не создавать по одному желанию диапазона."
+  ]
+}

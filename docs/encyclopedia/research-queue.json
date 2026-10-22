@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T14:13:48.107340+07:00",
+  "updatedAt": "2026-10-22T14:16:41.446342+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -575,17 +575,18 @@
         2022,
         2021,
         2020,
+        2015,
         2014,
         2013,
         2012,
         2011,
         2010
       ],
-      "variants": 137,
+      "variants": 169,
       "status": "partial_verified_fields",
-      "researchedVariants": 107,
-      "checkedAt": "2026-10-22T14:12:12.990659+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2013-2014.json",
+      "researchedVariants": 139,
+      "checkedAt": "2026-10-22T14:16:11.270960+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2014-special-2015.json",
       "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
@@ -32589,9 +32590,9 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T14:13:48.107340+07:00",
+    "updatedAt": "2026-10-22T14:16:41.446342+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "giulietta_2014_special_2015_prepared",
+    "state": "giulietta_2010_2015_saved_index_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "Alfa Romeo Giulietta 2015 — Collezione/Sprint Speciale и ранние исполнения, затем 2016",
@@ -32777,6 +32778,16 @@
         "fields": 312,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-giulietta-2014-special-2015": {
+        "batch": "research-2026-10-22-alfa-giulietta-2014-special-2015",
+        "commit": "9ce553fcde93bfb14ab6ea1713860879ce105db3",
+        "workflow": 39739140504,
+        "variants": 32,
+        "newVariants": 32,
+        "fields": 230,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32797,16 +32808,16 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-giulietta-2013-2014",
-      "commit": "3e82207bce47632ff6fd3e2b8687a3bd76c2ff4f",
-      "workflow": 39738685028,
-      "variants": 44,
-      "newVariants": 44,
-      "fields": 312,
+      "batch": "research-2026-10-22-alfa-giulietta-2014-special-2015",
+      "commit": "9ce553fcde93bfb14ab6ea1713860879ce105db3",
+      "workflow": 39739140504,
+      "variants": 32,
+      "newVariants": 32,
+      "fields": 230,
       "apiReadback": true,
       "includedInIndex": false
     },
-    "indexReleaseRequested": false,
+    "indexReleaseRequested": true,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
     "pendingIndexBatches": [
       {
@@ -32938,25 +32949,26 @@
         "fields": 312,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-giulietta-2014-special-2015",
+        "commit": "9ce553fcde93bfb14ab6ea1713860879ce105db3",
+        "workflow": 39739140504,
+        "variants": 32,
+        "newVariants": 32,
+        "fields": 230,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
-    "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-giulietta-2014-special-2015",
-      "modelId": "cb49c6bb46e8dd8caf106b34",
-      "years": [
-        2014,
-        2015
-      ],
-      "variants": 32,
-      "fields": 230,
-      "state": "prepared_not_applied",
-      "claimedAt": "2026-10-22T14:13:48.107340+07:00"
-    },
+    "inFlightResearch": null,
     "lastCompletedPass": {
-      "report": "docs/encyclopedia/reports/2026-10-22-giulia-2019-2026-pass.json",
-      "variants": 93,
-      "fields": 773,
-      "newVariants": 90
+      "report": "docs/encyclopedia/reports/2026-10-22-giulietta-2010-2015-pass.json",
+      "variants": 138,
+      "newVariants": 138,
+      "fields": 1024,
+      "apiReadback": true,
+      "includedInIndex": false
     },
     "failedIndexRelease": {
       "commit": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
@@ -32984,7 +32996,7 @@
       "state": "in_progress",
       "referenceOnly": true
     },
-    "releaseRequestedAt": "2026-10-22T06:27:13.443974+00:00",
+    "releaseRequestedAt": "2026-10-22T14:16:41.446342+07:00",
     "failedAggregateRelease": {
       "workflow": 39733245856,
       "commit": "bb3193f1fd0c37d1afeb23e615e940dadf6758ee",
@@ -32993,7 +33005,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-giulietta.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2015.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-acb9cee-activation.json"
   },
   "scope": {
