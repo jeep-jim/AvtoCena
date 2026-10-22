@@ -1,1 +1,6 @@
-{"operation":"resume-comparison-checkpoint-20261022","requestedAt":"2026-10-22T07:53:13.110Z","minimumYear":2008,"productionApplied":false}
+{
+  "requestedAt": "2026-10-22T12:51:03.850345+00:00",
+  "minimumYear": 2008,
+  "productionApplied": false,
+  "reason": "Resume preserved checkpoint after fixing confirmed page_too_large with bounded 8MiB response; visited4961 saved285 pending553"
+}

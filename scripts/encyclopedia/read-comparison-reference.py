@@ -2,6 +2,7 @@
 import json, re, sys, urllib.request, urllib.parse, urllib.robotparser
 from html.parser import HTMLParser
 BASE = 'https://auto.ru'
+MAX_PAGE_BYTES = 8 * 1024 * 1024  # Bounded large model/generation pages.
 AGENT = 'AvtoCenaTechnicalReference/1.0 (+https://avtocena.com)'
 
 def accepted(url):
@@ -61,8 +62,8 @@ def fetch(url):
         robots.parse(r.read(1000000).decode('utf-8').splitlines())
     if not robots.can_fetch(AGENT, url): raise ValueError('robots_disallow')
     with urllib.request.build_opener(Redirect()).open(urllib.request.Request(url, headers={'User-Agent': AGENT}), timeout=25) as r:
-        raw = r.read(3000001)
-        if len(raw) > 3000000: raise ValueError('page_too_large')
+        raw = r.read(MAX_PAGE_BYTES + 1)
+        if len(raw) > MAX_PAGE_BYTES: raise ValueError('page_too_large')
         html = raw.decode(r.headers.get_content_charset() or 'utf-8')
     p = Tables(); p.feed(html)
     if not p.links and not p.rows: raise ValueError('no_catalog_content_or_access_challenge')

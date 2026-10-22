@@ -35,7 +35,7 @@ const facets={makes:['Toyota','BMW','Mazda'],models:[{make:'Toyota',model:'Corol
 try {
  for(const width of [390,1440])for(const theme of ['dark','light']) {
   const context=await browser.newContext({viewport:{width,height:1000}}), page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(String(e)));
-  await page.route('**/api/catalog/**',route=>{const u=new URL(route.request().url());const models=[{make:'Toyota',model:'Yaris L'},{make:'Kia',model:'KX1'}];return route.fulfill({json:u.pathname.endsWith('models')&&u.searchParams.get('scope')==='inventory'?{version:1,brands:[['Toyota',[]],['Kia',[]]],models:models.map(x=>[x.make,x.model,[],1])}:u.pathname.endsWith('brand-counts')?{counts:{Toyota:10,Kia:8},modelCounts:{Toyota:1,Kia:1}}:{facets:{makes:['Toyota','Kia']},items:models.filter(x=>!u.searchParams.get('q')||x.model.toLowerCase().includes(u.searchParams.get('q').toLowerCase()))}});});
+  await page.route('**/api/catalog/**',route=>{const u=new URL(route.request().url());const models=[{make:'Toyota',model:'Yaris'},{make:'Kia',model:'KX1'}];return route.fulfill({json:u.pathname.endsWith('models')&&u.searchParams.get('scope')==='inventory'?{version:1,brands:[['Toyota',[]],['Kia',[]]],models:models.map(x=>[x.make,x.model,[],1])}:u.pathname.endsWith('brand-counts')?{counts:{Toyota:10,Kia:8},modelCounts:{Toyota:1,Kia:1}}:{facets:{makes:['Toyota','Kia']},items:models.filter(x=>!u.searchParams.get('q')||x.model.toLowerCase().includes(u.searchParams.get('q').toLowerCase()))}});});
   await page.goto(`${origin}/cars?theme=${theme}${width===1440?'&slowRouter=1':''}`);
   if(width===1440)await page.evaluate(()=>{const original=history.replaceState.bind(history);history.replaceState=(...args)=>{clearTimeout(window.__routeTimer);return original(...args);};});
   let scope=page.locator('.ac-catalog-filter-panel');
@@ -47,14 +47,14 @@ try {
   assert.equal(await scope.locator('input[name="make"]').inputValue(),'Toyota,Kia');
   const modelTrigger=scope.getByRole('searchbox',{name:'Модель автомобиля'});if(width<1024)await modelTrigger.click();
   const modelScope=width<1024?page.getByRole('dialog',{name:'Выбор моделей'}):scope;const modelInput=width<1024?modelScope.getByRole('searchbox',{name:'Поиск модели'}):modelTrigger;
-  await modelInput.fill('Yaris');await modelScope.getByRole('button',{name:/Yaris L/}).click();
+  await modelInput.fill('Yaris');await modelScope.getByRole('button',{name:/Yaris/}).click();
   if(width===1440)await page.waitForTimeout(250);
-  assert.equal(await modelInput.inputValue(),width<1024?'':'Yaris L, ');
+  assert.equal(await modelInput.inputValue(),width<1024?'':'Yaris, ');
   await modelInput.fill('');
-  assert.equal(await scope.locator('input[name="model"]').inputValue(),'Yaris L','erasing search keeps the selected model');
-  await modelInput.fill(width<1024?'KX1':'Yaris L, KX1');await modelScope.getByRole('button',{name:/KX1/}).click();
+  assert.equal(await scope.locator('input[name="model"]').inputValue(),'Yaris','erasing search keeps the selected model');
+  await modelInput.fill(width<1024?'KX1':'Yaris, KX1');await modelScope.getByRole('button',{name:/KX1/}).click();
   if(width===1440){await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture-server',{detail:'/cars?make=Toyota,Kia&model=Yaris%20L'})));await page.waitForTimeout(30);}
-  assert.equal(await scope.locator('input[name="model"]').inputValue(),'Yaris L|KX1');assert.equal(await scope.locator('input[name="make"]').inputValue(),'Toyota,Kia');
+  assert.equal(await scope.locator('input[name="model"]').inputValue(),'Yaris|KX1');assert.equal(await scope.locator('input[name="make"]').inputValue(),'Toyota,Kia');
   // Multi-select deliberately stays open; close it before using controls underneath.
   await modelScope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
   assert.equal(await modelTrigger.getAttribute('aria-expanded'),'false');
@@ -74,7 +74,7 @@ try {
   assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Новосибирск');
   await page.screenshot({path:`${out}/${width}-${theme}.png`});
   if(width<1024)await scope.locator('button[aria-label="Закрыть"],button[data-ac-mobile-close="1"]').click();
-  try{await page.waitForFunction(()=>new URLSearchParams(location.search).get('model')==='Yaris L|KX1');}catch(error){console.error('filter_navigation_state',await page.evaluate(()=>({url:location.href,lastFilterUrl:window.__lastFilterUrl,models:[...document.querySelectorAll('input[name=model]')].map(el=>el.value)})));throw error;}
+  try{await page.waitForFunction(()=>new URLSearchParams(location.search).get('model')==='Yaris|KX1');}catch(error){console.error('filter_navigation_state',await page.evaluate(()=>({url:location.href,lastFilterUrl:window.__lastFilterUrl,models:[...document.querySelectorAll('input[name=model]')].map(el=>el.value)})));throw error;}
   assert.equal(new URL(page.url()).searchParams.get('city'),'Новосибирск');assert.equal(new URL(page.url()).searchParams.get('market'),'china');
   let calls=0;const sent=[];
   await page.route('**/api/crm/dealers/*/media',route=>{calls++;sent.push(route.request().postDataBuffer()?.length||0);return route.fulfill(calls===2?{status:413,body:'too large'}:{json:{id:`photo-${calls}`,url:`/photo-${calls}`,caption:''}});});

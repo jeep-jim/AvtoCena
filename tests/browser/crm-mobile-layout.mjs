@@ -206,10 +206,12 @@ try{
     assert.ok(await close.evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(document.querySelector('button[type=submit]')).backgroundColor));
     await page.getByRole('button',{name:'Отмена',exact:true}).click();assert.equal(await page.getByPlaceholder('Имя клиента *').isVisible(),false);
     await page.getByRole('button',{name:'+ Создать',exact:true}).click();await close.click();assert.equal(await page.getByPlaceholder('Имя клиента *').isVisible(),false);
-    assert.equal(await page.locator('.crm-date-display').textContent(),'дд.мм.гггг');
-    assert.ok(await page.locator('.crm-date-control>svg').isVisible(),'consistent calendar icon');
-    await page.locator('#lead-date').evaluate(e=>{e.showPicker=()=>{window.__crmPickerOpened=true;}});await page.locator('#lead-date').click();assert.ok(await page.evaluate(()=>window.__crmPickerOpened),'tap opens native calendar');
-    const dateBoxes=await page.locator('.crm-lead-date-filter').evaluate(e=>[e.querySelector('label'),e.querySelector('input[type=date]'),e.querySelector('button')].map(n=>{const r=n.getBoundingClientRect();return r.y+r.height/2}));assert.ok(Math.max(...dateBoxes)-Math.min(...dateBoxes)<2,'date controls on one row');
+    await page.getByRole('button',{name:'Фильтры',exact:true}).click();
+    const leadFilters=page.getByRole('dialog',{name:'Фильтры заявок',exact:true});await leadFilters.waitFor();
+    const leadDate=leadFilters.getByLabel('Дата заявки',{exact:true});assert.equal(await leadDate.getAttribute('type'),'date');
+    await leadDate.fill('2026-10-01');assert.equal(await leadFilters.locator('form').evaluate(form=>new FormData(form).get('date')),'2026-10-01');
+    assert.ok(await leadFilters.evaluate(e=>e.scrollWidth<=e.clientWidth+1),'lead date and search controls fit the dialog');
+    await page.keyboard.press('Escape');await leadFilters.waitFor({state:'hidden'});
     if(width<768){for(const card of await page.locator('.crm-lead-summary').all()){const manager=await card.locator('.crm-lead-manager').boundingBox(),status=await card.locator('.crm-lead-status>span').boundingBox();assert.ok(manager.y>=status.y+status.height,'manager has its own row below status');assert.ok(manager.width>240,'manager uses full card width');}}
     if(width<=390){const height=await page.locator('.crm-lead-summary').first().evaluate(e=>e.getBoundingClientRect().height);assert.ok(height<265,`lead summary is compact (${height}px)`);}
     for(const summary of await page.locator('.crm-lead-summary').all()){assert.ok(await summary.locator('.crm-lead-channel-icon').isVisible(),'channel icons on desktop and mobile');assert.equal(await summary.locator('.crm-contact-text').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','no contact badge background');}
@@ -253,7 +255,7 @@ try{
     await page.getByRole('button',{name:'Просмотреть Договор.pdf'}).click();
     await page.locator('[data-pdf-page="1"] canvas').waitFor();
     await page.getByRole('button',{name:'Закрыть предпросмотр',exact:true}).click();
-    await page.locator('input[type=file]').setInputFiles({name:'Договор.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.4')});
+    await page.getByRole('region',{name:'Документы клиента',exact:true}).locator('input[type=file]').setInputFiles({name:'Договор.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.4')});
     await page.getByRole('status').filter({hasText:'Сохранено файлов: 1.'}).waitFor();
    }
    if(kind==='archive'){
