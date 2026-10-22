@@ -205,8 +205,10 @@ async function repriceEditorialOffer<T extends Partial<VehicleOffer>>(offer:T):P
 
 /** Compiled local lookup; the release warmup executes this before activation. */
 async function repriceEncyclopediaOffer<T extends Partial<VehicleOffer>>(input:T):Promise<T>{
- if(input.market==='japan'||(Number(input.totalRub)>0&&input.catalogPricingMode!=='seller'))return input;
  const offer=applyEncyclopediaCalculation(applyUaeManualSpecifications(input));
+ // A completed price does not imply complete display specifications. Enrich
+ // every card first, while preserving the existing Japan/calculated-price path.
+ if(offer.market==='japan'||(Number(offer.totalRub)>0&&offer.catalogPricingMode!=='seller'))return offer;
  if(!hasEncyclopediaCalculationEvidence(offer)||!specificationEvidenceComplete(offer))return offer;
  const {calculateOfferWithVerifiedSpecifications}=await import('./customs-pricing');
  const result=await calculateOfferWithVerifiedSpecifications(offer as VehicleOffer);
