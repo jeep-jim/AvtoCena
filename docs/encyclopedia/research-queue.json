@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T10:25:47+07:00",
+  "updatedAt": "2026-10-22T10:32:42+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32407,7 +32407,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T10:25:47+07:00",
+    "updatedAt": "2026-10-22T10:32:42+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "research_saved_index_release_requested",
     "preserveManual": true,
@@ -32450,7 +32450,15 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "inFlightResearch": null,
+    "inFlightResearch": {
+      "state": "prepared_not_applied",
+      "batch": "docs/encyclopedia/batches/2026-10-22-aion-i60-field-provenance.json",
+      "variants": 8,
+      "fields": 51,
+      "digest": "45c8946796e4617b3c5d4c9701eff56179936a1137a181322e7c6d1d14f1f62d",
+      "dependsOnReleaseWorkflow": 39716807213,
+      "requiresFreshApiCas": true
+    },
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {

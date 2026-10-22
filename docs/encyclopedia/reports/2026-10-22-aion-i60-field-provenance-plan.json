@@ -1,0 +1,148 @@
+{
+  "checkedAt": "2026-10-22T03:31:55.093Z",
+  "state": "prepared_not_applied",
+  "entries": 8,
+  "fields": 51,
+  "digest": "45c8946796e4617b3c5d4c9701eff56179936a1137a181322e7c6d1d14f1f62d",
+  "sourceRecordRevision": "c728796d-1ede-4698-89d2-b6acfdee1d50",
+  "sourceTableDigest": "6bef57a9348743710e898f7b0e999a5b8479accb1fe8ed28effc07902fd6ec69",
+  "plan": {
+    "changes": [
+      {
+        "variantId": "b01a1f0d074fc3f619f22c17",
+        "fields": [
+          "trim",
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh"
+        ]
+      },
+      {
+        "variantId": "d5ce72c02467858dd751a399",
+        "fields": [
+          "trim",
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh"
+        ]
+      },
+      {
+        "variantId": "ecf04de90fda2abaf7cde036",
+        "fields": [
+          "trim",
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh"
+        ]
+      },
+      {
+        "variantId": "0e83ce22f70dcc32dfd6e0f9",
+        "fields": [
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh"
+        ]
+      },
+      {
+        "variantId": "064ae75338b1c3b86c97a081",
+        "fields": [
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh"
+        ]
+      },
+      {
+        "variantId": "d58c5b85759b87c67cbef0fc",
+        "fields": [
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh"
+        ]
+      },
+      {
+        "variantId": "0c211bda85459790af0e9517",
+        "fields": [
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh"
+        ]
+      },
+      {
+        "variantId": "f21f01158ff7a449e24cb0e9",
+        "fields": [
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "publicationDependency": "39716807213 must finish before any manifest write; then fresh API/CAS and single research marker",
+  "remaining": [
+    {
+      "variantId": "b56be3654b7ad09b80357061",
+      "year": 2024,
+      "reason": "Год предшествует заводскому началу продаж 16.11.2025; требуется проверка идентичности, не переносить данные i60."
+    },
+    {
+      "variantId": "3e7b17e66e2b6dfe03e0d5cb",
+      "year": 2025,
+      "reason": "Не указано точное исполнение."
+    },
+    {
+      "variantId": "c8322ccafc83f617e78bc064",
+      "year": 2025,
+      "reason": "Не указано точное исполнение."
+    },
+    {
+      "variantId": "360831770dbc3e0fa80badfc",
+      "year": 2025,
+      "reason": "Нет однозначного соответствия заводскому исполнению; нужен документ идентичности."
+    },
+    {
+      "variantId": "c66dd9eb7ffc961d5294d548",
+      "year": 2026,
+      "reason": "Не указано точное исполнение."
+    },
+    {
+      "variantId": "071914c40d0dd5c9724f3473",
+      "year": 2026,
+      "reason": "Нет однозначного соответствия заводскому исполнению; нужен документ идентичности."
+    }
+  ],
+  "missingFields": [
+    "certified30MinutePower",
+    "engineCc",
+    "icePowerKw",
+    "engineCode",
+    "grossVehicleWeightKg",
+    "transmission"
+  ],
+  "historicalCoverage": "Исторические версии до 16.11.2025 не создавались; отсутствующие реальные исполнения 2025/2026 и MY2027 остаются в расширении.",
+  "nextAfterApply": "AION RT"
+}

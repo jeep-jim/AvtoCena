@@ -1,0 +1,635 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aion-i60-field-provenance",
+  "entries": [
+    {
+      "modelId": "fe5a07120ce3847255f59ed3",
+      "variantId": "0e83ce22f70dcc32dfd6e0f9",
+      "make": "AION",
+      "model": "i60",
+      "year": 2026,
+      "trim": "210 ADVANCED",
+      "expectedDigest": "45f17172a3305af9195c3a9fa1d4af43f1218ce5a43e71c3c9c7b7970dd33b08",
+      "patch": {
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "drive": "fwd",
+        "motorPeakKw": 180,
+        "batteryKwh": 29.165
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacmotor.com/configtable?id=657",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица i60, точное исполнение LDR2-N14-02: передний привод, последовательный гибрид, пиковая мощность электромотора 180 кВт, батарея 29.165 кВт·ч. Кузов SUV и начало продаж 16.11.2025 подтверждены заводской хронологией; исходный год записи сохранён. Это версии 210/530 до обновления 2027 года; характеристики 520/700 на них не перенесены. Объём и мощность ДВС, общая мощность, полная масса, КПП и 30-минутная мощность не подтверждаются этой партией.",
+        "supportingUrls": [
+          "https://www.aion.com.cn/show/about_us",
+          "https://www.gacgroup.com/cn/news/detail?baseid=19189"
+        ],
+        "tableRequest": {
+          "url": "https://www.gacmotor.com/gacwebsite/public/api/get_car_type_info",
+          "method": "POST",
+          "body": {
+            "id": 657
+          }
+        },
+        "tableDigest": "6bef57a9348743710e898f7b0e999a5b8479accb1fe8ed28effc07902fd6ec69",
+        "deriveCode": "LDR2-N14-02",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.aion.com.cn/show/about_us",
+            "checkedAt": "2026-10-22",
+            "selector": "2025-11-16"
+          },
+          "fuel": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "drive": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "fe5a07120ce3847255f59ed3",
+      "variantId": "064ae75338b1c3b86c97a081",
+      "make": "AION",
+      "model": "i60",
+      "year": 2026,
+      "trim": "210 ADVANCED EREV",
+      "expectedDigest": "de0604fdb3bcc841147095627f1893e483d2276725939bc32498e1e6ed51a30f",
+      "patch": {
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "drive": "fwd",
+        "motorPeakKw": 180,
+        "batteryKwh": 29.165
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacmotor.com/configtable?id=657",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица i60, точное исполнение LDR2-N14-02: передний привод, последовательный гибрид, пиковая мощность электромотора 180 кВт, батарея 29.165 кВт·ч. Кузов SUV и начало продаж 16.11.2025 подтверждены заводской хронологией; исходный год записи сохранён. Это версии 210/530 до обновления 2027 года; характеристики 520/700 на них не перенесены. Объём и мощность ДВС, общая мощность, полная масса, КПП и 30-минутная мощность не подтверждаются этой партией.",
+        "supportingUrls": [
+          "https://www.aion.com.cn/show/about_us",
+          "https://www.gacgroup.com/cn/news/detail?baseid=19189"
+        ],
+        "tableRequest": {
+          "url": "https://www.gacmotor.com/gacwebsite/public/api/get_car_type_info",
+          "method": "POST",
+          "body": {
+            "id": 657
+          }
+        },
+        "tableDigest": "6bef57a9348743710e898f7b0e999a5b8479accb1fe8ed28effc07902fd6ec69",
+        "deriveCode": "LDR2-N14-02",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.aion.com.cn/show/about_us",
+            "checkedAt": "2026-10-22",
+            "selector": "2025-11-16"
+          },
+          "fuel": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "drive": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "fe5a07120ce3847255f59ed3",
+      "variantId": "d58c5b85759b87c67cbef0fc",
+      "make": "AION",
+      "model": "i60",
+      "year": 2026,
+      "trim": "REEV 210 Advanced Edition",
+      "expectedDigest": "b40b7b0e963bf717d5aaa5c8a5600d98766711ce552b080f6aa3aae0e4324779",
+      "patch": {
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "drive": "fwd",
+        "motorPeakKw": 180,
+        "batteryKwh": 29.165
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacmotor.com/configtable?id=657",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица i60, точное исполнение LDR2-N14-02: передний привод, последовательный гибрид, пиковая мощность электромотора 180 кВт, батарея 29.165 кВт·ч. Кузов SUV и начало продаж 16.11.2025 подтверждены заводской хронологией; исходный год записи сохранён. Это версии 210/530 до обновления 2027 года; характеристики 520/700 на них не перенесены. Объём и мощность ДВС, общая мощность, полная масса, КПП и 30-минутная мощность не подтверждаются этой партией.",
+        "supportingUrls": [
+          "https://www.aion.com.cn/show/about_us",
+          "https://www.gacgroup.com/cn/news/detail?baseid=19189"
+        ],
+        "tableRequest": {
+          "url": "https://www.gacmotor.com/gacwebsite/public/api/get_car_type_info",
+          "method": "POST",
+          "body": {
+            "id": 657
+          }
+        },
+        "tableDigest": "6bef57a9348743710e898f7b0e999a5b8479accb1fe8ed28effc07902fd6ec69",
+        "deriveCode": "LDR2-N14-02",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.aion.com.cn/show/about_us",
+            "checkedAt": "2026-10-22",
+            "selector": "2025-11-16"
+          },
+          "fuel": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "drive": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "fe5a07120ce3847255f59ed3",
+      "variantId": "0c211bda85459790af0e9517",
+      "make": "AION",
+      "model": "i60",
+      "year": 2026,
+      "trim": "530 Advanced",
+      "expectedDigest": "a0b807f7fbd091dc59ce648a5cec61fc21958bacd983fe9f18c3c68324a16881",
+      "patch": {
+        "bodyType": "suv",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "drive": "fwd",
+        "motorPeakKw": 150,
+        "batteryKwh": 62.268
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacmotor.com/configtable?id=657",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица i60, точное исполнение LRJ2-N12-09: передний привод, электромобиль, пиковая мощность электромотора 150 кВт, батарея 62.268 кВт·ч. Кузов SUV и начало продаж 16.11.2025 подтверждены заводской хронологией; исходный год записи сохранён. Это версии 210/530 до обновления 2027 года; характеристики 520/700 на них не перенесены. Объём и мощность ДВС, общая мощность, полная масса, КПП и 30-минутная мощность не подтверждаются этой партией.",
+        "supportingUrls": [
+          "https://www.aion.com.cn/show/about_us",
+          "https://www.gacgroup.com/cn/news/detail?baseid=19189"
+        ],
+        "tableRequest": {
+          "url": "https://www.gacmotor.com/gacwebsite/public/api/get_car_type_info",
+          "method": "POST",
+          "body": {
+            "id": 657
+          }
+        },
+        "tableDigest": "6bef57a9348743710e898f7b0e999a5b8479accb1fe8ed28effc07902fd6ec69",
+        "deriveCode": "LRJ2-N12-09",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.aion.com.cn/show/about_us",
+            "checkedAt": "2026-10-22",
+            "selector": "2025-11-16"
+          },
+          "fuel": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          },
+          "drive": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "fe5a07120ce3847255f59ed3",
+      "variantId": "f21f01158ff7a449e24cb0e9",
+      "make": "AION",
+      "model": "i60",
+      "year": 2026,
+      "trim": "210 Advanced",
+      "expectedDigest": "946b19a2a07df887df57dc641e7fc505b73f571e2b852a6d9926f194cd70519c",
+      "patch": {
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "drive": "fwd",
+        "motorPeakKw": 180,
+        "batteryKwh": 29.165
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacmotor.com/configtable?id=657",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица i60, точное исполнение LDR2-N14-02: передний привод, последовательный гибрид, пиковая мощность электромотора 180 кВт, батарея 29.165 кВт·ч. Кузов SUV и начало продаж 16.11.2025 подтверждены заводской хронологией; исходный год записи сохранён. Это версии 210/530 до обновления 2027 года; характеристики 520/700 на них не перенесены. Объём и мощность ДВС, общая мощность, полная масса, КПП и 30-минутная мощность не подтверждаются этой партией.",
+        "supportingUrls": [
+          "https://www.aion.com.cn/show/about_us",
+          "https://www.gacgroup.com/cn/news/detail?baseid=19189"
+        ],
+        "tableRequest": {
+          "url": "https://www.gacmotor.com/gacwebsite/public/api/get_car_type_info",
+          "method": "POST",
+          "body": {
+            "id": 657
+          }
+        },
+        "tableDigest": "6bef57a9348743710e898f7b0e999a5b8479accb1fe8ed28effc07902fd6ec69",
+        "deriveCode": "LDR2-N14-02",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.aion.com.cn/show/about_us",
+            "checkedAt": "2026-10-22",
+            "selector": "2025-11-16"
+          },
+          "fuel": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "drive": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "fe5a07120ce3847255f59ed3",
+      "variantId": "b01a1f0d074fc3f619f22c17",
+      "make": "AION",
+      "model": "i60",
+      "year": 2025,
+      "trim": "530 进阶版",
+      "expectedDigest": "ab8bfb52a2ace5fd0405feeda260fa7f6cebccfe7814f5fdfe3b4e091ba79180",
+      "patch": {
+        "trim": "530 Продвинутая",
+        "bodyType": "suv",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "drive": "fwd",
+        "motorPeakKw": 150,
+        "batteryKwh": 62.268
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacmotor.com/configtable?id=657",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица i60, точное исполнение LRJ2-N12-09: передний привод, электромобиль, пиковая мощность электромотора 150 кВт, батарея 62.268 кВт·ч. Кузов SUV и начало продаж 16.11.2025 подтверждены заводской хронологией; исходный год записи сохранён. Это версии 210/530 до обновления 2027 года; характеристики 520/700 на них не перенесены. Объём и мощность ДВС, общая мощность, полная масса, КПП и 30-минутная мощность не подтверждаются этой партией.",
+        "supportingUrls": [
+          "https://www.aion.com.cn/show/about_us",
+          "https://www.gacgroup.com/cn/news/detail?baseid=19189"
+        ],
+        "tableRequest": {
+          "url": "https://www.gacmotor.com/gacwebsite/public/api/get_car_type_info",
+          "method": "POST",
+          "body": {
+            "id": 657
+          }
+        },
+        "tableDigest": "6bef57a9348743710e898f7b0e999a5b8479accb1fe8ed28effc07902fd6ec69",
+        "deriveCode": "LRJ2-N12-09",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          },
+          "bodyType": {
+            "url": "https://www.aion.com.cn/show/about_us",
+            "checkedAt": "2026-10-22",
+            "selector": "2025-11-16"
+          },
+          "fuel": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          },
+          "drive": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LRJ2-N12-09"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "fe5a07120ce3847255f59ed3",
+      "variantId": "d5ce72c02467858dd751a399",
+      "make": "AION",
+      "model": "i60",
+      "year": 2025,
+      "trim": "210 标准版",
+      "expectedDigest": "3d33ec1f8c9f3378d9c9c52fe5ea679ed805f08e5b06b72d05bc68f0c9a0b25e",
+      "patch": {
+        "trim": "210 Стандартная",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "drive": "fwd",
+        "motorPeakKw": 180,
+        "batteryKwh": 29.165
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacmotor.com/configtable?id=657",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица i60, точное исполнение LDR2-N12-19: передний привод, последовательный гибрид, пиковая мощность электромотора 180 кВт, батарея 29.165 кВт·ч. Кузов SUV и начало продаж 16.11.2025 подтверждены заводской хронологией; исходный год записи сохранён. Это версии 210/530 до обновления 2027 года; характеристики 520/700 на них не перенесены. Объём и мощность ДВС, общая мощность, полная масса, КПП и 30-минутная мощность не подтверждаются этой партией.",
+        "supportingUrls": [
+          "https://www.aion.com.cn/show/about_us",
+          "https://www.gacgroup.com/cn/news/detail?baseid=19189"
+        ],
+        "tableRequest": {
+          "url": "https://www.gacmotor.com/gacwebsite/public/api/get_car_type_info",
+          "method": "POST",
+          "body": {
+            "id": 657
+          }
+        },
+        "tableDigest": "6bef57a9348743710e898f7b0e999a5b8479accb1fe8ed28effc07902fd6ec69",
+        "deriveCode": "LDR2-N12-19",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N12-19"
+          },
+          "bodyType": {
+            "url": "https://www.aion.com.cn/show/about_us",
+            "checkedAt": "2026-10-22",
+            "selector": "2025-11-16"
+          },
+          "fuel": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N12-19"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N12-19"
+          },
+          "drive": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N12-19"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N12-19"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N12-19"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "fe5a07120ce3847255f59ed3",
+      "variantId": "ecf04de90fda2abaf7cde036",
+      "make": "AION",
+      "model": "i60",
+      "year": 2025,
+      "trim": "210 进阶版",
+      "expectedDigest": "b401cf9dfd5bde15534a2554ce4d103f754397329826cb345ece3f187e5cc8bb",
+      "patch": {
+        "trim": "210 Продвинутая",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "drive": "fwd",
+        "motorPeakKw": 180,
+        "batteryKwh": 29.165
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gacmotor.com/configtable?id=657",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица i60, точное исполнение LDR2-N14-02: передний привод, последовательный гибрид, пиковая мощность электромотора 180 кВт, батарея 29.165 кВт·ч. Кузов SUV и начало продаж 16.11.2025 подтверждены заводской хронологией; исходный год записи сохранён. Это версии 210/530 до обновления 2027 года; характеристики 520/700 на них не перенесены. Объём и мощность ДВС, общая мощность, полная масса, КПП и 30-минутная мощность не подтверждаются этой партией.",
+        "supportingUrls": [
+          "https://www.aion.com.cn/show/about_us",
+          "https://www.gacgroup.com/cn/news/detail?baseid=19189"
+        ],
+        "tableRequest": {
+          "url": "https://www.gacmotor.com/gacwebsite/public/api/get_car_type_info",
+          "method": "POST",
+          "body": {
+            "id": 657
+          }
+        },
+        "tableDigest": "6bef57a9348743710e898f7b0e999a5b8479accb1fe8ed28effc07902fd6ec69",
+        "deriveCode": "LDR2-N14-02",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "bodyType": {
+            "url": "https://www.aion.com.cn/show/about_us",
+            "checkedAt": "2026-10-22",
+            "selector": "2025-11-16"
+          },
+          "fuel": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "powertrainKind": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "drive": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "motorPeakKw": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          },
+          "batteryKwh": {
+            "url": "https://www.gacmotor.com/configtable?id=657",
+            "checkedAt": "2026-10-22",
+            "selector": "LDR2-N14-02"
+          }
+        }
+      }
+    }
+  ]
+}
