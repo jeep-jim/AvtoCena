@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T14:04:43.390137+07:00",
+  "updatedAt": "2026-10-22T14:09:43.088065+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -575,13 +575,16 @@
         2022,
         2021,
         2020,
-        2013
+        2013,
+        2012,
+        2011,
+        2010
       ],
-      "variants": 31,
+      "variants": 93,
       "status": "partial_verified_fields",
-      "researchedVariants": 1,
-      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "researchedVariants": 63,
+      "checkedAt": "2026-10-22T14:09:43.088065+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2010-2012.json",
       "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
@@ -32585,12 +32588,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T14:04:43.390137+07:00",
+    "updatedAt": "2026-10-22T14:09:43.088065+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "giulietta_2010_2012_prepared",
+    "state": "giulietta_2013_2014_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulietta 2013 после независимого API-readback партии 2010–2012",
+    "nextModel": "Alfa Romeo Giulietta 2014 — оставшиеся Sprint/Quadrifoglio Verde/Launch Edition; затем 2015",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32753,6 +32756,16 @@
         "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
         "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
         "activationReport": "docs/encyclopedia/reports/2026-10-22-index-acb9cee-activation.json"
+      },
+      "alfa-giulietta-2010-2012": {
+        "batch": "research-2026-10-22-alfa-giulietta-2010-2012",
+        "commit": "9a68b9591dc9b7c082a51f17985d838ed6d23038",
+        "workflow": 39738308666,
+        "variants": 62,
+        "newVariants": 62,
+        "fields": 482,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32773,16 +32786,14 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-giulia-2023-2026",
-      "commit": "4da0310796f6763c011b534635e63bd573224f33",
-      "workflow": 39732875758,
-      "variants": 35,
-      "fields": 292,
-      "newVariants": 35,
+      "batch": "research-2026-10-22-alfa-giulietta-2010-2012",
+      "commit": "9a68b9591dc9b7c082a51f17985d838ed6d23038",
+      "workflow": 39738308666,
+      "variants": 62,
+      "newVariants": 62,
+      "fields": 482,
       "apiReadback": true,
-      "includedInIndex": true,
-      "indexRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
-      "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd"
+      "includedInIndex": false
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
@@ -32896,20 +32907,29 @@
         "newVariants": 11,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-giulietta-2010-2012",
+        "commit": "9a68b9591dc9b7c082a51f17985d838ed6d23038",
+        "workflow": 39738308666,
+        "variants": 62,
+        "newVariants": 62,
+        "fields": 482,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-giulietta-2010-2012",
+      "batch": "research-2026-10-22-alfa-giulietta-2013-2014",
       "modelId": "cb49c6bb46e8dd8caf106b34",
       "years": [
-        2010,
-        2011,
-        2012
+        2013,
+        2014
       ],
-      "variants": 62,
-      "fields": 482,
+      "variants": 44,
+      "fields": 312,
       "state": "prepared_not_applied",
-      "claimedAt": "2026-10-22T14:04:43.390137+07:00"
+      "claimedAt": "2026-10-22T14:09:43.088065+07:00"
     },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-giulia-2019-2026-pass.json",

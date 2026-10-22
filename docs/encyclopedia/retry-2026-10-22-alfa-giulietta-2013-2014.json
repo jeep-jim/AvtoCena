@@ -1,0 +1,143 @@
+{
+  "checkedAt": "2026-10-22T07:09:14.885Z",
+  "modelId": "cb49c6bb46e8dd8caf106b34",
+  "years": [
+    2013,
+    2014
+  ],
+  "items": [
+    {
+      "variantIds": [
+        "bf8a3a9b404deddd27376765"
+      ],
+      "fields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "reason": "DISTINCTIVE 2013 без идентификатора мотора. В заводском прайсе несколько бензиновых и дизельных вариантов. UAE seller horsepower/volume не использованы."
+    },
+    {
+      "variantIds": [
+        "f49b7c5d069605e166c35db6",
+        "c087d1e50ba86f44f177585e"
+      ],
+      "fields": [
+        "powerKw",
+        "icePowerKw"
+      ],
+      "reason": "Конфликт заводских документов: IT прайс 04.02.2014 даёт 128 кВт, DE 01.04.2014 — 129 кВт для 175 PS. До омологационной сверки оставлены только подтверждённые 175 PS.",
+      "sources": [
+        "https://www.media.stellantis.com/uploads/it/2014/listini/140204_AR_Giulietta.pdf",
+        "https://www.media.stellantis.com/de-de/alfa-romeo/press/neues-giulietta-topmodell-quadrifoglio-verde-tct"
+      ]
+    },
+    {
+      "variantIds": [
+        "af7b3c8aac39402655242113",
+        "f0144fe0cba2f629aa227824",
+        "e1247cf9e7123590d5c2c339",
+        "93df97e6379948e7e3376c07",
+        "debda588b808d75157316e3f",
+        "66330683041066165a8e076d",
+        "cf3c0b2e0db7e69778eb851a",
+        "e972014c3084853553229660",
+        "184992c1752925cd8de8afcd",
+        "fef0afeda5d183b1547ae9c6",
+        "db4f0e31193214f829594a51",
+        "ef259ada9d56781c44b5ae8b",
+        "4e836c400cf48930e3fecb6f",
+        "3f7d5aed97416a0d1e015756",
+        "6e8d30f5c27ee2f93e1955cd",
+        "ec8e45921d238b2e5196d751",
+        "a732b3410e43b349499ad0b5",
+        "1be97287d90e76a8a26a208f",
+        "7e1e25edbacfbaf5e3aa6ad5",
+        "f0b39ded0a0bf2f225c1e6ff",
+        "9f25f5a53015ea3964be1c7d",
+        "20d431424643ba5bdb83c4aa",
+        "d1ef19eac7a879f60e792a41",
+        "d416a0e886584ba6b32791e3",
+        "cf1395872dc7ea5ba632cbfe",
+        "a63eda74acbe7a39c624da34",
+        "8e11993d550943336fda7ea2",
+        "c4d466550ed37d3a47eb705b",
+        "5d7b158d473add638233455f",
+        "95f3ae7df925c1c14289e2b3",
+        "be5e03f3abcebc9609b3bd12",
+        "e3c22cfa450b4b2cdc5afc4d",
+        "bb87c1673724a7606f8787f8",
+        "6e86b236045ed5d032e1ff94",
+        "a37fa6e334d17deccca78147",
+        "e20a095585fdd787e6c159be"
+      ],
+      "fields": [
+        "transmission"
+      ],
+      "reason": "Отсутствие TCT в прайсе не доказывает механическую коробку; требуется руководство/техтаблица точного года."
+    },
+    {
+      "variantIds": [
+        "af7b3c8aac39402655242113",
+        "f0144fe0cba2f629aa227824",
+        "e1247cf9e7123590d5c2c339",
+        "93df97e6379948e7e3376c07",
+        "debda588b808d75157316e3f",
+        "66330683041066165a8e076d",
+        "cf3c0b2e0db7e69778eb851a",
+        "0b9528490496dd98fe080e62",
+        "7c1b0dbc6f490f57f7856b26",
+        "e972014c3084853553229660",
+        "184992c1752925cd8de8afcd",
+        "fef0afeda5d183b1547ae9c6",
+        "db4f0e31193214f829594a51",
+        "ef259ada9d56781c44b5ae8b",
+        "4e836c400cf48930e3fecb6f",
+        "3f7d5aed97416a0d1e015756",
+        "6e8d30f5c27ee2f93e1955cd",
+        "ec8e45921d238b2e5196d751",
+        "a732b3410e43b349499ad0b5",
+        "1be97287d90e76a8a26a208f",
+        "7e1e25edbacfbaf5e3aa6ad5",
+        "f0b39ded0a0bf2f225c1e6ff",
+        "9f25f5a53015ea3964be1c7d",
+        "20d431424643ba5bdb83c4aa",
+        "babc9d23972ad72c647a62b5",
+        "a2ef8022573c3910e5538c74",
+        "d1ef19eac7a879f60e792a41",
+        "d416a0e886584ba6b32791e3",
+        "cf1395872dc7ea5ba632cbfe",
+        "a63eda74acbe7a39c624da34",
+        "8e11993d550943336fda7ea2",
+        "c4d466550ed37d3a47eb705b",
+        "29ddb1512f473796f0b8fe98",
+        "f9ac6b4728496e6e815ee2fb",
+        "5d7b158d473add638233455f",
+        "95f3ae7df925c1c14289e2b3",
+        "be5e03f3abcebc9609b3bd12",
+        "e3c22cfa450b4b2cdc5afc4d",
+        "bb87c1673724a7606f8787f8",
+        "6e86b236045ed5d032e1ff94",
+        "a37fa6e334d17deccca78147",
+        "e20a095585fdd787e6c159be",
+        "f49b7c5d069605e166c35db6",
+        "c087d1e50ba86f44f177585e"
+      ],
+      "fields": [
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нужна техническая таблица точного года и исполнения; по старому году или внешности не переносить."
+    },
+    {
+      "fields": [
+        "year",
+        "trim"
+      ],
+      "reason": "Не полный охват года: поздние 2013 MY2014, 2014 Sprint/Quadrifoglio Verde/Launch Edition и специальные версии требуют собственных таблиц и проверки дублей. Следующий курсор: Giulietta 2014, оставшиеся исполнения, затем 2015."
+    }
+  ]
+}
