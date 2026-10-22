@@ -48,9 +48,9 @@ export function verifiedPackedBudgetSelector(directory:PackedBudgetDirectory,mar
 }
 
 
-export const BUDGET_SELECTOR_STORAGE_VERSION = 5;
+export const BUDGET_SELECTOR_STORAGE_VERSION = 6;
 export type CompressedBudgetSelector = {encoding:'gzip-base64';payload:string};
-export type CompressedBudgetDirectory = Omit<PackedBudgetDirectory,'version'> & {version:3};
+export type CompressedBudgetDirectory = Omit<PackedBudgetDirectory,'version'> & {version:3;encyclopediaDigest?:string|null};
 // Derived, immutable selectors only. Bound inflation even if an object is corrupt.
 const MAX_SELECTOR_BYTES = 128 * 1024 * 1024;
 export function compressBudgetSelector(packed:PackedBudgetSelector):CompressedBudgetSelector {

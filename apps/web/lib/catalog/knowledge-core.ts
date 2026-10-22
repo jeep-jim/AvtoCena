@@ -1,3 +1,4 @@
+import {applyEncyclopediaCalculation,hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-index';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -387,7 +388,8 @@ export function sanitizeLegacyKnowledgeSpecifications<T extends VehicleOffer>(of
 }
 
 export async function enrichOfferWithKnowledgeCore<T extends VehicleOffer>(offer: T): Promise<T> {
-  if(offer.market==='uae')return applyUaeManualSpecifications(offer);
+  offer = applyEncyclopediaCalculation(applyUaeManualSpecifications(offer));
+  if(hasEncyclopediaCalculationEvidence(offer)||offer.market==='uae')return offer;
   offer = sanitizeLegacyKnowledgeSpecifications(offer);
   const index = await readKnowledgeCoreIndex();
   let current: VehicleOffer = offer;

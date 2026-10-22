@@ -1,9 +1,10 @@
+import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-index';
 /** Owner 20.10.2026: UAE power and displacement are manual-only.
  * Applies to retained full records and compact projections, not just new intake.
  * Saved employee calculations are separate records and remain untouched.
  */
 export function applyUaeManualSpecifications<T extends Record<string, any>>(offer:T):T {
- if(offer.market!=='uae')return offer;
+ if(offer.market!=='uae'||hasEncyclopediaCalculationEvidence(offer))return offer;
  const rate=offer.calculationSnapshot?.currencyRate;
  const price=Number(offer.sourcePrice), effective=Number(rate?.effectiveRate);
  const bound=rate&&['cbr','cbr_live'].includes(rate.rateSource)&&rate.currency===offer.sourceCurrency

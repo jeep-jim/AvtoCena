@@ -17,3 +17,6 @@ apps/web/public/pdfjs/
 
 /data/catalog/knowledge-read-model/
 /apps/web/public/model-directory.*.json
+
+# Private encyclopedia projection is prepared into the release image, never public git.
+/data/knowledge/encyclopedia/calculation-v1.json

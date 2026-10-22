@@ -1,3 +1,6 @@
+import {applyEncyclopediaCalculation,hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-index';
+import {applyUaeManualSpecifications} from './uae-manual-specifications';
+import {specificationEvidenceComplete} from './modification-matching';
 import {applyCatalogEditorial,readCatalogEditorial} from './editorial';
 import {youngImportIncludesLogistics} from "./korea-customs-value";
 import {withChinaCnyPrice,withChinaCnyPrices} from "./china-cny-price";
@@ -200,11 +203,23 @@ async function repriceEditorialOffer<T extends Partial<VehicleOffer>>(offer:T):P
  return {...result,...((offer as any).cardProjectionVersion?{publicVisibleRub:result.totalRub||undefined}: {})} as T;
 }
 
+/** Compiled local lookup; the release warmup executes this before activation. */
+async function repriceEncyclopediaOffer<T extends Partial<VehicleOffer>>(input:T):Promise<T>{
+ if(input.market==='japan'||(Number(input.totalRub)>0&&input.catalogPricingMode!=='seller'))return input;
+ const offer=applyEncyclopediaCalculation(applyUaeManualSpecifications(input));
+ if(!hasEncyclopediaCalculationEvidence(offer)||!specificationEvidenceComplete(offer))return offer;
+ const {calculateOfferWithVerifiedSpecifications}=await import('./customs-pricing');
+ const result=await calculateOfferWithVerifiedSpecifications(offer as VehicleOffer);
+ if(!(Number(result.totalRub)>0)||result.calculationSnapshot?.customs?.status!=='ready')return offer;
+ return {...result,catalogPricingMode:undefined,sellerPriceRub:undefined,modificationSelection:undefined,
+  publicVisibleRub:result.totalRub,publicSpecificationVerified:true} as unknown as T;
+}
+
 export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (!offer.market) return offer;
   const editorial=await readCatalogEditorial();
   offer=offer.id?applyCatalogEditorial(offer as T & {id:string},editorial):offer;
-  offer=await repriceEditorialOffer(await withChinaCnyPrice(offer));
+  offer=await repriceEncyclopediaOffer(await repriceEditorialOffer(await withChinaCnyPrice(offer)));
   const rated = await attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer)));
   const configured = await getEffectiveMarketVersion(String(rated.market));
   const repriced = repriceOfferWithBusinessConfig(rated, configured);
@@ -216,7 +231,7 @@ export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOff
   if (!offers.length) return offers;
   const editorial=await readCatalogEditorial();
   offers=offers.map(offer=>offer.id?applyCatalogEditorial(offer as T & {id:string},editorial):offer);
-  offers=await Promise.all((await withChinaCnyPrices(offers,options)).map(repriceEditorialOffer));
+  offers=await Promise.all((await withChinaCnyPrices(offers,options)).map(async offer=>repriceEncyclopediaOffer(await repriceEditorialOffer(offer))));
   const [markets, ratedOffers] = await Promise.all([
     getEffectiveMarketsWithDefaults(),
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer))))),

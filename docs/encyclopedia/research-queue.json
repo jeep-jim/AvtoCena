@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T06:32:53+07:00",
+  "updatedAt": "2026-10-22T07:14:56.498792+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1249,7 +1249,11 @@
         2025
       ],
       "variants": 9,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "lastResearchAt": "2026-10-22T07:14:56.498792+07:00",
+      "processedVariants": 6,
+      "confirmedFields": 58,
+      "nextAction": "6 модификаций 2026 сохранены и прочитаны; 3 строки без точного года/комплектации остаются в повторном поиске. 30-минутная мощность не найдена. По текущему указанию владельца приоритет — подключение расчётов к уже заполненной энциклопедии и точным эталонам Китая/Европы; затем A7."
     },
     {
       "id": "1db9a9057b9919c24b8a0e67",
@@ -32337,5 +32341,12 @@
       "variants": 18,
       "status": "pending"
     }
-  ]
+  ],
+  "activePriority": {
+    "updatedAt": "2026-10-22T07:14:56.498792+07:00",
+    "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
+    "state": "implementation_tested_deployment_audit_pending",
+    "preserveManual": true,
+    "noPeakTo30Min": true
+  }
 }

@@ -1,3 +1,5 @@
+import {applyEncyclopediaCalculation} from '../encyclopedia/calculation-index';
+import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {catalogBodyType} from './pickup-body';
 import type {BudgetCountIndex, BudgetMetadata} from './budget-count-index';
 import type {CatalogSearchProjection} from './storage';
@@ -5,7 +7,7 @@ import {safePublicPricing} from './safe-public-pricing';
 
 /** Same admitted public specifications as card matching; never fabricate power or displacement. */
 export function budgetSpecifications(input:CatalogSearchProjection){
- const row=safePublicPricing(input);
+ const row=safePublicPricing(applyEncyclopediaCalculation(applyUaeManualSpecifications(input)));
  return {bodyType:catalogBodyType(row),engineCc:row.engineCc,utilizationPowerKw:row.utilizationPowerKw,powertrainKind:row.powertrainKind,powerHp:row.powerHp,fuel:row.fuel};
 }
 export async function enrichBudgetSpecifications(index:BudgetCountIndex,read:(block:number)=>Promise<{generationId:string;items:CatalogSearchProjection[]}>){

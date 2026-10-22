@@ -1,3 +1,4 @@
+import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-index';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {applyCatalogEditorialPrice,readCatalogEditorial} from './editorial';
 import {youngImportIncludesLogistics} from "./korea-customs-value";
@@ -178,7 +179,7 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
 async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number, resolvedModification = false, userParameters = false): Promise<VehicleOffer> {
   input=applyCatalogEditorialPrice(input,await readCatalogEditorial());
   input=await withChinaCnyPrice(input);
-  if(input.market==='uae'&&!userParameters){
+  if(input.market==='uae'&&!userParameters&&!hasEncyclopediaCalculationEvidence(input)){
     const safe=applyUaeManualSpecifications(input);
     const rate=await convertToRub(safe.sourcePrice,safe.sourceCurrency);
     return applyUaeManualSpecifications({...safe,calculationSnapshot:{currencyRate:rate||undefined}});

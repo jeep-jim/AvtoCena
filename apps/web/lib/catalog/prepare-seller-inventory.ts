@@ -44,7 +44,7 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
     if (!combustionPowerMismatch(repriced)) return repriced;
   }
   const source = enrichEncarOfficialPower(enrichOfferWithSourceTableParameters(inventorySourceEvidence(input)));
-  const original = input.market==='uae'?applyUaeManualSpecifications(source):await enrichOfferWithKnowledgeCore(source);
+  const original = await enrichOfferWithKnowledgeCore(source);
   if (specificationEvidenceComplete(original)) {
     const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
     if (catalogOfferVisibleRub(calculated) > 0 && hasCredibleOfferContent(calculated) && !combustionPowerMismatch(calculated)) {

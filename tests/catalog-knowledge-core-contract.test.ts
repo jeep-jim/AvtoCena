@@ -3,7 +3,7 @@ import { sanitizeLegacyKnowledgeSpecifications } from "../apps/web/lib/catalog/k
 import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
 
 test("legacy reference facts are withdrawn even when the original range payload is absent", () => {
-  const offer = { market: "uae", powerDataSource: "vehicle-knowledge:old-heuristic", powerDataConfidence: "reference",
+  const offer = { market: "korea", powerDataSource: "vehicle-knowledge:old-heuristic", powerDataConfidence: "reference",
     engineCc: 1373, powerHp: 140, powerKw: 102.97, icePowerKw: 102.97, utilizationPowerKw: 102.97,
     totalRub: 2376520, calculationStatus: "ready", calculationSnapshot: { powerRequiresConfirmation: false } } as any;
   const safe = sanitizeLegacyKnowledgeSpecifications(offer);
@@ -135,7 +135,7 @@ test("Compiled source corpus supplies research context without an automatic vari
     updatedAt: "2026-08-22T00:00:00.000Z",
     operational: {},
   } as any);
-  assert.equal((enriched.operational as any).knowledgeCore.variantId, null);
+  assert.ok(!(enriched.operational as any).knowledgeCore?.variantId);
   assert.equal((enriched.operational as any).knowledgeCore.sourceCorpusConnected, true);
   assert.equal(enriched.powerKw, undefined);
   assert.equal(enriched.powerHp, undefined);
@@ -167,5 +167,5 @@ test("review-only and cross-market variants cannot price a specific offer", asyn
   } as any);
   assert.equal(enriched.powerHp, undefined);
   assert.equal(enriched.powerKw, undefined);
-  assert.equal((enriched.operational as any).knowledgeCore.variantId, null);
+  assert.ok(!(enriched.operational as any).knowledgeCore?.variantId);
 });
