@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T17:08:04+07:00",
+  "updatedAt": "2026-10-22T17:13:58+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -629,19 +629,19 @@
         2009,
         2008
       ],
-      "variants": 71,
+      "variants": 81,
       "status": "partial_verified_fields",
       "researchedVariants": 0,
       "checkedAt": "2026-10-22T01:36:38.003919+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-mito-remaining.json",
-      "nextAction": "MiTo: UK2012 Sprint/Sportiva подготовлены, затем2013; ранние2012 и прочие пропуски в retry",
-      "lastCheckedAt": "2026-10-22T17:08:04+07:00",
-      "lastBatch": "research-2026-10-22-alfa-mito-2012-remaining-manual",
-      "lastBatchVariants": 18,
-      "lastBatchFields": 130,
-      "newVariantsThisBatch": 11,
+      "nextAction": "MiTo: применить подготовленные27 исполнений2013 и3 уточненияTCT2012; затем2013 Live/UKранние и2014",
+      "lastCheckedAt": "2026-10-22T17:13:58+07:00",
+      "lastBatch": "research-2026-10-22-alfa-mito-2012-uk-sprint-sportiva",
+      "lastBatchVariants": 10,
+      "lastBatchFields": 99,
+      "newVariantsThisBatch": 10,
       "fullHistoricalCoverage": false,
-      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2012-remaining-manual-readback.json"
+      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2012-uk-sprint-sportiva-readback.json"
     },
     {
       "id": "d9d48f8457c33f7e466d6c6e",
@@ -32613,12 +32613,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T17:08:04+07:00",
+    "updatedAt": "2026-10-22T17:13:58+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "mito_2012_11_new_verified_uk_10_prepared",
+    "state": "mito_2012_21_new_verified_2013_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "MiTo: UK2012 Sprint/Sportiva подготовлены, затем2013; ранние2012 и прочие пропуски в retry",
+    "nextModel": "MiTo: применить подготовленные27 исполнений2013 и3 уточненияTCT2012; затем2013 Live/UKранние и2014",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32945,6 +32945,16 @@
         "fields": 130,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-mito-2012-uk-sprint-sportiva": {
+        "batch": "research-2026-10-22-alfa-mito-2012-uk-sprint-sportiva",
+        "commit": "0ea35325e4e6fa0c3b9cb62d5c70fef0bb4dc707",
+        "workflow": 39760829792,
+        "variants": 10,
+        "newVariants": 10,
+        "fields": 99,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -33260,20 +33270,20 @@
       "report": "docs/encyclopedia/reports/2026-10-22-junior-mito-pass.json"
     },
     "failedIndexRelease": {
-      "commit": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
-      "workflow": 39720853891,
+      "commit": "ad327011321b44aa7e0d59465dded59095067908",
+      "workflow": 39754473141,
       "conclusion": "failure",
       "error": "publication_wait_deadline",
-      "failedAt": "2026-10-22T04:58:08Z",
+      "failedAt": "2026-10-22T10:10:19Z",
       "blockingOperation": "catalog_v3_publish_china",
-      "lastObservedLockUntil": "2026-10-22T05:25:24.872Z",
+      "lastObservedLockUntil": "2026-10-22T10:35:28.588Z",
       "activationOccurred": false,
-      "nextAction": "Check publication completion before requesting one aggregate index release; do not clear lock or duplicate collectors"
+      "nextAction": "Existing queued f3f7331 is running; inspect its index and activation before any additional release"
     },
     "concurrentRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
-      "state": "pending",
+      "state": "in_progress",
       "note": "Чужой выпуск фильтров; проверить состав фактически подготовленного индекса, не запускать дублирующий выпуск"
     },
     "installedIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
@@ -33327,10 +33337,10 @@
     },
     "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
     "preparedBatch": {
-      "batch": "research-2026-10-22-alfa-mito-2012-uk-sprint-sportiva",
-      "variants": 10,
-      "newVariants": 10,
-      "fields": 99,
+      "batch": "research-2026-10-22-alfa-mito-2013-ranges-2012-tct",
+      "variants": 30,
+      "newVariants": 27,
+      "fields": 273,
       "state": "prepared_not_applied",
       "preflightPassed": true
     }
