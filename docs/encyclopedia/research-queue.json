@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T11:25:27.689156+07:00",
+  "updatedAt": "2026-10-22T11:33:23.658969+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -288,7 +288,9 @@
       "status": "partial_verified_fields",
       "researchedVariants": 49,
       "retryFile": "docs/encyclopedia/retry-2026-10-22.json",
-      "nextAction": "10 ambiguous records and missing certified power; exact source required"
+      "nextAction": "После двух партий M7: свежий API/CAS, применить подготовленные 49 подтверждений полной массы M8, readback. Затем M9; 10 неоднозначных строк и отсутствующие мощности остаются в retry.",
+      "lastReviewedAt": "2026-10-22T11:33:23.658969+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m8-gross-mass-plan.json"
     },
     {
       "id": "06aa61c491bf051c20b852b8",
@@ -32432,7 +32434,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T11:25:27.689156+07:00",
+    "updatedAt": "2026-10-22T11:33:23.658969+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "index_release_running_next_batch_prepared",
     "preserveManual": true,
@@ -32550,6 +32552,15 @@
         "variants": 40,
         "fields": 64,
         "digest": "7b6565470a802baecfe7acaf48bbfcc709b6e1bdc211269a8556c3146a6b2f7f",
+        "dependsOnReleaseWorkflow": 39720853891,
+        "requiresFreshApiCas": true
+      },
+      {
+        "state": "prepared_not_applied",
+        "batch": "docs/encyclopedia/batches/2026-10-22-aito-m8-gross-mass.json",
+        "variants": 49,
+        "fields": 49,
+        "digest": "de2a24fa5bb412be70a72fa0bb9b0a2b0928ede722eb7437d2334e7f33a812ff",
         "dependsOnReleaseWorkflow": 39720853891,
         "requiresFreshApiCas": true
       }

@@ -1,0 +1,1868 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aito-m8-gross-mass",
+  "entries": [
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "0bcf30e916d79ee1fedfb2ce",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Max+ 53.4kWh 6-seat LiDAR 896",
+      "expectedDigest": "dd6f468c5c1c6c7fd630c811f68ccec0c6d5549b37ae25af0281a4b5069136cc",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Max+ 53.4kWh 6-seat LiDAR 896; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "487867bffc38c59eec0dbd96",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Max+ 53.4kWh 5-seat LiDAR 192",
+      "expectedDigest": "d4e040e1fa8456e615b1a4acff137083469476162f5da12d55766fe16c7dbc32",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Max+ 53.4kWh 5-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "f85304f2d66e02e422c6647d",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Max+ 53.4kWh 6-seat LiDAR 192",
+      "expectedDigest": "9c7cf9ee1ab0575553e337454f7adbb5c30f134690cbe18800a6b26f5b9091bc",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Max+ 53.4kWh 6-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "a68711124774577a9c26fcf8",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Ultra 53.4kWh 6-seat LiDAR 192",
+      "expectedDigest": "9c5fae8844de4415a7c06b2dc45ddf4a13d96ed1f9981ed0e87a287e17b7f935",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Ultra 53.4kWh 6-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "603b0287305f4cbc6365990e",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Ultra 53.4kWh 6-seat LiDAR 896",
+      "expectedDigest": "af90bc157d2a878d568b3eccbd886639ee60b5fbc73bd27548703f377c66a476",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Ultra 53.4kWh 6-seat LiDAR 896; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "6bcf3e4bc2e9275c8176d93c",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Max 37kWh 5-seat LiDAR 192",
+      "expectedDigest": "13f3697f95d66a3f005a4758d6cbdfd8650816736b5227984fc0ded3d84219a3",
+      "patch": {
+        "grossVehicleWeightKg": 3145
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3145 кг для SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S. Таблица на стр. 427 связывает код с батареей 37 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Max 37kWh 5-seat LiDAR 192; SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "e8ac76acd0f405a20849470b",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Max 37kWh 6-seat LiDAR 192",
+      "expectedDigest": "59166d4353c338644bd3ae5a5ead3d971e6188bd934986d87bd6d60564db292c",
+      "patch": {
+        "grossVehicleWeightKg": 3145
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3145 кг для SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S. Таблица на стр. 427 связывает код с батареей 37 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Max 37kWh 6-seat LiDAR 192; SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "94292f4d13a7c3a887288663",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Ultra 6-seat AWD LiDAR 192",
+      "expectedDigest": "089b828783fb4b43731d49dadc06b1ed51258dd0ecb809f071fb2277e74311dc",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Ultra 6-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "15dd52a5734447c38853ded4",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Max+ 5-seat AWD LiDAR 192",
+      "expectedDigest": "4d7611380c16aa3771dbac7a700c96b87bbde481b1f554dd976f6e8d5455c50f",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Max+ 5-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "b43de740195fbfb379299014",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Max+ 6-seat AWD LiDAR 192",
+      "expectedDigest": "d6c8f615e3c296158bf6a3df5f462c688e3d4f4d47ee0f52f33db1f4a74a6ed3",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Max+ 6-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "91a33628284043391fe4d7f7",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Ultra 5-seat AWD LiDAR 192",
+      "expectedDigest": "92bfb0c6e7d90ade6cd271dd79025b0521628e3fdae1f4971cfaa3dac7f55390",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Ultra 5-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "7438b0e82a0a8d9ae980c394",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Ultra 5-seat AWD LiDAR 896",
+      "expectedDigest": "f0a0518e757aa0a7ee21674683e2556f5c7a2a8aa717cdd7aef6e41987ec062d",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Ultra 5-seat AWD LiDAR 896; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "975ffe4c1857ed05444b970d",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Max+ 5-seat AWD LiDAR 896",
+      "expectedDigest": "afc49ee787dcec50ca1bf81787bfe74408da7868ff6f4ce89d100c0f57519c31",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Max+ 5-seat AWD LiDAR 896; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2fbba4d8425ebe20f1459a1c",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Max+ 6-seat Long Range LiDAR 192",
+      "expectedDigest": "3221a6c03036f5c2b40bd6a614d7d57e7c50cad7095de3ede847f5e428fbcb32",
+      "patch": {
+        "grossVehicleWeightKg": 3050
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3050 кг для SKE6521SBEVR. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод rwd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Max+ 6-seat Long Range LiDAR 192; SKE6521SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2e204bc26050e23d1e268f05",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Max+ 5-seat Long Range LiDAR 192",
+      "expectedDigest": "2d1dbd100439896eef8622939f6059a043661984140121a619dcae57f9fee17e",
+      "patch": {
+        "grossVehicleWeightKg": 3050
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3050 кг для SKE6521SBEVR. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод rwd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Max+ 5-seat Long Range LiDAR 192; SKE6521SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "72d2af7ed20dd40bef38b097",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Max+ 6-seat Long Range LiDAR 896",
+      "expectedDigest": "276639a413e450d3ba9928143704ee44406e533f13383f4ac4b62060f1cad500",
+      "patch": {
+        "grossVehicleWeightKg": 3050
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3050 кг для SKE6521SBEVR. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод rwd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Max+ 6-seat Long Range LiDAR 896; SKE6521SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "851dbd2349c34c909e45fc5f",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Ultra 53.4kWh 5-seat LiDAR 192",
+      "expectedDigest": "1cecc692a45cf7d838fdb3236c689d3bcf8052247ded0890c50b38b6d9d5bf32",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Ultra 53.4kWh 5-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "1ecc857cdc269ed98d93d1cf",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Ultra 53.4kWh 5-seat LiDAR 896",
+      "expectedDigest": "bb4c9bb33f53eb60ce337fd15d2dedd1c315c0cf96b0d4b29a2bc391ff0ec8b6",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Ultra 53.4kWh 5-seat LiDAR 896; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "8dd99bcaaf34579077f104fb",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EREV Max+ 53.4kWh 5-seat LiDAR 896",
+      "expectedDigest": "8a7e55a18413e6f4e2ad23cf31f14e07729bc817d22d381b88cf87b2f9efa0a9",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 EREV Max+ 53.4kWh 5-seat LiDAR 896; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "1809dd1134400443df4ba508",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Max+ 6-seat AWD LiDAR 896",
+      "expectedDigest": "4171edfe2a48b14733d93a600865aa89c6af54141807802a6ba23e6eae1abc52",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Max+ 6-seat AWD LiDAR 896; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "9c5fd9704733fdc9647e2aac",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Ultra 6-seat AWD LiDAR 896",
+      "expectedDigest": "d2fa0856cb33cae97ffa462000314018e5c2cac0177f08b187f7eb9a5f0dd77f",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Ultra 6-seat AWD LiDAR 896; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "6caec82adedde838cf97a9fe",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 EV Max+ 5-seat Long Range LiDAR 896",
+      "expectedDigest": "1f47bdfbc0eeb12a7cccca2841e907bf78f8015ea8151c96210ae813364878dd",
+      "patch": {
+        "grossVehicleWeightKg": 3050
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3050 кг для SKE6521SBEVR. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод rwd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 EV Max+ 5-seat Long Range LiDAR 896; SKE6521SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "ab6bcb91cf607b79a4b0dd02",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Pure Electric Ultra AWD 6-seater",
+      "expectedDigest": "df571a8765093bd7457b287969de395ecfd695d460d3c5aa8fa9ec124ea9840b",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "2025 Pure Electric Ultra AWD 6-seater; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "d9e6a0543e3601641f17a291",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Range Extender Max+ Edition 53.4kWh 5-seater",
+      "expectedDigest": "dfd13a0678d756e6fefb430b0fb074cb0b143fdadebf55d4f90c7ba96dae654b",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 Range Extender Max+ Edition 53.4kWh 5-seater; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "e88030809cb7f617c4baa923",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Extended Range Max 37kWh 5-Seater",
+      "expectedDigest": "bf3dc1959b59074b701710c52655113fe5574b1099ee5506ccf846980b8b2081",
+      "patch": {
+        "grossVehicleWeightKg": 3145
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3145 кг для SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S. Таблица на стр. 427 связывает код с батареей 37 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 Extended Range Max 37kWh 5-Seater; SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2a0a2c2592472ec0cd023c29",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Model Extended Range Max+ Edition 53.4kWh 6-Seater",
+      "expectedDigest": "b08d9db89285cd4c32843c6c1b67bb9b1497b53dc69e28709f5e8b477bda8e4d",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 Model Extended Range Max+ Edition 53.4kWh 6-Seater; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "25a0bf1b98e01c736776301e",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Extended Range Ultra 53.4kWh 6-Seater",
+      "expectedDigest": "6ae2672cdc0548f09b29543d5a07cac9edda24c46cb35e947744330272f9c35f",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 Extended Range Ultra 53.4kWh 6-Seater; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "a7b3662ca65af16af868aa73",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Model Extended Range Ultra Edition 53.4kWh 5-Seater",
+      "expectedDigest": "804a71a8484a04b5a8636e2a53bcb77e32eb2b856ca165886d5d88d77241fc48",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2025 Model Extended Range Ultra Edition 53.4kWh 5-Seater; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "0aa1f57795ee36a93efdcce3",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EV Max+ 6-seat Long Range LiDAR 192",
+      "expectedDigest": "cff4a5e7fb63dab1e06ec8c8cca423bdcc517fcbe0ed8c0ece75728f830030ac",
+      "patch": {
+        "grossVehicleWeightKg": 3050
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3050 кг для SKE6521SBEVR. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод rwd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "EV Max+ 6-seat Long Range LiDAR 192; SKE6521SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "4234cafa1f114e8777965b82",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EREV Max 53.4kWh 6-seat LiDAR 896",
+      "expectedDigest": "59de4798b4334cdcb2aefeeb251d07a083245ddac0af32450900c5fa61bdee42",
+      "patch": {
+        "grossVehicleWeightKg": 3080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3080 кг для SKE6521DREEVR1. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод rwd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max 53.4kWh 6-seat LiDAR 896; SKE6521DREEVR1; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "b246db132ec4cff640ba6bd9",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EV Max+ 6-seat AWD LiDAR 192",
+      "expectedDigest": "f9ccf42cd4d868592fedb618bc0f546590dcadab00c1070c0925f1fb390dd273",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "EV Max+ 6-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2b97d855954fe35a3bb6cc3f",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EV Max+ 5-seat AWD LiDAR 192",
+      "expectedDigest": "57cc050f1804b49c14ebf3268da51a548e361c2a80bb0578a2f414edea0615e2",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "EV Max+ 5-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "b7a1996458c447402d00167e",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EV Ultra 6-seat AWD LiDAR 192",
+      "expectedDigest": "9ac5367e92f71f7fa081020f761daf35f5143413698dca64a219d64a44f63001",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "EV Ultra 6-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "1739125a3a517451046f84c2",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EV Max+ 6-seat AWD LiDAR 192",
+      "expectedDigest": "de5099266fb6ba8c407f5fee68d9a6fcbf08c6c942308f46425269ddba9c1c17",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "EV Max+ 6-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "a3d0488a804bf099c4c21d00",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EV Ultra 5-seat AWD LiDAR 192",
+      "expectedDigest": "1e2b100d2d3a1bad2a1700f369987ebbbc280fd93d5a3cebb5e0a9c518992b9b",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "EV Ultra 5-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "f5ffeff9c8132d35b3968592",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EREV Max+ 53.4kWh 5-seat LiDAR 192",
+      "expectedDigest": "4368ac59f2eea4da7a830b05726484bf91574290ab77418c4c654d819817485c",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max+ 53.4kWh 5-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "0a6097830626c0045a801be1",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EREV Ultra 53.4kWh 6-seat LiDAR 192",
+      "expectedDigest": "4852857e6ea308596857d99e7bb35fccb1c6d1f4a0696b215512442c16010778",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Ultra 53.4kWh 6-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2f69b1306b5b5498380eb2c7",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EREV Ultra 53.4kWh 5-seat LiDAR 192",
+      "expectedDigest": "41dd71a836a8cd98b7875228082475dc57041df96495f951c817f882da99b60c",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Ultra 53.4kWh 5-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "14225f4f457153a6e222c732",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EREV Max+ 53.4kWh 6-seat LiDAR 192",
+      "expectedDigest": "09db93bcfcbba5836a85d9dafed5fbff0e1928e26af709889523e605ae2091a8",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max+ 53.4kWh 6-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "89eb7203776e92f4c300cd24",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EREV Max 37kWh 5-seat LiDAR 192",
+      "expectedDigest": "b0fe20cd20349a78953b185cdae88ef5a0624e1c6bc33db649f773bf325f1a7b",
+      "patch": {
+        "grossVehicleWeightKg": 3145
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3145 кг для SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S. Таблица на стр. 427 связывает код с батареей 37 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max 37kWh 5-seat LiDAR 192; SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "6bf81b62408991f7d273acea",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EREV Max 37kWh 6-seat LiDAR 192",
+      "expectedDigest": "4cac169f87c8adcdacdecf77be072a7cad051ca13e6c1b68c60be7c644181c09",
+      "patch": {
+        "grossVehicleWeightKg": 3145
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3145 кг для SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S. Таблица на стр. 427 связывает код с батареей 37 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max 37kWh 6-seat LiDAR 192; SKE6521SSHEVAS / SKE6521SSHEVA2S / SKE6521SSHEVA1S; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "a9723826352c2eac76382d0e",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "EREV Ultra 53.4kWh 6-seat LiDAR 192",
+      "expectedDigest": "f99e465f48e248886b9a8904fcead5aefa70cd1ecb7dc42944223ca3cc7ec512",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Ultra 53.4kWh 6-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "54ffbe05c23484b9853856af",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "EREV Max 53.4kWh 5-seat LiDAR 896",
+      "expectedDigest": "3de16cb5adcf4f12c4592e595364c6a877e7134c474bfae2850b90feb750b476",
+      "patch": {
+        "grossVehicleWeightKg": 3080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3080 кг для SKE6521DREEVR1. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод rwd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max 53.4kWh 5-seat LiDAR 896; SKE6521DREEVR1; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "9da9a924d9430c9366d3f93f",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "EV Max+ 6-seat AWD LiDAR 192",
+      "expectedDigest": "177ce363ebaa5b923613fa6ff3155d6492877f0beb6beb8b6343e8f1e76b3a78",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "eb1825f0ab80e3eb928eba083350a2f22f178205882d9f1fe2f429f33b45be56",
+        "pages": [
+          419,
+          421
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 419: полная масса 3165 кг для SKE6521SBEVAS. Таблица на стр. 421 связывает код с батареей 100 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 419,
+            "selector": "EV Max+ 6-seat AWD LiDAR 192; SKE6521SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "8d56cf38f5629d84b9bcf3e4",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "EREV Ultra 53.4kWh 5-seat LiDAR 192",
+      "expectedDigest": "75a717be548cb1f6d3b3409ea1be4645d07a38414c6fd11aa547fa8c0949973d",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Ultra 53.4kWh 5-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "c63d839221ccbc6455af1a18",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "EREV Max+ 53.4kWh 6-seat LiDAR 192",
+      "expectedDigest": "2e70f6d24248902dea0901263fe68a74035e9cc46e478c3f6acbc80bc33051b5",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max+ 53.4kWh 6-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "d626417c63fed7576f270cfd",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "EREV Ultra 53.4kWh 6-seat LiDAR 192",
+      "expectedDigest": "5aa912c7eae602b78ffa0c85d19db817496060905ac43752fc079e7333a4bcca",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Ultra 53.4kWh 6-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "6be173018fcbdfcf2e99afa0",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "EREV Max+ 53.4kWh 6-seat LiDAR 896",
+      "expectedDigest": "61c472bf18f5a05610a28b1091e0de7d53a97f7dd50bd86f997f6beb2d6563ca",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max+ 53.4kWh 6-seat LiDAR 896; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "db2e450b6ba111cd4d22cdf7",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "EREV Max+ 53.4kWh 5-seat LiDAR 192",
+      "expectedDigest": "826a561b874f350edebf4e0731631cc1dfcfc58bf2581c34678d4111ebd69284",
+      "patch": {
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+        "pages": [
+          425,
+          427
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://hima.auto/wenjie/m8/configuration/"
+        ],
+        "statement": "Заводское руководство M8, стр. 425: полная масса 3165 кг для SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S. Таблица на стр. 427 связывает код с батареей 53.4 кВт·ч. Привод awd и батарея сверены с прежними заводскими подтверждениями в истории записи. Снаряжённая масса и мощность не подставлялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max+ 53.4kWh 5-seat LiDAR 192; SKE6521SSHEVA3S / SKE6521SSHEVA5S / SKE6521SSHEVA4S; 53.4 kWh; awd"
+          }
+        }
+      }
+    }
+  ]
+}
