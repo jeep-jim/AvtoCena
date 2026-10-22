@@ -1,0 +1,1602 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-aston-db11-2017-2021",
+  "entries": [
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2017,
+      "variantId": "649c50affa8804b8cc0b3bd8",
+      "trim": "V12 Coupe",
+      "operation": "create",
+      "expectedRevision": "e8462be9-64d6-4c39-8f40-b30ade2e732a",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 5204,
+        "powerHp": 608,
+        "powerKw": 447,
+        "icePowerKw": 447,
+        "grossVehicleWeightKg": 2290,
+        "engineCode": "AE31"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V12 Coupe, 2017 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 223
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 223
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 198
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 221
+          },
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 22,
+            "printedPages": "40–41",
+            "selector": "V12 Coupe: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+              "pdfPage": 223,
+              "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617"
+            }
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 222
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 221
+          },
+          "powerHp": {
+            "url": "https://media.astonmartin.com/aston-martin-db11-the-latest-in-an-illustrious-bloodline/?lang=eng",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз",
+            "effectiveAt": "2017-02-28",
+            "unit": "PS",
+            "selector": "V12 447 kW / 600 bhp / 608 PS",
+            "crossCheck": {
+              "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+              "pdfPage": 223,
+              "modelYear": 2017,
+              "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617"
+            }
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 223
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 223
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 224
+          },
+          "engineCode": {
+            "url": "https://www.astonmartin.com/guides/HY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "7db39f939baf7453009fb797751542c42e3058bef48b613a3df6e2c61d165617",
+            "modelYear": 2017,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=17MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 221
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2018,
+      "variantId": "3b8a0614e7f9aea879178b92",
+      "trim": "V12 Coupe",
+      "operation": "create",
+      "expectedRevision": "e8462be9-64d6-4c39-8f40-b30ade2e732a",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 5204,
+        "powerHp": 608,
+        "powerKw": 447,
+        "icePowerKw": 447,
+        "grossVehicleWeightKg": 2290
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V12 Coupe, 2018 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 236
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 236
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 206
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 233
+          },
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 22,
+            "printedPages": "40–41",
+            "selector": "V12 Coupe: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+              "pdfPage": 236,
+              "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83"
+            }
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 235
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 233
+          },
+          "powerHp": {
+            "url": "https://media.astonmartin.com/aston-martin-db11-the-latest-in-an-illustrious-bloodline/?lang=eng",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз",
+            "effectiveAt": "2017-02-28",
+            "unit": "PS",
+            "selector": "V12 447 kW / 600 bhp / 608 PS",
+            "crossCheck": {
+              "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+              "pdfPage": 236,
+              "modelYear": 2018,
+              "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83"
+            }
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 236
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 236
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V12 Coupe",
+            "pdfPage": 237
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2018,
+      "variantId": "27adc80b17d64ec18f98d12f",
+      "trim": "V8 Coupe",
+      "operation": "create",
+      "expectedRevision": "e8462be9-64d6-4c39-8f40-b30ade2e732a",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 510,
+        "powerKw": 375,
+        "icePowerKw": 375,
+        "grossVehicleWeightKg": 2180
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V8 Coupe, 2018 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 236
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 236
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 206
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 234
+          },
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 23,
+            "printedPages": "42–43",
+            "selector": "V8 Coupe / V8 Volante: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+              "pdfPage": 236,
+              "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83"
+            }
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 235
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 234
+          },
+          "powerHp": {
+            "url": "https://media.astonmartin.com/sublime-choices-db11-now-offered-with-v8-engine/?lang=eng",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз",
+            "effectiveAt": "2017-06-28",
+            "unit": "PS",
+            "selector": "V8 375 kW / 503 bhp / 510 PS",
+            "crossCheck": {
+              "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+              "pdfPage": 236,
+              "modelYear": 2018,
+              "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83"
+            }
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 236
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 236
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "daabb59faa9c26c506b5578ebc3b2f3dd43a450557ba4cd6d41158204eda8b83",
+            "modelYear": 2018,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=18MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 237
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2019,
+      "variantId": "3f193510451c48642b5c81e0",
+      "trim": "V8 Coupe",
+      "operation": "create",
+      "expectedRevision": "e8462be9-64d6-4c39-8f40-b30ade2e732a",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 510,
+        "powerKw": 375,
+        "icePowerKw": 375,
+        "grossVehicleWeightKg": 2180
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V8 Coupe, 2019 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 259
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 259
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 228
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 257
+          },
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 23,
+            "printedPages": "42–43",
+            "selector": "V8 Coupe / V8 Volante: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+              "pdfPage": 259,
+              "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7"
+            }
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 258
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 257
+          },
+          "powerHp": {
+            "url": "https://media.astonmartin.com/sublime-choices-db11-now-offered-with-v8-engine/?lang=eng",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз",
+            "effectiveAt": "2017-06-28",
+            "unit": "PS",
+            "selector": "V8 375 kW / 503 bhp / 510 PS",
+            "crossCheck": {
+              "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+              "pdfPage": 259,
+              "modelYear": 2019,
+              "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7"
+            }
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 259
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 259
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 260
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2019,
+      "variantId": "f1b56c6b50bf3f579a4f8358",
+      "trim": "V8 Volante",
+      "operation": "create",
+      "expectedRevision": "e8462be9-64d6-4c39-8f40-b30ade2e732a",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 Volante",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 510,
+        "powerKw": 375,
+        "icePowerKw": 375,
+        "grossVehicleWeightKg": 2290
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V8 Volante, 2019 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 259
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 259
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 228
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 257
+          },
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 23,
+            "printedPages": "42–43",
+            "selector": "V8 Coupe / V8 Volante: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+              "pdfPage": 259,
+              "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7"
+            }
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 258
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 257
+          },
+          "powerHp": {
+            "url": "https://media.astonmartin.com/sublime-choices-db11-now-offered-with-v8-engine/?lang=eng",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз",
+            "effectiveAt": "2017-06-28",
+            "unit": "PS",
+            "selector": "V8 375 kW / 503 bhp / 510 PS",
+            "crossCheck": {
+              "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+              "pdfPage": 259,
+              "modelYear": 2019,
+              "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7"
+            }
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 259
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 259
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 260
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2020,
+      "variantId": "8ad2571d7609919a0ce70bde",
+      "trim": "V12 AMR Coupe",
+      "operation": "create",
+      "expectedRevision": "e8462be9-64d6-4c39-8f40-b30ade2e732a",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 AMR Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 5204,
+        "powerHp": 639,
+        "powerKw": 470,
+        "icePowerKw": 470,
+        "grossVehicleWeightKg": 2290
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V12 AMR Coupe, 2020 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 260
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 260
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 229
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 257
+          },
+          "drive": {
+            "url": "https://media.astonmartin.com/db11-amr-new-performance-flagship-of-the-db11-range/?lang=eng",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз",
+            "effectiveAt": "2018-05-11",
+            "selector": "Transmission: Rear-wheel drive"
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 259
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 257
+          },
+          "powerHp": {
+            "url": "https://media.astonmartin.com/db11-amr-new-performance-flagship-of-the-db11-range/?lang=eng",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз",
+            "effectiveAt": "2018-05-11",
+            "unit": "PS",
+            "selector": "V12 AMR 470 kW / 630 bhp / 639 PS",
+            "crossCheck": {
+              "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+              "pdfPage": 260,
+              "modelYear": 2020,
+              "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20"
+            }
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 260
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 260
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 261
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2020,
+      "variantId": "ca46ab779376cdb1830e965b",
+      "trim": "V8 Coupe",
+      "operation": "create",
+      "expectedRevision": "e8462be9-64d6-4c39-8f40-b30ade2e732a",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 510,
+        "powerKw": 375,
+        "icePowerKw": 375,
+        "grossVehicleWeightKg": 2180
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V8 Coupe, 2020 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 260
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 260
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 229
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 258
+          },
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 23,
+            "printedPages": "42–43",
+            "selector": "V8 Coupe / V8 Volante: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+              "pdfPage": 260,
+              "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20"
+            }
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 259
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 258
+          },
+          "powerHp": {
+            "url": "https://media.astonmartin.com/sublime-choices-db11-now-offered-with-v8-engine/?lang=eng",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз",
+            "effectiveAt": "2017-06-28",
+            "unit": "PS",
+            "selector": "V8 375 kW / 503 bhp / 510 PS",
+            "crossCheck": {
+              "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+              "pdfPage": 260,
+              "modelYear": 2020,
+              "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20"
+            }
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 260
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 260
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 261
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2020,
+      "variantId": "30bcb05ad381f4daabf458f8",
+      "trim": "V8 Volante",
+      "operation": "create",
+      "expectedRevision": "e8462be9-64d6-4c39-8f40-b30ade2e732a",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 Volante",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 510,
+        "powerKw": 375,
+        "icePowerKw": 375,
+        "grossVehicleWeightKg": 2290
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V8 Volante, 2020 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 260
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 260
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 229
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 258
+          },
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 23,
+            "printedPages": "42–43",
+            "selector": "V8 Coupe / V8 Volante: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+              "pdfPage": 260,
+              "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20"
+            }
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 259
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 258
+          },
+          "powerHp": {
+            "url": "https://media.astonmartin.com/sublime-choices-db11-now-offered-with-v8-engine/?lang=eng",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз",
+            "effectiveAt": "2017-06-28",
+            "unit": "PS",
+            "selector": "V8 375 kW / 503 bhp / 510 PS",
+            "crossCheck": {
+              "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+              "pdfPage": 260,
+              "modelYear": 2020,
+              "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20"
+            }
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 260
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 260
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/LY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "141b4ce9ea488d2ee2ec89c63d3efc5e03f60f9192f9e53195565c1ed778db20",
+            "modelYear": 2020,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=20MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 261
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2018,
+      "variantId": "3c5a436c03a29ed0f91c5310",
+      "trim": "V8 Volante",
+      "expectedDigest": "208307337b0a6ab12a7f09300f291fc724bff885538cdd5c7432361f64a9fba3",
+      "patch": {
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/JY53-19A321-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V8 Volante, 2018 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 23,
+            "printedPages": "42–43",
+            "selector": "V8 Coupe / V8 Volante: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://media.astonmartin.com/db11-volante-pearl-blonde-press-kit/?lang=eng",
+              "effectiveAt": "2018-10-11",
+              "selector": "V8 Volante: 3982 cm3, 375 kW / 510 PS; поставки с I квартала 2018 года"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2019,
+      "variantId": "ef2530cf833a5466363769f7",
+      "trim": "V12 AMR Coupe",
+      "expectedDigest": "75ca059eb67649d23d1e15ff46925ee13f7b98efa4657a77cdfcf63eca27f2e3",
+      "patch": {
+        "grossVehicleWeightKg": 2290
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V12 AMR Coupe, 2019 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AC.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "4bd56efc7378027e5d85ef7418de3e9024a3a12ea0d2629248d6a45794f911f7",
+            "modelYear": 2019,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19.5MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 260
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2021,
+      "variantId": "537c263761fa5bb21e110f8e",
+      "trim": "V12 AMR Coupe",
+      "expectedDigest": "2d3a35d1000e0d34d91af11cb851e3f05078426fd3b3e52eab23ec6556708b96",
+      "patch": {
+        "grossVehicleWeightKg": 2290
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY53-19A321-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V12 AMR Coupe, 2021 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/MY53-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "cbb9c7bd8866fe4a71a0307b14e7de35cd8b7031ba854f129df13e76941f02f8",
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=21MY&language=English",
+            "selector": "V12 AMR Coupe",
+            "pdfPage": 261
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2021,
+      "variantId": "8e54f7559ccab1bdc0b0a058",
+      "trim": "V8 Coupe",
+      "expectedDigest": "45d4713cce394043eb0fefee606c39b24ef8e58cc97573d69ef2b1dfbf3c3ad8",
+      "patch": {
+        "drive": "rwd",
+        "grossVehicleWeightKg": 2180
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V8 Coupe, 2021 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 23,
+            "printedPages": "42–43",
+            "selector": "V8 Coupe / V8 Volante: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+              "pdfPage": 246,
+              "sourceSha256": "d3adc0d4a14b688c3f4dbf738ba262772497e38f98b778b4cf28386866166a53"
+            }
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "d3adc0d4a14b688c3f4dbf738ba262772497e38f98b778b4cf28386866166a53",
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=21MY&language=Chinese%20%2F%20China",
+            "selector": "V8 Coupe",
+            "pdfPage": 247
+          }
+        }
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2021,
+      "variantId": "a63ddc52ab2cf3a250a24308",
+      "trim": "V8 Volante",
+      "expectedDigest": "7ac243a8418a36ecd945b6a849f0a7d25c6cea9b0fe6ab320f36f0b0565eab44",
+      "patch": {
+        "drive": "rwd",
+        "grossVehicleWeightKg": 2290
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Точное исполнение V8 Volante, 2021 год: подтверждены только перечисленные поля по заводским источникам. Для добавленных мощностей использованы PS, не bhp; kW сверены с годовым руководством. GVW — разрешённая полная масса, не снаряжённая. Для новых строк год относится к заводскому модельному году. Неизвестные исполнения не сопоставлялись по объёму или мощности.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://astonmartins.com/wp-content/uploads/2017/06/db11brochure.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра в открытом архиве; не редакционная статья",
+            "pdfPage": 23,
+            "printedPages": "42–43",
+            "selector": "V8 Coupe / V8 Volante: Rear-wheel drive",
+            "modelYearCrossCheck": {
+              "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+              "pdfPage": 246,
+              "sourceSha256": "d3adc0d4a14b688c3f4dbf738ba262772497e38f98b778b4cf28386866166a53"
+            }
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "sourceSha256": "d3adc0d4a14b688c3f4dbf738ba262772497e38f98b778b4cf28386866166a53",
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=21MY&language=Chinese%20%2F%20China",
+            "selector": "V8 Volante",
+            "pdfPage": 247
+          }
+        }
+      }
+    }
+  ]
+}

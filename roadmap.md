@@ -12639,3 +12639,11 @@ China [39840733509](https://github.com/jeep-jim/AvtoCena/actions/runs/3984073350
 Reader-release39835446552 SUCCESS и отчёт39841134049 подтверждают установленный ac711: A1102023/41расчётное поле включено, три поздние Alpine/165расчётных полей ещё отсутствуют. China39840733509 сопровождается отдельно, дубликат deploy/publish не запускается.
 
 Drom39831884392 завершился FAILURE/reference_fetch_stopped_checkpoint_saved в19:38:20UTC, а не штатным лимитом. Последний лог: fetched1090,visited13040,saved8403,pending256; это промежуточные счётчики, не финальный checkpoint. Причина спрятана в сохранённом state.failed. До её чтения перезапуск не делается. В существующий read-only metadataworkflow добавлено строго ограниченное optional чтение одного reference-intake state: только updatedAt,счётчики,nextURL и последняя ошибка. Хранилище/сборщики/защиты/секреты не изменяются. Запрошена эта проверка; результат ещё ожидается.
+
+
+### 2026-10-23 03:04 Asia/Krasnoyarsk — DB11: точная партия 2017–2021 подготовлена
+
+- Заводские руководства17/18/19.5/20/21MY, включая21MY China:13 операций (8 guardedcreate,5 дополнений),96 подтверждённых полей. GVW прочитана по отдельным столбцам V12 Coupe/V8 Coupe/V8 Volante; bhp не выданы за PS. Неоднозначные STANDARD/без trim не изменяются.
+- Свежий API preflight: revision e8462be9-64d6-4c39-8f40-b30ade2e732a; 8/8 guards PASS, штатный неизменённый compiler88 полей,32 исходных строки неизменны, история5 записей сохранена. Сохранение и независимый readback ещё ожидаются.
+- Активный reader f4d7d22 / index ac711 проверен: A1102023 включён; три поздние Alpine партии207 полей в снимке отсутствуют. Новый выпуск не дублируется: China39840733509 уже in_progress.
+- Read-only workflow39844493209/job120054063098 SUCCESS: reference checkpoint13045 visited/8403 saved/253 pending; ошибка redirect_outside_catalog на https://www.drom.ru/catalog/bedford/cf/g_1969_11383/. Это не лимит времени: повторный intake не запущен, запрет redirect не обходился, checkpoint/сборщик не изменены.

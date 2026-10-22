@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T02:16:30+07:00",
+  "updatedAt": "2026-10-23T03:04:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32658,9 +32658,9 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T02:16:30+07:00",
+    "updatedAt": "2026-10-23T03:04:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "three_batches_saved_api_readback_pass_activation_pending",
+    "state": "aston_db11_2017_2021_batch_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "Aston Martin DB11, точные исполнения2017–2024; затем далее по алфавиту. Alpine gaps отдельно в retry.",
@@ -32668,9 +32668,9 @@
     "rawAuditCalculated": 87,
     "publicSerializationParity": 75,
     "allModelsComplete": false,
-    "installedRelease": "e78c7154232f39ac73a2253314e2b0fe34da1344",
-    "installedWorkflow": 39828240506,
-    "indexDigest": "86cb2a5d9e503e870633382e218071e89c046d25c38e921304db748f308521a5",
+    "installedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "installedWorkflow": 39835446552,
+    "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
     "catalogRowsEnriched": 778,
     "catalogFieldsFilled": 1464,
     "remaining": [
@@ -32742,23 +32742,6 @@
     ],
     "pendingNextIndexBatches": [
       {
-        "key": "alpine-a110-2023",
-        "batch": "research-2026-10-23-alpine-a110-2023",
-        "commit": "ea495f04c0ffeea0de2b8fb500e4a40ff629b8f6",
-        "workflow": 39831749837,
-        "job": 120009393406,
-        "variants": 5,
-        "newVariants": 4,
-        "updatedVariants": 1,
-        "fields": 45,
-        "compiledCalculationFields": 41,
-        "workflowConclusion": "success",
-        "apiReadback": true,
-        "includedInIndex": false,
-        "indexMembershipState": "applied_after_e78c715_index_snapshot",
-        "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2023-readback.json"
-      },
-      {
         "key": "alpine-a110-2024-2025-a290-2024",
         "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
         "commit": "e5cb3235dfdadb8ec14f66bf6e50ffe7adfd0ba3",
@@ -32772,7 +32755,7 @@
         "workflowConclusion": "success",
         "apiReadback": true,
         "includedInIndex": false,
-        "indexMembershipState": "pending_current_release_snapshot_check",
+        "indexMembershipState": "excluded_from_ac711_snapshot_verified",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-late-readback.json"
       },
       {
@@ -32789,7 +32772,7 @@
         "workflowConclusion": "success",
         "apiReadback": true,
         "includedInIndex": false,
-        "indexMembershipState": "pending_current_release_snapshot_check",
+        "indexMembershipState": "excluded_from_ac711_snapshot_verified",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2025-readback.json"
       },
       {
@@ -32806,11 +32789,20 @@
         "workflowConclusion": "success",
         "apiReadback": true,
         "includedInIndex": false,
-        "indexMembershipState": "pending_next_index_snapshot_check",
+        "indexMembershipState": "excluded_from_ac711_snapshot_verified",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2026-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": [
+      {
+        "modelId": "eff6651568e364a8a5a40e97",
+        "batch": "research-2026-10-23-aston-db11-2017-2021",
+        "variants": 13,
+        "newVariants": 8,
+        "fields": 96,
+        "apiReadback": false
+      }
+    ],
     "lastCompletedPass": {
       "version": 1,
       "checkedAt": "2026-10-23T02:16:30+07:00",
@@ -33010,7 +33002,7 @@
       "reasonVerified": false,
       "freshWriterStateAfterFailureConfirmed": false
     },
-    "installedIndexDigest": "86cb2a5d9e503e870633382e218071e89c046d25c38e921304db748f308521a5",
+    "installedIndexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
     "catalogFieldsEnriched": 1464,
     "failedConcurrentRelease": {
       "workflow": 39749020662,
@@ -33019,22 +33011,22 @@
       "activated": false
     },
     "technicalReferenceIntake": {
-      "previousWorkflow": 39809543570,
-      "previousConclusion": "success_time_limit",
-      "previousFetched": 2804,
-      "previousVisited": 11950,
-      "previousSaved": 7516,
-      "previousPending": 262,
-      "completed": false,
-      "state": "in_progress",
-      "referenceOnly": true,
-      "checkpointReset": false,
-      "checkedAt": "2026-10-23T02:16:30+07:00",
-      "resumeCommit": "0a63873004d9234976478390bd30b7271aefb266",
       "workflow": 39831884392,
       "job": 120009865681,
-      "newSavedCountNotYetKnown": true,
-      "duplicateRunStarted": false
+      "state": "blocked_redirect_outside_catalog",
+      "completed": false,
+      "referenceOnly": true,
+      "visited": 13045,
+      "saved": 8403,
+      "pending": 253,
+      "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/",
+      "error": "redirect_outside_catalog",
+      "checkpointAt": "2026-10-22T19:38:18.897Z",
+      "inspectionWorkflow": 39844493209,
+      "inspectionJob": 120054063098,
+      "checkpointReset": false,
+      "duplicateRunStarted": false,
+      "nextAction": "Не возобновлять тот же запрещённый redirect и не обходить ограничение. Сборщик и checkpoint не изменены; независимое подтверждение заводских данных продолжается."
     },
     "releaseRequestedAt": "2026-10-23T01:04:00+07:00",
     "failedAggregateRelease": {
@@ -33046,7 +33038,7 @@
       "activated": false
     },
     "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-db11.json",
-    "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-86cb2a5-activation.json",
+    "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
       "state": "completed_partial",
@@ -35152,20 +35144,14 @@
       }
     ],
     "currentReaderRelease": {
-      "checkedAt": "2026-10-23T02:16:30+07:00",
-      "state": "reader_release_in_progress_price_preparation",
       "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
       "workflow": 39835446552,
-      "job": 120022420382,
-      "privateIndexPreparation": "success",
-      "build": "success",
-      "pricePreparation": "in_progress",
-      "activationConfirmed": false,
-      "newBatchMembershipUnconfirmed": true,
-      "observedActiveRelease": "e78c7154232f39ac73a2253314e2b0fe34da1344",
-      "observedCalculationVersion": "669463ac57d4c4d8890392b1114d8b458e8bdb24729cc397ee5d7f608fedfc27",
+      "state": "activated_verified",
+      "activationConfirmed": true,
+      "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+      "activationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
       "duplicateReleaseRequested": false,
-      "nextAction": "После завершения текущего reader-release проверить время и состав неизменяемого снимка по manifest/readback и livehealth. Сопровождение выпуска/публикации Китая уже идёт отдельно; не дублировать. Не вошедшие партии включить в следующий согласованный штатный индекс. Коммит выпуска раньше партии сам по себе не доказывает исключения: индекс читает текущую базу."
+      "nextAction": "Следующий совокупный штатный индекс после уже работающей публикации Китая39840733509; не запускать конкурирующий выпуск."
     },
     "alpineLatePass": {
       "version": 1,
@@ -35335,7 +35321,28 @@
       "handoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-db11.json",
       "allModelsComplete": false,
       "historicalExpansionComplete": false
-    }
+    },
+    "activatedIndexBatches": [
+      {
+        "key": "alpine-a110-2023",
+        "batch": "research-2026-10-23-alpine-a110-2023",
+        "commit": "ea495f04c0ffeea0de2b8fb500e4a40ff629b8f6",
+        "workflow": 39831749837,
+        "job": 120009393406,
+        "variants": 5,
+        "newVariants": 4,
+        "updatedVariants": 1,
+        "fields": 45,
+        "compiledCalculationFields": 41,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": true,
+        "indexMembershipState": "immutable_snapshot_membership_verified",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2023-readback.json",
+        "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+        "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112"
+      }
+    ]
   },
   "scope": {
     "minimumYear": 2008,
