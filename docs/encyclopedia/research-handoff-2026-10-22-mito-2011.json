@@ -3,7 +3,7 @@
   "modelId": "81a4b290257d227a5fd86ee6",
   "make": "Alfa Romeo",
   "model": "Mito",
-  "state": "researched_candidates_not_applied",
+  "state": "applied_api_readback_pass",
   "requiresFreshApiPreflight": true,
   "sources": [
     {
@@ -406,5 +406,9 @@
     "https://www.media.stellantis.com/uploads/rs/RS/2012/ALFA_ROMEO/FILES/ALFA_ROMEO_MITO.pdf",
     "https://www.media.stellantis.com/uploads/fr/FR/2011/ALFA_ROMEO/INFOS_TECHNIQUES_EQUIPEMENTS/ALFA_MITO/111024_AR_MITO_JTDM85_INFOS_TECH.pdf",
     "https://www.media.stellantis.com/uploads/fr/FR/2011/ALFA_ROMEO/COMMUNIQUES/110830_AR_FRANCFORT_FICH_TECH.pdf"
-  ]
+  ],
+  "appliedBatch": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super",
+  "workflow": 39756015851,
+  "apiReadback": true,
+  "appliedAt": "2026-10-22T16:36:43.251034+07:00"
 }

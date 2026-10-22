@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-10-22T09:24:41.766034+00:00",
   "modelId": "81a4b290257d227a5fd86ee6",
-  "state": "researched_candidates_not_applied",
+  "state": "applied_api_readback_pass",
   "requiresFreshApiPreflight": true,
   "updates": [
     {
@@ -239,5 +239,9 @@
       "identity": "2010 TCT135",
       "reason": "Обычный мануал показываетмеханический135; TCT требуетотдельногоприложения. Не переносить955A2000 автоматически."
     }
-  ]
+  ],
+  "appliedBatch": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super",
+  "workflow": 39756015851,
+  "apiReadback": true,
+  "appliedAt": "2026-10-22T16:36:43.251034+07:00"
 }

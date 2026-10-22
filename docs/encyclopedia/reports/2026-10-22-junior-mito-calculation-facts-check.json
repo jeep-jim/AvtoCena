@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-22T09:17:41.618Z",
+  "checkedAt": "2026-10-22T09:35:14.266Z",
   "scope": "Independent compilation of public API records with unchanged production compiler; deployed private index checked separately",
   "models": [
     {
@@ -11,12 +11,13 @@
     {
       "id": "81a4b290257d227a5fd86ee6",
       "model": "Mito",
-      "revision": "fccd8f56-e1a5-4ea0-acf6-c3b490ee75c1",
-      "variants": 31
+      "revision": "6ddb6cfc-d676-41b4-a374-d4c6e0a54939",
+      "variants": 44
     }
   ],
-  "variants": 40,
-  "calculationFields": 277,
+  "variantOperations": 63,
+  "uniqueVariants": 53,
+  "calculationFields": 401,
   "referenceOnlyFields": 20,
   "referenceOnly": [
     {
@@ -223,25 +224,25 @@
     {
       "variantId": "754d116c1ee47270e847e335",
       "year": 2008,
-      "fields": 6,
+      "fields": 9,
       "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
     },
     {
       "variantId": "bf0ec9b64ec45d4873c1f69b",
       "year": 2008,
-      "fields": 6,
+      "fields": 9,
       "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
     },
     {
       "variantId": "6b0bd522698d410323b6ca7b",
       "year": 2008,
-      "fields": 6,
+      "fields": 9,
       "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
     },
     {
       "variantId": "eba05720902742770612b184",
       "year": 2008,
-      "fields": 6,
+      "fields": 9,
       "batchId": "research-2026-10-22-alfa-mito-2008-2009-launch"
     },
     {
@@ -337,13 +338,13 @@
     {
       "variantId": "469db545a1e44735462cd0cd",
       "year": 2010,
-      "fields": 8,
+      "fields": 9,
       "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
     },
     {
       "variantId": "3251301fef989d7e16afa1ec",
       "year": 2010,
-      "fields": 8,
+      "fields": 9,
       "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
     },
     {
@@ -361,26 +362,164 @@
     {
       "variantId": "7f6f9c58b93bd5de30135f22",
       "year": 2010,
-      "fields": 8,
+      "fields": 9,
       "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
     },
     {
       "variantId": "a7e575384cb5dab52c5e4cad",
       "year": 2010,
-      "fields": 6,
+      "fields": 8,
       "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
     },
     {
       "variantId": "32847858cf0969b02e083387",
       "year": 2010,
-      "fields": 6,
+      "fields": 8,
       "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
     },
     {
       "variantId": "040b809591dd1ee320e2c5eb",
       "year": 2010,
-      "fields": 6,
+      "fields": 8,
       "batchId": "research-2026-10-22-alfa-mito-2009-2010-multiair"
+    },
+    {
+      "variantId": "754d116c1ee47270e847e335",
+      "year": 2008,
+      "fields": 9,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "bf0ec9b64ec45d4873c1f69b",
+      "year": 2008,
+      "fields": 9,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "6b0bd522698d410323b6ca7b",
+      "year": 2008,
+      "fields": 9,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "eba05720902742770612b184",
+      "year": 2008,
+      "fields": 9,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "469db545a1e44735462cd0cd",
+      "year": 2010,
+      "fields": 9,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "3251301fef989d7e16afa1ec",
+      "year": 2010,
+      "fields": 9,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "7f6f9c58b93bd5de30135f22",
+      "year": 2010,
+      "fields": 9,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "a7e575384cb5dab52c5e4cad",
+      "year": 2010,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "32847858cf0969b02e083387",
+      "year": 2010,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "040b809591dd1ee320e2c5eb",
+      "year": 2010,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "5bb7b041225648eca45dba6b",
+      "year": 2010,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "5e35fa90b6fc7c5a13766014",
+      "year": 2010,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "43da493050d2da71fe530e3d",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "4eea49390bf7234b5db0751e",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "5a128fa01578b2947176990d",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "820f29b7c664f07fa9fe7d7f",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "648cfac6dcabd1fd32df113d",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "50aef9a6c1d22219f858eaf0",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "6a482e81f3c4840918d6d930",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "29996178399cbb79c0c6bba5",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "cca65898069d116e6cd29ce2",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "0d26275644cac7cc409ab589",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
+    },
+    {
+      "variantId": "cbc9ec474a2ab270cbc6f4ff",
+      "year": 2011,
+      "fields": 8,
+      "batchId": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super"
     }
   ]
 }
