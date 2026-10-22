@@ -74,7 +74,7 @@ try {
   assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Новосибирск');
   await page.screenshot({path:`${out}/${width}-${theme}.png`});
   if(width<1024)await scope.locator('button[aria-label="Закрыть"],button[data-ac-mobile-close="1"]').click();
-  await page.waitForFunction(()=>new URLSearchParams(location.search).get('model')==='Yaris L|KX1');
+  try{await page.waitForFunction(()=>new URLSearchParams(location.search).get('model')==='Yaris L|KX1');}catch(error){console.error('filter_navigation_state',await page.evaluate(()=>({url:location.href,lastFilterUrl:window.__lastFilterUrl,models:[...document.querySelectorAll('input[name=model]')].map(el=>el.value)})));throw error;}
   assert.equal(new URL(page.url()).searchParams.get('city'),'Новосибирск');assert.equal(new URL(page.url()).searchParams.get('market'),'china');
   let calls=0;const sent=[];
   await page.route('**/api/crm/dealers/*/media',route=>{calls++;sent.push(route.request().postDataBuffer()?.length||0);return route.fulfill(calls===2?{status:413,body:'too large'}:{json:{id:`photo-${calls}`,url:`/photo-${calls}`,caption:''}});});

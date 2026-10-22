@@ -88,6 +88,47 @@ try{
  formMode=false;const beforeAuto=sendCount;const autoRequest=phone.waitForRequest(r=>r.url().endsWith('/api/autobot')&&r.method()==='POST');await phone.getByRole('button',{name:'Открыть АвтоБота',exact:true}).tap();await autoRequest;await phone.locator('.ab-thinking').waitFor({state:'hidden'});assert.equal(sendCount,beforeAuto+1);
  const widths=await phone.locator('.ab-car-questions button').evaluateAll(els=>els.map(el=>({width:el.getBoundingClientRect().width,parent:el.parentElement.getBoundingClientRect().width,height:el.getBoundingClientRect().height})));assert.ok(widths.length);assert.ok(widths.every(x=>Math.abs(x.width-x.parent)<1&&x.height<60));
  await phone.getByRole('button',{name:'Закрыть АвтоБота',exact:true}).click();await phone.getByRole('button',{name:'Открыть АвтоБота',exact:true}).tap();await phone.waitForTimeout(300);assert.equal(sendCount,beforeAuto+1);
+ // Real settings controls: permissions are independent of chat-history availability.
+ for(const scenario of [
+  {name:'owner',status:200,owner:true,control:true},
+  {name:'admin',status:200,owner:false,control:true},
+  {name:'manager',status:200,owner:false,control:false},
+  {name:'signed-out',status:401,control:false},
+  {name:'forbidden',status:403,control:false},
+  {name:'temporary-error',status:503,control:false},
+ ]){
+  const staffContext=await browser.newContext({viewport:{width:390,height:844}});
+  let permissionStatus=scenario.status,historyUnavailable=true,savedSetting;
+  await staffContext.route('https://autobot.test/**',route=>{
+   const u=new URL(route.request().url());
+   if(u.pathname==='/api/crm/assistant'){
+    if(u.searchParams.has('capabilities'))return route.fulfill({status:permissionStatus,json:{owner:scenario.owner,canControlPage:scenario.control}});
+    if(route.request().method()==='POST'){savedSetting=route.request().postDataJSON();return route.fulfill({json:{pageControl:savedSetting.enabled}});}
+    return route.fulfill(historyUnavailable?{status:503,json:{}}:{json:{revision:'settings-1',canControlPage:scenario.control,pageControl:false}});
+   }
+   if(u.pathname==='/api/autobot')return route.fulfill({json:{connected:true}});
+   if(u.pathname==='/app.js')return route.fulfill({contentType:'text/javascript',body:fs.readFileSync(out+'/app.js','utf8')});
+   if(u.pathname==='/app.css')return route.fulfill({contentType:'text/css',body:fs.readFileSync(out+'/app.css','utf8')});
+   if(u.pathname.startsWith('/api/'))return route.fulfill({status:403,json:{}});
+   return route.fulfill({contentType:'text/html',body:'<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><div id="root"></div><script src="/app.js"></script>'});
+  });
+  const staffPage=await staffContext.newPage();await staffPage.goto('https://autobot.test/cars');
+  await staffPage.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click();
+  await staffPage.getByRole('button',{name:'Настройки АвтоБота',exact:true}).click();
+  const retry=staffPage.getByRole('button',{name:'Проверить доступ снова',exact:true});await retry.waitFor();
+  const control=staffPage.getByRole('switch',{name:'Помощь с формами и переходами',exact:true});
+  assert.equal(await control.count(),scenario.control?1:0,scenario.name);
+  if(scenario.control){
+   historyUnavailable=false;
+   await staffPage.evaluate(()=>window.addEventListener('team-assistant-open',()=>window.__teamOpened=true));
+   await control.check();await staffPage.waitForFunction(()=>window.__teamOpened===true);
+   assert.deepEqual(savedSetting,{op:'page_control',enabled:true,revision:'settings-1'});
+  }else if(scenario.status===503){
+   permissionStatus=200;historyUnavailable=false;await retry.click();await retry.waitFor({state:'hidden'});
+   assert.equal(await control.count(),0,'retry never grants page control to a manager');
+  }
+  await staffContext.close();
+ }
  await mobile.close();
  console.log('PASS: reload retains messages and draft, request retains history, new conversation clears, new tab starts empty');
 }finally{await browser.close();}
