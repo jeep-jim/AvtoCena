@@ -1,0 +1,181 @@
+{
+  "checkedAt": "2026-10-22T13:42:10.308564+00:00",
+  "passed": true,
+  "baselineVariants": 109,
+  "currentVariants": 151,
+  "untouchedExactlyPreserved": 72,
+  "updatedUnpatchedFieldsPreserved": 37,
+  "newVariants": 42,
+  "revision": "d4d38229-eabc-4275-ac5a-4902be3245ce",
+  "newByYear": {
+    "2022": 8,
+    "2023": 5,
+    "2024": 7,
+    "2025": 5,
+    "2026": 17
+  },
+  "existingNamedDuplicates": [
+    {
+      "year": 2023,
+      "trim": "1.6 diesel 130 ps tct6 sprint",
+      "variantIds": [
+        "fd0ea61af46a2424e1d29bed",
+        "1d79e547243db385c5966f4d",
+        "2347b3dc16d926aaa45f8d46",
+        "886e71c8eb6e86cd6f8388cf"
+      ]
+    },
+    {
+      "year": 2023,
+      "trim": "1.5 hybrid 130 ps tct7 sprint",
+      "variantIds": [
+        "6dea545f17acb6f2822d8ba7",
+        "64b9c6c34b3a67a8ebbb167e"
+      ]
+    },
+    {
+      "year": 2023,
+      "trim": "1.5 hybrid 160 ps tct7 veloce",
+      "variantIds": [
+        "959f3a557c44e078c991a799",
+        "4159764dd2b742fc785f69fc"
+      ]
+    },
+    {
+      "year": 2024,
+      "trim": "veloce",
+      "variantIds": [
+        "9d1ebec02ac00c5d79a63c2e",
+        "ae1b633f6682cba3593ed3e4"
+      ]
+    },
+    {
+      "year": 2024,
+      "trim": "1.6 diesel 130 ps tct6 sprint",
+      "variantIds": [
+        "d2729bfd1dc8d40bdbcca827",
+        "66eeb9976ccf456dbdc5c2af",
+        "4b2f4613b7f8e48464e6c8bb",
+        "423e034c6c863a78742e5b19"
+      ]
+    },
+    {
+      "year": 2024,
+      "trim": "1.5 hybrid 160 ps tct7 veloce",
+      "variantIds": [
+        "df6078a4a1011c6814eedc57",
+        "b4f5d64b8656d8cd2366e7ab",
+        "7b9fd43d85d7db75260aeaa9"
+      ]
+    },
+    {
+      "year": 2025,
+      "trim": "1.5 hybrid 160 ps tct7 veloce",
+      "variantIds": [
+        "1ccda2431324a696ff0342bc",
+        "5faf372fe3295ed6d4b10c17",
+        "fc4d713698622a9256da2d3e",
+        "7f07bc242a678b1a6cfdaaee"
+      ]
+    },
+    {
+      "year": 2025,
+      "trim": "1.3 plug-in hybrid 280 ps at6 q4 sprint",
+      "variantIds": [
+        "db3a79c586dda64afa90b2fb",
+        "2942b298f51f11157dbb63a8",
+        "a5c91477c82398a7786e7c0d",
+        "946ac760fe1e094503bb7868",
+        "f6f934ef4465c10af7c83a68",
+        "e69b176bba31da91cceefcda"
+      ]
+    }
+  ],
+  "finalNamedDuplicates": [
+    {
+      "year": 2023,
+      "trim": "1.6 diesel 130 ps tct6 sprint",
+      "variantIds": [
+        "fd0ea61af46a2424e1d29bed",
+        "1d79e547243db385c5966f4d",
+        "2347b3dc16d926aaa45f8d46",
+        "886e71c8eb6e86cd6f8388cf"
+      ]
+    },
+    {
+      "year": 2023,
+      "trim": "1.5 hybrid 130 ps tct7 sprint",
+      "variantIds": [
+        "6dea545f17acb6f2822d8ba7",
+        "64b9c6c34b3a67a8ebbb167e"
+      ]
+    },
+    {
+      "year": 2023,
+      "trim": "1.5 hybrid 160 ps tct7 veloce",
+      "variantIds": [
+        "959f3a557c44e078c991a799",
+        "4159764dd2b742fc785f69fc"
+      ]
+    },
+    {
+      "year": 2023,
+      "trim": "1.3 plug-in hybrid 280 ps at6 q4 veloce",
+      "variantIds": [
+        "ee56b396c77522ec9360b310",
+        "78953519053fa6eabc187f8c"
+      ]
+    },
+    {
+      "year": 2024,
+      "trim": "veloce",
+      "variantIds": [
+        "9d1ebec02ac00c5d79a63c2e",
+        "ae1b633f6682cba3593ed3e4"
+      ]
+    },
+    {
+      "year": 2024,
+      "trim": "1.6 diesel 130 ps tct6 sprint",
+      "variantIds": [
+        "d2729bfd1dc8d40bdbcca827",
+        "66eeb9976ccf456dbdc5c2af",
+        "4b2f4613b7f8e48464e6c8bb",
+        "423e034c6c863a78742e5b19"
+      ]
+    },
+    {
+      "year": 2024,
+      "trim": "1.5 hybrid 160 ps tct7 veloce",
+      "variantIds": [
+        "df6078a4a1011c6814eedc57",
+        "b4f5d64b8656d8cd2366e7ab",
+        "7b9fd43d85d7db75260aeaa9"
+      ]
+    },
+    {
+      "year": 2025,
+      "trim": "1.5 hybrid 160 ps tct7 veloce",
+      "variantIds": [
+        "1ccda2431324a696ff0342bc",
+        "5faf372fe3295ed6d4b10c17",
+        "fc4d713698622a9256da2d3e",
+        "7f07bc242a678b1a6cfdaaee"
+      ]
+    },
+    {
+      "year": 2025,
+      "trim": "1.3 plug-in hybrid 280 ps at6 q4 sprint",
+      "variantIds": [
+        "db3a79c586dda64afa90b2fb",
+        "2942b298f51f11157dbb63a8",
+        "a5c91477c82398a7786e7c0d",
+        "946ac760fe1e094503bb7868",
+        "f6f934ef4465c10af7c83a68",
+        "e69b176bba31da91cceefcda"
+      ]
+    }
+  ],
+  "duplicateNote": "Новые строки не создают повторов; подтверждённое переименование старой PHEV Veloce2023 делает явным ещё одно существовавшее наблюдение, оно не удалено.",
+  "researchedVariants": 84
+}

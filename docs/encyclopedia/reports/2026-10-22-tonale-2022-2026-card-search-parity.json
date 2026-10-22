@@ -1,0 +1,146 @@
+{
+  "checkedAt": "2026-10-22T13:42:13.655571+00:00",
+  "release": "27a073c40317608196df93a7b51fb1b72c5daac8",
+  "indexDigest": "9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+  "healthReadback": {
+    "ok": true,
+    "releaseSha": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "calculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5"
+  },
+  "scope": "Three repeated exact Giulia variants and Sonata 2024 2.0 Exclusive; not a claim that new Tonale 2022–2026 rows match current offers",
+  "passed": true,
+  "koreaSearchParityConfirmed": false,
+  "rows": [
+    {
+      "offerId": "59703791a42836ef76179621",
+      "checks": {
+        "engineCc": {
+          "search": 1995,
+          "card": 1995,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 280,
+          "card": 280,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+          "card": "permanent_encyclopedia:9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 6689748,
+          "card": 6689748,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "generationId": "gen_1792660229591_c103ed94"
+    },
+    {
+      "offerId": "afef809354c3dbc4975fdbec",
+      "checks": {
+        "engineCc": {
+          "search": 1995,
+          "card": 1995,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 280,
+          "card": 280,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+          "card": "permanent_encyclopedia:9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 6586321,
+          "card": 6586321,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "generationId": "gen_1792660229591_c103ed94"
+    },
+    {
+      "offerId": "a4646082dba9ee0d25be6e48",
+      "checks": {
+        "engineCc": {
+          "search": 1995,
+          "card": 1995,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 280,
+          "card": 280,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+          "card": "permanent_encyclopedia:9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 6793173,
+          "card": 6793173,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "generationId": "gen_1792660229591_c103ed94"
+    },
+    {
+      "offerId": "ajes-korea-6d1ocW5lV5Cl77",
+      "checks": {
+        "card_only": true,
+        "search": "previous visitor_restricted; not retried or bypassed"
+      },
+      "generationId": null
+    }
+  ]
+}
