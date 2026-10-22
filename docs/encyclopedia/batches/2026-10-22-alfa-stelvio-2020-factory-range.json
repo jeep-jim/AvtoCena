@@ -1,0 +1,1388 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-stelvio-2020-factory-range",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "4ce45c6947f078a9e1bcee9d",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "grossVehicleWeightKg": 2330,
+        "engineCode": "46335692",
+        "chassisCode": "949AXP1A"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Stelvio MY20 подтверждено прайсом FCA Switzerland от 01.07.2020, PDF 2–3; см³, метрические CV/PS, AT8 и привод прочитаны из таблицы. Дополнительные коды и разрешённая полная масса — из руководства FCA 11.2019, PDF 277–278, 294, 296, для совпадающего двигателя и привода. Полная масса не подменена снаряжённой. Для 200 PS кВт оставлены пустыми: прайс даёт 147, руководство 148; коды и масса этой версии также отложены. Для 210 PS код SCR не выбран без подтверждения исполнения; для 280 PS спорный код кузова не перенесён. Строка review, не полная верификация.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio; MVS 630.GR5.1; trim",
+            "effectiveAt": "2020-07-01"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio; MVS 630.GR5.1; fuel",
+            "effectiveAt": "2020-07-01"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio; MVS 630.GR5.1; powertrainKind",
+            "effectiveAt": "2020-07-01"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio; MVS 630.GR5.1; engineCc",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio; MVS 630.GR5.1; powerHp",
+            "effectiveAt": "2020-07-01"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio; MVS 630.GR5.1; drive",
+            "effectiveAt": "2020-07-01"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio; MVS 630.GR5.1; transmission",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio; MVS 630.GR5.1; powerKw",
+            "effectiveAt": "2020-07-01"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 160 PS AT8 RWD Stelvio; MVS 630.GR5.1; icePowerKw",
+            "effectiveAt": "2020-07-01"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "160 PS rwd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "160 PS rwd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "160 PS rwd; chassisCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "496310bce0023dc2fad3cf52",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.0 Turbo 200 PS AT8 Q4 Stelvio",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Q4 Stelvio",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 200,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Stelvio MY20 подтверждено прайсом FCA Switzerland от 01.07.2020, PDF 2–3; см³, метрические CV/PS, AT8 и привод прочитаны из таблицы. Дополнительные коды и разрешённая полная масса — из руководства FCA 11.2019, PDF 277–278, 294, 296, для совпадающего двигателя и привода. Полная масса не подменена снаряжённой. Для 200 PS кВт оставлены пустыми: прайс даёт 147, руководство 148; коды и масса этой версии также отложены. Для 210 PS код SCR не выбран без подтверждения исполнения; для 280 PS спорный код кузова не перенесён. Строка review, не полная верификация.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Stelvio; MVS 630.GA2.1; trim",
+            "effectiveAt": "2020-07-01"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Stelvio; MVS 630.GA2.1; fuel",
+            "effectiveAt": "2020-07-01"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Stelvio; MVS 630.GA2.1; powertrainKind",
+            "effectiveAt": "2020-07-01"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Stelvio; MVS 630.GA2.1; engineCc",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Stelvio; MVS 630.GA2.1; powerHp",
+            "effectiveAt": "2020-07-01"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Stelvio; MVS 630.GA2.1; drive",
+            "effectiveAt": "2020-07-01"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Stelvio; MVS 630.GA2.1; transmission",
+            "effectiveAt": "2020-07-01"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "d04eda66c2e39dfe73205085",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Super",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "grossVehicleWeightKg": 2410,
+        "engineCode": "55284529",
+        "chassisCode": "949AXM2A"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Stelvio MY20 подтверждено прайсом FCA Switzerland от 01.07.2020, PDF 2–3; см³, метрические CV/PS, AT8 и привод прочитаны из таблицы. Дополнительные коды и разрешённая полная масса — из руководства FCA 11.2019, PDF 277–278, 294, 296, для совпадающего двигателя и привода. Полная масса не подменена снаряжённой. Для 200 PS кВт оставлены пустыми: прайс даёт 147, руководство 148; коды и масса этой версии также отложены. Для 210 PS код SCR не выбран без подтверждения исполнения; для 280 PS спорный код кузова не перенесён. Строка review, не полная верификация.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630.PA6.1; trim",
+            "effectiveAt": "2020-07-01"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630.PA6.1; fuel",
+            "effectiveAt": "2020-07-01"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630.PA6.1; powertrainKind",
+            "effectiveAt": "2020-07-01"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630.PA6.1; engineCc",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630.PA6.1; powerHp",
+            "effectiveAt": "2020-07-01"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630.PA6.1; drive",
+            "effectiveAt": "2020-07-01"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630.PA6.1; transmission",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630.PA6.1; powerKw",
+            "effectiveAt": "2020-07-01"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630.PA6.1; icePowerKw",
+            "effectiveAt": "2020-07-01"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "190 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; chassisCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "80a381d1737aa66d9d006318",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.0 Turbo 200 PS AT8 Q4 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Q4 Super",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 200,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Stelvio MY20 подтверждено прайсом FCA Switzerland от 01.07.2020, PDF 2–3; см³, метрические CV/PS, AT8 и привод прочитаны из таблицы. Дополнительные коды и разрешённая полная масса — из руководства FCA 11.2019, PDF 277–278, 294, 296, для совпадающего двигателя и привода. Полная масса не подменена снаряжённой. Для 200 PS кВт оставлены пустыми: прайс даёт 147, руководство 148; коды и масса этой версии также отложены. Для 210 PS код SCR не выбран без подтверждения исполнения; для 280 PS спорный код кузова не перенесён. Строка review, не полная верификация.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Super; MVS 630.PA2.1; trim",
+            "effectiveAt": "2020-07-01"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Super; MVS 630.PA2.1; fuel",
+            "effectiveAt": "2020-07-01"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Super; MVS 630.PA2.1; powertrainKind",
+            "effectiveAt": "2020-07-01"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Super; MVS 630.PA2.1; engineCc",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Super; MVS 630.PA2.1; powerHp",
+            "effectiveAt": "2020-07-01"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Super; MVS 630.PA2.1; drive",
+            "effectiveAt": "2020-07-01"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Super; MVS 630.PA2.1; transmission",
+            "effectiveAt": "2020-07-01"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "7fac19cfce3a6cd195c615a6",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.0 Turbo 200 PS AT8 Q4 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Q4 Sprint",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 200,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Stelvio MY20 подтверждено прайсом FCA Switzerland от 01.07.2020, PDF 2–3; см³, метрические CV/PS, AT8 и привод прочитаны из таблицы. Дополнительные коды и разрешённая полная масса — из руководства FCA 11.2019, PDF 277–278, 294, 296, для совпадающего двигателя и привода. Полная масса не подменена снаряжённой. Для 200 PS кВт оставлены пустыми: прайс даёт 147, руководство 148; коды и масса этой версии также отложены. Для 210 PS код SCR не выбран без подтверждения исполнения; для 280 PS спорный код кузова не перенесён. Строка review, не полная верификация.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Sprint; MVS 630.JA2.1; trim",
+            "effectiveAt": "2020-07-01"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Sprint; MVS 630.JA2.1; fuel",
+            "effectiveAt": "2020-07-01"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Sprint; MVS 630.JA2.1; powertrainKind",
+            "effectiveAt": "2020-07-01"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Sprint; MVS 630.JA2.1; engineCc",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Sprint; MVS 630.JA2.1; powerHp",
+            "effectiveAt": "2020-07-01"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Sprint; MVS 630.JA2.1; drive",
+            "effectiveAt": "2020-07-01"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 200 PS AT8 Q4 Sprint; MVS 630.JA2.1; transmission",
+            "effectiveAt": "2020-07-01"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "c3b2d085c41a013ed5b0ee0a",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "grossVehicleWeightKg": 2410
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Stelvio MY20 подтверждено прайсом FCA Switzerland от 01.07.2020, PDF 2–3; см³, метрические CV/PS, AT8 и привод прочитаны из таблицы. Дополнительные коды и разрешённая полная масса — из руководства FCA 11.2019, PDF 277–278, 294, 296, для совпадающего двигателя и привода. Полная масса не подменена снаряжённой. Для 200 PS кВт оставлены пустыми: прайс даёт 147, руководство 148; коды и масса этой версии также отложены. Для 210 PS код SCR не выбран без подтверждения исполнения; для 280 PS спорный код кузова не перенесён. Строка review, не полная верификация.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti; MVS 630.VA7.1 (630.PA7.1); trim",
+            "effectiveAt": "2020-07-01"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti; MVS 630.VA7.1 (630.PA7.1); fuel",
+            "effectiveAt": "2020-07-01"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti; MVS 630.VA7.1 (630.PA7.1); powertrainKind",
+            "effectiveAt": "2020-07-01"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti; MVS 630.VA7.1 (630.PA7.1); engineCc",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti; MVS 630.VA7.1 (630.PA7.1); powerHp",
+            "effectiveAt": "2020-07-01"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti; MVS 630.VA7.1 (630.PA7.1); drive",
+            "effectiveAt": "2020-07-01"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti; MVS 630.VA7.1 (630.PA7.1); transmission",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti; MVS 630.VA7.1 (630.PA7.1); powerKw",
+            "effectiveAt": "2020-07-01"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti; MVS 630.VA7.1 (630.PA7.1); icePowerKw",
+            "effectiveAt": "2020-07-01"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "210 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "dd38a3b35c23503bfcc0ec99",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Ti",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Ti",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "grossVehicleWeightKg": 2350,
+        "engineCode": "55273835"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+        "checkedAt": "2026-10-22",
+        "statement": "Исполнение Stelvio MY20 подтверждено прайсом FCA Switzerland от 01.07.2020, PDF 2–3; см³, метрические CV/PS, AT8 и привод прочитаны из таблицы. Дополнительные коды и разрешённая полная масса — из руководства FCA 11.2019, PDF 277–278, 294, 296, для совпадающего двигателя и привода. Полная масса не подменена снаряжённой. Для 200 PS кВт оставлены пустыми: прайс даёт 147, руководство 148; коды и масса этой версии также отложены. Для 210 PS код SCR не выбран без подтверждения исполнения; для 280 PS спорный код кузова не перенесён. Строка review, не полная верификация.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 2,
+            "selector": "2.0 Turbo 280 PS AT8 Q4 Ti; MVS 630.VA4.1 (630.PA4.1); trim",
+            "effectiveAt": "2020-07-01"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 280 PS AT8 Q4 Ti; MVS 630.VA4.1 (630.PA4.1); fuel",
+            "effectiveAt": "2020-07-01"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 280 PS AT8 Q4 Ti; MVS 630.VA4.1 (630.PA4.1); powertrainKind",
+            "effectiveAt": "2020-07-01"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 280 PS AT8 Q4 Ti; MVS 630.VA4.1 (630.PA4.1); engineCc",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 280 PS AT8 Q4 Ti; MVS 630.VA4.1 (630.PA4.1); powerHp",
+            "effectiveAt": "2020-07-01"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 280 PS AT8 Q4 Ti; MVS 630.VA4.1 (630.PA4.1); drive",
+            "effectiveAt": "2020-07-01"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 280 PS AT8 Q4 Ti; MVS 630.VA4.1 (630.PA4.1); transmission",
+            "effectiveAt": "2020-07-01"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 280 PS AT8 Q4 Ti; MVS 630.VA4.1 (630.PA4.1); powerKw",
+            "effectiveAt": "2020-07-01"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "selector": "2.0 Turbo 280 PS AT8 Q4 Ti; MVS 630.VA4.1 (630.PA4.1); icePowerKw",
+            "effectiveAt": "2020-07-01"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 294,
+            "selector": "280 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 277,
+            "selector": "280 PS awd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "fa383a9035ab411f512f64c0",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 Turbodiesel 160 CV AT8 RWD Super",
+      "expectedDigest": "166f9e6b373c4e8d6e7b53d7dcf9933249ac474555ac34613065c86e03c3c35e",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2330,
+        "engineCode": "46335692",
+        "chassisCode": "949AXP1A"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "160 PS rwd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "160 PS rwd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "160 PS rwd; chassisCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "22fad31f53c359e0c8314cf4",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 Turbodiesel 190 CV AT8 Q4 Ti",
+      "expectedDigest": "d6cbdc07e07fd4f55f9722906ac36fb00e7a11c87fdaebf4d488cd83d683ed16",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2410,
+        "engineCode": "55284529",
+        "chassisCode": "949AXM2A"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "190 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; chassisCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "779c57aedc70523d8bb41647",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 t Business Q4 190cv auto",
+      "expectedDigest": "f5ea437cba0c0c3d185d5121518c9ae7b8828cdb056d0fb5ef4adfe299a5790a",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2410,
+        "engineCode": "55284529",
+        "chassisCode": "949AXM2A"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "190 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; chassisCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "01ebfd5b14962560de81226f",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "Stelvio 2.2 TDI Executive RWD 190cv AT8 PREZZO REALE!!!!!",
+      "expectedDigest": "4358ab895afd77f481778e3c962fe02a9c8639212b312c1f8ac19a4986e39aee",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2330,
+        "engineCode": "46335692",
+        "chassisCode": "949AXN1A"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "190 PS rwd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS rwd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS rwd; chassisCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "18f4c612586bc3b9fde37323",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 t Business rwd 190cv auto",
+      "expectedDigest": "d4af001b10f486504084f24478f902e3787b17554a7cd6a4894dc2df3d1f0650",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2330,
+        "engineCode": "46335692",
+        "chassisCode": "949AXN1A"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "190 PS rwd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS rwd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS rwd; chassisCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "5e669434a1f7daf1323ce251",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 t Sprint Q4 190cv auto con garanzia 12-48 M",
+      "expectedDigest": "7df85de993451245f8bc6efec3e593ff81c3f85a4957159b40154a3262485cad",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2410,
+        "engineCode": "55284529",
+        "chassisCode": "949AXM2A"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "190 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; chassisCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "871cf5674ab72be7f468d68e",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "Stelvio 2.2 Turbodiesel 190 CV AT8 Q4 Ti",
+      "expectedDigest": "8906701b15e3bde925d92cac7ae73da14d89f031908c28be5df54b45ec9ddb5b",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2410,
+        "engineCode": "55284529",
+        "chassisCode": "949AXM2A"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "190 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 278,
+            "selector": "190 PS awd; chassisCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "9df95dc3b065b7d36179df7d",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+      "expectedDigest": "0b60d28a46fb6777725a4ac21d2cc8a6ea1655db4ca34d39d12d892437bdf096",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2410
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 296,
+            "selector": "210 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "1d1981aef0a48ea44141e130",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "Super Q4 8-FACH-ALU*NAVI*CARPLAY*RFK*PDC",
+      "expectedDigest": "c2ca12416ab829cdf46e783c4c805af33fd55920c630325d771b0200ced4c9f7",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2350,
+        "engineCode": "55273835"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 294,
+            "selector": "280 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 277,
+            "selector": "280 PS awd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "3fa7f427de05dc68fd001fc4",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+      "expectedDigest": "5ed5b0b5ebc26b9713557107bf74946eacf84af761c2a0ed93dcc4fa520b81fb",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2350,
+        "engineCode": "55273835"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 294,
+            "selector": "280 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 277,
+            "selector": "280 PS awd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "e4840b180924519bd75d22fd",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+      "expectedDigest": "4abd78d3f6b4147629fce1e82b6cc4fff54c858eb91675bca48e15e9328b8c94",
+      "patch": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 2350,
+        "engineCode": "55273835"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Руководство FCA Stelvio 11.2019: разрешённая полная масса (строка total), коды двигателя и кузова проверены для ранее подтверждённых двигателя, мощности и привода; PDF 277–278, 294, 296. Для 210 PS код SCR не выбран без доказательства; для 280 PS противоречивые коды кузова не перенесены. Сохранены исходное название, мощность, прежние источники и история. Две существующие Veloce 280 PS обработаны отдельно без удаления или создания дубля. Статус review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+            "checkedAt": "2026-10-22",
+            "selector": "Stelvio SUV MY2020",
+            "effectiveAt": "2020-05-18"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 294,
+            "selector": "280 PS awd; Maximum permitted loads – total, kg; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 277,
+            "selector": "280 PS awd; engineCode; printed page = PDF page minus 2",
+            "effectiveAt": "2019-11"
+          }
+        }
+      }
+    }
+  ]
+}

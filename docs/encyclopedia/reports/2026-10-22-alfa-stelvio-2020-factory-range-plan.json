@@ -1,0 +1,220 @@
+{
+  "checkedAt": "2026-10-22T13:01:34.184Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-stelvio-2020-factory-range",
+  "sourceRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+  "variants": 18,
+  "newVariants": 7,
+  "fields": 112,
+  "changes": [
+    {
+      "variantId": "fa383a9035ab411f512f64c0",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "22fad31f53c359e0c8314cf4",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "779c57aedc70523d8bb41647",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "01ebfd5b14962560de81226f",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "18f4c612586bc3b9fde37323",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "5e669434a1f7daf1323ce251",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "871cf5674ab72be7f468d68e",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "9df95dc3b065b7d36179df7d",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "1d1981aef0a48ea44141e130",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "3fa7f427de05dc68fd001fc4",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "e4840b180924519bd75d22fd",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "4ce45c6947f078a9e1bcee9d",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "496310bce0023dc2fad3cf52",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ]
+    },
+    {
+      "variantId": "d04eda66c2e39dfe73205085",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "80a381d1737aa66d9d006318",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ]
+    },
+    {
+      "variantId": "7fac19cfce3a6cd195c615a6",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ]
+    },
+    {
+      "variantId": "c3b2d085c41a013ed5b0ee0a",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "dd38a3b35c23503bfcc0ec99",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ]
+    }
+  ]
+}
