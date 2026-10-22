@@ -1,0 +1,943 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aito-m5-historical-manuals",
+  "entries": [
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "2e5a9ac317eb71aba1b62c6e",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2022,
+      "trim": "EREV RWD Standard Edition",
+      "expectedDigest": "678ecec640756f3c2f82c620cbcd16ee80eabbbd39cec9ef8f392ff538be0780",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2595
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для исходных версий 2022 года, страница 258; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2595 кг; снаряжённая масса не использована. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "320a3a65efd6a533c18d5e895fab0d141a950fef4af82ad79997e5682cb16c72",
+        "pages": [
+          258
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "bc9f57abb0d4a364ed651b57",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2022,
+      "trim": "EREV 4WD Performance Edition",
+      "expectedDigest": "b4ca97a3e1148af4494ee4f4efd2bd8070c27faf8d3a937395e73979ee47bfe5",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2710
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для исходных версий 2022 года, страница 258; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2710 кг; снаряжённая масса не использована. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "320a3a65efd6a533c18d5e895fab0d141a950fef4af82ad79997e5682cb16c72",
+        "pages": [
+          258
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "ca6cde35f83d073a589720f6",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2022,
+      "trim": "2022 Extended Range AWD Ultimate Edition",
+      "expectedDigest": "fa743f43f5f54b8f11c748b8c371f38723195adf6cb13196b103ab19a6d0a78e",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2710
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для исходных версий 2022 года, страница 258; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2710 кг; снаряжённая масса не использована. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "320a3a65efd6a533c18d5e895fab0d141a950fef4af82ad79997e5682cb16c72",
+        "pages": [
+          258
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "02344c9022e3a810af9decde",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2022,
+      "trim": "EREV 4WD Supreme Edition",
+      "expectedDigest": "74755d96e15b7ed2d2c4c233e170b18a2f96622bae205b0d67353754a940d6b8",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2710
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для исходных версий 2022 года, страница 258; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2710 кг; снаряжённая масса не использована. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "320a3a65efd6a533c18d5e895fab0d141a950fef4af82ad79997e5682cb16c72",
+        "pages": [
+          258
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 258,
+            "selector": "EREV Standard / AWD Performance-Ultimate-Flagship: same engine and AWD gross mass"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "7931e1704ca0b1fe205a191f",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2022,
+      "trim": "EV RWD Standard Edition",
+      "expectedDigest": "aecdece1660e87abaf3adeee88fddd298664bf9742e3eb28910c5e345f90709e",
+      "patch": {
+        "grossVehicleWeightKg": 2610
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для исходных версий 2022 года, страница 250; таблица проверена визуально. Полная разрешённая масса 2610 кг; снаряжённая масса не использована. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "50738e7fb56e8a143f87dfcdb83dc740cad8c30611dc9c424e1ce449062a507e",
+        "pages": [
+          250
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 250,
+            "selector": "EV RWD Standard Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "bd99ecb396ab90cfaf9f5747",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2022,
+      "trim": "EV 4WD Performance Edition",
+      "expectedDigest": "b1f9e2ec2333e8301bc50ceca43d1a7ce7c10b86030086ba19bf4d65eddba996",
+      "patch": {
+        "grossVehicleWeightKg": 2725
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для исходных версий 2022 года, страница 250; таблица проверена визуально. Полная разрешённая масса 2725 кг; снаряжённая масса не использована. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "50738e7fb56e8a143f87dfcdb83dc740cad8c30611dc9c424e1ce449062a507e",
+        "pages": [
+          250
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 250,
+            "selector": "EV 4WD Performance Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "c5846331dad7bec12b91dbf0",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2023,
+      "trim": "2023 Extended Range AWD Smart Drive Edition",
+      "expectedDigest": "214024f0fc00e5a9e0a5c87403a9c10ddb669bb2286211a149b997720d8cb5e0",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2710
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для Smart Drive 2023 года, страница 347; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2710 кг; снаряжённая масса не использована. Привод полный. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "15ee56c88dcb891ad7a39479cfd3f9d38ec979311a346cebcb64a72305baa2fa",
+        "pages": [
+          347
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/news/m5-series-ads-version-launch-20230417/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "2023 Extended Range AWD Smart Drive Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "2023 Extended Range AWD Smart Drive Edition"
+          },
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "2023 Extended Range AWD Smart Drive Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "2023 Extended Range AWD Smart Drive Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "53c338d7128c6ca6c84b10ed",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2023,
+      "trim": "EREV RWD Smart Drive Edition",
+      "expectedDigest": "d1dc934bc6a14e9a0d560df45ad3a654030d1117d813b884a7d756b46d013f48",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "drive": "rwd",
+        "grossVehicleWeightKg": 2595
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для Smart Drive 2023 года, страница 347; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2595 кг; снаряжённая масса не использована. Привод задний. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "15ee56c88dcb891ad7a39479cfd3f9d38ec979311a346cebcb64a72305baa2fa",
+        "pages": [
+          347
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/news/m5-series-ads-version-launch-20230417/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "EREV RWD Smart Drive Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "EREV RWD Smart Drive Edition"
+          },
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "EREV RWD Smart Drive Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "EREV RWD Smart Drive Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "c202a711d8b0311af5e370f4",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2023,
+      "trim": "EREV 4WD Smart Drive Edition",
+      "expectedDigest": "c260fc6b1cb9c44897f241d823cd74e178521201f91f8ff0c02872f4e66c53e5",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2710
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для Smart Drive 2023 года, страница 347; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2710 кг; снаряжённая масса не использована. Привод полный. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "15ee56c88dcb891ad7a39479cfd3f9d38ec979311a346cebcb64a72305baa2fa",
+        "pages": [
+          347
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/news/m5-series-ads-version-launch-20230417/"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "EREV 4WD Smart Drive Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "EREV 4WD Smart Drive Edition"
+          },
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "EREV 4WD Smart Drive Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 347,
+            "selector": "EREV 4WD Smart Drive Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "f0ea570b3f80bf6238152f3f",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2023,
+      "trim": "2023 Extended Range RWD Standard Edition",
+      "expectedDigest": "4f6a622cc50899860c97ca80bd44a7570220fd070b0e3c5b00d1e6138d22c1b2",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "drive": "rwd",
+        "grossVehicleWeightKg": 2595
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для Standard 2023 года, страница 238; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2595 кг; снаряжённая масса не использована. Привод задний. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "56d3f7d6728ff9798c0c53909bf1fa94bd1bd742a5c77cd36579e8b8a6963436",
+        "pages": [
+          238
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 238,
+            "selector": "2023 Extended Range RWD Standard Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 238,
+            "selector": "2023 Extended Range RWD Standard Edition"
+          },
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 238,
+            "selector": "2023 Extended Range RWD Standard Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 238,
+            "selector": "2023 Extended Range RWD Standard Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "ce271f53c901437ac64461ed",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2023,
+      "trim": "EREV RWD Standard Edition",
+      "expectedDigest": "910b349135e5d9732443089a2dd75b7f17e6f60de2da42168d797c9e72ed499b",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "drive": "rwd",
+        "grossVehicleWeightKg": 2595
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для Standard 2023 года, страница 238; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2595 кг; снаряжённая масса не использована. Привод задний. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "56d3f7d6728ff9798c0c53909bf1fa94bd1bd742a5c77cd36579e8b8a6963436",
+        "pages": [
+          238
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 238,
+            "selector": "EREV RWD Standard Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 238,
+            "selector": "EREV RWD Standard Edition"
+          },
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 238,
+            "selector": "EREV RWD Standard Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 238,
+            "selector": "EREV RWD Standard Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "ca8b7c3edae23edecde90b54",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2023,
+      "trim": "2023 Pure Electric AWD Smart Drive Edition",
+      "expectedDigest": "603afa24697beb26d34c8687c60b98de797d15e95850ad500582d713ae532942",
+      "patch": {
+        "drive": "awd",
+        "grossVehicleWeightKg": 2725
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E7%BA%AF%E7%94%B5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для Smart Drive 2023 года, страница 345; таблица проверена визуально. Полная разрешённая масса 2725 кг; снаряжённая масса не использована. Привод полный. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "b4937064c87dd1503a8bf52851a515938205ac4fc416d2bc2017c75e46b78f5c",
+        "pages": [
+          345
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html",
+          "https://aito.auto/news/m5-series-ads-version-launch-20230417/"
+        ],
+        "fieldSources": {
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E7%BA%AF%E7%94%B5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 345,
+            "selector": "2023 Pure Electric AWD Smart Drive Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM5%E7%BA%AF%E7%94%B5%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 345,
+            "selector": "2023 Pure Electric AWD Smart Drive Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "6c0f2f0ae9bdf23bcf8acada",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2024,
+      "trim": "2024 Extended Range Max RS AWD Advanced Smart Driving Edition",
+      "expectedDigest": "c571af3b5f55ba7655119a336ce8ed2a72de62bb5d9a1bcb45ca8d3dd4b152b2",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2710
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для обновления 2024 года, страница 344; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2710 кг; снаряжённая масса не использована. Привод полный. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "432adbd0bc126eef099bf21362a00dfa091c9e954445029c253b0f7899f278f4",
+        "pages": [
+          344
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "2024 Extended Range Max RS AWD Advanced Smart Driving Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "2024 Extended Range Max RS AWD Advanced Smart Driving Edition"
+          },
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "2024 Extended Range Max RS AWD Advanced Smart Driving Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "2024 Extended Range Max RS AWD Advanced Smart Driving Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "5bb6e55e4d6677dbbed024e5",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2024,
+      "trim": "EREV Max RWD Premium Smart Drive Edition",
+      "expectedDigest": "ee909eab7c68bd020ce6bfcadb32a8a5e1ca564fb89c8817cf4031551699c577",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "drive": "rwd",
+        "grossVehicleWeightKg": 2595
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для обновления 2024 года, страница 344; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2595 кг; снаряжённая масса не использована. Привод задний. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "432adbd0bc126eef099bf21362a00dfa091c9e954445029c253b0f7899f278f4",
+        "pages": [
+          344
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RWD Premium Smart Drive Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RWD Premium Smart Drive Edition"
+          },
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RWD Premium Smart Drive Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RWD Premium Smart Drive Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "fa146b7274525449bb583d4b",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2024,
+      "trim": "EREV Max RWD Premium Smart Drive Edition",
+      "expectedDigest": "5d70d0557917d3a23a13574c64399f0289e0b7ae8271a2cee1f1102bbf7e90dc",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "drive": "rwd",
+        "grossVehicleWeightKg": 2595
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для обновления 2024 года, страница 344; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2595 кг; снаряжённая масса не использована. Привод задний. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "432adbd0bc126eef099bf21362a00dfa091c9e954445029c253b0f7899f278f4",
+        "pages": [
+          344
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RWD Premium Smart Drive Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RWD Premium Smart Drive Edition"
+          },
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RWD Premium Smart Drive Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RWD Premium Smart Drive Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "658d3f16b0cc51ab218d2654",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2024,
+      "trim": "EREV Max RS 4WD Premium Smart Drive Edition",
+      "expectedDigest": "3e798ba09f5923a2fc7d335f0ca4c3a2b734a415b3e9d014e2fcba01f8e2306b",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2710
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для обновления 2024 года, страница 344; таблица проверена визуально. ДВС H15RT, объём 1499 мл = 1499 см³. Полная разрешённая масса 2710 кг; снаряжённая масса не использована. Привод полный. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "432adbd0bc126eef099bf21362a00dfa091c9e954445029c253b0f7899f278f4",
+        "pages": [
+          344
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RS 4WD Premium Smart Drive Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RS 4WD Premium Smart Drive Edition"
+          },
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RS 4WD Premium Smart Drive Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 344,
+            "selector": "EREV Max RS 4WD Premium Smart Drive Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "c14c77796fc23b03c271c130",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2024,
+      "trim": "EV Max RWD Premium Smart Drive Edition",
+      "expectedDigest": "580f08ba4f0ca9510a8800d787cbd92c76e066e8c13abd07dc14e1ccf66d95a0",
+      "patch": {
+        "drive": "rwd",
+        "grossVehicleWeightKg": 2610,
+        "motorPeakKw": 200
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство AITO M5 для обновления 2024 года, страница 340; таблица проверена визуально. Полная разрешённая масса 2610 кг; снаряжённая масса не использована. Привод задний. Пиковая мощность заднего электромотора 200 кВт. Исходное исполнение и год сохранены. Мощность ДВС (нетто/номинальная) и длительная мощность электромотора здесь не перенесены в расчётные поля; подтверждения 30 минут нет.",
+        "documentSha256": "3f2cd82c4dc33ac02c2edc73275a35220d964327b6bce37104927e5fb622bad4",
+        "pages": [
+          340
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "drive": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 340,
+            "selector": "EV Max RWD Premium Smart Drive Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 340,
+            "selector": "EV Max RWD Premium Smart Drive Edition"
+          },
+          "motorPeakKw": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M5%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 340,
+            "selector": "EV Max RWD Premium Smart Drive Edition"
+          }
+        }
+      }
+    }
+  ]
+}

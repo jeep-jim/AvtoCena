@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T11:09:51.262159+07:00",
+  "updatedAt": "2026-10-22T11:14:37.008237+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -237,7 +237,10 @@
         2021
       ],
       "variants": 60,
-      "status": "partial_applied"
+      "status": "partial_applied",
+      "lastReviewedAt": "2026-10-22T11:14:37.008237+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m5-historical-manuals-plan.json",
+      "nextAction": "После окончания текущего выпуска: свежий API/CAS, применить подготовленные 17 вариантов / 55 полей, проверить readback. Затем M6; пропуски M5 остаются в retry."
     },
     {
       "id": "a509545256f3729336fdfc6f",
@@ -32421,9 +32424,9 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T11:09:51.262159+07:00",
+    "updatedAt": "2026-10-22T11:14:37.008237+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "research_saved_index_requested",
+    "state": "index_release_running_next_batch_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "AITO M5",
@@ -32475,15 +32478,13 @@
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
     "inFlightResearch": {
-      "state": "applied_api_readback_pass",
-      "batch": "docs/encyclopedia/batches/2026-10-22-aion-ut-europe-exact.json",
-      "variants": 2,
-      "fields": 17,
-      "newVariants": 1,
-      "digest": "3edbe537c436454a8fca5ff3d1c9d18d83763a1d552ddfb4e87a8fe3288ea96d",
-      "requiresFreshApiCas": false,
-      "workflow": 39720654481,
-      "commit": "f2088b6244c95cdf395280780e06045a5a45aa32"
+      "state": "prepared_not_applied",
+      "batch": "docs/encyclopedia/batches/2026-10-22-aito-m5-historical-manuals.json",
+      "variants": 17,
+      "fields": 55,
+      "digest": "3f47fa17c2d82a4cfa89b39abf0260db1e1cbfe687a2ff7522003e2fbe73be27",
+      "dependsOnReleaseWorkflow": 39720853891,
+      "requiresFreshApiCas": true
     },
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
@@ -32512,7 +32513,9 @@
         "fields": 17,
         "workflow": 39720654481
       }
-    ]
+    ],
+    "requestedRelease": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
+    "requestedReleaseWorkflow": 39720853891
   },
   "scope": {
     "minimumYear": 2008,
