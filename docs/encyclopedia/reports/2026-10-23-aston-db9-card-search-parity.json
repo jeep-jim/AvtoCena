@@ -1,0 +1,73 @@
+{
+  "checkedAt": "2026-10-22T21:06:32.738638+00:00",
+  "passed": true,
+  "scope": "DB9 2013 STANDARD card/search parity in active index; new batches not activated",
+  "undefinedNormalization": "React Flight $undefined interpreted as absent value, equivalent to missing JSON property",
+  "generationId": "gen_1792660229591_c103ed94",
+  "rows": [
+    {
+      "offerId": "8895cf6bf58a892682c4d649",
+      "checks": {
+        "year": {
+          "search": 2013,
+          "card": 2013,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    }
+  ],
+  "market": "uae",
+  "repeatedExactModificationGroups": 0,
+  "offersChecked": 1,
+  "comparisons": 11
+}

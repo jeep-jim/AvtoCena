@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-10-22T21:07:34.268Z",
+  "passed": true,
+  "productionMatcherUnchanged": true,
+  "exactCases": [
+    {
+      "year": 2015,
+      "trim": "V12 GT Coupe Touchtronic II",
+      "engineCc": 5935,
+      "powerHp": 547,
+      "powerKw": 403,
+      "missingFields": [
+        "fuel",
+        "drive",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "year": 2015,
+      "trim": "V12 GT Volante Touchtronic II",
+      "engineCc": 5935,
+      "powerHp": 547,
+      "powerKw": 403,
+      "missingFields": [
+        "fuel",
+        "drive",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "year": 2016,
+      "trim": "V12 GT Coupe Touchtronic II",
+      "engineCc": 5935,
+      "powerHp": 547,
+      "powerKw": 403,
+      "missingFields": [
+        "fuel",
+        "drive",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "year": 2016,
+      "trim": "V12 GT Volante Touchtronic II",
+      "engineCc": 5935,
+      "powerHp": 547,
+      "powerKw": 403,
+      "missingFields": [
+        "fuel",
+        "drive",
+        "grossVehicleWeightKg"
+      ]
+    }
+  ],
+  "genericUaeOfferStillNeedsData": true,
+  "ordinaryDb9MassNotTransferredToGT": true,
+  "activationConfirmed": false
+}

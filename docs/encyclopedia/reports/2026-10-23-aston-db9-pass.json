@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T04:08:00+07:00",
+  "state": "db9_two_batches_saved_api_readback_pass_activation_pending",
+  "scope": "DB9 MY2008/2009/2010/2011/2013/2014/2015 и DB9 GT реальных годов выпуска2015–2016",
+  "operations": 26,
+  "newVariants": 25,
+  "updatedVariants": 1,
+  "confirmedFields": 243,
+  "compiledCalculationFields": 218,
+  "batches": [
+    {
+      "key": "aston-db9-2008-2015",
+      "batch": "research-2026-10-23-aston-db9-2008-2015",
+      "commit": "4decc9edc66e7ee0761ffbf243d51860ff5bf05f",
+      "workflow": 39853879513,
+      "job": 120086895407,
+      "variants": 22,
+      "newVariants": 21,
+      "updatedVariants": 1,
+      "fields": 211,
+      "compiledCalculationFields": 190,
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "saved_after_active_ac711_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db9-readback.json"
+    },
+    {
+      "key": "aston-db9-gt-2015-2016",
+      "batch": "research-2026-10-23-aston-db9-gt-2015-2016",
+      "commit": "a42d2fdd7875c9a848431a4d9811775eb7dc2ad0",
+      "workflow": 39854387454,
+      "job": 120088652526,
+      "variants": 4,
+      "newVariants": 4,
+      "updatedVariants": 0,
+      "fields": 32,
+      "compiledCalculationFields": 28,
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "saved_after_active_ac711_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db9-gt-readback.json"
+    }
+  ],
+  "models": [
+    {
+      "id": "d9beb45b880f70fa01286ee4",
+      "model": "DB9",
+      "beforeVariants": 2,
+      "afterVariants": 27,
+      "researchedVariants": 26,
+      "revision": "b9949511-117d-41d3-938f-473f5dd3b8b2"
+    }
+  ],
+  "validation": {
+    "guards": "8/8 PASS локально и в двух защищённых workflow",
+    "apiReadback": "22/211 и 4/32 PASS",
+    "unchangedVariantsPreserved": [
+      1,
+      23
+    ],
+    "previousFieldSourcesPreserved": true,
+    "manualWrites": 0,
+    "duplicatesAdded": 0,
+    "wholeRowVerified": false,
+    "productionCompilerUnchanged": true,
+    "exactAnnualMatchingCases": 26,
+    "manualInputPreserved": true,
+    "gtMissingFieldsRemainMissing": true,
+    "publicParityOffers": 1,
+    "publicParityComparisons": 11,
+    "publicParityPassed": true,
+    "publicExactDuplicateGroups": 0,
+    "publicScope": "UAE DB9, все1 найденное предложение; не утверждение о всех рынках",
+    "matchingReports": [
+      "docs/encyclopedia/reports/2026-10-23-aston-db9-final-matching.json",
+      "docs/encyclopedia/reports/2026-10-23-aston-db9-gt-matching.json"
+    ],
+    "publicParityReport": "docs/encyclopedia/reports/2026-10-23-aston-db9-card-search-parity.json"
+  },
+  "integration": {
+    "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "workflow": 39835446552,
+    "state": "activated_verified",
+    "activationConfirmed": true,
+    "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "activationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
+    "duplicateReleaseRequested": false,
+    "nextAction": "После завершения уже работающей публикации Китая — один согласованный штатный совокупный индекс со всеми pending-партиями. Проверить состав снимка и активацию. Не дублировать сопровождающий выпуск.",
+    "checkedAt": "2026-10-23T04:08:00+07:00",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "pendingWriterWorkflow": 39840733509,
+    "newBatchesActivated": false,
+    "newCalculationFieldsPreparedLocally": 218,
+    "publisherState": "in_progress",
+    "writerInspectionWorkflow": 39852699392
+  },
+  "remaining": {
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-db9-remaining.json",
+    "rowsWithUnconfirmedFields": 27,
+    "missingAnnualCoverage": [
+      2012
+    ],
+    "specialAndRegionalEditionsPending": true,
+    "modelYearSubrevisionsPending": [
+      "09.25MY",
+      "09.5MY",
+      "10.5MY"
+    ],
+    "registration2022": "EEA observation сохранено; заводской MY2022 не подтверждён",
+    "uaeGenericIdentity": "STANDARD без engineCode/chassisCode остаётся needs_data. Точные заводские данные имеются, но действующая защита не допускает неоднозначную подстановку.",
+    "gtMissingFields": [
+      "fuel",
+      "drive",
+      "grossVehicleWeightKg",
+      "engineCode",
+      "chassisCode"
+    ],
+    "historicalExpansionComplete": false,
+    "allModelsComplete": false
+  },
+  "technicalReferenceIntake": {
+    "workflow": 39831884392,
+    "job": 120009865681,
+    "state": "blocked_redirect_outside_catalog",
+    "completed": false,
+    "referenceOnly": true,
+    "visited": 13045,
+    "saved": 8403,
+    "pending": 253,
+    "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/",
+    "error": "redirect_outside_catalog",
+    "checkpointAt": "2026-10-22T19:38:18.897Z",
+    "inspectionWorkflow": 39844493209,
+    "inspectionJob": 120054063098,
+    "checkpointReset": false,
+    "duplicateRunStarted": false,
+    "nextAction": "Не возобновлять тот же запрещённый redirect и не обходить ограничение. Сборщик и checkpoint не изменены; независимое подтверждение заводских данных продолжается."
+  },
+  "next": "Aston Martin Dbs (DBS): все реальные годы с2008, Coupe/Volante и поздние Superleggera/770 Ultimate. Затем Dbx, DBX707 и далее. Пробелы DB9 отдельно в retry.",
+  "handoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-dbs.json"
+}
