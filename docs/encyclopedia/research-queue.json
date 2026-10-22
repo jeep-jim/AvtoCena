@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T01:28:00+07:00",
+  "updatedAt": "2026-10-23T01:30:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -34062,29 +34062,17 @@
       "activated": false
     },
     "technicalReferenceIntake": {
-      "previousWorkflow": 39781954229,
-      "previousSaved": 5794,
-      "previousPending": 368,
-      "resumeWorkflow": 39809543570,
-      "state": "in_progress",
-      "referenceOnly": true,
-      "previousTotalVisited": 6000,
+      "previousWorkflow": 39809543570,
       "previousConclusion": "success_time_limit",
-      "resumeCommit": "56070f0f5c46bf1ece124b15e172a1285ec38d00",
-      "checkedAt": "2026-10-23T00:11:00+07:00",
-      "lastWorkflow": 39809543570,
-      "lastLoggedVisited": 6530,
-      "lastLoggedSaved": 3902,
-      "lastLoggedPending": 399,
-      "reason": "reference_fetch_stopped_checkpoint_saved",
-      "nextAction": "Проверить уже работающий39809543570; не дублировать.",
-      "previousFetched": 2610,
-      "previousVisited": 9146,
+      "previousFetched": 2804,
+      "previousVisited": 11950,
+      "previousSaved": 7516,
+      "previousPending": 262,
       "completed": false,
-      "workflow": 39809543570,
-      "job": 119931742489,
+      "state": "resume_requested",
+      "referenceOnly": true,
       "checkpointReset": false,
-      "newSavedCountNotYetKnown": true
+      "checkedAt": "2026-10-23T01:30:00+07:00"
     },
     "releaseRequestedAt": "2026-10-23T01:04:00+07:00",
     "failedAggregateRelease": {
