@@ -1,4 +1,4 @@
 {
-  "operation": "verify-china-chunked-publication-20261022-2054",
-  "reason": "Read active publication lock and generation; no storage mutation."
+  "operation": "check-china-recovery-20261022-2153",
+  "reason": "Read generation and publication lease; no storage writes."
 }
