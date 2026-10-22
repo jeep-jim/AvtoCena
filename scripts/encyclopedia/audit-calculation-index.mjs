@@ -27,7 +27,7 @@ for(let start=0;start<candidates.length;start+=4){
  const originals=candidates.slice(start,start+4),priced=await applyActiveBusinessPriceBatch(originals,{readOnly:true});
  for(let i=0;i<priced.length;i++){
   const row=priced[i];
-  if(!['uae','korea'].includes(row.market)||!(Number(row.totalRub)>0)||row.catalogPricingMode==='seller')continue;
+  if(!(Number(row.totalRub)>0)||row.catalogPricingMode==='seller')continue;
   const enriched=applyEncyclopediaCalculation(applyUaeManualSpecifications(originals[i]),index);
   const publicRow=publicOffer({...enriched,images:enriched.images||[]});
   const [replayed]=await applyActiveBusinessPriceBatch([publicRow],{readOnly:true});

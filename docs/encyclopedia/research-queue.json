@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T07:14:56.498792+07:00",
+  "updatedAt": "2026-10-22T08:00:01.468410+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1253,7 +1253,8 @@
       "lastResearchAt": "2026-10-22T07:14:56.498792+07:00",
       "processedVariants": 6,
       "confirmedFields": 58,
-      "nextAction": "6 модификаций 2026 сохранены и прочитаны; 3 строки без точного года/комплектации остаются в повторном поиске. 30-минутная мощность не найдена. По текущему указанию владельца приоритет — подключение расчётов к уже заполненной энциклопедии и точным эталонам Китая/Европы; затем A7."
+      "nextAction": "6 модификаций 2026 сохранены и прочитаны; 3 строки без точного года/комплектации остаются в повторном поиске. 30-минутная мощность не найдена. По текущему указанию владельца приоритет — подключение расчётов к уже заполненной энциклопедии и точным эталонам Китая/Европы; затем A7.",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a6l-etron.json"
     },
     {
       "id": "1db9a9057b9919c24b8a0e67",
@@ -1272,7 +1273,13 @@
         2013
       ],
       "variants": 167,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "lastResearchAt": "2026-10-22T08:00:01.468410+07:00",
+      "processedVariants": 2,
+      "confirmedFields": 12,
+      "variantsRead": 167,
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a7.json",
+      "nextAction": "Повторно прочитаны все подтверждения. Остальные строки и неполные поля перечислены в retry; отсутствующая 30-минутная мощность не заменяется мощностью ДВС. Далее новая группа Audi A8; исторические A7/A7L остаются открытыми."
     },
     {
       "id": "54d17ae4d922cd08d67f5ea9",
@@ -1297,7 +1304,13 @@
         2021
       ],
       "variants": 76,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "lastResearchAt": "2026-10-22T08:00:01.468410+07:00",
+      "processedVariants": 16,
+      "confirmedFields": 157,
+      "variantsRead": 76,
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a7l.json",
+      "nextAction": "Повторно прочитаны все подтверждения. Остальные строки и неполные поля перечислены в retry; отсутствующая 30-минутная мощность не заменяется мощностью ДВС. Далее новая группа Audi A8; исторические A7/A7L остаются открытыми."
     },
     {
       "id": "1314a66b16c62faefdaa7675",
@@ -32343,10 +32356,26 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T07:14:56.498792+07:00",
+    "updatedAt": "2026-10-22T08:00:01.468410+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "implementation_tested_deployment_audit_pending",
+    "state": "production_public_evidence_and_immutable_selector_fixes_deploying",
     "preserveManual": true,
-    "noPeakTo30Min": true
+    "noPeakTo30Min": true,
+    "nextModel": "Audi A8",
+    "lastVerifiedResearch": {
+      "A7": {
+        "variants": 2,
+        "fields": 12,
+        "workflow": 39701012997
+      },
+      "A7L": {
+        "variants": 16,
+        "fields": 157,
+        "workflow": 39702823205
+      }
+    },
+    "rawAuditCalculated": 69,
+    "publicSerializationParity": 21,
+    "allModelsComplete": false
   }
 }

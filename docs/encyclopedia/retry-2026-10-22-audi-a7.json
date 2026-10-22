@@ -1,0 +1,859 @@
+{
+  "modelId": "1db9a9057b9919c24b8a0e67",
+  "make": "Audi",
+  "model": "A7",
+  "checkedAt": "2026-10-22",
+  "variantsRead": 167,
+  "unchanged": [
+    {
+      "variantId": "9a97d6b653b72e190993257c",
+      "year": 2013,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "1adc39374f6f355684fa3934",
+      "year": 2016,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "9ed6bb0029f1856a6c3d5035",
+      "year": 2019,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "660c42e86d46f4ab302e58ca",
+      "year": 2019,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "87c13374a3418b2fa62f29d8",
+      "year": 2020,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "a39c77d4b92635b989b782c9",
+      "year": 2020,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "b878480406e8e909b9a6842f",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "ed005f51a6a285fdabf20982",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "3f61ab5f496faaf3d45b0d3e",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "03b9653a323f6dd76551e10b",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "2fbae13e246cba547c113a6e",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "044e6f5ff7748b3cbecee96f",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "0efa9e620265c3c6701b400f",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "f7591438f8d6de24d978d94e",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "f0fd39abc5b8f2866d9f4431",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "a9659b1b7e044a1bccb493ba",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "0ac2a6b1ac3d7f2aca488a97",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "5a4eaea3a3066a68c54f6d18",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "049e9efe3ff97108b0f83b13",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "ee3b0ceb25d644467dc7dbc7",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "d8c22c18de7bd3db61271ba6",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "298b17eb6cc3fdd6c6bc516d",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "b71a0cfc3b9dc40f8fd2dc98",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "e758f65c995f6ff460592a4c",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "b56b2a01311f5ace08a216db",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "98a3a4c99b2a604308e620a3",
+      "year": 2020,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "64f2c8557ff3312b009122c5",
+      "year": 2020,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "3a0bead9637f0c2bdf9c4f4a",
+      "year": 2021,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "f71c55dfb3fe1181f43516bb",
+      "year": 2021,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "7ed94fdec9b4637d53c33431",
+      "year": 2021,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "3e74537c34b6ab1b413f67f3",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "98d987ac7451e44c02e312d7",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "ae7fbe3acaa705fd688a02f5",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "5eef71cff13e6ff8335f48c2",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "3c7b0d7d0fcc69711d95862c",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "72dc058382d78cc3625ffe4e",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "97511c8ec6fe6dd4f4ee5998",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "99eaa59ec291483a7dfe562e",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "b14e0608cc8b4f3c2be00ff8",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "1da8ac6f255aacdd4ee56af7",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "6c1d32f0b8f4d4c5849394ac",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "9510459c3af4dbeafb07884c",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "3ec370d2f94748ec288b727b",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "aadbd7154a73aa37ec0ec8b1",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "9a64f83ad32f97acd2bf3912",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "47f75fdc895b9e909fb5d40d",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "c6d6b757b22d1d4ab2967cdf",
+      "year": 2021,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "acb865343a4e8fbe5b4e1184",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "34bdc309e622bdd20cc49b67",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "a211619e090002f78c05c9de",
+      "year": 2021,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "62e82bd03df9a34414e74b79",
+      "year": 2021,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "3e20b9e90022125cdf0c081f",
+      "year": 2021,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "2524351c6918bb44ee646214",
+      "year": 2021,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "32fd50fbf5ed4358da7e3a61",
+      "year": 2021,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "0ae6bde3589501c6c2f948c8",
+      "year": 2022,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "e7efe25a6b32f4493458e04c",
+      "year": 2022,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "9bf086b8cc8599d6a8d73e26",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "c5bdf4788a01bf1e7bc86381",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "5eb44129144705ee966bacdf",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "537854248998b108e6f45277",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "cc8df14840a6cedf388b91af",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "a1c1b52a7fe07786c7da8a82",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "2c32624665181444f96de842",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "9e310e3184e8f0b93089ce95",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "6a09a508122c5287fb3af16b",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "e890b902309814447acb5427",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "3c3045c341d445727c3ca1ff",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "a4f26d571d3b08292caf36ba",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "1e7431fd169095b0a16404e5",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "1f49da8e81e72254e0b74228",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "3346e38af68849b8bcb2c375",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "a0c481e25c5f948997ad744d",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "c8de747b9e43f27e9edfd87d",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "60c3813e100ad36f6267b035",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "b8b6e5bb0f7ac3172b4d5dba",
+      "year": 2022,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "033461e7777e7008c191c325",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "8ff67c8ccfba45955cf14cff",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "5eb3e91b97d536d643c6402c",
+      "year": 2022,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "782af5b2ee867e65b9244885",
+      "year": 2022,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "942c670cd244aa6c4b03ce9f",
+      "year": 2022,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "cd3ec8a8ee66d64cdbb74cf9",
+      "year": 2022,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "bcee8e20406daf9808e2fff4",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "a12154f593dca4943e35cede",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "f7b77de5f93e430ecf99100e",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "8dc1a95b021ae7e95c983c34",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "da721aca124d42b1ea71deba",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "bb659df9308b8ea0cdf0e781",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "d04d52b32135ffa87f19c961",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "7fb120d03f0f6853466e442d",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "a9e5992d99a0639cddfa5f0d",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "181ad77a1de3d7cae82777bd",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "23b55ecabc96725e370b13ea",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "a1b130ca24efbba49bfee833",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "684eb57a51bdd409c56314ae",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "3daa08ec1409c7414777c4cf",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "056427c58dcab44d36cda10c",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "1b0a65395ceba9adf132ccba",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "9e60ed8ee9201b1a6ec81270",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "a6106ce9ef228144a3fd6e25",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "5d548258f704980a6ce9d29f",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "eb3fb45202dad5f0c8794def",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "eb854cae79839ffd850d8ecf",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "9f916c60ef949c6da984cd4f",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "e59fee4a3dcc1aa08a80496c",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "ac6b11e9d16ea59b4351e688",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "067a47c9852530a6a081783c",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "2a14f139d77bacd3a5e886e1",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "71c6a73acf27324d18387312",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "d31ef08127b0fec22a924d9b",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "04ba4d34b068b2e5fde6855b",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "d98919eeac07d131a598fd40",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "12dcd28b3277f39808758930",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "51c70a59a93dc345816c11cc",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "b66687dabc8c8ba8fff74ad9",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "1d4453f44a920a1e22d56c37",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "125f28a7e8f022e030037278",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "d29b30113a3390054b726fa3",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "afdba77285cb309829f02d60",
+      "year": 2023,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "5ff06598f01ac372f4b12339",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "78dcda3334a4c41e4c4381da",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "cc0d323e997cfe0fb61da6fb",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "906cf2e6b28f9bdec7b1f39e",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "d970ad61733fa02519886fa9",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "cdb7d23461f07c1486186aa8",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "6f6fe335a0d7787cfbb9b3d7",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "ba8ce5b0eae45f871f1321fa",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "39eb4704b7f99441e3f51318",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "feb2c15006d010aef478859d",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "0d95361abd80e4ae353120f9",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "895977fd2a14588a62b3e701",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "036ffaf465d306a3d578ab70",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "859101cff91394c5e07e361a",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "fd35f317d24eeb4a92f191e2",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "bcfd2d5269ce5ba930336d11",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "7a5ba6cf32ae1fa5659d0d95",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "9525a6b0562c59b3db325877",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "3539b7edb5e9273dd66063aa",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "f27735b4e90dba8c8a6b8445",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "a87287de1e421b0c4e7f465e",
+      "year": 2024,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "9d9bcd780f07d59b9a82c83b",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "7c50b4dfa9df385e1ab0efc8",
+      "year": 2025,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "24560f88e357e29b67c40c22",
+      "year": 2025,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "651f556dd4645d72676c50f0",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "bca0fe6c1dc24601aeec5d7f",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "31cf1ac119344b171a4adc9f",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "4609feb6c6dbd3d6e5a3b0ea",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "6c0482d8d925475551056de3",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "5e401a88d187f93db983874c",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "69fab4ebfbc603520713b074",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "c5a340eb13fee212ee9fc0ed",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "9aa3921c1e1348c562ddbf09",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "099dc4e14270135d3176ea2c",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "e8cf6ae7fb69e0fb9a8f7d68",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "55ae31ffb56583fe15b1dff7",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "da314d50b047007e4f871619",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "9881976ba9450e06b82d40e3",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "3557245c3cabbfd64407f614",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "278ce8aa4d31a8e40cf49c31",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "da66d341570e276d5f8bb0f3",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "5a961a3c2c49393a47f01151",
+      "year": 2025,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "3722ae35105c55c7426e3784",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "1c6dff4589191d47659607d6",
+      "year": 2025,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "1bdcab9e4094157700b69c31",
+      "year": 2025,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "50012f61f8827a6b7dce9578",
+      "year": 2026,
+      "reason": "dated_factory_edition_for_exact_year_and_version_required"
+    },
+    {
+      "variantId": "99bd83bdf3cead856bee4b2d",
+      "year": 2026,
+      "reason": "missing_exact_trim_identity"
+    }
+  ],
+  "processedGaps": [
+    {
+      "variantId": "7646a2ca7c21ba0fa15ab87d",
+      "missing": [
+        "exact_hybrid_architecture",
+        "grossVehicleWeightKg",
+        "certified_30_minute_power_if_applicable",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "f04604f3e595dfe08638e39c",
+      "missing": [
+        "exact_hybrid_architecture",
+        "grossVehicleWeightKg",
+        "certified_30_minute_power_if_applicable",
+        "engineCode"
+      ]
+    }
+  ],
+  "sourcesReviewed": [
+    "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A7_sportback_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+    "https://media.audi.com/is/content/audi/country/de/de/neuwagen/preislisten/my-2025/preislisten/preisliste_a7-sportback_a7-sportback-tfsi-e_s7-sportback.pdf"
+  ],
+  "note": "Rows lacking an exact technical identity remain unchanged. German MY2025 specifications were not copied to Chinese/Korean trims. A comprehensive historical source search remains open."
+}

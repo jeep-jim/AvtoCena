@@ -1,0 +1,36 @@
+{
+  "batch": "research-2026-10-22-audi-a7-2024-cn",
+  "dryRun": false,
+  "models": [
+    {
+      "id": "1db9a9057b9919c24b8a0e67",
+      "changes": [
+        {
+          "variantId": "f04604f3e595dfe08638e39c",
+          "fields": [
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "drive",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "7646a2ca7c21ba0fa15ab87d",
+          "fields": [
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "drive",
+            "transmission"
+          ]
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "startedAt": "2026-10-22T00:40:18.609Z",
+  "finishedAt": "2026-10-22T00:40:24.746Z"
+}
