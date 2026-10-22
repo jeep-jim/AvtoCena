@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:39:17.836208+07:00",
+  "updatedAt": "2026-10-22T16:43:38.456693+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32618,7 +32618,7 @@
     "state": "junior_mito_53_new_saved_index_activation_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "MiTo: ноябрь2011 подготовлен9/69; затемUK2011 и2012",
+    "nextModel": "MiTo2012: после партии8/52 остальные11 строк прайса01.11.2012; UK2011 в retry, затем2013",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32913,6 +32913,16 @@
         "fields": 137,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-mito-2011-november": {
+        "batch": "research-2026-10-22-alfa-mito-2011-november",
+        "commit": "33aa38297274bc76a340cdf9f3e6b8a4c14b58f5",
+        "workflow": 39757189903,
+        "variants": 9,
+        "newVariants": 9,
+        "fields": 69,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32933,13 +32943,12 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super",
-      "commit": "56a054e27c6714f1048d1ce915f75ee10e225fbc",
-      "workflow": 39756015851,
-      "variants": 23,
-      "newVariants": 13,
-      "updatedVariants": 10,
-      "fields": 137,
+      "batch": "research-2026-10-22-alfa-mito-2011-november",
+      "commit": "33aa38297274bc76a340cdf9f3e6b8a4c14b58f5",
+      "workflow": 39757189903,
+      "variants": 9,
+      "newVariants": 9,
+      "fields": 69,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -33095,14 +33104,24 @@
         "fields": 137,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-mito-2011-november",
+        "commit": "33aa38297274bc76a340cdf9f3e6b8a4c14b58f5",
+        "workflow": 39757189903,
+        "variants": 9,
+        "newVariants": 9,
+        "fields": 69,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-mito-2011-november",
+      "batch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
       "state": "prepared_not_applied",
-      "variants": 9,
-      "fields": 69,
-      "newVariants": 9
+      "variants": 8,
+      "newVariants": 7,
+      "fields": 52
     },
     "lastCompletedPass": {
       "checkedAt": "2026-10-22T16:36:43.251034+07:00",
