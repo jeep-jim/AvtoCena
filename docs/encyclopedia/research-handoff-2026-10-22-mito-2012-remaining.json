@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-10-22T16:45:37.476870+07:00",
+  "checkedAt": "2026-10-22T17:08:04+07:00",
   "modelId": "81a4b290257d227a5fd86ee6",
   "year": 2012,
-  "state": "researched_identities_not_applied",
+  "state": "applied_api_readback_pass",
   "requiresFreshApiPreflight": true,
   "source": {
     "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
@@ -101,5 +101,7 @@
     "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-mito-now-available-with-multi-award-winning-twinair-engine-technology",
     "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-romeo-adds-new-sportiva-trim-to-mito-and-giulietta-range"
   ],
-  "nextCursor": "MiTo: эти11 оставшихсястрок2012, затем ранние/UK2012 и2013; UK2011 и пропуски2008–2011 в retry."
+  "nextCursor": "MiTo: UK2012 Sprint/Sportiva подготовлены, затем2013; ранние2012 и прочие пропуски в retry",
+  "batch": "research-2026-10-22-alfa-mito-2012-remaining-manual",
+  "workflow": 39760420714
 }
