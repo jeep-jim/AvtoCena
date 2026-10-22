@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T11:51:49.367262+07:00",
+  "updatedAt": "2026-10-22T11:54:29.679868+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -240,7 +240,7 @@
       "status": "partial_verified_fields",
       "lastReviewedAt": "2026-10-22T11:39:59.447376+07:00",
       "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m5-historical-manuals-readback.json",
-      "nextAction": "После окончания текущего выпуска: свежий API/CAS, применить подготовленные 17 вариантов / 55 полей, проверить readback. Затем M6; пропуски M5 остаются в retry.",
+      "nextAction": "Партии 22.10 сохранены и независимо прочитаны; не повторять. Продолжить оставшиеся поля и историческое расширение по retryPlan после алфавитного прохода.",
       "appliedResearchBatches": [
         {
           "batch": "research-2026-10-22-aito-m5-historical-manuals",
@@ -264,7 +264,7 @@
       "status": "partial_verified_fields",
       "lastReviewedAt": "2026-10-22T11:41:57.283284+07:00",
       "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m6-gross-mass-and-edition-readback.json",
-      "nextAction": "После M5 и завершения текущего выпуска: свежий API/CAS, применить 13 вариантов / 20 полей, включая новое EREV Max+; проверить readback. Затем M7. Шесть неоднозначных записей остаются в retry.",
+      "nextAction": "Партии 22.10 сохранены и независимо прочитаны; не повторять. Продолжить оставшиеся поля и историческое расширение по retryPlan после алфавитного прохода.",
       "appliedResearchBatches": [
         {
           "batch": "research-2026-10-22-aito-m6-gross-mass-and-edition",
@@ -291,7 +291,7 @@
       "variants": 124,
       "status": "partial_verified_fields",
       "researchedVariants": 40,
-      "nextAction": "Последняя партия сохранена и независимо прочитана; не повторять её. Продолжать ещё не применённые партии из activePriority, затем оставшиеся поля и историческое расширение из retryPlan.",
+      "nextAction": "Партии 22.10 сохранены и независимо прочитаны; не повторять. Продолжить оставшиеся поля и историческое расширение по retryPlan после алфавитного прохода.",
       "lastReviewedAt": "2026-10-22T11:47:56.469839+07:00",
       "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m7-2026-manuals-readback.json",
       "appliedResearchBatches": [
@@ -314,7 +314,12 @@
           "includedInIndex": false
         }
       ],
-      "retryPlan": "docs/encyclopedia/reports/2026-10-22-aito-m7-2026-manuals-plan.json"
+      "retryPlan": "docs/encyclopedia/reports/2026-10-22-aito-m7-2026-manuals-plan.json",
+      "retryPlans": [
+        "docs/encyclopedia/reports/2026-10-22-aito-m7-historical-manuals-plan.json",
+        "docs/encyclopedia/reports/2026-10-22-aito-m7-2026-manuals-plan.json"
+      ],
+      "remainingUnselectedVariants": 49
     },
     {
       "id": "b0972339b8a7f3fc37bf8d6b",
@@ -328,7 +333,7 @@
       "status": "partial_verified_fields",
       "researchedVariants": 49,
       "retryFile": "docs/encyclopedia/retry-2026-10-22.json",
-      "nextAction": "Последняя партия сохранена и независимо прочитана; не повторять её. Продолжать ещё не применённые партии из activePriority, затем оставшиеся поля и историческое расширение из retryPlan.",
+      "nextAction": "Партии 22.10 сохранены и независимо прочитаны; не повторять. Продолжить оставшиеся поля и историческое расширение по retryPlan после алфавитного прохода.",
       "lastReviewedAt": "2026-10-22T11:49:16.111336+07:00",
       "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m8-gross-mass-readback.json",
       "appliedResearchBatches": [
@@ -357,7 +362,7 @@
       "status": "partial_verified_fields",
       "researchedVariants": 28,
       "retryFile": "docs/encyclopedia/retry-2026-10-22.json",
-      "nextAction": "Последняя партия сохранена и независимо прочитана; не повторять её. Продолжать ещё не применённые партии из activePriority, затем оставшиеся поля и историческое расширение из retryPlan.",
+      "nextAction": "Партии 22.10 сохранены и независимо прочитаны; не повторять. Продолжить оставшиеся поля и историческое расширение по retryPlan после алфавитного прохода.",
       "lastReviewedAt": "2026-10-22T11:51:01.373442+07:00",
       "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m9-generation-fields-readback.json",
       "appliedResearchBatches": [
@@ -383,11 +388,28 @@
         2023,
         2022,
         2021,
-        2020
+        2020,
+        2019
       ],
-      "variants": 22,
-      "status": "needs_exact_variant_source",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22.json"
+      "variants": 25,
+      "status": "partial_verified_fields",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22.json",
+      "lastReviewedAt": "2026-10-22T11:53:45.965668+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aiways-u5-manual-years-readback.json",
+      "appliedResearchBatches": [
+        {
+          "batch": "research-2026-10-22-aiways-u5-manual-years",
+          "commit": "b287f840a56486e6d9939c84b9336653b6024017",
+          "workflow": 39724775367,
+          "variants": 3,
+          "fields": 18,
+          "apiReadback": true,
+          "includedInIndex": false
+        }
+      ],
+      "retryPlan": "docs/encyclopedia/reports/2026-10-22-aiways-u5-manual-years-plan.json",
+      "nextAction": "Три заводские годовые версии сохранены; 22 исходные строки и 30-минутная мощность требуют точного подтверждения. Не повторять guarded-create.",
+      "researchedVariants": 3
     },
     {
       "id": "c68055fa5f58a5579f5d3b7b",
@@ -398,7 +420,11 @@
       ],
       "variants": 1,
       "status": "needs_exact_variant_source",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22.json"
+      "retryFile": "docs/encyclopedia/retry-2026-10-22.json",
+      "lastReviewedAt": "2026-10-22T11:54:29.679868+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aixam-source-review.json",
+      "retryPlan": "docs/encyclopedia/reports/2026-10-22-aixam-source-review.json",
+      "nextAction": "Вернуться после алфавитного прохода: точный год/серия и категория; не переносить текущие заводские характеристики без совпадения."
     },
     {
       "id": "7d166f9f7147265c4ae4b179",
@@ -409,7 +435,11 @@
       ],
       "variants": 1,
       "status": "needs_exact_variant_source",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22.json"
+      "retryFile": "docs/encyclopedia/retry-2026-10-22.json",
+      "lastReviewedAt": "2026-10-22T11:54:29.679868+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aixam-source-review.json",
+      "retryPlan": "docs/encyclopedia/reports/2026-10-22-aixam-source-review.json",
+      "nextAction": "Вернуться после алфавитного прохода: точный год/серия и категория; не переносить текущие заводские характеристики без совпадения."
     },
     {
       "id": "c73056068974cb178c84d0b6",
@@ -32500,12 +32530,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T11:51:49.367262+07:00",
+    "updatedAt": "2026-10-22T11:54:29.679868+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "index_release_running_research_continuing",
+    "state": "index_release_running_verified_batches_wait_next_release",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Aiways U5",
+    "nextModel": "Alfa Romeo 4C",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32590,6 +32620,15 @@
         "fields": 45,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "aiways-u5-manual-years": {
+        "batch": "research-2026-10-22-aiways-u5-manual-years",
+        "commit": "b287f840a56486e6d9939c84b9336653b6024017",
+        "workflow": 39724775367,
+        "variants": 3,
+        "fields": 18,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32610,11 +32649,11 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-aito-m9-generation-fields",
-      "commit": "1a59a76ad9f152993504af450f2b086e6327decb",
-      "workflow": 39724528014,
-      "variants": 30,
-      "fields": 45,
+      "batch": "research-2026-10-22-aiways-u5-manual-years",
+      "commit": "b287f840a56486e6d9939c84b9336653b6024017",
+      "workflow": 39724775367,
+      "variants": 3,
+      "fields": 18,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32691,15 +32730,25 @@
         "fields": 45,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-aiways-u5-manual-years",
+        "commit": "b287f840a56486e6d9939c84b9336653b6024017",
+        "workflow": 39724775367,
+        "variants": 3,
+        "fields": 18,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
-    "inFlightResearch": {
-      "state": "apply_requested",
-      "batch": "docs/encyclopedia/batches/2026-10-22-aiways-u5-manual-years.json",
-      "variants": 3,
-      "fields": 18,
-      "digest": "07a6aeb837d062791fd0ddda22a04046edc2601dc241e2dfbde87f184573fce0",
-      "preflightPassed": true
+    "inFlightResearch": null,
+    "lastCompletedPass": {
+      "report": "docs/encyclopedia/reports/2026-10-22-aion-aito-aiways-pass.json",
+      "variants": 197,
+      "fields": 413,
+      "newVariants": 5,
+      "apiReadbackPassed": true,
+      "allModelsComplete": false
     }
   },
   "scope": {

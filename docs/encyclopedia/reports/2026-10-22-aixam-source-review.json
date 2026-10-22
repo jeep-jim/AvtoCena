@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-10-22T11:54:29.679868+07:00",
+  "scope": "Aixam current rows; no database mutation",
+  "models": [
+    {
+      "modelId": "c68055fa5f58a5579f5d3b7b",
+      "make": "Aixam",
+      "model": "Crossover",
+      "year": 2023,
+      "variantId": "8104de578f5530cc92af1115",
+      "reason": "Исходная запись электрическая, но комплектация — текст объявления без точной серии/батареи. Заводская электрическая брошюра 06/2022 подтверждает Premium Crossover, но не точное соответствие этой записи 2023. Дизельные 479 см³ и 6 кВт со страницы текущего Crossover запрещено переносить в эту запись.",
+      "sources": [
+        "https://www.aixam.com/ressources/pages/aixam_brochure-electrique_06-22_compressed.pdf"
+      ],
+      "documentSha256": "d77e30f98cfc2a84d11d5fcd4d50a6967eb584029ebde065fff1fe5c533c77e4"
+    },
+    {
+      "modelId": "7d166f9f7147265c4ae4b179",
+      "make": "Aixam",
+      "model": "GTI",
+      "year": 2021,
+      "variantId": "c847c19b9d40de7d4d1669c4",
+      "reason": "Комплектация AIXAM не определяет точную серию/тип одобрения GTI 2021. Текущая заводская страница Coupé GTI подтверждает дизельные 479 см³ и 6 кВт, но не год исходной записи. Требуется датированная таблица 2021 или точный технический код. Категория лёгкого квадрицикла требует подтверждения и не подменяется легковым M1.",
+      "sources": [
+        "https://www.aixam.com/en/licence-free-car-coupe/gti",
+        "https://www.aixam.com/en/kubota-engine"
+      ]
+    }
+  ],
+  "allModelsComplete": false
+}
