@@ -1,16 +1,16 @@
 {
   "stage": "encyclopedia_calculation_audit",
   "version": 1,
-  "indexDigest": "29d8a71b47da4b335daf8c43024bf0854b5522cb047bf2e53109f877fbe34409",
+  "indexDigest": "901059aaf32973509db5be6b26692440d122dae71a942000da37e7452fe4b6cf",
   "generationId": "gen_1792548716303_1c83fca2",
-  "checkedAt": "2026-10-22T01:11:22.034Z",
+  "checkedAt": "2026-10-22T01:24:21.146Z",
   "markets": {
     "china": {
       "rows": 132350,
       "pending": 61579,
-      "exactMatches": 37309,
-      "filledRecords": 118,
-      "filledFields": 134,
+      "exactMatches": 77508,
+      "filledRecords": 122,
+      "filledFields": 140,
       "completeSpecifications": 273,
       "calculated": 47,
       "calculationMissing": {
@@ -61,9 +61,9 @@
     "europe": {
       "rows": 46127,
       "pending": 7600,
-      "exactMatches": 6325,
-      "filledRecords": 17,
-      "filledFields": 33,
+      "exactMatches": 36731,
+      "filledRecords": 299,
+      "filledFields": 519,
       "completeSpecifications": 81,
       "calculated": 1,
       "calculationMissing": {

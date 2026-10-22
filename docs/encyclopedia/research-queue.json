@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T08:23:24.461629+07:00",
+  "updatedAt": "2026-10-22T08:38:41.259296+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32362,12 +32362,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T08:00:01.468410+07:00",
+    "updatedAt": "2026-10-22T08:38:41.259296+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "integration_live_additional_display_and_compact_filter_release_pending",
+    "state": "integration_live_verified_partial_coverage",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Audi A8 D5",
+    "nextModel": "212 T01",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32388,8 +32388,18 @@
     "rawAuditCalculated": 69,
     "publicSerializationParity": 69,
     "allModelsComplete": false,
-    "installedRelease": "be099ce3076d78a140e02d0257843b3020e1e204",
-    "pendingRelease": "62f6bb08ea7721d537ff4ee0ef55cf585fb536a5",
-    "pendingWorkflow": 39704586763
+    "installedRelease": "62f6bb08ea7721d537ff4ee0ef55cf585fb536a5",
+    "installedWorkflow": 39704586763,
+    "indexDigest": "901059aaf32973509db5be6b26692440d122dae71a942000da37e7452fe4b6cf",
+    "catalogRowsEnriched": 451,
+    "catalogFieldsFilled": 763,
+    "remaining": [
+      "Exact edition/year/trim identity gaps across the encyclopedia",
+      "Certified30-minute power, vehicle category and gross mass where required",
+      "Immediate publication of each manual encyclopedia edit is not implemented; next protected index preparation is required",
+      "Catalog API performance remains below the requested target"
+    ],
+    "priorAlphabeticalCheckpoint": "Audi A8 D5",
+    "parallelResearch": "Owner-directed restart from212 is recorded in roadmap. Subsequent212 research writes are outside the installed901059aa index and this26-variant research total."
   }
 }

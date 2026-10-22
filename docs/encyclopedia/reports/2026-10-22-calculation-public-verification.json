@@ -1,25 +1,83 @@
 {
-  "checkedAt": "2026-10-22T08:11:31.607008+07:00",
-  "releaseSha": "00147369df2c96d16d04d92ccb8af5cd18a04571",
-  "workflow": 39702436205,
+  "checkedAt": "2026-10-22T08:37:19.038231+07:00",
+  "releaseSha": "62f6bb08ea7721d537ff4ee0ef55cf585fb536a5",
+  "workflow": 39704586763,
   "status": "success",
-  "sample": {
-    "id": "56bbcecb51a61b76402371a9",
-    "market": "uae",
-    "make": "Audi",
-    "model": "A3",
-    "year": 2024,
-    "engineCc": 1498,
-    "powerHp": 150,
-    "listTotalRub": 3177645,
-    "sortedListTotalRub": 3177645,
-    "budgetListTotalRub": 3177645,
-    "detailTotalRub": 3177645,
-    "indexDigest": "b9afd6fb4310dff99516509656dd21fcaf1415c4c98b98f29ebc2bd3fa35b422"
+  "publicChecks": {
+    "list": {
+      "path": "/api/catalog/search?market=uae&make=Audi&model=A3&pageSize=48",
+      "ms": 26684,
+      "count": 51,
+      "id": "56bbcecb51a61b76402371a9",
+      "totalRub": 3177645,
+      "engineCc": 1498,
+      "powerHp": 150,
+      "drive": "fwd",
+      "bodyType": "sedan",
+      "transmission": "automatic",
+      "indexDigest": "901059aaf32973509db5be6b26692440d122dae71a942000da37e7452fe4b6cf"
+    },
+    "budget": {
+      "path": "/api/catalog/search?market=uae&make=Audi&model=A3&budgetFrom=3000000&budgetTo=3300000&pageSize=48",
+      "ms": 24472,
+      "count": 1,
+      "id": "56bbcecb51a61b76402371a9",
+      "totalRub": 3177645,
+      "engineCc": 1498,
+      "powerHp": 150,
+      "drive": "fwd",
+      "bodyType": "sedan",
+      "transmission": "automatic",
+      "indexDigest": "901059aaf32973509db5be6b26692440d122dae71a942000da37e7452fe4b6cf"
+    },
+    "sorted": {
+      "path": "/api/catalog/search?market=uae&make=Audi&model=A3&sort=totalRub&pageSize=48",
+      "ms": 25723,
+      "count": 51,
+      "id": "56bbcecb51a61b76402371a9",
+      "totalRub": 3177645,
+      "engineCc": 1498,
+      "powerHp": 150,
+      "drive": "fwd",
+      "bodyType": "sedan",
+      "transmission": "automatic",
+      "indexDigest": "901059aaf32973509db5be6b26692440d122dae71a942000da37e7452fe4b6cf"
+    },
+    "detail": {
+      "path": "/cars/offer/audi-a3-35-tfsi-advanced-2024--56bbcecb51a61b76402371a9",
+      "ms": 7203,
+      "totalRub": 3177645
+    },
+    "home": {
+      "path": "/api/catalog/home",
+      "ms": 7006,
+      "count": 902913,
+      "observedNewFieldsOnHome": []
+    },
+    "specifications": {
+      "path": "/api/catalog/search?market=uae&make=Audi&model=A3&drive=fwd&transmission=automatic&bodyType=sedan&budgetFrom=3000000&budgetTo=3300000&pageSize=48",
+      "ms": 4059,
+      "count": 1,
+      "id": "56bbcecb51a61b76402371a9",
+      "totalRub": 3177645,
+      "engineCc": 1498,
+      "powerHp": 150,
+      "drive": "fwd",
+      "bodyType": "sedan",
+      "transmission": "automatic",
+      "indexDigest": "901059aaf32973509db5be6b26692440d122dae71a942000da37e7452fe4b6cf"
+    },
+    "repeatList": {
+      "path": "https://avtocena.com/api/catalog/search?market=uae&make=Audi&model=A3&pageSize=48",
+      "ms": 5785,
+      "count": 51,
+      "id": "56bbcecb51a61b76402371a9",
+      "totalRub": 3177645
+    }
   },
   "limitations": [
-    "Sample verifies one exact model/year/modification, not all catalog inventory.",
-    "API response times remained several seconds; the catalog speed target is not claimed achieved.",
-    "Latest A7L and compact identity changes await following release."
+    "Public sample and protected audit do not establish completeness of the whole encyclopedia.",
+    "Initial post-release parallel search probes took24-27 seconds; repeated warmed query timing is recorded separately. The0.5-1 second target is not achieved.",
+    "Encyclopedia edits reach catalogs through protected versioned index preparation, not immediate synchronization of every edit."
   ]
 }
