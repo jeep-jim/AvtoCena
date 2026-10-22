@@ -13,7 +13,7 @@ try{
    const u=new URL(route.request().url()),body=route.request().postDataJSON();
    if(u.pathname==='/api/auth/me')return route.fulfill({contentType:'application/json',body:JSON.stringify({user:visitor?null:{id:'owner',role:'owner'}})});
    if(u.pathname==='/api/crm/assistant'){
-    if(route.request().method()==='GET')return route.fulfill({contentType:'application/json',body:JSON.stringify({userId:'owner',name:'Иван',owner:true,canCode:true,canFill:true,connected,codeConnected:false,messages,revision})});
+    if(route.request().method()==='GET')return route.fulfill({contentType:'application/json',body:JSON.stringify({userId:'owner',name:'Иван',owner:true,canCode:true,canFill:true,canControlPage:true,pageControl:true,connected,codeConnected:false,messages,revision})});
     assert.equal(body.revision,revision);
     if(body.op==='message'){captured=body.context;assert.ok(!JSON.stringify(captured).includes('PRIVATE'));const f=captured.fields.find(f=>f.label.startsWith('Мощность'));assert.ok(f);const action={id:'00000000-0000-4000-8000-000000000001',kind:'fill',summary:'Заполнить мощность',path:'/cars/car1',fields:[{id:f.id,label:f.label,before:f.value,value:'150'}]};messages=[{id:'u',role:'user',text:body.text,at:new Date().toISOString()},{id:'a',role:'assistant',text:'Проверьте модификацию перед сохранением. [Источник](https://example.com)',at:new Date().toISOString(),actions:[action]}];revision++;}
     if(body.op==='action'){actions++;messages[1].actions[0].status='done';revision++;return route.fulfill({contentType:'application/json',body:JSON.stringify({messages,revision,action:messages[1].actions[0]})});}

@@ -98,3 +98,22 @@ test('browser channel is private, single-use, encrypted and preserves the assist
  assert.equal((await task).text,'new answer');assert.equal((await (await get(channel)).json()).turn,null);
  state.actor=member({companyId:'other'});assert.equal((await get(channel)).status,403);
 });
+
+test('page control is opt-in, owner/admin-only, and revocation blocks pending actions',async()=>{
+ const state={files:new Map(),events:[],actor:member()},r=await load('apps/web/app/(crm)/api/crm/assistant/route.ts',state,true);
+ const req=(body:any)=>new Request('https://avtocena.com/api/crm/assistant',{method:'POST',headers:{origin:'https://avtocena.com','content-type':'application/json'},body:JSON.stringify(body)});
+ const status=async()=> (await r.GET(new Request('https://avtocena.com/api/crm/assistant?path=/cars/autocatalog'))).json();
+ assert.equal((await status()).pageControl,false);
+ assert.equal((await r.POST(req({revision:0,op:'page_control',enabled:true}))).status,403);
+ state.actor=member({role:'admin'});
+ assert.equal((await r.POST(req({revision:0,op:'page_control',enabled:true}))).status,200);
+ assert.equal((await status()).pageControl,true);assert.equal((await status()).canFill,true);
+ const store=await load('apps/web/lib/team-assistant/store.ts',state),id='00000000-0000-4000-8000-000000000002';
+ await store.savePending('manager',{action:{id,kind:'fill',path:'/cars/autocatalog',fields:[]},createdAt:Date.now(),state:'ready'});
+ assert.equal((await r.POST(req({revision:1,op:'page_control',enabled:false}))).status,200);
+ assert.equal((await r.POST(req({revision:2,op:'action',id,path:'/cars/autocatalog'}))).status,400);
+ assert.equal((await status()).canFill,false);
+ const p=await load('apps/web/lib/team-assistant/policy.ts',state);
+ assert.equal(p.canFillPath(member(),'/cars/autocatalog'),false);
+ assert.equal(p.assistantPageControlAllowed(member({role:'owner',companyId:'other'})),false);
+});
