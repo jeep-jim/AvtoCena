@@ -1,0 +1,2188 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-alpine-a110-2017-2022",
+  "entries": [
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2017,
+      "variantId": "595ad84a547ded12d6743bb7",
+      "trim": "Première Edition",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Première Edition",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "powerHp": 252,
+        "drive": "rwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводской материал от 05.12.2017: Première Edition, купе, бензин, 252 PS, задний привод. Запуск подтверждён в конце 2017, поставки 2018 — отдельным заводским анонсом. Семиступенчатая DCT подтверждена историческим описанием производителя. Руководство A110 периода 10.10.2017–14.07.2025: 1798 см³, тип двигателя M5P Turbo, без выдуманного суффикса. КВт и полная масса этой версии пока не подтверждены. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+            "effectiveAt": "2017-12-05",
+            "selector": "Première Edition: petrol, 252 PS, rear-wheel drive, coupe",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "identitySources": [
+              {
+                "url": "https://media.alpinecars.com/alpine-is-back-a110-the-compact-and-agile-french-sports-car/?lang=eng",
+                "effectiveAt": "2017-03-07",
+                "selector": "Deliveries late 2017 continental Europe, 2018 UK/Japan",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+            "effectiveAt": "2017-12-05",
+            "selector": "Première Edition: petrol, 252 PS, rear-wheel drive, coupe",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+            "effectiveAt": "2017-12-05",
+            "selector": "Première Edition: petrol, 252 PS, rear-wheel drive, coupe",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "drive": {
+            "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+            "effectiveAt": "2017-12-05",
+            "selector": "Première Edition: petrol, 252 PS, rear-wheel drive, coupe",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "transmission": {
+            "url": "https://media.alpinecars.com/alpine-unveils-new-alpine-a110s/?lang=eng",
+            "effectiveAt": "2019-06-13",
+            "selector": "Alpine and the A110; Première Edition, Pure and Légende; all versions seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2018,
+      "variantId": "4f616827295a5118edeebece",
+      "trim": "Première Edition",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Première Edition",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "powerHp": 252,
+        "drive": "rwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводской материал от 05.12.2017: Première Edition, купе, бензин, 252 PS, задний привод. Запуск подтверждён в конце 2017, поставки 2018 — отдельным заводским анонсом. Семиступенчатая DCT подтверждена историческим описанием производителя. Руководство A110 периода 10.10.2017–14.07.2025: 1798 см³, тип двигателя M5P Turbo, без выдуманного суффикса. КВт и полная масса этой версии пока не подтверждены. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+            "effectiveAt": "2017-12-05",
+            "selector": "Première Edition: petrol, 252 PS, rear-wheel drive, coupe",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "identitySources": [
+              {
+                "url": "https://media.alpinecars.com/alpine-is-back-a110-the-compact-and-agile-french-sports-car/?lang=eng",
+                "effectiveAt": "2017-03-07",
+                "selector": "Deliveries late 2017 continental Europe, 2018 UK/Japan",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+            "effectiveAt": "2017-12-05",
+            "selector": "Première Edition: petrol, 252 PS, rear-wheel drive, coupe",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+            "effectiveAt": "2017-12-05",
+            "selector": "Première Edition: petrol, 252 PS, rear-wheel drive, coupe",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "drive": {
+            "url": "https://media.alpinecars.com/alpine-a110-premiere-edition-test-drive-in-aix-en-provence/?lang=eng",
+            "effectiveAt": "2017-12-05",
+            "selector": "Première Edition: petrol, 252 PS, rear-wheel drive, coupe",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "transmission": {
+            "url": "https://media.alpinecars.com/alpine-unveils-new-alpine-a110s/?lang=eng",
+            "effectiveAt": "2019-06-13",
+            "selector": "Alpine and the A110; Première Edition, Pure and Légende; all versions seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2018,
+      "variantId": "e670ce8e64ac2fa013c5c71c",
+      "trim": "Pure",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Pure",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 252,
+        "powerKw": 185,
+        "icePowerKw": 185,
+        "grossVehicleWeightKg": 1365
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальная заводская таблица Alpine 2018-02, PDF13, точная колонка Pure: 1798 см³, бензиновый ДВС, 185 кВт/252 PS, задний привод, 7-ступенчатая DCT, купе. Разрешённая полная масса 1365 кг отделена от снаряжённой. Дата и таблица проверены; примечание о предварительных выбросах не переносится на остальные поля. Тип двигателя M5P Turbo подтверждён руководством, точный суффикс неизвестен. Источник не является индивидуальным CoC. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; trim; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d",
+            "identitySources": [
+              {
+                "url": "https://media.alpinecars.com/alpine-announces-prices-for-a110-pure-and-legende-in-france/?lang=fra",
+                "effectiveAt": "2018-06-01",
+                "selector": "Pure and Légende available summer 2018; 252 PS",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; fuel; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "powertrainKind": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; powertrainKind; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "engineCc": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; engineCc; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; bodyType; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "drive": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; drive; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "transmission": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; transmission; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "powerHp": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; powerHp; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "powerKw": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; powerKw; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "icePowerKw": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; icePowerKw; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2018,
+      "variantId": "d3ce9528c91a104aa6de142c",
+      "trim": "Légende",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Légende",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 252,
+        "powerKw": 185,
+        "icePowerKw": 185,
+        "grossVehicleWeightKg": 1365
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальная заводская таблица Alpine 2018-02, PDF13, точная колонка Légende: 1798 см³, бензиновый ДВС, 185 кВт/252 PS, задний привод, 7-ступенчатая DCT, купе. Разрешённая полная масса 1365 кг отделена от снаряжённой. Дата и таблица проверены; примечание о предварительных выбросах не переносится на остальные поля. Тип двигателя M5P Turbo подтверждён руководством, точный суффикс неизвестен. Источник не является индивидуальным CoC. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; trim; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d",
+            "identitySources": [
+              {
+                "url": "https://media.alpinecars.com/alpine-announces-prices-for-a110-pure-and-legende-in-france/?lang=fra",
+                "effectiveAt": "2018-06-01",
+                "selector": "Pure and Légende available summer 2018; 252 PS",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; fuel; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "powertrainKind": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; powertrainKind; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "engineCc": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; engineCc; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; bodyType; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "drive": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; drive; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "transmission": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; transmission; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "powerHp": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; powerHp; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "powerKw": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; powerKw; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "icePowerKw": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; icePowerKw; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://blog.le-parnass.com/catalogue_pdf/alpine_a110spec2018_e.pdf",
+            "effectiveAt": "2018-02",
+            "pdfPage": 13,
+            "datePage": 16,
+            "sourceNature": "manufacturer original archived copy",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "268672cdfbb45c025ac73724ab8c93f139a2a5380e65070d368b4fe43429e43d"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2019,
+      "variantId": "477d063c84c29a9264521fe3",
+      "trim": "Pure",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Pure",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 252,
+        "powerKw": 185,
+        "icePowerKw": 185,
+        "grossVehicleWeightKg": 1365
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальная заводская таблица Alpine 2019-09, PDF19, точная колонка Pure: 1798 см³, бензиновый ДВС, 185 кВт/252 PS, задний привод, 7-ступенчатая DCT, купе. Разрешённая полная масса 1365 кг отделена от снаряжённой. Дата и таблица проверены; примечание о предварительных выбросах не переносится на остальные поля. Тип двигателя M5P Turbo подтверждён руководством, точный суффикс неизвестен. Источник не является индивидуальным CoC. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; trim; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "fuel": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; fuel; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; powertrainKind; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; engineCc; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; bodyType; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "drive": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; drive; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "transmission": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; transmission; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; powerHp; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; powerKw; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; icePowerKw; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Pure; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2019,
+      "variantId": "6effa49068b191c571c20d7c",
+      "trim": "Légende",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Légende",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 252,
+        "powerKw": 185,
+        "icePowerKw": 185,
+        "grossVehicleWeightKg": 1365
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальная заводская таблица Alpine 2019-09, PDF19, точная колонка Légende: 1798 см³, бензиновый ДВС, 185 кВт/252 PS, задний привод, 7-ступенчатая DCT, купе. Разрешённая полная масса 1365 кг отделена от снаряжённой. Дата и таблица проверены; примечание о предварительных выбросах не переносится на остальные поля. Тип двигателя M5P Turbo подтверждён руководством, точный суффикс неизвестен. Источник не является индивидуальным CoC. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; trim; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "fuel": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; fuel; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; powertrainKind; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; engineCc; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; bodyType; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "drive": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; drive; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "transmission": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; transmission; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; powerHp; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; powerKw; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; icePowerKw; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "Légende; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2019,
+      "variantId": "f2fdea04137fa737af25cde1",
+      "trim": "S",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "S",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 292,
+        "powerKw": 215,
+        "icePowerKw": 215,
+        "grossVehicleWeightKg": 1365
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальная заводская таблица Alpine 2019-09, PDF19, точная колонка S: 1798 см³, бензиновый ДВС, 215 кВт/292 PS, задний привод, 7-ступенчатая DCT, купе. Разрешённая полная масса 1365 кг отделена от снаряжённой. Дата и таблица проверены; примечание о предварительных выбросах не переносится на остальные поля. Тип двигателя M5P Turbo подтверждён руководством, точный суффикс неизвестен. Источник не является индивидуальным CoC. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; trim; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "fuel": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; fuel; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; powertrainKind; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; engineCc; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; bodyType; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "drive": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; drive; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "transmission": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; transmission; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; powerHp; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; powerKw; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; icePowerKw; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-valdeurope.fr/storage/frbrochure-alpine-a1100919.pdf",
+            "effectiveAt": "2019-09",
+            "pdfPage": 19,
+            "printedPages": "36-37",
+            "datePage": 25,
+            "sourceNature": "manufacturer original hosted by Alpine dealer",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "c9c4240c029e170f77d8010932ef90d7a91bd55cede86f0c346776df2a3fc913"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2022,
+      "variantId": "05a322171770e0c1f61f30bf",
+      "trim": "1.8 Turbo 252 PS DCT",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.8 Turbo 252 PS DCT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 252,
+        "powerKw": 185,
+        "icePowerKw": 185,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальная заводская таблица Alpine 2022-04, PDF46, точная колонка 1.8 Turbo 252 PS DCT: 1798 см³, бензиновый ДВС, 185 кВт/252 PS, задний привод, 7-ступенчатая DCT, купе. Разрешённая полная масса 1360 кг отделена от снаряжённой. Дата и таблица проверены; примечание о предварительных выбросах не переносится на остальные поля. Тип двигателя M5P Turbo подтверждён руководством, точный суффикс неизвестен. Источник не является индивидуальным CoC. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; trim; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "fuel": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; fuel; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powertrainKind; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "engineCc": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; engineCc; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; bodyType; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "drive": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; drive; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "transmission": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; transmission; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "powerHp": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powerHp; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "powerKw": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powerKw; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; icePowerKw; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2022,
+      "variantId": "f2862f5863e11e3360a6b922",
+      "trim": "GT",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "GT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальная заводская таблица Alpine 2022-04, PDF46, точная колонка GT: 1798 см³, бензиновый ДВС, 221 кВт/300 PS, задний привод, 7-ступенчатая DCT, купе. Разрешённая полная масса 1360 кг отделена от снаряжённой. Дата и таблица проверены; примечание о предварительных выбросах не переносится на остальные поля. Тип двигателя M5P Turbo подтверждён руководством, точный суффикс неизвестен. Источник не является индивидуальным CoC. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; trim; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "fuel": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; fuel; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powertrainKind; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "engineCc": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; engineCc; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; bodyType; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "drive": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; drive; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "transmission": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; transmission; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "powerHp": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powerHp; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "powerKw": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powerKw; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; icePowerKw; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2022,
+      "variantId": "071600b3727c14b2bd5d065d",
+      "trim": "S",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "S",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальная заводская таблица Alpine 2022-04, PDF46, точная колонка S: 1798 см³, бензиновый ДВС, 221 кВт/300 PS, задний привод, 7-ступенчатая DCT, купе. Разрешённая полная масса 1360 кг отделена от снаряжённой. Дата и таблица проверены; примечание о предварительных выбросах не переносится на остальные поля. Тип двигателя M5P Turbo подтверждён руководством, точный суффикс неизвестен. Источник не является индивидуальным CoC. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; trim; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "fuel": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; fuel; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; powertrainKind; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "engineCc": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; engineCc; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; bodyType; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "drive": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; drive; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "transmission": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; transmission; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "powerHp": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; powerHp; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "powerKw": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; powerKw; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; icePowerKw; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpinecars.com/assets/docs/PL-BrochureAlpineA110_04.2022.pdf",
+            "effectiveAt": "2022-04",
+            "pdfPage": 46,
+            "datePage": 56,
+            "sourceNature": "manufacturer original official host; English UK technical table",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "S; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "82a12ccab6a22e5a500efd6050cedae98c8a4359f4238b96fe27a8eeb87692c5"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2020,
+      "variantId": "5640209c8d8d7ea92e95f48c",
+      "trim": "Légende GT",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Légende GT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "powerHp": 252,
+        "powerKw": 185,
+        "icePowerKw": 185
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://presse.alpinecars.de/legende-gt-und-color-edition-2020-neue-sondermodelle-fur-die-alpine-a110/?lang=deu",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводской анонс Alpine Deutschland 02.03.2020: Légende GT, бензиновый ДВС 185 кВт/252 PS. Это версия 2020, отличная от 292 PS Légende GT 2021. Точный объём 1798 см³ и тип M5P Turbo — из руководства. Привод, коробка, кузов и масса не перенесены автоматически с базовой Légende. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://presse.alpinecars.de/legende-gt-und-color-edition-2020-neue-sondermodelle-fur-die-alpine-a110/?lang=deu",
+            "effectiveAt": "2020-03-02",
+            "selector": "Légende GT 185 kW/252 PS petrol; Color Edition 2020 215 kW/292 PS",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "fuel": {
+            "url": "https://presse.alpinecars.de/legende-gt-und-color-edition-2020-neue-sondermodelle-fur-die-alpine-a110/?lang=deu",
+            "effectiveAt": "2020-03-02",
+            "selector": "Légende GT 185 kW/252 PS petrol; Color Edition 2020 215 kW/292 PS",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://presse.alpinecars.de/legende-gt-und-color-edition-2020-neue-sondermodelle-fur-die-alpine-a110/?lang=deu",
+            "effectiveAt": "2020-03-02",
+            "selector": "Légende GT 185 kW/252 PS petrol; Color Edition 2020 215 kW/292 PS",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://presse.alpinecars.de/legende-gt-und-color-edition-2020-neue-sondermodelle-fur-die-alpine-a110/?lang=deu",
+            "effectiveAt": "2020-03-02",
+            "selector": "Légende GT 185 kW/252 PS petrol; Color Edition 2020 215 kW/292 PS",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerKw": {
+            "url": "https://presse.alpinecars.de/legende-gt-und-color-edition-2020-neue-sondermodelle-fur-die-alpine-a110/?lang=deu",
+            "effectiveAt": "2020-03-02",
+            "selector": "Légende GT 185 kW/252 PS petrol; Color Edition 2020 215 kW/292 PS",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "icePowerKw": {
+            "url": "https://presse.alpinecars.de/legende-gt-und-color-edition-2020-neue-sondermodelle-fur-die-alpine-a110/?lang=deu",
+            "effectiveAt": "2020-03-02",
+            "selector": "Légende GT 185 kW/252 PS petrol; Color Edition 2020 215 kW/292 PS",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2021,
+      "variantId": "98940c1e20aef94a75ef1b35",
+      "trim": "Pure",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Pure",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "powerHp": 252,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводское описание актуальной гаммы от 31.07.2021: Pure/Légende 252 PS, S 292 PS, семиступенчатая DCT у всех перечисленных версий. Руководство A110 подтверждает бензин, 1798 см³ и M5P Turbo. КВт, кузов, привод и полная масса не перенесены с других годов. Год подтверждён текущей гаммой в датированном документе. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+            "effectiveAt": "2021-07-31",
+            "selector": "The Alpine A110: Pure/Légende 252 PS, S 292 PS, all seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "fuel": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+            "effectiveAt": "2021-07-31",
+            "selector": "The Alpine A110: Pure/Légende 252 PS, S 292 PS, all seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "transmission": {
+            "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+            "effectiveAt": "2021-07-31",
+            "selector": "The Alpine A110: Pure/Légende 252 PS, S 292 PS, all seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2021,
+      "variantId": "f2aba31eaefeca655d889844",
+      "trim": "Légende",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Légende",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "powerHp": 252,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводское описание актуальной гаммы от 31.07.2021: Pure/Légende 252 PS, S 292 PS, семиступенчатая DCT у всех перечисленных версий. Руководство A110 подтверждает бензин, 1798 см³ и M5P Turbo. КВт, кузов, привод и полная масса не перенесены с других годов. Год подтверждён текущей гаммой в датированном документе. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+            "effectiveAt": "2021-07-31",
+            "selector": "The Alpine A110: Pure/Légende 252 PS, S 292 PS, all seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "fuel": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+            "effectiveAt": "2021-07-31",
+            "selector": "The Alpine A110: Pure/Légende 252 PS, S 292 PS, all seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "transmission": {
+            "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+            "effectiveAt": "2021-07-31",
+            "selector": "The Alpine A110: Pure/Légende 252 PS, S 292 PS, all seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2021,
+      "variantId": "66e54b531c6753f1d0ca726b",
+      "trim": "S",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "S",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "powerHp": 292,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводское описание актуальной гаммы от 31.07.2021: Pure/Légende 252 PS, S 292 PS, семиступенчатая DCT у всех перечисленных версий. Руководство A110 подтверждает бензин, 1798 см³ и M5P Turbo. КВт, кузов, привод и полная масса не перенесены с других годов. Год подтверждён текущей гаммой в датированном документе. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+            "effectiveAt": "2021-07-31",
+            "selector": "The Alpine A110: Pure/Légende 252 PS, S 292 PS, all seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "fuel": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+            "effectiveAt": "2021-07-31",
+            "selector": "The Alpine A110: Pure/Légende 252 PS, S 292 PS, all seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "transmission": {
+            "url": "https://media.alpinecars.com/alpine-opens-first-showroom-in-hungary/?lang=fra",
+            "effectiveAt": "2021-07-31",
+            "selector": "The Alpine A110: Pure/Légende 252 PS, S 292 PS, all seven-speed dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2021,
+      "variantId": "1e63488e62b36b16575c78a8",
+      "trim": "Légende GT",
+      "operation": "create",
+      "expectedRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Légende GT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "powerHp": 292,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.alpinecars.com/alpine-a110-legende-gt-2021-lesprit-grand-tourisme-dans-sa-version-la-plus-intense/?lang=fra",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводской анонс от 12.05.2021: Légende GT 2021, купе, 292 метрические л.с. (французские ch), коробка с двойным сцеплением. Это не 252 PS версия 2020. Руководство A110 подтверждает бензин, 1798 см³ и тип M5P Turbo. Неподтверждённые кВт, привод и полная масса оставлены пустыми. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://media.alpinecars.com/alpine-a110-legende-gt-2021-lesprit-grand-tourisme-dans-sa-version-la-plus-intense/?lang=fra",
+            "effectiveAt": "2021-05-12",
+            "selector": "Légende GT 2021; 292 ch; coupe GT; dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "fuel": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://media.alpinecars.com/alpine-a110-legende-gt-2021-lesprit-grand-tourisme-dans-sa-version-la-plus-intense/?lang=fra",
+            "effectiveAt": "2021-05-12",
+            "selector": "Légende GT 2021; 292 ch; coupe GT; dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://media.alpinecars.com/alpine-a110-legende-gt-2021-lesprit-grand-tourisme-dans-sa-version-la-plus-intense/?lang=fra",
+            "effectiveAt": "2021-05-12",
+            "selector": "Légende GT 2021; 292 ch; coupe GT; dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "transmission": {
+            "url": "https://media.alpinecars.com/alpine-a110-legende-gt-2021-lesprit-grand-tourisme-dans-sa-version-la-plus-intense/?lang=fra",
+            "effectiveAt": "2021-05-12",
+            "selector": "Légende GT 2021; 292 ch; coupe GT; dual-clutch",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2020,
+      "variantId": "667a5dcf34e75c2607ecc7aa",
+      "trim": "Color Edition 2020",
+      "expectedDigest": "2f079ee47a414d060cb561b7aeaea68cd54df930325df27ee1d95a410692ed9f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнены только поля из заводского руководства A110 для периода 10.10.2017–14.07.2025: бензин, обычный ДВС, 1798 см³ и тип M5P Turbo. Исходная точная идентичность Color Edition 2020 и прежние подтверждения мощности/коробки/привода сохранены через историю. Суффикс двигателя неизвестен. Статус review.",
+        "fieldSources": {
+          "fuel": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "Engine specifications; 1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    }
+  ]
+}
