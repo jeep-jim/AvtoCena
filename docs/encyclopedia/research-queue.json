@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T14:16:41.446342+07:00",
+  "updatedAt": "2026-10-22T14:24:44.835324+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32590,9 +32590,9 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T14:16:41.446342+07:00",
+    "updatedAt": "2026-10-22T14:24:44.835324+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "giulietta_2010_2015_saved_index_requested",
+    "state": "giulietta_index_built_awaiting_price_preparation",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "Alfa Romeo Giulietta 2015 — Collezione/Sprint Speciale и ранние исполнения, затем 2016",
@@ -32833,9 +32833,17 @@
         "workflow": 39720654481
       }
     ],
-    "requestedRelease": "acb9cee4107d5ff1cf2034071358ff1a4514c37c",
-    "requestedReleaseWorkflow": 39734109605,
-    "additionalPreparedResearch": [],
+    "requestedRelease": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
+    "requestedReleaseWorkflow": 39739467523,
+    "additionalPreparedResearch": [
+      {
+        "path": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2011-manual-retry.json",
+        "state": "prepared_not_applied",
+        "variants": 17,
+        "fields": 65,
+        "requiresFreshApiPreflight": true
+      }
+    ],
     "pendingNextIndexBatches": [
       {
         "batch": "research-2026-10-22-aito-m5-historical-manuals",
@@ -32981,7 +32989,14 @@
       "activationOccurred": false,
       "nextAction": "Check publication completion before requesting one aggregate index release; do not clear lock or duplicate collectors"
     },
-    "concurrentRelease": null,
+    "concurrentRelease": {
+      "release": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
+      "workflow": 39739467523,
+      "job": 119692916111,
+      "state": "in_progress",
+      "indexPreparation": "success",
+      "build": "success"
+    },
     "installedIndexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
     "catalogFieldsEnriched": 1359,
     "failedConcurrentRelease": {

@@ -1,0 +1,1267 @@
+{
+  "checkedAt": "2026-10-22T07:22:22.964Z",
+  "status": "prepared_not_applied",
+  "reason": "Найдено после фиксации снимка текущего выпуска. Не писать до завершения выпуска; перед отдельной партией повторить API-preflight и убедиться, что источники/история не изменились.",
+  "modelId": "cb49c6bb46e8dd8caf106b34",
+  "variants": 17,
+  "fields": 65,
+  "sourceRevision": "f6f93444-43a5-4919-ab51-e8ef96fd5ee7",
+  "batch": {
+    "version": 1,
+    "id": "research-2026-10-22-alfa-giulietta-2011-manual-retry",
+    "entries": [
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "b031e2f348ca68a8b4c034f9",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.4 Turbo Benzina 120 PS Giulietta",
+        "expectedDigest": "608849db3111598e50dcedb86300ab6e19e82b8349073263c4cad84b64d4722d",
+        "patch": {
+          "engineCode": "198A4000",
+          "grossVehicleWeightKg": 1785,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Giulietta; 198A4000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 242,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Giulietta; Maximum permitted loads — total 1785 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Giulietta; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Giulietta; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "72c7121bbc3109573f0e3ad4",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.4 Turbo Benzina 120 PS Progression",
+        "expectedDigest": "7c022d0fa5ed25090204a7ec8bbd3fab05d2998006afec2e92c39d27640f4ac8",
+        "patch": {
+          "engineCode": "198A4000",
+          "grossVehicleWeightKg": 1785,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Progression; 198A4000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 242,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Progression; Maximum permitted loads — total 1785 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Progression; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Progression; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "ce4e2f72cc611563e6e5362a",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.4 Turbo Benzina 120 PS Distinctive",
+        "expectedDigest": "daa2c2385f387be9948623a0f08885741cdaeb88a08f21451eeb563ddf921564",
+        "patch": {
+          "engineCode": "198A4000",
+          "grossVehicleWeightKg": 1785,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Distinctive; 198A4000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 242,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Distinctive; Maximum permitted loads — total 1785 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Distinctive; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo Benzina 120 PS Distinctive; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "09e756d8f0c7718d28e318e5",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.4 Turbo MultiAir 170 PS Progression",
+        "expectedDigest": "410fe66897142714d1321233a408caacf2c5fe597f9be2b609707e9d6bd60386",
+        "patch": {
+          "engineCode": "940A2000",
+          "grossVehicleWeightKg": 1795,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Progression; 940A2000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 242,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Progression; Maximum permitted loads — total 1795 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Progression; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Progression; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "844c51c9ff7767ed04dd9cf5",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.4 Turbo MultiAir 170 PS Distinctive",
+        "expectedDigest": "de5cdfb52601d6d04fc449c0a39699e7cfdc8b9923f03cafc0efbf161253d0d9",
+        "patch": {
+          "engineCode": "940A2000",
+          "grossVehicleWeightKg": 1795,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Distinctive; 940A2000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 242,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Distinctive; Maximum permitted loads — total 1795 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Distinctive; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Distinctive; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "4e6d4b98bff00a4f62f1e337",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.4 Turbo MultiAir 170 PS Exclusive",
+        "expectedDigest": "152169ab42ddcd58b75eea43ef50a2642c8a79b002049e1557b866f650669e16",
+        "patch": {
+          "engineCode": "940A2000",
+          "grossVehicleWeightKg": 1795,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Exclusive; 940A2000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 242,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Exclusive; Maximum permitted loads — total 1795 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Exclusive; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.4 Turbo MultiAir 170 PS Exclusive; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "d7fbbfb454324f6accbd6804",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1750 TBi 235 PS Quadrifoglio Verde",
+        "expectedDigest": "c63d2d45baed21af0a934e3f4c8026707ddf95fd73ca76ecd9e4a0aceb455f88",
+        "patch": {
+          "engineCode": "940A1000",
+          "grossVehicleWeightKg": 1825,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1750 TBi 235 PS Quadrifoglio Verde; 940A1000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 242,
+              "selector": "2011 1750 TBi 235 PS Quadrifoglio Verde; Maximum permitted loads — total 1825 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1750 TBi 235 PS Quadrifoglio Verde; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1750 TBi 235 PS Quadrifoglio Verde; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "3effe03bf541166ca51ce0ef",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.6 JTDM-2 105 PS Giulietta",
+        "expectedDigest": "a06a718960d4cb3343791ce5a27d32693e86054a29bda61e36a8b420d22a2056",
+        "patch": {
+          "engineCode": "940A3000",
+          "grossVehicleWeightKg": 1815,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.6 JTDM-2 105 PS Giulietta; 940A3000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 1.6 JTDM-2 105 PS Giulietta; Maximum permitted loads — total 1815 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.6 JTDM-2 105 PS Giulietta; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.6 JTDM-2 105 PS Giulietta; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "c9836c5969269ebca50a8803",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.6 JTDM-2 105 PS Progression",
+        "expectedDigest": "4165d2f4dbb78a15813ddcdc1bb104f77d03b6511e8152b084f9e35c45e92273",
+        "patch": {
+          "engineCode": "940A3000",
+          "grossVehicleWeightKg": 1815,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.6 JTDM-2 105 PS Progression; 940A3000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 1.6 JTDM-2 105 PS Progression; Maximum permitted loads — total 1815 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.6 JTDM-2 105 PS Progression; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.6 JTDM-2 105 PS Progression; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "20e1eff359d4091193d7b020",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.6 JTDM-2 105 PS Distinctive",
+        "expectedDigest": "d999c27cbad7192995d53ddd16a1359e2a7387d7f410e787eddb82ac9e99cf1c",
+        "patch": {
+          "engineCode": "940A3000",
+          "grossVehicleWeightKg": 1815,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.6 JTDM-2 105 PS Distinctive; 940A3000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 1.6 JTDM-2 105 PS Distinctive; Maximum permitted loads — total 1815 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.6 JTDM-2 105 PS Distinctive; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.6 JTDM-2 105 PS Distinctive; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "b1d758a90329d7dfcb458a2f",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "1.6 JTDM-2 105 PS Exclusive",
+        "expectedDigest": "ad2e3fbeed5a07b71bbf850ceaaf6c36e7127c1993d3699ddc28eb5f8d4925b7",
+        "patch": {
+          "engineCode": "940A3000",
+          "grossVehicleWeightKg": 1815,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 1.6 JTDM-2 105 PS Exclusive; 940A3000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 1.6 JTDM-2 105 PS Exclusive; Maximum permitted loads — total 1815 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.6 JTDM-2 105 PS Exclusive; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 1.6 JTDM-2 105 PS Exclusive; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "2f55da150ebae19f688b79ec",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "2.0 JTDM-2 140 PS Progression",
+        "expectedDigest": "99c9556ba6dab12faef454e64ed8d7d0fc0382f7e2473e9bd23b20ca5bda942e",
+        "patch": {
+          "engineCode": "940A5000",
+          "grossVehicleWeightKg": 1825,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 2.0 JTDM-2 140 PS Progression; 940A5000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 2.0 JTDM-2 140 PS Progression; Maximum permitted loads — total 1825 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 2.0 JTDM-2 140 PS Progression; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 2.0 JTDM-2 140 PS Progression; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "f0d2b2d95de46f20845f1f61",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "2.0 JTDM-2 140 PS Distinctive",
+        "expectedDigest": "711225babc026195d0a24460ccc5d148ed15187eeb35d7f286034148e6f26f19",
+        "patch": {
+          "engineCode": "940A5000",
+          "grossVehicleWeightKg": 1825,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 2.0 JTDM-2 140 PS Distinctive; 940A5000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 2.0 JTDM-2 140 PS Distinctive; Maximum permitted loads — total 1825 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 2.0 JTDM-2 140 PS Distinctive; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 2.0 JTDM-2 140 PS Distinctive; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "52aa3a0a9fc41cd1e91d6338",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "2.0 JTDM-2 140 PS Exclusive",
+        "expectedDigest": "97b2ef791410ecd602b659d4034f8e19fdbfb0d216e93777432666f718f6d14d",
+        "patch": {
+          "engineCode": "940A5000",
+          "grossVehicleWeightKg": 1825,
+          "drive": "fwd",
+          "transmission": "manual"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 2.0 JTDM-2 140 PS Exclusive; 940A5000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 2.0 JTDM-2 140 PS Exclusive; Maximum permitted loads — total 1825 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 2.0 JTDM-2 140 PS Exclusive; six forward gears, clutch, Front; non-TCT manual version"
+            },
+            "transmission": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 2.0 JTDM-2 140 PS Exclusive; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "b6daab2973655624827ad5bf",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "2.0 JTDM-2 170 PS Progression",
+        "expectedDigest": "ee6aeafa56a97fe289eb236e44b3334d16d2ba28ca43d27b615390a6c1e01804",
+        "patch": {
+          "engineCode": "940A4000",
+          "grossVehicleWeightKg": 1825,
+          "drive": "fwd"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 2.0 JTDM-2 170 PS Progression; 940A4000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 2.0 JTDM-2 170 PS Progression; Maximum permitted loads — total 1825 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 2.0 JTDM-2 170 PS Progression; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "7b5a9691da5b2c9a463a02b2",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "2.0 JTDM-2 170 PS Distinctive",
+        "expectedDigest": "08865ef1fbec391b27aac790cf9db53ba456f897aa1968edcab224abbab181c8",
+        "patch": {
+          "engineCode": "940A4000",
+          "grossVehicleWeightKg": 1825,
+          "drive": "fwd"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 2.0 JTDM-2 170 PS Distinctive; 940A4000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 2.0 JTDM-2 170 PS Distinctive; Maximum permitted loads — total 1825 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 2.0 JTDM-2 170 PS Distinctive; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      },
+      {
+        "modelId": "cb49c6bb46e8dd8caf106b34",
+        "variantId": "5144bb73d863907409de2b10",
+        "make": "Alfa Romeo",
+        "model": "Giulietta",
+        "year": 2011,
+        "trim": "2.0 JTDM-2 170 PS Exclusive",
+        "expectedDigest": "9e9c536346afba1ada60a7fc7cbd5aced473ca95a4125db1e9b503b0f3daa330",
+        "patch": {
+          "engineCode": "940A4000",
+          "grossVehicleWeightKg": 1825,
+          "drive": "fwd"
+        },
+        "confirmedFields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive"
+        ],
+        "source": {
+          "type": "manufacturer",
+          "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+          "checkedAt": "2026-10-22",
+          "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+          "pages": [
+            231,
+            232,
+            233,
+            234,
+            242,
+            243
+          ],
+          "statement": "Заводское руководство 11/2011: точное сочетание топлива, мощности и объёма в таблицах двигателей, код двигателя, передний привод и механическая шестиступенчатая коробка. Полная масса — строка Maximum permitted loads / total, не снаряжённая и не буксируемая. Эти таблицы не охватывают TCT; версии с TCT исключены. Год не распространяется на соседние годы автоматически.",
+          "fieldSources": {
+            "engineCode": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 231,
+              "selector": "2011 2.0 JTDM-2 170 PS Exclusive; 940A4000"
+            },
+            "grossVehicleWeightKg": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 243,
+              "selector": "2011 2.0 JTDM-2 170 PS Exclusive; Maximum permitted loads — total 1825 kg"
+            },
+            "drive": {
+              "url": "https://aftersales.fiat.com/eLumData/EN/83/191_GIULIETTA/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG/83_191_GIULIETTA_604.38.300_EN_06_11.11_L_LG.pdf",
+              "checkedAt": "2026-10-22",
+              "documentSha256": "60a7346ae08fcb7550039411d89192b3f9464b89e5d0a2942430a065a6c893e4",
+              "page": 234,
+              "selector": "2011 2.0 JTDM-2 170 PS Exclusive; six forward gears, clutch, Front; non-TCT manual version"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "plan": {
+    "changes": [
+      {
+        "variantId": "b031e2f348ca68a8b4c034f9",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "72c7121bbc3109573f0e3ad4",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "ce4e2f72cc611563e6e5362a",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "09e756d8f0c7718d28e318e5",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "844c51c9ff7767ed04dd9cf5",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "4e6d4b98bff00a4f62f1e337",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "d7fbbfb454324f6accbd6804",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "3effe03bf541166ca51ce0ef",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "c9836c5969269ebca50a8803",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "20e1eff359d4091193d7b020",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "b1d758a90329d7dfcb458a2f",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "2f55da150ebae19f688b79ec",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "f0d2b2d95de46f20845f1f61",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "52aa3a0a9fc41cd1e91d6338",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "b6daab2973655624827ad5bf",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive"
+        ]
+      },
+      {
+        "variantId": "7b5a9691da5b2c9a463a02b2",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive"
+        ]
+      },
+      {
+        "variantId": "5144bb73d863907409de2b10",
+        "fields": [
+          "engineCode",
+          "grossVehicleWeightKg",
+          "drive"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "requiresFreshApiPreflight": true,
+  "requiresOwnIndexReleaseAfterApply": true
+}
