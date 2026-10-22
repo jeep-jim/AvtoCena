@@ -63,7 +63,9 @@ try{
    if(kind==='dealer-docs')await page.route('**/api/dealers/contracts**',r=>r.fulfill({json:{records:[]}}));
    // Calendar fixtures and expectations use October 1; real clock time must not age them.
    if(kind==='team')await page.clock.setFixedTime(new Date('2026-10-01T05:00:00Z'));
-   await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
+   // Native GET forms submit to the current pathname, as on the real CRM page.
+   const fixturePath=kind==='leads'?'/crm/leads':'/';
+   await page.goto(`http://127.0.0.1:${server.address().port}${fixturePath}?kind=${kind}&theme=${theme}`);
    if(kind==='dealer-docs'){
     await page.getByRole('heading',{name:'Клиенты и документы',exact:true}).waitFor();
     assert.equal(await page.getByRole('button',{name:'Добавить клиента',exact:true}).count(),1);
