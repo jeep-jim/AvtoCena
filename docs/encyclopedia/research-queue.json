@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:47:18.250127+07:00",
+  "updatedAt": "2026-10-22T17:04:58+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32613,9 +32613,9 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T16:47:18.250127+07:00",
+    "updatedAt": "2026-10-22T17:04:58+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "junior_mito_69_new_saved_index_activation_pending",
+    "state": "mito_2012_18_operations_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "Alfa Romeo MiTo:11 оставшихся строк прайса01.11.2012 по handoff, затем ранние/UK2012 и2013; UK2011 и прочие пропуски в retry",
@@ -33304,10 +33304,25 @@
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39743682918,
-      "state": "in_progress",
-      "referenceOnly": true
+      "state": "failure_checkpoint_saved",
+      "referenceOnly": true,
+      "checkedAt": "2026-10-22T17:04:58+07:00",
+      "lastLoggedFetched": 2070,
+      "lastLoggedVisited": 4960,
+      "lastLoggedSaved": 285,
+      "lastLoggedPending": 555,
+      "reason": "reference_fetch_stopped_checkpoint_saved",
+      "nextAction": "Read failed URL/reason from checkpoint before resume; do not bypass access failures"
     },
-    "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6"
+    "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
+    "preparedBatch": {
+      "batch": "research-2026-10-22-alfa-mito-2012-remaining-manual",
+      "variants": 18,
+      "newVariants": 11,
+      "fields": 130,
+      "state": "prepared_not_applied",
+      "preflightPassed": true
+    }
   },
   "scope": {
     "minimumYear": 2008,

@@ -1,0 +1,1446 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-mito-2012-remaining-manual",
+  "entries": [
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "eeef6f9f3ebbe8d624b10105",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 MPI MultiAir 105 PS S/S Distinctive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MPI MultiAir 105 PS S/S Distinctive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 1368,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 B32 1. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Механическая коробка подтверждена педалью сцепления и синхронизированными передачами на PDF стр.227. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 B32 1; 1.4 MPI MultiAir 105 PS S/S Distinctive; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "abc969e3f4b8f4f32704ba78",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 MPI MultiAir 105 PS S/S SBK",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MPI MultiAir 105 PS S/S SBK",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 1368,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 K32 1. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Механическая коробка подтверждена педалью сцепления и синхронизированными передачами на PDF стр.227. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 K32 1; 1.4 MPI MultiAir 105 PS S/S SBK; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "145b78316fb79ba15ed9b2f2",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 MPI MultiAir 105 PS S/S Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MPI MultiAir 105 PS S/S Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 1368,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 E32 1 + 6U3. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Механическая коробка подтверждена педалью сцепления и синхронизированными передачами на PDF стр.227. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E32 1 + 6U3; 1.4 MPI MultiAir 105 PS S/S Veloce; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "24d22e23a4a65f039bbb6029",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 TB MultiAir 135 PS S/S TCT Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB MultiAir 135 PS S/S TCT Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 135,
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 E34 1 + 6U3. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Для TCT отдельно использована заводская брошюра 09/2012: PDF стр.31 и описание двойного сухого сцепления на стр.13; код двигателя не заимствован у механики. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1 + 6U3; 1.4 TB MultiAir 135 PS S/S TCT Veloce; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1 + 6U3; 1.4 TB MultiAir 135 PS S/S TCT Veloce; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1 + 6U3; 1.4 TB MultiAir 135 PS S/S TCT Veloce; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1 + 6U3; 1.4 TB MultiAir 135 PS S/S TCT Veloce; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1 + 6U3; 1.4 TB MultiAir 135 PS S/S TCT Veloce; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1 + 6U3; 1.4 TB MultiAir 135 PS S/S TCT Veloce; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1 + 6U3; 1.4 TB MultiAir 135 PS S/S TCT Veloce; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1 + 6U3; 1.4 TB MultiAir 135 PS S/S TCT Veloce; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 13,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1 + 6U3; 1.4 TB MultiAir 135 PS S/S TCT Veloce; transmission"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "3caf88c7aca49ca58ffde5fb",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.3 JTDM 95 PS S/S Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.3 JTDM 95 PS S/S Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 95,
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 E3A 1 + 6U3. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Механическая коробка подтверждена педалью сцепления и синхронизированными передачами на PDF стр.227. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1 + 6U3; 1.3 JTDM 95 PS S/S Veloce; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "03e26882315c51332f43849f",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 TB MultiAir 135 PS S/S Exclusive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB MultiAir 135 PS S/S Exclusive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 135,
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 E33 1. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Механическая коробка подтверждена педалью сцепления и синхронизированными передачами на PDF стр.227. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E33 1; 1.4 TB MultiAir 135 PS S/S Exclusive; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "02f2eb2518e91ee00664a4ef",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 TB MultiAir 135 PS S/S TCT Exclusive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB MultiAir 135 PS S/S TCT Exclusive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 135,
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 E34 1. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Для TCT отдельно использована заводская брошюра 09/2012: PDF стр.31 и описание двойного сухого сцепления на стр.13; код двигателя не заимствован у механики. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1; 1.4 TB MultiAir 135 PS S/S TCT Exclusive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1; 1.4 TB MultiAir 135 PS S/S TCT Exclusive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1; 1.4 TB MultiAir 135 PS S/S TCT Exclusive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1; 1.4 TB MultiAir 135 PS S/S TCT Exclusive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1; 1.4 TB MultiAir 135 PS S/S TCT Exclusive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1; 1.4 TB MultiAir 135 PS S/S TCT Exclusive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1; 1.4 TB MultiAir 135 PS S/S TCT Exclusive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1; 1.4 TB MultiAir 135 PS S/S TCT Exclusive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 13,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E34 1; 1.4 TB MultiAir 135 PS S/S TCT Exclusive; transmission"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "b87a01ff87db429a53b34787",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.3 JTDM 95 PS S/S Exclusive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.3 JTDM 95 PS S/S Exclusive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 95,
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 E3A 1. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Механическая коробка подтверждена педалью сцепления и синхронизированными передачами на PDF стр.227. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3A 1; 1.3 JTDM 95 PS S/S Exclusive; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "5d349a3c414a39d68697019a",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.6 JTDM 120 PS S/S Exclusive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS S/S Exclusive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 120,
+        "engineCc": 1598,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A3000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 E3E 1. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Механическая коробка подтверждена педалью сцепления и синхронизированными передачами на PDF стр.227. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "145 E3E 1; 1.6 JTDM 120 PS S/S Exclusive; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "4cd1c8a3411d634c110847e6",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 170,
+        "engineCc": 1368,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "940A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 Q36 1. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Механическая коробка подтверждена педалью сцепления и синхронизированными передачами на PDF стр.227. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "94e1e4769ade3a6e02b4fb8f",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 170,
+        "engineCc": 1368,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "940A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год: заводской прайс 01.11.2012, PDF стр.2, Sincom 145 Q36 1. Технические поля: заводское руководство 60438485, 07/2012 (PDF стр.310), архив AROC; таблицы визуально сверены. Механическая коробка подтверждена педалью сцепления и синхронизированными передачами на PDF стр.227. Метрическая мощность PS взята из французских ch CEE, не из британских bhp. Полная масса/число мест не угаданы; 30-минутная мощность не применялась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 223,
+            "checkedAt": "2026-10-22",
+            "selector": "145 Q36 1; 1.4 TB MultiAir 170 PS S/S Quadrifoglio Verde SBK Limited Edition; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "73f51ac4-a510-428a-a97f-d1471836853b"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "52da0b4c05255459405cdcff",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 MPI 70 PS Progression",
+      "expectedDigest": "9ba27631e601b2a25dc277fedaeea567963d79811e9551236c1c48cfac5a016f",
+      "patch": {
+        "transmission": "manual",
+        "engineCode": "955A9000"
+      },
+      "confirmedFields": [
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Уточнение по заводскому руководству Alfa Romeo 60438485, редакция 07/2012 (PDF стр.310), сохранённому в архиве AROC. Сверены технические таблицы и педаль сцепления/привод на PDF стр.227. Существующие источники мощности и точной комплектации сохраняются в истории; полная масса и число мест не выбраны из вариантов 4/5 мест.",
+        "fieldSources": {
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 70 PS Progression; 1.4 MPI 70 PS Progression; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 70 PS Progression; 1.4 MPI 70 PS Progression; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "8dd09115f59af21549ba0d3c",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 MPI 78 PS S/S Distinctive",
+      "expectedDigest": "eb29a4b5a689fc9490b477eebe1c45aaac4f21065c4b152895eff1b928458749",
+      "patch": {
+        "transmission": "manual",
+        "engineCc": 1368,
+        "powerKw": 57,
+        "icePowerKw": 57,
+        "drive": "fwd",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "transmission",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Уточнение по заводскому руководству Alfa Romeo 60438485, редакция 07/2012 (PDF стр.310), сохранённому в архиве AROC. Сверены технические таблицы и педаль сцепления/привод на PDF стр.227. Существующие источники мощности и точной комплектации сохраняются в истории; полная масса и число мест не выбраны из вариантов 4/5 мест.",
+        "fieldSources": {
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Distinctive; 1.4 MPI 78 PS S/S Distinctive; transmission"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Distinctive; 1.4 MPI 78 PS S/S Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Distinctive; 1.4 MPI 78 PS S/S Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Distinctive; 1.4 MPI 78 PS S/S Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Distinctive; 1.4 MPI 78 PS S/S Distinctive; drive"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Distinctive; 1.4 MPI 78 PS S/S Distinctive; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "f56fcc74d7462e2179139fd7",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 MPI 78 PS S/S SBK",
+      "expectedDigest": "754af29b4f047138b4bdd7a690ca887b10f287fa3f08e7539e7d44c74d8832b4",
+      "patch": {
+        "transmission": "manual",
+        "engineCc": 1368,
+        "powerKw": 57,
+        "icePowerKw": 57,
+        "drive": "fwd",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "transmission",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Уточнение по заводскому руководству Alfa Romeo 60438485, редакция 07/2012 (PDF стр.310), сохранённому в архиве AROC. Сверены технические таблицы и педаль сцепления/привод на PDF стр.227. Существующие источники мощности и точной комплектации сохраняются в истории; полная масса и число мест не выбраны из вариантов 4/5 мест.",
+        "fieldSources": {
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S SBK; 1.4 MPI 78 PS S/S SBK; transmission"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S SBK; 1.4 MPI 78 PS S/S SBK; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S SBK; 1.4 MPI 78 PS S/S SBK; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S SBK; 1.4 MPI 78 PS S/S SBK; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S SBK; 1.4 MPI 78 PS S/S SBK; drive"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S SBK; 1.4 MPI 78 PS S/S SBK; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "ddbae224f7507c6ff90f62e5",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "0.9 TwinAir 85 PS S/S Distinctive",
+      "expectedDigest": "b4cbd3558e27be3d425fd443385850e6e230b40af17de44738b96dcd4070529a",
+      "patch": {
+        "transmission": "manual",
+        "engineCode": "312A2000"
+      },
+      "confirmedFields": [
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Уточнение по заводскому руководству Alfa Romeo 60438485, редакция 07/2012 (PDF стр.310), сохранённому в архиве AROC. Сверены технические таблицы и педаль сцепления/привод на PDF стр.227. Существующие источники мощности и точной комплектации сохраняются в истории; полная масса и число мест не выбраны из вариантов 4/5 мест.",
+        "fieldSources": {
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Distinctive; 0.9 TwinAir 85 PS S/S Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Distinctive; 0.9 TwinAir 85 PS S/S Distinctive; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "5888a53c76de3d3ffe0f5307",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "0.9 TwinAir 85 PS S/S SBK",
+      "expectedDigest": "a6a4f4df8ff10c1337b9fdbd9ea2c13e66662313765cddb327f7167101cc222b",
+      "patch": {
+        "transmission": "manual",
+        "engineCode": "312A2000"
+      },
+      "confirmedFields": [
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Уточнение по заводскому руководству Alfa Romeo 60438485, редакция 07/2012 (PDF стр.310), сохранённому в архиве AROC. Сверены технические таблицы и педаль сцепления/привод на PDF стр.227. Существующие источники мощности и точной комплектации сохраняются в истории; полная масса и число мест не выбраны из вариантов 4/5 мест.",
+        "fieldSources": {
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S SBK; 0.9 TwinAir 85 PS S/S SBK; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S SBK; 0.9 TwinAir 85 PS S/S SBK; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "623fdab277146fc3645cf674",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.3 JTDM 85 PS S/S Distinctive",
+      "expectedDigest": "600eb0ec592dbf88c8f766a166870cae44a3ae2e70560aa48a0a61a4fe1a0032",
+      "patch": {
+        "transmission": "manual",
+        "engineCode": "199B4000"
+      },
+      "confirmedFields": [
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Уточнение по заводскому руководству Alfa Romeo 60438485, редакция 07/2012 (PDF стр.310), сохранённому в архиве AROC. Сверены технические таблицы и педаль сцепления/привод на PDF стр.227. Существующие источники мощности и точной комплектации сохраняются в истории; полная масса и число мест не выбраны из вариантов 4/5 мест.",
+        "fieldSources": {
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Distinctive; 1.3 JTDM 85 PS S/S Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Distinctive; 1.3 JTDM 85 PS S/S Distinctive; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "6788dcd2e7b115c57f612694",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.3 JTDM 85 PS S/S SBK",
+      "expectedDigest": "67085b6fc53a43ea41768bd884a63fcfcc21799e930daa4437344357a8f21e25",
+      "patch": {
+        "transmission": "manual",
+        "engineCode": "199B4000"
+      },
+      "confirmedFields": [
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Уточнение по заводскому руководству Alfa Romeo 60438485, редакция 07/2012 (PDF стр.310), сохранённому в архиве AROC. Сверены технические таблицы и педаль сцепления/привод на PDF стр.227. Существующие источники мощности и точной комплектации сохраняются в истории; полная масса и число мест не выбраны из вариантов 4/5 мест.",
+        "fieldSources": {
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S SBK; 1.3 JTDM 85 PS S/S SBK; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S SBK; 1.3 JTDM 85 PS S/S SBK; engineCode"
+          }
+        }
+      }
+    }
+  ]
+}
