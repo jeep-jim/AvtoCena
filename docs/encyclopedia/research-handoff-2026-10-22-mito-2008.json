@@ -3,7 +3,7 @@
   "modelId": "81a4b290257d227a5fd86ee6",
   "make": "Alfa Romeo",
   "model": "Mito",
-  "state": "research_candidates_not_applied",
+  "state": "applied_api_readback_pass",
   "year": 2008,
   "sources": [
     {
@@ -81,5 +81,8 @@
     "Найти первичный PDFмануала2008: сторонняя копия указывает78PS вместо немецких95PS. Не переносить код955A1000/параметры78PS на95PS.",
     "Механическая КПП/полная масса/engineCode только по точной таблице, не по косвенной формулировке."
   ],
-  "notApplied": true
+  "notApplied": true,
+  "appliedBatch": "research-2026-10-22-alfa-mito-2008-2009-launch",
+  "workflow": 39753037347,
+  "remaining": "2008: точный объём, код двигателя, коробка и полная масса требуют отдельного источника"
 }

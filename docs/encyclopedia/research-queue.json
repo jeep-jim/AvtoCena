@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:07:07.588606+07:00",
+  "updatedAt": "2026-10-22T16:14:57.654135+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -626,11 +626,17 @@
         2012
       ],
       "variants": 2,
-      "status": "needs_exact_variant_source",
+      "status": "partial_verified_fields",
       "researchedVariants": 0,
       "checkedAt": "2026-10-22T01:36:38.003919+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
-      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified",
+      "lastCheckedAt": "2026-10-22T16:14:57.654135+07:00",
+      "lastBatch": "research-2026-10-22-alfa-mito-2008-2009-launch",
+      "lastBatchVariants": 19,
+      "lastBatchFields": 159,
+      "newVariantsThisBatch": 19,
+      "fullHistoricalCoverage": false
     },
     {
       "id": "d9d48f8457c33f7e466d6c6e",
@@ -32607,7 +32613,7 @@
     "state": "continue_mito_historical",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "MiTo2008/2009 партия19/159 подготовлена, затем поздняя гамма2009 и2010",
+    "nextModel": "Alfa Romeo MiTo: поздний2009 и2010 MultiAir/JTDM-2 подготовлены10/80; затем остаток2010 и2011+",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32871,6 +32877,16 @@
         "fields": 98,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-mito-2008-2009-launch": {
+        "batch": "research-2026-10-22-alfa-mito-2008-2009-launch",
+        "commit": "ab1d51958a64184e6f81403e1aac0a65183d012f",
+        "workflow": 39753037347,
+        "variants": 19,
+        "newVariants": 19,
+        "fields": 159,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32891,12 +32907,12 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-junior-2024-2025-september",
-      "commit": "6fb66d917314216285c442794a9e29491ed821f9",
-      "workflow": 39752511359,
-      "variants": 11,
-      "newVariants": 11,
-      "fields": 98,
+      "batch": "research-2026-10-22-alfa-mito-2008-2009-launch",
+      "commit": "ab1d51958a64184e6f81403e1aac0a65183d012f",
+      "workflow": 39753037347,
+      "variants": 19,
+      "newVariants": 19,
+      "fields": 159,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -33025,10 +33041,10 @@
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-mito-2008-2009-launch",
+      "batch": "research-2026-10-22-alfa-mito-2009-2010-multiair",
       "state": "prepared_not_applied",
-      "variants": 19,
-      "fields": 159
+      "variants": 10,
+      "fields": 80
     },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-giulietta-junior-pass.json",
