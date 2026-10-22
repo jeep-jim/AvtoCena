@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T12:03:03.130150+07:00",
+  "updatedAt": "2026-10-22T12:07:18.580097+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -454,9 +454,20 @@
       "variants": 4,
       "status": "partial_verified_fields",
       "researchedVariants": 1,
-      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
-      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
+      "checkedAt": "2026-10-22T12:05:39.702655+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-4c-8c-historical.json",
+      "nextAction": "Retry exact historical gaps and unresolved identity; no whole-row verified status",
+      "lastVerifiedBatch": {
+        "batch": "research-2026-10-22-alfa-4c-8c-historical",
+        "commit": "a8ddd17bb3834a539d350a37bf5acc9d956e6ce8",
+        "workflow": 39725832995,
+        "variants": 9,
+        "fields": 77,
+        "newVariants": 8,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      "newAnnualVariants": 6
     },
     {
       "id": "37c5ad68b7ae5208ef5fb83b",
@@ -469,9 +480,20 @@
       "variants": 2,
       "status": "partial_verified_fields",
       "researchedVariants": 1,
-      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
-      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
+      "checkedAt": "2026-10-22T12:05:39.702655+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-4c-8c-historical.json",
+      "nextAction": "Retry exact historical gaps and unresolved identity; no whole-row verified status",
+      "lastVerifiedBatch": {
+        "batch": "research-2026-10-22-alfa-4c-8c-historical",
+        "commit": "a8ddd17bb3834a539d350a37bf5acc9d956e6ce8",
+        "workflow": 39725832995,
+        "variants": 9,
+        "fields": 77,
+        "newVariants": 8,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      "newAnnualVariants": 1
     },
     {
       "id": "80bec9eb3050622a66840bcc",
@@ -483,9 +505,20 @@
       "variants": 1,
       "status": "partial_verified_fields",
       "researchedVariants": 1,
-      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
-      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
+      "checkedAt": "2026-10-22T12:05:39.702655+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-4c-8c-historical.json",
+      "nextAction": "Retry exact historical gaps and unresolved identity; no whole-row verified status",
+      "lastVerifiedBatch": {
+        "batch": "research-2026-10-22-alfa-4c-8c-historical",
+        "commit": "a8ddd17bb3834a539d350a37bf5acc9d956e6ce8",
+        "workflow": 39725832995,
+        "variants": 9,
+        "fields": 77,
+        "newVariants": 8,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      "newAnnualVariants": 1
     },
     {
       "id": "296965c95e42800c757012ac",
@@ -32530,12 +32563,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T12:03:03.130150+07:00",
+    "updatedAt": "2026-10-22T12:07:18.580097+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "research_in_flight_index_blocked_by_publication_lock",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo 4C",
+    "nextModel": "Alfa Romeo Giulia",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32629,6 +32662,16 @@
         "fields": 18,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-4c-8c-historical": {
+        "batch": "research-2026-10-22-alfa-4c-8c-historical",
+        "commit": "a8ddd17bb3834a539d350a37bf5acc9d956e6ce8",
+        "workflow": 39725832995,
+        "variants": 9,
+        "fields": 77,
+        "newVariants": 8,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32649,11 +32692,12 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-aiways-u5-manual-years",
-      "commit": "b287f840a56486e6d9939c84b9336653b6024017",
-      "workflow": 39724775367,
-      "variants": 3,
-      "fields": 18,
+      "batch": "research-2026-10-22-alfa-4c-8c-historical",
+      "commit": "a8ddd17bb3834a539d350a37bf5acc9d956e6ce8",
+      "workflow": 39725832995,
+      "variants": 9,
+      "fields": 77,
+      "newVariants": 8,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32739,14 +32783,24 @@
         "fields": 18,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-4c-8c-historical",
+        "commit": "a8ddd17bb3834a539d350a37bf5acc9d956e6ce8",
+        "workflow": 39725832995,
+        "variants": 9,
+        "fields": 77,
+        "newVariants": 8,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-4c-8c-historical",
-      "variants": 9,
-      "fields": 77,
-      "newVariants": 8,
-      "status": "submitted_pending_workflow_readback"
+      "batch": "research-2026-10-22-alfa-giulia-2016-2017",
+      "variants": 43,
+      "fields": 379,
+      "newVariants": 43,
+      "status": "prepared_pending_submission"
     },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-aion-aito-aiways-pass.json",

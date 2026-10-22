@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-22T12:07:18.580097+07:00",
+  "model": "Alfa Romeo Giulia",
+  "modelId": "296965c95e42800c757012ac",
+  "recordsRead": 132,
+  "preparedAnnualVariants": 43,
+  "remaining": [
+    {
+      "scope": "New 2016 petrol variants and Veloce diesel 210 PS",
+      "fields": [
+        "engineCc"
+      ],
+      "reason": "Reviewed MY2016 tables identify exact versions but omit exact displacement for these engines; do not derive cc from 2.0/2.2/2.9 labels"
+    },
+    {
+      "scope": "New 2016 diesel 136 PS Giulia/Super",
+      "fields": [
+        "drive"
+      ],
+      "reason": "Belgian table gives engine and transmission but no explicit driven axle; retained as unknown pending dated specification"
+    },
+    {
+      "scope": "All new historical variants",
+      "fields": [
+        "grossVehicleWeightKg",
+        "engineCode"
+      ],
+      "reason": "Reviewed tables give curb mass or no mass; no gross-weight or exact engine-code proof"
+    },
+    {
+      "scope": "Existing 2018–2026 records",
+      "reason": "132 records read; 16 already researched. Unnamed observations cannot be matched by power/displacement alone. Veloce without engine designation is ambiguous between petrol/diesel and RWD/Q4. Next cursor is Giulia 2018 and dated specifications."
+    },
+    {
+      "scope": "Existing exact duplicates",
+      "reason": "Three 2024 Veloce Q4 identities and four 2025 Veloce Q4 identities are already technically equal; audit catalog/card matching without merging IDs or erasing observations."
+    }
+  ],
+  "nextCursor": "Alfa Romeo Giulia 2018; then remaining 2019–2026 and Giulietta"
+}
