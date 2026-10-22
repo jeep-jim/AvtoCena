@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-10-22T15:17:10.219467+07:00",
+  "batches": [
+    {
+      "batch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
+      "commit": "92fde64ff774cc7e8ed2938241ddad0c98496f51",
+      "workflow": 39744256772,
+      "variants": 59,
+      "newVariants": 42,
+      "fields": 368,
+      "apiReadback": true,
+      "includedInIndex": false
+    },
+    {
+      "batch": "research-2026-10-22-alfa-giulietta-2018-2020",
+      "commit": "07cc5f3fd15e12f4165170b5d088f3dbfb081552",
+      "workflow": 39744821834,
+      "variants": 35,
+      "newVariants": 35,
+      "fields": 254,
+      "apiReadback": true,
+      "includedInIndex": false
+    },
+    {
+      "batch": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce",
+      "commit": "c33d03eb627e6e79dad33e483b43d5e91ab24a60",
+      "workflow": 39745875814,
+      "variants": 7,
+      "newVariants": 4,
+      "fields": 41,
+      "apiReadback": true,
+      "includedInIndex": false
+    },
+    {
+      "batch": "research-2026-10-22-alfa-junior-2026-july",
+      "commit": "f4845cad2b6e1cfa39374f218eaf9b23b408eb17",
+      "workflow": 39746380415,
+      "variants": 8,
+      "newVariants": 5,
+      "fields": 48,
+      "apiReadback": true,
+      "includedInIndex": false
+    }
+  ],
+  "variants": 109,
+  "newVariants": 86,
+  "fields": 711,
+  "apiReadback": true,
+  "includedInIndex": false,
+  "indexReleaseRequested": true,
+  "remaining": "Giulietta: спорные мощности/идентичность/масса и ранние2018; Junior:2024, октябрь2026, категория/30мин/GVWQ4; далее MiTo2008+",
+  "allModelsComplete": false
+}

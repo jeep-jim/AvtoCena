@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T15:14:40.218371+07:00",
+  "updatedAt": "2026-10-22T15:17:10.219467+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -575,6 +575,10 @@
         2022,
         2021,
         2020,
+        2019,
+        2018,
+        2017,
+        2016,
         2015,
         2014,
         2013,
@@ -582,12 +586,16 @@
         2011,
         2010
       ],
-      "variants": 169,
+      "variants": 246,
       "status": "partial_verified_fields",
-      "researchedVariants": 139,
-      "checkedAt": "2026-10-22T14:16:11.270960+07:00",
+      "researchedVariants": 216,
+      "checkedAt": "2026-10-22T15:17:10.219467+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2014-special-2015.json",
-      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
+      "nextAction": "Giulietta retry separately; next alphabetic cursor Junior",
+      "retryFiles": [
+        "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2016-2017-manual-retry.json",
+        "docs/encyclopedia/retry-2026-10-22-alfa-giulietta-2018-2020.json"
+      ]
     },
     {
       "id": "76763ca9fc792df61980328c",
@@ -598,12 +606,16 @@
         2025,
         2024
       ],
-      "variants": 28,
+      "variants": 37,
       "status": "partial_verified_fields",
-      "researchedVariants": 14,
-      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "researchedVariants": 23,
+      "checkedAt": "2026-10-22T15:17:10.219467+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
-      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
+      "nextAction": "Alfa Romeo Junior2024: заводской мануал и точные исполнения; октябрь2026 после прямой проверки редакции; затем MiTo2008+",
+      "retryFiles": [
+        "docs/encyclopedia/retry-2026-10-22-alfa-junior-2025-mass-intensa-veloce.json",
+        "docs/encyclopedia/retry-2026-10-22-alfa-junior-2026-july.json"
+      ]
     },
     {
       "id": "81a4b290257d227a5fd86ee6",
@@ -32590,12 +32602,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T15:14:40.218371+07:00",
+    "updatedAt": "2026-10-22T15:17:10.219467+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "junior_2026_prepared",
+    "state": "giulietta_junior_index_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Junior2024 и октябрь2026; затем MiTo2008+",
+    "nextModel": "Alfa Romeo Junior2024: заводской мануал и точные исполнения; октябрь2026 после прямой проверки редакции; затем MiTo2008+",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32827,6 +32839,16 @@
         "fields": 41,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-junior-2026-july": {
+        "batch": "research-2026-10-22-alfa-junior-2026-july",
+        "commit": "f4845cad2b6e1cfa39374f218eaf9b23b408eb17",
+        "workflow": 39746380415,
+        "variants": 8,
+        "newVariants": 5,
+        "fields": 48,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32847,16 +32869,16 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce",
-      "commit": "c33d03eb627e6e79dad33e483b43d5e91ab24a60",
-      "workflow": 39745875814,
-      "variants": 7,
-      "newVariants": 4,
-      "fields": 41,
+      "batch": "research-2026-10-22-alfa-junior-2026-july",
+      "commit": "f4845cad2b6e1cfa39374f218eaf9b23b408eb17",
+      "workflow": 39746380415,
+      "variants": 8,
+      "newVariants": 5,
+      "fields": 48,
       "apiReadback": true,
       "includedInIndex": false
     },
-    "indexReleaseRequested": false,
+    "indexReleaseRequested": true,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
     "pendingIndexBatches": [
       {
@@ -33008,24 +33030,26 @@
         "fields": 41,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-junior-2026-july",
+        "commit": "f4845cad2b6e1cfa39374f218eaf9b23b408eb17",
+        "workflow": 39746380415,
+        "variants": 8,
+        "newVariants": 5,
+        "fields": 48,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
-    "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-junior-2026-july",
-      "variants": 8,
-      "newVariants": 5,
-      "fields": 48,
-      "state": "prepared_not_applied"
-    },
+    "inFlightResearch": null,
     "lastCompletedPass": {
-      "report": "docs/encyclopedia/reports/2026-10-22-giulietta-2010-2015-pass.json",
-      "variants": 138,
-      "newVariants": 138,
-      "fields": 1024,
+      "report": "docs/encyclopedia/reports/2026-10-22-giulietta-junior-pass.json",
+      "variants": 109,
+      "newVariants": 86,
+      "fields": 711,
       "apiReadback": true,
-      "includedInIndex": true,
-      "indexRelease": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
-      "indexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698"
+      "includedInIndex": false
     },
     "failedIndexRelease": {
       "commit": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
@@ -33059,7 +33083,7 @@
       "state": "in_progress",
       "referenceOnly": true
     },
-    "releaseRequestedAt": "2026-10-22T14:16:41.446342+07:00",
+    "releaseRequestedAt": "2026-10-22T15:17:10.219467+07:00",
     "failedAggregateRelease": {
       "workflow": 39733245856,
       "commit": "bb3193f1fd0c37d1afeb23e615e940dadf6758ee",
