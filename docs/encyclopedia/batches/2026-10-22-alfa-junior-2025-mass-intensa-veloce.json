@@ -1,0 +1,612 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce",
+  "entries": [
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "1a2ee1648fe65a65ec42cd1a",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Speciale",
+      "expectedDigest": "26e9327cfd3abfc79d1f5a857253db0e29b29f263de20e92cc027912caec63e5",
+      "patch": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1790
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской швейцарский прайс Junior: действует с31.03.2025, редакция08.2025. Визуально сверены исполнения на стр2, технические таблицы PDF35–36 (печатные36–37). Записана полная масса Gesamtgewicht, не снаряжённая. 107кВт — мощность гибридной системы, 115/207кВт электромотора — максимальная, не30-минутная. Ёмкость батареи полная. Для Q4 заводская полная масса n.v., оставлена неизвестной. MY24 в имени файла не используется как год выпуска.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.L23-0-1-S00; 1.2 Ibrida 145 PS eDCT6 Speciale; exact powertrain column"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 36,
+            "selector": "SR.626.L23-0-1-S00; 1.2 Ibrida 145 PS eDCT6 Speciale; Gesamtgewicht (kg)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "06a6704e2a4b4b2cb4eb1475",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "156 PS Elettrica 54 kWh",
+      "expectedDigest": "c9a277ba3eefd2710c801de598cfaebc70869fd3072fdc25ad598a28da89d54c",
+      "patch": {
+        "grossVehicleWeightKg": 2040
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской швейцарский прайс Junior: действует с31.03.2025, редакция08.2025. Визуально сверены исполнения на стр2, технические таблицы PDF35–36 (печатные36–37). Записана полная масса Gesamtgewicht, не снаряжённая. 107кВт — мощность гибридной системы, 115/207кВт электромотора — максимальная, не30-минутная. Ёмкость батареи полная. Для Q4 заводская полная масса n.v., оставлена неизвестной. MY24 в имени файла не используется как год выпуска.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 36,
+            "selector": "SR.627.E2E-0-1-J00; 156 PS Elettrica 54 kWh; Gesamtgewicht (kg)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "f4b0a5283cc484beebaca960",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "156 PS Elettrica 54 kWh Speciale",
+      "expectedDigest": "d8b60972d8c39009ab599a9c29c3b55574a22aa6aecd9e6fe055e0b7ec662173",
+      "patch": {
+        "grossVehicleWeightKg": 2040
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской швейцарский прайс Junior: действует с31.03.2025, редакция08.2025. Визуально сверены исполнения на стр2, технические таблицы PDF35–36 (печатные36–37). Записана полная масса Gesamtgewicht, не снаряжённая. 107кВт — мощность гибридной системы, 115/207кВт электромотора — максимальная, не30-минутная. Ёмкость батареи полная. Для Q4 заводская полная масса n.v., оставлена неизвестной. MY24 в имени файла не используется как год выпуска.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 36,
+            "selector": "SR.627.L2E-0-1-S00; 156 PS Elettrica 54 kWh Speciale; Gesamtgewicht (kg)"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "767be136-1760-43a0-9054-90654a6e7634",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "f279b6854a3f7d2c03e0dada",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Intensa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Intensa",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1199,
+        "systemPowerKw": 107,
+        "batteryKwh": 0.89,
+        "drive": "fwd",
+        "transmission": "dct",
+        "grossVehicleWeightKg": 1790
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "systemPowerKw",
+        "batteryKwh",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской швейцарский прайс Junior: действует с31.03.2025, редакция08.2025. Визуально сверены исполнения на стр2, технические таблицы PDF35–36 (печатные36–37). Записана полная масса Gesamtgewicht, не снаряжённая. 107кВт — мощность гибридной системы, 115/207кВт электромотора — максимальная, не30-минутная. Ёмкость батареи полная. Для Q4 заводская полная масса n.v., оставлена неизвестной. MY24 в имени файла не используется как год выпуска.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 2,
+            "selector": "SR.626.A23-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Intensa; exact powertrain column"
+          },
+          "fuel": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A23-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Intensa; exact powertrain column"
+          },
+          "powertrainKind": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A23-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Intensa; exact powertrain column"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A23-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Intensa; exact powertrain column"
+          },
+          "systemPowerKw": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A23-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Intensa; Gesamtleistung"
+          },
+          "batteryKwh": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A23-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Intensa; Batteriekapazität (Brutto, netto) — Brutto"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A23-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Intensa; exact powertrain column"
+          },
+          "transmission": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A23-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Intensa; exact powertrain column"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 36,
+            "selector": "SR.626.A23-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Intensa; Gesamtgewicht (kg)"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "767be136-1760-43a0-9054-90654a6e7634",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "65c33ec518dcc40f19e256c6",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Intensa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Intensa",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1199,
+        "systemPowerKw": 107,
+        "batteryKwh": 0.89,
+        "drive": "awd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "systemPowerKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской швейцарский прайс Junior: действует с31.03.2025, редакция08.2025. Визуально сверены исполнения на стр2, технические таблицы PDF35–36 (печатные36–37). Записана полная масса Gesamtgewicht, не снаряжённая. 107кВт — мощность гибридной системы, 115/207кВт электромотора — максимальная, не30-минутная. Ёмкость батареи полная. Для Q4 заводская полная масса n.v., оставлена неизвестной. MY24 в имени файла не используется как год выпуска.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 2,
+            "selector": "SR.626.A43-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Q4 Intensa; exact powertrain column"
+          },
+          "fuel": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A43-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Q4 Intensa; exact powertrain column"
+          },
+          "powertrainKind": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A43-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Q4 Intensa; exact powertrain column"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A43-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Q4 Intensa; exact powertrain column"
+          },
+          "systemPowerKw": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A43-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Q4 Intensa; Gesamtleistung"
+          },
+          "batteryKwh": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A43-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Q4 Intensa; Batteriekapazität (Brutto, netto) — Brutto"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A43-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Q4 Intensa; exact powertrain column"
+          },
+          "transmission": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.626.A43-0-1-IT0; 1.2 Ibrida 145 PS eDCT6 Q4 Intensa; exact powertrain column"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "767be136-1760-43a0-9054-90654a6e7634",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "dde8919268e31011d24bed5b",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "156 PS Elettrica 54 kWh Intensa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh Intensa",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор",
+        "grossVehicleWeightKg": 2040
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской швейцарский прайс Junior: действует с31.03.2025, редакция08.2025. Визуально сверены исполнения на стр2, технические таблицы PDF35–36 (печатные36–37). Записана полная масса Gesamtgewicht, не снаряжённая. 107кВт — мощность гибридной системы, 115/207кВт электромотора — максимальная, не30-минутная. Ёмкость батареи полная. Для Q4 заводская полная масса n.v., оставлена неизвестной. MY24 в имени файла не используется как год выпуска.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 2,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; exact powertrain column"
+          },
+          "fuel": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; exact powertrain column"
+          },
+          "powertrainKind": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; exact powertrain column"
+          },
+          "powerHp": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; exact powertrain column"
+          },
+          "powerKw": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; exact powertrain column"
+          },
+          "motorPeakKw": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; Max. Leistung des Elektromotors"
+          },
+          "batteryKwh": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; Batteriekapazität (Brutto, netto) — Brutto"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; exact powertrain column"
+          },
+          "transmission": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; exact powertrain column"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 36,
+            "selector": "SR.627.A2E-0-1-IT0; 156 PS Elettrica 54 kWh Intensa; Gesamtgewicht (kg)"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "767be136-1760-43a0-9054-90654a6e7634",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "4d973d6b87b550835d88bfe6",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "280 PS Elettrica 54 kWh Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "280 PS Elettrica 54 kWh Veloce",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 280,
+        "powerKw": 207,
+        "motorPeakKw": 207,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор",
+        "grossVehicleWeightKg": 2055
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской швейцарский прайс Junior: действует с31.03.2025, редакция08.2025. Визуально сверены исполнения на стр2, технические таблицы PDF35–36 (печатные36–37). Записана полная масса Gesamtgewicht, не снаряжённая. 107кВт — мощность гибридной системы, 115/207кВт электромотора — максимальная, не30-минутная. Ёмкость батареи полная. Для Q4 заводская полная масса n.v., оставлена неизвестной. MY24 в имени файла не используется как год выпуска.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 2,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; exact powertrain column"
+          },
+          "fuel": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; exact powertrain column"
+          },
+          "powertrainKind": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; exact powertrain column"
+          },
+          "powerHp": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; exact powertrain column"
+          },
+          "powerKw": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; exact powertrain column"
+          },
+          "motorPeakKw": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; Max. Leistung des Elektromotors"
+          },
+          "batteryKwh": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; Batteriekapazität (Brutto, netto) — Brutto"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; exact powertrain column"
+          },
+          "transmission": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 35,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; exact powertrain column"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alfaromeo.ch/content/dam/alfa/ch/pricelists/2025/09/ALFA_ROMEO_JUNIOR_MY24_Preisliste_31032025_DE_v14.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7208652933c2fba5e379bbaf3220ef1a3be5664db7fd784a30173cf2c7b6132d",
+            "validFrom": "2025-03-31",
+            "documentRevision": "626/627-24-V14-08-2025",
+            "pdfPage": 36,
+            "selector": "SR.627.V2R-0-1-V00; 280 PS Elettrica 54 kWh Veloce; Gesamtgewicht (kg)"
+          }
+        }
+      }
+    }
+  ]
+}

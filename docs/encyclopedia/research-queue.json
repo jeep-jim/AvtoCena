@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T15:01:58.341375+07:00",
+  "updatedAt": "2026-10-22T15:10:32.107432+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32590,12 +32590,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T15:01:58.341375+07:00",
+    "updatedAt": "2026-10-22T15:10:32.107432+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "giulietta_2018_2020_prepared",
+    "state": "junior_2025_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Junior 2024–2026; Giulietta retry отдельно",
+    "nextModel": "Alfa Romeo Junior2024/2026: точные годовые источники; затем MiTo2008+",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32807,6 +32807,16 @@
         "fields": 368,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-giulietta-2018-2020": {
+        "batch": "research-2026-10-22-alfa-giulietta-2018-2020",
+        "commit": "07cc5f3fd15e12f4165170b5d088f3dbfb081552",
+        "workflow": 39744821834,
+        "variants": 35,
+        "newVariants": 35,
+        "fields": 254,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32827,12 +32837,12 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
-      "commit": "92fde64ff774cc7e8ed2938241ddad0c98496f51",
-      "workflow": 39744256772,
-      "variants": 59,
-      "newVariants": 42,
-      "fields": 368,
+      "batch": "research-2026-10-22-alfa-giulietta-2018-2020",
+      "commit": "07cc5f3fd15e12f4165170b5d088f3dbfb081552",
+      "workflow": 39744821834,
+      "variants": 35,
+      "newVariants": 35,
+      "fields": 254,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32968,13 +32978,23 @@
         "fields": 368,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-giulietta-2018-2020",
+        "commit": "07cc5f3fd15e12f4165170b5d088f3dbfb081552",
+        "workflow": 39744821834,
+        "variants": 35,
+        "newVariants": 35,
+        "fields": 254,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-giulietta-2018-2020",
-      "variants": 35,
-      "newVariants": 35,
-      "fields": 254,
+      "batch": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce",
+      "variants": 7,
+      "newVariants": 4,
+      "fields": 41,
       "state": "prepared_not_applied"
     },
     "lastCompletedPass": {
@@ -33001,7 +33021,7 @@
     "concurrentRelease": {
       "release": "56ce8698f675d0c5b05e56430a5a60576ce75596",
       "workflow": 39743381721,
-      "state": "in_progress",
+      "state": "success",
       "indexPreparation": "success",
       "containsCurrentPass": false
     },
