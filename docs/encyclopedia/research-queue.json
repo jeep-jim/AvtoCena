@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T01:11:32+07:00",
+  "updatedAt": "2026-10-23T01:28:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -33936,7 +33936,19 @@
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2017-2022-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": [
+      {
+        "batch": "research-2026-10-23-alpine-a110-2023",
+        "modelId": "cc5a28958f2b1bd3eac176d4",
+        "year": 2023,
+        "state": "requested",
+        "expectedRevision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+        "newVariants": 4,
+        "updatedVariants": 1,
+        "fields": 45,
+        "notIncludedInRelease": "e78c7154232f39ac73a2253314e2b0fe34da1344"
+      }
+    ],
     "lastCompletedPass": {
       "version": 1,
       "checkedAt": "2026-10-23T01:11:32+07:00",

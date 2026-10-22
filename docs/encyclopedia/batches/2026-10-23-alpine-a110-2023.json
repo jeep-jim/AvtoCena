@@ -1,0 +1,777 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-alpine-a110-2023",
+  "entries": [
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2023,
+      "variantId": "c778ac18248bd921411211e7",
+      "trim": "1.8 Turbo 252 PS DCT",
+      "operation": "create",
+      "expectedRevision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.8 Turbo 252 PS DCT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 252,
+        "powerKw": 185,
+        "icePowerKw": 185,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская брошюра гаммы 2023, PDF54: точная колонка 1.8 Turbo 252 PS DCT, 1798 см³, бензиновый ДВС, 185 кВт/252 метрических PS, задний привод, 7-ступенчатая DCT, купе. Полная масса 1360 кг, не снаряжённая. Дата печати PDF64 — 12/2022, заголовок документа GAMME_2023; предложение этих исполнений подтверждает заводской прайс от 30.03.2023. Руководство подтверждает тип M5P Turbo; суффикс неизвестен. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; trim; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a",
+            "identitySources": [
+              {
+                "url": "https://alpinestoremilano.it/wp-content/uploads/2023/04/Listino_A110_MY22_04.04.2023.pdf",
+                "effectiveAt": "2023-03-30",
+                "pdfPage": 1,
+                "datePage": 1,
+                "sourceNature": "Открытый заводской прайс у дилера; только технические факты",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group",
+                "selector": "1.8 Turbo 252 PS DCT; trim; technical specifications",
+                "sourceSha256": "ca86287eca3624186a8c4c2147bbf767fea5ca1b8e06b71d1f24039da72a8dbf"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; fuel; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powertrainKind; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; engineCc; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; bodyType; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "drive": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; drive; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "transmission": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; transmission; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powerHp; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; powerKw; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; icePowerKw; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "1.8 Turbo 252 PS DCT; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2023,
+      "variantId": "c73a37d1587270d981331980",
+      "trim": "GT",
+      "operation": "create",
+      "expectedRevision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "GT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская брошюра гаммы 2023, PDF54: точная колонка GT, 1798 см³, бензиновый ДВС, 221 кВт/300 метрических PS, задний привод, 7-ступенчатая DCT, купе. Полная масса 1360 кг, не снаряжённая. Дата печати PDF64 — 12/2022, заголовок документа GAMME_2023; предложение этих исполнений подтверждает заводской прайс от 30.03.2023. Руководство подтверждает тип M5P Turbo; суффикс неизвестен. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; trim; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a",
+            "identitySources": [
+              {
+                "url": "https://alpinestoremilano.it/wp-content/uploads/2023/04/Listino_A110_MY22_04.04.2023.pdf",
+                "effectiveAt": "2023-03-30",
+                "pdfPage": 1,
+                "datePage": 1,
+                "sourceNature": "Открытый заводской прайс у дилера; только технические факты",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group",
+                "selector": "GT; trim; technical specifications",
+                "sourceSha256": "ca86287eca3624186a8c4c2147bbf767fea5ca1b8e06b71d1f24039da72a8dbf"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; fuel; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powertrainKind; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; engineCc; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; bodyType; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "drive": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; drive; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "transmission": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; transmission; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powerHp; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; powerKw; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; icePowerKw; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "GT; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2023,
+      "variantId": "e49f1ae82458acf14314596f",
+      "trim": "R",
+      "operation": "create",
+      "expectedRevision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "R",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "bodyType": "coupe",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "grossVehicleWeightKg": 1316
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "bodyType",
+        "drive",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская брошюра гаммы 2023, PDF54: точная колонка R, 1798 см³, бензиновый ДВС, 221 кВт/300 метрических PS, задний привод, 7-ступенчатая DCT, купе. Полная масса 1316 кг, не снаряжённая. Дата печати PDF64 — 12/2022, заголовок документа GAMME_2023; предложение этих исполнений подтверждает заводской прайс от 30.03.2023. Руководство подтверждает тип M5P Turbo; суффикс неизвестен. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; trim; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a",
+            "identitySources": [
+              {
+                "url": "https://alpinestoremilano.it/wp-content/uploads/2023/04/Listino_A110_MY22_04.04.2023.pdf",
+                "effectiveAt": "2023-03-30",
+                "pdfPage": 1,
+                "datePage": 1,
+                "sourceNature": "Открытый заводской прайс у дилера; только технические факты",
+                "checkedAt": "2026-10-23",
+                "sourcePublisher": "Alpine / Renault Group",
+                "selector": "R; trim; technical specifications",
+                "sourceSha256": "ca86287eca3624186a8c4c2147bbf767fea5ca1b8e06b71d1f24039da72a8dbf"
+              }
+            ]
+          },
+          "fuel": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; fuel; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "powertrainKind": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; powertrainKind; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "engineCc": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; engineCc; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "bodyType": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; bodyType; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "drive": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; drive; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "transmission": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; transmission; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "powerHp": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; powerHp; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "powerKw": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; powerKw; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "icePowerKw": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; icePowerKw; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+            "effectiveAt": "2023",
+            "pdfPage": 54,
+            "datePage": 64,
+            "documentDate": "12/2022",
+            "documentTitle": "ALPINE_BROCHURE_GAMME_2023_BE_FR_WEB",
+            "sourceNature": "Оригинальная заводская брошюра гаммы 2023 у дилера; дата печати 12/2022, PDF создан 03.01.2023",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "R; grossVehicleWeightKg; technical specifications",
+            "sourceSha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2023,
+      "variantId": "c240bc3e5843bca07e5a3055",
+      "trim": "San Remo 73",
+      "operation": "create",
+      "expectedRevision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "San Remo 73",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1798,
+        "engineCode": "M5P Turbo",
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "engineCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://alpinestoremilano.it/wp-content/uploads/2023/04/Listino_A110_MY22_04.04.2023.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Открытый заводской прайс Alpine от 30.03.2023, PDF1: точная версия A110 SAN REMO 73 L.E., 221 кВт/300 метрических cv. Руководство A110 подтверждает бензин, обычный ДВС, 1798 см³ и тип M5P Turbo. Масса, кузов, привод и коробка здесь не перенесены с других версий. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://alpinestoremilano.it/wp-content/uploads/2023/04/Listino_A110_MY22_04.04.2023.pdf",
+            "effectiveAt": "2023-03-30",
+            "pdfPage": 1,
+            "datePage": 1,
+            "sourceNature": "Открытый заводской прайс у дилера; только технические факты",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "San Remo 73; trim; technical specifications",
+            "sourceSha256": "ca86287eca3624186a8c4c2147bbf767fea5ca1b8e06b71d1f24039da72a8dbf"
+          },
+          "fuel": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powertrainKind": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCc": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          },
+          "powerHp": {
+            "url": "https://alpinestoremilano.it/wp-content/uploads/2023/04/Listino_A110_MY22_04.04.2023.pdf",
+            "effectiveAt": "2023-03-30",
+            "pdfPage": 1,
+            "datePage": 1,
+            "sourceNature": "Открытый заводской прайс у дилера; только технические факты",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "San Remo 73; powerHp; technical specifications",
+            "sourceSha256": "ca86287eca3624186a8c4c2147bbf767fea5ca1b8e06b71d1f24039da72a8dbf"
+          },
+          "powerKw": {
+            "url": "https://alpinestoremilano.it/wp-content/uploads/2023/04/Listino_A110_MY22_04.04.2023.pdf",
+            "effectiveAt": "2023-03-30",
+            "pdfPage": 1,
+            "datePage": 1,
+            "sourceNature": "Открытый заводской прайс у дилера; только технические факты",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "San Remo 73; powerKw; technical specifications",
+            "sourceSha256": "ca86287eca3624186a8c4c2147bbf767fea5ca1b8e06b71d1f24039da72a8dbf"
+          },
+          "icePowerKw": {
+            "url": "https://alpinestoremilano.it/wp-content/uploads/2023/04/Listino_A110_MY22_04.04.2023.pdf",
+            "effectiveAt": "2023-03-30",
+            "pdfPage": 1,
+            "datePage": 1,
+            "sourceNature": "Открытый заводской прайс у дилера; только технические факты",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group",
+            "selector": "San Remo 73; icePowerKw; technical specifications",
+            "sourceSha256": "ca86287eca3624186a8c4c2147bbf767fea5ca1b8e06b71d1f24039da72a8dbf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2023,
+      "variantId": "8dd1d0b6bc6fb66eacbea728",
+      "trim": "S",
+      "expectedDigest": "d78d9dcbaba016b49a4bda244f8975006c317b71557187b6936e1f87cb65ce9d",
+      "patch": {
+        "engineCode": "M5P Turbo"
+      },
+      "confirmedFields": [
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только тип двигателя M5P Turbo по заводскому руководству A110 10.10.2017–14.07.2025. Прежние подтверждённые характеристики S2023 и их источники сохраняются через историю; суффикс двигателя неизвестен. Статус review.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://www.user-manual.alpinecars.com/en/en/content/xef/technical-specifications/information-about-vehicle/engine-identification-engine",
+            "effectiveAt": "2017-10-10/2025-07-14",
+            "selector": "1.8 Tce; M5P Turbo; 1798 cc; unleaded petrol",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Alpine / Renault Group"
+          }
+        }
+      }
+    }
+  ]
+}
