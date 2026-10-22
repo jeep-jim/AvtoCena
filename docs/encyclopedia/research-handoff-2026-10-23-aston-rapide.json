@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T06:04:47.661931+07:00",
+  "next": {
+    "modelId": "62f2bf675810869f68e70d2e",
+    "make": "Aston Martin",
+    "model": "Rapide",
+    "scopeSinceYear": 2008,
+    "observedYears": [
+      2021,
+      2020,
+      2016,
+      2014
+    ],
+    "expectedObservedVariants": 6,
+    "baseline2014OnlyRevision": "af17e5b2-f4de-46c4-98d3-6bca7962772d",
+    "action": "Сначала свежий API всех лет; исходный снимок не содержит10MY/11MY/12MY, хотя заводские руководства есть. Подтвердить фактические годы начала и расширить отсутствующие исполнения через guardedcreate. Rapide/S/AMR/E не смешивать; регистрационные2020/2021 не считать автоматически модельными."
+  },
+  "factoryCatalog": "https://www.astonmartin.com/api/v1/owner-guides/search?model=Rapide",
+  "discoveredFactoryGuides": [
+    {
+      "title": "12MY Rapide English Owner Guide",
+      "url": "https://www.astonmartin.com/guides/CD43-19A321-AA.pdf",
+      "modelYearTags": [
+        {
+          "name": "year",
+          "value": "12MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "12MY"
+        }
+      ]
+    },
+    {
+      "title": "11MY Rapide English Owner Guide",
+      "url": "https://www.astonmartin.com/guides/AD43-19A321-AD.pdf",
+      "modelYearTags": [
+        {
+          "name": "year",
+          "value": "11MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "11MY"
+        }
+      ]
+    },
+    {
+      "title": "10MY Rapide English Owner Guide",
+      "url": "https://www.astonmartin.com/guides/AD43-19A321-AA.pdf",
+      "modelYearTags": [
+        {
+          "name": "year",
+          "value": "10MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "10MY"
+        }
+      ]
+    }
+  ],
+  "completedDbxGroup": {
+    "report": "docs/encyclopedia/reports/2026-10-23-aston-dbx-pass.json",
+    "retry": "docs/encyclopedia/retry-2026-10-23-aston-dbx-remaining.json",
+    "operations": 9,
+    "newVariants": 3,
+    "updatedVariants": 6,
+    "confirmedFields": 30,
+    "compiledCalculationFields": 27,
+    "apiReadback": true,
+    "repeatBatch": false,
+    "models": [
+      {
+        "modelId": "41c41db2719c2d3b75470cd9",
+        "model": "Dbx",
+        "beforeRevision": "4a6246e4-eb28-41bd-ab68-a8d4ff49ca80",
+        "afterRevision": "c22950a3-0496-42bf-bc18-8f3a3284d782",
+        "variantsBefore": 45,
+        "variantsAfter": 46,
+        "researchedVariantsAfter": 10
+      },
+      {
+        "modelId": "49f0712914bb0925bd328b09",
+        "model": "DBX707",
+        "beforeRevision": "d40b2beb-0f01-4c61-98b7-be04153aa40e",
+        "afterRevision": "035fe994-4950-41e2-b363-f3fa485d49bc",
+        "variantsBefore": 8,
+        "variantsAfter": 10,
+        "researchedVariantsAfter": 4
+      }
+    ]
+  },
+  "index": {
+    "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "activeIndexFromPublicEvidence": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "blockingRuns": [
+      {
+        "id": 39840733509,
+        "status": "in_progress"
+      },
+      {
+        "id": 39857878662,
+        "status": "pending"
+      }
+    ],
+    "duplicateReleaseRequested": false,
+    "nextAction": "После завершения обоих существующих выпусков и подтверждения writerfree — один штатный совокупный индекс всех pending партий, подготовка цен и проверка фактической активации."
+  },
+  "referenceIntake": {
+    "run": 39831884392,
+    "job": 120009865681,
+    "status": "completed",
+    "conclusion": "failure",
+    "checkpointFromLatestRoadmap": {
+      "visited": 13045,
+      "saved": 8403,
+      "pending": 253,
+      "completed": false,
+      "error": "redirect_outside_catalog",
+      "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/"
+    },
+    "restarted": false
+  },
+  "publicParityBlocker": {
+    "mismatches": [
+      {
+        "offerId": "b65974b83d5399d588073fc5",
+        "fields": {
+          "totalRub": {
+            "search": null,
+            "card": 25164851,
+            "equal": false
+          },
+          "calculationStatus": {
+            "search": "needs_data",
+            "card": "estimated",
+            "equal": false
+          }
+        }
+      }
+    ],
+    "report": "docs/encyclopedia/reports/2026-10-23-aston-dbx-public-parity.json",
+    "nextAction": "После существующей публикации повторить точную пару карточка/поиск и одинаковый контекст расчёта; установить причину расхождения статуса/цены, не менять правила в рамках заполнения данных."
+  },
+  "allModelsComplete": false,
+  "rules": [
+    "Не менять сборщики, расчётные правила, защиты и секреты.",
+    "Max64, свежие SHA256/CAS, история, независимый API-readback; без конкурентной записи в модель.",
+    "Старые retry сохранить; отсутствие доступного документа не означает отсутствия данных."
+  ]
+}

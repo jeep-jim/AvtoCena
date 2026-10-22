@@ -1,0 +1,567 @@
+{
+  "checkedAt": "2026-10-22T23:02:08.035566+00:00",
+  "passed": false,
+  "scope": "DBX/DBX707 UAE card/search parity in active index; new batch not activated",
+  "undefinedNormalization": "React Flight $undefined interpreted as absent value, equivalent to missing JSON property",
+  "generationId": "gen_1792660229591_c103ed94",
+  "rows": [
+    {
+      "offerId": "08efe0bb926946faa6f34098",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "707",
+          "card": "707",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "awd",
+          "card": "awd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "b90cccfb2978073e5c6418ee",
+      "checks": {
+        "year": {
+          "search": 2021,
+          "card": 2021,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "awd",
+          "card": "awd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "b65974b83d5399d588073fc5",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "Aston Martin DBX707",
+          "card": "Aston Martin DBX707",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 3982,
+          "card": 3982,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 707,
+          "card": 707,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 520,
+          "card": 520,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 520,
+          "card": 520,
+          "equal": true
+        },
+        "drive": {
+          "search": "awd",
+          "card": "awd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+          "card": "permanent_encyclopedia:ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": 25164851,
+          "equal": false
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "estimated",
+          "equal": false
+        }
+      }
+    },
+    {
+      "offerId": "ece980b72f2a54fcde2b073c",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "awd",
+          "card": "awd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "2a7a4269df7313e7411430c2",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "awd",
+          "card": "awd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "fd51363c1260a0b60ad2e450",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "707",
+          "card": "707",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "awd",
+          "card": "awd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "c604ea4f2bfa31bc54f781a5",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "awd",
+          "card": "awd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "52aba3b7ce64108f485a7b16",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "awd",
+          "card": "awd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "80fce614312fb9ac1f062753",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "awd",
+          "card": "awd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    }
+  ],
+  "market": "uae",
+  "repeatedExactModificationGroups": 2,
+  "offersChecked": 9,
+  "comparisons": 99,
+  "recheck": {
+    "offerId": "b65974b83d5399d588073fc5",
+    "independentRequests": true,
+    "mismatchReproduced": true,
+    "searchStatus": "needs_data",
+    "searchTotalRub": null,
+    "cardStatus": "estimated",
+    "cardTotalRub": 25164851,
+    "searchGeneration": "gen_1792660229591_c103ed94",
+    "bothPowerDataSource": "permanent_encyclopedia:ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "technicalFieldsMatch": true,
+    "causeNotDetermined": true,
+    "calculationRulesChanged": false
+  }
+}

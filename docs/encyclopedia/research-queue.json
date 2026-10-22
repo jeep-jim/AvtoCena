@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T06:01:00+07:00",
+  "updatedAt": "2026-10-23T06:04:47.661931+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -913,12 +913,13 @@
         2021,
         2020
       ],
-      "variants": 45,
+      "variants": 46,
       "status": "partial_verified_fields",
-      "researchedVariants": 9,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
-      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
+      "researchedVariants": 10,
+      "checkedAt": "2026-10-23T06:03:26.123596+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-dbx-remaining.json",
+      "nextAction": "Сохранены точные поля партии DBX; оставшиеся поля/годы и неоднозначные исходные исполнения — в retry. 9 операций не повторять.",
+      "revision": "c22950a3-0496-42bf-bc18-8f3a3284d782"
     },
     {
       "id": "49f0712914bb0925bd328b09",
@@ -930,12 +931,13 @@
         2023,
         2022
       ],
-      "variants": 8,
+      "variants": 10,
       "status": "partial_verified_fields",
-      "researchedVariants": 2,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
-      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
+      "researchedVariants": 4,
+      "checkedAt": "2026-10-23T06:03:26.123596+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-dbx-remaining.json",
+      "nextAction": "Сохранены точные поля партии DBX; оставшиеся поля/годы и неоднозначные исходные исполнения — в retry. 9 операций не повторять.",
+      "revision": "035fe994-4950-41e2-b363-f3fa485d49bc"
     },
     {
       "id": "62f2bf675810869f68e70d2e",
@@ -32675,12 +32677,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T06:01:00+07:00",
+    "updatedAt": "2026-10-23T06:04:47.661931+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "dbs_two_batches_saved_api_readback_pass_activation_pending",
+    "state": "dbx_years_mass_saved_api_readback_pass_activation_pending_parity_retry",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Aston Martin Dbx (41c41db2719c2d3b75470cd9), все реальные годы/исполнения с2008; затем DBX707 (49f0712914bb0925bd328b09). Пробелы DBS в отдельном retry,22 операции не повторять.",
+    "nextModel": "Aston Martin Rapide (62f2bf675810869f68e70d2e), все реальные годы/исполнения с2008; начать со свежих годовых API и заводских10MY/11MY/12MY, отсутствующих в текущем снимке. DBX/DBX707 остаются в точном retry,9 операций не повторять.",
     "lastVerifiedResearch": "aston-dbs-superleggera-770",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 75,
@@ -32697,24 +32699,24 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-dbs-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-dbx-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "aston-dbs-superleggera-770",
-      "batch": "research-2026-10-23-aston-dbs-superleggera-770",
-      "commit": "4320c7b28e4028cb8ff9773651d057da8ac9b415",
-      "workflow": 39862288879,
-      "job": 120115722010,
-      "variants": 5,
-      "newVariants": 4,
-      "updatedVariants": 1,
-      "fields": 29,
-      "compiledCalculationFields": 25,
+      "key": "aston-dbx-years-mass",
+      "batch": "research-2026-10-23-aston-dbx-years-mass",
+      "commit": "5afbf10c1d1ad6ebbb0175c3027eb12a68ca8d21",
+      "workflow": 39868864645,
+      "job": 120137927440,
+      "variants": 9,
+      "newVariants": 3,
+      "updatedVariants": 6,
+      "fields": 30,
+      "compiledCalculationFields": 27,
       "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
       "indexMembershipState": "saved_after_active_ac711_snapshot",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-dbs-modern-readback.json"
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-dbx-readback.json"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792660229591_c103ed94",
@@ -32910,115 +32912,107 @@
         "includedInIndex": false,
         "indexMembershipState": "saved_after_active_ac711_snapshot",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-dbs-modern-readback.json"
+      },
+      {
+        "key": "aston-dbx-years-mass",
+        "batch": "research-2026-10-23-aston-dbx-years-mass",
+        "commit": "5afbf10c1d1ad6ebbb0175c3027eb12a68ca8d21",
+        "workflow": 39868864645,
+        "job": 120137927440,
+        "variants": 9,
+        "newVariants": 3,
+        "updatedVariants": 6,
+        "fields": 30,
+        "compiledCalculationFields": 27,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "saved_after_active_ac711_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-dbx-readback.json"
       }
     ],
-    "inFlightResearch": {
+    "inFlightResearch": [],
+    "lastCompletedPass": {
+      "checkedAt": "2026-10-23T06:04:47.661931+07:00",
       "batch": "research-2026-10-23-aston-dbx-years-mass",
-      "state": "prepared_for_workflow",
+      "apiReadback": true,
+      "passed": true,
       "operations": 9,
       "newVariants": 3,
       "updatedVariants": 6,
-      "fields": 30,
+      "confirmedFields": 30,
       "compiledCalculationFields": 27,
-      "preflightReport": "docs/encyclopedia/reports/2026-10-23-aston-dbx-preflight.json",
-      "apiReadback": false
-    },
-    "lastCompletedPass": {
-      "version": 1,
-      "checkedAt": "2026-10-23T05:07:59.205155+07:00",
-      "modelId": "a49dff8aecc0f27d5149f172",
-      "make": "Aston Martin",
-      "model": "Dbs",
-      "batchResults": [
+      "unchangedVariantsPreserved": 47,
+      "models": [
         {
-          "checkedAt": "2026-10-22T22:04:22.967Z",
-          "batch": "research-2026-10-23-aston-dbs-2008-2012",
-          "apiReadback": true,
-          "passed": true,
-          "operations": 17,
-          "newVariants": 17,
-          "updatedVariants": 0,
-          "confirmedFields": 170,
-          "compiledCalculationFields": 153,
-          "unchangedVariantsPreserved": 20,
-          "beforeRevision": "70ccade7-bdd0-4e5a-8e25-533b004309f7",
-          "afterRevision": "07d9067e-a5af-4420-abe6-f388a096a409",
-          "variantsBefore": 20,
-          "variantsAfter": 37,
-          "previousFieldSourcesPreserved": true,
-          "manualWrites": 0,
-          "wholeRowVerified": false,
-          "duplicatesAdded": 0,
-          "compilerChanged": false,
-          "activationConfirmed": false,
-          "commit": "84840c44dfbd5ceea9c7d2e9154f10f7c2e2bf75",
-          "workflow": 39861914446,
-          "job": 120114462167,
-          "workflowConclusion": "success"
+          "modelId": "41c41db2719c2d3b75470cd9",
+          "model": "Dbx",
+          "beforeRevision": "4a6246e4-eb28-41bd-ab68-a8d4ff49ca80",
+          "afterRevision": "c22950a3-0496-42bf-bc18-8f3a3284d782",
+          "variantsBefore": 45,
+          "variantsAfter": 46,
+          "researchedVariantsAfter": 10
         },
         {
-          "checkedAt": "2026-10-22T22:06:51.617Z",
-          "batch": "research-2026-10-23-aston-dbs-superleggera-770",
-          "apiReadback": true,
-          "passed": true,
-          "operations": 5,
-          "newVariants": 4,
-          "updatedVariants": 1,
-          "confirmedFields": 29,
-          "compiledCalculationFields": 25,
-          "unchangedVariantsPreserved": 36,
-          "beforeRevision": "07d9067e-a5af-4420-abe6-f388a096a409",
-          "afterRevision": "54a36a34-9ea0-4320-938e-7e3c9cf98d88",
-          "variantsBefore": 37,
-          "variantsAfter": 41,
-          "previousFieldSourcesPreserved": true,
-          "manualWrites": 0,
-          "wholeRowVerified": false,
-          "duplicatesAdded": 0,
-          "compilerChanged": false,
-          "activationConfirmed": false,
-          "commit": "4320c7b28e4028cb8ff9773651d057da8ac9b415",
-          "workflow": 39862288879,
-          "job": 120115722010,
-          "workflowConclusion": "success"
+          "modelId": "49f0712914bb0925bd328b09",
+          "model": "DBX707",
+          "beforeRevision": "d40b2beb-0f01-4c61-98b7-be04153aa40e",
+          "afterRevision": "035fe994-4950-41e2-b363-f3fa485d49bc",
+          "variantsBefore": 8,
+          "variantsAfter": 10,
+          "researchedVariantsAfter": 4
         }
       ],
-      "newVariants": 21,
-      "updatedVariants": 1,
-      "operations": 22,
-      "confirmedFields": 199,
-      "compiledCalculationFields": 178,
-      "variantsBefore": 20,
-      "variantsAfter": 41,
-      "researchedVariantsAfter": 24,
-      "unresearchedExistingVariants": 17,
-      "finalRevision": "54a36a34-9ea0-4320-938e-7e3c9cf98d88",
-      "nativeMatching": {
-        "checkedAt": "2026-10-22T22:07:00.715Z",
-        "passed": true,
-        "exactCases": 21,
-        "existing2019SuperleggeraIdentityGuard": true,
-        "manualInputPreserved": true,
+      "previousFieldSourcesPreserved": true,
+      "manualWrites": 0,
+      "wholeRowVerified": false,
+      "duplicatesAdded": 0,
+      "nativeMatcher": {
+        "exactCases": 3,
         "genericIdentityStillBlocked": true,
-        "registrationYearNotInferred": true,
-        "unknown770FieldsNotInferred": true,
-        "productionMatcherUnchanged": true,
-        "activationConfirmed": false
+        "manualInputPreserved": true,
+        "unknownFieldsNotInferred": true,
+        "yearNotInferred": true
       },
-      "publicParity": {
-        "passed": true,
-        "offers": 5,
-        "comparisons": 55,
-        "repeatedExactModificationGroups": 1,
-        "report": "docs/encyclopedia/reports/2026-10-23-aston-dbs-public-parity.json"
-      },
-      "allModelsComplete": false,
-      "allDbsFieldsComplete": false,
+      "compilerChanged": false,
       "activationConfirmed": false,
+      "version": 1,
+      "commit": "5afbf10c1d1ad6ebbb0175c3027eb12a68ca8d21",
+      "workflow": 39868864645,
+      "job": 120137927440,
+      "workflowConclusion": "success",
+      "scopeSinceYear": 2008,
+      "allModelsComplete": false,
+      "historicalExpansionComplete": false,
+      "publicParity": {
+        "passed": false,
+        "offers": 9,
+        "comparisons": 99,
+        "repeatedExactModificationGroups": 2,
+        "mismatches": [
+          {
+            "offerId": "b65974b83d5399d588073fc5",
+            "fields": {
+              "totalRub": {
+                "search": null,
+                "card": 25164851,
+                "equal": false
+              },
+              "calculationStatus": {
+                "search": "needs_data",
+                "card": "estimated",
+                "equal": false
+              }
+            }
+          }
+        ],
+        "independentlyReproduced": true,
+        "report": "docs/encyclopedia/reports/2026-10-23-aston-dbx-public-parity.json"
+      },
       "releaseState": {
         "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
         "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
-        "activeIndexFromLatestVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+        "activeIndexFromPublicEvidence": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
         "blockingRuns": [
           {
             "id": 39840733509,
@@ -33030,7 +33024,7 @@
           }
         ],
         "duplicateReleaseRequested": false,
-        "nextAction": "После существующих публикаций — один штатный совокупный индекс всех pending партий и подготовка цен; проверить состав и активацию."
+        "nextAction": "После завершения обоих существующих выпусков и подтверждения writerfree — один штатный совокупный индекс всех pending партий, подготовка цен и проверка фактической активации."
       },
       "referenceIntake": {
         "run": 39831884392,
@@ -33047,9 +33041,8 @@
         },
         "restarted": false
       },
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-dbs-remaining.json",
-      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-dbx.json",
-      "scopeSinceYear": 2008,
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-dbx-remaining.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-rapide.json",
       "collectorsCalculationRulesGuardsSecretsChanged": false
     },
     "failedIndexRelease": {
@@ -33117,7 +33110,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-dbx.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-rapide.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -35826,6 +35819,163 @@
       "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-dbx.json",
       "scopeSinceYear": 2008,
       "collectorsCalculationRulesGuardsSecretsChanged": false
+    },
+    "astonDbxPass": {
+      "checkedAt": "2026-10-23T06:04:47.661931+07:00",
+      "batch": "research-2026-10-23-aston-dbx-years-mass",
+      "apiReadback": true,
+      "passed": true,
+      "operations": 9,
+      "newVariants": 3,
+      "updatedVariants": 6,
+      "confirmedFields": 30,
+      "compiledCalculationFields": 27,
+      "unchangedVariantsPreserved": 47,
+      "models": [
+        {
+          "modelId": "41c41db2719c2d3b75470cd9",
+          "model": "Dbx",
+          "beforeRevision": "4a6246e4-eb28-41bd-ab68-a8d4ff49ca80",
+          "afterRevision": "c22950a3-0496-42bf-bc18-8f3a3284d782",
+          "variantsBefore": 45,
+          "variantsAfter": 46,
+          "researchedVariantsAfter": 10
+        },
+        {
+          "modelId": "49f0712914bb0925bd328b09",
+          "model": "DBX707",
+          "beforeRevision": "d40b2beb-0f01-4c61-98b7-be04153aa40e",
+          "afterRevision": "035fe994-4950-41e2-b363-f3fa485d49bc",
+          "variantsBefore": 8,
+          "variantsAfter": 10,
+          "researchedVariantsAfter": 4
+        }
+      ],
+      "previousFieldSourcesPreserved": true,
+      "manualWrites": 0,
+      "wholeRowVerified": false,
+      "duplicatesAdded": 0,
+      "nativeMatcher": {
+        "exactCases": 3,
+        "genericIdentityStillBlocked": true,
+        "manualInputPreserved": true,
+        "unknownFieldsNotInferred": true,
+        "yearNotInferred": true
+      },
+      "compilerChanged": false,
+      "activationConfirmed": false,
+      "version": 1,
+      "commit": "5afbf10c1d1ad6ebbb0175c3027eb12a68ca8d21",
+      "workflow": 39868864645,
+      "job": 120137927440,
+      "workflowConclusion": "success",
+      "scopeSinceYear": 2008,
+      "allModelsComplete": false,
+      "historicalExpansionComplete": false,
+      "publicParity": {
+        "passed": false,
+        "offers": 9,
+        "comparisons": 99,
+        "repeatedExactModificationGroups": 2,
+        "mismatches": [
+          {
+            "offerId": "b65974b83d5399d588073fc5",
+            "fields": {
+              "totalRub": {
+                "search": null,
+                "card": 25164851,
+                "equal": false
+              },
+              "calculationStatus": {
+                "search": "needs_data",
+                "card": "estimated",
+                "equal": false
+              }
+            }
+          }
+        ],
+        "independentlyReproduced": true,
+        "report": "docs/encyclopedia/reports/2026-10-23-aston-dbx-public-parity.json"
+      },
+      "releaseState": {
+        "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+        "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+        "activeIndexFromPublicEvidence": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+        "blockingRuns": [
+          {
+            "id": 39840733509,
+            "status": "in_progress"
+          },
+          {
+            "id": 39857878662,
+            "status": "pending"
+          }
+        ],
+        "duplicateReleaseRequested": false,
+        "nextAction": "После завершения обоих существующих выпусков и подтверждения writerfree — один штатный совокупный индекс всех pending партий, подготовка цен и проверка фактической активации."
+      },
+      "referenceIntake": {
+        "run": 39831884392,
+        "job": 120009865681,
+        "status": "completed",
+        "conclusion": "failure",
+        "checkpointFromLatestRoadmap": {
+          "visited": 13045,
+          "saved": 8403,
+          "pending": 253,
+          "completed": false,
+          "error": "redirect_outside_catalog",
+          "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/"
+        },
+        "restarted": false
+      },
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-dbx-remaining.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-rapide.json",
+      "collectorsCalculationRulesGuardsSecretsChanged": false
+    },
+    "dbxPublicParityBlocker": {
+      "passed": false,
+      "offers": 9,
+      "comparisons": 99,
+      "repeatedExactModificationGroups": 2,
+      "mismatches": [
+        {
+          "offerId": "b65974b83d5399d588073fc5",
+          "fields": {
+            "totalRub": {
+              "search": null,
+              "card": 25164851,
+              "equal": false
+            },
+            "calculationStatus": {
+              "search": "needs_data",
+              "card": "estimated",
+              "equal": false
+            }
+          }
+        }
+      ],
+      "independentlyReproduced": true,
+      "report": "docs/encyclopedia/reports/2026-10-23-aston-dbx-public-parity.json"
+    },
+    "latestPublicationCheck": {
+      "checkedAt": "2026-10-23T06:03:26.123596+07:00",
+      "runs": [
+        {
+          "id": 39840733509,
+          "status": "in_progress",
+          "conclusion": null,
+          "updatedAt": "2026-10-22T19:31:29Z"
+        },
+        {
+          "id": 39857878662,
+          "status": "pending",
+          "conclusion": null,
+          "updatedAt": "2026-10-22T21:30:56Z"
+        }
+      ],
+      "newReleaseRequested": false,
+      "action": "После завершения обоих существующих выпусков и подтверждения writerfree — один штатный совокупный индекс всех pending партий, подготовка цен и проверка фактической активации."
     }
   },
   "scope": {
