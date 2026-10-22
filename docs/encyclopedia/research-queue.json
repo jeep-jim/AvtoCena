@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T10:32:42+07:00",
+  "updatedAt": "2026-10-22T10:43:02+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -197,7 +197,9 @@
         2024
       ],
       "variants": 23,
-      "status": "historical_source_needed"
+      "status": "historical_source_needed",
+      "lastReviewedAt": "2026-10-22T10:43:02+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aion-rt-source-review.json"
     },
     {
       "id": "d2045d3d36b1b4e4e1130acf",
@@ -32407,9 +32409,9 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T10:32:42+07:00",
+    "updatedAt": "2026-10-22T10:43:02+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "research_saved_index_release_requested",
+    "state": "research_saved_index_installed_next_batch_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "AION i60",
@@ -32435,14 +32437,14 @@
         "workflow": 39716530594
       }
     },
-    "rawAuditCalculated": 69,
-    "publicSerializationParity": 69,
+    "rawAuditCalculated": 75,
+    "publicSerializationParity": 75,
     "allModelsComplete": false,
-    "installedRelease": "7fc70b5352dd166f0a7c0ed5e02c237a526a9d70",
-    "installedWorkflow": 39713387784,
-    "indexDigest": "53929d4693ab117fbecf255e929a140119d84c7c1fff423faa0b53b9a5c39887",
-    "catalogRowsEnriched": 451,
-    "catalogFieldsFilled": 763,
+    "installedRelease": "5b8453f63b8e4af36092f79f86dbe665e557e969",
+    "installedWorkflow": 39716807213,
+    "indexDigest": "7d4d2834a0f1a9832927b96b736928799ce3d8c3495ca6fcc3ce2bf32befc508",
+    "catalogRowsEnriched": 476,
+    "catalogFieldsFilled": 814,
     "remaining": [
       "Exact edition/year/trim identity gaps across the encyclopedia",
       "Certified30-minute power, vehicle category and gross mass where required",
@@ -32457,7 +32459,8 @@
       "fields": 51,
       "digest": "45c8946796e4617b3c5d4c9701eff56179936a1137a181322e7c6d1d14f1f62d",
       "dependsOnReleaseWorkflow": 39716807213,
-      "requiresFreshApiCas": true
+      "requiresFreshApiCas": true,
+      "dependencyReleaseStatus": "success"
     },
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
@@ -32468,9 +32471,11 @@
       "variants": 32,
       "fields": 301,
       "apiReadback": true,
-      "newVariants": 26
+      "newVariants": 26,
+      "includedInIndex": "7d4d2834a0f1a9832927b96b736928799ce3d8c3495ca6fcc3ce2bf32befc508"
     },
-    "indexReleaseRequested": true
+    "indexReleaseRequested": false,
+    "auditGenerationId": "gen_1792548716303_1c83fca2"
   },
   "scope": {
     "minimumYear": 2008,

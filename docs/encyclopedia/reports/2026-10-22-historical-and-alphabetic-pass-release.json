@@ -1,0 +1,156 @@
+{
+  "checkedAt": "2026-10-22T03:42:24.717Z",
+  "release": "5b8453f63b8e4af36092f79f86dbe665e557e969",
+  "workflow": 39716807213,
+  "job": 119620750683,
+  "conclusion": "success",
+  "index": {
+    "stage": "encyclopedia_index_ready",
+    "modelsRead": 2423,
+    "variants": 67297,
+    "factoryFields": 18019,
+    "ownerReferenceFields": 485251,
+    "manualFields": 0,
+    "digest": "7d4d2834a0f1a9832927b96b736928799ce3d8c3495ca6fcc3ce2bf32befc508",
+    "manifestDigest": "ca8d6d23b0f5cd05e0b2bbf22c0514d422a06059e7f0cbda41bfb156c70a85e6",
+    "readback": true
+  },
+  "delta": {
+    "indexedVariants": 26,
+    "factoryFields": 254,
+    "ownerReferenceFields": -19
+  },
+  "matchingTests": {
+    "tests": 24,
+    "failures": 0
+  },
+  "apiReadback": {
+    "variants": 32,
+    "fields": 301,
+    "passed": true
+  },
+  "audit": {
+    "generationId": "gen_1792548716303_1c83fca2",
+    "markets": {
+      "china": {
+        "rows": 132350,
+        "pending": 61579,
+        "exactMatches": 77478,
+        "filledRecords": 134,
+        "filledFields": 152,
+        "completeSpecifications": 275,
+        "calculated": 49,
+        "calculationMissing": {
+          "gross_vehicle_weight_kg": 220,
+          "vehicle_category": 6
+        },
+        "missing": {
+          "unclassified_field_provenance": 35193,
+          "engine_cc_missing": 1790,
+          "fuel_or_powertrain_missing": 869,
+          "peak_power_missing": 17878,
+          "certified_30min_power_missing": 59684
+        }
+      },
+      "korea": {
+        "rows": 9918,
+        "pending": 7155,
+        "exactMatches": 37,
+        "filledRecords": 33,
+        "filledFields": 102,
+        "completeSpecifications": 18,
+        "calculated": 18,
+        "calculationMissing": {},
+        "missing": {
+          "unclassified_field_provenance": 13456,
+          "engine_cc_missing": 1,
+          "peak_power_missing": 6517,
+          "certified_30min_power_missing": 2022
+        }
+      },
+      "uae": {
+        "rows": 22039,
+        "pending": 22039,
+        "exactMatches": 9,
+        "filledRecords": 9,
+        "filledFields": 35,
+        "completeSpecifications": 6,
+        "calculated": 6,
+        "calculationMissing": {},
+        "missing": {
+          "unclassified_field_provenance": 22032,
+          "engine_cc_missing": 21629,
+          "peak_power_missing": 22029,
+          "certified_30min_power_missing": 2712,
+          "powertrain_identity_conflict": 1
+        }
+      },
+      "europe": {
+        "rows": 46127,
+        "pending": 7600,
+        "exactMatches": 36731,
+        "filledRecords": 300,
+        "filledFields": 525,
+        "completeSpecifications": 82,
+        "calculated": 2,
+        "calculationMissing": {
+          "vehicle_category": 80
+        },
+        "missing": {
+          "engine_cc_missing": 423,
+          "unclassified_field_provenance": 1764,
+          "fuel_or_powertrain_missing": 1248,
+          "certified_30min_power_missing": 5963,
+          "peak_power_missing": 712
+        }
+      },
+      "georgia": {
+        "rows": 1705,
+        "pending": 1705,
+        "exactMatches": 0,
+        "filledRecords": 0,
+        "filledFields": 0,
+        "completeSpecifications": 0,
+        "calculated": 0,
+        "calculationMissing": {},
+        "missing": {
+          "unclassified_field_provenance": 1639,
+          "engine_cc_missing": 1572,
+          "peak_power_missing": 1431,
+          "certified_30min_power_missing": 391,
+          "fuel_or_powertrain_missing": 66
+        }
+      }
+    },
+    "publicPriceParity": 75,
+    "readback": true,
+    "priorPublicPriceParity": 74
+  },
+  "limitations": [
+    "Аудит относится к сохранённому контрольному снимку пяти рынков, не ко всему текущему каталогу и не к японским аукционам.",
+    "Партия AION i60 8/51 только подготовлена и не входит в этот индекс.",
+    "Полнота всех моделей/лет/полей и целевая скорость сайта не достигнуты."
+  ],
+  "publicReadback": {
+    "checkedAt": "2026-10-22T10:43:02+07:00",
+    "health": {
+      "ok": true,
+      "releaseSha": "5b8453f63b8e4af36092f79f86dbe665e557e969",
+      "calculationVersion": "c16b8553a4be95ec20c052ac22f94ad623eb1467cbab52cc64a2b581f4dbfc14"
+    },
+    "control": {
+      "id": "ajes-korea-6d1ocW5lV5Cl77",
+      "searchOccurrences": 1,
+      "totalRubWithoutCityDelivery": 3560003,
+      "engineCc": 1999,
+      "powerHp": 160,
+      "detailVisiblePriceParity": true,
+      "detailHttpStatus": 200
+    },
+    "observedRequestSeconds": {
+      "search": 5.82,
+      "detail": 7.99
+    },
+    "speedTargetMet": false
+  }
+}
