@@ -12592,3 +12592,12 @@ e5cb3235/workflow39836589326/job120026421635SUCCESS. Независимый API-
 Следующий новый алфавитный курсор: Aston Martin DB11 (eff6651568e364a8a5a40e97),2017–2024, свежая проверка всех исполнений/полей. Не начинать вновь A1102024. Alpine R2024, ранние GT/S2025, R70, A1102026/R Ultime, A290 Première Édition/региональные версии/Collection, сертифицированная30-минутная мощность и неизвестные массы сохранены в отдельный retry. A390 отсутствует среди текущих2423 моделей: требуется штатное создание канонической модели, существующий guardedcreate умеет только новые варианты существующей модели. Факт отсутствия модели не означает отсутствия технических данных. Прежние retry не удалены. Полный проход всех моделей с2008 не завершён.
 
 Отчёт: docs/encyclopedia/reports/2026-10-23-alpine-late-pass.json. Retry: docs/encyclopedia/retry-2026-10-23-alpine-late-remaining.json. Точный курсор и порядок продолжения: docs/encyclopedia/research-handoff-2026-10-23-aston-db11.json.
+
+
+### 23.10.2026 02:29 Asia/Krasnoyarsk — Reader установлен; подготовка безопасного восстановления Китая
+
+Deploy39835446552/job120022420382 terminalSUCCESS. PublichealthHTTP200 подтвердилf4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112/calculationVersiona187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44. Новыйreader установлен, productionaudit/storagechecks/четыреspecificationparityPASS. Индексготов19:06:03UTC,digestac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb,manifestf8b44fa3e303db16530ee0263ba68768650b208bdfbca93a5d296a04489a2e3e,2423models/68134variants/25075factoryFields/485097ownerReferenceFields/9manualFields. Росткe78+4variants/+41factoryfields соответствуетпозднейA1102023; членствотрёхпоследующихAlpineпартийпоодномувремениготовностинеутверждается,новыйснимокчитаетмоделипоследовательно.
+
+Штатныйpostdeploysharedprices39839574726/job120036714067terminalSUCCESS;39839574812CRMdeliverySUCCESS. Предыдущиеtimeout/unavailableнеповторялисьвслепую. Green39835446628/PDF39835446767SUCCESS. БолееактуальныйCRM39836211270SUCCESS,модельныеbrowser39836211295SUCCESS;старыйCRM39835446631FAILбудетразграничёнпожурналу. Новыйdeployне запущен.
+
+ПередвключениемCATALOG_CHUNKED_ALL_PROJECTION_WRITEвштатнойпубликациизапрошенодносвежееread-onlyчтениеwriter/manifest. Плансохраняется:ровноодинChina recoveryиз39680279304безrefresh/reset/sourceзапросов;всепроверкисохранить. ТекущаяChina162449/2014total0остаётсянеисправленнойдоpublishedиliveподтверждения. ЭнциклопедияпродолжаетотдельныйAstonDB11,не дублировать. fbbfd577подсказкаCorollaпоканеустановлена.
