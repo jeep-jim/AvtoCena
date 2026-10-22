@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-22T19:11:12+07:00",
+  "make": "Alfa Romeo",
+  "model": "Stelvio",
+  "modelId": "0d734c400f4417df7f272d30",
+  "nextYear": 2020,
+  "followingYears": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "nextModelAfterStelvio": "Alfa Romeo Tonale",
+  "currentRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+  "requiresFreshApiPreflight": true,
+  "existing2020Variants": 31,
+  "completedPass": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-pass.json",
+  "completedBatches": [
+    "research-2026-10-22-alfa-stelvio-2018-september-range",
+    "research-2026-10-22-alfa-stelvio-2018-manual-sport",
+    "research-2026-10-22-alfa-stelvio-2019-september-range"
+  ],
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-stelvio-2018-2019-remaining.json",
+  "integration": {
+    "state": "aggregate_release_in_progress_late_batches_require_next_index",
+    "checkedAt": "2026-10-22T19:10:00+07:00",
+    "currentRelease": "4fac75d1846655c4528ccbe55ef551c2bb888f25",
+    "currentWorkflow": 39774518003,
+    "currentStep": "Prepare exact price indexes before activating the release",
+    "privateIndexPreparedAt": "2026-10-22T12:00:40Z",
+    "privateIndexPrepareStartedAt": "2026-10-22T11:58:30Z",
+    "lateBatchesExcludedFromThisPreparedSnapshot": [
+      "research-2026-10-22-alfa-stelvio-2018-manual-sport",
+      "research-2026-10-22-alfa-stelvio-2019-september-range"
+    ],
+    "firstBatchMembershipNeedsVerification": "research-2026-10-22-alfa-stelvio-2018-september-range",
+    "newBatchesActivationConfirmed": false,
+    "duplicateReleaseRequested": false,
+    "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
+    "observedProductionIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+    "visitorRequestSearchOrSyncAdded": false,
+    "nextAction": "Дождаться текущего совокупного выпуска, проверить фактический состав и readback. Две поздние партии сохранены после подготовки снимка: включить в следующий штатный индекс после завершения текущего, без конкурентного deploy. Отдельное сопровождение выпуска уже поручено владельцем."
+  },
+  "sourceLeadsNotYetValidatedForNextBatch": [
+    "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+    "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva",
+    "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19.pdf"
+  ],
+  "instructions": [
+    "Не начинать заново 2017–2019: 48 новых строк текущего прохода уже сохранены и проверены.",
+    "Сверить 2020 по точной редакции, двигателю, мощности, приводу и коробке; две прежние Veloce 280 PS имеют одинаковое название, их не сливать автоматически.",
+    "Проверить 250 PS Veloce и даты появления, 280 PS, 160/190/210 PS Diesel, Quadrifoglio. Не переносить 510 PS на другую модификацию по названию.",
+    "Не запускать конкурентный research для этой модели или дублирующий выпуск.",
+    "Корея: текущий search вернул 503 japan_search_unavailable / visitor_restricted; ограничение не обходить. Карточка Sonata доступна, полная parity пока не подтверждена."
+  ]
+}

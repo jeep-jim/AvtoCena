@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T18:14:48+07:00",
+  "updatedAt": "2026-10-22T19:11:12+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -687,15 +687,15 @@
         2018,
         2017
       ],
-      "variants": 173,
+      "variants": 221,
       "status": "partial_verified_fields",
-      "researchedVariants": 55,
-      "checkedAt": "2026-10-22T18:14:48+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-spider-stelvio-remaining.json",
-      "nextAction": "Alfa Romeo Stelvio2018, затем2019–2026, Tonale; Spider/2017 gaps in retry",
-      "lastCheckedAt": "2026-10-22T18:14:48+07:00",
-      "lastVerifiedPass": "docs/encyclopedia/reports/2026-10-22-spider-stelvio-pass.json",
-      "researchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-stelvio-2018.json"
+      "researchedVariants": 103,
+      "checkedAt": "2026-10-22T19:11:12+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-stelvio-2018-2019-remaining.json",
+      "nextAction": "Alfa Romeo Stelvio 2020, затем 2021–2026 и Tonale; отдельные пропуски 2018–2019 в retry",
+      "lastCheckedAt": "2026-10-22T19:11:12+07:00",
+      "lastVerifiedPass": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-pass.json",
+      "researchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-stelvio-2020.json"
     },
     {
       "id": "cff3b237a2a26a9e00708f89",
@@ -32629,12 +32629,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T18:14:48+07:00",
+    "updatedAt": "2026-10-22T19:11:12+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "spider_2008_2010_stelvio_2017_47_new_saved_activation_blocked",
+    "state": "stelvio_2018_2019_48_new_saved_late_batches_pending_next_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Stelvio2018, затем2019–2026, Tonale; Spider/2017 gaps in retry",
+    "nextModel": "Alfa Romeo Stelvio 2020, затем 2021–2026 и Tonale; отдельные пропуски 2018–2019 в retry",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -33069,6 +33069,48 @@
         "apiReadback": true,
         "includedInIndex": false,
         "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2017-italy-range-readback.json"
+      },
+      "alfa-stelvio-2018-september-range": {
+        "batch": "research-2026-10-22-alfa-stelvio-2018-september-range",
+        "commit": "425ce5ef610c68b538c73e05a8f8cfa4e8c68105",
+        "workflow": 39774482659,
+        "variants": 21,
+        "newVariants": 21,
+        "updatedVariants": 0,
+        "fields": 202,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "prepared_snapshot_membership_not_yet_verified",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2018-september-range-readback.json"
+      },
+      "alfa-stelvio-2018-manual-sport": {
+        "batch": "research-2026-10-22-alfa-stelvio-2018-manual-sport",
+        "commit": "ae40f66292deae51d3c9389d5b2814df6e66ce58",
+        "workflow": 39774944116,
+        "variants": 22,
+        "newVariants": 1,
+        "updatedVariants": 21,
+        "fields": 84,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "applied_after_prepared_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2018-manual-sport-readback.json"
+      },
+      "alfa-stelvio-2019-september-range": {
+        "batch": "research-2026-10-22-alfa-stelvio-2019-september-range",
+        "commit": "fb5936f9d18b81324b9b3e0357e5da5f7d16deb2",
+        "workflow": 39775230259,
+        "variants": 26,
+        "newVariants": 26,
+        "updatedVariants": 0,
+        "fields": 260,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "applied_after_prepared_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2019-september-range-readback.json"
       }
     },
     "rawAuditCalculated": 75,
@@ -33086,21 +33128,23 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-22-stelvio-2018-2019-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-stelvio-2017-italy-range",
-      "commit": "f276e93cbf9b653864c6ce927fd35cc960dab563",
-      "workflow": 39768610181,
-      "variants": 15,
-      "newVariants": 15,
-      "fields": 134,
+      "batch": "research-2026-10-22-alfa-stelvio-2019-september-range",
+      "commit": "fb5936f9d18b81324b9b3e0357e5da5f7d16deb2",
+      "workflow": 39775230259,
+      "variants": 26,
+      "newVariants": 26,
+      "updatedVariants": 0,
+      "fields": 260,
       "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
-      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2017-italy-range-readback.json"
+      "indexMembershipState": "applied_after_prepared_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2019-september-range-readback.json"
     },
-    "indexReleaseRequested": false,
+    "indexReleaseRequested": true,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
     "pendingIndexBatches": [
       {
@@ -33116,8 +33160,8 @@
         "workflow": 39720654481
       }
     ],
-    "requestedRelease": "ad327011321b44aa7e0d59465dded59095067908",
-    "requestedReleaseWorkflow": 39754473141,
+    "requestedRelease": "4fac75d1846655c4528ccbe55ef551c2bb888f25",
+    "requestedReleaseWorkflow": 39774518003,
     "additionalPreparedResearch": [
       {
         "path": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2011-manual-retry.json",
@@ -33399,195 +33443,171 @@
         "apiReadback": true,
         "includedInIndex": false,
         "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2017-italy-range-readback.json"
+      },
+      {
+        "batch": "research-2026-10-22-alfa-stelvio-2018-september-range",
+        "commit": "425ce5ef610c68b538c73e05a8f8cfa4e8c68105",
+        "workflow": 39774482659,
+        "variants": 21,
+        "newVariants": 21,
+        "updatedVariants": 0,
+        "fields": 202,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "prepared_snapshot_membership_not_yet_verified",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2018-september-range-readback.json"
+      },
+      {
+        "batch": "research-2026-10-22-alfa-stelvio-2018-manual-sport",
+        "commit": "ae40f66292deae51d3c9389d5b2814df6e66ce58",
+        "workflow": 39774944116,
+        "variants": 22,
+        "newVariants": 1,
+        "updatedVariants": 21,
+        "fields": 84,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "applied_after_prepared_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2018-manual-sport-readback.json"
+      },
+      {
+        "batch": "research-2026-10-22-alfa-stelvio-2019-september-range",
+        "commit": "fb5936f9d18b81324b9b3e0357e5da5f7d16deb2",
+        "workflow": 39775230259,
+        "variants": 26,
+        "newVariants": 26,
+        "updatedVariants": 0,
+        "fields": 260,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "applied_after_prepared_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2019-september-range-readback.json"
       }
     ],
     "inFlightResearch": null,
     "lastCompletedPass": {
-      "checkedAt": "2026-10-22T18:14:48+07:00",
-      "models": [
-        {
-          "make": "Alfa Romeo",
-          "model": "Spider",
-          "years": [
-            2008,
-            2009,
-            2010
-          ],
-          "newVariantsByYear": {
-            "2008": 9,
-            "2009": 9,
-            "2010": 14
-          },
-          "checkedAt": "2026-10-22T11:12:27.354343+00:00",
-          "modelId": "d9d48f8457c33f7e466d6c6e",
-          "revision": "fd58d4e1-923b-4b00-b30c-d0f68a6c491e",
-          "variants": 35,
-          "duplicateExactNamedIdentities": 0,
-          "passed": true,
-          "baselineVariants": 3,
-          "untouchedPreserved": 3,
-          "newVariants": 32
-        },
-        {
-          "make": "Alfa Romeo",
-          "model": "Stelvio",
-          "years": [
-            2017
-          ],
-          "newVariantsByYear": {
-            "2017": 15
-          },
-          "checkedAt": "2026-10-22T11:12:27.359160+00:00",
-          "modelId": "0d734c400f4417df7f272d30",
-          "revision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
-          "variants": 173,
-          "duplicateExactNamedIdentities": 8,
-          "passed": true,
-          "new2017Variants": 15,
-          "baselineVariants": 158,
-          "untouchedPreserved": 158,
-          "newDuplicateExactNamedIdentities": 0,
-          "preexistingDuplicateNamedExcess": 8,
-          "preexistingDuplicateGroups": [
-            {
-              "year": 2020,
-              "trim": "2.0 turbo 280 ps at8 q4 veloce",
-              "ids": [
-                "3fa7f427de05dc68fd001fc4",
-                "e4840b180924519bd75d22fd"
-              ]
-            },
-            {
-              "year": 2022,
-              "trim": "alfa romeo stelvio",
-              "ids": [
-                "fb9a989f57964fc0192f85c0",
-                "3f12c77e9fcd454ecc9c8537"
-              ]
-            },
-            {
-              "year": 2022,
-              "trim": "2.2 turbo diesel 190 ps at8 q4 sprint",
-              "ids": [
-                "ea80ef32e9ac6b12f92ab00c",
-                "8fccc46ab1b1963303fddc74"
-              ]
-            },
-            {
-              "year": 2022,
-              "trim": "2.2 turbo diesel 210 ps at8 q4 veloce",
-              "ids": [
-                "f018e72a6dbb367cf9a03370",
-                "c20facbfa1a7278ed99ca3ea",
-                "550a5b1445d9d1557fc91090"
-              ]
-            },
-            {
-              "year": 2024,
-              "trim": "2.0 turbo 280 ps at8 q4 sprint",
-              "ids": [
-                "29aea0472a884b72569e2bfb",
-                "922e45f4d3e7bf1324a873e6"
-              ]
-            },
-            {
-              "year": 2025,
-              "trim": "2.2 turbo diesel 210 ps at8 q4 veloce",
-              "ids": [
-                "394987de08b9a24517851c6a",
-                "09986a7db475620cad7360ee",
-                "de7c36f0d9be23de2b6517e2"
-              ]
-            }
-          ]
-        }
+      "checkedAt": "2026-10-22T19:11:12+07:00",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "years": [
+        2018,
+        2019
       ],
-      "newVariants": 47,
-      "updatedExistingVariants": 0,
-      "confirmedFields": 463,
-      "calculationFieldsCompiled": 412,
-      "referenceOnlyFields": 4,
-      "identityNames": 47,
-      "untouchedVariantsPreserved": 161,
+      "modelId": "0d734c400f4417df7f272d30",
+      "revision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+      "variants": 221,
+      "baselineVariants": 173,
+      "untouchedPreserved": 173,
+      "newVariants": 48,
+      "newVariantsByYear": {
+        "2018": 22,
+        "2019": 26
+      },
       "newExactNamedIdentityDuplicates": 0,
-      "preexistingStelvioDuplicateNamedExcess": 8,
+      "preexistingDuplicateNamedExcess": 8,
+      "researchedVariants": 103,
+      "passed": true,
+      "variantOperations": 69,
+      "additionalUpdatesToNewRows": 21,
+      "updatedPreviouslyExistingVariants": 0,
+      "confirmedFields": 546,
+      "calculationFieldsCompiled": 476,
+      "referenceOnlyFields": 22,
+      "identityNames": 48,
       "wholeRowVerificationPromoted": false,
       "batches": [
         {
-          "batch": "research-2026-10-22-alfa-spider-2008-manual-edizione",
-          "commit": "e2c678bde26f757bbcac23c166246cd68a78b7bb",
-          "workflow": 39767249101,
-          "variants": 9,
-          "newVariants": 9,
-          "fields": 104,
+          "batch": "research-2026-10-22-alfa-stelvio-2018-september-range",
+          "commit": "425ce5ef610c68b538c73e05a8f8cfa4e8c68105",
+          "workflow": 39774482659,
+          "variants": 21,
+          "newVariants": 21,
+          "updatedVariants": 0,
+          "fields": 202,
           "workflowConclusion": "success",
           "apiReadback": true,
           "includedInIndex": false,
-          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-spider-2008-manual-edizione-readback.json"
+          "indexMembershipState": "prepared_snapshot_membership_not_yet_verified",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2018-september-range-readback.json"
         },
         {
-          "batch": "research-2026-10-22-alfa-spider-2009-2010-factory",
-          "commit": "c887c03e2d103a88e0ba576805d7222f110e54d5",
-          "workflow": 39768344710,
-          "variants": 23,
-          "newVariants": 23,
-          "fields": 225,
+          "batch": "research-2026-10-22-alfa-stelvio-2018-manual-sport",
+          "commit": "ae40f66292deae51d3c9389d5b2814df6e66ce58",
+          "workflow": 39774944116,
+          "variants": 22,
+          "newVariants": 1,
+          "updatedVariants": 21,
+          "fields": 84,
           "workflowConclusion": "success",
           "apiReadback": true,
           "includedInIndex": false,
-          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-spider-2009-2010-factory-readback.json"
+          "indexMembershipState": "applied_after_prepared_snapshot",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2018-manual-sport-readback.json"
         },
         {
-          "batch": "research-2026-10-22-alfa-stelvio-2017-italy-range",
-          "commit": "f276e93cbf9b653864c6ce927fd35cc960dab563",
-          "workflow": 39768610181,
-          "variants": 15,
-          "newVariants": 15,
-          "fields": 134,
+          "batch": "research-2026-10-22-alfa-stelvio-2019-september-range",
+          "commit": "fb5936f9d18b81324b9b3e0357e5da5f7d16deb2",
+          "workflow": 39775230259,
+          "variants": 26,
+          "newVariants": 26,
+          "updatedVariants": 0,
+          "fields": 260,
           "workflowConclusion": "success",
           "apiReadback": true,
           "includedInIndex": false,
-          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2017-italy-range-readback.json"
+          "indexMembershipState": "applied_after_prepared_snapshot",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2019-september-range-readback.json"
         }
       ],
       "tests": {
-        "freshCasPreflight": "PASS for each batch",
+        "freshCasPreflight": "PASS for all three batches",
         "researchBatchGuards": "PASS 8/8 and protected workflow validation",
-        "independentApiReadback": "PASS 47/463",
-        "unchangedProductionCompiler": "PASS 47/412,4 reference-only chassis fields",
-        "oldRecordsPreserved": "PASS161/161"
+        "independentApiReadback": "PASS 69 operations / 546 fields",
+        "unchangedProductionCompiler": "PASS 476 calculation fields, 22 reference-only chassis codes",
+        "oldRecordsPreserved": "PASS 173/173",
+        "newExactIdentityDuplicates": 0
       },
-      "preservationReport": "docs/encyclopedia/reports/2026-10-22-spider-stelvio-preservation.json",
-      "compileReport": "docs/encyclopedia/reports/2026-10-22-spider-stelvio-calculation-facts.json",
+      "compileReport": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-calculation-facts.json",
+      "preservationReport": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-preservation.json",
       "integration": {
-        "state": "activation_blocked_publication_wait_deadline",
-        "checkedAt": "2026-10-22T18:14:48+07:00",
-        "failedRelease": "f3f733172241a35369c270dc4409921ffeaa6fde",
-        "failedWorkflow": 39755527627,
-        "reason": "publication_wait_deadline",
-        "blockingOperation": "catalog_v3_publish_china",
-        "blockingWorkflow": 39743683106,
-        "blockingWorkflowObservedState": "in_progress",
-        "activationOccurred": false,
+        "state": "aggregate_release_in_progress_late_batches_require_next_index",
+        "checkedAt": "2026-10-22T19:11:12+07:00",
+        "currentRelease": "4fac75d1846655c4528ccbe55ef551c2bb888f25",
+        "currentWorkflow": 39774518003,
+        "currentStep": "Prepare exact price indexes before activating the release",
+        "privateIndexPreparedAt": "2026-10-22T12:00:40Z",
+        "privateIndexPrepareStartedAt": "2026-10-22T11:58:30Z",
+        "lateBatchesExcludedFromThisPreparedSnapshot": [
+          "research-2026-10-22-alfa-stelvio-2018-manual-sport",
+          "research-2026-10-22-alfa-stelvio-2019-september-range"
+        ],
+        "firstBatchMembershipNeedsVerification": "research-2026-10-22-alfa-stelvio-2018-september-range",
         "newBatchesActivationConfirmed": false,
         "duplicateReleaseRequested": false,
         "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
         "observedProductionIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
         "visitorRequestSearchOrSyncAdded": false,
-        "nextAction": "Отдельное сопровождение публикации уже назначено владельцем: после завершения текущегоpublisher один совокупный защищённый выпуск со всемиpendingNextIndexBatches. Не снимать/обходить блокировку,не дублироватьвыпуск."
+        "nextAction": "Дождаться текущего совокупного выпуска, проверить фактический состав и readback. Две поздние партии сохранены после подготовки снимка: включить в следующий штатный индекс после завершения текущего, без конкурентного deploy. Отдельное сопровождение выпуска уже поручено владельцем."
       },
       "regressionCheck": {
-        "passed": true,
-        "offers": 4,
-        "sonata160PS1999CcTotalRub": 3560003,
-        "scope": "Existing active index only; new historical rows not claimed active",
-        "report": "docs/encyclopedia/reports/2026-10-22-spider-stelvio-card-search-parity.json"
+        "state": "partial_europe_pass_korea_search_restricted",
+        "europeRepeatedExactVariants": 3,
+        "sonataCard160PS1999CcTotalRub": 3560003,
+        "sonataSearchParityConfirmed": false,
+        "koreaSearchStatus": 503,
+        "koreaSearchError": "japan_search_unavailable",
+        "koreaSearchReason": "visitor_restricted",
+        "accessRestrictionsBypassed": false,
+        "report": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-card-search-parity.json"
       },
-      "nextCursor": "Alfa Romeo Stelvio2018, затем2019–2026, Tonale; Spider/2017 gaps in retry",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-spider-stelvio-remaining.json",
-      "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-stelvio-2018.json",
+      "nextCursor": "Alfa Romeo Stelvio 2020, затем 2021–2026 и Tonale; отдельные пропуски 2018–2019 в retry",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-stelvio-2018-2019-remaining.json",
+      "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-stelvio-2020.json",
       "wholeEncyclopediaComplete": false,
-      "report": "docs/encyclopedia/reports/2026-10-22-spider-stelvio-pass.json"
+      "report": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-pass.json"
     },
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
@@ -33599,12 +33619,16 @@
       "nextAction": "Отдельное сопровождение публикации уже назначено владельцем: после завершения текущегоpublisher один совокупный защищённый выпуск со всемиpendingNextIndexBatches. Не снимать/обходить блокировку,не дублироватьвыпуск."
     },
     "concurrentRelease": {
-      "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
-      "workflow": 39755527627,
-      "state": "failure",
-      "error": "publication_wait_deadline",
+      "commit": "4fac75d1846655c4528ccbe55ef551c2bb888f25",
+      "workflow": 39774518003,
+      "state": "in_progress",
       "activationOccurred": false,
-      "note": "Отдельное сопровождение публикации уже назначено владельцем: после завершения текущегоpublisher один совокупный защищённый выпуск со всемиpendingNextIndexBatches. Не снимать/обходить блокировку,не дублироватьвыпуск."
+      "privateIndexPreparedAt": "2026-10-22T12:00:40Z",
+      "lateBatchesExcludedFromThisPreparedSnapshot": [
+        "research-2026-10-22-alfa-stelvio-2018-manual-sport",
+        "research-2026-10-22-alfa-stelvio-2019-september-range"
+      ],
+      "note": "Дождаться текущего совокупного выпуска, проверить фактический состав и readback. Две поздние партии сохранены после подготовки снимка: включить в следующий штатный индекс после завершения текущего, без конкурентного deploy. Отдельное сопровождение выпуска уже поручено владельцем."
     },
     "installedIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
     "catalogFieldsEnriched": 1359,
@@ -33632,7 +33656,7 @@
       "reason": "reference_fetch_stopped_checkpoint_saved",
       "nextAction": "Read checkpoint failed URL/reason before resume; do not bypass source access errors"
     },
-    "releaseRequestedAt": "2026-10-22T16:18:13.376522+07:00",
+    "releaseRequestedAt": "2026-10-22T18:57:30+07:00",
     "failedAggregateRelease": {
       "workflow": 39733245856,
       "commit": "bb3193f1fd0c37d1afeb23e615e940dadf6758ee",
@@ -33641,7 +33665,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-stelvio-2018.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-stelvio-2020.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39743682918,
@@ -34061,6 +34085,127 @@
       "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-stelvio-2018.json",
       "wholeEncyclopediaComplete": false,
       "report": "docs/encyclopedia/reports/2026-10-22-spider-stelvio-pass.json"
+    },
+    "stelvio2018_2019Pass": {
+      "checkedAt": "2026-10-22T19:11:12+07:00",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "years": [
+        2018,
+        2019
+      ],
+      "modelId": "0d734c400f4417df7f272d30",
+      "revision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+      "variants": 221,
+      "baselineVariants": 173,
+      "untouchedPreserved": 173,
+      "newVariants": 48,
+      "newVariantsByYear": {
+        "2018": 22,
+        "2019": 26
+      },
+      "newExactNamedIdentityDuplicates": 0,
+      "preexistingDuplicateNamedExcess": 8,
+      "researchedVariants": 103,
+      "passed": true,
+      "variantOperations": 69,
+      "additionalUpdatesToNewRows": 21,
+      "updatedPreviouslyExistingVariants": 0,
+      "confirmedFields": 546,
+      "calculationFieldsCompiled": 476,
+      "referenceOnlyFields": 22,
+      "identityNames": 48,
+      "wholeRowVerificationPromoted": false,
+      "batches": [
+        {
+          "batch": "research-2026-10-22-alfa-stelvio-2018-september-range",
+          "commit": "425ce5ef610c68b538c73e05a8f8cfa4e8c68105",
+          "workflow": 39774482659,
+          "variants": 21,
+          "newVariants": 21,
+          "updatedVariants": 0,
+          "fields": 202,
+          "workflowConclusion": "success",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "indexMembershipState": "prepared_snapshot_membership_not_yet_verified",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2018-september-range-readback.json"
+        },
+        {
+          "batch": "research-2026-10-22-alfa-stelvio-2018-manual-sport",
+          "commit": "ae40f66292deae51d3c9389d5b2814df6e66ce58",
+          "workflow": 39774944116,
+          "variants": 22,
+          "newVariants": 1,
+          "updatedVariants": 21,
+          "fields": 84,
+          "workflowConclusion": "success",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "indexMembershipState": "applied_after_prepared_snapshot",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2018-manual-sport-readback.json"
+        },
+        {
+          "batch": "research-2026-10-22-alfa-stelvio-2019-september-range",
+          "commit": "fb5936f9d18b81324b9b3e0357e5da5f7d16deb2",
+          "workflow": 39775230259,
+          "variants": 26,
+          "newVariants": 26,
+          "updatedVariants": 0,
+          "fields": 260,
+          "workflowConclusion": "success",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "indexMembershipState": "applied_after_prepared_snapshot",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2019-september-range-readback.json"
+        }
+      ],
+      "tests": {
+        "freshCasPreflight": "PASS for all three batches",
+        "researchBatchGuards": "PASS 8/8 and protected workflow validation",
+        "independentApiReadback": "PASS 69 operations / 546 fields",
+        "unchangedProductionCompiler": "PASS 476 calculation fields, 22 reference-only chassis codes",
+        "oldRecordsPreserved": "PASS 173/173",
+        "newExactIdentityDuplicates": 0
+      },
+      "compileReport": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-calculation-facts.json",
+      "preservationReport": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-preservation.json",
+      "integration": {
+        "state": "aggregate_release_in_progress_late_batches_require_next_index",
+        "checkedAt": "2026-10-22T19:11:12+07:00",
+        "currentRelease": "4fac75d1846655c4528ccbe55ef551c2bb888f25",
+        "currentWorkflow": 39774518003,
+        "currentStep": "Prepare exact price indexes before activating the release",
+        "privateIndexPreparedAt": "2026-10-22T12:00:40Z",
+        "privateIndexPrepareStartedAt": "2026-10-22T11:58:30Z",
+        "lateBatchesExcludedFromThisPreparedSnapshot": [
+          "research-2026-10-22-alfa-stelvio-2018-manual-sport",
+          "research-2026-10-22-alfa-stelvio-2019-september-range"
+        ],
+        "firstBatchMembershipNeedsVerification": "research-2026-10-22-alfa-stelvio-2018-september-range",
+        "newBatchesActivationConfirmed": false,
+        "duplicateReleaseRequested": false,
+        "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
+        "observedProductionIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+        "visitorRequestSearchOrSyncAdded": false,
+        "nextAction": "Дождаться текущего совокупного выпуска, проверить фактический состав и readback. Две поздние партии сохранены после подготовки снимка: включить в следующий штатный индекс после завершения текущего, без конкурентного deploy. Отдельное сопровождение выпуска уже поручено владельцем."
+      },
+      "regressionCheck": {
+        "state": "partial_europe_pass_korea_search_restricted",
+        "europeRepeatedExactVariants": 3,
+        "sonataCard160PS1999CcTotalRub": 3560003,
+        "sonataSearchParityConfirmed": false,
+        "koreaSearchStatus": 503,
+        "koreaSearchError": "japan_search_unavailable",
+        "koreaSearchReason": "visitor_restricted",
+        "accessRestrictionsBypassed": false,
+        "report": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-card-search-parity.json"
+      },
+      "nextCursor": "Alfa Romeo Stelvio 2020, затем 2021–2026 и Tonale; отдельные пропуски 2018–2019 в retry",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-stelvio-2018-2019-remaining.json",
+      "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-stelvio-2020.json",
+      "wholeEncyclopediaComplete": false,
+      "report": "docs/encyclopedia/reports/2026-10-22-stelvio-2018-2019-pass.json"
     }
   },
   "scope": {
