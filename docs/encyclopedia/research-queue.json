@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T06:04:47.661931+07:00",
+  "updatedAt": "2026-10-23T06:59:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32677,7 +32677,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T06:04:47.661931+07:00",
+    "updatedAt": "2026-10-23T06:59:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "dbx_years_mass_saved_api_readback_pass_activation_pending_parity_retry",
     "preserveManual": true,
@@ -32931,7 +32931,15 @@
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-dbx-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": {
+      "batch": "research-2026-10-23-aston-rapide-model-years",
+      "state": "prepared_for_workflow",
+      "operations": 12,
+      "newVariants": 12,
+      "fields": 104,
+      "compiledCalculationFields": 92,
+      "apiReadback": false
+    },
     "lastCompletedPass": {
       "checkedAt": "2026-10-23T06:04:47.661931+07:00",
       "batch": "research-2026-10-23-aston-dbx-years-mass",

@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-22T23:58:25.379Z",
+  "batch": "research-2026-10-23-aston-rapide-model-years",
+  "apiReadback": false,
+  "passed": true,
+  "operations": 12,
+  "newVariants": 12,
+  "updatedVariants": 0,
+  "confirmedFields": 104,
+  "compiledCalculationFields": 92,
+  "unchangedVariantsPreserved": 6,
+  "beforeRevision": "af17e5b2-f4de-46c4-98d3-6bca7962772d",
+  "afterRevision": "b5c5a27d-1972-4e6e-a829-a9830315e519",
+  "variantsBefore": 6,
+  "variantsAfter": 18,
+  "researchedVariantsAfter": 12,
+  "manualWrites": 0,
+  "wholeRowVerified": false,
+  "duplicatesAdded": 0,
+  "nativeMatcher": {
+    "exactCases": 12,
+    "genericIdentityStillBlocked": true,
+    "manualInputPreserved": true,
+    "unknownFieldsNotInferred": true,
+    "registrationYearNotInferred": true,
+    "performancePackAndCatalystsSeparate": true
+  },
+  "compilerChanged": false,
+  "activationConfirmed": false
+}
