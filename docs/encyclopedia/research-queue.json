@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:21:19.075721+07:00",
+  "updatedAt": "2026-10-22T16:25:06.034959+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32613,7 +32613,7 @@
     "state": "junior_mito_saved_index_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo MiTo: остаток2010 Turismo Sport, затем2011 по заводским таблицам; поздние2009 и прочие пропуски в retry",
+    "nextModel": "Alfa Romeo MiTo: завершить10/21 уточнений2008/2010 и2 Turismo Sport2010 по manual-handoff, затем11/99 точных исполнений2011 по handoff; никаких подготовленных кандидатов пока не применено",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32959,6 +32959,14 @@
         "state": "researched_candidates_not_applied",
         "variants": 11,
         "fields": 99,
+        "requiresFreshApiPreflight": true
+      },
+      {
+        "path": "docs/encyclopedia/research-handoff-2026-10-22-mito-manual-retry.json",
+        "state": "researched_candidates_not_applied",
+        "updateVariants": 10,
+        "updateFields": 21,
+        "newCandidates": 2,
         "requiresFreshApiPreflight": true
       }
     ],

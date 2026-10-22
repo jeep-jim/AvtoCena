@@ -1,0 +1,243 @@
+{
+  "checkedAt": "2026-10-22T09:24:41.766034+00:00",
+  "modelId": "81a4b290257d227a5fd86ee6",
+  "state": "researched_candidates_not_applied",
+  "requiresFreshApiPreflight": true,
+  "updates": [
+    {
+      "variantId": "754d116c1ee47270e847e335",
+      "year": 2008,
+      "trim": "1.4 TB 16V 155 PS MiTo",
+      "candidatePatch": {
+        "engineCc": 1368,
+        "engineCode": "199A8000",
+        "transmission": "manual"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.31.810_EN_02_06.08_L_LG/83_145_MiTo_604.31.810_EN_02_06.08_L_LG.pdf",
+        "pdfPages": [
+          226,
+          227
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    },
+    {
+      "variantId": "bf0ec9b64ec45d4873c1f69b",
+      "year": 2008,
+      "trim": "1.4 TB 16V 155 PS Turismo",
+      "candidatePatch": {
+        "engineCc": 1368,
+        "engineCode": "199A8000",
+        "transmission": "manual"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.31.810_EN_02_06.08_L_LG/83_145_MiTo_604.31.810_EN_02_06.08_L_LG.pdf",
+        "pdfPages": [
+          226,
+          227
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    },
+    {
+      "variantId": "6b0bd522698d410323b6ca7b",
+      "year": 2008,
+      "trim": "1.6 JTDM 16V 120 PS MiTo",
+      "candidatePatch": {
+        "engineCc": 1598,
+        "engineCode": "955A3000",
+        "transmission": "manual"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.31.810_EN_02_06.08_L_LG/83_145_MiTo_604.31.810_EN_02_06.08_L_LG.pdf",
+        "pdfPages": [
+          226,
+          227
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    },
+    {
+      "variantId": "eba05720902742770612b184",
+      "year": 2008,
+      "trim": "1.6 JTDM 16V 120 PS Turismo",
+      "candidatePatch": {
+        "engineCc": 1598,
+        "engineCode": "955A3000",
+        "transmission": "manual"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.31.810_EN_02_06.08_L_LG/83_145_MiTo_604.31.810_EN_02_06.08_L_LG.pdf",
+        "pdfPages": [
+          226,
+          227
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    },
+    {
+      "variantId": "469db545a1e44735462cd0cd",
+      "year": 2010,
+      "trim": "1.4 MultiAir TB 99 kW MT5 Lusso",
+      "candidatePatch": {
+        "engineCode": "955A2000"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.38.270_EN_02_07.10_L_LG/83_145_MiTo_604.38.270_EN_02_07.10_L_LG.pdf",
+        "pdfPages": [
+          231,
+          232
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    },
+    {
+      "variantId": "3251301fef989d7e16afa1ec",
+      "year": 2010,
+      "trim": "1.4 MultiAir TB 99 kW MT5 Veloce",
+      "candidatePatch": {
+        "engineCode": "955A2000"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.38.270_EN_02_07.10_L_LG/83_145_MiTo_604.38.270_EN_02_07.10_L_LG.pdf",
+        "pdfPages": [
+          231,
+          232
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    },
+    {
+      "variantId": "7f6f9c58b93bd5de30135f22",
+      "year": 2010,
+      "trim": "1.4 MultiAir TB 125 kW MT6 Cloverleaf",
+      "candidatePatch": {
+        "engineCode": "940A2000"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.38.270_EN_02_07.10_L_LG/83_145_MiTo_604.38.270_EN_02_07.10_L_LG.pdf",
+        "pdfPages": [
+          231,
+          232
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    },
+    {
+      "variantId": "a7e575384cb5dab52c5e4cad",
+      "year": 2010,
+      "trim": "1.3 JTDM-2 70 kW Turismo",
+      "candidatePatch": {
+        "engineCode": "199B1000",
+        "transmission": "manual"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.38.270_EN_02_07.10_L_LG/83_145_MiTo_604.38.270_EN_02_07.10_L_LG.pdf",
+        "pdfPages": [
+          234,
+          235
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    },
+    {
+      "variantId": "32847858cf0969b02e083387",
+      "year": 2010,
+      "trim": "1.3 JTDM-2 70 kW Lusso",
+      "candidatePatch": {
+        "engineCode": "199B1000",
+        "transmission": "manual"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.38.270_EN_02_07.10_L_LG/83_145_MiTo_604.38.270_EN_02_07.10_L_LG.pdf",
+        "pdfPages": [
+          234,
+          235
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    },
+    {
+      "variantId": "040b809591dd1ee320e2c5eb",
+      "year": 2010,
+      "trim": "1.3 JTDM-2 70 kW Veloce",
+      "candidatePatch": {
+        "engineCode": "199B1000",
+        "transmission": "manual"
+      },
+      "source": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.38.270_EN_02_07.10_L_LG/83_145_MiTo_604.38.270_EN_02_07.10_L_LG.pdf",
+        "pdfPages": [
+          234,
+          235
+        ],
+        "checkedAt": "2026-10-22"
+      }
+    }
+  ],
+  "newCandidates": [
+    {
+      "year": 2010,
+      "trim": "1.4 16V 70 kW MT6 Turismo Sport",
+      "candidatePatch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "transmission": "manual",
+        "drive": "fwd"
+      },
+      "technicalSource": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.38.270_EN_02_07.10_L_LG/83_145_MiTo_604.38.270_EN_02_07.10_L_LG.pdf",
+        "pdfPages": [
+          233,
+          235
+        ]
+      },
+      "identitySource": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-mito-turismo-sport-joins-the-ranks-from-199-a-month-otr"
+    },
+    {
+      "year": 2010,
+      "trim": "1.3 JTDM-2 70 kW MT5 Turismo Sport",
+      "candidatePatch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "engineCode": "199B1000",
+        "transmission": "manual",
+        "drive": "fwd"
+      },
+      "technicalSource": {
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/145_MiTo/83_145_MiTo_604.38.270_EN_02_07.10_L_LG/83_145_MiTo_604.38.270_EN_02_07.10_L_LG.pdf",
+        "pdfPages": [
+          234,
+          235
+        ]
+      },
+      "identitySource": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-mito-turismo-sport-joins-the-ranks-from-199-a-month-otr"
+    }
+  ],
+  "excluded": [
+    {
+      "field": "engineCode",
+      "identity": "2010 1.4 Petrol95HP",
+      "reason": "Заводской мануал противоречив: печатнаястр230/PDF231 даёт199A6000, печатнаястр232/PDF233 даёт198A4000. Код не выбирать догадкой."
+    },
+    {
+      "field": "grossVehicleWeightKg",
+      "reason": "Мануалы задают разные полные массы4/5мест; без известной посадочной конфигурации нельзявыбрать одно значение.2008Turbo155:1625/1705кг;diesel120:1685/1765кг.2010JTDM-2:1630/1710кг."
+    },
+    {
+      "identity": "2008 1.4 Petrol95PS",
+      "reason": "Мануал06.2008 описывает78PS;95PS из2010 не переносить назад без подтверждения."
+    },
+    {
+      "identity": "2010 TCT135",
+      "reason": "Обычный мануал показываетмеханический135; TCT требуетотдельногоприложения. Не переносить955A2000 автоматически."
+    }
+  ]
+}
