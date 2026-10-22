@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T17:23:25+07:00",
+  "updatedAt": "2026-10-22T17:48:30+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -622,6 +622,10 @@
       "make": "Alfa Romeo",
       "model": "Mito",
       "years": [
+        2018,
+        2017,
+        2016,
+        2015,
         2014,
         2013,
         2012,
@@ -630,19 +634,19 @@
         2009,
         2008
       ],
-      "variants": 111,
+      "variants": 168,
       "status": "partial_verified_fields",
-      "researchedVariants": 109,
+      "researchedVariants": 166,
       "checkedAt": "2026-10-22T01:36:38.003919+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-mito-remaining.json",
-      "nextAction": "Alfa Romeo MiTo2014; then2015–2018 and retry queue",
-      "lastCheckedAt": "2026-10-22T17:23:25+07:00",
-      "lastBatch": "research-2026-10-22-alfa-mito-2013-live-early-uk",
-      "lastBatchVariants": 3,
-      "lastBatchFields": 30,
-      "newVariantsThisBatch": 3,
+      "nextAction": "Alfa Romeo Spider: подтверждённые годы с 2008, затем Stelvio; MiTo regional/identity gaps remain in retry",
+      "lastCheckedAt": "2026-10-22T17:48:30+07:00",
+      "lastBatch": "research-2026-10-22-alfa-mito-2016-2018-racer-2015",
+      "lastBatchVariants": 34,
+      "lastBatchFields": 333,
+      "newVariantsThisBatch": 34,
       "fullHistoricalCoverage": false,
-      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2013-live-early-uk-readback.json"
+      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2016-2018-racer-2015-readback.json"
     },
     {
       "id": "d9d48f8457c33f7e466d6c6e",
@@ -658,7 +662,10 @@
       "researchedVariants": 0,
       "checkedAt": "2026-10-22T01:36:38.003919+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
-      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
+      "nextAction": "Spider: начать точную гамму 2008, затем реальные последующие годы; не переносить год регистрации на производство. После Spider — Stelvio.",
+      "lastCheckedAt": "2026-10-22T17:49:00+07:00",
+      "researchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-spider-2008.json",
+      "identityWarning": "2020/2021 are EEA registration observations; manufacturing year and generation unverified. Existing records preserved."
     },
     {
       "id": "0d734c400f4417df7f272d30",
@@ -32614,12 +32621,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T17:23:25+07:00",
+    "updatedAt": "2026-10-22T17:48:30+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "mito_2012_2013_51_new_saved_activation_pending",
+    "state": "mito_2014_2018_57_new_saved_activation_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo MiTo2014; then2015–2018 and retry queue",
+    "nextModel": "Alfa Romeo Spider: подтверждённые годы с 2008, затем Stelvio; MiTo regional/identity gaps remain in retry",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32982,6 +32989,42 @@
         "variants": 3,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-mito-2014-trofeo-edizione-tct": {
+        "batch": "research-2026-10-22-alfa-mito-2014-trofeo-edizione-tct",
+        "commit": "21ef2384ed0bdd52bfd570c8052c80ff254966eb",
+        "workflow": 39763970437,
+        "variants": 10,
+        "newVariants": 10,
+        "fields": 100,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2014-trofeo-edizione-tct-readback.json"
+      },
+      "alfa-mito-2015-uk-range": {
+        "batch": "research-2026-10-22-alfa-mito-2015-uk-range",
+        "commit": "3cd3201ad77fe21ac7c2d73a19ddc1800120cb15",
+        "workflow": 39764319483,
+        "variants": 13,
+        "newVariants": 13,
+        "fields": 130,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2015-uk-range-readback.json"
+      },
+      "alfa-mito-2016-2018-racer-2015": {
+        "batch": "research-2026-10-22-alfa-mito-2016-2018-racer-2015",
+        "commit": "be86347452ed517d279be4b1db3ce862ebcb50f7",
+        "workflow": 39765022671,
+        "variants": 34,
+        "newVariants": 34,
+        "fields": 333,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2016-2018-racer-2015-readback.json"
       }
     },
     "rawAuditCalculated": 75,
@@ -33002,15 +33045,16 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
-      "commit": "c13b40739d0e3579f79ea2b5b3977dda86831b0b",
-      "workflow": 39757749521,
-      "variants": 8,
-      "newVariants": 7,
-      "updatedVariants": 1,
-      "fields": 52,
+      "batch": "research-2026-10-22-alfa-mito-2016-2018-racer-2015",
+      "commit": "be86347452ed517d279be4b1db3ce862ebcb50f7",
+      "workflow": 39765022671,
+      "variants": 34,
+      "newVariants": 34,
+      "fields": 333,
+      "workflowConclusion": "success",
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": false,
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2016-2018-racer-2015-readback.json"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
@@ -33191,110 +33235,195 @@
         "fields": 52,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-mito-2012-remaining-manual",
+        "commit": "03bb00be07e9bfc4654fa3de23d1888a6d6badbd",
+        "workflow": 39760420714,
+        "operations": 18,
+        "newVariants": 11,
+        "updates": 7,
+        "fields": 130,
+        "workflowConclusion": "success",
+        "apiReadbackPassed": true,
+        "includedInActiveIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-mito-2012-uk-sprint-sportiva",
+        "commit": "0ea35325e4e6fa0c3b9cb62d5c70fef0bb4dc707",
+        "workflow": 39760829792,
+        "operations": 10,
+        "newVariants": 10,
+        "updates": 0,
+        "fields": 99,
+        "workflowConclusion": "success",
+        "apiReadbackPassed": true,
+        "includedInActiveIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-mito-2013-ranges-2012-tct",
+        "commit": "741e663a2c1783843d9de480a84ff66bf93c0cee",
+        "workflow": 39761586526,
+        "operations": 30,
+        "newVariants": 27,
+        "updates": 3,
+        "fields": 273,
+        "workflowConclusion": "success",
+        "apiReadbackPassed": true,
+        "includedInActiveIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-mito-2013-live-early-uk",
+        "commit": "d1c40a7861274c5b885804286073fed14fb2bf79",
+        "workflow": 39762001795,
+        "operations": 3,
+        "newVariants": 3,
+        "updates": 0,
+        "fields": 30,
+        "workflowConclusion": "success",
+        "apiReadbackPassed": true,
+        "includedInActiveIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-mito-2014-trofeo-edizione-tct",
+        "commit": "21ef2384ed0bdd52bfd570c8052c80ff254966eb",
+        "workflow": 39763970437,
+        "variants": 10,
+        "newVariants": 10,
+        "fields": 100,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2014-trofeo-edizione-tct-readback.json"
+      },
+      {
+        "batch": "research-2026-10-22-alfa-mito-2015-uk-range",
+        "commit": "3cd3201ad77fe21ac7c2d73a19ddc1800120cb15",
+        "workflow": 39764319483,
+        "variants": 13,
+        "newVariants": 13,
+        "fields": 130,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2015-uk-range-readback.json"
+      },
+      {
+        "batch": "research-2026-10-22-alfa-mito-2016-2018-racer-2015",
+        "commit": "be86347452ed517d279be4b1db3ce862ebcb50f7",
+        "workflow": 39765022671,
+        "variants": 34,
+        "newVariants": 34,
+        "fields": 333,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2016-2018-racer-2015-readback.json"
       }
     ],
     "inFlightResearch": null,
     "lastCompletedPass": {
-      "checkedAt": "2026-10-22T16:47:18.250127+07:00",
-      "variants": 69,
-      "newVariants": 69,
-      "fields": 595,
-      "calculationFields": 506,
-      "referenceOnlyFields": 20,
-      "identityFields": 69,
-      "apiReadback": true,
-      "guardTests": 48,
-      "preservedOriginalVariants": 27,
-      "includedInIndex": false,
+      "checkedAt": "2026-10-22T17:48:30+07:00",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "newVariantsByYear": {
+        "2014": 10,
+        "2015": 19,
+        "2016": 10,
+        "2017": 10,
+        "2018": 8
+      },
+      "baselineVariants": 111,
+      "variantsAfter": 168,
+      "newVariants": 57,
+      "updatedExistingVariants": 0,
+      "confirmedFields": 563,
+      "calculationFieldsCompiled": 506,
+      "identityNames": 57,
+      "untouchedVariantsPreserved": 111,
+      "exactNamedIdentityDuplicates": 0,
+      "wholeRowVerificationPromoted": false,
       "batches": [
         {
-          "batch": "research-2026-10-22-alfa-junior-2024-2025-september",
-          "commit": "6fb66d917314216285c442794a9e29491ed821f9",
-          "workflow": 39752511359,
-          "variants": 11,
-          "newVariants": 11,
-          "fields": 98,
-          "apiReadback": true,
-          "includedInIndex": false
-        },
-        {
-          "batch": "research-2026-10-22-alfa-mito-2008-2009-launch",
-          "commit": "ab1d51958a64184e6f81403e1aac0a65183d012f",
-          "workflow": 39753037347,
-          "variants": 19,
-          "newVariants": 19,
-          "fields": 159,
-          "apiReadback": true,
-          "includedInIndex": false
-        },
-        {
-          "batch": "research-2026-10-22-alfa-mito-2009-2010-multiair",
-          "commit": "d583e174654f9a70df883bba2ed81c5ef59c0b8e",
-          "workflow": 39754053860,
+          "batch": "research-2026-10-22-alfa-mito-2014-trofeo-edizione-tct",
+          "commit": "21ef2384ed0bdd52bfd570c8052c80ff254966eb",
+          "workflow": 39763970437,
           "variants": 10,
           "newVariants": 10,
-          "fields": 80,
+          "fields": 100,
+          "workflowConclusion": "success",
           "apiReadback": true,
-          "includedInIndex": false
+          "includedInIndex": false,
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2014-trofeo-edizione-tct-readback.json"
         },
         {
-          "batch": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super",
-          "commit": "56a054e27c6714f1048d1ce915f75ee10e225fbc",
-          "workflow": 39756015851,
-          "variants": 23,
+          "batch": "research-2026-10-22-alfa-mito-2015-uk-range",
+          "commit": "3cd3201ad77fe21ac7c2d73a19ddc1800120cb15",
+          "workflow": 39764319483,
+          "variants": 13,
           "newVariants": 13,
-          "updatedVariants": 10,
-          "fields": 137,
+          "fields": 130,
+          "workflowConclusion": "success",
           "apiReadback": true,
-          "includedInIndex": false
+          "includedInIndex": false,
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2015-uk-range-readback.json"
         },
         {
-          "batch": "research-2026-10-22-alfa-mito-2011-november",
-          "commit": "33aa38297274bc76a340cdf9f3e6b8a4c14b58f5",
-          "workflow": 39757189903,
-          "variants": 9,
-          "newVariants": 9,
-          "fields": 69,
+          "batch": "research-2026-10-22-alfa-mito-2016-2018-racer-2015",
+          "commit": "be86347452ed517d279be4b1db3ce862ebcb50f7",
+          "workflow": 39765022671,
+          "variants": 34,
+          "newVariants": 34,
+          "fields": 333,
+          "workflowConclusion": "success",
           "apiReadback": true,
-          "includedInIndex": false
-        },
-        {
-          "batch": "research-2026-10-22-alfa-mito-2012-twinair-mpi-jtdm",
-          "commit": "c13b40739d0e3579f79ea2b5b3977dda86831b0b",
-          "workflow": 39757749521,
-          "variants": 8,
-          "newVariants": 7,
-          "updatedVariants": 1,
-          "fields": 52,
-          "apiReadback": true,
-          "includedInIndex": false
+          "includedInIndex": false,
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2016-2018-racer-2015-readback.json"
         }
       ],
-      "nextCursor": "Alfa Romeo MiTo:11 оставшихся строк прайса01.11.2012 по handoff, затем ранние/UK2012 и2013; UK2011 и прочие пропуски в retry",
-      "variantOperations": 80,
-      "updatedExistingVariants": 11,
+      "compileReport": "docs/encyclopedia/reports/2026-10-22-mito-2014-2018-calculation-facts.json",
+      "preservationReport": "docs/encyclopedia/reports/2026-10-22-mito-2014-2018-preservation.json",
+      "tests": {
+        "freshCasPreflight": "PASS for each batch",
+        "researchBatchGuards": "PASS",
+        "independentApiReadback": "PASS 57/563",
+        "unchangedProductionCompiler": "PASS 57/506",
+        "oldRecordsPreserved": "PASS 111/111"
+      },
       "integration": {
         "state": "activation_pending",
-        "requestedRelease": "ad327011321b44aa7e0d59465dded59095067908",
-        "workflow": 39754473141,
-        "lastObservedStep": "Prepare exact price indexes before activating the release",
-        "preparedBeforeLastThreeBatches": true,
-        "queuedRelease": "f3f733172241a35369c270dc4409921ffeaa6fde",
-        "queuedWorkflow": 39755527627,
-        "queuedState": "pending",
+        "checkedAt": "2026-10-22T17:48:30+07:00",
+        "currentRelease": "f3f733172241a35369c270dc4409921ffeaa6fde",
+        "currentWorkflow": 39755527627,
+        "currentStep": "Prepare exact price indexes before activating the release",
+        "newBatchesActivationConfirmed": false,
+        "preparedIndexPredatesCurrentThreeBatches": true,
+        "duplicateReleaseRequested": false,
         "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
         "observedProductionIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
-        "newBatchesActivationConfirmed": false,
-        "duplicateReleaseRequested": false
+        "visitorRequestSearchOrSyncAdded": false,
+        "nextAction": "После завершения текущего выпуска проверить его состав и выпустить один совокупный индекс со всеми ещё не активированными партиями; не запускать конкурирующий выпуск."
       },
-      "productionRegressionCheck": {
+      "regressionCheck": {
         "passed": true,
         "offers": 4,
-        "sonataTotalRub": 3560003,
-        "scope": "Existing index only; no claim that new MiTo/Junior variants enrich current offers",
-        "report": "docs/encyclopedia/reports/2026-10-22-junior-mito-release-card-search-parity.json"
+        "sonata160PS1999CcTotalRub": 3560003,
+        "scope": "Existing active index only; new historical rows are not claimed active",
+        "report": "docs/encyclopedia/reports/2026-10-22-mito-2014-2018-card-search-parity.json"
       },
-      "report": "docs/encyclopedia/reports/2026-10-22-junior-mito-pass.json"
+      "nextCursor": "Alfa Romeo Spider: подтверждённые годы с 2008, затем Stelvio; MiTo regional/identity gaps remain in retry",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-mito-remaining.json",
+      "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-spider-2008.json",
+      "wholeEncyclopediaComplete": false,
+      "report": "docs/encyclopedia/reports/2026-10-22-mito-2014-2018-pass.json"
     },
     "failedIndexRelease": {
       "commit": "ad327011321b44aa7e0d59465dded59095067908",
@@ -33311,7 +33440,7 @@
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
       "state": "in_progress",
-      "note": "Чужой выпуск фильтров; проверить состав фактически подготовленного индекса, не запускать дублирующий выпуск"
+      "note": "По свежему roadmap 17:47 отдельный контроль установки сопровождает текущий выпуск и затем один актуальный индекс. Не дублировать; сверить ожидающие партии по этому списку."
     },
     "installedIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
     "catalogFieldsEnriched": 1359,
@@ -33348,7 +33477,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-mito-2014.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-spider-2008.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39743682918,
@@ -33478,6 +33607,109 @@
       "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-mito-2014.json",
       "wholeEncyclopediaComplete": false,
       "report": "docs/encyclopedia/reports/2026-10-22-mito-2012-2013-pass.json"
+    },
+    "mito2014_2018Pass": {
+      "checkedAt": "2026-10-22T17:48:30+07:00",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "newVariantsByYear": {
+        "2014": 10,
+        "2015": 19,
+        "2016": 10,
+        "2017": 10,
+        "2018": 8
+      },
+      "baselineVariants": 111,
+      "variantsAfter": 168,
+      "newVariants": 57,
+      "updatedExistingVariants": 0,
+      "confirmedFields": 563,
+      "calculationFieldsCompiled": 506,
+      "identityNames": 57,
+      "untouchedVariantsPreserved": 111,
+      "exactNamedIdentityDuplicates": 0,
+      "wholeRowVerificationPromoted": false,
+      "batches": [
+        {
+          "batch": "research-2026-10-22-alfa-mito-2014-trofeo-edizione-tct",
+          "commit": "21ef2384ed0bdd52bfd570c8052c80ff254966eb",
+          "workflow": 39763970437,
+          "variants": 10,
+          "newVariants": 10,
+          "fields": 100,
+          "workflowConclusion": "success",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2014-trofeo-edizione-tct-readback.json"
+        },
+        {
+          "batch": "research-2026-10-22-alfa-mito-2015-uk-range",
+          "commit": "3cd3201ad77fe21ac7c2d73a19ddc1800120cb15",
+          "workflow": 39764319483,
+          "variants": 13,
+          "newVariants": 13,
+          "fields": 130,
+          "workflowConclusion": "success",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2015-uk-range-readback.json"
+        },
+        {
+          "batch": "research-2026-10-22-alfa-mito-2016-2018-racer-2015",
+          "commit": "be86347452ed517d279be4b1db3ce862ebcb50f7",
+          "workflow": 39765022671,
+          "variants": 34,
+          "newVariants": 34,
+          "fields": 333,
+          "workflowConclusion": "success",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2016-2018-racer-2015-readback.json"
+        }
+      ],
+      "compileReport": "docs/encyclopedia/reports/2026-10-22-mito-2014-2018-calculation-facts.json",
+      "preservationReport": "docs/encyclopedia/reports/2026-10-22-mito-2014-2018-preservation.json",
+      "tests": {
+        "freshCasPreflight": "PASS for each batch",
+        "researchBatchGuards": "PASS",
+        "independentApiReadback": "PASS 57/563",
+        "unchangedProductionCompiler": "PASS 57/506",
+        "oldRecordsPreserved": "PASS 111/111"
+      },
+      "integration": {
+        "state": "activation_pending",
+        "checkedAt": "2026-10-22T17:48:30+07:00",
+        "currentRelease": "f3f733172241a35369c270dc4409921ffeaa6fde",
+        "currentWorkflow": 39755527627,
+        "currentStep": "Prepare exact price indexes before activating the release",
+        "newBatchesActivationConfirmed": false,
+        "preparedIndexPredatesCurrentThreeBatches": true,
+        "duplicateReleaseRequested": false,
+        "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
+        "observedProductionIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+        "visitorRequestSearchOrSyncAdded": false,
+        "nextAction": "После завершения текущего выпуска проверить его состав и выпустить один совокупный индекс со всеми ещё не активированными партиями; не запускать конкурирующий выпуск."
+      },
+      "regressionCheck": {
+        "passed": true,
+        "offers": 4,
+        "sonata160PS1999CcTotalRub": 3560003,
+        "scope": "Existing active index only; new historical rows are not claimed active",
+        "report": "docs/encyclopedia/reports/2026-10-22-mito-2014-2018-card-search-parity.json"
+      },
+      "nextCursor": "Alfa Romeo Spider: подтверждённые годы с 2008, затем Stelvio; MiTo regional/identity gaps remain in retry",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-mito-remaining.json",
+      "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-spider-2008.json",
+      "wholeEncyclopediaComplete": false,
+      "report": "docs/encyclopedia/reports/2026-10-22-mito-2014-2018-pass.json"
     }
   },
   "scope": {

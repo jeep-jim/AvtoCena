@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-10-22T17:49:00+07:00",
+  "state": "research_leads_not_applied",
+  "modelId": "d9d48f8457c33f7e466d6c6e",
+  "make": "Alfa Romeo",
+  "model": "Spider",
+  "year": 2008,
+  "requiresFreshApiPreflight": true,
+  "nextCursor": "Spider: начать точную гамму 2008, затем реальные последующие годы; не переносить год регистрации на производство. После Spider — Stelvio.",
+  "apiReadback": {
+    "revision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+    "year2008Variants": 0,
+    "existingYears": [
+      1998,
+      2020,
+      2021
+    ],
+    "existingVariants": 3,
+    "initialTransient503": true,
+    "retrySucceeded": true
+  },
+  "preserve": [
+    {
+      "id": "ee7b81ce2ed4b7486990106c",
+      "year": 1998,
+      "reason": "Исходная UAE-идентичность Other, точное исполнение не подтверждено; старые записи сохранять."
+    },
+    {
+      "id": "92e23a4142979ebcf5ae6b39",
+      "year": 2020,
+      "reason": "EEA registration observations,1962см³/93кВт без полевых свидетельств. Год регистрации не доказывает модельный год; не переносить характеристики Tipo939."
+    },
+    {
+      "id": "ee17a0ad9d26261dad18ddea",
+      "year": 2021,
+      "reason": "EEA registration observations,1962см³/90кВт без полевых свидетельств. Проверить идентичность; не удалять и не выдавать за заводские данные."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+      "effectiveAt": "2008-04-11",
+      "kind": "manufacturer_press",
+      "leads": [
+        "Spider Edizione 2.2 JTS185PS/136кВт",
+        "Spider Edizione 3.2 V6 260PS/191кВт",
+        "Spider Edizione 2.4 JTDM210PS/154кВт"
+      ],
+      "note": "Указаны стандартная6MT, опциональная Selespeed для2.2 и Q-Tronic для3.2/2.4. Для diesel Q-Tronic перепроверить отдельную таблицу мощности; не автоматически считать210PS. Нужны точные объёмы/коды/привод и различениеQ4/FWD."
+    },
+    {
+      "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/in-vendita-due-nuove-motorizzazioni-di-alfa-spider-e-alfa-brera-a-partire-da-29-800-euro",
+      "effectiveAt": "2009-04-07",
+      "kind": "manufacturer_press",
+      "leads": [
+        "Spider1750TBi200CV",
+        "Spider2.0JTDM170CV"
+      ],
+      "note": "Подтверждён старт продаж2009. Объём1750 не брать из названия; нужна точная таблица. Документ говорит об одном исполнении, не придумывать Distinctive."
+    },
+    {
+      "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-engines-and-added-style-for-brera-and-spider-range",
+      "effectiveAt": "2010-05-13",
+      "kind": "manufacturer_press",
+      "leads": [
+        "Spider1750TBi",
+        "Spider2.0JTDM"
+      ],
+      "note": "Имеются отдельные технические таблицы: не переносить первую таблицу Brera на Spider. Мощность подписана bhp, не переименовывать в PS. Для1750 прямо указан1742см³. Italia Independent требует точной применимости, не делать общую перекрёстную гамму."
+    }
+  ],
+  "applied": false,
+  "missing": [
+    "Точные годовые таблицы2008–2010 с объёмами, кодами, приводом и трансмиссиями",
+    "Однозначная идентичность генераций Spider,4CSpider,8CSpider",
+    "Истинные годы выпуска против EEA регистрации2020/2021",
+    "Свежие SHA256/revision непосредственно перед guarded create"
+  ]
+}
