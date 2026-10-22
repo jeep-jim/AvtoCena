@@ -1,0 +1,2756 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-historical-and-alphabetic-pass",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "a1110cc532749b4397f6b684",
+      "variantId": "f12ffc048fe278a243362cca",
+      "make": "Abarth",
+      "model": "500",
+      "year": 2008,
+      "trim": "1.4 16V Turbo 135 5MT",
+      "expectedRevision": "46d78a51-3261-4c6b-811d-94b029af2b2e",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 16V Turbo 135 5MT",
+        "engineCc": 1368,
+        "powerHp": 135,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/abarth/press/new-500-abarth-debuts-at-geneva",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской дебют18.02.2008:1368см³, бензиновыйFire1.4 16V Turbo, механическая5-ступенчатаяКПП. Итальянский релиз той же даты явно указывает135CV/99кВт; британская неоднозначная подписьbhp не использована для перевода мощности. Начало продаж в2008 подтверждено немецким заводским релизом11.07.2008. Новая запись исходной дорожной версии, неEsseesse/AssettoCorse. Код двигателя/полная масса/привод отдельно не подтверждены.",
+        "supportingUrls": [
+          "https://www.media.stellantis.com/it-it/abarth/press/abarth-la-nuova-sede-di-torino-e-la-stagione-sportiva-2008",
+          "https://www.media.stellantis.com/de-de/abarth/press/neuer-500-abarth-deutschlandstart-am-19-juli-offizielle-premiere-des-kult-modells-mit-live-act-in-munchen"
+        ],
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/new-500-abarth-debuts-at-geneva",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/new-500-abarth-debuts-at-geneva",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/abarth/press/abarth-la-nuova-sede-di-torino-e-la-stagione-sportiva-2008",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/abarth/press/abarth-la-nuova-sede-di-torino-e-la-stagione-sportiva-2008",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/abarth/press/abarth-la-nuova-sede-di-torino-e-la-stagione-sportiva-2008",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/new-500-abarth-debuts-at-geneva",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/new-500-abarth-debuts-at-geneva",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/new-500-abarth-debuts-at-geneva",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a1110cc532749b4397f6b684",
+      "variantId": "8331f133643f6d1a8748ca2c",
+      "make": "Abarth",
+      "model": "500",
+      "year": 2020,
+      "trim": "T-Jet 16v 595 Competizione",
+      "expectedDigest": "fd48f6999d0e21ba9ccc6d705a2f6ce9fb9bd582f9298916f7c161f6aca612ed",
+      "patch": {
+        "engineCc": 1368,
+        "powerHp": 180,
+        "powerKw": 132,
+        "icePowerKw": 132,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица от 18.09.2020, стр. 3: точное исполнение Competizione или Turismo. Объём и мощность одинаковы для BVM/BVA и обоих кузовов; неизвестные КПП и кузов не выбирались. Более ранние MY18/MY19 этим документом не перезаписываются.",
+        "documentSha256": "8f379f7dc86b3366b17329e481a236c8b34ce265fb84f584ce9fc0a80ea628ae",
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a1110cc532749b4397f6b684",
+      "variantId": "06fbf878bffbc3868ae236de",
+      "make": "Abarth",
+      "model": "500",
+      "year": 2026,
+      "trim": "42 kWh 3d 114kW",
+      "expectedDigest": "8a356d06216d3bdd0344cc2f01b1fadde77725619203e3083350252d2f81c859",
+      "patch": {
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerKw": 113.7,
+        "powerHp": 155,
+        "motorPeakKw": 113.7,
+        "batteryKwh": 42
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "powerKw",
+        "powerHp",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.abarthcars.co.uk/new-abarth-500e-electric",
+        "checkedAt": "2026-10-22",
+        "statement": "Электрическая версия42кВт·ч: страница AbarthUK указывает113.7кВт; заводской прайсQ4-2026стр.7 прямо маркирует500eMY26.155PS подтверждены европейским заводским сообщением, не приравниванием британскихhp кPS. Исходное название500 иtrim сохранены.30-минутная мощность неизвестна.",
+        "supportingUrls": [
+          "https://www.abarthcars.co.uk/content/dam/abarth/uk/price_list/Abarth-Price-List-Q4-2026.pdf",
+          "https://www.media.stellantis.com/uk-en/abarth/press/more-abarth-than-ever-abarth-goes-electric-and-more-global",
+          "https://www.media.stellantis.com/uk-en/fiat/press/major-price-reductions-announced-across-fully-electric-fiat-and-abarth-ranges-to-make-switch-to-electric-more-attractive-than-ever"
+        ],
+        "fieldSources": {
+          "fuel": {
+            "url": "https://www.abarthcars.co.uk/new-abarth-500e-electric",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.abarthcars.co.uk/new-abarth-500e-electric",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.abarthcars.co.uk/new-abarth-500e-electric",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/more-abarth-than-ever-abarth-goes-electric-and-more-global",
+            "checkedAt": "2026-10-22"
+          },
+          "motorPeakKw": {
+            "url": "https://www.abarthcars.co.uk/new-abarth-500e-electric",
+            "checkedAt": "2026-10-22"
+          },
+          "batteryKwh": {
+            "url": "https://www.abarthcars.co.uk/new-abarth-500e-electric",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e24f0e81bb1296368fc46702",
+      "variantId": "8a6dbc31ac2eafdb60febc3c",
+      "make": "Abarth",
+      "model": "500e",
+      "year": 2024,
+      "trim": "Scorpionissima Pano+LED+Kamera+Navi",
+      "expectedDigest": "50ac89f2e31569cc6ffc9052440d554a630a780c80a34ca80777b7d81f83a7e2",
+      "patch": {
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerKw": 113.7,
+        "powerHp": 155,
+        "motorPeakKw": 113.7,
+        "batteryKwh": 42
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "powerKw",
+        "powerHp",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/abarth/press/more-abarth-than-ever-abarth-goes-electric-and-more-global",
+        "checkedAt": "2026-10-22",
+        "statement": "Точное исполнение Scorpionissima: заводской европейский выпуск от22.11.2022 указывает113.7кВт/155PS и42кВт·ч. Таблица Fiat Australia05.2024 подтверждает существование этого исполнения в2024, но её округлённые113кВт не переносились. Максимальная мощность не является30-минутной. Кузов/привод/КПП этой европейской записи отдельно не подтверждены.",
+        "supportingUrls": [
+          "https://www.fiat.com.au/content/dam/fiat2023/au/pdf/abarth/500e/buyersguide/abarth-500e-buyersguide-may-2024.pdf"
+        ],
+        "fieldSources": {
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/more-abarth-than-ever-abarth-goes-electric-and-more-global",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/more-abarth-than-ever-abarth-goes-electric-and-more-global",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/more-abarth-than-ever-abarth-goes-electric-and-more-global",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/more-abarth-than-ever-abarth-goes-electric-and-more-global",
+            "checkedAt": "2026-10-22"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/more-abarth-than-ever-abarth-goes-electric-and-more-global",
+            "checkedAt": "2026-10-22"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uk-en/abarth/press/more-abarth-than-ever-abarth-goes-electric-and-more-global",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "0dd6a825e0210aa95781150b",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2020,
+      "trim": "1.4 TURBO T-JET 165 CV TURISMO",
+      "expectedDigest": "e31f9bf697232ff0d0d5a447c2d64ff364b525b799584642824643aa33aa8c27",
+      "patch": {
+        "engineCc": 1368,
+        "powerKw": 121,
+        "icePowerKw": 121
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица от 18.09.2020, стр. 3: точное исполнение Competizione или Turismo. Объём и мощность одинаковы для BVM/BVA и обоих кузовов; неизвестные КПП и кузов не выбирались. Более ранние MY18/MY19 этим документом не перезаписываются.",
+        "documentSha256": "8f379f7dc86b3366b17329e481a236c8b34ce265fb84f584ce9fc0a80ea628ae",
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "a92047b3c45cd70478577001",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2020,
+      "trim": "COMPETIZIONE",
+      "expectedDigest": "7bdceeb46eeaba8553094c7bf0d56caba4e4aef163cdcdd1bfd52ffe77dd8cc4",
+      "patch": {
+        "engineCc": 1368,
+        "powerKw": 132,
+        "icePowerKw": 132
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица от 18.09.2020, стр. 3: точное исполнение Competizione или Turismo. Объём и мощность одинаковы для BVM/BVA и обоих кузовов; неизвестные КПП и кузов не выбирались. Более ранние MY18/MY19 этим документом не перезаписываются.",
+        "documentSha256": "8f379f7dc86b3366b17329e481a236c8b34ce265fb84f584ce9fc0a80ea628ae",
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicabarthau18092020-5f68cda236158.pdf",
+            "page": 3,
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "704cf1bf161e2d9733e2f1e0",
+      "variantId": "52ea6af43b543c43ee2ebb41",
+      "make": "Acura",
+      "model": "Integra",
+      "year": 2023,
+      "trim": "1.5T A-Spec CVT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "ebe1ecfe-221c-4bfd-8b28-216e61f97c68",
+      "patch": {
+        "trim": "1.5T A-Spec CVT",
+        "engineCc": 1498,
+        "powerHp": 202.77,
+        "powerKw": 149.14,
+        "icePowerKw": 149.14,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "fwd",
+        "transmission": "cvt"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица MY2023 от26.05.2022: четыре отдельных исполнения, передний привод, бензиновый1.5T; CVT и6MT разведены.200hp SAE net переведены в метрическиеPS:200×745.699871582/735.49875=202.77PS;149.14кВт.1498см³ подтверждены индексированным разделом Specifications заводского руководства2023; прямое чтение временно503. Значение также визуально сверено с заводской брошюрой HondaMexico2023стр.10 для того же1.5T/200SAEhp; комплектации и трансмиссии взяты из таблицы США. Не подставлено в существующую неопределённую комплектацию.",
+        "supportingUrls": [
+          "https://techinfo.honda.com/rjanisis/pubs/OM/AH/B3S52323IOM/enu/details/131236047-16992.html",
+          "https://www.honda.mx/web/pdf/brochure/acura/Brochure_INTEGRA_2023.pdf"
+        ],
+        "unitConversions": {
+          "powerHp": {
+            "sourceValue": 200,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "PS",
+            "factor": 1.0138696654236328
+          },
+          "powerKw": {
+            "sourceValue": 200,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "kW",
+            "factor": 0.745699871582
+          }
+        },
+        "fieldSources": {
+          "trim": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "engineCc": {
+            "url": "https://techinfo.honda.com/rjanisis/pubs/OM/AH/B3S52323IOM/enu/details/131236047-16992.html",
+            "checkedAt": "2026-10-22",
+            "access": "indexed_primary_source; direct_HTTP_503",
+            "corroboration": {
+              "url": "https://www.honda.mx/web/pdf/brochure/acura/Brochure_INTEGRA_2023.pdf",
+              "page": 10,
+              "sha256": "fc37d9501d4181673088b4eb85a7a45e0298d4a5bf61428ea7aa5d8d759931b1",
+              "checkedAt": "2026-10-22",
+              "access": "primary_PDF_downloaded_and_visually_checked"
+            }
+          },
+          "powerHp": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "powerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "icePowerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "fuel": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "powertrainKind": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "drive": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "transmission": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "704cf1bf161e2d9733e2f1e0",
+      "variantId": "79609b0c7cec111142845653",
+      "make": "Acura",
+      "model": "Integra",
+      "year": 2023,
+      "trim": "1.5T A-Spec Technology 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "ebe1ecfe-221c-4bfd-8b28-216e61f97c68",
+      "patch": {
+        "trim": "1.5T A-Spec Technology 6MT",
+        "engineCc": 1498,
+        "powerHp": 202.77,
+        "powerKw": 149.14,
+        "icePowerKw": 149.14,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица MY2023 от26.05.2022: четыре отдельных исполнения, передний привод, бензиновый1.5T; CVT и6MT разведены.200hp SAE net переведены в метрическиеPS:200×745.699871582/735.49875=202.77PS;149.14кВт.1498см³ подтверждены индексированным разделом Specifications заводского руководства2023; прямое чтение временно503. Значение также визуально сверено с заводской брошюрой HondaMexico2023стр.10 для того же1.5T/200SAEhp; комплектации и трансмиссии взяты из таблицы США. Не подставлено в существующую неопределённую комплектацию.",
+        "supportingUrls": [
+          "https://techinfo.honda.com/rjanisis/pubs/OM/AH/B3S52323IOM/enu/details/131236047-16992.html",
+          "https://www.honda.mx/web/pdf/brochure/acura/Brochure_INTEGRA_2023.pdf"
+        ],
+        "unitConversions": {
+          "powerHp": {
+            "sourceValue": 200,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "PS",
+            "factor": 1.0138696654236328
+          },
+          "powerKw": {
+            "sourceValue": 200,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "kW",
+            "factor": 0.745699871582
+          }
+        },
+        "fieldSources": {
+          "trim": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "engineCc": {
+            "url": "https://techinfo.honda.com/rjanisis/pubs/OM/AH/B3S52323IOM/enu/details/131236047-16992.html",
+            "checkedAt": "2026-10-22",
+            "access": "indexed_primary_source; direct_HTTP_503",
+            "corroboration": {
+              "url": "https://www.honda.mx/web/pdf/brochure/acura/Brochure_INTEGRA_2023.pdf",
+              "page": 10,
+              "sha256": "fc37d9501d4181673088b4eb85a7a45e0298d4a5bf61428ea7aa5d8d759931b1",
+              "checkedAt": "2026-10-22",
+              "access": "primary_PDF_downloaded_and_visually_checked"
+            }
+          },
+          "powerHp": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "powerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "icePowerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "fuel": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "powertrainKind": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "drive": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "transmission": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "704cf1bf161e2d9733e2f1e0",
+      "variantId": "f092ca91445a97d63a9c8593",
+      "make": "Acura",
+      "model": "Integra",
+      "year": 2023,
+      "trim": "1.5T A-Spec Technology CVT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "ebe1ecfe-221c-4bfd-8b28-216e61f97c68",
+      "patch": {
+        "trim": "1.5T A-Spec Technology CVT",
+        "engineCc": 1498,
+        "powerHp": 202.77,
+        "powerKw": 149.14,
+        "icePowerKw": 149.14,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "fwd",
+        "transmission": "cvt"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица MY2023 от26.05.2022: четыре отдельных исполнения, передний привод, бензиновый1.5T; CVT и6MT разведены.200hp SAE net переведены в метрическиеPS:200×745.699871582/735.49875=202.77PS;149.14кВт.1498см³ подтверждены индексированным разделом Specifications заводского руководства2023; прямое чтение временно503. Значение также визуально сверено с заводской брошюрой HondaMexico2023стр.10 для того же1.5T/200SAEhp; комплектации и трансмиссии взяты из таблицы США. Не подставлено в существующую неопределённую комплектацию.",
+        "supportingUrls": [
+          "https://techinfo.honda.com/rjanisis/pubs/OM/AH/B3S52323IOM/enu/details/131236047-16992.html",
+          "https://www.honda.mx/web/pdf/brochure/acura/Brochure_INTEGRA_2023.pdf"
+        ],
+        "unitConversions": {
+          "powerHp": {
+            "sourceValue": 200,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "PS",
+            "factor": 1.0138696654236328
+          },
+          "powerKw": {
+            "sourceValue": 200,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "kW",
+            "factor": 0.745699871582
+          }
+        },
+        "fieldSources": {
+          "trim": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "engineCc": {
+            "url": "https://techinfo.honda.com/rjanisis/pubs/OM/AH/B3S52323IOM/enu/details/131236047-16992.html",
+            "checkedAt": "2026-10-22",
+            "access": "indexed_primary_source; direct_HTTP_503",
+            "corroboration": {
+              "url": "https://www.honda.mx/web/pdf/brochure/acura/Brochure_INTEGRA_2023.pdf",
+              "page": 10,
+              "sha256": "fc37d9501d4181673088b4eb85a7a45e0298d4a5bf61428ea7aa5d8d759931b1",
+              "checkedAt": "2026-10-22",
+              "access": "primary_PDF_downloaded_and_visually_checked"
+            }
+          },
+          "powerHp": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "powerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "icePowerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "fuel": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "powertrainKind": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "drive": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "transmission": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "704cf1bf161e2d9733e2f1e0",
+      "variantId": "0b0e337182eafd98490002ba",
+      "make": "Acura",
+      "model": "Integra",
+      "year": 2023,
+      "trim": "1.5T Base CVT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "ebe1ecfe-221c-4bfd-8b28-216e61f97c68",
+      "patch": {
+        "trim": "1.5T Base CVT",
+        "engineCc": 1498,
+        "powerHp": 202.77,
+        "powerKw": 149.14,
+        "icePowerKw": 149.14,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "fwd",
+        "transmission": "cvt"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица MY2023 от26.05.2022: четыре отдельных исполнения, передний привод, бензиновый1.5T; CVT и6MT разведены.200hp SAE net переведены в метрическиеPS:200×745.699871582/735.49875=202.77PS;149.14кВт.1498см³ подтверждены индексированным разделом Specifications заводского руководства2023; прямое чтение временно503. Значение также визуально сверено с заводской брошюрой HondaMexico2023стр.10 для того же1.5T/200SAEhp; комплектации и трансмиссии взяты из таблицы США. Не подставлено в существующую неопределённую комплектацию.",
+        "supportingUrls": [
+          "https://techinfo.honda.com/rjanisis/pubs/OM/AH/B3S52323IOM/enu/details/131236047-16992.html",
+          "https://www.honda.mx/web/pdf/brochure/acura/Brochure_INTEGRA_2023.pdf"
+        ],
+        "unitConversions": {
+          "powerHp": {
+            "sourceValue": 200,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "PS",
+            "factor": 1.0138696654236328
+          },
+          "powerKw": {
+            "sourceValue": 200,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "kW",
+            "factor": 0.745699871582
+          }
+        },
+        "fieldSources": {
+          "trim": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "engineCc": {
+            "url": "https://techinfo.honda.com/rjanisis/pubs/OM/AH/B3S52323IOM/enu/details/131236047-16992.html",
+            "checkedAt": "2026-10-22",
+            "access": "indexed_primary_source; direct_HTTP_503",
+            "corroboration": {
+              "url": "https://www.honda.mx/web/pdf/brochure/acura/Brochure_INTEGRA_2023.pdf",
+              "page": 10,
+              "sha256": "fc37d9501d4181673088b4eb85a7a45e0298d4a5bf61428ea7aa5d8d759931b1",
+              "checkedAt": "2026-10-22",
+              "access": "primary_PDF_downloaded_and_visually_checked"
+            }
+          },
+          "powerHp": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "powerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "icePowerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "fuel": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "powertrainKind": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "drive": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          },
+          "transmission": {
+            "url": "https://hondanews.com/en-US/releases/release-5d911be38cf30e49d54f6cb45201862a-2023-integra-specifications-features",
+            "checkedAt": "2026-10-22",
+            "access": "primary_table"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "93d751e6058d8dbf6d33bae5",
+      "variantId": "891f592542cb6b539e6d73ed",
+      "make": "Acura",
+      "model": "Mdx",
+      "year": 2008,
+      "trim": "3.7 Base SH-AWD 5AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "901ac797-48a0-46ab-9f85-9b1f156bfa15",
+      "patch": {
+        "trim": "3.7 Base SH-AWD 5AT",
+        "engineCc": 3664,
+        "powerHp": 304.16,
+        "powerKw": 223.71,
+        "icePowerKw": 223.71,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "awd",
+        "transmission": "automatic",
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица MDX MY2008: 3664 см³, 300 SAE hp, SH-AWD, 5AT. Пакеты перечислены отдельно; масса прицепа не является полной массой автомобиля.",
+        "unitConversions": {
+          "powerHp": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "PS",
+            "factor": 1.0138696654236328
+          },
+          "powerKw": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "kW",
+            "factor": 0.745699871582
+          }
+        },
+        "fieldSources": {
+          "trim": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview packages and MY2008 pricing"
+          },
+          "engineCc": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerHp": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "icePowerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "fuel": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powertrainKind": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "drive": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "transmission": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "bodyType": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview: SUV"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "93d751e6058d8dbf6d33bae5",
+      "variantId": "8f0d940ebc6627ca1c0e9858",
+      "make": "Acura",
+      "model": "Mdx",
+      "year": 2008,
+      "trim": "3.7 Sport Entertainment SH-AWD 5AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "901ac797-48a0-46ab-9f85-9b1f156bfa15",
+      "patch": {
+        "trim": "3.7 Sport Entertainment SH-AWD 5AT",
+        "engineCc": 3664,
+        "powerHp": 304.16,
+        "powerKw": 223.71,
+        "icePowerKw": 223.71,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "awd",
+        "transmission": "automatic",
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица MDX MY2008: 3664 см³, 300 SAE hp, SH-AWD, 5AT. Пакеты перечислены отдельно; масса прицепа не является полной массой автомобиля.",
+        "unitConversions": {
+          "powerHp": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "PS",
+            "factor": 1.0138696654236328
+          },
+          "powerKw": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "kW",
+            "factor": 0.745699871582
+          }
+        },
+        "fieldSources": {
+          "trim": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview packages and MY2008 pricing"
+          },
+          "engineCc": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerHp": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "icePowerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "fuel": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powertrainKind": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "drive": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "transmission": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "bodyType": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview: SUV"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "93d751e6058d8dbf6d33bae5",
+      "variantId": "6ae2e817bcfc132cc15d1cf9",
+      "make": "Acura",
+      "model": "Mdx",
+      "year": 2008,
+      "trim": "3.7 Sport SH-AWD 5AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "901ac797-48a0-46ab-9f85-9b1f156bfa15",
+      "patch": {
+        "trim": "3.7 Sport SH-AWD 5AT",
+        "engineCc": 3664,
+        "powerHp": 304.16,
+        "powerKw": 223.71,
+        "icePowerKw": 223.71,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "awd",
+        "transmission": "automatic",
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица MDX MY2008: 3664 см³, 300 SAE hp, SH-AWD, 5AT. Пакеты перечислены отдельно; масса прицепа не является полной массой автомобиля.",
+        "unitConversions": {
+          "powerHp": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "PS",
+            "factor": 1.0138696654236328
+          },
+          "powerKw": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "kW",
+            "factor": 0.745699871582
+          }
+        },
+        "fieldSources": {
+          "trim": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview packages and MY2008 pricing"
+          },
+          "engineCc": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerHp": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "icePowerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "fuel": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powertrainKind": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "drive": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "transmission": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "bodyType": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview: SUV"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "93d751e6058d8dbf6d33bae5",
+      "variantId": "f27fb814cd4721e8146094e0",
+      "make": "Acura",
+      "model": "Mdx",
+      "year": 2008,
+      "trim": "3.7 Technology Entertainment SH-AWD 5AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "901ac797-48a0-46ab-9f85-9b1f156bfa15",
+      "patch": {
+        "trim": "3.7 Technology Entertainment SH-AWD 5AT",
+        "engineCc": 3664,
+        "powerHp": 304.16,
+        "powerKw": 223.71,
+        "icePowerKw": 223.71,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "awd",
+        "transmission": "automatic",
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица MDX MY2008: 3664 см³, 300 SAE hp, SH-AWD, 5AT. Пакеты перечислены отдельно; масса прицепа не является полной массой автомобиля.",
+        "unitConversions": {
+          "powerHp": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "PS",
+            "factor": 1.0138696654236328
+          },
+          "powerKw": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "kW",
+            "factor": 0.745699871582
+          }
+        },
+        "fieldSources": {
+          "trim": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview packages and MY2008 pricing"
+          },
+          "engineCc": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerHp": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "icePowerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "fuel": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powertrainKind": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "drive": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "transmission": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "bodyType": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview: SUV"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "93d751e6058d8dbf6d33bae5",
+      "variantId": "ef142928ba88c2c81299d2d2",
+      "make": "Acura",
+      "model": "Mdx",
+      "year": 2008,
+      "trim": "3.7 Technology SH-AWD 5AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "901ac797-48a0-46ab-9f85-9b1f156bfa15",
+      "patch": {
+        "trim": "3.7 Technology SH-AWD 5AT",
+        "engineCc": 3664,
+        "powerHp": 304.16,
+        "powerKw": 223.71,
+        "icePowerKw": 223.71,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "awd",
+        "transmission": "automatic",
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица MDX MY2008: 3664 см³, 300 SAE hp, SH-AWD, 5AT. Пакеты перечислены отдельно; масса прицепа не является полной массой автомобиля.",
+        "unitConversions": {
+          "powerHp": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "PS",
+            "factor": 1.0138696654236328
+          },
+          "powerKw": {
+            "sourceValue": 300,
+            "sourceUnit": "mechanical hp (SAE net)",
+            "targetUnit": "kW",
+            "factor": 0.745699871582
+          }
+        },
+        "fieldSources": {
+          "trim": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview packages and MY2008 pricing"
+          },
+          "engineCc": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerHp": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "icePowerKw": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "fuel": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "powertrainKind": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "drive": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "transmission": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Specifications: Powertrain"
+          },
+          "bodyType": {
+            "url": "https://hondanews.com/en-US/releases/release-49cd22230314f3a870cf8a004c34be03-2008-acura-mdx-introduction",
+            "checkedAt": "2026-10-22",
+            "section": "Overview: SUV"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "f2aa4c64831b364f82e02440",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "G AERO 2.4 4WD",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "G AERO 2.4 4WD",
+        "chassisCode": "RR2",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "e0048ba6f8d00862cb155577",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "G AERO 2.4 FF",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "G AERO 2.4 FF",
+        "chassisCode": "RR1",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "e18c5c606b29b7e55399921a",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "G AERO HDD Navi Package 2.4 4WD",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "G AERO HDD Navi Package 2.4 4WD",
+        "chassisCode": "RR2",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "b65e87acbbba9965434b314b",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "G AERO HDD Navi Package 2.4 FF",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "G AERO HDD Navi Package 2.4 FF",
+        "chassisCode": "RR1",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "88387e7675b7129e8429465e",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "MX 2.4 4WD",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "MX 2.4 4WD",
+        "chassisCode": "RR2",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "846b573f550194922110174a",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "MX 2.4 FF",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "MX 2.4 FF",
+        "chassisCode": "RR1",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "bed7c91a8bb3f8cf3f961454",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "MX Side Lift-Up Seat 2.4 4WD",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "MX Side Lift-Up Seat 2.4 4WD",
+        "chassisCode": "RR2",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "8236a55bf37d4275d668369e",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "MX Side Lift-Up Seat 2.4 FF",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "MX Side Lift-Up Seat 2.4 FF",
+        "chassisCode": "RR1",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "71e3438c2f8aae2a53461bb0",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "VG 3.0 4WD",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "VG 3.0 4WD",
+        "chassisCode": "RR4",
+        "engineCode": "J30A",
+        "engineCc": 2997,
+        "powerHp": 250,
+        "powerKw": 184,
+        "icePowerKw": 184,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "8da24e2137c8eeeade4fdb0e",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "VG 3.0 FF",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "VG 3.0 FF",
+        "chassisCode": "RR3",
+        "engineCode": "J30A",
+        "engineCc": 2997,
+        "powerHp": 250,
+        "powerKw": 184,
+        "icePowerKw": 184,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "0471dda6361b3a8f81abb034",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "VG Aero HDD Navi Package 3.0 4WD",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "VG Aero HDD Navi Package 3.0 4WD",
+        "chassisCode": "RR4",
+        "engineCode": "J30A",
+        "engineCc": 2997,
+        "powerHp": 250,
+        "powerKw": 184,
+        "icePowerKw": 184,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "9df08cc07b01d374fad66fc7",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "VG Aero HDD Navi Package 3.0 FF",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "VG Aero HDD Navi Package 3.0 FF",
+        "chassisCode": "RR3",
+        "engineCode": "J30A",
+        "engineCc": 2997,
+        "powerHp": 250,
+        "powerKw": 184,
+        "icePowerKw": 184,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "ea309d6679309d708bf6fd55",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "VG Aero Package 3.0 4WD",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "VG Aero Package 3.0 4WD",
+        "chassisCode": "RR4",
+        "engineCode": "J30A",
+        "engineCc": 2997,
+        "powerHp": 250,
+        "powerKw": 184,
+        "icePowerKw": 184,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "f3d946c0fc414577a21b196a",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "VG Aero Package 3.0 FF",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "VG Aero Package 3.0 FF",
+        "chassisCode": "RR3",
+        "engineCode": "J30A",
+        "engineCc": 2997,
+        "powerHp": 250,
+        "powerKw": 184,
+        "icePowerKw": 184,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "06e27ff3d4a2311c60b55d07",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "VG Side Lift-Up Seat 3.0 4WD",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "VG Side Lift-Up Seat 3.0 4WD",
+        "chassisCode": "RR4",
+        "engineCode": "J30A",
+        "engineCc": 2997,
+        "powerHp": 250,
+        "powerKw": 184,
+        "icePowerKw": 184,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "f8362fff266423a6b8028f13",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "VG Side Lift-Up Seat 3.0 FF",
+      "expectedRevision": "3795d5c0-e4b2-4bbd-959b-971935fa7351",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "VG Side Lift-Up Seat 3.0 FF",
+        "chassisCode": "RR3",
+        "engineCode": "J30A",
+        "engineCc": 2997,
+        "powerHp": 250,
+        "powerKw": 184,
+        "icePowerKw": 184,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив обычного Elysion (12.2006–11.2008). Отдельные исполнения FF и 4WD. Заводские округлённые кВт и PS сохранены. Масса автомобиля с опциями не является разрешённой полной массой.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "chassisCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCode": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "engineCc": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerHp": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "icePowerKw": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "fuel": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "powertrainKind": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "transmission": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          },
+          "drive": {
+            "url": "https://www.honda.co.jp/auto-archive/elysion/normal/2008/shogen.html",
+            "checkedAt": "2026-10-22"
+          }
+        }
+      }
+    }
+  ]
+}
