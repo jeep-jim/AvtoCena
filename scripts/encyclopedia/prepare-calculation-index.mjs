@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {getJsonStorage,getDataRoot} from '../../apps/web/lib/data.ts';
-import {MANIFEST} from '../../apps/web/lib/encyclopedia/records.ts';
+import {MANIFEST,ROOT} from '../../apps/web/lib/encyclopedia/records.ts';
 import {isEncyclopediaCar} from '../../apps/web/lib/encyclopedia/scope.ts';
 import {CALCULATION_INDEX_PATH,compileModelFacts,modelKey,checksum} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
 const storage=getJsonStorage();
@@ -15,7 +15,14 @@ await Promise.all(Array.from({length:6},async()=>{
   const summary=rows[cursor++];if(!summary)return;
   const record=await storage.readJson(summary.key,null);
   if(record?.revision!==summary.revision||record.id!==summary.id)throw Error('encyclopedia_revision_mismatch');
-  const facts=compileModelFacts(record),key=modelKey(record.make,record.model);
+  const ancestors=[],visited=new Set([summary.key]);let previous=record.previousKey;
+  if(record.variants.some(v=>v.status==='review'&&v.researchEvidence))while(previous&&ancestors.length<128){
+   if(!previous.startsWith(`${ROOT}/`)||previous.includes('..')||visited.has(previous))throw Error('invalid_encyclopedia_history');
+   visited.add(previous);const parent=await storage.readJson(previous,null);
+   if(!parent||parent.id!==record.id)throw Error('encyclopedia_history_missing');
+   ancestors.push(parent);previous=parent.previousKey;
+  }
+  const facts=compileModelFacts(record,ancestors),key=modelKey(record.make,record.model);
   if(facts.length)models[key]=[...(models[key]||[]),...facts];
   report.modelsRead++;report.variants+=facts.length;
   for(const fact of facts)for(const source of Object.values(fact.sources))report[source.kind==='owner_reference'?'ownerReferenceFields':source.kind==='manual'?'manualFields':'factoryFields']++;

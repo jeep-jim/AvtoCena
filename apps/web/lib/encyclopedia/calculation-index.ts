@@ -31,26 +31,54 @@ function same(field:string,a:any,b:any){
  return normalized(field,a)===normalized(field,b);
 }
 /** Research review is field-level; stale evidence never certifies a later edit. */
-export function compileModelFacts(record:any):CalculationFact[]{
+export function compileModelFacts(record:any,ancestors:any[]=[]):CalculationFact[]{
  const out:CalculationFact[]=[];
  for(const v of record.variants||[]){
   if(!Number.isInteger(v.year)||!v.trim)continue;
   const values:any={},sources:any={},trims=new Set([token(v.trim)]);
-  const evidence=[...(v.researchEvidenceHistory||[]),v.researchEvidence].filter(Boolean);
+  const evidence=[...(v.researchEvidenceHistory||[]),v.researchEvidence].filter(Boolean).reverse();
+  const identityTrims=new Set([v.trim]);
+  const retainedReferences:any={};
   for(const e of evidence){
    if(!['manufacturer','official_registry'].includes(e.source?.type)||!/^https:\/\//.test(e.source?.url||''))continue;
-   if(e.checkedIdentity?.make!==record.make||e.checkedIdentity?.model!==record.model||e.checkedIdentity?.year!==v.year||e.checkedIdentity?.trim!==v.trim)continue;
-   for(const field of factFields)if(e.fields?.includes(field)&&exists(v[field])&&JSON.stringify(v[field])===JSON.stringify(e.values?.[field])){
+   if(e.checkedIdentity?.make!==record.make||e.checkedIdentity?.model!==record.model||e.checkedIdentity?.year!==v.year||!identityTrims.has(e.checkedIdentity?.trim))continue;
+   if(e.originalTrim)identityTrims.add(e.originalTrim);
+   const snapshot=e.ownerReferenceSnapshot;
+   if(snapshot?.markets?.some((m:string)=>m==='china'||m==='europe'))for(const field of factFields){
+    if(field!=='power30MinKw'&&exists(v[field])&&JSON.stringify(snapshot.values?.[field])===JSON.stringify(v[field]))retainedReferences[field]={kind:'owner_reference',markets:snapshot.markets.filter((m:string)=>m==='china'||m==='europe')};
+   }
+   for(const field of factFields)if(!sources[field]&&e.fields?.includes(field)&&exists(v[field])&&JSON.stringify(v[field])===JSON.stringify(e.values?.[field])){
     if(field==='power30MinKw'&&!e.source.certificationDocument)continue;
     values[field]=v[field];sources[field]={kind:e.source.type,url:e.source.url,batchId:e.batchId};
    }
    if(e.originalTrim)trims.add(token(e.originalTrim));
+  }
+  // Recover only unchanged observations along the immutable revision chain.
+  // A manual edit or unproved identity change ends that chain.
+  let child=v;
+  let unchanged=factFields.filter(f=>f!=='power30MinKw'&&exists(v[f]));
+  if(v.status==='review'&&v.researchEvidence)for(const parent of ancestors){
+   if(parent.id!==record.id||parent.make!==record.make||parent.model!==record.model)break;
+   const prior=parent.variants?.find((p:any)=>p.id===v.id);
+   if(!prior||prior.year!==v.year)break;
+   const e=child.researchEvidence;
+   if(child.status!=='observed'&&!(child.status==='review'&&e))break;
+   if(prior.trim!==child.trim&&!(e?.originalTrim===prior.trim&&e?.checkedIdentity?.trim===child.trim&&['manufacturer','official_registry'].includes(e?.source?.type)))break;
+   unchanged=unchanged.filter(f=>JSON.stringify(child[f])===JSON.stringify(prior[f]));
+   if(prior.status==='observed'){
+    const markets=(prior.markets||[]).filter((m:string)=>m==='china'||m==='europe');
+    if(markets.length)for(const field of unchanged)retainedReferences[field]={kind:'owner_reference',markets};
+    break;
+   }
+   child=prior;
   }
   const reference=v.status==='observed'&&(v.markets||[]).some((m:string)=>m==='china'||m==='europe');
   for(const field of factFields){
    if(sources[field]||!exists(v[field]))continue;
    if(v.status==='verified'&&/^https?:\/\//.test(v.sourceUrl||'')){
     values[field]=v[field];sources[field]={kind:'manual',url:v.sourceUrl};
+   }else if(retainedReferences[field]){
+    values[field]=v[field];sources[field]=retainedReferences[field];
    }else if(reference&&field!=='power30MinKw'){
     values[field]=v[field];sources[field]={kind:'owner_reference',markets:v.markets.filter((m:string)=>m==='china'||m==='europe')};
    }

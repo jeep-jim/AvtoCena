@@ -123,3 +123,31 @@ test('an exact encyclopedia match upgrades a seller card through the real engine
   }
  }finally{indexRead.mock.restore();resetCalculationIndexForTests();read.mock.restore();resetCatalogRateCache();invalidateEffectiveMarketsCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
+
+test('research preserves unchanged owner-reference fields without promoting them or stale values',()=>{
+ const row={...base,status:'review',bodyType:'sedan',researchEvidence:{checkedIdentity:{make:'Audi',model:'A6',year:2023,trim:base.trim},fields:['bodyType'],values:{bodyType:'sedan'},source:{type:'manufacturer',url:'https://www.audi.com/spec.pdf'},ownerReferenceSnapshot:{markets:['europe'],values:{engineCc:1968,powerHp:204,power30MinKw:99}}}};
+ const fact=compileModelFacts(record([row]))[0];
+ assert.equal(fact.values.engineCc,1968);assert.equal(fact.sources.engineCc?.kind,'owner_reference');
+ assert.equal(fact.sources.bodyType?.kind,'manufacturer');assert.equal(fact.values.power30MinKw,undefined);
+ assert.equal(compileModelFacts(record([{...row,powerHp:245}]))[0].values.powerHp,undefined);
+});
+test('a verified translation retains earlier field evidence and original matching identity',()=>{
+ const old={checkedIdentity:{make:'Audi',model:'A6',year:2023,trim:base.trim},fields:['powerHp'],values:{powerHp:204},source:{type:'manufacturer',url:'https://www.audi.com/spec.pdf'}};
+ const translated='40 TDI S tronic Перевод';
+ const row={...base,trim:translated,status:'review',researchEvidenceHistory:[old],researchEvidence:{...old,checkedIdentity:{...old.checkedIdentity,trim:translated},originalTrim:base.trim,fields:['trim'],values:{trim:translated}}};
+ const fact=compileModelFacts(record([row]))[0];assert.equal(fact.values.powerHp,204);
+ assert.equal((applyEncyclopediaCalculation(offer(),index([row])) as any).powerHp,204);
+ const unlinked={...row,researchEvidence:{...row.researchEvidence,originalTrim:'other'}};
+ assert.equal(compileModelFacts(record([unlinked])).length,0);
+});
+
+test('legacy reviews recover only unchanged reference fields from immutable ancestors',()=>{
+ const old=record([base]);const reviewed={...base,status:'review',bodyType:'sedan',researchEvidence:{checkedIdentity:{make:'Audi',model:'A6',year:2023,trim:base.trim},fields:['bodyType'],values:{bodyType:'sedan'},source:{type:'manufacturer',url:'https://www.audi.com/spec.pdf'}}};
+ const current=record([reviewed]);
+ assert.equal(compileModelFacts(current,[old])[0].values.engineCc,1968);
+ assert.equal(compileModelFacts(current,[old])[0].sources.engineCc?.kind,'owner_reference');
+ assert.equal(compileModelFacts(current,[record([{...base,engineCc:1998}])])[0].values.engineCc,undefined);
+ assert.equal(compileModelFacts(current,[record([{...base,year:2022}])])[0].values.engineCc,undefined);
+ assert.equal(compileModelFacts(current,[record([{...base,status:'review',engineCc:1968}]),old])[0].values.engineCc,undefined,'manual edits do not restore stale provenance');
+ assert.equal(compileModelFacts(current,[record([{...base,markets:['uae']}])])[0].values.engineCc,undefined);
+});

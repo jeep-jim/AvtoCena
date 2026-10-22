@@ -45,3 +45,14 @@ test('literal translation changes display text without promoting an observed spe
  assert.throws(()=>validateBatch({...batch,entries:[{...e,confirmedFields:['transmission']}]}));
  assert.throws(()=>validateBatch({...batch,entries:[{...e,patch:{transmission:'automatic'}}]}));
 });
+
+test('review snapshots owner-approved observations but never fabricates reference provenance',()=>{
+ const china={...v,markets:['china'],engineCc:1998,power30MinKw:88};
+ const e={...entry,expectedDigest:digest(china)};
+ const row=planModelResearch({...current,variants:[china]},[e],batch).record.variants[0];
+ assert.deepEqual(row.researchEvidence.ownerReferenceSnapshot.markets,['china']);
+ assert.equal(row.researchEvidence.ownerReferenceSnapshot.values.engineCc,1998);
+ assert.equal(row.researchEvidence.ownerReferenceSnapshot.values.power30MinKw,undefined);
+ const uae={...china,markets:['uae']};
+ assert.equal(planModelResearch({...current,variants:[uae]},[{...e,expectedDigest:digest(uae)}],batch).record.variants[0].researchEvidence.ownerReferenceSnapshot,undefined);
+});
