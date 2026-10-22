@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T02:06:00+07:00",
+  "updatedAt": "2026-10-23T02:09:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -798,13 +798,13 @@
         2025,
         2024
       ],
-      "variants": 12,
+      "variants": 15,
       "status": "partial_verified_fields",
-      "researchedVariants": 6,
-      "checkedAt": "2026-10-23T02:06:00+07:00",
+      "researchedVariants": 9,
+      "checkedAt": "2026-10-23T02:09:00+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json",
       "nextAction": "Alpine A290 2025: подготовленная точная партия; затем 2026 и пропуски Alpine/A390.",
-      "lastBatch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024"
+      "lastBatch": "research-2026-10-23-alpine-a290-2025"
     },
     {
       "id": "eff6651568e364a8a5a40e97",
@@ -32657,13 +32657,13 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T02:06:00+07:00",
+    "updatedAt": "2026-10-23T02:09:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "alpine_a110_2017_2023_saved_first_batch_active_2023_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alpine A290 2025: подготовленная точная партия; затем 2026 и пропуски Alpine/A390.",
-    "lastVerifiedResearch": "alpine-a110-2024-2025-a290-2024",
+    "nextModel": "Alpine A290 2026: подготовлены четыре точных исполнения. Затем Aston Martin DB11; пропуски Alpine и обнаружение A390 отдельно.",
+    "lastVerifiedResearch": "alpine-a290-2025",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 75,
     "allModelsComplete": false,
@@ -32682,21 +32682,21 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "alpine-a110-2024-2025-a290-2024",
-      "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
-      "commit": "e5cb3235dfdadb8ec14f66bf6e50ffe7adfd0ba3",
-      "workflow": 39836589326,
-      "job": 120026421635,
-      "variants": 12,
-      "newVariants": 12,
-      "updatedVariants": 0,
-      "fields": 130,
-      "compiledCalculationFields": 109,
+      "key": "alpine-a290-2025",
+      "batch": "research-2026-10-23-alpine-a290-2025",
+      "commit": "2db00741beddbf0d36481c07cb2f7954bfbaf73d",
+      "workflow": 39837140373,
+      "job": 120028307169,
+      "variants": 4,
+      "newVariants": 3,
+      "updatedVariants": 1,
+      "fields": 37,
+      "compiledCalculationFields": 28,
       "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
       "indexMembershipState": "pending_current_release_snapshot_check",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-late-readback.json"
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2025-readback.json"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792660229591_c103ed94",
@@ -32773,17 +32773,34 @@
         "includedInIndex": false,
         "indexMembershipState": "pending_current_release_snapshot_check",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-late-readback.json"
+      },
+      {
+        "key": "alpine-a290-2025",
+        "batch": "research-2026-10-23-alpine-a290-2025",
+        "commit": "2db00741beddbf0d36481c07cb2f7954bfbaf73d",
+        "workflow": 39837140373,
+        "job": 120028307169,
+        "variants": 4,
+        "newVariants": 3,
+        "updatedVariants": 1,
+        "fields": 37,
+        "compiledCalculationFields": 28,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "pending_current_release_snapshot_check",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2025-readback.json"
       }
     ],
     "inFlightResearch": [
       {
-        "batch": "research-2026-10-23-alpine-a290-2025",
+        "batch": "research-2026-10-23-alpine-a290-2026",
         "state": "prepared_workflow_requested",
         "models": [
           "9f23c75ab6a73713bf64580a"
         ],
         "entries": 4,
-        "fields": 37
+        "fields": 40
       }
     ],
     "lastCompletedPass": {
