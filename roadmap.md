@@ -12666,3 +12666,8 @@ Drom39831884392 завершился FAILURE/reference_fetch_stopped_checkpoint_
 - Остаток:32 DB11 и11 DB12 неназванных/неподтверждённых исходных строк плюс исторические/региональные/специальные исполнения, MY26 и идентификаторы. Retry и точный курсор сохранены: следующий Aston Martin DB9(d9beb45b880f70fa01286ee4), охват всех реальных лет с2008, включая отсутствующие в текущих2 строках;2022наблюдение проверить отдельно. Полный проход не завершён.
 - Referenceintake остаётся остановлен на redirect_outside_catalog, checkpoint13045 visited/8403 saved/253 pending; повторный запуск и обход ограничения не сделаны. Это отдельный блокер справочного сбора, заводское подтверждение продолжено.
 - Отчёт: docs/encyclopedia/reports/2026-10-23-aston-db11-db12-pass.json; handoff: docs/encyclopedia/research-handoff-2026-10-23-aston-db9.json. Сборщики/расчётныеправила/секреты не менялись. Добавлена только read-only диагностика состоянияreferencecheckpoint; она не выполняетзаписьвхранилище.
+
+
+### 23.10.2026 03:54 Asia/Krasnoyarsk — Контроль текущей публикации Китая
+
+Свежие AGENTS/roadmap прочитаны на 3f2fd85f. China39840733509/job120041080822 остаётся IN_PROGRESS: восстановление сохранённого intake, проверка резерва и границ года SUCCESS; Publish markets through calculation and retention guards выполняется. Collect SKIPPED. Live logs пока возвращают BlobNotFound404, что не является terminal failure. Повторный publisher/deploy/source collection не запускаются; блокировки не снимаются. Запрошено одно свежее чтение manifest/writer штатным read-only workflow. Сохранённые поздние партии DB11/DB12 принадлежат отдельной задаче и не дублируются.

@@ -1,5 +1,4 @@
 {
-  "requestedAt": "2026-10-22T19:56:28.465Z",
-  "reason": "Проверить причину остановки технического сбора по сохранённому checkpoint без перезапуска и изменения данных.",
-  "inspectTechnicalReferenceState": true
+  "operation": "verify-china-chunked-publication-20261022-2054",
+  "reason": "Read active publication lock and generation; no storage mutation."
 }
