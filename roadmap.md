@@ -12053,3 +12053,14 @@ Technical-reference-intake39749319614 остаётсяfailure_checkpoint_saved; 
 ### 2026-10-22 18:58 Asia/Krasnoyarsk — Stelvio 2018: точная сентябрьская гамма
 
 Подготовлена партия `alfa-stelvio-2018-september-range`: 21 новое исполнение, 202 подтверждённых поля по заводскому прайсу FCA Italy от 12.09.2018 (PDF, стр. 3; расположение колонок проверено визуально). Контроль существования и актуальной ревизии API пройден. Строка SUPER без точного двигателя сохранена. Для 200 PS кВт не внесены из-за расхождения 147/148 в заводских документах; масса и коды двигателя не выдуманы. Запрашивается штатный защищённый research workflow; сохранение ещё не объявлено успешным. Публикация индекса остаётся за отдельной задачей владельца, дублирующий выпуск не запускается.
+
+
+### 22.10.2026 18:58 Asia/Krasnoyarsk — Китай опубликован; красный итог относится к аудиту ОАЭ
+
+China39743683106 завершён. ШагPublish SUCCESS11:51:01UTC; итоговыйAudit failure11:51:29UTC. Скачан и прочитан artifact12423233144: published:true,publishedAt11:50:32.020UTC,generation gen_1792660229591_c103ed94,publishedMarketCount162449,addedCount30099. Свежий публичный /api/catalog/search?market=china&pageSize=2 вернул ту жеgeneration,total162449 и2 карточки.159980Che168(auto_api_che168,sourceIdautohome_used_china_open)+2469сохранённыхAutohomeNew. Исходный paid snapshot270337/yearFrom2014/cursor12360638/completeInventory:true. Другие рынки поpublication preserved:KR9926,UAE22045,EU46127,GE1706;Japan0 относится к этому хранилищу, не утверждение об отдельном платном японском API.
+
+Общий аудит242235видимых: invalidReady0,unsafePendingVisiblePrices0;3822unpriced/invalidSpecifications/blockingNeedsData относятся кUAE. УКитаяvisible162449,estimated90568,needsData71881,unpricedPublic0. Нельзя считать все китайские расчёты подтверждённымиreadyExact(он0) или игнорировать проблемуОАЭ. Аудит не отключён и не переведён вcontinue-on-error.
+
+Дополнительный verifier39773762211 отказалche168_publication_not_active. Егоworkflow использовалYC_STORAGEsecrets, тогда как publisher и действующий сайт используют REGпрофиль. Настройка verifier выровнена сpublisher:regcloud-staging,REGS3endpoint/bucket/prefix/credentials. Значения старых секретов не читались; точная удалённая причина несовпадения ещё требует повторной проверки.11 целевых тестов PASS,diff-check PASS. Сбор/публикация Китая повторно не запускаются.
+
+Важный незакрытый пункт: публичный запросyearFrom=2014&yearTo=2014 покаtotal0 на новойgeneration; наличие2014 в выдаче не подтверждено, нужна дальнейшая диагностика индексов/отбора. Запрошен один совокупный штатный deploy после завершенияpublisher, сновым снимком энциклопедии иполными защитами. Новыйобразнужен дляlatestиндекса; устаревшийf3f7331 не активируется вслепую. Успехустановки/автообновления/скорости пока не заявлен.
