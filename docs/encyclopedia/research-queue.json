@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T11:37:29.282572+07:00",
+  "updatedAt": "2026-10-22T11:39:59.447376+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -237,10 +237,21 @@
         2021
       ],
       "variants": 60,
-      "status": "partial_applied",
-      "lastReviewedAt": "2026-10-22T11:14:37.008237+07:00",
-      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m5-historical-manuals-plan.json",
-      "nextAction": "После окончания текущего выпуска: свежий API/CAS, применить подготовленные 17 вариантов / 55 полей, проверить readback. Затем M6; пропуски M5 остаются в retry."
+      "status": "partial_verified_fields",
+      "lastReviewedAt": "2026-10-22T11:39:59.447376+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m5-historical-manuals-readback.json",
+      "nextAction": "После окончания текущего выпуска: свежий API/CAS, применить подготовленные 17 вариантов / 55 полей, проверить readback. Затем M6; пропуски M5 остаются в retry.",
+      "appliedResearchBatches": [
+        {
+          "batch": "research-2026-10-22-aito-m5-historical-manuals",
+          "commit": "1231d249913b7ace102d9d3750bf5b626b7c2b1a",
+          "workflow": 39723434737,
+          "variants": 17,
+          "fields": 55,
+          "apiReadback": true,
+          "includedInIndex": false
+        }
+      ]
     },
     {
       "id": "a509545256f3729336fdfc6f",
@@ -32434,12 +32445,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T11:37:29.282572+07:00",
+    "updatedAt": "2026-10-22T11:39:59.447376+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "index_release_running_research_continuing",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "AITO M5",
+    "nextModel": "AITO M6",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32470,6 +32481,15 @@
         "variants": 2,
         "fields": 17,
         "workflow": 39720654481
+      },
+      "aito-m5-historical-manuals": {
+        "batch": "research-2026-10-22-aito-m5-historical-manuals",
+        "commit": "1231d249913b7ace102d9d3750bf5b626b7c2b1a",
+        "workflow": 39723434737,
+        "variants": 17,
+        "fields": 55,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32489,25 +32509,20 @@
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
     "inFlightResearch": {
       "state": "apply_requested",
-      "batch": "docs/encyclopedia/batches/2026-10-22-aito-m5-historical-manuals.json",
-      "variants": 17,
-      "fields": 55,
-      "digest": "3f47fa17c2d82a4cfa89b39abf0260db1e1cbfe687a2ff7522003e2fbe73be27",
-      "dependsOnReleaseWorkflow": 39720853891,
-      "requiresFreshApiCas": true,
-      "preflightPassed": true,
-      "preflightAt": "2026-10-22T04:35:25Z",
-      "dependencyResolved": "Immutable encyclopedia index and audit step completed successfully at 04:13:13 UTC; running release reads its frozen index, not current encyclopedia manifest."
+      "batch": "docs/encyclopedia/batches/2026-10-22-aito-m6-gross-mass-and-edition.json",
+      "variants": 13,
+      "fields": 20,
+      "digest": "33fd5466b615220002fc79c2e266ce7eab209bf8d586eef93eb4c1b12683d277",
+      "preflightPassed": true
     },
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-aion-ut-europe-exact",
-      "commit": "f2088b6244c95cdf395280780e06045a5a45aa32",
-      "workflow": 39720654481,
-      "variants": 2,
-      "fields": 17,
-      "newVariants": 1,
+      "batch": "research-2026-10-22-aito-m5-historical-manuals",
+      "commit": "1231d249913b7ace102d9d3750bf5b626b7c2b1a",
+      "workflow": 39723434737,
+      "variants": 17,
+      "fields": 55,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32530,16 +32545,6 @@
     "requestedRelease": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
     "requestedReleaseWorkflow": 39720853891,
     "additionalPreparedResearch": [
-      {
-        "state": "prepared_not_applied",
-        "batch": "docs/encyclopedia/batches/2026-10-22-aito-m6-gross-mass-and-edition.json",
-        "variants": 13,
-        "fields": 20,
-        "newVariants": 1,
-        "digest": "33fd5466b615220002fc79c2e266ce7eab209bf8d586eef93eb4c1b12683d277",
-        "dependsOnReleaseWorkflow": 39720853891,
-        "requiresFreshApiCas": true
-      },
       {
         "state": "prepared_not_applied",
         "batch": "docs/encyclopedia/batches/2026-10-22-aito-m7-historical-manuals.json",
@@ -32566,6 +32571,17 @@
         "digest": "de2a24fa5bb412be70a72fa0bb9b0a2b0928ede722eb7437d2334e7f33a812ff",
         "dependsOnReleaseWorkflow": 39720853891,
         "requiresFreshApiCas": true
+      }
+    ],
+    "pendingNextIndexBatches": [
+      {
+        "batch": "research-2026-10-22-aito-m5-historical-manuals",
+        "commit": "1231d249913b7ace102d9d3750bf5b626b7c2b1a",
+        "workflow": 39723434737,
+        "variants": 17,
+        "fields": 55,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ]
   },
