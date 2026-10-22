@@ -274,12 +274,11 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   }
   const [savedCalculation,clientScenario,currentUser,display] = await Promise.all([getSavedOfferCalculation(storedOffer),query.calculation ? getSavedOfferCalculation(storedOffer,query.calculation) : Promise.resolve(null),getCurrentUser(),resolveOfferDisplay(storedOffer,safeRequestedPowerHp,query.modificationId || '')]);
   const sharedScenario = query.estimate ? await sharedOfferScenario(storedOffer,query.estimate) : null;
-  // Attribute the displayed immutable link, not the latest public version.
-  const attributionRecord = sharedScenario ? null : clientScenario || (query.direct === "novokuznetsk" ? null : savedCalculation);
-  const savedByName = isCrmRole(currentUser?.role) && attributionRecord
-    ? attributionRecord.savedByName || (await readCrmUsers()).find(user=>user.id===attributionRecord.savedBy)?.displayName || "Сотрудник"
+  // The last saved edit belongs to the vehicle, independently of shared scenarios.
+  const savedByName = isCrmRole(currentUser?.role) && savedCalculation
+    ? savedCalculation.savedByName || (await readCrmUsers()).find(user=>user.id===savedCalculation.savedBy)?.displayName || "Сотрудник"
     : undefined;
-  const directScenario = sharedScenario || (clientScenario ? {draft:clientScenario.draft,calculation:clientScenario.calculation,savedAt:isCrmRole(currentUser?.role)?clientScenario.savedAt:undefined,savedByName} : (query.direct === "novokuznetsk" ? await directOfferScenario(storedOffer) : null));
+  const directScenario = sharedScenario || (clientScenario ? {draft:clientScenario.draft,calculation:clientScenario.calculation} : (query.direct === "novokuznetsk" ? await directOfferScenario(storedOffer) : null));
   const {offer,sellerPricing,selectionRequired,selectedModification,enrichedOffer,normalizedEnrichedOffer,initialPublic,pricedOffer,raw} = display;
   const sourceUrl = enrichedOffer.market === "japan" && !isGreenCornerOffer(enrichedOffer)
     ? undefined
