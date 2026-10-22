@@ -57,6 +57,7 @@ export function BrandModelDirectory({
 }) {
   const previews=useBrandPreviews();
   const [query, setQuery] = useState("");
+  const [failedImages,setFailedImages]=useState<string[]>([]);
   const [expanded, setExpanded] = useState(false);
   const normalizedQuery = searchable(query);
 
@@ -76,10 +77,10 @@ export function BrandModelDirectory({
 
   const canExpand = !normalizedQuery && models.length > PREVIEW_LIMIT;
 
-  return <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
+  return <section className="mt-7">
     <div className="flex items-center justify-between gap-3">
       <div>
-        <h2 className="text-2xl font-black md:text-4xl">Модели {brand}</h2>
+        <h2 className="text-2xl font-black md:text-3xl">Модели {brand}</h2>
         <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Выберите модель и посмотрите доступные автомобили со всех рынков.</p>
       </div>
       {canExpand ? <button
@@ -108,25 +109,25 @@ export function BrandModelDirectory({
 
     {filtered.length ? <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
       {filtered.map((model) => {
-        const previewUrl=model.previewUrl||previews.find(row=>[model.model,...(model.aliases||[])].some(name=>searchable(name)===searchable(row.model)))?.url;
+        const livePreview=previews.find(row=>[model.model,...(model.aliases||[])].some(name=>searchable(name)===searchable(row.model)))?.url;
+        const previewUrl=[model.previewUrl,livePreview].find(url=>url&&!failedImages.includes(url));
         return <article
           key={model.id}
-          className="overflow-hidden rounded-2xl bg-[var(--ac-surface-2)] transition"
+          className="overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] transition"
         >
           <Link
             href={`/cars/brand/${brandSlug}/model/${model.slug}`}
             className="group block w-full text-left transition hover:bg-[var(--ac-surface-3)]"
           >
-            <span className="relative flex h-24 items-center justify-center overflow-hidden bg-[var(--ac-surface)] sm:h-28">
-              {previewUrl ? <img src={previewUrl} alt={`${brand} ${model.model}`} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.025]" /> : <BrandLogoVisual brand={brand} className="!h-12 !w-24 opacity-55" />}
-              {model.count > 0 ? <span className="absolute right-2 top-2 rounded-full bg-black/65 px-2 py-1 text-[9px] font-black text-white">{model.count} в продаже</span> : null}
+            <span className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-[var(--ac-surface-2)]">
+              {previewUrl ? <img src={previewUrl} alt={`${brand} ${model.model}`} loading="lazy" decoding="async" onError={()=>setFailedImages(previous=>previous.includes(previewUrl)?previous:[...previous,previewUrl])} className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.025]" /> : <BrandLogoVisual brand={brand} className="!h-12 !w-24 opacity-55" />}
             </span>
             <span className="flex min-h-14 items-center justify-between gap-2 px-3 py-2.5">
               <span className="min-w-0">
                 <span className="block truncate text-sm font-black text-[var(--ac-text)] transition group-hover:text-red-500">{model.model}</span>
-                <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">{yearLabel(model.yearFrom, model.yearTo) || (model.count ? `${model.count} предложений` : "Под заказ")}</span>
+                <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">{yearLabel(model.yearFrom, model.yearTo)}</span>
               </span>
-              <span className="shrink-0 text-lg font-black text-[var(--ac-muted)]">→</span>
+              <span className="shrink-0 rounded-full bg-[var(--ac-surface-2)] px-2 py-1 text-xs font-bold text-[var(--ac-text)]" aria-label={`${model.count} предложений`}>{model.count.toLocaleString("ru-RU")}</span>
             </span>
           </Link>
         </article>;

@@ -63,25 +63,24 @@ export default async function BrandLandingPage({ params }: PageProps) {
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-8 md:px-8 md:py-12">
       <nav className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]" aria-label="Хлебные крошки">
-        <Link href="/cars/autocatalog" className="hover:text-red-500">Автокаталог</Link><span className="mx-2">/</span><span>{brand.name}</span>
+        <Link href="/cars" className="hover:text-red-500">Каталог</Link><span className="mx-2">/</span><span>{brand.name}</span>
       </nav>
 
-      <header className="mt-5 grid gap-6 rounded-[2rem] bg-[var(--ac-surface)] p-5 shadow-[0_22px_70px_rgba(0,0,0,.16)] md:grid-cols-[170px_minmax(0,1fr)] md:items-center md:p-8">
-        <div className="flex h-32 items-center justify-center rounded-[1.5rem] bg-[var(--ac-surface-2)] text-[var(--ac-muted)] md:h-40">
-          <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />
+      <header className="mt-5 grid grid-cols-[64px_minmax(0,1fr)] gap-4 border-b border-[var(--ac-border)] pb-7 md:grid-cols-[104px_minmax(0,1fr)] md:items-center md:gap-6">
+        <div className="flex h-16 items-center justify-center rounded-2xl bg-[var(--ac-surface-2)] text-[var(--ac-muted)] md:h-24">
+          <BrandLogoVisual brand={brand.name} className="!h-12 !w-14 md:!h-16 md:!w-20" />
         </div>
         <div className="min-w-0">
-          <div className="text-xs font-black normal-case tracking-normal text-red-500">Марка автомобиля</div>
-          <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name}</h1>
+          <h1 className="break-words text-3xl font-black leading-[.98] tracking-[-0.045em] md:text-5xl">{brand.name}</h1>
           <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">
-            Выберите модель {brand.name}, чтобы посмотреть автомобили, характеристики и стоимость под ключ.
+            Модели, характеристики и предложения {brand.name}.
           </p>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-black">
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{saleModels.length} моделей в продаже</span>
             {totalOffers ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{totalOffers.toLocaleString("ru-RU")} автомобилей</span> : null}
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{availableMarkets.length} {availableMarkets.length === 1 ? "рынок" : "рынков"}</span>
+            {availableMarkets.map((market) => <Link href={`/cars?market=${market}&make=${encodeURIComponent(brand.name)}`} key={market} className="inline-flex items-center gap-2 rounded-full border border-[var(--ac-border)] px-3 py-2 text-xs font-bold transition hover:border-red-500"><CatalogMarketFlag market={market} className="h-4 w-6" />{CATALOG_MARKET_LABELS[market]}</Link>)}
           </div>
-          {availableMarkets.length ? <div className="mt-3 flex flex-wrap gap-2">{availableMarkets.map((market) => <span key={market} className="inline-flex items-center gap-2 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-black"><CatalogMarketFlag market={market} className="h-4 w-6" />{CATALOG_MARKET_LABELS[market]}</span>)}</div> : null}
         </div>
       </header>
 
