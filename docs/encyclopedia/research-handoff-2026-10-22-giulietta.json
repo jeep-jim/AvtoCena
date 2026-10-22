@@ -1,0 +1,306 @@
+{
+  "checkedAt": "2026-10-22T13:26:36.172909+07:00",
+  "status": "research_handoff_not_applied",
+  "modelId": "cb49c6bb46e8dd8caf106b34",
+  "make": "Alfa Romeo",
+  "model": "Giulietta",
+  "nextCursor": 2010,
+  "current2010Rows": 0,
+  "currentRevisionAtCheck": "60b88f07-a516-461c-8749-f5bc9d3fc36f",
+  "sources": [
+    {
+      "id": "it-2010-launch",
+      "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta",
+      "publishedAt": "2010-04-13",
+      "purpose": "Подтверждён запуск новой Giulietta в 2010 году, кузов пятидверный хэтчбек; не создавать 2008/2009 для этого поколения."
+    },
+    {
+      "id": "de-2010-launch",
+      "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-giulietta-die-synthese-von-emotion-und-vernunft",
+      "publishedAt": "2010-05-04",
+      "purpose": "Точные сочетания базовая/Turismo и Quadrifoglio Verde, PS/kW; последняя доступна с конца лета 2010."
+    },
+    {
+      "id": "uk-2010-technical",
+      "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-giulietta-in-uk-press-pack",
+      "publishedAt": "2010-06-23",
+      "sha256": "75d1a703f0d1154fcc5ff985bf8039be5322fc0c7c1162699c1e12481ba3c334",
+      "purpose": "Таблица рабочего объёма: 1368/1368/1742/1598/1956 см³; привод Front и 6+1R — объединённые ячейки на все 5 двигателей. UK bhp не переносить как PS; 235-версия имеет 172.5 kW, а DE — 173 kW. Не смешивать округления."
+    },
+    {
+      "id": "at-2010-140-diesel",
+      "url": "https://www.media.stellantis.com/at-de/alfa-romeo/press/neues-dieseltriebwerk-2-0-jtdm-2-140-ps-fur-alfa-romeo-giulietta",
+      "publishedAt": "2010-12-28",
+      "purpose": "Подтверждена доступность дизеля 140 PS в конце 2010; точные исполнения и поля требуют таблицы."
+    },
+    {
+      "id": "it-2011-price",
+      "url": "https://www.media.stellantis.com/uploads/it/2011/ALFA_ROMEO/LISTINI/110628_AR_Giulietta.pdf",
+      "publishedAt": "2011-06-28",
+      "sha256": "620b1c2184cad8ab1f803b5cd1633d2ea195a04072944c8ca2fc4fca5c3bfce3",
+      "page": 2,
+      "purpose": "23 исполнения в 8 группах; проверить визуально и свежий API перед созданием. Отсутствие TCT в названии само по себе не доказывает тип коробки."
+    }
+  ],
+  "candidate2011Rows": [
+    {
+      "year": 2011,
+      "engine": "1.4 Turbo Benzina",
+      "trim": "Giulietta",
+      "mvs": "191.B51.0 + 6CM",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "powerPS": 120,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.4 Turbo Benzina",
+      "trim": "Progression",
+      "mvs": "191.B51.0 + 6CM + 6NK",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "powerPS": 120,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.4 Turbo Benzina",
+      "trim": "Distinctive",
+      "mvs": "191.C51.0 + 6CM",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "powerPS": 120,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.4 Turbo MultiAir",
+      "trim": "Progression",
+      "mvs": "191.B53.0 + 6CM",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.4 Turbo MultiAir",
+      "trim": "Distinctive",
+      "mvs": "191.C53.0 + 6CM",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.4 Turbo MultiAir",
+      "trim": "Exclusive",
+      "mvs": "191.C53.0 + 6CM + 6NJ",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.4 Turbo MultiAir TCT",
+      "trim": "Progression",
+      "mvs": "191.B5B.0 + 6CM",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.4 Turbo MultiAir TCT",
+      "trim": "Distinctive",
+      "mvs": "191.C5B.0 + 6CM",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.4 Turbo MultiAir TCT",
+      "trim": "Exclusive",
+      "mvs": "191.C5B.0 + 6CM + 6NJ",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1750 TBi",
+      "trim": "Quadrifoglio Verde",
+      "mvs": "191.C54.0 + 6CM",
+      "engineCc": 1742,
+      "powerKw": 173,
+      "powerPS": 235,
+      "fuel": "petrol",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.6 JTDM-2",
+      "trim": "Giulietta",
+      "mvs": "191.B56.0 + 6CM",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "powerPS": 105,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.6 JTDM-2",
+      "trim": "Progression",
+      "mvs": "191.B56.0 + 6CM + 6NK",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "powerPS": 105,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.6 JTDM-2",
+      "trim": "Distinctive",
+      "mvs": "191.C56.0 + 6CM",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "powerPS": 105,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "1.6 JTDM-2",
+      "trim": "Exclusive",
+      "mvs": "191.C56.0 + 6CM + 6NJ",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "powerPS": 105,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "2.0 JTDM-2",
+      "trim": "Progression",
+      "mvs": "191.B57.0 + 6CM",
+      "engineCc": 1956,
+      "powerKw": 103,
+      "powerPS": 140,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "2.0 JTDM-2",
+      "trim": "Distinctive",
+      "mvs": "191.C57.0 + 6CM",
+      "engineCc": 1956,
+      "powerKw": 103,
+      "powerPS": 140,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "2.0 JTDM-2",
+      "trim": "Exclusive",
+      "mvs": "191.C57.0 + 6CM + 6NJ",
+      "engineCc": 1956,
+      "powerKw": 103,
+      "powerPS": 140,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "2.0 JTDM-2",
+      "trim": "Progression",
+      "mvs": "191.B58.0 + 6CM",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "2.0 JTDM-2",
+      "trim": "Distinctive",
+      "mvs": "191.C58.0 + 6CM",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "2.0 JTDM-2",
+      "trim": "Exclusive",
+      "mvs": "191.C58.0 + 6CM + 6NJ",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "2.0 JTDM-2 TCT",
+      "trim": "Progression",
+      "mvs": "191.B5D.0 + 6CM",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "2.0 JTDM-2 TCT",
+      "trim": "Distinctive",
+      "mvs": "191.C5D.0 + 6CM",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    },
+    {
+      "year": 2011,
+      "engine": "2.0 JTDM-2 TCT",
+      "trim": "Exclusive",
+      "mvs": "191.C5D.0 + 6CM + 6NJ",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "powerPS": 170,
+      "fuel": "diesel",
+      "source": "it-2011-price"
+    }
+  ],
+  "requiredBeforeApply": [
+    "Проверить актуальный API всех лет и отсутствие дублирующих технических исполнений.",
+    "Визуально сверить прайс и сопоставить точные коробки/привод; свежие SHA256/CAS.",
+    "Начать с 2010, потом 2011: эти кандидаты ещё не сохранены в постоянной базе.",
+    "Не принимать выставку TCT в 2010 за подтверждение годового исполнения; заводской материал France указывает начало продаж весной 2011."
+  ]
+}
