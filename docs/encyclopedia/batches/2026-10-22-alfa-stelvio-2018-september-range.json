@@ -1,0 +1,2286 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-stelvio-2018-september-range",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "7ff129fec3337887ceb68c99",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.0 Turbo 200 PS AT8 Q4 Business",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Q4 Business",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 200,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Business; MVS 630-NA2-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Business; MVS 630-NA2-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Business; MVS 630-NA2-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Business; MVS 630-NA2-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Business; MVS 630-NA2-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Business; MVS 630-NA2-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Business; MVS 630-NA2-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Business; MVS 630-NA2-0/000; transmission"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "78e3b09c460eb78fdda9a483",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.0 Turbo 200 PS AT8 Q4 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Q4 Super",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 200,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Super; MVS 630-PA2-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Super; MVS 630-PA2-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Super; MVS 630-PA2-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Super; MVS 630-PA2-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Super; MVS 630-PA2-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Super; MVS 630-PA2-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Super; MVS 630-PA2-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Super; MVS 630-PA2-0/000; transmission"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "cc02cf62a4c5585564849f17",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.0 Turbo 200 PS AT8 Q4 Executive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Q4 Executive",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 200,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Executive; MVS 630-JA2-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Executive; MVS 630-JA2-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Executive; MVS 630-JA2-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Executive; MVS 630-JA2-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Executive; MVS 630-JA2-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Executive; MVS 630-JA2-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Executive; MVS 630-JA2-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 Executive; MVS 630-JA2-0/000; transmission"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "fcc01133b26a6af4b00e1a08",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.0 Turbo 200 PS AT8 Q4 B-Tech",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Q4 B-Tech",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 200,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 B-Tech; MVS 630-EA2-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 B-Tech; MVS 630-EA2-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 B-Tech; MVS 630-EA2-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 B-Tech; MVS 630-EA2-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 B-Tech; MVS 630-EA2-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 B-Tech; MVS 630-EA2-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 B-Tech; MVS 630-EA2-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 200 PS AT8 Q4 B-Tech; MVS 630-EA2-0/000; transmission"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "b6cef55379689039d5a67c73",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Super",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Super; MVS 630-PA4-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "a0f854ec68329932fc8af238",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Executive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Executive",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 Executive; MVS 630-JA4-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "c02316934251d23e7b44fdf6",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 B-Tech",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 B-Tech",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.0 Turbo 280 PS AT8 Q4 B-Tech; MVS 630-EA4-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "98ac56181344d7fc055cf2fa",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio",
+        "bodyType": "suv",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2891,
+        "powerHp": 510,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 375,
+        "icePowerKw": 375
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.9 V6 Bi-Turbo 510 PS AT8 Q4 Quadrifoglio; MVS 630-QAS-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "5c7b180ad6ab2122eee3cd21",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 RWD Business",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 RWD Business",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 160 PS AT8 RWD Business; MVS 630-NR5-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "08678eb81a0ef24eb610992f",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 RWD Business",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 RWD Business",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Business; MVS 630-NR6-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "9475fd19d0e331f7362c6663",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 RWD Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 RWD Super",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Super; MVS 630-PR6-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "4b7eaecd6aea931d5c15c3ae",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 RWD Executive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 RWD Executive",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD Executive; MVS 630-JR6-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "431edf7405ee6d7f678a8e67",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 RWD B-Tech",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 RWD B-Tech",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "rwd",
+        "transmission": "automatic",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 RWD B-Tech; MVS 630-ER6-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "89002fb1c334d632bb39b318",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Business",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Business",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Business; MVS 630-NA6-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "bcac061b105a3c5bb8d44153",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Super",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Super; MVS 630-PA6-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "86a6be8e8f5f24eea73e3ed4",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Executive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Executive",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 Executive; MVS 630-JA6-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "9466613195ea944429ce7c2f",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech; MVS 630-EA6-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "39f1c02cfcf0baf495c519da",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Business",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Business",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 154,
+        "icePowerKw": 154
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Business; MVS 630-NA7-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "19132f57d25378e25ddd0b00",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Super",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 154,
+        "icePowerKw": 154
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Super; MVS 630-PA7-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "5cbd8d424532e0e58b890d22",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Executive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Executive",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 154,
+        "icePowerKw": 154
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 Executive; MVS 630-JA7-0/000; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "54786b3b720cf6c604dfc74f",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2018,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd",
+        "transmission": "automatic",
+        "powerKw": 154,
+        "icePowerKw": 154
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс FCA Italy от 12.09.2018, страница 3: точно совпадают исполнение, код MVS/SS, двигатель, мощность CV (метрические PS), объём в см³, AT8 и привод. Год 2018 означает подтверждённое предложение на эту дату; точный день изготовления автомобиля не установлен. Поздняя гамма Euro 6D-TEMP отделена от ранних двигателей 150/180 PS. Для 200 PS значения кВт не внесены из-за расхождения 147/148 в заводских материалах; нужна омологация. Коммерческий код MVS не подставлен в код двигателя или шасси. Масса и 30-минутная мощность не подтверждены. Существующая неоднозначная строка SUPER сохранена. Новые строки остаются review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-05-03",
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; powerHp"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; transmission"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2018-09-12",
+            "pdfPage": 3,
+            "selector": "Stelvio 2.2 Turbo Diesel 210 PS AT8 Q4 B-Tech; MVS 630-EA7-0/000; icePowerKw"
+          }
+        }
+      }
+    }
+  ]
+}
