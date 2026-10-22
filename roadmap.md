@@ -12041,3 +12041,10 @@ Workflow39768344710/c887c03 SUCCESS, независимый API-readback23/225 P
 Technical-reference-intake39749319614 остаётсяfailure_checkpoint_saved; это неpage-limit, без причины изcheckpoint не возобновлён. Точный следующийкурсор —Stelvio2018 (одна исходнаяSUPER без точного двигателя), затем2019–2026,Tonale. Handoffсодержит заводские прайсы2018 и предупреждение оMY19/дате2018. Не начинатьзановоSpider/2017. Всяэнциклопедия иretryочередь ещёне завершены.
 
 Отчёт: docs/encyclopedia/reports/2026-10-22-spider-stelvio-pass.json. Пробелы: docs/encyclopedia/retry-2026-10-22-spider-stelvio-remaining.json. Продолжение: docs/encyclopedia/research-handoff-2026-10-22-stelvio-2018.json.
+
+
+### 22.10.2026 18:28 Asia/Krasnoyarsk — Контроль Китая, выпуск отложен до publisher
+
+Свежие GitHub jobs подтверждают: China39743683106/job119707033902 всё ещёin_progress на Publish markets through calculation and retention guards; итоговый аудит/publish-report пока не получен. Deploy39755527627/job119765125981 завершился failure10:57:44UTC(17:57:44Красноярск): полный лог Error:publication_wait_deadline после40мин ожидания catalog_v3_publish_china; последний lockedUntil11:25:28.671UTC, это состояние на момент лога, не доказательство текущего освобождения. Новый выпуск/повторный сбор не запускался, активная публикация не отменялась, writer-lock не изменялся.
+
+Прямойhealthвернулok:true,release75e91fe67467183520e7d0facde137260a0469f6,calculationVersion78adb05e1319215f3c06a1ea1db0f51b5931ced2c55e33ecd531b7a3209c1770. Нет подтверждения установкиf3f7331 либо подключения поздних партий. Следующий шаг послеterminalКитая: отчётpublished/generation/source/year2014 и другие рынки, затем один совокупный индекс всехpendingпартий и один выпуск с полной проверкой. Контроль остаётся включён; задачи энциклопедии не дублируются. Повторный зелёный автоматический refresh и производительность пока не подтверждены.
