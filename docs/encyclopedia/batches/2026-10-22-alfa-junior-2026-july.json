@@ -1,0 +1,699 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-junior-2026-july",
+  "entries": [
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "78c687ec742a57e93a9b73f2",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Ti",
+      "expectedDigest": "be3f16b9cd3fe4e36c29f362f62e6f7153ab9bf6dc4074e2419f9ca145f4f9bf",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+        "checkedAt": "2026-10-22",
+        "statement": "Загруженный заводской PDF датирован29.07.2026; визуально сверены страницы3 и11. Поисковая копия того же URL показывает19.10.2026: в этой партии используется только фактически загруженная июльская редакция с SHA256, без Luna Rossa. Объём1199см³, ДВС100кВт и система107кВт разделены. Пиковая электрическая мощность не30-минутная. Единица полной ёмкости батареи подтверждена отдельной заводской техтаблицей. Полная масса не вычисляется сложением веса и нагрузки.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 626.E23.1 MK0; 1.2 Ibrida 145 PS eDCT6 Ti; precise column on technical table"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "3b1a2b9b387bf8de7fde2879",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "1.2 Ibrida 145 PS eDCT6",
+      "expectedDigest": "4395bebdefc770b1f74cdbd404d145a02f2eee6cc0f9c644fc29d35dfbcfd7c4",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+        "checkedAt": "2026-10-22",
+        "statement": "Загруженный заводской PDF датирован29.07.2026; визуально сверены страницы3 и11. Поисковая копия того же URL показывает19.10.2026: в этой партии используется только фактически загруженная июльская редакция с SHA256, без Luna Rossa. Объём1199см³, ДВС100кВт и система107кВт разделены. Пиковая электрическая мощность не30-минутная. Единица полной ёмкости батареи подтверждена отдельной заводской техтаблицей. Полная масса не вычисляется сложением веса и нагрузки.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 626.E23.1 000; 1.2 Ibrida 145 PS eDCT6; precise column on technical table"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "ef94301cc861d3114a0541ed",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Sprint",
+      "expectedDigest": "62ce64314323e473cc530d8a9fc0c185a1c57a3e6c8904acceac98b107703c95",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+        "checkedAt": "2026-10-22",
+        "statement": "Загруженный заводской PDF датирован29.07.2026; визуально сверены страницы3 и11. Поисковая копия того же URL показывает19.10.2026: в этой партии используется только фактически загруженная июльская редакция с SHA256, без Luna Rossa. Объём1199см³, ДВС100кВт и система107кВт разделены. Пиковая электрическая мощность не30-минутная. Единица полной ёмкости батареи подтверждена отдельной заводской техтаблицей. Полная масса не вычисляется сложением веса и нагрузки.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 626.E23.1 MM0; 1.2 Ibrida 145 PS eDCT6 Sprint; precise column on technical table"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "68bf56078ab8c3b00dad2b6f",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Sprint",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "systemPowerKw": 107,
+        "batteryKwh": 0.89,
+        "drive": "awd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+        "checkedAt": "2026-10-22",
+        "statement": "Загруженный заводской PDF датирован29.07.2026; визуально сверены страницы3 и11. Поисковая копия того же URL показывает19.10.2026: в этой партии используется только фактически загруженная июльская редакция с SHA256, без Luna Rossa. Объём1199см³, ДВС100кВт и система107кВт разделены. Пиковая электрическая мощность не30-минутная. Единица полной ёмкости батареи подтверждена отдельной заводской техтаблицей. Полная масса не вычисляется сложением веса и нагрузки.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; precise column on technical table"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; precise column on technical table"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; precise column on technical table"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; precise column on technical table"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; precise column on technical table"
+          },
+          "systemPowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; precise column on technical table"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; precise column on technical table",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "page": 1,
+              "checkedAt": "2026-10-22",
+              "selector": "Battery Capacity gross/net [kWh]; confirms unit mistyped [kW] in Italian price list"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; precise column on technical table"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 626.E43.1 000; 1.2 Ibrida 145 PS eDCT6 Q4 Sprint; precise column on technical table"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "10c32167be53276eb6da22d4",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "156 PS Elettrica 54 kWh Junior",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh Junior",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+        "checkedAt": "2026-10-22",
+        "statement": "Загруженный заводской PDF датирован29.07.2026; визуально сверены страницы3 и11. Поисковая копия того же URL показывает19.10.2026: в этой партии используется только фактически загруженная июльская редакция с SHA256, без Luna Rossa. Объём1199см³, ДВС100кВт и система107кВт разделены. Пиковая электрическая мощность не30-минутная. Единица полной ёмкости батареи подтверждена отдельной заводской техтаблицей. Полная масса не вычисляется сложением веса и нагрузки.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.E2E.1 000; 156 PS Elettrica 54 kWh Junior; precise column on technical table"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.E2E.1 000; 156 PS Elettrica 54 kWh Junior; precise column on technical table"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.E2E.1 000; 156 PS Elettrica 54 kWh Junior; precise column on technical table"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 000; 156 PS Elettrica 54 kWh Junior; precise column on technical table"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 000; 156 PS Elettrica 54 kWh Junior; precise column on technical table"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 000; 156 PS Elettrica 54 kWh Junior; precise column on technical table"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 000; 156 PS Elettrica 54 kWh Junior; precise column on technical table",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "page": 1,
+              "checkedAt": "2026-10-22",
+              "selector": "Battery Capacity gross/net [kWh]; confirms unit mistyped [kW] in Italian price list"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 000; 156 PS Elettrica 54 kWh Junior; precise column on technical table"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 000; 156 PS Elettrica 54 kWh Junior; precise column on technical table"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "4b61bf2752e1b8700375cf83",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "156 PS Elettrica 54 kWh Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh Sprint",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+        "checkedAt": "2026-10-22",
+        "statement": "Загруженный заводской PDF датирован29.07.2026; визуально сверены страницы3 и11. Поисковая копия того же URL показывает19.10.2026: в этой партии используется только фактически загруженная июльская редакция с SHA256, без Luna Rossa. Объём1199см³, ДВС100кВт и система107кВт разделены. Пиковая электрическая мощность не30-минутная. Единица полной ёмкости батареи подтверждена отдельной заводской техтаблицей. Полная масса не вычисляется сложением веса и нагрузки.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.E2E.1 MM0; 156 PS Elettrica 54 kWh Sprint; precise column on technical table"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.E2E.1 MM0; 156 PS Elettrica 54 kWh Sprint; precise column on technical table"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.E2E.1 MM0; 156 PS Elettrica 54 kWh Sprint; precise column on technical table"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MM0; 156 PS Elettrica 54 kWh Sprint; precise column on technical table"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MM0; 156 PS Elettrica 54 kWh Sprint; precise column on technical table"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MM0; 156 PS Elettrica 54 kWh Sprint; precise column on technical table"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MM0; 156 PS Elettrica 54 kWh Sprint; precise column on technical table",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "page": 1,
+              "checkedAt": "2026-10-22",
+              "selector": "Battery Capacity gross/net [kWh]; confirms unit mistyped [kW] in Italian price list"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MM0; 156 PS Elettrica 54 kWh Sprint; precise column on technical table"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MM0; 156 PS Elettrica 54 kWh Sprint; precise column on technical table"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "2a98b7cbe44d46a17cafab04",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "156 PS Elettrica 54 kWh Ti",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh Ti",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+        "checkedAt": "2026-10-22",
+        "statement": "Загруженный заводской PDF датирован29.07.2026; визуально сверены страницы3 и11. Поисковая копия того же URL показывает19.10.2026: в этой партии используется только фактически загруженная июльская редакция с SHA256, без Luna Rossa. Объём1199см³, ДВС100кВт и система107кВт разделены. Пиковая электрическая мощность не30-минутная. Единица полной ёмкости батареи подтверждена отдельной заводской техтаблицей. Полная масса не вычисляется сложением веса и нагрузки.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.E2E.1 MK0; 156 PS Elettrica 54 kWh Ti; precise column on technical table"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.E2E.1 MK0; 156 PS Elettrica 54 kWh Ti; precise column on technical table"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.E2E.1 MK0; 156 PS Elettrica 54 kWh Ti; precise column on technical table"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MK0; 156 PS Elettrica 54 kWh Ti; precise column on technical table"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MK0; 156 PS Elettrica 54 kWh Ti; precise column on technical table"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MK0; 156 PS Elettrica 54 kWh Ti; precise column on technical table"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MK0; 156 PS Elettrica 54 kWh Ti; precise column on technical table",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "page": 1,
+              "checkedAt": "2026-10-22",
+              "selector": "Battery Capacity gross/net [kWh]; confirms unit mistyped [kW] in Italian price list"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MK0; 156 PS Elettrica 54 kWh Ti; precise column on technical table"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.E2E.1 MK0; 156 PS Elettrica 54 kWh Ti; precise column on technical table"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "4183feea6ecafd26bf49cef9",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "280 PS Elettrica 54 kWh Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "280 PS Elettrica 54 kWh Veloce",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 280,
+        "powerKw": 207,
+        "motorPeakKw": 207,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+        "checkedAt": "2026-10-22",
+        "statement": "Загруженный заводской PDF датирован29.07.2026; визуально сверены страницы3 и11. Поисковая копия того же URL показывает19.10.2026: в этой партии используется только фактически загруженная июльская редакция с SHA256, без Luna Rossa. Объём1199см³, ДВС100кВт и система107кВт разделены. Пиковая электрическая мощность не30-минутная. Единица полной ёмкости батареи подтверждена отдельной заводской техтаблицей. Полная масса не вычисляется сложением веса и нагрузки.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.V2R.1 000; 280 PS Elettrica 54 kWh Veloce; precise column on technical table"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.V2R.1 000; 280 PS Elettrica 54 kWh Veloce; precise column on technical table"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 3,
+            "selector": "MVS/SS 627.V2R.1 000; 280 PS Elettrica 54 kWh Veloce; precise column on technical table"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.V2R.1 000; 280 PS Elettrica 54 kWh Veloce; precise column on technical table"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.V2R.1 000; 280 PS Elettrica 54 kWh Veloce; precise column on technical table"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.V2R.1 000; 280 PS Elettrica 54 kWh Veloce; precise column on technical table"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.V2R.1 000; 280 PS Elettrica 54 kWh Veloce; precise column on technical table",
+            "unitConfirmation": {
+              "url": "https://www.media.stellantis.com/em-en/download-model-document/202",
+              "documentSha256": "9c38d8430d318028d3bda112ab37c656eedcec511aad7322926f60e8aaa0d349",
+              "page": 1,
+              "checkedAt": "2026-10-22",
+              "selector": "Battery Capacity gross/net [kWh]; confirms unit mistyped [kW] in Italian price list"
+            }
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.V2R.1 000; 280 PS Elettrica 54 kWh Veloce; precise column on technical table"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+            "publishedAt": "2026-07-29",
+            "pdfPage": 11,
+            "selector": "MVS/SS 627.V2R.1 000; 280 PS Elettrica 54 kWh Veloce; precise column on technical table"
+          }
+        }
+      }
+    }
+  ]
+}
