@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-10-22T03:19:26.222736+00:00",
   "batch": "research-2026-10-22-historical-and-alphabetic-pass",
-  "state": "prepared_awaiting_apply",
+  "state": "batch_applied_and_readback_passed",
   "originalRowsNeedingFurtherWork": [
     {
       "modelId": "a1110cc532749b4397f6b684",
@@ -785,5 +785,6 @@
   },
   "nextAlphabeticalModel": "AION i60",
   "oldAlphabeticalCheckpoint": "Audi A8 D5",
-  "priorRetryPreserved": true
+  "priorRetryPreserved": true,
+  "workflow": 39716530594
 }
