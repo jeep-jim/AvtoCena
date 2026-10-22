@@ -4,6 +4,7 @@ import {catalogInventoryAgeDecision as age} from '../apps/web/lib/catalog/invent
 import {PUBLIC_CATALOG_MARKETS} from '../apps/web/lib/catalog/runtime-config';
 import {CHINA_MIN_MODEL_YEAR} from '../apps/web/lib/catalog/china-year-policy';
 import {autoApiChe168Resume} from '../scripts/lib/auto-api-che168-client.mjs';
+import {catalogMinYearForMarket,isCatalogYearAllowed} from '../apps/web/lib/catalog/offer-quality';
 const now=new Date('2026-10-21T05:00:00Z');
 test('China includes 2014 through current year independently of six-year age',()=>{
  for(const year of [2014,2019,2020,2026])assert.equal(age({market:'china',year,productionDate:`${year}-01-01`},now).eligible,true);
@@ -19,4 +20,15 @@ test('older narrower feed cursor cannot skip newly allowed China years',()=>{
  const saved={version:1,market:'china',generationId:'fixture',updatedAt:now.toISOString(),sources:[{sourceId:'autohome_used_china_open',provider:'auto_api_che168',yearFrom:2020,cursor:20,snapshotStartedAt:now.toISOString(),stopReason:'source_changes_finished'}]};
  assert.ok(autoApiChe168Resume(saved,{yearFrom:2020,now:now.getTime()}));
  assert.equal(autoApiChe168Resume(saved,{yearFrom:CHINA_MIN_MODEL_YEAR,now:now.getTime()}),null);
+});
+
+test('publication year gate accepts the same China lower boundary as intake',()=>{
+ assert.equal(catalogMinYearForMarket('china'),2014);
+ for(const year of [2014,2015,2016,2017,2018,2019,2020]){
+  assert.equal(isCatalogYearAllowed(year,'china'),true,String(year));
+  assert.equal(age({market:'china',year},now).eligible,true,String(year));
+ }
+ assert.equal(isCatalogYearAllowed(2013,'china'),false);
+ assert.equal(catalogMinYearForMarket('japan'),2008);
+ for(const market of ['korea','europe','georgia'])assert.equal(catalogMinYearForMarket(market),new Date(Date.now()+7*3600000).getUTCFullYear()-6);
 });

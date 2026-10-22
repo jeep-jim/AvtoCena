@@ -1,3 +1,4 @@
+import {CHINA_MIN_MODEL_YEAR} from './china-year-policy';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {publicationWithdrawn} from "./publication-policy";
@@ -35,7 +36,7 @@ export function hasAllowedCatalogSourceProvenance(offer: VehicleOffer) {
 
 export function catalogMinYearForMarket(marketValue: unknown) {
   const market = String(marketValue || "").trim().toLowerCase();
-  return market === "japan" ? CATALOG_JAPAN_MIN_YEAR : new Date(Date.now()+7*3600000).getUTCFullYear()-6;
+  return market === "japan" ? CATALOG_JAPAN_MIN_YEAR : market === "china" ? CHINA_MIN_MODEL_YEAR : new Date(Date.now()+7*3600000).getUTCFullYear()-6;
 }
 export function isCatalogYearAllowed(yearValue: unknown, marketValue?: unknown) {
   const year = Number(yearValue || 0);

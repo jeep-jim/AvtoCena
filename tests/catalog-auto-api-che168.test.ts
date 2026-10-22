@@ -13,6 +13,7 @@ import {autoApiChe168Client, autoApiPage, autoApiChe168Detail, collectAutoApiChe
 import {observationShardWriter, publishedIntakeCheckpoint} from '../scripts/lib/catalog-intake-checkpoint.mjs';
 import {convertMarketOnDisk} from '../scripts/lib/catalog-disk-conversion.mjs';
 
+import {isPublicOffer} from '../apps/web/lib/catalog/storage';
 const observedAt='2026-10-08T12:00:00.000Z';
 function fixture() {return {inner_id:'50837332',data:{inner_id:'50837332',url:'https://www.che168.com/dealer/451591/50837332.html',
   mark:'BMW',model:'1 Series',configuration:'125i',year:'2022',price:'98000',km_age:'0',first_registration:'2022-09',
@@ -308,4 +309,15 @@ test('legacy replay uses only bound named body fields for heavy-vehicle exclusio
  const o=normalizeAutoApiChe168(r)!;
  assert.equal(o.bodyType,undefined);assert.equal(catalogHeavyVehicleExcluded(o),true);
  o.operational!.sourceSpecifications!.sourceOfferId='foreign';assert.equal(catalogHeavyVehicleExcluded(o),false);
+});
+
+test('paid China 2014 survives final public publication without invented specifications',()=>{
+ const raw=fixture();raw.data.year='2014';raw.data.first_registration='2014-01';
+ const row=normalizeAutoApiChe168(raw,observedAt)!;
+ Object.assign(row,{catalogPricingMode:'seller',sellerPriceRub:980000,calculationStatus:'needs_data',totalRub:null,
+  calculationSnapshot:{currencyRate:{currency:'CNY',sourcePrice:98000,effectiveRate:10,rateSource:'cbr'}}});
+ assert.equal(isPublicOffer(row),true);
+ assert.equal(isPublicOffer({...row,year:2013}),false);
+ assert.equal(isPublicOffer({...row,status:'removed'}),false);
+ assert.equal(isPublicOffer({...row,images:[]}),false);
 });

@@ -267,6 +267,9 @@ jobs:
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Check bucket reserve without deleting objects
         run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
+      - name: Verify China intake and final publication year boundaries
+        if: matrix.market == 'china'
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/china-year-policy.test.ts tests/catalog-auto-api-che168.test.ts
       - name: Publish markets through calculation and retention guards
         env:
           # Full publication index is much larger than request-time shards.

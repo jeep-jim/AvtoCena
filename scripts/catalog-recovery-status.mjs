@@ -1,10 +1,14 @@
 import fs from 'node:fs/promises';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
 
 // Read only: keep supplier checkpoints, publication and writer locks untouched.
 const storage=getJsonStorage();
 if(storage.driver!=='object')throw Error('durable_object_storage_required');
 const report={checkedAt:new Date().toISOString(),references:{}};
+const exec=promisify(execFile);
+function errorCategory(message){return String(message||'').match(/HTTP Error \d{3}|http[_ :]*\d{3}|timed out|timeout|robots_disallow|no_catalog_content_or_access_challenge|redirect_outside_catalog|page_too_large|unsupported_reference_url|captcha|access denied|ENOTFOUND|ECONNRESET|UnicodeDecodeError/i)?.[0]||'unclassified';}
 for(const [name,root] of [['technical','reference-intake'],['comparison','comparison-intake']]){
  const state=await storage.readJson(`knowledge/encyclopedia/${root}/v1/state.json`,null);
  report.references[name]=state?{
@@ -12,9 +16,19 @@ for(const [name,root] of [['technical','reference-intake'],['comparison','compar
   completed:state.completed===true,updatedAt:state.updatedAt,
   // Only known error categories: do not publish supplier responses or URLs.
   failures:(state.failed||[]).slice(-5).map(row=>({at:row.at,
-   category:String(row.message||'').match(/HTTP Error \d{3}|http[_ :]*\d{3}|timed out|timeout|captcha|robot|access denied|ENOTFOUND|ECONNRESET|empty[^\s]{0,40}/i)?.[0]||'unclassified',
+   category:errorCategory(row.message),
    digest:(String(row.message||'').includes('SyntaxError')?'parser_syntax':undefined)}))
  }: {missing:true};
+ if(process.env.REFERENCE_DIAGNOSE_ONE==='1'&&state?.pending?.length){
+  // One saved URL only, with the existing robots/redirect/access checks.
+  // No crawl, checkpoint mutation, retries or challenge bypass.
+  const parser=name==='comparison'?'read-comparison-reference.py':'read-technical-reference.py';
+  let stdout,executionError;
+  try{({stdout}=await exec('python3',[`scripts/encyclopedia/${parser}`,state.pending[0]],{timeout:65000,maxBuffer:4000000}));}
+  catch(error){stdout=error.stdout;executionError=error;}
+  let row;try{row=JSON.parse(stdout||'null');}catch{}
+  report.references[name].singlePageProbe=row&&!row.error?{ok:true,factualFields:Object.keys(row.facts||{}).length,links:row.links?.length}:{ok:false,category:errorCategory(row?.detail||executionError?.message),errorType:/^[A-Za-z]+Error$/.test(row?.error||'')?row.error:undefined};
+ }
 }
 const before=await storage.readJson('catalog/manifest.json',null);
 const projection=await storage.readJson('catalog/public/projection/china.json',null);

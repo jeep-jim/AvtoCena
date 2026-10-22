@@ -121,7 +121,7 @@ try{
   if(scenario.control){
    historyUnavailable=false;
    await staffPage.evaluate(()=>window.addEventListener('team-assistant-open',()=>window.__teamOpened=true));
-   await control.check();await staffPage.waitForFunction(()=>window.__teamOpened===true);
+   await control.click();await staffPage.waitForFunction(()=>window.__teamOpened===true);
    assert.deepEqual(savedSetting,{op:'page_control',enabled:true,revision:'settings-1'});
   }else if(scenario.status===503){
    permissionStatus=200;historyUnavailable=false;await retry.click();await retry.waitFor({state:'hidden'});

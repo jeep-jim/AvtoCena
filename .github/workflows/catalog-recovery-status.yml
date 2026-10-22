@@ -15,6 +15,7 @@ jobs:
     environment: regcloud-staging
     timeout-minutes: 12
     env:
+      REFERENCE_DIAGNOSE_ONE: '1'
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
       YC_OBJECT_STORAGE_REGION: us-east-1

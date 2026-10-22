@@ -14,7 +14,16 @@ async function checkpoint(){state.visited=[...visited];state.updatedAt=now();awa
 while(state.pending.length&&fetched<limit&&Date.now()<deadline){
  const url=state.pending.shift();queued.delete(url);if(visited.has(url))continue;
  try{
-  const {stdout}=await exec('python3',[parser,url],{timeout:65000,maxBuffer:4000000});const row=JSON.parse(stdout);if(row.error)throw Error(row.detail);
+  let stdout;
+  try{({stdout}=await exec('python3',[parser,url],{timeout:65000,maxBuffer:4000000}));}
+  catch(error){
+   // Python reports a structured reason on stdout and exits nonzero. execFile
+   // otherwise hides it behind "Command failed", losing the recovery evidence.
+   let failure;try{failure=JSON.parse(error.stdout||'null');}catch{}
+   if(failure?.error)throw Error(String(failure.detail||failure.error).slice(0,300));
+   throw error;
+  }
+  const row=JSON.parse(stdout);if(row.error)throw Error(row.detail);
   for(const next of row.links)if(!visited.has(next)&&!queued.has(next)){queued.add(next);state.pending.push(next);}
   if(Object.keys(row.facts).length){const id=createHash('sha256').update(url).digest('hex');await storage.writeJson(`${root}/records/${id}.json`,{...row,links:undefined,retrievedAt:now()});state.saved++;}
   visited.add(url);fetched++;
