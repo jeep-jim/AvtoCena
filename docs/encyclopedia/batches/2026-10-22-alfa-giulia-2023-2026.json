@@ -1,0 +1,3589 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-giulia-2023-2026",
+  "entries": [
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "7fd745763bc2a46b8b601a70",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Super",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PA5-4; 2.0 Turbo 280 PS AT8 Q4 Super"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PA5-4; 2.0 Turbo 280 PS AT8 Q4 Super"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PA5-4; 2.0 Turbo 280 PS AT8 Q4 Super"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PA5-4; 2.0 Turbo 280 PS AT8 Q4 Super"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PA5-4; 2.0 Turbo 280 PS AT8 Q4 Super"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PA5-4; 2.0 Turbo 280 PS AT8 Q4 Super"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PA5-4; 2.0 Turbo 280 PS AT8 Q4 Super"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PA5-4; 2.0 Turbo 280 PS AT8 Q4 Super"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PA5-4; 2.0 Turbo 280 PS AT8 Q4 Super"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "f83217560098911a22fc279d",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PRP-4; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PRP-4; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PRP-4; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PRP-4; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PRP-4; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PRP-4; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PRP-4; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-PRP-4; 2.2 Turbo Diesel 160 PS AT8 Super"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "f0b4269f2455198481c6da08",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JA5-4; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JA5-4; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JA5-4; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JA5-4; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JA5-4; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JA5-4; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JA5-4; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JA5-4; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JA5-4; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "eb9ee1d4b045fccad1149680",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JRP-4; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JRP-4; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JRP-4; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JRP-4; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JRP-4; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JRP-4; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JRP-4; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-JRP-4; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "e1c8546cf4f646229d27f13d",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Ti",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Ti",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VA5-4; 2.0 Turbo 280 PS AT8 Q4 Ti"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VA5-4; 2.0 Turbo 280 PS AT8 Q4 Ti"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VA5-4; 2.0 Turbo 280 PS AT8 Q4 Ti"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VA5-4; 2.0 Turbo 280 PS AT8 Q4 Ti"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VA5-4; 2.0 Turbo 280 PS AT8 Q4 Ti"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VA5-4; 2.0 Turbo 280 PS AT8 Q4 Ti"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VA5-4; 2.0 Turbo 280 PS AT8 Q4 Ti"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VA5-4; 2.0 Turbo 280 PS AT8 Q4 Ti"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VA5-4; 2.0 Turbo 280 PS AT8 Q4 Ti"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "f06577d9a8ef3287131f15d6",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Ti",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Ti",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VRP-4; 2.2 Turbo Diesel 160 PS AT8 Ti"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VRP-4; 2.2 Turbo Diesel 160 PS AT8 Ti"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VRP-4; 2.2 Turbo Diesel 160 PS AT8 Ti"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VRP-4; 2.2 Turbo Diesel 160 PS AT8 Ti"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VRP-4; 2.2 Turbo Diesel 160 PS AT8 Ti"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VRP-4; 2.2 Turbo Diesel 160 PS AT8 Ti"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VRP-4; 2.2 Turbo Diesel 160 PS AT8 Ti"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VRP-4; 2.2 Turbo Diesel 160 PS AT8 Ti"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "917a6b46c2038d29d25a0cf3",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DRP-4; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DRP-4; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DRP-4; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DRP-4; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DRP-4; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DRP-4; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DRP-4; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DRP-4; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "e9d86755872257f4412d9952",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Ti",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Ti"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Ti"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Ti"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Ti"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Ti"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Ti"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-VAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Ti"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "5f77dd5a7cd18b509fea0a6b",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-DAQ-4; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "99c96a2d1aeb7c8a451cfc81",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "2.9 V6 520 PS AT8 Quadrifoglio",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.9 V6 520 PS AT8 Quadrifoglio",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2891,
+        "powerHp": 520,
+        "powerKw": 382,
+        "icePowerKw": 382
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2023 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-QRU-4; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-QRU-4; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-QRU-4; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-QRU-4; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-QRU-4; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-QRU-4; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-QRU-4; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "page": 3,
+            "selector": "2023; 620-QRU-4; 2.9 V6 520 PS AT8 Quadrifoglio"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "20799b81585b7e8462ca7af0",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2024 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "835e7e3416b657896c40d4cb",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2024 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "8930936118533712e01124aa",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2024 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "28f904f000baadef22e80ef2",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2024 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 VEL; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 VEL; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 VEL; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 VEL; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 VEL; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 VEL; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-1AQ-5 VEL; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "ff573b4ca012e96574ffa9a1",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Tributo Italiano",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Tributo Italiano",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2024 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Tributo Italiano"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Tributo Italiano"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Tributo Italiano"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Tributo Italiano"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Tributo Italiano"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Tributo Italiano"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Tributo Italiano"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Tributo Italiano"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Tributo Italiano"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "ea464e00cedb335b3ed582ea",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Tributo Italiano",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Tributo Italiano",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2024 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Tributo Italiano"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Tributo Italiano"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Tributo Italiano"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Tributo Italiano"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Tributo Italiano"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Tributo Italiano"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Tributo Italiano"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Tributo Italiano"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "995f608091a66347ab132544",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Tributo Italiano",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Tributo Italiano",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2024 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Tributo Italiano"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Tributo Italiano"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Tributo Italiano"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Tributo Italiano"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Tributo Italiano"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Tributo Italiano"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "page": 3,
+            "selector": "2024; 620-9AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Tributo Italiano"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "454d63088d8bca9eab591385",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2025 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1A5-5 000; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "c5f39fce5f42f4f0ff7a67c9",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2025 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 000; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "fa7d9c063ef0e18ba957196c",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2025 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1AQ-5 000; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "6169762861a833bfe0a25dd4",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2025 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-1RP-5 VEL; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "0b337bbe279b852edfcc5d3d",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Intensa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Intensa",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2025 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-AA5-5 000; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-AA5-5 000; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-AA5-5 000; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-AA5-5 000; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-AA5-5 000; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-AA5-5 000; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-AA5-5 000; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-AA5-5 000; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-AA5-5 000; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "4bda5bea2a6448702800884b",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Intensa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Intensa",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2025 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-ARP-5 000; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-ARP-5 000; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-ARP-5 000; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-ARP-5 000; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-ARP-5 000; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-ARP-5 000; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-ARP-5 000; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "page": 3,
+            "selector": "2025; 620-ARP-5 000; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "5766277eafb147fd61215fdd",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 1A5 5 ; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 ; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 ; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 ; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 ; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 ; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 ; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 ; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 ; 2.0 Turbo 280 PS AT8 Q4 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "036b6834d34fd6e235622c00",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "drive": "rwd",
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 1RP 5 ; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 ; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 ; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 ; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 ; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 ; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 ; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 ; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 ; 2.2 Turbo Diesel 160 PS AT8 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "241acaabe44697d1d4adc45a",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd",
+        "powerKw": 155,
+        "icePowerKw": 155
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 1AQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Sprint"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "590fa82157de90867eccb684",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 1A5 5 B23 / B26; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 B23 / B26; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 B23 / B26; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 B23 / B26; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 B23 / B26; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 B23 / B26; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 B23 / B26; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 B23 / B26; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1A5 5 B23 / B26; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "ee323c30fa8cf3acb930b1c4",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "drive": "rwd",
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 1RP 5 B23 / B26; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 B23 / B26; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 B23 / B26; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 B23 / B26; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 B23 / B26; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 B23 / B26; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 B23 / B26; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 B23 / B26; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1RP 5 B23 / B26; 2.2 Turbo Diesel 160 PS AT8 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "393cd196f9b806661c43dbd8",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd",
+        "powerKw": 155,
+        "icePowerKw": 155
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 1AQ 5 B23 / B26; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 B23 / B26; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 B23 / B26; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 B23 / B26; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 B23 / B26; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 B23 / B26; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 B23 / B26; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 B23 / B26; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 1AQ 5 B23 / B26; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "c8c8c49309b847fdb3742fb8",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Intensa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Intensa",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 AA5 5 ; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AA5 5 ; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AA5 5 ; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AA5 5 ; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AA5 5 ; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AA5 5 ; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AA5 5 ; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AA5 5 ; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AA5 5 ; 2.0 Turbo 280 PS AT8 Q4 Intensa"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "d0773d19f8ecc2e37fdf79c0",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Intensa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Intensa",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "drive": "rwd",
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 ARP 5 ; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 ARP 5 ; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 ARP 5 ; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 ARP 5 ; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 ARP 5 ; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 ARP 5 ; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 ARP 5 ; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 ARP 5 ; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 ARP 5 ; 2.2 Turbo Diesel 160 PS AT8 Intensa"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "379c4a7dc537314bb3d80e6c",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Intensa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Intensa",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd",
+        "powerKw": 155,
+        "icePowerKw": 155
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 AAQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Intensa"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AAQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Intensa"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AAQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Intensa"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AAQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Intensa"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AAQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Intensa"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AAQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Intensa"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AAQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Intensa"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AAQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Intensa"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 AAQ 5 ; 2.2 Turbo Diesel 210 PS AT8 Q4 Intensa"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "3b68eedc1dc37e0e810df5ca",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.9 V6 520 PS AT8 Quadrifoglio",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.9 V6 520 PS AT8 Quadrifoglio",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2891,
+        "powerHp": 520,
+        "drive": "rwd",
+        "powerKw": 382,
+        "icePowerKw": 382
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+        "pages": [
+          20,
+          21
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Прайс 04.03.2026 продолжает линейку MY24; дата документа подтверждает предложение в 2026, а не дату изготовления конкретной машины. Привод и кВт прямо указаны в технической таблице на стр. 21. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 20,
+            "selector": "2026; 620 QRU 5; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 QRU 5; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 QRU 5; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 QRU 5; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 QRU 5; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 QRU 5; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 QRU 5; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 QRU 5; 2.9 V6 520 PS AT8 Quadrifoglio"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeo20260304-69a9358311aa4.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "7d0797870492336c0bcf7864892b22a28a7822d7078ccfbee0ceb7af55c64b7d",
+            "page": 21,
+            "selector": "2026; 620 QRU 5; 2.9 V6 520 PS AT8 Quadrifoglio"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "1368ea0d8d530915df11076c",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-ORB-7; 2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-ORB-7; 2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-ORB-7; 2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-ORB-7; 2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-ORB-7; 2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-ORB-7; 2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-ORB-7; 2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-ORB-7; 2.2 Turbo Diesel 160 PS AT8 Edizione Luna Rossa"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "expectedRevision": "98b63cab-1ad0-4266-82a8-3ea430e0c043",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "6b9bd6447302b9c9a848c07a",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd",
+        "powerKw": 154,
+        "icePowerKw": 154
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+        "pages": [
+          3
+        ],
+        "statement": "Заводской прайс календарного 2026 года: точное сочетание двигателя, коробки и комплектации; см³ и метрические CV/ch/PS из таблицы. Отсутствие Q4 не используется для вывода заднего привода. Для дизеля 210 PS старых прайсов расхождение кВт оставлено на повторную проверку; Edizione Luna Rossa имеет собственную строку 154 кВт. Снаряжённая масса не переносится в допустимую полную массу; данные не распространяются на другие годы или специальные версии.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-OAC-7; 2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-OAC-7; 2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-OAC-7; 2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-OAC-7; 2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-OAC-7; 2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-OAC-7; 2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-OAC-7; 2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-OAC-7; 2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/attachment/18577/listinoargiulialunarossadel25settembre2026-6ab540d867408.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "1eb1ce17ab58d1819f53c8bd0fd441d18e480f6e3dbb90ad34844aa49950acaa",
+            "page": 3,
+            "selector": "2026; 620-OAC-7; 2.2 Turbo Diesel 210 PS AT8 Q4 Edizione Luna Rossa"
+          }
+        }
+      }
+    }
+  ]
+}
