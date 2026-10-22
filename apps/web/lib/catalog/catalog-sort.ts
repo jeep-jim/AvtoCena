@@ -1,4 +1,6 @@
 export const catalogSortOptions = [
+ {value:'auctionDateDesc',label:'Сначала недавно проданные',field:'auctionDate'},
+ {value:'auctionDateAsc',label:'Сначала давно проданные',field:'auctionDate'},
  {value:'totalRub',label:'Сначала дешевле',field:'price'},
  {value:'totalRubDesc',label:'Сначала дороже',field:'price'},
  {value:'year',label:'Сначала новые',field:'year'},
@@ -10,7 +12,7 @@ export type CatalogSortTerm=typeof catalogSortOptions[number]['value'];
 export function parseCatalogSort(value:string|undefined):CatalogSortTerm[]|null{
  if(!value||value==='updatedAt')return [];
  const terms=value.split(',');const fields=new Set<string>();
- if(terms.length>3)return null;
+ if(terms.length>4)return null;
  for(const term of terms){const option=catalogSortOptions.find(o=>o.value===term);if(!option||fields.has(option.field))return null;fields.add(option.field);}
  return terms as CatalogSortTerm[];
 }
@@ -25,9 +27,9 @@ export function sortNumber(value:unknown,zeroAllowed=false){if(value===null||val
 export function compareSortNumbers(a:number,b:number,term:CatalogSortTerm){
  if(!Number.isFinite(a))return Number.isFinite(b)?1:0;
  if(!Number.isFinite(b))return -1;
- return term==='year'||term==='totalRubDesc'||term==='mileageDesc'?b-a:a-b;
+ return term==='auctionDateDesc'||term==='year'||term==='totalRubDesc'||term==='mileageDesc'?b-a:a-b;
 }
-export function compareCatalogTerms<T extends {year?:unknown;mileageKm?:unknown}>(a:T,b:T,terms:CatalogSortTerm[],price:(row:T)=>number){
- for(const term of terms){const value=(row:T)=>term.startsWith('totalRub')?sortNumber(price(row)):term.startsWith('mileage')?sortNumber(row.mileageKm,true):sortNumber(row.year);const delta=compareSortNumbers(value(a),value(b),term);if(delta)return delta;}
+export function compareCatalogTerms<T extends {year?:unknown;mileageKm?:unknown;auctionDate?:unknown}>(a:T,b:T,terms:CatalogSortTerm[],price:(row:T)=>number){
+ for(const term of terms){const value=(row:T)=>term.startsWith('auctionDate')?Date.parse(String(row.auctionDate||'')):term.startsWith('totalRub')?sortNumber(price(row)):term.startsWith('mileage')?sortNumber(row.mileageKm,true):sortNumber(row.year);const delta=compareSortNumbers(value(a),value(b),term);if(delta)return delta;}
  return 0;
 }

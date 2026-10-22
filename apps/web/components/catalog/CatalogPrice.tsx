@@ -15,13 +15,13 @@ function CatalogPriceContent({
   label,
   dense = false,
   priceClassName = "text-[22px]",
-  deliveryCity = "",
+  deliveryCity = "",showSaleDate=false,
 }: {
   offer: any;
   label: string;
   dense?: boolean;
   priceClassName?: string;
-  deliveryCity?: string;
+  deliveryCity?: string;showSaleDate?:boolean;
 }) {
   if (offer.deliveredCalculationPreview && !offer.savedCalculationPreview && !(offer.market === "japan" && !isGreenCornerOffer(offer))) return <PriceTrend offer={offer} label={label} statusLabel="Расчёт под ключ" dense={dense} priceClassName={priceClassName} />;
   if (isGreenCornerOffer(offer)) {
@@ -32,17 +32,17 @@ function CatalogPriceContent({
     }
   }
   if (offer.savedCalculationPreview) return offer.market === "japan" && !isGreenCornerOffer(offer)
-    ? <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
+    ? <AuctionCardPrice showSaleDate={showSaleDate} offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
     : <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
-  if (offer.market === "japan" && !isGreenCornerOffer(offer) && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><AuctionCardPrice offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
-  if (isSellerPricedOffer(offer)) return <SellerPrice deliveryCity={deliveryCity} offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
+  if (offer.market === "japan" && !isGreenCornerOffer(offer) && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><AuctionCardPrice showSaleDate={showSaleDate} offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
+  if (isSellerPricedOffer(offer)) return <SellerPrice showSaleDate={showSaleDate} deliveryCity={deliveryCity} offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
   const totalRub = Number(offer?.totalRub || 0);
   const japanAuction = !isGreenCornerOffer(offer) && (String(offer?.market || "").toLowerCase() === "japan"
     || /япони/i.test(String(offer?.marketLabel || "")));
   const highlightElectrified = isElectrifiedPrice(offer);
 
   if (totalRub > 0) {
-    if (japanAuction) return <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
+    if (japanAuction) return <AuctionCardPrice showSaleDate={showSaleDate} offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
     const preliminary = isCatalogPowerScenario(offer)
       || String(offer?.calculationStatus || "") === "preliminary_power_pending"
       || offer?.calculationSnapshot?.pricingConfidence === "preliminary";

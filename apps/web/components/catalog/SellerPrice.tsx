@@ -1,4 +1,5 @@
 "use client";
+import {auctionSaleDateLabel} from "@/lib/catalog/auction-sale-period";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
@@ -8,8 +9,8 @@ import { JapanAuctionBadges } from "./JapanAuctionBadges";
 import { sellerPriceLabel } from "../../lib/catalog/seller-price-contract";
 import { useTapActivation } from "./useTapActivation";
 
-export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = false, label, priceClassName = "text-3xl md:text-4xl", hideJapanBadges = false }: {
-  hideJapanBadges?: boolean; offer: any; deliveryCity?: string; panel?: boolean; dense?: boolean; label?: string; priceClassName?: string;
+export function SellerPrice({ offer, showSaleDate=false,deliveryCity = "", panel = true, dense = false, label, priceClassName = "text-3xl md:text-4xl", hideJapanBadges = false }: {
+  showSaleDate?:boolean;hideJapanBadges?: boolean; offer: any; deliveryCity?: string; panel?: boolean; dense?: boolean; label?: string; priceClassName?: string;
 }) {
   const [open, setOpen] = useState(false);
   const tap = useTapActivation();
@@ -22,7 +23,7 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
   return <div {...tap} className={panel ? "relative ac-offer-price-panel ac-price-trend-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4 text-[var(--ac-text)]" : "ac-price-trend relative min-w-0 text-[var(--ac-text)]"}>
     <div className="flex min-w-0 items-center justify-between gap-1">
       {label ? <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} ac-price-trend-label shrink-0 whitespace-nowrap font-black`}>{label}</div> : null}
-      <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-bold text-right text-[var(--ac-muted)] ${!panel ? "shrink-0 whitespace-nowrap" : "normal-case tracking-normal"}`}>{!panel && japan && !isGreenCornerOffer(offer) ? "Лот продан" : priceLabel}</div>
+      <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-bold text-right text-[var(--ac-muted)] ${!panel ? "shrink-0 whitespace-nowrap" : "normal-case tracking-normal"}`}>{!panel && japan && !isGreenCornerOffer(offer) ? <>{showSaleDate&&auctionSaleDateLabel(offer.auctionDate)&&<time className="hidden md:block text-[8px] font-normal leading-tight" dateTime={String(offer.auctionDate).slice(0,10)}>{auctionSaleDateLabel(offer.auctionDate)}</time>}Лот продан</> : priceLabel}</div>
     </div>
     <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between gap-1 ${panel ? "ac-seller-price-row" : "min-h-[22px] sm:min-h-[26px]"}`}>
       <span role={rate ? "button" : undefined} tabIndex={rate ? 0 : undefined} onClick={e=>{if(rate){e.preventDefault();e.stopPropagation();setOpen(true);}}} onKeyDown={e=>{if(rate && ["Enter"," "].includes(e.key)){e.preventDefault();e.stopPropagation();setOpen(true);}}} className={`ac-price ac-price--flat ${isElectrifiedPrice(offer) ? "ac-price--electrified" : ""} whitespace-nowrap font-black leading-none tracking-tight ${priceClassName}`}>{Math.round(price).toLocaleString("ru-RU")}<span className="ml-[0.18em] text-[0.58em]">₽</span></span>

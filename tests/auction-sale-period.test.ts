@@ -22,3 +22,9 @@ test('sale date display preserves supplier date and never fabricates missing val
  assert.equal(auctionSaleDateLabel('2026-10-15 00:00:00'),'15.10.2026');
  for(const value of [null,'','0000-00-00','2026-02-31'])assert.equal(auctionSaleDateLabel(value),'');
 });
+test('auction sale sorting works in both directions before pagination',()=>{
+ for(const [sort,direction] of [['auctionDateAsc','asc'],['auctionDateDesc','desc']]){
+  const sql=ajesQuery(ajesCatalogQuery({market:'japan',sort,salePeriod:'month'})).sql;
+  assert.match(sql,new RegExp(`order by auction_date ${direction}, id asc limit`));
+ }
+});

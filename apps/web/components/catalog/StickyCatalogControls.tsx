@@ -7,7 +7,7 @@ import './sticky-catalog-controls.css';
 import {SelectedFilterChip, type SelectedFilter} from "./SelectedFilterChip";
 type Chip=SelectedFilter;
 
-export function StickyCatalogControls({chips,onRemove,sort,onSort,hidden=false,hidePrice=false,onOpenFilters}:{onOpenFilters:()=>void;chips:Chip[];onRemove:(key:string)=>void;sort:string;onSort:(value:string)=>void;hidden?:boolean;hidePrice?:boolean}){
+export function StickyCatalogControls({chips,onRemove,sort,onSort,hidden=false,hidePrice=false,showAuctionDate=false,onOpenFilters}:{showAuctionDate?:boolean;onOpenFilters:()=>void;chips:Chip[];onRemove:(key:string)=>void;sort:string;onSort:(value:string)=>void;hidden?:boolean;hidePrice?:boolean}){
  const sentinel=useRef<HTMLDivElement>(null);
  const [visible,setVisible]=useState(false),[top,setTop]=useState(64),[leftPadding,setLeftPadding]=useState(28);
  useEffect(()=>{
@@ -24,7 +24,7 @@ export function StickyCatalogControls({chips,onRemove,sort,onSort,hidden=false,h
  return <><div ref={sentinel} className="ac-catalog-sticky-sentinel" aria-hidden="true"/>{visible&&!hidden&&createPortal(<nav className="ac-catalog-sticky backdrop-blur-xl" style={{top}} aria-label="Выбранные фильтры и сортировка">
   <div className="ac-catalog-sticky-inner" style={{paddingLeft:leftPadding}}>
    <div className="ac-catalog-sticky-chips" tabIndex={0} aria-label="Выбранные параметры">{chips.length?chips.map(chip=><SelectedFilterChip key={chip.key} chip={chip} onRemove={onRemove} />):<span className="ac-catalog-sticky-empty">Все автомобили</span>}</div>
-   <div className="ac-catalog-sticky-sort min-w-0 w-56"><CatalogSortSelect value={sort} onChange={onSort} hidePrice={hidePrice}/></div>
+   <div className="ac-catalog-sticky-sort min-w-0 w-56"><CatalogSortSelect showAuctionDate={showAuctionDate} value={sort} onChange={onSort} hidePrice={hidePrice}/></div>
    <button type="button" className="ac-catalog-sticky-icon" aria-label="Открыть фильтры каталога" title="Фильтры" onClick={onOpenFilters}><SlidersHorizontal size={21} aria-hidden="true"/></button>
   </div>
  </nav>,document.body)}</>;

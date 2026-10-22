@@ -16,6 +16,7 @@ const json=(value:unknown,status=200)=>Response.json(value,{status,headers});
 export async function GET(request:Request){
  const user=await getCurrentUser();if(!user)return json({error:'Войдите в аккаунт команды.'},401);
  if(!assistantAllowed(user))return json({error:'Помощник доступен только команде Топ Авто.'},403);
+ if(new URL(request.url).searchParams.get('capabilities')==='1')return json({owner:isPlatformOwner(user),canControlPage:assistantPageControlAllowed(user)});
  try{const path=safePath(new URL(request.url).searchParams.get('path')||'/crm')||'/crm';const s=await readHistory(user.id);return json({userId:user.id,name:user.displayName,owner:isPlatformOwner(user),canCode:assistantCodeAllowed(user),canControlPage:assistantPageControlAllowed(user),pageControl:assistantPageControlAllowed(user)&&s.pageControl===true,canFill:assistantPageControlAllowed(user)&&s.pageControl===true&&canFillPath(user,path),connected:await providerStatus(),codeConnected:codeConnectionReady(),messages:s.messages,revision:s.revision});}
  catch{return json({error:'Не удалось открыть переписку. Попробуйте ещё раз.'},503);}
 }

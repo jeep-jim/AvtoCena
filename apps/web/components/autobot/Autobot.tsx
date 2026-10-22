@@ -22,6 +22,22 @@ export function Autobot(){
  const pathname=usePathname(),privatePage=/^\/(crm|partner|login|account)(\/|$)/.test(pathname||'');
  const [opened,setOpened]=useState(false),[text,setText]=useState(''),[messages,setMessages]=useState<Message[]>([]),[busy,setBusy]=useState(false),[error,setError]=useState(''),[connected,setConnected]=useState<boolean|null>(null),[staff,setStaff]=useState(false),[owner,setOwner]=useState(false),[motion,setMotion]=useState(true),[settings,setSettings]=useState(false),[sheetOffset,setSheetOffset]=useState(0);
  const dialog=useRef<HTMLDialogElement>(null),input=useRef<HTMLTextAreaElement>(null),log=useRef<HTMLDivElement>(null),abort=useRef<AbortController|null>(null),sending=useRef(false),history=useRef<Message[]>([]),drag=useRef<{id:number;y:number;at:number}|null>(null),ignoreGripClick=useRef(false),opener=useRef<HTMLElement|null>(null);
+ useEffect(()=>{
+  if(!opened||!settings)return;
+  let active=true;
+  void (async()=>{
+   try{
+    const permission=await fetch('/api/crm/assistant?capabilities=1',{cache:'no-store'});
+    if(!permission.ok){if(active){setPageAccess(null);setStaff(false);}return;}
+    const capabilities=await permission.json();
+    if(!active)return;setStaff(true);setOwner(capabilities.owner===true);
+    setPageAccess(previous=>({canControlPage:capabilities.canControlPage===true,pageControl:previous?.pageControl===true}));
+    const response=await fetch('/api/crm/assistant?path='+encodeURIComponent(location.pathname),{cache:'no-store'});
+    if(!response.ok)throw Error('Не удалось загрузить настройку помощника. Откройте настройки ещё раз.');
+    const state=await response.json();if(active)setPageAccess({canControlPage:state.canControlPage===true,pageControl:state.pageControl===true});
+   }catch(e){if(active)setError(e instanceof Error?e.message:'Не удалось загрузить настройки помощника.');}
+  })();return()=>{active=false;};
+ },[opened,settings]);
  history.current=messages;
  const carPage=Boolean(pathname?.startsWith('/cars/offer/'));
  const carQuestions=[

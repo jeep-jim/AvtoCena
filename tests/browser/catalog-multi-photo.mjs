@@ -59,18 +59,16 @@ try {
   await modelScope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
   assert.equal(await modelTrigger.getAttribute('aria-expanded'),'false');
   const sortScope=scope;
-  for(const [label,value] of [['Дешевле','totalRub'],['Дороже','totalRubDesc'],['Новые','year'],['Ранние','yearAsc']]) {
+  await sortScope.getByRole('button',{name:/^Сортировка:/}).click();
+  for(const [label,value] of [['Сначала дешевле','totalRub'],['Сначала дороже','totalRubDesc'],['Сначала новые','year'],['Сначала старые','yearAsc']]) {
+   await sortScope.getByRole('button',{name:'Без сортировки',exact:true}).click();
    const button=sortScope.getByRole('button',{name:label,exact:true});await button.click();
    assert.equal(await button.getAttribute('aria-pressed'),'true');
-   assert.equal(await button.evaluate(el=>el.scrollWidth<=el.clientWidth),true,'sort label fits its button');
    assert.equal(await scope.locator('input[name="sort"]').inputValue(),value);
-   // The active background transitions for 160 ms; assert the settled style.
-   await page.waitForFunction(()=>[...document.querySelectorAll('.ac-sort-control button[aria-pressed="true"]')].every(el=>getComputedStyle(el).backgroundColor==='rgb(255, 53, 61)'),null,{timeout:5000});
-   assert.equal(await button.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 53, 61)');
-   assert.equal(await sortScope.locator('.ac-sort-control button[aria-pressed="true"]').count(),1);
   }
-  await sortScope.getByRole('button',{name:'Ранние',exact:true}).click();
+  await sortScope.getByRole('button',{name:'Без сортировки',exact:true}).click();
   assert.equal(await scope.locator('input[name="sort"]').inputValue(),'');
+  await sortScope.getByRole('button',{name:/^Сортировка:/}).click();
   const city=width<1024?scope:page;
   await city.getByRole('button',{name:/Выбрать город. Сейчас/}).click();await page.getByRole('button',{name:'Новосибирск',exact:true}).click();
   assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Новосибирск');

@@ -87,8 +87,8 @@ export function ajesQuery(input: unknown) {
   if(q.aggregate==='models')return {table,empty,kind:'models' as const,sql:`select marka_name, model_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name, model_name order by marka_name, model_name limit ${(page-1)*500},500`,page,pageSize:500};
   const sort=q.sort??'updatedAt';
   const terms=parseCatalogSort(sort);if(!terms)throw new AjesInputError();
-  const fields={mileage:'mileage asc',mileageDesc:'mileage desc',year:'year desc',yearAsc:'year asc',totalRub:'finish asc',totalRubDesc:'finish desc'};
-  const order=terms.length?terms.map(term=>fields[term]).join(', ')+(stock||terms[0].startsWith('mileage')?'':', auction_date desc'):stock?'id desc':'auction_date desc';
+  const fields={auctionDateAsc:'auction_date asc',auctionDateDesc:'auction_date desc',mileage:'mileage asc',mileageDesc:'mileage desc',year:'year desc',yearAsc:'year asc',totalRub:'finish asc',totalRubDesc:'finish desc'};
+  const order=terms.length?terms.map(term=>fields[term]).join(', ')+(stock||terms.some(t=>t.startsWith('auctionDate'))||terms[0].startsWith('mileage')?'':', auction_date desc'):stock?'id desc':'auction_date desc';
   return {table,empty,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize};
 }
 
