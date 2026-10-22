@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T05:07:59.205155+07:00",
+  "next": {
+    "modelId": "41c41db2719c2d3b75470cd9",
+    "make": "Aston Martin",
+    "model": "Dbx",
+    "scopeSinceYear": 2008,
+    "observedYears": [
+      2026,
+      2025,
+      2024,
+      2023,
+      2022,
+      2021,
+      2020
+    ],
+    "expectedObservedVariants": 45,
+    "baseline2020OnlyRevision": "4a6246e4-eb28-41bd-ab68-a8d4ff49ca80",
+    "action": "Сначала свежий API всех лет, подтвердить реальные годы/поколения. 2020 не заполнять автоматически из21MY;25MY может относиться к707, не смешивать550/707 и рядный6-цилиндровый DBX Straight-Six. Все поля подтверждать по точной таблице."
+  },
+  "discoveredFactoryGuides": [
+    {
+      "title": "25MY DBX English RoW Owner Guide",
+      "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY DBX English RoW Owner Guide.pdf",
+      "modelYearTags": [
+        {
+          "name": "year",
+          "value": "25MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Asia"
+        },
+        {
+          "name": "MY",
+          "value": "25MY"
+        }
+      ]
+    },
+    {
+      "title": "25MY DBX English Owner Guide",
+      "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY DBX English Owner Guide.pdf",
+      "modelYearTags": [
+        {
+          "name": "year",
+          "value": "25MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "25MY"
+        }
+      ]
+    },
+    {
+      "title": "21MY DBX English RoW Owner Guide",
+      "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+      "modelYearTags": [
+        {
+          "name": "year",
+          "value": "21MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Asia"
+        },
+        {
+          "name": "MY",
+          "value": "21MY"
+        }
+      ]
+    },
+    {
+      "title": "21MY DBX English Owner Guide",
+      "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+      "modelYearTags": [
+        {
+          "name": "year",
+          "value": "21MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "21MY"
+        }
+      ]
+    }
+  ],
+  "factoryCatalog": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+  "afterNext": {
+    "modelId": "49f0712914bb0925bd328b09",
+    "make": "Aston Martin",
+    "model": "DBX707",
+    "observedYears": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "expectedObservedVariants": 8
+  },
+  "completedDbs": {
+    "operations": 22,
+    "newVariants": 21,
+    "updatedVariants": 1,
+    "confirmedFields": 199,
+    "compiledCalculationFields": 178,
+    "revision": "54a36a34-9ea0-4320-938e-7e3c9cf98d88",
+    "apiReadback": true,
+    "report": "docs/encyclopedia/reports/2026-10-23-aston-dbs-pass.json",
+    "retry": "docs/encyclopedia/retry-2026-10-23-aston-dbs-remaining.json",
+    "repeatBatches": false
+  },
+  "index": {
+    "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "activeIndexFromLatestVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "blockingRuns": [
+      {
+        "id": 39840733509,
+        "status": "in_progress"
+      },
+      {
+        "id": 39857878662,
+        "status": "pending"
+      }
+    ],
+    "duplicateReleaseRequested": false,
+    "nextAction": "После существующих публикаций — один штатный совокупный индекс всех pending партий и подготовка цен; проверить состав и активацию."
+  },
+  "referenceIntake": {
+    "run": 39831884392,
+    "job": 120009865681,
+    "status": "completed",
+    "conclusion": "failure",
+    "checkpointFromLatestRoadmap": {
+      "visited": 13045,
+      "saved": 8403,
+      "pending": 253,
+      "completed": false,
+      "error": "redirect_outside_catalog",
+      "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/"
+    },
+    "restarted": false
+  },
+  "allModelsComplete": false,
+  "rules": [
+    "Не менять сборщики,расчётные правила,защиты,секреты.",
+    "Не запускать конкурентную запись в одну модель;max64,CAS,SHA256,история,независимыйAPI-readback.",
+    "Старые retry сохранить;отсутствие точного документа не означает отсутствие данных."
+  ]
+}
