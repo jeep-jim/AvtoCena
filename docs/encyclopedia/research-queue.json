@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T03:14:23.000+07:00",
+  "updatedAt": "2026-10-23T04:02:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32658,7 +32658,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T03:14:23.000+07:00",
+    "updatedAt": "2026-10-23T04:02:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "db11_db12_saved_api_readback_pass_activation_pending",
     "preserveManual": true,
@@ -32827,7 +32827,18 @@
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db12-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": [
+      {
+        "batch": "research-2026-10-23-aston-db9-2008-2015",
+        "modelId": "d9beb45b880f70fa01286ee4",
+        "state": "prepared_for_protected_workflow",
+        "operations": 22,
+        "newVariants": 21,
+        "fields": 211,
+        "expectedRevision": "946cc38f-e279-49c1-949a-154d85f1726a",
+        "apiReadback": false
+      }
+    ],
     "lastCompletedPass": {
       "version": 1,
       "checkedAt": "2026-10-23T03:14:23.000+07:00",
