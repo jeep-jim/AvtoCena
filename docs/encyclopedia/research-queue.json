@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T13:02:55.151126+07:00",
+  "updatedAt": "2026-10-22T13:09:36.264487+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -544,16 +544,16 @@
       "variants": 186,
       "status": "partial_verified_fields",
       "researchedVariants": 71,
-      "checkedAt": "2026-10-22T12:13:21.986791+07:00",
+      "checkedAt": "2026-10-22T13:07:41.489603+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulia-2016-2017.json",
-      "nextAction": "Alfa Romeo Giulia 2019; remaining 2020–2026, then Giulietta",
+      "nextAction": "Alfa Romeo Giulia 2020–2026, then Giulietta",
       "lastVerifiedBatch": {
-        "batch": "research-2026-10-22-alfa-giulia-2018",
-        "commit": "59dc3fb867a4c44c7d08aca1fc01dc7d9622b058",
-        "workflow": 39726599145,
-        "variants": 12,
-        "fields": 115,
-        "newVariants": 11,
+        "batch": "research-2026-10-22-alfa-giulia-2019",
+        "commit": "fc8939c0402e47d8a9cf5efd90e6c9a63a259eb6",
+        "workflow": 39731849226,
+        "variants": 20,
+        "fields": 154,
+        "newVariants": 20,
         "apiReadback": true,
         "includedInIndex": false
       },
@@ -32580,12 +32580,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T12:13:22.035127+07:00",
+    "updatedAt": "2026-10-22T13:07:41.489603+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "verified_batches_wait_next_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulia 2019; remaining 2020–2026, then Giulietta",
+    "nextModel": "Alfa Romeo Giulia 2020–2026, then Giulietta",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32709,6 +32709,16 @@
         "newVariants": 11,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-giulia-2019": {
+        "batch": "research-2026-10-22-alfa-giulia-2019",
+        "commit": "fc8939c0402e47d8a9cf5efd90e6c9a63a259eb6",
+        "workflow": 39731849226,
+        "variants": 20,
+        "fields": 154,
+        "newVariants": 20,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32729,12 +32739,12 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-giulia-2018",
-      "commit": "59dc3fb867a4c44c7d08aca1fc01dc7d9622b058",
-      "workflow": 39726599145,
-      "variants": 12,
-      "fields": 115,
-      "newVariants": 11,
+      "batch": "research-2026-10-22-alfa-giulia-2019",
+      "commit": "fc8939c0402e47d8a9cf5efd90e6c9a63a259eb6",
+      "workflow": 39731849226,
+      "variants": 20,
+      "fields": 154,
+      "newVariants": 20,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32850,17 +32860,29 @@
         "newVariants": 11,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-giulia-2019",
+        "commit": "fc8939c0402e47d8a9cf5efd90e6c9a63a259eb6",
+        "workflow": 39731849226,
+        "variants": 20,
+        "fields": 154,
+        "newVariants": 20,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-giulia-2019",
+      "batch": "research-2026-10-22-alfa-giulia-2020-2022",
       "modelId": "296965c95e42800c757012ac",
       "years": [
-        2019
+        2020,
+        2021,
+        2022
       ],
       "state": "prepared_preflight_pass",
-      "variants": 20,
-      "fields": 154
+      "variants": 38,
+      "fields": 327
     },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-alfa-historical-pass.json",
