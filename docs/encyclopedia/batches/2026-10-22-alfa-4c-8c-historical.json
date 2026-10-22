@@ -1,0 +1,840 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-4c-8c-historical",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "c73056068974cb178c84d0b6",
+      "variantId": "0de57b3db6d1aea20d709f2e",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "year": 2015,
+      "trim": "Coupe 1750 Turbo",
+      "expectedRevision": "2d5b62f3-eca7-4b20-9d34-5523a65959c5",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Coupe 1750 Turbo",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "dct",
+        "engineCc": 1742,
+        "powerKw": 177,
+        "icePowerKw": 177
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская спецификация прямо обозначена MY2015: Coupe и Spider, бензиновый двигатель 1742 см³, 177 кВт, задний привод и шестиступенчатая Alfa TCT с двумя сцеплениями. 237 hp SAE не записаны как метрические л.с. Массы curb/dry не являются полной массой. Техническое обозначение исполнения сохраняет кузов и двигатель; год запуска Spider — 2015.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 2
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Coupe 1750 Turbo"
+          }
+        },
+        "documentSha256": "145fa5d57338b514e41ae5234b8c2c9afe4eff7e6d3173dccba178760c00842f",
+        "pages": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "c73056068974cb178c84d0b6",
+      "variantId": "578ee1c32c776959d0394b59",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "year": 2015,
+      "trim": "Spider 1750 Turbo",
+      "expectedRevision": "2d5b62f3-eca7-4b20-9d34-5523a65959c5",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Spider 1750 Turbo",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "dct",
+        "engineCc": 1742,
+        "powerKw": 177,
+        "icePowerKw": 177
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская спецификация прямо обозначена MY2015: Coupe и Spider, бензиновый двигатель 1742 см³, 177 кВт, задний привод и шестиступенчатая Alfa TCT с двумя сцеплениями. 237 hp SAE не записаны как метрические л.с. Массы curb/dry не являются полной массой. Техническое обозначение исполнения сохраняет кузов и двигатель; год запуска Spider — 2015.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 2
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "MY2015 Coupe and Spider; GENERAL INFORMATION; BODY/CHASSIS; ENGINE; TRANSMISSION",
+            "page": 1
+          },
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/ie/IR/2015/Alfa_Romeo/2015_AR_4C_Spider_SP.pdf",
+            "checkedAt": "2026-10-22",
+            "selector": "Spider 1750 Turbo"
+          }
+        },
+        "documentSha256": "145fa5d57338b514e41ae5234b8c2c9afe4eff7e6d3173dccba178760c00842f",
+        "pages": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "c73056068974cb178c84d0b6",
+      "variantId": "44e2332bea5a114b662f45bc",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "year": 2018,
+      "trim": "Coupe 1750 TBi",
+      "expectedRevision": "2d5b62f3-eca7-4b20-9d34-5523a65959c5",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Coupe 1750 TBi",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "dct",
+        "engineCc": 1742,
+        "powerHp": 240,
+        "powerKw": 177,
+        "icePowerKw": 177
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской итальянский прайс от 25.05.2018, страницы 2–3: исполнение 643.110.0, Benzina 1750 TBi, 1742 см³, 177 кВт / 240 CV-CE, задний привод, шестиступенчатая TCT. Sincom — код версии в таблице, не код шасси. Сухая масса не перенесена в поле полной массы.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.110.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.110.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.110.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.110.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.110.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.110.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.110.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.110.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.110.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "Coupe 1750 TBi"
+          }
+        },
+        "documentSha256": "172db5e51d81e5fe32460c5fb074c066424814d0fc15eff6749d46c0e8981b00",
+        "pages": [
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "c73056068974cb178c84d0b6",
+      "variantId": "5283c96f0c109ded22157b37",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "year": 2018,
+      "trim": "Coupe Competizione 1750 TBi",
+      "expectedRevision": "2d5b62f3-eca7-4b20-9d34-5523a65959c5",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Coupe Competizione 1750 TBi",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "dct",
+        "engineCc": 1742,
+        "powerHp": 240,
+        "powerKw": 177,
+        "icePowerKw": 177
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской итальянский прайс от 25.05.2018, страницы 2–3: исполнение 643.220.1, Benzina 1750 TBi, 1742 см³, 177 кВт / 240 CV-CE, задний привод, шестиступенчатая TCT. Sincom — код версии в таблице, не код шасси. Сухая масса не перенесена в поле полной массы.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.220.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.220.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.220.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.220.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.220.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.220.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.220.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.220.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.220.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "Coupe Competizione 1750 TBi"
+          }
+        },
+        "documentSha256": "172db5e51d81e5fe32460c5fb074c066424814d0fc15eff6749d46c0e8981b00",
+        "pages": [
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "c73056068974cb178c84d0b6",
+      "variantId": "319cf1c1df04bbda4fed8d6d",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "year": 2018,
+      "trim": "Spider 1750 TBi",
+      "expectedRevision": "2d5b62f3-eca7-4b20-9d34-5523a65959c5",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Spider 1750 TBi",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "dct",
+        "engineCc": 1742,
+        "powerHp": 240,
+        "powerKw": 177,
+        "icePowerKw": 177
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской итальянский прайс от 25.05.2018, страницы 2–3: исполнение 643.310.0, Benzina 1750 TBi, 1742 см³, 177 кВт / 240 CV-CE, задний привод, шестиступенчатая TCT. Sincom — код версии в таблице, не код шасси. Сухая масса не перенесена в поле полной массы.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.310.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.310.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.310.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.310.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.310.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.310.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.310.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.310.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.310.0; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "Spider 1750 TBi"
+          }
+        },
+        "documentSha256": "172db5e51d81e5fe32460c5fb074c066424814d0fc15eff6749d46c0e8981b00",
+        "pages": [
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "c73056068974cb178c84d0b6",
+      "variantId": "1b7c30006e46b95b7151c7f8",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "year": 2018,
+      "trim": "Spider Italia 1750 TBi",
+      "expectedRevision": "2d5b62f3-eca7-4b20-9d34-5523a65959c5",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Spider Italia 1750 TBi",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "dct",
+        "engineCc": 1742,
+        "powerHp": 240,
+        "powerKw": 177,
+        "icePowerKw": 177
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской итальянский прайс от 25.05.2018, страницы 2–3: исполнение 643.420.1, Benzina 1750 TBi, 1742 см³, 177 кВт / 240 CV-CE, задний привод, шестиступенчатая TCT. Sincom — код версии в таблице, не код шасси. Сухая масса не перенесена в поле полной массы.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.420.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.420.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.420.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 2
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.420.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.420.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.420.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.420.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.420.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "643.420.1; Listino Prezzi del 25/05/2018; Caratteristiche tecniche",
+            "page": 3
+          },
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/79",
+            "checkedAt": "2026-10-22",
+            "selector": "Spider Italia 1750 TBi"
+          }
+        },
+        "documentSha256": "172db5e51d81e5fe32460c5fb074c066424814d0fc15eff6749d46c0e8981b00",
+        "pages": [
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "modelId": "c73056068974cb178c84d0b6",
+      "variantId": "3ac68c8d1c0b9e141290ae47",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "year": 2017,
+      "trim": "STANDARD",
+      "expectedDigest": "f9216ad8012c0ae41476bdc352788f44f59aea45555d0dc9ce15b4b5a4bdfa69",
+      "patch": {
+        "powerHp": 240
+      },
+      "confirmedFields": [
+        "powerHp"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/ch-de/alfa-romeo/press/alfa-romeo-am-internationalen-autosalon-genf-2017",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской релиз 01.03.2017: 4C Spider имеет тот же двигатель, что и Coupe; 1742 см³, 177 кВт (240 PS), TCT. Подтверждена только отсутствующая метрическая мощность 240 л.с.; прежние источники остальных полей сохраняются в истории.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/ch-de/alfa-romeo/press/alfa-romeo-am-internationalen-autosalon-genf-2017",
+            "checkedAt": "2026-10-22",
+            "selector": "Alfa Romeo 4C Spider; 177 kW (240 PS); 01.03.2017"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "37c5ad68b7ae5208ef5fb83b",
+      "variantId": "55a47b39402bcb9323c1046d",
+      "make": "Alfa Romeo",
+      "model": "8C Competizione Coupe",
+      "year": 2008,
+      "trim": "4.7 V8",
+      "expectedRevision": "590dfa4d-7ce6-489d-b50b-b10a5aeab5bd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "4.7 V8",
+        "bodyType": "coupe",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "6-speed automated manual",
+        "engineCc": 4691,
+        "powerHp": 450,
+        "powerKw": 331,
+        "icePowerKw": 331
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-competizione",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская историческая карточка явно указывает 2008 год, V8 4691 см³, задний привод и шестиступенчатую роботизированную коробку. Мощность 331 кВт / 450 PS подтверждена отдельным немецким заводским релизом. Техническое обозначение 4.7 V8 относится к указанному двигателю. Указанная масса не является разрешённой полной массой; топливо отдельным полем в этих таблицах не названо и здесь не подтверждается.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-competizione",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C COMPETIZIONE - 2008; ENGINE; transmission"
+          },
+          "powertrainKind": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-competizione",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C COMPETIZIONE - 2008; ENGINE; transmission"
+          },
+          "drive": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-competizione",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C COMPETIZIONE - 2008; ENGINE; transmission"
+          },
+          "transmission": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-competizione",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C COMPETIZIONE - 2008; ENGINE; transmission"
+          },
+          "engineCc": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-competizione",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C COMPETIZIONE - 2008; ENGINE; transmission"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-news-oktober-2007",
+            "checkedAt": "2026-10-22",
+            "selector": "Alfa 8C; 331 kW (450 PS)"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-news-oktober-2007",
+            "checkedAt": "2026-10-22",
+            "selector": "Alfa 8C; 331 kW (450 PS)"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-news-oktober-2007",
+            "checkedAt": "2026-10-22",
+            "selector": "Alfa 8C; 331 kW (450 PS)"
+          },
+          "trim": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-competizione",
+            "checkedAt": "2026-10-22",
+            "selector": "4.7 V8"
+          }
+        },
+        "supportingUrls": [
+          "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-news-oktober-2007",
+          "https://www.media.stellantis.com/uploads/ch/CH/2010/OTHERS/12E78AB5-C29F-7F28-CEC0D7F8DB62FC66.pdf"
+        ]
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "80bec9eb3050622a66840bcc",
+      "variantId": "1fcc69a2d38354a7b0d9f7ff",
+      "make": "Alfa Romeo",
+      "model": "8C Spider",
+      "year": 2009,
+      "trim": "4.7 V8",
+      "expectedRevision": "0d3aba2f-b424-4380-9e4c-9d86648fba04",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "4.7 V8",
+        "bodyType": "convertible",
+        "powertrainKind": "combustion",
+        "drive": "rwd",
+        "transmission": "6-speed automated manual",
+        "engineCc": 4691,
+        "powerHp": 450,
+        "powerKw": 331,
+        "icePowerKw": 331
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-spider",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская историческая карточка явно указывает 2009 год, V8 4691 см³, задний привод и шестиступенчатую роботизированную коробку. Мощность 331 кВт / 450 PS подтверждена отдельным немецким заводским релизом. Техническое обозначение 4.7 V8 относится к указанному двигателю. Указанная масса не является разрешённой полной массой; топливо отдельным полем в этих таблицах не названо и здесь не подтверждается.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-spider",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C SPIDER - 2009; ENGINE; transmission"
+          },
+          "powertrainKind": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-spider",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C SPIDER - 2009; ENGINE; transmission"
+          },
+          "drive": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-spider",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C SPIDER - 2009; ENGINE; transmission"
+          },
+          "transmission": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-spider",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C SPIDER - 2009; ENGINE; transmission"
+          },
+          "engineCc": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-spider",
+            "checkedAt": "2026-10-22",
+            "selector": "ALFA ROMEO 8C SPIDER - 2009; ENGINE; transmission"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/doppelsieg-fur-alfa-romeo-die-klassiker-der-zukunft-2009-sind-alfa-159-und-alfa-8c-spider",
+            "checkedAt": "2026-10-22",
+            "selector": "Alfa 8C; 331 kW (450 PS)"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/doppelsieg-fur-alfa-romeo-die-klassiker-der-zukunft-2009-sind-alfa-159-und-alfa-8c-spider",
+            "checkedAt": "2026-10-22",
+            "selector": "Alfa 8C; 331 kW (450 PS)"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/doppelsieg-fur-alfa-romeo-die-klassiker-der-zukunft-2009-sind-alfa-159-und-alfa-8c-spider",
+            "checkedAt": "2026-10-22",
+            "selector": "Alfa 8C; 331 kW (450 PS)"
+          },
+          "trim": {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-spider",
+            "checkedAt": "2026-10-22",
+            "selector": "4.7 V8"
+          }
+        },
+        "supportingUrls": [
+          "https://www.media.stellantis.com/de-de/alfa-romeo/press/doppelsieg-fur-alfa-romeo-die-klassiker-der-zukunft-2009-sind-alfa-159-und-alfa-8c-spider",
+          "https://www.media.stellantis.com/uploads/ch/CH/2010/OTHERS/12E78AB5-C29F-7F28-CEC0D7F8DB62FC66.pdf"
+        ]
+      }
+    }
+  ]
+}

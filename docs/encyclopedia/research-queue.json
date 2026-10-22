@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T11:54:29.679868+07:00",
+  "updatedAt": "2026-10-22T12:03:03.130150+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32530,9 +32530,9 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T11:54:29.679868+07:00",
+    "updatedAt": "2026-10-22T12:03:03.130150+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "index_release_running_verified_batches_wait_next_release",
+    "state": "research_in_flight_index_blocked_by_publication_lock",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "Alfa Romeo 4C",
@@ -32657,7 +32657,7 @@
       "apiReadback": true,
       "includedInIndex": false
     },
-    "indexReleaseRequested": true,
+    "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
     "pendingIndexBatches": [
       {
@@ -32741,7 +32741,13 @@
         "includedInIndex": false
       }
     ],
-    "inFlightResearch": null,
+    "inFlightResearch": {
+      "batch": "research-2026-10-22-alfa-4c-8c-historical",
+      "variants": 9,
+      "fields": 77,
+      "newVariants": 8,
+      "status": "submitted_pending_workflow_readback"
+    },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-aion-aito-aiways-pass.json",
       "variants": 197,
@@ -32749,6 +32755,17 @@
       "newVariants": 5,
       "apiReadbackPassed": true,
       "allModelsComplete": false
+    },
+    "failedIndexRelease": {
+      "commit": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
+      "workflow": 39720853891,
+      "conclusion": "failure",
+      "error": "publication_wait_deadline",
+      "failedAt": "2026-10-22T04:58:08Z",
+      "blockingOperation": "catalog_v3_publish_china",
+      "lastObservedLockUntil": "2026-10-22T05:25:24.872Z",
+      "activationOccurred": false,
+      "nextAction": "Check publication completion before requesting one aggregate index release; do not clear lock or duplicate collectors"
     }
   },
   "scope": {
