@@ -1,3 +1,4 @@
+import {createModelSuggestionSearch} from "@/lib/catalog/model-suggestion-search";
 import {greenCornerFacets} from "@/lib/catalog/green-corner-search";
 import {selectedCatalogMarkets} from "@/lib/catalog/market-selection";
 import {readGroupedCatalogFacets} from "@/lib/catalog/market-facets";
@@ -95,7 +96,16 @@ export async function GET(request: Request) {
     const [{readDirectoryModels},{matchingKnowledgeModels}]=await Promise.all([
       import("@/lib/catalog/model-directory"),import("@/lib/autocalc/knowledge"),
     ]);
-    const matches=matchingKnowledgeModels(await readDirectoryModels(),rawQuery.slice(0,180),rawMake.slice(0,80));
+    const directory=await readDirectoryModels();
+    let matches=matchingKnowledgeModels(directory,rawQuery.slice(0,180),rawMake.slice(0,80));
+    // Discovery suggestions may tolerate spelling errors. Exact technical matching
+    // in autocalc/knowledge stays unchanged until the user selects a model.
+    if(!matches.length&&rawQuery){
+      const search=createModelSuggestionSearch({version:1,brands:[],models:directory.map(item=>[item.make,item.model,item.aliases||[],1])});
+      const byName=new Map(directory.map(item=>[`${compact(item.make)}:${compact(item.model)}`,item]));
+      matches=search(rawQuery.slice(0,180),rawMake.slice(0,80)).slice(0,6)
+        .map(item=>byName.get(`${compact(item.make)}:${compact(item.model)}`)).filter((item):item is typeof directory[number]=>Boolean(item));
+    }
     return NextResponse.json({items:matches.map(item=>({id:item.id,make:item.make,model:item.model,aliases:item.aliases||[],label:`${item.make} ${item.model}`}))});
   }
   const mode = await effectiveCatalogEncyclopediaIdentityMode();
