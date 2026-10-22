@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T12:13:22.035127+07:00",
+  "updatedAt": "2026-10-22T13:02:55.151126+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32852,7 +32852,16 @@
         "includedInIndex": false
       }
     ],
-    "inFlightResearch": null,
+    "inFlightResearch": {
+      "batch": "research-2026-10-22-alfa-giulia-2019",
+      "modelId": "296965c95e42800c757012ac",
+      "years": [
+        2019
+      ],
+      "state": "prepared_preflight_pass",
+      "variants": 20,
+      "fields": 154
+    },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-alfa-historical-pass.json",
       "variants": 64,

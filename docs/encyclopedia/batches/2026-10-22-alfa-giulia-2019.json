@@ -1,0 +1,1972 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-giulia-2019",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "aee42c2680450c6ec0f9f9f5",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.0 Turbo 200 PS AT8 Business",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Business",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 200
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR2-0; 2.0 Turbo 200 PS AT8 Business"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR2-0; 2.0 Turbo 200 PS AT8 Business"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR2-0; 2.0 Turbo 200 PS AT8 Business"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR2-0; 2.0 Turbo 200 PS AT8 Business"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR2-0; 2.0 Turbo 200 PS AT8 Business"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR2-0; 2.0 Turbo 200 PS AT8 Business"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "090481474be25b364a687752",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.0 Turbo 200 PS AT8 Sport-Tech",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Sport-Tech",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 200
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR2-0 XED; 2.0 Turbo 200 PS AT8 Sport-Tech"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR2-0 XED; 2.0 Turbo 200 PS AT8 Sport-Tech"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR2-0 XED; 2.0 Turbo 200 PS AT8 Sport-Tech"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR2-0 XED; 2.0 Turbo 200 PS AT8 Sport-Tech"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR2-0 XED; 2.0 Turbo 200 PS AT8 Sport-Tech"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR2-0 XED; 2.0 Turbo 200 PS AT8 Sport-Tech"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "238800992e247d076086fe01",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.0 Turbo 200 PS AT8 Executive",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 Executive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 200
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR2-0; 2.0 Turbo 200 PS AT8 Executive"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR2-0; 2.0 Turbo 200 PS AT8 Executive"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR2-0; 2.0 Turbo 200 PS AT8 Executive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR2-0; 2.0 Turbo 200 PS AT8 Executive"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR2-0; 2.0 Turbo 200 PS AT8 Executive"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR2-0; 2.0 Turbo 200 PS AT8 Executive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "5cb89013389daea70b499b37",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.0 Turbo 200 PS AT8 B-Tech",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 200 PS AT8 B-Tech",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 200
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER2-0; 2.0 Turbo 200 PS AT8 B-Tech"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER2-0; 2.0 Turbo 200 PS AT8 B-Tech"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER2-0; 2.0 Turbo 200 PS AT8 B-Tech"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER2-0; 2.0 Turbo 200 PS AT8 B-Tech"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER2-0; 2.0 Turbo 200 PS AT8 B-Tech"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER2-0; 2.0 Turbo 200 PS AT8 B-Tech"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "ae340eeac877cf5aabeb1754",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "d0846cbe8396a6e5459e3090",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce TI",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce TI",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "drive": "awd",
+        "powerKw": 206,
+        "icePowerKw": 206
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce TI"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce TI"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce TI"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce TI"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce TI"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce TI"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce TI"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce TI"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA4-0; 2.0 Turbo 280 PS AT8 Q4 Veloce TI"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "d6ca8967d6e10e5b36251075",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2891,
+        "powerHp": 510,
+        "powerKw": 375,
+        "icePowerKw": 375
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-QRS-0; 2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-QRS-0; 2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-QRS-0; 2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-QRS-0; 2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-QRS-0; 2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-QRS-0; 2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-QRS-0; 2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-QRS-0; 2.9 V6 Bi-Turbo 510 PS AT8 Quadrifoglio"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "26133283d76c868681f41b6a",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Business",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Business",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR5-0; 2.2 Turbo Diesel 160 PS AT8 Business"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR5-0; 2.2 Turbo Diesel 160 PS AT8 Business"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR5-0; 2.2 Turbo Diesel 160 PS AT8 Business"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR5-0; 2.2 Turbo Diesel 160 PS AT8 Business"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR5-0; 2.2 Turbo Diesel 160 PS AT8 Business"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR5-0; 2.2 Turbo Diesel 160 PS AT8 Business"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR5-0; 2.2 Turbo Diesel 160 PS AT8 Business"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-NR5-0; 2.2 Turbo Diesel 160 PS AT8 Business"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "4c627ce8e0b4ce28823caa15",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Sport-Tech",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Sport-Tech",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR5-0 XED; 2.2 Turbo Diesel 160 PS AT8 Sport-Tech"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR5-0 XED; 2.2 Turbo Diesel 160 PS AT8 Sport-Tech"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR5-0 XED; 2.2 Turbo Diesel 160 PS AT8 Sport-Tech"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR5-0 XED; 2.2 Turbo Diesel 160 PS AT8 Sport-Tech"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR5-0 XED; 2.2 Turbo Diesel 160 PS AT8 Sport-Tech"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR5-0 XED; 2.2 Turbo Diesel 160 PS AT8 Sport-Tech"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR5-0 XED; 2.2 Turbo Diesel 160 PS AT8 Sport-Tech"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-GR5-0 XED; 2.2 Turbo Diesel 160 PS AT8 Sport-Tech"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "371c6df9d5d1992ef6445e5e",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Super",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR5-0; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR5-0; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR5-0; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR5-0; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR5-0; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR5-0; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR5-0; 2.2 Turbo Diesel 160 PS AT8 Super"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR5-0; 2.2 Turbo Diesel 160 PS AT8 Super"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "b453c70dbd3a126dcb387966",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 Executive",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Executive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR5-0; 2.2 Turbo Diesel 160 PS AT8 Executive"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR5-0; 2.2 Turbo Diesel 160 PS AT8 Executive"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR5-0; 2.2 Turbo Diesel 160 PS AT8 Executive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR5-0; 2.2 Turbo Diesel 160 PS AT8 Executive"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR5-0; 2.2 Turbo Diesel 160 PS AT8 Executive"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR5-0; 2.2 Turbo Diesel 160 PS AT8 Executive"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR5-0; 2.2 Turbo Diesel 160 PS AT8 Executive"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR5-0; 2.2 Turbo Diesel 160 PS AT8 Executive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "793e839210e66684afbb58e8",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 160 PS AT8 B-Tech",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 B-Tech",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER5-0; 2.2 Turbo Diesel 160 PS AT8 B-Tech"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER5-0; 2.2 Turbo Diesel 160 PS AT8 B-Tech"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER5-0; 2.2 Turbo Diesel 160 PS AT8 B-Tech"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER5-0; 2.2 Turbo Diesel 160 PS AT8 B-Tech"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER5-0; 2.2 Turbo Diesel 160 PS AT8 B-Tech"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER5-0; 2.2 Turbo Diesel 160 PS AT8 B-Tech"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER5-0; 2.2 Turbo Diesel 160 PS AT8 B-Tech"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER5-0; 2.2 Turbo Diesel 160 PS AT8 B-Tech"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "7d150759294db7a5dfb6ec10",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Super",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR6-0; 2.2 Turbo Diesel 190 PS AT8 Super"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR6-0; 2.2 Turbo Diesel 190 PS AT8 Super"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR6-0; 2.2 Turbo Diesel 190 PS AT8 Super"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR6-0; 2.2 Turbo Diesel 190 PS AT8 Super"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR6-0; 2.2 Turbo Diesel 190 PS AT8 Super"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR6-0; 2.2 Turbo Diesel 190 PS AT8 Super"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR6-0; 2.2 Turbo Diesel 190 PS AT8 Super"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-PR6-0; 2.2 Turbo Diesel 190 PS AT8 Super"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "f5bb3b920440bdbf94efec49",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Executive",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Executive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0; 2.2 Turbo Diesel 190 PS AT8 Executive"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0; 2.2 Turbo Diesel 190 PS AT8 Executive"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0; 2.2 Turbo Diesel 190 PS AT8 Executive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0; 2.2 Turbo Diesel 190 PS AT8 Executive"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0; 2.2 Turbo Diesel 190 PS AT8 Executive"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0; 2.2 Turbo Diesel 190 PS AT8 Executive"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0; 2.2 Turbo Diesel 190 PS AT8 Executive"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0; 2.2 Turbo Diesel 190 PS AT8 Executive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "c85f461f8ea8c96eb117007e",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 B-Tech",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 B-Tech",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER6-0; 2.2 Turbo Diesel 190 PS AT8 B-Tech"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER6-0; 2.2 Turbo Diesel 190 PS AT8 B-Tech"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER6-0; 2.2 Turbo Diesel 190 PS AT8 B-Tech"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER6-0; 2.2 Turbo Diesel 190 PS AT8 B-Tech"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER6-0; 2.2 Turbo Diesel 190 PS AT8 B-Tech"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER6-0; 2.2 Turbo Diesel 190 PS AT8 B-Tech"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER6-0; 2.2 Turbo Diesel 190 PS AT8 B-Tech"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-ER6-0; 2.2 Turbo Diesel 190 PS AT8 B-Tech"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "90d4226e92d00989742aefa4",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Lusso",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Lusso",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0 LSS; 2.2 Turbo Diesel 190 PS AT8 Lusso"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0 LSS; 2.2 Turbo Diesel 190 PS AT8 Lusso"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0 LSS; 2.2 Turbo Diesel 190 PS AT8 Lusso"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0 LSS; 2.2 Turbo Diesel 190 PS AT8 Lusso"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0 LSS; 2.2 Turbo Diesel 190 PS AT8 Lusso"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0 LSS; 2.2 Turbo Diesel 190 PS AT8 Lusso"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0 LSS; 2.2 Turbo Diesel 190 PS AT8 Lusso"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JR6-0 LSS; 2.2 Turbo Diesel 190 PS AT8 Lusso"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "c25e042494fef5ed6cc1fa01",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Executive",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Executive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "awd",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 Executive"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 Executive"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 Executive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 Executive"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 Executive"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 Executive"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 Executive"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 Executive"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-JA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 Executive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "0128d660d0040b6cbae380cd",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 190,
+        "drive": "awd",
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-EA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-EA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-EA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-EA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-EA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-EA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-EA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-EA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-EA6-0; 2.2 Turbo Diesel 190 PS AT8 Q4 B-Tech"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "e2238d7ec4a5440c854013f1",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-DA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "72a22bb9ba4fae01172fe910",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2019,
+      "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce TI",
+      "expectedRevision": "b690374a-5fa0-4509-839d-a408db620ec3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce TI",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "statement": "Заводской прайс от 23.09.2019: точное сочетание мотора, AT8 и комплектации, объём в см³ и мощность CV/PS из строки MVS. Q4 подтверждает полный привод; отсутствие Q4 не используется как самостоятельное доказательство заднего привода. Для 200 и 210 PS значения кВт оставлены для отдельной проверки округления; масса и код двигателя не выдумываются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce TI"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce TI"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce TI"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce TI"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce TI"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce TI"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "b6ce97bb11845d7ef4f06da8aec53a90d4c36ce6e2e09afc77da1313d86d82ac",
+            "page": 3,
+            "selector": "Listino 23/09/2019, Codice MVS 620-RA7-0; 2.2 Turbo Diesel 210 PS AT8 Q4 Veloce TI"
+          }
+        }
+      }
+    }
+  ]
+}

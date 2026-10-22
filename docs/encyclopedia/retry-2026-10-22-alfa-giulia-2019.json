@@ -1,0 +1,87 @@
+{
+  "checkedAt": "2026-10-22T06:02:11.375Z",
+  "modelId": "296965c95e42800c757012ac",
+  "year": 2019,
+  "source": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190923_Alfa-Romeo_Giulia_Listino.pdf",
+  "items": [
+    {
+      "variantIds": [
+        "b6a5625830860f2e251ecb5e"
+      ],
+      "fields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel"
+      ],
+      "reason": "Исходная VELOCE не содержит точного двигателя; заводской прайс допускает бензин 280 PS и дизель 210 PS. Однозначного совпадения нет."
+    },
+    {
+      "variantIds": [
+        "aee42c2680450c6ec0f9f9f5",
+        "090481474be25b364a687752",
+        "238800992e247d076086fe01",
+        "5cb89013389daea70b499b37",
+        "e2238d7ec4a5440c854013f1",
+        "72a22bb9ba4fae01172fe910"
+      ],
+      "fields": [
+        "powerKw",
+        "icePowerKw"
+      ],
+      "reason": "В прайсе 148 кВт для 200 CV и 155 кВт для 210 CV; нужна независимая заводская/омологационная проверка обозначения и округления."
+    },
+    {
+      "variantIds": [
+        "aee42c2680450c6ec0f9f9f5",
+        "090481474be25b364a687752",
+        "238800992e247d076086fe01",
+        "5cb89013389daea70b499b37",
+        "d6ca8967d6e10e5b36251075",
+        "26133283d76c868681f41b6a",
+        "4c627ce8e0b4ce28823caa15",
+        "371c6df9d5d1992ef6445e5e",
+        "b453c70dbd3a126dcb387966",
+        "793e839210e66684afbb58e8",
+        "7d150759294db7a5dfb6ec10",
+        "f5bb3b920440bdbf94efec49",
+        "c85f461f8ea8c96eb117007e",
+        "90d4226e92d00989742aefa4"
+      ],
+      "fields": [
+        "drive"
+      ],
+      "reason": "В использованной строке нет явного обозначения RWD; требуется техническая таблица точной версии."
+    },
+    {
+      "variantIds": [
+        "aee42c2680450c6ec0f9f9f5",
+        "090481474be25b364a687752",
+        "238800992e247d076086fe01",
+        "5cb89013389daea70b499b37",
+        "ae340eeac877cf5aabeb1754",
+        "d0846cbe8396a6e5459e3090",
+        "d6ca8967d6e10e5b36251075",
+        "26133283d76c868681f41b6a",
+        "4c627ce8e0b4ce28823caa15",
+        "371c6df9d5d1992ef6445e5e",
+        "b453c70dbd3a126dcb387966",
+        "793e839210e66684afbb58e8",
+        "7d150759294db7a5dfb6ec10",
+        "f5bb3b920440bdbf94efec49",
+        "c85f461f8ea8c96eb117007e",
+        "90d4226e92d00989742aefa4",
+        "c25e042494fef5ed6cc1fa01",
+        "0128d660d0040b6cbae380cd",
+        "e2238d7ec4a5440c854013f1",
+        "72a22bb9ba4fae01172fe910"
+      ],
+      "fields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Не приведены в использованной таблице. Ранние 2019 MT6, другие комплектации и серии требуют отдельного прайса."
+    }
+  ]
+}
