@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-22T04:09:17.852392+00:00",
+  "batch": "research-2026-10-22-aion-ut-europe-exact",
+  "mode": "readback",
+  "variants": 2,
+  "fields": 17,
+  "passed": true,
+  "rows": [
+    {
+      "modelId": "d2045d3d36b1b4e4e1130acf",
+      "variantId": "c959b64e2b9527a0b181c839",
+      "year": 2026,
+      "revision": "aa9ad8fa-616b-453b-8ab7-826535ac4f3d",
+      "fields": 8,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "d2045d3d36b1b4e4e1130acf",
+      "variantId": "a2d347ec5139c3529e9552f8",
+      "year": 2026,
+      "revision": "aa9ad8fa-616b-453b-8ab7-826535ac4f3d",
+      "fields": 9,
+      "historyPassed": true,
+      "sourcePassed": true
+    }
+  ]
+}

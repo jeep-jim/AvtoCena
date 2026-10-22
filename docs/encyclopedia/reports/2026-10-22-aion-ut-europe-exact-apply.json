@@ -1,0 +1,93 @@
+{
+  "workflow": 39720654481,
+  "job": 119633082187,
+  "commit": "f2088b6244c95cdf395280780e06045a5a45aa32",
+  "conclusion": "success",
+  "testsPassed": 8,
+  "reports": [
+    {
+      "batch": "research-2026-10-22-aion-ut-europe-exact",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "d2045d3d36b1b4e4e1130acf",
+          "changes": [
+            {
+              "variantId": "c959b64e2b9527a0b181c839",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "transmission",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "a2d347ec5139c3529e9552f8",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "transmission",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh",
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:08:46.465Z",
+      "finishedAt": "2026-10-22T04:08:50.158Z"
+    },
+    {
+      "batch": "research-2026-10-22-aion-ut-europe-exact",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "d2045d3d36b1b4e4e1130acf",
+          "changes": [
+            {
+              "variantId": "c959b64e2b9527a0b181c839",
+              "fields": [
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "transmission",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "a2d347ec5139c3529e9552f8",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "bodyType",
+                "fuel",
+                "powertrainKind",
+                "transmission",
+                "drive",
+                "motorPeakKw",
+                "batteryKwh",
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:08:50.403Z",
+      "finishedAt": "2026-10-22T04:08:57.605Z"
+    }
+  ]
+}
