@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T03:14:23.000+07:00",
+  "completed": false,
+  "cursor": {
+    "id": "d9beb45b880f70fa01286ee4",
+    "make": "Aston Martin",
+    "model": "DB9",
+    "observedYears": [
+      2022,
+      2013
+    ],
+    "scope": "Все реальные годы с2008; текущий снимок2 строк не ограничивает исторический охват."
+  },
+  "previousPass": "docs/encyclopedia/reports/2026-10-23-aston-db11-db12-pass.json",
+  "doNotRepeat": [
+    {
+      "batch": "research-2026-10-23-aston-db11-2017-2021",
+      "workflow": 39845529032,
+      "apiReadback": true
+    },
+    {
+      "batch": "research-2026-10-23-aston-db12-2024-2025",
+      "workflow": 39846429448,
+      "apiReadback": true
+    }
+  ],
+  "requiredNextSteps": [
+    "Прочесть свежиеAGENTS/roadmap/queue и проверить текущиеruns до записи/выпуска.",
+    "DB11/DB1218 операций119 полей уже сохранены; не начинать заново эти группы. Пробелы остаютсяв отдельныхretry.",
+    "DB9:получить свежиеAPIдля всех наблюдаемых лет и проверить заводские таблицы всех реальных лет с2008;2022наблюдение не означаетMY2022.",
+    "После завершения уже работающейChina39840733509 скоординировать один очередной штатный неизменяемый индекс со всемиpending. Активныйf4d7d22/ac711 не включает3 поздниеAlpine и2 новыеAstonпартии.",
+    "Referenceintake39831884392 остановлен redirect_outside_catalog,checkpoint13045/8403/253; не возобновлять тот жеredirect и не обходить guard. ТочноеURL и причина вqueue.",
+    "AMR/STANDARD/VOLANTE вUAE остаютсяneeds_data из-за защиты идентичности. Не выдавать нехватку идентификатора за отсутствие заводских характеристик; не менятьзащиты/сборщики/расчётныеправила и не переименовыватьданные радиобхода.",
+    "СледующиеDbs,Dbx,DBX707 и далее по очереди; прежниеretry сохранить."
+  ],
+  "integration": {
+    "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "workflow": 39835446552,
+    "state": "activated_verified",
+    "activationConfirmed": true,
+    "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "activationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
+    "duplicateReleaseRequested": false,
+    "nextAction": "Один штатный совокупный индекс после окончания уже работающей публикацииКитая39840733509; сопровождение публикации ведётся отдельно. Состав/активацию проверить, не утверждать новые данные активными.",
+    "checkedAt": "2026-10-23T03:14:23.000+07:00",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "pendingWriterWorkflow": 39840733509,
+    "newBatchesActivated": false,
+    "newCalculationFieldsPreparedLocally": 109
+  },
+  "retryFiles": [
+    "docs/encyclopedia/retry-2026-10-23-aston-db11-remaining.json",
+    "docs/encyclopedia/retry-2026-10-23-aston-db12-remaining.json"
+  ],
+  "allModelsComplete": false
+}

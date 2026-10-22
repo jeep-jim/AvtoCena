@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-10-22T20:12:49.466Z",
+  "passed": true,
+  "productionMatcherUnchanged": true,
+  "db12DuplicateCandidates": 3,
+  "db12_2024MassBefore": null,
+  "db12_2024MassAfter": 2260,
+  "db12_2024EngineCc": 3982,
+  "db12_2024PowerHp": 680,
+  "driveStillUnconfirmed": true,
+  "db12_2025CoupeMass": 2260,
+  "db12_2025VolanteMass": 2365,
+  "db11_2020ExactMatch": {
+    "engineCc": 3982,
+    "powerHp": 510,
+    "drive": "rwd"
+  },
+  "manualInputPreserved": true,
+  "liveUaeOffersStillBlocked": [
+    {
+      "id": "56b1eeaa95890b644e106f2f",
+      "year": 2022,
+      "trim": "AMR",
+      "reason": "trim_without_digit_and_no_engine_or_chassis_identifier; generic identification guard unchanged"
+    },
+    {
+      "id": "cda8e76b1f59a50d23256163",
+      "year": 2017,
+      "trim": "STANDARD",
+      "reason": "trim_without_digit_and_no_engine_or_chassis_identifier; generic identification guard unchanged"
+    },
+    {
+      "id": "20fdf9e23ab645acfb0fcaef",
+      "year": 2019,
+      "trim": "AMR",
+      "reason": "trim_without_digit_and_no_engine_or_chassis_identifier; generic identification guard unchanged"
+    },
+    {
+      "id": "513bc35a0e42c4505873f4f7",
+      "year": 2018,
+      "trim": "STANDARD",
+      "reason": "trim_without_digit_and_no_engine_or_chassis_identifier; generic identification guard unchanged"
+    },
+    {
+      "id": "dc10b7847dbe39a15ca85df5",
+      "year": 2021,
+      "trim": "AMR",
+      "reason": "trim_without_digit_and_no_engine_or_chassis_identifier; generic identification guard unchanged"
+    },
+    {
+      "id": "088978f7d9faa2686df0f7cf",
+      "year": 2018,
+      "trim": "VOLANTE",
+      "reason": "trim_without_digit_and_no_engine_or_chassis_identifier; generic identification guard unchanged"
+    }
+  ],
+  "activationConfirmed": false
+}

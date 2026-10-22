@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T03:11:00+07:00",
+  "updatedAt": "2026-10-23T03:14:23.000+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -838,12 +838,12 @@
         2024,
         2023
       ],
-      "variants": 16,
+      "variants": 18,
       "status": "partial_verified_fields",
-      "researchedVariants": 5,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
-      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
+      "researchedVariants": 7,
+      "checkedAt": "2026-10-23T03:14:23.000+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-db12-remaining.json",
+      "nextAction": "MY24 массы и MY25 Coupe/Volante сохранены и прочитаны;11 неназванных исходных строк,привод/коды,MY26/спецсерии и календарный2023 остаютсяretry. Следующий новый курсорDB9."
     },
     {
       "id": "d9beb45b880f70fa01286ee4",
@@ -32658,13 +32658,13 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T03:11:00+07:00",
+    "updatedAt": "2026-10-23T03:14:23.000+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "db11_saved_db12_prepared",
+    "state": "db11_db12_saved_api_readback_pass_activation_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Aston Martin DB12: партия MY24/MY25 подготовлена, затем DB9. Непроверенные DB11 сохранены в retry.",
-    "lastVerifiedResearch": "aston-db11-2017-2021",
+    "nextModel": "Aston Martin DB9: все реальные годы с2008, точные Coupe/Volante; наблюдаемый2022 проверить отдельно. Затем Dbs, Dbx, DBX707 и далее. DB11/DB12 gaps в retry.",
+    "lastVerifiedResearch": "aston-db12-2024-2025",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 75,
     "allModelsComplete": false,
@@ -32680,24 +32680,24 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-late-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-db12-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "aston-db11-2017-2021",
-      "batch": "research-2026-10-23-aston-db11-2017-2021",
-      "commit": "29a9428d9cd348b18001d10fda2937f457103c87",
-      "workflow": 39845529032,
-      "job": 120057670665,
-      "variants": 13,
-      "newVariants": 8,
-      "updatedVariants": 5,
-      "fields": 96,
-      "compiledCalculationFields": 88,
+      "key": "aston-db12-2024-2025",
+      "batch": "research-2026-10-23-aston-db12-2024-2025",
+      "commit": "d51469e2c947682b5ba461361dfdb02df68ab4a6",
+      "workflow": 39846429448,
+      "job": 120060802376,
+      "variants": 5,
+      "newVariants": 2,
+      "updatedVariants": 3,
+      "fields": 23,
+      "compiledCalculationFields": 21,
       "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
       "indexMembershipState": "saved_after_active_ac711_snapshot",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-readback.json"
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db12-readback.json"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792660229591_c103ed94",
@@ -32808,186 +32808,153 @@
         "includedInIndex": false,
         "indexMembershipState": "saved_after_active_ac711_snapshot",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-readback.json"
-      }
-    ],
-    "inFlightResearch": [
+      },
       {
-        "modelId": "1c7928819e7d7d0ab2e5a18d",
+        "key": "aston-db12-2024-2025",
         "batch": "research-2026-10-23-aston-db12-2024-2025",
+        "commit": "d51469e2c947682b5ba461361dfdb02df68ab4a6",
+        "workflow": 39846429448,
+        "job": 120060802376,
         "variants": 5,
         "newVariants": 2,
+        "updatedVariants": 3,
         "fields": 23,
-        "apiReadback": false
+        "compiledCalculationFields": 21,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "saved_after_active_ac711_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db12-readback.json"
       }
     ],
+    "inFlightResearch": [],
     "lastCompletedPass": {
       "version": 1,
-      "checkedAt": "2026-10-23T02:16:30+07:00",
-      "state": "three_batches_saved_api_readback_pass_activation_pending",
-      "scope": "Alpine A110 2024–2025, A290 2024–2026: отдельные подтверждённые годовые исполнения",
-      "operations": 20,
-      "newVariants": 19,
-      "updatedVariants": 1,
-      "confirmedFields": 207,
-      "compiledCalculationFields": 165,
-      "identityNameFields": 19,
-      "motorPeakReferenceFields": 11,
-      "batteryReferenceFields": 12,
+      "checkedAt": "2026-10-23T03:14:23.000+07:00",
+      "state": "db11_db12_saved_api_readback_pass_activation_pending",
+      "scope": "Aston Martin DB11 MY2017–2021 и DB12 MY2024–2025",
+      "operations": 18,
+      "newVariants": 10,
+      "updatedVariants": 8,
+      "confirmedFields": 119,
+      "compiledCalculationFields": 109,
       "batches": [
         {
-          "key": "alpine-a110-2024-2025-a290-2024",
-          "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
-          "commit": "e5cb3235dfdadb8ec14f66bf6e50ffe7adfd0ba3",
-          "workflow": 39836589326,
-          "job": 120026421635,
-          "variants": 12,
-          "newVariants": 12,
-          "updatedVariants": 0,
-          "fields": 130,
-          "compiledCalculationFields": 109,
+          "key": "aston-db11-2017-2021",
+          "batch": "research-2026-10-23-aston-db11-2017-2021",
+          "commit": "29a9428d9cd348b18001d10fda2937f457103c87",
+          "workflow": 39845529032,
+          "job": 120057670665,
+          "variants": 13,
+          "newVariants": 8,
+          "updatedVariants": 5,
+          "fields": 96,
+          "compiledCalculationFields": 88,
           "workflowConclusion": "success",
           "apiReadback": true,
           "includedInIndex": false,
-          "indexMembershipState": "pending_current_release_snapshot_check",
-          "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-late-readback.json"
+          "indexMembershipState": "saved_after_active_ac711_snapshot",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-readback.json"
         },
         {
-          "key": "alpine-a290-2025",
-          "batch": "research-2026-10-23-alpine-a290-2025",
-          "commit": "2db00741beddbf0d36481c07cb2f7954bfbaf73d",
-          "workflow": 39837140373,
-          "job": 120028307169,
-          "variants": 4,
-          "newVariants": 3,
-          "updatedVariants": 1,
-          "fields": 37,
-          "compiledCalculationFields": 28,
+          "key": "aston-db12-2024-2025",
+          "batch": "research-2026-10-23-aston-db12-2024-2025",
+          "commit": "d51469e2c947682b5ba461361dfdb02df68ab4a6",
+          "workflow": 39846429448,
+          "job": 120060802376,
+          "variants": 5,
+          "newVariants": 2,
+          "updatedVariants": 3,
+          "fields": 23,
+          "compiledCalculationFields": 21,
           "workflowConclusion": "success",
           "apiReadback": true,
           "includedInIndex": false,
-          "indexMembershipState": "pending_current_release_snapshot_check",
-          "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2025-readback.json"
-        },
-        {
-          "key": "alpine-a290-2026",
-          "batch": "research-2026-10-23-alpine-a290-2026",
-          "commit": "5519fe6f29fc8e5466ab01f9f7f86fd188bbd8e6",
-          "workflow": 39837681693,
-          "job": 120030182437,
-          "variants": 4,
-          "newVariants": 4,
-          "updatedVariants": 0,
-          "fields": 40,
-          "compiledCalculationFields": 28,
-          "workflowConclusion": "success",
-          "apiReadback": true,
-          "includedInIndex": false,
-          "indexMembershipState": "pending_next_index_snapshot_check",
-          "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a290-2026-readback.json"
+          "indexMembershipState": "saved_after_active_ac711_snapshot",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db12-readback.json"
         }
       ],
       "models": [
         {
-          "id": "cc5a28958f2b1bd3eac176d4",
-          "model": "A110",
-          "beforeVariants": 44,
-          "afterVariants": 51,
-          "researchedVariants": 29,
-          "revision": "07fc41a8-9194-4b42-b00c-ba429ce20b56"
+          "id": "eff6651568e364a8a5a40e97",
+          "model": "DB11",
+          "beforeVariants": 37,
+          "afterVariants": 45,
+          "researchedVariants": 13,
+          "revision": "293d2810-2e27-44e7-ba93-1921c2a3c383"
         },
         {
-          "id": "9f23c75ab6a73713bf64580a",
-          "model": "A290",
-          "beforeVariants": 7,
-          "afterVariants": 19,
-          "researchedVariants": 13,
-          "revision": "0432d522-a1b4-4f4a-92ec-eab41abf64a2"
+          "id": "1c7928819e7d7d0ab2e5a18d",
+          "model": "DB12",
+          "beforeVariants": 16,
+          "afterVariants": 18,
+          "researchedVariants": 7,
+          "revision": "ae2600c3-8fc6-4d5f-8c01-e636eaca196a"
         }
       ],
       "validation": {
-        "guards": "8/8 PASS",
-        "apiReadback": "12/130, 4/37, 4/40 PASS",
+        "guards": "8/8 PASS locally and in both protected workflows",
+        "apiReadback": "13/96 and 5/23 PASS",
+        "unchangedVariantsPreserved": [
+          32,
+          13
+        ],
+        "previousFieldSourcesPreserved": true,
         "manualWrites": 0,
         "duplicatesAdded": 0,
-        "previousEvidenceRetained": true,
         "wholeRowVerified": false,
-        "productionCompilerChanged": false,
-        "calculationRulesChanged": false,
-        "collectorsChanged": false,
-        "perBatchPreservedUnchanged": [
-          {
-            "A110": 44,
-            "A290": 7
-          },
-          {
-            "A290": 11
-          },
-          {
-            "A290": 15
-          }
-        ],
-        "compilerReports": [
-          "docs/encyclopedia/reports/2026-10-23-alpine-late-compiler.json",
-          "docs/encyclopedia/reports/2026-10-23-alpine-a290-2025-compiler.json",
-          "docs/encyclopedia/reports/2026-10-23-alpine-a290-2026-compiler.json"
-        ]
+        "productionCompilerUnchanged": true,
+        "matchingReport": "docs/encyclopedia/reports/2026-10-23-aston-exact-matching.json",
+        "publicParityReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-card-search-parity.json",
+        "publicParityOffers": 3,
+        "publicParityComparisons": 33,
+        "publicParityPassed": true
       },
       "integration": {
-        "checkedAt": "2026-10-23T02:16:30+07:00",
-        "state": "reader_release_in_progress_price_preparation",
         "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
         "workflow": 39835446552,
-        "job": 120022420382,
-        "privateIndexPreparation": "success",
-        "build": "success",
-        "pricePreparation": "in_progress",
-        "activationConfirmed": false,
-        "newBatchMembershipUnconfirmed": true,
-        "observedActiveRelease": "e78c7154232f39ac73a2253314e2b0fe34da1344",
-        "observedCalculationVersion": "669463ac57d4c4d8890392b1114d8b458e8bdb24729cc397ee5d7f608fedfc27",
+        "state": "activated_verified",
+        "activationConfirmed": true,
+        "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
         "duplicateReleaseRequested": false,
-        "nextAction": "После завершения текущего reader-release проверить время и состав неизменяемого снимка по manifest/readback и livehealth. Сопровождение выпуска/публикации Китая уже идёт отдельно; не дублировать. Не вошедшие партии включить в следующий согласованный штатный индекс. Коммит выпуска раньше партии сам по себе не доказывает исключения: индекс читает текущую базу."
+        "nextAction": "Один штатный совокупный индекс после окончания уже работающей публикацииКитая39840733509; сопровождение публикации ведётся отдельно. Состав/активацию проверить, не утверждать новые данные активными.",
+        "checkedAt": "2026-10-23T03:14:23.000+07:00",
+        "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+        "pendingWriterWorkflow": 39840733509,
+        "newBatchesActivated": false,
+        "newCalculationFieldsPreparedLocally": 109
       },
-      "regressionCheck": {
-        "passed": true,
-        "offers": 5,
-        "comparisons": 55,
-        "alpineOffers": 2,
-        "alpineStatuses": [
-          "estimated",
-          "estimated"
-        ],
-        "repeatedTonaleOffers": 3,
-        "tonaleRemainNeedsData": true,
-        "indexMembershipNotProvenByParity": true,
-        "reports": [
-          "docs/encyclopedia/reports/2026-10-23-alpine-late-repeated-parity.json",
-          "docs/encyclopedia/reports/2026-10-23-alpine-late-a110-parity.json"
-        ]
+      "remaining": {
+        "db11UnidentifiedRows": 32,
+        "db12UnidentifiedRows": 11,
+        "db11Retry": "docs/encyclopedia/retry-2026-10-23-aston-db11-remaining.json",
+        "db12Retry": "docs/encyclopedia/retry-2026-10-23-aston-db12-remaining.json",
+        "uaeOffers": 6,
+        "uaeReason": "AMR/STANDARD/VOLANTE без кода двигателя/шасси блокируются действующей защитой точной идентичности. Сам выпуск индекса не исправит это. Названия/защиты не меняли для обхода; UAEsellercc/hp не использовали.",
+        "historicalExpansionComplete": false,
+        "allModelsComplete": false
       },
       "technicalReferenceIntake": {
-        "previousWorkflow": 39809543570,
-        "previousConclusion": "success_time_limit",
-        "previousFetched": 2804,
-        "previousVisited": 11950,
-        "previousSaved": 7516,
-        "previousPending": 262,
-        "completed": false,
-        "state": "in_progress",
-        "referenceOnly": true,
-        "checkpointReset": false,
-        "checkedAt": "2026-10-23T02:16:30+07:00",
-        "resumeCommit": "0a63873004d9234976478390bd30b7271aefb266",
         "workflow": 39831884392,
         "job": 120009865681,
-        "newSavedCountNotYetKnown": true,
-        "duplicateRunStarted": false
+        "state": "blocked_redirect_outside_catalog",
+        "completed": false,
+        "referenceOnly": true,
+        "visited": 13045,
+        "saved": 8403,
+        "pending": 253,
+        "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/",
+        "error": "redirect_outside_catalog",
+        "checkpointAt": "2026-10-22T19:38:18.897Z",
+        "inspectionWorkflow": 39844493209,
+        "inspectionJob": 120054063098,
+        "checkpointReset": false,
+        "duplicateRunStarted": false,
+        "nextAction": "Не возобновлять тот же запрещённый redirect и не обходить ограничение. Сборщик и checkpoint не изменены; независимое подтверждение заводских данных продолжается."
       },
-      "next": "Aston Martin DB11, точные исполнения2017–2024; затем далее по алфавиту. Alpine gaps отдельно в retry.",
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-late-remaining.json",
-      "handoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-db11.json",
-      "allModelsComplete": false,
-      "historicalExpansionComplete": false
+      "next": "Aston Martin DB9: все реальные годы с2008, точные Coupe/Volante; наблюдаемый2022 проверить отдельно. Затем Dbs, Dbx, DBX707 и далее. DB11/DB12 gaps в retry.",
+      "handoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-db9.json"
     },
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
@@ -33054,7 +33021,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-db11.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-db9.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -35168,7 +35135,10 @@
       "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
       "duplicateReleaseRequested": false,
-      "nextAction": "Следующий совокупный штатный индекс после уже работающей публикации Китая39840733509; не запускать конкурирующий выпуск."
+      "nextAction": "Следующий совокупный штатный индекс после уже работающей публикации Китая39840733509; не запускать конкурирующий выпуск.",
+      "checkedAt": "2026-10-23T03:14:23.000+07:00",
+      "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+      "pendingWriterWorkflow": 39840733509
     },
     "alpineLatePass": {
       "version": 1,
@@ -35359,7 +35329,135 @@
         "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
         "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112"
       }
-    ]
+    ],
+    "astonDb11Db12Pass": {
+      "version": 1,
+      "checkedAt": "2026-10-23T03:14:23.000+07:00",
+      "state": "db11_db12_saved_api_readback_pass_activation_pending",
+      "scope": "Aston Martin DB11 MY2017–2021 и DB12 MY2024–2025",
+      "operations": 18,
+      "newVariants": 10,
+      "updatedVariants": 8,
+      "confirmedFields": 119,
+      "compiledCalculationFields": 109,
+      "batches": [
+        {
+          "key": "aston-db11-2017-2021",
+          "batch": "research-2026-10-23-aston-db11-2017-2021",
+          "commit": "29a9428d9cd348b18001d10fda2937f457103c87",
+          "workflow": 39845529032,
+          "job": 120057670665,
+          "variants": 13,
+          "newVariants": 8,
+          "updatedVariants": 5,
+          "fields": 96,
+          "compiledCalculationFields": 88,
+          "workflowConclusion": "success",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "indexMembershipState": "saved_after_active_ac711_snapshot",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-readback.json"
+        },
+        {
+          "key": "aston-db12-2024-2025",
+          "batch": "research-2026-10-23-aston-db12-2024-2025",
+          "commit": "d51469e2c947682b5ba461361dfdb02df68ab4a6",
+          "workflow": 39846429448,
+          "job": 120060802376,
+          "variants": 5,
+          "newVariants": 2,
+          "updatedVariants": 3,
+          "fields": 23,
+          "compiledCalculationFields": 21,
+          "workflowConclusion": "success",
+          "apiReadback": true,
+          "includedInIndex": false,
+          "indexMembershipState": "saved_after_active_ac711_snapshot",
+          "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db12-readback.json"
+        }
+      ],
+      "models": [
+        {
+          "id": "eff6651568e364a8a5a40e97",
+          "model": "DB11",
+          "beforeVariants": 37,
+          "afterVariants": 45,
+          "researchedVariants": 13,
+          "revision": "293d2810-2e27-44e7-ba93-1921c2a3c383"
+        },
+        {
+          "id": "1c7928819e7d7d0ab2e5a18d",
+          "model": "DB12",
+          "beforeVariants": 16,
+          "afterVariants": 18,
+          "researchedVariants": 7,
+          "revision": "ae2600c3-8fc6-4d5f-8c01-e636eaca196a"
+        }
+      ],
+      "validation": {
+        "guards": "8/8 PASS locally and in both protected workflows",
+        "apiReadback": "13/96 and 5/23 PASS",
+        "unchangedVariantsPreserved": [
+          32,
+          13
+        ],
+        "previousFieldSourcesPreserved": true,
+        "manualWrites": 0,
+        "duplicatesAdded": 0,
+        "wholeRowVerified": false,
+        "productionCompilerUnchanged": true,
+        "matchingReport": "docs/encyclopedia/reports/2026-10-23-aston-exact-matching.json",
+        "publicParityReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-card-search-parity.json",
+        "publicParityOffers": 3,
+        "publicParityComparisons": 33,
+        "publicParityPassed": true
+      },
+      "integration": {
+        "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+        "workflow": 39835446552,
+        "state": "activated_verified",
+        "activationConfirmed": true,
+        "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
+        "duplicateReleaseRequested": false,
+        "nextAction": "Один штатный совокупный индекс после окончания уже работающей публикацииКитая39840733509; сопровождение публикации ведётся отдельно. Состав/активацию проверить, не утверждать новые данные активными.",
+        "checkedAt": "2026-10-23T03:14:23.000+07:00",
+        "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+        "pendingWriterWorkflow": 39840733509,
+        "newBatchesActivated": false,
+        "newCalculationFieldsPreparedLocally": 109
+      },
+      "remaining": {
+        "db11UnidentifiedRows": 32,
+        "db12UnidentifiedRows": 11,
+        "db11Retry": "docs/encyclopedia/retry-2026-10-23-aston-db11-remaining.json",
+        "db12Retry": "docs/encyclopedia/retry-2026-10-23-aston-db12-remaining.json",
+        "uaeOffers": 6,
+        "uaeReason": "AMR/STANDARD/VOLANTE без кода двигателя/шасси блокируются действующей защитой точной идентичности. Сам выпуск индекса не исправит это. Названия/защиты не меняли для обхода; UAEsellercc/hp не использовали.",
+        "historicalExpansionComplete": false,
+        "allModelsComplete": false
+      },
+      "technicalReferenceIntake": {
+        "workflow": 39831884392,
+        "job": 120009865681,
+        "state": "blocked_redirect_outside_catalog",
+        "completed": false,
+        "referenceOnly": true,
+        "visited": 13045,
+        "saved": 8403,
+        "pending": 253,
+        "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/",
+        "error": "redirect_outside_catalog",
+        "checkpointAt": "2026-10-22T19:38:18.897Z",
+        "inspectionWorkflow": 39844493209,
+        "inspectionJob": 120054063098,
+        "checkpointReset": false,
+        "duplicateRunStarted": false,
+        "nextAction": "Не возобновлять тот же запрещённый redirect и не обходить ограничение. Сборщик и checkpoint не изменены; независимое подтверждение заводских данных продолжается."
+      },
+      "next": "Aston Martin DB9: все реальные годы с2008, точные Coupe/Volante; наблюдаемый2022 проверить отдельно. Затем Dbs, Dbx, DBX707 и далее. DB11/DB12 gaps в retry.",
+      "handoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-db9.json"
+    }
   },
   "scope": {
     "minimumYear": 2008,

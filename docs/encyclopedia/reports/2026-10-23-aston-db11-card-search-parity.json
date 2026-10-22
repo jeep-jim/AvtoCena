@@ -1,0 +1,191 @@
+{
+  "checkedAt": "2026-10-22T20:10:30.308840+00:00",
+  "passed": true,
+  "scope": "DB11 AMR2019/2021 and Volante2018 card/search parity in active index; new batch not activated",
+  "undefinedNormalization": "React Flight $undefined interpreted as absent value, equivalent to missing JSON property",
+  "generationId": "gen_1792660229591_c103ed94",
+  "rows": [
+    {
+      "offerId": "20fdf9e23ab645acfb0fcaef",
+      "checks": {
+        "year": {
+          "search": 2019,
+          "card": 2019,
+          "equal": true
+        },
+        "trim": {
+          "search": "AMR",
+          "card": "AMR",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "dc10b7847dbe39a15ca85df5",
+      "checks": {
+        "year": {
+          "search": 2021,
+          "card": 2021,
+          "equal": true
+        },
+        "trim": {
+          "search": "AMR",
+          "card": "AMR",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "088978f7d9faa2686df0f7cf",
+      "checks": {
+        "year": {
+          "search": 2018,
+          "card": 2018,
+          "equal": true
+        },
+        "trim": {
+          "search": "VOLANTE",
+          "card": "VOLANTE",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    }
+  ],
+  "europeSearchTotal": 0,
+  "chinaSearchTimedOut": true
+}

@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T03:14:23.000+07:00",
+  "state": "db11_db12_saved_api_readback_pass_activation_pending",
+  "scope": "Aston Martin DB11 MY2017–2021 и DB12 MY2024–2025",
+  "operations": 18,
+  "newVariants": 10,
+  "updatedVariants": 8,
+  "confirmedFields": 119,
+  "compiledCalculationFields": 109,
+  "batches": [
+    {
+      "key": "aston-db11-2017-2021",
+      "batch": "research-2026-10-23-aston-db11-2017-2021",
+      "commit": "29a9428d9cd348b18001d10fda2937f457103c87",
+      "workflow": 39845529032,
+      "job": 120057670665,
+      "variants": 13,
+      "newVariants": 8,
+      "updatedVariants": 5,
+      "fields": 96,
+      "compiledCalculationFields": 88,
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "saved_after_active_ac711_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-readback.json"
+    },
+    {
+      "key": "aston-db12-2024-2025",
+      "batch": "research-2026-10-23-aston-db12-2024-2025",
+      "commit": "d51469e2c947682b5ba461361dfdb02df68ab4a6",
+      "workflow": 39846429448,
+      "job": 120060802376,
+      "variants": 5,
+      "newVariants": 2,
+      "updatedVariants": 3,
+      "fields": 23,
+      "compiledCalculationFields": 21,
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "saved_after_active_ac711_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db12-readback.json"
+    }
+  ],
+  "models": [
+    {
+      "id": "eff6651568e364a8a5a40e97",
+      "model": "DB11",
+      "beforeVariants": 37,
+      "afterVariants": 45,
+      "researchedVariants": 13,
+      "revision": "293d2810-2e27-44e7-ba93-1921c2a3c383"
+    },
+    {
+      "id": "1c7928819e7d7d0ab2e5a18d",
+      "model": "DB12",
+      "beforeVariants": 16,
+      "afterVariants": 18,
+      "researchedVariants": 7,
+      "revision": "ae2600c3-8fc6-4d5f-8c01-e636eaca196a"
+    }
+  ],
+  "validation": {
+    "guards": "8/8 PASS locally and in both protected workflows",
+    "apiReadback": "13/96 and 5/23 PASS",
+    "unchangedVariantsPreserved": [
+      32,
+      13
+    ],
+    "previousFieldSourcesPreserved": true,
+    "manualWrites": 0,
+    "duplicatesAdded": 0,
+    "wholeRowVerified": false,
+    "productionCompilerUnchanged": true,
+    "matchingReport": "docs/encyclopedia/reports/2026-10-23-aston-exact-matching.json",
+    "publicParityReport": "docs/encyclopedia/reports/2026-10-23-aston-db11-card-search-parity.json",
+    "publicParityOffers": 3,
+    "publicParityComparisons": 33,
+    "publicParityPassed": true
+  },
+  "integration": {
+    "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "workflow": 39835446552,
+    "state": "activated_verified",
+    "activationConfirmed": true,
+    "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "activationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
+    "duplicateReleaseRequested": false,
+    "nextAction": "Один штатный совокупный индекс после окончания уже работающей публикацииКитая39840733509; сопровождение публикации ведётся отдельно. Состав/активацию проверить, не утверждать новые данные активными.",
+    "checkedAt": "2026-10-23T03:14:23.000+07:00",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "pendingWriterWorkflow": 39840733509,
+    "newBatchesActivated": false,
+    "newCalculationFieldsPreparedLocally": 109
+  },
+  "remaining": {
+    "db11UnidentifiedRows": 32,
+    "db12UnidentifiedRows": 11,
+    "db11Retry": "docs/encyclopedia/retry-2026-10-23-aston-db11-remaining.json",
+    "db12Retry": "docs/encyclopedia/retry-2026-10-23-aston-db12-remaining.json",
+    "uaeOffers": 6,
+    "uaeReason": "AMR/STANDARD/VOLANTE без кода двигателя/шасси блокируются действующей защитой точной идентичности. Сам выпуск индекса не исправит это. Названия/защиты не меняли для обхода; UAEsellercc/hp не использовали.",
+    "historicalExpansionComplete": false,
+    "allModelsComplete": false
+  },
+  "technicalReferenceIntake": {
+    "workflow": 39831884392,
+    "job": 120009865681,
+    "state": "blocked_redirect_outside_catalog",
+    "completed": false,
+    "referenceOnly": true,
+    "visited": 13045,
+    "saved": 8403,
+    "pending": 253,
+    "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/",
+    "error": "redirect_outside_catalog",
+    "checkpointAt": "2026-10-22T19:38:18.897Z",
+    "inspectionWorkflow": 39844493209,
+    "inspectionJob": 120054063098,
+    "checkpointReset": false,
+    "duplicateRunStarted": false,
+    "nextAction": "Не возобновлять тот же запрещённый redirect и не обходить ограничение. Сборщик и checkpoint не изменены; независимое подтверждение заводских данных продолжается."
+  },
+  "next": "Aston Martin DB9: все реальные годы с2008, точные Coupe/Volante; наблюдаемый2022 проверить отдельно. Затем Dbs, Dbx, DBX707 и далее. DB11/DB12 gaps в retry.",
+  "handoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-db9.json"
+}
