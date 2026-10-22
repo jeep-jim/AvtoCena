@@ -30,6 +30,8 @@ jobs:
       - run: npm ci
       - name: Verify exact encyclopedia matching
         run: node --import tsx --test tests/encyclopedia-calculation-index.test.ts tests/encyclopedia-release-index.test.ts tests/catalog-budget-specifications.test.ts tests/catalog-budget-runtime.test.ts
+      - name: Verify production dependency security
+        run: npm audit --omit=dev --audit-level=high
       - name: Verify catalog storage and bounded projection integrity
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-projection-parts.test.ts tests/catalog-storage-serialization.test.ts tests/regcloud-storage-compatibility.test.ts tests/storage.test.ts
       - name: Prepare private encyclopedia index for this release
