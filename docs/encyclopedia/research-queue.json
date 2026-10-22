@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T12:11:04.265472+07:00",
+  "updatedAt": "2026-10-22T12:13:22.035127+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -449,11 +449,13 @@
         2022,
         2021,
         2019,
-        2017
+        2018,
+        2017,
+        2015
       ],
-      "variants": 4,
+      "variants": 10,
       "status": "partial_verified_fields",
-      "researchedVariants": 1,
+      "researchedVariants": 7,
       "checkedAt": "2026-10-22T12:05:39.702655+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-4c-8c-historical.json",
       "nextAction": "Retry exact historical gaps and unresolved identity; no whole-row verified status",
@@ -475,11 +477,12 @@
       "model": "8C Competizione Coupe",
       "years": [
         2010,
-        2009
+        2009,
+        2008
       ],
-      "variants": 2,
+      "variants": 3,
       "status": "partial_verified_fields",
-      "researchedVariants": 1,
+      "researchedVariants": 2,
       "checkedAt": "2026-10-22T12:05:39.702655+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-4c-8c-historical.json",
       "nextAction": "Retry exact historical gaps and unresolved identity; no whole-row verified status",
@@ -500,11 +503,12 @@
       "make": "Alfa Romeo",
       "model": "8C Spider",
       "years": [
-        2010
+        2010,
+        2009
       ],
-      "variants": 1,
+      "variants": 2,
       "status": "partial_verified_fields",
-      "researchedVariants": 1,
+      "researchedVariants": 2,
       "checkedAt": "2026-10-22T12:05:39.702655+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-4c-8c-historical.json",
       "nextAction": "Retry exact historical gaps and unresolved identity; no whole-row verified status",
@@ -533,24 +537,27 @@
         2021,
         2020,
         2019,
-        2018
+        2018,
+        2017,
+        2016
       ],
-      "variants": 132,
+      "variants": 186,
       "status": "partial_verified_fields",
-      "researchedVariants": 16,
-      "checkedAt": "2026-10-22T12:11:04.218089+07:00",
+      "researchedVariants": 71,
+      "checkedAt": "2026-10-22T12:13:21.986791+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa-giulia-2016-2017.json",
-      "nextAction": "Alfa Romeo Giulia 2018",
+      "nextAction": "Alfa Romeo Giulia 2019; remaining 2020–2026, then Giulietta",
       "lastVerifiedBatch": {
-        "batch": "research-2026-10-22-alfa-giulia-2016-2017",
-        "commit": "98ce4ad3286e0fdb0b50eaba76164252bff507e7",
-        "workflow": 39726355486,
-        "variants": 43,
-        "fields": 379,
-        "newVariants": 43,
+        "batch": "research-2026-10-22-alfa-giulia-2018",
+        "commit": "59dc3fb867a4c44c7d08aca1fc01dc7d9622b058",
+        "workflow": 39726599145,
+        "variants": 12,
+        "fields": 115,
+        "newVariants": 11,
         "apiReadback": true,
         "includedInIndex": false
-      }
+      },
+      "newAnnualVariantsThisPass": 54
     },
     {
       "id": "cb49c6bb46e8dd8caf106b34",
@@ -32573,12 +32580,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T12:11:04.265472+07:00",
+    "updatedAt": "2026-10-22T12:13:22.035127+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "verified_batches_wait_next_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulia 2018",
+    "nextModel": "Alfa Romeo Giulia 2019; remaining 2020–2026, then Giulietta",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32692,6 +32699,16 @@
         "newVariants": 43,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      "alfa-giulia-2018": {
+        "batch": "research-2026-10-22-alfa-giulia-2018",
+        "commit": "59dc3fb867a4c44c7d08aca1fc01dc7d9622b058",
+        "workflow": 39726599145,
+        "variants": 12,
+        "fields": 115,
+        "newVariants": 11,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32712,12 +32729,12 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-giulia-2016-2017",
-      "commit": "98ce4ad3286e0fdb0b50eaba76164252bff507e7",
-      "workflow": 39726355486,
-      "variants": 43,
-      "fields": 379,
-      "newVariants": 43,
+      "batch": "research-2026-10-22-alfa-giulia-2018",
+      "commit": "59dc3fb867a4c44c7d08aca1fc01dc7d9622b058",
+      "workflow": 39726599145,
+      "variants": 12,
+      "fields": 115,
+      "newVariants": 11,
       "apiReadback": true,
       "includedInIndex": false
     },
@@ -32823,20 +32840,24 @@
         "newVariants": 43,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-giulia-2018",
+        "commit": "59dc3fb867a4c44c7d08aca1fc01dc7d9622b058",
+        "workflow": 39726599145,
+        "variants": 12,
+        "fields": 115,
+        "newVariants": 11,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
-    "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-giulia-2018",
-      "variants": 12,
-      "fields": 115,
-      "newVariants": 11,
-      "status": "submitted_pending_workflow_readback"
-    },
+    "inFlightResearch": null,
     "lastCompletedPass": {
-      "report": "docs/encyclopedia/reports/2026-10-22-aion-aito-aiways-pass.json",
-      "variants": 197,
-      "fields": 413,
-      "newVariants": 5,
+      "report": "docs/encyclopedia/reports/2026-10-22-alfa-historical-pass.json",
+      "variants": 64,
+      "fields": 571,
+      "newVariants": 62,
       "apiReadbackPassed": true,
       "allModelsComplete": false
     },
@@ -32855,7 +32876,7 @@
       "commit": "5b340a0be566f32825479d0564b2a236614cbb69",
       "workflow": 39725951294,
       "indexPreparedAt": "2026-10-22T05:08:09Z",
-      "status": "in_progress",
+      "status": "preparing_price_indexes",
       "activated": false,
       "note": "Separate owner change; encyclopedia mutations paused until index preparation succeeded. Giulia batches applied after index freeze require next index."
     }

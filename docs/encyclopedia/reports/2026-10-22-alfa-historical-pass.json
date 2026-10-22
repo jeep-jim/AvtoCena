@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-22T12:13:22.035127+07:00",
+  "scope": "Only this Alfa Romeo pass; excludes earlier 197/413 pass",
+  "variants": 64,
+  "fields": 571,
+  "newVariants": 62,
+  "batches": [
+    {
+      "batch": "research-2026-10-22-alfa-4c-8c-historical",
+      "commit": "a8ddd17bb3834a539d350a37bf5acc9d956e6ce8",
+      "workflow": 39725832995,
+      "variants": 9,
+      "fields": 77,
+      "newVariants": 8,
+      "apiReadbackPassed": true,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-alfa-4c-8c-historical-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-4c-8c-historical-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-alfa-giulia-2016-2017",
+      "commit": "98ce4ad3286e0fdb0b50eaba76164252bff507e7",
+      "workflow": 39726355486,
+      "variants": 43,
+      "fields": 379,
+      "newVariants": 43,
+      "apiReadbackPassed": true,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-alfa-giulia-2016-2017-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-giulia-2016-2017-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-alfa-giulia-2018",
+      "commit": "59dc3fb867a4c44c7d08aca1fc01dc7d9622b058",
+      "workflow": 39726599145,
+      "variants": 12,
+      "fields": 115,
+      "newVariants": 11,
+      "apiReadbackPassed": true,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-alfa-giulia-2018-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-giulia-2018-readback.json"
+    }
+  ],
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false,
+  "catalogParityReport": "docs/encyclopedia/reports/2026-10-22-giulia-existing-card-search-parity.json",
+  "integration": {
+    "installedRelease": "5b8453f63b8e4af36092f79f86dbe665e557e969",
+    "activeRelease": "5b340a0be566f32825479d0564b2a236614cbb69",
+    "activeWorkflow": 39725951294,
+    "activeStep": "Prepare exact price indexes before activating the release",
+    "newHistoricalGiuliaIncludedInActiveIndex": false,
+    "newHistoricalGiuliaInstalled": false,
+    "duplicateReleaseStarted": false
+  },
+  "nextCursor": "Alfa Romeo Giulia 2019; remaining 2020–2026, then Giulietta"
+}

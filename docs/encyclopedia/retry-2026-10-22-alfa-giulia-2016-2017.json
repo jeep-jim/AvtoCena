@@ -34,7 +34,31 @@
     {
       "scope": "Existing exact duplicates",
       "reason": "Three 2024 Veloce Q4 identities and four 2025 Veloce Q4 identities are already technically equal; audit catalog/card matching without merging IDs or erasing observations."
+    },
+    {
+      "scope": "Giulia Quadrifoglio 2018",
+      "fields": [
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "January 2018 factory PDF has 374 kW on page 2 and 375 kW on page 24. 510 metric hp and 2891 cc verified; kW not selected. Existing variant lacks exact homologation code for European permitted mass."
+    },
+    {
+      "scope": "Giulia 2018 Veloce original observation",
+      "reason": "Veloce names petrol 280 PS and diesel 210 PS variants; original row has no engine/fuel identity sufficient to choose. New exact annual versions saved separately."
     }
   ],
-  "nextCursor": "Alfa Romeo Giulia 2018; then remaining 2019–2026 and Giulietta"
+  "nextCursor": "Alfa Romeo Giulia 2019; remaining 2020–2026, then Giulietta",
+  "verified2018Batch": {
+    "batch": "research-2026-10-22-alfa-giulia-2018",
+    "commit": "59dc3fb867a4c44c7d08aca1fc01dc7d9622b058",
+    "workflow": 39726599145,
+    "variants": 12,
+    "fields": 115,
+    "newVariants": 11,
+    "apiReadbackPassed": true,
+    "applyReport": "docs/encyclopedia/reports/2026-10-22-alfa-giulia-2018-apply.json",
+    "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-giulia-2018-readback.json"
+  }
 }
