@@ -1,5 +1,5 @@
-import {AUCTION_SALE_PERIODS} from "@/lib/catalog/auction-sale-period";
 "use client";
+import {AUCTION_SALE_PERIODS} from "@/lib/catalog/auction-sale-period";
 import {CatalogChevron as Chevron} from "./CatalogChevron";
 import {CatalogColorSelect} from "./CatalogColorSelect";
 import {CatalogSortSelect} from "./CatalogSortSelect";

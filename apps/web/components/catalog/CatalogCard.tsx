@@ -1,5 +1,5 @@
-import {auctionSaleDateLabel} from "@/lib/catalog/auction-sale-period";
 "use client";
+import {auctionSaleDateLabel} from "@/lib/catalog/auction-sale-period";
 import {useState} from "react";
 import {useCatalogView} from "./CatalogSelectionContext";
 import {publicationWithdrawn} from "@/lib/catalog/publication-policy";

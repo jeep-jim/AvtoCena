@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T13:18:41.636595+07:00",
+  "updatedAt": "2026-10-22T13:25:04.781379+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32587,7 +32587,7 @@
   "activePriority": {
     "updatedAt": "2026-10-22T13:18:41.636595+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "verified_giulia_batches_wait_aggregate_index",
+    "state": "verified_giulia_batches_wait_build_fix_release",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "Alfa Romeo Giulietta: first documented year 2010, then later years; Giulia retries remain separate",
@@ -32950,7 +32950,15 @@
       "state": "in_progress",
       "referenceOnly": true
     },
-    "releaseRequestedAt": "2026-10-22T13:18:41.636595+07:00"
+    "releaseRequestedAt": "2026-10-22T13:18:41.636595+07:00",
+    "failedAggregateRelease": {
+      "workflow": 39733245856,
+      "commit": "bb3193f1fd0c37d1afeb23e615e940dadf6758ee",
+      "reason": "use_client_directive_after_import",
+      "indexPrepared": true,
+      "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
+      "activated": false
+    }
   },
   "scope": {
     "minimumYear": 2008,
