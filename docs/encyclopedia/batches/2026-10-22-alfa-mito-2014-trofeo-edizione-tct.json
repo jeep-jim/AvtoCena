@@ -1,0 +1,1035 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-mito-2014-trofeo-edizione-tct",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "afc11d85b6fef81caeb07fd7",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "0.9 TwinAir 105 PS S/S Trofeo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Trofeo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-01-14. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы.   Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-01-14",
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-01-14",
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Trofeo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "1eb963d4a4c1b414171dec29",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "1.3 JTDM 85 PS S/S Trofeo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "1.3 JTDM 85 PS S/S Trofeo",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 1248,
+        "powerKw": 62,
+        "icePowerKw": 62,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B4000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-01-14. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы.   Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-01-14",
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 208,
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 208,
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-01-14",
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 208,
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 208,
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 208,
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 208,
+            "selector": "1.3 JTDM 85 PS S/S Trofeo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "3863e151d6ec464089bfda5d",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "1.6 JTDM 120 PS S/S Trofeo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS S/S Trofeo",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 120,
+        "engineCc": 1598,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A3000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-01-14. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы.   Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-01-14",
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 209,
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 209,
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-01-14",
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 209,
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 209,
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 209,
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 209,
+            "selector": "1.6 JTDM 120 PS S/S Trofeo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "06ae0325964839a2a13b21a7",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "1.4 MPI 78 PS S/S Edizione",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "1.4 MPI 78 PS S/S Edizione",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 78,
+        "engineCc": 1368,
+        "powerKw": 57,
+        "icePowerKw": 57,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-series-limitees-alfa-romeo-mito-et-giulietta-edizione",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-05-05. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы.   Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-series-limitees-alfa-romeo-mito-et-giulietta-edizione",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-05-05",
+            "selector": "1.4 MPI 78 PS S/S Edizione; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 78 PS S/S Edizione; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 78 PS S/S Edizione; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-series-limitees-alfa-romeo-mito-et-giulietta-edizione",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-05-05",
+            "selector": "1.4 MPI 78 PS S/S Edizione; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 78 PS S/S Edizione; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 78 PS S/S Edizione; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 78 PS S/S Edizione; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "1.4 MPI 78 PS S/S Edizione; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "1.4 MPI 78 PS S/S Edizione; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 78 PS S/S Edizione; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "a369669e9d6355db69b3c7a7",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "1.4 MPI 70 PS Progression",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "1.4 MPI 70 PS Progression",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 70,
+        "engineCc": 1368,
+        "powerKw": 51,
+        "icePowerKw": 51,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A9000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-series-limitees-alfa-romeo-mito-et-giulietta-edizione",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-05-05. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы.   Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-series-limitees-alfa-romeo-mito-et-giulietta-edizione",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-05-05",
+            "selector": "1.4 MPI 70 PS Progression; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 70 PS Progression; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 70 PS Progression; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-series-limitees-alfa-romeo-mito-et-giulietta-edizione",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-05-05",
+            "selector": "1.4 MPI 70 PS Progression; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 70 PS Progression; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 70 PS Progression; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 70 PS Progression; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "1.4 MPI 70 PS Progression; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "1.4 MPI 70 PS Progression; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 205,
+            "selector": "1.4 MPI 70 PS Progression; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "3b83e10b934716e2113ba4fc",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Trofeo",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Trofeo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-versions-automatiques-alfa-tct-plus-puissantes-pour-mito-et-giulietta",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-04-26. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы. Для140PS применены103кВт и955B1000 из технической таблицы;102кВт в пресс-релизе26.04.2014 расходятся с руководством и не применены.  Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-versions-automatiques-alfa-tct-plus-puissantes-pour-mito-et-giulietta",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-04-26",
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-versions-automatiques-alfa-tct-plus-puissantes-pour-mito-et-giulietta",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-04-26",
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Trofeo; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "52cc2dfdcc4168b2521c063c",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Exclusive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Exclusive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-versions-automatiques-alfa-tct-plus-puissantes-pour-mito-et-giulietta",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-04-26. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы. Для140PS применены103кВт и955B1000 из технической таблицы;102кВт в пресс-релизе26.04.2014 расходятся с руководством и не применены.  Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-versions-automatiques-alfa-tct-plus-puissantes-pour-mito-et-giulietta",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-04-26",
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-versions-automatiques-alfa-tct-plus-puissantes-pour-mito-et-giulietta",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-04-26",
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Exclusive; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "bbe220c30616950d87478a07",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Distinctive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Distinctive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/nuovi-motori-per-alfa-romeo-giulietta-e-mito-model-year-2014",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-02-21. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы. Для140PS применены103кВт и955B1000 из технической таблицы;102кВт в пресс-релизе26.04.2014 расходятся с руководством и не применены.  Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/nuovi-motori-per-alfa-romeo-giulietta-e-mito-model-year-2014",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-02-21",
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/nuovi-motori-per-alfa-romeo-giulietta-e-mito-model-year-2014",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-02-21",
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 20,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 140 PS S/S TCT Distinctive; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "e346173d3f8a228abf7cf57e",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 170,
+        "engineCc": 1368,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "940A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/le-quadrifoglio-verde-signe-son-retour-sur-les-giulietta-et-mito",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-06-12. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы.  НоваяQV2014 имеетTCT; код940A2000 подтверждён прямо в таблицеTCT, не перенесён по аналогии. Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/le-quadrifoglio-verde-signe-son-retour-sur-les-giulietta-et-mito",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-06-12",
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 21,
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 21,
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/le-quadrifoglio-verde-signe-son-retour-sur-les-giulietta-et-mito",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-06-12",
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 21,
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 21,
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 21,
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 19,
+            "selector": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "77186c91689e87a32db2f794",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2014,
+      "trim": "0.9 TwinAir 105 PS S/S Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/2014-alfa-romeo-range-successfully-launched-to-the-media-on-the-isle-of-man",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и точное исполнение подтверждены заводским сообщением 2014-03-17. Технические поля сверены с заводским руководством 60438590 редакции06/2013 для гаммыMY2014; для TCT — дополнение60438751 редакции05/2014, PDFстр19–21. Архив AROC хранит заводские оригиналы.   Метрическая мощностьPS/ ch; номинальная или30-минутная мощность не выводилась. Полная масса и кузовной код зависят от4/5мест и без точной идентичности не выбраны.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/2014-alfa-romeo-range-successfully-launched-to-the-media-on-the-isle-of-man",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2014-03-17",
+            "selector": "0.9 TwinAir 105 PS S/S Sprint; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Sprint; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Sprint; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelle-series-speciales-alfa-romeo-mito-giulietta-trofeo",
+            "checkedAt": "2026-10-22",
+            "selector": "Тот же TwinAir105: метрические французские ch, не переименование британских bhp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Sprint; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Sprint; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Sprint; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "0.9 TwinAir 105 PS S/S Sprint; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 210,
+            "selector": "0.9 TwinAir 105 PS S/S Sprint; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 204,
+            "selector": "0.9 TwinAir 105 PS S/S Sprint; engineCode"
+          }
+        }
+      }
+    }
+  ]
+}
