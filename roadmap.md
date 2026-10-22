@@ -12671,3 +12671,14 @@ Drom39831884392 завершился FAILURE/reference_fetch_stopped_checkpoint_
 ### 23.10.2026 03:54 Asia/Krasnoyarsk — Контроль текущей публикации Китая
 
 Свежие AGENTS/roadmap прочитаны на 3f2fd85f. China39840733509/job120041080822 остаётся IN_PROGRESS: восстановление сохранённого intake, проверка резерва и границ года SUCCESS; Publish markets through calculation and retention guards выполняется. Collect SKIPPED. Live logs пока возвращают BlobNotFound404, что не является terminal failure. Повторный publisher/deploy/source collection не запускаются; блокировки не снимаются. Запрошено одно свежее чтение manifest/writer штатным read-only workflow. Сохранённые поздние партии DB11/DB12 принадлежат отдельной задаче и не дублируются.
+
+
+### 23.10.2026 03:55 Asia/Krasnoyarsk — Свежая блокировка Китая; точное разделение фоновых запусков
+
+Read-only [39852699392](https://github.com/jeep-jim/AvtoCena/actions/runs/39852699392)/job120082784247 SUCCESS: снимок 22.10 20:54:01.049UTC показывает writer ACTIVE, catalog_v3_publish_china_ee8c7d5c-f442-4df2-8849-e28c06dea706, start20:22:02.066, heartbeat20:42:07.260, lease21:12:07.260UTC. Manifest пока gen_1792660229591_c103ed94. China39840733509 остаётся живым; никаких cancel/unlock/restart/deploy. Терминал и годы2014–2019 ещё не подтверждены.
+
+Public health HTTP200 подтвердил f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112/calculationVersion a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44. Два ограниченных запроса home и China yearFrom=yearTo=2014/pageSize1 из рабочей среды завершились read timeout25s: это не свидетельство пустого каталога или падения публикации, но live-доступность/полнота этими запросами не подтверждены. Причина таймаутов не установлена.
+
+Сопутствующий REG current-pages39848874797/job120069384379 FAILURE20:27UTC — точный guard catalog_overview_publication_in_progress; publisher активен, прежний overview policyDate22.10 при ожидаемом23.10. Не перезапускать до завершения Китая. Sharedprices39848963462 SKIPPED. Другой scheduled overview39849532686/job120071660040 SUCCESS использовал legacy YC_* secrets/пустой prefix и ДРУГОЙ gen_1791597210034_5b83bc90/total207742, не текущий REG gen. Его зелёный статус не доказывает готовность production. Требуется отдельное согласование старого пути с REG без дублирования уже существующей подготовки; настройки/расписания этого запуска сейчас не менялись.
+
+Свежая отдельная исследовательская задача уже подтвердила DB11/DB12 119 полей/109 расчётных: вместе с тремя поздними Alpine остаются минимум5 партий,326 сохранённых полей/274 расчётных, НЕ в установленном ac711. Её курсор DB9, не повторять. Drom39831884392 остановлен с redirect_outside_catalog, checkpoint13045visited/8403saved/253pending; диагноз подтверждён39844493209. Повторный сбор/обход redirect не делались. Контроль публикации остаётся активным.
