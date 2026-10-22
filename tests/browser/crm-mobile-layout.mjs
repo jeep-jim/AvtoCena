@@ -221,7 +221,11 @@ try{
     const expandedSummary=page.locator('.crm-lead-summary').first();
     assert.ok(await expandedSummary.locator('.crm-lead-channel-icon').isVisible(),'opened card shows contact channel');
     assert.equal(await expandedSummary.locator('.crm-contact-text').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','no contact badge background');
-    assert.ok(await expandedSummary.locator('.crm-phone-icon').isVisible(),'modern handset icon');
+    const phoneCard=page.locator('.crm-lead-card').filter({has:page.locator('.crm-phone-icon')}).first();
+    await phoneCard.locator('summary').click();
+    assert.ok(await phoneCard.locator('.crm-phone-icon').isVisible(),'call contact shows handset icon');
+    assert.match(await phoneCard.locator('a[href^="tel:"]').first().getAttribute('href'),/^tel:\+7999123456/);
+    await phoneCard.locator('summary').click();
     if(width<768){
      const manager=await expandedSummary.locator('.crm-lead-manager').boundingBox(),status=await expandedSummary.locator('.crm-lead-status>span').boundingBox();
      assert.ok(manager&&status&&manager.y>=status.y+status.height,'opened card puts manager below status');
@@ -358,12 +362,19 @@ try{
     assert.equal(await page.locator('.crm-client-card').count(),1,'client search filters results');
    }
    if(kind==='leads'&&theme==='light'&&width===390){
-    await page.locator('#lead-date').fill('2026-09-22');
-    await page.getByRole('button',{name:'Показать',exact:true}).click();
-    await page.waitForURL('**/crm/leads?**date=2026-09-22');
-    await page.locator('#lead-date').waitFor();
+    await page.getByRole('button',{name:'Фильтры',exact:true}).click();
+    const filters=page.getByRole('dialog',{name:'Фильтры заявок',exact:true});
+    await filters.getByLabel('Дата заявки',{exact:true}).fill('2026-09-22');
+    await filters.getByRole('button',{name:'Найти',exact:true}).click();
+    await page.waitForURL(url=>url.pathname==='/crm/leads'&&url.searchParams.get('date')==='2026-09-22');
+    await page.getByRole('button',{name:'Фильтры: 1',exact:true}).waitFor();
     assert.equal(await page.locator('.crm-lead-card').count(),0,'date filter excludes other days');
-    await page.getByRole('button',{name:'Очистить',exact:true}).click();await page.waitForURL(url=>!url.searchParams.has('date'));await page.locator('.crm-lead-card').first().waitFor();assert.equal(await page.locator('#lead-date').inputValue(),'');
+    await page.getByRole('button',{name:'Фильтры: 1',exact:true}).click();
+    await filters.getByRole('link',{name:'Сбросить фильтры',exact:true}).click();
+    await page.waitForURL(url=>!url.searchParams.has('date'));await page.locator('.crm-lead-card').first().waitFor();
+    await page.getByRole('button',{name:'Фильтры',exact:true}).click();
+    assert.equal(await filters.getByLabel('Дата заявки',{exact:true}).inputValue(),'');
+    await page.keyboard.press('Escape');
    }
    assert.deepEqual(errors,[]);results.push({kind,width,theme,passed:true});
   }catch(e){fs.writeFileSync(`${out}/failure-${kind}-${theme}-${width}.json`,JSON.stringify({kind,width,theme,error:e?.stack||String(e),errors},null,2));await page.screenshot({path:`${out}/failure-${kind}-${theme}-${width}.png`,fullPage:true}).catch(()=>{});failures.push({kind,width,theme,error:e?.stack||String(e),errors});console.error(JSON.stringify({kind,width,theme,error:e?.stack||String(e),errors}));}finally{await page.close();}
