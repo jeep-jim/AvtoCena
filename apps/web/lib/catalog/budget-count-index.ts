@@ -7,7 +7,7 @@ import type {CatalogSearchParams} from './types';
 import type {CatalogSearchProjection} from './storage';
 import {budgetSpecifications} from './budget-specification-index';
 type JapanIdentity={id:string;updatedAt?:string;sourcePrice:number|null;sourceCurrency:string|null};
-export type BudgetMetadata=Pick<CatalogSearchProjection,'engineCc'|'utilizationPowerKw'|'powertrainKind'|'inventorySourceDate'|'grossVehicleWeightKg'|'vehicleCategory'|'powerHp'|'publicSpecificationVerified'|'id'|'make'|'model'|'year'|'mileageKm'|'bodyType'|'fuel'|'transmission'|'drive'|'sourceGroup'|'auctionDate'|'sourcePublishedAt'|'firstSeenAt'|'updatedAt'> & {block:number};
+export type BudgetMetadata=Pick<CatalogSearchProjection,'trim'|'engineCc'|'utilizationPowerKw'|'powertrainKind'|'inventorySourceDate'|'grossVehicleWeightKg'|'vehicleCategory'|'powerHp'|'publicSpecificationVerified'|'id'|'make'|'model'|'year'|'mileageKm'|'bodyType'|'fuel'|'transmission'|'drive'|'sourceGroup'|'auctionDate'|'sourcePublishedAt'|'firstSeenAt'|'updatedAt'> & {block:number;engineCode?:string;chassisCode?:string};
 export type BudgetCountRow=[market:string,totalRub:number,basis:DeliveryPricingBasis|null,japan:JapanIdentity|null,seller:boolean,metadata:BudgetMetadata,depositCostRub?:number,replay?:Partial<CatalogSearchProjection>];
 export type BudgetCountIndex={version:1|2|3;filterVersion?:1;specificationFilterVersion?:1;bodyFilterVersion?:1;inventoryPolicyVersion?:1;generationId:string;sourceRows:number;rows:BudgetCountRow[];otherRows?:BudgetCountRow[];pricingChunks?:Record<string,string[]>};
 /** Price-only inputs: no photographs, full ledger, descriptions or raw source data. */

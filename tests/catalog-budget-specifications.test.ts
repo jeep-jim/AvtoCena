@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildBudgetCountIndex} from '../apps/web/lib/catalog/budget-count-index';
+import {buildBudgetCountIndex,budgetReplayOffer} from '../apps/web/lib/catalog/budget-count-index';
 import {enrichBudgetSpecifications} from '../apps/web/lib/catalog/budget-specification-index';
 import {catalogSearchProjectionMatches} from '../apps/web/lib/catalog/storage';
 
@@ -59,4 +59,29 @@ test('specification backfill accepts empty markets but rejects a missing populat
   manifest.markets.japan.count=1;resetCatalogReadCachesForTests();
   await assert.rejects(backfillBudgetSpecificationSelectors(),/budget_specification_nonempty_market_missing/);
  }finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;if(previousVersion===undefined)delete process.env.AVTOCENA_CALCULATION_VERSION;else process.env.AVTOCENA_CALCULATION_VERSION=previousVersion;resetCatalogReadCachesForTests();}
+});
+
+
+test('derived selectors retain exact identity and enriched drive/transmission for filtering and price replay',async()=>{
+ const {applyEncyclopediaCalculation,compileModelFacts,checksum,modelKey}=await import('../apps/web/lib/encyclopedia/calculation-index');
+ const variant={id:'v1',year:2023,trim:'40 TDI S tronic',status:'observed',markets:['europe'],fuel:'diesel',powertrainKind:'combustion',engineCc:1968,powerHp:204,powerKw:150,transmission:'dct',drive:'fwd',bodyType:'sedan'};
+ const models={[modelKey('Audi','A6')]:compileModelFacts({id:'model',make:'Audi',model:'A6',revision:'r1',variants:[variant]})};
+ const encyclopedia={version:1 as const,digest:checksum(models),manifestDigest:'test',createdAt:'2026-10-22',models};
+ const raw:any={id:'known-car',market:'korea',make:'Audi',model:'A6',year:2023,trim:variant.trim,fuel:'diesel',totalRub:950000,catalogPricingMode:'seller',sourcePrice:10000,sourceCurrency:'EUR',powerHp:null,engineCc:null};
+ const source=buildBudgetCountIndex('exact-replay',[raw],new Map([[raw.id,0]]),3);
+ // Existing immutable selectors predate the encyclopedia identity fields.
+ delete source.rows[0][5].trim;
+ const matched=applyEncyclopediaCalculation(raw,encyclopedia);
+ const rich=await enrichBudgetSpecifications(source,async()=>({generationId:'exact-replay',items:[matched]}));
+ const metadata=rich.rows[0][5];
+ assert.equal(metadata.trim,variant.trim);assert.equal(metadata.drive,'fwd');assert.equal(metadata.transmission,'dct');
+ for(const params of [{drive:'fwd'},{transmission:'dct'},{bodyType:'sedan'},{drive:'awd'}]){
+  assert.equal(catalogSearchProjectionMatches({...metadata,market:'korea'},params),catalogSearchProjectionMatches(matched,params));
+ }
+ const replay=budgetReplayOffer(JSON.parse(JSON.stringify(rich.rows[0])));
+ assert.equal(replay.engineCc,null,'old price inputs still contain the original missing field');
+ const recovered=applyEncyclopediaCalculation(replay,encyclopedia);
+ assert.equal(recovered.engineCc,1968);assert.equal(recovered.powerHp,204);
+ assert.equal(recovered.encyclopediaCalculation?.indexDigest,encyclopedia.digest);
+ assert.equal(raw.engineCc,null);
 });
