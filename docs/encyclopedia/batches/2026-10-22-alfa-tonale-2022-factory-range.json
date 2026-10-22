@@ -1,0 +1,1177 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-tonale-2022-factory-range",
+  "entries": [
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "operation": "create",
+      "variantId": "35f8e7c53ddf29fa26f8289e",
+      "trim": "1.5 Hybrid 130 PS TCT7 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0326dba8-87f6-4496-aa42-5e9d32118087",
+      "patch": {
+        "trim": "1.5 Hybrid 130 PS TCT7 Super",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1469,
+        "icePowerKw": 96,
+        "transmission": "dct",
+        "drive": "fwd",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 2,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Super; MVS 622-SFK-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Super; MVS 622-SFK-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Super; MVS 622-SFK-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Super; MVS 622-SFK-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Super; MVS 622-SFK-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Super; MVS 622-SFK-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Super; MVS 622-SFK-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Super; MVS 622-SFK-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Super; MVS 622-SFK-0; motorPeakKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "variantId": "f9e038e46819ea45e9919181",
+      "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+      "expectedDigest": "6a76895a85a9f797c04503dbb0740d2ebf5f17e5bab2c4489ec70c7876a0cf4e",
+      "patch": {
+        "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1469,
+        "icePowerKw": 96,
+        "transmission": "dct",
+        "drive": "fwd",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 2,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Sprint; MVS 622-PFK-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Sprint; MVS 622-PFK-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Sprint; MVS 622-PFK-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Sprint; MVS 622-PFK-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Sprint; MVS 622-PFK-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Sprint; MVS 622-PFK-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Sprint; MVS 622-PFK-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Sprint; MVS 622-PFK-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Sprint; MVS 622-PFK-0; motorPeakKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "variantId": "101291eca6687a1447e59f2b",
+      "trim": "1.5 Hybrid 130 PS TCT7 Edizione Speciale",
+      "expectedDigest": "ff8a899c61679b97bb8f215fcbed4076ea7a53ac0ea1bedece6a7a4bab9805d1",
+      "patch": {
+        "trim": "1.5 Hybrid 130 PS TCT7 Edizione Speciale",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1469,
+        "icePowerKw": 96,
+        "transmission": "dct",
+        "drive": "fwd",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 2,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Edizione Speciale; MVS 622-EFK-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Edizione Speciale; MVS 622-EFK-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Edizione Speciale; MVS 622-EFK-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Edizione Speciale; MVS 622-EFK-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Edizione Speciale; MVS 622-EFK-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Edizione Speciale; MVS 622-EFK-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Edizione Speciale; MVS 622-EFK-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Edizione Speciale; MVS 622-EFK-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 130 PS TCT7 Edizione Speciale; MVS 622-EFK-0; motorPeakKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "operation": "create",
+      "variantId": "ebd1ab8cace03d31a0a4426b",
+      "trim": "1.5 Hybrid 160 PS TCT7 Ti",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0326dba8-87f6-4496-aa42-5e9d32118087",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Ti",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1469,
+        "icePowerKw": 118,
+        "transmission": "dct",
+        "drive": "fwd",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 2,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Ti; MVS 622-RFL-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Ti; MVS 622-RFL-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Ti; MVS 622-RFL-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Ti; MVS 622-RFL-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Ti; MVS 622-RFL-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Ti; MVS 622-RFL-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Ti; MVS 622-RFL-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Ti; MVS 622-RFL-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Ti; MVS 622-RFL-0; motorPeakKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "operation": "create",
+      "variantId": "3c605ab59d3c6a9ec346a4a4",
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0326dba8-87f6-4496-aa42-5e9d32118087",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1469,
+        "icePowerKw": 118,
+        "transmission": "dct",
+        "drive": "fwd",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 2,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Veloce; MVS 622-DFL-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Veloce; MVS 622-DFL-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Veloce; MVS 622-DFL-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Veloce; MVS 622-DFL-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Veloce; MVS 622-DFL-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Veloce; MVS 622-DFL-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Veloce; MVS 622-DFL-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Veloce; MVS 622-DFL-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Veloce; MVS 622-DFL-0; motorPeakKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "operation": "create",
+      "variantId": "b3e240b88e267ad5cd235e29",
+      "trim": "1.5 Hybrid 160 PS TCT7 Edizione Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0326dba8-87f6-4496-aa42-5e9d32118087",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Edizione Speciale",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1469,
+        "icePowerKw": 118,
+        "transmission": "dct",
+        "drive": "fwd",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 2,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Edizione Speciale; MVS 622-EFL-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Edizione Speciale; MVS 622-EFL-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Edizione Speciale; MVS 622-EFL-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Edizione Speciale; MVS 622-EFL-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Edizione Speciale; MVS 622-EFL-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Edizione Speciale; MVS 622-EFL-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Edizione Speciale; MVS 622-EFL-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Edizione Speciale; MVS 622-EFL-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.5 Hybrid 160 PS TCT7 Edizione Speciale; MVS 622-EFL-0; motorPeakKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "operation": "create",
+      "variantId": "a6d3f4805f342cecfd7260c5",
+      "trim": "1.6 Diesel 130 PS TCT6 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0326dba8-87f6-4496-aa42-5e9d32118087",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Super",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "icePowerKw": 96,
+        "transmission": "dct",
+        "drive": "fwd",
+        "powerHp": 130,
+        "powerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 2,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; powerHp; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Super; MVS 622-SF2-0; powerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "operation": "create",
+      "variantId": "809b8dfc2463898ff16f05f6",
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0326dba8-87f6-4496-aa42-5e9d32118087",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "icePowerKw": 96,
+        "transmission": "dct",
+        "drive": "fwd",
+        "powerHp": 130,
+        "powerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 2,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; powerHp; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Sprint; MVS 622-PF2-0; powerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "operation": "create",
+      "variantId": "859e865e3b7bdaeddd1d9865",
+      "trim": "1.6 Diesel 130 PS TCT6 Ti",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0326dba8-87f6-4496-aa42-5e9d32118087",
+      "patch": {
+        "trim": "1.6 Diesel 130 PS TCT6 Ti",
+        "bodyType": "suv",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "icePowerKw": 96,
+        "transmission": "dct",
+        "drive": "fwd",
+        "powerHp": 130,
+        "powerKw": 96
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 2,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonale_cennik_2022-62879f6e274b2.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-16",
+            "pdfPage": 13,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; powerHp; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale_listinodel12_07_2022-62eccddc7d71d.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-07-12",
+            "pdfPage": 3,
+            "selector": "Tonale 1.6 Diesel 130 PS TCT6 Ti; MVS 622-RF2-0; powerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "variantId": "f06ffc5399fbc811ea73a412",
+      "trim": "1 1.3 T280 PHEV Q4 Veloce",
+      "expectedDigest": "850bd306aea5d5ae24cfeee43d06339baddc3e61718177fde4d621a68df7af7b",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1332,
+        "icePowerKw": 132,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 90,
+        "systemPowerKw": 206,
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "systemPowerKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; motorPeakKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "systemPowerKw": {
+            "url": "https://www.media.stellantis.com/at-de/alfa-romeo/press/alfa-romeo-tonale-plug-in-hybrid-q4-effiziente-sportlichkeit-ganz-im-stil-der-marke",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; systemPowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; MVS 638-DER-0; batteryKwh; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2022,
+      "operation": "create",
+      "variantId": "4831359aaf06aa989f5b47df",
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0326dba8-87f6-4496-aa42-5e9d32118087",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1332,
+        "icePowerKw": 132,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 90,
+        "systemPowerKw": 206,
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "systemPowerKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2022: заводские прайсы 16.05,12.07,18.11.2022 и датированные анонсы; колонки PDF визуально сверены. Идентичность и реальные годовые исполнения подтверждены отдельно от наблюдений. MHEV: 96/118кВт ДВС и 15кВт пиковая электромотора; PHEV: 132кВт ДВС,90кВт пиковая электромотора,206кВт системы,15,5кВт·ч батарея. Generic powerHp/powerKw гибридов не подтверждаются как расчётная мощность. 30-минутная мощность,коды и полная масса не угаданы; снаряжённая масса не использована. Старые источники сохраняются в истории,статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; trim; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; bodyType; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; fuel; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; powertrainKind; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; engineCc; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; icePowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/221118_listinoartonale-637b56c8c1f65.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-18",
+            "pdfPage": 3,
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; transmission; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; drive; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; motorPeakKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "systemPowerKw": {
+            "url": "https://www.media.stellantis.com/at-de/alfa-romeo/press/alfa-romeo-tonale-plug-in-hybrid-q4-effiziente-sportlichkeit-ganz-im-stil-der-marke",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; systemPowerKw; мощности ДВС, пиковая электромотора и системная раздельно"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; MVS 622-HER-0; batteryKwh; мощности ДВС, пиковая электромотора и системная раздельно"
+          }
+        }
+      }
+    }
+  ]
+}
