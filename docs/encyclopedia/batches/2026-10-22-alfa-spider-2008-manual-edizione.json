@@ -1,0 +1,1045 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-spider-2008-manual-edizione",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "e74805cd39469f98eecf95e5",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2008,
+      "trim": "2.2 JTS 185 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+      "patch": {
+        "trim": "2.2 JTS 185 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2198,
+        "powerHp": 185,
+        "powerKw": 136,
+        "icePowerKw": 136,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939A5000",
+        "grossVehicleWeightKg": 1855,
+        "chassisCode": "939EXB1B 19"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма Spider MY2008 и Edizione подтверждены заводскими анонсами апреля2008. Заводской оригинал Spider60431908 редакции08/2008, PDF231–233,242: точные коды/объём/кВт/привод/ручная коробка и максимальная допустимая масса. PS подтверждены немецким заводским источником, не переименованием bhp. Selespeed — AMT, его масса не перенесена из manual. Полные кузовные коды сохранены только для прямо указанных базовых ручных версий. Не переносились сведения Brera или8CSpider;30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "2.2 JTS 185 PS 6MT; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "2.2 JTS 185 PS 6MT; bodyType"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "2.2 JTS 185 PS 6MT; powerHp"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.2 JTS 185 PS 6MT; drive"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.2 JTS 185 PS 6MT; transmission"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "2.2 JTS 185 PS 6MT; engineCode"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 242,
+            "selector": "2.2 JTS 185 PS 6MT; grossVehicleWeightKg"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "2.2 JTS 185 PS 6MT; chassisCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "0eca67a9c5ae6a1ef424e50b",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2008,
+      "trim": "3.2 JTS 260 PS 4x2 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+      "patch": {
+        "trim": "3.2 JTS 260 PS 4x2 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3195,
+        "powerHp": 260,
+        "powerKw": 191,
+        "icePowerKw": 191,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939A000",
+        "grossVehicleWeightKg": 1950
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма Spider MY2008 и Edizione подтверждены заводскими анонсами апреля2008. Заводской оригинал Spider60431908 редакции08/2008, PDF231–233,242: точные коды/объём/кВт/привод/ручная коробка и максимальная допустимая масса. PS подтверждены немецким заводским источником, не переименованием bhp. Selespeed — AMT, его масса не перенесена из manual. Полные кузовные коды сохранены только для прямо указанных базовых ручных версий. Не переносились сведения Brera или8CSpider;30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; bodyType"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS 4x2 6MT; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS 4x2 6MT; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS 4x2 6MT; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "3.2 JTS 260 PS 4x2 6MT; powerHp"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS 4x2 6MT; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS 4x2 6MT; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "3.2 JTS 260 PS 4x2 6MT; drive"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "3.2 JTS 260 PS 4x2 6MT; transmission"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "3.2 JTS 260 PS 4x2 6MT; engineCode"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 242,
+            "selector": "3.2 JTS 260 PS 4x2 6MT; grossVehicleWeightKg"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "6e1ec0a237995ea8dc80ee19",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2008,
+      "trim": "3.2 JTS 260 PS Q4 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+      "patch": {
+        "trim": "3.2 JTS 260 PS Q4 6MT",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3195,
+        "powerHp": 260,
+        "powerKw": 191,
+        "icePowerKw": 191,
+        "drive": "awd",
+        "transmission": "manual",
+        "engineCode": "939A000",
+        "grossVehicleWeightKg": 2015,
+        "chassisCode": "939EXG2B 28"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма Spider MY2008 и Edizione подтверждены заводскими анонсами апреля2008. Заводской оригинал Spider60431908 редакции08/2008, PDF231–233,242: точные коды/объём/кВт/привод/ручная коробка и максимальная допустимая масса. PS подтверждены немецким заводским источником, не переименованием bhp. Selespeed — AMT, его масса не перенесена из manual. Полные кузовные коды сохранены только для прямо указанных базовых ручных версий. Не переносились сведения Brera или8CSpider;30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "3.2 JTS 260 PS Q4 6MT; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "3.2 JTS 260 PS Q4 6MT; bodyType"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS Q4 6MT; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS Q4 6MT; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS Q4 6MT; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "3.2 JTS 260 PS Q4 6MT; powerHp"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS Q4 6MT; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "3.2 JTS 260 PS Q4 6MT; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "3.2 JTS 260 PS Q4 6MT; drive"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "3.2 JTS 260 PS Q4 6MT; transmission"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "3.2 JTS 260 PS Q4 6MT; engineCode"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 242,
+            "selector": "3.2 JTS 260 PS Q4 6MT; grossVehicleWeightKg"
+          },
+          "chassisCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "3.2 JTS 260 PS Q4 6MT; chassisCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "9fc129e62fbdff9b6754cc1e",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2008,
+      "trim": "2.4 JTDM 210 PS 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+      "patch": {
+        "trim": "2.4 JTDM 210 PS 6MT",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2387,
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939A9000",
+        "grossVehicleWeightKg": 1985
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма Spider MY2008 и Edizione подтверждены заводскими анонсами апреля2008. Заводской оригинал Spider60431908 редакции08/2008, PDF231–233,242: точные коды/объём/кВт/привод/ручная коробка и максимальная допустимая масса. PS подтверждены немецким заводским источником, не переименованием bhp. Selespeed — AMT, его масса не перенесена из manual. Полные кузовные коды сохранены только для прямо указанных базовых ручных версий. Не переносились сведения Brera или8CSpider;30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "2.4 JTDM 210 PS 6MT; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "2.4 JTDM 210 PS 6MT; bodyType"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "2.4 JTDM 210 PS 6MT; powerHp"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.4 JTDM 210 PS 6MT; drive"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.4 JTDM 210 PS 6MT; transmission"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "2.4 JTDM 210 PS 6MT; engineCode"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 242,
+            "selector": "2.4 JTDM 210 PS 6MT; grossVehicleWeightKg"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "0a18d62530e3fa33611bb2d9",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2008,
+      "trim": "2.2 JTS 185 PS Selespeed",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+      "patch": {
+        "trim": "2.2 JTS 185 PS Selespeed",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2198,
+        "powerHp": 185,
+        "powerKw": 136,
+        "icePowerKw": 136,
+        "drive": "fwd",
+        "transmission": "amt",
+        "engineCode": "939A5000"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма Spider MY2008 и Edizione подтверждены заводскими анонсами апреля2008. Заводской оригинал Spider60431908 редакции08/2008, PDF231–233,242: точные коды/объём/кВт/привод/ручная коробка и максимальная допустимая масса. PS подтверждены немецким заводским источником, не переименованием bhp. Selespeed — AMT, его масса не перенесена из manual. Полные кузовные коды сохранены только для прямо указанных базовых ручных версий. Не переносились сведения Brera или8CSpider;30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "2.2 JTS 185 PS Selespeed; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "2.2 JTS 185 PS Selespeed; bodyType"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-23",
+            "selector": "2.2 JTS 185 PS Selespeed; powerHp"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.2 JTS 185 PS Selespeed; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-modelljahr-2008-alfa-spider-und-brera-ergonomisch-perfektioniert-neu-entwickelte-sportsitze-sorgen-fur-deutlichen-komfortgewinn-wei-lackierte-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS Selespeed: автоматизированная шестиступенчатая механическая коробка; не DCT"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "2.2 JTS 185 PS Selespeed; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "117bf52a4e6bf0b9dd601c43",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2008,
+      "trim": "2.2 JTS 185 PS 6MT Edizione",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+      "patch": {
+        "trim": "2.2 JTS 185 PS 6MT Edizione",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2198,
+        "powerHp": 185,
+        "powerKw": 136,
+        "icePowerKw": 136,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939A5000",
+        "grossVehicleWeightKg": 1855
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма Spider MY2008 и Edizione подтверждены заводскими анонсами апреля2008. Заводской оригинал Spider60431908 редакции08/2008, PDF231–233,242: точные коды/объём/кВт/привод/ручная коробка и максимальная допустимая масса. PS подтверждены немецким заводским источником, не переименованием bhp. Selespeed — AMT, его масса не перенесена из manual. Полные кузовные коды сохранены только для прямо указанных базовых ручных версий. Не переносились сведения Brera или8CSpider;30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-11",
+            "selector": "2.2 JTS 185 PS 6MT Edizione; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-11",
+            "selector": "2.2 JTS 185 PS 6MT Edizione; bodyType"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT Edizione; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT Edizione; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT Edizione; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-11",
+            "selector": "2.2 JTS 185 PS 6MT Edizione; powerHp"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT Edizione; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS 6MT Edizione; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.2 JTS 185 PS 6MT Edizione; drive"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.2 JTS 185 PS 6MT Edizione; transmission"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "2.2 JTS 185 PS 6MT Edizione; engineCode"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 242,
+            "selector": "2.2 JTS 185 PS 6MT Edizione; grossVehicleWeightKg"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "1b2db8adc36d9eb267a215fb",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2008,
+      "trim": "2.2 JTS 185 PS Selespeed Edizione",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+      "patch": {
+        "trim": "2.2 JTS 185 PS Selespeed Edizione",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2198,
+        "powerHp": 185,
+        "powerKw": 136,
+        "icePowerKw": 136,
+        "drive": "fwd",
+        "transmission": "amt",
+        "engineCode": "939A5000"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма Spider MY2008 и Edizione подтверждены заводскими анонсами апреля2008. Заводской оригинал Spider60431908 редакции08/2008, PDF231–233,242: точные коды/объём/кВт/привод/ручная коробка и максимальная допустимая масса. PS подтверждены немецким заводским источником, не переименованием bhp. Selespeed — AMT, его масса не перенесена из manual. Полные кузовные коды сохранены только для прямо указанных базовых ручных версий. Не переносились сведения Brera или8CSpider;30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-11",
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-11",
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; bodyType"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-11",
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; powerHp"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "selector": "2.2 JTS Selespeed: автоматизированная шестиступенчатая механическая коробка; не DCT"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "2.2 JTS 185 PS Selespeed Edizione; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "0eb120c9d8a2e9d655c91d73",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2008,
+      "trim": "2.4 JTDM 210 PS 6MT Edizione",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+      "patch": {
+        "trim": "2.4 JTDM 210 PS 6MT Edizione",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2387,
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "939A9000",
+        "grossVehicleWeightKg": 1985
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма Spider MY2008 и Edizione подтверждены заводскими анонсами апреля2008. Заводской оригинал Spider60431908 редакции08/2008, PDF231–233,242: точные коды/объём/кВт/привод/ручная коробка и максимальная допустимая масса. PS подтверждены немецким заводским источником, не переименованием bhp. Selespeed — AMT, его масса не перенесена из manual. Полные кузовные коды сохранены только для прямо указанных базовых ручных версий. Не переносились сведения Brera или8CSpider;30-минутная мощность не выводилась.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-11",
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-11",
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; bodyType"
+          },
+          "fuel": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-sommer-wird-weiss-alfa-spider-und-brera-jetzt-als-edizione-modelle-alfa-romeo-startet-in-das-fruhjahr-2008-mit-wei-er-sonderserie-sonderserie-edizione-mit-exklusiver-vollausstattung",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-04-11",
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; powerHp"
+          },
+          "powerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 232,
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; drive"
+          },
+          "transmission": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 233,
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; transmission"
+          },
+          "engineCode": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 231,
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; engineCode"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 242,
+            "selector": "2.4 JTDM 210 PS 6MT Edizione; grossVehicleWeightKg"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "variantId": "364a8bad68322d7769855ae1",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "year": 2008,
+      "trim": "2.4 JTDM 200 PS Q-Tronic",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+      "patch": {
+        "trim": "2.4 JTDM 200 PS Q-Tronic",
+        "bodyType": "convertible",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2387,
+        "powerHp": 200,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-al-78-deg-salone-internazionale-di-ginevra",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс19.02.2008 прямо называет Spider MY08 2.4JTDM200CV с автоматическойQ-Tronic. Греческий заводской прайс22.09.2008 PDF3: отдельный код177.ASW.1,2387см³,4x2Q-Tronic.200CV не заменены210PS ручной версии. Код двигателя,кВт и полная масса неизвестны: из руководства154кВт/939A9000 не перенесены.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-al-78-deg-salone-internazionale-di-ginevra",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-02-19",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; trim"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-al-78-deg-salone-internazionale-di-ginevra",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-02-19",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; bodyType"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-al-78-deg-salone-internazionale-di-ginevra",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-02-19",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-al-78-deg-salone-internazionale-di-ginevra",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-02-19",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2008/dogana_%20_%202008.09.22.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "effectiveAt": "2008-09-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-al-78-deg-salone-internazionale-di-ginevra",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-02-19",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; powerHp"
+          },
+          "drive": {
+            "url": "https://www.alfaromeo.gr/content/dam/alfa/gr/price-catalogue/2008/dogana_%20_%202008.09.22.pdf",
+            "checkedAt": "2026-10-22",
+            "pdfPage": 3,
+            "effectiveAt": "2008-09-22",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-al-78-deg-salone-internazionale-di-ginevra",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-02-19",
+            "selector": "2.4 JTDM 200 PS Q-Tronic; transmission"
+          }
+        }
+      }
+    }
+  ]
+}
