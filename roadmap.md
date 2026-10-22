@@ -12744,3 +12744,8 @@ Read-only [39860601072](https://github.com/jeep-jim/AvtoCena/actions/runs/398606
 - Свежие runs/jobs referenceintake:39831884392/job120009865681 completed/failure; более нового intake не найдено. Последний проверенный checkpoint13045visited/8403saved/253pending,redirect_outside_catalog BedfordCF; не таймлимит,не возобновлялся и не обходился.
 - Остаток DBS:41строка имеет неподтверждённые отдельные поля,17старых строк без factoryresearch;6групп годовых/региональных/специальных пробелов перечислены в docs/encyclopedia/retry-2026-10-23-aston-dbs-remaining.json. Старые retry сохранены. Следующий курсор Dbx/DBX707; официальные21MY/25MY DBX руководства найдены,2020API прочитан только для подготовкиhandoff,записьDBX не выполнялась. Полный проход всех моделей с2008 не завершён.
 - Отчёт docs/encyclopedia/reports/2026-10-23-aston-dbs-pass.json; handoff docs/encyclopedia/research-handoff-2026-10-23-aston-dbx.json. Сборщики,расчётныеправила,защиты,секреты не менялись.
+
+
+### 23.10.2026 05:27 Asia/Krasnoyarsk — Контроль двух China runs без повторной публикации
+
+Свежие AGENTS/roadmap прочитаны на510b9255. Recovery39840733509/publish120041080822 остаётся IN_PROGRESS, collectSKIPPED; scheduled39857878662 пока не имеет jobs. Запрошено одно штатное read-only чтение manifest/lease, без изменений storage. Новый publisher/deploy не запущен, lock не снимается. Отдельная энциклопедия уже сохранила DBS:9pendingпартий768полей/670расчётных, следующийDBX; исследования не дублируются.

@@ -1,4 +1,4 @@
 {
-  "operation": "check-china-recovery-20261022-2153",
-  "reason": "Read generation and publication lease; no storage writes."
+  "operation": "check-china-recovery-20261022-2227",
+  "reason": "Read manifest and lease only; preserve both existing China runs."
 }
