@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T04:02:00+07:00",
+  "updatedAt": "2026-10-23T04:05:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32658,7 +32658,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T04:02:00+07:00",
+    "updatedAt": "2026-10-23T04:05:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "db11_db12_saved_api_readback_pass_activation_pending",
     "preserveManual": true,
@@ -32825,17 +32825,34 @@
         "includedInIndex": false,
         "indexMembershipState": "saved_after_active_ac711_snapshot",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db12-readback.json"
+      },
+      {
+        "key": "aston-db9-2008-2015",
+        "batch": "research-2026-10-23-aston-db9-2008-2015",
+        "commit": "4decc9edc66e7ee0761ffbf243d51860ff5bf05f",
+        "workflow": 39853879513,
+        "job": 120086895407,
+        "variants": 22,
+        "newVariants": 21,
+        "updatedVariants": 1,
+        "fields": 211,
+        "compiledCalculationFields": 190,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "saved_after_active_ac711_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-db9-readback.json"
       }
     ],
     "inFlightResearch": [
       {
-        "batch": "research-2026-10-23-aston-db9-2008-2015",
+        "batch": "research-2026-10-23-aston-db9-gt-2015-2016",
         "modelId": "d9beb45b880f70fa01286ee4",
         "state": "prepared_for_protected_workflow",
-        "operations": 22,
-        "newVariants": 21,
-        "fields": 211,
-        "expectedRevision": "946cc38f-e279-49c1-949a-154d85f1726a",
+        "operations": 4,
+        "newVariants": 4,
+        "fields": 32,
+        "expectedRevision": "2d1de275-ffd8-4b68-8c21-d904cdecc621",
         "apiReadback": false
       }
     ],
