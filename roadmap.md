@@ -12749,3 +12749,14 @@ Read-only [39860601072](https://github.com/jeep-jim/AvtoCena/actions/runs/398606
 ### 23.10.2026 05:27 Asia/Krasnoyarsk — Контроль двух China runs без повторной публикации
 
 Свежие AGENTS/roadmap прочитаны на510b9255. Recovery39840733509/publish120041080822 остаётся IN_PROGRESS, collectSKIPPED; scheduled39857878662 пока не имеет jobs. Запрошено одно штатное read-only чтение manifest/lease, без изменений storage. Новый publisher/deploy не запущен, lock не снимается. Отдельная энциклопедия уже сохранила DBS:9pendingпартий768полей/670расчётных, следующийDBX; исследования не дублируются.
+
+
+### 23.10.2026 05:29 Asia/Krasnoyarsk — Публикация жива; фоновые результаты не подменяют её завершение
+
+Read-only [39865079842](https://github.com/jeep-jim/AvtoCena/actions/runs/39865079842)/job120125120039: снимок22.10 22:27:53.713UTC, тот же writer ACTIVE/start20:22:02.066, heartbeat продвинулся до22:24:05.274, lease22:54:05.274UTC. Manifest прежний gen_1792660229591_c103ed94. Recovery39840733509 IN_PROGRESS, scheduled39857878662 остаётся в очереди безjobs. Ни отмены, ни unlock, ни повторного сбора/публикации/деплоя не сделано.
+
+HealthHTTP200 подтверждает f4d7d22/a187. По одному ограниченному home и China2014 запросу получили read timeout20s, полнота/доступность выдачи не подтверждены этим проходом. Это не доказательство отсутствия2014 или потери старого каталога. Предыдущий HTTP200/total0 остаётся историческим срезом.
+
+Новые фоновые журналы: sharedprices39864464582/job120123059431 FAILURE, verifiedfalse/error live_encyclopedia_binding_missing, при live releasef4d и ДРУГОМ generation gen_1791597210034_5b83bc90. Не смешивать с успешнымREG39839574726; не повторять до разбора storage binding. REG39864556588 SKIPPED. Compact39864464687/job120123060256 terminalSUCCESS, но содержательный результат deferred/catalog_writer_busy/indexPreparedfalse: никакого verified/parity этим запуском не доказано. Переводчик39864464665 и Direct39864464629 ещё выполнялись; terminal проверить позднее, прежние403необъявлятьисправленными.
+
+Отдельная энциклопедия: после DBS уже9pendingпартий768полей/670calc, следующийDBX. Ни одной новой researchзаписи этим контролем не создавалось. После завершения ОБОИХ China и writerfree — проверить результаты/2014–2019/рынки и только затем один согласованный выпуск pendingalias+knowledge. Контроль активен; нового завершения этапа для повторного сообщения владельцу нет.
