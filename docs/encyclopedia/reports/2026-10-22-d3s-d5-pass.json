@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T23:08:00+07:00",
+  "state": "saved_api_readback_pass_pending_index",
+  "scope": "D3S2020/2021/MY2023 и D5Bi-Turbo2013; не полнота марок или модели",
+  "operations": 8,
+  "newVariants": 8,
+  "updatedVariants": 0,
+  "confirmedFields": 76,
+  "calculationFieldsCompiled": 60,
+  "batches": [
+    {
+      "key": "alpina-d3s-2020-2021-2023-factory",
+      "commit": "34a6a22e893a011743b728ea6e4e15c5dbf41d75",
+      "workflow": 39810094134,
+      "job": 119933712403,
+      "variants": 6,
+      "newVariants": 6,
+      "fields": 58,
+      "batch": "research-2026-10-22-alpina-d3s-2020-2021-2023-factory",
+      "workflowStatus": "completed",
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3s-2020-2021-2023-factory-readback.json"
+    },
+    {
+      "key": "alpina-d5-2013-official-table",
+      "commit": "566830e20052bd5d4f9b8f610347401582fc00f0",
+      "workflow": 39810598660,
+      "job": 119935475539,
+      "variants": 2,
+      "newVariants": 2,
+      "fields": 18,
+      "batch": "research-2026-10-22-alpina-d5-2013-official-table",
+      "workflowStatus": "completed",
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d5-2013-official-table-readback.json"
+    }
+  ],
+  "models": [
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "model": "D3",
+      "revision": "c2af14d2-438f-4cf6-92f2-757219316135",
+      "newVariants": 6,
+      "confirmedFields": 58,
+      "calculationFields": 44,
+      "preservedExistingVariants": 33,
+      "totalVariants": 39,
+      "researchedVariants": 38
+    },
+    {
+      "modelId": "c26b4f6cf8e267db5d1f7503",
+      "model": "D5",
+      "revision": "3a2ea0cf-b603-4df6-92c3-a9d50126c1db",
+      "newVariants": 2,
+      "confirmedFields": 18,
+      "calculationFields": 16,
+      "preservedExistingVariants": 1,
+      "totalVariants": 3,
+      "researchedVariants": 3
+    }
+  ],
+  "validation": {
+    "guards": "8/8 PASS plus both protected workflows",
+    "independentApiReadback": "8/76 PASS",
+    "preservedExistingVariants": 34,
+    "duplicatesAdded": 0,
+    "manualWrites": 0,
+    "productionCompilerChanged": false,
+    "referenceOnlyFields": 8,
+    "identityFields": 8,
+    "preservationReport": "docs/encyclopedia/reports/2026-10-22-d3s-d5-preservation-and-compiler.json"
+  },
+  "sourceScope": {
+    "D3S": "Оригинальные ALPINA/Nicole2020/2021/2022, технические страницы14 и даты16 визуально сверены. Официальная копия2021 SHA256совпала с архивной. Обновление объявлено MY2023 в официальном пресс-релизе25.05.2022; дата публикации2022 не превращена в год исполнения2022.",
+    "D5": "TCS/EnergieSchweiz/BFE, TARGA-ASTRA09/2013,PDF32. Государственный технический справочник, не заводской источник и не индивидуальная омологация. Каталог с2014 в заголовке использован только для2013."
+  },
+  "integration": {
+    "checkedAt": "2026-10-22T23:08:00+07:00",
+    "state": "saved_and_compiled_pending_next_immutable_index",
+    "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "healthCalculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5",
+    "lastKnownActiveIndexDigest": "9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+    "newBatchesActivationConfirmed": false,
+    "existingChinaPublication": {
+      "id": 39788307780,
+      "status": "queued",
+      "conclusion": null,
+      "lastOwnerMetadataReadAt": "2026-10-22T15:41:31Z",
+      "lastOwnerHeartbeatAt": "2026-10-22T15:36:36.844Z",
+      "note": "Свежий terminal не подтверждён. Прошлое наблюдение живого publisher не заменяет новый heartbeat; lock не изменялся."
+    },
+    "duplicateReleaseRequested": false,
+    "visitorRequestSearchOrSyncAdded": false,
+    "nextAction": "После отдельно сопровождаемой retained-China publication включить pending в один штатный неизменяемый индекс и проверить членство/активацию. Не запускать конкурирующий deploy."
+  },
+  "regressionCheck": {
+    "passed": true,
+    "repeatedTonaleOffers": 3,
+    "report": "docs/encyclopedia/reports/2026-10-22-d3s-pass-repeated-card-search-parity.json",
+    "allThreeRemainNeedsData": true,
+    "doesNotVerifyNewAlpinaActivation": true,
+    "sonataCard": {
+      "id": "ajes-korea-6d1ocW5lV5Cl77",
+      "year": 2024,
+      "engineCc": 1999,
+      "powerHp": 160,
+      "totalRub": 3532010,
+      "calculationStatus": "estimated"
+    },
+    "previousReportedSonataTotalRub": 3560003,
+    "sonataPriceChangeReasonAudited": false,
+    "koreaSearchParityConfirmed": false
+  },
+  "technicalReferenceIntake": {
+    "previousWorkflow": 39781954229,
+    "previousConclusion": "success_time_limit",
+    "previousFetched": 2610,
+    "previousVisited": 9146,
+    "previousSaved": 5794,
+    "previousPending": 368,
+    "completed": false,
+    "resumeCommit": "56070f0f5c46bf1ece124b15e172a1285ec38d00",
+    "workflow": 39809543570,
+    "job": 119931742489,
+    "state": "in_progress",
+    "checkpointReset": false,
+    "referenceOnly": true,
+    "newSavedCountNotYetKnown": true
+  },
+  "remaining": {
+    "D3S": [
+      "2022: не переносить обновлённый каталог с датой08/2022 на календарный2022. Официальный анонс25.05.2022 прямо называет MY2023. Ранние исполнения2022 требуют точной датированной таблицы.",
+      "2024/2025: найдены указатели на прайсы/списки опций и сторонние каталоги, но точная заводская годовая таблица ещё не проверена. URL старого немецкого PDF возвращает404, архивный прайс03/2023 —403; отказ не обходился, данные не считаются отсутствующими.",
+      "2026: исходная наблюдаемая строка сохранена, её год и техническая идентичность не подтверждены. Не распространять автоматически прежние годы.",
+      "Все D3S: 30-минутная мощность, ёмкость батареи, мощность системы и точный engineCode не подтверждены. 261кВт относится кДВС,8кВт — максимальный boost стартер-генератора; genericpowerHp/powerKw не заполнены.",
+      "2020/MY2023: полная масса и chassisCode не подтверждены. Снаряжённая масса и payload не суммировались. 2021: подтверждён только тип3CA-3U40 с2992см³ и полной массой2165/2215кг; иные региональные варианты требуют отдельных источников.",
+      "Прежние пропуски D3 2008–2019 сохранены в цепочке retry. Полнота модели и исторического расширения не заявлена."
+    ],
+    "D5": [
+      "2008–2012: проверить фактическое начало D5, не создавать годы до появления модели. Найден заводской анонс15.12.2011; доступность/годовые исполнения2011–2012 требуют подтверждения.",
+      "2013: точные коды двигателя/кузова, привод, число ступеней и разрешённая полная масса ещё не подтверждены для строк государственного справочника. Снаряжённые1940/2040кг не использованы как полная масса.",
+      "2014 и последующие годы: продолжить ежегодные таблицы D5Bi-Turbo/D5S, различать дизель350PS/257кВт, японские версии и поздниеD5S. Не переносить одинаковые характеристики между годами без подтверждения.",
+      "Исходная D5S2022 сохранена целиком с прежними источниками; проверка её типа гибридизации, кодов, полной массы и прочих пробелов остаётся отдельно.",
+      "Каталог канонических моделей содержит уAlpina толькоD3/D5: охват2423 записей не является полнотой всех существовавших моделей. Добавление отсутствующих модельных семейств и лет требует отдельного контролируемого обнаружения и штатного создания."
+    ]
+  },
+  "next": "Alpina D5 с2014 года и последующие D5S; ранние2011/2012 и пробелы — retry; затем Alpine. Отдельно обнаружить отсутствующие модельные семейства Alpina.",
+  "retryFiles": [
+    "docs/encyclopedia/retry-2026-10-22-alpina-d3s-remaining.json",
+    "docs/encyclopedia/retry-2026-10-22-alpina-d5-early-remaining.json"
+  ],
+  "handoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-d5-2014.json",
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false
+}
