@@ -1,9 +1,9 @@
 {
   "checkedAt": "2026-10-22T03:11:15.824Z",
   "state": "prepared_not_applied",
-  "entries": 31,
-  "fields": 294,
-  "digest": "0c5d5894c1bb4471017c0f53613fdacae61c6a2656c213daea7d152c9785f385",
+  "entries": 32,
+  "fields": 301,
+  "digest": "493dd1826fe74fd97cb1a893cafee0d7e8fc6f6f9c98245b475b631f2f7330b6",
   "plans": [
     {
       "id": "a1110cc532749b4397f6b684",
@@ -521,6 +521,37 @@
         }
       ],
       "skipped": []
+    },
+    {
+      "id": "5390fe7410ebf5c337ed39a0",
+      "revision": "eb64467d-5136-48e5-bfa9-71f48995b214",
+      "changes": [
+        {
+          "variantId": "455c90fc4f6fb54e68e37aa0",
+          "fields": [
+            "engineCc",
+            "icePowerKw",
+            "systemPowerKw",
+            "fuel",
+            "powertrainKind",
+            "drive",
+            "transmission"
+          ]
+        }
+      ],
+      "skipped": []
     }
-  ]
+  ],
+  "indexProjectedFields": 254,
+  "indexProjectionPassed": true,
+  "testsPassed": 8,
+  "plannedFieldChanges": {
+    "newVariants": 26,
+    "existingVariants": 6,
+    "newRecordFields": 270,
+    "emptyFieldsFilled": 6,
+    "correctedObservedFields": 6,
+    "confirmedExistingFields": 19
+  },
+  "freshApiPreflightPassed": true
 }

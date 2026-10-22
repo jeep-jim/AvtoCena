@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T08:38:41.259296+07:00",
+  "updatedAt": "2026-10-22T10:22:46+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32362,12 +32362,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T08:38:41.259296+07:00",
+    "updatedAt": "2026-10-22T10:22:46+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "integration_live_verified_partial_coverage",
+    "state": "research_apply_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "212 T01",
+    "nextModel": "AION i60",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32388,9 +32388,9 @@
     "rawAuditCalculated": 69,
     "publicSerializationParity": 69,
     "allModelsComplete": false,
-    "installedRelease": "62f6bb08ea7721d537ff4ee0ef55cf585fb536a5",
-    "installedWorkflow": 39704586763,
-    "indexDigest": "901059aaf32973509db5be6b26692440d122dae71a942000da37e7452fe4b6cf",
+    "installedRelease": "7fc70b5352dd166f0a7c0ed5e02c237a526a9d70",
+    "installedWorkflow": 39713387784,
+    "indexDigest": "53929d4693ab117fbecf255e929a140119d84c7c1fff423faa0b53b9a5c39887",
     "catalogRowsEnriched": 451,
     "catalogFieldsFilled": 763,
     "remaining": [
@@ -32400,7 +32400,16 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "parallelResearch": "Owner-directed restart from212 is recorded in roadmap. Subsequent212 research writes are outside the installed901059aa index and this26-variant research total."
+    "inFlightResearch": {
+      "batch": "research-2026-10-22-historical-and-alphabetic-pass",
+      "state": "apply_requested_readback_pending",
+      "variants": 32,
+      "fieldConfirmations": 301,
+      "blockingReleaseRun": 39713387784,
+      "file": "docs/encyclopedia/batches/2026-10-22-historical-and-alphabetic-pass.json"
+    },
+    "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
+    "historicalExpansionComplete": false
   },
   "scope": {
     "minimumYear": 2008,
