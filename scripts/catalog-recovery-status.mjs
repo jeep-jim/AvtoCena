@@ -30,6 +30,8 @@ for(const [name,root] of [['technical','reference-intake'],['comparison','compar
   report.references[name].singlePageProbe=row&&!row.error?{ok:true,factualFields:Object.keys(row.facts||{}).length,links:row.links?.length}:{ok:false,category:errorCategory(row?.detail||executionError?.message),errorType:/^[A-Za-z]+Error$/.test(row?.error||'')?row.error:undefined};
  }
 }
+const lock=await storage.readJson('catalog/import-lock.json',null);
+report.writerLock=lock?{operationType:lock.operationType,startedAt:lock.startedAt,lockedUntil:lock.lockedUntil,finishedAt:lock.finishedAt}:null;
 const before=await storage.readJson('catalog/manifest.json',null);
 const projection=await storage.readJson('catalog/public/projection/china.json',null);
 const checkpoint=await storage.readJson('catalog/intake-cursors/v1/china.json',null);

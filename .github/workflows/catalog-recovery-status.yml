@@ -15,7 +15,6 @@ jobs:
     environment: regcloud-staging
     timeout-minutes: 12
     env:
-      REFERENCE_DIAGNOSE_ONE: '1'
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
       YC_OBJECT_STORAGE_REGION: us-east-1
@@ -29,9 +28,13 @@ jobs:
         with: {node-version: 24, cache: npm}
       - run: npm ci
       - run: node --import tsx scripts/catalog-recovery-status.mjs
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-price-on-request-audit.test.ts tests/catalog-visible-calculation-audit-contract.test.ts
+      - run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-recovery-status
-          path: catalog-recovery-status.json
+          path: |
+            catalog-recovery-status.json
+            catalog-visible-calculation-coverage.json
           retention-days: 14

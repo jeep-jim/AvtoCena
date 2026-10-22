@@ -21,8 +21,8 @@ test("V3 keeps the two-photo general admission contract while source-specific ga
   assert.doesNotMatch(reusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
 });
 
-test("unpriced inventory needs an admitted modification selector to render", () => {
-  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
+test("ordinary unpriced inventory needs an admitted selector or seller price; retro remains price on request", () => {
+  assert.match(catalogCard, /if \(!retro && !visibleRub && !selectionRequired && !sellerPricing\) return null/);
   assert.match(catalogCard, /hasModificationSelection\(offer\)/);
   assert.match(catalogCard, /Выбрать модификацию/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);

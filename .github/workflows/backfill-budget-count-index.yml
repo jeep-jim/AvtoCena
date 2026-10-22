@@ -16,7 +16,7 @@ jobs:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.head_branch == 'main'
     environment: regcloud-staging
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud

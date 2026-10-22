@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import {isVerifiedPriceOnRequestForAudit} from './lib/visible-audit-price-policy.mjs';
 
 const { readCurrentPublicCatalogProjection } = await import("../apps/web/lib/catalog/storage.ts");
 const { hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
@@ -112,6 +113,7 @@ const invalidReady = [];
 const readyUnclassified = [];
 const invalidSpecifications = [];
 const sellerOnlySpecifications = [];
+const priceOnRequestSpecifications = [];
 const unsafePendingVisiblePrices = [];
 const unpricedPublicCards = [];
 const fallbackPowerCards = [];
@@ -120,7 +122,9 @@ const statusCounts = new Map();
 const visibleModels = new Set();
 let readyExact = 0;
 let ready = 0;
-const { needsData, verifiedSellerNeedsData, blockingNeedsData } = summarizePendingCalculationsForAudit(visible);
+const { needsData, verifiedSellerNeedsData, blockingNeedsData: pendingWithoutSellerPrice } = summarizePendingCalculationsForAudit(visible);
+const verifiedPriceOnRequestNeedsData=visible.filter(isVerifiedPriceOnRequestForAudit).length;
+const blockingNeedsData=pendingWithoutSellerPrice-verifiedPriceOnRequestNeedsData;
 let preliminary = 0;
 let auctionStart = 0;
 let resolvedIdentity = 0;
@@ -134,8 +138,10 @@ for (const offer of visible) {
   increment(statusCounts, status);
   const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
   const verifiedSellerOnly = isVerifiedSellerOnlyForAudit(offer);
+  const verifiedPriceOnRequest = isVerifiedPriceOnRequestForAudit(offer);
+  if (verifiedPriceOnRequest && specificationRejection) priceOnRequestSpecifications.push({id:offer.id,market,reason:specificationRejection});
   if (verifiedSellerOnly && specificationRejection) sellerOnlySpecifications.push({id:offer.id,market,reason:specificationRejection});
-  if (specificationRejection && !verifiedSellerOnly) invalidSpecifications.push({ id: offer.id, market, make: offer.make, model: offer.model, reason: specificationRejection });
+  if (specificationRejection && !verifiedSellerOnly && !verifiedPriceOnRequest) invalidSpecifications.push({ id: offer.id, market, make: offer.make, model: offer.model, reason: specificationRejection });
   if (specificationRejection === "unconfirmed_power_scenario") fallbackPowerCards.push({ id: offer.id, market, make: offer.make, model: offer.model, powerDataSource: offer.powerDataSource || null });
   if (specificationRejection === "unproven_exact_100_hp") unprovenExact100Cards.push({ id: offer.id, market, make: offer.make, model: offer.model });
 
@@ -208,7 +214,7 @@ for (const offer of visible) {
   const pendingOrIncomplete = Boolean(specificationRejection)
     || ["needs_data", "needs_power_data", "preliminary_power_pending"].includes(status);
   const visibleRub = catalogOfferVisibleRub(offer);
-  if (visibleRub <= 0 && !verifiedSellerOnly) {
+  if (visibleRub <= 0 && !verifiedSellerOnly && !verifiedPriceOnRequest) {
     marketRow.unpricedPublic++;
     unpricedPublicCards.push({
       id: offer.id,
@@ -252,12 +258,14 @@ const report = {
     readyExactRatio: ready ? Number((readyExact / ready).toFixed(5)) : 1,
     needsData,
     verifiedSellerNeedsData,
+    verifiedPriceOnRequestNeedsData,
     blockingNeedsData,
     preliminary,
     auctionStart,
     invalidReady: invalidReady.length,
     invalidSpecifications: invalidSpecifications.length,
     sellerOnlyIncomplete: sellerOnlySpecifications.length,
+    priceOnRequestIncomplete: priceOnRequestSpecifications.length,
     unsafePendingVisiblePrices: unsafePendingVisiblePrices.length,
     unpricedPublicCards: unpricedPublicCards.length,
     fallback100PublicCount: fallbackPowerCards.length,
@@ -269,6 +277,7 @@ const report = {
   invalidReady: invalidReady.slice(0, SAMPLE_LIMIT),
   invalidSpecifications: invalidSpecifications.slice(0, SAMPLE_LIMIT),
   sellerOnlySpecifications: sellerOnlySpecifications.slice(0,SAMPLE_LIMIT),
+  priceOnRequestSpecifications: priceOnRequestSpecifications.slice(0,SAMPLE_LIMIT),
   unsafePendingVisiblePrices: unsafePendingVisiblePrices.slice(0, SAMPLE_LIMIT),
   unpricedPublicCards: unpricedPublicCards.slice(0, SAMPLE_LIMIT),
   fallbackPowerCards: fallbackPowerCards.slice(0, SAMPLE_LIMIT),
