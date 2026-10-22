@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T20:23:19.000+07:00",
+  "next": {
+    "make": "Alfa Romeo",
+    "model": "Tonale",
+    "modelId": "cff3b237a2a26a9e00708f89",
+    "startYear": 2022,
+    "years": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "baselineVariantsFromQueue": 109,
+    "researchedVariantsFromQueue": 40,
+    "needsFreshApiRead": true
+  },
+  "after": [
+    "Alpina D3",
+    "Alpina D5",
+    "Alpine A110",
+    "Alpine A290"
+  ],
+  "lastVerifiedPass": "docs/encyclopedia/reports/2026-10-22-stelvio-2020-2026-pass.json",
+  "lastVerifiedBatch": {
+    "batch": "research-2026-10-22-alfa-stelvio-2023-2026-factory-ranges",
+    "commit": "c391e894de96f04c4554c4c1bb51b82eee4668ca",
+    "workflow": 39785287022,
+    "variants": 41,
+    "newVariants": 32,
+    "updatedVariants": 9,
+    "fields": 410,
+    "workflowConclusion": "success",
+    "apiReadback": true,
+    "includedInIndex": false,
+    "indexMembershipState": "applied_after_current_release_index_snapshot",
+    "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-stelvio-2023-2026-factory-ranges-readback.json"
+  },
+  "retryFiles": [
+    "docs/encyclopedia/retry-2026-10-22-stelvio-2020-2026-remaining.json",
+    "docs/encyclopedia/retry-2026-10-22-stelvio-2018-2019-remaining.json",
+    "docs/encyclopedia/retry-2026-10-22-alfa.json"
+  ],
+  "rules": [
+    "Начать с актуальных AGENTS/roadmap/queue и свежих API-строк; не повторять сохранённые партии Stelvio.",
+    "Точные годы и исполнения, максимум 64 записи, свежие SHA256/CAS, источники на поля и обязательный независимый API-readback.",
+    "Tonale: различать ДВС, MHEV/PHEV, мощность ДВС/электромотора/системы; 30-минутная только по документу.",
+    "Проверять исторические отсутствующие годы/исполнения с 2008 включительно без выдумывания годов до появления модели."
+  ],
+  "integration": {
+    "state": "saved_and_compiled_pending_next_immutable_index",
+    "checkedAt": "2026-10-22T20:23:19.000+07:00",
+    "currentRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "currentWorkflow": 39781954190,
+    "currentWorkflowState": "in_progress",
+    "currentStep": "Prepare exact price indexes before activating the release",
+    "privateIndexPrepareStartedAt": "2026-10-22T12:53:01Z",
+    "privateIndexPreparedAt": "2026-10-22T12:55:07Z",
+    "newBatchesExcludedFromCurrentPreparedSnapshot": [
+      "research-2026-10-22-alfa-stelvio-2020-factory-range",
+      "research-2026-10-22-alfa-stelvio-2021-factory-range",
+      "research-2026-10-22-alfa-stelvio-2022-factory-range",
+      "research-2026-10-22-alfa-stelvio-2023-2026-factory-ranges"
+    ],
+    "newBatchesActivationConfirmed": false,
+    "duplicateReleaseRequested": false,
+    "observedProductionRelease": "4fac75d1846655c4528ccbe55ef551c2bb888f25",
+    "observedProductionIndexDigest": "80a3247a6f63f9ef347009e446381862ca18c3ba33cc7ada2a0309a4ad3ac82d",
+    "visitorRequestSearchOrSyncAdded": false,
+    "nextAction": "После завершения уже работающего выпуска и запланированной владельцем публикации Китая включить эти четыре партии вместе с остальными pending в один следующий штатный неизменяемый индекс; проверить состав и активацию. Не запускать конкурентный deploy или обходить writer lease."
+  },
+  "referenceIntake": {
+    "technicalWorkflow": 39781954229,
+    "comparisonWorkflow": 39781954271,
+    "stateAtLastCheck": "in_progress",
+    "duplicateLaunch": false
+  },
+  "completion": false
+}

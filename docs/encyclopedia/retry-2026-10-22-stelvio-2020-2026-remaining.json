@@ -1,0 +1,3342 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+  "make": "Alfa Romeo",
+  "model": "Stelvio",
+  "modelId": "0d734c400f4417df7f272d30",
+  "revision": "28e306cf-af95-4e25-baf3-0596edcd8dc3",
+  "state": "partial_fields_and_regional_ranges_require_retry",
+  "primaryPassYears": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "wholeModelComplete": false,
+  "nextMainCursor": "Alfa Romeo Tonale 2022–2026, затем Alpina D3/D5 и Alpine A110/A290; историческое расширение с 2008 года сохраняется",
+  "carryForwardEarlierRetry": "docs/encyclopedia/retry-2026-10-22-stelvio-2018-2019-remaining.json",
+  "groups": [
+    {
+      "years": [
+        2020
+      ],
+      "reason": "200 PS: швейцарский MY20 указывает 147 кВт, руководство FCA — 148 кВт. Значение не выбрано произвольно и не вычислено из PS. Для существующего наблюдения 201 PS требуется уточнение единиц и исполнения.",
+      "variantIds": [
+        "496310bce0023dc2fad3cf52",
+        "80a381d1737aa66d9d006318",
+        "7fac19cfce3a6cd195c615a6",
+        "bbe53bc0a7cf851b65c300fa"
+      ],
+      "fields": [
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "sources": [
+        "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+        "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf"
+      ]
+    },
+    {
+      "years": [
+        2020
+      ],
+      "reason": "У 210 PS коды различаются для SCR/без SCR; в руководстве для 280 PS два кода кузова, включая 952ACA4. Не выбирать неоднозначный код двигателя или кузова.",
+      "fields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "sources": [
+        "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf"
+      ]
+    },
+    {
+      "years": [
+        2020
+      ],
+      "reason": "Дополнить региональные и ранние исполнения 2020: Veloce 250 PS, стандартная Quadrifoglio 510 PS и Business. Требуется точная датированная связка комплектации с технической таблицей; перенос из 2021 не выполнен.",
+      "sources": [
+        "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-riparte-con-la-nuova-gamma-sportiva"
+      ]
+    },
+    {
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "reason": "Найти подходящие годовые руководства или омологацию Euro 6D FINAL / Euro 6E / Euro 6E bis для кодов двигателя и разрешённой полной массы. Значения MY20 не переносить автоматически.",
+      "fields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "reason": "Остаются ранние годовые исполнения и специальные серии вне выбранных прайсов: 250 PS Sprint, 6C Villa d’Este, Competizione, Quadrifoglio 100th Anniversary/Super Sport/Collezione, Intensa 2026, Edizione Luna Rossa и неитальянские версии 200/280 PS. Проверять реальные годы и технические различия региональных исполнений.",
+      "sources": [
+        "https://www.media.stellantis.com/it-it/download-price-lists/232",
+        "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-rinnova-la-gamma",
+        "https://www.media.stellantis.com/em-en/alfa-romeo/press/alfa-romeo-edizione-luna-rossa-debuts-in-napoli"
+      ]
+    },
+    {
+      "years": [
+        2020,
+        2022,
+        2024,
+        2025
+      ],
+      "reason": "Восемь прежних избыточных записей с одинаковыми названиями оставлены без удаления. Перед объединением сверить исходную идентичность. Новых дублей нет."
+    }
+  ],
+  "pendingVariants": [
+    {
+      "variantId": "3324834c124d2eff23fb9fdc",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "e2f7f734d1d32255db42bd35",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "e771ea206c8f8ac56e052e4f",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "a0bb777b64ff364b5c605e85",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "ba032920009494b4c60c5ad9",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "2833e723520c1a1d0c19d770",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "cd802734048e97a5b4225c65",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "7d48970f97311654e74b46ac",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "4e605d87aae09f7a2869f539",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "e5aa30aa81490fdfe56856ea",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "2edfacd17b46912aeed3a349",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "01ffbbec8114743d60179e5b",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "d7af60fba51660a93b80a26e",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "57644c2ad737c319b6053aa6",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "d2cb05f2ba957b510fcad18a",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "4c10a8f77570d442bba43cfd",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "640ca6d8398755bc44f96fed",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "bbe53bc0a7cf851b65c300fa",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "9df95dc3b065b7d36179df7d",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "engineCode"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "5df4dc5252a5ec412a9d902e",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "3ebdd2d84833855bce3e0a5f",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1d1981aef0a48ea44141e130",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "496310bce0023dc2fad3cf52",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "80a381d1737aa66d9d006318",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "7fac19cfce3a6cd195c615a6",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c3b2d085c41a013ed5b0ee0a",
+      "year": 2020,
+      "fieldsRequiringEvidence": [
+        "engineCode"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "de9014ad0709f2da210c5eca",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "7e55bdd6a803f102ec530124",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "0148665970aafbf929288a25",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "59f78006bfd8b6e09dd835b9",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "b5092a1b5b2be7e5b80f8e71",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1271d40ce12adf1faaa40ba5",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "e1a2237d8bdaba25dfba6534",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "7272c0053174ea65b19a4b21",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "75486d386eee3c0f04287812",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "78a1ba8e296b30f09fceebd9",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c1084087325cc97ea16651d8",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "ba6f45f5787a39ca1b809dc4",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "9fa8ba92d63c1adb02c9d998",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "23d484fa5ad7ff5b0c33946a",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "59ca9385af7066d9deb95e91",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "8c09b85dc24d7187f9599d2f",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1d2d3cf82091d4fba3020d22",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "fb24ce072a61a9f5370466ae",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "91f25c600a0ede3a8f9ee8c8",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "2e5caf03fe0e6caa59450a45",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "17c6cb5211757e6cdcb95ca5",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c7593b3f6efe4ec169dcd5c8",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "078ff81ac4cb8ac004402131",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c7f5e7f0477ccacdac7a644c",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "833200cb151a54d25a4299e3",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "890c03a1e306dc31115b9e04",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "3f7a806496b902420c12f8a2",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "33e2926813cca5182880ba57",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c9bad8f0f779f9877f0192ce",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "ffed03d7fd730d003bd8da05",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "28530bf7ec716efef47d7128",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c19507f658a8cb2ca45e9720",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "7836b172244177743411f216",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "e97b0a666c3405ed8ea1fda2",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "757fb0bb5aa38f9138e7d97d",
+      "year": 2021,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1b3e21a529bc1d71581ebca0",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "fb9a989f57964fc0192f85c0",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "63a614b652aa176799b44702",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "cf86920a0a5febdc85972e7d",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "579a2e9efd45db5586c21982",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "503ffe5cbd8f4699ae2b440d",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "67d819ea69f51487901d5525",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "4deb96ceb27c7ebdcddbf898",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c7a99f1a68df3ae0b77732a2",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "5468184cddb55c18ec04288c",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "0d913209364bc018ee1ef0c7",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "885e057902d78e2d9c9f3d09",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "7ccd94a7e015de9e56b5e124",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "69bcd93bec99d939331aca45",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "b62b254be2c653adf4915dce",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "27ed14248efe266a96e0262a",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "96253a0f88ede5d407dd93b9",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "150df96708115daf7951af39",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "ea80ef32e9ac6b12f92ab00c",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "8fccc46ab1b1963303fddc74",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "27803012e146004c4db4660d",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "aa36dacd624a63905dce380b",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "f018e72a6dbb367cf9a03370",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c20facbfa1a7278ed99ca3ea",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "550a5b1445d9d1557fc91090",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "3f12c77e9fcd454ecc9c8537",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "5a056782cef50a5f50295104",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "325b91ec363cd602628560e9",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c9f0b227eb7d2f889f393946",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "5bd88991bcc71948db52a858",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "ee11badf8d73e94720e5faaa",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "fe7a82d1097f4b03442487ff",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "86bafdba9ace1b3767eaa61f",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "91e39153aa01580ec2b21b55",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1415ba9e31fa72d78d1591d1",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c825560bd68a9875417fb7f2",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "4821c50bf09e8d17453cf3dc",
+      "year": 2022,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "8279423762cd6abdc089ba08",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "7d15b0e67d1bc094e3bd0707",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "f0b3fa1b24c168d1a8bb06c1",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "f8934f84321a5cdd9f5c4cc9",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "ab09fc05047d001996c732ee",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "12f8a3d8f2cc15f8360d77da",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "5a9254dd61c5e4b0a10e87dd",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "905362c1b6b1d595d07d973a",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "d880437edcac2de945967247",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "de03cc947ba3cc9ed007eff7",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "7d0634d2dc0cffb6d34e18bd",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "9e07b3aa1b89f59d1e538c8b",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "6d80bfe759f5e981a1d8ee5b",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "2b73313cc69b3501503581e1",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1f1fa3e01b4c27f73e737533",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "ee7959805cbdddb15e7f70ab",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "bae4d89000f710e6238b1f7e",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "679be6ff96c234d0ebbd3c1e",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1512f2934093ae754e1bd02c",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "4bc6b5f9625e2ab1c5c75929",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "b0a65c8fc4881f6afcaaa42d",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "fb6eb59565858a01f981f6aa",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "831d73f918ecbf22c37ac63e",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "eb1768d820a5fdbae95b410d",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "f2742c8b9ac4fda0fc707347",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "30e1f5282feb05198816e542",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "162643688d3821abfe3a9e01",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "b60c4f96459b904b2d8cef82",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "2985178908142f085b3b41be",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "9e4f1e4f6233472b3621e32f",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "e1196051a995b7b5181fc070",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1865d7ea8980c447de67f8f5",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "686ede7d7ddb792eb3e4f6bb",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "255a79f19f187030e430f487",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "e3f9e12ffdcd8d532de29771",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "0d54c813d1170d5584a96fce",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "668a02370f4e2b70a53ab16e",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "8f95603e1249f244f09b4dfb",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "993f67d616b11037d117f74e",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "b68f46a90357347310b59620",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "199c1a5861a3d110bb73a5c1",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "5e84275bf6795e32f42078f5",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "93a21d7d6f62ff58093856a9",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "fb19e8a0b84479340b5b81e9",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "8f03d399230864a0279e68d5",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "8634910101e1613379c9d8b2",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "49e340880f33be07d2f000e2",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "d16f3efe9ba1ed45eb9d2c1a",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "9367e8345fa191795bd92bd6",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "a733608d9b940e1992871255",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "6b35891ae4418ed09d94b17a",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "00bc4b5b26e16e85cfd1c0cd",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "3fbda4781b8c739cbe6bd4b0",
+      "year": 2023,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "79a23075f5df67eea3a22d77",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1c4234d6e73ed85dcec738f7",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "237cdc48b855549178a7666c",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "3957da1e008a0bd1b7b643d9",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "233911d72a994b4bd37fc876",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "bc38e7f9c93fd927c65d9a9e",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "9366a7937701d2b13dcb3d14",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "3aa594fda5d9c8b9d266af8b",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "6fb53c31e580b5118526062c",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "a42603debd872f6ff8052983",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "dff7a565b249e41d1bc96790",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "5586e922710548f09e959f3f",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "7d08532122676ce1a9ca9de2",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "b738bf0fd1b6f4e8f8406436",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "9d64996d91f42132bb2bebfc",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "29aea0472a884b72569e2bfb",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "922e45f4d3e7bf1324a873e6",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "9df53746d81e59411f52dd26",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "32c9c01038a576dab5cf818f",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "3967a56cadf35817f226b4d7",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "fbcabfefa6d8eaea4e345a3f",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1079af64bfca76243e881510",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "a99f7d58cae9f4f14a632d1e",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "555b1087d03a87e9017aa5bc",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "0f4adb22c2afd4fea6e0a2a1",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "0eee69c5a2c03a28bfb93430",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "41865d6e1f14099f44a2c516",
+      "year": 2024,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "4fdbf75bd129bb5414e1c3e8",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "d66c4463a759b500093d4acf",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "a7d244c3787b2d994bbcec54",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "2b7552a26b4ca26e79392802",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "4b981059a419d761542f2c78",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "d2049fc4f0d1d7fc96115b12",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "2aa4a2e90ab4243fac199ebc",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "b6107718dfb2a6983b309b10",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "a245a246b3f8f08db004870c",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "8b83e75ca0f7899329f30574",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "6218ab9d5bd16d2e902e1888",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "needs_exact_identity",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "394987de08b9a24517851c6a",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "09986a7db475620cad7360ee",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "de7c36f0d9be23de2b6517e2",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "b576e43946d8eb5f9649e919",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "a87300508a1098834ab69e89",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "bc090cf45e55b4ce39b76619",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "49fba8b4561d0b7538fa225d",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "633b7b2eb822c5034cc243bd",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "c679b2122b89d34b30ca39c6",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1fd94ea5dda1ed658e8f75cb",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "e87cd55bf70358af393cf009",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "1d445ce624b766d062a6a898",
+      "year": 2025,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "6e9f7ab7283cc7b2c388ba9c",
+      "year": 2026,
+      "fieldsRequiringEvidence": [
+        "bodyType",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "24868efae61b55a334def48f",
+      "year": 2026,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "37b56052a0b98f133a6a7e14",
+      "year": 2026,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "d78f26ac7156faf85e80d295",
+      "year": 2026,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "a7ef458316c5dfe0c81dd7b7",
+      "year": 2026,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    },
+    {
+      "variantId": "84ff29f7d0fe49050058ccbc",
+      "year": 2026,
+      "fieldsRequiringEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "identityState": "existing_named_variant",
+      "reason": "Отсутствует подтверждение конкретного поля для этой годовой модификации; наблюдение не автоматически заводской факт."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.media.stellantis.com/ch-it/download-price-lists/184",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "efab340011832d4c0efb522e66ab2b144fc40fde043fe48aa707937709120441",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [
+        2,
+        3
+      ],
+      "role": "field_source"
+    },
+    {
+      "url": "https://aftersales.fiat.com/eLumData/EN/83/630_STELVIO/83_630_STELVIO_603.93.593_EN_01_11.19_L_LG%23AP_603.93.593_01_11.19/83_630_STELVIO_603.93.593_EN_01_11.19.pdf",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "2b075acf6159a3e46fff3236901b00f1dd8e027a187ad7e16c334848e4568215",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [
+        277,
+        278,
+        280,
+        294,
+        296
+      ],
+      "role": "field_source"
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/210421_ar_stelviomy21_listino-60805b042538f.pdf",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "7c8c573ac73fb63faa44f5cafad8b5a88f86ec21e13bcddc29606a5eba80e3e9",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [
+        3
+      ],
+      "role": "field_source"
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2130_06_2021-615d6ddb58062.pdf",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "b0c5de9de29fb629cda0e0ea5569b998cc554e1d12840f77c052ddbc530100b7",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [
+        3
+      ],
+      "role": "field_source"
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy22_220301-62277ef024789.pdf",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "641edc29ffe966018f4d133e3df431db287b12abe179f8bb7bd16fb35081fc8d",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [],
+      "role": "comparison_only"
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [
+        3
+      ],
+      "role": "field_source"
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2301_08_2023-650c0befbcbc6.pdf",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "1094e8cbee67b795978e41b42575adb30c21feb695440f2a3fb5a25cc25790e1",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [
+        3
+      ],
+      "role": "field_source"
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy24del1luglio2024-6686b7e810fea.pdf",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "165cb859e8b554d34138d2d7f53c67a40323379f595daf77ca1c513729d371a2",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [
+        3
+      ],
+      "role": "field_source"
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy24del1febbraio2025-67bd937b29ce6.pdf",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "b6ffe4527fa399229cdbbfec5125412442b779c4abb7634bacce32b52485e888",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [
+        3
+      ],
+      "role": "field_source"
+    },
+    {
+      "url": "https://www.media.stellantis.com/it-it/download-price-lists/283?v=1777453145",
+      "checkedAt": "2026-10-22T20:20:00.458642+07:00",
+      "sha256": "0126447d8157c8a701f03b481be371c2f05ae4070f9ea31865339975cbdef28e",
+      "type": "manufacturer",
+      "pdfPagesVisuallyChecked": [
+        3
+      ],
+      "role": "field_source"
+    }
+  ]
+}
