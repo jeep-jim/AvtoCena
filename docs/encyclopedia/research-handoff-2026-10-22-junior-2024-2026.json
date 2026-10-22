@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-22T15:21:17.684604+07:00",
+  "modelId": "76763ca9fc792df61980328c",
+  "state": "research_candidates_not_applied",
+  "source": {
+    "type": "manufacturer",
+    "url": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf",
+    "sha256": "df59316721e1885472b53d217d3351232142078d85ed6e0e541d6256dc495868",
+    "document": "530.05.129 EN 01 06 24",
+    "visuallyReviewedPdfPages": [
+      266,
+      277
+    ],
+    "printedPages": [
+      264,
+      275
+    ]
+  },
+  "candidates": [
+    {
+      "year": 2024,
+      "powertrainLabel": "Ibrida136",
+      "facts": {
+        "engineCode": "EB2LTDH2",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "grossVehicleWeightKg": 1790
+      },
+      "requiredBeforeApply": "Точный годовой прайс/исполнение или сопоставление исходной идентичности. Нынешние2024 строки без trim, не идентифицировать только по100кВт."
+    },
+    {
+      "year": 2024,
+      "powertrainLabel": "Elettrica156",
+      "facts": {
+        "powerHp": 156,
+        "powerKw": 115,
+        "grossVehicleWeightKg": 2040
+      },
+      "requiredBeforeApply": "Точный годовой прайс/исполнение и источник исходной идентичности. Не переносить пик115кВт в30мин."
+    }
+  ],
+  "rejectedInference": [
+    "Мануал содержит раннюю240PS/175кВт, не280PS/207кВт; нельзя переносить данные между ними. Доступность серийной240PS не подтверждена.",
+    "Наблюдение62кВт без trim не сопоставлено и не изменено.",
+    "Путь /2025/ хранения файла не является модельным годом."
+  ],
+  "october2026Retry": {
+    "url": "https://www.media.stellantis.com/it-it/download-price-lists/295",
+    "webTextDate": "2026-10-19",
+    "downloadedPdfDate": "2026-07-29",
+    "downloadedSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
+    "nextAction": "Получить прямой датированный октябрьский PDF, визуально сверить Luna Rossa и MVS.2; не выдавать веб-текст за проверенный PDF."
+  },
+  "nextCursor": "Junior2024, затем октябрь2026; после проверки или переноса точных пробелов в retry перейти MiTo2008+; не перезапускать уже применённые4 партии"
+}

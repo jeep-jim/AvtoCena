@@ -1,0 +1,788 @@
+{
+  "checkedAt": "2026-10-22T08:20:04.357Z",
+  "scope": "Independent compilation of public API records with unchanged production compiler; deployed private index checked separately",
+  "models": [
+    {
+      "id": "cb49c6bb46e8dd8caf106b34",
+      "model": "Giulietta",
+      "revision": "aa75afcb-ade1-43d2-b8dd-faffdd56b81a",
+      "variants": 246
+    },
+    {
+      "id": "76763ca9fc792df61980328c",
+      "model": "Junior",
+      "revision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "variants": 37
+    }
+  ],
+  "variants": 109,
+  "calculationFields": 607,
+  "referenceOnlyFields": 18,
+  "referenceOnly": [
+    {
+      "variantId": "f279b6854a3f7d2c03e0dada",
+      "field": "systemPowerKw",
+      "value": 107,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "f279b6854a3f7d2c03e0dada",
+      "field": "batteryKwh",
+      "value": 0.89,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "65c33ec518dcc40f19e256c6",
+      "field": "systemPowerKw",
+      "value": 107,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "65c33ec518dcc40f19e256c6",
+      "field": "batteryKwh",
+      "value": 0.89,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "dde8919268e31011d24bed5b",
+      "field": "motorPeakKw",
+      "value": 115,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "dde8919268e31011d24bed5b",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "4d973d6b87b550835d88bfe6",
+      "field": "motorPeakKw",
+      "value": 207,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "4d973d6b87b550835d88bfe6",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "68bf56078ab8c3b00dad2b6f",
+      "field": "systemPowerKw",
+      "value": 107,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "68bf56078ab8c3b00dad2b6f",
+      "field": "batteryKwh",
+      "value": 0.89,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "10c32167be53276eb6da22d4",
+      "field": "motorPeakKw",
+      "value": 115,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "10c32167be53276eb6da22d4",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "4b61bf2752e1b8700375cf83",
+      "field": "motorPeakKw",
+      "value": 115,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "4b61bf2752e1b8700375cf83",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "2a98b7cbe44d46a17cafab04",
+      "field": "motorPeakKw",
+      "value": 115,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "2a98b7cbe44d46a17cafab04",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "4183feea6ecafd26bf49cef9",
+      "field": "motorPeakKw",
+      "value": 207,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    },
+    {
+      "variantId": "4183feea6ecafd26bf49cef9",
+      "field": "batteryKwh",
+      "value": 54,
+      "reason": "Reference characteristic outside unchanged calculation-index allowlist"
+    }
+  ],
+  "passed": true,
+  "rows": [
+    {
+      "variantId": "b031e2f348ca68a8b4c034f9",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "72c7121bbc3109573f0e3ad4",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "ce4e2f72cc611563e6e5362a",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "09e756d8f0c7718d28e318e5",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "844c51c9ff7767ed04dd9cf5",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "4e6d4b98bff00a4f62f1e337",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "d7fbbfb454324f6accbd6804",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "3effe03bf541166ca51ce0ef",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "c9836c5969269ebca50a8803",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "20e1eff359d4091193d7b020",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "b1d758a90329d7dfcb458a2f",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "2f55da150ebae19f688b79ec",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "f0d2b2d95de46f20845f1f61",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "52aa3a0a9fc41cd1e91d6338",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "b6daab2973655624827ad5bf",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "7b5a9691da5b2c9a463a02b2",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "5144bb73d863907409de2b10",
+      "year": 2011,
+      "fields": 10,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "34d4a0063aaf26e062dc1679",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "f08323f89be653d5b4aa3f8d",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "4d5a3187ec7dde798ee540a1",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "49e9f5bb51919cb4fad03f8c",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "91602c4d281bae53045d0ec3",
+      "year": 2016,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "3985e7ec164fedeb27d82af3",
+      "year": 2016,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "d98e7835d44884997bc3fa58",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "9e0fbb6256860036005b3c02",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "15eb6c416adb96c95e7f42a8",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "9d975ef52a4ed0e9f2882dee",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "84618b0ca5dd5fc4c63a56a3",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "0a33c4d81bad093ad19ac851",
+      "year": 2016,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "e1688f04d97bd0300ea2fc03",
+      "year": 2016,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "e946fbb6b9f960715f258553",
+      "year": 2016,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "5653de5bdee6cc3133b05f97",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "332615567f613703081aa656",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "22773f9fceca07d082a6f41e",
+      "year": 2016,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "a14b54519fa4500fca587dc5",
+      "year": 2016,
+      "fields": 5,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "038a0d234ae96214aef5d650",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "c0ad1e91e8361ddeb515efba",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "5761b623a71a387771e95e22",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "e06be1c496fb2080c8b566a4",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "85a1db0b8081a8015f722582",
+      "year": 2017,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "4b4ca10025d200486b63b498",
+      "year": 2017,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "0a532816f7b3cfe104dcb150",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "040d0de5b187db467dacad5e",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "8a457ec81bfef9e70b22ec34",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "edd5d6db40278c294b5598e5",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "ca270740d9e6ef8d356c3533",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "a989ac95b10302ede88be77f",
+      "year": 2017,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "77af1e45ce2b12d1ae500a2c",
+      "year": 2017,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "3ebf7c74810a4fe670646260",
+      "year": 2017,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "fb7bef30930ecdafcd4257d4",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "6233f199345bae63e025eee7",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "969af6e9c4167b677d8a58af",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "30406c87b522e01d94f0c5f4",
+      "year": 2017,
+      "fields": 5,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "edef99f6b8c3bc558e7a40a1",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "30b458b5fbf089f2bdf3003c",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "e53ac7a9b1fe296db4d5b584",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "ff0b3d52c492dfc5dfa42492",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "09c4005cc1e7f49c83d5f7f6",
+      "year": 2017,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "e690c622ceee59f04cebaa20",
+      "year": 2017,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry"
+    },
+    {
+      "variantId": "32791f7e8cca23ad91298127",
+      "year": 2018,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "ddb1020b8e4519e30b914df7",
+      "year": 2018,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "72b1a18c6f483ae216011d47",
+      "year": 2018,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "4589a3dd70f1c0d0314f183b",
+      "year": 2018,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "db6aecfb5799154e30c4e202",
+      "year": 2018,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "19932eb4a246261f82f33e1a",
+      "year": 2018,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "b86029b650bafbfb0d789bc4",
+      "year": 2018,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "9455f9479126cfb49cb32c17",
+      "year": 2018,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "08367809e7bfbc355d5ea334",
+      "year": 2018,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "02d753608dd1f54e11dc7960",
+      "year": 2018,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "e975ebdada3315cdbd4bfe4b",
+      "year": 2018,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "ad0c62685cf22b68d8f46cfa",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "70e3e9d2b7b09bee536d13a4",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "1e19c8481f2cec8b396cc0ae",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "6c8ea35d7ff592ad697947d0",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "71124d6665de6cf7fc6d72bf",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "90303c696adf40e82f550a70",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "2bfd24f6c1ed244fe994c2db",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "46ea3d33b981b97e1fb05918",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "2816fc3ea6e908e2559eb0b2",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "f277873543cdf19ea124feff",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "aa4eec01ebc1b7ea77c4a9b8",
+      "year": 2019,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "bdf347164a76aebe5370773f",
+      "year": 2019,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "cf8bb1a9ec385865e6685e5d",
+      "year": 2019,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "de5929cdd3904bcb086cf46e",
+      "year": 2019,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "ac09c5a4e9145c77ef55bdb4",
+      "year": 2019,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "37f97f53ef1cd6827d866e64",
+      "year": 2019,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "0064586bb789a5321d3b333b",
+      "year": 2019,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "f66972426378f0aad4af9573",
+      "year": 2020,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "85e3cb61d423ce8ff069d281",
+      "year": 2020,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "ba7e508e37ac2bb4cf87b1d7",
+      "year": 2020,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "a5b22cf94def29cb42493525",
+      "year": 2020,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "848c522353d2e5b76e8b35d0",
+      "year": 2020,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "47309701252560a0c87e5e02",
+      "year": 2020,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "98a54038cc9da7894d76c6aa",
+      "year": 2020,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-giulietta-2018-2020"
+    },
+    {
+      "variantId": "1a2ee1648fe65a65ec42cd1a",
+      "year": 2025,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce"
+    },
+    {
+      "variantId": "06a6704e2a4b4b2cb4eb1475",
+      "year": 2025,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce"
+    },
+    {
+      "variantId": "f4b0a5283cc484beebaca960",
+      "year": 2025,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce"
+    },
+    {
+      "variantId": "f279b6854a3f7d2c03e0dada",
+      "year": 2025,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce"
+    },
+    {
+      "variantId": "65c33ec518dcc40f19e256c6",
+      "year": 2025,
+      "fields": 5,
+      "batchId": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce"
+    },
+    {
+      "variantId": "dde8919268e31011d24bed5b",
+      "year": 2025,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce"
+    },
+    {
+      "variantId": "4d973d6b87b550835d88bfe6",
+      "year": 2025,
+      "fields": 7,
+      "batchId": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce"
+    },
+    {
+      "variantId": "78c687ec742a57e93a9b73f2",
+      "year": 2026,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2026-july"
+    },
+    {
+      "variantId": "3b1a2b9b387bf8de7fde2879",
+      "year": 2026,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2026-july"
+    },
+    {
+      "variantId": "ef94301cc861d3114a0541ed",
+      "year": 2026,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2026-july"
+    },
+    {
+      "variantId": "68bf56078ab8c3b00dad2b6f",
+      "year": 2026,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2026-july"
+    },
+    {
+      "variantId": "10c32167be53276eb6da22d4",
+      "year": 2026,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2026-july"
+    },
+    {
+      "variantId": "4b61bf2752e1b8700375cf83",
+      "year": 2026,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2026-july"
+    },
+    {
+      "variantId": "2a98b7cbe44d46a17cafab04",
+      "year": 2026,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2026-july"
+    },
+    {
+      "variantId": "4183feea6ecafd26bf49cef9",
+      "year": 2026,
+      "fields": 6,
+      "batchId": "research-2026-10-22-alfa-junior-2026-july"
+    }
+  ]
+}
