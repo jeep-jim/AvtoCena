@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import {readCatalogProjectionParts, writeCatalogProjectionParts} from "./catalog-projection-parts";
 
 export const DEFAULT_MAX_RECORDS_PER_CHUNK = 500;
 const TRANSIENT_STATUS = new Set([408, 425, 429, 500, 502, 503, 504]);
@@ -81,9 +82,15 @@ async function walkLocalFiles(root: string): Promise<string[]> {
 
 export class LocalJsonStorage implements JsonStorage {
   driver: JsonStorageDriver = "local";
-  async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const p = localPath(relativePath); try { if (!fs.existsSync(p)) return { value: fallback, found: false }; return { value: safeParse(await fs.promises.readFile(p, "utf-8"), fallback), etag: localEtag(p), found: true }; } catch { return { value: fallback, found: false }; } }
+  async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> {
+    const p = localPath(relativePath);
+    let meta: JsonReadResult<T>;
+    try { if (!fs.existsSync(p)) return {value: fallback, found: false}; meta = {value: safeParse(await fs.promises.readFile(p, "utf-8"), fallback), etag: localEtag(p), found: true}; }
+    catch { return {value: fallback, found: false}; }
+    return {...meta, value: await readCatalogProjectionParts(this, relativePath, meta.value)};
+  }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
-  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const p = localPath(relativePath); const current = localEtag(p); if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError(); if (condition?.ifMatch && current !== condition.ifMatch) throw new StorageConflictError(); await fs.promises.mkdir(path.dirname(p), { recursive: true }); const tmp = `${p}.${process.pid}.${crypto.randomUUID()}.tmp`; await fs.promises.writeFile(tmp, serializeStorageJson(relativePath, value), "utf-8"); await fs.promises.rename(tmp, p); }
+  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { if (await writeCatalogProjectionParts(this, relativePath, value, condition)) return; const p = localPath(relativePath); const current = localEtag(p); if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError(); if (condition?.ifMatch && current !== condition.ifMatch) throw new StorageConflictError(); await fs.promises.mkdir(path.dirname(p), { recursive: true }); const tmp = `${p}.${process.pid}.${crypto.randomUUID()}.tmp`; await fs.promises.writeFile(tmp, serializeStorageJson(relativePath, value), "utf-8"); await fs.promises.rename(tmp, p); }
   async deleteJson(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const p = localPath(relativePath); const current = localEtag(p); if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError(); if (condition?.ifMatch && current !== condition.ifMatch) throw new StorageConflictError(); await fs.promises.mkdir(path.dirname(p), { recursive: true }); await fs.promises.writeFile(p, data); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
   async getBinary(relativePath: string) { const data = await fs.promises.readFile(localPath(relativePath)); return { data, size: data.length, checksum: sha256(data) }; }
@@ -251,7 +258,7 @@ export class ObjectJsonStorage implements JsonStorage {
     if (res.status === 304 && conditional) return conditional;
     if (res.status === 404) return {value: fallback, found: false};
     if (!res.ok) throw new Error(`object_storage_read_${res.status}`);
-    return {value: parseStorageJson<T>(objectStorageResponseBody(res)), etag: cleanEtag(res.headers.get("etag")), found: true};
+    return {value: await readCatalogProjectionParts(this, relativePath, parseStorageJson<T>(objectStorageResponseBody(res))), etag: cleanEtag(res.headers.get("etag")), found: true};
   }
   async readObjectMetadata(relativePath: string) {
     const res = await this.request("HEAD", relativePath);
@@ -260,7 +267,7 @@ export class ObjectJsonStorage implements JsonStorage {
     return {found: true, etag: cleanEtag(res.headers.get("etag"))};
   }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
-  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, serializeStorageJson(relativePath, value), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
+  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { if (await writeCatalogProjectionParts(this, relativePath, value, condition)) return; const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, serializeStorageJson(relativePath, value), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
   async head(relativePath: string) { const res = await this.request("HEAD", relativePath); if (res.status === 404) return false; if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_head_${res.status}`); return true; }
   async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": contentType }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, data, headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_binary_write_${res.status}`); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
