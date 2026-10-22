@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T01:39:29+07:00",
+  "updatedAt": "2026-10-23T02:06:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -782,13 +782,13 @@
         2018,
         2017
       ],
-      "variants": 44,
+      "variants": 51,
       "status": "partial_verified_fields",
-      "researchedVariants": 22,
-      "checkedAt": "2026-10-23T01:39:29+07:00",
+      "researchedVariants": 29,
+      "checkedAt": "2026-10-23T02:06:00+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
-      "nextAction": "Alpine A110 2024–2026: точные годовые исполнения; затем A290. Пропуски и спецсерии 2017–2023 отдельно.",
-      "lastBatch": "research-2026-10-23-alpine-a110-2023"
+      "nextAction": "Alpine A290 2025: подготовленная точная партия; затем 2026 и пропуски Alpine/A390.",
+      "lastBatch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024"
     },
     {
       "id": "9f23c75ab6a73713bf64580a",
@@ -798,12 +798,13 @@
         2025,
         2024
       ],
-      "variants": 7,
+      "variants": 12,
       "status": "partial_verified_fields",
-      "researchedVariants": 1,
-      "checkedAt": "2026-10-22T02:17:29.580694+07:00",
+      "researchedVariants": 6,
+      "checkedAt": "2026-10-23T02:06:00+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json",
-      "nextAction": "Retry exact model-year/trim and missing field sources; reviewed rows without identity remain unchanged"
+      "nextAction": "Alpine A290 2025: подготовленная точная партия; затем 2026 и пропуски Alpine/A390.",
+      "lastBatch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024"
     },
     {
       "id": "eff6651568e364a8a5a40e97",
@@ -32656,13 +32657,13 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T01:39:29+07:00",
+    "updatedAt": "2026-10-23T02:06:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "alpine_a110_2017_2023_saved_first_batch_active_2023_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alpine A110 2024–2026: точные годовые исполнения; затем A290. Пропуски и спецсерии 2017–2023 отдельно.",
-    "lastVerifiedResearch": "alpine-a110-2023",
+    "nextModel": "Alpine A290 2025: подготовленная точная партия; затем 2026 и пропуски Alpine/A390.",
+    "lastVerifiedResearch": "alpine-a110-2024-2025-a290-2024",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 75,
     "allModelsComplete": false,
@@ -32681,21 +32682,21 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "alpine-a110-2023",
-      "batch": "research-2026-10-23-alpine-a110-2023",
-      "commit": "ea495f04c0ffeea0de2b8fb500e4a40ff629b8f6",
-      "workflow": 39831749837,
-      "job": 120009393406,
-      "variants": 5,
-      "newVariants": 4,
-      "updatedVariants": 1,
-      "fields": 45,
-      "compiledCalculationFields": 41,
+      "key": "alpine-a110-2024-2025-a290-2024",
+      "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
+      "commit": "e5cb3235dfdadb8ec14f66bf6e50ffe7adfd0ba3",
+      "workflow": 39836589326,
+      "job": 120026421635,
+      "variants": 12,
+      "newVariants": 12,
+      "updatedVariants": 0,
+      "fields": 130,
+      "compiledCalculationFields": 109,
       "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
-      "indexMembershipState": "applied_after_e78c715_index_snapshot",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2023-readback.json"
+      "indexMembershipState": "pending_current_release_snapshot_check",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-late-readback.json"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792660229591_c103ed94",
@@ -32755,9 +32756,36 @@
         "includedInIndex": false,
         "indexMembershipState": "applied_after_e78c715_index_snapshot",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2023-readback.json"
+      },
+      {
+        "key": "alpine-a110-2024-2025-a290-2024",
+        "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
+        "commit": "e5cb3235dfdadb8ec14f66bf6e50ffe7adfd0ba3",
+        "workflow": 39836589326,
+        "job": 120026421635,
+        "variants": 12,
+        "newVariants": 12,
+        "updatedVariants": 0,
+        "fields": 130,
+        "compiledCalculationFields": 109,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "pending_current_release_snapshot_check",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-late-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": [
+      {
+        "batch": "research-2026-10-23-alpine-a290-2025",
+        "state": "prepared_workflow_requested",
+        "models": [
+          "9f23c75ab6a73713bf64580a"
+        ],
+        "entries": 4,
+        "fields": 37
+      }
+    ],
     "lastCompletedPass": {
       "version": 1,
       "checkedAt": "2026-10-23T01:39:29+07:00",
@@ -35077,7 +35105,14 @@
         "release": "e78c7154232f39ac73a2253314e2b0fe34da1344",
         "indexMembershipState": "native_compiler_guarded_manifest_snapshot"
       }
-    ]
+    ],
+    "currentReaderRelease": {
+      "workflow": 39835446552,
+      "commit": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+      "state": "in_progress",
+      "activationConfirmed": false,
+      "newBatchMembershipUnconfirmed": true
+    }
   },
   "scope": {
     "minimumYear": 2008,
