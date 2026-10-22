@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T15:17:10.219467+07:00",
+  "updatedAt": "2026-10-22T15:35:55.001363+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32602,12 +32602,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T15:17:10.219467+07:00",
+    "updatedAt": "2026-10-22T15:35:55.001363+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "giulietta_junior_index_preparing",
+    "state": "continue_junior_2024_then_mito",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Junior2024: заводской мануал и точные исполнения; октябрь2026 после прямой проверки редакции; затем MiTo2008+",
+    "nextModel": "Junior2024; поздние прайсы2025; октябрь2026; затем MiTo2008+. Пропуски отдельно, ранее применённые партии не повторять.",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32818,7 +32818,10 @@
         "newVariants": 42,
         "fields": 368,
         "apiReadback": true,
-        "includedInIndex": false
+        "includedInIndex": true,
+        "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+        "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+        "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
       },
       "alfa-giulietta-2018-2020": {
         "batch": "research-2026-10-22-alfa-giulietta-2018-2020",
@@ -32828,7 +32831,10 @@
         "newVariants": 35,
         "fields": 254,
         "apiReadback": true,
-        "includedInIndex": false
+        "includedInIndex": true,
+        "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+        "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+        "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
       },
       "alfa-junior-2025-mass-intensa-veloce": {
         "batch": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce",
@@ -32838,7 +32844,10 @@
         "newVariants": 4,
         "fields": 41,
         "apiReadback": true,
-        "includedInIndex": false
+        "includedInIndex": true,
+        "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+        "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+        "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
       },
       "alfa-junior-2026-july": {
         "batch": "research-2026-10-22-alfa-junior-2026-july",
@@ -32848,15 +32857,18 @@
         "newVariants": 5,
         "fields": 48,
         "apiReadback": true,
-        "includedInIndex": false
+        "includedInIndex": true,
+        "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+        "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+        "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
       }
     },
     "rawAuditCalculated": 75,
     "publicSerializationParity": 75,
     "allModelsComplete": false,
-    "installedRelease": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
-    "installedWorkflow": 39739467523,
-    "indexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+    "installedRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+    "installedWorkflow": 39746709502,
+    "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
     "catalogRowsEnriched": 800,
     "catalogFieldsFilled": 1359,
     "remaining": [
@@ -32876,9 +32888,12 @@
       "newVariants": 5,
       "fields": 48,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+      "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
     },
-    "indexReleaseRequested": true,
+    "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
     "pendingIndexBatches": [
       {
@@ -33000,46 +33015,6 @@
         "newVariants": 11,
         "apiReadback": true,
         "includedInIndex": false
-      },
-      {
-        "batch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
-        "commit": "92fde64ff774cc7e8ed2938241ddad0c98496f51",
-        "workflow": 39744256772,
-        "variants": 59,
-        "newVariants": 42,
-        "fields": 368,
-        "apiReadback": true,
-        "includedInIndex": false
-      },
-      {
-        "batch": "research-2026-10-22-alfa-giulietta-2018-2020",
-        "commit": "07cc5f3fd15e12f4165170b5d088f3dbfb081552",
-        "workflow": 39744821834,
-        "variants": 35,
-        "newVariants": 35,
-        "fields": 254,
-        "apiReadback": true,
-        "includedInIndex": false
-      },
-      {
-        "batch": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce",
-        "commit": "c33d03eb627e6e79dad33e483b43d5e91ab24a60",
-        "workflow": 39745875814,
-        "variants": 7,
-        "newVariants": 4,
-        "fields": 41,
-        "apiReadback": true,
-        "includedInIndex": false
-      },
-      {
-        "batch": "research-2026-10-22-alfa-junior-2026-july",
-        "commit": "f4845cad2b6e1cfa39374f218eaf9b23b408eb17",
-        "workflow": 39746380415,
-        "variants": 8,
-        "newVariants": 5,
-        "fields": 48,
-        "apiReadback": true,
-        "includedInIndex": false
       }
     ],
     "inFlightResearch": null,
@@ -33049,7 +33024,11 @@
       "newVariants": 86,
       "fields": 711,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+      "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+      "calculationFields": 607,
+      "referenceOnlyFields": 18
     },
     "failedIndexRelease": {
       "commit": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
@@ -33062,26 +33041,22 @@
       "activationOccurred": false,
       "nextAction": "Check publication completion before requesting one aggregate index release; do not clear lock or duplicate collectors"
     },
-    "concurrentRelease": {
-      "release": "56ce8698f675d0c5b05e56430a5a60576ce75596",
-      "workflow": 39743381721,
-      "state": "success",
-      "indexPreparation": "success",
-      "containsCurrentPass": false
-    },
-    "installedIndexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+    "concurrentRelease": null,
+    "installedIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
     "catalogFieldsEnriched": 1359,
     "failedConcurrentRelease": {
       "workflow": 39731564487,
       "reason": "encyclopedia_changed_during_preparation"
     },
     "technicalReferenceIntake": {
-      "previousWorkflow": 39713120109,
-      "previousSaved": 1324,
-      "previousPending": 422,
-      "resumeWorkflow": 39731352531,
-      "state": "in_progress",
-      "referenceOnly": true
+      "previousWorkflow": 39731352531,
+      "previousSaved": 3398,
+      "previousPending": 365,
+      "resumeWorkflow": null,
+      "state": "resume_requested",
+      "referenceOnly": true,
+      "previousTotalVisited": 6000,
+      "previousConclusion": "success_page_limit"
     },
     "releaseRequestedAt": "2026-10-22T15:17:10.219467+07:00",
     "failedAggregateRelease": {
@@ -33093,7 +33068,7 @@
       "activated": false
     },
     "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-junior-2024-2026.json",
-    "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-6df5eec-activation.json",
+    "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39743682918,
       "state": "in_progress",

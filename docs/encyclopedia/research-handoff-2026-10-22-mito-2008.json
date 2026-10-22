@@ -1,0 +1,85 @@
+{
+  "checkedAt": "2026-10-22T15:23:32.034954+07:00",
+  "modelId": "81a4b290257d227a5fd86ee6",
+  "make": "Alfa Romeo",
+  "model": "Mito",
+  "state": "research_candidates_not_applied",
+  "year": 2008,
+  "sources": [
+    {
+      "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/mito-fakten-im-berblick-1",
+      "type": "manufacturer",
+      "publishedAt": "2008-11-24",
+      "supports": "Три точные моторизации и мощности70/95,114/155,88/120; немецкий старт27.09.2008; комплектацииMiTo/Turismo."
+    },
+    {
+      "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-neue-alfa-romeo-mito-ist-da-mit-dem-alfa-romeo-mito-startet-der-weltweit-kompakteste-sportler-ein-hochstma-an-fahrdynamik-und-motoren-mit-bis-zu-155-ps",
+      "type": "manufacturer",
+      "publishedAt": "2008-06-20",
+      "supports": "Две комплектации, три двигателя, передний привод;6ступеней. DDCT/MultiAir заявлены позднее, не приписывать2008."
+    }
+  ],
+  "candidates": [
+    {
+      "trim": "1.4 16V 95 PS MiTo",
+      "powerHp": 95,
+      "powerKw": 70,
+      "icePowerKw": 70,
+      "fuel": "petrol",
+      "powertrainKind": "combustion",
+      "drive": "fwd"
+    },
+    {
+      "trim": "1.4 16V 95 PS Turismo",
+      "powerHp": 95,
+      "powerKw": 70,
+      "icePowerKw": 70,
+      "fuel": "petrol",
+      "powertrainKind": "combustion",
+      "drive": "fwd"
+    },
+    {
+      "trim": "1.4 TB 16V 155 PS MiTo",
+      "powerHp": 155,
+      "powerKw": 114,
+      "icePowerKw": 114,
+      "fuel": "petrol",
+      "powertrainKind": "combustion",
+      "drive": "fwd"
+    },
+    {
+      "trim": "1.4 TB 16V 155 PS Turismo",
+      "powerHp": 155,
+      "powerKw": 114,
+      "icePowerKw": 114,
+      "fuel": "petrol",
+      "powertrainKind": "combustion",
+      "drive": "fwd"
+    },
+    {
+      "trim": "1.6 JTDM 16V 120 PS MiTo",
+      "powerHp": 120,
+      "powerKw": 88,
+      "icePowerKw": 88,
+      "fuel": "diesel",
+      "powertrainKind": "combustion",
+      "drive": "fwd"
+    },
+    {
+      "trim": "1.6 JTDM 16V 120 PS Turismo",
+      "powerHp": 120,
+      "powerKw": 88,
+      "icePowerKw": 88,
+      "fuel": "diesel",
+      "powertrainKind": "combustion",
+      "drive": "fwd"
+    }
+  ],
+  "requiresBeforeApply": [
+    "Свежий API по модели/2008, CAS модели и SHA256null; не менять2 имеющихся записи2012/2014.",
+    "Подтвердить точный объём в первичной техтаблице/руководстве, не округлять1.4/1.6 до1400/1600.",
+    "Найти первичный PDFмануала2008: сторонняя копия указывает78PS вместо немецких95PS. Не переносить код955A1000/параметры78PS на95PS.",
+    "Механическая КПП/полная масса/engineCode только по точной таблице, не по косвенной формулировке."
+  ],
+  "notApplied": true
+}

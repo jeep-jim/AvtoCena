@@ -51,5 +51,19 @@
     "downloadedSha256": "7b5ee20ed5b17bcdea1b2a5818193cf2dea298685df0c1e5e1d57e7e3d217d48",
     "nextAction": "Получить прямой датированный октябрьский PDF, визуально сверить Luna Rossa и MVS.2; не выдавать веб-текст за проверенный PDF."
   },
-  "nextCursor": "Junior2024, затем октябрь2026; после проверки или переноса точных пробелов в retry перейти MiTo2008+; не перезапускать уже применённые4 партии"
+  "nextCursor": "Junior2024; поздние прайсы2025; октябрь2026; затем MiTo2008+. Пропуски отдельно, ранее применённые партии не повторять.",
+  "additionalSourcesToReview": [
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel19settembre2025-68d1489fb285c.pdf",
+      "documentDate": "2025-09-19",
+      "status": "discovered_not_visually_reviewed",
+      "purpose": "Поздняя гамма2025 Junior/Sprint/Ti; MY26 не заменяет календарный2025."
+    },
+    {
+      "url": "https://o.media.stellantis.com/uploads/it/attachment/17578/alfaromeojuniormy26listinodel4novembre2025-6908d3239c756.pdf",
+      "documentDate": "2025-11-04",
+      "status": "discovered_not_visually_reviewed",
+      "purpose": "Проверить Milano Cortina2026 как название исполнения, не автоматически год2026. Отдельная поздняя годовая партия2025 после проверки."
+    }
+  ]
 }

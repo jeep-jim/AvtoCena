@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-22T15:17:10.219467+07:00",
+  "checkedAt": "2026-10-22T15:35:55.001363+07:00",
   "batches": [
     {
       "batch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
@@ -9,7 +9,10 @@
       "newVariants": 42,
       "fields": 368,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+      "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
     },
     {
       "batch": "research-2026-10-22-alfa-giulietta-2018-2020",
@@ -19,7 +22,10 @@
       "newVariants": 35,
       "fields": 254,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+      "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
     },
     {
       "batch": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce",
@@ -29,7 +35,10 @@
       "newVariants": 4,
       "fields": 41,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+      "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
     },
     {
       "batch": "research-2026-10-22-alfa-junior-2026-july",
@@ -39,15 +48,24 @@
       "newVariants": 5,
       "fields": 48,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": true,
+      "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+      "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
     }
   ],
   "variants": 109,
   "newVariants": 86,
   "fields": 711,
   "apiReadback": true,
-  "includedInIndex": false,
-  "indexReleaseRequested": true,
+  "includedInIndex": true,
+  "indexReleaseRequested": false,
   "remaining": "Giulietta: спорные мощности/идентичность/масса и ранние2018; Junior:2024, октябрь2026, категория/30мин/GVWQ4; далее MiTo2008+",
-  "allModelsComplete": false
+  "allModelsComplete": false,
+  "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
+  "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+  "cardSearchParityReport": "docs/encyclopedia/reports/2026-10-22-giulietta-junior-release-card-search-parity.json",
+  "calculationFields": 607,
+  "referenceOnlyFields": 18,
+  "existingRecordsPreserved": 174
 }
