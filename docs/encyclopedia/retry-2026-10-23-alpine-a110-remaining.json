@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T01:11:32+07:00",
+  "updatedAt": "2026-10-23T01:39:29+07:00",
   "modelId": "cc5a28958f2b1bd3eac176d4",
   "make": "Alpine",
   "model": "A110",
@@ -94,7 +94,6 @@
     },
     {
       "years": [
-        2023,
         2024,
         2025,
         2026
@@ -121,11 +120,49 @@
         "bodyType"
       ],
       "reason": "В текущей партии не подтверждён отдельным годовым источником; не считать заполненным по другим годам."
+    },
+    {
+      "years": [
+        2023
+      ],
+      "variants": [
+        "San Remo 73"
+      ],
+      "fields": [
+        "bodyType",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Записаны точные мощность/объём/тип двигателя; остальные поля спецсерии требуют отдельного подтверждения."
+    },
+    {
+      "years": [
+        2023
+      ],
+      "variants": [
+        "Fernando Alonso",
+        "Le Mans",
+        "Enstone Edition",
+        "Tour de Corse 75"
+      ],
+      "reason": "Проверить реальные годы и точные таблицы спецсерий; не считать гамму2023 полностью закрытой."
     }
   ],
   "accessNotes": [
     "media.alpinecars.com direct HTTP403: использованы доступные поисковым инструментом первичные тексты без обхода; часть PDF недоступна.",
     "Архивный PDF02/2018 и оригинальные PDF09/2019,04/2022 проверены визуально; в git только факты и ссылки."
   ],
-  "allModelsComplete": false
+  "allModelsComplete": false,
+  "publicMatchingReview": {
+    "checkedAt": "2026-10-23T01:39:29+07:00",
+    "release": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+    "alpineOfferIds": [
+      "f24374af90180dcb90e7efb3",
+      "d040fe8db9657a2e402a91bc"
+    ],
+    "state": "calculated_card_search_parity_pass_drive_empty",
+    "note": "Разобрать точную идентичность объявлений и отсутствующий привод, не расширяя совпадение по одной мощности. Технические факты виндексе сами по себе не доказывают совпадение с каждым объявлением."
+  }
 }

@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-10-22T18:31:17.385591+00:00",
+  "passed": true,
+  "batch": "research-2026-10-23-alpine-a110-2023",
+  "modelId": "cc5a28958f2b1bd3eac176d4",
+  "beforeRevision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+  "afterRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+  "newVariants": 4,
+  "updatedVariants": 1,
+  "confirmedFields": 45,
+  "preservedUnchangedVariants": 39,
+  "historyPreservedUpdates": 1,
+  "duplicatesAdded": 0,
+  "manualWrites": 0,
+  "rows": [
+    {
+      "variantId": "c778ac18248bd921411211e7",
+      "year": 2023,
+      "trim": "1.8 Turbo 252 PS DCT",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "c73a37d1587270d981331980",
+      "year": 2023,
+      "trim": "GT",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "e49f1ae82458acf14314596f",
+      "year": 2023,
+      "trim": "R",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "c240bc3e5843bca07e5a3055",
+      "year": 2023,
+      "trim": "San Remo 73",
+      "operation": "create",
+      "fields": 8,
+      "passed": true
+    },
+    {
+      "variantId": "8dd1d0b6bc6fb66eacbea728",
+      "year": 2023,
+      "trim": "S",
+      "operation": "update",
+      "fields": 1,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T01:39:29+07:00",
+  "state": "first_batch_active_late_batch_pending_next_index",
+  "release": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+  "workflow": 39828240506,
+  "job": 119997158321,
+  "workflowConclusion": "success",
+  "activationConfirmed": true,
+  "indexDigest": "86cb2a5d9e503e870633382e218071e89c046d25c38e921304db748f308521a5",
+  "manifestDigest": "81a8e991d8b71eb36ae0ae784ee9b4fe7922350289311e311de31905814720bb",
+  "indexReadback": true,
+  "modelsRead": 2423,
+  "compiledVariants": 68130,
+  "factoryFields": 25034,
+  "ownerReferenceFields": 485097,
+  "manualFields": 9,
+  "healthCalculationVersion": "669463ac57d4c4d8890392b1114d8b458e8bdb24729cc397ee5d7f608fedfc27",
+  "firstBatchCalculationFieldsActivated": 140,
+  "lateBatch": {
+    "key": "alpine-a110-2023",
+    "batch": "research-2026-10-23-alpine-a110-2023",
+    "commit": "ea495f04c0ffeea0de2b8fb500e4a40ff629b8f6",
+    "workflow": 39831749837,
+    "job": 120009393406,
+    "variants": 5,
+    "newVariants": 4,
+    "updatedVariants": 1,
+    "fields": 45,
+    "compiledCalculationFields": 41,
+    "workflowConclusion": "success",
+    "apiReadback": true,
+    "includedInIndex": false,
+    "indexMembershipState": "applied_after_e78c715_index_snapshot",
+    "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2023-readback.json"
+  },
+  "lateCalculationFieldsPending": 41,
+  "allNewBatchesActivated": false,
+  "duplicateReleaseRequested": false,
+  "visitorRequestSearchOrSyncAdded": false,
+  "codeRulesAndGuardsChanged": false,
+  "sourceWorkflowLog": "https://github.com/jeep-jim/AvtoCena/actions/runs/39828240506/job/119997158321",
+  "index": {
+    "stage": "encyclopedia_index_ready",
+    "modelsRead": 2423,
+    "variants": 68130,
+    "factoryFields": 25034,
+    "ownerReferenceFields": 485097,
+    "manualFields": 9,
+    "digest": "86cb2a5d9e503e870633382e218071e89c046d25c38e921304db748f308521a5",
+    "manifestDigest": "81a8e991d8b71eb36ae0ae784ee9b4fe7922350289311e311de31905814720bb",
+    "readback": true
+  },
+  "audit": {
+    "generationId": "gen_1792660229591_c103ed94",
+    "checkedAt": "2026-10-22T18:16:00.823Z",
+    "markets": {
+      "china": {
+        "rows": 162449,
+        "pending": 71881,
+        "exactMatches": 72239,
+        "filledRecords": 428,
+        "filledFields": 725,
+        "completeSpecifications": 259,
+        "calculated": 61,
+        "calculationMissing": {
+          "gross_vehicle_weight_kg": 193,
+          "vehicle_category": 5
+        },
+        "missing": {
+          "unclassified_field_provenance": 54729,
+          "engine_cc_missing": 2180,
+          "fuel_or_powertrain_missing": 1037,
+          "certified_30min_power_missing": 69441,
+          "peak_power_missing": 23199
+        }
+      },
+      "korea": {
+        "rows": 9916,
+        "pending": 7155,
+        "exactMatches": 37,
+        "filledRecords": 33,
+        "filledFields": 102,
+        "completeSpecifications": 18,
+        "calculated": 18,
+        "calculationMissing": {},
+        "missing": {
+          "unclassified_field_provenance": 13456,
+          "engine_cc_missing": 1,
+          "peak_power_missing": 6517,
+          "certified_30min_power_missing": 2022
+        }
+      },
+      "uae": {
+        "rows": 22039,
+        "pending": 22039,
+        "exactMatches": 11,
+        "filledRecords": 9,
+        "filledFields": 35,
+        "completeSpecifications": 6,
+        "calculated": 6,
+        "calculationMissing": {},
+        "missing": {
+          "unclassified_field_provenance": 22030,
+          "engine_cc_missing": 21629,
+          "peak_power_missing": 22029,
+          "certified_30min_power_missing": 2712,
+          "powertrain_identity_conflict": 1
+        }
+      },
+      "europe": {
+        "rows": 46127,
+        "pending": 7600,
+        "exactMatches": 36728,
+        "filledRecords": 308,
+        "filledFields": 602,
+        "completeSpecifications": 82,
+        "calculated": 2,
+        "calculationMissing": {
+          "vehicle_category": 80
+        },
+        "missing": {
+          "engine_cc_missing": 421,
+          "unclassified_field_provenance": 1764,
+          "fuel_or_powertrain_missing": 1248,
+          "certified_30min_power_missing": 5963,
+          "peak_power_missing": 712
+        }
+      },
+      "georgia": {
+        "rows": 1705,
+        "pending": 1705,
+        "exactMatches": 0,
+        "filledRecords": 0,
+        "filledFields": 0,
+        "completeSpecifications": 0,
+        "calculated": 0,
+        "calculationMissing": {},
+        "missing": {
+          "unclassified_field_provenance": 1639,
+          "engine_cc_missing": 1572,
+          "peak_power_missing": 1431,
+          "certified_30min_power_missing": 391,
+          "fuel_or_powertrain_missing": 66
+        }
+      }
+    },
+    "publicPriceParity": 87,
+    "readback": true,
+    "totals": {
+      "rows": 242236,
+      "filledRecords": 778,
+      "filledFields": 1464,
+      "calculated": 87
+    },
+    "comparisonToPriorIndexPerformed": false,
+    "note": "Итоги текущего контрольного снимка, не прирост к предыдущему установленному индексу. Япония в этом аудите не представлена. Снимки платных фидов и полный журнал вgit не переносились."
+  },
+  "validation": {
+    "exactMatchingTests": "24/24 PASS",
+    "indexAndAuditReadback": true,
+    "exactPricesPrepared": true,
+    "protectedDeployAndRollbackGates": "PASS",
+    "liveHealth": true,
+    "publicCardSearchParity": "5/5 PASS; 55 comparisons",
+    "regression": {
+      "passed": true,
+      "postActivation": true,
+      "offers": 5,
+      "fieldsPerOffer": 11,
+      "alpineOffers": 2,
+      "alpineStatuses": [
+        "estimated",
+        "estimated"
+      ],
+      "repeatedTonaleOffers": 3,
+      "tonaleRemainNeedsData": true,
+      "firstParallelAttempt": "Одна страница Tonale прервала чтение по таймауту; последовательный повтор прошёл для всех трёх.",
+      "reports": [
+        "docs/encyclopedia/reports/2026-10-23-a110-pass-repeated-card-search-parity.json",
+        "docs/encyclopedia/reports/2026-10-23-a110-existing-offers-card-search-parity.json"
+      ],
+      "doesNotClaimAllCatalogCalculated": true
+    }
+  },
+  "allModelsComplete": false,
+  "remaining": [
+    "Поздняя партия research-2026-10-23-alpine-a110-2023 записана после снимка;41расчётное поле требует следующего индекса.",
+    "Три проверенные Tonale2023 DieselSprint сохраняютneeds_data/неизвестныйengineCc; не считать проблему всех одинаковых модификаций решённой.",
+    "Существующие A110 вкаталоге рассчитываются; drive вкарточке/выдаче пока пуст. Установка фактов виндексе не означает автоматического совпадения всех объявлений.",
+    "Полнота всех моделей, лет и специального оборудования не достигнута; пропуски в retry."
+  ]
+}

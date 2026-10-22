@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T01:39:29+07:00",
+  "next": "Alpine A110 2024–2026: точные годовые исполнения; затем A290. Пропуски и спецсерии 2017–2023 отдельно.",
+  "currentModelId": "cc5a28958f2b1bd3eac176d4",
+  "nextModelId": "9f23c75ab6a73713bf64580a",
+  "doNotRepeat": [
+    {
+      "key": "alpine-a110-2017-2022",
+      "batch": "research-2026-10-23-alpine-a110-2017-2022",
+      "commit": "2404454672d5c2a9753c977d9e4a7be0d1543079",
+      "workflow": 39827707552,
+      "job": 119995305092,
+      "variants": 16,
+      "newVariants": 15,
+      "updatedVariants": 1,
+      "fields": 155,
+      "compiledCalculationFields": 140,
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": true,
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2017-2022-readback.json",
+      "indexDigest": "86cb2a5d9e503e870633382e218071e89c046d25c38e921304db748f308521a5",
+      "release": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+      "indexMembershipState": "native_compiler_guarded_manifest_snapshot",
+      "activationConfirmed": true
+    },
+    {
+      "key": "alpine-a110-2023",
+      "batch": "research-2026-10-23-alpine-a110-2023",
+      "commit": "ea495f04c0ffeea0de2b8fb500e4a40ff629b8f6",
+      "workflow": 39831749837,
+      "job": 120009393406,
+      "variants": 5,
+      "newVariants": 4,
+      "updatedVariants": 1,
+      "fields": 45,
+      "compiledCalculationFields": 41,
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_e78c715_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2023-readback.json"
+    }
+  ],
+  "readbackRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
+  "leads": [
+    {
+      "url": "https://media.alpinecars.com/the-2024-alpine-a110-range-and-pricing-for-france/?lang=eng",
+      "note": "ProductionMarch2024, despite announcementDecember2023; English bhp label conflicts with expected PS: verify French/table before saving."
+    },
+    {
+      "url": "https://media.alpinecars.com/triple-digit-growth-for-alpine-in-2025/?lang=eng",
+      "note": "A390 missing-family discovery needed; deliverieslate2025 not equal2026publicationdate."
+    },
+    {
+      "url": "https://www.alpine-marche.be/wp-content/uploads/2023/04/Alpine-A110.pdf",
+      "sha256": "64fcfba59d9c1f91739fcf53a9c58f4a16fef6684bf55d3ac8ada4400217226a",
+      "tablePage": 54,
+      "datePage": 64,
+      "documentDate": "12/2022",
+      "visualChecked": true,
+      "note": "Заводская брошюра GAMME_2023: таблица PDF54 и дата PDF64 визуально проверены. Поля base/GT/R применены партией research-2026-10-23-alpine-a110-2023; у S дополнен только engineCode из руководства. Не повторять."
+    },
+    {
+      "url": "https://media.alpinecars.com/alpine-a110-r-tarifs-et-ouverture-des-commandes-en-france/?lang=fra",
+      "note": "Первичный анонс поставок R/FernandoAlonso с весны2023; не создавать2022 по дате анонса."
+    },
+    {
+      "url": "https://cdn.group.renault.com/alp/uk/pdf/brochures/UK_Brochure_Alpine_A110.pdf.asset.pdf/a2f473e984.pdf?modelAdminId=a110",
+      "sha256": "58710125fafa4e62ffb90fbbbb42de1d23750c5f6f2185d4602be4c78b43c0cf",
+      "tablePage": 18,
+      "datePage": 22,
+      "documentDate": "03/2025",
+      "visualChecked": true,
+      "note": "Официальный PDF:base185kW/252HP,GTS221kW/300HP;1798,RWD,7DCT,coupe,GVW1360. Единицу HP сверить с французским ch;не сохранено вБД."
+    },
+    {
+      "url": "https://media.alpinecars.com/alpine-to-celebrate-its-70th-anniversary-with-a-limited-edition-a110-r-70-and-a-revamp-of-its-a110-range/?lang=fra",
+      "documentDate": "2025-02-26",
+      "note": "Анонс GTS/R70, заказы с начала марта2025; страница поfra фактическианглийская."
+    },
+    {
+      "url": "https://alpine-cergy-pontoise.fr/wp-content/uploads/2024/12/BrochureA290_2024.pdf",
+      "sha256": "8edab5db9464e645d462407464e9de8d9cb12a7cfef37700a7854ac1799ea88b",
+      "tablePage": 22,
+      "datePage": 25,
+      "documentDate": "10/2024",
+      "visualChecked": true,
+      "note": "Заводская брошюра у дилера:максимальная180ch/130kW или220ch/160kW;52kWh,FWD,редуктор,5-дверныйхэтчбек,GVW1950. 30-минутной мощности нет. Перед переносомточно сопоставить GT/GT Premium/GT Performance/GTS постраницамоборудования. НичегоизэтоговБДещёне записано."
+    },
+    {
+      "url": "https://alpinestoremilano.it/wp-content/uploads/2023/04/Listino_A110_MY22_04.04.2023.pdf",
+      "sha256": "ca86287eca3624186a8c4c2147bbf767fea5ca1b8e06b71d1f24039da72a8dbf",
+      "tablePage": 1,
+      "datePage": 1,
+      "documentDate": "2023-03-30",
+      "visualChecked": true,
+      "note": "Открытый заводской прайс от30.03.2023, PDF1. Использован для подтверждения годовой гаммы и мощности San Remo73. Партия2023 успешно применена и проверена API. Полные документы вgit не копируются."
+    }
+  ],
+  "integration": "Выпуск e78c715/39828240506 установлен; индекс86cb2a5 подтверждён native readback и live health. Первая партия:140расчётных полей включены. Поздняя партия2023:41расчётное поле ожидает следующего индекса. Вmain подготовлен новый storage-reader для отдельно сопровождаемой публикации Китая; не создавать дублирующий выпуск, согласовать по свежим runs/roadmap.",
+  "allModelsComplete": false,
+  "release": {
+    "commit": "e78c7154232f39ac73a2253314e2b0fe34da1344",
+    "workflow": 39828240506,
+    "state": "success",
+    "noDuplicateRelease": true,
+    "indexDigest": "86cb2a5d9e503e870633382e218071e89c046d25c38e921304db748f308521a5",
+    "activationConfirmed": true
+  }
+}
