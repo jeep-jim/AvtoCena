@@ -1,4 +1,5 @@
 "use client";
+import {groupFilterModels} from "@/lib/catalog/model-filter-options";
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal, flushSync } from "react-dom";
@@ -184,7 +185,8 @@ export function VehicleModelSearch({
   const sourceSearch=useMemo(()=>sourceItems?createModelSuggestionSearch({version:1,brands:[],models:sourceItems.map(item=>[item.make,item.model,item.aliases||[],1])}):null,[sourceItems]);
   const items=useMemo(()=>{
     const local=sourceSearch?mergeModelSuggestions(inventory?.(searchQuery,make)||[],sourceSearch(searchQuery,make),searchQuery):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems.map(item=>({...item,aliases:item.aliases||[]}));
-    return mergeModelSuggestions(supplierSearches.flatMap(search=>search(searchQuery,make)),local,searchQuery);
+    const merged=mergeModelSuggestions(supplierSearches.flatMap(search=>search(searchQuery,make)),local,searchQuery);
+    return contextual?groupFilterModels(merged):merged;
   },[sourceSearch,contextual,inventory,directory,searchQuery,make,remoteItems,supplierSearches]);
   useEffect(()=>setVisibleCount(60),[searchQuery,make]);
   const [open, setOpen] = useState(false);

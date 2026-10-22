@@ -82,3 +82,12 @@ test('unreviewed localized document headings do not enter the public dictionary;
  assert.equal(find('').length,2);
  assert.equal(find('','Toyota').length,2);
 });
+
+ test('Russian spellings, transliteration and typos suggest the canonical model',()=>{
+ const find=createModelSuggestionSearch({version:1,brands:[],models:[['Toyota','Corolla',[],1],['Toyota','Corolla Cross',[],1],['Hyundai','Kona',[],1],['Hyundai','Kona Electric',[],1],['BMW','X5',[],1],['BMW','X3',[],1]]});
+ for(const q of ['королла','колрла','corola','korolla','xorolla'])assert.ok(find(q).some(row=>row.model==='Corolla'),q);
+ for(const q of ['кона','cona','kona'])assert.equal(find(q)[0].model,'Kona',q);
+ assert.deepEqual(find('колрла','Hyundai'),[]);
+ assert.deepEqual(find('X4'),[]);
+ assert.equal(find('Corolla')[0].related,undefined);
+ });

@@ -4,6 +4,20 @@ export type ModelSearchData = {version:1;models:[string,string,string[],number][
 export type ModelSuggestion = {id?:string;make:string;model:string;aliases:string[];related?:boolean};
 const letters:Record<string,string>={а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'i',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'ts',ч:'ch',ш:'sh',щ:'sch',ъ:'',ы:'i',ь:'',э:'e',ю:'yu',я:'ya'};
 export function suggestionKey(value:string){return value.normalize('NFKC').toLowerCase().replace(/[а-яё]/g,c=>letters[c]).replace(/y/g,'i').replace(/c(?=[aourl])/g,'k').replace(/([lrs])\1+/g,'$1').replace(/[^\p{L}\p{N}]+/gu,' ').trim();}
+// Bounded typo suggestions for alphabetic names only; never rewrite a selection.
+function nearModelWord(query:string, word:string){
+ if(!/^[a-z]{4,}$/.test(query)||!/^[a-z]+$/.test(word))return false;
+ const max=query.length>=5?2:1;
+ if(Math.abs(query.length-word.length)>max)return false;
+ let previous=Array.from({length:word.length+1},(_,i)=>i);
+ for(let i=1;i<=query.length;i++){
+  const next=[i];
+  for(let j=1;j<=word.length;j++)next[j]=Math.min(next[j-1]+1,previous[j]+1,previous[j-1]+(query[i-1]===word[j-1]?0:1));
+  if(Math.min(...next)>max)return false;
+  previous=next;
+ }
+ return previous[word.length]<=max;
+}
 const brandKey=(make:string)=>suggestionKey(canonicalCatalogBrand(make));
 function* compileSearch(data:ModelSearchData){
  const brandAliases=new Map<string,string>();
@@ -35,7 +49,9 @@ function* compileSearch(data:ModelSearchData){
   if(q.length<2&&q&&!brands.size)return [];
   const tokens=q.split(' ').filter(Boolean),significant=tokens.filter(t=>t.length>=4);
   const results:{row:typeof rows[number];score:number;related:boolean}[]=[];
-  const candidates=brands.size?[...brands].flatMap(brand=>makeRows.get(brand)||[]):q?(tokens[0].length>=2?fragmentRows.get(tokens[0].slice(0,2))||[]:rows.flatMap((row,index)=>row.names.some(name=>name.includes(tokens[0]))?[index]:[])):rows.map((_,index)=>index);
+  const typoQuery=tokens.length===1&&/^[a-z]{4,}$/.test(q);
+  const fragmentCandidates=typoQuery?[...new Set(Array.from({length:q.length-1},(_,i)=>fragmentRows.get(q.slice(i,i+2))||[]).flat())]:fragmentRows.get(tokens[0]?.slice(0,2))||[];
+  const candidates=brands.size?[...brands].flatMap(brand=>makeRows.get(brand)||[]):q?(tokens[0].length>=2?fragmentCandidates:rows.flatMap((row,index)=>row.names.some(name=>name.includes(tokens[0]))?[index]:[])):rows.map((_,index)=>index);
   for(const index of candidates){const row=rows[index];
    if(brands.size&&!brands.has(row.brand))continue;
    let score=q?0:100,related=false;
@@ -48,7 +64,8 @@ function* compileSearch(data:ModelSearchData){
     // Missing middle words / trim suffix: Corolla Z may suggest Corolla Cross.
     // Require a substantial shared word; never broaden short numeric identities.
     else if(tokens.length>1&&significant.length&&significant.every(t=>name.split(' ').includes(t)))rank=300;
-    if(rank>score){score=rank;related=rank===300;}
+    else if(typoQuery&&name.split(' ').some(word=>nearModelWord(q,word)))rank=200;
+    if(rank>score){score=rank;related=rank===300||rank===200;}
    }
    if(score)results.push({row,score:score+(row.canonical?20:0),related});
   }
