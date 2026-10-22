@@ -1,0 +1,208 @@
+{
+  "checkedAt": "2026-10-22T04:19:55.745Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-aito-m6-gross-mass-and-edition",
+  "digest": "33fd5466b615220002fc79c2e266ce7eab209bf8d586eef93eb4c1b12683d277",
+  "sourceModelRevision": "4093550b-5e8e-4597-9511-ebbb1f78dee0",
+  "recordsRead": 18,
+  "variants": 13,
+  "newVariants": 1,
+  "fields": 20,
+  "plan": {
+    "changes": [
+      {
+        "variantId": "f95ceb79d43685224a299759",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "90641a1cfb521cd2c45d7689",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "8c34f3907fa45adb900ed6c0",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "478432305a9118c46fd3e4f7",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "77adb4c03bdb1412a28109c8",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "235609122d33377c27a6c21a",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f76c9efd82f7b91a385b16e0",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "49caade874ae04290cb92097",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "a4888807696fe9d693d3f3b7",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f43a569e298d5682ed842aef",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "346c7414d8e9062518476566",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "12ea4ae30cca59af81e4b491",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "abb130ef6af08f54f7a1ae8a",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "drive",
+          "batteryKwh",
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "mapping": {
+    "EREV Max": {
+      "mass": 2920,
+      "code": "SKE6501DREEVA1F",
+      "battery": 37,
+      "drive": "awd"
+    },
+    "EREV Max+ Long Range": {
+      "mass": 2865,
+      "code": "SKE6501DREEVR1",
+      "battery": 53.4,
+      "drive": "rwd"
+    },
+    "EREV Ultra": {
+      "mass": 2940,
+      "code": "SKE6501DREEVA2F",
+      "battery": 53.4,
+      "drive": "awd"
+    },
+    "EV Max": {
+      "mass": 2885,
+      "code": "SKE6501DBEVR2 / SKE6501DBEVR3",
+      "battery": 81,
+      "drive": "rwd"
+    },
+    "EV Max+": {
+      "mass": 2885,
+      "code": "SKE6501DBEVR2 / SKE6501DBEVR3",
+      "battery": 81,
+      "drive": "rwd"
+    },
+    "EV Max+ Long Range": {
+      "mass": 2835,
+      "code": "SKE6501DBEVR1",
+      "battery": 100,
+      "drive": "rwd"
+    },
+    "EV Ultra": {
+      "mass": 2940,
+      "code": "SKE6501DBEVA1F",
+      "battery": 100,
+      "drive": "awd"
+    },
+    "EREV Max+": {
+      "mass": 2920,
+      "code": "SKE6501DREEVA1F",
+      "battery": 37,
+      "drive": "awd"
+    }
+  },
+  "retry": [
+    {
+      "variantId": "838011c4ae17bb08884b64a0",
+      "year": 2026,
+      "reason": "Нет однозначного исполнения: название Base Model или отсутствие trim. Наблюдаемая масса/привод сами по себе не определяют модификацию."
+    },
+    {
+      "variantId": "d1ff03d2b0be265c3f57a020",
+      "year": 2026,
+      "reason": "Нет однозначного исполнения: название Base Model или отсутствие trim. Наблюдаемая масса/привод сами по себе не определяют модификацию."
+    },
+    {
+      "variantId": "4d66e82c37991737ed76df38",
+      "year": 2026,
+      "reason": "Нет однозначного исполнения: название Base Model или отсутствие trim. Наблюдаемая масса/привод сами по себе не определяют модификацию."
+    },
+    {
+      "variantId": "d470da45d9f98bb8dc3994ff",
+      "year": 2026,
+      "reason": "Нет однозначного исполнения: название Base Model или отсутствие trim. Наблюдаемая масса/привод сами по себе не определяют модификацию."
+    },
+    {
+      "variantId": "b91e043c92b53b18b82a6a06",
+      "year": 2026,
+      "reason": "Нет однозначного исполнения: название Base Model или отсутствие trim. Наблюдаемая масса/привод сами по себе не определяют модификацию."
+    },
+    {
+      "variantId": "e00e5042cffaaa3cdd376679",
+      "year": 2026,
+      "reason": "Нет однозначного исполнения: название Base Model или отсутствие trim. Наблюдаемая масса/привод сами по себе не определяют модификацию."
+    }
+  ],
+  "missingFields": [
+    "power30MinKw",
+    "frontMotor30MinKw",
+    "rearMotor30MinKw",
+    "documented calculation-eligible icePowerKw"
+  ],
+  "manuals": [
+    {
+      "name": "m6-erev",
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/问界M6增程版使用说明书.pdf",
+      "sha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+      "currentDownloadMatches": true
+    },
+    {
+      "name": "m6-ev",
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/问界M6纯电版使用说明书.pdf",
+      "sha256": "a3128e44685bf0f43eee416318605045934d2e703340a2061f32ad5baeaf3fb9",
+      "currentDownloadMatches": true
+    }
+  ],
+  "dependsOnReleaseWorkflow": 39720853891,
+  "requiresFreshApiCas": true,
+  "duplicateNote": "Существующие пары точных исполнений с префиксом 2026 и без него не объединялись; масса подтверждена для каждого ID. Первоначальная идентичность и история источников сохраняются.",
+  "historicalExpansionComplete": false
+}

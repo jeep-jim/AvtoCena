@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T11:14:37.008237+07:00",
+  "updatedAt": "2026-10-22T11:20:29.337221+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -250,7 +250,10 @@
         2026
       ],
       "variants": 18,
-      "status": "partial_applied"
+      "status": "partial_applied",
+      "lastReviewedAt": "2026-10-22T11:20:29.337221+07:00",
+      "sourceReview": "docs/encyclopedia/reports/2026-10-22-aito-m6-gross-mass-and-edition-plan.json",
+      "nextAction": "После M5 и завершения текущего выпуска: свежий API/CAS, применить 13 вариантов / 20 полей, включая новое EREV Max+; проверить readback. Затем M7. Шесть неоднозначных записей остаются в retry."
     },
     {
       "id": "b3f19fa0f1975e57410dd272",
@@ -32424,7 +32427,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T11:14:37.008237+07:00",
+    "updatedAt": "2026-10-22T11:20:29.337221+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "index_release_running_next_batch_prepared",
     "preserveManual": true,
@@ -32515,7 +32518,19 @@
       }
     ],
     "requestedRelease": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
-    "requestedReleaseWorkflow": 39720853891
+    "requestedReleaseWorkflow": 39720853891,
+    "additionalPreparedResearch": [
+      {
+        "state": "prepared_not_applied",
+        "batch": "docs/encyclopedia/batches/2026-10-22-aito-m6-gross-mass-and-edition.json",
+        "variants": 13,
+        "fields": 20,
+        "newVariants": 1,
+        "digest": "33fd5466b615220002fc79c2e266ce7eab209bf8d586eef93eb4c1b12683d277",
+        "dependsOnReleaseWorkflow": 39720853891,
+        "requiresFreshApiCas": true
+      }
+    ]
   },
   "scope": {
     "minimumYear": 2008,
