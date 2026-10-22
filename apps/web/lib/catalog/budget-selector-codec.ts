@@ -49,6 +49,8 @@ export function verifiedPackedBudgetSelector(directory:PackedBudgetDirectory,mar
 
 
 export const BUDGET_SELECTOR_STORAGE_VERSION = 6;
+// Keep release/data revisions immutable alongside one another during cutover.
+export const specificationSelectorDirectory=(encyclopediaDigest:string|null,calculationVersion:string)=>`budget-markets-v6/${digest([encyclopediaDigest,calculationVersion])}`;
 export type CompressedBudgetSelector = {encoding:'gzip-base64';payload:string};
 export type CompressedBudgetDirectory = Omit<PackedBudgetDirectory,'version'> & {version:3;encyclopediaDigest?:string|null};
 // Derived, immutable selectors only. Bound inflation even if an object is corrupt.

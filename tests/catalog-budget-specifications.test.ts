@@ -30,7 +30,7 @@ test('backfilled specifications preserve identities, unknowns and exact engine/c
 
 
 test('specification backfill accepts empty markets but rejects a missing populated market',async()=>{
- const {getJsonStorage}=await import('../apps/web/lib/data');
+ const {getJsonStorage,StorageConflictError}=await import('../apps/web/lib/data');
  const {backfillBudgetSpecificationSelectors,resetCatalogReadCachesForTests}=await import('../apps/web/lib/catalog/storage');
  const generationId='empty-market-specs';
  const offers:any[]=[{id:'china-one',market:'china',make:'Haval',model:'M6',engineCc:1497,totalRub:2000000}];
@@ -38,16 +38,25 @@ test('specification backfill accepts empty markets but rejects a missing populat
  const manifest:any={generationId,markets:{china:{count:1},japan:{count:0}}};
  const values=new Map<string,any>([['catalog/manifest.json',manifest],[`catalog/generations/${generationId}/indexes/budget-count-v3.json`,source],[`catalog/generations/${generationId}/indexes/budget-cards-v3/0.json`,{generationId,items:offers}]]);
  const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
+ const previousVersion=process.env.AVTOCENA_CALCULATION_VERSION;
+ process.env.AVTOCENA_CALCULATION_VERSION='a'.repeat(64);
  storage.readJson=async <T>(key:string,fallback:T)=>values.has(key)?values.get(key):fallback;
  storage.readJsonWithMeta=async <T>(key:string,fallback:T)=>({found:values.has(key),value:values.has(key)?values.get(key):fallback});
- storage.writeJson=async(key,value)=>{values.set(key,value);};
+ storage.writeJson=async(key,value,condition)=>{if(condition?.ifNoneMatch==='*'&&values.has(key))throw new StorageConflictError();values.set(key,value);};
  try{
   resetCatalogReadCachesForTests();
   const ready=await backfillBudgetSpecificationSelectors();
   assert.deepEqual(Object.keys(ready.markets),['china']);
   assert.equal(ready.markets.china.rows+ready.markets.china.otherRows,1);
-  assert.equal([...values.keys()].some(key=>key.endsWith('/budget-markets-v5/japan.json')),false);
+  assert.equal([...values.keys()].some(key=>/budget-markets-v6\/[^/]+\/japan.json$/.test(key)),false);
+  const firstKeys=[...values.keys()].filter(key=>key.includes('/budget-markets-v6/'));
+  const firstValues=firstKeys.map(key=>JSON.stringify(values.get(key)));
+  process.env.AVTOCENA_CALCULATION_VERSION='b'.repeat(64);resetCatalogReadCachesForTests();
+  await backfillBudgetSpecificationSelectors();
+  assert.equal([...values.keys()].filter(key=>key.includes('/budget-markets-v6/')).length,firstKeys.length*2,'a new release has its own immutable selector namespace');
+  assert.deepEqual(firstKeys.map(key=>JSON.stringify(values.get(key))),firstValues,'previous live selectors remain byte-for-byte unchanged');
+  await backfillBudgetSpecificationSelectors();
   manifest.markets.japan.count=1;resetCatalogReadCachesForTests();
   await assert.rejects(backfillBudgetSpecificationSelectors(),/budget_specification_nonempty_market_missing/);
- }finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;resetCatalogReadCachesForTests();}
+ }finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;if(previousVersion===undefined)delete process.env.AVTOCENA_CALCULATION_VERSION;else process.env.AVTOCENA_CALCULATION_VERSION=previousVersion;resetCatalogReadCachesForTests();}
 });
