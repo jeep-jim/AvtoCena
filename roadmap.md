@@ -12217,3 +12217,12 @@ Stelvio2023–2026 run39785287022 SUCCESS; подробный readback уже з
 ### 22.10.2026 20:33 Asia/Krasnoyarsk — Tonale 2022: подготовлены 11 исполнений / 106 полей
 
 Сохранённый курсор Tonale продолжен без повторения Stelvio. Заводские таблицы 16.05/12.07/18.11.2022, страницы 2/3/13 визуально проверены: 6 MHEV,3 дизельных,2 PHEV;8 новых строк и3 дополнения. Раздельно ДВС96/118/132кВт, электромотор15/90кВт (пик),системаPHEV206кВт; никаких догадок о30-минутной мощности/массе/кодах. СвежийCAS-preflight и8/8guardtests PASS. Партия подготовлена, фактическое сохранение ещё проверяется. Текущий deploy39781954190 и обаreference-intake работают, дубликаты не запущены. Новые данные потребуют следующего индекса.
+
+
+### 22.10.2026 20:36 Asia/Krasnoyarsk — Установка подтверждена, запускается восстановление China2014
+
+Deploy39781954190 SUCCESS завершён13:31:21UTC; независимый публичный /api/health HTTP200 подтвердил27a073c40317608196df93a7b51fb1b72c5daac8/calculationVersionfa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5. В логе есть краткая неудача сравнения release при переключении, после неё проверка прошла; внешний контроль также подтвердил нужный SHA. Все4specification-parity PASS. Блокировка проверена39787125245/job119853181753:13:29:01UTC activefalse, прежняяleaseистекла13:21:03UTC. Новыйdeploy не запускается.
+
+Проверены активные/queued workflows и marker: новойChinaпубликации нет. Запрошена ровноодна публикация из сохранённого intake39680279304:publishMarkets[china],refreshMarkets[],resetCursorsfalse; безпоставщика/HTML/сброса. Опубликованнаяgenerationпокаgen_1792660229591_c103ed94,China162449,2014querytotal0; восстановление2014–2019 ещё не подтверждено. HomeHTTP200,total933012;JP621668,KR78607,UAE22038,EU46125,GE1705. Штатный post-deploy prices39787631986 queued,неотменяется; при сменеgenerationегоитогпроверитьотдельно.
+
+Mobile39785388351: Chromium14cases PASS, multiple-model/city/photo-upload PASS, WebKit14cases PASS. Live-budget после подтверждения27a отказал response.ok на первомJapanзапросе; точныйHTTPвтесте невыводился. Повторный публичныйJapanbudget2000000/pageSize2HTTP200,partialtrue,staletrue,totalnull; это не доказательство стабильности/полной проверки. Runостаётсяfailure. CRM39787125424: все realCRM pages SUCCESS, но последующий publicdropdown/calculation regression FAILURE, причина изучается; не объявлятьвесьrunзелёным. Справочники продолжаются. ПоздниеStelvio2020–2026 иTonaleтребуютодногоследующегоиндекса послеChina.
