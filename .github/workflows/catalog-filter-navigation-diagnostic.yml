@@ -1,0 +1,30 @@
+name: Catalog — diagnose one mobile filter navigation
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/catalog-filter-navigation-diagnostic.json']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-filter-navigation-diagnostic
+  cancel-in-progress: false
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --prefix "$RUNNER_TEMP/filter-diagnostic" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Inspect one public 360px filter transition without rebuilding the app
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-diagnostic/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node scripts/catalog-filter-navigation-diagnostic.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-filter-navigation
+          path: artifacts/catalog-filter-navigation
+          retention-days: 7
