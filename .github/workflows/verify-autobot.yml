@@ -1,7 +1,7 @@
 name: Verify Autobot tools and tab memory
 on:
   push:
-    paths: ['apps/web/lib/autobot/**', 'apps/web/components/autobot/**', 'apps/web/lib/autocalc/source.ts', 'tests/autobot.test.ts', 'tests/browser/autobot-session.mjs', '.github/workflows/verify-autobot.yml']
+    paths: ['apps/web/lib/autobot/**', 'apps/web/components/autobot/**', 'apps/web/lib/autocalc/source.ts', 'tests/autobot.test.ts', 'tests/catalog-japan-filter-rail.test.ts', 'tests/browser/autobot-session.mjs', '.github/workflows/verify-autobot.yml']
   workflow_dispatch:
 permissions:
   contents: read

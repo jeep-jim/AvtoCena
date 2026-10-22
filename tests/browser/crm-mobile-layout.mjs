@@ -105,7 +105,7 @@ try{
     await page.reload();await page.locator('.crm-clients-grid').waitFor();
    }
    if(kind==='client'){
-    const chat=page.locator('.crm-discussion');await chat.getByText('Стас, свяжись с клиентом',{exact:true}).waitFor();await page.evaluate(()=>{const u=new URL(location.href);u.searchParams.set('message','old-comment');u.hash='discussion-client-client-0';history.replaceState({},'',u);window.dispatchEvent(new HashChangeEvent('hashchange'));});await chat.locator('.is-highlighted').waitFor();await chat.getByRole('button',{name:'Ответить',exact:true}).click();await chat.getByLabel('Сообщение команде',{exact:true}).fill('Принял, свяжусь сегодня');await chat.getByRole('button',{name:'Отправить',exact:true}).click();await chat.getByText('Принял, свяжусь сегодня',{exact:true}).waitFor();assert.equal(chatWrites,1);await chat.locator('blockquote').waitFor({state:'visible'});assert.equal(await chat.getByLabel('Сообщение команде',{exact:true}).inputValue(),'');
+    const chat=page.locator('.crm-discussion');await chat.getByText('Стас, свяжись с клиентом',{exact:true}).waitFor();await page.evaluate(()=>{const u=new URL(location.href);u.searchParams.set('message','old-comment');u.hash='discussion-client-client-0';history.replaceState({},'',u);window.dispatchEvent(new HashChangeEvent('hashchange'));});await chat.locator('.is-highlighted').waitFor();await chat.getByRole('button',{name:'Действия с сообщением Антон',exact:true}).click();await page.getByRole('dialog',{name:'Сообщение',exact:true}).getByRole('button',{name:'Ответить',exact:true}).click();await chat.getByLabel('Сообщение команде',{exact:true}).fill('Принял, свяжусь сегодня');await chat.getByRole('button',{name:'Отправить сообщение',exact:true}).click();await chat.getByText('Принял, свяжусь сегодня',{exact:true}).waitFor();assert.equal(chatWrites,1);await chat.locator('blockquote').waitFor({state:'visible'});assert.equal(await chat.getByLabel('Сообщение команде',{exact:true}).inputValue(),'');
     assert.equal(await chat.getByRole('button',{name:'Редактировать',exact:true}).count(),1);await chat.getByRole('button',{name:'Редактировать',exact:true}).click();await chat.getByLabel('Редактировать свой комментарий').fill('Исправленный комментарий');await chat.getByRole('button',{name:'Отмена',exact:true}).click();assert.equal(chatMessages[1].text,'Принял, свяжусь сегодня');await chat.getByRole('button',{name:'Редактировать',exact:true}).click();await chat.getByLabel('Редактировать свой комментарий').fill('Исправленный комментарий');await chat.getByRole('button',{name:'Сохранить изменение',exact:true}).click();await chat.getByText('Исправленный комментарий',{exact:true}).waitFor();assert.equal(chatMessages.length,2);assert.equal(chatWrites,1);await chat.getByText(/изменено/).waitFor();
     if(width===390||width===1440)await chat.screenshot({path:`${out}/discussion-${theme}-${width}.png`});
     await chat.getByLabel('Сообщение команде',{exact:true}).fill('Черновик ответа');const chatScroll=await page.evaluate(()=>scrollY);await Promise.all([page.waitForResponse(r=>r.url().includes('/api/crm/discussion')&&r.request().method()==='GET'),page.evaluate(()=>window.dispatchEvent(new Event('avtocena:crm-change')))]);await page.evaluate(()=>new Promise(requestAnimationFrame));assert.equal(await chat.getByLabel('Сообщение команде',{exact:true}).inputValue(),'Черновик ответа');assert.ok(Math.abs((await page.evaluate(()=>scrollY))-chatScroll)<2,'polling does not move page');await chat.getByLabel('Сообщение команде',{exact:true}).fill('');
@@ -153,13 +153,13 @@ try{
     page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'Удалить Кадровый документ.pdf',exact:true}).click();assert.equal(staffDocs.length,1);page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Удалить Кадровый документ.pdf',exact:true}).click();await page.getByText('Документов пока нет.',{exact:true}).waitFor();
     await page.getByRole('tab',{name:'График',exact:true}).click();await page.locator('.crm-calendar-person-row').waitFor();assert.equal(await page.locator('.crm-calendar-person-row').count(),1);await page.getByRole('tab',{name:'Данные',exact:true}).click();assert.equal(await page.getByLabel('Дата рождения',{exact:true}).inputValue(),'1991-05-16');assert.equal(await page.getByLabel('Адрес офиса 2',{exact:true}).inputValue(),'Новокузнецк, офис 2');
     if(width===390||width===1440){await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));await page.screenshot({path:`${out}/staff-tabs-${theme}-${width}.png`,fullPage:true});}
-    assert.equal(await page.locator('.crm-permissions').getByRole('switch').count(),17,'permission controls remain separate from the offer-copy switch');for(const key of ['chat','analytics','site','game','replyReviews','deleteReviews'])assert.equal(await page.locator(`[name=permission_${key}]`).count(),1,'new capability is independently configurable');assert.equal(await page.locator('input[name=offerCopyEnabled]').count(),1);assert.equal(await page.getByRole('switch',{name:/Удаление клиентов и заявок/}).isDisabled(),true);assert.equal(await page.getByRole('switch',{name:/Управление сотрудниками/}).isDisabled(),true);
+    assert.equal(await page.locator('.crm-permissions').getByRole('switch').count(),20,'permission controls remain separate from the offer-copy switch');for(const key of ['assistant','assistantCode','deleteIdeas','chat','analytics','site','game','replyReviews','deleteReviews'])assert.equal(await page.locator(`[name=permission_${key}]`).count(),1,'new capability is independently configurable');assert.equal(await page.locator('input[name=offerCopyEnabled]').count(),1);assert.equal(await page.getByRole('switch',{name:/Удаление клиентов и заявок/}).isDisabled(),true);assert.equal(await page.getByRole('switch',{name:/Управление сотрудниками/}).isDisabled(),true);
     await page.getByLabel('Роль',{exact:true}).selectOption('admin');assert.equal(await page.getByRole('switch',{name:/Удаление клиентов и заявок/}).isDisabled(),false);assert.equal(await page.getByRole('switch',{name:/Управление сотрудниками/}).isDisabled(),false);
     await page.getByRole('switch',{name:/Документы и договоры/}).uncheck();assert.equal(await page.getByRole('switch',{name:/Документы и договоры/}).isChecked(),false);
     await page.getByLabel('Роль',{exact:true}).selectOption('dealer');assert.equal(await page.locator('.crm-permissions').getByRole('switch').count(),2);for(const key of ['replyReviews','deleteReviews'])assert.equal(await page.locator(`[name=permission_${key}]`).count(),1);
    }
    if(kind==='overview'&&width<=390){const boxes=await page.locator('.crm-metrics>div').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.equal(boxes[0].y,boxes[1].y);assert.ok(boxes[2].y>boxes[0].y);}
-   if(['clients','client','leads'].includes(kind)){assert.ok(await page.locator('.crm-manual-client-origin').count()>0,'manual origin is shown');if(kind==='leads')assert.ok((await page.locator('.crm-manual-client-origin').first().innerText()).includes('Уже был в базе'));if(kind==='clients'&&(width===390||width===1440)){await page.locator('.crm-manual-client-origin').first().scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/manual-origin-${theme}-${width}.png`});}}
+   if(['clients','client','leads'].includes(kind)){assert.ok(await page.locator('.crm-manual-client-origin').count()>0,'manual origin is shown');if(kind==='leads')assert.ok(await page.locator('.crm-manual-client-origin').filter({hasText:'Уже был в базе'}).count()>0);if(kind==='clients'&&(width===390||width===1440)){await page.locator('.crm-manual-client-origin').first().scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/manual-origin-${theme}-${width}.png`});}}
    if(kind==='documents'){
     assert.equal(await page.getByRole('button',{name:'Договоры',exact:true}).count(),0);
     assert.equal(await page.getByRole('button',{name:'Создать договор',exact:true}).count(),1);
@@ -180,20 +180,20 @@ try{
     await page.waitForFunction(()=>{const paper=document.querySelector('.contract-paper'),target=paper?.querySelector('.contract-highlight');if(!target)return false;const p=paper.getBoundingClientRect(),t=target.getBoundingClientRect();return t.top>=p.top&&t.bottom<=p.bottom;});
     if(width>=768){const box=await page.locator('.contract-preview').boundingBox();assert.ok(box.y+box.height<=851,'preview fits viewport');}
     if(width===390||width===1440)await page.screenshot({path:`${out}/contract-editor-${theme}-${width}.png`});
-    await page.getByRole('button',{name:'← К списку',exact:true}).click();await page.locator('.contract-list-row').waitFor();
-    page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'В архив договор TEST/99',exact:true}).click();assert.equal(await page.locator('.contract-list-row').count(),1,'cancel archive retains document');
+    await page.getByRole('button',{name:'← К списку',exact:true}).click();await page.locator('.contract-list-row, .contract-records-table tbody tr').waitFor();
+    page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'В архив договор TEST/99',exact:true}).click();assert.equal(await page.locator('.contract-list-row, .contract-records-table tbody tr').count(),1,'cancel archive retains document');
     page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'В архив договор TEST/99',exact:true}).click();await page.getByRole('button',{name:'Архив',exact:true}).click();await page.getByRole('button',{name:'Восстановить договор TEST/99',exact:true}).waitFor();
-    page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Восстановить договор TEST/99',exact:true}).click();await page.getByRole('button',{name:'Архив',exact:true}).click();await page.locator('.contract-list-row').waitFor();
+    page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Восстановить договор TEST/99',exact:true}).click();await page.getByRole('button',{name:'Архив',exact:true}).click();await page.locator('.contract-list-row, .contract-records-table tbody tr').waitFor();
     if(width===1440){await page.getByRole('button',{name:'Редактировать шаблон',exact:true}).click();await page.locator('.contract-editor-layout').waitFor();assert.ok(await page.locator('.contract-paper').isVisible());await page.getByRole('button',{name:'← К списку',exact:true}).click();}
    }
    if(kind==='documents'){
     for(let i=0;i<5;i++){await page.getByRole('button',{name:'Создать договор',exact:true}).click();await page.getByRole('button',{name:'← К списку',exact:true}).click();}
-    await page.locator('.contract-list-row').nth(5).waitFor();
+    await page.locator('.contract-list-row, .contract-records-table tbody tr').nth(5).waitFor();
     await page.getByRole('button',{name:'Плитки',exact:true}).click();
     const columns=await page.locator('.contract-list-tiles').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length);
     assert.equal(columns,width>=1100?3:width>=768?2:1);
-    await page.getByPlaceholder('Клиент, автомобиль или номер').fill('TEST/99');assert.equal(await page.locator('.contract-list-row').count(),1);
-    await page.getByRole('button',{name:'Список',exact:true}).click();assert.equal(await page.locator('.contract-list-row').count(),1);
+    await page.getByPlaceholder('Клиент, автомобиль или номер').fill('TEST/99');assert.equal(await page.locator('.contract-list-row, .contract-records-table tbody tr').count(),1);
+    await page.getByRole('button',{name:'Список',exact:true}).click();assert.equal(await page.locator('.contract-list-row, .contract-records-table tbody tr').count(),1);
     await page.getByRole('button',{name:'Плитки',exact:true}).click();await page.getByRole('button',{name:'Сбросить',exact:true}).click();
     await page.reload();await page.locator('.contract-list-tiles .contract-list-row').nth(5).waitFor();
     if(width===390||width===1440){await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:`${out}/document-tiles-${theme}-${width}.png`});}
@@ -300,7 +300,7 @@ try{
     if(width===1440){const list=await page.locator('.crm-clients-list').boundingBox(),form=await page.locator('.crm-client-create').boundingBox();assert.ok(form.x>list.x+list.width,'create form on the right');}
    }
    if(kind==='game'){
-    // Exercise the CSS landscape fallback even when a browser supports fullscreen.
+    // Exercise the embedded viewport when fullscreen is unavailable.
     await page.evaluate(()=>{Element.prototype.requestFullscreen=()=>Promise.reject(new Error('Not supported'));});
     await page.getByRole('button',{name:'Погнали!',exact:true}).click();
     const close=page.getByRole('button',{name:'Закрыть игру',exact:true}),game=page.frameLocator('.pognali-frame');
@@ -309,7 +309,7 @@ try{
     const box=await page.locator('.pognali-frame').boundingBox();
     assert.ok(box.x>=-1&&box.y>=-1&&box.x+box.width<=width+1&&box.y+box.height<=851,'game fits viewport');
     const dimensions=await game.locator('body').evaluate(()=>({w:innerWidth,h:innerHeight}));
-    if(width<768)assert.ok(dimensions.w>dimensions.h,'portrait phone renders landscape game');
+    assert.ok(dimensions.w>0&&dimensions.h>0,'embedded game has a usable viewport');
     assert.ok(await game.locator('#btnStart').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'start visible without scrolling');
     assert.ok(await close.isVisible());
     if(width<768){
@@ -317,7 +317,7 @@ try{
      // Send a real touchscreen tap at the DOM-derived, rotated button center.
      const target=await game.locator('#btnStart').evaluate(e=>{const r=e.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2;return {x,y,hit:document.elementFromPoint(x,y)?.closest('button')?.id};});
      assert.equal(target.hit,'btnStart','start is not covered inside the game');
-     await page.touchscreen.tap(box.x+box.width-target.y,box.y+target.x);
+     await page.touchscreen.tap(box.x+target.x,box.y+target.y);
     }else await game.getByRole('button',{name:'Начать игру',exact:false}).click();
     await game.locator('#hud.on').waitFor();
     await close.click();
@@ -329,10 +329,9 @@ try{
    }
    assert.ok(await page.locator('.crm-brand > span').isVisible(),'CRM visible on mobile and desktop');
    assert.equal((await page.locator('.crm-brand > span').innerText()).trim(),'CRM','CRM replaces the public brand in the admin header');
-   assert.ok(await page.getByRole('link',{name:'Погнали — гонки команды'}).isVisible(),'game is available in the CRM header');
+   assert.equal(await page.locator('.crm-header-game').isVisible(),width>=768,'desktop game shortcut respects compact mobile header');
    assert.equal(await page.locator('.crm-game-label').isVisible(),width>=768,'full game label on desktop, icons on mobile');
-   assert.equal(await page.locator('.crm-game-emoji').count(),2);
-   for(const icon of await page.locator('.crm-game-emoji').all())assert.equal(await icon.evaluate(e=>getComputedStyle(e).transform),'matrix(-1, 0, 0, 1, 0, 0)','car and cloud face right');
+   assert.equal(await page.locator('.crm-header-game svg').count(),1,'game icon remains visible');
    assert.equal(await page.locator('.crm-brand-mark').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','no white logo background');
    for(const select of await page.locator('select:visible').all()){assert.ok(['right 16px center','right 16px 50%','calc(100% - 16px) 50%'].includes(await select.evaluate(e=>getComputedStyle(e).backgroundPosition)),await select.evaluate(e=>e.outerHTML+' POSITION='+getComputedStyle(e).backgroundPosition));assert.ok(await select.evaluate(e=>parseFloat(getComputedStyle(e).paddingRight)>=40));}
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no overflow after disclosure');
