@@ -1,1 +1,4 @@
-{"operation":"verify-post-maintenance-lease-20261022-1328","reason":"Read only publication state after maintenance lease expiry; no unlock or publication."}
+{
+  "requestedAt": "2026-10-22T15:40:00Z",
+  "reason": "Read only manifest and writer heartbeat while China GitHub status is queued; no cancellation or unlock"
+}
