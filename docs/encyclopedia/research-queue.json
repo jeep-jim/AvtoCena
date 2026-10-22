@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:02:54.958860+07:00",
+  "updatedAt": "2026-10-22T16:07:07.588606+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32604,10 +32604,10 @@
   "activePriority": {
     "updatedAt": "2026-10-22T15:39:36.713910+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "continue_junior_2024_then_mito",
+    "state": "continue_mito_historical",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Junior2024; поздние прайсы2025; октябрь2026; затем MiTo2008+. Пропуски отдельно, ранее применённые партии не повторять.",
+    "nextModel": "MiTo2008/2009 партия19/159 подготовлена, затем поздняя гамма2009 и2010",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32861,6 +32861,16 @@
         "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
         "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
         "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
+      },
+      "alfa-junior-2024-2025-september": {
+        "batch": "research-2026-10-22-alfa-junior-2024-2025-september",
+        "commit": "6fb66d917314216285c442794a9e29491ed821f9",
+        "workflow": 39752511359,
+        "variants": 11,
+        "newVariants": 11,
+        "fields": 98,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32881,17 +32891,14 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-junior-2026-july",
-      "commit": "f4845cad2b6e1cfa39374f218eaf9b23b408eb17",
-      "workflow": 39746380415,
-      "variants": 8,
-      "newVariants": 5,
-      "fields": 48,
+      "batch": "research-2026-10-22-alfa-junior-2024-2025-september",
+      "commit": "6fb66d917314216285c442794a9e29491ed821f9",
+      "workflow": 39752511359,
+      "variants": 11,
+      "newVariants": 11,
+      "fields": 98,
       "apiReadback": true,
-      "includedInIndex": true,
-      "indexRelease": "b15db81d37d49bd89de5ae628843a10519b2af5b",
-      "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
-      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json"
+      "includedInIndex": false
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
@@ -33018,10 +33025,10 @@
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-junior-2024-2025-september",
-      "variants": 11,
-      "fields": 98,
-      "state": "prepared_not_applied"
+      "batch": "research-2026-10-22-alfa-mito-2008-2009-launch",
+      "state": "prepared_not_applied",
+      "variants": 19,
+      "fields": 159
     },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-giulietta-junior-pass.json",

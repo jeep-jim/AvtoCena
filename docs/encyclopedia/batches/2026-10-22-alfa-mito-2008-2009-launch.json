@@ -1,0 +1,1715 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-mito-2008-2009-launch",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "7d408d776043fe9850eed932",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2008,
+      "trim": "1.4 16V 95 PS MiTo",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 16V 95 PS MiTo",
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводские материалы15.09.2008 подтверждают три моторизации в комплектациях MiTo/Turismo; передний привод — публикация20.06.2008. Подтверждены только перечисленные поля. Точный объём, код двигателя, полная масса и коробка этой годовой записи требуют отдельного документа; параметры78PS не переносятся на95PS.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS MiTo; две комплектации/три двигателя; trim"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS MiTo; две комплектации/три двигателя; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS MiTo; две комплектации/три двигателя; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS MiTo; две комплектации/три двигателя; icePowerKw"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS MiTo; две комплектации/три двигателя; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS MiTo; две комплектации/три двигателя; powertrainKind"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-neue-alfa-romeo-mito-ist-da-mit-dem-alfa-romeo-mito-startet-der-weltweit-kompakteste-sportler-ein-hochstma-an-fahrdynamik-und-motoren-mit-bis-zu-155-ps",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-06-20",
+            "selector": "1.4 16V 95 PS MiTo; две комплектации/три двигателя; drive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "3da3db8c86208a6f31dfe216",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2008,
+      "trim": "1.4 16V 95 PS Turismo",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 16V 95 PS Turismo",
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводские материалы15.09.2008 подтверждают три моторизации в комплектациях MiTo/Turismo; передний привод — публикация20.06.2008. Подтверждены только перечисленные поля. Точный объём, код двигателя, полная масса и коробка этой годовой записи требуют отдельного документа; параметры78PS не переносятся на95PS.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS Turismo; две комплектации/три двигателя; trim"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS Turismo; две комплектации/три двигателя; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS Turismo; две комплектации/три двигателя; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS Turismo; две комплектации/три двигателя; icePowerKw"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS Turismo; две комплектации/три двигателя; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 16V 95 PS Turismo; две комплектации/три двигателя; powertrainKind"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-neue-alfa-romeo-mito-ist-da-mit-dem-alfa-romeo-mito-startet-der-weltweit-kompakteste-sportler-ein-hochstma-an-fahrdynamik-und-motoren-mit-bis-zu-155-ps",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-06-20",
+            "selector": "1.4 16V 95 PS Turismo; две комплектации/три двигателя; drive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "754d116c1ee47270e847e335",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2008,
+      "trim": "1.4 TB 16V 155 PS MiTo",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB 16V 155 PS MiTo",
+        "powerHp": 155,
+        "powerKw": 114,
+        "icePowerKw": 114,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводские материалы15.09.2008 подтверждают три моторизации в комплектациях MiTo/Turismo; передний привод — публикация20.06.2008. Подтверждены только перечисленные поля. Точный объём, код двигателя, полная масса и коробка этой годовой записи требуют отдельного документа; параметры78PS не переносятся на95PS.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS MiTo; две комплектации/три двигателя; trim"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS MiTo; две комплектации/три двигателя; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS MiTo; две комплектации/три двигателя; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS MiTo; две комплектации/три двигателя; icePowerKw"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS MiTo; две комплектации/три двигателя; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS MiTo; две комплектации/три двигателя; powertrainKind"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-neue-alfa-romeo-mito-ist-da-mit-dem-alfa-romeo-mito-startet-der-weltweit-kompakteste-sportler-ein-hochstma-an-fahrdynamik-und-motoren-mit-bis-zu-155-ps",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-06-20",
+            "selector": "1.4 TB 16V 155 PS MiTo; две комплектации/три двигателя; drive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "bf0ec9b64ec45d4873c1f69b",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2008,
+      "trim": "1.4 TB 16V 155 PS Turismo",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB 16V 155 PS Turismo",
+        "powerHp": 155,
+        "powerKw": 114,
+        "icePowerKw": 114,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводские материалы15.09.2008 подтверждают три моторизации в комплектациях MiTo/Turismo; передний привод — публикация20.06.2008. Подтверждены только перечисленные поля. Точный объём, код двигателя, полная масса и коробка этой годовой записи требуют отдельного документа; параметры78PS не переносятся на95PS.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS Turismo; две комплектации/три двигателя; trim"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS Turismo; две комплектации/три двигателя; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS Turismo; две комплектации/три двигателя; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS Turismo; две комплектации/три двигателя; icePowerKw"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS Turismo; две комплектации/три двигателя; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.4 TB 16V 155 PS Turismo; две комплектации/три двигателя; powertrainKind"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-neue-alfa-romeo-mito-ist-da-mit-dem-alfa-romeo-mito-startet-der-weltweit-kompakteste-sportler-ein-hochstma-an-fahrdynamik-und-motoren-mit-bis-zu-155-ps",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-06-20",
+            "selector": "1.4 TB 16V 155 PS Turismo; две комплектации/три двигателя; drive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "6b0bd522698d410323b6ca7b",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2008,
+      "trim": "1.6 JTDM 16V 120 PS MiTo",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 16V 120 PS MiTo",
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводские материалы15.09.2008 подтверждают три моторизации в комплектациях MiTo/Turismo; передний привод — публикация20.06.2008. Подтверждены только перечисленные поля. Точный объём, код двигателя, полная масса и коробка этой годовой записи требуют отдельного документа; параметры78PS не переносятся на95PS.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS MiTo; две комплектации/три двигателя; trim"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS MiTo; две комплектации/три двигателя; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS MiTo; две комплектации/три двигателя; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS MiTo; две комплектации/три двигателя; icePowerKw"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS MiTo; две комплектации/три двигателя; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS MiTo; две комплектации/три двигателя; powertrainKind"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-neue-alfa-romeo-mito-ist-da-mit-dem-alfa-romeo-mito-startet-der-weltweit-kompakteste-sportler-ein-hochstma-an-fahrdynamik-und-motoren-mit-bis-zu-155-ps",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-06-20",
+            "selector": "1.6 JTDM 16V 120 PS MiTo; две комплектации/три двигателя; drive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "eba05720902742770612b184",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2008,
+      "trim": "1.6 JTDM 16V 120 PS Turismo",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 16V 120 PS Turismo",
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводские материалы15.09.2008 подтверждают три моторизации в комплектациях MiTo/Turismo; передний привод — публикация20.06.2008. Подтверждены только перечисленные поля. Точный объём, код двигателя, полная масса и коробка этой годовой записи требуют отдельного документа; параметры78PS не переносятся на95PS.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS Turismo; две комплектации/три двигателя; trim"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS Turismo; две комплектации/три двигателя; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS Turismo; две комплектации/три двигателя; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS Turismo; две комплектации/три двигателя; icePowerKw"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS Turismo; две комплектации/три двигателя; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/preise-und-ausstattungen",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-09-15",
+            "selector": "1.6 JTDM 16V 120 PS Turismo; две комплектации/три двигателя; powertrainKind"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/der-neue-alfa-romeo-mito-ist-da-mit-dem-alfa-romeo-mito-startet-der-weltweit-kompakteste-sportler-ein-hochstma-an-fahrdynamik-und-motoren-mit-bis-zu-155-ps",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2008-06-20",
+            "selector": "1.6 JTDM 16V 120 PS Turismo; две комплектации/три двигателя; drive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "ff9009d795a7777c24972acd",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 16V 70 kW MT6 Turismo",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 16V 70 kW MT6 Turismo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "f505da401a25e554c08a5541",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 16V 70 kW MT6 Lusso",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 16V 70 kW MT6 Lusso",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "d979c0632ab237012d4d0951",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 16V 70 kW MT6 Veloce",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 16V 70 kW MT6 Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 16V 70 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "e162d468eea1d9d24ba9dbab",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 TB 88 kW MT5 Turismo",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB 88 kW MT5 Turismo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "54052d951118d455cb1f501f",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 TB 88 kW MT5 Lusso",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB 88 kW MT5 Lusso",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "0b1e29c71a649712ed0caa88",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 TB 88 kW MT5 Veloce",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB 88 kW MT5 Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 88 kW MT5 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "d6e32e472813161ae72fa65a",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 TB 114 kW MT6 Lusso",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB 114 kW MT6 Lusso",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 114,
+        "icePowerKw": 114,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "bc76a3b28ad957308ee8fda1",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 TB 114 kW MT6 Veloce",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB 114 kW MT6 Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 114,
+        "icePowerKw": 114,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.4 TB 114 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "0442ce1646e643deacc636f6",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.3 JTDM 66 kW MT6 Turismo",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.3 JTDM 66 kW MT6 Turismo",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerKw": 66,
+        "icePowerKw": 66,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Turismo; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "67c919720368983e00b3dcf0",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.3 JTDM 66 kW MT6 Lusso",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.3 JTDM 66 kW MT6 Lusso",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerKw": 66,
+        "icePowerKw": 66,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "523b2514474fb6464e1fef7d",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.3 JTDM 66 kW MT6 Veloce",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.3 JTDM 66 kW MT6 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerKw": 66,
+        "icePowerKw": 66,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.3 JTDM 66 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "c3ce3f77ccfdea3d18cb45ad",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.6 JTDM 88 kW MT6 Lusso",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 88 kW MT6 Lusso",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Lusso; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "d7ad25afe77bdc89edb50aa5",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.6 JTDM 88 kW MT6 Veloce",
+      "expectedRevision": "a381a249-37dd-45f0-899f-e9d740421904",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 88 kW MT6 Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет22.01.2009, продажи с24.01.2009: точные строки PRICING сопоставлены колонкам TECHNICAL DATA. Объёмы1368/1248/1598см³, мощности70/88/114/66/88кВт, передний привод, механическая коробка и трёхдверный хэтчбек. В таблице спорное обозначение bhp при округлённых кВт: powerHp не подтверждалась; в названии указаны заводские кВт. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-in-uk-press-pack",
+            "checkedAt": "2026-10-22",
+            "publishedAt": "2009-01-22",
+            "selector": "1.6 JTDM 88 kW MT6 Veloce; PRICING точная строка + TECHNICAL DATA соответствующая колонка; bodyType"
+          }
+        }
+      }
+    }
+  ]
+}
