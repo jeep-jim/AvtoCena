@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:36:43.251034+07:00",
+  "updatedAt": "2026-10-22T16:39:17.836208+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32618,7 +32618,7 @@
     "state": "junior_mito_53_new_saved_index_activation_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo MiTo: оставшиеся исполнения2011, затем2012; пропуски в retry",
+    "nextModel": "MiTo: ноябрь2011 подготовлен9/69; затемUK2011 и2012",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -33097,7 +33097,13 @@
         "includedInIndex": false
       }
     ],
-    "inFlightResearch": null,
+    "inFlightResearch": {
+      "batch": "research-2026-10-22-alfa-mito-2011-november",
+      "state": "prepared_not_applied",
+      "variants": 9,
+      "fields": 69,
+      "newVariants": 9
+    },
     "lastCompletedPass": {
       "checkedAt": "2026-10-22T16:36:43.251034+07:00",
       "variants": 53,
