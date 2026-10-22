@@ -35,4 +35,21 @@ jobs:
           const storage=getJsonStorage();
           const [manifest,lock]=await Promise.all([storage.readJson('catalog/manifest.json',null),storage.readJson('catalog/import-lock.json',null)]);
           console.log('PUBLICATION_STATUS',JSON.stringify({checkedAt:new Date().toISOString(),generationId:manifest?.generationId,writer:{active:Date.parse(lock?.lockedUntil||'')>Date.now(),operationType:lock?.operationType,operationId:lock?.operationId,startedAt:lock?.startedAt,heartbeatAt:lock?.heartbeatAt,lockedUntil:lock?.lockedUntil}}));
+          const {readFile}=await import('node:fs/promises');
+          const marker=JSON.parse(await readFile('.github/market-runs/regcloud-publication-status.json','utf8'));
+          if(marker.inspectRelease){
+            const release=marker.inspectRelease, keys=marker.inspectModels;
+            if(!/^[a-f0-9]{40}$/.test(release)||!Array.isArray(keys)||keys.length>5||keys.some(k=>typeof k!=='string'||!/^[a-z0-9]+:[a-z0-9]+$/.test(k)))throw Error('invalid_index_inspection');
+            const health=async()=>{const r=await fetch('https://avtocena.com/api/health',{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('inspection_health_http_'+r.status);const h=await r.json();if(h.releaseSha!==release)throw Error('inspection_release_changed');return h;};
+            await health();
+            const binding=await storage.readJson('knowledge/encyclopedia/calculation-releases/'+release+'.json',null);
+            if(binding?.release!==release||!/^knowledge\/encyclopedia\/calculation-indexes\/[a-f0-9]{64}\.json$/.test(binding?.key||''))throw Error('invalid_index_binding');
+            const index=await storage.readJson(binding.key,null);
+            const {createHash}=await import('node:crypto');
+            if(index?.digest!==binding.digest||createHash('sha256').update(JSON.stringify(index.models)).digest('hex')!==binding.digest)throw Error('index_checksum_mismatch');
+            const models={};
+            for(const key of keys){const rows=index.models[key]||[],batches={};for(const row of rows)for(const source of Object.values(row.sources||{}))if(source.batchId)batches[source.batchId]=(batches[source.batchId]||0)+1;models[key]={variants:rows.length,revisions:[...new Set(rows.map(r=>r.revision))],batchCalculationFields:batches};}
+            await health();
+            console.log('RELEASE_INDEX_INSPECTION',JSON.stringify({release,digest:index.digest,createdAt:index.createdAt,manifestDigest:index.manifestDigest,models}));
+          }
           STATUS
