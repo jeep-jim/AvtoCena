@@ -1,3 +1,4 @@
+import {selectedCatalogMarkets,marketSelectionUrl} from "@/lib/catalog/market-selection";
 import {withCatalogEditorial,applyCatalogEditorial,editorialHidden} from '@/lib/catalog/editorial';
 import {applyEncyclopediaDisplayIdentityBatch} from '@/lib/catalog/display-identity';
 import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
@@ -23,6 +24,14 @@ function positiveNumber(url: URL, key: string) {
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
+  const markets=selectedCatalogMarkets(url.searchParams.get('market'));
+  if(markets.length>1){
+    const responses=await Promise.all(markets.map(m=>GET(new Request(marketSelectionUrl(url,m),request))));
+    const failed=responses.find(r=>!r.ok);if(failed)return failed;
+    const parts=await Promise.all(responses.map(r=>r.json()));const counts:Record<string,number>={};
+    for(const part of parts)for(const [make,count] of Object.entries(part.counts||{}))counts[make]=(counts[make]||0)+Number(count);
+    return NextResponse.json({counts,modelCounts:{}},{headers:{'Cache-Control':'private, max-age=15'}});
+  }
   if(!url.searchParams.has("city")){const city=(await cookies()).get("avtocena_city")?.value;if(city)url.searchParams.set("city",city);}
   if(url.searchParams.get("market")==="japan" && url.searchParams.get("stock")==="green") {
     const snapshot=await readGreenCorner();

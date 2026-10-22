@@ -9,6 +9,7 @@ import {LeadDialog} from '@/components/leads/PublicLeadCaptureV2';
 import {DealerBannerGallery,dealerBanners} from './DealerBannerGallery';
 import {DealerRequisites} from './DealerRequisites';
 import {Star,MapPin,BadgeCheck} from 'lucide-react';
+import {useSearchParams} from "next/navigation";
 import {useEffect,useRef,useState} from 'react';
 import {DealerLink as Link} from './DealerBrowsingContext';
 import {DealerMarketChips} from './DealerMarketChips';
@@ -27,6 +28,8 @@ function Icon({name}:{name:string}){
 function RatingIcon(){return <svg className="dealer-rating-icon" width="24" height="24" viewBox="0 0 28 28" aria-hidden="true"><path d="m13 5 2.8 6 6.5.9-4.7 4.6 1.1 6.5-5.7-3-5.8 3 1.1-6.5L3.6 12l6.5-.9Z" fill="#f7bf27"/><path d="m23 0 1.2 3.6L28 5l-3.8 1.3L23 10l-1.3-3.7L18 5l3.7-1.4Z" fill="#4f9fee"/><path d="m4 20 1.1 2.8L8 24l-2.9 1.1L4 28l-1.1-2.9L0 24l2.9-1.2Z" fill="#26b87b"/></svg>;}
 function OfferIcon(){return <svg className="dealer-offer-icon" width="28" height="24" viewBox="0 0 32 26" aria-hidden="true"><path d="m5 12 4-7h13l5 7 3 2v7H2v-7Z" fill="#ee424d"/><path d="m10 7-3 6h17l-4-6Z" fill="#e5eef5"/><path d="M16 7v6" stroke="#ee424d" strokeWidth="2"/><path d="M4 16h4m17 0h3" stroke="#fff" strokeWidth="2"/><circle cx="8" cy="21" r="4" fill="#20242b"/><circle cx="24" cy="21" r="4" fill="#20242b"/><circle cx="8" cy="21" r="1.5" fill="#aab4c0"/><circle cx="24" cy="21" r="1.5" fill="#aab4c0"/></svg>;}
 export function DealerProfileContent({s,preview=false,items=[],catalog,verified=false,editorSection,canShareSelection=false,initialSelectionQuery=''}:{s:PublicDealerProfile;preview?:boolean;items?:SpecialRailItem[];catalog?:React.ReactNode;verified?:boolean;editorSection?:string;canShareSelection?:boolean;initialSelectionQuery?:string}){
+ const searchParams=useSearchParams();
+ const catalogOnly=!editorSection && Boolean(searchParams.get('market') || searchParams.get('stock'));
  const [tab,setTab]=useState<Tab>('cars'),[shareStatus,setShareStatus]=useState('');
  const [leadOpen,setLeadOpen]=useState(false);
  const [canModerateReviews,setCanModerateReviews]=useState(false),[canReplyReviews,setCanReplyReviews]=useState(false);
@@ -59,8 +62,9 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
   if(['overview','profile'].includes(editorSection)&&top.current?.ownerDocument!==document){const win=top.current?.ownerDocument.defaultView;win?.scrollTo({top:0,behavior:'instant'});}
  },[editorSection]);
  const logo=<>{s.logoLight||s.logoDark?<><img src={s.logoLight||s.logoDark} alt={`Логотип ${s.name}`} className="dealer-logo-light"/><img src={s.logoDark||s.logoLight} alt={`Логотип ${s.name}`} className="dealer-logo-dark"/></>:<img className="dealer-default-logo" src="/logo/avtocena-mark-dark.svg" alt="АвтоЦена"/>}</>;
- return <div ref={top} className="dealer-profile mx-auto w-full max-w-[1500px] px-4 md:px-8" onClickCapture={editorSection?e=>{if((e.target as HTMLElement).closest('a'))e.preventDefault();}:undefined}>
-  <DealerBannerGallery s={s}/>
+ return <div ref={top} className={`dealer-profile mx-auto w-full max-w-[1500px] px-4 md:px-8 ${catalogOnly?"dealer-profile--catalog-only":""}`} onClickCapture={editorSection?e=>{if((e.target as HTMLElement).closest('a'))e.preventDefault();}:undefined}>
+  <div className="dealer-profile-home-banner"><DealerBannerGallery s={s}/></div>
+  <style>{`@media(max-width:767px){.dealer-profile--catalog-only .dealer-profile-sheet{margin-top:0}.dealer-profile--catalog-only .dealer-profile-sheet:before{top:0}.dealer-profile--catalog-only .dealer-profile-home-banner,.dealer-profile--catalog-only .dealer-profile-identity,.dealer-profile--catalog-only .dealer-profile-actions,.dealer-profile--catalog-only .dealer-tab-content>div>.dealer-stories,.dealer-profile--catalog-only .dealer-main-offers{display:none!important}}`}</style>
   <div className="dealer-profile-sheet">
   <section className="dealer-profile-identity dealer-sheet">
    <div className="dealer-identity-row">

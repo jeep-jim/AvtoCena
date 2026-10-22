@@ -1,3 +1,4 @@
+import {selectedCatalogMarkets,marketSelectionUrl} from "@/lib/catalog/market-selection";
 import {readGreenCorner,readGreenCornerPage} from '@/lib/catalog/green-corner';
 import {GET as greenSearch} from "@/app/api/catalog/green/route";
 import {exactAjesCount} from '@/lib/catalog/ajes-count-display';
@@ -25,6 +26,13 @@ export async function GET(request: Request) {
   const started = performance.now();
   const u = new URL(request.url);
   const p = u.searchParams;
+  const markets=selectedCatalogMarkets(p.get('market'));
+  if(markets.length>1&&p.get('countOnly')==='1'){
+    const responses=await Promise.all(markets.map(m=>GET(new Request(marketSelectionUrl(u,m),request))));
+    const failed=responses.find(r=>!r.ok);if(failed)return failed;
+    const parts=await Promise.all(responses.map(r=>r.json()));
+    return NextResponse.json({ok:true,total:parts.reduce((sum,p)=>sum+(Number(p.total)||0),0),countIncomplete:parts.some(p=>p.countIncomplete||p.total==null),items:[]},{headers:{'Cache-Control':'private, max-age=15'}});
+  }
   if(p.get('stock')==='green'&&(!p.get('market')||p.get('market')==='japan'))return greenSearch(request);
   if(await usesAjesMarket(p.get('market'),p.get('source'))&&!(p.get('market')==='japan'&&p.get('stock')==='green')){
     try{

@@ -1,3 +1,6 @@
+import {greenCornerFacets} from "@/lib/catalog/green-corner-search";
+import {selectedCatalogMarkets} from "@/lib/catalog/market-selection";
+import {readGroupedCatalogFacets} from "@/lib/catalog/market-facets";
 import { NextResponse } from "next/server";
 import {readGreenCorner} from '@/lib/catalog/green-corner';
 import { readCatalogFacets, readCatalogDirectoryCountRows } from "@/lib/catalog/storage";
@@ -107,20 +110,20 @@ export async function GET(request: Request) {
   const inventoryContext = hasInventoryContext(modelFilters);
 
   if (scope === "facets") {
-    const facets = await readCatalogFacets(facetFilters);
+    const facets = await selectedFacets(facetFilters);
     return NextResponse.json({ facets });
   }
 
   if (!query) {
     if (!make) {
       if (scope !== "makes") return NextResponse.json({ items: [] });
-      const facets = await readCatalogFacets(facetFilters);
+      const facets = await selectedFacets(facetFilters);
       return NextResponse.json({
         items: facets.makes.slice(0, limit).map((item) => ({ value: item, label: item })),
       });
     }
 
-    const catalog = await readCatalogFacets(modelFilters);
+    const catalog = await selectedFacets(modelFilters);
     const knowledge = inventoryContext
       ? { models: [] as ModelSuggestion[] }
       : mode === "apply"
@@ -138,7 +141,7 @@ export async function GET(request: Request) {
     });
   }
 
-  const catalogFacets = inventoryContext ? await readCatalogFacets(modelFilters) : { models: [] as ModelSuggestion[] };
+  const catalogFacets = inventoryContext ? await selectedFacets(modelFilters) : { models: [] as ModelSuggestion[] };
   if (!inventoryContext && mode === "apply") {
     const matches = await searchEncyclopediaIdentityModels(query, make || undefined, limit);
     return NextResponse.json({
@@ -163,4 +166,9 @@ export async function GET(request: Request) {
       label: makeValues.length === 1 ? item.model : `${item.make} ${item.model}`,
     })),
   });
+}
+
+async function selectedFacets(params:Parameters<typeof readCatalogFacets>[0]){
+ const markets=selectedCatalogMarkets(params?.market);
+ return markets.length>1?readGroupedCatalogFacets({...params,market:undefined},markets,async query=>query.market==="green"?{...greenCornerFacets((await readGreenCorner()).items),generationId:"green"}:readCatalogFacets(query)):readCatalogFacets(params);
 }

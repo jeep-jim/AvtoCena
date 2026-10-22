@@ -108,7 +108,7 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
   const root = useRef<HTMLDivElement>(null);
   const close = () => setOpen(false);
   useDropdown(open, root, close);
-  const multiple=["bodyType","transmission","fuel","drive"].includes(name);
+  const multiple=["market","bodyType","transmission","fuel","drive"].includes(name);
   const selected=filterSelections(value);
   const active=options.find(item=>item.value===value);
   const chosen=(item:string)=>item?selected.includes(item):!selected.length;
@@ -116,7 +116,7 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
   const title=multiple&&selected.length?selected.map(v=>options.find(o=>o.value===v)?.label||v).join(", "):active?.label||placeholder;
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"} ${className}`}>
     <input type="hidden" name={name} value={value} />
-    <button type="button" onClick={() => setOpen((current) => !current)} className={`${name === "auctionGrade" && value ? `ac-japan-badge ${auctionGradeColorClass(value)}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`} aria-expanded={open}><span className="flex min-w-0 items-center gap-2 truncate">{name==="market"&&value&&<span aria-hidden="true"><CatalogMarketFlag market={value} className="h-4 w-6 shrink-0"/></span>}{title}</span><Chevron open={open} /></button>
+    <button type="button" onClick={() => setOpen((current) => !current)} className={`${name === "auctionGrade" && value ? `ac-japan-badge ${auctionGradeColorClass(value)}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`} aria-expanded={open}><span className="flex min-w-0 items-center gap-2 truncate">{name==="market"&&value&&selected.length===1&&<span aria-hidden="true"><CatalogMarketFlag market={value} className="h-4 w-6 shrink-0"/></span>}{title}</span><Chevron open={open} /></button>
     {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2"><div className="ac-hide-scrollbar max-h-64 overflow-y-auto">{options.map((item) => <button key={item.value || "any"} type="button" onClick={() => choose(item.value)} aria-label={item.label} aria-pressed={chosen(item.value)} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${chosen(item.value) ? "is-active" : ""}`}><span className="flex items-center gap-2">{name==="market"&&item.value&&<span aria-hidden="true"><CatalogMarketFlag market={item.value} className="h-4 w-6 shrink-0"/></span>}{item.label}</span>{chosen(item.value) ? <span>✓</span> : null}</button>)}</div></div> : null}
   </div>;
 }
@@ -309,7 +309,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
     </div>}
     <div className="ac-range-fields-shell mt-2.5">
       <div className={`grid gap-3 md:grid-cols-2 xl:grid-cols-4`}>
-        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={!draft.market || draft.market === "uae" ? 1886 : draft.market === "china" ? CHINA_MIN_MODEL_YEAR : draft.market === "japan" ? JAPAN_MIN_MODEL_YEAR : new Date().getFullYear() - 6} max={new Date().getFullYear() + (!draft.market || draft.market === "uae" ? 1 : 0)} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
+        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={!draft.market || draft.market.includes("|") || draft.market === "uae" ? 1886 : draft.market === "china" ? CHINA_MIN_MODEL_YEAR : draft.market === "japan" ? JAPAN_MIN_MODEL_YEAR : new Date().getFullYear() - 6} max={new Date().getFullYear() + (!draft.market || draft.market === "uae" ? 1 : 0)} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
         {<DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />}
         <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
         <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
@@ -390,7 +390,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     return () => { cancelled = true; };
   }, [electricOnly, draft.fuel]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!mobileOpen) return;
     const body = document.body;
     const html = document.documentElement;
@@ -409,7 +409,8 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       body.style.top = saved.top; body.style.width = saved.width;
       html.style.overflow = saved.htmlOverflow;
       html.style.scrollBehavior = "auto";
-      window.scrollTo(0, scrollY);
+      window.scrollTo({top:scrollY,behavior:"instant"});
+      restoreFilterScroll();
       html.style.scrollBehavior = saved.scrollBehavior;
       window.removeEventListener("keydown", escape);
     };
@@ -466,7 +467,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     if (draft.market === "japan") auctionGradeSelections(draft.auctionGrade).forEach(grade => rows.push({key: `auctionGrade:${grade}`, label: `Оценка ${grade}`, grade}));
     if (draft.market === "japan" && draft.stock === "green") rows.push({key:"stock",label:"В наличии · Зелёный угол"});
     draft.model.split("|").filter(Boolean).forEach(model => rows.push({key:`model:${model}`,label:model}));
-    if (draft.market && draft.stock!=="green") rows.push({ key: "market", label: optionLabel(markets, draft.market) });
+    if (draft.market && draft.stock!=="green") rows.push({ key: "market", label: filterSelections(draft.market).map(m=>optionLabel(markets,m)).join(", ") });
     if (draft.bodyType) rows.push({ key: "bodyType", label: optionLabel(bodies, draft.bodyType) });
     if (draft.transmission) rows.push({ key: "transmission", label: optionLabel(transmissions, draft.transmission) });
     if (draft.fuel) rows.push({ key: "fuel", label: optionLabel(fuels, draft.fuel) });

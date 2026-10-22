@@ -1,5 +1,6 @@
 "use client";
 import {createContext,useContext,useMemo,type ReactNode, type ComponentProps} from 'react';
+import {rememberFilterScroll} from "@/lib/catalog/filter-scroll";
 import Link from 'next/link';
 import {useSelectedCity} from '@/lib/location/selected-city';
 import {usePathname} from 'next/navigation';
@@ -7,7 +8,15 @@ import {Star,Car,Images,MapPin,MessageCircle} from 'lucide-react';
 import {dealerBrowsingHref,type DealerBrowsingContext} from '@/lib/dealers/browsing-context';
 const Context=createContext<DealerBrowsingContext|null>(null);
 export const useDealerBrowsing=()=>useContext(Context);
-export function DealerLink({href,...props}:ComponentProps<typeof Link>){const dealer=useDealerBrowsing();const city=useSelectedCity();return <Link {...props} href={typeof href==='string'?dealerBrowsingHref(href,dealer,city):href}/>;}
+export function DealerLink({href,onClick,scroll,...props}:ComponentProps<typeof Link>){
+ const dealer=useDealerBrowsing();const city=useSelectedCity();
+ const target=typeof href==='string'?dealerBrowsingHref(href,dealer,city):href;
+ const catalog=typeof href==='string' && (href.split('?')[0]==='/cars'||href.split('?')[0]==='/cars/green');
+ return <Link {...props} href={target} scroll={scroll??(catalog?false:undefined)} onClick={event=>{
+  onClick?.(event);
+  if(catalog&&!event.defaultPrevented&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey&&event.button===0&&typeof target==='string')rememberFilterScroll(target);
+ }}/>;
+}
 export function DealerBrowsingProvider({dealer,children,profile=false}:{dealer:DealerBrowsingContext|null;children:ReactNode;profile?:boolean}){
  const pathname=usePathname();
  // Both the ID and friendly route render this server-authorized profile.
