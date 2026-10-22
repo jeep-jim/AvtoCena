@@ -1,0 +1,330 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-abarth-exact-variants",
+  "entries": [
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "24cc60f93710caf192a3f67d",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2021,
+      "trim": "COMPETIZIONE",
+      "expectedDigest": "deba3f8040484a38897af06a8f6060e06e0cee523c2f5c18d70a4ac5e2f03cf6",
+      "patch": {
+        "engineCc": 1368,
+        "powerHp": 180,
+        "powerKw": 132,
+        "icePowerKw": 132,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.abarth.gr/content/dam/abarth/gr/home/CAT_595Gamma2021_ENG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская гамма2021, таблицаPDFстр.20: точное исполнение Competizione/Turismo. Мощность и объём подтверждены; вариант кузова и коробки отдельно не определён."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "c3ee2a34f4c635b7c8fcc0c5",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2021,
+      "trim": "595 Competizione | Schalensitze| Bi-Xenon| Beats",
+      "expectedDigest": "60befd4ef199ee7fe5148f6310534ef369c97350519dad55578b79134c72c378",
+      "patch": {
+        "engineCc": 1368,
+        "powerHp": 180,
+        "powerKw": 132,
+        "icePowerKw": 132,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.abarth.gr/content/dam/abarth/gr/home/CAT_595Gamma2021_ENG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская гамма2021, таблицаPDFстр.20: точное исполнение Competizione/Turismo. Мощность и объём подтверждены; вариант кузова и коробки отдельно не определён."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "ee6b16fb9c6752b576d8dd53",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2021,
+      "trim": "1.4 t-jet Turismo 165cv ** 30.000km - Tetto - Pelle **",
+      "expectedDigest": "9e3215a4713aca8af6770cc149c2477130a639a0676ab765dc464a049917b00c",
+      "patch": {
+        "engineCc": 1368,
+        "powerHp": 165,
+        "powerKw": 121,
+        "icePowerKw": 121,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.abarth.gr/content/dam/abarth/gr/home/CAT_595Gamma2021_ENG.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская гамма2021, таблицаPDFстр.20: точное исполнение Competizione/Turismo. Мощность и объём подтверждены; вариант кузова и коробки отдельно не определён."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "9dd33cf62eaf6070e88ed694",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2018,
+      "trim": "COMPETIZIONE",
+      "expectedDigest": "b2975551db7c87ed369796fbf3451beb83e8e78cca2b93d5c6935400624abd42",
+      "patch": {
+        "powerHp": 180,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/em-en/abarth/press/the-new-abarth-595-range-performance-and-style",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма595 Euro6D-TEMP от03.09.2018: подтверждена мощность указанного исполнения. MY18/MY19 в названии сохранён; год карточки не изменён."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "a92047b3c45cd70478577001",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2020,
+      "trim": "COMPETIZIONE",
+      "expectedDigest": "8614a22edad73679ea48bc40fef1efeed37d396e7ecaadd00605416103f8862f",
+      "patch": {
+        "powerHp": 180,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/em-en/abarth/press/the-new-abarth-595-range-performance-and-style",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма595 Euro6D-TEMP от03.09.2018: подтверждена мощность указанного исполнения. MY18/MY19 в названии сохранён; год карточки не изменён."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "0dd6a825e0210aa95781150b",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2020,
+      "trim": "1.4 TURBO T-JET 165 CV TURISMO",
+      "expectedDigest": "cc079c53fe512b68b3ec3eeb31ce1a99ed6527d630e4f3dbba002474fc3d72e9",
+      "patch": {
+        "powerHp": 165,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/em-en/abarth/press/the-new-abarth-595-range-performance-and-style",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма595 Euro6D-TEMP от03.09.2018: подтверждена мощность указанного исполнения. MY18/MY19 в названии сохранён; год карточки не изменён."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "d0b25d90400664c5b148fc55",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2020,
+      "trim": "1.4 t-jet 145cv my18",
+      "expectedDigest": "6194582aca944a92a4a4a5eef23c3b59d422874ff0bbf86418f1b9c9eb4400bc",
+      "patch": {
+        "powerHp": 145,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/em-en/abarth/press/the-new-abarth-595-range-performance-and-style",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма595 Euro6D-TEMP от03.09.2018: подтверждена мощность указанного исполнения. MY18/MY19 в названии сохранён; год карточки не изменён."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "7a5ca3918f78eba6c5c7ee64",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2020,
+      "trim": "1.4 t-jet Turismo 165cv my19",
+      "expectedDigest": "7e8c79b88d0fda49b17019f738d41f092bb9356706d39857529bdb2c296a30a0",
+      "patch": {
+        "powerHp": 165,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/em-en/abarth/press/the-new-abarth-595-range-performance-and-style",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма595 Euro6D-TEMP от03.09.2018: подтверждена мощность указанного исполнения. MY18/MY19 в названии сохранён; год карточки не изменён."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "87eec9b87634c46a1c20839b",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2022,
+      "trim": "1.4 T- F 595 - Garantie constructeur 10/2027",
+      "expectedDigest": "87347534d112ea36f9121ca711d6d689312c4337f534a186b6056c5098bb9d43",
+      "patch": {
+        "powerHp": 165,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/em-en/abarth/press/from-formula-4-to-the-road-the-new-abarth-f595-165-hp-of-sheer-adrenaline",
+        "checkedAt": "2026-10-22",
+        "statement": "F595: заводской выпуск15.07.2021 подтверждает165л.с.; исполнение присутствует в гамме2022. Число передач и кузов не выбирались из нескольких вариантов."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "544c06f3df9a929644870d79",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2022,
+      "trim": "1.4 Turbo F595",
+      "expectedDigest": "d67f632b28e085b683936114495b8449cace6daf3897cf636aaaeb28539c2fb9",
+      "patch": {
+        "powerHp": 165,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/em-en/abarth/press/from-formula-4-to-the-road-the-new-abarth-f595-165-hp-of-sheer-adrenaline",
+        "checkedAt": "2026-10-22",
+        "statement": "F595: заводской выпуск15.07.2021 подтверждает165л.с.; исполнение присутствует в гамме2022. Число передач и кузов не выбирались из нескольких вариантов."
+      }
+    },
+    {
+      "modelId": "f1a594b37ed0983c19c4dd81",
+      "variantId": "78d4bedb60486654d5cf1c9e",
+      "make": "Abarth",
+      "model": "595",
+      "year": 2022,
+      "trim": "1.4 Turbo T-Jet 165 CV",
+      "expectedDigest": "7d0c00b28ad6794ae2d0fe70fcd4b50b4a63487cebc1ea72c1738db4e2c0fdbd",
+      "patch": {
+        "powerHp": 165,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/em-en/abarth/press/the-new-abarth-595-range-the-scorpion-stings-once-again",
+        "checkedAt": "2026-10-22",
+        "statement": "Гамма595 от08.03.2022: бензиновый1.4T-Jet165л.с. Подтверждено только точное исполнение165CV."
+      }
+    },
+    {
+      "modelId": "0d4ee508e91027c53c0860f0",
+      "variantId": "121f419c9f55687794514794",
+      "make": "Abarth",
+      "model": "695",
+      "year": 2020,
+      "trim": "695 1.4 T-Jet 70th Anniversario (EU6d-TEMP)",
+      "expectedDigest": "e05f2b0e68f228c25b37e295922148a0d6cf2af2a5d1fecb225f4e2c0cf95a61",
+      "patch": {
+        "engineCc": 1368,
+        "powerHp": 180,
+        "powerKw": 132,
+        "icePowerKw": 132,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.abarth.com/695-70-anniversari-live",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская техническая таблица именно69570°Anniversario:1368см³/180л.с./132кВт. Спецсерия представлена04.10.2019; применяется к точному исполнению карточки2020."
+      }
+    }
+  ]
+}
