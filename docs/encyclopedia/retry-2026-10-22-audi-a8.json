@@ -1,0 +1,817 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T08:23:24.461629+07:00",
+  "make": "Audi",
+  "model": "A8",
+  "modelId": "1314a66b16c62faefdaa7675",
+  "variantsRead": 158,
+  "processedVariants": 2,
+  "confirmedFields": 22,
+  "unchanged": [
+    {
+      "variantId": "0ec0cdb27400e9ef599a93b9",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "30ef45e548cb8d0b6cf02a0f",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "8aea5aa3657fc535a6201a36",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "9459cc2879c5a14fea3b925a",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "193abecd94d4346d288192dd",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "74f9898251d946bf96ca9f4f",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "5b19d0cda271d3e877d191fb",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "2c8518f90a32071f9636b2d3",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "75923b69574617c81b41a14c",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "43377b12f653189eee726d3c",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "c460826045344307aee64a9c",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "460d158397f719927de238b6",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "949d4c8ad62d17bd21a9bd12",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "01eb575ce4f5cdb3462f4164",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "043f3565a7e4667fa939a05f",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "4ed03dd1fbeb6a15fc9bd802",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "2757c06a59217a180625b4fe",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "1bfd31db9164867256c63cb9",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "45412dccfddfae9947cc5b30",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "a3826d28db87e93deefa3339",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "f5ab89dca54e50fb89ca59da",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "748da309ae9242c5ac38c979",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "527f003d9e824bd64dd2e6e8",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "d09a604cdb12af9c04a5ae8e",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "b1212096815e761778467b7e",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "a3cef4721e99762e98b10e73",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "45dd04a1a0ff2d267e30c42f",
+      "year": 2021,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "e5489636df01cd5c4276aaad",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "408c6956dcce10bf393e7065",
+      "year": 2021,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "5b96d872b8f40f12e9d45781",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "c0446fa993e46fedfdac9857",
+      "year": 2024,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "31b2c1ffb3bd5bf3708c2e1d",
+      "year": 2024,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "0eb867d68df47f9500d6978a",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "a587594dc2d0133e457cc5fb",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "461984be9e704b9909fb67a7",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "0627ee47ba1758282e0243d9",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "5cf2f25117e2525ed4066600",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "5d5a54003e070b36b75fe379",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "15d1517bbb28ff7c88133f43",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "a1541fe27a98d21abbd8ced7",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "b8edf565bf8e0c582efb8c95",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "65c48bd65d57728daff4c2a9",
+      "year": 2024,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "7ced30489b1d41278619ead9",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "486ef34c98621ac1dd0ad8a3",
+      "year": 2024,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "40645aa6e5d29c4cc403e2a9",
+      "year": 2024,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "529fbf7bab1a92873419bf95",
+      "year": 2024,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "784e3df818949d4cbbf6a651",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "4e216ecc1f15d56d0c3ec7c9",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "b81dc074f7113af96bdeb35a",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "f22d73580a9682ecbab55ae3",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "715da2f8c03c7d713c6aa5d5",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "433076139aadaf44c1d5c4af",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "bce19bb259e2dad599f4703d",
+      "year": 2023,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "6e5294a259688128c9008fa4",
+      "year": 2023,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "7f5e859be653e05690ba56ab",
+      "year": 2023,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "623b6d6b8f26147b9a202f98",
+      "year": 2023,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "d7f9a42387405fdc938e7f23",
+      "year": 2023,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "baeb96083a76cb4f0a04ceeb",
+      "year": 2023,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "e36055cfcc7e351baacc12be",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "2c2157108e5cb0d6c9a84fe7",
+      "year": 2023,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "e1c28c655e5020d40b5d5c12",
+      "year": 2023,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "da7f2924688f3281ab914dd2",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "cc2ab6b2eb6aee76ad627abd",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "213d431c5a52eef38fd1f4fa",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "0f5793c7411fccf45aa90255",
+      "year": 2023,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "b0e84086c519ac5848b84d24",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "8123ec72d137fb0ba3e19cf4",
+      "year": 2023,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "2a698aef02b00584b6026d72",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "0ba733414074937a2507b3ec",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "bdfd09e42288ab0d027091fc",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "49c2668b8a2e11338497d8d8",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "c47eac478c15fa5dd11b267f",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "a18a577607df0e47bbcfca8c",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "82e91dcd4eb973c39f9b1454",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "350d7b8aa09ff35a734c0cb2",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "f94730146f650daecf0f4402",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "522b5de6ef2838251318ca7b",
+      "year": 2026,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "b766e699f825dd3fce3ad932",
+      "year": 2026,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "37c1b6b0416c328dc1c24772",
+      "year": 2026,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "4a565d5eab8ed3ca127d4d9e",
+      "year": 2026,
+      "reason": "trim_year_conflict_requires_identity_review"
+    },
+    {
+      "variantId": "4eec147a22027a557966a94d",
+      "year": 2015,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "4a6c16e0bfea262edc6bc605",
+      "year": 2020,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "c62825c49f04cb8c6697df1f",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "378e997c8b724a6436fc58ae",
+      "year": 2020,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "29d97007fdcf6abf5b35fe00",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "a1c8d7308d007434fe70f924",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "4b26006094bf8269fd7e304f",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "8f468722d6fbd04d2e766f9f",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "0e8052da38b049e35990fb9d",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "9853559f376baf42ef52098d",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "f1d9b51ba601cfac28b3c9ee",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "59157940c85dcd7f3d07a5d9",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "5ecc6e5324f0db1cd9e947ec",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "46ceb63d6263ff44f09644a4",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "c06e3822053edacacfdcf3c9",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "dedb3645f45325014d9a7f21",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "28268282db043b962e5f1ad8",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "efe66eed82b6b7d15631a5e6",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "35da31bdb85226fb978804e6",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "b511a972b5c3b15977481dc0",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "2671d3dc66936e7ca113a084",
+      "year": 2020,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "6612dc7c9dd1aa6d0bcb8bd2",
+      "year": 2020,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "220a8ed9fe4e068d58975e82",
+      "year": 2020,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "5b0b5b410be601f0e3eefd55",
+      "year": 2020,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "2f7fb0ced224aae4c4de9e79",
+      "year": 2020,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "7e729b1348ebc844f723a479",
+      "year": 2020,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "b208e5a18a48ca2879c95c9c",
+      "year": 2025,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "cd8f7fbc02bae99ec69d807f",
+      "year": 2025,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "f0209ab501cc5c036d92ebe3",
+      "year": 2025,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "e2fab673243eb9851cfc6bd7",
+      "year": 2025,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "e4d1f4c4d5595bf370ebfca7",
+      "year": 2025,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "9f9c0c3a9d6258ef70454a97",
+      "year": 2025,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "c9e3a8871f921d0241f921f2",
+      "year": 2025,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "81269db25f2030a6b34b33d7",
+      "year": 2025,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "44368a20ffe11d80755d3ef8",
+      "year": 2025,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "7d812d31ef7483be3a4e966a",
+      "year": 2025,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "0ab6c76e2e4d40b03fed5ba2",
+      "year": 2025,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "12728ff63b26d32e88fa003a",
+      "year": 2025,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "d602b457fbe93b9a2eb2acab",
+      "year": 2025,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "3c5b57a30a3979b09493c52d",
+      "year": 2025,
+      "reason": "trim_year_conflict_requires_identity_review"
+    },
+    {
+      "variantId": "baa7195c5a02aee4bae28667",
+      "year": 2025,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "5245947b7732bd5969caa100",
+      "year": 2025,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "2c6a6f695298c50cb2694e36",
+      "year": 2025,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "69247f7315e8d04c3168a841",
+      "year": 2025,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "420ccecb4398f06d0c37c758",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "843a94e6fbb14338bfa901ae",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "b0ddc83b561642ff2ce9d474",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "eb0463e69539ed6399c487f7",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "abffd210bcee2f77e7feb163",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "34ba202e71653aaeb599d8e7",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "e9a44a2a0fac3604dd796488",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "b6e6d22b93ed86ab094a2332",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "de3a6a3cba60009509ca4d81",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "1657be252fc60e36c5392caa",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "73f2f91f0a8a54f570255e13",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "ce577a66e346c35c644e95a5",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "1ba98293273748e8b158f07e",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "66544b7c13436859b8247084",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "826bedb4358e83e03492c287",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "a022e8b95dc4cac8d90a2081",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "b8be1828da7893de7f9c92de",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "0a428856684f9d071416df54",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "fa8ebafe48e8b44fd09b5747",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "f39895808410775feb806a74",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "1004da5616725468ad513be1",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "d5aac0642122d37647e28ff6",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "c815a1a3dbb8d59dc66e2d6a",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "1a8791f73a86883c97b48f17",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "f0a148e3be60bb8debe66074",
+      "year": 2022,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "24ee8a1b68849d0982e992a3",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "0672d0231cf2af9eef62c0eb",
+      "year": 2022,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "variantId": "ebe495097dcec3599f8e2b3a",
+      "year": 2016,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "89962cf84b247fc42dc9e127",
+      "year": 2019,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "b18dacc3f1ffa85670d28e93",
+      "year": 2019,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "089338eb1cd48f6d121ba217",
+      "year": 2019,
+      "reason": "needs_dated_factory_specification"
+    },
+    {
+      "variantId": "5ed70e45ac65878a66fcdeb6",
+      "year": 2019,
+      "reason": "needs_dated_factory_specification"
+    }
+  ],
+  "processedRemaining": [
+    {
+      "variantId": "5f609fc704ce5d8fac73bb91",
+      "missing": [
+        "power30MinKw",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ],
+      "reason": "Continuous electrical output60kW is not certified30-minute power; wheelbase and exact weight not established."
+    },
+    {
+      "variantId": "9f537c963e903c1b45c20b1c",
+      "missing": [
+        "power30MinKw",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ],
+      "reason": "Continuous electrical output60kW is not certified30-minute power; wheelbase and exact weight not established."
+    }
+  ],
+  "sourceSearchNotes": [
+    "Official Audi Ireland MY2026 guide and Audi340kW technical sheet verified for two2026 PHEV rows.",
+    "Official China2025 A8L leaflet contains marketing/trim imagery, not a technical specification table.",
+    "No dated factory matching completed for historical years or GCC/Korean editions in this pass."
+  ]
+}

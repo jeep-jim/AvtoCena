@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T08:00:01.468410+07:00",
+  "updatedAt": "2026-10-22T08:23:24.461629+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1329,7 +1329,13 @@
         2015
       ],
       "variants": 158,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "lastResearchAt": "2026-10-22T08:23:24.461629+07:00",
+      "processedVariants": 2,
+      "confirmedFields": 22,
+      "variantsRead": 158,
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a8.json",
+      "nextAction": "Вернуться к156 строкам и неполным полям обработанных2; точную30-минутную мощность не подтверждает continuous. Следующая новая группа Audi A8 D5."
     },
     {
       "id": "0773a2de17e0bf772e98b201",
@@ -32358,10 +32364,10 @@
   "activePriority": {
     "updatedAt": "2026-10-22T08:00:01.468410+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "production_public_evidence_and_immutable_selector_fixes_deploying",
+    "state": "integration_live_additional_display_and_compact_filter_release_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Audi A8",
+    "nextModel": "Audi A8 D5",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32372,10 +32378,18 @@
         "variants": 16,
         "fields": 157,
         "workflow": 39702823205
+      },
+      "A8": {
+        "variants": 2,
+        "fields": 22,
+        "workflow": 39705219952
       }
     },
     "rawAuditCalculated": 69,
-    "publicSerializationParity": 21,
-    "allModelsComplete": false
+    "publicSerializationParity": 69,
+    "allModelsComplete": false,
+    "installedRelease": "be099ce3076d78a140e02d0257843b3020e1e204",
+    "pendingRelease": "62f6bb08ea7721d537ff4ee0ef55cf585fb536a5",
+    "pendingWorkflow": 39704586763
   }
 }
