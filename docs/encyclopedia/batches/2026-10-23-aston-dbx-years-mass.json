@@ -1,0 +1,642 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-aston-dbx-years-mass",
+  "entries": [
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2021,
+      "variantId": "a09d48777947968bd2e32fb8",
+      "trim": "STANDARD",
+      "expectedDigest": "338febb1e40b821c58071ee839aac929960375b5d3c0440bc8525bd36942fc0f",
+      "patch": {
+        "grossVehicleWeightKg": 3035
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBX 21MY: модельный год подтверждён заводским каталогом руководств. Полная масса GVW 3035 кг, не снаряжённая масса и не масса автопоезда. 405 кВт; 542 bhp не объявлены метрическими л.с. Названия специальных серий не подтверждены; прежние источники и идентичности сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 227,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "STANDARD"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2021,
+      "variantId": "0203e88659df16808979e285",
+      "trim": "4.0T V8 Silk Road of Swan",
+      "expectedDigest": "36acac9d6aecbd50fbcbb9decf38c0e582fc30f2cc7f74f49f0a33635cf5beeb",
+      "patch": {
+        "grossVehicleWeightKg": 3035
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBX 21MY: модельный год подтверждён заводским каталогом руководств. Полная масса GVW 3035 кг, не снаряжённая масса и не масса автопоезда. 405 кВт; 542 bhp не объявлены метрическими л.с. Названия специальных серий не подтверждены; прежние источники и идентичности сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 227,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "4.0T V8 Silk Road of Swan"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2021,
+      "variantId": "a4e9b332a53343a503c52d16",
+      "trim": "First Edition Limited Edition",
+      "expectedDigest": "cd0c7d3781ab8dd2688d346d92b5e97a12cbb9aae5b9671f6e187fe3b9c668e3",
+      "patch": {
+        "grossVehicleWeightKg": 3035
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBX 21MY: модельный год подтверждён заводским каталогом руководств. Полная масса GVW 3035 кг, не снаряжённая масса и не масса автопоезда. 405 кВт; 542 bhp не объявлены метрическими л.с. Названия специальных серий не подтверждены; прежние источники и идентичности сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 227,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "First Edition Limited Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2021,
+      "variantId": "4294cfbf51b561a2f3460d0b",
+      "trim": "1 OWNER*14m ASTON WARRANTY*FULL SERVICE BOOK*TOP CONDITION*",
+      "expectedDigest": "d6d498c3a0af6d6bd38f076256a7f10c6073018c3f4b05fd921f2ea141af946b",
+      "patch": {
+        "grossVehicleWeightKg": 3035
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBX 21MY: модельный год подтверждён заводским каталогом руководств. Полная масса GVW 3035 кг, не снаряжённая масса и не масса автопоезда. 405 кВт; 542 bhp не объявлены метрическими л.с. Названия специальных серий не подтверждены; прежние источники и идентичности сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A321-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Europe",
+            "sourceSha256": "34a1e97a465a996e92ed197a37665d411e0c26c952a1f6c934061aea7420b8ab",
+            "pdfPage": 239,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English Owner Guide",
+            "selector": "1 OWNER*14m ASTON WARRANTY*FULL SERVICE BOOK*TOP CONDITION*"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2025,
+      "variantId": "14ee4deb1e3adfe292d98570",
+      "trim": "707",
+      "expectedDigest": "201e9061dca863f9d41a4201275f65f5166d8ed75f9f43063862b08e8d2b7d41",
+      "patch": {
+        "grossVehicleWeightKg": 2960
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBX 25MY с силовым агрегатом DBX707: модельный год подтверждён заводским каталогом руководств. Полная масса GVW 2960 кг, не снаряжённая масса и не масса автопоезда. 707 PS и 520 кВт приведены отдельно в заводской таблице. Названия специальных серий не подтверждены; прежние источники и идентичности сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 254,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "707"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "49f0712914bb0925bd328b09",
+      "make": "Aston Martin",
+      "model": "DBX707",
+      "year": 2025,
+      "variantId": "d5e7a289b736984be63f519a",
+      "trim": "STANDARD",
+      "expectedDigest": "446969b6e7da91b5763f813b12012c934a07441420eb664d877784f95b131e59",
+      "patch": {
+        "grossVehicleWeightKg": 2960
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBX 25MY с силовым агрегатом DBX707: модельный год подтверждён заводским каталогом руководств. Полная масса GVW 2960 кг, не снаряжённая масса и не масса автопоезда. 707 PS и 520 кВт приведены отдельно в заводской таблице. Названия специальных серий не подтверждены; прежние источники и идентичности сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 254,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "STANDARD"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "year": 2021,
+      "variantId": "466cb1110450508b544624ef",
+      "trim": "V8 9AT",
+      "operation": "create",
+      "expectedRevision": "4a6246e4-eb28-41bd-ab68-a8d4ff49ca80",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 9AT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3982,
+        "powerKw": 405,
+        "icePowerKw": 405,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 3035
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBX 21MY: модельный год подтверждён заводским каталогом руководств. Полная масса GVW 3035 кг, не снаряжённая масса и не масса автопоезда. 405 кВт; 542 bhp не объявлены метрическими л.с. Названия специальных серий не подтверждены; прежние источники и идентичности сохраняются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 224,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT",
+            "supportingPages": [
+              224,
+              225
+            ],
+            "identityDescription": "Техническое обозначение V8 и 9-ступенчатой АКПП; не название декоративной комплектации."
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 200,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 224,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 224,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 226,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT",
+            "unit": "kW"
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 226,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT",
+            "unit": "kW"
+          },
+          "drive": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 225,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 225,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/MY83-19A322-AA.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "4d588e1af630ac8e652dc6b846df516c0872ab1f221370988cba6c3129139425",
+            "pdfPage": 227,
+            "modelYear": 2021,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "21MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "49f0712914bb0925bd328b09",
+      "make": "Aston Martin",
+      "model": "DBX707",
+      "year": 2025,
+      "variantId": "a0ce04de41d81bae0598bc6e",
+      "trim": "V8 9AT",
+      "operation": "create",
+      "expectedRevision": "d40b2beb-0f01-4c61-98b7-be04153aa40e",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 9AT",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3982,
+        "powerKw": 520,
+        "icePowerKw": 520,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2960,
+        "powerHp": 707
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "powerHp"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DBX 25MY с силовым агрегатом DBX707: модельный год подтверждён заводским каталогом руководств. Полная масса GVW 2960 кг, не снаряжённая масса и не масса автопоезда. 707 PS и 520 кВт приведены отдельно в заводской таблице. Названия специальных серий не подтверждены; прежние источники и идентичности сохраняются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 252,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT",
+            "supportingPages": [
+              252,
+              253
+            ],
+            "identityDescription": "Техническое обозначение V8 и 9-ступенчатой АКПП; не название декоративной комплектации."
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 224,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 252,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 252,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 253,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT",
+            "unit": "kW"
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 253,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT",
+            "unit": "kW"
+          },
+          "drive": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 253,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 253,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 254,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT"
+          },
+          "powerHp": {
+            "url": "https://www.astonmartin.com/guides/DBX/25MY/25MY%20DBX%20English%20RoW%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца Rest of World",
+            "sourceSha256": "a6c73d1206bccef5385cd074464430e5af85adc8a941d4aa20d5df0e2d0a9438",
+            "pdfPage": 253,
+            "modelYear": 2025,
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBX",
+            "modelYearCatalogTitle": "25MY DBX English RoW Owner Guide",
+            "selector": "V8 9AT",
+            "unit": "PS"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "49f0712914bb0925bd328b09",
+      "make": "Aston Martin",
+      "model": "DBX707",
+      "year": 2022,
+      "variantId": "5a018d7b6bced0da8dd1e8b4",
+      "trim": "V8 9AT",
+      "operation": "create",
+      "expectedRevision": "d40b2beb-0f01-4c61-98b7-be04153aa40e",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 9AT",
+        "bodyType": "suv",
+        "powerHp": 707,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powerHp",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/en/our-world/news/2022/2/1/introducing-the-aston-martin-dbx707-the-world-s-most-powerful-luxury-suv",
+        "checkedAt": "2026-10-23",
+        "statement": "DBX707 V8 9AT: 707 PS, полный привод, SUV и АКПП9 подтверждены заводским выпуском 01.02.2022; фактический выпуск клиентской машины подтверждён 09.05.2022. Точный объём в см³, кВт, топливо и GVW не заимствуются из MY2025 и требуют отдельной таблицы 2022.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/en/our-world/news/2022/2/1/introducing-the-aston-martin-dbx707-the-world-s-most-powerful-luxury-suv",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 01.02.2022",
+            "sourceSha256": "1085c19361d05eb76ff0fa20136c580d59051b38e53b62581fe7289884547223",
+            "selector": "DBX707 V8 9AT",
+            "year": 2022,
+            "yearBasis": "Завод подтвердил первый завершённый клиентский автомобиль 09.05.2022; год не выведен из регистрации.",
+            "yearSource": "https://www.astonmartin.com/en/our-world/news/2022/5/9/first-aston-martin-dbx707-customer-car-completed",
+            "yearSourceSha256": "3554cb0847883324e0769e42143ec51fcd3776f29986336af0be5340c59e4fbf",
+            "section": "V8; 9-speed wet clutch automatic transmission"
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/en/our-world/news/2022/2/1/introducing-the-aston-martin-dbx707-the-world-s-most-powerful-luxury-suv",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 01.02.2022",
+            "sourceSha256": "1085c19361d05eb76ff0fa20136c580d59051b38e53b62581fe7289884547223",
+            "selector": "DBX707 V8 9AT",
+            "year": 2022,
+            "yearBasis": "Завод подтвердил первый завершённый клиентский автомобиль 09.05.2022; год не выведен из регистрации.",
+            "yearSource": "https://www.astonmartin.com/en/our-world/news/2022/5/9/first-aston-martin-dbx707-customer-car-completed",
+            "yearSourceSha256": "3554cb0847883324e0769e42143ec51fcd3776f29986336af0be5340c59e4fbf",
+            "section": "SUV"
+          },
+          "powerHp": {
+            "url": "https://www.astonmartin.com/en/our-world/news/2022/2/1/introducing-the-aston-martin-dbx707-the-world-s-most-powerful-luxury-suv",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 01.02.2022",
+            "sourceSha256": "1085c19361d05eb76ff0fa20136c580d59051b38e53b62581fe7289884547223",
+            "selector": "DBX707 V8 9AT",
+            "year": 2022,
+            "yearBasis": "Завод подтвердил первый завершённый клиентский автомобиль 09.05.2022; год не выведен из регистрации.",
+            "yearSource": "https://www.astonmartin.com/en/our-world/news/2022/5/9/first-aston-martin-dbx707-customer-car-completed",
+            "yearSourceSha256": "3554cb0847883324e0769e42143ec51fcd3776f29986336af0be5340c59e4fbf",
+            "section": "707PS",
+            "unit": "PS"
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/en/our-world/news/2022/2/1/introducing-the-aston-martin-dbx707-the-world-s-most-powerful-luxury-suv",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 01.02.2022",
+            "sourceSha256": "1085c19361d05eb76ff0fa20136c580d59051b38e53b62581fe7289884547223",
+            "selector": "DBX707 V8 9AT",
+            "year": 2022,
+            "yearBasis": "Завод подтвердил первый завершённый клиентский автомобиль 09.05.2022; год не выведен из регистрации.",
+            "yearSource": "https://www.astonmartin.com/en/our-world/news/2022/5/9/first-aston-martin-dbx707-customer-car-completed",
+            "yearSourceSha256": "3554cb0847883324e0769e42143ec51fcd3776f29986336af0be5340c59e4fbf",
+            "section": "V8; 9-speed wet clutch automatic transmission"
+          },
+          "drive": {
+            "url": "https://www.astonmartin.com/en/our-world/news/2022/2/1/introducing-the-aston-martin-dbx707-the-world-s-most-powerful-luxury-suv",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз от 01.02.2022",
+            "sourceSha256": "1085c19361d05eb76ff0fa20136c580d59051b38e53b62581fe7289884547223",
+            "selector": "DBX707 V8 9AT",
+            "year": 2022,
+            "yearBasis": "Завод подтвердил первый завершённый клиентский автомобиль 09.05.2022; год не выведен из регистрации.",
+            "yearSource": "https://www.astonmartin.com/en/our-world/news/2022/5/9/first-aston-martin-dbx707-customer-car-completed",
+            "yearSourceSha256": "3554cb0847883324e0769e42143ec51fcd3776f29986336af0be5340c59e4fbf",
+            "section": "all-wheel drive system transfer case"
+          }
+        }
+      }
+    }
+  ]
+}

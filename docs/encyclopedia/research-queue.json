@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T22:09:02.520Z",
+  "updatedAt": "2026-10-23T06:01:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32675,7 +32675,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T22:09:02.520Z",
+    "updatedAt": "2026-10-23T06:01:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "dbs_two_batches_saved_api_readback_pass_activation_pending",
     "preserveManual": true,
@@ -32912,7 +32912,17 @@
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-dbs-modern-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": {
+      "batch": "research-2026-10-23-aston-dbx-years-mass",
+      "state": "prepared_for_workflow",
+      "operations": 9,
+      "newVariants": 3,
+      "updatedVariants": 6,
+      "fields": 30,
+      "compiledCalculationFields": 27,
+      "preflightReport": "docs/encyclopedia/reports/2026-10-23-aston-dbx-preflight.json",
+      "apiReadback": false
+    },
     "lastCompletedPass": {
       "version": 1,
       "checkedAt": "2026-10-23T05:07:59.205155+07:00",
