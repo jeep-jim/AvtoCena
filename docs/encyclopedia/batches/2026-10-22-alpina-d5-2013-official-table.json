@@ -1,0 +1,304 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alpina-d5-2013-official-table",
+  "entries": [
+    {
+      "modelId": "c26b4f6cf8e267db5d1f7503",
+      "make": "Alpina",
+      "model": "D5",
+      "year": 2013,
+      "operation": "create",
+      "variantId": "dbbd3da8fd54efed73321e91",
+      "trim": "3.0 Bi-Turbo 350 PS Saloon AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "a2503122-a815-4ca8-be1e-7d029060053d",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Saloon AT",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2993,
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальный открытый каталог TCS/EnergieSchweiz/BFE, данные TARGA-ASTRA на09/2013. PDF32, печатнаястр62: точные строки D5 BiTurbo3.0d и D5 BiTurboTouring3.0d,2993см³,257кВт/350PS,автоматическая коробкаA; L=седан,K=универсал. Голубая строка означает дизель с фильтром, гибриды выделены отдельно. Таблица и легенда визуально проверены. Это государственный технический справочник, не заводской документ и не индивидуальная омологация. Каталог с2014 в заглавии создаёт2013 по дате среза. Снаряжённая масса1940/2040кг не принята за полную. Привод,коды и число ступеней не перенесены из других лет. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Saloon 3.0d; A; trim",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Saloon 3.0d; A; bodyType",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Saloon 3.0d; A; fuel",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Saloon 3.0d; A; powertrainKind",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Saloon 3.0d; A; engineCc",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Saloon 3.0d; A; powerHp",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Saloon 3.0d; A; powerKw",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Saloon 3.0d; A; icePowerKw",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Saloon 3.0d; A; transmission",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "c26b4f6cf8e267db5d1f7503",
+      "make": "Alpina",
+      "model": "D5",
+      "year": 2013,
+      "operation": "create",
+      "variantId": "e683c895d3a5d644aad03823",
+      "trim": "3.0 Bi-Turbo 350 PS Touring AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "a2503122-a815-4ca8-be1e-7d029060053d",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Touring AT",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2993,
+        "powerHp": 350,
+        "powerKw": 257,
+        "icePowerKw": 257,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальный открытый каталог TCS/EnergieSchweiz/BFE, данные TARGA-ASTRA на09/2013. PDF32, печатнаястр62: точные строки D5 BiTurbo3.0d и D5 BiTurboTouring3.0d,2993см³,257кВт/350PS,автоматическая коробкаA; L=седан,K=универсал. Голубая строка означает дизель с фильтром, гибриды выделены отдельно. Таблица и легенда визуально проверены. Это государственный технический справочник, не заводской документ и не индивидуальная омологация. Каталог с2014 в заглавии создаёт2013 по дате среза. Снаряжённая масса1940/2040кг не принята за полную. Привод,коды и число ступеней не перенесены из других лет. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Touring 3.0d; A; trim",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Touring 3.0d; A; bodyType",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Touring 3.0d; A; fuel",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Touring 3.0d; A; powertrainKind",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Touring 3.0d; A; engineCc",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Touring 3.0d; A; powerHp",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Touring 3.0d; A; powerKw",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Touring 3.0d; A; icePowerKw",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 32,
+            "printedPage": 62,
+            "datePage": 2,
+            "sourceSha256": "447b09d54d56313dae07c023e795a037bb0c3a2d6708bd603ff728934f3a964e",
+            "selector": "BMW ALPINA D5 BiTurbo Touring 3.0d; A; transmission",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    }
+  ]
+}
