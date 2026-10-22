@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T13:43:47.032622+07:00",
+  "updatedAt": "2026-10-22T14:04:43.390137+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32585,12 +32585,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T13:43:47.032622+07:00",
+    "updatedAt": "2026-10-22T14:04:43.390137+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "continue_alphabetic_giulietta_2010",
+    "state": "giulietta_2010_2012_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulietta 2010, затем последующие подтверждённые годы; пропуски Giulia отдельно",
+    "nextModel": "Alfa Romeo Giulietta 2013 после независимого API-readback партии 2010–2012",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32898,7 +32898,19 @@
         "includedInIndex": false
       }
     ],
-    "inFlightResearch": null,
+    "inFlightResearch": {
+      "batch": "research-2026-10-22-alfa-giulietta-2010-2012",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "years": [
+        2010,
+        2011,
+        2012
+      ],
+      "variants": 62,
+      "fields": 482,
+      "state": "prepared_not_applied",
+      "claimedAt": "2026-10-22T14:04:43.390137+07:00"
+    },
     "lastCompletedPass": {
       "report": "docs/encyclopedia/reports/2026-10-22-giulia-2019-2026-pass.json",
       "variants": 93,
