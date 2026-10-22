@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:25:06.034959+07:00",
+  "updatedAt": "2026-10-22T16:30:06.247000+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32613,7 +32613,7 @@
     "state": "junior_mito_saved_index_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo MiTo: завершить10/21 уточнений2008/2010 и2 Turismo Sport2010 по manual-handoff, затем11/99 точных исполнений2011 по handoff; никаких подготовленных кандидатов пока не применено",
+    "nextModel": "MiTo2008/2010manual и2011 подготовлены23/137; после API-readback остаток2011 затем2012",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -33065,7 +33065,13 @@
         "includedInIndex": false
       }
     ],
-    "inFlightResearch": null,
+    "inFlightResearch": {
+      "batch": "research-2026-10-22-alfa-mito-2008-2011-manual-turismo-super",
+      "state": "prepared_not_applied",
+      "variants": 23,
+      "newVariants": 13,
+      "fields": 137
+    },
     "lastCompletedPass": {
       "checkedAt": "2026-10-22T16:18:13.376522+07:00",
       "variants": 40,
@@ -33124,7 +33130,12 @@
       "activationOccurred": false,
       "nextAction": "Check publication completion before requesting one aggregate index release; do not clear lock or duplicate collectors"
     },
-    "concurrentRelease": null,
+    "concurrentRelease": {
+      "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
+      "workflow": 39755527627,
+      "state": "pending",
+      "note": "Чужой выпуск фильтров; проверить состав фактически подготовленного индекса, не запускать дублирующий выпуск"
+    },
     "installedIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
     "catalogFieldsEnriched": 1359,
     "failedConcurrentRelease": {
