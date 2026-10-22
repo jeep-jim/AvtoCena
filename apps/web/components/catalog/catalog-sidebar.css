@@ -1,5 +1,6 @@
 .ac-catalog-results{min-width:0}
 @media(min-width:1024px){
+ .ac-catalog-results section.ac-brand-rail{border-top:1px solid var(--ac-border);border-bottom:1px solid var(--ac-border);border-radius:0}
  .ac-catalog-layout{display:grid;grid-template-columns:292px minmax(0,1fr);gap:28px;align-items:start;margin-top:0}
  .ac-catalog-sidebar{grid-column:1;grid-row:1 / span 2;position:sticky;top:88px;min-width:0;max-height:calc(100dvh - 104px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;-ms-overflow-style:none}
  .ac-catalog-sidebar-inner{padding:0 24px 0 0;border-right:1px solid var(--ac-border);border-radius:0;background:transparent}

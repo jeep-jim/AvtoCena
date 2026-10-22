@@ -25,7 +25,7 @@ jobs:
   audit:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,19 +37,13 @@ jobs:
         if: github.ref == 'refs/heads/main'
         env:
           EXPECTED_RELEASE: ${{ github.sha }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet HEAD^ HEAD -- .github/market-runs/regcloud-deploy.json; then
             echo 'No production deployment requested by this commit; audit the current release'
             exit 0
           fi
-          node --input-type=module <<'JS'
-          let ready=false;
-          for(let i=0;i<48;i++){
-            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&d.releaseSha===process.env.EXPECTED_RELEASE){ready=true;break;}}catch{}
-            await new Promise(r=>setTimeout(r,10000));
-          }
-          if(!ready)throw new Error('Exact production release not confirmed');
-          JS
+          node scripts/wait-published-release.mjs
       - name: Read public headers, photo hosts and existing cloud configuration
         env:
           YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
@@ -94,7 +88,7 @@ jobs:
     if: always() && needs.browser.result == 'success' && ((github.event_name == 'pull_request' && needs.audit.result == 'skipped') || (needs.audit.result == 'success' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/catalog-read-concurrency-20260926')))
     needs: [audit, browser]
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

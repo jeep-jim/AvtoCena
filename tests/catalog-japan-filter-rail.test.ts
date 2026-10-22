@@ -7,7 +7,7 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  const mocks:Record<string,string>={
  'ajes-market-selection':`export const usesAjesMarket=async market=>['china','korea','japan'].includes(market);`,
  'ajes-catalog':`export const withAjesCount=async x=>x;`,
- 'green-corner-search':`export const filterGreenCorner=(items,params)=>items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));export const greenCornerFacets=()=>({});`,
+ 'green-corner-search':`export const filterGreenCorner=(items,params)=>items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));export const greenCornerFacets=()=>({makes:[],models:[],bodyTypes:[],fuels:[],transmissions:[],drives:[]});`,
  'green-corner':`export const readGreenCorner=async()=>({items:[{id:'match',make:'Volkswagen',powerHp:150},{id:'too-powerful',make:'Volkswagen',powerHp:200},{id:'wrong-brand',make:'Toyota',powerHp:100}]});export const publicGreenOffer=x=>x;export const currentGreenCornerPrices=async x=>x;`,
  'storage':`export const readCatalogFacets=async()=>({});export const searchOffers=async()=>({total:0,items:[],page:1,pageSize:10});`,
  'market-facets':`export const readGroupedCatalogFacets=async()=>({});`,
@@ -20,7 +20,8 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  };
  const ui=['GreenCornerCatalog','AjesCatalog','AjesRail','JapanSectionTabs','GreenCornerRail','PublicHeader','BrandLogoRail','CatalogLoadMore','CatalogCard','CatalogMarketFlag','CatalogFilters','CurrencyRatesStrip'];
  for(const name of ui)mocks[name]=`export function ${name}(){return null;}`;
- const output=await build({entryPoints:['apps/web/components/catalog/CatalogContent.tsx'],bundle:true,platform:'node',format:'cjs',write:false,jsx:'automatic',packages:'external',plugins:[{name:'fixtures',setup(b){b.onResolve({filter:/.*/},a=>{const n=a.path.split('/').at(-1)!;if(mocks[n])return {path:n,namespace:'fixtures'};});b.onLoad({filter:/.*/,namespace:'fixtures'},a=>({contents:mocks[a.path],loader:'js'}));}}]});
+ mocks.AjesRail+=`export const readAjesRailData=async()=>({total:1,items:[]});export function CatalogEmptyResults(){return null;}`;
+ const output=await build({entryPoints:['apps/web/components/catalog/CatalogContent.tsx'],bundle:true,platform:'node',format:'cjs',write:false,loader:{'.css':'empty'},jsx:'automatic',packages:'external',plugins:[{name:'fixtures',setup(b){b.onResolve({filter:/.*/},a=>{const n=a.path.split('/').at(-1)!;if(mocks[n])return {path:n,namespace:'fixtures'};});b.onLoad({filter:/.*/,namespace:'fixtures'},a=>({contents:mocks[a.path],loader:'js'}));}}]});
  const m={exports:{} as any};new Function('require','module','exports',output.outputFiles[0].text)(require,m,m.exports);
  const params={make:'Volkswagen',powerTo:'160',sort:'totalRub',city:'Новокузнецк'};
  const tree=await m.exports.CatalogContent({params});const elements:any[]=[];

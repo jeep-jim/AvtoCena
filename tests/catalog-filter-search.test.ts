@@ -10,7 +10,7 @@ import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath
 const modelRoute = fs.readFileSync(new URL("../apps/web/app/api/catalog/models/route.ts", import.meta.url), "utf8");
 
 test("model suggestions merge the live catalog with the curated knowledge base", () => {
-  assert.match(modelRoute, /readCatalogFacets\(modelFilters\)/);
+  assert.match(modelRoute, /selectedFacets\(modelFilters\)/);
   assert.match(modelRoute, /mergeSuggestions\(knowledgeMatches, catalogFacets\.models, query, limit\)/);
 });
 

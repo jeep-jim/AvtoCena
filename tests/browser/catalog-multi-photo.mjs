@@ -62,7 +62,7 @@ try {
   await sortScope.getByRole('button',{name:/^Сортировка:/}).click();
   for(const [label,value] of [['Сначала дешевле','totalRub'],['Сначала дороже','totalRubDesc'],['Сначала новые','year'],['Сначала старые','yearAsc']]) {
    await sortScope.getByRole('button',{name:'Без сортировки',exact:true}).click();
-   const button=sortScope.getByRole('button',{name:label,exact:true});await button.click();
+   const button=sortScope.getByRole('button',{name:new RegExp('^'+label+'(?:\\s|$)')});await button.click();
    assert.equal(await button.getAttribute('aria-pressed'),'true');
    assert.equal(await scope.locator('input[name="sort"]').inputValue(),value);
   }

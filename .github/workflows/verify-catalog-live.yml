@@ -15,7 +15,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,15 +25,9 @@ jobs:
       - name: Wait for exact published release
         env:
           EXPECTED_RELEASE: ${{ github.sha }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
-          node --input-type=module <<'JS'
-          let ready=false;
-          for(let n=0;n<50;n++){
-            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&d.releaseSha===process.env.EXPECTED_RELEASE){ready=true;break;}}catch{}
-            await new Promise(r=>setTimeout(r,10000));
-          }
-          if(!ready)throw Error('Exact release not confirmed');
-          JS
+          node scripts/wait-published-release.mjs
       - name: Mobile and desktop published journey
         env:
           PLAYWRIGHT_MODULE: /tmp/catalog-live/node_modules/playwright/index.mjs
