@@ -22,7 +22,7 @@ for(const market of ['korea','china','europe','uae','georgia']){
  console.log(JSON.stringify({market,total:result.total,ms:Math.round(performance.now()-start)}));
 }
 
-for(const params of [{market:'china',engineTo:2000,budgetTo:3000000,pageSize:24},{market:'korea',engineTo:2000,powerTo:160,pageSize:24}]){
+for(const params of [{market:'china',engineTo:2000,budgetTo:3000000,pageSize:24},{market:'korea',engineTo:2000,powerTo:160,pageSize:24},{market:'uae',make:'Audi',model:'A3',budgetFrom:3000000,budgetTo:3300000,pageSize:24},{market:'korea',drive:'fwd',transmission:'dct',pageSize:24}]){
  const compact=await searchOffers(params),baseline=await searchOffersWithoutBudgetIndexForTests(params);
  assert.equal(compact.total,baseline.total,'specification filter count must equal full authoritative search');
  assert.deepEqual(compact.items.map(row=>row.id),baseline.items.map(row=>row.id),'specification filter order must equal full authoritative search');

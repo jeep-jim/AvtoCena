@@ -7,8 +7,8 @@ import {safePublicPricing} from './safe-public-pricing';
 
 /** Same admitted public specifications as card matching; never fabricate power or displacement. */
 export function budgetSpecifications(input:CatalogSearchProjection){
- const row=safePublicPricing(applyEncyclopediaCalculation(applyUaeManualSpecifications(input)));
- return {bodyType:catalogBodyType(row),drive:row.drive,transmission:row.transmission,engineCc:row.engineCc,utilizationPowerKw:row.utilizationPowerKw,powertrainKind:row.powertrainKind,powerHp:row.powerHp,fuel:row.fuel};
+ const row:CatalogSearchProjection & {engineCode?:string;chassisCode?:string}=safePublicPricing(applyEncyclopediaCalculation(applyUaeManualSpecifications(input)));
+ return {trim:row.trim,engineCode:row.engineCode,chassisCode:row.chassisCode,drive:row.drive,transmission:row.transmission,bodyType:catalogBodyType(row),engineCc:row.engineCc,utilizationPowerKw:row.utilizationPowerKw,powertrainKind:row.powertrainKind,powerHp:row.powerHp,fuel:row.fuel};
 }
 export async function enrichBudgetSpecifications(index:BudgetCountIndex,read:(block:number)=>Promise<{generationId:string;items:CatalogSearchProjection[]}>){
  const rows=[...index.rows,...(index.otherRows||[])];
