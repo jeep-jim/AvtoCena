@@ -1,7 +1,7 @@
 import {createHash,randomUUID} from 'node:crypto';
 export const stable = value => JSON.stringify(value, (_,v)=>v && typeof v==='object' && !Array.isArray(v)?Object.fromEntries(Object.entries(v).sort(([a],[b])=>a.localeCompare(b))):v);
 export const digest = value => createHash('sha256').update(stable(value)).digest('hex');
-const fields = new Set(['trim','bodyType','fuel','powertrainKind','transmission','drive','engineCode','engineCc','powerHp','powerKw','icePowerKw','motorPeakKw','systemPowerKw','batteryKwh','grossVehicleWeightKg','power30MinKw','frontMotor30MinKw','rearMotor30MinKw','motors30MinKw']);
+const fields = new Set(['trim','chassisCode','bodyType','fuel','powertrainKind','transmission','drive','engineCode','engineCc','powerHp','powerKw','icePowerKw','motorPeakKw','systemPowerKw','batteryKwh','grossVehicleWeightKg','power30MinKw','frontMotor30MinKw','rearMotor30MinKw','motors30MinKw']);
 const literalTranslations={transmission:{'电动车单速变速箱':'Одноступенчатый редуктор'}};
 const certified = new Set(['power30MinKw','frontMotor30MinKw','rearMotor30MinKw','motors30MinKw']);
 export function validateBatch(batch){
@@ -10,10 +10,13 @@ export function validateBatch(batch){
  for(const e of batch.entries){
   const id=`${e.modelId}:${e.variantId}`;
   if(ids.has(id)||! /^[a-f0-9]{24}$/.test(e.modelId)||!e.variantId||! /^[a-f0-9]{64}$/.test(e.expectedDigest))throw Error('invalid_entry_identity');ids.add(id);
+  if(e.operation!==undefined&&e.operation!=='create')throw Error('invalid_operation');
+  if(e.operation==='create'&&(e.expectedDigest!==digest(null)||!e.expectedRevision||e.year<2008||!['manufacturer','official_registry'].includes(e.source?.type)))throw Error('invalid_new_variant_evidence');
   if(!e.make||!e.model||!e.trim||!Number.isInteger(e.year)||e.year<1900||e.year>new Date().getUTCFullYear()+1)throw Error('missing_exact_identity');
   if(!e.source || !['manufacturer','official_registry','observation_translation'].includes(e.source.type)||!e.source.statement||e.source.statement.length>1200||!/^\d{4}-\d{2}-\d{2}$/.test(e.source.checkedAt))throw Error('missing_field_source');
   const url=new URL(e.source.url);if(url.protocol!=='https:'||url.username||url.password)throw Error('invalid_source_url');
   if(!e.patch||!Object.keys(e.patch).length)throw Error('empty_patch');
+  if(e.operation==='create'&&(e.patch.trim!==e.trim||!e.confirmedFields.includes('trim')||Object.keys(e.patch).some(f=>!e.confirmedFields.includes(f))))throw Error('new_variant_requires_confirmed_identity');
   for(const [field,value] of Object.entries(e.patch)){
    const translation=e.translations?.[field];
    if(!fields.has(field)||(!e.confirmedFields.includes(field)&&!translation))throw Error('unconfirmed_patch_field');
@@ -33,6 +36,7 @@ export function planModelResearch(current, entries, batch, at=new Date().toISOSt
   const e=entries.find(e=>e.variantId===v.id);if(!e)return v;
   const already=v.researchEvidence?.batchId===batch.id&&Object.entries(e.patch).every(([k,value])=>v[k]===value);
   if(already){skipped.push({variantId:v.id,reason:'already_applied'});return v;}
+  if(e.operation==='create'){skipped.push({variantId:v.id,reason:'existing_variant_not_overwritten'});return v;}
   if(Object.entries(e.translations||{}).some(([field,t])=>v[field]!==t.from)){skipped.push({variantId:v.id,reason:'translation_source_changed'});return v;}
   if(e.make!==current.make||e.model!==current.model||e.year!==v.year||e.trim!==v.trim||digest(v)!==e.expectedDigest){skipped.push({variantId:v.id,reason:'changed_since_review'});return v;}
   const notes=[v.notes,`${e.source.checkedAt}: ${e.source.statement} Источник: ${e.source.url}`].filter(Boolean).join('\n');
@@ -40,6 +44,12 @@ export function planModelResearch(current, entries, batch, at=new Date().toISOSt
   changes.push({variantId:v.id,fields:Object.keys(e.patch)});
   return {...v,...e.patch,status:'review',notes,...(v.researchEvidence?{researchEvidenceHistory:[...(v.researchEvidenceHistory||[]),v.researchEvidence]}:{}),researchEvidence:{...(v.status==='observed'&&(v.markets||[]).some(m=>m==='china'||m==='europe')?{ownerReferenceSnapshot:{markets:v.markets.filter(m=>m==='china'||m==='europe'),values:Object.fromEntries([...fields].filter(f=>f!=='trim'&&!certified.has(f)&&v[f]!==undefined).map(f=>[f,v[f]]))}}:{}),batchId:batch.id,source:e.source,fields:e.confirmedFields,values:Object.fromEntries(Object.entries(e.patch).filter(([field])=>e.confirmedFields.includes(field))),translations:e.translations,originalTrim:v.trim,checkedIdentity:{make:current.make,model:current.model,year:v.year,trim:e.patch.trim||v.trim}}};
  });
- for(const e of entries)if(!current.variants.some(v=>v.id===e.variantId))skipped.push({variantId:e.variantId,reason:'variant_missing'});
+ for(const e of entries)if(!current.variants.some(v=>v.id===e.variantId)){
+  if(e.operation!=='create'){skipped.push({variantId:e.variantId,reason:'variant_missing'});continue;}
+  if(e.make!==current.make||e.model!==current.model||e.expectedRevision!==current.revision){skipped.push({variantId:e.variantId,reason:'changed_since_review'});continue;}
+  if(variants.some(v=>v.year===e.year&&String(v.trim||'').normalize('NFKC').toLowerCase()===e.trim.normalize('NFKC').toLowerCase()&&String(v.chassisCode||'')===String(e.patch.chassisCode||''))){skipped.push({variantId:e.variantId,reason:'duplicate_variant_identity'});continue;}
+  variants.push({id:e.variantId,year:e.year,...e.patch,markets:[],observedCount:0,status:'review',sourceUrl:e.source.url,notes:`${e.source.checkedAt}: ${e.source.statement}`,researchEvidence:{batchId:batch.id,source:e.source,fields:e.confirmedFields,values:e.patch,originalTrim:e.trim,checkedIdentity:{make:current.make,model:current.model,year:e.year,trim:e.trim}}});
+  changes.push({variantId:e.variantId,operation:'create',fields:Object.keys(e.patch)});
+ }
  return {record:changes.length?{...current,variants,revision:randomUUID(),updatedAt:at,editedBy:'owner-authorized-encyclopedia-research'}:current,changes,skipped};
 }

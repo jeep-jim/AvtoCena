@@ -56,3 +56,16 @@ test('review snapshots owner-approved observations but never fabricates referenc
  const uae={...china,markets:['uae']};
  assert.equal(planModelResearch({...current,variants:[uae]},[{...e,expectedDigest:digest(uae)}],batch).record.variants[0].researchEvidence.ownerReferenceSnapshot,undefined);
 });
+
+test('historical manufacturer variants are appended with revision protection and replay safety',()=>{
+ const e={...entry,operation:'create',variantId:'historical-2008',year:2008,trim:'2.4 S',expectedRevision:current.revision,expectedDigest:digest(null),patch:{trim:'2.4 S',chassisCode:'RR1',engineCc:2354},confirmedFields:['trim','chassisCode','engineCc']};
+ const b={...batch,entries:[e]};validateBatch(b);
+ const first=planModelResearch(current,[e],b);assert.equal(first.changes.length,1);assert.deepEqual(first.record.variants[0],v);assert.equal(first.record.variants[1].year,2008);
+ assert.equal(first.record.variants[1].researchEvidence.ownerReferenceSnapshot,undefined);
+ assert.equal(planModelResearch(first.record,[e],b).changes.length,0);
+ assert.equal(planModelResearch({...current,revision:'concurrent-edit'},[e],b).changes.length,0);
+ const duplicate={...e,variantId:'different-id',expectedRevision:first.record.revision};assert.equal(planModelResearch(first.record,[duplicate],b).skipped[0].reason,'duplicate_variant_identity');
+ assert.throws(()=>validateBatch({...b,entries:[{...e,year:2007}]}));
+ assert.throws(()=>validateBatch({...b,entries:[{...e,source:{...e.source,type:'observation_translation'}}]}));
+ assert.throws(()=>validateBatch({...b,entries:[{...e,confirmedFields:['engineCc']}]}));
+});
