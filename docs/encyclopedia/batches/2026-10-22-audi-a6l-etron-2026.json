@@ -1,0 +1,444 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a6l-etron-2026",
+  "entries": [
+    {
+      "modelId": "649dd3ac3d5c169544a23005",
+      "variantId": "90e191ebe2cbdec13e372c27",
+      "make": "Audi",
+      "model": "A6L e-tron",
+      "year": 2026,
+      "trim": "2026款 首发乾崑智驾版",
+      "expectedDigest": "dffba731143dbf1f376516becd2f6ffc928cc1119008882dd9839b83aaa890c0",
+      "patch": {
+        "trim": "Launch Edition Qiankun ADAS",
+        "bodyType": "sedan",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "drive": "rwd",
+        "powerKw": 260,
+        "powerHp": 354,
+        "systemPowerKw": 260,
+        "batteryKwh": 107,
+        "motorPeakKw": 260,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "powerKw",
+        "powerHp",
+        "systemPowerKw",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A6L e-tron, заводской каталог 2026.Q2: таблица стр.7, дата стр.11, точная комплектация Launch Edition Qiankun ADAS. Максимальная суммарная мощность 260 кВт, батарея 107 кВт·ч, задний привод. PS вычислены round(kW / 0.73549875). Пиковая мощность единственного заднего мотора 260 кВт. Кузов седан и электрическая установка подтверждены также релизом производителя10.04.2026. Название переведено на английский; КПП при наличии китайского текста переведена буквально без подтверждения характеристики. Полная масса и30-минутная мощность не установлены. На строки2025года таблица не переносилась.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              7,
+              11
+            ],
+            "sha256": "3a321cc7226cb86675e80cf32e780587c97698951b9da0b3b8cb50de7f6208b0",
+            "fields": [
+              "trim",
+              "drive",
+              "powerKw",
+              "powerHp",
+              "systemPowerKw",
+              "batteryKwh",
+              "motorPeakKw"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          },
+          {
+            "url": "https://www.audi-faw-nev.com.cn/zh/Company_information/company_news/2026_04_10_02.html",
+            "date": "2026-04-10",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ],
+            "publisher": "Audi FAW NEV"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "649dd3ac3d5c169544a23005",
+      "variantId": "9f356a457e1120293ec0793d",
+      "make": "Audi",
+      "model": "A6L e-tron",
+      "year": 2026,
+      "trim": "2026款 超长续航版",
+      "expectedDigest": "df245c064841816d45dba4f0a6c20adbb90606e3e0a69bd9f446e2052bf0f474",
+      "patch": {
+        "trim": "Ultra Long Range",
+        "bodyType": "sedan",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "drive": "rwd",
+        "powerKw": 265,
+        "powerHp": 360,
+        "systemPowerKw": 265,
+        "batteryKwh": 107,
+        "motorPeakKw": 265,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "powerKw",
+        "powerHp",
+        "systemPowerKw",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A6L e-tron, заводской каталог 2026.Q2: таблица стр.7, дата стр.11, точная комплектация Ultra Long Range. Максимальная суммарная мощность 265 кВт, батарея 107 кВт·ч, задний привод. PS вычислены round(kW / 0.73549875). Пиковая мощность единственного заднего мотора 265 кВт. Кузов седан и электрическая установка подтверждены также релизом производителя10.04.2026. Название переведено на английский; КПП при наличии китайского текста переведена буквально без подтверждения характеристики. Полная масса и30-минутная мощность не установлены. На строки2025года таблица не переносилась.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              7,
+              11
+            ],
+            "sha256": "3a321cc7226cb86675e80cf32e780587c97698951b9da0b3b8cb50de7f6208b0",
+            "fields": [
+              "trim",
+              "drive",
+              "powerKw",
+              "powerHp",
+              "systemPowerKw",
+              "batteryKwh",
+              "motorPeakKw"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          },
+          {
+            "url": "https://www.audi-faw-nev.com.cn/zh/Company_information/company_news/2026_04_10_02.html",
+            "date": "2026-04-10",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ],
+            "publisher": "Audi FAW NEV"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "649dd3ac3d5c169544a23005",
+      "variantId": "51db0f66477a5950a1abd83c",
+      "make": "Audi",
+      "model": "A6L e-tron",
+      "year": 2026,
+      "trim": "2026款 quattro 乾崑智驾版",
+      "expectedDigest": "25ab9a77806b7a4eb3fd3667179826c9db403d30e7b5d4fd2fb1f4be44794cb0",
+      "patch": {
+        "trim": "quattro Qiankun ADAS",
+        "bodyType": "sedan",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "drive": "awd",
+        "powerKw": 405,
+        "powerHp": 551,
+        "systemPowerKw": 405,
+        "batteryKwh": 107,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "powerKw",
+        "powerHp",
+        "systemPowerKw",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A6L e-tron, заводской каталог 2026.Q2: таблица стр.7, дата стр.11, точная комплектация quattro Qiankun ADAS. Максимальная суммарная мощность 405 кВт, батарея 107 кВт·ч, полный привод. PS вычислены round(kW / 0.73549875). Передний/задний пики135/270кВт не записаны как30-минутные. Кузов седан и электрическая установка подтверждены также релизом производителя10.04.2026. Название переведено на английский; КПП при наличии китайского текста переведена буквально без подтверждения характеристики. Полная масса и30-минутная мощность не установлены. На строки2025года таблица не переносилась.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              7,
+              11
+            ],
+            "sha256": "3a321cc7226cb86675e80cf32e780587c97698951b9da0b3b8cb50de7f6208b0",
+            "fields": [
+              "trim",
+              "drive",
+              "powerKw",
+              "powerHp",
+              "systemPowerKw",
+              "batteryKwh"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          },
+          {
+            "url": "https://www.audi-faw-nev.com.cn/zh/Company_information/company_news/2026_04_10_02.html",
+            "date": "2026-04-10",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ],
+            "publisher": "Audi FAW NEV"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "649dd3ac3d5c169544a23005",
+      "variantId": "42b437ba34b3799efd252d0b",
+      "make": "Audi",
+      "model": "A6L e-tron",
+      "year": 2026,
+      "trim": "2026款 长续航版",
+      "expectedDigest": "1fb5ef1b5aea9e4ec249d7e39f2b64978a30696008d1a1e5da8fa1b239a65743",
+      "patch": {
+        "trim": "Long Range",
+        "bodyType": "sedan",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "drive": "rwd",
+        "powerKw": 215,
+        "powerHp": 292,
+        "systemPowerKw": 215,
+        "batteryKwh": 95,
+        "motorPeakKw": 215,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "powerKw",
+        "powerHp",
+        "systemPowerKw",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A6L e-tron, заводской каталог 2026.Q2: таблица стр.7, дата стр.11, точная комплектация Long Range. Максимальная суммарная мощность 215 кВт, батарея 95 кВт·ч, задний привод. PS вычислены round(kW / 0.73549875). Пиковая мощность единственного заднего мотора 215 кВт. Кузов седан и электрическая установка подтверждены также релизом производителя10.04.2026. Название переведено на английский; КПП при наличии китайского текста переведена буквально без подтверждения характеристики. Полная масса и30-минутная мощность не установлены. На строки2025года таблица не переносилась.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              7,
+              11
+            ],
+            "sha256": "3a321cc7226cb86675e80cf32e780587c97698951b9da0b3b8cb50de7f6208b0",
+            "fields": [
+              "trim",
+              "drive",
+              "powerKw",
+              "powerHp",
+              "systemPowerKw",
+              "batteryKwh",
+              "motorPeakKw"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          },
+          {
+            "url": "https://www.audi-faw-nev.com.cn/zh/Company_information/company_news/2026_04_10_02.html",
+            "date": "2026-04-10",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ],
+            "publisher": "Audi FAW NEV"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "649dd3ac3d5c169544a23005",
+      "variantId": "a2c38b9f6be9d107d3ed68e6",
+      "make": "Audi",
+      "model": "A6L e-tron",
+      "year": 2026,
+      "trim": "首发乾崑智驾版",
+      "expectedDigest": "c51664828ecbae593c6a2d9eda71b43a265a92c31d573a7cdf74e317d6d8f00b",
+      "patch": {
+        "trim": "Launch Edition Qiankun ADAS",
+        "bodyType": "sedan",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "drive": "rwd",
+        "powerKw": 260,
+        "powerHp": 354,
+        "systemPowerKw": 260,
+        "batteryKwh": 107,
+        "motorPeakKw": 260
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "powerKw",
+        "powerHp",
+        "systemPowerKw",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A6L e-tron, заводской каталог 2026.Q2: таблица стр.7, дата стр.11, точная комплектация Launch Edition Qiankun ADAS. Максимальная суммарная мощность 260 кВт, батарея 107 кВт·ч, задний привод. PS вычислены round(kW / 0.73549875). Пиковая мощность единственного заднего мотора 260 кВт. Кузов седан и электрическая установка подтверждены также релизом производителя10.04.2026. Название переведено на английский; КПП при наличии китайского текста переведена буквально без подтверждения характеристики. Полная масса и30-минутная мощность не установлены. На строки2025года таблица не переносилась.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              7,
+              11
+            ],
+            "sha256": "3a321cc7226cb86675e80cf32e780587c97698951b9da0b3b8cb50de7f6208b0",
+            "fields": [
+              "trim",
+              "drive",
+              "powerKw",
+              "powerHp",
+              "systemPowerKw",
+              "batteryKwh",
+              "motorPeakKw"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          },
+          {
+            "url": "https://www.audi-faw-nev.com.cn/zh/Company_information/company_news/2026_04_10_02.html",
+            "date": "2026-04-10",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ],
+            "publisher": "Audi FAW NEV"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "649dd3ac3d5c169544a23005",
+      "variantId": "fd48c4e5fc562cf5d974fc79",
+      "make": "Audi",
+      "model": "A6L e-tron",
+      "year": 2026,
+      "trim": "quattro 乾崑智驾版",
+      "expectedDigest": "4e2eb57097f4a714d7fdbc553c4f50cdc90fa07cf19e46ae10d9cb0bc83687ab",
+      "patch": {
+        "trim": "quattro Qiankun ADAS",
+        "bodyType": "sedan",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "drive": "awd",
+        "powerKw": 405,
+        "powerHp": 551,
+        "systemPowerKw": 405,
+        "batteryKwh": 107
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "powerKw",
+        "powerHp",
+        "systemPowerKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A6L e-tron, заводской каталог 2026.Q2: таблица стр.7, дата стр.11, точная комплектация quattro Qiankun ADAS. Максимальная суммарная мощность 405 кВт, батарея 107 кВт·ч, полный привод. PS вычислены round(kW / 0.73549875). Передний/задний пики135/270кВт не записаны как30-минутные. Кузов седан и электрическая установка подтверждены также релизом производителя10.04.2026. Название переведено на английский; КПП при наличии китайского текста переведена буквально без подтверждения характеристики. Полная масса и30-минутная мощность не установлены. На строки2025года таблица не переносилась.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/04-10/%E5%A5%A5%E8%BF%AAA6L%20e-tron%E4%B8%8A%E5%B8%82%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              7,
+              11
+            ],
+            "sha256": "3a321cc7226cb86675e80cf32e780587c97698951b9da0b3b8cb50de7f6208b0",
+            "fields": [
+              "trim",
+              "drive",
+              "powerKw",
+              "powerHp",
+              "systemPowerKw",
+              "batteryKwh"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          },
+          {
+            "url": "https://www.audi-faw-nev.com.cn/zh/Company_information/company_news/2026_04_10_02.html",
+            "date": "2026-04-10",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ],
+            "publisher": "Audi FAW NEV"
+          }
+        ]
+      }
+    }
+  ]
+}
