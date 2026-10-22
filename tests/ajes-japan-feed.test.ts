@@ -632,7 +632,7 @@ test('truck policy change retains old viewed rows only as a partial refresh/fail
 
 test('shared year range intersects each market policy without rejecting older lower bounds',()=>{
  for(const table of ['stats','main','korea','china'] as const){
-   const floor=table==='stats'||table==='main'?2008:new Date().getUTCFullYear()-6;
+   const floor=table==='stats'||table==='main'?2008:table==='china'?2014:new Date().getUTCFullYear()-6;
    assert.equal(ajesQuery({table,yearFrom:2007}).sql,ajesQuery({table}).sql);
    assert.match(ajesQuery({table,yearFrom:2007,yearTo:2007}).sql,new RegExp('year>='+floor+' and year<=2007'));
    assert.match(ajesQuery({table,yearFrom:2022,yearTo:2024}).sql,/year>=2022 and year<=2024/);

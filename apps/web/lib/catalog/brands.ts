@@ -292,3 +292,11 @@ export function catalogBrandLogoSlug(value: string) {
 export function catalogBrandAliasSlug(value: string) {
   return byKey.get(key(canonicalCatalogBrand(value)))?.aliasSlug || catalogBrandSlug(value);
 }
+
+/** Search aliases only: never change a vehicle's technical identity. */
+export function catalogBrandMatches(value:string,query:string){
+ const normalize=(v:string)=>v.normalize('NFKC').toLocaleLowerCase('ru-RU').replace(/ё/g,'е').trim();
+ const aliases:Record<string,string[]>={Hyundai:['хендай','хендэ','хундай','хюндай','хюндэ'],Toyota:['тойота','тоета'],Kia:['киа','кия'],Nissan:['ниссан'],Honda:['хонда'],Mazda:['мазда'],Mitsubishi:['митсубиси','мицубиси'],Volkswagen:['фольксваген'],BMW:['бмв'], 'Mercedes-Benz':['мерседес'],Renault:['рено'],Skoda:['шкода'],Chevrolet:['шевроле'],Geely:['джили'],Haval:['хавал','хавейл']};
+ const needle=normalize(query),canonical=canonicalCatalogBrand(value);
+ return !needle||[value,canonical,...(aliases[canonical]||[])].some(v=>normalize(v).includes(needle));
+}

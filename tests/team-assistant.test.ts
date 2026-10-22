@@ -19,7 +19,7 @@ test('only internal team; code rights default to owner and explicit grants are r
  const p=await load('apps/web/lib/team-assistant/policy.ts',{});
  for(const role of ['manager','admin','owner']){assert.equal(p.assistantAllowed(member({role})),true);assert.equal(p.assistantCodeAllowed(member({role})),role==='owner');}
  assert.equal(p.assistantCodeAllowed(member({permissions:{assistantCode:true}})),true);
- for(const u of [null,member({role:'dealer'}),member({companyId:'other',role:'owner'}),member({status:'disabled',role:'owner'}),member({permissions:{assistant:false}}),member({role:'owner',permissions:{assistant:false}})])assert.equal(p.assistantAllowed(u),false);
+ for(const u of [null,member({role:'dealer'}),member({companyId:'other',role:'owner'}),member({status:'disabled',role:'owner'}),member({permissions:{assistant:false}})])assert.equal(p.assistantAllowed(u),false);
  assert.equal(p.canFillPath(member(),'/crm/clients/123'),true);
  assert.equal(p.canFillPath(member({permissions:{editClients:false}}),'/crm/clients/123'),false);
  for(const path of ['/crm/managers/123','/crm/settings','/crm/documents','/api/crm/users'])assert.equal(p.canFillPath(member({role:'owner'}),path),false);
@@ -105,7 +105,7 @@ test('page control is opt-in, owner/admin-only, and revocation blocks pending ac
  const status=async()=> (await r.GET(new Request('https://avtocena.com/api/crm/assistant?path=/cars/autocatalog'))).json();
  assert.equal((await status()).pageControl,false);
  assert.equal((await r.POST(req({revision:0,op:'page_control',enabled:true}))).status,403);
- state.actor=member({role:'admin'});
+ state.actor=member({role:'admin',permissions:{assistantPageControl:true}});
  assert.equal((await r.POST(req({revision:0,op:'page_control',enabled:true}))).status,200);
  assert.equal((await status()).pageControl,true);assert.equal((await status()).canFill,true);
  const store=await load('apps/web/lib/team-assistant/store.ts',state),id='00000000-0000-4000-8000-000000000002';
@@ -116,4 +116,15 @@ test('page control is opt-in, owner/admin-only, and revocation blocks pending ac
  const p=await load('apps/web/lib/team-assistant/policy.ts',state);
  assert.equal(p.canFillPath(member(),'/cars/autocatalog'),false);
  assert.equal(p.assistantPageControlAllowed(member({role:'owner',companyId:'other'})),false);
+});
+
+test('owner cannot lose control through the chat preference; employees require explicit control grant',async()=>{
+ const p=await load('apps/web/lib/team-assistant/policy.ts',{});
+ assert.equal(p.assistantPageControlAllowed(member({role:'owner',permissions:{assistant:false}})),true);
+ for(const role of ['admin','manager']){
+  assert.equal(p.assistantPageControlAllowed(member({role})),false);
+  assert.equal(p.assistantPageControlAllowed(member({role,permissions:{assistantPageControl:true}})),true);
+  assert.equal(p.assistantPageControlAllowed(member({role,permissions:{assistantPageControl:false}})),false);
+ }
+ assert.equal(p.canFillPath(member({role:'manager',permissions:{assistantPageControl:true}}),'/cars/autocatalog'),false);
 });

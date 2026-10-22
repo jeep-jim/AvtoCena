@@ -5,7 +5,7 @@ import {hasCrmPermission} from '../crm-permissions';
 import type {AssistantContext} from './types';
 
 export const assistantAllowed=(u:AuthUser|null|undefined)=>isPlatformTeam(u)&&hasCrmPermission(u,'assistant');
-export const assistantPageControlAllowed=(u:AuthUser|null|undefined)=>assistantAllowed(u)&&['owner','admin'].includes(u!.role);
+export const assistantPageControlAllowed=(u:AuthUser|null|undefined)=>assistantAllowed(u)&&hasCrmPermission(u,'assistantPageControl');
 export const assistantCodeAllowed=(u:AuthUser|null|undefined)=>assistantAllowed(u)&&hasCrmPermission(u,'assistantCode');
 import {privateField,safePath} from './client-policy';
 export {privateField,safePath} from './client-policy';
@@ -15,7 +15,7 @@ export function canFillPath(u:AuthUser,path:string){
  if(/^\/crm\/clients(?:\/|$)/.test(p))return hasCrmPermission(u,'editClients');
  if(/^\/crm\/leads(?:\/|$)/.test(p))return hasCrmPermission(u,'editLeads');
  if(/^\/crm\/catalog(?:\/|$)/.test(p))return hasCrmPermission(u,'catalog');
- if(p==='/cars/autocatalog'||p.startsWith('/cars/autocatalog/'))return assistantPageControlAllowed(u);
+ if(p==='/cars/autocatalog'||p.startsWith('/cars/autocatalog/'))return assistantPageControlAllowed(u)&&['owner','admin'].includes(u.role);
  if(/^\/cars(?:\/|$)/.test(p))return hasCrmPermission(u,'calculations');
  // Staff/roles, integration credentials, financial settings and forms with external side effects are excluded.
  return false;

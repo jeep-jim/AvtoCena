@@ -1,4 +1,5 @@
 import {auctionSaleRange} from "./auction-sale-period";
+import {japanExcludedMake,japanMakeSqlExclusion} from './japan-vehicle-policy';
 import {CHINA_MIN_MODEL_YEAR} from './china-year-policy';
 import {motorcycleExcluded,motorcycleSqlExclusion} from './motorcycle-policy';
 import {vehicleColorAliases} from './vehicle-colors';
@@ -55,6 +56,7 @@ export function ajesQuery(input: unknown) {
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
   where.push(heavyVehicleSqlExclusion(),motorcycleSqlExclusion());
+  if(!stock)where.push(japanMakeSqlExclusion());
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const modelClauses=[...models.map(v=>`model_name='${v}'`),...families.map(v=>`model_name like '${v} %'`)];
   if(modelClauses.length)where.push('('+modelClauses.join(' or ')+')');
@@ -119,7 +121,7 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
   const id=text('ID'), year=number('YEAR'),stock=table==='korea'||table==='china';
   if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<(stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR) || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || (!stock&&number('AUCTION_TYPE')===1)) return null;
   const sold=table==='stats' && /^sold$/i.test(text('STATUS'));
-  if(knownHeavyVehicleFamily(text('MARKA_NAME'),text('MODEL_NAME'))||motorcycleExcluded({make:text('MARKA_NAME'),model:text('MODEL_NAME'),trim:text('GRADE'),bodyType:text('BODY_TYPE'),vehicleCategory:text('VEHICLE_CATEGORY')}))return null;
+  if((['stats','main'].includes(table)&&japanExcludedMake(text('MARKA_NAME')))||knownHeavyVehicleFamily(text('MARKA_NAME'),text('MODEL_NAME'))||motorcycleExcluded({make:text('MARKA_NAME'),model:text('MODEL_NAME'),trim:text('GRADE'),bodyType:text('BODY_TYPE'),vehicleCategory:text('VEHICLE_CATEGORY')}))return null;
   if(stock&&/^(?:sold|removed|withdrawn|deleted)$/i.test(text('STATUS')))return null;
   const finish=number('FINISH');
   if ((table==='stats' && !sold) || ((table==='stats'||stock)&&!finish)) return null;

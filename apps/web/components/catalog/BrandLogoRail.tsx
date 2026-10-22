@@ -1,4 +1,5 @@
 "use client";
+import {catalogBrandMatches} from "@/lib/catalog/brands";
 import {PublicSheet} from "@/components/ui/PublicSheet";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
@@ -227,7 +228,7 @@ function BrandLogoRailContent({
   const orderedBrands = activeBrands;
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("ru-RU");
-    return normalized ? activeBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : activeBrands;
+    return normalized ? activeBrands.filter((brand) => catalogBrandMatches(brand,normalized)) : activeBrands;
   }, [activeBrands, query]);
   const railBrands = showSearch && query.trim() ? filtered : orderedBrands;
 

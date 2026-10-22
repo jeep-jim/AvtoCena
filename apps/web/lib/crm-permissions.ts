@@ -1,6 +1,7 @@
 import type {AuthUser} from './auth';
 export const CRM_PERMISSIONS = {
  assistant:{label:'ИИ Бро',description:'Личный чат команды Топ Авто: поиск, подсказки и заполнение доступных форм.'},
+ assistantPageControl:{label:'Управление страницами через АвтоБота',description:'Заполнение доступных форм и переходы по команде сотрудника. Доступ выдаёт только владелец.'},
  assistantCode:{label:'Изменения оформления через ИИ',description:'Подготовка правок интерфейса в отдельной ветке после ввода кодовой фразы. Право назначает только владелец.'},
  catalog:{label:"Редактирование каталога",description:"Для администратора: названия, фотографии, скрытие и восстановление объявлений."},
  replyReviews:{label:'Ответы на отзывы',description:'Ответ компании на отзывы и изменение ответа. Для дилера — только своя компания.'},
@@ -31,19 +32,19 @@ export function hasCrmPermission(user:AuthUser|null|undefined,key:CrmPermission)
  if(!user||user.status==='disabled')return false;
  if(user.role==='dealer')return ['replyReviews','deleteReviews'].includes(key)&&user.permissions?.[key]===true;
  if(!['owner','admin','manager'].includes(user.role))return false;
- if(key==='assistant')return user.permissions?.assistant!==false;
  if(user.role==='owner')return true;
+ if(key==='assistant')return user.permissions?.assistant!==false;
  if(user.role==='manager'&&isAdministrativeCrmPermission(key))return false;
  if(key==='analytics'&&user.permissions?.analytics===undefined)return hasCrmPermission(user,'activityAll');
- if(key==='deleteReviews'||key==='deleteIdeas'||key==='assistantCode')return user.permissions?.[key]===true;
+ if(key==='deleteReviews'||key==='deleteIdeas'||key==='assistantCode'||key==='assistantPageControl')return user.permissions?.[key]===true;
  if(key==='site')return user.permissions?.site===true;
  return user.permissions?.[key] ?? (user.role==='admin'||managerDefaults.has(key));
 }
-export function permissionDefaults(role:string){return Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(k=>[k,role==='owner'||(role==='admin'&&k!=='site'&&k!=='deleteReviews'&&k!=='deleteIdeas'&&k!=='assistantCode')||managerDefaults.has(k)])) as Record<CrmPermission,boolean>;}
-export const ROLE_DETAILS:Record<string,string>={owner:'Все разделы, вся клиентская база и лента. Управление владельцами, сотрудниками, ключами, тарифами, дилерами и общими шаблонами договоров. Полный доступ владельца не отключается. Показ ИИ Бро можно выключить отдельно.',admin:'По умолчанию — вся база, общая лента, назначения, документы, расчёты, команда, тарифы и дилеры. Не может изменять владельцев или общие шаблоны договоров. Права можно ограничить переключателями. Чат и игра включены; управление сайтом разрешается отдельно.',manager:'По умолчанию — созданные и назначенные ему клиенты и заявки, их документы и договоры, расчёты. Общие напоминания и рабочий график доступны всей команде; смены редактируются с подтверждением. Нет доступа к управлению командой, тарифами и дилерами. Чат и игра включены. Дополнительный обзор, аналитика и назначения включаются отдельно.'};
+export function permissionDefaults(role:string){return Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(k=>[k,role==='owner'||(role==='admin'&&k!=='site'&&k!=='deleteReviews'&&k!=='deleteIdeas'&&k!=='assistantCode'&&k!=='assistantPageControl')||managerDefaults.has(k)])) as Record<CrmPermission,boolean>;}
+export const ROLE_DETAILS:Record<string,string>={owner:'Все разделы, вся клиентская база и лента. Управление владельцами, сотрудниками, ключами, тарифами, дилерами и общими шаблонами договоров. Полный доступ владельца не отключается. Управление АвтоБотом доступно владельцу всегда.',admin:'По умолчанию — вся база, общая лента, назначения, документы, расчёты, команда, тарифы и дилеры. Не может изменять владельцев или общие шаблоны договоров. Права можно ограничить переключателями. Чат и игра включены; управление сайтом разрешается отдельно.',manager:'По умолчанию — созданные и назначенные ему клиенты и заявки, их документы и договоры, расчёты. Общие напоминания и рабочий график доступны всей команде; смены редактируются с подтверждением. Нет доступа к управлению командой, тарифами и дилерами. Чат и игра включены. Дополнительный обзор, аналитика и назначения включаются отдельно.'};
 
 export const CRM_PERMISSION_GROUPS:{label:string;keys:CrmPermission[]}[]=[
- {label:'ИИ-помощник команды',keys:['assistant','assistantCode']},
+ {label:'ИИ-помощник команды',keys:['assistant','assistantPageControl','assistantCode']},
  {label:'Разделы и общение',keys:['chat','analytics','game']},
  {label:'Клиенты, заявки и документы',keys:['viewAll','editClients','editLeads','assign','documents','calculations','deleteRecords','activityAll']},
  {label:'Управление',keys:['staff','settings','site','catalog','dealers','replyReviews','deleteReviews','deleteIdeas']},

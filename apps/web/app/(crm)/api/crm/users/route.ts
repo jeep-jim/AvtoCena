@@ -50,6 +50,8 @@ export async function POST(request: Request) {
     if(actor.role!=="owner"&&permissions)delete permissions.deleteReviews;
     if(actor.role!=="owner"&&form.has("permission_assistantCode"))throw Error("Право изменения оформления через ИИ выдаёт только владелец");
     if(actor.role!=="owner"&&permissions)delete permissions.assistantCode;
+    if(actor.role!=="owner"&&form.has("permission_assistantPageControl"))throw Error("Право управления через АвтоБота выдаёт только владелец");
+    if(actor.role!=="owner"&&permissions)delete permissions.assistantPageControl;
     const birthDate=form.has("birthDate")?validateBirthDate(clean(form.get("birthDate"),10)):undefined;
     const status = clean(form.get("status"), 30) === "disabled" ? "disabled" : "active";
     const companyId = clean(form.get("companyId"), 160) || "dealer_topavto";
@@ -80,7 +82,7 @@ export async function POST(request: Request) {
       if (!current) throw new Error("Сотрудник не найден");
       if (current.role === "owner" && actor.role !== "owner") throw new Error("Изменить владельца может только владелец");
       if (actor.id === userId && (status === "disabled" || role !== current.role)) throw new Error("Нельзя отключить или понизить собственный доступ");
-      if(actor.role!=="owner"&&permissions){permissions.deleteReviews=current.permissions?.deleteReviews===true;permissions.deleteIdeas=current.permissions?.deleteIdeas===true;permissions.assistantCode=current.permissions?.assistantCode===true;}
+      if(actor.role!=="owner"&&permissions){permissions.deleteReviews=current.permissions?.deleteReviews===true;permissions.deleteIdeas=current.permissions?.deleteIdeas===true;permissions.assistantCode=current.permissions?.assistantCode===true;permissions.assistantPageControl=current.permissions?.assistantPageControl===true;}
       assertCanGrant({...current,role,status:"active",permissions:permissions||current.permissions});
       previous=current;
       if(actor.id===userId&&permissions&&!permissions.staff)throw Error("Нельзя отключить собственное управление доступом");

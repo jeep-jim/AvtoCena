@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 
+import {catalogBrandMatches} from "@/lib/catalog/brands";
+
 type Option = { value: string; label: string };
 type BrandStats = {
   generationId?: string;
@@ -120,7 +122,7 @@ export function CatalogBrandMultiSelect({
     }
     const needle = query.trim().toLocaleLowerCase("ru-RU");
     return [...seen.values()]
-      .filter((option) => !needle || option.label.toLocaleLowerCase("ru-RU").includes(needle))
+      .filter((option) => catalogBrandMatches(option.label,needle))
       .sort((left, right) => Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===right.value.toLocaleLowerCase("ru-RU")))-Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===left.value.toLocaleLowerCase("ru-RU"))) || left.label.localeCompare(right.label, "ru"));
   }, [options, query, selected, stats.counts]);
 

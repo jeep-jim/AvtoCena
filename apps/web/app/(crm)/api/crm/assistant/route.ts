@@ -33,7 +33,7 @@ export async function POST(request:Request){
   if(body.op==='message'&&!validChannel(body.browserChannel)&&!await providerStatus())return json({error:'Подключение ChatGPT ещё не завершено. Владелец сможет включить ответы после авторизации.'},503);
   lease=await lockHistory(user.id,body.revision);
   if(body.op==='page_control'){
-   if(!assistantPageControlAllowed(user))return json({error:'Управление страницей доступно владельцам и администраторам.'},403);
+   if(!assistantPageControlAllowed(user))return json({error:'Управление страницей доступно владельцу и сотрудникам с выданным разрешением.'},403);
    if(typeof body.enabled!=='boolean')throw Error('Выберите состояние переключателя.');
    const s=await mutateHistory(user.id,s=>({...s,pageControl:body.enabled,revision:s.revision+1}));
    await recordCrmActivity(user,{type:'assistant_page_control',title:body.enabled?'Разрешена помощь с формами':'Помощь с формами отключена',visibility:'management'});

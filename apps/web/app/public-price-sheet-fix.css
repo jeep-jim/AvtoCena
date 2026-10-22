@@ -252,3 +252,13 @@ html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Ма�
 html body .ac-price.ac-price--electrified { color:#ffd21f!important; }
 html[data-theme="light"] body .ac-price.ac-price--electrified { color:#c58a00!important; }
 .ac-offer-page [data-city-delivery] .ac-city-selector { font-size:16px; }
+
+/* Owner's two rules around the catalog brand strip, using the sidebar token. */
+@media(min-width:1024px){
+ html body .ac-page-copy.ac-catalog-page .ac-catalog-results section.ac-brand-rail[aria-label="Марки автомобилей"]{
+  border-top:1px solid var(--ac-border)!important;
+  border-bottom:1px solid var(--ac-border)!important;
+  padding-top:16px!important;
+  padding-bottom:16px!important;
+ }
+}

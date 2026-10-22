@@ -12,7 +12,7 @@ test('permission defaults preserve roles; overrides restrict admins and cannot p
  assert.equal(hasCrmPermission(admin,'staff'),false);assert.equal(hasCrmPermission(admin,'documents'),false);
  assert.equal(canSeeLead(admin,{assignedManagerId:'other'}),false);assert.equal(canSeeLead(admin,{assignedManagerId:'a'}),true);
  assert.equal(canSeeLead(manager,undefined),false);assert.equal(hasCrmPermission({...manager,status:'disabled'},'documents'),false);
- for(const key of Object.keys(CRM_PERMISSIONS))assert.equal(hasCrmPermission({id:'o',role:'owner',permissions:{[key]:false}} as any,key as any),key!=='assistant');
+ for(const key of Object.keys(CRM_PERMISSIONS))assert.equal(hasCrmPermission({id:'o',role:'owner',permissions:{[key]:false}} as any,key as any),true);
 });
 test('activity visibility follows current assignment, management scope and identity without leaking hidden events',async()=>{
  const state:any={users:[{id:'a',displayName:'Admin',role:'admin'},{id:'m',displayName:'Manager',role:'manager'}],leads:[{id:'mine',assignedManagerId:'m'},{id:'other',assignedManagerId:'a'}],clients:[],events:[{id:'1',createdAt:'2026-09-26T10:00:00Z',type:'lead_assigned',title:'Assigned',leadId:'mine',managerId:'a',assignedManagerId:'m'},{id:'2',createdAt:'2026-09-26T09:00:00Z',type:'lead_updated',title:'Hidden',leadId:'other',managerId:'m'},{id:'3',createdAt:'2026-09-26T08:00:00Z',type:'staff_key_issued',title:'Key issued',visibility:'management',managerId:'m'}]};
