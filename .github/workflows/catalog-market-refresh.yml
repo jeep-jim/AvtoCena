@@ -269,6 +269,8 @@ jobs:
         run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
       - name: Publish markets through calculation and retention guards
         env:
+          # Full publication index is much larger than request-time shards.
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: "300000"
           CATALOG_PUBLISH_MARKETS: ${{ matrix.market }}
         shell: bash
         run: |

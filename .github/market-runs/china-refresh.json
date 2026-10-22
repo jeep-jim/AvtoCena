@@ -1,9 +1,1 @@
-{
-  "operation": "china-compressed-replay-resume-20261021",
-  "market": "china",
-  "publishMarkets": [
-    "china"
-  ],
-  "resetCursors": false,
-  "reason": "Resume saved 2014+ replay; atomically compress journal before continuing; require complete replay before publication."
-}
+{"operation":"recover-china-publication-index-timeout-20261022","market":"china","publishMarkets":["china"],"reuseRunId":"39680279304","refreshMarkets":[],"resetCursors":false,"reason":"Одна повторная публикация завершённого сбора 2014+ с увеличенным временем чтения большого индекса; все проверки сохранены."}

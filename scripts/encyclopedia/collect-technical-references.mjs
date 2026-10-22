@@ -8,9 +8,10 @@ const seed=comparison?'https://auto.ru/catalog/cars/':'https://www.drom.ru/catal
 const root=comparison?'knowledge/encyclopedia/comparison-intake/v1':'knowledge/encyclopedia/reference-intake/v1',key=`${root}/state.json`,now=()=>new Date().toISOString();
 const state=await storage.readJson(key,null)||{version:1,minimumYear:2008,pending:[seed],visited:[],saved:0,failed:[],startedAt:now()};
 const visited=new Set(state.visited),queued=new Set(state.pending),limit=Math.min(3000,Math.max(1,Number(process.env.REFERENCE_PAGE_LIMIT||3000)));
+const deadline=Date.now()+150*60*1000;
 let fetched=0;
 async function checkpoint(){state.visited=[...visited];state.updatedAt=now();await storage.writeJson(key,state);}
-while(state.pending.length&&fetched<limit){
+while(state.pending.length&&fetched<limit&&Date.now()<deadline){
  const url=state.pending.shift();queued.delete(url);if(visited.has(url))continue;
  try{
   const {stdout}=await exec('python3',[parser,url],{timeout:65000,maxBuffer:4000000});const row=JSON.parse(stdout);if(row.error)throw Error(row.detail);
