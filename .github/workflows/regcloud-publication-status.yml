@@ -37,6 +37,11 @@ jobs:
           console.log('PUBLICATION_STATUS',JSON.stringify({checkedAt:new Date().toISOString(),generationId:manifest?.generationId,writer:{active:Date.parse(lock?.lockedUntil||'')>Date.now(),operationType:lock?.operationType,operationId:lock?.operationId,startedAt:lock?.startedAt,heartbeatAt:lock?.heartbeatAt,lockedUntil:lock?.lockedUntil}}));
           const {readFile}=await import('node:fs/promises');
           const marker=JSON.parse(await readFile('.github/market-runs/regcloud-publication-status.json','utf8'));
+          if(marker.inspectTechnicalReferenceState === true){
+            const state=await storage.readJson('knowledge/encyclopedia/reference-intake/v1/state.json',null);
+            if(!state)throw Error('technical_reference_checkpoint_missing');
+            console.log('TECHNICAL_REFERENCE_CHECKPOINT',JSON.stringify({checkedAt:new Date().toISOString(),updatedAt:state.updatedAt,completed:state.completed===true,visited:state.visited?.length,saved:state.saved,pending:state.pending?.length,nextUrl:state.pending?.[0],latestFailure:state.failed?.slice(-1)}));
+          }
           if(marker.inspectRelease){
             const release=marker.inspectRelease, keys=marker.inspectModels;
             if(!/^[a-f0-9]{40}$/.test(release)||!Array.isArray(keys)||keys.length>5||keys.some(k=>typeof k!=='string'||!/^[a-z0-9]+:[a-z0-9]+$/.test(k)))throw Error('invalid_index_inspection');

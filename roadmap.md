@@ -12630,3 +12630,12 @@ A110: 22 расчётных варианта, revision 906f64a4-77aa-4c7d-9869-e
 Контрольная Audi A3 UAE 56bbcecb51a61b76402371a9: поиск fwd+automatic/3–3.3 млн HTTP200 total1; правильный detail /cars/offer/<id> HTTP200. Полный offer с этим ID в серверном RSC подтверждает те же totalRub3148247, fwd/automatic, 1498cc/150PS и источник permanent_encyclopedia:ac711. Подписи «передний»/«автомат». Это проверка данных серверной карточки, не визуальная приёмка браузером. /api/catalog/offer/<id> не имеет GET-route: прежний timeout такого URL не доказывает поломку detail.
 
 China [39840733509](https://github.com/jeep-jim/AvtoCena/actions/runs/39840733509)/publish120041080822 продолжает работать: collect SKIPPED, восстановление intake и intake-to-publication SUCCESS, Check bucket reserve IN_PROGRESS на 19:36 UTC. Дублей/новых deploy нет. Writer inactive на 19:34 в read-only относится к этапу preflight и НЕ разрешает запуск конкурирующего выпуска. До terminal/outcome/public 2014 нельзя считать новые 2014–2019 опубликованными. Текущий контроль оставить активным.
+
+
+### 23.10.2026 03:01 Asia/Krasnoyarsk — DB11: начата проверка по годовым руководствам; справочный сбор остановился с checkpoint
+
+Прочитаны свежие AGENTS/roadmap/queue/continuation на f73ada8d. Курсор DB11, API37строк/revisione8462be9-64d6-4c39-8f40-b30ade2e732a. Найдены официальные руководства17MY–21MY и заводские V8/Volante/AMR таблицы; готовится точная партия, сохранение пока не заявляется. Безымянные строки и STANDARD не отождествляются по объёму/мощности.
+
+Reader-release39835446552 SUCCESS и отчёт39841134049 подтверждают установленный ac711: A1102023/41расчётное поле включено, три поздние Alpine/165расчётных полей ещё отсутствуют. China39840733509 сопровождается отдельно, дубликат deploy/publish не запускается.
+
+Drom39831884392 завершился FAILURE/reference_fetch_stopped_checkpoint_saved в19:38:20UTC, а не штатным лимитом. Последний лог: fetched1090,visited13040,saved8403,pending256; это промежуточные счётчики, не финальный checkpoint. Причина спрятана в сохранённом state.failed. До её чтения перезапуск не делается. В существующий read-only metadataworkflow добавлено строго ограниченное optional чтение одного reference-intake state: только updatedAt,счётчики,nextURL и последняя ошибка. Хранилище/сборщики/защиты/секреты не изменяются. Запрошена эта проверка; результат ещё ожидается.

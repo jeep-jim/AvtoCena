@@ -1,9 +1,5 @@
 {
-  "requestedAt": "2026-10-22 19:33:19 UTC",
-  "reason": "Read-only verification of installed immutable Alpine batches while the single retained China publisher runs",
-  "inspectRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
-  "inspectModels": [
-    "alpine:a110",
-    "alpine:a290"
-  ]
+  "requestedAt": "2026-10-22T19:56:28.465Z",
+  "reason": "Проверить причину остановки технического сбора по сохранённому checkpoint без перезапуска и изменения данных.",
+  "inspectTechnicalReferenceState": true
 }
