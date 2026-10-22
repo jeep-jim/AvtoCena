@@ -1,1 +1,4 @@
-{"requestedAt":"2026-10-22T17:55:31.440Z","reason":"Read-only metadata after China terminal failure before pending encyclopedia index; no lock mutations or competing publisher"}
+{
+  "requestedAt": "2026-10-22 18:49:27 UTC",
+  "reason": "Read-only writer check after successful e78 release, before sequential bounded projection reader release"
+}

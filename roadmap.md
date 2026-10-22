@@ -12529,3 +12529,10 @@ Deploy39828240506/e78c7154232f39ac73a2253314e2b0fe34da1344SUCCESS, livehealth п
 Drom39809543570SUCCESS:visited11950/saved7516/pending262,completedfalse. По существующему marker0a638730 безсброса checkpoint запущен39831884392/job120009865681, collectin_progress. Это толькоunverified_reference; новых цифр после возобновления пока нет. Время записи возобновления уточнено01:30→01:29 по времени коммита.
 
 Следующий курсор A1102024–2026, затемA290; спецсерии2023 ипробелы2017–2022 отдельно. Проверенные PDF/даты/страницы/SHA256 для следующихгрупп записаны в handoff; документы целиком и платныефиды вgit не копировались. Отчёты: docs/encyclopedia/reports/2026-10-23-alpine-a110-pass.json и docs/encyclopedia/reports/2026-10-23-index-86cb2a5-activation.json.
+
+
+### 23.10.2026 01:52 Asia/Krasnoyarsk — Установка e78 подтверждена; подготовка следующего reader-выпуска
+
+Deploy39828240506/job119997158321 terminalSUCCESS. Публичный healthHTTP200 подтвердилe78c7154232f39ac73a2253314e2b0fe34da1344/calculationVersion669463ac57d4c4d8890392b1114d8b458e8bdb24729cc397ee5d7f608fedfc27. Лог подтверждает индекс18:15:37UTC/digest86cb2a5d9e503e870633382e218071e89c046d25c38e921304db748f308521a5,2423модели/68130вариантов/25034factoryFields/485097ownerReferenceFields/9manualFields и4specification-parityPASS. Это не полнота автомобилей. ПоздняяA1102023партия45полей осталасьпослеснимка,прочитана свежаязапись отдельнойэнциклопедии01:39.
+
+Перед единственным последовательным reader-release запрошено свежее read-only чтение manifest/writer. В списке запусков новогоdeploy нет; публикующийКитай не повторяется, флагчастей остаётсяoffдоhealthновогоreader. Обнаружены postdeployfailure39832541771(sharedprices) и39832541636(CRMdelivery), причины ещёизучаются; слепойrerunне выполняется. Dromуже39831884392in_progress,не дублируется.
