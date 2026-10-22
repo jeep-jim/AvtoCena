@@ -1,0 +1,3396 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-giulietta-2018-2020",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "32791f7e8cca23ad91298127",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.4 Turbo Benzina 120 PS Giulietta",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Giulietta",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.B5V.2,SS000,Giulietta,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "ddb1020b8e4519e30b914df7",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.4 Turbo Benzina 120 PS Sport",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Sport",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.BSV.2,SS000,Sport,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSV.2; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSV.2; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSV.2; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSV.2; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSV.2; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSV.2; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSV.2; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "72b1a18c6f483ae216011d47",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.4 Turbo Benzina 120 PS Super",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Super",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.C5V.2,SS000,Super,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "4589a3dd70f1c0d0314f183b",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.4 Turbo Benzina 120 PS B-Tech",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS B-Tech",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.C5V.2,SSBTH,B-Tech,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS BTH; 1.4 Turbo Benzina 120 CV; B-Tech; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS BTH; 1.4 Turbo Benzina 120 CV; B-Tech; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS BTH; 1.4 Turbo Benzina 120 CV; B-Tech; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS BTH; 1.4 Turbo Benzina 120 CV; B-Tech; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS BTH; 1.4 Turbo Benzina 120 CV; B-Tech; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS BTH; 1.4 Turbo Benzina 120 CV; B-Tech; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5V.2; SS BTH; 1.4 Turbo Benzina 120 CV; B-Tech; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "db6aecfb5799154e30c4e202",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.6 JTDM 120 PS Giulietta",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Giulietta",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.B5W.2,SS000,Giulietta,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "19932eb4a246261f82f33e1a",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.6 JTDM 120 PS Sport",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Sport",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.BSW.2,SS000,Sport,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSW.2; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSW.2; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSW.2; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSW.2; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSW.2; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSW.2; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.BSW.2; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "b86029b650bafbfb0d789bc4",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.6 JTDM 120 PS Super",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.C5W.2,SS000,Super,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "9455f9479126cfb49cb32c17",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.6 JTDM 120 PS B-Tech",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS B-Tech",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.C5W.2,SSBTH,B-Tech,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS BTH; 1.6 JTDM 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS BTH; 1.6 JTDM 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS BTH; 1.6 JTDM 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS BTH; 1.6 JTDM 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS BTH; 1.6 JTDM 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS BTH; 1.6 JTDM 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5W.2; SS BTH; 1.6 JTDM 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "08367809e7bfbc355d5ea334",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.6 JTDM 120 PS Business",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Business",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.B5W.2,SS111,Business,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 111; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 111; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 111; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 111; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 111; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 111; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5W.2; SS 111; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "02d753608dd1f54e11dc7960",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.6 JTDM TCT 120 PS B-Tech",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM TCT 120 PS B-Tech",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.C5X.2,SSBTH,B-Tech,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5X.2; SS BTH; 1.6 JTDM TCT 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5X.2; SS BTH; 1.6 JTDM TCT 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5X.2; SS BTH; 1.6 JTDM TCT 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5X.2; SS BTH; 1.6 JTDM TCT 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5X.2; SS BTH; 1.6 JTDM TCT 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5X.2; SS BTH; 1.6 JTDM TCT 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5X.2; SS BTH; 1.6 JTDM TCT 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.C5X.2; SS BTH; 1.6 JTDM TCT 120 CV; B-Tech; 1598 cm3; 88 kW; Euro6d Temp",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neue-alfa-romeo-giulietta-die-preise-stehen-fest",
+              "checkedAt": "2026-10-22",
+              "selector": "TCT Doppelkupplungsgetriebe"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "e975ebdada3315cdbd4bfe4b",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2018,
+      "trim": "1.6 JTDM TCT 120 PS Business",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM TCT 120 PS Business",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2018-11-01, страница3 визуально сверена: MVS191.B5X.2,SS111,Business,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5X.2; SS 111; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5X.2; SS 111; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5X.2; SS 111; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5X.2; SS 111; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5X.2; SS 111; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5X.2; SS 111; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5X.2; SS 111; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Giulietta_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "f964411dba3356e3ead8fafc3aef733cfb5ac7bfe78c601df50497a9d2671c01",
+            "page": 3,
+            "publishedAt": "2018-11-01",
+            "selector": "MVS 191.B5X.2; SS 111; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neue-alfa-romeo-giulietta-die-preise-stehen-fest",
+              "checkedAt": "2026-10-22",
+              "selector": "TCT Doppelkupplungsgetriebe"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "ad0c62685cf22b68d8f46cfa",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.4 Turbo Benzina 120 PS Giulietta",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Giulietta",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.B5V.3,SS000,Giulietta,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "70e3e9d2b7b09bee536d13a4",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.4 Turbo Benzina 120 PS Sport",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Sport",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.BSV.3,SS000,Sport,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sport; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "1e19c8481f2cec8b396cc0ae",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.4 Turbo Benzina 120 PS Carbon Edition",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Carbon Edition",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.BSV.3,SSCED,Carbon Edition,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS CED; 1.4 Turbo Benzina 120 CV; Carbon Edition; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS CED; 1.4 Turbo Benzina 120 CV; Carbon Edition; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS CED; 1.4 Turbo Benzina 120 CV; Carbon Edition; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS CED; 1.4 Turbo Benzina 120 CV; Carbon Edition; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS CED; 1.4 Turbo Benzina 120 CV; Carbon Edition; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS CED; 1.4 Turbo Benzina 120 CV; Carbon Edition; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSV.3; SS CED; 1.4 Turbo Benzina 120 CV; Carbon Edition; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "6c8ea35d7ff592ad697947d0",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.4 Turbo Benzina 120 PS Super",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Super",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.E5V.3,SS000,Super,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Super; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "71124d6665de6cf7fc6d72bf",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.4 Turbo Benzina 120 PS Super L.E.",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Super L.E.",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-06-04, страница3 визуально сверена: MVS191.E5V.3,SSLCH,Super L.E.,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5V.3; SS LCH; 1.4 Turbo Benzina 120 CV; Super L.E.; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5V.3; SS LCH; 1.4 Turbo Benzina 120 CV; Super L.E.; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5V.3; SS LCH; 1.4 Turbo Benzina 120 CV; Super L.E.; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5V.3; SS LCH; 1.4 Turbo Benzina 120 CV; Super L.E.; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5V.3; SS LCH; 1.4 Turbo Benzina 120 CV; Super L.E.; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5V.3; SS LCH; 1.4 Turbo Benzina 120 CV; Super L.E.; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5V.3; SS LCH; 1.4 Turbo Benzina 120 CV; Super L.E.; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "90303c696adf40e82f550a70",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM 120 PS Giulietta",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Giulietta",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.B5W.3,SS000,Giulietta,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "2bfd24f6c1ed244fe994c2db",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM 120 PS Sport",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Sport",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.BSW.3,SS000,Sport,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "46ea3d33b981b97e1fb05918",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM 120 PS Carbon Edition",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Carbon Edition",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.BSW.3,SSCED,Carbon Edition,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS CED; 1.6 JTDM 120 CV; Carbon Edition; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS CED; 1.6 JTDM 120 CV; Carbon Edition; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS CED; 1.6 JTDM 120 CV; Carbon Edition; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS CED; 1.6 JTDM 120 CV; Carbon Edition; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS CED; 1.6 JTDM 120 CV; Carbon Edition; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS CED; 1.6 JTDM 120 CV; Carbon Edition; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSW.3; SS CED; 1.6 JTDM 120 CV; Carbon Edition; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "2816fc3ea6e908e2559eb0b2",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM 120 PS Super",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.E5W.3,SS000,Super,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "f277873543cdf19ea124feff",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM 120 PS Business",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Business",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.C5W.3,SS000,Business,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5W.3; SS 000; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5W.3; SS 000; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5W.3; SS 000; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5W.3; SS 000; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5W.3; SS 000; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5W.3; SS 000; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5W.3; SS 000; 1.6 JTDM 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "aa4eec01ebc1b7ea77c4a9b8",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM 120 PS Super L.E.",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Super L.E.",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-06-04, страница3 визуально сверена: MVS191.E5W.3,SSLCH,Super L.E.,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5W.3; SS LCH; 1.6 JTDM 120 CV; Super L.E.; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5W.3; SS LCH; 1.6 JTDM 120 CV; Super L.E.; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5W.3; SS LCH; 1.6 JTDM 120 CV; Super L.E.; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5W.3; SS LCH; 1.6 JTDM 120 CV; Super L.E.; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5W.3; SS LCH; 1.6 JTDM 120 CV; Super L.E.; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5W.3; SS LCH; 1.6 JTDM 120 CV; Super L.E.; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/190604_Alfa-Romeo_Giulietta_listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "60404c103b0a3fbf8626220fc1c9eae87490bc736290dbb3f168b86d05728944",
+            "page": 3,
+            "publishedAt": "2019-06-04",
+            "selector": "MVS 191.E5W.3; SS LCH; 1.6 JTDM 120 CV; Super L.E.; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "bdf347164a76aebe5370773f",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM TCT 120 PS Sport",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM TCT 120 PS Sport",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.BSX.3,SS000,Sport,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS 000; 1.6 JTDM TCT 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS 000; 1.6 JTDM TCT 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS 000; 1.6 JTDM TCT 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS 000; 1.6 JTDM TCT 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS 000; 1.6 JTDM TCT 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS 000; 1.6 JTDM TCT 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS 000; 1.6 JTDM TCT 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS 000; 1.6 JTDM TCT 120 CV; Sport; 1598 cm3; 88 kW; Euro6d Temp",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neue-alfa-romeo-giulietta-die-preise-stehen-fest",
+              "checkedAt": "2026-10-22",
+              "selector": "TCT Doppelkupplungsgetriebe"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "cf8bb1a9ec385865e6685e5d",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM TCT 120 PS Sportiva",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM TCT 120 PS Sportiva",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.BSX.3,SSSPT,Sportiva,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS SPT; 1.6 JTDM TCT 120 CV; Sportiva; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS SPT; 1.6 JTDM TCT 120 CV; Sportiva; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS SPT; 1.6 JTDM TCT 120 CV; Sportiva; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS SPT; 1.6 JTDM TCT 120 CV; Sportiva; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS SPT; 1.6 JTDM TCT 120 CV; Sportiva; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS SPT; 1.6 JTDM TCT 120 CV; Sportiva; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS SPT; 1.6 JTDM TCT 120 CV; Sportiva; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.BSX.3; SS SPT; 1.6 JTDM TCT 120 CV; Sportiva; 1598 cm3; 88 kW; Euro6d Temp",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neue-alfa-romeo-giulietta-die-preise-stehen-fest",
+              "checkedAt": "2026-10-22",
+              "selector": "TCT Doppelkupplungsgetriebe"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "de5929cdd3904bcb086cf46e",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM TCT 120 PS Super",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM TCT 120 PS Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.E5X.3,SS000,Super,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5X.3; SS 000; 1.6 JTDM TCT 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5X.3; SS 000; 1.6 JTDM TCT 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5X.3; SS 000; 1.6 JTDM TCT 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5X.3; SS 000; 1.6 JTDM TCT 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5X.3; SS 000; 1.6 JTDM TCT 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5X.3; SS 000; 1.6 JTDM TCT 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5X.3; SS 000; 1.6 JTDM TCT 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.E5X.3; SS 000; 1.6 JTDM TCT 120 CV; Super; 1598 cm3; 88 kW; Euro6d Temp",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neue-alfa-romeo-giulietta-die-preise-stehen-fest",
+              "checkedAt": "2026-10-22",
+              "selector": "TCT Doppelkupplungsgetriebe"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "ac09c5a4e9145c77ef55bdb4",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "1.6 JTDM TCT 120 PS Business",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM TCT 120 PS Business",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.C5X.3,SS000,Business,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5X.3; SS 000; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5X.3; SS 000; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5X.3; SS 000; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5X.3; SS 000; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5X.3; SS 000; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5X.3; SS 000; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5X.3; SS 000; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.C5X.3; SS 000; 1.6 JTDM TCT 120 CV; Business; 1598 cm3; 88 kW; Euro6d Temp",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neue-alfa-romeo-giulietta-die-preise-stehen-fest",
+              "checkedAt": "2026-10-22",
+              "selector": "TCT Doppelkupplungsgetriebe"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "37f97f53ef1cd6827d866e64",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "2.0 JTDM TCT 170 PS Veloce",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM TCT 170 PS Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 170,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.V5U.3,SS000,Veloce,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neue-alfa-romeo-giulietta-die-preise-stehen-fest",
+              "checkedAt": "2026-10-22",
+              "selector": "TCT Doppelkupplungsgetriebe"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "0064586bb789a5321d3b333b",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2019,
+      "trim": "2.0 JTDM TCT 170 PS Carbon Edition",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM TCT 170 PS Carbon Edition",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 170,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2019-10-01, страница3 визуально сверена: MVS191.V5U.3,SSCED,Carbon Edition,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS CED; 2.0 JTDM TCT 170 CV; Carbon Edition; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS CED; 2.0 JTDM TCT 170 CV; Carbon Edition; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS CED; 2.0 JTDM TCT 170 CV; Carbon Edition; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS CED; 2.0 JTDM TCT 170 CV; Carbon Edition; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS CED; 2.0 JTDM TCT 170 CV; Carbon Edition; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS CED; 2.0 JTDM TCT 170 CV; Carbon Edition; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS CED; 2.0 JTDM TCT 170 CV; Carbon Edition; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/it/2019/ALFA-ROMEO/Listini/191001_AR_Giulietta-MY19_Listino.pdf",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "09dd28a4d771e15be2febb09c1ec50c657ab1a9681dad7d04e30be76a418d6af",
+            "page": 3,
+            "publishedAt": "2019-10-01",
+            "selector": "MVS 191.V5U.3; SS CED; 2.0 JTDM TCT 170 CV; Carbon Edition; 1956 cm3; 125 kW; Euro6d Temp",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neue-alfa-romeo-giulietta-die-preise-stehen-fest",
+              "checkedAt": "2026-10-22",
+              "selector": "TCT Doppelkupplungsgetriebe"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "f66972426378f0aad4af9573",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2020,
+      "trim": "1.4 Turbo Benzina 120 PS Giulietta",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Giulietta",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2020-06-03, страница3 визуально сверена: MVS191.B5V.3,SS000,Giulietta,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Giulietta; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "85e3cb61d423ce8ff069d281",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2020,
+      "trim": "1.4 Turbo Benzina 120 PS Sprint",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2020-06-03, страница3 визуально сверена: MVS191.BSV.3,SS000,Sprint,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sprint; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sprint; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sprint; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sprint; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sprint; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sprint; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSV.3; SS 000; 1.4 Turbo Benzina 120 CV; Sprint; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "ba7e508e37ac2bb4cf87b1d7",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2020,
+      "trim": "1.4 Turbo Benzina 120 PS Ti",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 Turbo Benzina 120 PS Ti",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2020-06-03, страница3 визуально сверена: MVS191.E5V.3,SS000,Ti,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Ti; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Ti; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Ti; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Ti; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Ti; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Ti; 1368 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5V.3; SS 000; 1.4 Turbo Benzina 120 CV; Ti; 1368 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "a5b22cf94def29cb42493525",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2020,
+      "trim": "1.6 JTDM 120 PS Giulietta",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Giulietta",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2020-06-03, страница3 визуально сверена: MVS191.B5W.3,SS000,Giulietta,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.B5W.3; SS 000; 1.6 JTDM 120 CV; Giulietta; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "848c522353d2e5b76e8b35d0",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2020,
+      "trim": "1.6 JTDM 120 PS Sprint",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2020-06-03, страница3 визуально сверена: MVS191.BSW.3,SS000,Sprint,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sprint; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sprint; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sprint; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sprint; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sprint; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sprint; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.BSW.3; SS 000; 1.6 JTDM 120 CV; Sprint; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "47309701252560a0c87e5e02",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2020,
+      "trim": "1.6 JTDM 120 PS Ti",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS Ti",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2020-06-03, страница3 визуально сверена: MVS191.E5W.3,SS000,Ti,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Ti; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Ti; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Ti; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Ti; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Ti; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Ti; 1598 cm3; 88 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.E5W.3; SS 000; 1.6 JTDM 120 CV; Ti; 1598 cm3; 88 kW; Euro6d Temp"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "98a54038cc9da7894d76c6aa",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2020,
+      "trim": "2.0 JTDM TCT 170 PS Veloce",
+      "expectedRevision": "be625648-d336-4c52-86cc-31fda59a15b9",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "2.0 JTDM TCT 170 PS Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1956,
+        "powerHp": 170,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской прайс 2020-06-03, страница3 визуально сверена: MVS191.V5U.3,SS000,Veloce,Euro6d Temp. Объём см³, мощность CV/PS и кВт по точной строке. Календарный год подтверждён датой прайса. Код MVS не является кодом двигателя/шасси и сохранён только в источнике. Неизвестные масса/привод/механическая КПП не выводятся из похожих исполнений.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/105",
+            "checkedAt": "2026-10-22",
+            "documentSha256": "d6858e70bdbf6772acbfaca8bde1f9d06a9d66d25d3d0d9bf3a27d6a58d52129",
+            "page": 3,
+            "publishedAt": "2020-06-03",
+            "selector": "MVS 191.V5U.3; SS 000; 2.0 JTDM TCT 170 CV; Veloce; 1956 cm3; 125 kW; Euro6d Temp",
+            "definition": {
+              "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/neue-alfa-romeo-giulietta-die-preise-stehen-fest",
+              "checkedAt": "2026-10-22",
+              "selector": "TCT Doppelkupplungsgetriebe"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

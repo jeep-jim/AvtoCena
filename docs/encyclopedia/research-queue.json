@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T14:56:56.101959+07:00",
+  "updatedAt": "2026-10-22T15:01:58.341375+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32590,12 +32590,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T14:56:56.101959+07:00",
+    "updatedAt": "2026-10-22T15:01:58.341375+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "giulietta_2016_2017_prepared",
+    "state": "giulietta_2018_2020_prepared",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alfa Romeo Giulietta 2018, затем 2019–2020; отдельный retry специальных пакетов 2015",
+    "nextModel": "Alfa Romeo Junior 2024–2026; Giulietta retry отдельно",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32797,6 +32797,16 @@
         "indexRelease": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
         "indexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
         "activationReport": "docs/encyclopedia/reports/2026-10-22-index-6df5eec-activation.json"
+      },
+      "alfa-giulietta-2016-2017-manual-retry": {
+        "batch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
+        "commit": "92fde64ff774cc7e8ed2938241ddad0c98496f51",
+        "workflow": 39744256772,
+        "variants": 59,
+        "newVariants": 42,
+        "fields": 368,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     },
     "rawAuditCalculated": 75,
@@ -32817,17 +32827,14 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-22-historical-and-alphabetic-pass.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-22-alfa-giulietta-2014-special-2015",
-      "commit": "9ce553fcde93bfb14ab6ea1713860879ce105db3",
-      "workflow": 39739140504,
-      "variants": 32,
-      "newVariants": 32,
-      "fields": 230,
+      "batch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
+      "commit": "92fde64ff774cc7e8ed2938241ddad0c98496f51",
+      "workflow": 39744256772,
+      "variants": 59,
+      "newVariants": 42,
+      "fields": 368,
       "apiReadback": true,
-      "includedInIndex": true,
-      "indexRelease": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
-      "indexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
-      "activationReport": "docs/encyclopedia/reports/2026-10-22-index-6df5eec-activation.json"
+      "includedInIndex": false
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
@@ -32850,10 +32857,12 @@
     "additionalPreparedResearch": [
       {
         "path": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2011-manual-retry.json",
-        "state": "prepared_not_applied",
+        "state": "applied_api_readback_pass",
         "variants": 17,
         "fields": 65,
-        "requiresFreshApiPreflight": true
+        "requiresFreshApiPreflight": true,
+        "appliedBatch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
+        "workflow": 39744256772
       }
     ],
     "pendingNextIndexBatches": [
@@ -32949,13 +32958,23 @@
         "newVariants": 11,
         "apiReadback": true,
         "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
+        "commit": "92fde64ff774cc7e8ed2938241ddad0c98496f51",
+        "workflow": 39744256772,
+        "variants": 59,
+        "newVariants": 42,
+        "fields": 368,
+        "apiReadback": true,
+        "includedInIndex": false
       }
     ],
     "inFlightResearch": {
-      "batch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
-      "variants": 59,
-      "newVariants": 42,
-      "fields": 368,
+      "batch": "research-2026-10-22-alfa-giulietta-2018-2020",
+      "variants": 35,
+      "newVariants": 35,
+      "fields": 254,
       "state": "prepared_not_applied"
     },
     "lastCompletedPass": {

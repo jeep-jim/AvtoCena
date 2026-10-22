@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-10-22T07:22:22.964Z",
-  "status": "prepared_not_applied",
-  "reason": "Найдено после фиксации снимка текущего выпуска. Не писать до завершения выпуска; перед отдельной партией повторить API-preflight и убедиться, что источники/история не изменились.",
+  "status": "applied_api_readback_pass",
+  "reason": "17/65 подтверждены и сохранены в составе партии2016–2017; не применять повторно.",
   "modelId": "cb49c6bb46e8dd8caf106b34",
   "variants": 17,
   "fields": 65,
@@ -1263,5 +1263,7 @@
     "skipped": []
   },
   "requiresFreshApiPreflight": true,
-  "requiresOwnIndexReleaseAfterApply": true
+  "requiresOwnIndexReleaseAfterApply": true,
+  "appliedBatch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
+  "workflow": 39744256772
 }
