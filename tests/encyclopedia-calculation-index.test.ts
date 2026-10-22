@@ -6,7 +6,7 @@ import {invalidateEffectiveMarketsCache} from '../apps/web/lib/effective-market-
 import {applyActiveBusinessPriceBatch,applyActiveBusinessPricing} from '../apps/web/lib/catalog/live-business-pricing';
 import {publicOffer,searchProjectionFromOffer} from '../apps/web/lib/catalog/storage';
 import assert from 'node:assert/strict';
-import {compileModelFacts,applyEncyclopediaCalculation,checksum,modelKey,hasEncyclopediaCalculationEvidence,type CalculationIndex} from '../apps/web/lib/encyclopedia/calculation-index';
+import {compileModelFacts,applyEncyclopediaCalculation,checksum,modelKey,hasEncyclopediaCalculationEvidence,resetCalculationIndexForTests,type CalculationIndex} from '../apps/web/lib/encyclopedia/calculation-index';
 import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specification-evidence-audit';
 import {specificationEvidenceComplete} from '../apps/web/lib/catalog/modification-matching';
 import {applyUaeManualSpecifications} from '../apps/web/lib/catalog/uae-manual-specifications';
@@ -61,6 +61,20 @@ test('no index means no inference; original records are immutable and repeated e
  const input=offer(),before=JSON.stringify(input);assert.equal(applyEncyclopediaCalculation(input,null),input);
  const i=index([base]),result=applyEncyclopediaCalculation(input,i);assert.equal(JSON.stringify(input),before);assert.equal(applyEncyclopediaCalculation(result,i),result);
 });
+test('display-only matches retain evidence through public serialization and retire stale display fields',()=>{
+ const row={...base,status:'review',bodyType:'sedan',researchEvidence:{checkedIdentity:{make:'Audi',model:'A6',year:2023,trim:base.trim},fields:['bodyType','drive'],values:{bodyType:'sedan',drive:'fwd'},source:{type:'manufacturer',url:'https://www.audi.com/spec.pdf'}}};
+ const input:any={...offer(),drive:undefined,images:[],totalRub:3000000};
+ const matched:any=applyEncyclopediaCalculation(input,index([row]));
+ const serialized:any=publicOffer(matched);
+ assert.equal(serialized.operational,undefined);
+ assert.equal(serialized.encyclopediaCalculation.provenance,undefined);
+ assert.equal(hasEncyclopediaCalculationEvidence(serialized),true);
+ assert.equal(serialized.bodyType,'sedan');assert.equal(serialized.drive,'fwd');
+ const next:any=applyEncyclopediaCalculation(serialized,index([]));
+ assert.equal(next.bodyType,undefined);assert.equal(next.drive,undefined);
+ assert.equal(next.totalRub,3000000,'retiring display-only facts does not erase a completed calculation');
+ assert.equal(input.drive,undefined);
+});
 test('auction preview uses exact encyclopedia fields while unknown electric certification stays missing',()=>{
  const input:any={...offer(),id:'ajes-stats-123',market:'japan',sourceId:'ajes_japan_feed',catalogPricingMode:'seller',bodyType:'sedan',vehicleCategory:'M1'};
  const matched:any=applyEncyclopediaCalculation(input,index([base]));
@@ -76,6 +90,10 @@ test('an exact encyclopedia match upgrades a seller card through the real engine
  const today=new Date().toISOString(),markets=JSON.parse(fs.readFileSync('data/markets/markets.json','utf8'));
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED='true';resetCatalogRateCache();invalidateEffectiveMarketsCache();
  const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string,fallback:any)=>({found:true,value:key==='fees/exchange-rates.json'?{updatedAt:today,EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:'cbr'},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:'cbr'},AED:{cbrRate:25,nominal:1,rateDate:today,rateSource:'cbr'}}:key==='markets/markets.json'?markets:fallback}));
+ const originalRead=fs.readFileSync;
+ const bundled=index([{...base,bodyType:'sedan'}]);
+ const indexRead=mock.method(fs,'readFileSync',((file:any,...args:any[])=>String(file).endsWith('/knowledge/encyclopedia/calculation-v1.json')?JSON.stringify(bundled):(originalRead as any)(file,...args)) as any);
+ resetCalculationIndexForTests();
  try{
   for(const market of ['europe','uae']){
    const input:any={...offer(),market,sourcePrice:10000,sourceCurrency:'EUR',catalogPricingMode:'seller',sellerPriceRub:950000,totalRub:null,calculationStatus:'needs_data',bodyType:'sedan',images:[],status:'active',offerType:'fixed'};
@@ -91,8 +109,17 @@ test('an exact encyclopedia match upgrades a seller card through the real engine
    assert.equal((await applyActiveBusinessPricing(matched)).totalRub,card.totalRub);
    const publicCard=publicOffer(card as any);
    assert.equal(applyUaeManualSpecifications(publicCard).powerHp,204,'browser-safe public card retains independently sourced power');
-   assert.equal(searchProjectionFromOffer(card as any).encyclopediaCalculation?.indexDigest,index([base]).digest);
+   assert.equal(searchProjectionFromOffer(card as any).encyclopediaCalculation?.indexDigest,bundled.digest);
    assert.equal(input.totalRub,null);
   }
- }finally{read.mock.restore();resetCatalogRateCache();invalidateEffectiveMarketsCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
+  for(const market of ['europe','japan']){
+   const complete:any={...offer(),market,drive:undefined,bodyType:undefined,sourcePrice:10000,sourceCurrency:'EUR',totalRub:3000000,images:[],calculationStatus:'ready'};
+   const [card]:any[]=await applyActiveBusinessPriceBatch([complete],{readOnly:true});
+   assert.equal(card.drive,'fwd','priced/Japan cards still receive exact display facts');
+   assert.equal(card.bodyType,'sedan');
+   assert.equal(card.totalRub,3000000,'display enrichment preserves the completed price');
+   assert.equal((await applyActiveBusinessPricing(complete) as any).drive,card.drive);
+   assert.equal(complete.drive,undefined);
+  }
+ }finally{indexRead.mock.restore();resetCalculationIndexForTests();read.mock.restore();resetCatalogRateCache();invalidateEffectiveMarketsCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });

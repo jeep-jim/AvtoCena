@@ -12,15 +12,16 @@ if(!snapshot.items?.length)throw Error('catalog_snapshot_empty');
 const candidates=[];
 for(const raw of snapshot.items){
  const market=report.markets[raw.market]||={rows:0,pending:0,exactMatches:0,filledRecords:0,filledFields:0,completeSpecifications:0,calculated:0,calculationMissing:{},missing:{}};market.rows++;
- if(Number(raw.totalRub)>0&&raw.catalogPricingMode!=='seller')continue;
- market.pending++;
+ const pending=!(Number(raw.totalRub)>0&&raw.catalogPricingMode!=='seller');
+ market.pending+=Number(pending);
  const source=applyUaeManualSpecifications(raw),enriched=applyEncyclopediaCalculation(source,index);
  if(hasEncyclopediaCalculationEvidence(enriched)){
   market.exactMatches++;
   const filled=factFields.filter(f=>!source[f]&&enriched[f]);
   market.filledFields+=filled.length;market.filledRecords+=Number(filled.length>0);
-  if(specificationEvidenceComplete(enriched)){market.completeSpecifications++;candidates.push(raw);}
+  if(pending&&specificationEvidenceComplete(enriched)){market.completeSpecifications++;candidates.push(raw);}
  }
+ if(!pending)continue;
  for(const field of SPECIFICATION_AUDIT_FIELDS){const result=classifySpecificationEvidence(enriched,field);if(!['exact','not_applicable'].includes(result.state))market.missing[result.reason]=(market.missing[result.reason]||0)+1;}
 }
 for(let start=0;start<candidates.length;start+=4){

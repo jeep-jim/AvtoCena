@@ -84,7 +84,7 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
   for(const field of previous.filledFields||[])delete fresh[field];
   for(const field of Object.keys(previous.values))if(fresh.operational.semanticEvidence[field]?.source===`permanent_encyclopedia:${previous.indexDigest}`)delete fresh.operational.semanticEvidence[field];
   delete fresh.operational.encyclopediaCalculation;delete fresh.encyclopediaCalculation;
-  if(previous.filledFields?.length){fresh.totalRub=null;fresh.publicVisibleRub=undefined;fresh.publicSpecificationVerified=false;fresh.calculationSnapshot=undefined;fresh.catalogPricingMode='seller';}
+  if(previous.filledFields?.some((f:string)=>['engineCc','powerHp','powerKw','icePowerKw','power30MinKw','fuel','powertrainKind','grossVehicleWeightKg'].includes(f))){fresh.totalRub=null;fresh.publicVisibleRub=undefined;fresh.publicSpecificationVerified=false;fresh.calculationSnapshot=undefined;fresh.catalogPricingMode='seller';}
   if(fresh.powerDataSource===`permanent_encyclopedia:${previous.indexDigest}`){delete fresh.powerDataSource;delete fresh.powerDataConfidence;}
   offer=fresh;
  }
@@ -113,6 +113,6 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  next.operational={...offer.operational,semanticEvidence:semantic,encyclopediaCalculation:{version:1,indexDigest:index.digest,
   sourceIdentity:calculationSourceIdentity(offer),values:applied,provenance,filledFields}};
  next.encyclopediaCalculation={version:1,indexDigest:index.digest,sourceIdentity:calculationSourceIdentity(offer),
-  values:Object.fromEntries(Object.entries(applied).filter(([f])=>['engineCc','powerHp','powerKw','icePowerKw','power30MinKw','fuel','powertrainKind'].includes(f))),filledFields:filledFields.filter(f=>['engineCc','powerHp','powerKw','icePowerKw','power30MinKw','fuel','powertrainKind'].includes(f))};
+  values:applied,filledFields};
  return next;
 }
