@@ -1,0 +1,410 @@
+{
+  "checkedAt": "2026-10-22T09:20:47.495711+00:00",
+  "modelId": "81a4b290257d227a5fd86ee6",
+  "make": "Alfa Romeo",
+  "model": "Mito",
+  "state": "researched_candidates_not_applied",
+  "requiresFreshApiPreflight": true,
+  "sources": [
+    {
+      "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+      "effectiveAt": "2011-04-01",
+      "pagesVisuallyChecked": [
+        2
+      ]
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+      "pagesVisuallyChecked": [
+        1
+      ]
+    },
+    {
+      "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/lancement-en-france-de-la-nouvelle-gamme-alfa-mito-my-2011",
+      "publishedAt": "2011-04-04",
+      "role": "Связь PDF-приложений с запуском2011; модели и комплектации"
+    }
+  ],
+  "candidates": [
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.3 JTDM",
+        "trim": "Progression",
+        "sincom": "145 A3A 1",
+        "startStop": true,
+        "transmissionDesignation": "MT5"
+      },
+      "candidatePatch": {
+        "trim": "1.3 JTDM 95 PS S/S MT5 Progression",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.3 JTDM 95 ch"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.3 JTDM",
+        "trim": "Distinctive",
+        "sincom": "145 B3A 1",
+        "startStop": true,
+        "transmissionDesignation": "MT5"
+      },
+      "candidatePatch": {
+        "trim": "1.3 JTDM 95 PS S/S MT5 Distinctive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.3 JTDM 95 ch"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.3 JTDM",
+        "trim": "Super",
+        "sincom": "145 B3A 1 + 6MI",
+        "startStop": true,
+        "transmissionDesignation": "MT5"
+      },
+      "candidatePatch": {
+        "trim": "1.3 JTDM 95 PS S/S MT5 Super",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.3 JTDM 95 ch"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.3 JTDM",
+        "trim": "Selective",
+        "sincom": "145 E3A 1",
+        "startStop": true,
+        "transmissionDesignation": "MT5"
+      },
+      "candidatePatch": {
+        "trim": "1.3 JTDM 95 PS S/S MT5 Selective",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerHp": 95,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.3 JTDM 95 ch"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.4 MPI MultiAir",
+        "trim": "Distinctive",
+        "sincom": "145 B32 1",
+        "startStop": true,
+        "transmissionDesignation": "MT6"
+      },
+      "candidatePatch": {
+        "trim": "1.4 MPI MultiAir 105 PS S/S MT6 Distinctive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 105,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.4 MPI MultiAir 105 ch"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.4 MPI MultiAir",
+        "trim": "Super",
+        "sincom": "145 B32 1 + 6MI",
+        "startStop": true,
+        "transmissionDesignation": "MT6"
+      },
+      "candidatePatch": {
+        "trim": "1.4 MPI MultiAir 105 PS S/S MT6 Super",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 105,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.4 MPI MultiAir 105 ch"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.4 MPI MultiAir",
+        "trim": "Selective",
+        "sincom": "145 E32 1",
+        "startStop": true,
+        "transmissionDesignation": "MT6"
+      },
+      "candidatePatch": {
+        "trim": "1.4 MPI MultiAir 105 PS S/S MT6 Selective",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 105,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.4 MPI MultiAir 105 ch"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.4 TB MultiAir",
+        "trim": "Selective",
+        "sincom": "145 E33 1",
+        "startStop": true,
+        "transmissionDesignation": "MT5"
+      },
+      "candidatePatch": {
+        "trim": "1.4 TB MultiAir 135 PS S/S MT5 Selective",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 135,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.4 TB MultiAir 135 ch"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.4 TB MultiAir",
+        "trim": "Selective",
+        "sincom": "145 E34 1",
+        "startStop": true,
+        "transmissionDesignation": "TCT"
+      },
+      "candidatePatch": {
+        "trim": "1.4 TB MultiAir 135 PS S/S TCT Selective",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 135,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "dct"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.4 TB MultiAir 135 ch Alfa TCT"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.6 JTDM",
+        "trim": "Selective",
+        "sincom": "145 E3E 1",
+        "startStop": true,
+        "transmissionDesignation": "MT6"
+      },
+      "candidatePatch": {
+        "trim": "1.6 JTDM 120 PS S/S MT6 Selective",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1598,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.6 JTDM 120 ch"
+      }
+    },
+    {
+      "year": 2011,
+      "identity": {
+        "engine": "1.4 TB MultiAir",
+        "trim": "Quadrifoglio Verde",
+        "sincom": "145 S36 1",
+        "startStop": true,
+        "transmissionDesignation": "MT6"
+      },
+      "candidatePatch": {
+        "trim": "1.4 TB MultiAir 170 PS S/S MT6 Quadrifoglio Verde",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 170,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "identitySource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TARIF.pdf",
+        "pdfPage": 2,
+        "effectiveAt": "2011-04-01"
+      },
+      "technicalSource": {
+        "url": "https://www.media.stellantis.com/uploads/fr/FR/2010/ALFA_ROMEO/INFOS_TECHNIQUES/110401_AR_MITO_MY_TECH.pdf",
+        "pdfPage": 1,
+        "column": "1.4 TB MultiAir 170 ch"
+      }
+    }
+  ],
+  "excluded": [
+    {
+      "identity": "1.4 MPI78PS S/S Progression/Distinctive",
+      "sincom": [
+        "145 A3N 1",
+        "145 B3N 1"
+      ],
+      "reason": "Прайс и пресс-релиз подтверждают8клапанов/S&S, техническийPDF показывает58кВт5750об/мин,120Нм4000 иMT6. До уточнения редакции/кода двигателя не переносить старые параметры16V. Мощность78ch и тип бензин подтверждены, остальные поля требуют проверки."
+    },
+    {
+      "identity": "VPC и70/85PS из страницы3",
+      "reason": "Коммерческие конверсии и будущие исполнения, тариф/идентичность требуют отдельного подтверждения; не смешивать с легковыми строками."
+    }
+  ],
+  "remaining": {
+    "2010": [
+      "Turismo Sport: точные бензиновая95bhp/дизельная95bhp версии по публикации11.08.2010; дизель1248/70кВт можно связать точнымJTDM-2, petrolneeds2010technicaltable",
+      "Остальные годовые комплектации"
+    ],
+    "2011": [
+      "UK:9строк нового прайса27.04.2011, исходная опечаткаTB у105bhp; отдельнаятехпроверка85PS",
+      "Sprint special edition до смены гаммы",
+      "Поздняя французская гамма15.11.2011 в заводском досье2012; не переносить по годуименифайла",
+      "Две первичныеPDF таблицы85PS содержат62кВт, не предполагать63кВт; проверить визуально и связать позднийпрайс. ДебютTwinAir наавтосалоне неравен началу продаж2011."
+    ],
+    "unknownFields": [
+      "engineCode",
+      "grossVehicleWeightKg",
+      "vehicleCategory"
+    ]
+  },
+  "nextSources": [
+    "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-mito-turismo-sport-joins-the-ranks-from-199-a-month-otr",
+    "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-range-goes-on-sale-in-may",
+    "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/DOSSIERS_DE_PRESSE/050211_AR_DP__GIULIETTA_ALFATCT.pdf",
+    "https://www.media.stellantis.com/uploads/rs/RS/2012/ALFA_ROMEO/FILES/ALFA_ROMEO_MITO.pdf",
+    "https://www.media.stellantis.com/uploads/fr/FR/2011/ALFA_ROMEO/INFOS_TECHNIQUES_EQUIPEMENTS/ALFA_MITO/111024_AR_MITO_JTDM85_INFOS_TECH.pdf",
+    "https://www.media.stellantis.com/uploads/fr/FR/2011/ALFA_ROMEO/COMMUNIQUES/110830_AR_FRANCFORT_FICH_TECH.pdf"
+  ]
+}

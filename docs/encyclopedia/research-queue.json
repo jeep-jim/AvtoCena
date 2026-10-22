@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T16:18:13.376522+07:00",
+  "updatedAt": "2026-10-22T16:21:19.075721+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32942,8 +32942,8 @@
         "workflow": 39720654481
       }
     ],
-    "requestedRelease": null,
-    "requestedReleaseWorkflow": null,
+    "requestedRelease": "ad327011321b44aa7e0d59465dded59095067908",
+    "requestedReleaseWorkflow": 39754473141,
     "additionalPreparedResearch": [
       {
         "path": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2011-manual-retry.json",
@@ -32953,6 +32953,13 @@
         "requiresFreshApiPreflight": true,
         "appliedBatch": "research-2026-10-22-alfa-giulietta-2016-2017-manual-retry",
         "workflow": 39744256772
+      },
+      {
+        "path": "docs/encyclopedia/research-handoff-2026-10-22-mito-2011.json",
+        "state": "researched_candidates_not_applied",
+        "variants": 11,
+        "fields": 99,
+        "requiresFreshApiPreflight": true
       }
     ],
     "pendingNextIndexBatches": [
@@ -33145,7 +33152,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-junior-2024-2026.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-mito-2011.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39743682918,
