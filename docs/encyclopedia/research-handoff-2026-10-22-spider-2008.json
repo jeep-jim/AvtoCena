@@ -1,12 +1,12 @@
 {
-  "checkedAt": "2026-10-22T17:49:00+07:00",
-  "state": "research_leads_not_applied",
+  "checkedAt": "2026-10-22T18:14:48+07:00",
+  "state": "applied_partial_api_readback_pass",
   "modelId": "d9d48f8457c33f7e466d6c6e",
   "make": "Alfa Romeo",
   "model": "Spider",
   "year": 2008,
   "requiresFreshApiPreflight": true,
-  "nextCursor": "Spider: начать точную гамму 2008, затем реальные последующие годы; не переносить год регистрации на производство. После Spider — Stelvio.",
+  "nextCursor": "Stelvio2018; Spider remaining fields in retry",
   "apiReadback": {
     "revision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
     "year2008Variants": 0,
@@ -69,11 +69,41 @@
       "note": "Имеются отдельные технические таблицы: не переносить первую таблицу Brera на Spider. Мощность подписана bhp, не переименовывать в PS. Для1750 прямо указан1742см³. Italia Independent требует точной применимости, не делать общую перекрёстную гамму."
     }
   ],
-  "applied": false,
+  "applied": true,
   "missing": [
-    "Точные годовые таблицы2008–2010 с объёмами, кодами, приводом и трансмиссиями",
-    "Однозначная идентичность генераций Spider,4CSpider,8CSpider",
-    "Истинные годы выпуска против EEA регистрации2020/2021",
-    "Свежие SHA256/revision непосредственно перед guarded create"
-  ]
+    "Три исходные наблюдения не имеют точной идентичности.2020/2021 — регистрационные годыEEA,не доказанные годы производства Spider939.1998Other сохранён. Не удалять,не переносить параметры939/4C/8C.",
+    "Перепроверить ранние/региональные исполнения,3.2Edizione иQ-Tronic; общий анонсEdizione не доказывает каждое сочетаниеQ4/FWD/коробки.Для2.4Q-Tronic200PS не найдены отдельные код/кВт/масса2008.",
+    "Греческий заводской прайс20.10.2009 подтвердил9 точных базовых исполнений. Код/полная масса и большинствокВт требуют годовой технической таблицы; привод1750/2.0/2.4 отдельно не заполнен.2.2manual иSelespeed не смешивать;3.2Q4Q-Tronic отдельно.",
+    "У2.4Q-Tronic200PS/147кВт (включаяItaliaIndependent) остаются объём/код/привод/масса по точному2010документу.3.2Q-Tronic и региональные серии требуют точной применимости. Для2.0JTDMкузовной код не выбран между59/59B или61/61B; массаItaliaIndependent не перенесена без подтверждения.2.2II относится только кBrera.",
+    "Нужен дополнительный проход по ранним/региональным сериям и реальным границам выпуска; доступность продаж после2010 не доказывает модельный/производственный год."
+  ],
+  "appliedBatches": [
+    {
+      "batch": "research-2026-10-22-alfa-spider-2008-manual-edizione",
+      "commit": "e2c678bde26f757bbcac23c166246cd68a78b7bb",
+      "workflow": 39767249101,
+      "variants": 9,
+      "newVariants": 9,
+      "fields": 104,
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-spider-2008-manual-edizione-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-alfa-spider-2009-2010-factory",
+      "commit": "c887c03e2d103a88e0ba576805d7222f110e54d5",
+      "workflow": 39768344710,
+      "variants": 23,
+      "newVariants": 23,
+      "fields": 225,
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-spider-2009-2010-factory-readback.json"
+    }
+  ],
+  "newVariants": 32,
+  "confirmedFields": 329,
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-spider-stelvio-remaining.json"
 }

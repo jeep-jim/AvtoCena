@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-10-22T18:14:48+07:00",
+  "state": "research_leads_not_applied",
+  "modelId": "0d734c400f4417df7f272d30",
+  "make": "Alfa Romeo",
+  "model": "Stelvio",
+  "year": 2018,
+  "requiresFreshApiPreflight": true,
+  "nextCursor": "Stelvio2018: ранняя гамма и переходEuro6d-TEMP/MY2019; затем2019–2026, Tonale и следующие марки.2017 не начинать заново,пробелы вretry.",
+  "apiReadback": {
+    "revision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+    "variants": 173,
+    "researchedVariants": 55,
+    "year2018Variants": 1
+  },
+  "preserve": [
+    {
+      "id": "78bca17fcaa7aa9581395f67",
+      "year": 2018,
+      "trim": "SUPER",
+      "reason": "НаблюдениеAWD/automatic без мощности/объёма не позволяет выбрать двигатель; сохранить до точной идентификации."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/180919_Alfa_Romeo_Listino_Stelvio.pdf",
+      "effectiveAt": "2018-09-12",
+      "state": "search_lead_not_fully_reviewed",
+      "note": "Внутренняя дата12.09.2018 отличается от имени180919. СверитьPDFтаблицу,реальные200/280PS,160/190/210diesel,исполненияB-Tech и годовую применимость."
+    },
+    {
+      "url": "https://www.media.stellantis.com/uploads/it/2018/ALFA-ROMEO/Listini/181108_Alfa-Romeo_Stelvio-MY19_Listino.pdf",
+      "effectiveAt": "2018-11-01",
+      "state": "search_lead_not_fully_reviewed",
+      "note": "ИмяMY19 и дата2018: отдельно подтвердить модельныйгод,не дублировать автоматически."
+    },
+    {
+      "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-lancia-la-nuova-serie-speciale-stelvio-sport-edition",
+      "state": "search_lead_not_fully_reviewed",
+      "note": "SportEdition2018: проверитьточные двигатели/коробки/источник до создания."
+    }
+  ],
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-spider-stelvio-remaining.json",
+  "applied": false
+}

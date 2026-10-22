@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T18:14:48+07:00",
+  "scope": "Spider2008–2010 / Stelvio2017; точные неизвестные поля и идентичности",
+  "items": [
+    {
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "years": [
+        1998,
+        2020,
+        2021
+      ],
+      "fields": [
+        "generation",
+        "year",
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw"
+      ],
+      "reason": "Три исходные наблюдения не имеют точной идентичности.2020/2021 — регистрационные годыEEA,не доказанные годы производства Spider939.1998Other сохранён. Не удалять,не переносить параметры939/4C/8C.",
+      "state": "retry_identity"
+    },
+    {
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "years": [
+        2008
+      ],
+      "fields": [
+        "trim",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Перепроверить ранние/региональные исполнения,3.2Edizione иQ-Tronic; общий анонсEdizione не доказывает каждое сочетаниеQ4/FWD/коробки.Для2.4Q-Tronic200PS не найдены отдельные код/кВт/масса2008.",
+      "state": "retry_primary_table"
+    },
+    {
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "years": [
+        2009
+      ],
+      "fields": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "reason": "Греческий заводской прайс20.10.2009 подтвердил9 точных базовых исполнений. Код/полная масса и большинствокВт требуют годовой технической таблицы; привод1750/2.0/2.4 отдельно не заполнен.2.2manual иSelespeed не смешивать;3.2Q4Q-Tronic отдельно.",
+      "state": "retry_primary_table"
+    },
+    {
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "years": [
+        2010
+      ],
+      "fields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "chassisCode"
+      ],
+      "reason": "У2.4Q-Tronic200PS/147кВт (включаяItaliaIndependent) остаются объём/код/привод/масса по точному2010документу.3.2Q-Tronic и региональные серии требуют точной применимости. Для2.0JTDMкузовной код не выбран между59/59B или61/61B; массаItaliaIndependent не перенесена без подтверждения.2.2II относится только кBrera.",
+      "state": "retry_primary_table"
+    },
+    {
+      "modelId": "d9d48f8457c33f7e466d6c6e",
+      "years": [
+        2008,
+        2009,
+        2010
+      ],
+      "fields": [
+        "historicalCoverage"
+      ],
+      "reason": "Нужен дополнительный проход по ранним/региональным сериям и реальным границам выпуска; доступность продаж после2010 не доказывает модельный/производственный год.",
+      "state": "retry_historical_scope"
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "years": [
+        2017
+      ],
+      "fields": [
+        "powerKw",
+        "icePowerKw"
+      ],
+      "reason": "2.0Turbo200PS: заводские прайсы147/148кВт;2.2Diesel180PS:132/133кВт. PS и объёмы подтверждены,кВт не внесены. Нужны руководство/омологация точной версии.",
+      "sources": [
+        "https://www.media.stellantis.com/uploads/it/2017/ALFA-ROMEO/Listini/171102_Alfa-Romeo_Stelvio_Listino.pdf",
+        "https://www.media.stellantis.com/uploads/pl/PL/2017/ALFA_ROMEO/Files/Cennik_AR_STELVIO_RP_2017.pdf",
+        "https://www.media.stellantis.com/uk-en/alfa-romeo/press/the-alfa-romeo-stelvio"
+      ],
+      "state": "retry_conflicting_factory_units"
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "years": [
+        2017
+      ],
+      "fields": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "regionalTrimCoverage"
+      ],
+      "reason": "15 исполнений итальянской гаммы сохранены. Коды двигателей,полная масса и дополнительные национальные исполнения (включаяMilanoEdizione/базовые версии) не объявлены заполненными.",
+      "state": "retry_primary_table"
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "year": 2020,
+      "trim": "2.0 turbo 280 ps at8 q4 veloce",
+      "ids": [
+        "3fa7f427de05dc68fd001fc4",
+        "e4840b180924519bd75d22fd"
+      ],
+      "state": "retry_duplicate_identity",
+      "reason": "Повтор названия найден в158 исходных строках до записи2017. Сохранены всеидентичности/источники; проверить исходныеvariantId/привязки и совпадение подтверждённых полей. Не удалять и не объединять только поtrim; общийAlfaRomeoStelvio2022 не является точной модификацией."
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "year": 2022,
+      "trim": "alfa romeo stelvio",
+      "ids": [
+        "fb9a989f57964fc0192f85c0",
+        "3f12c77e9fcd454ecc9c8537"
+      ],
+      "state": "retry_duplicate_identity",
+      "reason": "Повтор названия найден в158 исходных строках до записи2017. Сохранены всеидентичности/источники; проверить исходныеvariantId/привязки и совпадение подтверждённых полей. Не удалять и не объединять только поtrim; общийAlfaRomeoStelvio2022 не является точной модификацией."
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "year": 2022,
+      "trim": "2.2 turbo diesel 190 ps at8 q4 sprint",
+      "ids": [
+        "ea80ef32e9ac6b12f92ab00c",
+        "8fccc46ab1b1963303fddc74"
+      ],
+      "state": "retry_duplicate_identity",
+      "reason": "Повтор названия найден в158 исходных строках до записи2017. Сохранены всеидентичности/источники; проверить исходныеvariantId/привязки и совпадение подтверждённых полей. Не удалять и не объединять только поtrim; общийAlfaRomeoStelvio2022 не является точной модификацией."
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "year": 2022,
+      "trim": "2.2 turbo diesel 210 ps at8 q4 veloce",
+      "ids": [
+        "f018e72a6dbb367cf9a03370",
+        "c20facbfa1a7278ed99ca3ea",
+        "550a5b1445d9d1557fc91090"
+      ],
+      "state": "retry_duplicate_identity",
+      "reason": "Повтор названия найден в158 исходных строках до записи2017. Сохранены всеидентичности/источники; проверить исходныеvariantId/привязки и совпадение подтверждённых полей. Не удалять и не объединять только поtrim; общийAlfaRomeoStelvio2022 не является точной модификацией."
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "year": 2024,
+      "trim": "2.0 turbo 280 ps at8 q4 sprint",
+      "ids": [
+        "29aea0472a884b72569e2bfb",
+        "922e45f4d3e7bf1324a873e6"
+      ],
+      "state": "retry_duplicate_identity",
+      "reason": "Повтор названия найден в158 исходных строках до записи2017. Сохранены всеидентичности/источники; проверить исходныеvariantId/привязки и совпадение подтверждённых полей. Не удалять и не объединять только поtrim; общийAlfaRomeoStelvio2022 не является точной модификацией."
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "year": 2025,
+      "trim": "2.2 turbo diesel 210 ps at8 q4 veloce",
+      "ids": [
+        "394987de08b9a24517851c6a",
+        "09986a7db475620cad7360ee",
+        "de7c36f0d9be23de2b6517e2"
+      ],
+      "state": "retry_duplicate_identity",
+      "reason": "Повтор названия найден в158 исходных строках до записи2017. Сохранены всеидентичности/источники; проверить исходныеvariantId/привязки и совпадение подтверждённых полей. Не удалять и не объединять только поtrim; общийAlfaRomeoStelvio2022 не является точной модификацией."
+    }
+  ]
+}
