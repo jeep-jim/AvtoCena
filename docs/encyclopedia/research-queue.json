@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T17:17:21+07:00",
+  "updatedAt": "2026-10-22T17:23:25+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -630,19 +630,19 @@
         2009,
         2008
       ],
-      "variants": 108,
+      "variants": 111,
       "status": "partial_verified_fields",
-      "researchedVariants": 0,
+      "researchedVariants": 109,
       "checkedAt": "2026-10-22T01:36:38.003919+07:00",
       "retryFile": "docs/encyclopedia/retry-2026-10-22-mito-remaining.json",
-      "nextAction": "MiTo: Live/TwinAir85Sprint/78Progression2013 подготовлены; далее2014, отдельные ранниеUK2013 и Veloce/QVLimited2013 в retry",
-      "lastCheckedAt": "2026-10-22T17:17:21+07:00",
-      "lastBatch": "research-2026-10-22-alfa-mito-2013-ranges-2012-tct",
-      "lastBatchVariants": 30,
-      "lastBatchFields": 273,
-      "newVariantsThisBatch": 27,
+      "nextAction": "Alfa Romeo MiTo2014; then2015–2018 and retry queue",
+      "lastCheckedAt": "2026-10-22T17:23:25+07:00",
+      "lastBatch": "research-2026-10-22-alfa-mito-2013-live-early-uk",
+      "lastBatchVariants": 3,
+      "lastBatchFields": 30,
+      "newVariantsThisBatch": 3,
       "fullHistoricalCoverage": false,
-      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2013-ranges-2012-tct-readback.json"
+      "lastReadback": "docs/encyclopedia/reports/2026-10-22-alfa-mito-2013-live-early-uk-readback.json"
     },
     {
       "id": "d9d48f8457c33f7e466d6c6e",
@@ -32614,12 +32614,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-22T17:17:21+07:00",
+    "updatedAt": "2026-10-22T17:23:25+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "mito_2012_2013_48_new_verified_live_prepared",
+    "state": "mito_2012_2013_51_new_saved_activation_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "MiTo: Live/TwinAir85Sprint/78Progression2013 подготовлены; далее2014, отдельные ранниеUK2013 и Veloce/QVLimited2013 в retry",
+    "nextModel": "Alfa Romeo MiTo2014; then2015–2018 and retry queue",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -32965,6 +32965,21 @@
         "newVariants": 27,
         "updatedVariants": 3,
         "fields": 273,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      "alfa-mito-2013-live-early-uk": {
+        "batch": "research-2026-10-22-alfa-mito-2013-live-early-uk",
+        "commit": "d1c40a7861274c5b885804286073fed14fb2bf79",
+        "workflow": 39762001795,
+        "operations": 3,
+        "newVariants": 3,
+        "updates": 0,
+        "fields": 30,
+        "workflowConclusion": "success",
+        "apiReadbackPassed": true,
+        "includedInActiveIndex": false,
+        "variants": 3,
         "apiReadback": true,
         "includedInIndex": false
       }
@@ -33333,7 +33348,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-mito-2012-remaining.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-mito-2014.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39743682918,
@@ -33348,13 +33363,121 @@
       "nextAction": "Read failed URL/reason from checkpoint before resume; do not bypass access failures"
     },
     "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
-    "preparedBatch": {
-      "batch": "research-2026-10-22-alfa-mito-2013-live-early-uk",
-      "variants": 3,
-      "newVariants": 3,
-      "fields": 30,
-      "state": "prepared_not_applied",
-      "preflightPassed": true
+    "mito2012_2013Pass": {
+      "checkedAt": "2026-10-22T17:23:25+07:00",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "years": [
+        2012,
+        2013
+      ],
+      "baselineVariants": 60,
+      "variantsAfter": 111,
+      "newVariants": 51,
+      "variantOperations": 61,
+      "updatedPreviouslyExistingVariants": 7,
+      "additionalUpdatesToNewRows": 3,
+      "confirmedFields": 532,
+      "calculationFieldsCompiled": 481,
+      "identityNames": 51,
+      "untouchedVariantsPreserved": 53,
+      "exactNamedIdentityDuplicates": 0,
+      "wholeRowVerificationPromoted": false,
+      "batches": [
+        {
+          "batch": "research-2026-10-22-alfa-mito-2012-remaining-manual",
+          "commit": "03bb00be07e9bfc4654fa3de23d1888a6d6badbd",
+          "workflow": 39760420714,
+          "operations": 18,
+          "newVariants": 11,
+          "updates": 7,
+          "fields": 130,
+          "workflowConclusion": "success",
+          "apiReadbackPassed": true,
+          "includedInActiveIndex": false
+        },
+        {
+          "batch": "research-2026-10-22-alfa-mito-2012-uk-sprint-sportiva",
+          "commit": "0ea35325e4e6fa0c3b9cb62d5c70fef0bb4dc707",
+          "workflow": 39760829792,
+          "operations": 10,
+          "newVariants": 10,
+          "updates": 0,
+          "fields": 99,
+          "workflowConclusion": "success",
+          "apiReadbackPassed": true,
+          "includedInActiveIndex": false
+        },
+        {
+          "batch": "research-2026-10-22-alfa-mito-2013-ranges-2012-tct",
+          "commit": "741e663a2c1783843d9de480a84ff66bf93c0cee",
+          "workflow": 39761586526,
+          "operations": 30,
+          "newVariants": 27,
+          "updates": 3,
+          "fields": 273,
+          "workflowConclusion": "success",
+          "apiReadbackPassed": true,
+          "includedInActiveIndex": false
+        },
+        {
+          "batch": "research-2026-10-22-alfa-mito-2013-live-early-uk",
+          "commit": "d1c40a7861274c5b885804286073fed14fb2bf79",
+          "workflow": 39762001795,
+          "operations": 3,
+          "newVariants": 3,
+          "updates": 0,
+          "fields": 30,
+          "workflowConclusion": "success",
+          "apiReadbackPassed": true,
+          "includedInActiveIndex": false
+        }
+      ],
+      "readbackReportPattern": "docs/encyclopedia/reports/2026-10-22-{batch-name}-readback.json",
+      "compileReport": "docs/encyclopedia/reports/2026-10-22-mito-2012-2013-calculation-facts.json",
+      "preservationReport": "docs/encyclopedia/reports/2026-10-22-mito-2012-2013-preservation.json",
+      "integration": {
+        "state": "activation_pending",
+        "failedRelease": "ad327011321b44aa7e0d59465dded59095067908",
+        "failedWorkflow": 39754473141,
+        "reason": "publication_wait_deadline",
+        "blockingOperation": "catalog_v3_publish_china",
+        "lastObservedLockUntil": "2026-10-22T10:35:28.588Z",
+        "currentRelease": "f3f733172241a35369c270dc4409921ffeaa6fde",
+        "currentWorkflow": 39755527627,
+        "currentJobs": [
+          {
+            "id": 119765125981,
+            "status": "in_progress",
+            "conclusion": null,
+            "currentSteps": [
+              {
+                "name": "Prepare exact price indexes before activating the release",
+                "startedAt": "2026-10-22T10:17:26Z"
+              }
+            ]
+          }
+        ],
+        "newBatchesActivationConfirmed": false,
+        "lateBatchesMustBeCheckedAgainstPreparedIndex": true,
+        "duplicateReleaseRequested": false,
+        "observedProductionRelease": "75e91fe67467183520e7d0facde137260a0469f6",
+        "observedProductionIndexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+        "visitorRequestSearchOrSyncAdded": false
+      },
+      "regressionCheck": {
+        "passed": true,
+        "offers": 4,
+        "sonata160PS1999CcTotalRub": 3560003,
+        "scope": "Existing active index only; new historical rows are not claimed active",
+        "report": "docs/encyclopedia/reports/2026-10-22-mito-2012-2013-card-search-parity.json"
+      },
+      "nextCursor": "Alfa Romeo MiTo2014; then2015–2018 and retry queue",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-mito-remaining.json",
+      "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-22-mito-2014.json",
+      "wholeEncyclopediaComplete": false,
+      "report": "docs/encyclopedia/reports/2026-10-22-mito-2012-2013-pass.json"
     }
   },
   "scope": {

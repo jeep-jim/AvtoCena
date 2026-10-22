@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-10-22T17:21:44.492062+07:00",
+  "state": "research_leads_not_applied",
+  "modelId": "81a4b290257d227a5fd86ee6",
+  "year": 2014,
+  "requiresFreshApiPreflight": true,
+  "nextCursor": "MiTo2014, затем2015–2018; отдельная очередь пропусков2008–2013 сохраняется",
+  "sources": [
+    {
+      "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-series-limitees-alfa-romeo-mito-et-giulietta-edizione",
+      "effectiveAt": "2014-05-05",
+      "confirmedIdentity": [
+        "1.4 MPI78PS S/S Edizione",
+        "1.4 MPI70PS Progression"
+      ],
+      "note": "200экземпляровEdizione; не считать Progression78 во Франции."
+    },
+    {
+      "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/nouvelles-versions-automatiques-alfa-tct-plus-puissantes-pour-mito-et-giulietta",
+      "effectiveAt": "2014-04-26",
+      "confirmedIdentity": [
+        "1.4 TB MultiAir140PS TCT Trofeo",
+        "1.4 TB MultiAir140PS TCT Exclusive"
+      ],
+      "note": "Текст даёт102кВт/140ch. Другие заводские документы дают103кВт: проверить точную техническуютаблицу/мануал, не брать102 автоматически."
+    },
+    {
+      "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/le-quadrifoglio-verde-signe-son-retour-sur-les-giulietta-et-mito",
+      "effectiveAt": "2014-06-12",
+      "confirmedIdentity": [
+        "1.4 TB MultiAir170PS TCT Quadrifoglio Verde"
+      ],
+      "note": "Новая двойнаясухаяTCT6; не переносить код двигателя/механику старойQV. Речь оMiTo отдельно отGiulietta."
+    },
+    {
+      "url": "https://www.media.stellantis.com/at-de/alfa-romeo/press/der-neue-alfa-romeo-mito-quadrifoglio-verde",
+      "note": "Поисковаязацепка103кВт/140PS; открыть и сверить целиком перед применением."
+    }
+  ],
+  "missing": [
+    "Точная полная годовая гамма2014 и периоды смены135→140/MT170→TCT170",
+    "РуководствоTCT2014 для engineCode, engineCc, drive и kW",
+    "Неназванная исходная запись2014 требует точной идентификации; не перезаписывать по внешности"
+  ],
+  "applied": false
+}
