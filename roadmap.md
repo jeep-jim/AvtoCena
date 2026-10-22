@@ -12710,3 +12710,12 @@ Public health HTTP200 подтвердил f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0
 ### 23.10.2026 04:53 Asia/Krasnoyarsk — Контроль одного действующего восстановления Китая
 
 Свежие AGENTS/roadmap прочитаны на 2e22db88. China39840733509/publish120041080822 IN_PROGRESS/Publish markets through calculation and retention guards, collect SKIPPED. Появился штатный scheduled39857878662 (21:30:55UTC), сейчас PENDING; он не запущен этим контролем и не считается завершением recovery. Расписания/очередь не изменялись, живой publisher не отменяется. Перед любым следующим deploy проверить ОБА запуска и свободный writer, не допустить конкуренции. Запрошено одно свежее read-only чтение manifest/lease. Энциклопедия отдельно сохранила обе DB9 партии: теперь7 pending/569полей/492расчётных, следующийDBS; исследования не дублируются.
+
+
+### 23.10.2026 04:53 Asia/Krasnoyarsk — Heartbeat Китая продвинулся, текущий каталог не переключён
+
+Read-only [39860601072](https://github.com/jeep-jim/AvtoCena/actions/runs/39860601072)/job120110007555 прочитал состояние 22.10 21:52:16.008UTC: тот же writer ACTIVE, start20:22:02.066, новый heartbeat21:49:04.849, lease22:19:04.849UTC. Продвижение heartbeat подтверждено относительно20:42 предыдущего контроля. Manifest прежний gen_1792660229591_c103ed94. China39840733509 ещё IN_PROGRESS; logs404BlobNotFound не считаются failure. Scheduled39857878662 PENDING, concurrency catalog-refresh-china/cancel-in-progress:false; не отменялся и не запускался вручную. До terminal обоих/свободного writer новые deploy не запускать.
+
+Ограниченные публичные чтения: health HTTP200 f4d7d22/a187; home HTTP200 total930999/countIncompletefalse/прежняяgeneration; China2014 HTTP200 total0. Повтор home для детализации marketCounts завершился timeout20s. Один успешный ответ не доказывает стабильность; изменение общего числа -284 к931283 не приписывается конкретному рынку без данных. Нет подтверждения новых2014–2019, конечного published/outcome/parts. Следующий контроль продолжает уже существующий publisher, не повторяет источник.
+
+Точная локальная отметка предыдущей записи «04:53» обозначает запись текущего прохода, начатого04:50; фактический commit bd2a создан около04:51. Исследовательский cursorDBS и7 pending569/492 остаются отдельной задачей. Расписания, блокировки, source checkpoints и guards не менялись. Контроль активен.
