@@ -1,0 +1,145 @@
+{
+  "checkedAt": "2026-10-22T18:03:16.285519+00:00",
+  "passed": true,
+  "batch": "research-2026-10-23-alpine-a110-2017-2022",
+  "modelId": "cc5a28958f2b1bd3eac176d4",
+  "beforeRevision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+  "afterRevision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+  "newVariants": 15,
+  "updatedVariants": 1,
+  "confirmedFields": 155,
+  "preservedUnchangedVariants": 24,
+  "historyPreservedUpdates": 1,
+  "duplicatesAdded": 0,
+  "manualWrites": 0,
+  "rows": [
+    {
+      "variantId": "595ad84a547ded12d6743bb7",
+      "year": 2017,
+      "trim": "Première Edition",
+      "operation": "create",
+      "fields": 9,
+      "passed": true
+    },
+    {
+      "variantId": "4f616827295a5118edeebece",
+      "year": 2018,
+      "trim": "Première Edition",
+      "operation": "create",
+      "fields": 9,
+      "passed": true
+    },
+    {
+      "variantId": "e670ce8e64ac2fa013c5c71c",
+      "year": 2018,
+      "trim": "Pure",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "d3ce9528c91a104aa6de142c",
+      "year": 2018,
+      "trim": "Légende",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "477d063c84c29a9264521fe3",
+      "year": 2019,
+      "trim": "Pure",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "6effa49068b191c571c20d7c",
+      "year": 2019,
+      "trim": "Légende",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "f2fdea04137fa737af25cde1",
+      "year": 2019,
+      "trim": "S",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "05a322171770e0c1f61f30bf",
+      "year": 2022,
+      "trim": "1.8 Turbo 252 PS DCT",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "f2862f5863e11e3360a6b922",
+      "year": 2022,
+      "trim": "GT",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "071600b3727c14b2bd5d065d",
+      "year": 2022,
+      "trim": "S",
+      "operation": "create",
+      "fields": 12,
+      "passed": true
+    },
+    {
+      "variantId": "5640209c8d8d7ea92e95f48c",
+      "year": 2020,
+      "trim": "Légende GT",
+      "operation": "create",
+      "fields": 8,
+      "passed": true
+    },
+    {
+      "variantId": "98940c1e20aef94a75ef1b35",
+      "year": 2021,
+      "trim": "Pure",
+      "operation": "create",
+      "fields": 7,
+      "passed": true
+    },
+    {
+      "variantId": "f2aba31eaefeca655d889844",
+      "year": 2021,
+      "trim": "Légende",
+      "operation": "create",
+      "fields": 7,
+      "passed": true
+    },
+    {
+      "variantId": "66e54b531c6753f1d0ca726b",
+      "year": 2021,
+      "trim": "S",
+      "operation": "create",
+      "fields": 7,
+      "passed": true
+    },
+    {
+      "variantId": "1e63488e62b36b16575c78a8",
+      "year": 2021,
+      "trim": "Légende GT",
+      "operation": "create",
+      "fields": 8,
+      "passed": true
+    },
+    {
+      "variantId": "667a5dcf34e75c2607ecc7aa",
+      "year": 2020,
+      "trim": "Color Edition 2020",
+      "operation": "update",
+      "fields": 4,
+      "passed": true
+    }
+  ]
+}

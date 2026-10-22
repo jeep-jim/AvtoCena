@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T01:04:00+07:00",
+  "modelId": "cc5a28958f2b1bd3eac176d4",
+  "make": "Alpine",
+  "model": "A110",
+  "scope": "С 2008 включительно; современная A110 выпущена в конце2017, годы2008–2016 по этой серии не создаются.",
+  "pending": [
+    {
+      "years": [
+        2017,
+        2018
+      ],
+      "variants": [
+        "Première Edition"
+      ],
+      "fields": [
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Нужны точные таблицы этой версии; поля Pure/Légende не распространены автоматически."
+    },
+    {
+      "years": [
+        2020
+      ],
+      "variants": [
+        "Pure",
+        "Légende",
+        "S"
+      ],
+      "reason": "Найденный PDF с mars-2020 в URL фактически датирован09/2019. Нужен датированный источник2020."
+    },
+    {
+      "years": [
+        2020
+      ],
+      "variants": [
+        "Légende GT"
+      ],
+      "fields": [
+        "bodyType",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Не подтверждены напрямую для спецсерии текущими источниками."
+    },
+    {
+      "years": [
+        2021
+      ],
+      "variants": [
+        "Pure",
+        "Légende",
+        "S",
+        "Légende GT"
+      ],
+      "fields": [
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Подтверждены PS, точный объём/тип двигателя и DCT; не копировать недоказанные поля других лет."
+    },
+    {
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "reason": "22 прежние EEA строки без trim: точное исполнение не следует только из cc/мощности. Сохранены без изменений."
+    },
+    {
+      "years": [
+        2021,
+        2022
+      ],
+      "variants": [
+        "Color Edition",
+        "Légende GT regional variants",
+        "Jean Rédélé",
+        "Tour de Corse 75",
+        "Fernando Alonso",
+        "R"
+      ],
+      "reason": "Спецсерии/переходные годы требуют точного подтверждения начала поставок и таблиц."
+    },
+    {
+      "years": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "reason": "Следующий основной курсор; поздние годы и региональные исполнения не завершены."
+    },
+    {
+      "fields": [
+        "chassisCode",
+        "engineCode suffix"
+      ],
+      "reason": "Руководство даёт тип M5P Turbo; суффиксы и точный код шасси не выдумывать."
+    }
+  ],
+  "accessNotes": [
+    "media.alpinecars.com direct HTTP403: использованы доступные поисковым инструментом первичные тексты без обхода; часть PDF недоступна.",
+    "Архивный PDF02/2018 и оригинальные PDF09/2019,04/2022 проверены визуально; в git только факты и ссылки."
+  ],
+  "allModelsComplete": false
+}

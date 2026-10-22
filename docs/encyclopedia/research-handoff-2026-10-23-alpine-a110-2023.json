@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T01:04:00+07:00",
+  "next": "Alpine A110 2023–2026: точные заводские исполнения и спецсерии; затем A290. Пробелы 2017–2022 отдельно.",
+  "currentModelId": "cc5a28958f2b1bd3eac176d4",
+  "nextModelId": "9f23c75ab6a73713bf64580a",
+  "doNotRepeat": {
+    "key": "alpine-a110-2017-2022",
+    "batch": "research-2026-10-23-alpine-a110-2017-2022",
+    "commit": "2404454672d5c2a9753c977d9e4a7be0d1543079",
+    "workflow": 39827707552,
+    "job": 119995305092,
+    "variants": 16,
+    "newVariants": 15,
+    "updatedVariants": 1,
+    "fields": 155,
+    "compiledCalculationFields": 140,
+    "workflowConclusion": "success",
+    "apiReadback": true,
+    "includedInIndex": false,
+    "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2017-2022-readback.json"
+  },
+  "readbackRevision": "2ebc0d1a-0a83-4793-9cc4-53839bcbabd4",
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
+  "leads": [
+    {
+      "url": "https://media.alpinecars.com/the-2024-alpine-a110-range-and-pricing-for-france/?lang=eng",
+      "note": "ProductionMarch2024, despite announcementDecember2023; English bhp label conflicts with expected PS: verify French/table before saving."
+    },
+    {
+      "url": "https://media.alpinecars.com/triple-digit-growth-for-alpine-in-2025/?lang=eng",
+      "note": "A390 missing-family discovery needed; deliverieslate2025 not equal2026publicationdate."
+    }
+  ],
+  "integration": "Единый штатный выпуск запрошен; успех, индекс и activation ещё проверить. Не дублировать.",
+  "allModelsComplete": false
+}

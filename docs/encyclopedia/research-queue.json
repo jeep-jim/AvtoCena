@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T00:11:00+07:00",
+  "updatedAt": "2026-10-23T01:04:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -777,14 +777,18 @@
         2023,
         2022,
         2021,
-        2020
+        2020,
+        2019,
+        2018,
+        2017
       ],
-      "variants": 25,
+      "variants": 40,
       "status": "partial_verified_fields",
-      "researchedVariants": 3,
-      "checkedAt": "2026-10-22T02:17:29.580694+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json",
-      "nextAction": "Retry exact model-year/trim and missing field sources; reviewed rows without identity remain unchanged"
+      "researchedVariants": 18,
+      "checkedAt": "2026-10-23T01:04:00+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
+      "nextAction": "Alpine A110 2023–2026: точные заводские исполнения и спецсерии; затем A290. Пробелы 2017–2022 отдельно.",
+      "lastBatch": "research-2026-10-23-alpine-a110-2017-2022"
     },
     {
       "id": "9f23c75ab6a73713bf64580a",
@@ -32652,12 +32656,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T00:11:00+07:00",
+    "updatedAt": "2026-10-23T01:04:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "alpina_d5_10_new_saved_pending_index",
+    "state": "alpine_a110_2017_2022_saved_aggregate_release_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Alpine A110: исторические годы с 2008 включительно только по фактической доступности поколения, затем A290. Поздние D5 и пропуски — отдельный retry; не повторять сохранённую партию D5 2014–2021.",
+    "nextModel": "Alpine A110 2023–2026: точные заводские исполнения и спецсерии; затем A290. Пробелы 2017–2022 отдельно.",
     "lastVerifiedResearch": {
       "A7": {
         "variants": 2,
@@ -33304,6 +33308,22 @@
         "job": 119968766518,
         "workflowConclusion": "success",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-d5-source-page-readback.json"
+      },
+      "alpine-a110-2017-2022": {
+        "key": "alpine-a110-2017-2022",
+        "batch": "research-2026-10-23-alpine-a110-2017-2022",
+        "commit": "2404454672d5c2a9753c977d9e4a7be0d1543079",
+        "workflow": 39827707552,
+        "job": 119995305092,
+        "variants": 16,
+        "newVariants": 15,
+        "updatedVariants": 1,
+        "fields": 155,
+        "compiledCalculationFields": 140,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2017-2022-readback.json"
       }
     },
     "rawAuditCalculated": 75,
@@ -33321,25 +33341,23 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-23-alpina-d5-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "alpina-d5-2016-source-page",
-      "commit": "d96072d51d43e396969d574f71a4c1add5cedf19",
-      "workflow": 39820089587,
-      "variants": 2,
-      "newVariants": 0,
-      "fields": 18,
-      "newTechnicalValues": 0,
-      "evidenceOnlyCorrection": true,
-      "batch": "research-2026-10-23-alpina-d5-2016-source-page",
-      "workflowStatus": "completed",
+      "key": "alpine-a110-2017-2022",
+      "batch": "research-2026-10-23-alpine-a110-2017-2022",
+      "commit": "2404454672d5c2a9753c977d9e4a7be0d1543079",
+      "workflow": 39827707552,
+      "job": 119995305092,
+      "variants": 16,
+      "newVariants": 15,
+      "updatedVariants": 1,
+      "fields": 155,
+      "compiledCalculationFields": 140,
+      "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
-      "indexMembershipState": "pending_next_immutable_index",
-      "job": 119968766518,
-      "workflowConclusion": "success",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-23-d5-source-page-readback.json"
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2017-2022-readback.json"
     },
     "indexReleaseRequested": true,
     "auditGenerationId": "gen_1792548716303_1c83fca2",
@@ -33900,9 +33918,25 @@
         "job": 119968766518,
         "workflowConclusion": "success",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-d5-source-page-readback.json"
+      },
+      {
+        "key": "alpine-a110-2017-2022",
+        "batch": "research-2026-10-23-alpine-a110-2017-2022",
+        "commit": "2404454672d5c2a9753c977d9e4a7be0d1543079",
+        "workflow": 39827707552,
+        "job": 119995305092,
+        "variants": 16,
+        "newVariants": 15,
+        "updatedVariants": 1,
+        "fields": 155,
+        "compiledCalculationFields": 140,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-alpine-a110-2017-2022-readback.json"
       }
     ],
-    "inFlightResearch": null,
+    "inFlightResearch": [],
     "lastCompletedPass": {
       "version": 1,
       "checkedAt": "2026-10-23T00:11:00+07:00",
@@ -34083,7 +34117,7 @@
       "checkpointReset": false,
       "newSavedCountNotYetKnown": true
     },
-    "releaseRequestedAt": "2026-10-22T18:57:30+07:00",
+    "releaseRequestedAt": "2026-10-23T01:04:00+07:00",
     "failedAggregateRelease": {
       "workflow": 39733245856,
       "commit": "bb3193f1fd0c37d1afeb23e615e940dadf6758ee",
@@ -34092,7 +34126,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-alpine.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-alpine-a110-2023.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-22-index-b15db81-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
