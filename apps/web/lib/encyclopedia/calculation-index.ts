@@ -1,3 +1,5 @@
+import {hasEncyclopediaCalculationEvidence,calculationSourceIdentity} from './calculation-evidence';
+export {hasEncyclopediaCalculationEvidence} from './calculation-evidence';
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
@@ -70,29 +72,25 @@ export function readCalculationIndex(){
  return bundled;
 }
 export function resetCalculationIndexForTests(){bundled=undefined;}
-export function hasEncyclopediaCalculationEvidence(offer:any){
- const e=offer.operational?.encyclopediaCalculation;
- return e?.version===1&&typeof e.indexDigest==='string'&&e.sourceIdentity===checksum([offer.make,offer.model,offer.year,offer.trim])
-  &&Object.keys(e.values||{}).length>0&&Object.entries(e.values).every(([f,v])=>JSON.stringify(offer[f])===JSON.stringify(v));
-}
 /** Exact modification/year, hard constraints, and per-field unanimity. No score winner. */
 export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex()):T{
  if(!index||!offer.make||!offer.model||!Number.isInteger(offer.year)||!offer.trim)return offer;
  if(/customer_input|manual/i.test(offer.powerDataSource||'')||offer.calculationSnapshot?.modificationScenario)return offer;
  if(hasEncyclopediaCalculationEvidence(offer)){
-  const previous=offer.operational.encyclopediaCalculation;
+  const previous=offer.operational?.encyclopediaCalculation||offer.encyclopediaCalculation;
   if(previous.indexDigest===index.digest)return offer;
   // Retire only values inserted by the previous index, never later manual edits.
-  const fresh:any={...offer,operational:{...offer.operational,semanticEvidence:{...offer.operational.semanticEvidence}}};
+  const fresh:any={...offer,operational:{...offer.operational,semanticEvidence:{...offer.operational?.semanticEvidence}}};
   for(const field of previous.filledFields||[])delete fresh[field];
   for(const field of Object.keys(previous.values))if(fresh.operational.semanticEvidence[field]?.source===`permanent_encyclopedia:${previous.indexDigest}`)delete fresh.operational.semanticEvidence[field];
-  delete fresh.operational.encyclopediaCalculation;
+  delete fresh.operational.encyclopediaCalculation;delete fresh.encyclopediaCalculation;
+  if(previous.filledFields?.length){fresh.totalRub=null;fresh.publicVisibleRub=undefined;fresh.publicSpecificationVerified=false;fresh.calculationSnapshot=undefined;fresh.catalogPricingMode='seller';}
   if(fresh.powerDataSource===`permanent_encyclopedia:${previous.indexDigest}`){delete fresh.powerDataSource;delete fresh.powerDataConfidence;}
   offer=fresh;
  }
  const trim=token(offer.trim);
  // Marketing labels such as Base, Premium or Luxury do not identify an engine.
- if(!/\d/u.test(trim)&&!offer.engineCode&&!offer.chassisCode)return offer;
+ if((!/\d/u.test(trim)||!/[\p{L}]/u.test(trim))&&!offer.engineCode&&!offer.chassisCode)return offer;
  const all=(index.models[modelKey(offer.make,offer.model)]||[]).filter(v=>v.year===offer.year&&v.trims.includes(trim));
  const candidates=all.filter(v=>Object.entries(v.constraints).every(([f,value])=>!exists(offer[f])||same(f,offer[f],value))
   &&['generation','chassisCode','engineCode'].every(f=>!exists(offer[f])||exists(v.constraints[f])&&same(f,offer[f],v.constraints[f])));
@@ -113,6 +111,8 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  if(!Object.keys(applied).length)return offer;
  if(applied.powerHp||applied.powerKw){next.powerDataSource=`permanent_encyclopedia:${index.digest}`;next.powerDataConfidence=Object.values(provenance).flat().some((s:any)=>s.kind==='owner_reference')?'source_exact':'documented';}
  next.operational={...offer.operational,semanticEvidence:semantic,encyclopediaCalculation:{version:1,indexDigest:index.digest,
-  sourceIdentity:checksum([offer.make,offer.model,offer.year,offer.trim]),values:applied,provenance,filledFields}};
+  sourceIdentity:calculationSourceIdentity(offer),values:applied,provenance,filledFields}};
+ next.encyclopediaCalculation={version:1,indexDigest:index.digest,sourceIdentity:calculationSourceIdentity(offer),
+  values:Object.fromEntries(Object.entries(applied).filter(([f])=>['engineCc','powerHp','powerKw','icePowerKw','power30MinKw','fuel','powertrainKind'].includes(f))),filledFields:filledFields.filter(f=>['engineCc','powerHp','powerKw','icePowerKw','power30MinKw','fuel','powertrainKind'].includes(f))};
  return next;
 }

@@ -13,7 +13,7 @@ export type BudgetCountIndex={version:1|2|3;filterVersion?:1;specificationFilter
 /** Price-only inputs: no photographs, full ledger, descriptions or raw source data. */
 export function budgetPriceReplay(row:CatalogSearchProjection):Partial<CatalogSearchProjection>|undefined {
  if(row.market==='japan' || hasModificationSelection(row) || !(Number(row.totalRub)>0))return undefined;
- const keys=['sourcePrice','sourceCurrency','chinaPriceConversion','priceMode','calculationStatus','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','power30MinKwByMotor','utilizationPowerKw','powertrainKind','powerDataSource','transportToBorderRub','productionDate','productionMonth','productionYear','vehicleCategory','tnVedCode','grossVehicleWeightKg','n1IceFuel','personalUseEligible','cardProjectionVersion','publicSpecificationVerified'];
+ const keys=['encyclopediaCalculation','sourcePrice','sourceCurrency','chinaPriceConversion','priceMode','calculationStatus','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','power30MinKwByMotor','utilizationPowerKw','powertrainKind','powerDataSource','transportToBorderRub','productionDate','productionMonth','productionYear','vehicleCategory','tnVedCode','grossVehicleWeightKg','n1IceFuel','personalUseEligible','cardProjectionVersion','publicSpecificationVerified'];
  const replay:any=Object.fromEntries(keys.filter(key=>(row as any)[key]!==undefined).map(key=>[key,(row as any)[key]]));
  const snapshot=row.calculationSnapshot;
  // The shared engine consumes inputs and the attested customs gate. Historical

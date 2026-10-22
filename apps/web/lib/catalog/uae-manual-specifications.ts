@@ -1,4 +1,4 @@
-import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-index';
+import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-evidence';
 /** Owner 20.10.2026: UAE power and displacement are manual-only.
  * Applies to retained full records and compact projections, not just new intake.
  * Saved employee calculations are separate records and remain untouched.

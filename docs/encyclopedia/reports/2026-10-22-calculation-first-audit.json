@@ -1,0 +1,312 @@
+{
+  "stage": "encyclopedia_calculation_audit",
+  "version": 1,
+  "indexDigest": "9924bac5d91ef5b88237dcfd32591de0c0d53ac30c643daf001193ca814923db",
+  "generationId": "gen_1792548716303_1c83fca2",
+  "checkedAt": "2026-10-22T00:20:21.554Z",
+  "markets": {
+    "china": {
+      "rows": 132350,
+      "pending": 61579,
+      "exactMatches": 37340,
+      "filledRecords": 118,
+      "filledFields": 134,
+      "completeSpecifications": 273,
+      "missing": {
+        "unclassified_field_provenance": 35181,
+        "engine_cc_missing": 1790,
+        "fuel_or_powertrain_missing": 869,
+        "peak_power_missing": 17878,
+        "certified_30min_power_missing": 59684
+      }
+    },
+    "korea": {
+      "rows": 9918,
+      "pending": 7155,
+      "exactMatches": 25,
+      "filledRecords": 21,
+      "filledFields": 69,
+      "completeSpecifications": 15,
+      "missing": {
+        "unclassified_field_provenance": 13462,
+        "engine_cc_missing": 1,
+        "peak_power_missing": 6520,
+        "certified_30min_power_missing": 2022
+      }
+    },
+    "uae": {
+      "rows": 22039,
+      "pending": 22039,
+      "exactMatches": 13,
+      "filledRecords": 13,
+      "filledFields": 51,
+      "completeSpecifications": 9,
+      "missing": {
+        "unclassified_field_provenance": 22029,
+        "engine_cc_missing": 21625,
+        "peak_power_missing": 22025,
+        "certified_30min_power_missing": 2712,
+        "powertrain_identity_conflict": 1
+      }
+    },
+    "europe": {
+      "rows": 46127,
+      "pending": 7600,
+      "exactMatches": 6334,
+      "filledRecords": 17,
+      "filledFields": 33,
+      "completeSpecifications": 81,
+      "missing": {
+        "engine_cc_missing": 424,
+        "unclassified_field_provenance": 1751,
+        "fuel_or_powertrain_missing": 1249,
+        "certified_30min_power_missing": 5963,
+        "peak_power_missing": 713
+      }
+    },
+    "georgia": {
+      "rows": 1705,
+      "pending": 1705,
+      "exactMatches": 0,
+      "filledRecords": 0,
+      "filledFields": 0,
+      "completeSpecifications": 0,
+      "missing": {
+        "unclassified_field_provenance": 1639,
+        "engine_cc_missing": 1572,
+        "peak_power_missing": 1431,
+        "certified_30min_power_missing": 391,
+        "fuel_or_powertrain_missing": 66
+      }
+    }
+  },
+  "samples": [
+    {
+      "id": "1310baa4cd439c0e85de9e9d",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "c5dc98348f491e5d205ca38b",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "7c59bc3ddf6f39b1eae0cd9f",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "9738dc416604e468734b499f",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "d1074abc550c6a6295193b91",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "ff024d29f82220281a62b05f",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "fc2bcb203ef4439fd9697a0c",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "64844037e3e90d03ef7e5205",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "c5460bb641892aa8bf370440",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "e4e29e8b1bbe20fed082fe65",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "d42ccb86bf56d193a966d4d3",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "0b8ebfda998ba0f601a004af",
+      "market": "china",
+      "delivered": false
+    },
+    {
+      "id": "7b23187ec8e017f8d5c7c38c",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "b9b8c5f8c8d3469133ed8da0",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "41e260a1354c16edd92469ba",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "a3c5882d3ae6552ace5fc992",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "5d2c90bdf7b8299a0711f3ed",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "7347bd0fdddddc2c2b8abcd7",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "889116f45e7a1635b41db192",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "e765f8fefe0626cf25def7bd",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "634fca83c4b749d899b26bf1",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "0dd3a7e0c97a709c2c904773",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "ae4153fd650bf1c2aa63179b",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "79db1e9936243ed945fc386f",
+      "market": "korea",
+      "delivered": true
+    },
+    {
+      "id": "0a23a5fd9398b867bc8647a1",
+      "market": "uae",
+      "delivered": true
+    },
+    {
+      "id": "e5ca051af7d6f6aa26704f36",
+      "market": "uae",
+      "delivered": true
+    },
+    {
+      "id": "9a6166790200b98215f4c422",
+      "market": "uae",
+      "delivered": true
+    },
+    {
+      "id": "791c99542b433768a086820b",
+      "market": "uae",
+      "delivered": true
+    },
+    {
+      "id": "725ff6f1cc60d9947d7da652",
+      "market": "uae",
+      "delivered": true
+    },
+    {
+      "id": "a5600f434f149b9d033c00ef",
+      "market": "uae",
+      "delivered": true
+    },
+    {
+      "id": "aaee1ef4e1324566a147fa33",
+      "market": "uae",
+      "delivered": true
+    },
+    {
+      "id": "56bbcecb51a61b76402371a9",
+      "market": "uae",
+      "delivered": true
+    },
+    {
+      "id": "fd51363c1260a0b60ad2e450",
+      "market": "uae",
+      "delivered": true
+    },
+    {
+      "id": "7d64c740118764707303b3f7",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "e423cd9d7b1b0ec70aa413a3",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "6d83bfc656200874170ecd6f",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "d1f6cfaa9449574bd80155b0",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "c144906b70f405d7ba0895bd",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "18c33482b0bcbc82c75afd1b",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "5e81001c94315625702debb7",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "90d5ab086dacb35bcf49741a",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "6ac6c41f607a6eff8bb05d2f",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "ab1282cd087d755fa013917b",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "b0c33c49ad96b807b9105f33",
+      "market": "europe",
+      "delivered": false
+    },
+    {
+      "id": "241819214099d595988e8315",
+      "market": "europe",
+      "delivered": false
+    }
+  ],
+  "readback": true,
+  "deploymentStatus": "build_failed_before_activation_client_server_boundary_fixed_locally"
+}

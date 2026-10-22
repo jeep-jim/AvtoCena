@@ -196,6 +196,7 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  encyclopediaCalculation?:VehicleOffer["encyclopediaCalculation"];
   inventorySourceDate?:string; grossVehicleWeightKg?:number; vehicleCategory?:VehicleOffer["vehicleCategory"];
   chinaPriceConversion?:VehicleOffer["chinaPriceConversion"];
   japanDeliveredPreview?: {totalRub:number;engineCc?:number;estimated:boolean};
@@ -443,7 +444,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
     trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
     powerDataConfidence: offer.powerDataConfidence, powerDataSource: offer.powerDataSource, transportToBorderRub: offer.transportToBorderRub,
     modificationSelection: offer.modificationSelection, recoveryQualification: offer.recoveryQualification,
-    chinaPriceConversion:offer.chinaPriceConversion, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
+    encyclopediaCalculation:offer.encyclopediaCalculation, chinaPriceConversion:offer.chinaPriceConversion, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
     calculationStatus: offer.calculationStatus, calculationSnapshot: {
       currencyRate: offer.calculationSnapshot?.currencyRate,
       pricingConfidence: offer.calculationSnapshot?.pricingConfidence,
@@ -503,7 +504,7 @@ function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
 }
 function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
   row = applyCatalogEditorial(safePublicPricing(row));
-  const { sourceGroup: _sourceGroup, ...publicRow } = row;
+  const { sourceGroup: _sourceGroup, operational: _operational, ...publicRow } = row as CatalogSearchProjection & {operational?:unknown};
   const imageUrl = protectedPhotoUrl(String(row.cardImageUrl || ""), row.market);
   return {
     ...publicRow, bodyType:catalogBodyType(row), catalogEntryKind:isChinaModelSpecification(row)?"model_variant":undefined, cardImageUrl: imageUrl, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,

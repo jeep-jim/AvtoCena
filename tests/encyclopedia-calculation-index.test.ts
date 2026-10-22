@@ -1,4 +1,10 @@
-import test from 'node:test';
+import test,{mock} from 'node:test';
+import fs from 'node:fs';
+import {LocalJsonStorage} from '../apps/web/lib/data';
+import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
+import {invalidateEffectiveMarketsCache} from '../apps/web/lib/effective-market-settings';
+import {applyActiveBusinessPriceBatch,applyActiveBusinessPricing} from '../apps/web/lib/catalog/live-business-pricing';
+import {publicOffer,searchProjectionFromOffer} from '../apps/web/lib/catalog/storage';
 import assert from 'node:assert/strict';
 import {compileModelFacts,applyEncyclopediaCalculation,checksum,modelKey,hasEncyclopediaCalculationEvidence,type CalculationIndex} from '../apps/web/lib/encyclopedia/calculation-index';
 import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specification-evidence-audit';
@@ -53,4 +59,23 @@ test('UAE seller data is discarded first; only independently matched encyclopedi
 test('no index means no inference; original records are immutable and repeated enrichment is stable',()=>{
  const input=offer(),before=JSON.stringify(input);assert.equal(applyEncyclopediaCalculation(input,null),input);
  const i=index([base]),result=applyEncyclopediaCalculation(input,i);assert.equal(JSON.stringify(input),before);assert.equal(applyEncyclopediaCalculation(result,i),result);
+});
+test('an exact encyclopedia match upgrades a seller card through the real engine and agrees with detail replay',async()=>{
+ const today=new Date().toISOString(),markets=JSON.parse(fs.readFileSync('data/markets/markets.json','utf8'));
+ const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED='true';resetCatalogRateCache();invalidateEffectiveMarketsCache();
+ const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string,fallback:any)=>({found:true,value:key==='fees/exchange-rates.json'?{updatedAt:today,EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:'cbr'},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:'cbr'},AED:{cbrRate:25,nominal:1,rateDate:today,rateSource:'cbr'}}:key==='markets/markets.json'?markets:fallback}));
+ try{
+  for(const market of ['europe','uae']){
+   const input:any={...offer(),market,sourcePrice:10000,sourceCurrency:'EUR',catalogPricingMode:'seller',sellerPriceRub:950000,totalRub:null,calculationStatus:'needs_data',bodyType:'sedan',images:[],status:'active',offerType:'fixed'};
+   const matched=applyEncyclopediaCalculation(input,index([base]));
+   const [card]=await applyActiveBusinessPriceBatch([matched],{readOnly:true});
+   assert.ok(Number(card.totalRub)>950000,JSON.stringify(card.calculationSnapshot));
+   assert.equal(card.catalogPricingMode,undefined);assert.equal(card.calculationSnapshot.customs.status,'ready');
+   assert.equal((await applyActiveBusinessPricing(matched)).totalRub,card.totalRub);
+   const publicCard=publicOffer(card as any);
+   assert.equal(applyUaeManualSpecifications(publicCard).powerHp,204,'browser-safe public card retains independently sourced power');
+   assert.equal(searchProjectionFromOffer(card as any).encyclopediaCalculation?.indexDigest,index([base]).digest);
+   assert.equal(input.totalRub,null);
+  }
+ }finally{read.mock.restore();resetCatalogRateCache();invalidateEffectiveMarketsCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });

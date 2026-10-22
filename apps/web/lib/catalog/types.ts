@@ -26,6 +26,7 @@ export type CatalogImage = {
 };
 
 export type VehicleOffer = {
+  encyclopediaCalculation?: {version:1;indexDigest:string;sourceIdentity:string;values:Record<string,unknown>;filledFields:string[]};
   editorialSpecifications?: import('./editorial-specifications').EditorialSpecifications;
   chinaPriceConversion?:import("./china-cny-price").ChinaPriceConversion;
   greenCornerInvoice?: {basis:"CIF";freightJpy:number;capturedAt:string;paymentQuote:{sell:number;nominal:number;fetchedAt:string}};

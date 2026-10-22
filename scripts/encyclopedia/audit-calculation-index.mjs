@@ -11,7 +11,7 @@ const snapshot=await readCurrentCatalogProjectionSnapshot(),report={version:1,in
 if(!snapshot.items?.length)throw Error('catalog_snapshot_empty');
 const candidates=[];
 for(const raw of snapshot.items){
- const market=report.markets[raw.market]||={rows:0,pending:0,exactMatches:0,filledRecords:0,filledFields:0,completeSpecifications:0,missing:{}};market.rows++;
+ const market=report.markets[raw.market]||={rows:0,pending:0,exactMatches:0,filledRecords:0,filledFields:0,completeSpecifications:0,calculated:0,calculationMissing:{},missing:{}};market.rows++;
  if(Number(raw.totalRub)>0&&raw.catalogPricingMode!=='seller')continue;
  market.pending++;
  const source=applyUaeManualSpecifications(raw),enriched=applyEncyclopediaCalculation(source,index);
@@ -19,13 +19,13 @@ for(const raw of snapshot.items){
   market.exactMatches++;
   const filled=factFields.filter(f=>!source[f]&&enriched[f]);
   market.filledFields+=filled.length;market.filledRecords+=Number(filled.length>0);
-  if(specificationEvidenceComplete(enriched)){market.completeSpecifications++;if(candidates.filter(x=>x.market===raw.market).length<12)candidates.push(raw);}
+  if(specificationEvidenceComplete(enriched)){market.completeSpecifications++;candidates.push(raw);}
  }
  for(const field of SPECIFICATION_AUDIT_FIELDS){const result=classifySpecificationEvidence(enriched,field);if(!['exact','not_applicable'].includes(result.state))market.missing[result.reason]=(market.missing[result.reason]||0)+1;}
 }
 for(let start=0;start<candidates.length;start+=4){
  const originals=candidates.slice(start,start+4),priced=await applyActiveBusinessPriceBatch(originals,{readOnly:true});
- for(let i=0;i<priced.length;i++){const row=priced[i];report.samples.push({id:row.id,market:row.market,make:row.make,model:row.model,year:row.year,engineCc:row.engineCc,powerHp:row.powerHp,totalRub:row.totalRub||null,status:row.calculationStatus,delivered:Number(row.totalRub)>0&&row.catalogPricingMode!=='seller',missing:row.calculationSnapshot?.missing||[]});}
+ for(let i=0;i<priced.length;i++){const row=priced[i],market=report.markets[row.market],delivered=Number(row.totalRub)>0&&row.catalogPricingMode!=='seller';market.calculated+=Number(delivered);for(const reason of row.operational?.encyclopediaCalculationBlocked?.missing||[])market.calculationMissing[reason]=(market.calculationMissing[reason]||0)+1;if(report.samples.filter(s=>s.market===row.market).length<12)report.samples.push({id:row.id,market:row.market,make:row.make,model:row.model,year:row.year,engineCc:row.engineCc,powerHp:row.powerHp,totalRub:row.totalRub||null,status:row.calculationStatus,delivered:Number(row.totalRub)>0&&row.catalogPricingMode!=='seller',missing:row.calculationSnapshot?.missing||[]});}
 }
 const current=await storage.readJson('catalog/manifest.json',null);if(current?.generationId!==snapshot.generationId)throw Error('catalog_changed_during_encyclopedia_audit');
 const key=`knowledge/encyclopedia/calculation-audits/${index.digest}/${Date.now()}.json`;
