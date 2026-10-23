@@ -1,0 +1,47 @@
+name: Encyclopedia — preserve official ASTRA evidence
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/encyclopedia-astra-source.json']
+permissions:
+  contents: read
+concurrency:
+  group: encyclopedia-astra-source
+  cancel-in-progress: false
+jobs:
+  preserve:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Verify extraction and complete pinned public source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tests/encyclopedia-astra-extraction.test.py
+          curl --fail --location --retry 2 --connect-timeout 30 --max-time 1800 --silent --show-error 'https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv' -o "$RUNNER_TEMP/astra.csv"
+          echo "4bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf  $RUNNER_TEMP/astra.csv" | sha256sum --check
+          python3 scripts/encyclopedia/extract-astra.py "$RUNNER_TEMP/astra.csv" "$RUNNER_TEMP/astra-evidence.json" --expected-bytes 851983508
+      - name: Preserve immutable evidence and verify every shard
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+        run: node --import tsx scripts/encyclopedia/store-astra-evidence.mjs "$RUNNER_TEMP/astra-evidence.json"
+      - name: Remove temporary source files
+        if: always()
+        run: rm -f "$RUNNER_TEMP/astra.csv" "$RUNNER_TEMP/astra-evidence.json"
