@@ -192,7 +192,7 @@ function sortParam(key: SortKey, direction: SortDir) {
   return normalizedCatalogSort(key);
 }
 
-function ElectricCheckbox({ value, onChange }: { value: string; onChange: (value: string) => void }) {
+function ElectricCheckbox({ value, onChange, disabled=false }: { value: string; onChange: (value: string) => void; disabled?:boolean }) {
  const [open,setOpen]=useState(false);
  const root=useRef<HTMLDivElement>(null);
  const choices=[...new Set(filterSelections(value).flatMap(v=>v==="electrified"?["electric","hybrid"]:[v]))];
@@ -202,8 +202,8 @@ function ElectricCheckbox({ value, onChange }: { value: string; onChange: (value
  const toggle=(fuel:string,checked:boolean)=>onChange(encode(checked?[...new Set([...choices,fuel])]:choices.filter(v=>v!==fuel)));
  return <div ref={root} className="ac-electric-options relative min-w-0">
   <div className="ac-filter-control ac-electric-filter flex min-h-13 items-center gap-2 rounded-[15px] px-4 text-sm font-black">
-   <label className="flex min-h-13 min-w-0 flex-1 cursor-pointer items-center gap-3"><input type="checkbox" checked={selected} onChange={e=>onChange(encode(e.target.checked?[...new Set([...choices,"electric","hybrid"])]:choices.filter(v=>v!=="electric"&&v!=="hybrid")))} className="ac-unified-checkbox ac-quick-checkbox"/><span>Электро{value==="electric"?": электромобили":value==="hybrid"?": гибриды":""}</span></label>
-   <button type="button" onClick={()=>setOpen(!open)} aria-label="Уточнить тип электрического автомобиля" aria-expanded={open} className="flex min-h-13 w-[17px] shrink-0 items-center justify-center text-[var(--ac-muted)]"><Chevron open={open}/></button>
+   <label className="flex min-h-13 min-w-0 flex-1 cursor-pointer items-center gap-3"><input type="checkbox" disabled={disabled} checked={selected} onChange={e=>onChange(encode(e.target.checked?[...new Set([...choices,"electric","hybrid"])]:choices.filter(v=>v!=="electric"&&v!=="hybrid")))} className="ac-unified-checkbox ac-quick-checkbox"/><span>Электро{value==="electric"?": электромобили":value==="hybrid"?": гибриды":""}</span></label>
+   <button type="button" disabled={disabled} onClick={()=>setOpen(!open)} aria-label="Уточнить тип электрического автомобиля" aria-expanded={open} className="flex min-h-13 w-[17px] shrink-0 items-center justify-center text-[var(--ac-muted)]"><Chevron open={open}/></button>
   </div>
   {open ? <div className="absolute inset-x-0 top-full z-[120] mt-2 rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] px-4 py-2 text-sm font-semibold">
    {[["electric","Электромобили"],["hybrid","Гибриды"]].map(([fuel,label])=><label key={fuel} className="flex min-h-11 cursor-pointer items-center gap-3"><input type="checkbox" checked={value===fuel||value==="electrified"} onChange={e=>toggle(fuel,e.target.checked)} className="ac-unified-checkbox ac-quick-checkbox"/>{label}</label>)}
@@ -517,7 +517,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       </div>
       <div className={`ac-filter-quick-row mt-2.5 grid grid-cols-4 items-center gap-2.5`}>
         {<PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />}
-        <ElectricCheckbox value={draft.fuel} onChange={setElectric} />
+        <ElectricCheckbox value={draft.fuel} onChange={setElectric} disabled={!interactive} />
         <div className="ac-sidebar-sort"><SortControl showAuctionDate={draft.market==="japan"&&draft.stock!=="green"} hidePrice={false} sortKey={sortKey} direction={sortDirection} onChange={chooseSort} /></div>
         <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>
       </div>
@@ -535,7 +535,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
         <section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><div className="ac-sidebar-sort"><SortControl showAuctionDate={draft.market==="japan"&&draft.stock!=="green"} hidePrice={false} sortKey={sortKey} direction={sortDirection} onChange={chooseSort} /></div></section>
-        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} />{<PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />}</div></section>
+        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} disabled={!interactive} />{<PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />}</div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields sourceModels={sourceModels} auctionResults={auctionResults} draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel /></section>
       </div>
       <div className="shrink-0 border-t border-[var(--ac-border)] bg-[var(--ac-surface)] px-4 pt-3 pb-[max(12px,env(safe-area-inset-bottom))]">

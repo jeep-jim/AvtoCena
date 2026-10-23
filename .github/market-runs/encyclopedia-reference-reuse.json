@@ -1,6 +1,6 @@
 {
-  "mode": "apply",
-  "requestedAt": "2026-10-23T04:25:00Z",
-  "reason": "Owner requested permanent reuse of already saved exact annual modifications before researching unknown fields. Existing records only; no feed collection or manual overwrite.",
-  "expectedPlanDigest": "f7043eff99bb22191dce9822a19c8702c9a81f76b61420a6e63d99edb8132b79"
+  "mode": "preview",
+  "requestedAt": "2026-10-23T05:08:51.955799+00:00",
+  "reason": "Read-only evidence repair preview: retain exact donor proof for already-present matching fields. No repeat feed ingestion; validate every saved donor fact against current supported facts before use.",
+  "donorSnapshotDigest": "c9563334e6b003327a0c3427df860724e42e4efb00b31c40d5caf32f22aebd59"
 }

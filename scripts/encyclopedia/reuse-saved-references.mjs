@@ -3,7 +3,7 @@ import {getJsonStorage,mutateDataJson} from '../../apps/web/lib/data.ts';
 import {MANIFEST,ROOT,summarize} from '../../apps/web/lib/encyclopedia/records.ts';
 import {isEncyclopediaCar} from '../../apps/web/lib/encyclopedia/scope.ts';
 import {compileModelFacts,modelKey,checksum} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
-import {planReferenceReuse} from '../../apps/web/lib/encyclopedia/reference-reuse.ts';
+import {planReferenceReuse,revalidateReferenceDonorIndex} from '../../apps/web/lib/encyclopedia/reference-reuse.ts';
 import {publishReferencePlans} from './publish-reference-plans.mjs';
 
 const marker=JSON.parse(await fs.readFile('.github/market-runs/encyclopedia-reference-reuse.json','utf8'));
@@ -34,11 +34,19 @@ await Promise.all(Array.from({length:6},async()=>{
 }));
 const ordered=Object.fromEntries(Object.keys(models).sort().map(k=>[k,models[k].sort((a,b)=>a.variantId.localeCompare(b.variantId))]));
 const index={version:1,createdAt:new Date().toISOString(),manifestDigest,digest:checksum(ordered),models:ordered};
-const plans=rows.map(summary=>({summary,...planReferenceReuse(records.get(summary.id),index)})).filter(p=>p.changes.length);
-const reviewed=plans.map(p=>({id:p.record.id,revision:p.summary.revision,changes:p.changes.map(c=>({variantId:c.variantId,values:Object.fromEntries(c.fields.map(f=>[f,p.record.variants.find(v=>v.id===c.variantId)[f]]))}))}));
-const planDigest=checksum({manifestDigest,indexDigest:index.digest,reviewed});
+let donorIndex=index;
+if(marker.donorSnapshotDigest){
+ if(!/^[a-f0-9]{64}$/.test(marker.donorSnapshotDigest))throw Error('invalid_donor_snapshot_digest');
+ const saved=await storage.readJson(`knowledge/encyclopedia/calculation-indexes/${marker.donorSnapshotDigest}.json`,null);
+ if(saved?.digest!==marker.donorSnapshotDigest)throw Error('reference_donor_snapshot_missing');
+ donorIndex=revalidateReferenceDonorIndex(saved,index);
+}
+const plans=rows.map(summary=>({summary,...planReferenceReuse(records.get(summary.id),donorIndex)})).filter(p=>p.changes.length);
+const reviewed=plans.map(p=>({id:p.record.id,revision:p.summary.revision,changes:p.changes.map(c=>{const v=p.record.variants.find(v=>v.id===c.variantId),proof=v.referenceEvidence.at(-1);return {variantId:c.variantId,fields:c.fields,evidenceFields:c.evidenceFields,values:proof.values,provenance:proof.provenance};})}));
+const planDigest=checksum({manifestDigest,indexDigest:index.digest,donorIndexDigest:donorIndex.digest,reviewed});
 const report={mode:marker.mode,startedAt:index.createdAt,manifestDigest,indexDigest:index.digest,planDigest,modelsRead:rows.length,
- modelsChanged:plans.length,variants:plans.reduce((n,p)=>n+p.changes.length,0),fields:plans.reduce((n,p)=>n+p.changes.reduce((k,c)=>k+c.fields.length,0),0),
+ donorIndexDigest:donorIndex.digest,modelsChanged:plans.length,variants:plans.reduce((n,p)=>n+p.changes.length,0),fields:plans.reduce((n,p)=>n+p.changes.reduce((k,c)=>k+c.fields.length,0),0),
+ evidenceFields:plans.reduce((n,p)=>n+p.changes.reduce((k,c)=>k+c.evidenceFields.length,0),0),
  models:plans.map(p=>({id:p.record.id,make:p.record.make,model:p.record.model,expectedRevision:p.summary.revision,changes:p.changes})),savedModels:0,savedFields:0};
 await fs.mkdir('reports',{recursive:true});
 const saveReport=()=>fs.writeFile('reports/encyclopedia-reference-reuse.json',JSON.stringify(report,null,2));
