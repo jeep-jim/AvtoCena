@@ -1,14 +1,4 @@
 {
-  "requestedAt": "2026-10-23T16:24:23.994305+00:00",
-  "reason": "Bounded read-only A3 transmission pipeline and DBX stored projection diagnosis. Three exact IDs only; no raw payloads, storage writes, source collection, or deploy.",
-  "inspectRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
-  "inspectModels": [
-    "audi:a3",
-    "astonmartin:dbx"
-  ],
-  "inspectOfferIds": [
-    "3b783a66af3b69634f611db2",
-    "4e3f16f9dc955a3ab40ba0f1",
-    "b65974b83d5399d588073fc5"
-  ]
+  "requestedAt": "2026-10-23T16:35:16.577Z",
+  "reason": "Fresh read-only writer and publication preflight before the narrowly verified A3 gearbox correction; no offer/index scan."
 }

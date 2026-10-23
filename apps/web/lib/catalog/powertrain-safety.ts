@@ -37,6 +37,10 @@ export function canonicalSourceFuel(value: unknown) {
 }
 function transmission(value: unknown) {
   const v=text(value); if(!v) return undefined;
+  // Retained Europe records and their exact encyclopedia attestations use
+  // this German source value. Preserve it during customs replay; translating
+  // it to a new stored value here would invalidate the bound evidence.
+  if (v === "schaltgetriebe") return String(value).trim();
   if (/cvt|e-cvt|ecvt|xtronic|вариатор|无级变速/.test(v)) return "cvt";
   if (/dct|dsg|pdk|dual clutch|робот|双离合/.test(v)) return "dct";
   if (/manual|\bmt\b|механик|手动|수동/.test(v)) return "manual";

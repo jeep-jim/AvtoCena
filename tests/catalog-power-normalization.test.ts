@@ -6,6 +6,21 @@ import { canonicalizeSemanticSourceFields, preferExplicitCombustionPowertrain } 
 import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
 import { applyPrestigeJapanExactIdentityKnowledge } from "../apps/web/lib/catalog/prestige-japan-identity-knowledge";
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
+import { catalogTransmissionName } from "../apps/web/lib/catalog/presentation";
+
+test("Europe source gearbox survives detail customs normalization with its evidence value intact", () => {
+  const source = { make:"Audi", model:"A3", year:2021, trim:"Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+    fuel:"petrol", powertrainKind:"combustion" as const, engineCc:1498, powerHp:150, powerKw:110,
+    transmission:"Schaltgetriebe" };
+  const detail = normalizeVehicleOfferSpecs(preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(source)));
+  assert.equal(detail.transmission, source.transmission);
+  assert.equal(catalogTransmissionName(detail.transmission), "механика");
+  assert.equal(detail.engineCc, 1498);
+  assert.equal(detail.powerHp, 150);
+  assert.equal(detail.power30MinKw, undefined);
+  assert.equal(canonicalizeSemanticSourceFields({transmission:"unclassified source code"}).transmission, undefined);
+  assert.equal(canonicalizeSemanticSourceFields({transmission:"automatic"}).transmission, "automatic");
+});
 
 test("automatic transmission with manual mode remains automatic", () => {
   const direct = normalizeVehicleOfferSpecs({

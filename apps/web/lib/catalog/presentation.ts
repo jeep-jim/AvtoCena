@@ -507,6 +507,7 @@ export function catalogFuelName(value: unknown) {
 export function catalogTransmissionName(value: unknown) {
   const raw = safeCatalogText(value).toLowerCase();
   if (!raw) return "уточняется";
+  if (raw === "schaltgetriebe") return "механика";
   const gears = Number(raw.match(/(?:^|\D)(\d{1,2})[-\s]*(?:挡|speed|speeds|gear|gears|gang|ступ)/i)?.[1] || 0);
   const label = (name: string) => gears > 0 && gears <= 12 ? `${gears}-ступ. ${name}` : name;
   if (/电动车?单速变速箱|电动汽车单速变速箱|单速变速箱|固定齿比|固定传动比|single[- ]?speed|1[- ]?speed/.test(raw)) return "одноступенчатый редуктор";
