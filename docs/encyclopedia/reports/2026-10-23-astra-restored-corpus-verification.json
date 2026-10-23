@@ -1,0 +1,19 @@
+{
+  "corpusDigest": "27d803e79b281ad6f00bbb38a9fb0523a6edd7097ef3a1249839498105d58d6c",
+  "inputRecords": 466987,
+  "uniqueRecords": 466987,
+  "originalSourceRows": 1038355,
+  "detailRows": 1768599,
+  "eligibleRecords": 300947,
+  "rejected": {
+    "outside_passenger_light_van_pickup_scope": 150628,
+    "unknown_commercial_name": 182,
+    "unknown_vehicle_category": 12512,
+    "excluded_vehicle_family": 2718
+  },
+  "datasets": {
+    "edatenblatt": 44829,
+    "tas": 211485,
+    "targa": 210673
+  }
+}
