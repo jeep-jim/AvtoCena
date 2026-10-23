@@ -1,0 +1,991 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-owner-li-l6-l7",
+  "entries": [
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2024,
+      "trim": "2025 Pro Smart Renewal Edition",
+      "variantId": "334f28a8f7a3ddbb6c2edd59",
+      "expectedDigest": "cecb8bd0642876fbe9ac88b9613ae0c0db3e444150b5639b8f06a6a2cd31e870",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2024,
+      "trim": "Pro",
+      "variantId": "1181bf462bbd83a1c4add085",
+      "expectedDigest": "7d387fd162fffa03696e3e849371b50a76f595b1ef1c3a0eec4386cc4b545fa3",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2024,
+      "trim": "2024 Pro",
+      "variantId": "13e5b72a3f437a4a3e413eb2",
+      "expectedDigest": "c444837987be053283972fde7f462564e149d6b2a78b75924d627f1b9e250372",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2024,
+      "trim": "2024 Max",
+      "variantId": "a38dcc590e81a4c3b926e11c",
+      "expectedDigest": "297fd330e1d3cdb1bec349f9c3a9f1db0f3b2e9d7f7d7298ca7784b67a84d174",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2024,
+      "trim": "Max",
+      "variantId": "780e7809475e56b78d170f3c",
+      "expectedDigest": "96a361886e96ce0aa04ab558491b095167634e6daa49d89b3954df3a9c5b9c7a",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2024,
+      "trim": "Pro Smart Refresh Edition",
+      "variantId": "ca244f226463c3f2c2c8ede8",
+      "expectedDigest": "b6203431dad916863966d122947d6b5b7e88e2be59632fdf094910c6d42ecb79",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "2025 Max Smart Renewal Edition",
+      "variantId": "9f267155582a8ed06e1f3a25",
+      "expectedDigest": "749a332268e8c9bb2663e1b48b3cade3428b5657f5ba3ed70cea22c640f722db",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "2025 Pro Smart Renewal Edition",
+      "variantId": "3c710c26f55d37122397acfc",
+      "expectedDigest": "c0eeb9054bae89ae3def7648fe7d2179983e2a7793756ecfe9ad3548b6888209",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "2024 Pro",
+      "variantId": "3e5b0553bb2bb644e8a9aaea",
+      "expectedDigest": "ebc759cfc8a042afe2479b35058f2e0de58b3a14d5f650e828bb28ae8e15f86c",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "2024 Max",
+      "variantId": "6d3b681762ec101752daac44",
+      "expectedDigest": "20110d9f06f9149dc756b4cf785720bc479819ffbe5d86b3e4df8b6216c5eef7",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "Pro",
+      "variantId": "f4a47e728525157e0716d3b8",
+      "expectedDigest": "e8fefb8fa09ff5e452bac8c8816c61ebf7c7c8d4e9cef25f3fee5c0f560600ce",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "Max Smart Refresh Edition",
+      "variantId": "5af45044c11410b9e6621923",
+      "expectedDigest": "4c250f7b693d7ad32dd5ff0b0272efe3b1a44040379adf3edac9ce406255662b",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "2025 Max Smart Renewal Edition",
+      "variantId": "ff7a7441ec8841f4781c790a",
+      "expectedDigest": "cbdad500b29716ec6b118162a8257c34bc0a12c41b636c512617fa8d0f207d14",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "Max",
+      "variantId": "34fcc3e559d80adcd7daf412",
+      "expectedDigest": "402d150d6ab4aa1a21e067141ff255305d51283df517f710dc6aea3ac6ba91f2",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "Max",
+      "variantId": "9cb9f80a90e66b007f2d82bf",
+      "expectedDigest": "ac86dc4ef3d1ec165dbc9a0ede1606335da6660d2a92f347db757d6fe6d113b2",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "Pro Smart Refresh Edition",
+      "variantId": "a8eaa5758fedd3a5a8d80cb7",
+      "expectedDigest": "939bad36df778c496f8dd6c81f72cc38dac6bb01e3ac4293180fd057d981a610",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2026,
+      "trim": "2025 Pro Smart Renewal Edition",
+      "variantId": "2e2209f2de0dbb76803e6fb5",
+      "expectedDigest": "8e207fff42519a0f36c2f049eef2373eee892f798ba926343cc78ad57758f73e",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2026,
+      "trim": "2025 Max Smart Renewal Edition",
+      "variantId": "d1bc3f56853a477dd07516e6",
+      "expectedDigest": "c80a1e70d89d3002579560cebe9d047412d76cced2c0a93336b4320b719fdfbd",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2026,
+      "trim": "Pro Smart Refresh Edition",
+      "variantId": "8b9ed03622ec92686c2c26f2",
+      "expectedDigest": "c1262e5423ae25b8707efe39735ceb5ba214078b0326b1bf6133f64ce124b1b0",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2026,
+      "trim": "Ultra",
+      "variantId": "7276f4c6210682bef421bd68",
+      "expectedDigest": "78ea39428bedeb993fce187c448e535f744c9a01c09510b2d396943a1a54da3a",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2026,
+      "trim": "Max Smart Refresh Edition",
+      "variantId": "21319968b9041e538a602961",
+      "expectedDigest": "d955ffe30ff48ad50b523373a85c0bec9e5046e9826704539b3d8c75caef5ecc",
+      "patch": {
+        "power30MinKw": 134,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "Ultra Smart Refresh Edition",
+      "variantId": "10b9a6d0566eb59db9e2d08b",
+      "expectedDigest": "f662f42429e9605b3a05dd2b8d3dd40751a4f52a3382022cf71d23c027cea76d",
+      "patch": {
+        "power30MinKw": 145,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "2025 Ultra Smart Renewal Edition",
+      "variantId": "d81ffca6b3de03dda985fc14",
+      "expectedDigest": "b1c4af3fcb73b555e1c9bf4f3eb451a156824ba469f0faacf66e5f73b87d2681",
+      "patch": {
+        "power30MinKw": 145
+      },
+      "confirmedFields": [
+        "power30MinKw"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "2025 Max Smart Renewal Edition",
+      "variantId": "4c9e6fe7ab6df56ca12f2a83",
+      "expectedDigest": "e34af168019ee12c0e7dbf8363228ad2d6e37e12899c09158e300498ce04d9c1",
+      "patch": {
+        "power30MinKw": 145
+      },
+      "confirmedFields": [
+        "power30MinKw"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "2025 Pro Smart Renewal Edition",
+      "variantId": "95ffdb26f0666ec68b721684",
+      "expectedDigest": "33d367e93417905fe869ee6ec588554b4b638fa04059e94fb66920d9a5d7b89f",
+      "patch": {
+        "power30MinKw": 145
+      },
+      "confirmedFields": [
+        "power30MinKw"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "Ultra Smart Refresh Edition",
+      "variantId": "87a8330316ad80a9ea3ee696",
+      "expectedDigest": "1fc6b64d8400e251ce0fa1bd748ba74d2ae50b606694ca3d902488810cee0dc5",
+      "patch": {
+        "power30MinKw": 145,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "Max Smart Refresh Edition",
+      "variantId": "6bb873879824bbf1683d4a91",
+      "expectedDigest": "0eeee0ee2c2cc9955b869a600539094ded4ed8077e49264c9cf737d7230994d5",
+      "patch": {
+        "power30MinKw": 145,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "MAX",
+      "variantId": "a3d84e96c17cbe4629f8a03b",
+      "expectedDigest": "16189b269f34051e1d2c570448425a553276121de5c505ff27ef002d976af33a",
+      "patch": {
+        "power30MinKw": 145,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "Pro Smart Refresh Edition",
+      "variantId": "490d614ecae0192d7b9ce0d2",
+      "expectedDigest": "2e84f77e17cb72238e900a9ff3149f2b48ca45afa50eeed210b31b002d76be9c",
+      "patch": {
+        "power30MinKw": 145,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "MAX",
+      "variantId": "b451cc52e04505d97e71ab4d",
+      "expectedDigest": "d51d81f6a24631ea1460e88322a67a876bac5bad0901c85472628ecfb5a73146",
+      "patch": {
+        "power30MinKw": 145
+      },
+      "confirmedFields": [
+        "power30MinKw"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "Pro",
+      "variantId": "b757f6465fa28f08c55ca30f",
+      "expectedDigest": "4263c7287bbd1641ac742f2c2e0e644175fb2a7f143cdc02bf008b6931ca2779",
+      "patch": {
+        "power30MinKw": 145,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "Ultra",
+      "variantId": "a1034e23a507e09b893b8129",
+      "expectedDigest": "4b9e95ac38ff2a1ad4300135692b49c5b1e224cb6a7d9c45a5860c36dca5d58c",
+      "patch": {
+        "power30MinKw": 145,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2025,
+      "trim": "Ultra Smart Refresh Edition",
+      "variantId": "a1efbedc9c956c1f4cea34ba",
+      "expectedDigest": "c3584f763c52697617c10ed53b5f0a7ec0a042b6779e22b4313c8b6a03a92e81",
+      "patch": {
+        "power30MinKw": 145
+      },
+      "confirmedFields": [
+        "power30MinKw"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2026,
+      "trim": "2025 Max Smart Renewal Edition",
+      "variantId": "e01cf1f1acaa6a792974c1ae",
+      "expectedDigest": "77cede648ceb9478107ae0d7f4defc219af1d2b2980c5d309953d5dc3add3896",
+      "patch": {
+        "power30MinKw": 145
+      },
+      "confirmedFields": [
+        "power30MinKw"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2026,
+      "trim": "Max Smart Refresh Edition",
+      "variantId": "23785b835e8b7ae8e51efe3d",
+      "expectedDigest": "95fa887ee8911509a2913615d9bc9b907dbc19efd094dbe7fa6736d96e0d342a",
+      "patch": {
+        "power30MinKw": 145,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "make": "Li Auto",
+      "model": "Li L7",
+      "year": 2026,
+      "trim": "Ultra Smart Refresh Edition",
+      "variantId": "ee4548a7038a55fb33c169fe",
+      "expectedDigest": "44b121b9f5bac4290c76df92ded3f06ffa91e0bbc7b9ae8ef15cebbb113c129b",
+      "patch": {
+        "power30MinKw": 145,
+        "powertrainKind": "series_hybrid"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 4,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 4; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L7 2025–2026, 65+80 = 145 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    },
+    {
+      "modelId": "e6c60cefa0b0464429b01622",
+      "make": "Li Auto",
+      "model": "L6",
+      "year": 2026,
+      "trim": "2026款 Ultra",
+      "variantId": "da5978fa1b57a8f05d920b72",
+      "expectedDigest": "3bba11f1a47d994b90e18c596d3b96eecc1d3561d44ef8590d0d04e5209971fd",
+      "patch": {
+        "power30MinKw": 134
+      },
+      "confirmedFields": [
+        "power30MinKw"
+      ],
+      "source": {
+        "type": "owner_confirmed",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "checkedAt": "2026-10-23",
+        "confirmedByOwner": true,
+        "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+        "tableRow": 12,
+        "powerEvidenceDocument": "Owner-provided checked table, image(20261023-075515).png, row 12; not a manufacturer CoC.",
+        "statement": "Владелец передал проверенную таблицу: Li L6 2024–2026, 65+69 = 134 кВт 30-минутной мощности электромоторов, расчёт по электрическому приводу последовательного гибрида. Это ручное подтверждение владельца, не заводской сертификат. Пиковая мощность и топливо не изменяются; проверены модель, год и существующая модификация."
+      }
+    }
+  ]
+}

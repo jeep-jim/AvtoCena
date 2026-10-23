@@ -1,3 +1,4 @@
+import {isOwnerConfirmedEvidence} from './owner-evidence.mjs';
 import {hasEncyclopediaCalculationEvidence,calculationSourceIdentity} from './calculation-evidence';
 export {hasEncyclopediaCalculationEvidence} from './calculation-evidence';
 import fs from 'node:fs';
@@ -41,7 +42,7 @@ export function compileModelFacts(record:any,ancestors:any[]=[]):CalculationFact
   const identityTrims=new Set([v.trim]);
   const retainedReferences:any={};
   for(const e of evidence){
-   if(!['manufacturer','official_registry'].includes(e.source?.type)||!/^https:\/\//.test(e.source?.url||''))continue;
+   if(!(['manufacturer','official_registry'].includes(e.source?.type)||isOwnerConfirmedEvidence(e.source))||!/^https:\/\//.test(e.source?.url||''))continue;
    if(e.checkedIdentity?.make!==record.make||e.checkedIdentity?.model!==record.model||e.checkedIdentity?.year!==v.year||!identityTrims.has(e.checkedIdentity?.trim))continue;
    if(e.originalTrim)identityTrims.add(e.originalTrim);
    const snapshot=e.ownerReferenceSnapshot;
@@ -49,8 +50,8 @@ export function compileModelFacts(record:any,ancestors:any[]=[]):CalculationFact
     if(field!=='power30MinKw'&&exists(v[field])&&JSON.stringify(snapshot.values?.[field])===JSON.stringify(v[field]))retainedReferences[field]={kind:'owner_reference',markets:snapshot.markets.filter((m:string)=>m==='china'||m==='europe')};
    }
    for(const field of factFields)if(!sources[field]&&e.fields?.includes(field)&&exists(v[field])&&JSON.stringify(v[field])===JSON.stringify(e.values?.[field])){
-    if(field==='power30MinKw'&&!e.source.certificationDocument)continue;
-    values[field]=v[field];sources[field]={kind:e.source.type,url:e.source.url,batchId:e.batchId};
+    if(field==='power30MinKw'&&!(isOwnerConfirmedEvidence(e.source)||e.source.certificationDocument))continue;
+    values[field]=v[field];sources[field]={kind:isOwnerConfirmedEvidence(e.source)?'manual':e.source.type,url:e.source.url,batchId:e.batchId};
    }
    if(e.originalTrim)trims.add(token(e.originalTrim));
   }

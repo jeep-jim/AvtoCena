@@ -1,3 +1,4 @@
+import {isOwnerConfirmedEvidence} from '../../apps/web/lib/encyclopedia/owner-evidence.mjs';
 import {createHash,randomUUID} from 'node:crypto';
 export const stable = value => JSON.stringify(value, (_,v)=>v && typeof v==='object' && !Array.isArray(v)?Object.fromEntries(Object.entries(v).sort(([a],[b])=>a.localeCompare(b))):v);
 export const digest = value => createHash('sha256').update(stable(value)).digest('hex');
@@ -13,7 +14,8 @@ export function validateBatch(batch){
   if(e.operation!==undefined&&e.operation!=='create')throw Error('invalid_operation');
   if(e.operation==='create'&&(e.expectedDigest!==digest(null)||!e.expectedRevision||e.year<2008||!['manufacturer','official_registry'].includes(e.source?.type)))throw Error('invalid_new_variant_evidence');
   if(!e.make||!e.model||!e.trim||!Number.isInteger(e.year)||e.year<1900||e.year>new Date().getUTCFullYear()+1)throw Error('missing_exact_identity');
-  if(!e.source || !['manufacturer','official_registry','observation_translation'].includes(e.source.type)||!e.source.statement||e.source.statement.length>1200||!/^\d{4}-\d{2}-\d{2}$/.test(e.source.checkedAt))throw Error('missing_field_source');
+  if(!e.source || !['manufacturer','official_registry','observation_translation','owner_confirmed'].includes(e.source.type)||!e.source.statement||e.source.statement.length>1200||!/^\d{4}-\d{2}-\d{2}$/.test(e.source.checkedAt))throw Error('missing_field_source');
+  if(e.source.type==='owner_confirmed'&&(!isOwnerConfirmedEvidence(e.source)||e.operation==='create'))throw Error('invalid_owner_confirmation');
   const url=new URL(e.source.url);if(url.protocol!=='https:'||url.username||url.password)throw Error('invalid_source_url');
   if(!e.patch||!Object.keys(e.patch).length)throw Error('empty_patch');
   if(e.operation==='create'&&(e.patch.trim!==e.trim||!e.confirmedFields.includes('trim')||Object.keys(e.patch).some(f=>!e.confirmedFields.includes(f))))throw Error('new_variant_requires_confirmed_identity');
@@ -25,7 +27,7 @@ export function validateBatch(batch){
    if(typeof value==='number'&&(!Number.isFinite(value)||value<=0||value>50000))throw Error('invalid_value');
    if(typeof value!=='number'&&typeof value!=='string')throw Error('invalid_value');
    if(typeof value==='string'&&(!value.trim()||value.length>160||/\p{Script=Han}/u.test(value)))throw Error('untranslated_value');
-   if(certified.has(field)&&(!e.source.certificationDocument||!e.source.statement.includes('30')))throw Error('certified_power_evidence_required');
+   if(certified.has(field)&&(!(isOwnerConfirmedEvidence(e.source)||e.source.certificationDocument)||!e.source.statement.includes('30')))throw Error('certified_power_evidence_required');
   }
  }
  return batch;

@@ -25,7 +25,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Verify research guards
-        run: node --import tsx --test tests/encyclopedia-research-batch.test.ts
+        run: node --import tsx --test tests/encyclopedia-research-batch.test.ts tests/encyclopedia-owner-evidence.test.ts
       - name: Apply exact reviewed fields and verify saved revisions
         env:
           JSON_STORAGE_DRIVER: object
