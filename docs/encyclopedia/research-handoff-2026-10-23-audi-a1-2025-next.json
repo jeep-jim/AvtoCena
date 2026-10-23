@@ -1,0 +1,550 @@
+{
+  "version": 4,
+  "checkedAt": "2026-10-23T08:04:10.174Z",
+  "previousHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2023-next.json",
+  "next": {
+    "modelId": "d5a8af35e3698aa33eaea9a9",
+    "make": "Audi",
+    "model": "A1",
+    "revision": "f1afdff4-20f7-45f6-b467-247de44f3ed1",
+    "variants": 394,
+    "researchedVariants": 221,
+    "firstCursor": {
+      "variantId": "d536c5881f0e1801ca5714a3",
+      "year": 2025,
+      "trim": "Sportback 30 TFSI S line LED CarPlay Sitzhzg.",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "bodyType",
+        "engineCode"
+      ],
+      "reason": "Проверять только реальные пробелы, известные значения не повторять"
+    },
+    "remainingExplicitSportbackBodyCandidates": 62,
+    "nextBoundedCandidates": [
+      {
+        "variantId": "d536c5881f0e1801ca5714a3",
+        "year": 2025,
+        "trim": "Sportback 30 TFSI S line LED CarPlay Sitzhzg.",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "9d826cd18ef2556899b0f7c3",
+        "year": 2025,
+        "trim": "Sportback 30 TFSI S tronic S line | SITZH. |",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "563905dec38afed185f395c6",
+        "year": 2025,
+        "trim": "Sportback 30TFSI S-tronic KAMERA LED APS+",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "77c780dbb634d9b4dce29919",
+        "year": 2025,
+        "trim": "Sportback 35 TFSI 2x S line S tro*Sonos*LED*V",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "59eed3426d90cf0fc7371117",
+        "year": 2025,
+        "trim": "Sportback 35 TFSI Advanced S-Tronic NAV/LED",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "11290edca6778d73a4af2f4e",
+        "year": 2025,
+        "trim": "Sportback 35 TFSI S line S tronic*LED*Alu*ACC",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "c132be329dedf0d2b7b3a4a9",
+        "year": 2025,
+        "trim": "Sportback 40 TFSI S line edition NAV/VCP/LED",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "df2f6bdce7960eeb4b6148d3",
+        "year": 2025,
+        "trim": "Sportback 40 TFSI S LINE LM17 TEILLEDER SITZH",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "56ca5bcaf323576b9403a484",
+        "year": 2025,
+        "trim": "Sportback advanced 30 TFSI S tronic *Kamera*",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "5108e2c36ef6c55af152f85e",
+        "year": 2025,
+        "trim": "Sportback S line 25TFSI Stronic LED GRA EPH",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "8319a997d76e66d6600e0b90",
+        "year": 2025,
+        "trim": "Sportback S line 35 TFSI 110(150",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "a43b89e181dfe6c33f237ba7",
+        "year": 2026,
+        "trim": "A1 SPB 30 TFSI S tronic S line edition",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "9e145517780e7c26eca735e0",
+        "year": 2026,
+        "trim": "II 2019 Sportback Sportback 30 1.0 tfsi S Line Edition 116cv s-tronic",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "fbf7bf46a20d42b57dea739d",
+        "year": 2026,
+        "trim": "Sportback 25 TFSI 2x S LINE LM17 LED SOUND SP",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "3a8c7859b6f9a67f7e759974",
+        "year": 2026,
+        "trim": "Sportback 25 TFSI advanced LED SPORTSITZE 17\"",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "de97a6a833d7a16af14dbb80",
+        "year": 2026,
+        "trim": "Sportback 25 TFSI advanced OPTIK 17\" LED",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "89efd723cbb1cbe8ed9b84d0",
+        "year": 2026,
+        "trim": "Sportback 25 TFSI advanced OPTIK LED 17\"",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "11aaddbb47b542dad43c1a01",
+        "year": 2026,
+        "trim": "Sportback 25 TFSI advanced OPTIK LED 17\" GRA",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "a14be282912f01ee41529e44",
+        "year": 2026,
+        "trim": "Sportback 25 TFSI Aps Plus Carplay Klima Sh",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      },
+      {
+        "variantId": "a8e9afcbbd8d128254405145",
+        "year": 2026,
+        "trim": "Sportback 25 TFSI LED SHZ Smart Interface",
+        "factoryConfirmedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "drive",
+          "grossVehicleWeightKg"
+        ],
+        "otherSupportedFields": [],
+        "missingSupportedFields": [
+          "bodyType",
+          "engineCode"
+        ],
+        "reason": "Проверять только реальные пробелы, известные значения не повторять"
+      }
+    ],
+    "nextAction": "Остаток A1 сохранён с точного курсора2025. После ограниченной группы перейти к существующей Audi A3 согласно прежнему плану, затем вернуться к этим полям; A1 не объявлена завершённой."
+  },
+  "completedBatch": {
+    "batch": "research-2026-10-23-audi-a1-2023-2025-body",
+    "variantIds": [
+      "3851bcdb79e12a0cb313cf3b",
+      "82ea8334d96a77a4836f7b58",
+      "3bae468116f4797be524ea7f",
+      "c2e4df0ab27ad7bbc50159c6",
+      "4c2df5b35458b4ba5def9ce2",
+      "73bfd4b20833b46d56a97bc2",
+      "4ce98588665ff1c2a3329b9c",
+      "08274c69d53bfe4eaa13ac42",
+      "4c807a305a0e9d1540aa8160",
+      "62d5d9a029c4412233100449",
+      "2cefaf019e6780f9df44307b",
+      "734422c22cf0364a28e6cd13",
+      "535ad69c2f4091d63a7a2389",
+      "51c9d4e8e65609356d87c1ee",
+      "a20d2757df2001da4fde7750",
+      "1cdd14eea1ad5aad513c2937",
+      "326b8203f101c9efa6be9e68",
+      "a1c8f6defa7db9aa8eaea650",
+      "01e65fa3a5411d099a8647a9",
+      "86cc3f1c237f2d43cbefe705",
+      "7c43f54de616b9181b21a102",
+      "055c42d146f171fa8b2aaad6",
+      "cfb12c554e7f0c4aace71d25",
+      "f895cc42cf4242f47b55a27a",
+      "02d10cf83e66e55f6e1e7ff8",
+      "14f28a350bafb20bde5bd746",
+      "8a4cb0af563123690d14949c",
+      "5008c04a600557a022be8dc4",
+      "a173f5b98a0896b0a0668582",
+      "57cfe5c7c2f5f25780fcfdf8",
+      "83a11f3a0d1049d5973a0dc5",
+      "a7650a6a1777da651f5a97ee",
+      "e8d5bee22883c7b5e836dce7",
+      "96859d64867a9d5650e5234f",
+      "e03ed348e140d2c52bccad37",
+      "1b06a90709849891739b696d",
+      "680568c7c5a15acee79186af",
+      "29a0054765ff810703ac41ea",
+      "702a46f13b87b4869b838dcb",
+      "e8e440a68430c7d52a92b2de",
+      "bb85a890f1f9bd0ef2016608",
+      "be7fb13ed010d30ac5de485b",
+      "3033bb62d25ffb1b1bbfd840",
+      "0b9bf3b76ea935fc868ed119",
+      "b52f2680859adff4cdcbecf9",
+      "0dad51e009b08fa42d7e54a3",
+      "217dbc2768258a5c514ee60d",
+      "39a22ffbf68d5cbbe67b5b59",
+      "b2ff2ea7ab99f4d2fb04e065",
+      "4d0cd3f95027abd93b9fa601"
+    ],
+    "fields": 50,
+    "apiReadback": true
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a1-2023-2025-remaining.json",
+  "coordination": {
+    "writesPaused": false,
+    "servingRelease": "025980454268fa9841ffab34b119037f348a1a11",
+    "servingIndex": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+    "newBatchIncluded": false,
+    "doNotDuplicate": [
+      "manual release",
+      "BMW research",
+      "reference reuse",
+      "full China",
+      "UI code"
+    ]
+  }
+}
