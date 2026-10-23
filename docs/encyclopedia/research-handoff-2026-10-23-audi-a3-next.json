@@ -1,34 +1,15 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-23T22:00:27.622Z",
-  "lastCompletedBatch": "research-2026-10-24-audi-a3-2025-2026-body",
+  "checkedAt": "2026-10-23T23:00:59.822Z",
+  "lastCompletedBatch": "research-2026-10-24-audi-a3-2026-tail-body",
   "modelId": "f40e34e905b8ca09f3636eda",
   "make": "Audi",
   "model": "A3",
-  "revision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
-  "next": {
-    "variantId": "5bb44ac456b5005f011b5353",
-    "year": 2026,
-    "trim": "Sportback Advanced TFSI Stronic Navi ACC EPH",
-    "missingValueFields": [
-      "drive",
-      "bodyType",
-      "engineCode",
-      "grossVehicleWeightKg"
-    ],
-    "knownValues": {
-      "fuel": "petrol",
-      "powertrainKind": "combustion",
-      "engineCc": 1498,
-      "powerHp": 150,
-      "powerKw": 110,
-      "icePowerKw": 110,
-      "transmission": "automatic"
-    }
-  },
-  "nextAction": "Продолжить с 5bb44ac456b5005f011b5353:32 явно обозначенных Sportback/SB/SPB 2026 без кузова, затем следующий пункт очереди. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
+  "revision": "27d4b571-523c-4219-ab9a-22e73363e898",
+  "next": null,
+  "nextAction": "Выбранная группа явно обозначенных non-China Sportback/SB/SPB2020–2026 без кузова исчерпана. Продолжить A4 по nextResearchHandoff; другие поля/ранние8P/8V/MHEV и A1 остаются в retry. A3 не объявлен полностью проверенным.",
   "remaining2022BodyCandidates": 0,
-  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2025-2026-remaining.json",
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2026-tail-remaining.json",
   "earlyRetry": [
     {
       "id": "c98ec4e1792a7635f7ad3f1a",
@@ -141,5 +122,31 @@
   "remaining2023BodyCandidates": 0,
   "remaining2024BodyCandidates": 0,
   "remaining2025BodyCandidates": 0,
-  "remaining2026BodyCandidates": 32
+  "remaining2026BodyCandidates": 0,
+  "nextModel": {
+    "variantId": "39980c5572c0e098b7d91f67",
+    "year": 2019,
+    "trim": "40 TFSI S-LINE",
+    "missingValueFields": [
+      "engineCc",
+      "powerHp",
+      "powerKw",
+      "icePowerKw",
+      "engineCode",
+      "grossVehicleWeightKg"
+    ],
+    "knownValues": {
+      "fuel": "petrol",
+      "powertrainKind": "combustion",
+      "transmission": "automatic",
+      "drive": "fwd",
+      "bodyType": "sedan"
+    },
+    "modelId": "e3570ba4a67b01797e57a749",
+    "make": "Audi",
+    "model": "A4",
+    "revision": "faf11b62-1ba3-5d26-a1f2-a571dcda09f4"
+  },
+  "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a4-next.json",
+  "modelComplete": false
 }

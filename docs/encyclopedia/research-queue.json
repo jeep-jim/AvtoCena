@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T22:31:03.324461Z",
+  "updatedAt": "2026-10-23T23:02:09.384Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1148,8 +1148,8 @@
       ],
       "variants": 3663,
       "status": "partial_verified_fields",
-      "researchedVariants": 553,
-      "checkedAt": "2026-10-23T22:00:27.622Z",
+      "researchedVariants": 574,
+      "checkedAt": "2026-10-23T23:02:09.384Z",
       "researchedYears": [
         2009,
         2010,
@@ -1197,10 +1197,10 @@
         2025,
         2026
       ],
-      "nextAction": "Продолжить с 5bb44ac456b5005f011b5353:32 явно обозначенных Sportback/SB/SPB 2026 без кузова, затем следующий пункт очереди. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
+      "nextAction": "Выбранная группа явно обозначенных non-China Sportback/SB/SPB2020–2026 без кузова исчерпана. Продолжить A4 по nextResearchHandoff; другие поля/ранние8P/8V/MHEV и A1 остаются в retry. A3 не объявлен полностью проверенным.",
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
-      "nextVariantId": "5bb44ac456b5005f011b5353",
-      "boundedReadAt": "2026-10-23T22:00:27.622Z",
+      "nextVariantId": null,
+      "boundedReadAt": "2026-10-23T23:02:09.384Z",
       "boundedReadYears": [
         2026,
         2025,
@@ -1217,12 +1217,12 @@
         2010,
         2009
       ],
-      "boundedReadRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
-      "revision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
-      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2025-2026-remaining.json",
-      "lastBatch": "research-2026-10-24-audi-a3-2025-2026-body",
-      "lastBatchFields": 50,
-      "lastBatchVariants": 50,
+      "boundedReadRevision": "27d4b571-523c-4219-ab9a-22e73363e898",
+      "revision": "27d4b571-523c-4219-ab9a-22e73363e898",
+      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2026-tail-remaining.json",
+      "lastBatch": "research-2026-10-24-audi-a3-2026-tail-body",
+      "lastBatchFields": 32,
+      "lastBatchVariants": 32,
       "annualVariants": 1111,
       "unknownYearAstraVariants": 2552
     },
@@ -1270,7 +1270,7 @@
         2019,
         2015
       ],
-      "nextAction": "Первичный просмотр A4 всех 1342 строк выполнен; поля подтверждены у 502,840 без правок в retry. Следующая новая группа A4L. Затем повторный поиск пропусков: отдельные allroad/50TDI/ранние редакции,неполная идентичность,защищённые строки. Не считать A4 полностью заполненным.",
+      "nextAction": "Свежий API/revision/CAS; подтвердить точную годовую и региональную применимость для 2019 40 TFSI S-LINE. Нет подтверждения — отдельный retry и перейти к существующим 2020 и последующим годам. Отсутствующие годы с2008 подтверждать отдельно, основу не пересобирать.",
       "inspectedYears": [
         2025,
         2024,
@@ -1280,7 +1280,16 @@
         2020,
         2019,
         2015
-      ]
+      ],
+      "boundedReadAt": "2026-10-23T23:00:59.822Z",
+      "boundedReadYears": [
+        2015,
+        2019
+      ],
+      "boundedReadRevision": "faf11b62-1ba3-5d26-a1f2-a571dcda09f4",
+      "modelWideCountsRefreshed": false,
+      "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a4-next.json",
+      "nextVariantId": "39980c5572c0e098b7d91f67"
     },
     {
       "id": "7a296c2cbde73725fc3d6bd4",
@@ -32745,36 +32754,36 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T22:31:03.324461Z",
+    "updatedAt": "2026-10-23T23:02:09.384Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a3_2025_2026_50_body_saved_readback_pending_next_index",
+    "state": "audi_a3_selected_body_group_saved_a4_handoff_pending_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "5bb44ac456b5005f011b5353",
-      "year": 2026,
-      "trim": "Sportback Advanced TFSI Stronic Navi ACC EPH",
+      "variantId": "39980c5572c0e098b7d91f67",
+      "year": 2019,
+      "trim": "40 TFSI S-LINE",
       "missingValueFields": [
-        "drive",
-        "bodyType",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
         "engineCode",
         "grossVehicleWeightKg"
       ],
       "knownValues": {
         "fuel": "petrol",
         "powertrainKind": "combustion",
-        "engineCc": 1498,
-        "powerHp": 150,
-        "powerKw": 110,
-        "icePowerKw": 110,
-        "transmission": "automatic"
+        "transmission": "automatic",
+        "drive": "fwd",
+        "bodyType": "sedan"
       },
-      "modelId": "f40e34e905b8ca09f3636eda",
+      "modelId": "e3570ba4a67b01797e57a749",
       "make": "Audi",
-      "model": "A3",
-      "revision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e"
+      "model": "A4",
+      "revision": "faf11b62-1ba3-5d26-a1f2-a571dcda09f4"
     },
-    "lastVerifiedResearch": "audi-a3-2025-2026-body",
+    "lastVerifiedResearch": "audi-a3-2026-tail-body",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32790,51 +32799,136 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2025-2026-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2026-tail-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-24-audi-a3-2025-2026-body",
-      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json",
-      "commit": "88e4b356b68da063fcb4c77b97c0c3507f8056df",
-      "workflow": 40030422620,
-      "job": 120677030553,
-      "applyFinishedAt": "2026-10-23T21:58:28.899Z",
-      "variants": 50,
+      "batch": "research-2026-10-24-audi-a3-2026-tail-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2026-tail-body.json",
+      "commit": "27d77ac19efaaf5ebf638e848784bda78d4b532d",
+      "workflow": 40036752984,
+      "job": 120698014765,
+      "applyFinishedAt": "2026-10-23T22:57:25.448Z",
+      "variants": 32,
       "newVariants": 0,
-      "fields": 50,
-      "compiledFields": 50,
+      "fields": 32,
+      "compiledFields": 32,
       "apiReadback": true,
       "includedInIndex": false,
-      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-body-pass.json",
-      "afterRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2026-tail-body-pass.json",
+      "afterRevision": "27d4b571-523c-4219-ab9a-22e73363e898",
       "publicParity": {
         "passed": true,
-        "offers": 6,
-        "comparisons": 78,
-        "matched": 78,
+        "offers": 7,
+        "comparisons": 91,
+        "matched": 91,
         "repeatedGroups": 2,
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-public-parity.json"
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2026-tail-public-parity.json"
       },
-      "nativeExact": 46,
+      "nativeExact": 11,
       "nativeHeld": [
         {
-          "variantId": "f885fcfdff168f27d655f749",
-          "trim": "Sportback*ACC*ViCo*Kamera*LED*NAVI**",
+          "variantId": "817de1d91ca1e7632d436ed1",
+          "trim": "Sportback TFSI S-Tronic Navi LED virtual AHK",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         },
         {
-          "variantId": "0bc1eade35a29bfd2fcd9f63",
-          "trim": "Sportback TDI ADVANCED LED NAVI KAMERA eKLAPP",
+          "variantId": "e015f19705fc8cfc81a732e8",
+          "trim": "Sportback TDI S LINE LED KAMERA OPTIK+ ACC",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         },
         {
-          "variantId": "e8b18696508729ed60e0248d",
-          "trim": "Sportback advanced TDI Stron LED Navi RFK HUD",
+          "variantId": "925f3ec43d06e90a2d40a27d",
+          "trim": "Sportback TFSI advanced Rückfahrkamera",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         },
         {
-          "variantId": "e8bfbdad8a306974763288d1",
-          "trim": "SB TFSIe Stronic S line/LED/PDC+/Navi+/Kamera",
+          "variantId": "84a6192c0ab18b1079f650b3",
+          "trim": "Sportback TFSI S tronic advanced AHK*SONOS*LED*...",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "5bb44ac456b5005f011b5353",
+          "trim": "Sportback Advanced TFSI Stronic Navi ACC EPH",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "e87b3c4383f69b26e56e76c5",
+          "trim": "Sportback TFSI S TRONIC+WINTERRÄDER+HEAD UP+",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "160560a4d8770399cbb3f887",
+          "trim": "Sportback TFSI AdvancedS tr. RFK*HUD*Navi*ACC",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "5832e1f5118f12cb36f7949e",
+          "trim": "Sportback TDI advanced LED ACC KAMERA PDC HuD",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "96972188aff40b40d462edbc",
+          "trim": "Sportback S line TDI Stronic Navi ACC EPH",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "d0b4b39e4f028f873088b6e0",
+          "trim": "Sportback TDI S LINE LED KAMERA",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "1c82a68306ff0f67f1b351e8",
+          "trim": "Sportback S line TFSI Stronic ACC Navi EPH",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "b900af419adc36689ecfb37e",
+          "trim": "Sportback TDI S LINE LED NAVI SPORTSITZE eKLA",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "571183afb2225fe3fa181474",
+          "trim": "Sportback TFSI advanced Business+*SONOS*HuD*",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "b3e23e49b3847624dd8719c0",
+          "trim": "Sportback TDI VOLLLEDER ACC LED KAMERA",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "69cbf55ed910d14b94b712d3",
+          "trim": "Sportback TFSI quattro advanced black ACC Nav",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "94af1fd60ca0a9fa8a340a69",
+          "trim": "Sportback TFSI quattro S-LINE, AHK, Navi, el.",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "c724a0cacf9070fa323b292b",
+          "trim": "Sportback TFSI quattro S line HuD Navi SONOS",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "8e743573a904acfaa784f546",
+          "trim": "Sportback TFSIe S tronic virt./LED/Standhzg.",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "c14a5ca58ce07c2aa01fb606",
+          "trim": "Sportback TFSI e advanced LED KAMERA ACC PDC+",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "91c9dc868fe58f0169b90f5c",
+          "trim": "Sportback TFSI e S line S tronic AHZV Head-up",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "943db3a0f11026979d67876d",
+          "trim": "Sportback TFSI e S line LED ACC KAMERA NAVI+",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         }
       ]
@@ -32976,9 +33070,141 @@
             "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
           }
         ]
+      },
+      {
+        "batch": "research-2026-10-24-audi-a3-2026-tail-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2026-tail-body.json",
+        "commit": "27d77ac19efaaf5ebf638e848784bda78d4b532d",
+        "workflow": 40036752984,
+        "job": 120698014765,
+        "applyFinishedAt": "2026-10-23T22:57:25.448Z",
+        "variants": 32,
+        "newVariants": 0,
+        "fields": 32,
+        "compiledFields": 32,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2026-tail-body-pass.json",
+        "afterRevision": "27d4b571-523c-4219-ab9a-22e73363e898",
+        "publicParity": {
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 91,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2026-tail-public-parity.json"
+        },
+        "nativeExact": 11,
+        "nativeHeld": [
+          {
+            "variantId": "817de1d91ca1e7632d436ed1",
+            "trim": "Sportback TFSI S-Tronic Navi LED virtual AHK",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "e015f19705fc8cfc81a732e8",
+            "trim": "Sportback TDI S LINE LED KAMERA OPTIK+ ACC",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "925f3ec43d06e90a2d40a27d",
+            "trim": "Sportback TFSI advanced Rückfahrkamera",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "84a6192c0ab18b1079f650b3",
+            "trim": "Sportback TFSI S tronic advanced AHK*SONOS*LED*...",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "5bb44ac456b5005f011b5353",
+            "trim": "Sportback Advanced TFSI Stronic Navi ACC EPH",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "e87b3c4383f69b26e56e76c5",
+            "trim": "Sportback TFSI S TRONIC+WINTERRÄDER+HEAD UP+",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "160560a4d8770399cbb3f887",
+            "trim": "Sportback TFSI AdvancedS tr. RFK*HUD*Navi*ACC",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "5832e1f5118f12cb36f7949e",
+            "trim": "Sportback TDI advanced LED ACC KAMERA PDC HuD",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "96972188aff40b40d462edbc",
+            "trim": "Sportback S line TDI Stronic Navi ACC EPH",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "d0b4b39e4f028f873088b6e0",
+            "trim": "Sportback TDI S LINE LED KAMERA",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "1c82a68306ff0f67f1b351e8",
+            "trim": "Sportback S line TFSI Stronic ACC Navi EPH",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "b900af419adc36689ecfb37e",
+            "trim": "Sportback TDI S LINE LED NAVI SPORTSITZE eKLA",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "571183afb2225fe3fa181474",
+            "trim": "Sportback TFSI advanced Business+*SONOS*HuD*",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "b3e23e49b3847624dd8719c0",
+            "trim": "Sportback TDI VOLLLEDER ACC LED KAMERA",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "69cbf55ed910d14b94b712d3",
+            "trim": "Sportback TFSI quattro advanced black ACC Nav",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "94af1fd60ca0a9fa8a340a69",
+            "trim": "Sportback TFSI quattro S-LINE, AHK, Navi, el.",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "c724a0cacf9070fa323b292b",
+            "trim": "Sportback TFSI quattro S line HuD Navi SONOS",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "8e743573a904acfaa784f546",
+            "trim": "Sportback TFSIe S tronic virt./LED/Standhzg.",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "c14a5ca58ce07c2aa01fb606",
+            "trim": "Sportback TFSI e advanced LED KAMERA ACC PDC+",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "91c9dc868fe58f0169b90f5c",
+            "trim": "Sportback TFSI e S line S tronic AHZV Head-up",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "943db3a0f11026979d67876d",
+            "trim": "Sportback TFSI e S line LED ACC KAMERA NAVI+",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          }
+        ]
       }
     ],
-    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-body-pass.json",
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a3-2026-tail-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -33044,7 +33270,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a4-next.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-public-acceptance.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -37515,7 +37741,7 @@
         "report": "docs/encyclopedia/reports/2026-10-24-next-release-writer-coordination.json",
         "reason": "active_china_publication",
         "workflow": 40026092554,
-        "pendingFields": 100,
+        "pendingFields": 132,
         "deployRequested": false,
         "checkedAt": "2026-10-23T22:31:03.324461Z",
         "readbackReport": "docs/encyclopedia/reports/2026-10-24-pending100-live-readback.json"
@@ -38424,7 +38650,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0501.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0602.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -38901,6 +39127,138 @@
         {
           "variantId": "e8bfbdad8a306974763288d1",
           "trim": "SB TFSIe Stronic S line/LED/PDC+/Navi+/Kamera",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        }
+      ]
+    },
+    "audiA3Body2026TailPass": {
+      "batch": "research-2026-10-24-audi-a3-2026-tail-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2026-tail-body.json",
+      "commit": "27d77ac19efaaf5ebf638e848784bda78d4b532d",
+      "workflow": 40036752984,
+      "job": 120698014765,
+      "applyFinishedAt": "2026-10-23T22:57:25.448Z",
+      "variants": 32,
+      "newVariants": 0,
+      "fields": 32,
+      "compiledFields": 32,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2026-tail-body-pass.json",
+      "afterRevision": "27d4b571-523c-4219-ab9a-22e73363e898",
+      "publicParity": {
+        "passed": true,
+        "offers": 7,
+        "comparisons": 91,
+        "matched": 91,
+        "repeatedGroups": 2,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2026-tail-public-parity.json"
+      },
+      "nativeExact": 11,
+      "nativeHeld": [
+        {
+          "variantId": "817de1d91ca1e7632d436ed1",
+          "trim": "Sportback TFSI S-Tronic Navi LED virtual AHK",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "e015f19705fc8cfc81a732e8",
+          "trim": "Sportback TDI S LINE LED KAMERA OPTIK+ ACC",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "925f3ec43d06e90a2d40a27d",
+          "trim": "Sportback TFSI advanced Rückfahrkamera",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "84a6192c0ab18b1079f650b3",
+          "trim": "Sportback TFSI S tronic advanced AHK*SONOS*LED*...",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "5bb44ac456b5005f011b5353",
+          "trim": "Sportback Advanced TFSI Stronic Navi ACC EPH",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "e87b3c4383f69b26e56e76c5",
+          "trim": "Sportback TFSI S TRONIC+WINTERRÄDER+HEAD UP+",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "160560a4d8770399cbb3f887",
+          "trim": "Sportback TFSI AdvancedS tr. RFK*HUD*Navi*ACC",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "5832e1f5118f12cb36f7949e",
+          "trim": "Sportback TDI advanced LED ACC KAMERA PDC HuD",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "96972188aff40b40d462edbc",
+          "trim": "Sportback S line TDI Stronic Navi ACC EPH",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "d0b4b39e4f028f873088b6e0",
+          "trim": "Sportback TDI S LINE LED KAMERA",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "1c82a68306ff0f67f1b351e8",
+          "trim": "Sportback S line TFSI Stronic ACC Navi EPH",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "b900af419adc36689ecfb37e",
+          "trim": "Sportback TDI S LINE LED NAVI SPORTSITZE eKLA",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "571183afb2225fe3fa181474",
+          "trim": "Sportback TFSI advanced Business+*SONOS*HuD*",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "b3e23e49b3847624dd8719c0",
+          "trim": "Sportback TDI VOLLLEDER ACC LED KAMERA",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "69cbf55ed910d14b94b712d3",
+          "trim": "Sportback TFSI quattro advanced black ACC Nav",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "94af1fd60ca0a9fa8a340a69",
+          "trim": "Sportback TFSI quattro S-LINE, AHK, Navi, el.",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "c724a0cacf9070fa323b292b",
+          "trim": "Sportback TFSI quattro S line HuD Navi SONOS",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "8e743573a904acfaa784f546",
+          "trim": "Sportback TFSIe S tronic virt./LED/Standhzg.",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "c14a5ca58ce07c2aa01fb606",
+          "trim": "Sportback TFSI e advanced LED KAMERA ACC PDC+",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "91c9dc868fe58f0169b90f5c",
+          "trim": "Sportback TFSI e S line S tronic AHZV Head-up",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "943db3a0f11026979d67876d",
+          "trim": "Sportback TFSI e S line LED ACC KAMERA NAVI+",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         }
       ]
