@@ -32999,7 +32999,20 @@
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-late-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": [
+      {
+        "batch": "research-2026-10-23-aston-valhalla-vanquish",
+        "models": [
+          "Aston Martin Vanquish",
+          "Aston Martin Valhalla"
+        ],
+        "operations": 14,
+        "newVariants": 13,
+        "fields": 95,
+        "state": "workflow_requested_readback_pending",
+        "checkedAt": "2026-10-23T10:09:00+07:00"
+      }
+    ],
     "lastCompletedPass": {
       "checkedAt": "2026-10-23T09:04:41+07:00",
       "batch": "research-2026-10-23-aston-v12-vantage-late",
