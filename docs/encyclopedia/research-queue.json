@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T08:02:00+07:00",
+  "updatedAt": "2026-10-23T09:02:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32693,7 +32693,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T08:02:00+07:00",
+    "updatedAt": "2026-10-23T09:02:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "rapide_model_years_saved_api_readback_pass_activation_pending",
     "preserveManual": true,
@@ -32981,7 +32981,14 @@
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": {
+      "batch": "research-2026-10-23-aston-v12-vantage-late",
+      "modelId": "95f7940568d492384daba7df",
+      "operations": 3,
+      "confirmedFields": 20,
+      "sha256": "4832d744f17d46f698b4ff3fc198904b1e0e50d577649fbc989cb7214c585364",
+      "state": "submitted_pending_workflow_and_independent_readback"
+    },
     "lastCompletedPass": {
       "checkedAt": "2026-10-23T07:59:28+07:00",
       "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",

@@ -1,0 +1,474 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-aston-v12-vantage-late",
+  "entries": [
+    {
+      "modelId": "95f7940568d492384daba7df",
+      "make": "Aston Martin",
+      "model": "V12 Vantage",
+      "year": 2022,
+      "variantId": "30455eb1dc68b4ab1b78ae56",
+      "trim": "V12 Twin-Turbo Купе 8AT",
+      "operation": "create",
+      "expectedRevision": "3069826e-b541-4867-9316-43b21f6feaf3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 Twin-Turbo Купе 8AT",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 5204,
+        "powerHp": 700,
+        "powerKw": 515,
+        "icePowerKw": 515,
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2085
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "V12 Vantage Coupe2022: заводской лист June2022 в архиве NHTSA,5204см³,700PS/515кВт,бензиновыйДВС,ZF8AT,GVW2085кг. Реальный год подтверждён поставкамиQ2вFY2022.1795кг — снаряжённая, не полная. Привод/коды не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/en/our-world/news/2022/3/16/introducing-the-new-v12-vantage-a-spectacular-finale-for-an-iconic-bloodline",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "f96621b0d06bdc1e8b15887b2c755959caa82cd17b1d93bb3375aaf6129c4b20",
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70"
+          },
+          "bodyType": {
+            "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+            "pdfPage": 8,
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70"
+          },
+          "fuel": {
+            "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+            "pdfPage": 3,
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70"
+          },
+          "powertrainKind": {
+            "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+            "pdfPage": 3,
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70"
+          },
+          "engineCc": {
+            "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+            "pdfPage": 3,
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70"
+          },
+          "powerHp": {
+            "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+            "pdfPage": 3,
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70",
+            "unit": "PS",
+            "normalization": "Прямые700PS, не690bhp."
+          },
+          "powerKw": {
+            "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+            "pdfPage": 3,
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70",
+            "unit": "kW"
+          },
+          "icePowerKw": {
+            "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+            "pdfPage": 3,
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70",
+            "unit": "kW"
+          },
+          "transmission": {
+            "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+            "pdfPage": 5,
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской технический лист June2022 в архиве NHTSA; пресс-релиз производителя",
+            "sourceSha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+            "pdfPage": 8,
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Купе 8AT",
+            "originalTechnicalSelector": "V12 Vantage; Twin-Turbo V12; Touchtronic IV ZF 8HP70",
+            "unit": "kg",
+            "normalization": "Gross Vehicle Weight, не Unladen Mass1795kg."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "95f7940568d492384daba7df",
+      "make": "Aston Martin",
+      "model": "V12 Vantage",
+      "year": 2022,
+      "variantId": "beb49844899018757c06c581",
+      "trim": "V12 Twin-Turbo Родстер 8AT",
+      "operation": "create",
+      "expectedRevision": "3069826e-b541-4867-9316-43b21f6feaf3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 Twin-Turbo Родстер 8AT",
+        "bodyType": "convertible",
+        "powerHp": 700,
+        "transmission": "automatic",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powerHp",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+        "checkedAt": "2026-10-23",
+        "statement": "V12 Vantage Roadster 2022:700PS,ZF8AT,RWD,родстер. Реальный год подтверждён годовым отчётом.5.2л не превращены в5200см³; точные см³,кВт,топливо,GVW требуют таблицы родстера. Масса купе не перенесена. UAEv12 не сопоставлена по общемуtrim.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic"
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic"
+          },
+          "powerHp": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic",
+            "unit": "PS",
+            "normalization": "Прямые700PS, не690bhp."
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic"
+          },
+          "drive": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2022,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+              "sourceSha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "Фактическое начало поставок: Coupe Q2 2022, Roadster Q4 2022."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "95f7940568d492384daba7df",
+      "make": "Aston Martin",
+      "model": "V12 Vantage",
+      "year": 2023,
+      "variantId": "b06bbcc36d7f532837985121",
+      "trim": "V12 Twin-Turbo Родстер 8AT",
+      "operation": "create",
+      "expectedRevision": "3069826e-b541-4867-9316-43b21f6feaf3",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 Twin-Turbo Родстер 8AT",
+        "bodyType": "convertible",
+        "powerHp": 700,
+        "transmission": "automatic",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powerHp",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+        "checkedAt": "2026-10-23",
+        "statement": "V12 Vantage Roadster 2023:700PS,ZF8AT,RWD,родстер. Реальный год подтверждён годовым отчётом.5.2л не превращены в5200см³; точные см³,кВт,топливо,GVW требуют таблицы родстера. Масса купе не перенесена. UAEv12 не сопоставлена по общемуtrim.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2023,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/2023-results/aston-martin-lagonda-fy-2023-results.pdf?rev=1fef788985ef4cd88cb7da5773860a7e",
+              "sourceSha256": "69619788cf6d83cabe094f7d7814186e0bb58be8cdb19ffbc89ed8f83150e3e2",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "FY2023: V12 Vantage Roadster включён в фактический рост объёма и состав поставок."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic"
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2023,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/2023-results/aston-martin-lagonda-fy-2023-results.pdf?rev=1fef788985ef4cd88cb7da5773860a7e",
+              "sourceSha256": "69619788cf6d83cabe094f7d7814186e0bb58be8cdb19ffbc89ed8f83150e3e2",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "FY2023: V12 Vantage Roadster включён в фактический рост объёма и состав поставок."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic"
+          },
+          "powerHp": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2023,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/2023-results/aston-martin-lagonda-fy-2023-results.pdf?rev=1fef788985ef4cd88cb7da5773860a7e",
+              "sourceSha256": "69619788cf6d83cabe094f7d7814186e0bb58be8cdb19ffbc89ed8f83150e3e2",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "FY2023: V12 Vantage Roadster включён в фактический рост объёма и состав поставок."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic",
+            "unit": "PS",
+            "normalization": "Прямые700PS, не690bhp."
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2023,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/2023-results/aston-martin-lagonda-fy-2023-results.pdf?rev=1fef788985ef4cd88cb7da5773860a7e",
+              "sourceSha256": "69619788cf6d83cabe094f7d7814186e0bb58be8cdb19ffbc89ed8f83150e3e2",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "FY2023: V12 Vantage Roadster включён в фактический рост объёма и состав поставок."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic"
+          },
+          "drive": {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводской пресс-релиз19.08.2022",
+            "sourceSha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+            "year": 2023,
+            "yearEvidence": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/2023-results/aston-martin-lagonda-fy-2023-results.pdf?rev=1fef788985ef4cd88cb7da5773860a7e",
+              "sourceSha256": "69619788cf6d83cabe094f7d7814186e0bb58be8cdb19ffbc89ed8f83150e3e2",
+              "pdfPage": 2,
+              "checkedAt": "2026-10-23",
+              "basis": "FY2023: V12 Vantage Roadster включён в фактический рост объёма и состав поставок."
+            },
+            "selector": "V12 Twin-Turbo Родстер 8AT",
+            "originalTechnicalSelector": "V12 Vantage Roadster; 5.2-litre Twin-Turbo V12; ZF 8-speed automatic"
+          }
+        }
+      }
+    }
+  ]
+}
