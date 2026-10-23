@@ -37011,8 +37011,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
-      "writesPaused": true,
-      "reason": "ASTRA exact plan6d417105 apply and following immutable release snapshot; independent research writes remain paused to preserve revision consistency.",
+      "writesPaused": false,
+      "reason": "ASTRA apply completed; release857468e immutable index prepared and exact ASTRA membership verified. Independent research may resume with fresh revision/CAS; no duplicate deployment.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37040,7 +37040,7 @@
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
       },
       "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json",
-      "isolatedRelease": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+      "isolatedRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
       "postSnapshotCamry": {
         "workflow": 39925160057,
         "fields": 8,
@@ -37072,22 +37072,23 @@
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
       },
-      "pendingReleaseWorkflow": 39936828093,
+      "pendingReleaseWorkflow": 39975111916,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
-        "state": "astra_apply_then_release_snapshot",
+        "state": "released_after_verified_index_snapshot",
         "workflow": 39972729425,
         "job": 120479350486,
         "mode": "apply",
         "scope": "Независимые research batches; не блокирует основной ASTRA preview/apply",
-        "reason": "ASTRA apply39972729425 применяет закреплённый план6d417105 с beforeRevision/beforeChecksum. Независимые research saves отложены до завершения apply и изоляции общего индекса согласно roadmap.",
-        "resumeCondition": "Прочесть свежий roadmap, terminal ASTRA apply/readback и SUCCESS Prepare private encyclopedia index согласованного общего выпуска. Затем свежий API A3, исключение уже заполненных полей, пересчёт SHA256/CAS и обязательный API-readback. Не запускать отдельный deploy.",
+        "reason": "Apply39972729425 SUCCESS; release39975111916 index preparation SUCCESS; artifact12511063599 SHA256 db3b06db0fdd58b6544f361640e78df6c2e16ab86d4cb10d3f809ff682864862 verified locally. Public activation still pending.",
+        "resumeCondition": "Resume independent saved research with fresh API/revision/checksum, omit already filled fields, preserve manual edits and read back. Existing release39975111916 continues; do not duplicate deploy or ASTRA import.",
         "preparedBatch": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
         "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
         "previewWorkflow": 39949279655,
         "previewJob": 120399492239,
         "previewConclusion": "success",
-        "previewAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-astra-preview-acceptance.json"
+        "previewAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-astra-preview-acceptance.json",
+        "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       }
     },
     "audiA1BodyAndGapsPass": {
