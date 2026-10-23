@@ -32779,9 +32779,9 @@
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
-    "installedRelease": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
-    "installedWorkflow": 39923658639,
-    "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+    "installedRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+    "installedWorkflow": 39975111916,
+    "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
     "catalogRowsEnriched": 776,
     "catalogFieldsFilled": 1464,
     "remaining": [
@@ -32936,7 +32936,7 @@
       "reasonVerified": false,
       "freshWriterStateAfterFailureConfirmed": false
     },
-    "installedIndexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+    "installedIndexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
     "catalogFieldsEnriched": 1464,
     "failedConcurrentRelease": {
       "workflow": 39749020662,
@@ -32986,7 +32986,7 @@
       "nextAction": "Предыдущая порция39781954271 SUCCESS по свежему roadmap; не считать весь каталог законченным. Проверить дальнейший запуск перед возобновлением.",
       "completed": false
     },
-    "observedProductionRelease": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+    "observedProductionRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
     "mito2012_2013Pass": {
       "checkedAt": "2026-10-22T17:23:25+07:00",
       "modelId": "81a4b290257d227a5fd86ee6",
@@ -35079,15 +35079,15 @@
       }
     ],
     "currentReaderRelease": {
-      "release": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
-      "workflow": 39893572344,
+      "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+      "workflow": 39975111916,
       "state": "activated_verified",
       "activationConfirmed": true,
-      "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
-      "activationReport": "docs/encyclopedia/reports/2026-10-23-index-3e2d35-activation.json",
-      "checkedAt": "2026-10-23T10:36:00.581640+07:00",
-      "observedCalculationVersion": "d700f68f2c1e0d14574433e613b9346b06f495ac80cc7adf6ae408225a1de14e",
-      "nextAction": "Continue existing-model Vantage handoff; no repeat of the 14 activated batches and no model-foundation rediscovery."
+      "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+      "activationReport": "docs/encyclopedia/reports/2026-10-23-astra-installed-coverage.json",
+      "verificationLocalDate": "2026-10-23",
+      "observedCalculationVersion": "517a84ded1ba1eca308fea174fb8a0b04d4359a4321c1eb80a20d82cff2e254f",
+      "nextAction": "Continue exact field completion with current research cursor; coordinate pending A3 batch and active DBX/A3 diagnosis. Do not duplicate ASTRA/import/deploy."
     },
     "alpineLatePass": {
       "version": 1,
@@ -36356,16 +36356,23 @@
       }
     },
     "latestPublicationCheck": {
-      "checkedAt": "2026-10-23T05:52:31.951865+00:00",
-      "observedRelease": "025980454268fa9841ffab34b119037f348a1a11",
-      "activeIndex": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
-      "previous14BatchesActivated": true,
-      "newBatchActivated": true,
-      "referenceReusePublicPriceParityPassed": true,
+      "verificationLocalDate": "2026-10-23",
+      "observedRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+      "activeIndex": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+      "publicGate": {
+        "version": 1,
+        "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+        "startedAt": "2026-10-23T15:37:57.958Z",
+        "groups": 16,
+        "variants": 90,
+        "fields": 234,
+        "verified": true,
+        "finishedAt": "2026-10-23T15:38:03.291Z"
+      },
       "allModelsComplete": false,
       "newReleaseRequested": false,
-      "report": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json",
-      "action": "Продолжить существующую очередь Audi A1 и недостающих полей. Новые партии после изоляции снимка сохранять отдельно и включать в следующий согласованный выпуск; не пересобирать уже включённые партии."
+      "report": "docs/encyclopedia/reports/2026-10-23-astra-installed-coverage.json",
+      "action": "Current release installed; pending post-snapshot batches still require next coordinated index. Price completeness not implied."
     },
     "astonRapidePass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
@@ -36796,16 +36803,23 @@
       "collectorsCalculationRulesGuardsSecretsChanged": false
     },
     "coverage": {
-      "report": "docs/encyclopedia/reports/2026-10-23-all-brands-coverage.json",
-      "brands": 181,
-      "models": 2423,
-      "variants": 114945,
-      "requiredValuesPresent": 49731,
-      "requiredValuesSupported": 48074,
+      "report": "docs/encyclopedia/reports/2026-10-23-astra-installed-coverage.json",
+      "brands": 271,
+      "models": 4451,
+      "variants": 345392,
+      "requiredValuesPresent": 49806,
+      "requiredValuesSupported": 48149,
+      "technicalVariantsWithoutYear": 230447,
+      "annualVariants": 114945,
+      "annualModels": 2423,
+      "notFullySupportedAnnualVariants": 66796,
+      "notFullySupportedVariants": 297243,
+      "fullyCoveredExistingModelsByRequiredFields": 94,
       "completeUniverseClaim": false,
       "allModelsComplete": false,
-      "notFullySupportedVariants": 66871,
-      "fullyCoveredExistingModelsByRequiredFields": 112
+      "scope": "Existing permanent encyclopedia only; required field coverage is not proof of exact offer matching or a completed price calculation.",
+      "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+      "snapshotCreatedAt": "2026-10-23T15:13:44.630Z"
     },
     "catalogAuditScope": "Stored projection audit: five markets, not a count of newly gained live offers or full paid-feed coverage.",
     "astonVantagePass": {
@@ -37130,7 +37144,7 @@
         "job": 120479350486,
         "mode": "apply",
         "scope": "Независимые research batches; не блокирует основной ASTRA preview/apply",
-        "reason": "Apply39972729425 SUCCESS; release39975111916 index preparation SUCCESS; artifact12511063599 SHA256 db3b06db0fdd58b6544f361640e78df6c2e16ab86d4cb10d3f809ff682864862 verified locally. Public activation still pending.",
+        "reason": "ASTRA apply and release39975111916 completed successfully; public gate90variants/234fields and live health857468e confirmed. Independent research may continue with fresh revisions/CAS.",
         "resumeCondition": "Resume independent saved research with fresh API/revision/checksum, omit already filled fields, preserve manual edits and read back. Existing release39975111916 continues; do not duplicate deploy or ASTRA import.",
         "preparedBatch": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
         "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
