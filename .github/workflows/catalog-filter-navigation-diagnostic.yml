@@ -12,16 +12,30 @@ concurrency:
 jobs:
   diagnose:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
       - run: npm install --prefix "$RUNNER_TEMP/filter-diagnostic" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Wait for requested installed release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          export EXPECTED_RELEASE=$(node -p "JSON.parse(require('fs').readFileSync('.github/market-runs/catalog-filter-navigation-diagnostic.json')).expectedRelease")
+          node scripts/wait-published-release.mjs
       - name: Inspect public 320px consecutive SUV and sedan selections without rebuilding the app
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-diagnostic/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node scripts/catalog-filter-navigation-diagnostic.mjs
+      - name: Check installed electric feedback and six Japan cards
+        if: always()
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-diagnostic/node_modules/playwright/index.mjs
+        run: |
+          if node -e "process.exit(JSON.parse(require('fs').readFileSync('.github/market-runs/catalog-filter-navigation-diagnostic.json')).checkCatalogFeedback === true ? 0 : 1)"; then
+            CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-filter-feedback-live.mjs
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
