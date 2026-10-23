@@ -72,10 +72,11 @@ jobs:
             if(marker.inspectOfferIds !== undefined){
               const ids=marker.inspectOfferIds;
               if(!Array.isArray(ids)||ids.length<1||ids.length>3||ids.some(id=>typeof id!=='string'||!/^[a-f0-9]{24}$/.test(id)))throw Error('invalid_offer_inspection');
-              const {getOfferFromCurrentShard,searchProjectionFromOffer}=await import('./apps/web/lib/catalog/storage.ts');
-              const {applyEncyclopediaCalculation}=await import('./apps/web/lib/encyclopedia/calculation-index.ts');
+              const {getOfferFromCurrentShard,getOfferFromCurrentProjection,searchProjectionFromOffer}=await import('./apps/web/lib/catalog/storage.ts');
+              const {applyEncyclopediaCalculation,modelKey,token}=await import('./apps/web/lib/encyclopedia/calculation-index.ts');
               const {applyUaeManualSpecifications}=await import('./apps/web/lib/catalog/uae-manual-specifications.ts');
               const {safePublicPricing}=await import('./apps/web/lib/catalog/safe-public-pricing.ts');
+              const {normalizeVehicleOfferSpecs}=await import('./apps/web/lib/catalog/spec-normalization.ts');
               const {SPECIFICATION_AUDIT_FIELDS,classifySpecificationEvidence}=await import('./apps/web/lib/catalog/specification-evidence-audit.ts');
               const rows=[];
               for(const id of ids){
@@ -84,12 +85,15 @@ jobs:
                 const full=applyEncyclopediaCalculation(applyUaeManualSpecifications(source),index);
                 const projected=searchProjectionFromOffer(full);
                 const audit=offer=>Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field=>[field,classifySpecificationEvidence(offer,field)]));
-                const values=offer=>Object.fromEntries(['id','market','year','fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','calculationStatus','totalRub'].map(key=>[key,offer[key]??null]));
+                const values=offer=>Object.fromEntries(['id','market','make','model','year','trim','generation','chassisCode','engineCode','transmission','drive','bodyType','fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','calculationStatus','totalRub'].map(key=>[key,offer[key]??null]));
                 const sanitizedSource=safePublicPricing(applyUaeManualSpecifications(source));
                 const enrichedSanitized=applyEncyclopediaCalculation(sanitizedSource,index);
                 const safeEnriched=safePublicPricing(enrichedSanitized);
-                const stage=offer=>({values:values(offer),audit:audit(offer),attestedFields:Object.keys(offer.encyclopediaCalculation?.values||{})});
-                rows.push({id,source:stage(source),sanitizedSource:stage(sanitizedSource),enrichedSanitized:stage(enrichedSanitized),safeEnriched:stage(safeEnriched),full:stage(full),projection:stage(projected),attestedFields:Object.keys(full.encyclopediaCalculation?.values||{})});
+                const stage=offer=>offer?({values:values(offer),audit:audit(offer),attestedFields:Object.keys(offer.encyclopediaCalculation?.values||{}),transmissionEvidence:offer.operational?.semanticEvidence?.transmission?{status:offer.operational.semanticEvidence.transmission.status,value:offer.operational.semanticEvidence.transmission.value,source:offer.operational.semanticEvidence.transmission.source}:null}):null;
+                const storedProjection=await getOfferFromCurrentProjection(id);
+                const candidates=(index.models[modelKey(source.make,source.model)]||[]).filter(v=>v.year===source.year&&v.trims.includes(token(source.trim)));
+                if(candidates.length>20)throw Error('inspection_candidates_exceed_bound');
+                rows.push({id,storedProjection:stage(storedProjection),normalizedFull:stage(normalizeVehicleOfferSpecs(full)),indexCandidates:candidates.map(v=>({variantId:v.variantId,revision:v.revision,constraints:v.constraints,transmission:v.values.transmission,transmissionSource:v.sources.transmission})),source:stage(source),sanitizedSource:stage(sanitizedSource),enrichedSanitized:stage(enrichedSanitized),safeEnriched:stage(safeEnriched),full:stage(full),projection:stage(projected),attestedFields:Object.keys(full.encyclopediaCalculation?.values||{})});
               }
               const after=await storage.readJson('catalog/manifest.json',null);
               if(after?.generationId!==manifest?.generationId)throw Error('inspection_generation_changed');
