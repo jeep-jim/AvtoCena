@@ -32707,14 +32707,14 @@
     "state": "vantage_late_saved_readback_pass_next_audi_a1_writes_paused_for_manual_repair",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Audi A1 — существующие394варианта, только недостающие поля; запись после согласованного repair-снимка",
+    "nextModel": "Audi A1 — существующие394варианта, заполнять только недостающие поля; уже известные точные данные не собирать повторно",
     "lastVerifiedResearch": "aston-vantage",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
-    "installedRelease": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
-    "installedWorkflow": 39893572344,
-    "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
+    "installedRelease": "025980454268fa9841ffab34b119037f348a1a11",
+    "installedWorkflow": 39905197131,
+    "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
     "catalogRowsEnriched": 776,
     "catalogFieldsFilled": 1464,
     "remaining": [
@@ -32784,25 +32784,7 @@
         "requiresFreshApiPreflight": true
       }
     ],
-    "pendingNextIndexBatches": [
-      {
-        "key": "aston-vantage-late",
-        "batch": "research-2026-10-23-aston-vantage-late",
-        "commit": "9f155687ed5c4a95c58e77e2827d7bfc8ae71579",
-        "workflow": 39904155549,
-        "job": 120252138672,
-        "variants": 22,
-        "newVariants": 22,
-        "updatedVariants": 0,
-        "fields": 158,
-        "compiledCalculationFields": 136,
-        "workflowConclusion": "success",
-        "apiReadback": true,
-        "includedInIndex": false,
-        "indexMembershipState": "saved_after_isolated_9a83d4be_snapshot",
-        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-vantage-late-readback.json"
-      }
-    ],
+    "pendingNextIndexBatches": [],
     "inFlightResearch": [],
     "lastCompletedPass": "research-2026-10-23-aston-vantage-late",
     "failedIndexRelease": {
@@ -32835,7 +32817,7 @@
       "reasonVerified": false,
       "freshWriterStateAfterFailureConfirmed": false
     },
-    "installedIndexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
+    "installedIndexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
     "catalogFieldsEnriched": 1464,
     "failedConcurrentRelease": {
       "workflow": 39749020662,
@@ -32871,7 +32853,7 @@
       "activated": false
     },
     "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1.json",
-    "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-3e2d35-activation.json",
+    "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
       "state": "completed_partial",
@@ -35487,6 +35469,26 @@
           },
           "doesNotCertifyAllCatalogPrices": true
         }
+      },
+      {
+        "key": "aston-vantage-late",
+        "batch": "research-2026-10-23-aston-vantage-late",
+        "commit": "9f155687ed5c4a95c58e77e2827d7bfc8ae71579",
+        "workflow": 39904155549,
+        "job": 120252138672,
+        "variants": 22,
+        "newVariants": 22,
+        "updatedVariants": 0,
+        "fields": 158,
+        "compiledCalculationFields": 136,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": true,
+        "indexMembershipState": "immutable_snapshot_membership_and_public_activation_verified",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-vantage-late-readback.json",
+        "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+        "release": "025980454268fa9841ffab34b119037f348a1a11",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
       }
     ],
     "astonDb11Db12Pass": {
@@ -36031,18 +36033,22 @@
       "release": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
       "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
       "fixCode": "b6dd15ef1c805c78d00b81337621e159558ea9ec",
-      "fixInstalled": false,
+      "fixInstalled": true,
       "existingProjectionMigrationVerified": false,
-      "latestReport": "docs/encyclopedia/reports/2026-10-23-index-3e2d35-activation.json"
+      "latestReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json",
+      "fixInstalledRelease": "025980454268fa9841ffab34b119037f348a1a11"
     },
     "latestPublicationCheck": {
-      "checkedAt": "2026-10-23T11:07:00+07:00",
-      "observedRelease": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
-      "activeIndex": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
+      "checkedAt": "2026-10-23T05:52:31.951865+00:00",
+      "observedRelease": "025980454268fa9841ffab34b119037f348a1a11",
+      "activeIndex": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
       "previous14BatchesActivated": true,
-      "newBatchActivated": false,
+      "newBatchActivated": true,
+      "referenceReusePublicPriceParityPassed": true,
+      "allModelsComplete": false,
       "newReleaseRequested": false,
-      "action": "Включить только новую Vantage-партию в следующий согласованный штатный индекс/подготовку цен. Прежние14активированных не повторять. Не запускать слепой deploy с неподтверждённым переносом DBX fuel provenance; этот участок сопровождается отдельно."
+      "report": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json",
+      "action": "Продолжить существующую очередь Audi A1 и недостающих полей. Новые партии после изоляции снимка сохранять отдельно и включать в следующий согласованный выпуск; не пересобирать уже включённые партии."
     },
     "astonRapidePass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
@@ -36476,11 +36482,13 @@
       "report": "docs/encyclopedia/reports/2026-10-23-all-brands-coverage.json",
       "brands": 181,
       "models": 2423,
-      "variants": 114892,
-      "requiredValuesPresent": 49546,
-      "requiredValuesSupported": 47889,
+      "variants": 114945,
+      "requiredValuesPresent": 49731,
+      "requiredValuesSupported": 48074,
       "completeUniverseClaim": false,
-      "allModelsComplete": false
+      "allModelsComplete": false,
+      "notFullySupportedVariants": 66871,
+      "fullyCoveredExistingModelsByRequiredFields": 112
     },
     "catalogAuditScope": "Stored projection audit: five markets, not a count of newly gained live offers or full paid-feed coverage.",
     "astonVantagePass": {
@@ -36504,7 +36512,7 @@
       "wholeRowVerified": false,
       "manualWrites": 0,
       "compilerChanged": false,
-      "activationConfirmed": false,
+      "activationConfirmed": true,
       "nativeMatcher": {
         "exactCases": 33,
         "bodyAndGearboxMassSeparated": true,
@@ -36571,7 +36579,14 @@
         "newBatchMembership": "saved_after_active_3e2d35_snapshot",
         "duplicateReleaseRequested": false,
         "nextAction": "Включить только новую Vantage-партию в следующий согласованный штатный индекс/подготовку цен. Прежние14активированных не повторять. Не запускать слепой deploy с неподтверждённым переносом DBX fuel provenance; этот участок сопровождается отдельно.",
-        "blockingContext": "В main есть неустановленное generic DBX fuel confirmation изменение; старые проекции требуют bounded переноса и приёмки. Исследовательская задача не меняет этот код/данные и не запускает второй независимый выпуск."
+        "blockingContext": "В main есть неустановленное generic DBX fuel confirmation изменение; старые проекции требуют bounded переноса и приёмки. Исследовательская задача не меняет этот код/данные и не запускает второй независимый выпуск.",
+        "latestActivation": {
+          "release": "025980454268fa9841ffab34b119037f348a1a11",
+          "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "workflow": 39905197131,
+          "confirmed": true,
+          "report": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
+        }
       },
       "referenceIntake": {
         "run": 39831884392,
@@ -36588,7 +36603,8 @@
       },
       "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-vantage-remaining.json",
       "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-vantage-late.json",
-      "collectorsCalculationRulesGuardsSecretsChanged": false
+      "collectorsCalculationRulesGuardsSecretsChanged": false,
+      "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "astonVantageLatePass": {
       "checkedAt": "2026-10-23T05:10:15.098Z",
@@ -36610,7 +36626,7 @@
       "wholeRowVerified": false,
       "manualWrites": 0,
       "compilerChanged": false,
-      "activationConfirmed": false,
+      "activationConfirmed": true,
       "nativeMatcher": {
         "exactCases": 22,
         "genericIdentityStillBlocked": true,
@@ -36684,7 +36700,14 @@
         "newBatchIncludedInExistingSnapshot": false,
         "newBatchActivationConfirmed": false,
         "duplicateReleaseRequested": false,
-        "nextAction": "Включить только новую партию158/136 в следующий согласованный штатныйиндекс/подготовкуцен. Ручнаясессия сопровождает8329202 иDBX/UI, не дублировать её выпуск/перенос."
+        "nextAction": "Включить только новую партию158/136 в следующий согласованный штатныйиндекс/подготовкуцен. Ручнаясессия сопровождает8329202 иDBX/UI, не дублировать её выпуск/перенос.",
+        "latestActivation": {
+          "release": "025980454268fa9841ffab34b119037f348a1a11",
+          "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "workflow": 39905197131,
+          "confirmed": true,
+          "report": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
+        }
       },
       "referenceIntake": {
         "run": 39831884392,
@@ -36705,29 +36728,32 @@
       "historicalExpansionComplete": false,
       "collectorsCalculationRulesGuardsSecretsChanged": false,
       "coordination": {
-        "observedMain": "a02c62471f9901276f769b60793ba1b8a6d195ca",
-        "writesPaused": true,
-        "reason": "Ручнаясессия12:11 готовит guarded repair proof для существующих точных referenceEvidence и согласованный выпуск. Наша партия сохранена05:09:40UTC, до новой паузы. Дальнейшее research-сохранение — только после изоляции следующего согласованного снимка; независимое исследование разрешено.",
+        "observedMain": "025980454268fa9841ffab34b119037f348a1a11",
+        "writesPaused": false,
+        "reason": "Снимок36991f изолирован05:24:38UTC и установлен05:45:31UTC. Записи по существующей очереди разрешены; новые партии после снимка принадлежат следующему выпуску.",
         "doNotDuplicate": [
           "reference repair preview/apply",
           "production deploy",
           "UI changes",
           "full China collection"
         ],
-        "newBatchAwaitingNextIndex": true
-      }
+        "newBatchAwaitingNextIndex": false,
+        "checkedAt": "2026-10-23T05:52:31.951865+00:00"
+      },
+      "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "observedMain": "a02c62471f9901276f769b60793ba1b8a6d195ca",
-      "writesPaused": true,
-      "reason": "Ручнаясессия12:11 готовит guarded repair proof для существующих точных referenceEvidence и согласованный выпуск. Наша партия сохранена05:09:40UTC, до новой паузы. Дальнейшее research-сохранение — только после изоляции следующего согласованного снимка; независимое исследование разрешено.",
+      "observedMain": "025980454268fa9841ffab34b119037f348a1a11",
+      "writesPaused": false,
+      "reason": "Снимок36991f изолирован05:24:38UTC и установлен05:45:31UTC. Записи по существующей очереди разрешены; новые партии после снимка принадлежат следующему выпуску.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
         "UI changes",
         "full China collection"
       ],
-      "newBatchAwaitingNextIndex": true
+      "newBatchAwaitingNextIndex": false,
+      "checkedAt": "2026-10-23T05:52:31.951865+00:00"
     }
   },
   "scope": {

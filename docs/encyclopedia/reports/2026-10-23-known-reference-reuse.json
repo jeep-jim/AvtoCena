@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-23T04:54:47.163749+00:00",
+  "checkedAt": "2026-10-23T05:52:31.951865+00:00",
   "scope": "Missing fields in existing permanent model variants only. Exact identity and field provenance retained; no supplier refresh or model rediscovery.",
   "preview": {
     "workflow": 39899840943,
@@ -113,7 +113,11 @@
     "observedTotalRub": null,
     "observedStatus": "needs_data",
     "cause": "Filled-only proof created partial candidates; unchanged fuel lacked proof and blocked unanimity. Reproduced and corrected without relaxing matching.",
-    "resolvedOnPublicSite": false
+    "resolvedOnPublicSite": true,
+    "resolvedAt": "2026-10-23T05:46:40.281943+00:00",
+    "restoredTotalRub": 3148247,
+    "correctionRelease": "025980454268fa9841ffab34b119037f348a1a11",
+    "publicSearchAndCardEqual": true
   },
   "evidenceRepair": {
     "previewWorkflow": 39904336772,
@@ -132,5 +136,275 @@
     "completedAt": "2026-10-23T05:18:51.724Z",
     "savedModels": 19,
     "savedValues": 0
+  },
+  "correctionRelease": {
+    "release": "025980454268fa9841ffab34b119037f348a1a11",
+    "workflow": 39905197131,
+    "job": 120255443792,
+    "conclusion": "success",
+    "activatedAt": "2026-10-23T05:45:31.0109373Z",
+    "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+    "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json",
+    "publicPriceParityPassed": true,
+    "publicPriceCheck": {
+      "checkedAt": "2026-10-23T05:46:40.281943+00:00",
+      "healthBefore": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "025980454268fa9841ffab34b119037f348a1a11",
+        "calculationVersion": "b66d3801d7193a68315f5fbe0ba403ac8c81c401b6d2715563389050f7d17b04"
+      },
+      "checks": [
+        {
+          "label": "Audi A3",
+          "offerId": "56bbcecb51a61b76402371a9",
+          "searchUrl": "https://avtocena.com/api/catalog/search?market=uae&brand=Audi&model=A3&pageSize=24",
+          "cardUrl": "https://avtocena.com/cars/offer/56bbcecb51a61b76402371a9",
+          "searchMs": 4077,
+          "cardMs": 8820,
+          "comparisons": {
+            "year": {
+              "search": 2024,
+              "card": 2024,
+              "equal": true
+            },
+            "trim": {
+              "search": "35 TFSI ADVANCED",
+              "card": "35 TFSI ADVANCED",
+              "equal": true
+            },
+            "engineCc": {
+              "search": 1498,
+              "card": 1498,
+              "equal": true
+            },
+            "powerHp": {
+              "search": 150,
+              "card": 150,
+              "equal": true
+            },
+            "powerKw": {
+              "search": 110,
+              "card": 110,
+              "equal": true
+            },
+            "icePowerKw": {
+              "search": 110,
+              "card": 110,
+              "equal": true
+            },
+            "fuel": {
+              "search": "petrol",
+              "card": "petrol",
+              "equal": true
+            },
+            "powertrainKind": {
+              "search": "combustion",
+              "card": "combustion",
+              "equal": true
+            },
+            "totalRub": {
+              "search": 3148247,
+              "card": 3148247,
+              "equal": true
+            },
+            "calculationStatus": {
+              "search": "estimated",
+              "card": "estimated",
+              "equal": true
+            }
+          },
+          "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "generationId": "gen_1792702445675_8c312f85",
+          "total": 51,
+          "passed": true
+        }
+      ],
+      "healthAfter": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "025980454268fa9841ffab34b119037f348a1a11",
+        "calculationVersion": "b66d3801d7193a68315f5fbe0ba403ac8c81c401b6d2715563389050f7d17b04"
+      },
+      "passed": true
+    }
+  },
+  "latestLiveUiVerification": {
+    "workflow": 39906023966,
+    "job": 120258073850,
+    "artifact": 12481661486,
+    "conclusion": "success",
+    "feedback": {
+      "checkedAt": "2026-10-23T05:46:15.835Z",
+      "expectedRelease": "025980454268fa9841ffab34b119037f348a1a11",
+      "passed": true,
+      "health": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "025980454268fa9841ffab34b119037f348a1a11",
+        "calculationVersion": "b66d3801d7193a68315f5fbe0ba403ac8c81c401b6d2715563389050f7d17b04"
+      },
+      "japanCards": 6,
+      "initialMs": 6108,
+      "checkedAfterClick": true,
+      "loaderVisible": true,
+      "filterAcknowledgedMs": 12871,
+      "filterCompleteMs": 12891,
+      "withinTwoSeconds": false,
+      "colors": {
+        "dark": "rgb(255, 210, 31)",
+        "light": "rgb(255, 210, 31)"
+      },
+      "duplicateSearches": 0,
+      "healthAfter": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "025980454268fa9841ffab34b119037f348a1a11",
+        "calculationVersion": "b66d3801d7193a68315f5fbe0ba403ac8c81c401b6d2715563389050f7d17b04"
+      },
+      "errors": []
+    },
+    "mobile": {
+      "passed": true,
+      "failure": null,
+      "phase": "second-sedan",
+      "healthBefore": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "025980454268fa9841ffab34b119037f348a1a11",
+        "calculationVersion": "b66d3801d7193a68315f5fbe0ba403ac8c81c401b6d2715563389050f7d17b04"
+      },
+      "healthAfter": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "025980454268fa9841ffab34b119037f348a1a11",
+        "calculationVersion": "b66d3801d7193a68315f5fbe0ba403ac8c81c401b6d2715563389050f7d17b04"
+      },
+      "state": {
+        "url": "https://avtocena.com/cars?bodyType=suv%7Csedan",
+        "readyState": "complete",
+        "selectedBody": "suv|sedan",
+        "busy": "false"
+      },
+      "clickedMs": 10088,
+      "firstUrlMs": 23863,
+      "secondClickedMs": 23863,
+      "elapsedMs": 33963,
+      "pageErrors": [],
+      "responses": [
+        {
+          "url": "https://avtocena.com/cars",
+          "type": "document",
+          "startedMs": 932,
+          "durationMs": 5685,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/api/catalog/rates",
+          "type": "fetch",
+          "startedMs": 9063,
+          "durationMs": 251,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/api/auth/me",
+          "type": "fetch",
+          "startedMs": 9063,
+          "durationMs": 563,
+          "status": 401
+        },
+        {
+          "url": "https://avtocena.com/api/autobot",
+          "type": "fetch",
+          "startedMs": 9063,
+          "durationMs": 1692,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/api/crm/assistant",
+          "type": "fetch",
+          "startedMs": 9064,
+          "durationMs": 1761,
+          "status": 401
+        },
+        {
+          "url": "https://avtocena.com/api/account/auth",
+          "type": "fetch",
+          "startedMs": 9546,
+          "durationMs": 1295,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/api/catalog/saved-previews",
+          "type": "fetch",
+          "startedMs": 9574,
+          "durationMs": 1480,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/cookies",
+          "type": "fetch",
+          "startedMs": 9179,
+          "durationMs": 6974,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/",
+          "type": "fetch",
+          "startedMs": 9624,
+          "durationMs": 6759,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/account",
+          "type": "fetch",
+          "startedMs": 9625,
+          "durationMs": 6772,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/favorites",
+          "type": "fetch",
+          "startedMs": 9626,
+          "durationMs": 6922,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/cars?bodyType=suv",
+          "type": "fetch",
+          "startedMs": 10359,
+          "durationMs": 13373,
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://avtocena.com/api/catalog/saved-previews",
+          "type": "fetch",
+          "startedMs": 23873,
+          "durationMs": 397,
+          "status": 200
+        },
+        {
+          "url": "https://avtocena.com/cars?bodyType=suv%7Csedan",
+          "type": "fetch",
+          "startedMs": 24136,
+          "durationMs": 9433,
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://avtocena.com/api/catalog/saved-previews",
+          "type": "fetch",
+          "startedMs": 33707,
+          "durationMs": 216,
+          "status": 200
+        }
+      ],
+      "unfinished": [
+        {
+          "url": "https://avtocena.com/api/auth/me",
+          "type": "fetch",
+          "startedMs": 9547
+        }
+      ]
+    }
   }
 }
