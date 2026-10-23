@@ -37195,8 +37195,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
-      "writesPaused": true,
-      "reason": "One coordinated release requested after DBX evidence apply; pause independent research writes only until Prepare private encyclopedia index completes successfully, then resume with fresh revisions/CAS. No duplicate deploy/apply.",
+      "writesPaused": false,
+      "reason": "Prepare private encyclopedia index SUCCESS, coverage artifact12526853496 created19:43:08UTC. Snapshot isolated; independent research writes may resume with fresh revisions/CAS. New post-snapshot batches remain pending. Release is still building; do not duplicate deploy or DBX apply.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37204,7 +37204,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T19:33:30Z",
+      "checkedAt": "2026-10-23T19:43:47Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37224,7 +37224,7 @@
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
       },
       "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json",
-      "isolatedRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+      "isolatedRelease": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
       "postSnapshotCamry": {
         "workflow": 39925160057,
         "fields": 8,
@@ -37256,7 +37256,7 @@
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
       },
-      "pendingReleaseWorkflow": null,
+      "pendingReleaseWorkflow": 40012399412,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
         "state": "released_after_verified_index_snapshot",
@@ -37274,7 +37274,8 @@
         "previewAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-astra-preview-acceptance.json",
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       },
-      "lastCompletedReleaseWorkflow": 39988848904
+      "lastCompletedReleaseWorkflow": 39988848904,
+      "pendingRelease": "10f4579b9f8adc91aaef49c435923c466f4fd9bc"
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,

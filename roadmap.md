@@ -13738,3 +13738,10 @@ Apply40010362345 теперь TERMINAL SUCCESS. Артефакт12526726820 ск
 Red-before/green-after:26targeted testsPASS, дополнительныеnegativeHTTPS/batch/contradictoryfactory checksPASS; webTypeScriptPASS, YAML/diffPASS. Локальныйreplayименно прочитанногоsource+installedcandidate подтвердилhatchback вpublicserialization/searchprojection/canonicalization, сохранённую4105050цену и unknown30min. Это НЕноваяпубличнаяприёмка. Regression добавленвreleasegate.
 
 Параллельный10f4579 уже запросилобщийrelease с4pending163полями иfuelreplay, нашфиксвнегоНЕвходит. Второйdeployне запрошен: послеterminalтекущего включитьфиксвследующийсогласованныйвыпуск снакопленнымипартиями ипроверитьреальный061974search/card/подпись/цену. Queuebodyblocker уточнён,publicParityClosed=false; cursor/pending/researchpause/modelrecords сохранены. ПрипереносеRoad восстановленточныйсуффикспредыдущейзаписиDBXиз50760b9, случайноразрезанныйиз-заUTF16/codepointприконкурентномappend; историявосстановлена, все последующиезаписисохранены.
+
+
+### 24.10.2026, 02:43 Красноярск — снимок10f4579 изолирован; researchwrites разрешены
+
+Regcloud-deploy40012399412/job120616099378: ASTRAwait/exact/security/storage и Prepareprivateindex SUCCESS, coverageartifact12526853496 создан19:43:08UTC, сейчасBuild IN_PROGRESS. Researchwrites вновьразрешены сновымиrevisions/CAS; послеснимковыеизменениявэтотreleaseнеобещать. Четыреpending163поля/22required включениепроверяетсяпоартефакту; активация/публичныйDBXпаритет ещёpending. ПовторныйDBXapply40010362345 запрещён:verified6objects/0values ужеуспешен.
+
+Конкурентный1f207982 сдоказаннымA3bodyfix сохранён, вrelease10f4579 НЕвходит; второйdeploy пока не запрашивается. НеуспешнаяпопыткадокументальногоCAS989fa32 наустаревшем10f4579 НЕопубликована; свежаяветка/очередь/восстановленнаяисторияRoad1f207982 сохранены. Ожидаем текущийrelease ипубличнуюDBXприёмку. Бот/роли/визуальнаяпроверка/скорость иA3bodyactivation остаютсяоткрыты.
