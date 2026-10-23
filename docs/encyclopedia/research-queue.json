@@ -36598,6 +36598,17 @@
         "checkedAt": "2026-10-23T20:16:46.996Z",
         "cases": 4,
         "scope": "Visible price on390/1280 light/dark; not complete image loading or global502 resolution."
+      },
+      "primaryPhotoAcceptance": {
+        "passed": true,
+        "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+        "checkedAt": "2026-10-23T21:04:26.274Z",
+        "workflow": 40023954206,
+        "job": 120655294785,
+        "artifact": 12531587819,
+        "cases": 4,
+        "report": "docs/diagnostics/2026-10-24-dbx-primary-photo-acceptance.json",
+        "scope": "Primary photo and visible price; 390/1280px, light/dark; not entire gallery or speed."
       }
     },
     "latestPublicationCheck": {
