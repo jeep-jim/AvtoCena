@@ -1,0 +1,134 @@
+{
+  "checkedAt": "2026-10-23T03:41:45Z",
+  "runId": 39896292069,
+  "jobId": 120227416930,
+  "artifactId": 12477171142,
+  "release": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+  "scope": "One Chromium 320px dark production navigation; read-only, no rebuild. Not a general stability acceptance.",
+  "result": {
+    "passed": false,
+    "failure": "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded.",
+    "phase": "first-suv",
+    "healthBefore": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+      "calculationVersion": "d700f68f2c1e0d14574433e613b9346b06f495ac80cc7adf6ae408225a1de14e"
+    },
+    "healthAfter": null,
+    "state": {
+      "url": "https://avtocena.com/cars",
+      "readyState": "complete",
+      "selectedBody": "suv",
+      "busy": "true"
+    },
+    "clickedMs": 6046,
+    "firstUrlMs": null,
+    "secondClickedMs": null,
+    "elapsedMs": 36136,
+    "pageErrors": [],
+    "responses": [
+      {
+        "url": "https://avtocena.com/cars",
+        "type": "document",
+        "startedMs": 870,
+        "durationMs": 2054,
+        "status": 200
+      },
+      {
+        "url": "https://avtocena.com/api/catalog/rates",
+        "type": "fetch",
+        "startedMs": 4781,
+        "durationMs": 197,
+        "status": 200
+      },
+      {
+        "url": "https://avtocena.com/api/auth/me",
+        "type": "fetch",
+        "startedMs": 4781,
+        "durationMs": 210,
+        "status": 401
+      },
+      {
+        "url": "https://avtocena.com/api/autobot",
+        "type": "fetch",
+        "startedMs": 4781,
+        "durationMs": 519,
+        "status": 200
+      },
+      {
+        "url": "https://avtocena.com/cookies",
+        "type": "fetch",
+        "startedMs": 4854,
+        "durationMs": 447,
+        "status": 200
+      },
+      {
+        "url": "https://avtocena.com/api/crm/assistant",
+        "type": "fetch",
+        "startedMs": 4781,
+        "durationMs": 521,
+        "status": 401
+      },
+      {
+        "url": "https://avtocena.com/api/account/auth",
+        "type": "fetch",
+        "startedMs": 5243,
+        "durationMs": 105,
+        "status": 200
+      },
+      {
+        "url": "https://avtocena.com/api/catalog/saved-previews",
+        "type": "fetch",
+        "startedMs": 5254,
+        "durationMs": 251,
+        "status": 200
+      },
+      {
+        "url": "https://avtocena.com/",
+        "type": "fetch",
+        "startedMs": 5299,
+        "durationMs": 210,
+        "status": 200
+      },
+      {
+        "url": "https://avtocena.com/account",
+        "type": "fetch",
+        "startedMs": 5300,
+        "durationMs": 210,
+        "status": 200
+      },
+      {
+        "url": "https://avtocena.com/favorites",
+        "type": "fetch",
+        "startedMs": 5300,
+        "durationMs": 241,
+        "status": 200
+      }
+    ],
+    "unfinished": [
+      {
+        "url": "https://avtocena.com/api/auth/me",
+        "type": "fetch",
+        "startedMs": 5244
+      },
+      {
+        "url": "https://avtocena.com/cars?bodyType=suv",
+        "type": "fetch",
+        "startedMs": 6301
+      }
+    ]
+  },
+  "interpretation": "Selected SUV state persisted and an RSC fetch was outstanding for about 29.8 seconds. Second sedan step was never reached. This does not establish a frontend race or the server/provider/network root cause. healthAfter is null because the navigation failed first.",
+  "externalDocumentProbe": {
+    "url": "https://avtocena.com/cars?bodyType=suv",
+    "compressed": true,
+    "http": 200,
+    "firstByteSeconds": 6.434965,
+    "totalSeconds": 25.002148,
+    "receivedBytes": 32017,
+    "complete": false,
+    "curlExit": 28,
+    "interpretation": "Partial compressed HTML response from a separate external client; not browser timing."
+  }
+}
