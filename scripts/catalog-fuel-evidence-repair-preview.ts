@@ -4,6 +4,7 @@ import {getJsonStorage} from '../apps/web/lib/data';
 import {catalogProjectionBatches} from '../apps/web/lib/catalog-projection-parts';
 import {detailHash,detailShardPath} from '../apps/web/lib/catalog/detail-shards';
 import {catalogIndexShardKey} from '../apps/web/lib/catalog/storage';
+import {validBudgetMarketIndex} from '../apps/web/lib/catalog/budget-market-index';
 import {fuelRepairDigest,repairFuelRows} from './lib/catalog-fuel-evidence-repair';
 
 // Explicit manual preview only. It cannot acquire a writer or alter any object.
@@ -24,7 +25,7 @@ async function raw(path:string,maxBytes=128*1024*1024,pin=true){
  const before=pin?await storage.readObjectMetadata!(path):null;
  if(pin&&(!before?.found||!before.etag))throw Error('fuel_preview_missing:'+path);
  const body=await storage.getBinary!(path);bytesRead+=body.data.length;
- if(body.data.length>maxBytes || bytesRead>2*1024*1024*1024)throw Error('fuel_preview_bytes_bound');
+ if(body.data.length>maxBytes || bytesRead>2*1024*1024*1024)throw Error('fuel_preview_bytes_bound:'+JSON.stringify({path,objectBytes:body.data.length,maxBytes,bytesRead}));
  if(pin){const after=await storage.readObjectMetadata!(path);if(after.etag!==before!.etag)throw Error('fuel_preview_changed:'+path);pinned.set(path,before!.etag!);}
  return JSON.parse(body.data.toString('utf8'));
 }
@@ -59,11 +60,21 @@ for(const [id,source] of sources){
  for(const path of [`catalog/public/projection/${market}.json`,`catalog/generations/${generation}/indexes/projection/${market}.json`,`catalog/public/projection-brand/${make}-${brandHash}.json`,`catalog/generations/${generation}/indexes/projection-brand/${make}-${brandHash}.json`])add(path,id);
 }
 for(const [path,ids] of scopes)inspect(path,await raw(path),[...ids]);
-const budgetPath=`catalog/generations/${generation}/indexes/budget-count-v3.json`;
-const budget=await raw(budgetPath);
-if(budget.generationId!==generation||budget.version!==3||!Array.isArray(budget.rows)||!Array.isArray(budget.otherRows))throw Error('fuel_preview_budget_schema');
+const budgetDirectory=await raw(`catalog/generations/${generation}/indexes/budget-markets-v1/ready.json`,1024*1024);
+if(budgetDirectory.version!==1||budgetDirectory.generationId!==generation)throw Error('fuel_preview_budget_directory');
+const budgets=new Map<string,any>();
+for(const source of sources.values()){
+ const market=catalogIndexShardKey(source.market);
+ if(!/^(china|korea|japan|europe|uae|georgia)$/.test(market))throw Error('fuel_preview_budget_market');
+ if(!budgets.has(market)){
+  const part=await raw(`catalog/generations/${generation}/indexes/budget-markets-v1/${market}.json`);
+  if(!Array.isArray(part.rows)||!Array.isArray(part.otherRows)||!validBudgetMarketIndex(budgetDirectory,market,part))throw Error('fuel_preview_budget_market_integrity');
+  budgets.set(market,part);
+ }
+}
 const budgetTargets=[];
 for(const id of request.offerIds){
+ const budget=budgets.get(catalogIndexShardKey(sources.get(id).market));
  const matches=[...budget.rows,...budget.otherRows].filter((row:any)=>row?.[5]?.id===id);
  if(matches.length!==1||!Number.isSafeInteger(matches[0][5].block)||matches[0][5].block<0)throw Error('fuel_preview_budget_target');
  const row=matches[0],path=`catalog/generations/${generation}/indexes/budget-cards-v3/${row[5].block}.json`;

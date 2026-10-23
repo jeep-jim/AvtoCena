@@ -1,6 +1,6 @@
 {
-  "requestedAt": "2026-10-23T19:08:00Z",
-  "reason": "Corrected bounded DBX preview after terminal compact and natural lease expiry; fresh writer/generation/health checks required before reading projections. No production writes.",
+  "requestedAt": "2026-10-23T19:12:30Z",
+  "reason": "Address DBX through checksum-verified UAE budget partition; full global budget root exceeded bound. Retain all byte/time/identity/writer guards; preview only.",
   "previewFuelEvidenceRepair": {
     "offerIds": [
       "b65974b83d5399d588073fc5"
