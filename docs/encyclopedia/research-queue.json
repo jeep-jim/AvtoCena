@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T17:00:01.002Z",
+  "updatedAt": "2026-10-23T17:10:20.729040+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32745,7 +32745,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T17:00:01.002Z",
+    "updatedAt": "2026-10-23T17:10:20.729040+00:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2022_2023_50_body_fields_saved_readback_pending_index",
     "preserveManual": true,
@@ -32778,9 +32778,9 @@
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
-    "installedRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
-    "installedWorkflow": 39975111916,
-    "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+    "installedRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "installedWorkflow": 39988848904,
+    "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
     "catalogRowsEnriched": 776,
     "catalogFieldsFilled": 1464,
     "remaining": [
@@ -32877,32 +32877,6 @@
     ],
     "pendingNextIndexBatches": [
       {
-        "batch": "research-2026-10-23-audi-a3-2022-body",
-        "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
-        "commit": "cda51eaf8cf28e36b20e2ceb958c74ec1634c296",
-        "workflow": 39982805443,
-        "job": 120514196873,
-        "variants": 50,
-        "newVariants": 0,
-        "fields": 50,
-        "compiledFields": 50,
-        "apiReadback": true,
-        "includedInIndex": false,
-        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-pass.json",
-        "afterRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
-        "publicParity": {
-          "passed": true,
-          "offers": 7,
-          "comparisons": 91,
-          "matched": 91,
-          "repeatedGroups": 2,
-          "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-public-parity.json",
-          "scope": "Ограниченная выборка Audi A3 Europe: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована."
-        },
-        "nativeExact": 50,
-        "nativeHeld": []
-      },
-      {
         "batch": "research-2026-10-23-audi-a3-2022-2023-body",
         "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
         "commit": "986255742c12d450a9fbbd855f4b11c475f5ccd6",
@@ -32959,7 +32933,7 @@
       "reasonVerified": false,
       "freshWriterStateAfterFailureConfirmed": false
     },
-    "installedIndexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+    "installedIndexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
     "catalogFieldsEnriched": 1464,
     "failedConcurrentRelease": {
       "workflow": 39749020662,
@@ -32995,7 +32969,7 @@
       "activated": false
     },
     "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
-    "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+    "lastActivationReport": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
       "state": "completed_partial",
@@ -33009,7 +32983,7 @@
       "nextAction": "Предыдущая порция39781954271 SUCCESS по свежему roadmap; не считать весь каталог законченным. Проверить дальнейший запуск перед возобновлением.",
       "completed": false
     },
-    "observedProductionRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+    "observedProductionRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
     "mito2012_2013Pass": {
       "checkedAt": "2026-10-22T17:23:25+07:00",
       "modelId": "81a4b290257d227a5fd86ee6",
@@ -35102,15 +35076,15 @@
       }
     ],
     "currentReaderRelease": {
-      "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
-      "workflow": 39975111916,
+      "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+      "workflow": 39988848904,
       "state": "activated_verified",
       "activationConfirmed": true,
-      "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
-      "activationReport": "docs/encyclopedia/reports/2026-10-23-astra-installed-coverage.json",
-      "verificationLocalDate": "2026-10-23",
-      "observedCalculationVersion": "517a84ded1ba1eca308fea174fb8a0b04d4359a4321c1eb80a20d82cff2e254f",
-      "nextAction": "Continue exact field completion with current research cursor; coordinate pending A3 batch and active DBX/A3 diagnosis. Do not duplicate ASTRA/import/deploy."
+      "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "activationReport": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
+      "verificationLocalDate": "2026-10-24",
+      "observedCalculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d",
+      "nextAction": "Continue current research cursor; later A3 2022–2023 body batch remains pending. DBX projection migration and real assistant role acceptance remain open; no duplicate import/deploy."
     },
     "alpineLatePass": {
       "version": 1,
@@ -35818,6 +35792,37 @@
         "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
         "activationReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-a5449c-activation.json",
         "publicPricesFullyAccepted": false
+      },
+      {
+        "batch": "research-2026-10-23-audi-a3-2022-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+        "commit": "cda51eaf8cf28e36b20e2ceb958c74ec1634c296",
+        "workflow": 39982805443,
+        "job": 120514196873,
+        "variants": 50,
+        "newVariants": 0,
+        "fields": 50,
+        "compiledFields": 50,
+        "apiReadback": true,
+        "includedInIndex": true,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-pass.json",
+        "afterRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+        "publicParity": {
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 91,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-public-parity.json",
+          "scope": "Ограниченная выборка Audi A3 Europe: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована."
+        },
+        "nativeExact": 50,
+        "nativeHeld": [],
+        "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+        "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+        "activationWorkflow": 39988848904,
+        "activationReport": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
+        "publicPricesFullyAccepted": false
       }
     ],
     "astonDb11Db12Pass": {
@@ -36364,13 +36369,13 @@
       "fixCode": "b6dd15ef1c805c78d00b81337621e159558ea9ec",
       "fixInstalled": true,
       "existingProjectionMigrationVerified": false,
-      "latestReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json",
+      "latestReport": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
       "fixInstalledRelease": "025980454268fa9841ffab34b119037f348a1a11",
       "latestControl": {
-        "checkedAt": "2026-10-23T16:12:33.335841+00:00",
-        "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
-        "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
-        "report": "docs/encyclopedia/reports/2026-10-23-a5449c-blocker-acceptance.json",
+        "checkedAt": "2026-10-23T17:10:20.729040+00:00",
+        "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+        "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+        "report": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
         "searchTotalRub": null,
         "cardTotalRub": 25031959,
         "searchStatus": "needs_data",
@@ -36379,23 +36384,24 @@
       }
     },
     "latestPublicationCheck": {
-      "verificationLocalDate": "2026-10-23",
-      "observedRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
-      "activeIndex": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+      "verificationLocalDate": "2026-10-24",
+      "checkedAt": "2026-10-23T17:10:20.729040+00:00",
+      "observedRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+      "activeIndex": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
       "publicGate": {
         "version": 1,
-        "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
-        "startedAt": "2026-10-23T15:37:57.958Z",
+        "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+        "startedAt": "2026-10-23T17:08:34.234Z",
         "groups": 16,
-        "variants": 90,
-        "fields": 234,
+        "variants": 140,
+        "fields": 284,
         "verified": true,
-        "finishedAt": "2026-10-23T15:38:03.291Z"
+        "finishedAt": "2026-10-23T17:09:01.970Z"
       },
       "allModelsComplete": false,
       "newReleaseRequested": false,
-      "report": "docs/encyclopedia/reports/2026-10-23-astra-installed-coverage.json",
-      "action": "Current release installed; pending post-snapshot batches still require next coordinated index. Price completeness not implied."
+      "report": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
+      "action": "A3 transmission parity verified on two exact offers. Only the snapshot's A3 2022 batch activated; later research stays pending. DBX price parity and visual browser acceptance remain open."
     },
     "astonRapidePass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
@@ -36826,7 +36832,7 @@
       "collectorsCalculationRulesGuardsSecretsChanged": false
     },
     "coverage": {
-      "report": "docs/encyclopedia/reports/2026-10-23-astra-installed-coverage.json",
+      "report": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
       "brands": 271,
       "models": 4451,
       "variants": 345392,
@@ -36841,8 +36847,8 @@
       "completeUniverseClaim": false,
       "allModelsComplete": false,
       "scope": "Existing permanent encyclopedia only; required field coverage is not proof of exact offer matching or a completed price calculation.",
-      "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
-      "snapshotCreatedAt": "2026-10-23T15:13:44.630Z"
+      "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "snapshotCreatedAt": "2026-10-23T16:45:39.920Z"
     },
     "catalogAuditScope": "Stored projection audit: five markets, not a count of newly gained live offers or full paid-feed coverage.",
     "astonVantagePass": {
@@ -37099,7 +37105,7 @@
     "researchWriteCoordination": {
       "observedMain": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
       "writesPaused": false,
-      "reason": "Release39988848904 private index and mandatory checks SUCCESS; snapshot isolated. Independent research may resume with fresh revisions/CAS; later writes belong to a future index. No duplicate release.",
+      "reason": "Release39988848904 installed and public gates passed. Snapshot447aaea isolated16:45:39UTC; later research remains pending. Continue fresh revisions/CAS, no duplicate release.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37107,7 +37113,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T16:50:05.727Z",
+      "checkedAt": "2026-10-23T17:10:20.729040+00:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37159,7 +37165,7 @@
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
       },
-      "pendingReleaseWorkflow": 39988848904,
+      "pendingReleaseWorkflow": null,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
         "state": "released_after_verified_index_snapshot",
@@ -37176,7 +37182,8 @@
         "previewConclusion": "success",
         "previewAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-astra-preview-acceptance.json",
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
-      }
+      },
+      "lastCompletedReleaseWorkflow": 39988848904
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -38091,10 +38098,10 @@
       "productionInstalled": true,
       "publicParityClosed": true,
       "deliveredCalculationAccepted": false,
-      "lastObservedRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
-      "lastObservedReleaseCheckedAt": "2026-10-23T16:12:33.335841+00:00",
+      "lastObservedRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+      "lastObservedReleaseCheckedAt": "2026-10-23T17:10:20.729040+00:00",
       "publicParityScope": "Independent certified 30-minute power=134 retained in search and full card; not delivered calculation acceptance",
-      "latestReport": "docs/encyclopedia/reports/2026-10-23-a5449c-blocker-acceptance.json"
+      "latestReport": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json"
     },
     "audiA3EarlyAndBodyPass": {
       "batch": "research-2026-10-23-audi-a3-early-and-body",
@@ -38148,33 +38155,49 @@
     "audiA3TransmissionPublicParityBlocker": {
       "offerId": "4e3f16f9dc955a3ab40ba0f1",
       "searchTransmission": "Schaltgetriebe",
-      "cardTransmission": null,
-      "rawCardTransmission": "$undefined",
+      "cardTransmission": "Schaltgetriebe",
+      "rawCardTransmission": "Schaltgetriebe",
       "confirmedByBoundedRetry": true,
-      "totalRubSearch": 3066889,
-      "totalRubCard": 3066889,
-      "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
-      "newBatchActive": false,
+      "totalRubSearch": 3040832,
+      "totalRubCard": 3040832,
+      "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+      "newBatchActive": true,
       "rootCause": "customs_replay_semantic_normalizer_erases_schaltgetriebe",
       "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-public-parity.json",
       "latestAdditionalControl": {
         "offerId": "3b783a66af3b69634f611db2",
         "searchTransmission": "Schaltgetriebe",
-        "cardTransmission": null,
-        "rawCardTransmission": "$undefined",
+        "cardTransmission": "Schaltgetriebe",
+        "cardTransmissionLabel": "механика",
         "totalRubSearch": 3041845,
         "totalRubCard": 3041845,
-        "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
-        "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
-        "confirmedByBoundedRetry": true,
-        "rootCause": "not_established",
-        "report": "docs/encyclopedia/reports/2026-10-23-a5449c-blocker-acceptance.json",
-        "checkedAt": "2026-10-23T16:12:33.335841+00:00"
+        "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+        "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+        "report": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
+        "checkedAt": "2026-10-23T17:10:20.729040+00:00",
+        "publicParityClosed": true
       },
       "fixCommit": "1b3c80ea0441ed4c8e87ee3af2b2bab4464c420f",
-      "fixState": "release_requested_not_installed",
+      "fixState": "installed_public_api_rsc_parity_verified",
       "diagnosticWorkflow": 39986639109,
-      "diagnosticReport": "docs/diagnostics/2026-10-23-a3-transmission-root-cause.json"
+      "diagnosticReport": "docs/diagnostics/2026-10-23-a3-transmission-root-cause.json",
+      "previousPrimaryControl": {
+        "offerId": "4e3f16f9dc955a3ab40ba0f1",
+        "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+        "searchTransmission": "Schaltgetriebe",
+        "cardTransmission": null,
+        "totalRubSearch": 3066889,
+        "totalRubCard": 3066889,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-public-parity.json"
+      },
+      "cardTransmissionLabel": "механика",
+      "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "productionInstalled": true,
+      "publicParityClosed": true,
+      "publicParityScope": "Exact transmission value/label and all 12 compared fields on two A3 offers; not general visual/site stability acceptance",
+      "checkedAt": "2026-10-23T17:10:20.729040+00:00",
+      "latestReport": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
+      "visualAcceptance": false
     },
     "audiA3Body2021_2022Pass": {
       "batch": "research-2026-10-23-audi-a3-2021-2022-body",
@@ -38223,7 +38246,7 @@
       "fields": 50,
       "compiledFields": 50,
       "apiReadback": true,
-      "includedInIndex": false,
+      "includedInIndex": true,
       "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-pass.json",
       "afterRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
       "publicParity": {
@@ -38236,7 +38259,12 @@
         "scope": "Ограниченная выборка Audi A3 Europe: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована."
       },
       "nativeExact": 50,
-      "nativeHeld": []
+      "nativeHeld": [],
+      "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+      "activationWorkflow": 39988848904,
+      "activationReport": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
+      "publicPricesFullyAccepted": false
     },
     "audiA3Body2022_2023Pass": {
       "batch": "research-2026-10-23-audi-a3-2022-2023-body",
