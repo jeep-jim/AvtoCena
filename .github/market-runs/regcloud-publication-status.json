@@ -1,5 +1,8 @@
 {
-  "requestedAt": "2026-10-23T03:07:17.588207+00:00",
-  "reason": "Fresh writer/manifest check after successful compact preparation, before one aggregate encyclopedia release",
-  "inspectStagedGeneration": false
+  "requestedAt": "2026-10-23T03:28:00Z",
+  "reason": "Read-only corrected coverage of the existing prepared encyclopedia snapshot; no collection, compilation, deployment or storage mutation",
+  "auditSavedCoverage": {
+    "release": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+    "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4"
+  }
 }

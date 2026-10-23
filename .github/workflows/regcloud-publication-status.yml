@@ -95,3 +95,11 @@ jobs:
             console.log('RELEASE_INDEX_INSPECTION',JSON.stringify({release,digest:index.digest,createdAt:index.createdAt,manifestDigest:index.manifestDigest,models}));
           }
           STATUS
+          node --import tsx --input-type=module -e "import fs from 'node:fs'; if(JSON.parse(fs.readFileSync('.github/market-runs/regcloud-publication-status.json')).auditSavedCoverage) await import('./scripts/encyclopedia/audit-saved-coverage.mjs')"
+      - name: Preserve read-only coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: encyclopedia-coverage
+          path: reports/encyclopedia-coverage.json
+          if-no-files-found: ignore

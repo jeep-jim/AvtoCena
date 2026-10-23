@@ -3693,5 +3693,7 @@
       }
     }
   ],
-  "nextPass": "Fill gaps in existing model records. Reuse saved exact source facts first, then manufacturer year tables. Missing certified power stays missing; figures do not prove every offer matches or every specification is verified."
+  "nextPass": "Fill gaps in existing model records. Reuse saved exact source facts first, then manufacturer year tables. Missing certified power stays missing; figures do not prove every offer matches or every specification is verified.",
+  "countingCaveat": "Version 1 counts only canonical engine-kind labels; ICE/BEV/HEV aliases can undercount supported variants. Corrected read-only audit requested; model and variant totals and batch membership remain valid.",
+  "coverageCountsProvisional": true
 }

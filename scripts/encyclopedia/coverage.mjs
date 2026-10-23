@@ -2,6 +2,10 @@
 const present = value => value !== undefined && value !== null && value !== '' && value !== 0 && value !== 'unknown';
 const increment = (counts, key) => { counts[key] = (counts[key] || 0) + 1; };
 const kinds = new Set(['combustion', 'electric', 'series_hybrid', 'other_hybrid']);
+const kindOf = value => {
+ const token=String(value??'').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
+ return ({ice:'combustion',bev:'electric',hev:'other_hybrid',phev:'other_hybrid',erev:'series_hybrid',reev:'series_hybrid',otherhybrid:'other_hybrid',serieshybrid:'series_hybrid'})[token]||token;
+};
 
 export function modelCoverage(record, facts) {
   const compiled = new Map(facts.map(fact => [fact.variantId, fact]));
@@ -12,17 +16,17 @@ export function modelCoverage(record, facts) {
   for (const row of record.variants) {
     increment(result.statusCounts, row.status || 'unknown');
     const fact = compiled.get(row.id), values = fact?.values || {};
-    const required = ['year','trim','fuel','powertrainKind'];
-    if (kinds.has(row.powertrainKind)) {
-      if (row.powertrainKind !== 'electric') required.push('engineCc');
+    const required = ['year','trim','fuel','powertrainKind'], kind=kindOf(row.powertrainKind);
+    if (kinds.has(kind)) {
+      if (kind !== 'electric') required.push('engineCc');
       required.push('powerHpOrKw');
-      if (row.powertrainKind !== 'combustion') required.push('power30MinKw');
+      if (kind !== 'combustion') required.push('power30MinKw');
     }
-    let complete = kinds.has(row.powertrainKind), supported = complete;
+    let complete = kinds.has(kind), supported = complete;
     for (const field of required) {
       const has = field === 'powerHpOrKw' ? present(row.powerHp) || present(row.powerKw)
         : field === 'year' ? Number.isInteger(row.year) && row.year >= 1900 && row.year <= new Date().getFullYear()+1
-        : field === 'powertrainKind' ? kinds.has(row[field]) : present(row[field]);
+        : field === 'powertrainKind' ? kinds.has(kind) : present(row[field]);
       const evidence = field === 'year' || field === 'trim' ? Boolean(fact) && has
         : field === 'powerHpOrKw' ? present(values.powerHp) || present(values.powerKw) : present(values[field]);
       if (!has) { increment(result.missing, field); complete = false; supported = false; }
@@ -48,7 +52,7 @@ export function summarizeCoverage(models, context) {
     for (const field of ['missing','unsupported']) for (const [key,count] of Object.entries(model[field])) row[field][key]=(row[field][key]||0)+count;
     brands.set(model.make,row);
   }
-  return {version:1,...context,
+  return {version:2,...context,
     scope:'Existing permanent encyclopedia only; required field coverage is not proof of exact offer matching or a completed price calculation.',
     total:{brands:brands.size,models:models.length,variants:models.reduce((n,m)=>n+m.variants,0),
       requiredValuesPresent:models.reduce((n,m)=>n+m.requiredValuesPresent,0),requiredValuesSupported:models.reduce((n,m)=>n+m.requiredValuesSupported,0)},

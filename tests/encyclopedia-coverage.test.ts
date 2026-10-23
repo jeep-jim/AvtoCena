@@ -13,6 +13,17 @@ test('electric coverage requires certified power, never displacement or peak sub
 test('unknown powertrain cannot be counted complete',()=>{
  const r=modelCoverage(record([{...row,powertrainKind:'unknown'}]),[]);assert.equal(r.requiredValuesPresent,0);assert.equal(r.missing.powertrainKind,1);
 });
+test('documented engine abbreviations count like calculator aliases without supplying missing facts',()=>{
+ for(const alias of ['ICE','ice','combustion']){
+  const values={fuel:'petrol',powertrainKind:alias,engineCc:1999,powerHp:160};
+  const r=modelCoverage(record([{...row,powertrainKind:alias}]),[{variantId:row.id,values,sources:{}}]);
+  assert.equal(r.requiredValuesSupported,1);assert.equal(r.missing.powertrainKind,undefined);
+ }
+ for(const alias of ['BEV','HEV','PHEV','EREV','series_hybrid','other_hybrid']){
+  const r=modelCoverage(record([{...row,powertrainKind:alias}]),[]);
+  assert.equal(r.requiredValuesSupported,0);assert.equal(r.missing.power30MinKw,1);
+ }
+});
 test('compiled field sources stay distinct and reports aggregate all models',()=>{
  const facts=[{variantId:'variant',values:{fuel:'petrol',powertrainKind:'combustion',engineCc:1999,powerHp:160},sources:{fuel:{kind:'manufacturer',batchId:'batch'},powertrainKind:{kind:'manufacturer',batchId:'batch'},engineCc:{kind:'owner_reference'},powerHp:{kind:'manual'}}}];
  const one=modelCoverage(record([row]),facts);assert.equal(one.requiredValuesSupported,1);assert.deepEqual(one.sourceFields,{manufacturer:2,owner_reference:1,manual:1});assert.equal(one.batches.batch,2);
