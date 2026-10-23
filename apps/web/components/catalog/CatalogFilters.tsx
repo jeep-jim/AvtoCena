@@ -1,4 +1,5 @@
 "use client";
+import {CatalogFilterPending} from './CatalogFilterPending';
 import {AUCTION_SALE_PERIODS} from "@/lib/catalog/auction-sale-period";
 import {CatalogChevron as Chevron} from "./CatalogChevron";
 import {CatalogColorSelect} from "./CatalogColorSelect";
@@ -192,14 +193,6 @@ function sortParam(key: SortKey, direction: SortDir) {
   return normalizedCatalogSort(key);
 }
 
-async function loadElectricFacets(fuel: string) {
-  const response = await fetch(`/api/catalog/search?fuel=${encodeURIComponent(fuel)}&pageSize=1&includeFacets=1`, { cache: "no-store" });
-  if (!response.ok) throw new Error(`catalog_electric_facets_http_${response.status}`);
-  const payload = await response.json();
-  if (!payload?.facets) throw new Error("catalog_electric_facets_missing");
-  return payload.facets as Facets;
-}
-
 function ElectricCheckbox({ value, onChange }: { value: string; onChange: (value: string) => void }) {
  const [open,setOpen]=useState(false);
  const root=useRef<HTMLDivElement>(null);
@@ -208,7 +201,7 @@ function ElectricCheckbox({ value, onChange }: { value: string; onChange: (value
  const encode=(values:string[])=>values.length===2&&values.includes("electric")&&values.includes("hybrid")?"electrified":values.join("|");
  useEffect(()=>{if(!open)return;const close=(e:PointerEvent)=>{if(!root.current?.contains(e.target as Node))setOpen(false);};const escape=(e:KeyboardEvent)=>{if(e.key==="Escape")setOpen(false);};document.addEventListener("pointerdown",close);document.addEventListener("keydown",escape);return()=>{document.removeEventListener("pointerdown",close);document.removeEventListener("keydown",escape);};},[open]);
  const toggle=(fuel:string,checked:boolean)=>onChange(encode(checked?[...new Set([...choices,fuel])]:choices.filter(v=>v!==fuel)));
- return <div ref={root} className="relative min-w-0">
+ return <div ref={root} className="ac-electric-options relative min-w-0">
   <div className="ac-filter-control ac-electric-filter flex min-h-13 items-center gap-2 rounded-[15px] px-4 text-sm font-black">
    <label className="flex min-h-13 min-w-0 flex-1 cursor-pointer items-center gap-3"><input type="checkbox" checked={selected} onChange={e=>onChange(encode(e.target.checked?[...new Set([...choices,"electric","hybrid"])]:choices.filter(v=>v!=="electric"&&v!=="hybrid")))} className="ac-unified-checkbox ac-quick-checkbox"/><span>Электро{value==="electric"?": электромобили":value==="hybrid"?": гибриды":""}</span></label>
    <button type="button" onClick={()=>setOpen(!open)} aria-label="Уточнить тип электрического автомобиля" aria-expanded={open} className="flex min-h-13 w-[17px] shrink-0 items-center justify-center text-[var(--ac-muted)]"><Chevron open={open}/></button>
@@ -337,7 +330,6 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const initialSortState = useMemo(() => initialSort(initial.sort || ""), [initial.sort]);
   const [sortKey, setSortKey] = useState<SortKey>(initialSortState.key);
   const [sortDirection, setSortDirection] = useState<SortDir>(initialSortState.direction);
-  const [electricFacets, setElectricFacets] = useState<Facets | null>(null);
   const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.color || initial.frameNumber || initial.chassis || initial.lotNumber || initial.auctionGrade || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
   const [expanded, setExpanded] = useState(hasAdvancedValue);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -388,13 +380,6 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     return () => window.clearTimeout(timer);
   }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
 
-  useEffect(() => {
-    if (auctionResults || !electricOnly || draft.stock === "green") { setElectricFacets(null); return; }
-    let cancelled = false;
-    loadElectricFacets(draft.fuel).then((next) => { if (!cancelled) setElectricFacets(next); }).catch(() => { if (!cancelled) setElectricFacets({ makes: [], models: [], markets: [], bodyTypes: [], fuels: ["electric", "hybrid"], transmissions: [], drives: [] }); });
-    return () => { cancelled = true; };
-  }, [electricOnly, draft.fuel]);
-
   useLayoutEffect(() => {
     if (!mobileOpen) return;
     const body = document.body;
@@ -438,7 +423,8 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     const url=new URL(window.location.href);url.searchParams.delete('filters');window.history.replaceState(window.history.state,'',url.pathname+url.search+url.hash);
   },[dealer?.id]);
 
-  const activeFacets = electricOnly && draft.stock !== "green" ? electricFacets || facets : facets;
+  // Reuse the server's directory; a toggle must not launch a second full search.
+  const activeFacets = facets;
   const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);
   const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);
   const marketOptions = dealer ? markets.filter(m=>!m.value||dealer.markets.includes((m.value==="green"?"japan":m.value) as any)) : markets;
@@ -516,14 +502,15 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     rememberFilterScroll(href);
     startTransition(() => router.push(href, {scroll:false}));
   };
-  const setElectric = (value: string) => { setField("fuel", value); setElectricFacets(null); };
+  const setElectric = (value: string) => { setField("fuel", value); };
   const chooseSort = (key: SortKey, direction: SortDir) => {
     setSortKey(key);
     setSortDirection(direction);
   };
 
   return <><CatalogFilterUiEnhancer /><span role="status" className="sr-only">{pending ? "Обновляем результаты" : ""}</span>
-    <form aria-busy={pending} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
+    <CatalogFilterPending pending={updating}/>
+    <form aria-busy={updating} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="mb-2.5"><CatalogCityFilter onChange={changeCity} /></div>
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />

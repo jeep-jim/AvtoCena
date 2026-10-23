@@ -1,4 +1,5 @@
 "use client";
+import {CatalogSectionLoading} from './CatalogLoading';
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 
@@ -75,8 +76,8 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   if(cursorPaging&&nextCursor)fallbackQuery.set("after",nextCursor);
   fallbackQuery.set("page", String(page + 1));
   const pageCount = total===null ? page+((batches.at(-1)!.hasMore??(batches.at(-1)!.count===24))?1:0) : Math.ceil(total / 24);
-  const windowStart = Math.max(1, Math.min(page - 3, pageCount - 7));
-  const numberedPages = [...new Set(cursorPaging?[1,...batches.map(batch=>batch.page),...(nextCursor?[page+1]:[])]:[1, ...Array.from({length:8},(_,i)=>windowStart+i), pageCount])].filter(n => n >= 1 && n <= pageCount).sort((a,b)=>a-b);
+  const windowStart = Math.max(1, Math.min(page - 2, pageCount - 4));
+  const numberedPages = [...new Set(cursorPaging?[1,...batches.map(batch=>batch.page),...(nextCursor?[page+1]:[])]:[1, ...Array.from({length:5},(_,i)=>windowStart+i), pageCount])].filter(n => n >= 1 && n <= pageCount).sort((a,b)=>a-b);
   function pageHref(target: number) {
     const params = new URLSearchParams(fallbackQuery);
     params.set("page", String(target));
@@ -117,9 +118,9 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
       if (mounted.current && activeKey.current===key) setError("Не удалось загрузить автомобили. Попробуйте ещё раз — список сохранён.");
     } finally {lock.current = false; if (mounted.current && activeKey.current===key) setBusy(false);}
   }
-  return <div ref={list}>
+  return <div ref={list}><CatalogSectionLoading/>
     {batches.map(batch => <div key={batch.page} data-catalog-batch={batch.page} className="mb-2.5 grid min-w-0 grid-cols-2 gap-2.5 sm:mb-3 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{batch.cards}</div>)}
-    <div className="mx-auto mt-7 flex w-full flex-col items-center gap-3 md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)]">
+    <div className="mx-auto mt-7 flex w-full flex-col items-center gap-3">
       <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} {total!==null?`из ${total.toLocaleString("ru-RU")}`:""}</p>
       {pageCount > 1 ? <nav aria-label="Страницы каталога" className="ac-pagination">
         {page > 1 && (!cursorPaging||page===2||batches.some(batch=>batch.page===page-1)) ? <a href={pageHref(page-1)} aria-label="Предыдущая страница"><ChevronLeft size={20}/></a> : <span aria-disabled="true"><ChevronLeft size={20}/></span>}

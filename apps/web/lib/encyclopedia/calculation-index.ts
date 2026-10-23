@@ -5,6 +5,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {getDataRoot} from '../data';
 import {canonicalCatalogBrand} from '../catalog/brands';
+import {retainedReferenceSources} from './reference-evidence';
 
 // Immutable, privately prepared release data. No storage/network reads on lookup.
 export const CALCULATION_INDEX_PATH='knowledge/encyclopedia/calculation-v1.json';
@@ -73,10 +74,13 @@ export function compileModelFacts(record:any,ancestors:any[]=[]):CalculationFact
    child=prior;
   }
   const reference=v.status==='observed'&&(v.markets||[]).some((m:string)=>m==='china'||m==='europe');
+  const reused=retainedReferenceSources(record,v);
   for(const field of factFields){
    if(sources[field]||!exists(v[field]))continue;
    if(v.status==='verified'&&/^https?:\/\//.test(v.sourceUrl||'')){
     values[field]=v[field];sources[field]={kind:'manual',url:v.sourceUrl};
+   }else if(reused[field]){
+    values[field]=v[field];sources[field]=reused[field];
    }else if(retainedReferences[field]){
     values[field]=v[field];sources[field]=retainedReferences[field];
    }else if(reference&&field!=='power30MinKw'){

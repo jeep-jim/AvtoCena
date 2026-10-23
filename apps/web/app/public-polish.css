@@ -435,7 +435,7 @@ html body input.ac-unified-checkbox { appearance: none; width: 24px; height: 24p
 html body input.ac-unified-checkbox:checked { background: #facc15; border-color: #facc15; }
 html body input.ac-unified-checkbox:checked::after { content: "✓"; color: #273343; font-size: 14px; font-weight: 900; }
 html body input.ac-unified-checkbox:focus-visible { outline: 2px solid var(--ac-text); outline-offset: 3px; }
-.ac-pagination { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; }
+.ac-pagination { display:flex; flex-wrap:nowrap; align-items:center; justify-content:center; gap:6px; max-width:100%; }
 .ac-pagination a, .ac-pagination > span { display:flex; align-items:center; justify-content:center; flex:0 0 auto; min-width:36px; height:40px; padding:0 8px; border-radius:8px; font-size:14px; font-weight:800; }
 html body .ac-pagination a { background:var(--ac-surface-2); color:var(--ac-text); border:1px solid var(--ac-border); }
 html body .ac-pagination a[aria-current="page"] { background:#94a3b8; color:#101827; border-color:#94a3b8; }
