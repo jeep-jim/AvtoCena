@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "status": "prepared_not_applied",
+  "modelId": "00624e6c77b6541109a32d66",
+  "revision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+  "batch": "research-2026-10-24-audi-a6-2020-2024-avant-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a6-2020-2024-avant-body.json",
+  "batchDigest": "fb07e6360a5bb71a758a3fdb89792b127063f8fe6af4a704b5281d092ff08ddc",
+  "variantsBefore": 3723,
+  "annualVariants": 1410,
+  "astraUnknownYearVariants": 2313,
+  "targetVariants": 19,
+  "fields": 19,
+  "years": {
+    "2020": 1,
+    "2021": 4,
+    "2022": 6,
+    "2023": 5,
+    "2024": 3
+  },
+  "unchangedNonTargets": 3704,
+  "guardTests": 11,
+  "compiled": 19,
+  "exactMatch": 19,
+  "manualPreserved": true,
+  "unknownPowerPreserved": true,
+  "replaySafe": true,
+  "source": {
+    "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+    "sha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+    "checkedAt": "2026-10-24"
+  },
+  "coverageScope": "18 successful year slices cover all3723variants matching installed snapshot count/revision;2011–2013 requests timed out, not claimed successful. No repeated ASTRA source download or full catalog scan.",
+  "limitations": [
+    "bodyType only; no claim of closing price-blocking power gaps",
+    "Current installed index447aaea does not include this future batch",
+    "A3 cursor/research and DBX diagnosis remain independent"
+  ]
+}
