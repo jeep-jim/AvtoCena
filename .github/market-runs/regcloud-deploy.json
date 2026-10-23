@@ -1,6 +1,6 @@
 {
-  "requestedAt": "2026-10-23T10:06:24.127Z",
-  "reason": "Activate eight saved/readback Toyota and Audi A3 batches: 125 existing variants, 226 confirmed fields (193 calculation fields, 7 trim identities, 26 descriptive fields outside calculation index). Preserve six prior active batches with exact field/batch/kind/URL membership. No new collection; unknown 30min and manual safeguards unchanged. Research writes paused until immutable snapshot completes.",
+  "requestedAt": "2026-10-23T15:00:23.680294+00:00",
+  "reason": "Activate verified ASTRA corpus plan plus saved Toyota35 and AudiA3 50 fields, preserving14 prior research batches. Source-only unknown-year records must stay outside annual calculations. Include independent LiL6 certified-power fix and immutable source identity display/edit protection. Mandatory exact plan, source, field and index checks before activation.",
   "requiredResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json",
     "docs/encyclopedia/batches/2026-10-23-audi-a1-next-gaps.json",
@@ -15,7 +15,18 @@
     "docs/encyclopedia/batches/2026-10-23-toyota-aygox-annual-gaps.json",
     "docs/encyclopedia/batches/2026-10-23-toyota-aygox-hybrid.json",
     "docs/encyclopedia/batches/2026-10-23-audi-a3-early-and-body.json",
-    "docs/encyclopedia/batches/2026-10-23-audi-a3-2020-2021-body.json"
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2020-2021-body.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-cross.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2021-2022-body.json"
   ],
-  "ideaReports": []
+  "ideaReports": [],
+  "requiredAstraPlanDigests": [
+    "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
+  ],
+  "publicResearchBatches": [
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-cross.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2021-2022-body.json"
+  ]
 }
