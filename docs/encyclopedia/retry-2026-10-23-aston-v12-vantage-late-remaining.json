@@ -1,0 +1,399 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T09:04:41+07:00",
+  "modelId": "95f7940568d492384daba7df",
+  "make": "Aston Martin",
+  "model": "V12 Vantage",
+  "revision": "282d18a2-4887-4240-9f01-b18116d7d966",
+  "scopeSinceYear": 2008,
+  "allFieldsComplete": false,
+  "historicalExpansionComplete": false,
+  "variantsWithRemainingFields": [
+    {
+      "variantId": "85815e492645d2594f0a9e7c",
+      "year": 2010,
+      "trim": "V12 Купе 6MT",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "2ee2204bd8f000c137ab45cc",
+      "year": 2011,
+      "trim": "V12 Купе 6MT",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "aedbd53091df015b8e2eb31d",
+      "year": 2012,
+      "trim": "V12 Купе 6MT",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "4170b84c00d358b3318f4d80",
+      "year": 2013,
+      "trim": "V12 Купе 6MT",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "8a20c2887986ddef719efd00",
+      "year": 2013,
+      "trim": "V12 Родстер 6MT",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "94db6613f74d5c10f9d13dae",
+      "year": 2014,
+      "trim": "S V12 Купе Sportshift III 7",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "e7eb5c022636469f16329d89",
+      "year": 2015,
+      "trim": "S V12 Купе Sportshift III 7",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "0188f66ed1010093a425112a",
+      "year": 2015,
+      "trim": "S V12 Родстер Sportshift III 7",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "6e0817e616652c898d1abfd3",
+      "year": 2016,
+      "trim": "Other",
+      "unconfirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "a482a598870a69ecf59782cd",
+      "year": 2016,
+      "trim": "S V12 Купе Sportshift III 7",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "7f5d13cfa57e6290024a36c3",
+      "year": 2016,
+      "trim": "S V12 Родстер Sportshift III 7",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "7983e3a86677894c35d42cd9",
+      "year": 2017,
+      "trim": "S V12 Купе Sportshift III 7",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "9e9ca4e2c749bb1e22cafce8",
+      "year": 2017,
+      "trim": "S V12 Купе 7MT",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "d4e53cb6735f2ecc1b2869d6",
+      "year": 2017,
+      "trim": "S V12 Купе Sportshift III 7 Performance Pack",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "da7d1985f4c0a1f31ccce417",
+      "year": 2017,
+      "trim": "S V12 Родстер Sportshift III 7",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "ff2aff217d9512fa5af6e9c9",
+      "year": 2017,
+      "trim": "S V12 Родстер 7MT",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "4c735b1a0795bef9fe14dede",
+      "year": 2017,
+      "trim": "S V12 Родстер Sportshift III 7 Performance Pack",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "powerHp"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "30455eb1dc68b4ab1b78ae56",
+      "year": 2022,
+      "trim": "V12 Twin-Turbo Купе 8AT",
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "beb49844899018757c06c581",
+      "year": 2022,
+      "trim": "V12 Twin-Turbo Родстер 8AT",
+      "unconfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCode",
+        "chassisCode",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "e399d8f01e9c22333fa6d761",
+      "year": 2023,
+      "trim": "v12",
+      "unconfirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "engineCode",
+        "chassisCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    },
+    {
+      "variantId": "b06bbcc36d7f532837985121",
+      "year": 2023,
+      "trim": "V12 Twin-Turbo Родстер 8AT",
+      "unconfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCode",
+        "chassisCode",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нужны точный год,кузов,КПП,регион и таблица; исходные наблюдения не являются подтверждением."
+    }
+  ],
+  "yearCoverageRetries": [
+    {
+      "years": [
+        2008,
+        2009
+      ],
+      "reason": "Не смешивать V12 RS concept и серийный автомобиль. Заводская серия10MY подтверждена отдельно; нужны первичные таблицы и подтверждение реального календарного2009.2008 не создавать по дате концепта."
+    },
+    {
+      "years": [
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "reason": "Границы календарного выпуска родстера и S, региональные версии, спецсерии Carbon Black/Carbon Edition.13MY родстер GVW в PDF200 неоднозначна; PS/кВт13MY–15.5MY не выводить изbhp или графика."
+    },
+    {
+      "years": [
+        2016,
+        2017,
+        2018
+      ],
+      "reason": "17MYmanual+PerformancePack, AMR/GT12 и последний2018 подтверждать отдельно; не переносить420/424кВт17MY на2018.Обзорная страницаS2013–2018 даётAM28/573PS,но не различает годовые420/421кВт и пакеты; не заполнять все годы одной цифрой."
+    },
+    {
+      "years": [
+        2022,
+        2023
+      ],
+      "reason": "Купе2022 и родстер2022/2023 добавлены. Родстер: точныеcc/кВт/топливо/GVW ещёнеподтверждены;5.2л не преобразованы в5200см³,масса купе не перенесена. Купе2023 требует отдельного подтверждения года/идентичности. ОбщийUAEtrimv12 не даёт точного соответствия."
+    },
+    {
+      "years": [
+        2019,
+        2020,
+        2021,
+        2024,
+        2025,
+        2026
+      ],
+      "reason": "Не создавать непрерывную серию из регистрационных годов или поздних объявлений; подтвердить наличие/отсутствие реального производства, включая специальные версии."
+    }
+  ],
+  "previousRetryFiles": [
+    "docs/encyclopedia/retry-2026-10-22-aston.json",
+    "docs/encyclopedia/retry-2026-10-23-aston-v12-vantage-remaining.json"
+  ],
+  "sourceLeads": [
+    {
+      "file": "info.pdf",
+      "url": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10216826-0001.pdf",
+      "sha256": "6c09248fef4d3247b6b9f56f93b02de550cf3dce4cfaa88593984df51165d351",
+      "bytes": 669675,
+      "status": 200
+    },
+    {
+      "file": "fy2022.pdf",
+      "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+      "sha256": "d4b5a39375368e8beb95261968c3bff4ccc0857922f3adad29a3b50719b2ebf4",
+      "bytes": 537522,
+      "status": 200
+    },
+    {
+      "file": "fy2023.pdf",
+      "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/2023-results/aston-martin-lagonda-fy-2023-results.pdf?rev=1fef788985ef4cd88cb7da5773860a7e",
+      "sha256": "69619788cf6d83cabe094f7d7814186e0bb58be8cdb19ffbc89ed8f83150e3e2",
+      "bytes": 801907,
+      "status": 200
+    },
+    {
+      "file": "roadster.html",
+      "url": "https://www.astonmartin.com/en-us/our-world/news/2022/8/20/introducing-the-new-v12-vantage-roadster-the-ultimate-expression-of-style-sound-and-speed",
+      "sha256": "efdb3ea540fa26af328527749ea553778f2abd35a86b76a0c4b702b74d86d762",
+      "bytes": 101391,
+      "status": 200
+    },
+    {
+      "file": "coupe.html",
+      "url": "https://www.astonmartin.com/en/our-world/news/2022/3/16/introducing-the-new-v12-vantage-a-spectacular-finale-for-an-iconic-bloodline",
+      "sha256": "f96621b0d06bdc1e8b15887b2c755959caa82cd17b1d93bb3375aaf6129c4b20",
+      "bytes": 107589,
+      "status": 200
+    },
+    {
+      "url": "https://www.mit.gov.it/nfsmitgov/files/media/pubblicazioni/2022-11/Guida_completa_CO2_finale.pdf",
+      "status": "HTTP503; временная недоступность, повторить позже. Поисковая выдержка не использована как подтверждение."
+    }
+  ],
+  "calculationIdentityBlockers": {
+    "offerIds": [
+      "e09313e54478ba27166cebe3",
+      "d8fbab1b6aa1e6e797562588"
+    ],
+    "reason": "Other2016/v122023 не определяют точную техническую модификацию; исходныйfwd2016 не проверен и не переносится в заводские факты. Обаneeds_data.",
+    "guardsChanged": false
+  },
+  "nextAction": "Следующий алфавитный курсорV8. Поздняя партия сохранена; вернуться к перечисленным пробелам после продвижения, не повторять успешные операции."
+}

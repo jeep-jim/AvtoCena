@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-23T02:03:32.336Z",
+  "batch": "research-2026-10-23-aston-v12-vantage-late",
+  "apiReadback": true,
+  "passed": true,
+  "operations": 3,
+  "newVariants": 3,
+  "updatedVariants": 0,
+  "confirmedFields": 20,
+  "compiledCalculationFields": 17,
+  "unchangedVariantsPreserved": 18,
+  "beforeRevision": "3069826e-b541-4867-9316-43b21f6feaf3",
+  "afterRevision": "282d18a2-4887-4240-9f01-b18116d7d966",
+  "variantsBefore": 18,
+  "variantsAfter": 21,
+  "researchedVariantsAfter": 19,
+  "manualWrites": 0,
+  "wholeRowVerified": false,
+  "duplicatesAdded": 0,
+  "nativeMatcher": {
+    "exactCases": 3,
+    "genericIdentityStillBlocked": true,
+    "manualInputPreserved": true,
+    "unknownFieldsNotInferred": true,
+    "registrationYearNotInferred": true,
+    "bodyGearboxPerformancePackSeparate": true
+  },
+  "compilerChanged": false,
+  "activationConfirmed": false
+}

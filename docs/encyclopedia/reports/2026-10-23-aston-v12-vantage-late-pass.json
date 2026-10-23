@@ -1,0 +1,108 @@
+{
+  "checkedAt": "2026-10-23T09:04:41+07:00",
+  "batch": "research-2026-10-23-aston-v12-vantage-late",
+  "apiReadback": true,
+  "passed": true,
+  "operations": 3,
+  "newVariants": 3,
+  "updatedVariants": 0,
+  "confirmedFields": 20,
+  "compiledCalculationFields": 17,
+  "unchangedVariantsPreserved": 18,
+  "beforeRevision": "3069826e-b541-4867-9316-43b21f6feaf3",
+  "afterRevision": "282d18a2-4887-4240-9f01-b18116d7d966",
+  "variantsBefore": 18,
+  "variantsAfter": 21,
+  "researchedVariantsAfter": 19,
+  "manualWrites": 0,
+  "wholeRowVerified": false,
+  "duplicatesAdded": 0,
+  "nativeMatcher": {
+    "exactCases": 3,
+    "genericIdentityStillBlocked": true,
+    "manualInputPreserved": true,
+    "unknownFieldsNotInferred": true,
+    "registrationYearNotInferred": true,
+    "bodyGearboxPerformancePackSeparate": true
+  },
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "version": 1,
+  "modelId": "95f7940568d492384daba7df",
+  "make": "Aston Martin",
+  "model": "V12 Vantage",
+  "commit": "ca2399dd8a3f50e69c3a9d097749c8bf9c91b4ac",
+  "workflow": 39887296473,
+  "job": 120198338793,
+  "workflowConclusion": "success",
+  "independentApiYears": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2022,
+    2023
+  ],
+  "sourceReview": {
+    "sourceHashesOnEveryField": true,
+    "factoryTechnicalSheetHostedByNhtsa": true,
+    "technicalPagesVisuallyReviewed": [
+      3,
+      8
+    ],
+    "actualYearEvidence": "FY2022/FY2023 page2",
+    "bhpNotMislabelledPs": true,
+    "grossMassNotKerbMass": true,
+    "roadsterDisplacementAndMassNotInferred": true
+  },
+  "releaseState": {
+    "activeIndexFromPreviousVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "activationConfirmed": false,
+    "chinaRecovery": {
+      "run": 39886753529,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "blockingRuns": [
+      {
+        "run": 39857878662,
+        "job": 120189873204,
+        "status": "in_progress",
+        "step": "Sync Che168"
+      }
+    ],
+    "duplicateReleaseRequested": false,
+    "nextAction": "ПослеterminalscheduledChina и свежегоwriterfree — один совокупный штатныйиндекс всехpending партий; проверитьсостав,активацию,подготовкуцен,Sonata160PSиоткрытыйDBXparity.",
+    "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44"
+  },
+  "referenceIntake": {
+    "run": 39831884392,
+    "job": 120009865681,
+    "status": "completed",
+    "conclusion": "failure",
+    "checkpointFromLatestRoadmap": {
+      "visited": 13045,
+      "saved": 8403,
+      "pending": 253,
+      "error": "redirect_outside_catalog"
+    },
+    "restarted": false
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v12-vantage-late-remaining.json",
+  "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v8.json",
+  "scopeSinceYear": 2008,
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false,
+  "collectorsCalculationRulesGuardsSecretsChanged": false,
+  "publicParity": {
+    "passed": false,
+    "offers": 1,
+    "comparisons": 11,
+    "report": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-late-public-parity.json"
+  }
+}
