@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T08:05:11Z",
+  "updatedAt": "2026-10-23T08:17:35.536964+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -36828,8 +36828,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "025980454268fa9841ffab34b119037f348a1a11",
-      "writesPaused": false,
-      "reason": "Активен36991f/0259804; A1 58+51+50 и отдельные BMW5 сохранены после снимка. Следующий единый индекс согласовать через main/roadmap; deploy не дублировать.",
+      "writesPaused": true,
+      "reason": "Preparing one isolated index containing six saved A1/BMW/Li batches. Pause research writes only until encyclopedia_index_ready; preserve all cursor work. No duplicate deploy.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -36837,7 +36837,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T08:05:11Z",
+      "checkedAt": "2026-10-23T08:17:35.536964+00:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -36853,7 +36853,8 @@
         "batchPath": "docs/encyclopedia/batches/2026-10-23-owner-li-l6-l7.json",
         "doNotDuplicate": true,
         "status": "Штатное сохранение запрошено отдельной ручной сессией; её приёмку не подменять A1отчётом"
-      }
+      },
+      "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json"
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
