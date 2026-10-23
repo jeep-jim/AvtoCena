@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T20:32:12.779885Z",
+  "updatedAt": "2026-10-23T20:44:21.909769Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32745,7 +32745,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T20:32:12.779885Z",
+    "updatedAt": "2026-10-23T20:44:21.909769Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2024_50_body_saved_readback_pending_next_index",
     "preserveManual": true,
@@ -37292,8 +37292,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "e941ec64941d520b1f483d7efffbef27fd72c71e",
-      "writesPaused": true,
-      "reason": "One coordinated A3 body fix + saved2024body50 release requested. Pause research writes only until Prepare private index and membership SUCCESS; then resume with fresh revisions/CAS. Do not duplicate deploy or completed imports/applies.",
+      "writesPaused": false,
+      "reason": "A3 release40019745015 private index and membership SUCCESS; artifact12530896370 SHA verified, isolated20:42:21UTC. Research may resume now with fresh revisions/CAS. Post-snapshot batches need a later coordinated release. Current build ongoing; do not duplicate deploy.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37301,7 +37301,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T20:32:12.779885Z",
+      "checkedAt": "2026-10-23T20:44:21.909769Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37321,7 +37321,7 @@
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
       },
       "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json",
-      "isolatedRelease": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+      "isolatedRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
       "postSnapshotCamry": {
         "workflow": 39925160057,
         "fields": 8,
@@ -37372,7 +37372,9 @@
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       },
       "lastCompletedReleaseWorkflow": 40012399412,
-      "pendingRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a"
+      "pendingRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "isolatedIndexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+      "isolationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json"
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -38581,7 +38583,7 @@
       "diagnosticRun": 40012114533,
       "diagnosticJob": 120614837560,
       "rootCauseReport": "docs/encyclopedia/reports/2026-10-24-a3-body-root-cause.json",
-      "fixStatus": "release_requested_not_installed",
+      "fixStatus": "index_isolated_build_in_progress_not_installed",
       "activeReleaseExcludesFix": "10f4579",
       "next": "After current release terminal, include factory-backed coarse-body resolution in next coordinated release; verify061974864a6a9708c3084fc8 search/card hatchback + body label + unchanged pricing. Do not repeat diagnostics or research apply."
     },

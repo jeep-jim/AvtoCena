@@ -13810,3 +13810,10 @@ Metadata40019528235/job120640158206 SUCCESS:20:29:32.861UTC writeractive=false/l
 ### 24.10.2026, 03:32 Красноярск — идентификатор текущего A3 выпуска
 
 [Release40019745015](https://github.com/jeep-jim/AvtoCena/actions/runs/40019745015), SHAe7a30716fad957202890c82f59274e8f0b2ec38a. ASTRAguard job120640893120 SUCCESS; prepare job120641315906 IN_PROGRESS. Researchwrites всё ещё приостановлены до SUCCESS privateindex/membership; это не повторный apply. Следующий контроль читает этот run, не запускает дубликат. Publicacceptance подготовлена для061974body/label/4105050, двух прежнихA3transmission, DBX25031959, LiL6 certified134/неполныйрасчёт. Фактическая активация пока не подтверждена.
+
+
+### 24.10.2026, 03:44 Красноярск — A3 индекс93e2ea изолирован, researchwrites возобновлены
+
+[40019745015](https://github.com/jeep-jim/AvtoCena/actions/runs/40019745015)/job120641315906: privateindex и membership SUCCESS; Build IN_PROGRESS. Artifact12530896370 создан20:42:21UTC, скачан, SHA256a71334f0904ffc1c835f1a4cc65aab06d500d05c3b62b27221534ea78c7cfae4 проверен. Индекс93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662, manifest1f32a1aca1380246575936c20cf4134e60fb0fbcb62c07610dea6f8bf8dba1e3, snapshot20:35:43.948UTC. A3revisiona2d7f897-4a62-4fc3-a9b5-d0a8d67920ae/новая2024bodyпартия отражены вcoverage; ASTRAplan6d417105 verified/2895models/230447unknownyear сохранены. Required23/public9 marker сохранён. Report docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json.
+
+Researchwrites сразу разрешены сновымиrevision/checksum/CAS/readback; послеснимковые партии вe7a307 не обещать. Исправление кузова ещё НЕустановлено, publicParityClosed=false; подготовленная адресная приёмка061974 + прежнихконтролей остаётсяпослеактивации. Скачан и независимо проверен предыдущийpublicartifact12528961379/SHA256b9445cfafd12bfa048b9051f35b48fe871f5e606ef65a8c926471a2e7817ad26:10f4579/22groups303variants447fields verified. A6очередьпрочитана:19кузовов ужеактивны, остаток мощности требует точногоисточника; новыхA6значенийнепридумано. Не повторять A3apply/ASTRA/DBX/выпуск; продолжитьсуществующийrun послеегофактическогозавершения.
