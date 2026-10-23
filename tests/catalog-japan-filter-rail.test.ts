@@ -8,7 +8,7 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  'ajes-market-selection':`export const usesAjesMarket=async market=>['china','korea','japan'].includes(market);`,
  'ajes-catalog':`export const withAjesCount=async x=>x;`,
  'green-corner-search':`export const filterGreenCorner=(items,params)=>items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));export const greenCornerFacets=()=>({makes:[],models:[],bodyTypes:[],fuels:[],transmissions:[],drives:[]});`,
- 'green-corner':`export const readGreenCorner=async()=>({items:[{id:'match',make:'Volkswagen',powerHp:150},{id:'too-powerful',make:'Volkswagen',powerHp:200},{id:'wrong-brand',make:'Toyota',powerHp:100}]});export const publicGreenOffer=x=>x;export const currentGreenCornerPrices=async x=>x;`,
+ 'green-corner':`export const readGreenCorner=async()=>({items:[{id:'match',make:'Volkswagen',powerHp:150},{id:'too-powerful',make:'Volkswagen',powerHp:200},{id:'wrong-brand',make:'Toyota',powerHp:100}]});export const publicGreenOffer=x=>x;export const readGreenCornerPage=async(items,params,clampPage,pageSize)=>{if(pageSize!==6)throw Error('preview must price six cards');const rows=items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));return {items:rows,total:rows.length}};`,
  'storage':`export const readCatalogFacets=async()=>({});export const searchOffers=async()=>({total:0,items:[],page:1,pageSize:10});`,
  'market-facets':`export const readGroupedCatalogFacets=async()=>({});`,
  'overview':`export const readCatalogOverview=async()=>null;`,

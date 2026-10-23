@@ -1,6 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {filterGreenCorner,greenCornerPageSelection} from '../apps/web/lib/catalog/green-corner-search';
+test('six-card preview prices only visible matches, while budget still examines all matching candidates',async()=>{
+ const stock:any[]=Array.from({length:420},(_,i)=>({id:String(i),make:'Honda',model:'Fit',year:2024,fuel:i<42?'electric':'petrol'}));
+ let examined=0;const price=async(items:any[])=>{examined+=items.length;return items.map(x=>({...x,japanDeliveredPreview:{totalRub:1500000}}));};
+ const preview=await greenCornerPageSelection(stock,{fuel:'electric'},price,true,6);
+ assert.equal(preview.items.length,6);assert.equal(preview.total,42);assert.equal(examined,6);
+ examined=0;const budget=await greenCornerPageSelection(stock,{fuel:'electric',budget:'2000000'},price,true,6);
+ assert.equal(budget.items.length,6);assert.equal(budget.total,42);assert.equal(examined,42);
+});
 const rows:any[]=Array.from({length:454},(_,i)=>({id:`green-${i}`,market:'japan',make:'Toyota',model:'Yaris',year:2020+i%7,catalogPricingMode:'seller',sourcePrice:100+i}));
 const quote=async(items:any[])=>items.map(x=>({...x,japanDeliveredPreview:{totalRub:x.sourcePrice*10000}}));
 test('ordinary stock pages price at most 24 cars and preserve full count, order and pagination',async()=>{

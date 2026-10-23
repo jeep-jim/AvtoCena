@@ -17,14 +17,14 @@ export function greenCornerNeedsFullPricing(params:GreenFilters) {
  return Boolean(params.budgetFrom||params.budgetTo||params.budget||parseCatalogSort(params.sort)?.some(term=>term.startsWith('totalRub')));
 }
 export async function greenCornerPageSelection(items:VehicleOffer[],params:GreenFilters,
- price:(items:VehicleOffer[])=>Promise<VehicleOffer[]>,clampPage=true) {
+ price:(items:VehicleOffer[])=>Promise<VehicleOffer[]>,clampPage=true,pageSize=24) {
  const full=greenCornerNeedsFullPricing(params);
  const candidates=full?filterGreenCorner(items,{...params,budgetFrom:undefined,budgetTo:undefined,budget:undefined,sort:undefined}):items;
  const current=full?await price(candidates):items;
  const matched=filterGreenCorner(current,params);
  const requested=Math.max(1,Math.floor(Number(params.page)||1));
- const page=clampPage?Math.min(requested,Math.max(1,Math.ceil(matched.length/24))):requested;
- const visible=matched.slice((page-1)*24,page*24);
+ const page=clampPage?Math.min(requested,Math.max(1,Math.ceil(matched.length/pageSize))):requested;
+ const visible=matched.slice((page-1)*pageSize,page*pageSize);
  return {items:full?visible:await price(visible),total:matched.length,page,facets:greenCornerFacets(items)};
 }
 // Match the price shown by CatalogPrice, including saved calculations and city delivery.

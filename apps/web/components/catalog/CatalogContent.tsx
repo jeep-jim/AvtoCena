@@ -12,8 +12,8 @@ import {AjesRail,readAjesRailData,CatalogEmptyResults} from './AjesRail';
 import {Suspense} from 'react';
 import { JapanSectionTabs } from "@/components/catalog/JapanSectionTabs";
 import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
-import { filterGreenCorner, greenCornerFacets } from "@/lib/catalog/green-corner-search";
-import { readGreenCorner, publicGreenOffer, currentGreenCornerPrices } from "@/lib/catalog/green-corner";
+import { greenCornerFacets } from "@/lib/catalog/green-corner-search";
+import { readGreenCorner, publicGreenOffer, readGreenCornerPage } from "@/lib/catalog/green-corner";
 import { parseEngineCc } from "@/lib/catalog/engine-input";
 import { formatCatalogCount } from "@/lib/catalog/count-format";
 import {DealerLink as Link} from "@/components/dealers/DealerBrowsingContext";
@@ -154,8 +154,9 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     ]);
   }
   const green = (!dealer||dealer.markets.includes("japan")) ? await greenRead : null;
-  const greenMatched = (japanAll || !selectedMarket) && green ? filterGreenCorner(await currentGreenCornerPrices(green.items),Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)]))) : green?.items || [];
-  const greenItems = japanAll ? greenMatched.slice(0,6).map(publicGreenOffer) : await applyActiveBusinessPricingBatch(greenMatched.slice(0,6).map(publicGreenOffer));
+  const greenSelection = showGreen && green ? await readGreenCornerPage(green.items, {...Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)])),page:"1"},true,OVERVIEW_CARDS) : null;
+  const greenItems = (greenSelection?.items || []).map(publicGreenOffer);
+  const greenTotal = greenSelection?.total || 0;
   if (showGreen && green) {
     facets={...facets};
     const stockFacets=greenCornerFacets(green.items);
@@ -164,7 +165,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     facets.models=[...models.values()];
   }
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0 || liveMarket(market.id) || market.id === "japan");
-  const localTotal=groupedMarkets.reduce((sum, market) => sum + market.total, 0) + ((japanAll || !selectedMarket) ? greenMatched.length : 0);
+  const localTotal=groupedMarkets.reduce((sum, market) => sum + market.total, 0) + ((japanAll || !selectedMarket) ? greenTotal : 0);
   const countSummary=overviewEligible&&(!dealer||dealer.markets.includes('japan'))?withAjesCount({total:localTotal,marketCounts:Object.fromEntries(groupedMarkets.map(m=>[m.id,m.total]))}):{total:localTotal,countIncomplete:groupedMarkets.some(m=>liveMarket(m.id)||m.id==='japan')};
   const total=localTotal,countIncomplete=overviewEligible||groupedMarkets.some(m=>liveMarket(m.id)||m.id==='japan');
 
@@ -213,8 +214,8 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
       </p>}
       </>}>
       <div className="hidden lg:block"><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
-      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <Suspense key={market.id} fallback={<CatalogSectionLoading active/>}><AjesRail market={market.id as "china"|"korea"} params={params} prepared={railReads.get(market.id)}/></Suspense> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={<CatalogSectionLoading active/>}><AjesRail params={params} prepared={railReads.get("japan")}/></Suspense>{showGreen&&<GreenCornerRail items={greenItems} total={greenMatched.length} href={pageHref({...params,stock:"green",market:"japan"},1)} />}</div> : <div key={market.id} className="min-w-0"><section><CatalogSectionLoading/><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><MarketResultCount total={market.total}>{formatCatalogCount(market.total)}</MarketResultCount></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-5 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</div>}</section></div>)}</div>
-{showGreen&&!markets.some(m=>m.id==="japan")&&<GreenCornerRail items={greenItems} total={greenMatched.length} href={pageHref({...params,stock:"green",market:"japan"},1)}/>}
+      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <Suspense key={market.id} fallback={<CatalogSectionLoading active/>}><AjesRail market={market.id as "china"|"korea"} params={params} prepared={railReads.get(market.id)}/></Suspense> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={<CatalogSectionLoading active/>}><AjesRail params={params} prepared={railReads.get("japan")}/></Suspense>{showGreen&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)} />}</div> : <div key={market.id} className="min-w-0"><section><CatalogSectionLoading/><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><MarketResultCount total={market.total}>{formatCatalogCount(market.total)}</MarketResultCount></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-5 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</div>}</section></div>)}</div>
+{showGreen&&!markets.some(m=>m.id==="japan")&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)}/>}
 {!selectedMarket&&<Suspense fallback={null}><CatalogEmptyResults localTotal={localTotal} reads={[...railReads.values()]}/></Suspense>}
 </CatalogSidebar>
       <CurrencyRatesStrip variant="mobile" className="mt-8 lg:hidden" />

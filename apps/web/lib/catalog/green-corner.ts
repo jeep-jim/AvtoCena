@@ -22,11 +22,11 @@ export async function getGreenCornerOffer(id:string){
 }
 export function publicGreenOffer(offer:VehicleOffer){const {operational,vin,frameNumber,...row}=offer;return row;}
 
-export async function readGreenCornerPage(items:VehicleOffer[],params:GreenFilters,clampPage=true) {
+export async function readGreenCornerPage(items:VehicleOffer[],params:GreenFilters,clampPage=true,pageSize=24) {
  return withCatalogEditorial(async()=>{
   const visible=items.filter(item=>!editorialHidden(item)).map(item=>applyCatalogEditorial(item));
   const current=await applyEncyclopediaDisplayIdentityBatch(visible);
-  return greenCornerPageSelection(current.map(item=>applyCatalogEditorial(item)),params,async rows=>(await currentGreenCornerPrices(rows)).map(item=>applyCatalogEditorial(item)),clampPage);
+  return greenCornerPageSelection(current.map(item=>applyCatalogEditorial(item)),params,async rows=>(await currentGreenCornerPrices(rows)).map(item=>applyCatalogEditorial(item)),clampPage,pageSize);
  });
 }
 

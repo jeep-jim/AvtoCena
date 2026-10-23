@@ -13,9 +13,9 @@ test("selected catalog filters stay visible even when the result facet is empty"
   assert.equal(catalogFilterOptions(options, [], "custom-body")[1]?.value, "custom-body");
 });
 
-test("electric filter loads one facet response instead of every catalog page", () => {
+test("electric filter reuses the directory without launching a duplicate catalog search", () => {
   const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
-  assert.match(source, /fuel=\$\{encodeURIComponent\(fuel\)\}&pageSize=1&includeFacets=1/);
+  assert.doesNotMatch(source, /loadElectricFacets|fetch\(`\/api\/catalog\/search/);
   assert.doesNotMatch(source, /Array\.from\(\{ length: pages - 1/);
 });
 
