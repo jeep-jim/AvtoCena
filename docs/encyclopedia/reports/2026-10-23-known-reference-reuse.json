@@ -51,8 +51,16 @@
     "sha": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
     "workflow": 39901961792,
     "job": 120245325220,
-    "activationConfirmed": false,
-    "lastObservedStep": "Prepare exact price indexes before activating the release"
+    "activationConfirmed": true,
+    "lastObservedStep": "Release active",
+    "conclusion": "success",
+    "activatedAt": "2026-10-23T05:03:02.974Z",
+    "health": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+      "calculationVersion": "fa0eb1e56c141553886fbeba4761806fb951f93229c401cf38fa7ebc2986884e"
+    }
   },
   "uiVerification": {
     "fixtureWorkflow": 39900179355,
@@ -76,7 +84,20 @@
       "indicator persists until acknowledgement",
       "no duplicate electric catalog API search"
     ],
-    "liveStatus": "waiting for release activation"
+    "liveStatus": "passed_with_latency_target_unmet",
+    "liveWorkflow": 39904336832,
+    "installedRelease": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+    "japanCards": 6,
+    "filterCompleteMs": 16151,
+    "withinTwoSeconds": false,
+    "loaderVisible": true,
+    "electricYellowBothThemes": true,
+    "duplicateSearches": 0,
+    "initialDiagnostic": {
+      "workflow": 39903055613,
+      "failed": true,
+      "reason": "Desktop click happened before interactive readiness; screenshot unchecked. Corrected probe waits existing readiness; unchanged30s deadline."
+    }
   },
   "limits": [
     "Required field coverage is not a count of calculated public offers.",
@@ -85,5 +106,25 @@
     "The live two-second filter target has not been demonstrated.",
     "Older public projections can still omit fuel/powertrain evidence; DBX search/detail parity requires independent verification."
   ],
-  "nextPass": "Continue the existing research queue only for remaining missing facts. Future reference reuse requires a fresh reviewed preview, because manifest revisions changed."
+  "nextPass": "Continue the existing research queue only for remaining missing facts. Future reference reuse requires a fresh reviewed preview, because manifest revisions changed.",
+  "priceRegression": {
+    "offerId": "56bbcecb51a61b76402371a9",
+    "previousTotalRub": 3148247,
+    "observedTotalRub": null,
+    "observedStatus": "needs_data",
+    "cause": "Filled-only proof created partial candidates; unchanged fuel lacked proof and blocked unanimity. Reproduced and corrected without relaxing matching.",
+    "resolvedOnPublicSite": false
+  },
+  "evidenceRepair": {
+    "previewWorkflow": 39904336772,
+    "previewArtifact": 12479638540,
+    "conclusion": "success",
+    "planDigest": "52c742ccb370056e5783b92327d5728f035b48b86ef6a5d802c3b6ac55a1e29b",
+    "models": 19,
+    "variants": 33,
+    "valuesChanged": 0,
+    "evidenceFields": 80,
+    "applyState": "requested",
+    "snapshotDonorsRevalidated": true
+  }
 }

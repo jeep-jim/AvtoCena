@@ -1,6 +1,7 @@
 {
-  "mode": "preview",
-  "requestedAt": "2026-10-23T05:08:51.955799+00:00",
-  "reason": "Read-only evidence repair preview: retain exact donor proof for already-present matching fields. No repeat feed ingestion; validate every saved donor fact against current supported facts before use.",
-  "donorSnapshotDigest": "c9563334e6b003327a0c3427df860724e42e4efb00b31c40d5caf32f22aebd59"
+  "mode": "apply",
+  "requestedAt": "2026-10-23T05:14:15.113402+00:00",
+  "reason": "Apply reviewed evidence-only repair19models/33variants/80proof fields; zero specification values changed. All frozen donor values and sources validated by successfulpreview39904336772.",
+  "donorSnapshotDigest": "c9563334e6b003327a0c3427df860724e42e4efb00b31c40d5caf32f22aebd59",
+  "expectedPlanDigest": "52c742ccb370056e5783b92327d5728f035b48b86ef6a5d802c3b6ac55a1e29b"
 }

@@ -11,6 +11,7 @@ import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specificati
 import {specificationEvidenceComplete} from '../apps/web/lib/catalog/modification-matching';
 import {applyUaeManualSpecifications} from '../apps/web/lib/catalog/uae-manual-specifications';
 import {japanPreviewParameters} from '../apps/web/lib/catalog/japan-preview-parameters';
+import {planReferenceReuse} from '../apps/web/lib/encyclopedia/reference-reuse';
 const record=(variants:any[])=>({id:'model',make:'Audi',model:'A6',revision:'r1',variants});
 const base={id:'v1',year:2023,trim:'40 TDI S tronic',status:'observed',markets:['europe'],fuel:'diesel',powertrainKind:'combustion',engineCc:1968,powerHp:204,powerKw:150,transmission:'dct',drive:'fwd'};
 const offer=()=>({make:'Audi',model:'A6',year:2023,trim:base.trim,market:'korea',sourceId:'ajes_korea_feed',sourceOfferId:'1',id:'1',fuel:'diesel',transmission:'dct',drive:'fwd',operational:{}});
@@ -121,6 +122,18 @@ test('an exact encyclopedia match upgrades a seller card through the real engine
    assert.equal((await applyActiveBusinessPricing(complete) as any).drive,card.drive);
    assert.equal(complete.drive,undefined);
   }
+  // Saving an existing UAE recipient must preserve the original donor's
+  // calculability after the index is rebuilt, including already-present fuel.
+  const prior=record([{...base,bodyType:'sedan'},{id:'uae-recipient',year:base.year,trim:base.trim,status:'observed',markets:['uae'],fuel:'diesel',transmission:'dct',bodyType:'sedan'}]);
+  const reused=planReferenceReuse(prior,index(prior.variants)).record;
+  bundled=index(reused.variants);resetCalculationIndexForTests();
+  const reusedInput:any={...offer(),market:'uae',sourcePrice:10000,sourceCurrency:'EUR',catalogPricingMode:'seller',totalRub:null,calculationStatus:'needs_data',bodyType:'sedan',images:[],status:'active',offerType:'fixed'};
+  const reusedMatch=applyEncyclopediaCalculation(reusedInput,bundled);
+  const reusedProjection=JSON.parse(JSON.stringify(searchProjectionFromOffer(reusedMatch)));
+  const [reusedSearch]=await applyActiveBusinessPriceBatch([reusedProjection],{readOnly:true});
+  const reusedDetail=await applyActiveBusinessPricing(reusedMatch);
+  assert.ok(Number(reusedSearch.totalRub)>950000,'reference transfer must not remove a previously calculable price');
+  assert.equal(reusedSearch.totalRub,reusedDetail.totalRub);
   // Regression: the factory confirms engine/power only; fuel comes from the
   // original listing and previously lost its evidence in the search projection.
   const fields=['engineCc','powerHp','powerKw'];
