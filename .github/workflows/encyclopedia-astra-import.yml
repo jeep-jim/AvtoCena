@@ -1,0 +1,62 @@
+name: Encyclopedia — owner-authorized ASTRA import
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/encyclopedia-astra-import.json']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: permanent-encyclopedia-research
+  cancel-in-progress: false
+
+jobs:
+  import:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - name: Verify ASTRA identities, source completeness and interruption recovery
+        run: |
+          python3 tests/download_astra_test.py
+          python3 tests/archive_astra_sources_test.py
+          python3 tests/encyclopedia-astra-bulk.test.py
+          python3 tests/encyclopedia-astra-supplements.test.py
+          python3 tests/encyclopedia-astra-run.test.py
+          node --import tsx --test tests/encyclopedia-astra-import.test.mjs tests/encyclopedia-astra-release.test.mjs tests/encyclopedia-research-batch.test.ts tests/encyclopedia-owner-evidence.test.ts
+      - name: Install existing object storage client
+        run: python3 -m pip install --quiet boto3
+      - name: Execute the exact pinned ASTRA request
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: python3 scripts/encyclopedia/run-astra-import.py --root "$RUNNER_TEMP/astra" --reports reports
+      - name: Preserve bounded import reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-import-${{ github.run_id }}
+          path: reports/astra-*.json
+          if-no-files-found: ignore
+          retention-days: 30

@@ -47,13 +47,16 @@ jobs:
         run: |
           node --import tsx scripts/encyclopedia/prepare-calculation-index.mjs
           node --import tsx scripts/encyclopedia/assert-release-batches.mjs
+          node --import tsx scripts/encyclopedia/assert-release-astra.mjs
           node --import tsx scripts/encyclopedia/audit-calculation-index.mjs
       - name: Preserve existing encyclopedia coverage and batch membership
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: encyclopedia-coverage
-          path: reports/encyclopedia-coverage.json
+          path: |
+            reports/encyclopedia-coverage.json
+            reports/astra-release-verification.json
           if-no-files-found: ignore
       - name: Build existing application without production credentials
         env:

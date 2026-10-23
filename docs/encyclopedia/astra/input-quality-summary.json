@@ -1,0 +1,67 @@
+{
+  "checkedAt": "2026-10-23",
+  "scope": "three_primary_automobile_datasets_before_supplements",
+  "status": "prepared_and_validated_locally_reg_apply_not_confirmed",
+  "sourceRows": 1038355,
+  "technicalGroups": 466987,
+  "technicalDetailGroups": 767397,
+  "coreFiles": 1873,
+  "compressedDetailFiles": 768,
+  "sources": [
+    {
+      "dataset": "edatenblatt",
+      "bytes": 851983508,
+      "sha256": "4bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf",
+      "sourceRows": 616197,
+      "technicalGroups": 44829
+    },
+    {
+      "dataset": "tas",
+      "bytes": 354426160,
+      "sha256": "c3758731603b0026b4299f9786771da709c4722978d0b0e507624a38a902404a",
+      "sourceRows": 211485,
+      "technicalGroups": 211485
+    },
+    {
+      "dataset": "targa",
+      "bytes": 322893637,
+      "sha256": "5851dc2bf2cd06efee42a380e75b661eafa4b577a2edc8ecca2269cb9f950b4b",
+      "sourceRows": 210673,
+      "technicalGroups": 210673
+    }
+  ],
+  "powerFields": {
+    "edatenblatt": {
+      "icePowerKw": "27.1. MaximumNetPower",
+      "motorPeakKw": "27.3. MaximumNetPowerElectricEngine",
+      "power30MinKw": "27.4. MaximumContinuousRatedPowerVeh"
+    },
+    "tas": {
+      "genericMotorPowerKw": "maximumNetPower",
+      "power30MinKw": "maximumContinuousRatedPower",
+      "hybridComponentOfGenericMotorPower": "unspecified",
+      "observedPositive30MinRows": 170
+    },
+    "targa": {
+      "genericMotorPowerKw": "28 Leistung kW",
+      "electricOrHybridPowerSemantics": "unspecified_no_peak_system_or_30minute_inference"
+    }
+  },
+  "quality": {
+    "contradictoryElectricClassificationSourceRows": 207,
+    "contradictoryElectricClassificationGroups": 68,
+    "continuousAboveDeclaredElectricMaximumGroups": 2,
+    "handling": "raw_facts_preserved_ambiguous_calculation_values_withheld"
+  },
+  "invariants": {
+    "modelYearsInferred": false,
+    "power30MinDerivedFromPeak": false,
+    "individualVehicleIdentifiersIncluded": false,
+    "missingDecodedValuesMustNotBeRestoredFromRawFacts": true,
+    "manualCatalogEditsMustBePreservedByIntegration": true
+  },
+  "tests": {
+    "bulkNormalizerPassed": 8,
+    "existingExtractorPassed": 2
+  }
+}

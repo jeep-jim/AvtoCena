@@ -1,0 +1,145 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import {assertAstraPlanMembership} from '../scripts/encyclopedia/assert-release-astra.mjs';
+import {previewAstraImport,applyAstraImport} from '../scripts/encyclopedia/apply-astra-corpus.mjs';
+import {ASTRA_ROOT,sha} from '../scripts/encyclopedia/astra-bridge.mjs';
+import {MANIFEST,ROOT,summarize} from '../apps/web/lib/encyclopedia/records.ts';
+import {compileModelFacts,checksum,modelKey} from '../apps/web/lib/encyclopedia/calculation-index.ts';
+
+const at='2026-10-23T12:00:00.000Z';
+const corpusDigest='b'.repeat(64);
+const sourceUrl='https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv';
+class MemoryStorage{
+ driver='object';data=new Map();
+ async readJson(key,fallback){return this.data.has(key)?structuredClone(this.data.get(key)):fallback;}
+ async writeJson(key,value,condition){if(condition?.ifNoneMatch==='*'&&this.data.has(key))throw Error('conflict');this.data.set(key,structuredClone(value));}
+}
+function sourceEvidence(){
+ const row={sourceDataset:'edatenblatt',sourceUrl,sourceSha256:'a'.repeat(64),sourceRows:2,certified30Min:true,
+  manufactureYears:[2021,2024],sourceRecordIds:['official-approval'],additionalFacts:{},
+  facts:{make:'Toyota',commercialName:'Yaris',category:'M1',approval:'e6*2007/46*0437*01',type:'XPA1F(EU,M)',variant:'MXPH11(H)',version:'MXPH11L-AHXEBW',engineCode:'M15A',engineCc:'1490',icePowerKw:'68',motorPeakKw:'59',power30MinKw:'37',fuelCodeCH:'C',powerSemantics:'ice_and_electric_separate_no_system_power'},
+  values:{fuel:'hybrid',powertrainKind:'other_hybrid',engineCc:1490,engineCode:'M15A',icePowerKw:68,motorPeakKw:59,power30MinKw:37,drive:'fwd',transmission:'cvt',grossVehicleWeightKg:1615}};
+ return {...row,evidenceId:sha(row)};
+}
+async function fixture(t){
+ const directory=await fs.mkdtemp(path.join(os.tmpdir(),'astra-release-test-'));
+ t.after(()=>fs.rm(directory,{recursive:true,force:true}));
+ const storage=new MemoryStorage();
+ const original={id:'1'.repeat(24),make:'Toyota',model:'Yaris',revision:'before',updatedAt:at,variants:[
+  {id:'annual-1',year:2023,trim:'1.5 Hybrid 115',status:'observed',markets:['europe'],observedCount:1,
+   fuel:'hybrid',powertrainKind:'other_hybrid',engineCc:1490,engineCode:'M15A',drive:'fwd',transmission:'cvt',powerKw:85}]};
+ const key=`${ROOT}/revisions/${original.id}/${original.revision}.json`;
+ await storage.writeJson(key,original);
+ await storage.writeJson(MANIFEST,{version:1,capturedAt:at,updatedAt:at,generationId:'fixture',models:[summarize(original,key)],coverage:{},savedSearchRows:0});
+ const corpus={corpusDigest,records:[sourceEvidence()],manifest:{version:1,sourceRows:2,files:[],sources:[]}};
+ const plan=await previewAstraImport({storage,corpus,reportDirectory:directory,at});
+ await applyAstraImport({storage,planDigest:plan.planDigest,reportDirectory:directory,
+  mutateManifest:async update=>storage.writeJson(MANIFEST,update(await storage.readJson(MANIFEST,null)))});
+ const manifest=await storage.readJson(MANIFEST,null);
+ const saved=await storage.readJson(manifest.models[0].key,null);
+ const applied=await storage.readJson(`${ASTRA_ROOT}/plans/${plan.planDigest}/applied.json`,null);
+ const models={[modelKey(saved.make,saved.model)]:compileModelFacts(saved)};
+ const index={version:1,createdAt:at,models,digest:checksum(models),manifestDigest:checksum(manifest.models.map(m=>[m.id,m.revision,m.key]))};
+ return {directory,storage,saved,plan,applied,manifest,index,
+  args(){return {index:structuredClone(this.index),plan:structuredClone(this.plan),applied:structuredClone(this.applied),manifest:structuredClone(this.manifest),expectedPlanDigest:this.plan.planDigest,readPlan:key=>this.storage.readJson(key,null)};}};
+}
+const resealIndex=args=>{args.index.digest=checksum(args.index.models);};
+const fact=args=>Object.values(args.index.models).flat()[0];
+async function resealModelPlan(f,change){
+ const p=await f.storage.readJson(f.plan.models[0].planKey,null);change(p);
+ p.recordChecksum=sha(p.record);
+ const descriptor=f.plan.models[0];descriptor.recordChecksum=sha(p.record);descriptor.planChecksum=sha(p);descriptor.assertions=p.assertions.length;
+ f.plan.planDigest=sha({version:1,corpusDigest:f.plan.corpusDigest,plans:f.plan.models.map(({planKey,...m})=>m)});
+ descriptor.planKey=`${ASTRA_ROOT}/plans/${f.plan.planDigest}/models/${descriptor.id}.json`;
+ f.applied={...f.applied,planDigest:f.plan.planDigest,models:f.plan.models.map(m=>({id:m.id,revision:m.afterRevision,checksum:m.recordChecksum}))};
+ await f.storage.writeJson(descriptor.planKey,p);
+}
+
+test('release accepts the exact applied preview and compiled annual facts, keeping source-only years outside the index',async t=>{
+ const f=await fixture(t),report=await assertAstraPlanMembership(f.args());
+ assert.equal(report.models,1);assert.equal(report.annualVariants,1);assert.equal(report.unknownYearVariantsOutsideIndex,1);
+ assert.ok(report.calculationFields>0);assert.equal(report.descriptiveFields,1);
+ assert.equal(f.saved.variants[0].power30MinKw,37);
+ const rows=Object.values(f.index.models).flat();assert.equal(rows.length,1);
+ assert.equal(rows[0].sources.power30MinKw.kind,'official_registry');
+ assert.equal(rows[0].values.motorPeakKw,undefined);
+});
+test('an absent, wrong, or incomplete applied-plan receipt blocks release',async t=>{
+ const f=await fixture(t);
+ await assert.rejects(assertAstraPlanMembership({...f.args(),applied:null}),/release_data_missing/);
+ for(const change of [{planDigest:'c'.repeat(64)},{corpusDigest:'c'.repeat(64)},{models:[]}]){
+  const args=f.args();Object.assign(args.applied,change);
+  await assert.rejects(assertAstraPlanMembership(args),/applied_plan_missing|apply_incomplete/);
+ }
+});
+test('requested plan, signed plan contents and calculation-index digest must each match',async t=>{
+ const f=await fixture(t);
+ await assert.rejects(assertAstraPlanMembership({...f.args(),expectedPlanDigest:'c'.repeat(64)}),/requested_plan_missing/);
+ const changed=f.args();changed.plan.models[0].recordChecksum='c'.repeat(64);
+ await assert.rejects(assertAstraPlanMembership(changed),/plan_digest_mismatch/);
+ const index=f.args();index.index.digest='c'.repeat(64);
+ await assert.rejects(assertAstraPlanMembership(index),/index_digest_invalid/);
+});
+test('current manifest revision and immutable record pointer must identify the saved record',async t=>{
+ const f=await fixture(t);
+ for(const [change,error] of [[{revision:'manual-new'},/revision_not_active/],[{key:'wrong-record.json'},/record_key_not_active/]]){
+  const args=f.args();Object.assign(args.manifest.models[0],change);
+  args.index.manifestDigest=checksum(args.manifest.models.map(m=>[m.id,m.revision,m.key]));
+  await assert.rejects(assertAstraPlanMembership(args),error);
+ }
+ const changed=f.args();changed.manifest.models[0].key='wrong-record.json';
+ await assert.rejects(assertAstraPlanMembership(changed),/release_manifest_changed/);
+});
+test('missing or modified immutable model plans block release',async t=>{
+ const f=await fixture(t);
+ await assert.rejects(assertAstraPlanMembership({...f.args(),readPlan:async()=>null}),/model_plan_changed/);
+ const model=await f.storage.readJson(f.plan.models[0].planKey,null);model.record.variants[0].power30MinKw=99;
+ await assert.rejects(assertAstraPlanMembership({...f.args(),readPlan:async()=>model}),/model_plan_changed/);
+});
+test('missing annual fact or wrong year, trim or fact revision blocks release',async t=>{
+ const f=await fixture(t),missing=f.args();missing.index.models={};resealIndex(missing);
+ await assert.rejects(assertAstraPlanMembership(missing),/annual_variant_missing/);
+ for(const change of [{year:2024},{trims:['wrong']},{revision:'older'}]){
+  const args=f.args();Object.assign(fact(args),change);resealIndex(args);
+  await assert.rejects(assertAstraPlanMembership(args),/annual_variant_missing/);
+ }
+});
+test('correct numeric power without the exact official source, batch or kind does not pass',async t=>{
+ const f=await fixture(t);
+ for(const change of [{kind:'owner_reference'},{batchId:'another-batch'},{url:'https://example.test/other-source'}]){
+  const args=f.args();Object.assign(fact(args).sources.power30MinKw,change);resealIndex(args);
+  await assert.rejects(assertAstraPlanMembership(args),/field_or_provenance_missing/);
+ }
+ const args=f.args();fact(args).values.power30MinKw=43;resealIndex(args);
+ await assert.rejects(assertAstraPlanMembership(args),/field_or_provenance_missing/);
+});
+test('an ASTRA source variant without a model year cannot be inserted into annual calculation facts',async t=>{
+ const f=await fixture(t),args=f.args(),unknown=f.saved.variants.find(v=>v.astraEvidence);
+ const promoted={...structuredClone(fact(args)),variantId:unknown.id,year:unknown.astraEvidence.manufactureYears[0]};
+ Object.values(args.index.models)[0].push(promoted);resealIndex(args);
+ await assert.rejects(assertAstraPlanMembership(args),/unknown_astra_model_year_promoted/);
+});
+test('unknown-year source variants from earlier ASTRA corpora also stay outside annual indexes',async t=>{
+ const f=await fixture(t);await resealModelPlan(f,p=>{p.record.variants.find(v=>v.astraEvidence).astraEvidence.corpusDigest='c'.repeat(64);});
+ const args=f.args(),unknown=f.saved.variants.find(v=>v.astraEvidence);
+ Object.values(args.index.models)[0].push({...structuredClone(fact(args)),variantId:unknown.id,year:2024});resealIndex(args);
+ await assert.rejects(assertAstraPlanMembership(args),/unknown_astra_model_year_promoted/);
+});
+test('duplicate fact identities cannot conceal a contradictory or missing record',async t=>{
+ const f=await fixture(t),args=f.args();Object.values(args.index.models)[0].push(structuredClone(fact(args)));resealIndex(args);
+ await assert.rejects(assertAstraPlanMembership(args),/duplicate_fact_identity/);
+});
+test('a self-consistent plan digest cannot excuse assertions that disagree with saved calculation or descriptive values',async t=>{
+ for(const field of ['power30MinKw','motorPeakKw']){
+  const f=await fixture(t);await resealModelPlan(f,p=>{p.record.variants[0][field]+=1;});
+  await assert.rejects(assertAstraPlanMembership(f.args()),/saved_field_missing/);
+ }
+});
+test('assertion model year must agree with the saved variant even if the index repeats the same wrong year',async t=>{
+ const f=await fixture(t);await resealModelPlan(f,p=>{p.assertions[0].year=2024;});
+ const args=f.args();fact(args).year=2024;resealIndex(args);
+ await assert.rejects(assertAstraPlanMembership(args),/annual_variant_missing/);
+});

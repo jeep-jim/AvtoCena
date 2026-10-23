@@ -1,0 +1,355 @@
+{
+  "version": 1,
+  "captured_date": "2026-10-23",
+  "base_url": "https://opendata.astra.admin.ch/ivzod/",
+  "sources": [
+    {
+      "path": "3000-eDatenblatt/eDatenblatt.csv",
+      "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+      "bytes": 851983508,
+      "etag": "\"32c83c94-65cb4af12c73f\"",
+      "last_modified": "Wed, 30 Sep 2026 15:09:21 GMT",
+      "sha256": "4bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf",
+      "role": "technical_data"
+    },
+    {
+      "path": "4000-Typengenehmigungen_TAS/4300-Datensaetze/TAS_Automobil.csv",
+      "url": "https://opendata.astra.admin.ch/ivzod/4000-Typengenehmigungen_TAS/4300-Datensaetze/TAS_Automobil.csv",
+      "bytes": 354426160,
+      "etag": "\"15201d30-65c9d4f6f6390\"",
+      "last_modified": "Tue, 29 Sep 2026 11:16:12 GMT",
+      "role": "technical_data",
+      "sha256": "c3758731603b0026b4299f9786771da709c4722978d0b0e507624a38a902404a"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt",
+      "bytes": 322893637,
+      "etag": "\"133ef745-657d09d960472\"",
+      "last_modified": "Thu, 30 Jul 2026 09:22:48 GMT",
+      "role": "technical_data",
+      "sha256": "5851dc2bf2cd06efee42a380e75b661eafa4b577a2edc8ecca2269cb9f950b4b"
+    },
+    {
+      "path": "4000-Typengenehmigungen_TAS/4200-json-Files-zip/json-Files-20260928.zip",
+      "url": "https://opendata.astra.admin.ch/ivzod/4000-Typengenehmigungen_TAS/4200-json-Files-zip/json-Files-20260928.zip",
+      "bytes": 898219408,
+      "etag": "\"3589bd90-65c9d49b8c021\"",
+      "last_modified": "Tue, 29 Sep 2026 11:14:36 GMT",
+      "role": "technical_data",
+      "sha256": "8d556f5a31769627733cfe15d624fbbd916c467d94b88230b15f317daf9ef73a"
+    },
+    {
+      "path": "4000-Typengenehmigungen_TAS/4300-Datensaetze/TAS_Emission.csv",
+      "url": "https://opendata.astra.admin.ch/ivzod/4000-Typengenehmigungen_TAS/4300-Datensaetze/TAS_Emission.csv",
+      "bytes": 92423706,
+      "etag": "\"582461a-65c9d5067ab22\"",
+      "last_modified": "Tue, 29 Sep 2026 11:16:28 GMT",
+      "role": "technical_data",
+      "sha256": "2b28e1f3b8297c28875af98bcfda4127c2fd344cfb1c2749e0c28ec1e0a3cfe8"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/emissionen.txt",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/emissionen.txt",
+      "bytes": 70829020,
+      "etag": "\"438c3dc-657d09e3d7852\"",
+      "last_modified": "Thu, 30 Jul 2026 09:22:59 GMT",
+      "role": "technical_data",
+      "sha256": "a11c1727440d6d587a1bd0b37eaeb011afc050b8f356ef746fdd6e18898fdd92"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/verbrauch.txt",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/verbrauch.txt",
+      "bytes": 18871876,
+      "etag": "\"11ff644-657d09a275b3f\"",
+      "last_modified": "Thu, 30 Jul 2026 09:21:51 GMT",
+      "role": "technical_data",
+      "sha256": "4a217d067c05b604f3a5bd804ac44a188dd79777b05d9417c43b233fc95c84f5"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2100-Dokumentation_und_Uebersichtstabelle/Neuzugaenge_und_Gesamtliste.xlsx",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2100-Dokumentation_und_Uebersichtstabelle/Neuzugaenge_und_Gesamtliste.xlsx",
+      "bytes": 71349557,
+      "etag": "\"440b535-65e7d18e63ce3\"",
+      "last_modified": "Fri, 23 Oct 2026 07:40:41 GMT",
+      "role": "schema",
+      "sha256": "a79bc74ddc75e9c0b9818e505894e02f1dfc8ec72cd112888242142a9b5dc1b2"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/Ds_D348_BFE6-9_fuer_Energieetikette.docx",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/Ds_D348_BFE6-9_fuer_Energieetikette.docx",
+      "bytes": 46840,
+      "etag": "\"b6f8-6549a1cf215a1\"",
+      "last_modified": "Fri, 19 Jun 2026 12:05:47 GMT",
+      "sha256": "825d8633bc9ca295e7ecb310ebd1e09dfad5381f8f2bca3ea43dbe53e0a18bd7",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/egnr_EU-Genehmigungsnummern.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/egnr_EU-Genehmigungsnummern.pdf",
+      "bytes": 266099,
+      "etag": "\"40f73-62629d6c3d73b\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:58 GMT",
+      "sha256": "63198bf83074b3c26f2bdc2b720ce6188b9d4b45ddd6ae0681945404870c6695",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/etgest_Abgas-Rauch-Geraeusch.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/etgest_Abgas-Rauch-Geraeusch.pdf",
+      "bytes": 269057,
+      "etag": "\"41b01-62629d6c52b15\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:59 GMT",
+      "sha256": "ff1910ea2f2b27af96becf86abd96beb5da28a058aca88f793df5f48eb4af486",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/m2pbfevv_Energieeffizienzkategorien.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/m2pbfevv_Energieeffizienzkategorien.pdf",
+      "bytes": 193879,
+      "etag": "\"2f557-62629d6c5d30d\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:59 GMT",
+      "sha256": "1b97d91b16b8cdc43c2b89199b8a35b510102bdcfbe28c36dfb6c292d6e9ef2f",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/tarmeg68 _Aufbau-und-Fahrmotoren.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/tarmeg68%20_Aufbau-und-Fahrmotoren.pdf",
+      "bytes": 211271,
+      "etag": "\"33947-62629d6c7caf7\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:59 GMT",
+      "sha256": "13324b838643586b9f8e257d1b2a19a23c2ffb66e9bb229c70284a1007de01a4",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/tgbasis_Basiswerte.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/tgbasis_Basiswerte.pdf",
+      "bytes": 789822,
+      "etag": "\"c0d3e-62629d6c94db1\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:59 GMT",
+      "sha256": "affadd1eb7b7e65510de1245d124441ca13b8757cf1e080411b89fb9788fd494",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/tgdtxt_Textfelder-deutsch.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/tgdtxt_Textfelder-deutsch.pdf",
+      "bytes": 718426,
+      "etag": "\"af65a-62629d6ca3fe1\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:59 GMT",
+      "sha256": "6a84b8ae758d1fc5981afd01557faa9e3eb63667fdf3505af8ed583ced5986dd",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/tgltxt_Bermerkungsztexte-d-f.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/tgltxt_Bermerkungsztexte-d-f.pdf",
+      "bytes": 605148,
+      "etag": "\"93bdc-62629d6cc6a94\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:59 GMT",
+      "sha256": "3e6749944a6ef2634a54dc0e28c1903dc9083bddefeb34a2cf19cd81d8b241b6",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/v2tgest-Verbrauchsangaben-Teil-2.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/v2tgest-Verbrauchsangaben-Teil-2.pdf",
+      "bytes": 446271,
+      "etag": "\"6cf3f-62629d6cd416c\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:59 GMT",
+      "sha256": "03ca5096aaf0cbb83b95a5231e6eae2a03f23977a4b02f1f13d84930b831595c",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/vtgest_Verbrauchsangaben-Teil-1.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/vtgest_Verbrauchsangaben-Teil-1.pdf",
+      "bytes": 453890,
+      "etag": "\"6ed02-62629d6ce3785\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:59 GMT",
+      "sha256": "56776807d31b55a48c15ea77aec1de9e6db12b28349f115619e66225ce86cc34",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/wtgest_Abgaswartung.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2510_Datenbeschreibung/wtgest_Abgaswartung.pdf",
+      "bytes": 347440,
+      "etag": "\"54d30-62629d6cef6ee\"",
+      "last_modified": "Tue, 05 Nov 2024 12:49:59 GMT",
+      "sha256": "b3b662221a3f169408565583f4efb5824b7bc4d00b4e0c807c118d3031e3bc68",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Basisdaten_TG_ab_1995.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Basisdaten_TG_ab_1995.pdf",
+      "bytes": 776387,
+      "etag": "\"bd8c3-62629e54634a9\"",
+      "last_modified": "Tue, 05 Nov 2024 12:54:02 GMT",
+      "sha256": "a6a62e9f48fdf11749d279edcefbed67cfeb7c77fbc071488a7f996397d18c84",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Basisdaten_TG_ab_1995.xlsx",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Basisdaten_TG_ab_1995.xlsx",
+      "bytes": 740654,
+      "etag": "\"b4d2e-62629e54bd22f\"",
+      "last_modified": "Tue, 05 Nov 2024 12:54:02 GMT",
+      "sha256": "f012b68518c2696c45d215510e241cc6daa3f1067ce34e12224c04af3ddee81e",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Emissionen_TG_ab_1995.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Emissionen_TG_ab_1995.pdf",
+      "bytes": 121272,
+      "etag": "\"1d9b8-62629e54d8f81\"",
+      "last_modified": "Tue, 05 Nov 2024 12:54:02 GMT",
+      "sha256": "ba9b21d6faad5eca81a638b81efd59ba3e74a6dedfbbc273816bd9adaec492af",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Emissionen_TG_ab_1995.xlsx",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Emissionen_TG_ab_1995.xlsx",
+      "bytes": 19626,
+      "etag": "\"4caa-62629e54edb8a\"",
+      "last_modified": "Tue, 05 Nov 2024 12:54:02 GMT",
+      "sha256": "5de8eab030bdde9e25bc04660bd6c41fe50ac71013d64f703d7e12cfa271334b",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Verbrauch_TG_ab_1995.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Verbrauch_TG_ab_1995.pdf",
+      "bytes": 117795,
+      "etag": "\"1cc23-62629e550cba4\"",
+      "last_modified": "Tue, 05 Nov 2024 12:54:03 GMT",
+      "sha256": "5daba77d6296390a88116ea91ec295bad573a3e209286ff725b3cd290ff0a8af",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Verbrauch_TG_ab_1995.xlsx",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/2220-Datenbeschreibung/Verbrauch_TG_ab_1995.xlsx",
+      "bytes": 17110,
+      "etag": "\"42d6-62629e551bdd5\"",
+      "last_modified": "Tue, 05 Nov 2024 12:54:03 GMT",
+      "sha256": "b1ac0aa9d05e949902db997cf52aaa6e068b6d5099af80c139f2b65cc6713a26",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2100-Dokumentation_und_Uebersichtstabelle/[711584087] Dokumentation TARGA Daten.pdf",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2100-Dokumentation_und_Uebersichtstabelle/%5B711584087%5D%20Dokumentation%20TARGA%20Daten.pdf",
+      "bytes": 593898,
+      "etag": "\"90fea-6242cdcfab846\"",
+      "last_modified": "Fri, 11 Oct 2024 05:36:04 GMT",
+      "sha256": "cfad947f485d0e5b2f43f3088b793ad30a1b011bebe7bb205e33082e000cb571",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/_read_me.txt",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/_read_me.txt",
+      "bytes": 1573,
+      "etag": "\"625-6264012c8c683\"",
+      "last_modified": "Wed, 06 Nov 2024 15:21:35 GMT",
+      "sha256": "a46fb50d4c1ad1fdc955d6292af0623824c88e44e0660da3860d8bcb5e989f16",
+      "role": "readme"
+    },
+    {
+      "path": "3000-eDatenblatt/Testdatensatz_eDatenblatt_mit_Beschreibung.xlsx",
+      "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/Testdatensatz_eDatenblatt_mit_Beschreibung.xlsx",
+      "bytes": 15020278,
+      "etag": "\"e530f6-61f25084de26f\"",
+      "last_modified": "Thu, 08 Aug 2024 05:09:33 GMT",
+      "sha256": "ac1822661cff822eeb1b1e84bec3ac046f38d761b279b0f2b443f54cdc149263",
+      "role": "schema"
+    },
+    {
+      "path": "4000-Typengenehmigungen_TAS/4250-json-Schema/TypeApproval_Schema.xlsx",
+      "url": "https://opendata.astra.admin.ch/ivzod/4000-Typengenehmigungen_TAS/4250-json-Schema/TypeApproval_Schema.xlsx",
+      "bytes": 46926,
+      "etag": "\"b74e-6582114bc78ec\"",
+      "last_modified": "Mon, 03 Aug 2026 09:22:45 GMT",
+      "sha256": "9359c286f597831476b70a52547ad17ce5c997c66571c6250d828a3ba624858f",
+      "role": "schema"
+    },
+    {
+      "path": "4000-Typengenehmigungen_TAS/4250-json-Schema/govServices_TypeApproval_Schema.json",
+      "url": "https://opendata.astra.admin.ch/ivzod/4000-Typengenehmigungen_TAS/4250-json-Schema/govServices_TypeApproval_Schema.json",
+      "bytes": 65421,
+      "etag": "\"ff8d-6582114bb8aa3\"",
+      "last_modified": "Mon, 03 Aug 2026 09:22:45 GMT",
+      "sha256": "5fb35f59455aca0983a36328bfb11e418e05f7af98b82579874ca216b2523d9d",
+      "role": "schema"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2520_Daten/egnr.csv",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2520_Daten/egnr.csv",
+      "bytes": 39635199,
+      "etag": "\"25cc8ff-657d0ab861540\"",
+      "last_modified": "Thu, 30 Jul 2026 09:26:42 GMT",
+      "role": "approval_links",
+      "sha256": "8fdab3379ae9a3f5d5f1f9d81954c2abe83a64ba8c6fe074f92c10528f76ecfe"
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2520_Daten/tarmeg68.csv",
+      "url": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2500-Basetables_fuer_Entwickler/2520_Daten/tarmeg68.csv",
+      "bytes": 411054,
+      "etag": "\"645ae-657d0aa2f22df\"",
+      "last_modified": "Thu, 30 Jul 2026 09:26:20 GMT",
+      "role": "engine_identifiers",
+      "sha256": "686440d3d44d276c207e30400ea141f8b68fb9683e6801a5b52e5a990087a5c0"
+    },
+    {
+      "path": "1000-Fahrzeuge_IVZ/1300-Fahrzeugbestaende/1320-Datensaetze_monatlich/1322-Datenbeschreibung/Codetabelle_d-f-i.xlsx",
+      "url": "https://opendata.astra.admin.ch/ivzod/1000-Fahrzeuge_IVZ/1300-Fahrzeugbestaende/1320-Datensaetze_monatlich/1322-Datenbeschreibung/Codetabelle_d-f-i.xlsx",
+      "bytes": 54205,
+      "etag": "\"d3bd-61f25570807c3\"",
+      "last_modified": "Thu, 08 Aug 2024 05:31:34 GMT",
+      "sha256": "a1591e5efc2e3a60f37f001f135e07e9fae3339d9356fb07f16f548b441be35d",
+      "role": "code_dictionary"
+    }
+  ],
+  "scope": "Current open vehicle technical data and the official descriptions needed to interpret it. No catalog match or worldwide coverage is asserted.",
+  "exclusions": [
+    {
+      "path": "/",
+      "reason": "Domain root returns HTTP403; public /ivzod/ successfully inventoried."
+    },
+    {
+      "path": "1000-Fahrzeuge_IVZ/",
+      "reason": "Vehicle registration/ownership statistics and contract datasets, not exact type/variant/version technical master records; registration/manufacture dates must not become model years. Official code dictionary is included separately."
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2300-Basisdaten_TG_1985-1995/",
+      "reason": "Historical vehicle approvals before current catalog scope (Japan2008+, China2014+, others recent); no post1995 replacement inferred."
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2310-pdf-Drucke_TG_1985-1995/",
+      "reason": "Historical printed approval duplicates before current catalog scope."
+    },
+    {
+      "path": "2000-Typengenehmigungen_TG_TARGA/2400-pdf-Scans_TG_bis_1985/",
+      "reason": "Historical scanned approvals before current catalog scope."
+    },
+    {
+      "path": "4000-Typengenehmigungen_TAS/4100-json-Files/",
+      "reason": "Use full json-Files-20260928.zip instead of228k separate HTTP requests; archive membership will be compared against inventory."
+    },
+    {
+      "path": "5000-Newsletter/",
+      "reason": "Administrative news, not vehicle technical data."
+    },
+    {
+      "pattern": "French translated RT-automobil / TAS_automobile and XLSB duplicates",
+      "reason": "German data and complete original JSON retained. Translate ordinary labels in application separately."
+    },
+    {
+      "pattern": "Standalone motorcycles/trailers datasets",
+      "reason": "Outside requested passenger/pickup/light-van technical catalog; all types remain in official full JSON archive."
+    },
+    {
+      "pattern": "TARGA developer tgbasis.csv, tgdtxt.csv, tgftxt.csv, tgltxt.csv",
+      "reason": "Technical and remarks fields are exported into TG-Automobil.txt; skip additional flattened/language copies. Official field-source mappings retained in accompanying PDFs."
+    },
+    {
+      "pattern": "TARGA developer etgest.csv, vtgest.csv, v2tgest.csv",
+      "reason": "Emission and consumption tables are exported to emissionen.txt and verbrauch.txt. Official schema/source-column mappings retained."
+    },
+    {
+      "pattern": "TARGA developer energy-efficiency label history, exhaust-servicing thresholds, aftermarket exhaust approvals",
+      "reason": "Administrative/historical label or service/aftermarket rules, outside technical identification and engine/displacement/power/body/drive/transmission import. Official descriptions retained."
+    }
+  ]
+}
