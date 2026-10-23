@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T23:02:09.384Z",
+  "updatedAt": "2026-10-23T23:27:29.811654+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -36945,13 +36945,17 @@
       }
     },
     "latestPublicationCheck": {
-      "workflow": 40033674573,
-      "job": 120687829911,
+      "workflow": 40038925349,
+      "job": 120705105717,
       "conclusion": "success",
-      "checkedAt": "2026-10-23T22:27:37.832Z",
-      "writerActive": false,
+      "checkedAt": "2026-10-23T23:19:07.938Z",
+      "writerActive": true,
       "generationId": "gen_1792702445675_8c312f85",
-      "note": "China publish job still active; free lease is not terminal publisher acceptance."
+      "operationType": "catalog_v3_publish_china",
+      "operationId": "catalog_v3_publish_china_fbe8ef80-0c43-40af-a5f4-d78cf61b0707",
+      "heartbeatAt": "2026-10-23T23:14:33.144Z",
+      "lockedUntil": "2026-10-23T23:44:33.144Z",
+      "note": "Existing metadata snapshot independently verified from terminal logs; not a fresh free lease."
     },
     "astonRapidePass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
@@ -37653,9 +37657,9 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "observedMain": "e941ec64941d520b1f483d7efffbef27fd72c71e",
+      "observedMain": "ea2a4148f4853b83c0aa8c431011d65bb9f66033",
       "writesPaused": false,
-      "reason": "100pending body fields fresh-readback verified. China40026092554 publication still active. Korea40032114341 terminal no_fresh_source_offers, previous manifest preserved; background-source planner fixed, no rerun. Wait China terminal and fresh lease before one coordinated release.",
+      "reason": "132 pending bodyType fields independently read back with exact year/trim/source evidence. China40026092554 publication and UAE40038476075 collection are active. Wait both terminal outcomes and fresh free writer lease before one combined release; research writes allowed.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37663,7 +37667,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T22:31:03.324461Z",
+      "checkedAt": "2026-10-23T23:27:29.811654+00:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37739,12 +37743,17 @@
       "isolationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json",
       "deferredNextRelease": {
         "report": "docs/encyclopedia/reports/2026-10-24-next-release-writer-coordination.json",
-        "reason": "active_china_publication",
+        "reason": "active_china_publication_and_uae_refresh",
         "workflow": 40026092554,
         "pendingFields": 132,
         "deployRequested": false,
-        "checkedAt": "2026-10-23T22:31:03.324461Z",
-        "readbackReport": "docs/encyclopedia/reports/2026-10-24-pending100-live-readback.json"
+        "checkedAt": "2026-10-23T23:27:29.811654+00:00",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-24-pending132-live-readback.json",
+        "workflows": [
+          40026092554,
+          40038476075
+        ],
+        "acceptanceChecklist": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0602.json"
       },
       "lastKoreaRefreshFailure": {
         "workflow": 40032114341,
