@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T08:17:35.536964+00:00",
+  "updatedAt": "2026-10-23T09:01:39.849164+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32720,7 +32720,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T08:05:11Z",
+    "updatedAt": "2026-10-23T09:01:39.849164+00:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a1_2023_2025_50_body_fields_saved_api_readback_pending_index_a3_resume",
     "preserveManual": true,
@@ -32755,9 +32755,9 @@
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
-    "installedRelease": "025980454268fa9841ffab34b119037f348a1a11",
-    "installedWorkflow": 39905197131,
-    "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+    "installedRelease": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+    "installedWorkflow": 39923658639,
+    "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
     "catalogRowsEnriched": 776,
     "catalogFieldsFilled": 1464,
     "remaining": [
@@ -32824,52 +32824,7 @@
         "requiresFreshApiPreflight": true
       }
     ],
-    "pendingNextIndexBatches": [
-      {
-        "batch": "research-2026-10-23-audi-a1-body-and-gaps",
-        "commit": "f38cc6172d4266b86b4a91b4e3984104e0cfed91",
-        "workflow": 39909220379,
-        "job": 120268074708,
-        "variants": 50,
-        "newVariants": 0,
-        "updatedVariants": 50,
-        "fields": 58,
-        "compiledCalculationFields": 58,
-        "workflowConclusion": "success",
-        "apiReadback": true,
-        "includedInIndex": false,
-        "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json",
-        "readbackReport": "docs/encyclopedia/reports/2026-10-23-audi-a1-body-and-gaps-readback.json"
-      },
-      {
-        "batch": "research-2026-10-23-audi-a1-next-gaps",
-        "commit": "fbd685f14aabec2a94cbf00b9bddf8275612e123",
-        "workflow": 39914987028,
-        "job": 120286427686,
-        "variants": 50,
-        "newVariants": 0,
-        "updatedVariants": 50,
-        "fields": 51,
-        "compiledFields": 51,
-        "apiReadback": true,
-        "includedInIndex": false,
-        "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json"
-      },
-      {
-        "batch": "research-2026-10-23-audi-a1-2023-2025-body",
-        "commit": "f3e1e0e74ed89a4053010d2c459296aeb7298063",
-        "workflow": 39921661124,
-        "job": 120308087918,
-        "variants": 50,
-        "newVariants": 0,
-        "updatedVariants": 50,
-        "fields": 50,
-        "compiledFields": 50,
-        "apiReadback": true,
-        "includedInIndex": false,
-        "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-2023-2025-body-pass.json"
-      }
-    ],
+    "pendingNextIndexBatches": [],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
@@ -32901,7 +32856,7 @@
       "reasonVerified": false,
       "freshWriterStateAfterFailureConfirmed": false
     },
-    "installedIndexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+    "installedIndexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
     "catalogFieldsEnriched": 1464,
     "failedConcurrentRelease": {
       "workflow": 39749020662,
@@ -32937,7 +32892,7 @@
       "activated": false
     },
     "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-resume.json",
-    "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json",
+    "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
       "state": "completed_partial",
@@ -35573,6 +35528,101 @@
         "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
         "release": "025980454268fa9841ffab34b119037f348a1a11",
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
+      },
+      {
+        "batch": "research-2026-10-23-audi-a1-body-and-gaps",
+        "commit": "f38cc6172d4266b86b4a91b4e3984104e0cfed91",
+        "workflow": 39909220379,
+        "job": 120268074708,
+        "variants": 50,
+        "newVariants": 0,
+        "updatedVariants": 50,
+        "fields": 58,
+        "compiledCalculationFields": 58,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": true,
+        "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-audi-a1-body-and-gaps-readback.json",
+        "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+        "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+        "indexMembershipState": "exact_value_and_batch_source_provenance_verified_then_public_health_confirmed",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+        "publicPricesFullyAccepted": false
+      },
+      {
+        "batch": "research-2026-10-23-audi-a1-next-gaps",
+        "commit": "fbd685f14aabec2a94cbf00b9bddf8275612e123",
+        "workflow": 39914987028,
+        "job": 120286427686,
+        "variants": 50,
+        "newVariants": 0,
+        "updatedVariants": 50,
+        "fields": 51,
+        "compiledFields": 51,
+        "apiReadback": true,
+        "includedInIndex": true,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json",
+        "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+        "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+        "indexMembershipState": "exact_value_and_batch_source_provenance_verified_then_public_health_confirmed",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+        "publicPricesFullyAccepted": false
+      },
+      {
+        "batch": "research-2026-10-23-audi-a1-2023-2025-body",
+        "commit": "f3e1e0e74ed89a4053010d2c459296aeb7298063",
+        "workflow": 39921661124,
+        "job": 120308087918,
+        "variants": 50,
+        "newVariants": 0,
+        "updatedVariants": 50,
+        "fields": 50,
+        "compiledFields": 50,
+        "apiReadback": true,
+        "includedInIndex": true,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-2023-2025-body-pass.json",
+        "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+        "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+        "indexMembershipState": "exact_value_and_batch_source_provenance_verified_then_public_health_confirmed",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+        "publicPricesFullyAccepted": false
+      },
+      {
+        "batch": "research-2026-10-23-bmw-i5-2026-30min",
+        "workflow": 39909676521,
+        "fields": 3,
+        "variants": 1,
+        "includedInIndex": true,
+        "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+        "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+        "indexMembershipState": "exact_value_and_batch_source_provenance_verified_then_public_health_confirmed",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+        "publicPricesFullyAccepted": false
+      },
+      {
+        "batch": "research-2026-10-23-bmw-i4-2026-30min",
+        "workflow": 39909903065,
+        "fields": 2,
+        "variants": 1,
+        "includedInIndex": true,
+        "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+        "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+        "indexMembershipState": "exact_value_and_batch_source_provenance_verified_then_public_health_confirmed",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+        "publicPricesFullyAccepted": false
+      },
+      {
+        "batch": "research-2026-10-23-owner-li-l6-l7",
+        "workflow": 39922105245,
+        "fields": 67,
+        "variants": 37,
+        "includedInIndex": true,
+        "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+        "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+        "indexMembershipState": "exact_value_and_batch_source_provenance_verified_then_public_health_confirmed",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+        "publicPricesFullyAccepted": false
       }
     ],
     "astonDb11Db12Pass": {
@@ -36829,7 +36879,7 @@
     "researchWriteCoordination": {
       "observedMain": "025980454268fa9841ffab34b119037f348a1a11",
       "writesPaused": false,
-      "reason": "Run 39923658639: isolated encyclopedia index and six-batch membership checks succeeded; research writes may resume. Price index preparation and activation still pending.",
+      "reason": "Release39923658639 installed; six-batch exact value/provenance membership and public health verified. Camry is post-snapshot pending. Public Li L6 parity remains open.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -36837,25 +36887,34 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T08:26:28.664Z",
+      "checkedAt": "2026-10-23T09:01:39.849164+00:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
           39909903065
         ],
-        "state": "saved_independent_api_readback_pass_pending_index",
+        "state": "included_in_active_index",
         "fields": 5,
         "report": "docs/encyclopedia/reports/2026-10-23-bmw-30min-progress.json",
-        "doNotDuplicate": true
+        "doNotDuplicate": true,
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
       },
       "parallelOwnerLiResearch": {
         "commit": "f479daa794d2bc82f24cb0800667e2fdf8ef11e8",
         "batchPath": "docs/encyclopedia/batches/2026-10-23-owner-li-l6-l7.json",
         "doNotDuplicate": true,
-        "status": "Штатное сохранение запрошено отдельной ручной сессией; её приёмку не подменять A1отчётом"
+        "status": "saved_readback_and_active_index_membership_confirmed_public_parity_not_closed",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
       },
       "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json",
-      "isolatedRelease": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182"
+      "isolatedRelease": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+      "postSnapshotCamry": {
+        "workflow": 39925160057,
+        "fields": 8,
+        "variants": 2,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-23-camry-readback-and-release-coverage.json"
+      }
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -37697,7 +37756,10 @@
       "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a1-remaining.json",
       "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-next.json",
       "allModelsComplete": false,
-      "collectorsCalculationRulesGuardsSecretsChanged": false
+      "collectorsCalculationRulesGuardsSecretsChanged": false,
+      "includedInIndex": true,
+      "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+      "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
     "audiA1NextGapsPass": {
       "batch": "research-2026-10-23-audi-a1-next-gaps",
@@ -37710,7 +37772,7 @@
       "fields": 51,
       "compiledFields": 51,
       "apiReadback": true,
-      "includedInIndex": false,
+      "includedInIndex": true,
       "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json",
       "afterRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
       "publicParity": {
@@ -37720,7 +37782,9 @@
         "repeatedGroups": 2,
         "scope": "Ограниченная выборка Europe A1; не весь каталог",
         "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-public-parity.json"
-      }
+      },
+      "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+      "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
     "audiA1Body2023_2025Pass": {
       "batch": "research-2026-10-23-audi-a1-2023-2025-body",
@@ -37733,7 +37797,7 @@
       "fields": 50,
       "compiledFields": 50,
       "apiReadback": true,
-      "includedInIndex": false,
+      "includedInIndex": true,
       "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-2023-2025-body-pass.json",
       "afterRevision": "f1afdff4-20f7-45f6-b467-247de44f3ed1",
       "publicParity": {
@@ -37743,9 +37807,20 @@
         "repeatedGroups": 2,
         "scope": "Ограниченная выборка Europe A1; не весь каталог",
         "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-2023-2025-public-parity.json"
-      }
+      },
+      "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+      "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-pending-index-acceptance-1505.json"
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-pending-index-acceptance-1505.json",
+    "liL6PublicParityBlocker": {
+      "offerId": "17b4b13194dc355e6415013f",
+      "searchPower30MinKw": 134,
+      "cardPower30MinKw": null,
+      "searchStatus": "needs_data",
+      "cardStatus": "needs_data",
+      "rootCause": "not_established",
+      "report": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
+    }
   },
   "scope": {
     "minimumYear": 2008,

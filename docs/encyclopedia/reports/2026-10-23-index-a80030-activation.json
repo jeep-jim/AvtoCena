@@ -1,0 +1,339 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T09:01:39.849164+00:00",
+  "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+  "workflow": 39923658639,
+  "job": 120314670440,
+  "conclusion": "success",
+  "activatedAt": "2026-10-23T08:39:24.9365721Z",
+  "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+  "manifestDigest": "8ff34364792ad63d00274758b6eeb26db4d9a0b8f5ee3139f21f433b7d6bc18d",
+  "membership": {
+    "batches": 6,
+    "variants": 189,
+    "fields": 231,
+    "checkedAt": "2026-10-23T08:20:45.5035244Z",
+    "checks": [
+      "value",
+      "batchId",
+      "sourceKind",
+      "sourceUrl",
+      "year"
+    ],
+    "ownerConfirmedStoredAs": "manual"
+  },
+  "sharedPrices": {
+    "workflow": 39926204092,
+    "job": 120323093659,
+    "conclusion": "success",
+    "verified": true,
+    "skipped": false,
+    "completedAt": "2026-10-23T08:51:44.4304447Z",
+    "generationId": "gen_1792702445675_8c312f85"
+  },
+  "publicAcceptance": {
+    "checkedAt": "2026-10-23T09:01:39.849164+00:00",
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+      "calculationVersion": "6e0e9af297594e6c30ce7e09b2e37f121e00e199d31ee1b00192a1538557a9e7"
+    },
+    "checks": [
+      {
+        "label": "a3",
+        "offerId": "56bbcecb51a61b76402371a9",
+        "cardUrl": "https://avtocena.com/cars/offer/56bbcecb51a61b76402371a9",
+        "comparisons": {
+          "year": {
+            "search": 2024,
+            "card": 2024,
+            "equal": true
+          },
+          "trim": {
+            "search": "35 TFSI ADVANCED",
+            "card": "35 TFSI ADVANCED",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "fuel": {
+            "search": "petrol",
+            "card": "petrol",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "combustion",
+            "card": "combustion",
+            "equal": true
+          },
+          "drive": {
+            "search": "fwd",
+            "card": "fwd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3148247,
+            "card": 3148247,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+            "card": "permanent_encyclopedia:a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+            "equal": true
+          }
+        },
+        "passed": true,
+        "calculationEvidence": {
+          "customsInput": {
+            "newModelYearScenario": false,
+            "customsValueRub": 1711953,
+            "importedAt": "2026-10-23T09:00:32.697Z",
+            "eurRateRub": 91.1364,
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "powertrainKind": "combustion",
+            "year": 2024,
+            "fuel": "petrol",
+            "bodyType": "sedan",
+            "make": "Audi",
+            "model": "A3",
+            "sourceTitle": "Audi · A3 · 35 TFSI ADVANCED · 35 TFSI ADVANCED · sedan"
+          },
+          "customs": {
+            "status": "ready",
+            "totalCustomsRub": 838678,
+            "knownCustomsRub": 835278,
+            "utilizationFeeRub": 3400,
+            "utilizationPowerKw": 110,
+            "ageEstimated": true,
+            "productionReferenceDate": "2024-07-01",
+            "missing": []
+          },
+          "missing": []
+        }
+      },
+      {
+        "label": "i4",
+        "offerId": "1b7700af07caec154dc99da6",
+        "cardUrl": "https://avtocena.com/cars/offer/1b7700af07caec154dc99da6",
+        "comparisons": {
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "Gran Coupe xDrive40 *M-Sportpaket Pro *Harman/Kardon *AHK",
+            "card": "Gran Coupe xDrive40 *M-Sportpaket Pro *Harman/Kardon *AHK",
+            "equal": true
+          },
+          "engineCc": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 401,
+            "card": 401,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 295,
+            "card": 295,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": 125,
+            "card": 125,
+            "equal": true
+          },
+          "fuel": {
+            "search": "electric",
+            "card": "electric",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "electric",
+            "card": "electric",
+            "equal": true
+          },
+          "drive": {
+            "search": "awd",
+            "card": "awd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 10433982,
+            "card": 10433982,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+            "card": "permanent_encyclopedia:a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+            "equal": true
+          }
+        },
+        "passed": true,
+        "calculationEvidence": {
+          "customsInput": {
+            "newModelYearScenario": false,
+            "customsValueRub": 5467273,
+            "importedAt": "2026-10-23T09:00:32.987Z",
+            "eurRateRub": 91.1364,
+            "powerHp": 401,
+            "powerKw": 295,
+            "power30MinKw": 125,
+            "powertrainKind": "electric",
+            "year": 2026,
+            "fuel": "electric",
+            "bodyType": "",
+            "make": "BMW",
+            "model": "i4",
+            "sourceTitle": "BMW · i4 · Gran Coupe xDrive40 *M-Sportpaket Pro *Harman/Kardon *AHK · Gran Coupe xDrive40 *M-Sportpaket Pro *Harman/Kardon *AHK"
+          },
+          "customs": {
+            "status": "ready",
+            "totalCustomsRub": 4197299,
+            "knownCustomsRub": 2349299,
+            "utilizationFeeRub": 1848000,
+            "utilizationPowerKw": 125,
+            "ageEstimated": true,
+            "productionReferenceDate": "2026-07-01",
+            "missing": []
+          },
+          "missing": []
+        }
+      },
+      {
+        "label": "li",
+        "offerId": "17b4b13194dc355e6415013f",
+        "cardUrl": "https://avtocena.com/cars/offer/17b4b13194dc355e6415013f",
+        "comparisons": {
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "2026款 Ultra",
+            "card": "2026款 Ultra",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1496,
+            "card": 1496,
+            "equal": true
+          },
+          "powerHp": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "powerKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": 134,
+            "card": null,
+            "equal": false
+          },
+          "fuel": {
+            "search": "hybrid",
+            "card": "hybrid",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "series_hybrid",
+            "card": "series_hybrid",
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "电动车单速变速箱",
+            "card": "电动车单速变速箱",
+            "equal": true
+          },
+          "totalRub": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "needs_data",
+            "card": "needs_data",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": null,
+            "card": null,
+            "equal": true
+          }
+        },
+        "passed": false,
+        "calculationEvidence": {
+          "customsInput": null,
+          "customs": null,
+          "missing": null
+        }
+      }
+    ]
+  },
+  "allModelsComplete": false,
+  "allCatalogOffersCalculated": false,
+  "publicParityPassed": false,
+  "limitations": [
+    "HTTP and target-ID full-offer RSC comparison, not visual browser acceptance.",
+    "Audi A3 and BMW i4 each pass 13 comparisons. BMW i4 customsInput.power30MinKw and customs.utilizationPowerKw both equal125.",
+    "Li Auto L6 17b4b13194dc355e6415013f search power30MinKw134 differs from full-card RSC undefined; both prices null/needs_data. Root cause not established.",
+    "Existing DBX projection parity remains open.",
+    "Camry batch39925160057 is after this isolated index and remains pending.",
+    "Speed postponed; production owner/manager bot role acceptance remains open."
+  ]
+}
