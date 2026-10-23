@@ -1,0 +1,707 @@
+{
+  "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+  "commit": "986255742c12d450a9fbbd855f4b11c475f5ccd6",
+  "workflow": 39991099450,
+  "job": 120542751161,
+  "variants": 50,
+  "newVariants": 0,
+  "fields": 50,
+  "compiledFields": 50,
+  "apiReadback": true,
+  "includedInIndex": false,
+  "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-body-pass.json",
+  "afterRevision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
+  "publicParity": {
+    "version": 1,
+    "checkedAt": "2026-10-23T16:58:45.484069+00:00",
+    "passed": true,
+    "scope": "Ограниченная выборка Audi A3 Europe: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована.",
+    "offersChecked": 7,
+    "comparisons": 91,
+    "matched": 91,
+    "rows": [
+      {
+        "offerId": "10215920c841388cf05d580f",
+        "checks": {
+          "year": {
+            "search": 2023,
+            "card": 2023,
+            "equal": true
+          },
+          "trim": {
+            "search": "A3 SPB 30 TDI S tronic S line edition",
+            "card": "A3 SPB 30 TDI S tronic S line edition",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1968,
+            "card": 1968,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 116,
+            "card": 116,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "card": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3335368,
+            "card": 3335368,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "drive": {
+            "search": "",
+            "card": "$undefined"
+          }
+        }
+      },
+      {
+        "offerId": "55e67cfe4d0a70a53cd9640c",
+        "checks": {
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+            "card": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "card": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 5611962,
+            "card": 5611962,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "drive": {
+            "search": "",
+            "card": "$undefined"
+          }
+        }
+      },
+      {
+        "offerId": "c77aaf888711c39b03326bb0",
+        "checks": {
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+            "card": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "card": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 5611962,
+            "card": 5611962,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "drive": {
+            "search": "",
+            "card": "$undefined"
+          }
+        }
+      },
+      {
+        "offerId": "2d8104efd4fbca37a6ab8a3f",
+        "checks": {
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+            "card": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "card": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 5611962,
+            "card": 5611962,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "drive": {
+            "search": "",
+            "card": "$undefined"
+          }
+        }
+      },
+      {
+        "offerId": "38347fa3e342af8d39eb6cca",
+        "checks": {
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+            "card": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "card": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 5611962,
+            "card": 5611962,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "drive": {
+            "search": "",
+            "card": "$undefined"
+          }
+        }
+      },
+      {
+        "offerId": "f83de00bd581160509188e47",
+        "checks": {
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "sportback 2.0 tdi s line edition 116cv",
+            "card": "sportback 2.0 tdi s line edition 116cv",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": 1905,
+            "card": 1905,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1968,
+            "card": 1968,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 116,
+            "card": 116,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "drive": {
+            "search": "fwd",
+            "card": "fwd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "manual",
+            "card": "manual",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "card": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 5538866,
+            "card": 5538866,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {}
+      },
+      {
+        "offerId": "bfa817f22a846040e02abc76",
+        "checks": {
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "sportback 2.0 tdi s line edition 116cv",
+            "card": "sportback 2.0 tdi s line edition 116cv",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": 1905,
+            "card": 1905,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1968,
+            "card": 1968,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 116,
+            "card": 116,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "drive": {
+            "search": "fwd",
+            "card": "fwd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "manual",
+            "card": "manual",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "card": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 5403502,
+            "card": 5403502,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {}
+      }
+    ],
+    "unavailable": [],
+    "repeatedGroups": [
+      {
+        "offerIds": [
+          "55e67cfe4d0a70a53cd9640c",
+          "c77aaf888711c39b03326bb0",
+          "2d8104efd4fbca37a6ab8a3f",
+          "38347fa3e342af8d39eb6cca"
+        ],
+        "allCardsChecked": true
+      },
+      {
+        "offerIds": [
+          "f83de00bd581160509188e47",
+          "bfa817f22a846040e02abc76"
+        ],
+        "allCardsChecked": true
+      }
+    ],
+    "duplicateOfferIds": 0,
+    "rowsReturned": 48,
+    "catalogTotalReported": 780,
+    "healthBefore": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+      "calculationVersion": "517a84ded1ba1eca308fea174fb8a0b04d4359a4321c1eb80a20d82cff2e254f"
+    },
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+      "calculationVersion": "517a84ded1ba1eca308fea174fb8a0b04d4359a4321c1eb80a20d82cff2e254f"
+    },
+    "sameRelease": true,
+    "generationId": "gen_1792702445675_8c312f85"
+  },
+  "nativeExact": 50,
+  "nativeHeld": [],
+  "checkedAt": "2026-10-23T17:00:01.487Z",
+  "state": "saved_readback_pass_pending_index",
+  "batchSha256": "71702c1ee24b91fdb04348c3d0a154649ce512d4c6104c4dec591a2b1fe6b841",
+  "years": {
+    "2022": 15,
+    "2023": 35
+  },
+  "beforeRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+  "readback": {
+    "version": 1,
+    "checkedAt": "2026-10-23T17:00:01.002Z",
+    "passed": true,
+    "modelId": "f40e34e905b8ca09f3636eda",
+    "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+    "beforeRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+    "afterRevision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
+    "rowsBefore": 3663,
+    "rowsAfter": 3663,
+    "annualRows": 1111,
+    "unknownYearRows": 2552,
+    "updatedVariants": 50,
+    "fields": 50,
+    "newVariants": 0,
+    "untargetedUnchanged": 3613,
+    "allExpectedValuesAndSourcesMatch": true,
+    "historyPreserved": true,
+    "replayPassed": true,
+    "compiledFields": 50,
+    "apiYearSlices": 15
+  },
+  "preflight": {
+    "version": 1,
+    "checkedAt": "2026-10-23T16:56:53.260Z",
+    "state": "prepared_not_applied",
+    "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+    "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+    "batchSha256": "71702c1ee24b91fdb04348c3d0a154649ce512d4c6104c4dec591a2b1fe6b841",
+    "modelId": "f40e34e905b8ca09f3636eda",
+    "beforeRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+    "variantsRead": 3663,
+    "variantsPlanned": 50,
+    "fieldsPlanned": 50,
+    "newVariants": 0,
+    "untargetedRowsPreserved": 3613,
+    "allExistingValuesPreserved": true,
+    "priorFieldSourcesPreserved": true,
+    "nativeExact": 50,
+    "nativeHeld": [],
+    "compiledFields": 50,
+    "guardTestsPassed": 11,
+    "manualPreserved": true,
+    "unknownCertifiedPowerNotInferred": true,
+    "replayPassed": true,
+    "sources": [
+      {
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+        "bytes": 79371,
+        "retrievedAt": "2026-10-23T16:56:39.502422+00:00"
+      },
+      {
+        "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+        "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+        "bytes": 47629,
+        "retrievedAt": "2026-10-23T16:56:46.290668+00:00"
+      },
+      {
+        "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+        "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+        "bytes": 66509,
+        "retrievedAt": "2026-10-23T16:56:52.417200+00:00"
+      }
+    ],
+    "cursorBefore": "a508272cf730c67bde2fa1e5",
+    "cursorAfterApply": "a9d1e29fc96ba2a231ba2fb2",
+    "remainingSelectedYearBodyAfterApply": 94,
+    "apiReadbackAfterApply": false,
+    "activationConfirmed": false,
+    "applyDeferredReason": null,
+    "releasedAfterWorkflow": 39988848904,
+    "annualRowsRead": 1111,
+    "unknownYearAstraRowsPreserved": 2552,
+    "nextCandidate": {
+      "variantId": "a9d1e29fc96ba2a231ba2fb2",
+      "year": 2023,
+      "trim": "Sportback 30 TDI., LED, Smartphone Interface"
+    }
+  },
+  "next": {
+    "variantId": "a9d1e29fc96ba2a231ba2fb2",
+    "year": 2023,
+    "trim": "Sportback 30 TDI., LED, Smartphone Interface",
+    "missingValueFields": [
+      "bodyType",
+      "engineCode"
+    ],
+    "knownValues": {
+      "fuel": "diesel",
+      "powertrainKind": "ice",
+      "engineCc": 1968,
+      "powerHp": 116,
+      "powerKw": 85,
+      "icePowerKw": 85,
+      "transmission": "manual",
+      "drive": "fwd",
+      "grossVehicleWeightKg": 1905
+    }
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2022-2023-remaining.json",
+  "researchedAnnualRows": 463,
+  "scope": "Подтверждены только50bodyType; не полная проверка автомобилей/модели/каталога.",
+  "release": {
+    "existingWorkflow": 39988848904,
+    "existingRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "newBatchPostSnapshot": true,
+    "activationConfirmed": false,
+    "duplicateDeployRequested": false
+  },
+  "allModelsComplete": false,
+  "workflowConclusion": "success",
+  "applyFinishedAt": "2026-10-23T16:59:02.242Z"
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T16:03:12.067Z",
+  "updatedAt": "2026-10-23T17:00:01.002Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1148,8 +1148,8 @@
       ],
       "variants": 3663,
       "status": "partial_verified_fields",
-      "researchedVariants": 430,
-      "checkedAt": "2026-10-23T16:03:12.067Z",
+      "researchedVariants": 463,
+      "checkedAt": "2026-10-23T17:00:01.002Z",
       "researchedYears": [
         2009,
         2010,
@@ -1197,10 +1197,10 @@
         2025,
         2026
       ],
-      "nextAction": "Продолжить с a508272cf730c67bde2fa1e5:15оставшихся Sportback2022 безкузова, затем2023, партия20–50. Сначала свежие API/revisions; существующие подтверждённые значения и ASTRA безгода не повторять. Прежние ранние8P/8V/MHEV и A1 retry сохранены.",
+      "nextAction": "Продолжить с a9d1e29fc96ba2a231ba2fb2:94 оставшихся явно обозначенных Sportback/SB/SPB 2023 без кузова, затем2024. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
-      "nextVariantId": "a508272cf730c67bde2fa1e5",
-      "boundedReadAt": "2026-10-23T16:01:17.019Z",
+      "nextVariantId": "a9d1e29fc96ba2a231ba2fb2",
+      "boundedReadAt": "2026-10-23T17:00:01.002Z",
       "boundedReadYears": [
         2026,
         2025,
@@ -1217,10 +1217,10 @@
         2010,
         2009
       ],
-      "boundedReadRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
-      "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2022-remaining.json",
-      "lastBatch": "research-2026-10-23-audi-a3-2022-body",
+      "boundedReadRevision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
+      "revision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2022-2023-remaining.json",
+      "lastBatch": "research-2026-10-23-audi-a3-2022-2023-body",
       "lastBatchFields": 50,
       "lastBatchVariants": 50,
       "annualVariants": 1111,
@@ -32745,37 +32745,36 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T16:03:12.067Z",
+    "updatedAt": "2026-10-23T17:00:01.002Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a3_2020_2021_50_body_fields_saved_readback_pending_index_public_transmission_retry",
+    "state": "audi_a3_2022_2023_50_body_fields_saved_readback_pending_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "a508272cf730c67bde2fa1e5",
-      "year": 2022,
-      "trim": "Sportback 35 TFSI S-Tronic AHK, Klima 2-Zonen",
+      "variantId": "a9d1e29fc96ba2a231ba2fb2",
+      "year": 2023,
+      "trim": "Sportback 30 TDI., LED, Smartphone Interface",
       "missingValueFields": [
         "bodyType",
-        "engineCode",
-        "power30MinKw"
+        "engineCode"
       ],
       "knownValues": {
-        "fuel": "petrol",
-        "powertrainKind": "mhev",
-        "engineCc": 1498,
-        "powerHp": 150,
-        "powerKw": 110,
-        "icePowerKw": 110,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "transmission": "manual",
         "drive": "fwd",
-        "transmission": "automatic",
-        "grossVehicleWeightKg": 1875
+        "grossVehicleWeightKg": 1905
       },
       "modelId": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff"
+      "revision": "714cb419-1c3f-4993-af14-0154d29bbcb9"
     },
-    "lastVerifiedResearch": "audi-a3-2020-2021-body",
+    "lastVerifiedResearch": "audi-a3-2022-2023-body",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32791,30 +32790,29 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2022-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2022-2023-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-23-audi-a3-2022-body",
-      "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
-      "commit": "cda51eaf8cf28e36b20e2ceb958c74ec1634c296",
-      "workflow": 39982805443,
-      "job": 120514196873,
+      "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+      "commit": "986255742c12d450a9fbbd855f4b11c475f5ccd6",
+      "workflow": 39991099450,
+      "job": 120542751161,
       "variants": 50,
       "newVariants": 0,
       "fields": 50,
       "compiledFields": 50,
       "apiReadback": true,
       "includedInIndex": false,
-      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-pass.json",
-      "afterRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-body-pass.json",
+      "afterRevision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
       "publicParity": {
         "passed": true,
         "offers": 7,
         "comparisons": 91,
         "matched": 91,
         "repeatedGroups": 2,
-        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-public-parity.json",
-        "scope": "Ограниченная выборка Audi A3 Europe: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована."
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-public-parity.json"
       },
       "nativeExact": 50,
       "nativeHeld": []
@@ -32903,9 +32901,34 @@
         },
         "nativeExact": 50,
         "nativeHeld": []
+      },
+      {
+        "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+        "commit": "986255742c12d450a9fbbd855f4b11c475f5ccd6",
+        "workflow": 39991099450,
+        "job": 120542751161,
+        "variants": 50,
+        "newVariants": 0,
+        "fields": 50,
+        "compiledFields": 50,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-body-pass.json",
+        "afterRevision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
+        "publicParity": {
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 91,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-public-parity.json"
+        },
+        "nativeExact": 50,
+        "nativeHeld": []
       }
     ],
-    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-pass.json",
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -38050,7 +38073,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-index-acceptance.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-index-acceptance.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -38211,6 +38234,31 @@
         "repeatedGroups": 2,
         "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-public-parity.json",
         "scope": "Ограниченная выборка Audi A3 Europe: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована."
+      },
+      "nativeExact": 50,
+      "nativeHeld": []
+    },
+    "audiA3Body2022_2023Pass": {
+      "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+      "commit": "986255742c12d450a9fbbd855f4b11c475f5ccd6",
+      "workflow": 39991099450,
+      "job": 120542751161,
+      "variants": 50,
+      "newVariants": 0,
+      "fields": 50,
+      "compiledFields": 50,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-body-pass.json",
+      "afterRevision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
+      "publicParity": {
+        "passed": true,
+        "offers": 7,
+        "comparisons": 91,
+        "matched": 91,
+        "repeatedGroups": 2,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-public-parity.json"
       },
       "nativeExact": 50,
       "nativeHeld": []
