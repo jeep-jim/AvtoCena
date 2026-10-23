@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T03:11:11.921Z",
+  "next": {
+    "modelId": "0f90ccb1a0cf0280fa416811",
+    "make": "Aston Martin",
+    "model": "Vantage",
+    "revision": "ea3445ce-4aaa-4294-a65a-8ce1d10ab05c",
+    "yearReadback": 2025,
+    "knownYears": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "knownVariants": 35,
+    "action": "Сначала свежие годовые API и заполнение непроверенных полей существующих Vantage; точные поколения/кузова/коробки. Не пересобирать список моделей. Отдельная V8 не объединяется по имени."
+  },
+  "completedBatch": {
+    "id": "research-2026-10-23-aston-valhalla-vanquish",
+    "commit": "2f569148f23be23bf06f1f68dbaac21b24d60893",
+    "workflow": 39893443144,
+    "job": 120218274686,
+    "newVariants": 13,
+    "updatedVariants": 1,
+    "fields": 95,
+    "compiledCalculationFields": 82,
+    "apiReadback": true,
+    "repeatBatch": false
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v8-valhalla-vanquish-remaining.json",
+  "sourceLeads": [
+    {
+      "url": "https://www.astonmartin.com/api/v1/owner-guides/search?model=Vantage",
+      "state": "Каталог найден; каждую таблицу перепроверить перед использованием."
+    },
+    {
+      "url": "https://www.astonmartin.com/api/v1/owner-guides/search?model=V8Vantage",
+      "state": "Каталог найден; не назначать другой канонической модели без подтверждения."
+    }
+  ],
+  "allModelsComplete": false,
+  "index": {
+    "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "activeIndexFromPreviousVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "activationConfirmed": false,
+    "aggregateWorkflow": 39893572344,
+    "aggregateJob": 120218685754,
+    "aggregateCommit": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+    "state": "preparing_private_encyclopedia_index",
+    "membershipVerified": false,
+    "duplicateReleaseRequested": false,
+    "compactWorkflow": 39890764403,
+    "compactConclusion": "success",
+    "writerfreeInspectionWorkflow": 39893375608,
+    "writerfreeObservedAt": "2026-10-23T03:08:45.174Z",
+    "nextAction": "В уже запущенном едином выпуске проверить членство всех14pending партий, активацию и подготовку цен. Sonata160PS и открытый DBX search/detail blocker проверяются отдельно; новый индекс не считается исправлением provenance."
+  }
+}

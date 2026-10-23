@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T09:04:41+07:00",
+  "updatedAt": "2026-10-23T10:13:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -993,19 +993,20 @@
       "make": "Aston Martin",
       "model": "V8",
       "years": [
-        2025,
-        2024,
-        2023,
-        2022,
+        2020,
         2021,
-        2020
+        2022,
+        2023,
+        2024,
+        2025
       ],
       "variants": 14,
       "status": "needs_exact_source",
       "researchedVariants": 0,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
-      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
+      "checkedAt": "2026-10-23T10:13:00+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v8-valhalla-vanquish-remaining.json",
+      "nextAction": "Продолжить адресные непроверенные поля из retry; сохранённую партию не повторять. Исходные наблюдения/ручные правки не заменять.",
+      "revision": "77103954-4534-45b8-86e3-fb1c56a39520"
     },
     {
       "id": "004233a68dabf0652a7f0416",
@@ -1017,28 +1018,32 @@
       "variants": 1,
       "status": "partial_verified_fields",
       "researchedVariants": 1,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
-      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
+      "checkedAt": "2026-10-23T10:13:00+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v8-valhalla-vanquish-remaining.json",
+      "nextAction": "Продолжить адресные непроверенные поля из retry; сохранённую партию не повторять. Исходные наблюдения/ручные правки не заменять.",
+      "revision": "80a503b4-ce6a-4ff1-87c4-4af063a4e05a"
     },
     {
       "id": "6311069a3ae15cc6b5c54e8a",
       "make": "Aston Martin",
       "model": "Vanquish",
       "years": [
-        2025,
-        2024,
-        2020,
-        2017,
+        2013,
+        2014,
         2015,
-        2014
+        2016,
+        2017,
+        2020,
+        2024,
+        2025
       ],
-      "variants": 13,
+      "variants": 26,
       "status": "partial_verified_fields",
-      "researchedVariants": 4,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
-      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
+      "researchedVariants": 17,
+      "checkedAt": "2026-10-23T10:13:00+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v8-valhalla-vanquish-remaining.json",
+      "nextAction": "Продолжить адресные непроверенные поля из retry; сохранённую партию не повторять. Исходные наблюдения/ручные правки не заменять.",
+      "revision": "4461f3f5-b0e4-4017-8e4e-93b038570362"
     },
     {
       "id": "0f90ccb1a0cf0280fa416811",
@@ -32694,13 +32699,13 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T09:04:41+07:00",
+    "updatedAt": "2026-10-23T10:13:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "rapide_model_years_saved_api_readback_pass_activation_pending",
+    "state": "valhalla_vanquish_saved_api_readback_pass_aggregate_index_preparing",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Aston Martin V8",
-    "lastVerifiedResearch": "aston-dbs-superleggera-770",
+    "nextModel": "Aston Martin Vantage",
+    "lastVerifiedResearch": "aston-valhalla-vanquish",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 75,
     "allModelsComplete": false,
@@ -32716,30 +32721,30 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-rapide-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v8-valhalla-vanquish-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "aston-v12-vantage-late",
-      "batch": "research-2026-10-23-aston-v12-vantage-late",
-      "commit": "ca2399dd8a3f50e69c3a9d097749c8bf9c91b4ac",
-      "workflow": 39887296473,
-      "job": 120198338793,
-      "variants": 3,
-      "newVariants": 3,
-      "updatedVariants": 0,
-      "fields": 20,
-      "compiledCalculationFields": 17,
+      "key": "aston-valhalla-vanquish",
+      "batch": "research-2026-10-23-aston-valhalla-vanquish",
+      "commit": "2f569148f23be23bf06f1f68dbaac21b24d60893",
+      "workflow": 39893443144,
+      "job": 120218274686,
+      "variants": 14,
+      "newVariants": 13,
+      "updatedVariants": 1,
+      "fields": 95,
+      "compiledCalculationFields": 82,
       "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
-      "indexMembershipState": "saved_after_active_ac711_snapshot",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-late-readback.json"
+      "indexMembershipState": "aggregate_snapshot_membership_pending",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-valhalla-vanquish-readback.json"
     },
-    "indexReleaseRequested": false,
+    "indexReleaseRequested": true,
     "auditGenerationId": "gen_1792660229591_c103ed94",
     "pendingIndexBatches": [],
-    "requestedRelease": "e78c7154232f39ac73a2253314e2b0fe34da1344",
-    "requestedReleaseWorkflow": 39828240506,
+    "requestedRelease": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+    "requestedReleaseWorkflow": 39893572344,
     "additionalPreparedResearch": [
       {
         "path": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2011-manual-retry.json",
@@ -32997,103 +33002,123 @@
         "includedInIndex": false,
         "indexMembershipState": "saved_after_active_ac711_snapshot",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-late-readback.json"
-      }
-    ],
-    "inFlightResearch": [
+      },
       {
+        "key": "aston-valhalla-vanquish",
         "batch": "research-2026-10-23-aston-valhalla-vanquish",
-        "models": [
-          "Aston Martin Vanquish",
-          "Aston Martin Valhalla"
-        ],
-        "operations": 14,
+        "commit": "2f569148f23be23bf06f1f68dbaac21b24d60893",
+        "workflow": 39893443144,
+        "job": 120218274686,
+        "variants": 14,
         "newVariants": 13,
+        "updatedVariants": 1,
         "fields": 95,
-        "state": "workflow_requested_readback_pending",
-        "checkedAt": "2026-10-23T10:09:00+07:00"
+        "compiledCalculationFields": 82,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "aggregate_snapshot_membership_pending",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-valhalla-vanquish-readback.json"
       }
     ],
+    "inFlightResearch": [],
     "lastCompletedPass": {
-      "checkedAt": "2026-10-23T09:04:41+07:00",
-      "batch": "research-2026-10-23-aston-v12-vantage-late",
+      "checkedAt": "2026-10-23T10:13:00+07:00",
+      "batch": "research-2026-10-23-aston-valhalla-vanquish",
       "apiReadback": true,
       "passed": true,
-      "operations": 3,
-      "newVariants": 3,
-      "updatedVariants": 0,
-      "confirmedFields": 20,
-      "compiledCalculationFields": 17,
-      "unchangedVariantsPreserved": 18,
-      "beforeRevision": "3069826e-b541-4867-9316-43b21f6feaf3",
-      "afterRevision": "282d18a2-4887-4240-9f01-b18116d7d966",
-      "variantsBefore": 18,
-      "variantsAfter": 21,
-      "researchedVariantsAfter": 19,
-      "manualWrites": 0,
-      "wholeRowVerified": false,
+      "operations": 14,
+      "newVariants": 13,
+      "updatedVariants": 1,
+      "confirmedFields": 95,
+      "compiledCalculationFields": 82,
+      "models": [
+        {
+          "model": "Vanquish",
+          "beforeRevision": "c79c150d-3775-4174-b726-a5e412bb1c49",
+          "afterRevision": "4461f3f5-b0e4-4017-8e4e-93b038570362",
+          "variantsBefore": 13,
+          "variantsAfter": 26,
+          "originalVariantsPreserved": 13,
+          "priorFieldEvidencePreserved": true
+        },
+        {
+          "model": "Valhalla",
+          "beforeRevision": "2d009b3e-337e-426f-b9f2-0d8197456105",
+          "afterRevision": "80a503b4-ce6a-4ff1-87c4-4af063a4e05a",
+          "variantsBefore": 1,
+          "variantsAfter": 1,
+          "originalVariantsPreserved": 0,
+          "priorFieldEvidencePreserved": true
+        }
+      ],
       "duplicatesAdded": 0,
-      "nativeMatcher": {
-        "exactCases": 3,
-        "genericIdentityStillBlocked": true,
-        "manualInputPreserved": true,
-        "unknownFieldsNotInferred": true,
-        "registrationYearNotInferred": true,
-        "bodyGearboxPerformancePackSeparate": true
-      },
+      "wholeRowVerified": false,
+      "manualWrites": 0,
       "compilerChanged": false,
       "activationConfirmed": false,
+      "nativeMatcher": {
+        "exactCases": 13,
+        "catVariantsSeparate": true,
+        "genericSNoGuessedPower": true,
+        "manualInputPreserved": true,
+        "unknownFieldsNotInferred": true
+      },
       "version": 1,
-      "modelId": "95f7940568d492384daba7df",
-      "make": "Aston Martin",
-      "model": "V12 Vantage",
-      "commit": "ca2399dd8a3f50e69c3a9d097749c8bf9c91b4ac",
-      "workflow": 39887296473,
-      "job": 120198338793,
+      "commit": "2f569148f23be23bf06f1f68dbaac21b24d60893",
+      "workflow": 39893443144,
+      "job": 120218274686,
       "workflowConclusion": "success",
-      "independentApiYears": [
-        2010,
-        2011,
-        2012,
-        2013,
-        2014,
-        2015,
-        2016,
-        2017,
-        2022,
-        2023
-      ],
-      "sourceReview": {
-        "sourceHashesOnEveryField": true,
-        "factoryTechnicalSheetHostedByNhtsa": true,
-        "technicalPagesVisuallyReviewed": [
-          3,
-          8
+      "scopeSinceYear": 2008,
+      "allModelsComplete": false,
+      "historicalExpansionComplete": false,
+      "independentApiYears": {
+        "Vanquish": [
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2020,
+          2024,
+          2025
         ],
-        "actualYearEvidence": "FY2022/FY2023 page2",
+        "Valhalla": [
+          2026
+        ]
+      },
+      "sourceReview": {
+        "factoryGuides": 8,
+        "sourceHashesOnEveryField": true,
+        "modelYearsFromFactoryGuideCatalog": true,
+        "visualTechnicalPageReview": true,
         "bhpNotMislabelledPs": true,
         "grossMassNotKerbMass": true,
-        "roadsterDisplacementAndMassNotInferred": true
+        "catVariantsSeparate": true
+      },
+      "publicParity": {
+        "passed": true,
+        "offers": 6,
+        "comparisons": 66,
+        "repeatedExactModificationGroups": 0,
+        "report": "docs/encyclopedia/reports/2026-10-23-aston-vanquish-public-parity.json"
       },
       "releaseState": {
+        "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+        "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
         "activeIndexFromPreviousVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
         "activationConfirmed": false,
-        "chinaRecovery": {
-          "run": 39886753529,
-          "status": "completed",
-          "conclusion": "success"
-        },
-        "blockingRuns": [
-          {
-            "run": 39857878662,
-            "job": 120189873204,
-            "status": "in_progress",
-            "step": "Sync Che168"
-          }
-        ],
+        "aggregateWorkflow": 39893572344,
+        "aggregateJob": 120218685754,
+        "aggregateCommit": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+        "state": "preparing_private_encyclopedia_index",
+        "membershipVerified": false,
         "duplicateReleaseRequested": false,
-        "nextAction": "ПослеterminalscheduledChina и свежегоwriterfree — один совокупный штатныйиндекс всехpending партий; проверитьсостав,активацию,подготовкуцен,Sonata160PSиоткрытыйDBXparity.",
-        "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
-        "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44"
+        "compactWorkflow": 39890764403,
+        "compactConclusion": "success",
+        "writerfreeInspectionWorkflow": 39893375608,
+        "writerfreeObservedAt": "2026-10-23T03:08:45.174Z",
+        "nextAction": "В уже запущенном едином выпуске проверить членство всех14pending партий, активацию и подготовку цен. Sonata160PS и открытый DBX search/detail blocker проверяются отдельно; новый индекс не считается исправлением provenance."
       },
       "referenceIntake": {
         "run": 39831884392,
@@ -33108,18 +33133,9 @@
         },
         "restarted": false
       },
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v12-vantage-late-remaining.json",
-      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v8.json",
-      "scopeSinceYear": 2008,
-      "allModelsComplete": false,
-      "historicalExpansionComplete": false,
-      "collectorsCalculationRulesGuardsSecretsChanged": false,
-      "publicParity": {
-        "passed": false,
-        "offers": 1,
-        "comparisons": 11,
-        "report": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-late-public-parity.json"
-      }
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v8-valhalla-vanquish-remaining.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-vantage.json",
+      "collectorsCalculationRulesGuardsSecretsChanged": false
     },
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
@@ -33186,7 +33202,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v8.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-vantage.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -36035,21 +36051,27 @@
       "report": "docs/encyclopedia/reports/2026-10-23-aston-dbx-public-parity.json"
     },
     "latestPublicationCheck": {
-      "checkedAt": "2026-10-23T09:04:41+07:00",
+      "checkedAt": "2026-10-23T10:13:00+07:00",
       "runs": [
         {
-          "id": 39857878662,
+          "id": 39893572344,
+          "job": 120218685754,
           "status": "in_progress",
-          "conclusion": null
+          "step": "Prepare private encyclopedia index for this release"
         },
         {
-          "id": 39886753529,
+          "id": 39890764403,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39893375608,
           "status": "completed",
           "conclusion": "success"
         }
       ],
       "newReleaseRequested": false,
-      "action": "ПослеterminalscheduledChina и свежегоwriterfree — один совокупный штатныйиндекс всехpending партий; проверитьсостав,активацию,подготовкуцен,Sonata160PSиоткрытыйDBXparity."
+      "action": "В уже запущенном едином выпуске проверить членство всех14pending партий, активацию и подготовку цен. Sonata160PS и открытый DBX search/detail blocker проверяются отдельно; новый индекс не считается исправлением provenance."
     },
     "astonRapidePass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
@@ -36363,6 +36385,121 @@
         "comparisons": 11,
         "report": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-late-public-parity.json"
       }
+    },
+    "astonValhallaVanquishPass": {
+      "checkedAt": "2026-10-23T10:13:00+07:00",
+      "batch": "research-2026-10-23-aston-valhalla-vanquish",
+      "apiReadback": true,
+      "passed": true,
+      "operations": 14,
+      "newVariants": 13,
+      "updatedVariants": 1,
+      "confirmedFields": 95,
+      "compiledCalculationFields": 82,
+      "models": [
+        {
+          "model": "Vanquish",
+          "beforeRevision": "c79c150d-3775-4174-b726-a5e412bb1c49",
+          "afterRevision": "4461f3f5-b0e4-4017-8e4e-93b038570362",
+          "variantsBefore": 13,
+          "variantsAfter": 26,
+          "originalVariantsPreserved": 13,
+          "priorFieldEvidencePreserved": true
+        },
+        {
+          "model": "Valhalla",
+          "beforeRevision": "2d009b3e-337e-426f-b9f2-0d8197456105",
+          "afterRevision": "80a503b4-ce6a-4ff1-87c4-4af063a4e05a",
+          "variantsBefore": 1,
+          "variantsAfter": 1,
+          "originalVariantsPreserved": 0,
+          "priorFieldEvidencePreserved": true
+        }
+      ],
+      "duplicatesAdded": 0,
+      "wholeRowVerified": false,
+      "manualWrites": 0,
+      "compilerChanged": false,
+      "activationConfirmed": false,
+      "nativeMatcher": {
+        "exactCases": 13,
+        "catVariantsSeparate": true,
+        "genericSNoGuessedPower": true,
+        "manualInputPreserved": true,
+        "unknownFieldsNotInferred": true
+      },
+      "version": 1,
+      "commit": "2f569148f23be23bf06f1f68dbaac21b24d60893",
+      "workflow": 39893443144,
+      "job": 120218274686,
+      "workflowConclusion": "success",
+      "scopeSinceYear": 2008,
+      "allModelsComplete": false,
+      "historicalExpansionComplete": false,
+      "independentApiYears": {
+        "Vanquish": [
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2020,
+          2024,
+          2025
+        ],
+        "Valhalla": [
+          2026
+        ]
+      },
+      "sourceReview": {
+        "factoryGuides": 8,
+        "sourceHashesOnEveryField": true,
+        "modelYearsFromFactoryGuideCatalog": true,
+        "visualTechnicalPageReview": true,
+        "bhpNotMislabelledPs": true,
+        "grossMassNotKerbMass": true,
+        "catVariantsSeparate": true
+      },
+      "publicParity": {
+        "passed": true,
+        "offers": 6,
+        "comparisons": 66,
+        "repeatedExactModificationGroups": 0,
+        "report": "docs/encyclopedia/reports/2026-10-23-aston-vanquish-public-parity.json"
+      },
+      "releaseState": {
+        "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+        "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+        "activeIndexFromPreviousVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+        "activationConfirmed": false,
+        "aggregateWorkflow": 39893572344,
+        "aggregateJob": 120218685754,
+        "aggregateCommit": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+        "state": "preparing_private_encyclopedia_index",
+        "membershipVerified": false,
+        "duplicateReleaseRequested": false,
+        "compactWorkflow": 39890764403,
+        "compactConclusion": "success",
+        "writerfreeInspectionWorkflow": 39893375608,
+        "writerfreeObservedAt": "2026-10-23T03:08:45.174Z",
+        "nextAction": "В уже запущенном едином выпуске проверить членство всех14pending партий, активацию и подготовку цен. Sonata160PS и открытый DBX search/detail blocker проверяются отдельно; новый индекс не считается исправлением provenance."
+      },
+      "referenceIntake": {
+        "run": 39831884392,
+        "job": 120009865681,
+        "status": "completed",
+        "conclusion": "failure",
+        "checkpointFromLatestRoadmap": {
+          "visited": 13045,
+          "saved": 8403,
+          "pending": 253,
+          "error": "redirect_outside_catalog"
+        },
+        "restarted": false
+      },
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v8-valhalla-vanquish-remaining.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-vantage.json",
+      "collectorsCalculationRulesGuardsSecretsChanged": false
     }
   },
   "scope": {

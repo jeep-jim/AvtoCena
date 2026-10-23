@@ -1,0 +1,1242 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T03:11:11.921Z",
+  "models": [
+    {
+      "modelId": "449cc595c6ad47ddfa1b0e46",
+      "make": "Aston Martin",
+      "model": "V8",
+      "revision": "77103954-4534-45b8-86e3-fb1c56a39520",
+      "variants": 14,
+      "researchedVariants": 0,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "variantsWithRemainingFields": [
+        {
+          "variantId": "a93cbd53b78efdd1a6d7dab4",
+          "year": 2020,
+          "bodyType": "Passenger car",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "2b8430233ad89cf5a628b04f",
+          "year": 2020,
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "0f997a521879b0d188ddefcc",
+          "year": 2021,
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "e3468664c1dd1b615217ec9c",
+          "year": 2021,
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "b02015cbe116eaaa349b33cb",
+          "year": 2022,
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "265168517c6e2c5f24b4d084",
+          "year": 2022,
+          "trim": "4.0T V8 Coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "unconfirmedFields": [
+            "trim",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "b2bc3550d1ca38e86d4e14d4",
+          "year": 2022,
+          "trim": "4.0T V8 Roadster",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "unconfirmedFields": [
+            "trim",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "79ee14e4609616789635ff91",
+          "year": 2022,
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "f67e9c5c221070fe2b2aa798",
+          "year": 2022,
+          "trim": "4.0T V8 F1 Edition Coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "unconfirmedFields": [
+            "trim",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "0a3e08dfe9b091b58d7b4ed0",
+          "year": 2023,
+          "trim": "4.0T V8 Coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "unconfirmedFields": [
+            "trim",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "6b87f30b3affc76aa2450158",
+          "year": 2023,
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "841ade7c525a558ed733896c",
+          "year": 2023,
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "2cacea7bf8d13a0d70c6672a",
+          "year": 2024,
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        },
+        {
+          "variantId": "a3eb32add4fd4560c75fd786",
+          "year": 2025,
+          "trim": "4.0T V8 F1 Edition Coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "unconfirmedFields": [
+            "trim",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужно точное соответствие V8/Vantage и поколение, год/кузов/исполнение. 4735 см³ в наблюдениях 2020/2021 не доказывают выпуск такого MY; никакого переноса по объёму/имени."
+        }
+      ]
+    },
+    {
+      "modelId": "004233a68dabf0652a7f0416",
+      "make": "Aston Martin",
+      "model": "Valhalla",
+      "revision": "80a503b4-ce6a-4ff1-87c4-4af063a4e05a",
+      "variants": 1,
+      "researchedVariants": 1,
+      "years": [
+        2026
+      ],
+      "variantsWithRemainingFields": [
+        {
+          "variantId": "8f3abae56b6868c770fac771",
+          "year": 2026,
+          "trim": "STANDARD",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "transmission",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "icePowerKw",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "unconfirmedFields": [
+            "trim",
+            "powerHp",
+            "powerKw",
+            "power30MinKw",
+            "bodyType",
+            "engineCode",
+            "chassisCode"
+          ],
+          "reason": "DCT подтверждена; STANDARD не является точным техническим селектором для всех рынков. 30-минутная мощность отдельно от пиковых185кВт."
+        }
+      ]
+    },
+    {
+      "modelId": "6311069a3ae15cc6b5c54e8a",
+      "make": "Aston Martin",
+      "model": "Vanquish",
+      "revision": "4461f3f5-b0e4-4017-8e4e-93b038570362",
+      "variants": 26,
+      "researchedVariants": 17,
+      "years": [
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2020,
+        2024,
+        2025
+      ],
+      "variantsWithRemainingFields": [
+        {
+          "variantId": "04f4fd6ded56667807f0304a",
+          "year": 2013,
+          "trim": "V12 Купе 6AT",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "84dc23452ded72d72bc93bab",
+          "year": 2014,
+          "bodyType": "coupe",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "5f03b4eeb23d0c1ca9489b0a",
+          "year": 2014,
+          "trim": "VOLANTE",
+          "bodyType": "coupe",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "eaac44758016353e53abe8a1",
+          "year": 2014,
+          "trim": "V12 Купе 6AT",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "8db7a5bd1605ec249458d9d5",
+          "year": 2014,
+          "trim": "V12 Volante Кабриолет 6AT",
+          "bodyType": "convertible",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "2cd77f806912a89cf825920b",
+          "year": 2015,
+          "trim": "STANDARD",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "transmission"
+          ],
+          "unconfirmedFields": [
+            "trim",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "10110d36542223140783f94f",
+          "year": 2015,
+          "trim": "V12 Купе 8AT",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "114bd21b93486852bbbfec5b",
+          "year": 2015,
+          "trim": "V12 Volante Кабриолет 8AT",
+          "bodyType": "convertible",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "a92796757bbda4f081fe9529",
+          "year": 2016,
+          "trim": "V12 Купе 8AT",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "501d77df6d37b6c86178790c",
+          "year": 2016,
+          "trim": "V12 Volante Кабриолет 8AT",
+          "bodyType": "convertible",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "dcc9e9b88e068c04dba9f85d",
+          "year": 2017,
+          "trim": "S",
+          "bodyType": "convertible",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "transmission"
+          ],
+          "unconfirmedFields": [
+            "trim",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "445aa16d2a4103230edf046c",
+          "year": 2017,
+          "trim": "S",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "transmission"
+          ],
+          "unconfirmedFields": [
+            "trim",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "caaf97a226371c8ca1dd9cbe",
+          "year": 2017,
+          "trim": "V12 Купе 8AT",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "27eb8c36590bb0ab4e1ad2a1",
+          "year": 2017,
+          "trim": "V12 Volante Кабриолет 8AT",
+          "bodyType": "convertible",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "822f88bf659a563777754a9e",
+          "year": 2017,
+          "trim": "S V12 Купе 8AT 4 катализатора",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "fbc44561d73618b21af8f543",
+          "year": 2017,
+          "trim": "S V12 Volante Кабриолет 8AT 4 катализатора",
+          "bodyType": "convertible",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "26493aaf5fe26455ac367ca8",
+          "year": 2017,
+          "trim": "S V12 Купе 8AT 6 катализатора",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "f9c3a60c3740b026d30b3d7b",
+          "year": 2017,
+          "trim": "S V12 Volante Кабриолет 8AT 6 катализатора",
+          "bodyType": "convertible",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "powerHp",
+            "drive",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "71a3a9cd9cdaa9163507e1b6",
+          "year": 2020,
+          "bodyType": "Passenger car",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "5c004d69934cd84f9a3d5b1d",
+          "year": 2020,
+          "bodyType": "Passenger car",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "9831a1ba41ad4b74096049d3",
+          "year": 2024,
+          "bodyType": "Passenger car",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "7e43fd552d016963d8a3d30d",
+          "year": 2025,
+          "bodyType": "coupe",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "b8e0b873d3feedf591345ff9",
+          "year": 2025,
+          "bodyType": "Passenger car",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "bd7e5f01a2f0edf0cfdcc253",
+          "year": 2025,
+          "bodyType": "Passenger car",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "9bce249cb6511a512d34a06e",
+          "year": 2025,
+          "bodyType": "Passenger car",
+          "confirmedFields": [],
+          "unconfirmedFields": [
+            "trim",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "power30MinKw",
+            "transmission",
+            "drive",
+            "bodyType",
+            "engineCode",
+            "grossVehicleWeightKg",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        },
+        {
+          "variantId": "2edaf57e01f731796bf56ebc",
+          "year": 2025,
+          "trim": "V12 Coupe",
+          "bodyType": "coupe",
+          "confirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType",
+            "grossVehicleWeightKg",
+            "trim"
+          ],
+          "unconfirmedFields": [
+            "power30MinKw",
+            "drive",
+            "engineCode",
+            "chassisCode"
+          ],
+          "reason": "Нужны точный кузов/год/КПП/катализаторы и таблица. bhp не PS; снаряжённая масса не полная. Исходные generic S не получают мощность одного из cat-вариантов."
+        }
+      ]
+    }
+  ],
+  "wholeEncyclopediaComplete": false,
+  "previousRetryFiles": [
+    "docs/encyclopedia/retry-2026-10-22-aston.json",
+    "docs/encyclopedia/research-handoff-2026-10-23-aston-v8.json"
+  ],
+  "sourceLeads": [
+    {
+      "id": "2903d7e3b58941838cdcfa4f29fcf964",
+      "url": "https://www.astonmartin.com/guides/Vanquish/25MY/25MY Vanquish English Owner Guide.pdf",
+      "previewUrl": "",
+      "title": "25MY Vanquish English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "25MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "25MY"
+        }
+      ],
+      "file": "25MY.pdf",
+      "sha256": "6481900213b51f1756b4e42b2336b739d1146460efcac40ed9fdd378ac27c16c",
+      "status": 200
+    },
+    {
+      "id": "380833002e1240f4ae2c3a53ef670bd9",
+      "url": "https://www.astonmartin.com/guides/HD33-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "17MY Vanquish English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "17MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "17MY"
+        }
+      ],
+      "file": "17MY.pdf",
+      "sha256": "5c886050285f46c67556ef6296a9919e86979a7eabda1d86b3412bba1037bc2e",
+      "status": 200
+    },
+    {
+      "id": "e4e11b2a90f34a469cc9869dddafd9c0",
+      "url": "https://www.astonmartin.com/guides/GD33-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "16MY Vanquish English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "16MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "16MY"
+        }
+      ],
+      "file": "16MY.pdf",
+      "sha256": "12705ac1e36d6b732904cdac21255ba26368b5cab6e03346e0a7bc84b9fe73b9",
+      "status": 200
+    },
+    {
+      "id": "c665ea543ba64cfdba56da7fac0ace0d",
+      "url": "https://www.astonmartin.com/guides/FD33-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "15MY Vanquish English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "15MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "15MY"
+        }
+      ],
+      "file": "15MY.pdf",
+      "sha256": "22226d7e550b3e588be6349f2ed93484f8dd52b9467b5fb35d1a8531cd50bba3",
+      "status": 200
+    },
+    {
+      "id": "6acf31008d854381b7f4b51a18eb7882",
+      "url": "https://www.astonmartin.com/guides/ED33-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "14MY Vanquish English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "14MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "14MY"
+        }
+      ],
+      "file": "14MY.pdf",
+      "sha256": "3f2557ac387c2b67b552b528385b979ad537c472c08d5a3832725fc3cff6363b",
+      "status": 200
+    },
+    {
+      "id": "a49253ef3a684a2aa187f7e0c3241063",
+      "url": "https://www.astonmartin.com/guides/ED33-19A321-AB.pdf",
+      "previewUrl": "",
+      "title": "14.5MY Vanquish English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "14.5MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "14.5MY"
+        }
+      ],
+      "file": "14.5MY.pdf",
+      "sha256": "905c351c22d0c7d5de8808f4f2ebfa4931d10603c792eaf10baa8cc22f062560",
+      "status": 200
+    },
+    {
+      "id": "f08a15d6fdbd4860bbe90d1e8d188f19",
+      "url": "https://www.astonmartin.com/guides/DD33-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "13MY Vanquish English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "13MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "13MY"
+        }
+      ],
+      "file": "13MY.pdf",
+      "sha256": "bb78e4d50ad34b8065658d538d2e32cf4a440e623f27b66c05f2f37a1738bd44",
+      "status": 200
+    },
+    {
+      "id": "c25e74e4437c43eb9b4cf66e20b287fc",
+      "url": "https://www.astonmartin.com/guides/HD33-19A321-AB.pdf",
+      "previewUrl": "",
+      "title": "17.5MY Vanquish S English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "17.5MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "17.5MY"
+        }
+      ],
+      "file": "17.5MY-S.pdf",
+      "sha256": "c98153ce54c924378e722cd013d5497c62a04e4a65b3cff1aaa467241e5b99b8",
+      "status": 200
+    }
+  ],
+  "deferred": [
+    {
+      "model": "Vanquish",
+      "years": [
+        2018
+      ],
+      "reason": "Целевой заводской owner-guide поиск VanquishS/18MY/English дал count0; не доказательство отсутствия данных. Найти отдельную годовую таблицу; не копировать17.5MY."
+    },
+    {
+      "model": "Vanquish",
+      "years": [
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2026
+      ],
+      "reason": "Годы выпуска/поколения не подтверждены в этом проходе. Наблюдения2020/2024 и региональные/специальные серии требуют точного сопоставления; существующие не удалять."
+    },
+    {
+      "model": "Vanquish",
+      "years": [
+        2025
+      ],
+      "reason": "Точная V12 Coupe уже подтверждена предыдущей партией и не продублирована. Остальные наблюдения, включая3982см³/614кВт, требуют проверки идентичности."
+    }
+  ],
+  "nextAction": "Перейти к существующим строкам Vantage; V8/Valhalla/Vanquish остаются в адресном retry. Не перезапускать discovery моделей и не повторять успешную партию."
+}

@@ -1,0 +1,115 @@
+{
+  "checkedAt": "2026-10-23T10:13:00+07:00",
+  "batch": "research-2026-10-23-aston-valhalla-vanquish",
+  "apiReadback": true,
+  "passed": true,
+  "operations": 14,
+  "newVariants": 13,
+  "updatedVariants": 1,
+  "confirmedFields": 95,
+  "compiledCalculationFields": 82,
+  "models": [
+    {
+      "model": "Vanquish",
+      "beforeRevision": "c79c150d-3775-4174-b726-a5e412bb1c49",
+      "afterRevision": "4461f3f5-b0e4-4017-8e4e-93b038570362",
+      "variantsBefore": 13,
+      "variantsAfter": 26,
+      "originalVariantsPreserved": 13,
+      "priorFieldEvidencePreserved": true
+    },
+    {
+      "model": "Valhalla",
+      "beforeRevision": "2d009b3e-337e-426f-b9f2-0d8197456105",
+      "afterRevision": "80a503b4-ce6a-4ff1-87c4-4af063a4e05a",
+      "variantsBefore": 1,
+      "variantsAfter": 1,
+      "originalVariantsPreserved": 0,
+      "priorFieldEvidencePreserved": true
+    }
+  ],
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 13,
+    "catVariantsSeparate": true,
+    "genericSNoGuessedPower": true,
+    "manualInputPreserved": true,
+    "unknownFieldsNotInferred": true
+  },
+  "version": 1,
+  "commit": "2f569148f23be23bf06f1f68dbaac21b24d60893",
+  "workflow": 39893443144,
+  "job": 120218274686,
+  "workflowConclusion": "success",
+  "scopeSinceYear": 2008,
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false,
+  "independentApiYears": {
+    "Vanquish": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2020,
+      2024,
+      2025
+    ],
+    "Valhalla": [
+      2026
+    ]
+  },
+  "sourceReview": {
+    "factoryGuides": 8,
+    "sourceHashesOnEveryField": true,
+    "modelYearsFromFactoryGuideCatalog": true,
+    "visualTechnicalPageReview": true,
+    "bhpNotMislabelledPs": true,
+    "grossMassNotKerbMass": true,
+    "catVariantsSeparate": true
+  },
+  "publicParity": {
+    "passed": true,
+    "offers": 6,
+    "comparisons": 66,
+    "repeatedExactModificationGroups": 0,
+    "report": "docs/encyclopedia/reports/2026-10-23-aston-vanquish-public-parity.json"
+  },
+  "releaseState": {
+    "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "activeIndexFromPreviousVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "activationConfirmed": false,
+    "aggregateWorkflow": 39893572344,
+    "aggregateJob": 120218685754,
+    "aggregateCommit": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+    "state": "preparing_private_encyclopedia_index",
+    "membershipVerified": false,
+    "duplicateReleaseRequested": false,
+    "compactWorkflow": 39890764403,
+    "compactConclusion": "success",
+    "writerfreeInspectionWorkflow": 39893375608,
+    "writerfreeObservedAt": "2026-10-23T03:08:45.174Z",
+    "nextAction": "В уже запущенном едином выпуске проверить членство всех14pending партий, активацию и подготовку цен. Sonata160PS и открытый DBX search/detail blocker проверяются отдельно; новый индекс не считается исправлением provenance."
+  },
+  "referenceIntake": {
+    "run": 39831884392,
+    "job": 120009865681,
+    "status": "completed",
+    "conclusion": "failure",
+    "checkpointFromLatestRoadmap": {
+      "visited": 13045,
+      "saved": 8403,
+      "pending": 253,
+      "error": "redirect_outside_catalog"
+    },
+    "restarted": false
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v8-valhalla-vanquish-remaining.json",
+  "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-vantage.json",
+  "collectorsCalculationRulesGuardsSecretsChanged": false
+}
