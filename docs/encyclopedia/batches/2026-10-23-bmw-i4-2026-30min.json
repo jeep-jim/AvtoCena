@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-bmw-i4-2026-30min",
+  "entries": [
+    {
+      "modelId": "0d2a63de5a497a47027d0eac",
+      "make": "BMW",
+      "model": "i4",
+      "year": 2026,
+      "trim": "Gran Coupe xDrive40 *M-Sportpaket Pro *Harman/Kardon *AHK",
+      "variantId": "65e831d9ceb6aab1b8c5eb81",
+      "expectedDigest": "6c60090b302914012d918bac7f0eb44fbdd03e54a301ba147fd395b69a9c94b2",
+      "patch": {
+        "power30MinKw": 125,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.bmw.de/de/neufahrzeuge/bmw-i/i4/bmw-i4-gran-coupe-technical-data.html",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "BMW official technical declaration: i4 xDrive40 Gran Coupe, 30-Minuten-Leistung. Manufacturer-declared value; not an individual vehicle CoC.",
+        "statement": "BMW i4 xDrive40 Gran Coupe: заводская таблица отдельно указывает 295 кВт/401PS максимальной и 125 кВт 30-минутной мощности, полный привод. Только существующая европейская запись 2026 с совпадающей модификацией и мощностью. Не переносить на eDrive40, M50/M60 или другие годы; источник не является индивидуальным CoC."
+      }
+    }
+  ]
+}
