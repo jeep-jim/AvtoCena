@@ -1,0 +1,251 @@
+{
+  "checkedAt": "2026-10-23T10:36:00.581640+07:00",
+  "release": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+  "workflow": 39893572344,
+  "job": 120218685754,
+  "conclusion": "success",
+  "activatedAt": "2026-10-23T03:29:30Z",
+  "health": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+    "calculationVersion": "d700f68f2c1e0d14574433e613b9346b06f495ac80cc7adf6ae408225a1de14e"
+  },
+  "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
+  "generationId": "gen_1792702445675_8c312f85",
+  "pendingBatchMembership": [
+    {
+      "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
+      "fieldsSaved": 130,
+      "expectedCalculationFields": 109,
+      "includedCalculationFields": 109
+    },
+    {
+      "batch": "research-2026-10-23-alpine-a290-2025",
+      "fieldsSaved": 37,
+      "expectedCalculationFields": 28,
+      "includedCalculationFields": 28
+    },
+    {
+      "batch": "research-2026-10-23-alpine-a290-2026",
+      "fieldsSaved": 40,
+      "expectedCalculationFields": 28,
+      "includedCalculationFields": 28
+    },
+    {
+      "batch": "research-2026-10-23-aston-db11-2017-2021",
+      "fieldsSaved": 96,
+      "expectedCalculationFields": 88,
+      "includedCalculationFields": 88
+    },
+    {
+      "batch": "research-2026-10-23-aston-db12-2024-2025",
+      "fieldsSaved": 23,
+      "expectedCalculationFields": 21,
+      "includedCalculationFields": 21
+    },
+    {
+      "batch": "research-2026-10-23-aston-db9-2008-2015",
+      "fieldsSaved": 211,
+      "expectedCalculationFields": 190,
+      "includedCalculationFields": 190
+    },
+    {
+      "batch": "research-2026-10-23-aston-db9-gt-2015-2016",
+      "fieldsSaved": 32,
+      "expectedCalculationFields": 28,
+      "includedCalculationFields": 28
+    },
+    {
+      "batch": "research-2026-10-23-aston-dbs-2008-2012",
+      "fieldsSaved": 170,
+      "expectedCalculationFields": 153,
+      "includedCalculationFields": 153
+    },
+    {
+      "batch": "research-2026-10-23-aston-dbs-superleggera-770",
+      "fieldsSaved": 29,
+      "expectedCalculationFields": 25,
+      "includedCalculationFields": 25
+    },
+    {
+      "batch": "research-2026-10-23-aston-dbx-years-mass",
+      "fieldsSaved": 30,
+      "expectedCalculationFields": 27,
+      "includedCalculationFields": 27
+    },
+    {
+      "batch": "research-2026-10-23-aston-rapide-model-years",
+      "fieldsSaved": 104,
+      "expectedCalculationFields": 92,
+      "includedCalculationFields": 92
+    },
+    {
+      "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",
+      "fieldsSaved": 133,
+      "expectedCalculationFields": 117,
+      "includedCalculationFields": 117
+    },
+    {
+      "batch": "research-2026-10-23-aston-v12-vantage-late",
+      "fieldsSaved": 20,
+      "expectedCalculationFields": 17,
+      "includedCalculationFields": 17
+    },
+    {
+      "batch": "research-2026-10-23-aston-valhalla-vanquish",
+      "fieldsSaved": 95,
+      "expectedCalculationFields": 82,
+      "includedCalculationFields": 82
+    }
+  ],
+  "publicChecks": [
+    {
+      "label": "Audi A3",
+      "offerId": "56bbcecb51a61b76402371a9",
+      "searchUrl": "https://avtocena.com/api/catalog/search?market=uae&brand=Audi&model=A3&pageSize=24",
+      "cardUrl": "https://avtocena.com/cars/offer/56bbcecb51a61b76402371a9",
+      "passed": true,
+      "checks": {
+        "year": {
+          "search": 2024,
+          "card": 2024,
+          "equal": true
+        },
+        "trim": {
+          "search": "35 TFSI ADVANCED",
+          "card": "35 TFSI ADVANCED",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3148247,
+          "card": 3148247,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "searchPartial": false,
+      "searchStale": false,
+      "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4"
+    },
+    {
+      "label": "Hyundai Sonata",
+      "offerId": "ajes-korea-6d1ocW5lV5Cl77",
+      "searchUrl": "https://avtocena.com/api/catalog/search?market=korea&brand=Hyundai&model=Sonata&pageSize=24",
+      "cardUrl": "https://avtocena.com/cars/offer/ajes-korea-6d1ocW5lV5Cl77",
+      "passed": true,
+      "checks": {
+        "year": {
+          "search": 2024,
+          "card": 2024,
+          "equal": true
+        },
+        "trim": {
+          "search": "2.0 Exclusive",
+          "card": "2.0 Exclusive",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1999,
+          "card": 1999,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 160,
+          "card": 160,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3532010,
+          "card": 3532010,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "searchPartial": true,
+      "searchStale": true,
+      "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4"
+    },
+    {
+      "label": "Aston Martin DBX",
+      "offerId": "b65974b83d5399d588073fc5",
+      "searchUrl": "https://avtocena.com/api/catalog/search?market=uae&brand=Aston%20Martin&model=DBX&pageSize=24",
+      "cardUrl": "https://avtocena.com/cars/offer/b65974b83d5399d588073fc5",
+      "passed": false,
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "Aston Martin DBX707",
+          "card": "Aston Martin DBX707",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 3982,
+          "card": 3982,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 707,
+          "card": 707,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 520,
+          "card": 520,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": 25164851,
+          "equal": false
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "estimated",
+          "equal": false
+        }
+      },
+      "searchPartial": false,
+      "searchStale": false,
+      "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4"
+    }
+  ],
+  "limitations": [
+    "DBX still differs between list and detail. Fix b6dd15e is prepared but not in this release; existing projections still need verified application.",
+    "Sonata search initially returned HTTP503 with filters; bounded plain-model retry returned a partial/stale paid-feed page. The exact returned Sonata pair passes; complete Korean browsing coverage and stable latency are not certified.",
+    "The pre-release audit uses stored projection rows for five markets and is not a count of newly gained live offers or all current paid-feed offers. Legacy Korea sample 40b86f2932887dcc1761a1be was not used as the public acceptance case.",
+    "No claim of all makes, years or fields completed; missing certified 30-minute power is not guessed."
+  ]
+}

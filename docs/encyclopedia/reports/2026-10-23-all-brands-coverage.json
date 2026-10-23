@@ -1,6 +1,7 @@
 {
-  "version": 1,
-  "createdAt": "2026-10-23T03:12:47.200Z",
+  "version": 2,
+  "createdAt": "2026-10-23T03:30:56.344Z",
+  "indexCreatedAt": "2026-10-23T03:12:47.200Z",
   "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
   "manifestDigest": "341be70f56e3582e4629061e4e95e2d453f27f37c9c1e96ab13313de09355115",
   "scope": "Existing permanent encyclopedia only; required field coverage is not proof of exact offer matching or a completed price calculation.",
@@ -8,31 +9,32 @@
     "brands": 181,
     "models": 2423,
     "variants": 114892,
-    "requiredValuesPresent": 49188,
-    "requiredValuesSupported": 47531
+    "requiredValuesPresent": 49546,
+    "requiredValuesSupported": 47889
   },
   "release": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
   "workflow": 39893572344,
-  "artifact": 12476255810,
-  "activationConfirmed": false,
-  "snapshotOnly": true,
+  "artifact": 12476064289,
+  "coverageAuditWorkflow": 39895213498,
+  "activationConfirmed": true,
+  "coverageCountsProvisional": false,
   "fullyCoveredExistingModelsByRequiredFields": 111,
-  "notFullySupportedVariants": 67361,
+  "notFullySupportedVariants": 67003,
   "missingFields": {
-    "engineCc": 12199,
-    "powerHpOrKw": 19090,
+    "engineCc": 12369,
+    "powerHpOrKw": 21255,
     "trim": 30658,
-    "power30MinKw": 21629,
-    "powertrainKind": 27168,
-    "fuel": 1921
+    "power30MinKw": 26165,
+    "fuel": 1921,
+    "powertrainKind": 3106
   },
   "unsupportedFields": {
     "year": 46636,
     "trim": 15978,
     "fuel": 46059,
-    "powertrainKind": 22210,
-    "engineCc": 9183,
-    "powerHpOrKw": 7132
+    "powertrainKind": 45863,
+    "engineCc": 28255,
+    "powerHpOrKw": 28637
   },
   "compiledSourceFields": {
     "manufacturer": 25967,
@@ -154,18 +156,20 @@
       "requiredValuesPresent": 19,
       "requiredValuesSupported": 19,
       "missing": {
-        "power30MinKw": 2,
         "trim": 33,
-        "powertrainKind": 34,
+        "fuel": 2,
+        "powertrainKind": 2,
+        "powerHpOrKw": 4,
         "engineCc": 3,
-        "powerHpOrKw": 2,
-        "fuel": 2
+        "power30MinKw": 16
       },
       "unsupported": {
         "year": 35,
         "fuel": 34,
-        "trim": 2,
-        "powertrainKind": 2
+        "powertrainKind": 34,
+        "engineCc": 18,
+        "powerHpOrKw": 30,
+        "trim": 2
       }
     },
     {
@@ -175,18 +179,18 @@
       "requiredValuesPresent": 13,
       "requiredValuesSupported": 13,
       "missing": {
-        "trim": 6,
         "engineCc": 4,
-        "powertrainKind": 5,
-        "powerHpOrKw": 2
+        "powerHpOrKw": 2,
+        "trim": 6,
+        "power30MinKw": 1
       },
       "unsupported": {
         "year": 10,
+        "trim": 4,
         "fuel": 10,
-        "powertrainKind": 6,
-        "engineCc": 2,
-        "powerHpOrKw": 4,
-        "trim": 4
+        "powertrainKind": 10,
+        "powerHpOrKw": 8,
+        "engineCc": 6
       }
     },
     {
@@ -217,16 +221,15 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
-        "powerHpOrKw": 90,
-        "power30MinKw": 340,
         "trim": 70,
-        "engineCc": 9,
-        "powertrainKind": 1
+        "power30MinKw": 341,
+        "powerHpOrKw": 91,
+        "engineCc": 9
       },
       "unsupported": {
         "year": 72,
         "fuel": 72,
-        "powertrainKind": 71,
+        "powertrainKind": 72,
         "engineCc": 42,
         "powerHpOrKw": 48,
         "trim": 2
@@ -240,13 +243,14 @@
       "requiredValuesSupported": 0,
       "missing": {
         "trim": 21,
-        "powertrainKind": 21,
-        "power30MinKw": 4,
+        "power30MinKw": 25,
         "powerHpOrKw": 3
       },
       "unsupported": {
         "year": 21,
-        "fuel": 21
+        "fuel": 21,
+        "powertrainKind": 21,
+        "powerHpOrKw": 21
       }
     },
     {
@@ -265,23 +269,23 @@
       "make": "Alfa Romeo",
       "models": 10,
       "variants": 1225,
-      "requiredValuesPresent": 725,
-      "requiredValuesSupported": 722,
+      "requiredValuesPresent": 777,
+      "requiredValuesSupported": 774,
       "missing": {
-        "engineCc": 56,
-        "powerHpOrKw": 42,
-        "fuel": 7,
         "trim": 291,
-        "powertrainKind": 417,
-        "power30MinKw": 16
+        "fuel": 7,
+        "powertrainKind": 64,
+        "engineCc": 56,
+        "powerHpOrKw": 101,
+        "power30MinKw": 50
       },
       "unsupported": {
         "year": 335,
-        "trim": 44,
         "fuel": 334,
-        "powertrainKind": 56,
-        "engineCc": 10,
-        "powerHpOrKw": 11
+        "powertrainKind": 334,
+        "engineCc": 277,
+        "powerHpOrKw": 243,
+        "trim": 44
       }
     },
     {
@@ -300,39 +304,42 @@
       "make": "Alpine",
       "models": 2,
       "variants": 70,
-      "requiredValuesPresent": 27,
-      "requiredValuesSupported": 27,
+      "requiredValuesPresent": 28,
+      "requiredValuesSupported": 28,
       "missing": {
-        "engineCc": 1,
         "trim": 28,
-        "powertrainKind": 42
+        "power30MinKw": 19,
+        "engineCc": 1,
+        "powerHpOrKw": 6
       },
       "unsupported": {
+        "year": 28,
         "fuel": 29,
-        "powertrainKind": 1,
-        "year": 28
+        "powertrainKind": 29,
+        "powerHpOrKw": 22,
+        "engineCc": 22
       }
     },
     {
       "make": "Aston Martin",
       "models": 12,
       "variants": 302,
-      "requiredValuesPresent": 98,
-      "requiredValuesSupported": 95,
+      "requiredValuesPresent": 121,
+      "requiredValuesSupported": 118,
       "missing": {
         "trim": 136,
-        "powertrainKind": 140,
-        "engineCc": 19,
-        "powerHpOrKw": 30,
+        "engineCc": 20,
+        "powerHpOrKw": 54,
         "fuel": 9,
-        "power30MinKw": 5
+        "powertrainKind": 6,
+        "power30MinKw": 6
       },
       "unsupported": {
         "year": 152,
         "fuel": 155,
-        "powertrainKind": 48,
-        "engineCc": 27,
-        "powerHpOrKw": 27,
+        "powertrainKind": 155,
+        "engineCc": 133,
+        "powerHpOrKw": 114,
         "trim": 16
       }
     },
@@ -340,23 +347,23 @@
       "make": "Audi",
       "models": 72,
       "variants": 9496,
-      "requiredValuesPresent": 4182,
-      "requiredValuesSupported": 4145,
+      "requiredValuesPresent": 4464,
+      "requiredValuesSupported": 4427,
       "missing": {
-        "powertrainKind": 3614,
         "trim": 2071,
-        "engineCc": 425,
-        "powerHpOrKw": 702,
-        "power30MinKw": 1011,
+        "powerHpOrKw": 886,
+        "engineCc": 429,
+        "power30MinKw": 1341,
+        "powertrainKind": 1645,
         "fuel": 188
       },
       "unsupported": {
         "year": 2618,
-        "trim": 547,
         "fuel": 2595,
-        "powertrainKind": 900,
-        "engineCc": 454,
-        "powerHpOrKw": 361
+        "powertrainKind": 2577,
+        "engineCc": 1807,
+        "powerHpOrKw": 1854,
+        "trim": 547
       }
     },
     {
@@ -366,16 +373,15 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
-        "powerHpOrKw": 42,
-        "power30MinKw": 74,
+        "powerHpOrKw": 43,
+        "power30MinKw": 75,
         "trim": 16,
-        "engineCc": 5,
-        "powertrainKind": 1
+        "engineCc": 5
       },
       "unsupported": {
         "year": 21,
         "fuel": 21,
-        "powertrainKind": 20,
+        "powertrainKind": 21,
         "trim": 5,
         "engineCc": 4,
         "powerHpOrKw": 4
@@ -388,19 +394,18 @@
       "requiredValuesPresent": 46,
       "requiredValuesSupported": 46,
       "missing": {
-        "powerHpOrKw": 41,
+        "powerHpOrKw": 48,
         "power30MinKw": 36,
-        "engineCc": 15,
-        "trim": 61,
-        "powertrainKind": 42
+        "engineCc": 16,
+        "trim": 61
       },
       "unsupported": {
         "year": 77,
         "trim": 16,
         "fuel": 77,
-        "powertrainKind": 35,
-        "engineCc": 14,
-        "powerHpOrKw": 16
+        "powertrainKind": 77,
+        "engineCc": 55,
+        "powerHpOrKw": 51
       }
     },
     {
@@ -411,15 +416,16 @@
       "requiredValuesSupported": 72,
       "missing": {
         "trim": 54,
-        "powerHpOrKw": 56,
-        "power30MinKw": 118,
+        "powerHpOrKw": 65,
+        "power30MinKw": 125,
         "fuel": 9,
-        "powertrainKind": 10
+        "powertrainKind": 1,
+        "engineCc": 4
       },
       "unsupported": {
         "year": 54,
         "fuel": 46,
-        "powertrainKind": 45,
+        "powertrainKind": 54,
         "engineCc": 24,
         "powerHpOrKw": 26
       }
@@ -431,18 +437,18 @@
       "requiredValuesPresent": 25,
       "requiredValuesSupported": 25,
       "missing": {
-        "engineCc": 4,
         "powerHpOrKw": 8,
+        "power30MinKw": 8,
         "trim": 9,
-        "power30MinKw": 8
+        "engineCc": 4
       },
       "unsupported": {
         "year": 13,
-        "trim": 4,
         "fuel": 13,
         "powertrainKind": 13,
         "engineCc": 8,
-        "powerHpOrKw": 8
+        "powerHpOrKw": 8,
+        "trim": 4
       }
     },
     {
@@ -452,20 +458,20 @@
       "requiredValuesPresent": 35,
       "requiredValuesSupported": 35,
       "missing": {
-        "engineCc": 128,
-        "powerHpOrKw": 119,
+        "engineCc": 129,
+        "powerHpOrKw": 133,
         "trim": 146,
-        "powertrainKind": 104,
-        "power30MinKw": 29,
-        "fuel": 5
+        "power30MinKw": 30,
+        "fuel": 5,
+        "powertrainKind": 5
       },
       "unsupported": {
         "year": 257,
         "trim": 111,
         "fuel": 253,
-        "powertrainKind": 154,
-        "engineCc": 33,
-        "powerHpOrKw": 36
+        "powertrainKind": 253,
+        "engineCc": 131,
+        "powerHpOrKw": 121
       }
     },
     {
@@ -475,16 +481,15 @@
       "requiredValuesPresent": 113,
       "requiredValuesSupported": 113,
       "missing": {
-        "powerHpOrKw": 40,
+        "powerHpOrKw": 41,
         "power30MinKw": 89,
         "trim": 35,
-        "engineCc": 7,
-        "powertrainKind": 1
+        "engineCc": 8
       },
       "unsupported": {
         "year": 39,
         "fuel": 39,
-        "powertrainKind": 38,
+        "powertrainKind": 39,
         "engineCc": 22,
         "powerHpOrKw": 25,
         "trim": 4
@@ -497,20 +502,20 @@
       "requiredValuesPresent": 5633,
       "requiredValuesSupported": 5554,
       "missing": {
-        "powerHpOrKw": 1328,
+        "powerHpOrKw": 1523,
         "trim": 2262,
         "fuel": 181,
-        "engineCc": 806,
-        "power30MinKw": 1199,
-        "powertrainKind": 1942
+        "engineCc": 808,
+        "power30MinKw": 1554,
+        "powertrainKind": 66
       },
       "unsupported": {
         "year": 3463,
         "trim": 1201,
         "fuel": 3433,
-        "powertrainKind": 1535,
-        "engineCc": 725,
-        "powerHpOrKw": 430
+        "powertrainKind": 3411,
+        "engineCc": 2244,
+        "powerHpOrKw": 2111
       }
     },
     {
@@ -567,14 +572,15 @@
         "powerHpOrKw": 10,
         "power30MinKw": 1,
         "engineCc": 9,
-        "trim": 7,
-        "powertrainKind": 7
+        "trim": 7
       },
       "unsupported": {
         "year": 17,
         "trim": 10,
         "fuel": 17,
-        "powertrainKind": 10
+        "powertrainKind": 17,
+        "engineCc": 7,
+        "powerHpOrKw": 7
       }
     },
     {
@@ -585,18 +591,18 @@
       "requiredValuesSupported": 328,
       "missing": {
         "trim": 133,
-        "powerHpOrKw": 96,
         "power30MinKw": 501,
-        "engineCc": 25,
-        "powertrainKind": 4,
-        "fuel": 2
+        "powerHpOrKw": 97,
+        "engineCc": 26,
+        "fuel": 2,
+        "powertrainKind": 1
       },
       "unsupported": {
         "year": 143,
         "fuel": 142,
-        "powertrainKind": 140,
-        "engineCc": 112,
-        "powerHpOrKw": 119,
+        "powertrainKind": 143,
+        "engineCc": 114,
+        "powerHpOrKw": 121,
         "trim": 10
       }
     },
@@ -607,20 +613,20 @@
       "requiredValuesPresent": 51,
       "requiredValuesSupported": 51,
       "missing": {
-        "powerHpOrKw": 522,
-        "power30MinKw": 1654,
+        "powerHpOrKw": 527,
+        "power30MinKw": 1788,
         "trim": 362,
-        "powertrainKind": 149,
         "engineCc": 186,
-        "fuel": 18
+        "fuel": 18,
+        "powertrainKind": 7
       },
       "unsupported": {
         "year": 478,
         "fuel": 478,
+        "powertrainKind": 478,
+        "powerHpOrKw": 283,
         "trim": 116,
-        "powertrainKind": 336,
-        "engineCc": 105,
-        "powerHpOrKw": 146
+        "engineCc": 113
       }
     },
     {
@@ -631,18 +637,18 @@
       "requiredValuesSupported": 230,
       "missing": {
         "trim": 167,
-        "engineCc": 74,
+        "engineCc": 75,
         "powerHpOrKw": 105,
-        "powertrainKind": 87,
         "fuel": 7,
-        "power30MinKw": 207
+        "powertrainKind": 7,
+        "power30MinKw": 216
       },
       "unsupported": {
         "year": 234,
         "fuel": 229,
-        "powertrainKind": 149,
-        "engineCc": 73,
-        "powerHpOrKw": 69,
+        "powertrainKind": 229,
+        "engineCc": 143,
+        "powerHpOrKw": 149,
         "trim": 67
       }
     },
@@ -654,15 +660,16 @@
       "requiredValuesSupported": 0,
       "missing": {
         "engineCc": 10,
-        "powerHpOrKw": 10,
-        "trim": 34,
-        "powertrainKind": 34
+        "powerHpOrKw": 11,
+        "trim": 34
       },
       "unsupported": {
         "year": 44,
         "trim": 10,
         "fuel": 44,
-        "powertrainKind": 10
+        "powertrainKind": 44,
+        "engineCc": 34,
+        "powerHpOrKw": 33
       }
     },
     {
@@ -672,17 +679,17 @@
       "requiredValuesPresent": 388,
       "requiredValuesSupported": 388,
       "missing": {
-        "powerHpOrKw": 161,
+        "powerHpOrKw": 162,
         "power30MinKw": 168,
         "trim": 235,
         "fuel": 8,
-        "powertrainKind": 8,
-        "engineCc": 93
+        "powertrainKind": 7,
+        "engineCc": 94
       },
       "unsupported": {
         "year": 320,
         "fuel": 316,
-        "powertrainKind": 316,
+        "powertrainKind": 317,
         "engineCc": 204,
         "powerHpOrKw": 206,
         "trim": 85
@@ -712,19 +719,18 @@
       "requiredValuesPresent": 320,
       "requiredValuesSupported": 320,
       "missing": {
-        "powerHpOrKw": 103,
+        "powerHpOrKw": 110,
         "power30MinKw": 134,
-        "engineCc": 44,
-        "trim": 165,
-        "powertrainKind": 12
+        "engineCc": 45,
+        "trim": 165
       },
       "unsupported": {
         "year": 204,
         "trim": 39,
         "fuel": 204,
-        "powertrainKind": 192,
-        "engineCc": 144,
-        "powerHpOrKw": 144
+        "powertrainKind": 204,
+        "engineCc": 155,
+        "powerHpOrKw": 149
       }
     },
     {
@@ -734,20 +740,20 @@
       "requiredValuesPresent": 116,
       "requiredValuesSupported": 79,
       "missing": {
-        "engineCc": 247,
-        "powerHpOrKw": 274,
+        "engineCc": 255,
+        "powerHpOrKw": 276,
         "trim": 269,
-        "powertrainKind": 199,
-        "power30MinKw": 55,
-        "fuel": 6
+        "power30MinKw": 56,
+        "fuel": 6,
+        "powertrainKind": 8
       },
       "unsupported": {
         "year": 577,
         "trim": 308,
         "fuel": 572,
-        "powertrainKind": 379,
-        "engineCc": 122,
-        "powerHpOrKw": 108
+        "powertrainKind": 570,
+        "engineCc": 304,
+        "powerHpOrKw": 297
       }
     },
     {
@@ -758,19 +764,19 @@
       "requiredValuesSupported": 8,
       "missing": {
         "trim": 29,
-        "powertrainKind": 27,
-        "engineCc": 10,
+        "engineCc": 11,
         "powerHpOrKw": 12,
         "power30MinKw": 10,
-        "fuel": 1
+        "fuel": 1,
+        "powertrainKind": 1
       },
       "unsupported": {
         "year": 38,
         "fuel": 38,
-        "trim": 9,
-        "powertrainKind": 12,
-        "engineCc": 3,
-        "powerHpOrKw": 3
+        "powertrainKind": 38,
+        "engineCc": 28,
+        "powerHpOrKw": 29,
+        "trim": 9
       }
     },
     {
@@ -798,12 +804,14 @@
       "requiredValuesPresent": 1,
       "requiredValuesSupported": 1,
       "missing": {
-        "trim": 2,
-        "powertrainKind": 2
+        "trim": 2
       },
       "unsupported": {
         "year": 2,
-        "fuel": 2
+        "fuel": 2,
+        "powertrainKind": 2,
+        "engineCc": 2,
+        "powerHpOrKw": 2
       }
     },
     {
@@ -814,19 +822,19 @@
       "requiredValuesSupported": 238,
       "missing": {
         "engineCc": 20,
-        "powerHpOrKw": 27,
+        "powerHpOrKw": 78,
         "trim": 634,
-        "powertrainKind": 647,
-        "power30MinKw": 59,
-        "fuel": 27
+        "power30MinKw": 178,
+        "fuel": 27,
+        "powertrainKind": 27
       },
       "unsupported": {
         "year": 670,
         "trim": 36,
         "fuel": 643,
-        "powertrainKind": 23,
-        "engineCc": 9,
-        "powerHpOrKw": 10
+        "powertrainKind": 643,
+        "engineCc": 510,
+        "powerHpOrKw": 579
       }
     },
     {
@@ -838,14 +846,17 @@
       "missing": {
         "engineCc": 10,
         "trim": 174,
-        "powertrainKind": 184,
-        "power30MinKw": 120,
-        "powerHpOrKw": 6,
-        "fuel": 10
+        "powerHpOrKw": 21,
+        "power30MinKw": 163,
+        "fuel": 10,
+        "powertrainKind": 10
       },
       "unsupported": {
         "year": 174,
-        "fuel": 174
+        "fuel": 174,
+        "powertrainKind": 174,
+        "engineCc": 131,
+        "powerHpOrKw": 159
       }
     },
     {
@@ -855,15 +866,17 @@
       "requiredValuesPresent": 146,
       "requiredValuesSupported": 146,
       "missing": {
-        "powerHpOrKw": 9,
-        "power30MinKw": 54,
+        "powerHpOrKw": 23,
+        "power30MinKw": 90,
         "trim": 156,
-        "powertrainKind": 156,
         "engineCc": 3
       },
       "unsupported": {
         "year": 156,
-        "fuel": 156
+        "fuel": 156,
+        "powertrainKind": 156,
+        "engineCc": 120,
+        "powerHpOrKw": 142
       }
     },
     {
@@ -874,15 +887,16 @@
       "requiredValuesSupported": 0,
       "missing": {
         "trim": 15,
-        "powertrainKind": 15,
-        "engineCc": 1,
-        "powerHpOrKw": 1
+        "powerHpOrKw": 2,
+        "engineCc": 2
       },
       "unsupported": {
         "year": 16,
         "fuel": 16,
-        "trim": 1,
-        "powertrainKind": 1
+        "powertrainKind": 16,
+        "engineCc": 14,
+        "powerHpOrKw": 14,
+        "trim": 1
       }
     },
     {
@@ -911,19 +925,19 @@
       "requiredValuesSupported": 0,
       "missing": {
         "powerHpOrKw": 86,
-        "power30MinKw": 260,
+        "power30MinKw": 266,
         "engineCc": 4,
         "trim": 48,
         "fuel": 1,
-        "powertrainKind": 7
+        "powertrainKind": 1
       },
       "unsupported": {
         "year": 52,
         "trim": 4,
         "fuel": 52,
-        "powertrainKind": 46,
+        "powertrainKind": 52,
         "engineCc": 26,
-        "powerHpOrKw": 27
+        "powerHpOrKw": 33
       }
     },
     {
@@ -965,15 +979,16 @@
       "missing": {
         "power30MinKw": 1,
         "engineCc": 7,
-        "powerHpOrKw": 7,
-        "trim": 18,
-        "powertrainKind": 18
+        "powerHpOrKw": 8,
+        "trim": 18
       },
       "unsupported": {
         "year": 25,
         "trim": 7,
         "fuel": 25,
-        "powertrainKind": 7
+        "powertrainKind": 25,
+        "engineCc": 18,
+        "powerHpOrKw": 17
       }
     },
     {
@@ -984,19 +999,19 @@
       "requiredValuesSupported": 46,
       "missing": {
         "trim": 263,
-        "powertrainKind": 260,
         "fuel": 4,
-        "engineCc": 133,
+        "powertrainKind": 4,
+        "engineCc": 138,
         "powerHpOrKw": 131,
-        "power30MinKw": 1
+        "power30MinKw": 2
       },
       "unsupported": {
         "year": 394,
         "fuel": 390,
-        "trim": 131,
-        "powertrainKind": 134,
-        "engineCc": 2,
-        "powerHpOrKw": 3
+        "powertrainKind": 390,
+        "engineCc": 252,
+        "powerHpOrKw": 259,
+        "trim": 131
       }
     },
     {
@@ -1008,10 +1023,10 @@
       "missing": {
         "engineCc": 21,
         "powerHpOrKw": 49,
-        "power30MinKw": 34,
         "trim": 16,
         "fuel": 4,
-        "powertrainKind": 4
+        "powertrainKind": 4,
+        "power30MinKw": 34
       },
       "unsupported": {
         "year": 34,
@@ -1030,12 +1045,14 @@
       "requiredValuesSupported": 23,
       "missing": {
         "trim": 94,
-        "powertrainKind": 94,
         "power30MinKw": 1
       },
       "unsupported": {
         "year": 94,
-        "fuel": 94
+        "fuel": 94,
+        "powertrainKind": 94,
+        "engineCc": 94,
+        "powerHpOrKw": 94
       }
     },
     {
@@ -1045,19 +1062,20 @@
       "requiredValuesPresent": 36,
       "requiredValuesSupported": 36,
       "missing": {
-        "power30MinKw": 24,
+        "power30MinKw": 54,
         "fuel": 2,
-        "powerHpOrKw": 4,
+        "powerHpOrKw": 24,
         "engineCc": 2,
-        "powertrainKind": 188,
+        "powertrainKind": 1,
         "trim": 187
       },
       "unsupported": {
         "year": 190,
         "trim": 3,
         "fuel": 190,
-        "powertrainKind": 3,
-        "engineCc": 3
+        "powertrainKind": 190,
+        "engineCc": 160,
+        "powerHpOrKw": 167
       }
     },
     {
@@ -1067,12 +1085,14 @@
       "requiredValuesPresent": 6,
       "requiredValuesSupported": 6,
       "missing": {
-        "trim": 17,
-        "powertrainKind": 17
+        "trim": 17
       },
       "unsupported": {
         "year": 17,
-        "fuel": 17
+        "fuel": 17,
+        "powertrainKind": 17,
+        "engineCc": 17,
+        "powerHpOrKw": 17
       }
     },
     {
@@ -1121,19 +1141,19 @@
       "requiredValuesSupported": 27,
       "missing": {
         "engineCc": 168,
-        "powerHpOrKw": 169,
+        "powerHpOrKw": 179,
         "power30MinKw": 66,
         "trim": 141,
-        "powertrainKind": 109,
-        "fuel": 6
+        "fuel": 6,
+        "powertrainKind": 6
       },
       "unsupported": {
         "year": 308,
         "trim": 167,
         "fuel": 302,
-        "powertrainKind": 199,
-        "engineCc": 32,
-        "powerHpOrKw": 30
+        "powertrainKind": 302,
+        "engineCc": 135,
+        "powerHpOrKw": 123
       }
     },
     {
@@ -1144,19 +1164,19 @@
       "requiredValuesSupported": 107,
       "missing": {
         "trim": 293,
-        "powertrainKind": 293,
-        "engineCc": 35,
-        "powerHpOrKw": 61,
         "fuel": 4,
-        "power30MinKw": 178
+        "powertrainKind": 4,
+        "powerHpOrKw": 81,
+        "power30MinKw": 211,
+        "engineCc": 35
       },
       "unsupported": {
         "year": 315,
-        "fuel": 312,
         "trim": 22,
-        "powertrainKind": 23,
-        "engineCc": 1,
-        "powerHpOrKw": 1
+        "fuel": 312,
+        "powertrainKind": 312,
+        "engineCc": 257,
+        "powerHpOrKw": 270
       }
     },
     {
@@ -1184,19 +1204,19 @@
       "requiredValuesSupported": 931,
       "missing": {
         "fuel": 40,
-        "powertrainKind": 1129,
-        "engineCc": 325,
-        "powerHpOrKw": 366,
+        "powertrainKind": 41,
+        "engineCc": 327,
+        "powerHpOrKw": 444,
         "trim": 1274,
-        "power30MinKw": 335
+        "power30MinKw": 371
       },
       "unsupported": {
         "year": 1597,
         "trim": 323,
         "fuel": 1579,
-        "powertrainKind": 490,
-        "engineCc": 165,
-        "powerHpOrKw": 170
+        "powertrainKind": 1578,
+        "engineCc": 1215,
+        "powerHpOrKw": 1180
       }
     },
     {
@@ -1207,9 +1227,9 @@
       "requiredValuesSupported": 25,
       "missing": {
         "trim": 4,
-        "engineCc": 1,
         "powerHpOrKw": 2,
-        "power30MinKw": 1
+        "power30MinKw": 1,
+        "engineCc": 1
       },
       "unsupported": {
         "year": 6,
@@ -1251,16 +1271,16 @@
       "requiredValuesSupported": 21,
       "missing": {
         "powerHpOrKw": 96,
-        "power30MinKw": 33,
+        "power30MinKw": 37,
         "trim": 6,
-        "powertrainKind": 4,
         "engineCc": 72
       },
       "unsupported": {
         "year": 79,
         "trim": 73,
         "fuel": 79,
-        "powertrainKind": 75
+        "powertrainKind": 79,
+        "powerHpOrKw": 4
       }
     },
     {
@@ -1270,20 +1290,20 @@
       "requiredValuesPresent": 370,
       "requiredValuesSupported": 370,
       "missing": {
-        "powerHpOrKw": 146,
-        "power30MinKw": 136,
+        "powerHpOrKw": 147,
+        "power30MinKw": 137,
         "engineCc": 85,
         "trim": 217,
-        "powertrainKind": 8,
-        "fuel": 7
+        "fuel": 7,
+        "powertrainKind": 5
       },
       "unsupported": {
         "year": 277,
         "trim": 60,
         "fuel": 277,
-        "powertrainKind": 274,
-        "engineCc": 194,
-        "powerHpOrKw": 194
+        "powertrainKind": 277,
+        "engineCc": 196,
+        "powerHpOrKw": 196
       }
     },
     {
@@ -1294,18 +1314,18 @@
       "requiredValuesSupported": 23,
       "missing": {
         "powerHpOrKw": 214,
-        "power30MinKw": 19,
-        "engineCc": 58,
+        "power30MinKw": 28,
         "trim": 36,
-        "powertrainKind": 58
+        "engineCc": 58,
+        "powertrainKind": 33
       },
       "unsupported": {
         "year": 450,
         "trim": 414,
         "fuel": 450,
-        "powertrainKind": 392,
-        "engineCc": 319,
-        "powerHpOrKw": 178
+        "powertrainKind": 417,
+        "engineCc": 335,
+        "powerHpOrKw": 203
       }
     },
     {
@@ -1318,16 +1338,15 @@
         "engineCc": 67,
         "powerHpOrKw": 73,
         "trim": 23,
-        "powertrainKind": 21,
-        "power30MinKw": 7
+        "power30MinKw": 10
       },
       "unsupported": {
         "year": 95,
         "trim": 72,
         "fuel": 95,
-        "powertrainKind": 74,
-        "engineCc": 1,
-        "powerHpOrKw": 2
+        "powertrainKind": 95,
+        "engineCc": 19,
+        "powerHpOrKw": 23
       }
     },
     {
@@ -1340,16 +1359,16 @@
         "trim": 55,
         "engineCc": 7,
         "powerHpOrKw": 10,
-        "power30MinKw": 17,
+        "power30MinKw": 21,
         "fuel": 3,
-        "powertrainKind": 10
+        "powertrainKind": 2
       },
       "unsupported": {
         "year": 57,
         "fuel": 57,
-        "powertrainKind": 49,
-        "engineCc": 44,
-        "powerHpOrKw": 45,
+        "powertrainKind": 57,
+        "engineCc": 48,
+        "powerHpOrKw": 53,
         "trim": 2
       }
     },
@@ -1388,17 +1407,16 @@
       "requiredValuesSupported": 257,
       "missing": {
         "trim": 171,
-        "engineCc": 38,
+        "engineCc": 39,
         "powerHpOrKw": 53,
-        "power30MinKw": 77,
-        "powertrainKind": 3
+        "power30MinKw": 78
       },
       "unsupported": {
         "year": 186,
         "fuel": 186,
-        "powertrainKind": 183,
-        "engineCc": 156,
-        "powerHpOrKw": 159,
+        "powertrainKind": 186,
+        "engineCc": 158,
+        "powerHpOrKw": 162,
         "trim": 15
       }
     },
@@ -1427,20 +1445,20 @@
       "requiredValuesPresent": 421,
       "requiredValuesSupported": 419,
       "missing": {
-        "power30MinKw": 255,
+        "powerHpOrKw": 231,
+        "power30MinKw": 278,
         "trim": 425,
-        "engineCc": 164,
-        "powerHpOrKw": 213,
-        "powertrainKind": 213,
+        "engineCc": 169,
+        "powertrainKind": 35,
         "fuel": 28
       },
       "unsupported": {
         "year": 616,
+        "trim": 191,
         "fuel": 588,
-        "powertrainKind": 403,
-        "engineCc": 228,
-        "powerHpOrKw": 219,
-        "trim": 191
+        "powertrainKind": 581,
+        "engineCc": 384,
+        "powerHpOrKw": 379
       }
     },
     {
@@ -1493,20 +1511,20 @@
       "requiredValuesPresent": 927,
       "requiredValuesSupported": 392,
       "missing": {
-        "engineCc": 444,
-        "powerHpOrKw": 1160,
+        "engineCc": 445,
+        "powerHpOrKw": 1210,
         "trim": 1006,
-        "powertrainKind": 941,
-        "power30MinKw": 513,
-        "fuel": 41
+        "power30MinKw": 714,
+        "fuel": 41,
+        "powertrainKind": 41
       },
       "unsupported": {
         "year": 2643,
         "trim": 1637,
         "fuel": 2636,
-        "powertrainKind": 1734,
-        "engineCc": 1209,
-        "powerHpOrKw": 632
+        "powertrainKind": 2634,
+        "engineCc": 1908,
+        "powerHpOrKw": 1482
       }
     },
     {
@@ -1516,9 +1534,9 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
-        "trim": 8,
         "powerHpOrKw": 33,
         "power30MinKw": 63,
+        "trim": 8,
         "engineCc": 1
       },
       "unsupported": {
@@ -1572,15 +1590,16 @@
       "requiredValuesSupported": 3,
       "missing": {
         "trim": 22,
-        "powertrainKind": 22,
-        "engineCc": 6,
-        "powerHpOrKw": 6
+        "powerHpOrKw": 10,
+        "engineCc": 6
       },
       "unsupported": {
         "year": 28,
         "fuel": 28,
-        "trim": 6,
-        "powertrainKind": 6
+        "powertrainKind": 28,
+        "engineCc": 22,
+        "powerHpOrKw": 18,
+        "trim": 6
       }
     },
     {
@@ -1592,18 +1611,18 @@
       "missing": {
         "trim": 38,
         "engineCc": 142,
-        "powerHpOrKw": 142,
-        "powertrainKind": 18,
+        "powerHpOrKw": 143,
+        "powertrainKind": 2,
         "power30MinKw": 8,
         "fuel": 1
       },
       "unsupported": {
         "year": 169,
         "fuel": 168,
-        "powertrainKind": 151,
+        "powertrainKind": 167,
         "trim": 131,
-        "engineCc": 9,
-        "powerHpOrKw": 9
+        "engineCc": 25,
+        "powerHpOrKw": 24
       }
     },
     {
@@ -1613,19 +1632,19 @@
       "requiredValuesPresent": 18,
       "requiredValuesSupported": 18,
       "missing": {
-        "trim": 18,
-        "powertrainKind": 4,
-        "fuel": 1,
         "engineCc": 16,
-        "powerHpOrKw": 1
+        "powerHpOrKw": 1,
+        "trim": 18,
+        "fuel": 1,
+        "powertrainKind": 1
       },
       "unsupported": {
         "year": 19,
+        "trim": 1,
         "fuel": 19,
-        "powertrainKind": 16,
-        "powerHpOrKw": 15,
-        "engineCc": 4,
-        "trim": 1
+        "powertrainKind": 19,
+        "engineCc": 7,
+        "powerHpOrKw": 18
       }
     },
     {
@@ -1635,19 +1654,19 @@
       "requiredValuesPresent": 13,
       "requiredValuesSupported": 13,
       "missing": {
+        "engineCc": 5,
+        "powerHpOrKw": 4,
         "trim": 12,
         "fuel": 5,
-        "powertrainKind": 5,
-        "engineCc": 5,
-        "powerHpOrKw": 4
+        "powertrainKind": 5
       },
       "unsupported": {
         "year": 16,
+        "trim": 4,
         "fuel": 11,
         "powertrainKind": 11,
         "engineCc": 6,
-        "powerHpOrKw": 7,
-        "trim": 4
+        "powerHpOrKw": 7
       }
     },
     {
@@ -1657,17 +1676,16 @@
       "requiredValuesPresent": 60,
       "requiredValuesSupported": 60,
       "missing": {
-        "powerHpOrKw": 40,
-        "power30MinKw": 26,
+        "powerHpOrKw": 41,
+        "power30MinKw": 27,
         "trim": 29,
         "fuel": 1,
-        "powertrainKind": 1,
         "engineCc": 30
       },
       "unsupported": {
         "year": 58,
         "fuel": 57,
-        "powertrainKind": 57,
+        "powertrainKind": 58,
         "engineCc": 22,
         "powerHpOrKw": 23,
         "trim": 29
@@ -1698,19 +1716,19 @@
       "requiredValuesPresent": 149,
       "requiredValuesSupported": 149,
       "missing": {
-        "power30MinKw": 30,
+        "power30MinKw": 66,
         "trim": 219,
         "engineCc": 56,
-        "powerHpOrKw": 62,
-        "powertrainKind": 185,
+        "powerHpOrKw": 81,
+        "powertrainKind": 4,
         "fuel": 1
       },
       "unsupported": {
         "year": 276,
         "fuel": 275,
-        "powertrainKind": 91,
-        "engineCc": 38,
-        "powerHpOrKw": 33,
+        "powertrainKind": 272,
+        "engineCc": 183,
+        "powerHpOrKw": 195,
         "trim": 57
       }
     },
@@ -1721,20 +1739,20 @@
       "requiredValuesPresent": 182,
       "requiredValuesSupported": 178,
       "missing": {
-        "powerHpOrKw": 240,
-        "power30MinKw": 153,
-        "engineCc": 230,
+        "powerHpOrKw": 247,
+        "power30MinKw": 154,
+        "engineCc": 232,
         "trim": 224,
-        "powertrainKind": 199,
+        "powertrainKind": 15,
         "fuel": 5
       },
       "unsupported": {
         "year": 459,
         "trim": 235,
         "fuel": 457,
-        "powertrainKind": 263,
-        "engineCc": 38,
-        "powerHpOrKw": 40
+        "powertrainKind": 447,
+        "engineCc": 219,
+        "powerHpOrKw": 217
       }
     },
     {
@@ -1744,18 +1762,17 @@
       "requiredValuesPresent": 387,
       "requiredValuesSupported": 387,
       "missing": {
-        "trim": 60,
         "powerHpOrKw": 99,
         "power30MinKw": 57,
-        "engineCc": 73,
-        "powertrainKind": 2
+        "trim": 60,
+        "engineCc": 73
       },
       "unsupported": {
         "year": 122,
         "fuel": 122,
-        "powertrainKind": 120,
-        "engineCc": 53,
-        "powerHpOrKw": 53,
+        "powertrainKind": 122,
+        "engineCc": 55,
+        "powerHpOrKw": 55,
         "trim": 62
       }
     },
@@ -1899,19 +1916,18 @@
       "requiredValuesPresent": 53,
       "requiredValuesSupported": 7,
       "missing": {
-        "powerHpOrKw": 60,
+        "powerHpOrKw": 70,
         "power30MinKw": 9,
         "trim": 37,
-        "powertrainKind": 37,
         "engineCc": 1
       },
       "unsupported": {
         "year": 143,
         "trim": 106,
         "fuel": 143,
-        "powertrainKind": 106,
-        "engineCc": 98,
-        "powerHpOrKw": 46
+        "powertrainKind": 143,
+        "engineCc": 135,
+        "powerHpOrKw": 73
       }
     },
     {
@@ -1921,10 +1937,10 @@
       "requiredValuesPresent": 803,
       "requiredValuesSupported": 274,
       "missing": {
-        "engineCc": 363,
-        "powerHpOrKw": 1166,
-        "power30MinKw": 442,
-        "powertrainKind": 637,
+        "engineCc": 364,
+        "powerHpOrKw": 1240,
+        "power30MinKw": 609,
+        "powertrainKind": 47,
         "trim": 666,
         "fuel": 12
       },
@@ -1932,9 +1948,9 @@
         "year": 2385,
         "trim": 1719,
         "fuel": 2378,
-        "powertrainKind": 1753,
-        "engineCc": 1299,
-        "powerHpOrKw": 603
+        "powertrainKind": 2343,
+        "engineCc": 1721,
+        "powerHpOrKw": 1119
       }
     },
     {
@@ -1979,15 +1995,14 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
-        "trim": 12,
-        "powertrainKind": 11
+        "trim": 12
       },
       "unsupported": {
         "year": 12,
         "fuel": 12,
-        "powertrainKind": 1,
-        "engineCc": 1,
-        "powerHpOrKw": 1
+        "powertrainKind": 12,
+        "engineCc": 12,
+        "powerHpOrKw": 12
       }
     },
     {
@@ -2015,19 +2030,19 @@
       "requiredValuesSupported": 23,
       "missing": {
         "trim": 118,
-        "powertrainKind": 96,
         "engineCc": 109,
-        "powerHpOrKw": 109,
+        "powerHpOrKw": 124,
         "power30MinKw": 24,
-        "fuel": 1
+        "fuel": 1,
+        "powertrainKind": 1
       },
       "unsupported": {
         "year": 223,
         "fuel": 222,
-        "trim": 105,
-        "powertrainKind": 127,
-        "engineCc": 19,
-        "powerHpOrKw": 19
+        "powertrainKind": 222,
+        "engineCc": 114,
+        "powerHpOrKw": 99,
+        "trim": 105
       }
     },
     {
@@ -2037,17 +2052,18 @@
       "requiredValuesPresent": 6,
       "requiredValuesSupported": 6,
       "missing": {
-        "trim": 46,
-        "powertrainKind": 46,
         "engineCc": 5,
         "powerHpOrKw": 4,
-        "power30MinKw": 23
+        "power30MinKw": 28,
+        "trim": 46
       },
       "unsupported": {
         "year": 49,
         "fuel": 49,
-        "trim": 3,
-        "powertrainKind": 3
+        "powertrainKind": 49,
+        "engineCc": 41,
+        "powerHpOrKw": 46,
+        "trim": 3
       }
     },
     {
@@ -2057,20 +2073,20 @@
       "requiredValuesPresent": 149,
       "requiredValuesSupported": 148,
       "missing": {
-        "engineCc": 495,
-        "powerHpOrKw": 511,
+        "powerHpOrKw": 602,
         "power30MinKw": 664,
         "trim": 845,
-        "powertrainKind": 732,
-        "fuel": 12
+        "engineCc": 496,
+        "fuel": 12,
+        "powertrainKind": 13
       },
       "unsupported": {
         "year": 1318,
         "trim": 473,
         "fuel": 1312,
-        "powertrainKind": 592,
-        "engineCc": 109,
-        "powerHpOrKw": 98
+        "powertrainKind": 1311,
+        "engineCc": 827,
+        "powerHpOrKw": 726
       }
     },
     {
@@ -2107,18 +2123,17 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
-        "powerHpOrKw": 191,
-        "power30MinKw": 446,
+        "powerHpOrKw": 192,
+        "power30MinKw": 476,
         "trim": 80,
-        "engineCc": 5,
-        "powertrainKind": 32
+        "engineCc": 5
       },
       "unsupported": {
         "year": 80,
         "fuel": 80,
-        "powertrainKind": 48,
-        "engineCc": 12,
-        "powerHpOrKw": 16
+        "powertrainKind": 80,
+        "powerHpOrKw": 47,
+        "engineCc": 14
       }
     },
     {
@@ -2147,17 +2162,16 @@
       "missing": {
         "power30MinKw": 4,
         "trim": 3,
-        "powertrainKind": 2,
         "engineCc": 1,
         "powerHpOrKw": 1
       },
       "unsupported": {
         "year": 4,
         "fuel": 4,
-        "trim": 1,
-        "powertrainKind": 2,
-        "engineCc": 1,
-        "powerHpOrKw": 1
+        "powertrainKind": 4,
+        "engineCc": 3,
+        "powerHpOrKw": 3,
+        "trim": 1
       }
     },
     {
@@ -2168,18 +2182,18 @@
       "requiredValuesSupported": 132,
       "missing": {
         "trim": 221,
-        "power30MinKw": 427,
-        "powertrainKind": 169,
-        "powerHpOrKw": 527,
+        "power30MinKw": 434,
+        "powerHpOrKw": 542,
         "engineCc": 485,
-        "fuel": 40
+        "fuel": 40,
+        "powertrainKind": 59
       },
       "unsupported": {
         "year": 730,
         "fuel": 707,
-        "powertrainKind": 577,
-        "engineCc": 90,
-        "powerHpOrKw": 83,
+        "powertrainKind": 687,
+        "engineCc": 193,
+        "powerHpOrKw": 178,
         "trim": 509
       }
     },
@@ -2224,18 +2238,18 @@
       "requiredValuesSupported": 210,
       "missing": {
         "trim": 66,
-        "engineCc": 61,
+        "engineCc": 62,
         "powerHpOrKw": 61,
-        "powertrainKind": 18,
         "power30MinKw": 26,
-        "fuel": 1
+        "fuel": 1,
+        "powertrainKind": 1
       },
       "unsupported": {
         "year": 124,
         "fuel": 124,
-        "powertrainKind": 107,
-        "engineCc": 48,
-        "powerHpOrKw": 50,
+        "powertrainKind": 124,
+        "engineCc": 64,
+        "powerHpOrKw": 67,
         "trim": 58
       }
     },
@@ -2248,16 +2262,15 @@
       "missing": {
         "engineCc": 1,
         "powerHpOrKw": 1,
-        "trim": 6,
-        "powertrainKind": 5
+        "trim": 6
       },
       "unsupported": {
         "year": 7,
         "trim": 1,
         "fuel": 7,
-        "powertrainKind": 2,
-        "engineCc": 1,
-        "powerHpOrKw": 1
+        "powertrainKind": 7,
+        "engineCc": 6,
+        "powerHpOrKw": 6
       }
     },
     {
@@ -2267,20 +2280,20 @@
       "requiredValuesPresent": 11,
       "requiredValuesSupported": 11,
       "missing": {
-        "powerHpOrKw": 32,
-        "power30MinKw": 45,
+        "powerHpOrKw": 35,
+        "power30MinKw": 70,
         "trim": 78,
-        "powertrainKind": 63,
         "fuel": 1,
-        "engineCc": 6
+        "powertrainKind": 1,
+        "engineCc": 7
       },
       "unsupported": {
         "year": 85,
         "fuel": 84,
-        "powertrainKind": 22,
-        "engineCc": 9,
-        "powerHpOrKw": 9,
-        "trim": 7
+        "powertrainKind": 84,
+        "powerHpOrKw": 68,
+        "trim": 7,
+        "engineCc": 45
       }
     },
     {
@@ -2320,17 +2333,16 @@
       "requiredValuesSupported": 70,
       "missing": {
         "powerHpOrKw": 37,
-        "power30MinKw": 214,
+        "power30MinKw": 217,
         "trim": 61,
-        "powertrainKind": 7,
         "engineCc": 5
       },
       "unsupported": {
         "year": 66,
         "fuel": 66,
-        "powertrainKind": 59,
-        "engineCc": 49,
-        "powerHpOrKw": 49,
+        "powertrainKind": 66,
+        "engineCc": 53,
+        "powerHpOrKw": 56,
         "trim": 5
       }
     },
@@ -2372,15 +2384,16 @@
       "requiredValuesSupported": 3,
       "missing": {
         "trim": 13,
-        "powertrainKind": 13,
         "engineCc": 3,
         "powerHpOrKw": 3
       },
       "unsupported": {
         "year": 16,
         "fuel": 16,
-        "trim": 3,
-        "powertrainKind": 3
+        "powertrainKind": 16,
+        "engineCc": 13,
+        "powerHpOrKw": 13,
+        "trim": 3
       }
     },
     {
@@ -2391,11 +2404,16 @@
       "requiredValuesSupported": 1,
       "missing": {
         "trim": 24,
-        "powertrainKind": 24
+        "powerHpOrKw": 1,
+        "engineCc": 2,
+        "power30MinKw": 4
       },
       "unsupported": {
         "year": 24,
-        "fuel": 24
+        "fuel": 24,
+        "powertrainKind": 24,
+        "engineCc": 18,
+        "powerHpOrKw": 23
       }
     },
     {
@@ -2406,19 +2424,19 @@
       "requiredValuesSupported": 35,
       "missing": {
         "trim": 199,
-        "powertrainKind": 180,
         "engineCc": 48,
-        "powerHpOrKw": 50,
-        "power30MinKw": 48,
-        "fuel": 2
+        "powerHpOrKw": 65,
+        "power30MinKw": 64,
+        "fuel": 2,
+        "powertrainKind": 3
       },
       "unsupported": {
         "year": 248,
         "fuel": 247,
-        "trim": 49,
-        "powertrainKind": 69,
-        "engineCc": 23,
-        "powerHpOrKw": 22
+        "powertrainKind": 246,
+        "engineCc": 184,
+        "powerHpOrKw": 184,
+        "trim": 49
       }
     },
     {
@@ -2428,19 +2446,19 @@
       "requiredValuesPresent": 193,
       "requiredValuesSupported": 193,
       "missing": {
-        "power30MinKw": 56,
         "trim": 71,
-        "powerHpOrKw": 13,
         "engineCc": 17,
-        "powertrainKind": 21,
-        "fuel": 7
+        "powerHpOrKw": 13,
+        "power30MinKw": 70,
+        "fuel": 7,
+        "powertrainKind": 7
       },
       "unsupported": {
         "year": 71,
         "fuel": 67,
-        "powertrainKind": 53,
+        "powertrainKind": 67,
         "engineCc": 42,
-        "powerHpOrKw": 49
+        "powerHpOrKw": 63
       }
     },
     {
@@ -2450,20 +2468,20 @@
       "requiredValuesPresent": 207,
       "requiredValuesSupported": 207,
       "missing": {
-        "engineCc": 99,
-        "powerHpOrKw": 132,
-        "power30MinKw": 135,
+        "engineCc": 105,
+        "powerHpOrKw": 174,
+        "power30MinKw": 173,
         "trim": 613,
-        "powertrainKind": 605,
-        "fuel": 54
+        "fuel": 54,
+        "powertrainKind": 61
       },
       "unsupported": {
         "year": 753,
         "trim": 140,
         "fuel": 705,
-        "powertrainKind": 153,
-        "powerHpOrKw": 65,
-        "engineCc": 60
+        "powertrainKind": 697,
+        "powerHpOrKw": 567,
+        "engineCc": 561
       }
     },
     {
@@ -2474,18 +2492,18 @@
       "requiredValuesSupported": 3,
       "missing": {
         "trim": 85,
-        "powertrainKind": 78,
+        "powerHpOrKw": 41,
         "engineCc": 32,
-        "powerHpOrKw": 32,
         "power30MinKw": 9,
-        "fuel": 6
+        "fuel": 6,
+        "powertrainKind": 6
       },
       "unsupported": {
         "year": 116,
         "fuel": 113,
-        "powertrainKind": 41,
-        "engineCc": 10,
-        "powerHpOrKw": 10,
+        "powertrainKind": 113,
+        "engineCc": 82,
+        "powerHpOrKw": 73,
         "trim": 31
       }
     },
@@ -2496,16 +2514,16 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
+        "trim": 11,
         "engineCc": 47,
         "powerHpOrKw": 47,
-        "trim": 11,
         "power30MinKw": 1
       },
       "unsupported": {
         "year": 47,
-        "trim": 36,
         "fuel": 47,
-        "powertrainKind": 47
+        "powertrainKind": 47,
+        "trim": 36
       }
     },
     {
@@ -2515,20 +2533,20 @@
       "requiredValuesPresent": 4913,
       "requiredValuesSupported": 4876,
       "missing": {
+        "engineCc": 1389,
+        "powerHpOrKw": 2021,
         "trim": 2705,
-        "engineCc": 1380,
-        "powerHpOrKw": 1821,
-        "power30MinKw": 1981,
-        "powertrainKind": 2243,
-        "fuel": 375
+        "power30MinKw": 2527,
+        "fuel": 375,
+        "powertrainKind": 100
       },
       "unsupported": {
         "year": 4270,
-        "fuel": 4231,
-        "powertrainKind": 2073,
         "trim": 1565,
-        "engineCc": 656,
-        "powerHpOrKw": 442
+        "fuel": 4231,
+        "powertrainKind": 4216,
+        "engineCc": 2244,
+        "powerHpOrKw": 2385
       }
     },
     {
@@ -2539,19 +2557,19 @@
       "requiredValuesSupported": 287,
       "missing": {
         "trim": 251,
-        "powerHpOrKw": 166,
-        "power30MinKw": 189,
+        "powerHpOrKw": 180,
+        "power30MinKw": 311,
         "engineCc": 96,
-        "powertrainKind": 228,
-        "fuel": 36
+        "fuel": 36,
+        "powertrainKind": 36
       },
       "unsupported": {
         "year": 341,
         "fuel": 341,
-        "powertrainKind": 149,
+        "powertrainKind": 341,
         "trim": 90,
-        "engineCc": 42,
-        "powerHpOrKw": 42
+        "engineCc": 112,
+        "powerHpOrKw": 220
       }
     },
     {
@@ -2572,19 +2590,19 @@
       "requiredValuesPresent": 411,
       "requiredValuesSupported": 360,
       "missing": {
-        "powerHpOrKw": 166,
-        "power30MinKw": 105,
+        "powerHpOrKw": 190,
+        "power30MinKw": 176,
         "trim": 373,
-        "powertrainKind": 340,
         "fuel": 2,
+        "powertrainKind": 2,
         "engineCc": 77
       },
       "unsupported": {
         "year": 561,
         "fuel": 560,
-        "powertrainKind": 222,
-        "engineCc": 135,
-        "powerHpOrKw": 81,
+        "powertrainKind": 560,
+        "powerHpOrKw": 395,
+        "engineCc": 402,
         "trim": 188
       }
     },
@@ -2595,20 +2613,20 @@
       "requiredValuesPresent": 94,
       "requiredValuesSupported": 94,
       "missing": {
-        "engineCc": 294,
-        "powerHpOrKw": 292,
+        "engineCc": 297,
+        "powerHpOrKw": 306,
         "trim": 137,
-        "power30MinKw": 24,
-        "powertrainKind": 123,
-        "fuel": 17
+        "power30MinKw": 30,
+        "fuel": 17,
+        "powertrainKind": 18
       },
       "unsupported": {
         "year": 423,
         "trim": 286,
         "fuel": 412,
-        "powertrainKind": 306,
-        "engineCc": 13,
-        "powerHpOrKw": 18
+        "powertrainKind": 411,
+        "engineCc": 109,
+        "powerHpOrKw": 109
       }
     },
     {
@@ -2619,15 +2637,16 @@
       "requiredValuesSupported": 0,
       "missing": {
         "trim": 13,
-        "powertrainKind": 13,
         "engineCc": 1,
-        "powerHpOrKw": 1
+        "powerHpOrKw": 3
       },
       "unsupported": {
         "year": 14,
         "fuel": 14,
-        "trim": 1,
-        "powertrainKind": 1
+        "powertrainKind": 14,
+        "engineCc": 13,
+        "powerHpOrKw": 11,
+        "trim": 1
       }
     },
     {
@@ -2637,9 +2656,9 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
+        "trim": 26,
         "powerHpOrKw": 36,
         "power30MinKw": 150,
-        "trim": 26,
         "engineCc": 9
       },
       "unsupported": {
@@ -2658,15 +2677,16 @@
       "requiredValuesSupported": 0,
       "missing": {
         "powerHpOrKw": 236,
-        "power30MinKw": 398,
+        "power30MinKw": 430,
         "trim": 80,
-        "powertrainKind": 34,
-        "fuel": 2
+        "fuel": 2,
+        "powertrainKind": 2
       },
       "unsupported": {
         "year": 82,
         "fuel": 81,
-        "powertrainKind": 49,
+        "powertrainKind": 81,
+        "powerHpOrKw": 32,
         "trim": 2
       }
     },
@@ -2677,20 +2697,20 @@
       "requiredValuesPresent": 350,
       "requiredValuesSupported": 350,
       "missing": {
-        "engineCc": 531,
-        "powerHpOrKw": 583,
+        "engineCc": 538,
+        "powerHpOrKw": 610,
         "trim": 418,
-        "powertrainKind": 281,
-        "power30MinKw": 201,
-        "fuel": 18
+        "power30MinKw": 265,
+        "fuel": 18,
+        "powertrainKind": 20
       },
       "unsupported": {
         "year": 930,
         "trim": 512,
         "fuel": 914,
-        "powertrainKind": 651,
-        "powerHpOrKw": 131,
-        "engineCc": 116
+        "powertrainKind": 912,
+        "engineCc": 308,
+        "powerHpOrKw": 365
       }
     },
     {
@@ -2717,19 +2737,20 @@
       "requiredValuesPresent": 446,
       "requiredValuesSupported": 446,
       "missing": {
-        "powerHpOrKw": 19,
-        "power30MinKw": 136,
+        "powerHpOrKw": 74,
+        "power30MinKw": 224,
         "trim": 655,
-        "powertrainKind": 656,
-        "engineCc": 16,
-        "fuel": 1
+        "engineCc": 17,
+        "fuel": 1,
+        "powertrainKind": 1
       },
       "unsupported": {
         "year": 659,
         "fuel": 659,
-        "trim": 4,
-        "powertrainKind": 4,
-        "powerHpOrKw": 1
+        "powertrainKind": 659,
+        "engineCc": 566,
+        "powerHpOrKw": 601,
+        "trim": 4
       }
     },
     {
@@ -2740,15 +2761,14 @@
       "requiredValuesSupported": 0,
       "missing": {
         "powerHpOrKw": 65,
-        "power30MinKw": 221,
-        "trim": 27,
-        "powertrainKind": 2
+        "power30MinKw": 223,
+        "trim": 27
       },
       "unsupported": {
         "year": 27,
         "fuel": 27,
-        "powertrainKind": 25,
-        "powerHpOrKw": 10
+        "powertrainKind": 27,
+        "powerHpOrKw": 12
       }
     },
     {
@@ -2776,19 +2796,19 @@
       "requiredValuesSupported": 434,
       "missing": {
         "trim": 497,
-        "powertrainKind": 482,
-        "power30MinKw": 203,
+        "powerHpOrKw": 160,
         "engineCc": 79,
-        "powerHpOrKw": 109,
-        "fuel": 6
+        "power30MinKw": 273,
+        "fuel": 6,
+        "powertrainKind": 7
       },
       "unsupported": {
         "year": 582,
         "fuel": 580,
-        "trim": 85,
-        "powertrainKind": 104,
-        "engineCc": 31,
-        "powerHpOrKw": 20
+        "powertrainKind": 579,
+        "engineCc": 436,
+        "powerHpOrKw": 444,
+        "trim": 85
       }
     },
     {
@@ -2852,18 +2872,18 @@
       "requiredValuesSupported": 425,
       "missing": {
         "trim": 1066,
+        "engineCc": 384,
+        "powerHpOrKw": 528,
         "fuel": 53,
-        "powertrainKind": 945,
-        "powerHpOrKw": 461,
-        "engineCc": 381,
-        "power30MinKw": 245
+        "powertrainKind": 54,
+        "power30MinKw": 457
       },
       "unsupported": {
         "year": 1446,
         "fuel": 1413,
-        "powertrainKind": 521,
-        "engineCc": 127,
-        "powerHpOrKw": 117,
+        "powertrainKind": 1412,
+        "engineCc": 803,
+        "powerHpOrKw": 941,
         "trim": 380
       }
     },
@@ -2874,17 +2894,19 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
+        "fuel": 11,
+        "powertrainKind": 11,
         "trim": 10,
-        "powertrainKind": 16,
         "engineCc": 1,
-        "powerHpOrKw": 1,
-        "fuel": 11
+        "powerHpOrKw": 1
       },
       "unsupported": {
         "year": 11,
         "fuel": 6,
-        "trim": 1,
-        "powertrainKind": 1
+        "powertrainKind": 6,
+        "engineCc": 5,
+        "powerHpOrKw": 5,
+        "trim": 1
       }
     },
     {
@@ -2894,20 +2916,20 @@
       "requiredValuesPresent": 317,
       "requiredValuesSupported": 239,
       "missing": {
-        "powerHpOrKw": 140,
-        "power30MinKw": 197,
-        "engineCc": 65,
+        "powerHpOrKw": 197,
+        "power30MinKw": 260,
+        "engineCc": 68,
         "trim": 599,
-        "powertrainKind": 599,
-        "fuel": 3
+        "fuel": 3,
+        "powertrainKind": 3
       },
       "unsupported": {
         "year": 794,
         "trim": 195,
         "fuel": 793,
-        "powertrainKind": 197,
-        "engineCc": 141,
-        "powerHpOrKw": 79
+        "powertrainKind": 793,
+        "engineCc": 671,
+        "powerHpOrKw": 618
       }
     },
     {
@@ -2939,19 +2961,19 @@
       "requiredValuesSupported": 38,
       "missing": {
         "engineCc": 145,
-        "powerHpOrKw": 161,
+        "powerHpOrKw": 180,
+        "power30MinKw": 35,
         "trim": 171,
-        "powertrainKind": 136,
-        "power30MinKw": 19,
-        "fuel": 22
+        "fuel": 22,
+        "powertrainKind": 22
       },
       "unsupported": {
         "year": 318,
         "trim": 147,
         "fuel": 309,
-        "powertrainKind": 195,
-        "engineCc": 34,
-        "powerHpOrKw": 34
+        "powertrainKind": 309,
+        "engineCc": 132,
+        "powerHpOrKw": 129
       }
     },
     {
@@ -2979,18 +3001,18 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
-        "power30MinKw": 5,
-        "trim": 1,
         "engineCc": 1,
-        "powerHpOrKw": 1
+        "powerHpOrKw": 1,
+        "power30MinKw": 5,
+        "trim": 1
       },
       "unsupported": {
         "year": 2,
+        "trim": 1,
         "fuel": 2,
         "powertrainKind": 2,
         "engineCc": 1,
-        "powerHpOrKw": 1,
-        "trim": 1
+        "powerHpOrKw": 1
       }
     },
     {
@@ -3017,14 +3039,17 @@
       "requiredValuesPresent": 292,
       "requiredValuesSupported": 292,
       "missing": {
-        "engineCc": 3,
         "trim": 206,
-        "powertrainKind": 206,
+        "powerHpOrKw": 40,
+        "engineCc": 3,
         "power30MinKw": 10
       },
       "unsupported": {
         "year": 206,
-        "fuel": 206
+        "fuel": 206,
+        "powertrainKind": 206,
+        "engineCc": 206,
+        "powerHpOrKw": 166
       }
     },
     {
@@ -3052,9 +3077,9 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
-        "trim": 9,
         "powerHpOrKw": 15,
         "power30MinKw": 36,
+        "trim": 9,
         "engineCc": 2
       },
       "unsupported": {
@@ -3117,19 +3142,19 @@
       "requiredValuesPresent": 1037,
       "requiredValuesSupported": 1037,
       "missing": {
-        "power30MinKw": 110,
-        "powerHpOrKw": 24,
+        "power30MinKw": 218,
         "trim": 933,
-        "powertrainKind": 905,
-        "engineCc": 23,
-        "fuel": 2
+        "powerHpOrKw": 80,
+        "engineCc": 25,
+        "fuel": 2,
+        "powertrainKind": 2
       },
       "unsupported": {
         "year": 945,
         "fuel": 945,
-        "powertrainKind": 42,
-        "engineCc": 30,
-        "powerHpOrKw": 30,
+        "powertrainKind": 945,
+        "powerHpOrKw": 877,
+        "engineCc": 823,
         "trim": 12
       }
     },
@@ -3141,16 +3166,16 @@
       "requiredValuesSupported": 0,
       "missing": {
         "powerHpOrKw": 2,
-        "power30MinKw": 1,
+        "power30MinKw": 11,
         "engineCc": 1,
-        "trim": 10,
-        "powertrainKind": 10
+        "trim": 10
       },
       "unsupported": {
         "year": 12,
         "trim": 2,
         "fuel": 12,
-        "powertrainKind": 2
+        "powertrainKind": 12,
+        "powerHpOrKw": 10
       }
     },
     {
@@ -3160,18 +3185,17 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
-        "powerHpOrKw": 20,
-        "power30MinKw": 89,
+        "power30MinKw": 149,
         "trim": 104,
-        "powertrainKind": 86,
+        "powerHpOrKw": 20,
         "engineCc": 1
       },
       "unsupported": {
         "year": 105,
         "fuel": 105,
-        "powertrainKind": 19,
-        "powerHpOrKw": 9,
-        "engineCc": 3,
+        "powertrainKind": 105,
+        "powerHpOrKw": 95,
+        "engineCc": 29,
         "trim": 1
       }
     },
@@ -3182,18 +3206,18 @@
       "requiredValuesPresent": 3,
       "requiredValuesSupported": 3,
       "missing": {
-        "trim": 2,
         "engineCc": 3,
         "powerHpOrKw": 3,
+        "trim": 2,
         "power30MinKw": 1
       },
       "unsupported": {
         "year": 4,
+        "trim": 2,
         "fuel": 4,
         "powertrainKind": 4,
         "engineCc": 1,
-        "powerHpOrKw": 1,
-        "trim": 2
+        "powerHpOrKw": 1
       }
     },
     {
@@ -3204,12 +3228,14 @@
       "requiredValuesSupported": 3,
       "missing": {
         "trim": 18,
-        "powertrainKind": 18,
         "power30MinKw": 2
       },
       "unsupported": {
         "year": 18,
-        "fuel": 18
+        "fuel": 18,
+        "powertrainKind": 18,
+        "engineCc": 18,
+        "powerHpOrKw": 18
       }
     },
     {
@@ -3219,17 +3245,19 @@
       "requiredValuesPresent": 6,
       "requiredValuesSupported": 6,
       "missing": {
-        "trim": 374,
-        "powertrainKind": 380,
-        "power30MinKw": 2,
         "engineCc": 6,
-        "powerHpOrKw": 6
+        "powerHpOrKw": 27,
+        "trim": 374,
+        "power30MinKw": 12,
+        "powertrainKind": 6
       },
       "unsupported": {
         "year": 386,
-        "fuel": 386,
         "trim": 12,
-        "powertrainKind": 6
+        "fuel": 386,
+        "powertrainKind": 380,
+        "engineCc": 364,
+        "powerHpOrKw": 353
       }
     },
     {
@@ -3251,20 +3279,20 @@
       "requiredValuesPresent": 46,
       "requiredValuesSupported": 46,
       "missing": {
-        "engineCc": 61,
-        "powerHpOrKw": 41,
+        "engineCc": 65,
+        "powerHpOrKw": 59,
         "trim": 143,
-        "powertrainKind": 157,
         "fuel": 18,
-        "power30MinKw": 6
+        "powertrainKind": 30,
+        "power30MinKw": 27
       },
       "unsupported": {
         "year": 230,
         "trim": 87,
         "fuel": 213,
-        "powertrainKind": 74,
-        "powerHpOrKw": 33,
-        "engineCc": 13
+        "powertrainKind": 201,
+        "engineCc": 117,
+        "powerHpOrKw": 142
       }
     },
     {
@@ -3292,17 +3320,19 @@
       "requiredValuesSupported": 26,
       "missing": {
         "engineCc": 173,
-        "powerHpOrKw": 188,
+        "powerHpOrKw": 215,
+        "power30MinKw": 70,
         "trim": 182,
         "fuel": 19,
-        "powertrainKind": 191,
-        "power30MinKw": 69
+        "powertrainKind": 31
       },
       "unsupported": {
         "year": 357,
         "trim": 175,
         "fuel": 341,
-        "powertrainKind": 169
+        "powertrainKind": 329,
+        "engineCc": 159,
+        "powerHpOrKw": 133
       }
     },
     {
@@ -3330,18 +3360,18 @@
       "requiredValuesPresent": 93,
       "requiredValuesSupported": 93,
       "missing": {
-        "engineCc": 25,
-        "powerHpOrKw": 43,
+        "power30MinKw": 166,
         "trim": 46,
-        "power30MinKw": 166
+        "engineCc": 25,
+        "powerHpOrKw": 43
       },
       "unsupported": {
         "year": 58,
-        "trim": 12,
         "fuel": 58,
         "powertrainKind": 58,
         "engineCc": 40,
-        "powerHpOrKw": 40
+        "powerHpOrKw": 40,
+        "trim": 12
       }
     },
     {
@@ -3352,17 +3382,17 @@
       "requiredValuesSupported": 0,
       "missing": {
         "powerHpOrKw": 254,
-        "power30MinKw": 440,
+        "power30MinKw": 834,
         "trim": 434,
-        "powertrainKind": 395,
-        "fuel": 1
+        "fuel": 1,
+        "powertrainKind": 1
       },
       "unsupported": {
         "year": 547,
-        "trim": 113,
         "fuel": 546,
-        "powertrainKind": 152,
-        "powerHpOrKw": 7
+        "powertrainKind": 546,
+        "trim": 113,
+        "powerHpOrKw": 401
       }
     },
     {
@@ -3372,13 +3402,14 @@
       "requiredValuesPresent": 0,
       "requiredValuesSupported": 0,
       "missing": {
-        "power30MinKw": 1,
-        "trim": 5,
-        "powertrainKind": 5
+        "power30MinKw": 6,
+        "trim": 5
       },
       "unsupported": {
         "year": 5,
-        "fuel": 5
+        "fuel": 5,
+        "powertrainKind": 5,
+        "powerHpOrKw": 5
       }
     },
     {
@@ -3388,20 +3419,20 @@
       "requiredValuesPresent": 810,
       "requiredValuesSupported": 801,
       "missing": {
-        "powerHpOrKw": 2088,
-        "power30MinKw": 1438,
-        "engineCc": 1961,
+        "engineCc": 2020,
+        "powerHpOrKw": 2260,
+        "power30MinKw": 1561,
         "trim": 1296,
-        "powertrainKind": 1038,
-        "fuel": 155
+        "fuel": 155,
+        "powertrainKind": 151
       },
       "unsupported": {
         "year": 3208,
         "trim": 1912,
         "fuel": 3119,
-        "powertrainKind": 2234,
-        "powerHpOrKw": 294,
-        "engineCc": 273
+        "powertrainKind": 3121,
+        "engineCc": 1036,
+        "powerHpOrKw": 1009
       }
     },
     {
@@ -3459,15 +3490,15 @@
       "requiredValuesSupported": 0,
       "missing": {
         "trim": 10,
-        "powertrainKind": 10,
-        "powerHpOrKw": 1,
-        "power30MinKw": 1
+        "power30MinKw": 11,
+        "powerHpOrKw": 1
       },
       "unsupported": {
         "year": 11,
         "fuel": 11,
-        "trim": 1,
-        "powertrainKind": 1
+        "powertrainKind": 11,
+        "powerHpOrKw": 10,
+        "trim": 1
       }
     },
     {
@@ -3478,19 +3509,19 @@
       "requiredValuesSupported": 16587,
       "missing": {
         "trim": 2652,
-        "powertrainKind": 2530,
-        "engineCc": 357,
-        "powerHpOrKw": 405,
+        "powerHpOrKw": 548,
+        "engineCc": 376,
         "fuel": 352,
-        "power30MinKw": 1015
+        "powertrainKind": 307,
+        "power30MinKw": 1480
       },
       "unsupported": {
         "year": 2932,
         "fuel": 2904,
-        "trim": 280,
-        "powertrainKind": 671,
-        "engineCc": 376,
-        "powerHpOrKw": 398
+        "powertrainKind": 2894,
+        "engineCc": 2115,
+        "powerHpOrKw": 2478,
+        "trim": 280
       }
     },
     {
@@ -3501,19 +3532,19 @@
       "requiredValuesSupported": 224,
       "missing": {
         "trim": 558,
-        "powertrainKind": 501,
+        "powerHpOrKw": 221,
         "fuel": 28,
-        "powerHpOrKw": 191,
-        "power30MinKw": 644,
-        "engineCc": 77
+        "powertrainKind": 21,
+        "power30MinKw": 739,
+        "engineCc": 78
       },
       "unsupported": {
         "year": 695,
         "fuel": 684,
-        "trim": 137,
-        "powertrainKind": 203,
-        "engineCc": 133,
-        "powerHpOrKw": 83
+        "powertrainKind": 683,
+        "engineCc": 517,
+        "powerHpOrKw": 533,
+        "trim": 137
       }
     },
     {
@@ -3524,17 +3555,16 @@
       "requiredValuesSupported": 0,
       "missing": {
         "engineCc": 7,
-        "power30MinKw": 193,
+        "power30MinKw": 208,
         "trim": 49,
-        "powerHpOrKw": 35,
-        "powertrainKind": 15
+        "powerHpOrKw": 35
       },
       "unsupported": {
         "year": 51,
         "fuel": 51,
-        "powertrainKind": 36,
+        "powertrainKind": 51,
         "engineCc": 23,
-        "powerHpOrKw": 25,
+        "powerHpOrKw": 40,
         "trim": 2
       }
     },
@@ -3583,19 +3613,19 @@
       "requiredValuesPresent": 151,
       "requiredValuesSupported": 151,
       "missing": {
-        "powerHpOrKw": 159,
-        "power30MinKw": 375,
+        "power30MinKw": 390,
         "trim": 174,
-        "engineCc": 5,
-        "powertrainKind": 28,
-        "fuel": 22
+        "engineCc": 8,
+        "powerHpOrKw": 180,
+        "fuel": 22,
+        "powertrainKind": 6
       },
       "unsupported": {
         "year": 175,
         "fuel": 157,
-        "powertrainKind": 151,
-        "engineCc": 102,
-        "powerHpOrKw": 106,
+        "powertrainKind": 173,
+        "engineCc": 109,
+        "powerHpOrKw": 107,
         "trim": 1
       }
     },
@@ -3607,16 +3637,15 @@
       "requiredValuesSupported": 0,
       "missing": {
         "powerHpOrKw": 54,
-        "power30MinKw": 95,
-        "trim": 20,
-        "powertrainKind": 2
+        "power30MinKw": 97,
+        "trim": 20
       },
       "unsupported": {
         "year": 23,
         "fuel": 23,
-        "powertrainKind": 21,
+        "powertrainKind": 23,
         "engineCc": 5,
-        "powerHpOrKw": 5,
+        "powerHpOrKw": 7,
         "trim": 3
       }
     },
@@ -3628,17 +3657,17 @@
       "requiredValuesSupported": 0,
       "missing": {
         "powerHpOrKw": 218,
-        "power30MinKw": 454,
+        "power30MinKw": 527,
         "trim": 142,
-        "powertrainKind": 74,
         "engineCc": 4,
-        "fuel": 1
+        "fuel": 1,
+        "powertrainKind": 1
       },
       "unsupported": {
         "year": 153,
         "fuel": 152,
-        "powertrainKind": 79,
-        "powerHpOrKw": 16,
+        "powertrainKind": 152,
+        "powerHpOrKw": 89,
         "trim": 11,
         "engineCc": 6
       }
@@ -3678,22 +3707,20 @@
       "requiredValuesSupported": 0,
       "missing": {
         "powerHpOrKw": 183,
-        "power30MinKw": 291,
+        "power30MinKw": 302,
         "trim": 51,
-        "powertrainKind": 11,
         "engineCc": 11
       },
       "unsupported": {
         "year": 65,
         "fuel": 65,
-        "powertrainKind": 54,
+        "powertrainKind": 65,
         "trim": 14,
-        "engineCc": 4,
-        "powerHpOrKw": 4
+        "powerHpOrKw": 15,
+        "engineCc": 4
       }
     }
   ],
-  "nextPass": "Fill gaps in existing model records. Reuse saved exact source facts first, then manufacturer year tables. Missing certified power stays missing; figures do not prove every offer matches or every specification is verified.",
-  "countingCaveat": "Version 1 counts only canonical engine-kind labels; ICE/BEV/HEV aliases can undercount supported variants. Corrected read-only audit requested; model and variant totals and batch membership remain valid.",
-  "coverageCountsProvisional": true
+  "correction": "Version 2 recognizes the same ICE/BEV/HEV/PHEV/EREV aliases as the matching code. Earlier 47531 was a conservative undercount; corrected value 47889. No facts or calculation rules changed.",
+  "nextPass": "Fill gaps in existing model records; preserve exact identity, field evidence and manual edits. These counts do not prove every offer matches or every specification is verified."
 }
