@@ -37987,8 +37987,19 @@
       "cardPower30MinKw": null,
       "searchStatus": "needs_data",
       "cardStatus": "needs_data",
-      "rootCause": "not_established",
-      "report": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
+      "rootCause": "safe_public_pricing_erases_independently_attested_30min_when_peak_power_conflicts",
+      "report": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
+      "diagnosticReport": "docs/encyclopedia/reports/2026-10-23-li-l6-certified-power-quarantine.json",
+      "diagnosticWorkflow": 39936983728,
+      "diagnosticJob": 120358818598,
+      "rootCauseVerifiedAt": "2026-10-23T10:09:32.833Z",
+      "fixCommit": "d7683629162d1e106f889c121dc5b491fc056016",
+      "fixState": "committed_pending_coordinated_release",
+      "productionInstalled": false,
+      "publicParityClosed": false,
+      "deliveredCalculationAccepted": false,
+      "lastObservedRelease": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+      "lastObservedReleaseCheckedAt": "2026-10-23T13:49:10Z"
     },
     "audiA3EarlyAndBodyPass": {
       "batch": "research-2026-10-23-audi-a3-early-and-body",
