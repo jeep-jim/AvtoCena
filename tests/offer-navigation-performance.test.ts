@@ -122,8 +122,10 @@ test("catalog generation becomes public only after canonical identity and dedupl
   assert.ok(currentReadModelRefresh > 0);
   assert.ok(currentReadModelRefresh < manifestSwitch);
   assert.match(storage, /assertCurrentCatalogReadModelsReady\(generationId, publishedOffers\)/);
-  assert.match(storage, /boundedDetailShards\(offers,CATALOG_CHUNK_SIZE\)/);
-  assert.match(storage, /expected\.items\.find\(offer=>!ids\.has\(offer\.id\)\)/);
+  const verifier=fs.readFileSync(new URL('../apps/web/lib/catalog/verify-read-models.ts',import.meta.url),'utf8');
+  assert.match(storage, /await verifyCatalogReadModels\(getJsonStorage\(\),generationId/);
+  assert.match(verifier, /boundedDetailShards\(rows,500\)/);
+  assert.match(verifier, /expected\.items\.some\(row=>!ids\.has\(row\.id\)\)/);
   assert.match(storage, /current\.generationId === manifest\.generationId/);
 });
 
