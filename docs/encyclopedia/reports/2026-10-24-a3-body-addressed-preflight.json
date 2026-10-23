@@ -1,0 +1,65 @@
+{
+  "checkedAt": "2026-10-23T18:29:00.231049+00:00",
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "offerId": "061974864a6a9708c3084fc8",
+  "searchHttp": 200,
+  "cardHttp": 200,
+  "modelHttp": 200,
+  "searchUniqueTarget": true,
+  "searchBodyType": "hatchback",
+  "cardBodyType": "",
+  "cardBodyLabel": "уточняется",
+  "searchAttestation": {
+    "version": 1,
+    "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+    "sourceIdentity": "[\"061974864a6a9708c3084fc8\",2020]",
+    "values": {
+      "fuel": "diesel",
+      "powertrainKind": "combustion",
+      "engineCc": 1968,
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
+      "transmission": "automatic",
+      "bodyType": "hatchback"
+    },
+    "filledFields": [
+      "bodyType"
+    ]
+  },
+  "cardAttestation": {
+    "version": 1,
+    "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+    "sourceIdentity": "[\"061974864a6a9708c3084fc8\",2020]",
+    "values": {
+      "fuel": "diesel",
+      "powertrainKind": "combustion",
+      "engineCc": 1968,
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
+      "transmission": "automatic"
+    },
+    "filledFields": []
+  },
+  "totalRubSearch": 4105050,
+  "totalRubCard": 4105050,
+  "modelRevision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e",
+  "variantId": "2b87bcd25d86cb99e9005934",
+  "variantBodyType": "hatchback",
+  "researchBatch": "research-2026-10-23-audi-a3-early-and-body",
+  "rootCause": "requires_private_source_and_installed_index_inspection",
+  "publicParityClosed": false,
+  "scope": "One exact offer. Fresh successful search and full target RSC; no timeout substituted for data. No claim of fleet coverage."
+}
