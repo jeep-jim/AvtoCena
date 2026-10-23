@@ -1,0 +1,1394 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T21:20:07.457157Z",
+  "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+  "workflow": 40019745015,
+  "job": 120641315906,
+  "conclusion": "success",
+  "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+  "artifactId": 12530824364,
+  "artifactSha256": "99a33686df884d039d602f24a4af70f3170c6d41cfec63c48c4548c5c6d76ceb",
+  "artifactDownloadedAndShaVerified": true,
+  "publicGate": {
+    "version": 1,
+    "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "startedAt": "2026-10-23T21:02:18.966Z",
+    "groups": 23,
+    "variants": 353,
+    "fields": 497,
+    "verified": true,
+    "finishedAt": "2026-10-23T21:02:31.846Z"
+  },
+  "terminalEvidence": [
+    {
+      "stage": "encyclopedia_index_ready",
+      "modelsRead": 4451,
+      "variants": 68335,
+      "factoryFields": 27260,
+      "ownerReferenceFields": 486480,
+      "manualFields": 76,
+      "digest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+      "manifestDigest": "1f32a1aca1380246575936c20cf4134e60fb0fbcb62c07610dea6f8bf8dba1e3",
+      "readback": true
+    },
+    {
+      "stage": "required_research_batches_verified",
+      "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+      "batches": 23,
+      "variants": 656,
+      "fields": 867,
+      "identityFields": 7,
+      "descriptiveFieldsOutsideIndex": 48
+    },
+    {
+      "stage": "required_astra_plans_verified",
+      "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+      "plans": [
+        {
+          "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+          "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+          "plans": 1,
+          "models": 2895,
+          "annualVariants": 5,
+          "calculationFields": 31,
+          "descriptiveFields": 1,
+          "unknownYearVariantsOutsideIndex": 230447,
+          "annualChanges": [
+            {
+              "modelId": "0d734c400f4417df7f272d30",
+              "make": "Alfa Romeo",
+              "model": "Stelvio",
+              "variantId": "1d1981aef0a48ea44141e130",
+              "year": 2020,
+              "trim": "Super Q4 8-FACH-ALU*NAVI*CARPLAY*RFK*PDC",
+              "fields": {
+                "powerKw": 206,
+                "icePowerKw": 206
+              },
+              "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+            },
+            {
+              "modelId": "70d0ce1a064bab6a09f30184",
+              "make": "BMW",
+              "model": "X2",
+              "variantId": "2c88956153fa4e45660291bf",
+              "year": 2025,
+              "trim": "M35i xDrive LED~HEADUP~KAMERA360~H&K~ACC~",
+              "fields": {
+                "fuel": "petrol",
+                "powertrainKind": "combustion",
+                "engineCc": 1998,
+                "powerKw": 221,
+                "icePowerKw": 221,
+                "drive": "awd",
+                "engineCode": "B48A20H",
+                "grossVehicleWeightKg": 2270
+              },
+              "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+            },
+            {
+              "modelId": "70d0ce1a064bab6a09f30184",
+              "make": "BMW",
+              "model": "X2",
+              "variantId": "572ad1ae2ab2c50aa5092d1d",
+              "year": 2025,
+              "trim": "M35i xDrive AHK|20\"LM|Head-Up|Parkassist.-Plu",
+              "fields": {
+                "fuel": "petrol",
+                "powertrainKind": "combustion",
+                "engineCc": 1998,
+                "powerKw": 221,
+                "icePowerKw": 221,
+                "drive": "awd",
+                "engineCode": "B48A20H",
+                "grossVehicleWeightKg": 2270
+              },
+              "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+            },
+            {
+              "modelId": "70d0ce1a064bab6a09f30184",
+              "make": "BMW",
+              "model": "X2",
+              "variantId": "724ccf336cb1e7aacb4eec9e",
+              "year": 2023,
+              "trim": "M35i xDrive",
+              "fields": {
+                "fuel": "petrol",
+                "powertrainKind": "combustion",
+                "engineCc": 1998,
+                "powerKw": 221,
+                "icePowerKw": 221,
+                "drive": "awd",
+                "engineCode": "B48A20H",
+                "grossVehicleWeightKg": 2270
+              },
+              "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+            },
+            {
+              "modelId": "e71c8376467b1da6bc08a8b7",
+              "make": "BMW",
+              "model": "i5",
+              "variantId": "c31f0df22cec7cf907072ca6",
+              "year": 2026,
+              "trim": "xDrive40 Touring",
+              "fields": {
+                "fuel": "electric",
+                "powertrainKind": "electric",
+                "powerKw": 290,
+                "motorPeakKw": 290,
+                "transmission": "automatic",
+                "engineCode": "HA0002N0"
+              },
+              "sourceUrl": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "encyclopedia_calculation_audit",
+      "version": 1,
+      "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+      "generationId": "gen_1792702445675_8c312f85",
+      "checkedAt": "2026-10-23T20:42:05.296Z",
+      "markets": {
+        "korea": {
+          "rows": 9926,
+          "pending": 7155,
+          "exactMatches": 37,
+          "filledRecords": 33,
+          "filledFields": 102,
+          "completeSpecifications": 18,
+          "calculated": 18,
+          "calculationMissing": {},
+          "missing": {
+            "unclassified_field_provenance": 13456,
+            "engine_cc_missing": 1,
+            "peak_power_missing": 6517,
+            "certified_30min_power_missing": 2022
+          }
+        },
+        "uae": {
+          "rows": 22045,
+          "pending": 22045,
+          "exactMatches": 12,
+          "filledRecords": 10,
+          "filledFields": 38,
+          "completeSpecifications": 8,
+          "calculated": 7,
+          "calculationMissing": {
+            "source_currency_rate": 1
+          },
+          "missing": {
+            "unclassified_field_provenance": 22034,
+            "engine_cc_missing": 21634,
+            "peak_power_missing": 22034,
+            "certified_30min_power_missing": 2712,
+            "powertrain_identity_conflict": 1
+          }
+        },
+        "europe": {
+          "rows": 46127,
+          "pending": 7600,
+          "exactMatches": 36723,
+          "filledRecords": 895,
+          "filledFields": 1467,
+          "completeSpecifications": 128,
+          "calculated": 48,
+          "calculationMissing": {
+            "vehicle_category": 80
+          },
+          "missing": {
+            "engine_cc_missing": 414,
+            "unclassified_field_provenance": 1763,
+            "fuel_or_powertrain_missing": 1221,
+            "certified_30min_power_missing": 5950,
+            "peak_power_missing": 692
+          }
+        },
+        "georgia": {
+          "rows": 1706,
+          "pending": 1706,
+          "exactMatches": 0,
+          "filledRecords": 0,
+          "filledFields": 0,
+          "completeSpecifications": 0,
+          "calculated": 0,
+          "calculationMissing": {},
+          "missing": {
+            "unclassified_field_provenance": 1640,
+            "engine_cc_missing": 1573,
+            "peak_power_missing": 1432,
+            "certified_30min_power_missing": 391,
+            "fuel_or_powertrain_missing": 66
+          }
+        },
+        "china": {
+          "rows": 244471,
+          "pending": 83926,
+          "exactMatches": 72083,
+          "filledRecords": 2747,
+          "filledFields": 4424,
+          "completeSpecifications": 430,
+          "calculated": 232,
+          "calculationMissing": {
+            "gross_vehicle_weight_kg": 193,
+            "vehicle_category": 5
+          },
+          "missing": {
+            "unclassified_field_provenance": 74739,
+            "engine_cc_missing": 3740,
+            "fuel_or_powertrain_missing": 2118,
+            "certified_30min_power_missing": 72226,
+            "peak_power_missing": 25104
+          }
+        }
+      },
+      "samples": [
+        {
+          "id": "7b23187ec8e017f8d5c7c38c",
+          "market": "korea",
+          "make": "Mercedes-Benz",
+          "model": "CLA",
+          "year": 2023,
+          "engineCc": 1991,
+          "powerHp": 421,
+          "totalRub": 7086400,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "b9b8c5f8c8d3469133ed8da0",
+          "market": "korea",
+          "make": "Mercedes-Benz",
+          "model": "GLB",
+          "year": 2023,
+          "engineCc": 1991,
+          "powerHp": 306,
+          "totalRub": 5192400,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "41e260a1354c16edd92469ba",
+          "market": "korea",
+          "make": "Mercedes-Benz",
+          "model": "GLB",
+          "year": 2023,
+          "engineCc": 1991,
+          "powerHp": 306,
+          "totalRub": 5573791,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "a3c5882d3ae6552ace5fc992",
+          "market": "korea",
+          "make": "Mercedes-Benz",
+          "model": "G-Class",
+          "year": 2020,
+          "engineCc": 3982,
+          "powerHp": 585,
+          "totalRub": 18905208,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "5d2c90bdf7b8299a0711f3ed",
+          "market": "korea",
+          "make": "Mercedes-Benz",
+          "model": "GLB",
+          "year": 2022,
+          "engineCc": 1991,
+          "powerHp": 306,
+          "totalRub": 5085936,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "40b86f2932887dcc1761a1be",
+          "market": "korea",
+          "make": "Hyundai",
+          "model": "Sonata",
+          "year": 2024,
+          "engineCc": 1999,
+          "powerHp": 160,
+          "totalRub": 3071035,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "7347bd0fdddddc2c2b8abcd7",
+          "market": "korea",
+          "make": "Mercedes-Benz",
+          "model": "GLB",
+          "year": 2021,
+          "engineCc": 1991,
+          "powerHp": 306,
+          "totalRub": 5062445,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "d2dd2dba5e36a18e3f163a38",
+          "market": "korea",
+          "make": "Hyundai",
+          "model": "Sonata",
+          "year": 2024,
+          "engineCc": 1999,
+          "powerHp": 160,
+          "totalRub": 3228226,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "8eb6d7da8c75281f99f8a7f5",
+          "market": "korea",
+          "make": "Hyundai",
+          "model": "Sonata",
+          "year": 2024,
+          "engineCc": 1999,
+          "powerHp": 160,
+          "totalRub": 3353478,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "889116f45e7a1635b41db192",
+          "market": "korea",
+          "make": "BMW",
+          "model": "X3",
+          "year": 2022,
+          "engineCc": 1998,
+          "powerHp": 184,
+          "totalRub": 5181636,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "e765f8fefe0626cf25def7bd",
+          "market": "korea",
+          "make": "BMW",
+          "model": "X3",
+          "year": 2022,
+          "engineCc": 1998,
+          "powerHp": 184,
+          "totalRub": 4455888,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "634fca83c4b749d899b26bf1",
+          "market": "korea",
+          "make": "BMW",
+          "model": "X3",
+          "year": 2022,
+          "engineCc": 1998,
+          "powerHp": 184,
+          "totalRub": 4644393,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "9a6166790200b98215f4c422",
+          "market": "uae",
+          "make": "BMW",
+          "model": "X4",
+          "year": 2025,
+          "engineCc": 2998,
+          "powerHp": 333,
+          "totalRub": 12975489,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "791c99542b433768a086820b",
+          "market": "uae",
+          "make": "BMW",
+          "model": "X4",
+          "year": 2023,
+          "engineCc": 2998,
+          "powerHp": 333,
+          "totalRub": 9067964,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "725ff6f1cc60d9947d7da652",
+          "market": "uae",
+          "make": "BMW",
+          "model": "X4",
+          "year": 2023,
+          "engineCc": 2998,
+          "powerHp": 333,
+          "totalRub": 9381146,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "a5600f434f149b9d033c00ef",
+          "market": "uae",
+          "make": "BMW",
+          "model": "X4",
+          "year": 2023,
+          "engineCc": 2998,
+          "powerHp": 333,
+          "totalRub": 9492989,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "aaee1ef4e1324566a147fa33",
+          "market": "uae",
+          "make": "Hyundai",
+          "model": "Elantra",
+          "year": 2025,
+          "engineCc": 1497,
+          "powerHp": 115,
+          "totalRub": 2214688,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "56bbcecb51a61b76402371a9",
+          "market": "uae",
+          "make": "Audi",
+          "model": "A3",
+          "year": 2024,
+          "engineCc": 1498,
+          "powerHp": 150,
+          "totalRub": 3127884,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "a1c964a7ec1f9e75b8f84430",
+          "market": "uae",
+          "make": "Toyota",
+          "model": "Camry",
+          "year": 2026,
+          "engineCc": 1987,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "b65974b83d5399d588073fc5",
+          "market": "uae",
+          "make": "Aston Martin",
+          "model": "Dbx",
+          "year": 2023,
+          "engineCc": 3982,
+          "powerHp": 707,
+          "totalRub": 25031959,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "7d64c740118764707303b3f7",
+          "market": "europe",
+          "make": "Toyota",
+          "model": "Hilux",
+          "year": 2026,
+          "engineCc": 2393,
+          "powerHp": 150,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "e423cd9d7b1b0ec70aa413a3",
+          "market": "europe",
+          "make": "Mitsubishi",
+          "model": "L200",
+          "year": 2022,
+          "engineCc": 2268,
+          "powerHp": 150,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "6d83bfc656200874170ecd6f",
+          "market": "europe",
+          "make": "Toyota",
+          "model": "Hilux",
+          "year": 2023,
+          "engineCc": 2393,
+          "powerHp": 150,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "d1f6cfaa9449574bd80155b0",
+          "market": "europe",
+          "make": "Mitsubishi",
+          "model": "L200",
+          "year": 2021,
+          "engineCc": 2268,
+          "powerHp": 150,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "c144906b70f405d7ba0895bd",
+          "market": "europe",
+          "make": "Mitsubishi",
+          "model": "L200",
+          "year": 2021,
+          "engineCc": 2268,
+          "powerHp": 150,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "18c33482b0bcbc82c75afd1b",
+          "market": "europe",
+          "make": "Mitsubishi",
+          "model": "L200",
+          "year": 2020,
+          "engineCc": 2268,
+          "powerHp": 150,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "435700f5d50b5c14fe64c61e",
+          "market": "europe",
+          "make": "Ford",
+          "model": "Focus",
+          "year": 2024,
+          "engineCc": 1499,
+          "powerHp": 116,
+          "totalRub": 3381379,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "77792cbe615d103ba04bad90",
+          "market": "europe",
+          "make": "Ford",
+          "model": "Focus",
+          "year": 2024,
+          "engineCc": 1499,
+          "powerHp": 116,
+          "totalRub": 3516742,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "920e06282d78638c7ddf5035",
+          "market": "europe",
+          "make": "Ford",
+          "model": "Focus",
+          "year": 2024,
+          "engineCc": 1499,
+          "powerHp": 116,
+          "totalRub": 3516742,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "da6ff09fe424056d3087084a",
+          "market": "europe",
+          "make": "Ford",
+          "model": "Focus",
+          "year": 2024,
+          "engineCc": 1499,
+          "powerHp": 116,
+          "totalRub": 3516742,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "cd739bb596114c3e390332ce",
+          "market": "europe",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "year": 2023,
+          "engineCc": 1498,
+          "powerHp": 131,
+          "totalRub": 2405341,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "1b7700af07caec154dc99da6",
+          "market": "europe",
+          "make": "BMW",
+          "model": "i4",
+          "year": 2026,
+          "powerHp": 401,
+          "totalRub": 10355064,
+          "status": "estimated",
+          "delivered": true,
+          "missing": []
+        },
+        {
+          "id": "c5dc98348f491e5d205ca38b",
+          "market": "china",
+          "make": "Isuzu",
+          "model": "Lingtuo",
+          "year": 2026,
+          "engineCc": 2499,
+          "powerHp": 150,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "7c59bc3ddf6f39b1eae0cd9f",
+          "market": "china",
+          "make": "MAXUS",
+          "model": "Interstellar",
+          "year": 2024,
+          "engineCc": 1996,
+          "powerHp": 143,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "9738dc416604e468734b499f",
+          "market": "china",
+          "make": "JAC",
+          "model": "T6",
+          "year": 2023,
+          "engineCc": 1999,
+          "powerHp": 150,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "d1074abc550c6a6295193b91",
+          "market": "china",
+          "make": "BAW",
+          "model": "Warrior Pickup",
+          "year": 2023,
+          "engineCc": 2360,
+          "powerHp": 140,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "ff024d29f82220281a62b05f",
+          "market": "china",
+          "make": "JMC",
+          "model": "Yuhu 7",
+          "year": 2023,
+          "engineCc": 1998,
+          "powerHp": 141,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "c5460bb641892aa8bf370440",
+          "market": "china",
+          "make": "JAC",
+          "model": "T8",
+          "year": 2021,
+          "engineCc": 1999,
+          "powerHp": 150,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "e4e29e8b1bbe20fed082fe65",
+          "market": "china",
+          "make": "Isuzu",
+          "model": "TAGA Daga",
+          "year": 2021,
+          "engineCc": 2999,
+          "powerHp": 143,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "d42ccb86bf56d193a966d4d3",
+          "market": "china",
+          "make": "Isuzu",
+          "model": "RE-MAX Ruimai",
+          "year": 2026,
+          "engineCc": 2499,
+          "powerHp": 143,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "1310baa4cd439c0e85de9e9d",
+          "market": "china",
+          "make": "Great Wall",
+          "model": "Fengjun 5",
+          "year": 2025,
+          "engineCc": 1996,
+          "powerHp": 139,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "ce9aa41c74c2ce29a8787a08",
+          "market": "china",
+          "make": "JMC",
+          "model": "Yuhu 7",
+          "year": 2023,
+          "engineCc": 1998,
+          "powerHp": 141,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "3275a68fe54dbf91bee3c7cf",
+          "market": "china",
+          "make": "Wuling",
+          "model": "Journey",
+          "year": 2022,
+          "engineCc": 1485,
+          "powerHp": 99,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        },
+        {
+          "id": "b88de0abf864fc9327ba0131",
+          "market": "china",
+          "make": "Isuzu",
+          "model": "RE-MAX Ruimai",
+          "year": 2025,
+          "engineCc": 2499,
+          "powerHp": 143,
+          "totalRub": null,
+          "status": "needs_data",
+          "delivered": false,
+          "missing": []
+        }
+      ],
+      "publicPriceParity": 305,
+      "readback": true
+    }
+  ],
+  "publicAcceptance": {
+    "checkedAt": "2026-10-23T21:19:06.334827+00:00",
+    "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "healthBefore": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+    },
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+    },
+    "rows": [
+      {
+        "name": "a3_body",
+        "offerId": "061974864a6a9708c3084fc8",
+        "comparisons": {
+          "bodyType": {
+            "search": "hatchback",
+            "card": "hatchback",
+            "equal": true
+          },
+          "year": {
+            "search": 2020,
+            "card": 2020,
+            "equal": true
+          },
+          "trim": {
+            "search": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+            "card": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1968,
+            "card": 1968,
+            "equal": true
+          },
+          "fuel": {
+            "search": "diesel",
+            "card": "diesel",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "combustion",
+            "card": "combustion",
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 4105050,
+            "card": 4105050,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "cardTransmissionLabel": "автомат",
+        "cardBodyLabel": "Хэтчбек",
+        "encyclopediaCalculation": {
+          "version": 1,
+          "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+          "sourceIdentity": "[\"061974864a6a9708c3084fc8\",2020]",
+          "values": {
+            "fuel": "diesel",
+            "powertrainKind": "combustion",
+            "engineCc": 1968,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "transmission": "automatic",
+            "bodyType": "hatchback"
+          },
+          "filledFields": [
+            "bodyType"
+          ]
+        },
+        "generationId": "gen_1792702445675_8c312f85"
+      },
+      {
+        "name": "a3_2021",
+        "offerId": "3b783a66af3b69634f611db2",
+        "comparisons": {
+          "bodyType": {
+            "search": "hatchback",
+            "card": "hatchback",
+            "equal": true
+          },
+          "year": {
+            "search": 2021,
+            "card": 2021,
+            "equal": true
+          },
+          "trim": {
+            "search": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "card": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "fuel": {
+            "search": "petrol",
+            "card": "petrol",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "combustion",
+            "card": "combustion",
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "Schaltgetriebe",
+            "card": "Schaltgetriebe",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3041845,
+            "card": 3041845,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "cardTransmissionLabel": "механика",
+        "cardBodyLabel": "Хэтчбек",
+        "encyclopediaCalculation": {
+          "version": 1,
+          "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+          "sourceIdentity": "[\"3b783a66af3b69634f611db2\",2021]",
+          "values": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "transmission": "Schaltgetriebe",
+            "bodyType": "hatchback"
+          },
+          "filledFields": [
+            "bodyType"
+          ]
+        },
+        "generationId": "gen_1792702445675_8c312f85"
+      },
+      {
+        "name": "a3_2020",
+        "offerId": "4e3f16f9dc955a3ab40ba0f1",
+        "comparisons": {
+          "bodyType": {
+            "search": "hatchback",
+            "card": "hatchback",
+            "equal": true
+          },
+          "year": {
+            "search": 2020,
+            "card": 2020,
+            "equal": true
+          },
+          "trim": {
+            "search": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "card": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "fuel": {
+            "search": "petrol",
+            "card": "petrol",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "combustion",
+            "card": "combustion",
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "Schaltgetriebe",
+            "card": "Schaltgetriebe",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3040832,
+            "card": 3040832,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "cardTransmissionLabel": "механика",
+        "cardBodyLabel": "Хэтчбек",
+        "encyclopediaCalculation": {
+          "version": 1,
+          "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+          "sourceIdentity": "[\"4e3f16f9dc955a3ab40ba0f1\",2020]",
+          "values": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "transmission": "Schaltgetriebe",
+            "bodyType": "hatchback"
+          },
+          "filledFields": [
+            "bodyType"
+          ]
+        },
+        "generationId": "gen_1792702445675_8c312f85"
+      },
+      {
+        "name": "dbx",
+        "offerId": "b65974b83d5399d588073fc5",
+        "comparisons": {
+          "bodyType": {
+            "search": "suv",
+            "card": "suv",
+            "equal": true
+          },
+          "year": {
+            "search": 2023,
+            "card": 2023,
+            "equal": true
+          },
+          "trim": {
+            "search": "Aston Martin DBX707",
+            "card": "Aston Martin DBX707",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 3982,
+            "card": 3982,
+            "equal": true
+          },
+          "fuel": {
+            "search": "petrol",
+            "card": "petrol",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "combustion",
+            "card": "combustion",
+            "equal": true
+          },
+          "powerHp": {
+            "search": 707,
+            "card": 707,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 520,
+            "card": 520,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 520,
+            "card": 520,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 25031959,
+            "card": 25031959,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "cardTransmissionLabel": "автомат",
+        "cardBodyLabel": "Кроссовер",
+        "encyclopediaCalculation": {
+          "version": 1,
+          "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+          "sourceIdentity": "[\"b65974b83d5399d588073fc5\",2023]",
+          "values": {
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "transmission": "automatic",
+            "bodyType": "suv"
+          },
+          "filledFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw"
+          ]
+        },
+        "generationId": "gen_1792702445675_8c312f85"
+      },
+      {
+        "name": "li",
+        "offerId": "17b4b13194dc355e6415013f",
+        "comparisons": {
+          "bodyType": {
+            "search": "suv",
+            "card": "suv",
+            "equal": true
+          },
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "2026款 Ultra",
+            "card": "2026款 Ultra",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1496,
+            "card": 1496,
+            "equal": true
+          },
+          "fuel": {
+            "search": "hybrid",
+            "card": "hybrid",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "series_hybrid",
+            "card": "series_hybrid",
+            "equal": true
+          },
+          "powerHp": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "powerKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": 134,
+            "card": 134,
+            "equal": true
+          },
+          "transmission": {
+            "search": "电动车单速变速箱",
+            "card": "电动车单速变速箱",
+            "equal": true
+          },
+          "totalRub": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "needs_data",
+            "card": "needs_data",
+            "equal": true
+          }
+        },
+        "cardTransmissionLabel": null,
+        "cardBodyLabel": null,
+        "encyclopediaCalculation": {
+          "version": 1,
+          "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+          "sourceIdentity": "[\"17b4b13194dc355e6415013f\",2026]",
+          "values": "$39:props:children:2:props:price:props:offer:operational:encyclopediaCalculation:values",
+          "filledFields": "$39:props:children:2:props:price:props:offer:operational:encyclopediaCalculation:filledFields"
+        },
+        "generationId": "gen_1792702445675_8c312f85"
+      }
+    ],
+    "requests": [
+      {
+        "name": "health_before",
+        "path": "/api/health",
+        "http": 200,
+        "seconds": 4.124,
+        "bytes": 180,
+        "checkedAt": "2026-10-23T21:18:40.052711+00:00"
+      },
+      {
+        "name": "a3_body_card",
+        "path": "/cars/offer/061974864a6a9708c3084fc8",
+        "http": 200,
+        "seconds": 10.83,
+        "bytes": 575267,
+        "checkedAt": "2026-10-23T21:18:50.884506+00:00"
+      },
+      {
+        "name": "a3_2021_card",
+        "path": "/cars/offer/3b783a66af3b69634f611db2",
+        "http": 200,
+        "seconds": 10.834,
+        "bytes": 572380,
+        "checkedAt": "2026-10-23T21:18:50.889322+00:00"
+      },
+      {
+        "name": "a3_2020_card",
+        "path": "/cars/offer/4e3f16f9dc955a3ab40ba0f1",
+        "http": 200,
+        "seconds": 10.838,
+        "bytes": 579740,
+        "checkedAt": "2026-10-23T21:18:50.894277+00:00"
+      },
+      {
+        "name": "a3_2020_search",
+        "path": "/api/catalog/search?market=europe&make=Audi&model=A3&yearFrom=2020&yearTo=2020&pageSize=48",
+        "http": 200,
+        "seconds": 6.464,
+        "bytes": 137027,
+        "checkedAt": "2026-10-23T21:18:57.358087+00:00"
+      },
+      {
+        "name": "a3_2021_search",
+        "path": "/api/catalog/search?market=europe&make=Audi&model=A3&yearFrom=2021&yearTo=2021&pageSize=48",
+        "http": 200,
+        "seconds": 1.136,
+        "bytes": 155292,
+        "checkedAt": "2026-10-23T21:18:58.494420+00:00"
+      },
+      {
+        "name": "dbx_card",
+        "path": "/cars/offer/b65974b83d5399d588073fc5",
+        "http": 200,
+        "seconds": 7.788,
+        "bytes": 515284,
+        "checkedAt": "2026-10-23T21:18:58.673034+00:00"
+      },
+      {
+        "name": "li_card",
+        "path": "/cars/offer/17b4b13194dc355e6415013f",
+        "http": 200,
+        "seconds": 8.365,
+        "bytes": 398675,
+        "checkedAt": "2026-10-23T21:18:59.254519+00:00"
+      },
+      {
+        "name": "li_search",
+        "path": "/api/catalog/search?market=china&make=Li%20Auto&model=L6&yearFrom=2026&yearTo=2026&pageSize=48",
+        "http": 200,
+        "seconds": 2.364,
+        "bytes": 2055,
+        "checkedAt": "2026-10-23T21:19:01.619178+00:00"
+      },
+      {
+        "name": "dbx_search",
+        "path": "/api/catalog/search?market=uae&make=Aston%20Martin&model=DBX&pageSize=48",
+        "http": 200,
+        "seconds": 2.965,
+        "bytes": 11752,
+        "checkedAt": "2026-10-23T21:19:01.638063+00:00"
+      },
+      {
+        "name": "a3_body_search",
+        "path": "/api/catalog/search?market=europe&make=Audi&model=A3&yearFrom=2020&yearTo=2020&pageSize=48",
+        "http": 200,
+        "seconds": 3.566,
+        "bytes": 137027,
+        "checkedAt": "2026-10-23T21:19:02.060706+00:00"
+      },
+      {
+        "name": "health_after",
+        "path": "/api/health",
+        "http": 200,
+        "seconds": 4.242,
+        "bytes": 180,
+        "checkedAt": "2026-10-23T21:19:06.334330+00:00"
+      }
+    ],
+    "scope": "Bounded public API and full target RSC; not visual or entire-catalog acceptance."
+  },
+  "comparisons": 65,
+  "matched": 65,
+  "publicBodyParityClosed": true,
+  "scope": "Five exact offers across Europe/UAE/China; not full-catalog, performance or visual acceptance. Li134 remains needs_data/null; unknown30min preserved."
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T21:00:26.197Z",
+  "updatedAt": "2026-10-23T21:20:07.457157Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32745,7 +32745,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T21:00:26.197Z",
+    "updatedAt": "2026-10-23T21:20:07.457157Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2024_2025_50_body_saved_readback_pending_next_index",
     "preserveManual": true,
@@ -32780,9 +32780,9 @@
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
-    "installedRelease": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
-    "installedWorkflow": 40012399412,
-    "indexDigest": "07893c43e0f82e0b724c9d03b0dfeac013d3f4f9f23cca7cc6d19254fc55c417",
+    "installedRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "installedWorkflow": 40019745015,
+    "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
     "catalogRowsEnriched": 776,
     "catalogFieldsFilled": 1464,
     "remaining": [
@@ -32826,7 +32826,7 @@
         }
       ]
     },
-    "indexReleaseRequested": true,
+    "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792702445675_8c312f85",
     "pendingIndexBatches": [],
     "requestedRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
@@ -32885,43 +32885,6 @@
       }
     ],
     "pendingNextIndexBatches": [
-      {
-        "batch": "research-2026-10-24-audi-a3-2024-body",
-        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
-        "commit": "98df8106098f82834e9c99782972cd9c493076ab",
-        "workflow": 40015059555,
-        "job": 120624886815,
-        "applyFinishedAt": "2026-10-23T19:56:20.615Z",
-        "variants": 50,
-        "newVariants": 0,
-        "fields": 50,
-        "compiledFields": 50,
-        "apiReadback": true,
-        "includedInIndex": false,
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-body-pass.json",
-        "afterRevision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
-        "publicParity": {
-          "passed": true,
-          "offers": 7,
-          "comparisons": 91,
-          "matched": 91,
-          "repeatedGroups": 2,
-          "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-public-parity.json"
-        },
-        "nativeExact": 48,
-        "nativeHeld": [
-          {
-            "variantId": "bcdc67fac908f954058be7e4",
-            "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
-            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
-          },
-          {
-            "variantId": "060ecbd39c657ef567ea7cbe",
-            "trim": "Sportback Business Edition S line S-tronic",
-            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
-          }
-        ]
-      },
       {
         "batch": "research-2026-10-24-audi-a3-2024-2025-body",
         "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
@@ -32986,7 +32949,7 @@
       "reasonVerified": false,
       "freshWriterStateAfterFailureConfirmed": false
     },
-    "installedIndexDigest": "07893c43e0f82e0b724c9d03b0dfeac013d3f4f9f23cca7cc6d19254fc55c417",
+    "installedIndexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
     "catalogFieldsEnriched": 1464,
     "failedConcurrentRelease": {
       "workflow": 39749020662,
@@ -33022,7 +32985,7 @@
       "activated": false
     },
     "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
-    "lastActivationReport": "docs/encyclopedia/reports/2026-10-24-index-07893c-activation.json",
+    "lastActivationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-public-acceptance.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
       "state": "completed_partial",
@@ -33036,7 +32999,7 @@
       "nextAction": "Предыдущая порция39781954271 SUCCESS по свежему roadmap; не считать весь каталог законченным. Проверить дальнейший запуск перед возобновлением.",
       "completed": false
     },
-    "observedProductionRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "observedProductionRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
     "mito2012_2013Pass": {
       "checkedAt": "2026-10-22T17:23:25+07:00",
       "modelId": "81a4b290257d227a5fd86ee6",
@@ -35126,6 +35089,48 @@
         "indexDigest": "86cb2a5d9e503e870633382e218071e89c046d25c38e921304db748f308521a5",
         "release": "e78c7154232f39ac73a2253314e2b0fe34da1344",
         "indexMembershipState": "native_compiler_guarded_manifest_snapshot"
+      },
+      {
+        "batch": "research-2026-10-24-audi-a3-2024-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+        "commit": "98df8106098f82834e9c99782972cd9c493076ab",
+        "workflow": 40015059555,
+        "job": 120624886815,
+        "applyFinishedAt": "2026-10-23T19:56:20.615Z",
+        "variants": 50,
+        "newVariants": 0,
+        "fields": 50,
+        "compiledFields": 50,
+        "apiReadback": true,
+        "includedInIndex": true,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-body-pass.json",
+        "afterRevision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
+        "publicParity": {
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 91,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-public-parity.json"
+        },
+        "nativeExact": 48,
+        "nativeHeld": [
+          {
+            "variantId": "bcdc67fac908f954058be7e4",
+            "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "060ecbd39c657ef567ea7cbe",
+            "trim": "Sportback Business Edition S line S-tronic",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          }
+        ],
+        "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+        "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+        "activationWorkflow": 40019745015,
+        "activationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-public-acceptance.json",
+        "publicPricesFullyAccepted": false
       }
     ],
     "currentReaderRelease": {
@@ -35999,6 +36004,48 @@
         "release": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
         "activationWorkflow": 40012399412,
         "activationReport": "docs/encyclopedia/reports/2026-10-24-index-07893c-activation.json",
+        "publicPricesFullyAccepted": false
+      },
+      {
+        "batch": "research-2026-10-24-audi-a3-2024-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+        "commit": "98df8106098f82834e9c99782972cd9c493076ab",
+        "workflow": 40015059555,
+        "job": 120624886815,
+        "applyFinishedAt": "2026-10-23T19:56:20.615Z",
+        "variants": 50,
+        "newVariants": 0,
+        "fields": 50,
+        "compiledFields": 50,
+        "apiReadback": true,
+        "includedInIndex": true,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-body-pass.json",
+        "afterRevision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
+        "publicParity": {
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 91,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-public-parity.json"
+        },
+        "nativeExact": 48,
+        "nativeHeld": [
+          {
+            "variantId": "bcdc67fac908f954058be7e4",
+            "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "060ecbd39c657ef567ea7cbe",
+            "trim": "Sportback Business Edition S line S-tronic",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          }
+        ],
+        "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+        "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+        "activationWorkflow": 40019745015,
+        "activationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-public-acceptance.json",
         "publicPricesFullyAccepted": false
       }
     ],
@@ -37333,7 +37380,7 @@
     "researchWriteCoordination": {
       "observedMain": "e941ec64941d520b1f483d7efffbef27fd72c71e",
       "writesPaused": false,
-      "reason": "A3 release40019745015 private index and membership SUCCESS; artifact12530896370 SHA verified, isolated20:42:21UTC. Research may resume now with fresh revisions/CAS. Post-snapshot batches need a later coordinated release. Current build ongoing; do not duplicate deploy.",
+      "reason": "Release40019745015 SUCCESS and actual A3 body/search/card65comparisons PASS. A3 2024body50 activated. Only post-snapshot2024-2025body50 pending; fresh preflight requested for next coordinated release.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37341,7 +37388,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T20:44:21.909769Z",
+      "checkedAt": "2026-10-23T21:20:07.457157Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37393,7 +37440,7 @@
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
       },
-      "pendingReleaseWorkflow": 40019745015,
+      "pendingReleaseWorkflow": null,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
         "state": "released_after_verified_index_snapshot",
@@ -37411,8 +37458,8 @@
         "previewAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-astra-preview-acceptance.json",
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       },
-      "lastCompletedReleaseWorkflow": 40012399412,
-      "pendingRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "lastCompletedReleaseWorkflow": 40019745015,
+      "pendingRelease": null,
       "isolatedIndexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
       "isolationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json"
     },
@@ -38311,7 +38358,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0401.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0420.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -38588,13 +38635,13 @@
       "year": 2020,
       "trim": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
       "searchBodyType": "hatchback",
-      "cardBodyType": null,
-      "rawCardBodyType": "",
+      "cardBodyType": "hatchback",
+      "rawCardBodyType": "hatchback",
       "totalRubSearch": 4105050,
       "totalRubCard": 4105050,
-      "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
-      "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
-      "checkedAt": "2026-10-23T17:58:16.728226+00:00",
+      "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+      "checkedAt": "2026-10-23T21:20:07.457157Z",
       "rootCause": "confirmed_mobile_de_ambiguous_limousine_blocks_factory_body_on_full_record",
       "repeatCardConfirmed": true,
       "repeatSearch": {
@@ -38602,30 +38649,32 @@
         "timeoutSeconds": 40,
         "absenceNotInferred": true
       },
-      "publicParityClosed": false,
-      "newBatchActive": false,
+      "publicParityClosed": true,
+      "newBatchActive": true,
       "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-body-parity-retry.json",
       "latestFreshComparison": {
-        "checkedAt": "2026-10-23T19:02:05.470202+00:00",
+        "checkedAt": "2026-10-23T21:19:06.334827+00:00",
+        "report": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-public-acceptance.json",
+        "publicParityClosed": true,
         "searchBodyType": "hatchback",
-        "cardBodyType": null,
+        "cardBodyType": "hatchback",
         "totalRubSearch": 4105050,
         "totalRubCard": 4105050,
         "healthBeforeAfter": {
           "ok": true,
           "service": "avtocena-web",
-          "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
-          "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
-        },
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-public-parity.json",
-        "publicParityClosed": false
+          "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+          "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+        }
       },
       "diagnosticRun": 40012114533,
       "diagnosticJob": 120614837560,
       "rootCauseReport": "docs/encyclopedia/reports/2026-10-24-a3-body-root-cause.json",
-      "fixStatus": "index_isolated_build_in_progress_not_installed",
-      "activeReleaseExcludesFix": "10f4579",
-      "next": "After current release terminal, include factory-backed coarse-body resolution in next coordinated release; verify061974864a6a9708c3084fc8 search/card hatchback + body label + unchanged pricing. Do not repeat diagnostics or research apply."
+      "fixStatus": "installed_public_parity_verified",
+      "activeReleaseExcludesFix": null,
+      "next": "Closed for this exact offer; retain regressions, manual/evidence/unknown30min guards. No repeated repair.",
+      "cardBodyLabel": "Хэтчбек",
+      "latestReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-public-acceptance.json"
     },
     "audiA3Body2023TailPass": {
       "batch": "research-2026-10-24-audi-a3-2023-tail-body",
@@ -38681,7 +38730,7 @@
       "fields": 50,
       "compiledFields": 50,
       "apiReadback": true,
-      "includedInIndex": false,
+      "includedInIndex": true,
       "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-body-pass.json",
       "afterRevision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
       "publicParity": {
@@ -38704,7 +38753,12 @@
           "trim": "Sportback Business Edition S line S-tronic",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         }
-      ]
+      ],
+      "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+      "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "activationWorkflow": 40019745015,
+      "activationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-public-acceptance.json",
+      "publicPricesFullyAccepted": false
     },
     "audiA3Body2024_2025Pass": {
       "batch": "research-2026-10-24-audi-a3-2024-2025-body",
