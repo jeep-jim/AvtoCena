@@ -1,13 +1,21 @@
 {
-  "requestedAt": "2026-10-23T08:17:35.536964+00:00",
-  "reason": "Activate saved reviewed encyclopedia batches now, without waiting for full completion: Audi A1 159 fields, BMW 5, owner-confirmed Li Auto 67 = 231 fields / 189 variants / 6 models. All apply/readbacks pass. Require exact value AND batch/source provenance membership before build; preserve unknown/manual/exact matching, publication wait and rollback safeguards. No feed collection or reuse replay.",
+  "requestedAt": "2026-10-23T10:06:24.127Z",
+  "reason": "Activate eight saved/readback Toyota and Audi A3 batches: 125 existing variants, 226 confirmed fields (193 calculation fields, 7 trim identities, 26 descriptive fields outside calculation index). Preserve six prior active batches with exact field/batch/kind/URL membership. No new collection; unknown 30min and manual safeguards unchanged. Research writes paused until immutable snapshot completes.",
   "requiredResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json",
     "docs/encyclopedia/batches/2026-10-23-audi-a1-next-gaps.json",
     "docs/encyclopedia/batches/2026-10-23-bmw-i5-2026-30min.json",
     "docs/encyclopedia/batches/2026-10-23-bmw-i4-2026-30min.json",
     "docs/encyclopedia/batches/2026-10-23-audi-a1-2023-2025-body.json",
-    "docs/encyclopedia/batches/2026-10-23-owner-li-l6-l7.json"
+    "docs/encyclopedia/batches/2026-10-23-owner-li-l6-l7.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-camry-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-bz3x-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-3x-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-camry-2026-petrol.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-aygox-annual-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-aygox-hybrid.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-early-and-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2020-2021-body.json"
   ],
   "ideaReports": []
 }
