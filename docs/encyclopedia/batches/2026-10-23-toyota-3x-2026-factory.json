@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-toyota-3x-2026-factory",
+  "entries": [
+    {
+      "modelId": "7a162ed2da28196d42e6df54",
+      "make": "Toyota",
+      "model": "3X",
+      "year": 2026,
+      "trim": "2026款 610 Max",
+      "variantId": "53090e3731692b404cfc571b",
+      "expectedDigest": "af7103e96239b9d461e40e3b033b64381857489cff02850892949b7c6dffbf37",
+      "patch": {
+        "trim": "2026 610 Max",
+        "powerKw": 165,
+        "motorPeakKw": 165,
+        "batteryKwh": 67.92,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/bozhi3x.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица Toyota bZ3X, редакциямай2026,стр.1. Существующая группа3X: точно сопоставлены китайские комплектации430Air+,520Pro,520ProLiDAR,610Max. Для Max пик165кВт/батарея67.92кВт·ч;для430Air+150/50.03;для520Pro иProLiDAR150/58.37. Год2026 и типэлектро проверены; название приведено к английскому, китайское описание коробки переведено буквально без повышения статуса доказательства. Данные30мин отсутствуют и не заполняются. Группы модели не объединяются, Knight/Nebula/2025 не затронуты."
+      }
+    },
+    {
+      "modelId": "7a162ed2da28196d42e6df54",
+      "make": "Toyota",
+      "model": "3X",
+      "year": 2026,
+      "trim": "2026款 520 Pro",
+      "variantId": "ce4a19afee9610194fd621c3",
+      "expectedDigest": "88886b23ef863a762cd6ae493066b4fd77725894946c45564d3c07e11c8edfc9",
+      "patch": {
+        "trim": "2026 520 Pro",
+        "powerKw": 150,
+        "motorPeakKw": 150,
+        "batteryKwh": 58.37,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/bozhi3x.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица Toyota bZ3X, редакциямай2026,стр.1. Существующая группа3X: точно сопоставлены китайские комплектации430Air+,520Pro,520ProLiDAR,610Max. Для Max пик165кВт/батарея67.92кВт·ч;для430Air+150/50.03;для520Pro иProLiDAR150/58.37. Год2026 и типэлектро проверены; название приведено к английскому, китайское описание коробки переведено буквально без повышения статуса доказательства. Данные30мин отсутствуют и не заполняются. Группы модели не объединяются, Knight/Nebula/2025 не затронуты."
+      }
+    },
+    {
+      "modelId": "7a162ed2da28196d42e6df54",
+      "make": "Toyota",
+      "model": "3X",
+      "year": 2026,
+      "trim": "2026款 520 Pro 激光雷达版",
+      "variantId": "169b11c9807e48201d8215bd",
+      "expectedDigest": "48394f0434d5aba5dbc1cbf19731a1876f3622132b28b04aed6b5f890f70611f",
+      "patch": {
+        "trim": "2026 520 Pro LiDAR Edition",
+        "powerKw": 150,
+        "motorPeakKw": 150,
+        "batteryKwh": 58.37,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/bozhi3x.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица Toyota bZ3X, редакциямай2026,стр.1. Существующая группа3X: точно сопоставлены китайские комплектации430Air+,520Pro,520ProLiDAR,610Max. Для Max пик165кВт/батарея67.92кВт·ч;для430Air+150/50.03;для520Pro иProLiDAR150/58.37. Год2026 и типэлектро проверены; название приведено к английскому, китайское описание коробки переведено буквально без повышения статуса доказательства. Данные30мин отсутствуют и не заполняются. Группы модели не объединяются, Knight/Nebula/2025 не затронуты."
+      }
+    },
+    {
+      "modelId": "7a162ed2da28196d42e6df54",
+      "make": "Toyota",
+      "model": "3X",
+      "year": 2026,
+      "trim": "2026款 430 Air+",
+      "variantId": "2a501d7590d733a18523c1f3",
+      "expectedDigest": "a0a218a0160f79f5f46f0c54b9fba81699cfe3756e6b2c234d3c586c332573be",
+      "patch": {
+        "trim": "2026 430 Air+",
+        "powerKw": 150,
+        "motorPeakKw": 150,
+        "batteryKwh": 50.03,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/bozhi3x.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица Toyota bZ3X, редакциямай2026,стр.1. Существующая группа3X: точно сопоставлены китайские комплектации430Air+,520Pro,520ProLiDAR,610Max. Для Max пик165кВт/батарея67.92кВт·ч;для430Air+150/50.03;для520Pro иProLiDAR150/58.37. Год2026 и типэлектро проверены; название приведено к английскому, китайское описание коробки переведено буквально без повышения статуса доказательства. Данные30мин отсутствуют и не заполняются. Группы модели не объединяются, Knight/Nebula/2025 не затронуты."
+      }
+    }
+  ]
+}
