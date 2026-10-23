@@ -43,4 +43,21 @@ jobs:
           tail -n 3000 /var/log/nginx/error.log | python3 -c 'import sys,json; s=sys.stdin.read(); print("NGINX_ERROR_CATEGORIES_LAST_3000",json.dumps({p:s.count(p) for p in ["connect() failed", "Connection refused", "upstream timed out", "upstream prematurely closed", "no live upstreams", "worker_connections are not enough"]}))'
           docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,json; s=sys.stdin.read(); print("RUNTIME_FATAL_CATEGORIES",json.dumps({p:s.count(p) for p in ["heap out of memory", "Reached heap limit", "FATAL ERROR", "Killed", "ENOMEM"]}))'
 
+          # Three bounded public reads from the server distinguish app latency from the client network.
+          python3 - <<'PROBE'
+          import urllib.request,time,json
+          for path in ['/api/health','/api/catalog/home','/']:
+              start=time.monotonic();status=None;timing=None;size=0
+              try:
+                  with urllib.request.urlopen('https://avtocena.com'+path,timeout=25) as response:
+                      status=response.status;timing=response.headers.get('Server-Timing')
+                      while True:
+                          chunk=response.read(65536)
+                          if not chunk:break
+                          size+=len(chunk)
+                          if time.monotonic()-start>30:raise TimeoutError('total_deadline')
+                  error=None
+              except Exception as exc:error=type(exc).__name__
+              print('PUBLIC_ROUTE_PROBE',json.dumps({'path':path,'status':status,'seconds':round(time.monotonic()-start,3),'bytes':size,'serverTiming':timing,'error':error}),flush=True)
+          PROBE
           REMOTE
