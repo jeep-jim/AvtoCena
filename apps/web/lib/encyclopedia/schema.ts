@@ -1,7 +1,8 @@
 export class EncyclopediaInputError extends Error {}
 export const textFields = ['motors30MinKw','trim','generation','chassisCode','bodyType','fuel','powertrainKind','transmission','drive','engineCode','notes','sourceUrl'] as const;
 export const numberFields = ['year','engineCc','powerHp','powerKw','icePowerKw','motorPeakKw','systemPowerKw','power30MinKw','frontMotor30MinKw','rearMotor30MinKw','batteryKwh','grossVehicleWeightKg'] as const;
-export type Variant = {id:string; markets:string[]; status:'observed'|'review'|'verified'; observedCount:number} & Partial<Record<typeof textFields[number],string>> & Partial<Record<typeof numberFields[number],number>>;
+export type AstraIdentity = Partial<Record<'approval'|'approvalCH'|'type'|'variant'|'version',string>>;
+export type Variant = {id:string; markets:string[]; status:'observed'|'review'|'verified'; observedCount:number; astraIdentity?:AstraIdentity; astraEvidence?:{manufactureYears?:number[];[field:string]:unknown}; astraMatchEvidence?:Record<string,unknown>; manualEditedAt?:string} & Partial<Record<typeof textFields[number],string>> & Partial<Record<typeof numberFields[number],number>>;
 export type ModelRecord = {id:string;make:string;model:string;photo:string;photoMarket?:string;revision:string;updatedAt:string;variants:Variant[];previousKey?:string;editedBy?:string};
 export type ModelSummary = {id:string;make:string;model:string;photo:string;photoMarket?:string;years:number[];hasUnknownYear?:boolean;fuels:string[];markets:string[];variants:number;verified:number;power30:number;needs30:number;key:string;revision:string;updatedAt:string};
 export type EncyclopediaManifest = {version:1;capturedAt:string;generationId:string;models:ModelSummary[];coverage:Record<string,number>;savedSearchRows:number;updatedAt:string};

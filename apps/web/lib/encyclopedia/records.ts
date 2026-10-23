@@ -30,7 +30,8 @@ export async function editModel(id:string,input:Record<string,unknown>,user:Auth
   const raw=input.variant;if(!raw||typeof raw!=='object'||Array.isArray(raw))throw new EncyclopediaInputError('Проверьте параметры.');
   const v=raw as Record<string,unknown>,clean=cleanVariant(v),old=next.variants.find(x=>x.id===v.id);
   if(v.id&&!old)throw new EncyclopediaInputError('Модификация не найдена.');
-  const changed:Variant={...clean,id:old?.id||randomUUID(),observedCount:old?.observedCount||0};
+  const sourceMetadata=old?Object.fromEntries(['astraIdentity','astraEvidence','astraMatchEvidence'].filter(field=>old[field as keyof Variant]!==undefined).map(field=>[field,old[field as keyof Variant]])):{};
+  const changed:Variant={...clean,...sourceMetadata,id:old?.id||randomUUID(),observedCount:old?.observedCount||0,manualEditedAt:next.updatedAt};
   if(next.variants.some(x=>x.id!==changed.id&&variantSignature(x)===variantSignature(changed)))throw new EncyclopediaInputError('Модификация с такими параметрами уже есть.');
   next.variants=old?next.variants.map(x=>x.id===old.id?changed:x):[...next.variants,changed];
  }

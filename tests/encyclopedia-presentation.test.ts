@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {fieldGroups,filterVariants} from '../apps/web/lib/encyclopedia/presentation';
+import {fieldGroups,filterVariants,astraDetails} from '../apps/web/lib/encyclopedia/presentation';
 import {textFields,numberFields,type Variant} from '../apps/web/lib/encyclopedia/schema';
 
 test('compact table keeps every editable specification available exactly once in its details',()=>{
@@ -22,4 +22,12 @@ test('modification filters combine text, top-level fuel and verification without
  assert.deepEqual(filterVariants(variants,'','missing30',{fuel:'petrol'}),[]);
  assert.equal(variants[2].power30MinKw,undefined,'peak power is never promoted to certified power');
  assert.equal(variants.length,3,'filtering does not remove stored records');
+});
+
+test('official approval identity is searchable without promoting manufacture years to model years',()=>{
+ const v:Variant={id:'astra',markets:[],status:'review',observedCount:0,astraIdentity:{approval:'e6*0437',variant:'MXPH11'},astraEvidence:{manufactureYears:[2024,2021,2024]}};
+ assert.equal(filterVariants([v],'e6*0437','').length,1);
+ assert.equal(filterVariants([v],'MXPH11','').length,1);
+ assert.equal(v.year,undefined);
+ assert.deepEqual(astraDetails(v).at(-1),{label:'Годы изготовления в источнике',value:'2021, 2024'});
 });

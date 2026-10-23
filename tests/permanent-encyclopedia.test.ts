@@ -85,3 +85,19 @@ test('encyclopedia hides non-car records without deleting revisions; mixed makes
   assert.equal((await getJsonStorage().readJson<any>(MANIFEST,null)).models.length,3,'editing visible records does not erase hidden originals');
  }finally{process.chdir(cwd);if(oldDriver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=oldDriver;await fs.rm(root,{recursive:true,force:true});}
 });
+
+test('manual edit preserves server ASTRA identities and rejects client provenance substitution',async()=>{
+ const cwd=process.cwd(),root=await fs.mkdtemp(path.join(os.tmpdir(),'astra-edit-')),oldDriver=process.env.JSON_STORAGE_DRIVER;
+ try{
+  process.chdir(root);process.env.JSON_STORAGE_DRIVER='local';await fs.mkdir(path.join(root,'data'));
+  const b=createSnapshotBuilder(at);b.add(car);const record=[...b.models.values()][0];
+  Object.assign(record.variants[0],{astraIdentity:{approval:'e6*0437',variant:'official'},astraEvidence:{manufactureYears:[2021],values:{powerKw:89}},researchEvidence:{batchId:'old-proof',fields:['powerKw'],values:{powerKw:89}}});
+  const manifest=await publishSnapshot(getJsonStorage(),b,'astra-test',0,at),m=(await readModel(manifest.models[0].id))!;
+  const changed=await editModel(m.id,{revision:m.revision,variant:{...m.variants[0],powerKw:90,astraIdentity:{approval:'forged'},astraEvidence:{values:{powerKw:90}}}},owner);
+  assert.deepEqual(changed.variants[0].astraIdentity,m.variants[0].astraIdentity);
+  assert.deepEqual(changed.variants[0].astraEvidence,m.variants[0].astraEvidence);
+  assert.equal(changed.variants[0].powerKw,90);
+  assert.equal((changed.variants[0] as any).researchEvidence,undefined);
+  assert.ok(changed.variants[0].manualEditedAt);
+ }finally{process.chdir(cwd);if(oldDriver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=oldDriver;await fs.rm(root,{recursive:true,force:true});}
+});

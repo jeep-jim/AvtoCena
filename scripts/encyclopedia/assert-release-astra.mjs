@@ -28,7 +28,7 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
   facts.set(identity,fact);
  }
  const calculationFields=new Set(factFields),seen=new Set();
- const report={plans:1,models:0,annualVariants:0,calculationFields:0,descriptiveFields:0,unknownYearVariantsOutsideIndex:0};
+ const report={plans:1,models:0,annualVariants:0,calculationFields:0,descriptiveFields:0,unknownYearVariantsOutsideIndex:0,annualChanges:[]};
  await parallel(plan.models,async descriptor=>{
   if(live.get(descriptor.id)?.revision!==descriptor.afterRevision)throw Error('required_astra_revision_not_active:'+descriptor.id);
   if(live.get(descriptor.id).key!==`${ROOT}/revisions/${descriptor.id}/${descriptor.afterRevision}.json`)throw Error('required_astra_record_key_not_active:'+descriptor.id);
@@ -46,6 +46,7 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
    const identity=`${assertion.modelId}:${assertion.variantId}`,fact=facts.get(identity),variant=variants.get(assertion.variantId);
    if(seen.has(identity)||assertion.modelId!==descriptor.id||!Number.isInteger(assertion.year)||!fact||!variant||variant.year!==assertion.year||variant.trim!==assertion.trim||fact.revision!==descriptor.afterRevision||fact.year!==assertion.year||!fact.trims.includes(token(assertion.trim)))throw Error('required_astra_annual_variant_missing:'+identity);
    seen.add(identity);report.annualVariants++;
+   report.annualChanges.push({modelId:descriptor.id,make:modelPlan.record.make,model:modelPlan.record.model,variantId:assertion.variantId,year:assertion.year,trim:assertion.trim,fields:assertion.fields,sourceUrl:assertion.sourceUrl});
    for(const [field,value] of Object.entries(assertion.fields)){
     if(stable(variant[field])!==stable(value))throw Error('required_astra_saved_field_missing:'+identity+':'+field);
     if(descriptiveFields.has(field)){

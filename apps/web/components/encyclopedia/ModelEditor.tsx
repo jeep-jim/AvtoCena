@@ -3,12 +3,13 @@ import {Fragment,useEffect,useId,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {Pencil,Plus,X} from 'lucide-react';
 import {CatalogChevron} from '@/components/catalog/CatalogChevron';
-import {fieldGroups,fieldChoices,filterVariants} from '@/lib/encyclopedia/presentation';
+import {fieldGroups,fieldChoices,filterVariants,astraDetails} from '@/lib/encyclopedia/presentation';
 import {type ModelRecord,type Variant,labels,numberFields,displayValue,statusLabels} from '@/lib/encyclopedia/schema';
 const pageSize=25;
 type Draft={mode:'model'|'variant';value:Record<string,any>;target:string};
 function RecordDetails({variant}:{variant:Variant}){
- return <div className="ac-ency-record-details">{fieldGroups.map(group=><section key={group.title}><h3>{group.title}</h3><dl>{group.fields.map(field=><div key={field}><dt>{labels[field]}</dt><dd>{field==='sourceUrl'&&variant.sourceUrl?<a href={variant.sourceUrl} target="_blank" rel="noreferrer">Открыть источник</a>:displayValue(variant[field])}</dd></div>)}</dl></section>)}</div>;
+ const official=astraDetails(variant);
+ return <div className="ac-ency-record-details">{fieldGroups.map(group=><section key={group.title}><h3>{group.title}</h3><dl>{group.fields.map(field=><div key={field}><dt>{labels[field]}</dt><dd>{field==='sourceUrl'&&variant.sourceUrl?<a href={variant.sourceUrl} target="_blank" rel="noreferrer">Открыть источник</a>:displayValue(variant[field])}</dd></div>)}</dl></section>)}{!!official.length&&<section><h3>Одобрение типа</h3><dl>{official.map(row=><div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}</dl></section>}</div>;
 }
 export function ModelEditor({record,canEdit,onSaved,defaultYear,onEditingChange,filterFuel='',onlyMissing30=false}:{record:ModelRecord;canEdit:boolean;onSaved?:()=>void|Promise<void>;defaultYear?:number;onEditingChange?:(editing:boolean)=>void;filterFuel?:string;onlyMissing30?:boolean}){
  const router=useRouter(),formId=useId(),form=useRef<HTMLFormElement>(null);
