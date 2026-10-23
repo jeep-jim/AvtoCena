@@ -1,4 +1,11 @@
 {
-  "requestedAt": "2026-10-23T16:35:16.577Z",
-  "reason": "Fresh read-only writer and publication preflight before the narrowly verified A3 gearbox correction; no offer/index scan."
+  "requestedAt": "2026-10-23T18:13:35Z",
+  "reason": "One bounded read-only DBX fuel-evidence repair preview; no production writes, no collector or deploy.",
+  "previewFuelEvidenceRepair": {
+    "offerIds": [
+      "b65974b83d5399d588073fc5"
+    ],
+    "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "generationId": "gen_1792702445675_8c312f85"
+  }
 }

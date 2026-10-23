@@ -9,7 +9,7 @@ permissions:
 jobs:
   status:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     environment: regcloud-staging
     steps:
       - uses: actions/checkout@v4
@@ -105,6 +105,7 @@ jobs:
           }
           STATUS
           node --import tsx --input-type=module -e "import fs from 'node:fs'; if(JSON.parse(fs.readFileSync('.github/market-runs/regcloud-publication-status.json')).auditSavedCoverage) await import('./scripts/encyclopedia/audit-saved-coverage.mjs')"
+          node --import tsx --input-type=module -e "import fs from 'node:fs'; if(JSON.parse(fs.readFileSync('.github/market-runs/regcloud-publication-status.json')).previewFuelEvidenceRepair) await import('./scripts/catalog-fuel-evidence-repair-preview.ts')"
       - name: Preserve read-only coverage report
         if: always()
         uses: actions/upload-artifact@v4
@@ -112,3 +113,11 @@ jobs:
           name: encyclopedia-coverage
           path: reports/encyclopedia-coverage.json
           if-no-files-found: ignore
+      - name: Preserve addressed fuel evidence preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-fuel-evidence-repair-preview
+          path: reports/catalog-fuel-evidence-repair-preview.json
+          if-no-files-found: ignore
+
