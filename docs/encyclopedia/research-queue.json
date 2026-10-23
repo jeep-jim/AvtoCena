@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T07:58:00+07:00",
+  "updatedAt": "2026-10-23T08:02:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -970,14 +970,22 @@
       "model": "V12 Vantage",
       "years": [
         2023,
-        2016
+        2017,
+        2016,
+        2015,
+        2014,
+        2013,
+        2012,
+        2011,
+        2010
       ],
-      "variants": 2,
-      "status": "needs_exact_source",
-      "researchedVariants": 0,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
-      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
+      "variants": 18,
+      "status": "partial_verified_fields",
+      "researchedVariants": 16,
+      "checkedAt": "2026-10-23T08:02:00+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v12-vantage-remaining.json",
+      "nextAction": "16 новых исполнений2010–2017 сохранены; продолжить2022–2023/2018, не повторять применённую партию. Точные пробелы всех18 строк вretry.",
+      "revision": "3069826e-b541-4867-9316-43b21f6feaf3"
     },
     {
       "id": "449cc595c6ad47ddfa1b0e46",
@@ -32685,12 +32693,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T07:58:00+07:00",
+    "updatedAt": "2026-10-23T08:02:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "rapide_model_years_saved_api_readback_pass_activation_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Aston Martin V12 Vantage (95f7940568d492384daba7df): свежие API, все реальные годы с2008, включая отсутствующие10MY–13MY. Rapide/S/AMR остаются в точном retry,12 операций не повторять.",
+    "nextModel": "Aston Martin V12 Vantage (95f7940568d492384daba7df): позднее поколение2022–2023 и2018, затем V8.16 исполнений2010–2017 сохранены/проверены, не повторять.",
     "lastVerifiedResearch": "aston-dbs-superleggera-770",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 75,
@@ -32710,21 +32718,21 @@
     "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-rapide-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "aston-rapide-model-years",
-      "batch": "research-2026-10-23-aston-rapide-model-years",
-      "commit": "695a4198c04e24d9188bb4459a50867bba60d204",
-      "workflow": 39875315275,
-      "job": 120159385289,
-      "variants": 12,
-      "newVariants": 12,
+      "key": "aston-v12-vantage-2010-2017",
+      "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",
+      "commit": "32555689664686117e1f93355d11302089c84d81",
+      "workflow": 39881234673,
+      "job": 120178840548,
+      "variants": 16,
+      "newVariants": 16,
       "updatedVariants": 0,
-      "fields": 104,
-      "compiledCalculationFields": 92,
+      "fields": 133,
+      "compiledCalculationFields": 117,
       "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
       "indexMembershipState": "saved_after_active_ac711_snapshot",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-rapide-readback.json"
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-readback.json"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792660229591_c103ed94",
@@ -32954,55 +32962,74 @@
         "includedInIndex": false,
         "indexMembershipState": "saved_after_active_ac711_snapshot",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-rapide-readback.json"
+      },
+      {
+        "key": "aston-v12-vantage-2010-2017",
+        "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",
+        "commit": "32555689664686117e1f93355d11302089c84d81",
+        "workflow": 39881234673,
+        "job": 120178840548,
+        "variants": 16,
+        "newVariants": 16,
+        "updatedVariants": 0,
+        "fields": 133,
+        "compiledCalculationFields": 117,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "saved_after_active_ac711_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-readback.json"
       }
     ],
-    "inFlightResearch": {
-      "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",
-      "modelId": "95f7940568d492384daba7df",
-      "state": "prepared_awaiting_workflow_and_api_readback",
-      "operations": 16,
-      "fields": 133,
-      "compiledCalculationFields": 117,
-      "sha256": "55a620e4c94ecbcdb2125ed6cde44a1fc49568157586712db6096a35ff8e7d3c",
-      "baseRevision": "1cdb0d03-67f4-47a8-a438-6622aa41241d"
-    },
+    "inFlightResearch": [],
     "lastCompletedPass": {
-      "checkedAt": "2026-10-23T07:01:38.857791+07:00",
-      "batch": "research-2026-10-23-aston-rapide-model-years",
+      "checkedAt": "2026-10-23T07:59:28+07:00",
+      "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",
       "apiReadback": true,
       "passed": true,
-      "operations": 12,
-      "newVariants": 12,
+      "operations": 16,
+      "newVariants": 16,
       "updatedVariants": 0,
-      "confirmedFields": 104,
-      "compiledCalculationFields": 92,
-      "unchangedVariantsPreserved": 6,
-      "beforeRevision": "af17e5b2-f4de-46c4-98d3-6bca7962772d",
-      "afterRevision": "99832547-5b6f-4500-8078-8747361bc749",
-      "variantsBefore": 6,
+      "confirmedFields": 133,
+      "compiledCalculationFields": 117,
+      "unchangedVariantsPreserved": 2,
+      "beforeRevision": "1cdb0d03-67f4-47a8-a438-6622aa41241d",
+      "afterRevision": "3069826e-b541-4867-9316-43b21f6feaf3",
+      "variantsBefore": 2,
       "variantsAfter": 18,
-      "researchedVariantsAfter": 12,
+      "researchedVariantsAfter": 16,
       "manualWrites": 0,
       "wholeRowVerified": false,
       "duplicatesAdded": 0,
       "nativeMatcher": {
-        "exactCases": 12,
+        "exactCases": 16,
         "genericIdentityStillBlocked": true,
         "manualInputPreserved": true,
         "unknownFieldsNotInferred": true,
         "registrationYearNotInferred": true,
-        "performancePackAndCatalystsSeparate": true
+        "bodyGearboxPerformancePackSeparate": true
       },
       "compilerChanged": false,
       "activationConfirmed": false,
       "version": 1,
-      "modelId": "62f2bf675810869f68e70d2e",
+      "modelId": "95f7940568d492384daba7df",
       "make": "Aston Martin",
-      "model": "Rapide",
-      "commit": "695a4198c04e24d9188bb4459a50867bba60d204",
-      "workflow": 39875315275,
-      "job": 120159385289,
+      "model": "V12 Vantage",
+      "commit": "32555689664686117e1f93355d11302089c84d81",
+      "workflow": 39881234673,
+      "job": 120178840548,
       "workflowConclusion": "success",
+      "independentApiYears": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2023
+      ],
       "scopeSinceYear": 2008,
       "allModelsComplete": false,
       "historicalExpansionComplete": false,
@@ -33011,20 +33038,22 @@
         "offers": 2,
         "comparisons": 22,
         "repeatedExactModificationGroups": 0,
-        "report": "docs/encyclopedia/reports/2026-10-23-aston-rapide-public-parity.json"
+        "emptyDriveRepresentationDifference": true,
+        "report": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-public-parity.json"
       },
       "sourceReview": {
-        "factoryGuides": 9,
+        "factoryGuidesDownloaded": 10,
         "additionalMidyearGuidesCompared": [
           "14.5MY",
-          "17.5MY"
+          "15.5MY"
         ],
         "sourceHashesOnEveryField": true,
         "visualTechnicalPageReview": true,
         "bhpNotMislabelledPs": true,
         "grossMassNotKerbMass": true,
-        "amrSportsCatalystRegion": "UK/Europe only",
-        "existingDbxParityBlockerStillOpen": true
+        "sportshiftStoredAsExistingRobotCategory": true,
+        "dualClutchConstructionNotAsserted": true,
+        "manualPerformancePackNotInferred": true
       },
       "releaseState": {
         "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
@@ -33041,7 +33070,7 @@
           }
         ],
         "duplicateReleaseRequested": false,
-        "nextAction": "После завершения обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава и активации, включая прежнюю пару DBX."
+        "nextAction": "После обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава/активации и открытогоDBXparity."
       },
       "referenceIntake": {
         "run": 39831884392,
@@ -33058,8 +33087,8 @@
         },
         "restarted": false
       },
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-rapide-remaining.json",
-      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage.json",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v12-vantage-remaining.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage-late.json",
       "collectorsCalculationRulesGuardsSecretsChanged": false
     },
     "failedIndexRelease": {
@@ -33127,7 +33156,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage-late.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -35976,23 +36005,21 @@
       "report": "docs/encyclopedia/reports/2026-10-23-aston-dbx-public-parity.json"
     },
     "latestPublicationCheck": {
-      "checkedAt": "2026-10-23T07:01:38.857791+07:00",
+      "checkedAt": "2026-10-23T08:02:00+07:00",
       "runs": [
         {
           "id": 39840733509,
           "status": "in_progress",
-          "conclusion": null,
-          "updatedAt": "2026-10-22T19:31:29Z"
+          "conclusion": null
         },
         {
           "id": 39857878662,
           "status": "pending",
-          "conclusion": null,
-          "updatedAt": "2026-10-22T21:30:56Z"
+          "conclusion": null
         }
       ],
       "newReleaseRequested": false,
-      "action": "После завершения обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава и активации, включая прежнюю пару DBX."
+      "action": "После обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава/активации и открытогоDBXparity."
     },
     "astonRapidePass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
@@ -36088,6 +36115,115 @@
       },
       "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-rapide-remaining.json",
       "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage.json",
+      "collectorsCalculationRulesGuardsSecretsChanged": false
+    },
+    "astonV12VantagePass": {
+      "checkedAt": "2026-10-23T07:59:28+07:00",
+      "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",
+      "apiReadback": true,
+      "passed": true,
+      "operations": 16,
+      "newVariants": 16,
+      "updatedVariants": 0,
+      "confirmedFields": 133,
+      "compiledCalculationFields": 117,
+      "unchangedVariantsPreserved": 2,
+      "beforeRevision": "1cdb0d03-67f4-47a8-a438-6622aa41241d",
+      "afterRevision": "3069826e-b541-4867-9316-43b21f6feaf3",
+      "variantsBefore": 2,
+      "variantsAfter": 18,
+      "researchedVariantsAfter": 16,
+      "manualWrites": 0,
+      "wholeRowVerified": false,
+      "duplicatesAdded": 0,
+      "nativeMatcher": {
+        "exactCases": 16,
+        "genericIdentityStillBlocked": true,
+        "manualInputPreserved": true,
+        "unknownFieldsNotInferred": true,
+        "registrationYearNotInferred": true,
+        "bodyGearboxPerformancePackSeparate": true
+      },
+      "compilerChanged": false,
+      "activationConfirmed": false,
+      "version": 1,
+      "modelId": "95f7940568d492384daba7df",
+      "make": "Aston Martin",
+      "model": "V12 Vantage",
+      "commit": "32555689664686117e1f93355d11302089c84d81",
+      "workflow": 39881234673,
+      "job": 120178840548,
+      "workflowConclusion": "success",
+      "independentApiYears": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2023
+      ],
+      "scopeSinceYear": 2008,
+      "allModelsComplete": false,
+      "historicalExpansionComplete": false,
+      "publicParity": {
+        "passed": true,
+        "offers": 2,
+        "comparisons": 22,
+        "repeatedExactModificationGroups": 0,
+        "emptyDriveRepresentationDifference": true,
+        "report": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-public-parity.json"
+      },
+      "sourceReview": {
+        "factoryGuidesDownloaded": 10,
+        "additionalMidyearGuidesCompared": [
+          "14.5MY",
+          "15.5MY"
+        ],
+        "sourceHashesOnEveryField": true,
+        "visualTechnicalPageReview": true,
+        "bhpNotMislabelledPs": true,
+        "grossMassNotKerbMass": true,
+        "sportshiftStoredAsExistingRobotCategory": true,
+        "dualClutchConstructionNotAsserted": true,
+        "manualPerformancePackNotInferred": true
+      },
+      "releaseState": {
+        "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+        "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+        "activeIndexFromLatestVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+        "blockingRuns": [
+          {
+            "id": 39840733509,
+            "status": "in_progress"
+          },
+          {
+            "id": 39857878662,
+            "status": "pending"
+          }
+        ],
+        "duplicateReleaseRequested": false,
+        "nextAction": "После обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава/активации и открытогоDBXparity."
+      },
+      "referenceIntake": {
+        "run": 39831884392,
+        "job": 120009865681,
+        "status": "completed",
+        "conclusion": "failure",
+        "checkpointFromLatestRoadmap": {
+          "visited": 13045,
+          "saved": 8403,
+          "pending": 253,
+          "completed": false,
+          "error": "redirect_outside_catalog",
+          "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/"
+        },
+        "restarted": false
+      },
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v12-vantage-remaining.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage-late.json",
       "collectorsCalculationRulesGuardsSecretsChanged": false
     }
   },

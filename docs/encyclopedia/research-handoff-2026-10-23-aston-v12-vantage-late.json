@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T07:59:28+07:00",
+  "next": {
+    "modelId": "95f7940568d492384daba7df",
+    "make": "Aston Martin",
+    "model": "V12 Vantage",
+    "revision": "3069826e-b541-4867-9316-43b21f6feaf3",
+    "variants": 18,
+    "priorityYears": [
+      2022,
+      2023,
+      2018
+    ],
+    "action": "Продолжить позднее поколение и2018; использовать новые первичные leads, свежие API/CAS.2010–2017 уже применены, не начинать сначала."
+  },
+  "then": {
+    "modelId": "449cc595c6ad47ddfa1b0e46",
+    "model": "V8",
+    "action": "Проверить исходную идентичностьV8 и не смешать с каноническимVantage; реальные годы с2008."
+  },
+  "sourceLeads": [
+    {
+      "url": "https://www.astonmartin.com/en-us/models/past-models/v12-vantage-s",
+      "access": "HTTP200",
+      "sha256": "b26132327ecc13cf798c3a6fe07d1528d0499b951c3e5f0400f71803f8b07100",
+      "status": "Обзор периода2013–2018, не годовая таблица; AM28/573PS требуют точного сопоставления."
+    },
+    {
+      "url": "https://www.astonmartin.com/en/our-world/news/2022/3/16/introducing-the-new-v12-vantage-a-spectacular-finale-for-an-iconic-bloodline",
+      "access": "HTTP200",
+      "sha256": "f96621b0d06bdc1e8b15887b2c755959caa82cd17b1d93bb3375aaf6129c4b20",
+      "status": "700PS/8AT подтверждены для анонсированного нового поколения; реальные годы/кузова требуют следующей партии."
+    },
+    {
+      "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/investors---results-and-presentations/aml-fy-2022-results-rns.pdf?rev=f3dc425a39d448d6b54aab84380ef3b3",
+      "status": "Найдено поиском; исходный PDF ещё не проверен, не расчётный источник."
+    },
+    {
+      "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/bondholders/final-offering-memorandum-13-march-2024.pdf?rev=a245d702dbd2401eafaadb26f9e3f2ac",
+      "status": "Найдено поиском как источник фактического выпуска2022/2023; прямой доступ/таблицы ещё проверить, предыдущая иная ссылка corporate---archive давала404."
+    }
+  ],
+  "completedBatch": {
+    "id": "research-2026-10-23-aston-v12-vantage-2010-2017",
+    "commit": "32555689664686117e1f93355d11302089c84d81",
+    "workflow": 39881234673,
+    "operations": 16,
+    "newVariants": 16,
+    "confirmedFields": 133,
+    "compiledCalculationFields": 117,
+    "apiReadback": true,
+    "revision": "3069826e-b541-4867-9316-43b21f6feaf3",
+    "report": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-pass.json",
+    "repeatBatch": false
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v12-vantage-remaining.json",
+  "index": {
+    "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "activeIndexFromLatestVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "blockingRuns": [
+      {
+        "id": 39840733509,
+        "status": "in_progress"
+      },
+      {
+        "id": 39857878662,
+        "status": "pending"
+      }
+    ],
+    "duplicateReleaseRequested": false,
+    "nextAction": "После обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава/активации и открытогоDBXparity."
+  },
+  "referenceIntake": {
+    "run": 39831884392,
+    "job": 120009865681,
+    "status": "completed",
+    "conclusion": "failure",
+    "checkpointFromLatestRoadmap": {
+      "visited": 13045,
+      "saved": 8403,
+      "pending": 253,
+      "completed": false,
+      "error": "redirect_outside_catalog",
+      "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/"
+    },
+    "restarted": false
+  },
+  "allModelsComplete": false
+}

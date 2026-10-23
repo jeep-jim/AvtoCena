@@ -1,0 +1,109 @@
+{
+  "checkedAt": "2026-10-23T07:59:28+07:00",
+  "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",
+  "apiReadback": true,
+  "passed": true,
+  "operations": 16,
+  "newVariants": 16,
+  "updatedVariants": 0,
+  "confirmedFields": 133,
+  "compiledCalculationFields": 117,
+  "unchangedVariantsPreserved": 2,
+  "beforeRevision": "1cdb0d03-67f4-47a8-a438-6622aa41241d",
+  "afterRevision": "3069826e-b541-4867-9316-43b21f6feaf3",
+  "variantsBefore": 2,
+  "variantsAfter": 18,
+  "researchedVariantsAfter": 16,
+  "manualWrites": 0,
+  "wholeRowVerified": false,
+  "duplicatesAdded": 0,
+  "nativeMatcher": {
+    "exactCases": 16,
+    "genericIdentityStillBlocked": true,
+    "manualInputPreserved": true,
+    "unknownFieldsNotInferred": true,
+    "registrationYearNotInferred": true,
+    "bodyGearboxPerformancePackSeparate": true
+  },
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "version": 1,
+  "modelId": "95f7940568d492384daba7df",
+  "make": "Aston Martin",
+  "model": "V12 Vantage",
+  "commit": "32555689664686117e1f93355d11302089c84d81",
+  "workflow": 39881234673,
+  "job": 120178840548,
+  "workflowConclusion": "success",
+  "independentApiYears": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2023
+  ],
+  "scopeSinceYear": 2008,
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false,
+  "publicParity": {
+    "passed": true,
+    "offers": 2,
+    "comparisons": 22,
+    "repeatedExactModificationGroups": 0,
+    "emptyDriveRepresentationDifference": true,
+    "report": "docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-public-parity.json"
+  },
+  "sourceReview": {
+    "factoryGuidesDownloaded": 10,
+    "additionalMidyearGuidesCompared": [
+      "14.5MY",
+      "15.5MY"
+    ],
+    "sourceHashesOnEveryField": true,
+    "visualTechnicalPageReview": true,
+    "bhpNotMislabelledPs": true,
+    "grossMassNotKerbMass": true,
+    "sportshiftStoredAsExistingRobotCategory": true,
+    "dualClutchConstructionNotAsserted": true,
+    "manualPerformancePackNotInferred": true
+  },
+  "releaseState": {
+    "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "activeIndexFromLatestVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "blockingRuns": [
+      {
+        "id": 39840733509,
+        "status": "in_progress"
+      },
+      {
+        "id": 39857878662,
+        "status": "pending"
+      }
+    ],
+    "duplicateReleaseRequested": false,
+    "nextAction": "После обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава/активации и открытогоDBXparity."
+  },
+  "referenceIntake": {
+    "run": 39831884392,
+    "job": 120009865681,
+    "status": "completed",
+    "conclusion": "failure",
+    "checkpointFromLatestRoadmap": {
+      "visited": 13045,
+      "saved": 8403,
+      "pending": 253,
+      "completed": false,
+      "error": "redirect_outside_catalog",
+      "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/"
+    },
+    "restarted": false
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-v12-vantage-remaining.json",
+  "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage-late.json",
+  "collectorsCalculationRulesGuardsSecretsChanged": false
+}
