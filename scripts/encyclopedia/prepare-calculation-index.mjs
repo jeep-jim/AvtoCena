@@ -4,12 +4,14 @@ import {getJsonStorage,getDataRoot} from '../../apps/web/lib/data.ts';
 import {MANIFEST,ROOT} from '../../apps/web/lib/encyclopedia/records.ts';
 import {isEncyclopediaCar} from '../../apps/web/lib/encyclopedia/scope.ts';
 import {CALCULATION_INDEX_PATH,compileModelFacts,modelKey,checksum} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
+import {modelCoverage,summarizeCoverage} from './coverage.mjs';
 const storage=getJsonStorage();
 if(storage.driver!=='object')throw Error('durable_object_storage_required');
 const manifest=await storage.readJson(MANIFEST,null);
 if(!manifest?.models?.length)throw Error('encyclopedia_missing');
 const models={},report={modelsRead:0,variants:0,factoryFields:0,ownerReferenceFields:0,manualFields:0};
 const rows=manifest.models.filter(isEncyclopediaCar);let cursor=0;
+const coverageModels=[];
 await Promise.all(Array.from({length:6},async()=>{
  for(;;){
   const summary=rows[cursor++];if(!summary)return;
@@ -23,6 +25,7 @@ await Promise.all(Array.from({length:6},async()=>{
    ancestors.push(parent);previous=parent.previousKey;
   }
   const facts=compileModelFacts(record,ancestors),key=modelKey(record.make,record.model);
+  coverageModels.push(modelCoverage(record,facts));
   if(facts.length)models[key]=[...(models[key]||[]),...facts];
   report.modelsRead++;report.variants+=facts.length;
   for(const fact of facts)for(const source of Object.values(fact.sources))report[source.kind==='owner_reference'?'ownerReferenceFields':source.kind==='manual'?'manualFields':'factoryFields']++;
@@ -50,3 +53,7 @@ if(release&&/^[a-f0-9]{40}$/.test(release)){
  if((await storage.readJson(bindingKey,null))?.digest!==index.digest)throw Error('release_encyclopedia_binding_readback_failed');
 }
 console.log(JSON.stringify({stage:'encyclopedia_index_ready',...report,digest:index.digest,manifestDigest,readback:true}));
+const coverage=summarizeCoverage(coverageModels,{createdAt:index.createdAt,indexDigest:index.digest,manifestDigest});
+await fs.mkdir('reports',{recursive:true});
+await fs.writeFile('reports/encyclopedia-coverage.json',JSON.stringify(coverage,null,2));
+console.log(JSON.stringify({stage:'encyclopedia_coverage',...coverage.total,reportPath:'reports/encyclopedia-coverage.json'}));

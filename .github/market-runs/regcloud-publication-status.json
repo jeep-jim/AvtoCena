@@ -1,12 +1,5 @@
 {
-  "requestedAt": "2026-10-23T02:53:00Z",
-  "reason": "Read-only DBX full-record versus projection specification provenance; no pricing or storage writes",
-  "inspectStagedGeneration": false,
-  "inspectRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
-  "inspectModels": [
-    "astonmartin:dbx"
-  ],
-  "inspectOfferIds": [
-    "b65974b83d5399d588073fc5"
-  ]
+  "requestedAt": "2026-10-23T03:07:17.588207+00:00",
+  "reason": "Fresh writer/manifest check after successful compact preparation, before one aggregate encyclopedia release",
+  "inspectStagedGeneration": false
 }

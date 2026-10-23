@@ -29,7 +29,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Verify exact encyclopedia matching
-        run: node --import tsx --test tests/encyclopedia-calculation-index.test.ts tests/encyclopedia-release-index.test.ts tests/catalog-budget-specifications.test.ts tests/catalog-budget-runtime.test.ts
+        run: node --import tsx --test tests/encyclopedia-calculation-index.test.ts tests/encyclopedia-release-index.test.ts tests/encyclopedia-coverage.test.ts tests/catalog-budget-specifications.test.ts tests/catalog-budget-runtime.test.ts
       - name: Verify production dependency security
         run: npm audit --omit=dev --audit-level=high
       - name: Verify catalog storage and bounded projection integrity
@@ -47,6 +47,13 @@ jobs:
         run: |
           node --import tsx scripts/encyclopedia/prepare-calculation-index.mjs
           node --import tsx scripts/encyclopedia/audit-calculation-index.mjs
+      - name: Preserve existing encyclopedia coverage and batch membership
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: encyclopedia-coverage
+          path: reports/encyclopedia-coverage.json
+          if-no-files-found: ignore
       - name: Build existing application without production credentials
         env:
           NEXT_TELEMETRY_DISABLED: '1'

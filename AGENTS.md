@@ -1,5 +1,7 @@
 # User-facing interface copy
 
+- Owner instruction 23.10.2026: fill the existing permanent encyclopedia foundation. Do not restart model discovery or rebuild/reparse the model list. Prioritize activation of saved reviewed batches, verified use in catalog calculations, then missing-field completion across the existing makes. Preserve records, revisions, manual edits and exact technical identities. The accepted iterative plan is docs/encyclopedia/2026-10-23-night-morning-recap-and-plan.md; unknown certified power must remain unknown.
+
 - Write public-site and CRM interface text for the person using the product. This applies to headings, helper text, empty states, tooltips, notifications and errors.
 - Do not expose implementation commentary: raw data, read models, normalization, fallback paths, storage formats, hidden reference records, placeholders or deployment details. Explain the user's next action or the practical meaning instead.
 - Keep necessary integration settings and protocol identifiers accurate (for example, a credential or an API field in integration documentation). Do not remove required attribution, legal notices or meaningful uncertainty about vehicle data.
