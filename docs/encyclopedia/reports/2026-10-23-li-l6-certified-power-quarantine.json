@@ -1,0 +1,656 @@
+{
+  "checkedAt": "2026-10-23T10:09:32.833Z",
+  "diagnosticRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/39936983728",
+  "jobId": 120358818598,
+  "conclusion": "success",
+  "proof": {
+    "checkedAt": "2026-10-23T10:09:32.833Z",
+    "generationId": "gen_1792702445675_8c312f85",
+    "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+    "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+    "rows": [
+      {
+        "id": "17b4b13194dc355e6415013f",
+        "source": {
+          "values": {
+            "id": "17b4b13194dc355e6415013f",
+            "market": "china",
+            "year": 2026,
+            "fuel": "hybrid",
+            "powertrainKind": "series_hybrid",
+            "engineCc": 1496,
+            "powerHp": 154,
+            "powerKw": 113.27,
+            "icePowerKw": null,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": []
+        },
+        "sanitizedSource": {
+          "values": {
+            "id": "17b4b13194dc355e6415013f",
+            "market": "china",
+            "year": 2026,
+            "fuel": "hybrid",
+            "powertrainKind": "series_hybrid",
+            "engineCc": 1496,
+            "powerHp": null,
+            "powerKw": null,
+            "icePowerKw": null,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "conflict",
+              "reason": "explicit_semantic_conflict",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": []
+        },
+        "enrichedSanitized": {
+          "values": {
+            "id": "17b4b13194dc355e6415013f",
+            "market": "china",
+            "year": 2026,
+            "fuel": "hybrid",
+            "powertrainKind": "series_hybrid",
+            "engineCc": 1496,
+            "powerHp": null,
+            "powerKw": null,
+            "icePowerKw": null,
+            "power30MinKw": 134,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "conflict",
+              "reason": "explicit_semantic_conflict",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "exact",
+              "reason": "usable_certified_30min_power",
+              "provenance": "source_evidence"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "power30MinKw",
+            "transmission",
+            "bodyType"
+          ]
+        },
+        "safeEnriched": {
+          "values": {
+            "id": "17b4b13194dc355e6415013f",
+            "market": "china",
+            "year": 2026,
+            "fuel": "hybrid",
+            "powertrainKind": "series_hybrid",
+            "engineCc": 1496,
+            "powerHp": null,
+            "powerKw": null,
+            "icePowerKw": null,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "conflict",
+              "reason": "explicit_semantic_conflict",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "power30MinKw",
+            "transmission",
+            "bodyType"
+          ]
+        },
+        "full": {
+          "values": {
+            "id": "17b4b13194dc355e6415013f",
+            "market": "china",
+            "year": 2026,
+            "fuel": "hybrid",
+            "powertrainKind": "series_hybrid",
+            "engineCc": 1496,
+            "powerHp": 154,
+            "powerKw": 113.27,
+            "icePowerKw": null,
+            "power30MinKw": 134,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "ambiguous",
+              "reason": "non_exact_certified_power_provenance",
+              "provenance": "source_evidence"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "power30MinKw",
+            "transmission",
+            "bodyType"
+          ]
+        },
+        "projection": {
+          "values": {
+            "id": "17b4b13194dc355e6415013f",
+            "market": "china",
+            "year": 2026,
+            "fuel": "hybrid",
+            "powertrainKind": "series_hybrid",
+            "engineCc": 1496,
+            "powerHp": null,
+            "powerKw": null,
+            "icePowerKw": null,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "power30MinKw",
+            "transmission",
+            "bodyType"
+          ]
+        },
+        "attestedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "power30MinKw",
+          "transmission",
+          "bodyType"
+        ]
+      },
+      {
+        "id": "b65974b83d5399d588073fc5",
+        "source": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "year": 2023,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": null,
+            "powerHp": null,
+            "powerKw": null,
+            "icePowerKw": null,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": []
+        },
+        "sanitizedSource": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "year": 2023,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": null,
+            "powerHp": null,
+            "powerKw": null,
+            "icePowerKw": null,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": []
+        },
+        "enrichedSanitized": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "year": 2023,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType"
+          ]
+        },
+        "safeEnriched": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "year": 2023,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType"
+          ]
+        },
+        "full": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "year": 2023,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType"
+          ]
+        },
+        "projection": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "year": 2023,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType"
+          ]
+        },
+        "attestedFields": [
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType"
+        ]
+      }
+    ]
+  },
+  "finding": "safePublicPricing removed independently attested exact power30MinKw=134 after the immutable index enriched a sanitized Li L6 record because the unrelated peak-power evidence remained conflicting.",
+  "change": {
+    "scope": "Preserve only positive exact 30-minute power explicitly covered by an identity/year/value-bound encyclopedia attestation that remains valid after removing rejected power fields. Reject engine/fuel/powertrain conflicts, certified conflicts, stale or combined attestations. Continue clearing invalid peak fields and delivered quotes.",
+    "productionInstalled": false,
+    "notIncludedInRunningRelease": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+    "deployRequested": false
+  },
+  "validation": {
+    "newBehaviorTests": {
+      "pass": 7,
+      "fail": 0
+    },
+    "newPlusEncyclopediaTests": {
+      "pass": 24,
+      "fail": 0
+    },
+    "broaderTests": {
+      "pass": 55,
+      "fail": 3,
+      "total": 58
+    },
+    "baselineFailuresReproducedUnmodified": [
+      "catalog-safe-public-pricing: UAE seller horsepower expectation",
+      "catalog-safe-public-pricing: UAE fuel quarantine expectation",
+      "catalog-source-fuel-evidence: UAE Petrol + Electricity normalization"
+    ],
+    "webTypecheck": "PASS",
+    "diffCheck": "PASS"
+  },
+  "remaining": [
+    "Install through a subsequent coordinated release; do not duplicate running deployment39936828093.",
+    "Public Li L6 search/detail acceptance and delivered calculation remain open; this patch only prevents certified-value erasure.",
+    "DBX new projection preserves fuel evidence; migration of existing projections and public parity remain open.",
+    "A3 transmission mismatch is separate.",
+    "Speed postponed per owner; real owner/manager assistant acceptance remains open."
+  ]
+}

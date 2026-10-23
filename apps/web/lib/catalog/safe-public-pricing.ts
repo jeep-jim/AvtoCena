@@ -7,6 +7,7 @@ import { catalogPowerSanity } from './power-sanity';
 import { classifySpecificationEvidence, SPECIFICATION_AUDIT_FIELDS } from './specification-evidence-audit';
 import { combustionPowerMismatch } from './combustion-power-consistency';
 import { auditedQuoteRejections } from './audited-quote-quarantine';
+import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-evidence';
 
 /** Reuse only a bound, dated CBR conversion; never substitute a delivered quote. */
 export function safePublicPricing<T extends Record<string, any>>(input: T): T {
@@ -22,6 +23,18 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
   for (const field of auditedQuoteRejections(input)) rejected.add(field);
   const powerRejected = sanity.suspicious || rejected.has('powerHp') || rejected.has('certifiedPower') || combustionPowerMismatch(input);
   if (!powerRejected && !rejected.size && !powertrainMismatch) return input;
+  // A rejected peak-power observation must not erase independently attested
+  // 30-minute power. The attestation must still bind after all rejected power
+  // fields are removed; a combined/stale attestation cannot take this path.
+  const encyclopediaEvidence = input.operational?.encyclopediaCalculation || input.encyclopediaCalculation;
+  const retainCertifiedPower = powerRejected && !powertrainMismatch
+    && !rejected.has('engineCc') && !rejected.has('fuelPowertrain')
+    && classifySpecificationEvidence(input, 'certifiedPower').state === 'exact'
+    && Number(input.power30MinKw) > 0
+    && Object.prototype.hasOwnProperty.call(encyclopediaEvidence?.values || {}, 'power30MinKw')
+    && hasEncyclopediaCalculationEvidence({...input, powerHp:undefined,
+      powerKw:undefined, icePowerKw:undefined, power30MinKwByMotor:undefined,
+      utilizationPowerKw:undefined});
   const rate = input.calculationSnapshot?.currencyRate;
   const price = Number(input.sourcePrice);
   const effectiveRate = Number(rate?.effectiveRate);
@@ -39,7 +52,8 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
   return {
     ...input,
     ...(powerRejected ? {powerHp: undefined, powerKw: undefined, icePowerKw: undefined,
-      power30MinKw: undefined, power30MinKwByMotor: undefined, utilizationPowerKw: undefined,
+      power30MinKw: retainCertifiedPower ? input.power30MinKw : undefined,
+      power30MinKwByMotor: undefined, utilizationPowerKw: undefined,
       powerDataConfidence: undefined} : {}),
     ...(rejected.has('engineCc') ? {engineCc: undefined} : {}),
     ...(rejected.has('fuelPowertrain') ? {fuel: undefined, powertrainKind: undefined} : {}),
