@@ -1,0 +1,186 @@
+{
+  "checkedAt": "2026-10-23",
+  "scope": "Toyota exact identity review; Camry factory batch requested separately, remaining candidates not applied",
+  "models": [
+    {
+      "id": "44569aac2d2feadaf45ab8ce",
+      "model": "bZ3X",
+      "candidates": [
+        {
+          "id": "89a4bd94c4230defb1eb0f74",
+          "year": 2026,
+          "trim": "520 Pro",
+          "candidateOwnerTableRow": 8
+        },
+        {
+          "id": "db811f0a40cb93ddc6430c98",
+          "year": 2025,
+          "trim": "2025 Model 520 Pro",
+          "candidateOwnerTableRow": 8
+        },
+        {
+          "id": "80c2e53e6d8b70cecdba6f40",
+          "year": 2025,
+          "trim": "520 Pro",
+          "candidateOwnerTableRow": 8
+        }
+      ]
+    },
+    {
+      "id": "76f504335c4103fa35725836",
+      "model": "Camry",
+      "candidates": [
+        {
+          "id": "74c689681da6f2476d00362c",
+          "year": 2026,
+          "trim": "Hybrid 2.0HSE Sport Lite Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "87effaf84830ab1133e65fe2",
+          "year": 2026,
+          "trim": "双擎 2.0HGVP 豪华版",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "202412f9cd7ec58af954773b",
+          "year": 2025,
+          "trim": "2024 Model Dual Hybrid 2.0HXS Sport Plus Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "21ea6a6856d22b2475e0530b",
+          "year": 2025,
+          "trim": "2024 Hybrid 2.0HGVP Luxury Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "f60c7215ba17d4893cf21de5",
+          "year": 2025,
+          "trim": "2024 Model Dual Hybrid 2.0HS Sport Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "86dabe7a545785edf7eb39c2",
+          "year": 2025,
+          "trim": "2026 Hybrid 2.0HGVP Luxury Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "06a1f2600842913cb36210a4",
+          "year": 2025,
+          "trim": "Hybrid 2.0HGVP Luxury Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "5345130c27b35bc7fc9c3869",
+          "year": 2025,
+          "trim": "Hybrid 2.0HG Light Glory Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "d08bdd8480b3f0bbd8345e16",
+          "year": 2025,
+          "trim": "Hybrid 2.0HE Elite Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "40de1b51f034a1bdae5ed63a",
+          "year": 2025,
+          "trim": "Hybrid 2.0HXS Light Glory Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "3fb1b19389ff7e9bb0038d62",
+          "year": 2025,
+          "trim": "双擎 2.0HGVP 豪华版",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "b241eda0e9adc0a256e64d37",
+          "year": 2025,
+          "trim": "2026 Hybrid 2.0HSE Sport Lite Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "e121501f6763a84544a00f81",
+          "year": 2025,
+          "trim": "Hybrid 2.0HG Premium Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "4d71f890b762c46ae69f7fd7",
+          "year": 2025,
+          "trim": "Hybrid 2.0HSE Sport Lite Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "df0e50f14f05c52c62a36498",
+          "year": 2024,
+          "trim": "2024 Model Dual Hybrid 2.0HS Sport Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "34ee600ab83c5cf2178f551e",
+          "year": 2024,
+          "trim": "2024 Hybrid 2.0HGVP Luxury Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "f7c07ce5c8096fda926411ec",
+          "year": 2024,
+          "trim": "2024 Model Dual Hybrid 2.0HXS Sport Plus Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "1acfd9e7c7d25ae3a4b6669e",
+          "year": 2024,
+          "trim": "2024 Model Dual Hybrid 2.0HXS Sport Plus Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "a74562b7e55633fe8526d151",
+          "year": 2024,
+          "trim": "Hybrid 2.0HS Sport Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "1821e49e0b49764684cb4b46",
+          "year": 2024,
+          "trim": "Hybrid 2.0HGVP Luxury Edition",
+          "candidateOwnerTableRow": 3
+        },
+        {
+          "id": "b843e444b082b2d23aa0bbfc",
+          "year": 2024,
+          "trim": "Hybrid 2.0HG Premium Edition",
+          "candidateOwnerTableRow": 3
+        }
+      ]
+    }
+  ],
+  "manufacturerSource": {
+    "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+    "modelYear": 2026,
+    "page": 1,
+    "visuallyVerified": true,
+    "camry20Hybrid": {
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "systemPowerKw": 145
+    },
+    "power30MinKw": "Not supplied in this manufacturer PDF; owner table gives 58 separately."
+  },
+  "warning": "170 kW owner calculation sum must not replace manufacturer 145 kW system maximum or 83 kW motor peak.",
+  "bz3xManufacturerSource": {
+    "url": "https://www.gac-toyota.com.cn/minisite/Campaigns/bozhi3xTable?model=520pro",
+    "modelYear": 2026,
+    "trim": "520 Pro",
+    "motorPeakKw": 150,
+    "batteryKwh": 58.37,
+    "curbWeightKg": 1760,
+    "power30MinKw": null,
+    "notes": "Official page distinguishes Pro from Pro+, LiDAR and Max. Curb mass must not populate grossVehicleWeightKg. Owner table 45 kW is separate owner-confirmed evidence, not a manufacturer value."
+  }
+}
