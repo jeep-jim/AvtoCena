@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T16:56:53.260Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+  "batchSha256": "71702c1ee24b91fdb04348c3d0a154649ce512d4c6104c4dec591a2b1fe6b841",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "beforeRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+  "variantsRead": 3663,
+  "variantsPlanned": 50,
+  "fieldsPlanned": 50,
+  "newVariants": 0,
+  "untargetedRowsPreserved": 3613,
+  "allExistingValuesPreserved": true,
+  "priorFieldSourcesPreserved": true,
+  "nativeExact": 50,
+  "nativeHeld": [],
+  "compiledFields": 50,
+  "guardTestsPassed": 11,
+  "manualPreserved": true,
+  "unknownCertifiedPowerNotInferred": true,
+  "replayPassed": true,
+  "sources": [
+    {
+      "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+      "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+      "bytes": 79371,
+      "retrievedAt": "2026-10-23T16:56:39.502422+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+      "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+      "bytes": 47629,
+      "retrievedAt": "2026-10-23T16:56:46.290668+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+      "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+      "bytes": 66509,
+      "retrievedAt": "2026-10-23T16:56:52.417200+00:00"
+    }
+  ],
+  "cursorBefore": "a508272cf730c67bde2fa1e5",
+  "cursorAfterApply": "a9d1e29fc96ba2a231ba2fb2",
+  "remainingSelectedYearBodyAfterApply": 94,
+  "apiReadbackAfterApply": false,
+  "activationConfirmed": false,
+  "applyDeferredReason": null,
+  "releasedAfterWorkflow": 39988848904,
+  "annualRowsRead": 1111,
+  "unknownYearAstraRowsPreserved": 2552,
+  "nextCandidate": {
+    "variantId": "a9d1e29fc96ba2a231ba2fb2",
+    "year": 2023,
+    "trim": "Sportback 30 TDI., LED, Smartphone Interface"
+  }
+}
