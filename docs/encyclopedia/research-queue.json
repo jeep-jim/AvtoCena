@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T12:10:00+07:00",
+  "updatedAt": "2026-10-23T05:13:46Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1057,18 +1057,20 @@
         2021,
         2020,
         2019,
+        2017,
         2016,
         2015,
         2014,
-        2013
+        2013,
+        2012
       ],
-      "variants": 66,
+      "variants": 88,
       "status": "partial_verified_fields",
-      "researchedVariants": 33,
-      "checkedAt": "2026-10-23T11:07:00+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-vantage-remaining.json",
-      "nextAction": "13–16/20–21:31точное исполнение сохранено;19/25уточнены имена/кузов с сохранением старых источников. Следующий курсор: поздниеVantage/F1 Edition, затемAudiA1. Неподтверждённые66строк перечислены вretry, не начинать13MY заново.",
-      "revision": "6ae62cc5-c4dc-4fe6-a767-d77a8ad8a2d2"
+      "researchedVariants": 55,
+      "checkedAt": "2026-10-23T05:13:46Z",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-vantage-late-remaining.json",
+      "nextAction": "Vantage:55исследованных из88; остатоквretry. СледующаясуществующаямодельAudiA1; не повторять22новых и предыдущие33операции.",
+      "revision": "2753137b-3b83-480d-991e-4d9d40981f1c"
     },
     {
       "id": "d5a8af35e3698aa33eaea9a9",
@@ -32700,12 +32702,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T11:07:00+07:00",
+    "updatedAt": "2026-10-23T05:13:46Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "vantage_saved_api_readback_pass_next_coordinated_index_pending",
+    "state": "vantage_late_saved_readback_pass_next_audi_a1_writes_paused_for_manual_repair",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Aston Martin Vantage — поздние F1 Edition/2022–2026, затем Audi A1",
+    "nextModel": "Audi A1 — существующие394варианта, только недостающие поля; запись после согласованного repair-снимка",
     "lastVerifiedResearch": "aston-vantage",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
@@ -32784,143 +32786,25 @@
     ],
     "pendingNextIndexBatches": [
       {
-        "key": "aston-vantage",
-        "batch": "research-2026-10-23-aston-vantage",
-        "commit": "cb13e69a63b8cf5ab11e1b2f513736e1a04f687d",
-        "workflow": 39898174510,
-        "job": 120233346531,
-        "variants": 33,
-        "newVariants": 31,
-        "updatedVariants": 2,
-        "fields": 247,
-        "compiledCalculationFields": 214,
+        "key": "aston-vantage-late",
+        "batch": "research-2026-10-23-aston-vantage-late",
+        "commit": "9f155687ed5c4a95c58e77e2827d7bfc8ae71579",
+        "workflow": 39904155549,
+        "job": 120252138672,
+        "variants": 22,
+        "newVariants": 22,
+        "updatedVariants": 0,
+        "fields": 158,
+        "compiledCalculationFields": 136,
         "workflowConclusion": "success",
         "apiReadback": true,
         "includedInIndex": false,
-        "indexMembershipState": "saved_after_active_3e2d35_snapshot",
-        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-vantage-readback.json"
+        "indexMembershipState": "saved_after_isolated_9a83d4be_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-vantage-late-readback.json"
       }
     ],
-    "inFlightResearch": [
-      {
-        "batch": "research-2026-10-23-aston-vantage-late",
-        "modelId": "0f90ccb1a0cf0280fa416811",
-        "operations": 22,
-        "newVariants": 22,
-        "confirmedFields": 158,
-        "compiledCalculationFields": 136,
-        "state": "prepared_cas_apply_requested",
-        "batchFile": "docs/encyclopedia/batches/2026-10-23-aston-vantage-late.json",
-        "expectedRevision": "6ae62cc5-c4dc-4fe6-a767-d77a8ad8a2d2"
-      }
-    ],
-    "lastCompletedPass": {
-      "checkedAt": "2026-10-23T11:07:00+07:00",
-      "batch": "research-2026-10-23-aston-vantage",
-      "apiReadback": true,
-      "passed": true,
-      "operations": 33,
-      "newVariants": 31,
-      "updatedVariants": 2,
-      "confirmedFields": 247,
-      "compiledCalculationFields": 214,
-      "unchangedVariantsPreserved": 33,
-      "previousFieldSourcesPreserved": true,
-      "beforeRevision": "ea3445ce-4aaa-4294-a65a-8ce1d10ab05c",
-      "afterRevision": "6ae62cc5-c4dc-4fe6-a767-d77a8ad8a2d2",
-      "variantsBefore": 35,
-      "variantsAfter": 66,
-      "researchedVariantsAfter": 33,
-      "duplicatesAdded": 0,
-      "wholeRowVerified": false,
-      "manualWrites": 0,
-      "compilerChanged": false,
-      "activationConfirmed": false,
-      "nativeMatcher": {
-        "exactCases": 33,
-        "bodyAndGearboxMassSeparated": true,
-        "genericUaeNoGuessedPower": true,
-        "manualInputPreserved": true,
-        "unknownFieldsNotInferred": true,
-        "originalTrimPreserved": true
-      },
-      "version": 1,
-      "modelId": "0f90ccb1a0cf0280fa416811",
-      "make": "Aston Martin",
-      "model": "Vantage",
-      "commit": "cb13e69a63b8cf5ab11e1b2f513736e1a04f687d",
-      "workflow": 39898174510,
-      "job": 120233346531,
-      "workflowConclusion": "success",
-      "scopeSinceYear": 2008,
-      "allModelsComplete": false,
-      "historicalExpansionComplete": false,
-      "independentApiYears": [
-        2013,
-        2014,
-        2015,
-        2016,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "sourceReview": {
-        "factoryGuides": 9,
-        "sourceHashesOnEveryField": true,
-        "modelYearsFromFactoryGuideCatalog": true,
-        "technicalTablesVisuallyReviewed": [
-          "13MY p207",
-          "14MY p215",
-          "15MY p213",
-          "16MY p218",
-          "20.5MY p234",
-          "21MY p239"
-        ],
-        "bhpNotMislabelledPs": true,
-        "grossMassNotKerbMass": true,
-        "sportshiftStoredAsExistingRobotCategory": true,
-        "dualClutchConstructionNotAsserted": true
-      },
-      "publicParity": {
-        "passed": true,
-        "offers": 11,
-        "comparisons": 121,
-        "repeatedExactModificationGroups": 2,
-        "duplicateOfferIds": 0,
-        "report": "docs/encyclopedia/reports/2026-10-23-aston-vantage-public-parity.json"
-      },
-      "releaseState": {
-        "observedRelease": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
-        "observedCalculationVersion": "d700f68f2c1e0d14574433e613b9346b06f495ac80cc7adf6ae408225a1de14e",
-        "activeIndexFromVerifiedActivation": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
-        "previous14BatchesActivated": true,
-        "activationConfirmed": false,
-        "newBatchMembership": "saved_after_active_3e2d35_snapshot",
-        "duplicateReleaseRequested": false,
-        "nextAction": "Включить только новую Vantage-партию в следующий согласованный штатный индекс/подготовку цен. Прежние14активированных не повторять. Не запускать слепой deploy с неподтверждённым переносом DBX fuel provenance; этот участок сопровождается отдельно.",
-        "blockingContext": "В main есть неустановленное generic DBX fuel confirmation изменение; старые проекции требуют bounded переноса и приёмки. Исследовательская задача не меняет этот код/данные и не запускает второй независимый выпуск."
-      },
-      "referenceIntake": {
-        "run": 39831884392,
-        "job": 120009865681,
-        "status": "completed",
-        "conclusion": "failure",
-        "checkpointFromLatestRoadmap": {
-          "visited": 13045,
-          "saved": 8403,
-          "pending": 253,
-          "error": "redirect_outside_catalog"
-        },
-        "restarted": false
-      },
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-vantage-remaining.json",
-      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-vantage-late.json",
-      "collectorsCalculationRulesGuardsSecretsChanged": false
-    },
+    "inFlightResearch": [],
+    "lastCompletedPass": "research-2026-10-23-aston-vantage-late",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -32986,7 +32870,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-vantage-late.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-3e2d35-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -35572,6 +35456,37 @@
         "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
         "release": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-3e2d35-activation.json"
+      },
+      {
+        "key": "aston-vantage",
+        "batch": "research-2026-10-23-aston-vantage",
+        "commit": "cb13e69a63b8cf5ab11e1b2f513736e1a04f687d",
+        "workflow": 39898174510,
+        "job": 120233346531,
+        "variants": 33,
+        "newVariants": 31,
+        "updatedVariants": 2,
+        "fields": 247,
+        "compiledCalculationFields": 214,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": true,
+        "indexMembershipState": "snapshot_membership_confirmed_by_manual_release_and_serving_health",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-vantage-readback.json",
+        "indexDigest": "9a83d4be5c8d38f867468bd32731e3e75227ce7cdc958b6bec6215f5975a390b",
+        "release": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+        "activationEvidence": {
+          "workflow": 39901961792,
+          "artifact": 12479097344,
+          "roadmapCommit": "a02c62471f9901276f769b60793ba1b8a6d195ca",
+          "health": {
+            "ok": true,
+            "service": "avtocena-web",
+            "releaseSha": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+            "calculationVersion": "fa0eb1e56c141553886fbeba4761806fb951f93229c401cf38fa7ebc2986884e"
+          },
+          "doesNotCertifyAllCatalogPrices": true
+        }
       }
     ],
     "astonDb11Db12Pass": {
@@ -36674,6 +36589,145 @@
       "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-vantage-remaining.json",
       "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-vantage-late.json",
       "collectorsCalculationRulesGuardsSecretsChanged": false
+    },
+    "astonVantageLatePass": {
+      "checkedAt": "2026-10-23T05:10:15.098Z",
+      "batch": "research-2026-10-23-aston-vantage-late",
+      "passed": true,
+      "apiReadback": true,
+      "operations": 22,
+      "newVariants": 22,
+      "updatedVariants": 0,
+      "confirmedFields": 158,
+      "compiledCalculationFields": 136,
+      "beforeRevision": "6ae62cc5-c4dc-4fe6-a767-d77a8ad8a2d2",
+      "afterRevision": "2753137b-3b83-480d-991e-4d9d40981f1c",
+      "variantsBefore": 66,
+      "variantsAfter": 88,
+      "unchangedVariantsPreserved": 66,
+      "previousFieldSourcesPreserved": true,
+      "duplicatesAdded": 0,
+      "wholeRowVerified": false,
+      "manualWrites": 0,
+      "compilerChanged": false,
+      "activationConfirmed": false,
+      "nativeMatcher": {
+        "exactCases": 22,
+        "genericIdentityStillBlocked": true,
+        "manualInputPreserved": true,
+        "unknownFieldsNotInferred": true
+      },
+      "version": 1,
+      "commit": "9f155687ed5c4a95c58e77e2827d7bfc8ae71579",
+      "workflow": 39904155549,
+      "job": 120252138672,
+      "workflowConclusion": "success",
+      "modelId": "0f90ccb1a0cf0280fa416811",
+      "make": "Aston Martin",
+      "model": "Vantage",
+      "independentApiYears": [
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "researchGuardTests": {
+        "passed": 8,
+        "total": 8
+      },
+      "sourceReview": {
+        "sourceHashesOnEveryField": true,
+        "yearEvidence": "Factory owner-guide catalogue and retrospective corporate production/delivery reports",
+        "factoryTechnicalPagesVisuallyReviewed": [
+          "12MY p203/p208",
+          "17MY p199/p204"
+        ],
+        "no4LToExactCc": true,
+        "noBhpAsPs": true,
+        "noDryMassAsGvw": true,
+        "noInferredSBadge2017": true,
+        "noInferredRoadsterOrSGearbox2025": true
+      },
+      "publicParity": {
+        "passed": true,
+        "offers": 11,
+        "comparisons": 121,
+        "repeatedExactModificationGroups": 2,
+        "report": "docs/encyclopedia/reports/2026-10-23-aston-vantage-late-public-parity.json"
+      },
+      "releaseState": {
+        "healthDuringPublicRead": {
+          "ok": true,
+          "service": "avtocena-web",
+          "releaseSha": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+          "calculationVersion": "fa0eb1e56c141553886fbeba4761806fb951f93229c401cf38fa7ebc2986884e"
+        },
+        "healthAfter": {
+          "ok": true,
+          "service": "avtocena-web",
+          "releaseSha": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+          "calculationVersion": "fa0eb1e56c141553886fbeba4761806fb951f93229c401cf38fa7ebc2986884e"
+        },
+        "existingReleaseWorkflow": 39901961792,
+        "existingReleaseConclusion": "success",
+        "existingSnapshotIndex": "9a83d4be5c8d38f867468bd32731e3e75227ce7cdc958b6bec6215f5975a390b",
+        "previousVantage214IncludedInExistingSnapshot": true,
+        "newBatchIncludedInExistingSnapshot": false,
+        "newBatchActivationConfirmed": false,
+        "duplicateReleaseRequested": false,
+        "nextAction": "Включить только новую партию158/136 в следующий согласованный штатныйиндекс/подготовкуцен. Ручнаясессия сопровождает8329202 иDBX/UI, не дублировать её выпуск/перенос."
+      },
+      "referenceIntake": {
+        "run": 39831884392,
+        "job": 120009865681,
+        "status": "completed",
+        "conclusion": "failure",
+        "checkpointFromRoadmap": {
+          "visited": 13045,
+          "saved": 8403,
+          "pending": 253,
+          "error": "redirect_outside_catalog"
+        },
+        "restarted": false
+      },
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-vantage-late-remaining.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1.json",
+      "allModelsComplete": false,
+      "historicalExpansionComplete": false,
+      "collectorsCalculationRulesGuardsSecretsChanged": false,
+      "coordination": {
+        "observedMain": "a02c62471f9901276f769b60793ba1b8a6d195ca",
+        "writesPaused": true,
+        "reason": "Ручнаясессия12:11 готовит guarded repair proof для существующих точных referenceEvidence и согласованный выпуск. Наша партия сохранена05:09:40UTC, до новой паузы. Дальнейшее research-сохранение — только после изоляции следующего согласованного снимка; независимое исследование разрешено.",
+        "doNotDuplicate": [
+          "reference repair preview/apply",
+          "production deploy",
+          "UI changes",
+          "full China collection"
+        ],
+        "newBatchAwaitingNextIndex": true
+      }
+    },
+    "researchWriteCoordination": {
+      "observedMain": "a02c62471f9901276f769b60793ba1b8a6d195ca",
+      "writesPaused": true,
+      "reason": "Ручнаясессия12:11 готовит guarded repair proof для существующих точных referenceEvidence и согласованный выпуск. Наша партия сохранена05:09:40UTC, до новой паузы. Дальнейшее research-сохранение — только после изоляции следующего согласованного снимка; независимое исследование разрешено.",
+      "doNotDuplicate": [
+        "reference repair preview/apply",
+        "production deploy",
+        "UI changes",
+        "full China collection"
+      ],
+      "newBatchAwaitingNextIndex": true
     }
   },
   "scope": {
