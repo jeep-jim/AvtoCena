@@ -1,11 +1,4 @@
 {
-  "requestedAt": "2026-10-23T19:12:30Z",
-  "reason": "Address DBX through checksum-verified UAE budget partition; full global budget root exceeded bound. Retain all byte/time/identity/writer guards; preview only.",
-  "previewFuelEvidenceRepair": {
-    "offerIds": [
-      "b65974b83d5399d588073fc5"
-    ],
-    "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
-    "generationId": "gen_1792702445675_8c312f85"
-  }
+  "requestedAt": "2026-10-23T19:30:00Z",
+  "reason": "Read-only fresh manifest/lease after verified six-object DBX evidence repair; no preview or mutation."
 }
