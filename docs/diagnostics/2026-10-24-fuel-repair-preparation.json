@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-10-23T18:46:30Z",
-  "state": "prepared_not_applied_not_deployed",
+  "checkedAt": "2026-10-23T18:48:30Z",
+  "state": "prepared_not_applied_not_deployed_waiting_existing_lease",
   "targetId": "b65974b83d5399d588073fc5",
   "installedRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
   "code": {
@@ -35,8 +35,17 @@
     },
     "indexVerified": false,
     "parityVerified": false,
-    "writerReleaseUnverified": true,
-    "doNotCancelOrDuplicate": true
+    "writerReleaseUnverified": false,
+    "doNotCancelOrDuplicate": true,
+    "writer": {
+      "checkedAt": "2026-10-23T18:47:11.192Z",
+      "runId": 40006063486,
+      "jobId": 120594147586,
+      "active": true,
+      "operationId": "read-model-repair-acff5335-fa4f-4b6f-9408-b0afc7758b12",
+      "startedAt": "2026-10-23T18:15:03.906Z",
+      "lockedUntil": "2026-10-23T18:55:03.906Z"
+    }
   },
   "liveAcceptance": {
     "runId": 40001652916,
@@ -82,5 +91,9 @@
   ],
   "scheduledJobsChanged": false,
   "collectorRunsStarted": false,
-  "deployRequested": false
+  "deployRequested": false,
+  "lastExternalHealth": {
+    "checkedAt": "2026-10-23T18:48:00Z",
+    "outcome": "single 20s timeout, no response bytes; not evidence of global outage or changed release"
+  }
 }
