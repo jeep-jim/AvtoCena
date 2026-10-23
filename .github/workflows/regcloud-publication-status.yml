@@ -69,6 +69,28 @@ jobs:
             if(index?.digest!==binding.digest||createHash('sha256').update(JSON.stringify(index.models)).digest('hex')!==binding.digest)throw Error('index_checksum_mismatch');
             const models={};
             for(const key of keys){const rows=index.models[key]||[],batches={};for(const row of rows)for(const source of Object.values(row.sources||{}))if(source.batchId)batches[source.batchId]=(batches[source.batchId]||0)+1;models[key]={variants:rows.length,revisions:[...new Set(rows.map(r=>r.revision))],batchCalculationFields:batches};}
+            if(marker.inspectOfferIds !== undefined){
+              const ids=marker.inspectOfferIds;
+              if(!Array.isArray(ids)||ids.length<1||ids.length>3||ids.some(id=>typeof id!=='string'||!/^[a-f0-9]{24}$/.test(id)))throw Error('invalid_offer_inspection');
+              const {getOfferFromCurrentShard,searchProjectionFromOffer}=await import('./apps/web/lib/catalog/storage.ts');
+              const {applyEncyclopediaCalculation}=await import('./apps/web/lib/encyclopedia/calculation-index.ts');
+              const {applyUaeManualSpecifications}=await import('./apps/web/lib/catalog/uae-manual-specifications.ts');
+              const {SPECIFICATION_AUDIT_FIELDS,classifySpecificationEvidence}=await import('./apps/web/lib/catalog/specification-evidence-audit.ts');
+              const rows=[];
+              for(const id of ids){
+                const source=await getOfferFromCurrentShard(id);
+                if(!source||source.id!==id)throw Error('inspection_offer_missing');
+                const full=applyEncyclopediaCalculation(applyUaeManualSpecifications(source),index);
+                const projected=searchProjectionFromOffer(full);
+                const audit=offer=>Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field=>[field,classifySpecificationEvidence(offer,field)]));
+                const values=offer=>Object.fromEntries(['id','market','year','fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw'].map(key=>[key,offer[key]??null]));
+                rows.push({id,full:{values:values(full),audit:audit(full)},projection:{values:values(projected),audit:audit(projected)},attestedFields:Object.keys(full.encyclopediaCalculation?.values||{})});
+              }
+              const after=await storage.readJson('catalog/manifest.json',null);
+              if(after?.generationId!==manifest?.generationId)throw Error('inspection_generation_changed');
+              await health();
+              console.log('OFFER_SPECIFICATION_PROVENANCE',JSON.stringify({checkedAt:new Date().toISOString(),generationId:manifest?.generationId,release,indexDigest:index.digest,rows}));
+            }
             await health();
             console.log('RELEASE_INDEX_INSPECTION',JSON.stringify({release,digest:index.digest,createdAt:index.createdAt,manifestDigest:index.manifestDigest,models}));
           }

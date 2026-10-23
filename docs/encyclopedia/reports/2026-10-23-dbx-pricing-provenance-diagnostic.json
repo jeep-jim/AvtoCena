@@ -1,0 +1,49 @@
+{
+  "checkedDate": "2026-10-23",
+  "generationId": "gen_1792702445675_8c312f85",
+  "offerId": "b65974b83d5399d588073fc5",
+  "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+  "search": {
+    "url": "https://avtocena.com/api/catalog/search?market=uae&brand=Aston%20Martin&model=DBX&pageSize=24",
+    "httpStatus": 200,
+    "seconds": 6.080459,
+    "totalRub": null,
+    "calculationStatus": "needs_data",
+    "fuelPowertrainAudit": {
+      "state": "ambiguous",
+      "reason": "unclassified_field_provenance",
+      "provenance": "stored_unclassified"
+    }
+  },
+  "detail": {
+    "url": "https://avtocena.com/cars/offer/b65974b83d5399d588073fc5",
+    "httpStatus": 200,
+    "secondsIncludingRedirect": 8.343364,
+    "totalRub": 25164851,
+    "calculationStatus": "estimated"
+  },
+  "sameFields": {
+    "year": 2023,
+    "sourcePrice": 725000,
+    "sourceCurrency": "AED",
+    "fuel": "petrol",
+    "powertrainKind": "combustion",
+    "engineCc": 3982,
+    "powerHp": 707,
+    "powerKw": 520,
+    "icePowerKw": 520
+  },
+  "evidence": {
+    "classifierUnchangedSinceInstalledRelease": true,
+    "attestedFields": [
+      "engineCc",
+      "powerHp",
+      "powerKw",
+      "icePowerKw",
+      "transmission",
+      "bodyType"
+    ],
+    "fullStoredRecordComparison": "pending read-only diagnostic",
+    "fixed": false
+  }
+}
