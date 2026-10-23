@@ -12875,3 +12875,8 @@ HealthHTTP200: прежний releasef4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112/ca
 Все18вариантов получили точные списки непроверенныхполей;5групп годовых/региональных повторов — docs/encyclopedia/retry-2026-10-23-aston-v12-vantage-remaining.json. Сохранены старые retry. Следующий курсорV12Vantage2022–2023/2018, затемV8; handoffdocs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage-late.json. Найдены заводской пресс-релиз2022 и корпоративные годовыеисточники для проверки реального выпуска; они не назначены UAEзаписи по одному названию. ОбзорS2013–2018 сAM28/573PS не заменяет точные годовые таблицы. Полный проход с2008 не завершён. Сборщики/правиларасчётов/защиты/секреты неизменны.
 
 Отчёт: docs/encyclopedia/reports/2026-10-23-aston-v12-vantage-pass.json. API-readback иpublic-parity сохранены отдельно.
+
+
+### 23.10.2026 08:13 Asia/Krasnoyarsk — Контроль после восстановления суточных страниц
+
+Прочитаны свежие AGENTS/roadmap на2ea54e83. China39840733509/publish120041080822 IN_PROGRESS; scheduled39857878662 jobs[]. Изменение generation-scoped REGpages97886ada и его успешная приёмка07:44 учтены, повторная подготовка не запрашивается. Запрошено только одно read-only чтение manifest/lease. Deploy/повторный China/сбор/cancel/unlock не запускаются. Отдельная энциклопедия V12Vantage39881234673 сохранена;12pending1035полей/906расчётных, продолжаются поздниеV12Vantage. Исследования не дублируются. Проверяются новые REGsharedprices failures отдельно от legacystorage.
