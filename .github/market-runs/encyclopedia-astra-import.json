@@ -1,7 +1,8 @@
 {
-  "requestedAt": "2026-10-23T11:54:00Z",
-  "mode": "preview",
+  "requestedAt": "2026-10-23T14:47:28.244481+00:00",
+  "mode": "apply",
   "sourcePlan": "docs/encyclopedia/astra/source-plan-2026-10-23.json",
   "sourcePlanSha256": "25e56df33170014e9a53611a3f7c52952fc340984d2bd9846967dd91f789b12d",
-  "reason": "Owner explicitly requests all useful open ASTRA datasets. Verify and archive every pinned source in existing private REG storage, preserve exact technical variants and prepare an immutable full-corpus import plan before applying it. No inferred model years or certified power; existing records and manual edits remain protected. Retry after run39949066818 failed TLS validation before data writes; use runner system CA bundle, retaining TLS verification."
+  "reason": "Apply exact successful ASTRA preview39949279655. 33 archived sources verified, 2895 model plans, 230447 unknown-year technical variants; 5 annual variants /8 missing fields /24 attestations, zero new annual30min. Preserve revisions, manual values and source identities; no re-download or broad guessed matching.",
+  "expectedPlanDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
 }

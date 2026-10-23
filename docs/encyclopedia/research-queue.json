@@ -37011,8 +37011,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
-      "writesPaused": false,
-      "reason": "Run39936828093 step Prepare private encyclopedia index and required batch membership completed successfully. Immutable release8846926 snapshot isolated; research can resume, new batches are post-snapshot.",
+      "writesPaused": true,
+      "reason": "ASTRA exact plan6d417105 apply and following immutable release snapshot; independent research writes remain paused to preserve revision consistency.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37075,14 +37075,15 @@
       "pendingReleaseWorkflow": 39936828093,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T12:01:37.272Z",
-        "state": "defer_new_apply_while_astra_snapshot_plan_is_active",
+        "state": "astra_apply_then_release_snapshot",
         "workflow": 39949279655,
         "job": 120399492239,
-        "mode": "preview",
+        "mode": "apply",
         "scope": "Независимые research batches; не блокирует основной ASTRA preview/apply",
         "reason": "apply-astra-corpus.mjs сравнивает identity(manifest) всех model revisions до/после preview и beforeRevision при apply. Новый research save устарит план. Не изменять маркер ASTRA и не запускать competing writer.",
         "resumeCondition": "Прочесть свежий roadmap и terminal ASTRA preview/apply; после согласованного сохранения проверить текущие API revisions и исключить уже заполненные ASTRA поля. Затем свежий CAS и API-readback research партии.",
-        "preparedBatch": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json"
+        "preparedBatch": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+        "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
       }
     },
     "audiA1BodyAndGapsPass": {
