@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T21:22:50.569522Z",
+  "updatedAt": "2026-10-23T22:00:27.622Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1148,8 +1148,8 @@
       ],
       "variants": 3663,
       "status": "partial_verified_fields",
-      "researchedVariants": 534,
-      "checkedAt": "2026-10-23T21:00:26.197Z",
+      "researchedVariants": 553,
+      "checkedAt": "2026-10-23T22:00:27.622Z",
       "researchedYears": [
         2009,
         2010,
@@ -1197,10 +1197,10 @@
         2025,
         2026
       ],
-      "nextAction": "Продолжить с a083a1cc0a9a1708d2df6a0a:16 явно обозначенных Sportback/SB/SPB 2025 без кузова, затем2026. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
+      "nextAction": "Продолжить с 5bb44ac456b5005f011b5353:32 явно обозначенных Sportback/SB/SPB 2026 без кузова, затем следующий пункт очереди. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
-      "nextVariantId": "a083a1cc0a9a1708d2df6a0a",
-      "boundedReadAt": "2026-10-23T21:00:26.197Z",
+      "nextVariantId": "5bb44ac456b5005f011b5353",
+      "boundedReadAt": "2026-10-23T22:00:27.622Z",
       "boundedReadYears": [
         2026,
         2025,
@@ -1217,10 +1217,10 @@
         2010,
         2009
       ],
-      "boundedReadRevision": "8fc067a1-14e0-4c21-9d84-ce321843ddbe",
-      "revision": "8fc067a1-14e0-4c21-9d84-ce321843ddbe",
-      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2024-2025-remaining.json",
-      "lastBatch": "research-2026-10-24-audi-a3-2024-2025-body",
+      "boundedReadRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "revision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2025-2026-remaining.json",
+      "lastBatch": "research-2026-10-24-audi-a3-2025-2026-body",
       "lastBatchFields": 50,
       "lastBatchVariants": 50,
       "annualVariants": 1111,
@@ -32745,38 +32745,36 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T21:22:50.569522Z",
+    "updatedAt": "2026-10-23T22:00:27.622Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a3_2024_2025_50_body_saved_readback_pending_next_index",
+    "state": "audi_a3_2025_2026_50_body_saved_readback_pending_next_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "a083a1cc0a9a1708d2df6a0a",
-      "year": 2025,
-      "trim": "Sportback 45 TFSIe S line Navi Matrix ACC AHK",
+      "variantId": "5bb44ac456b5005f011b5353",
+      "year": 2026,
+      "trim": "Sportback Advanced TFSI Stronic Navi ACC EPH",
       "missingValueFields": [
+        "drive",
         "bodyType",
         "engineCode",
-        "grossVehicleWeightKg",
-        "power30MinKw",
-        "batteryKwh"
+        "grossVehicleWeightKg"
       ],
       "knownValues": {
-        "fuel": "hybrid",
-        "powertrainKind": "phev",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
         "engineCc": 1498,
-        "powerHp": 272,
-        "powerKw": 200,
-        "icePowerKw": 130,
-        "transmission": "automatic",
-        "drive": "fwd"
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic"
       },
       "modelId": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revision": "8fc067a1-14e0-4c21-9d84-ce321843ddbe"
+      "revision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e"
     },
-    "lastVerifiedResearch": "audi-a3-2024-2025-body",
+    "lastVerifiedResearch": "audi-a3-2025-2026-body",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32792,36 +32790,51 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2024-2025-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2025-2026-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-24-audi-a3-2024-2025-body",
-      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
-      "commit": "6857d622c1b3419f186e534d2e16d200be019633",
-      "workflow": 40023312915,
-      "job": 120653127507,
-      "applyFinishedAt": "2026-10-23T20:59:28.139Z",
+      "batch": "research-2026-10-24-audi-a3-2025-2026-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json",
+      "commit": "88e4b356b68da063fcb4c77b97c0c3507f8056df",
+      "workflow": 40030422620,
+      "job": 120677030553,
+      "applyFinishedAt": "2026-10-23T21:58:28.899Z",
       "variants": 50,
       "newVariants": 0,
       "fields": 50,
       "compiledFields": 50,
       "apiReadback": true,
       "includedInIndex": false,
-      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-2025-body-pass.json",
-      "afterRevision": "8fc067a1-14e0-4c21-9d84-ce321843ddbe",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-body-pass.json",
+      "afterRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
       "publicParity": {
         "passed": true,
-        "offers": 7,
-        "comparisons": 91,
-        "matched": 91,
+        "offers": 6,
+        "comparisons": 78,
+        "matched": 78,
         "repeatedGroups": 2,
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-2025-public-parity.json"
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-public-parity.json"
       },
-      "nativeExact": 49,
+      "nativeExact": 46,
       "nativeHeld": [
         {
-          "variantId": "4e181d11889e128ab9ce9502",
-          "trim": "SB+S-Line+TDI+S-Tronic+P.Business-Plus",
+          "variantId": "f885fcfdff168f27d655f749",
+          "trim": "Sportback*ACC*ViCo*Kamera*LED*NAVI**",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "0bc1eade35a29bfd2fcd9f63",
+          "trim": "Sportback TDI ADVANCED LED NAVI KAMERA eKLAPP",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "e8b18696508729ed60e0248d",
+          "trim": "Sportback advanced TDI Stron LED Navi RFK HUD",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "e8bfbdad8a306974763288d1",
+          "trim": "SB TFSIe Stronic S line/LED/PDC+/Navi+/Kamera",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         }
       ]
@@ -32916,9 +32929,56 @@
             "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
           }
         ]
+      },
+      {
+        "batch": "research-2026-10-24-audi-a3-2025-2026-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json",
+        "commit": "88e4b356b68da063fcb4c77b97c0c3507f8056df",
+        "workflow": 40030422620,
+        "job": 120677030553,
+        "applyFinishedAt": "2026-10-23T21:58:28.899Z",
+        "variants": 50,
+        "newVariants": 0,
+        "fields": 50,
+        "compiledFields": 50,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-body-pass.json",
+        "afterRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+        "publicParity": {
+          "passed": true,
+          "offers": 6,
+          "comparisons": 78,
+          "matched": 78,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-public-parity.json"
+        },
+        "nativeExact": 46,
+        "nativeHeld": [
+          {
+            "variantId": "f885fcfdff168f27d655f749",
+            "trim": "Sportback*ACC*ViCo*Kamera*LED*NAVI**",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "0bc1eade35a29bfd2fcd9f63",
+            "trim": "Sportback TDI ADVANCED LED NAVI KAMERA eKLAPP",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "e8b18696508729ed60e0248d",
+            "trim": "Sportback advanced TDI Stron LED Navi RFK HUD",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "e8bfbdad8a306974763288d1",
+            "trim": "SB TFSIe Stronic S line/LED/PDC+/Navi+/Kamera",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          }
+        ]
       }
     ],
-    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-2025-body-pass.json",
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -38354,7 +38414,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0420.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0501.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -38784,6 +38844,53 @@
         {
           "variantId": "4e181d11889e128ab9ce9502",
           "trim": "SB+S-Line+TDI+S-Tronic+P.Business-Plus",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        }
+      ]
+    },
+    "audiA3Body2025_2026Pass": {
+      "batch": "research-2026-10-24-audi-a3-2025-2026-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json",
+      "commit": "88e4b356b68da063fcb4c77b97c0c3507f8056df",
+      "workflow": 40030422620,
+      "job": 120677030553,
+      "applyFinishedAt": "2026-10-23T21:58:28.899Z",
+      "variants": 50,
+      "newVariants": 0,
+      "fields": 50,
+      "compiledFields": 50,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-body-pass.json",
+      "afterRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "publicParity": {
+        "passed": true,
+        "offers": 6,
+        "comparisons": 78,
+        "matched": 78,
+        "repeatedGroups": 2,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-public-parity.json"
+      },
+      "nativeExact": 46,
+      "nativeHeld": [
+        {
+          "variantId": "f885fcfdff168f27d655f749",
+          "trim": "Sportback*ACC*ViCo*Kamera*LED*NAVI**",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "0bc1eade35a29bfd2fcd9f63",
+          "trim": "Sportback TDI ADVANCED LED NAVI KAMERA eKLAPP",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "e8b18696508729ed60e0248d",
+          "trim": "Sportback advanced TDI Stron LED Navi RFK HUD",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "e8bfbdad8a306974763288d1",
+          "trim": "SB TFSIe Stronic S line/LED/PDC+/Navi+/Kamera",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         }
       ]

@@ -1,36 +1,34 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-23T21:00:26.197Z",
-  "lastCompletedBatch": "research-2026-10-24-audi-a3-2024-2025-body",
+  "checkedAt": "2026-10-23T22:00:27.622Z",
+  "lastCompletedBatch": "research-2026-10-24-audi-a3-2025-2026-body",
   "modelId": "f40e34e905b8ca09f3636eda",
   "make": "Audi",
   "model": "A3",
-  "revision": "8fc067a1-14e0-4c21-9d84-ce321843ddbe",
+  "revision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
   "next": {
-    "variantId": "a083a1cc0a9a1708d2df6a0a",
-    "year": 2025,
-    "trim": "Sportback 45 TFSIe S line Navi Matrix ACC AHK",
+    "variantId": "5bb44ac456b5005f011b5353",
+    "year": 2026,
+    "trim": "Sportback Advanced TFSI Stronic Navi ACC EPH",
     "missingValueFields": [
+      "drive",
       "bodyType",
       "engineCode",
-      "grossVehicleWeightKg",
-      "power30MinKw",
-      "batteryKwh"
+      "grossVehicleWeightKg"
     ],
     "knownValues": {
-      "fuel": "hybrid",
-      "powertrainKind": "phev",
+      "fuel": "petrol",
+      "powertrainKind": "combustion",
       "engineCc": 1498,
-      "powerHp": 272,
-      "powerKw": 200,
-      "icePowerKw": 130,
-      "transmission": "automatic",
-      "drive": "fwd"
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
+      "transmission": "automatic"
     }
   },
-  "nextAction": "Продолжить с a083a1cc0a9a1708d2df6a0a:16 явно обозначенных Sportback/SB/SPB 2025 без кузова, затем2026. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
+  "nextAction": "Продолжить с 5bb44ac456b5005f011b5353:32 явно обозначенных Sportback/SB/SPB 2026 без кузова, затем следующий пункт очереди. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
   "remaining2022BodyCandidates": 0,
-  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2024-2025-remaining.json",
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2025-2026-remaining.json",
   "earlyRetry": [
     {
       "id": "c98ec4e1792a7635f7ad3f1a",
@@ -142,5 +140,6 @@
   "cursorNotAdvanced": false,
   "remaining2023BodyCandidates": 0,
   "remaining2024BodyCandidates": 0,
-  "remaining2025BodyCandidates": 16
+  "remaining2025BodyCandidates": 0,
+  "remaining2026BodyCandidates": 32
 }

@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T22:00:27.622Z",
+  "state": "saved_readback_verified_pending_next_coordinated_release",
+  "newReleaseRequested": false,
+  "installedRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+  "installedIndex": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+  "pendingBatches": [
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json"
+  ],
+  "pendingVariants": 100,
+  "pendingFields": 100,
+  "uniqueModelCount": 1,
+  "duplicateTargetFields": 0,
+  "requiredResearchBatches": [
+    "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a1-next-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-bmw-i5-2026-30min.json",
+    "docs/encyclopedia/batches/2026-10-23-bmw-i4-2026-30min.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a1-2023-2025-body.json",
+    "docs/encyclopedia/batches/2026-10-23-owner-li-l6-l7.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-camry-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-bz3x-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-3x-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-camry-2026-petrol.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-aygox-annual-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-aygox-hybrid.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-early-and-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2020-2021-body.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-cross.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2021-2022-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a6-2020-2024-avant-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json"
+  ],
+  "publicResearchBatches": [
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-cross.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2021-2022-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a6-2020-2024-avant-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json"
+  ],
+  "requiredAstraPlanDigests": [
+    "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
+  ],
+  "guards": "Fresh writer preflight; preserve exact/manual/source/unknown30min, ASTRA ancestry and immutable manifest; verify required batch membership, public gate and health. Do not replay apply or import.",
+  "scope": "Две послеснимковые партии Audi A3:2024–2025body50 и2025–2026body50;100 разных вариантов/100 кузовных полей. Не100 полностью подтверждённых автомобилей/готовых расчётов. Предыдущие2024body50 уже активированы вe7a307.",
+  "readbackReports": [
+    {
+      "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-readback.json"
+    },
+    {
+      "batch": "research-2026-10-24-audi-a6-2020-2024-avant-body",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a6-avant-readback.json"
+    },
+    {
+      "batch": "research-2026-10-24-audi-a3-2023-body",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-readback.json"
+    },
+    "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-readback.json",
+    "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-readback.json",
+    "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-2025-readback.json",
+    "docs/encyclopedia/reports/2026-10-24-audi-a3-2025-2026-readback.json"
+  ],
+  "nativeHeld": [
+    {
+      "variantId": "bcdc67fac908f954058be7e4",
+      "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    },
+    {
+      "variantId": "060ecbd39c657ef567ea7cbe",
+      "trim": "Sportback Business Edition S line S-tronic",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    },
+    {
+      "variantId": "4e181d11889e128ab9ce9502",
+      "trim": "SB+S-Line+TDI+S-Tronic+P.Business-Plus",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    },
+    {
+      "variantId": "f885fcfdff168f27d655f749",
+      "trim": "Sportback*ACC*ViCo*Kamera*LED*NAVI**",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    },
+    {
+      "variantId": "0bc1eade35a29bfd2fcd9f63",
+      "trim": "Sportback TDI ADVANCED LED NAVI KAMERA eKLAPP",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    },
+    {
+      "variantId": "e8b18696508729ed60e0248d",
+      "trim": "Sportback advanced TDI Stron LED Navi RFK HUD",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    },
+    {
+      "variantId": "e8bfbdad8a306974763288d1",
+      "trim": "SB TFSIe Stronic S line/LED/PDC+/Navi+/Kamera",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    }
+  ],
+  "currentRelease": {
+    "id": 40019745015,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "checkedAt": "2026-10-23T21:00:01.633Z",
+    "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "requestedBatches": [
+      "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json"
+    ],
+    "requestedFields": 50,
+    "privateIndexStep": "success",
+    "membershipStep": "success",
+    "activationConfirmed": true,
+    "isolationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json",
+    "activationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-public-acceptance.json"
+  },
+  "postSnapshotBatches": [
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json"
+  ],
+  "postSnapshotFields": 100,
+  "releaseCoordination": {
+    "state": "waiting_existing_scheduled_china_refresh",
+    "workflow": 40026092554,
+    "observedStatus": "in_progress",
+    "checkedAt": "2026-10-23T22:00:27.622Z",
+    "nextAction": "После terminal публикации проверить свежий writer lease и включить все актуальные pending в один согласованный выпуск; не дублировать China/deploy."
+  }
+}
