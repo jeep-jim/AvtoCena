@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T07:03:35.053Z",
+  "updatedAt": "2026-10-23T08:01:00Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -37690,6 +37690,16 @@
         "scope": "Ограниченная выборка Europe A1; не весь каталог",
         "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-public-parity.json"
       }
+    },
+    "inFlightResearch": {
+      "batch": "research-2026-10-23-audi-a1-2023-2025-body",
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "variants": 50,
+      "fields": 50,
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "status": "prepared_requesting_workflow",
+      "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a1-2023-2025-body.json",
+      "apiReadback": false
     }
   },
   "scope": {
