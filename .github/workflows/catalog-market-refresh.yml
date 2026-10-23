@@ -38,6 +38,8 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 24, cache: npm}
       - run: npm ci
+      - name: Verify background source planning offline
+        run: node --import tsx --test tests/catalog-market-workflow-policy.test.ts
       - id: policy
         env:
           EVENT_NAME: ${{ github.event_name }}
@@ -47,13 +49,14 @@ jobs:
           import fs from 'node:fs';
           import { catalogRefreshDue } from './scripts/lib/catalog-refresh-schedule.mjs';
           const {readCollectionControls}=await import('./apps/web/lib/catalog/collection-controls.ts');
-          const {collectionMarketEnabled}=await import('./apps/web/lib/catalog/collection-controls-schema.ts');
+          const {collectionMarketEnabled,collectionWorkflowEnabled}=await import('./apps/web/lib/catalog/collection-controls-schema.ts');
           const controls=await readCollectionControls();
           const market = process.env.TARGET_MARKET;
           const policy = JSON.parse(fs.readFileSync('data/catalog/refresh-policy-v1.json','utf8'));
-          const paused = Boolean(policy.pausedMarkets?.[market]) || !collectionMarketEnabled(controls,market);
+          // AJ System is served on demand and does not produce this worker's intake.
+          const paused = Boolean(policy.pausedMarkets?.[market]) || !collectionMarketEnabled(controls,market) || !collectionWorkflowEnabled(controls,market);
           const run = !paused && (['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && (market === 'china' || catalogRefreshDue())));
-          if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets[market]}`);
+          if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets?.[market] || 'no_enabled_background_source'}`);
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
           if (!['china','korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
           const reuse = marker.reuseRunId || '';

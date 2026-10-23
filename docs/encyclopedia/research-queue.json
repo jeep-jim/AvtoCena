@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T22:00:27.622Z",
+  "updatedAt": "2026-10-23T22:31:03.324461Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32745,7 +32745,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T22:00:27.622Z",
+    "updatedAt": "2026-10-23T22:31:03.324461Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2025_2026_50_body_saved_readback_pending_next_index",
     "preserveManual": true,
@@ -36719,12 +36719,13 @@
       }
     },
     "latestPublicationCheck": {
-      "workflow": 40026042515,
-      "job": 120662380193,
+      "workflow": 40033674573,
+      "job": 120687829911,
       "conclusion": "success",
-      "checkedAt": "2026-10-23T21:21:02.570Z",
+      "checkedAt": "2026-10-23T22:27:37.832Z",
       "writerActive": false,
-      "generationId": "gen_1792702445675_8c312f85"
+      "generationId": "gen_1792702445675_8c312f85",
+      "note": "China publish job still active; free lease is not terminal publisher acceptance."
     },
     "astonRapidePass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
@@ -37428,7 +37429,7 @@
     "researchWriteCoordination": {
       "observedMain": "e941ec64941d520b1f483d7efffbef27fd72c71e",
       "writesPaused": false,
-      "reason": "A3 fix and2024body50 accepted in e7a307. Next2024-2025body50 validated, but scheduled China40026092554 started21:20:57UTC. No duplicate deploy requested; keep research writes allowed. Recheck terminal refresh and fresh lease before next coordinated release.",
+      "reason": "100pending body fields fresh-readback verified. China40026092554 publication still active. Korea40032114341 terminal no_fresh_source_offers, previous manifest preserved; background-source planner fixed, no rerun. Wait China terminal and fresh lease before one coordinated release.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37436,7 +37437,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T21:22:50.569522Z",
+      "checkedAt": "2026-10-23T22:31:03.324461Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37512,11 +37513,20 @@
       "isolationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json",
       "deferredNextRelease": {
         "report": "docs/encyclopedia/reports/2026-10-24-next-release-writer-coordination.json",
-        "reason": "active_scheduled_catalog_refresh",
+        "reason": "active_china_publication",
         "workflow": 40026092554,
-        "pendingFields": 50,
+        "pendingFields": 100,
         "deployRequested": false,
-        "checkedAt": "2026-10-23T21:22:50.569522Z"
+        "checkedAt": "2026-10-23T22:31:03.324461Z",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-24-pending100-live-readback.json"
+      },
+      "lastKoreaRefreshFailure": {
+        "workflow": 40032114341,
+        "job": 120683058459,
+        "report": "docs/diagnostics/2026-10-24-korea-empty-background-run.json",
+        "reason": "no_fresh_source_offers",
+        "previousManifestPreserved": true,
+        "rerunRequested": false
       }
     },
     "audiA1BodyAndGapsPass": {
