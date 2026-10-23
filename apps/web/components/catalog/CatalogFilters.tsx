@@ -21,7 +21,6 @@ import { CityPickerDialog, LocationIcon } from "../home/CitySelector";
 import { useSelectedCity } from "../../lib/location/selected-city";
 import { persistCity, readSelectedCity } from "../../lib/location/selected-city";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
-import { isElectrifiedFilter } from "../../lib/catalog/fuel-filter";
 
 import { CatalogFilterUiEnhancer } from "./CatalogFilterUiEnhancer";
 
@@ -338,7 +337,6 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   // Server HTML can be visible before this component has its event handlers.
   const [interactive, setInteractive] = useState(false);
   useEffect(() => setInteractive(true), []);
-  const electricOnly = isElectrifiedFilter(draft.fuel);
   const updating = pending || catalogQuery(draft,sortKey,sortDirection) !== catalogQuery(draftFromInitial(initial),initialSortState.key,initialSortState.direction);
 
   useEffect(() => {

@@ -25,7 +25,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Verify exact reuse and provenance guards
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/encyclopedia-reference-reuse.test.ts tests/encyclopedia-calculation-index.test.ts
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/encyclopedia-reference-reuse.test.ts tests/encyclopedia-reference-publication.test.ts tests/encyclopedia-calculation-index.test.ts
       - name: Inspect or apply the reviewed existing-record plan
         env:
           JSON_STORAGE_DRIVER: object
