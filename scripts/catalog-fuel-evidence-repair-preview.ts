@@ -7,6 +7,7 @@ import {catalogIndexShardKey} from '../apps/web/lib/catalog/storage';
 import {fuelRepairDigest,repairFuelRows} from './lib/catalog-fuel-evidence-repair';
 
 // Explicit manual preview only. It cannot acquire a writer or alter any object.
+export async function main(){
 const marker=JSON.parse(await readFile('.github/market-runs/regcloud-publication-status.json','utf8'));
 const request=marker.previewFuelEvidenceRepair;
 if(!request || !Array.isArray(request.offerIds) || request.offerIds.length<1 || request.offerIds.length>3
@@ -87,3 +88,5 @@ const report={checkedAt:new Date().toISOString(),mode:'preview',productionWrites
  remaining:['Apply requires exact fresh source/generation/ETag checks and writer lease; no apply is implemented by this preview.','Price snapshots and live search/detail parity require verification after repair.']};
 await mkdir('reports',{recursive:true});await writeFile('reports/catalog-fuel-evidence-repair-preview.json',JSON.stringify(report,null,2)+'\n');
 console.log('FUEL_EVIDENCE_REPAIR_PREVIEW',JSON.stringify(report));
+}
+main().catch(error=>{console.error(error);process.exitCode=1;});
