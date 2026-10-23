@@ -13805,3 +13805,8 @@ Diagnostic40017888810/job120634551813 TERMINAL SUCCESS20:16:46.996UTC. На ус
 Metadata40019528235/job120640158206 SUCCESS:20:29:32.861UTC writeractive=false/lockedUntilпуст, gen_1792702445675_8c312f85. Sharedprices40016528469 и40017903406 TERMINAL SUCCESS; других active deploy/writer в свежем списке Actions нет. Проверен канонический digest партии4f01aacb7d1076a4180505483a717b7a854ba220ac3f9ef82620b5d31a243cd8 (digest JSON, не хеш форматированного файла),50entries/required23/public9.
 
 Запрошен один regcloud-deploy актуального main с уже проверенным bodyfix1f207982 и pending A3 2024body50; ideaReports пуст, ASTRAplan6d417105 сохранён. Researchwrites пауза только до изоляции нового privateindex/membership, затем свежие revisions/CAS. Курсор29f5beff и независимая research работа сохранены. Установка/публичный bodyparity пока НЕ подтверждены; после SUCCESS сверить health, publicrelease artifact,061974search/card кузов/подпись/4105050цену и прежние DBX/трансмиссия/30minguards. Никакого повторного apply, скачивания ASTRA или изменения source controls.
+
+
+### 24.10.2026, 03:32 Красноярск — идентификатор текущего A3 выпуска
+
+[Release40019745015](https://github.com/jeep-jim/AvtoCena/actions/runs/40019745015), SHAe7a30716fad957202890c82f59274e8f0b2ec38a. ASTRAguard job120640893120 SUCCESS; prepare job120641315906 IN_PROGRESS. Researchwrites всё ещё приостановлены до SUCCESS privateindex/membership; это не повторный apply. Следующий контроль читает этот run, не запускает дубликат. Publicacceptance подготовлена для061974body/label/4105050, двух прежнихA3transmission, DBX25031959, LiL6 certified134/неполныйрасчёт. Фактическая активация пока не подтверждена.

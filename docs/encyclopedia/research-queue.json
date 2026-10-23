@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T20:30:07.587099Z",
+  "updatedAt": "2026-10-23T20:32:12.779885Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32745,7 +32745,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T20:30:07.587099Z",
+    "updatedAt": "2026-10-23T20:32:12.779885Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2024_50_body_saved_readback_pending_next_index",
     "preserveManual": true,
@@ -32832,8 +32832,8 @@
     "indexReleaseRequested": true,
     "auditGenerationId": "gen_1792702445675_8c312f85",
     "pendingIndexBatches": [],
-    "requestedRelease": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
-    "requestedReleaseWorkflow": 39893572344,
+    "requestedRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "requestedReleaseWorkflow": 40019745015,
     "additionalPreparedResearch": [
       {
         "path": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2011-manual-retry.json",
@@ -37301,7 +37301,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T20:30:07.587099Z",
+      "checkedAt": "2026-10-23T20:32:12.779885Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37353,7 +37353,7 @@
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
       },
-      "pendingReleaseWorkflow": null,
+      "pendingReleaseWorkflow": 40019745015,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
         "state": "released_after_verified_index_snapshot",
@@ -37372,7 +37372,7 @@
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       },
       "lastCompletedReleaseWorkflow": 40012399412,
-      "pendingRelease": "requested_by_marker_awaiting_workflow_id"
+      "pendingRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a"
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
