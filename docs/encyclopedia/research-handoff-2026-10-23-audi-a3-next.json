@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-23T19:02:49.660Z",
-  "lastCompletedBatch": "research-2026-10-24-audi-a3-2023-tail-body",
+  "checkedAt": "2026-10-23T19:57:45.823Z",
+  "lastCompletedBatch": "research-2026-10-24-audi-a3-2024-body",
   "modelId": "f40e34e905b8ca09f3636eda",
   "make": "Audi",
   "model": "A3",
-  "revision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
+  "revision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
   "next": {
-    "variantId": "658efd8ee9446d35bc9ac33f",
+    "variantId": "29f5beff1e7f4b704e391ddd",
     "year": 2024,
-    "trim": "35 TDI SpB S-Line NAV+LED+PANO+17ZOLL",
+    "trim": "Sportback S line 30 TDI Pano RFK SHZ APP",
     "missingValueFields": [
       "bodyType",
       "engineCode",
@@ -19,16 +19,16 @@
       "fuel": "diesel",
       "powertrainKind": "ice",
       "engineCc": 1968,
-      "powerHp": 150,
-      "powerKw": 110,
-      "icePowerKw": 110,
-      "transmission": "automatic",
+      "powerHp": 116,
+      "powerKw": 85,
+      "icePowerKw": 85,
+      "transmission": "manual",
       "drive": "fwd"
     }
   },
-  "nextAction": "Продолжить с 658efd8ee9446d35bc9ac33f:58 явно обозначенных Sportback/SB/SPB 2024 без кузова, затем2025. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
+  "nextAction": "Продолжить с 29f5beff1e7f4b704e391ddd:8 явно обозначенных Sportback/SB/SPB 2024 без кузова, затем2025. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
   "remaining2022BodyCandidates": 0,
-  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2023-tail-remaining.json",
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2024-remaining.json",
   "earlyRetry": [
     {
       "id": "c98ec4e1792a7635f7ad3f1a",
@@ -139,5 +139,5 @@
   "a1Remainder": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2025-next.json",
   "cursorNotAdvanced": false,
   "remaining2023BodyCandidates": 0,
-  "remaining2024BodyCandidates": 58
+  "remaining2024BodyCandidates": 8
 }

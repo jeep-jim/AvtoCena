@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T02:37:09.506693+07:00",
+  "updatedAt": "2026-10-23T19:57:45.823Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1148,8 +1148,8 @@
       ],
       "variants": 3663,
       "status": "partial_verified_fields",
-      "researchedVariants": 509,
-      "checkedAt": "2026-10-23T19:02:49.660Z",
+      "researchedVariants": 531,
+      "checkedAt": "2026-10-23T19:57:45.823Z",
       "researchedYears": [
         2009,
         2010,
@@ -1197,10 +1197,10 @@
         2025,
         2026
       ],
-      "nextAction": "Продолжить с 658efd8ee9446d35bc9ac33f:58 явно обозначенных Sportback/SB/SPB 2024 без кузова, затем2025. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
+      "nextAction": "Продолжить с 29f5beff1e7f4b704e391ddd:8 явно обозначенных Sportback/SB/SPB 2024 без кузова, затем2025. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
-      "nextVariantId": "658efd8ee9446d35bc9ac33f",
-      "boundedReadAt": "2026-10-23T19:02:49.660Z",
+      "nextVariantId": "29f5beff1e7f4b704e391ddd",
+      "boundedReadAt": "2026-10-23T19:57:45.823Z",
       "boundedReadYears": [
         2026,
         2025,
@@ -1217,12 +1217,12 @@
         2010,
         2009
       ],
-      "boundedReadRevision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
-      "revision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
-      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2023-tail-remaining.json",
-      "lastBatch": "research-2026-10-24-audi-a3-2023-tail-body",
-      "lastBatchFields": 44,
-      "lastBatchVariants": 44,
+      "boundedReadRevision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
+      "revision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
+      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2024-remaining.json",
+      "lastBatch": "research-2026-10-24-audi-a3-2024-body",
+      "lastBatchFields": 50,
+      "lastBatchVariants": 50,
       "annualVariants": 1111,
       "unknownYearAstraVariants": 2552
     },
@@ -32745,15 +32745,15 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T19:02:49.660Z",
+    "updatedAt": "2026-10-23T19:57:45.823Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a3_2023_tail_44_body_saved_readback_pending_index",
+    "state": "audi_a3_2024_50_body_saved_readback_pending_next_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "658efd8ee9446d35bc9ac33f",
+      "variantId": "29f5beff1e7f4b704e391ddd",
       "year": 2024,
-      "trim": "35 TDI SpB S-Line NAV+LED+PANO+17ZOLL",
+      "trim": "Sportback S line 30 TDI Pano RFK SHZ APP",
       "missingValueFields": [
         "bodyType",
         "engineCode",
@@ -32763,18 +32763,18 @@
         "fuel": "diesel",
         "powertrainKind": "ice",
         "engineCc": 1968,
-        "powerHp": 150,
-        "powerKw": 110,
-        "icePowerKw": 110,
-        "transmission": "automatic",
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "transmission": "manual",
         "drive": "fwd"
       },
       "modelId": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revision": "9315ca88-ca6b-4671-87ac-adebad6c751f"
+      "revision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae"
     },
-    "lastVerifiedResearch": "audi-a3-2023-tail-body",
+    "lastVerifiedResearch": "audi-a3-2024-body",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32790,41 +32790,41 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2023-tail-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2024-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-24-audi-a3-2023-tail-body",
-      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
-      "commit": "721151721228a70c44f02b658050337205807c6d",
-      "workflow": 40008010326,
-      "job": 120600787162,
-      "applyFinishedAt": "2026-10-23T19:01:45.987Z",
-      "variants": 44,
+      "batch": "research-2026-10-24-audi-a3-2024-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+      "commit": "98df8106098f82834e9c99782972cd9c493076ab",
+      "workflow": 40015059555,
+      "job": 120624886815,
+      "applyFinishedAt": "2026-10-23T19:56:20.615Z",
+      "variants": 50,
       "newVariants": 0,
-      "fields": 44,
-      "compiledFields": 44,
+      "fields": 50,
+      "compiledFields": 50,
       "apiReadback": true,
       "includedInIndex": false,
-      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-body-pass.json",
-      "afterRevision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-body-pass.json",
+      "afterRevision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
       "publicParity": {
-        "passed": false,
+        "passed": true,
         "offers": 7,
         "comparisons": 91,
-        "matched": 90,
+        "matched": 91,
         "repeatedGroups": 2,
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-public-parity.json"
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-public-parity.json"
       },
-      "nativeExact": 42,
+      "nativeExact": 48,
       "nativeHeld": [
         {
-          "variantId": "217e4991c24842b55a08c100",
-          "trim": "Sportback advanced CarPlay|Bremsassistent",
+          "variantId": "bcdc67fac908f954058be7e4",
+          "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         },
         {
-          "variantId": "075c2786549d65dcf988299e",
-          "trim": "Sportback S line Optik-Paket schwarz+ AHK DSP",
+          "variantId": "060ecbd39c657ef567ea7cbe",
+          "trim": "Sportback Business Edition S line S-tronic",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         }
       ]
@@ -32988,6 +32988,43 @@
           {
             "variantId": "075c2786549d65dcf988299e",
             "trim": "Sportback S line Optik-Paket schwarz+ AHK DSP",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          }
+        ]
+      },
+      {
+        "batch": "research-2026-10-24-audi-a3-2024-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+        "commit": "98df8106098f82834e9c99782972cd9c493076ab",
+        "workflow": 40015059555,
+        "job": 120624886815,
+        "applyFinishedAt": "2026-10-23T19:56:20.615Z",
+        "variants": 50,
+        "newVariants": 0,
+        "fields": 50,
+        "compiledFields": 50,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-body-pass.json",
+        "afterRevision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
+        "publicParity": {
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 91,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-public-parity.json"
+        },
+        "nativeExact": 48,
+        "nativeHeld": [
+          {
+            "variantId": "bcdc67fac908f954058be7e4",
+            "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "060ecbd39c657ef567ea7cbe",
+            "trim": "Sportback Business Edition S line S-tronic",
             "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
           }
         ]
@@ -38172,7 +38209,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0203.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0258.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -38506,6 +38543,43 @@
         {
           "variantId": "075c2786549d65dcf988299e",
           "trim": "Sportback S line Optik-Paket schwarz+ AHK DSP",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        }
+      ]
+    },
+    "audiA3Body2024Pass": {
+      "batch": "research-2026-10-24-audi-a3-2024-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+      "commit": "98df8106098f82834e9c99782972cd9c493076ab",
+      "workflow": 40015059555,
+      "job": 120624886815,
+      "applyFinishedAt": "2026-10-23T19:56:20.615Z",
+      "variants": 50,
+      "newVariants": 0,
+      "fields": 50,
+      "compiledFields": 50,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-body-pass.json",
+      "afterRevision": "a2d7f897-4a62-4fc3-a9b5-d0a8d67920ae",
+      "publicParity": {
+        "passed": true,
+        "offers": 7,
+        "comparisons": 91,
+        "matched": 91,
+        "repeatedGroups": 2,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-public-parity.json"
+      },
+      "nativeExact": 48,
+      "nativeHeld": [
+        {
+          "variantId": "bcdc67fac908f954058be7e4",
+          "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "060ecbd39c657ef567ea7cbe",
+          "trim": "Sportback Business Edition S line S-tronic",
           "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
         }
       ]

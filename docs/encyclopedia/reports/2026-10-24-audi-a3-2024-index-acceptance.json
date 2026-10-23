@@ -1,0 +1,480 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T19:57:45.823Z",
+  "batch": "research-2026-10-24-audi-a3-2024-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+  "batchSha256": "4f01aacb7d1076a4180505483a717b7a854ba220ac3f9ef82620b5d31a243cd8",
+  "requiredFields": 50,
+  "variants": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "658efd8ee9446d35bc9ac33f",
+      "year": 2024,
+      "trim": "35 TDI SpB S-Line NAV+LED+PANO+17ZOLL",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7df956490c0b2786705a983d",
+      "year": 2024,
+      "trim": "A3 SPB 1.5 Tfsi mhev S line edition 150cv S-tronic",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "79f8b0ff3e752d57d50b6080",
+      "year": 2024,
+      "trim": "A3 SPB 35 TDI S tronic S line edition",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b2f05310c62af93d58dbc543",
+      "year": 2024,
+      "trim": "A3 SPB TDI 110 kW S tronic S line edition",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "bcdc67fac908f954058be7e4",
+      "year": 2024,
+      "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4acb430a4f864b2418c9ce8f",
+      "year": 2024,
+      "trim": "SPB 110KW TDI S tronic S LINE TETTO APRIBILE",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2eaccf5d26a1dec144b7e5c7",
+      "year": 2024,
+      "trim": "SpB 40 TDI Quattro S-Line NAV+LED+STHZG+19ZO",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b6e2a17cee350a977b09dd60",
+      "year": 2024,
+      "trim": "Spb. 30 TFSI S-tr. AHK GRA KAMERA LED",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "27190a9ad46da5bd35d35bca",
+      "year": 2024,
+      "trim": "Spb. S line 30 TDI KAM KLIMA SHZ SMARTPHONE",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1909be39f15c0bb4f494636d",
+      "year": 2024,
+      "trim": "Sportback 30 TDI 6-Gang S line *LED*Navi*EPH*",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a321bbbb870c804e671ed514",
+      "year": 2024,
+      "trim": "Sportback 30 TDI ASI LED SHZ 17-Zoll",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "defa920e343ebc1c80044356",
+      "year": 2024,
+      "trim": "Sportback 30 TDI MMI/ASI/Sportsitz/LED/SHZ",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "75cdaaf37118f9750769d946",
+      "year": 2024,
+      "trim": "Sportback 30 TDI S tronic advanced ACC LED LM",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b8106d1e0eaca5bf3c609be7",
+      "year": 2024,
+      "trim": "Sportback 30 TDI S-tronic S-Line",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "12d170d30ee14a07afdfcf71",
+      "year": 2024,
+      "trim": "Sportback 30 TDI Schaltgetriebe Pano*Kamera*V",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7fff9c5f7ab2773ea9cba568",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI 6-Gang LED+APP+BT+SHZ+2xPDC",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "841c28d43536d5b6bec9835a",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI advanced",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9c553e7912b7fd2124984e41",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI advanced |PDC|Carplay|Navi|",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "fcab701f1753121e3244c266",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI advanced ACC LED Navi PDC",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f29cde2bc1d2bb74b898b4be",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI advanced S tronic ACC LED",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e3f4624aa7849e700cef098a",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI advanced VirtualCockpit+ DA",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "fa4e3e6f318efb6654797daa",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI Business S line",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "eed57405c1929d427604dcb2",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI KAMERA LED ACC SHZ PDC VIRT",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2a602fb0aed4d0b67d906637",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI LED Kamera Sitzheizung DAB",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "6555d2c1b7b3af1b843649ce",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI Pano,Kamera,SmartphoneInt,S",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c97cf9c3e150b6e80495f051",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI S line 1.0 S-tronic SHZ PDC",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "08c2d5ea7eb0af6affe4356c",
+      "year": 2024,
+      "trim": "Sportback 30 TFSI S tronic PDC+,SmartphoneInt",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "72ff213cde268eaf23eb1735",
+      "year": 2024,
+      "trim": "SPORTBACK 30TFSi LED/TEMPO./CARPLAY/SHZ./DAB",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "02915bf62807d0848b47a31e",
+      "year": 2024,
+      "trim": "sportback 35 2.0 tdi business s-tronic",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "25212d27b9ff60d8fbe0c64b",
+      "year": 2024,
+      "trim": "Sportback 35 TDI Advanced LED/MMI/SPORTSITZE",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "dcd72049f9586bcaad27af7f",
+      "year": 2024,
+      "trim": "Sportback 35 TDI S LINE LED PRIVACY KAMERA",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "3f0b56396f94abeb1be017ce",
+      "year": 2024,
+      "trim": "Sportback 35 TDI S troni LED NAVI RFK ACC SHZ",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7be3e1d4ac020189d9c57097",
+      "year": 2024,
+      "trim": "Sportback 35 TDI S tronic adv Navi,LED,Sports",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "26d3dad9618330068f9104f4",
+      "year": 2024,
+      "trim": "Sportback 35 TDI S tronic Adv. Navi,LED,SHZ",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2265bffcc45b718baaf57107",
+      "year": 2024,
+      "trim": "Sportback 35 TDI S-Tronic., LED, ACC",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b97c5664c2d6837eee0464e5",
+      "year": 2024,
+      "trim": "Sportback 35 TFSI advanced ACC LED App-Navi",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e803bbda7a6aff6bbf0f3bbf",
+      "year": 2024,
+      "trim": "Sportback 35 TFSI advanced AHK LED LM 18\" Nav",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "42406728a1e9ab17a78a0d70",
+      "year": 2024,
+      "trim": "Sportback 35 TFSI advanced KAMERA PDC+ NAVI+",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "23e87b7a4e8c38137b691a38",
+      "year": 2024,
+      "trim": "Sportback 35 TFSI MHEV Busines Advanced S-Tronic",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c6a552ba2d04df092afe240f",
+      "year": 2024,
+      "trim": "Sportback 35 TFSI S line | NAVI | AHK |",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "77c429bc795da72750c1ab86",
+      "year": 2024,
+      "trim": "Sportback 35 TFSI S line S tronic LED APP",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5aef190b82ae24032810013e",
+      "year": 2024,
+      "trim": "Sportback 35 TFSI S tronic HUD*Sonos*Navi*Car",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "53dd5bcd5fda6cb87fdfe0c3",
+      "year": 2024,
+      "trim": "Sportback 40 TDI qu. S tronic S line Pano/Nav",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e92bd483447de5b007a572ce",
+      "year": 2024,
+      "trim": "Sportback 40 TFSI e Advanced S-Line",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "420d9493f4aa7a04a8f68b9f",
+      "year": 2024,
+      "trim": "Sportback 45 TFSI E S-LINE ACC B&O VIRTUAL KA",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e07662e5676a33091f1fca1c",
+      "year": 2024,
+      "trim": "Sportback advanced *KAMERA*SHZ*17 ZOLL LM*",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "3b2cf721e20020d1fe028815",
+      "year": 2024,
+      "trim": "Sportback advanced 30 TFSI ACC LED Navi",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f20ef3d958691a3462596a1d",
+      "year": 2024,
+      "trim": "Sportback Advanced 30TDI S-tronic 249,-ohne A",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8fbb11869f072d301e394fd7",
+      "year": 2024,
+      "trim": "Sportback advanced 35TDI NAVI LED SONOS RFK",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "060ecbd39c657ef567ea7cbe",
+      "year": 2024,
+      "trim": "Sportback Business Edition S line S-tronic",
+      "values": {
+        "bodyType": "hatchback"
+      }
+    }
+  ],
+  "state": "pending_next_coordinated_index",
+  "newDeployRequested": false,
+  "requiredChecks": [
+    "exact batch membership and field provenance",
+    "manual/source/unknown30min guards",
+    "immutable index and prices preparation",
+    "active release health and public search/card parity"
+  ],
+  "nativeHeld": [
+    {
+      "variantId": "bcdc67fac908f954058be7e4",
+      "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    },
+    {
+      "variantId": "060ecbd39c657ef567ea7cbe",
+      "trim": "Sportback Business Edition S line S-tronic",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    }
+  ]
+}
