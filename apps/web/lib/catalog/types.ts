@@ -26,6 +26,7 @@ export type CatalogImage = {
 };
 
 export type VehicleOffer = {
+  fuelPowertrainEvidence?:import('./fuel-powertrain-evidence').FuelPowertrainEvidence;
   encyclopediaCalculation?: {version:1;indexDigest:string;sourceIdentity:string;values:Record<string,unknown>;filledFields:string[]};
   editorialSpecifications?: import('./editorial-specifications').EditorialSpecifications;
   chinaPriceConversion?:import("./china-cny-price").ChinaPriceConversion;

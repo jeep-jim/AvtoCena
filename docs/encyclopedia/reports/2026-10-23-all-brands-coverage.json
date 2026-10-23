@@ -1,0 +1,3697 @@
+{
+  "version": 1,
+  "createdAt": "2026-10-23T03:12:47.200Z",
+  "indexDigest": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
+  "manifestDigest": "341be70f56e3582e4629061e4e95e2d453f27f37c9c1e96ab13313de09355115",
+  "scope": "Existing permanent encyclopedia only; required field coverage is not proof of exact offer matching or a completed price calculation.",
+  "total": {
+    "brands": 181,
+    "models": 2423,
+    "variants": 114892,
+    "requiredValuesPresent": 49188,
+    "requiredValuesSupported": 47531
+  },
+  "release": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+  "workflow": 39893572344,
+  "artifact": 12476255810,
+  "activationConfirmed": false,
+  "snapshotOnly": true,
+  "fullyCoveredExistingModelsByRequiredFields": 111,
+  "notFullySupportedVariants": 67361,
+  "missingFields": {
+    "engineCc": 12199,
+    "powerHpOrKw": 19090,
+    "trim": 30658,
+    "power30MinKw": 21629,
+    "powertrainKind": 27168,
+    "fuel": 1921
+  },
+  "unsupportedFields": {
+    "year": 46636,
+    "trim": 15978,
+    "fuel": 46059,
+    "powertrainKind": 22210,
+    "engineCc": 9183,
+    "powerHpOrKw": 7132
+  },
+  "compiledSourceFields": {
+    "manufacturer": 25967,
+    "owner_reference": 485093,
+    "official_registry": 112,
+    "manual": 9
+  },
+  "pendingBatchMembership": [
+    {
+      "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
+      "fieldsSaved": 130,
+      "expectedCalculationFields": 109,
+      "includedCalculationFields": 109
+    },
+    {
+      "batch": "research-2026-10-23-alpine-a290-2025",
+      "fieldsSaved": 37,
+      "expectedCalculationFields": 28,
+      "includedCalculationFields": 28
+    },
+    {
+      "batch": "research-2026-10-23-alpine-a290-2026",
+      "fieldsSaved": 40,
+      "expectedCalculationFields": 28,
+      "includedCalculationFields": 28
+    },
+    {
+      "batch": "research-2026-10-23-aston-db11-2017-2021",
+      "fieldsSaved": 96,
+      "expectedCalculationFields": 88,
+      "includedCalculationFields": 88
+    },
+    {
+      "batch": "research-2026-10-23-aston-db12-2024-2025",
+      "fieldsSaved": 23,
+      "expectedCalculationFields": 21,
+      "includedCalculationFields": 21
+    },
+    {
+      "batch": "research-2026-10-23-aston-db9-2008-2015",
+      "fieldsSaved": 211,
+      "expectedCalculationFields": 190,
+      "includedCalculationFields": 190
+    },
+    {
+      "batch": "research-2026-10-23-aston-db9-gt-2015-2016",
+      "fieldsSaved": 32,
+      "expectedCalculationFields": 28,
+      "includedCalculationFields": 28
+    },
+    {
+      "batch": "research-2026-10-23-aston-dbs-2008-2012",
+      "fieldsSaved": 170,
+      "expectedCalculationFields": 153,
+      "includedCalculationFields": 153
+    },
+    {
+      "batch": "research-2026-10-23-aston-dbs-superleggera-770",
+      "fieldsSaved": 29,
+      "expectedCalculationFields": 25,
+      "includedCalculationFields": 25
+    },
+    {
+      "batch": "research-2026-10-23-aston-dbx-years-mass",
+      "fieldsSaved": 30,
+      "expectedCalculationFields": 27,
+      "includedCalculationFields": 27
+    },
+    {
+      "batch": "research-2026-10-23-aston-rapide-model-years",
+      "fieldsSaved": 104,
+      "expectedCalculationFields": 92,
+      "includedCalculationFields": 92
+    },
+    {
+      "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",
+      "fieldsSaved": 133,
+      "expectedCalculationFields": 117,
+      "includedCalculationFields": 117
+    },
+    {
+      "batch": "research-2026-10-23-aston-v12-vantage-late",
+      "fieldsSaved": 20,
+      "expectedCalculationFields": 17,
+      "includedCalculationFields": 17
+    },
+    {
+      "batch": "research-2026-10-23-aston-valhalla-vanquish",
+      "fieldsSaved": 95,
+      "expectedCalculationFields": 82,
+      "includedCalculationFields": 82
+    }
+  ],
+  "brands": [
+    {
+      "make": "212",
+      "models": 1,
+      "variants": 33,
+      "requiredValuesPresent": 26,
+      "requiredValuesSupported": 24,
+      "missing": {
+        "engineCc": 4,
+        "powerHpOrKw": 2,
+        "trim": 4
+      },
+      "unsupported": {
+        "year": 5,
+        "trim": 1,
+        "fuel": 7,
+        "powertrainKind": 7,
+        "engineCc": 5,
+        "powerHpOrKw": 3
+      }
+    },
+    {
+      "make": "Abarth",
+      "models": 4,
+      "variants": 58,
+      "requiredValuesPresent": 19,
+      "requiredValuesSupported": 19,
+      "missing": {
+        "power30MinKw": 2,
+        "trim": 33,
+        "powertrainKind": 34,
+        "engineCc": 3,
+        "powerHpOrKw": 2,
+        "fuel": 2
+      },
+      "unsupported": {
+        "year": 35,
+        "fuel": 34,
+        "trim": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "Acura",
+      "models": 6,
+      "variants": 24,
+      "requiredValuesPresent": 13,
+      "requiredValuesSupported": 13,
+      "missing": {
+        "trim": 6,
+        "engineCc": 4,
+        "powertrainKind": 5,
+        "powerHpOrKw": 2
+      },
+      "unsupported": {
+        "year": 10,
+        "fuel": 10,
+        "powertrainKind": 6,
+        "engineCc": 2,
+        "powerHpOrKw": 4,
+        "trim": 4
+      }
+    },
+    {
+      "make": "AION",
+      "models": 3,
+      "variants": 55,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 25,
+        "power30MinKw": 55,
+        "trim": 11,
+        "engineCc": 5
+      },
+      "unsupported": {
+        "year": 12,
+        "fuel": 12,
+        "powertrainKind": 12,
+        "trim": 1,
+        "powerHpOrKw": 3,
+        "engineCc": 2
+      }
+    },
+    {
+      "make": "AITO",
+      "models": 5,
+      "variants": 341,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 90,
+        "power30MinKw": 340,
+        "trim": 70,
+        "engineCc": 9,
+        "powertrainKind": 1
+      },
+      "unsupported": {
+        "year": 72,
+        "fuel": 72,
+        "powertrainKind": 71,
+        "engineCc": 42,
+        "powerHpOrKw": 48,
+        "trim": 2
+      }
+    },
+    {
+      "make": "Aiways",
+      "models": 1,
+      "variants": 25,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "trim": 21,
+        "powertrainKind": 21,
+        "power30MinKw": 4,
+        "powerHpOrKw": 3
+      },
+      "unsupported": {
+        "year": 21,
+        "fuel": 21
+      }
+    },
+    {
+      "make": "Aixam",
+      "models": 2,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 2,
+        "power30MinKw": 1
+      },
+      "unsupported": {}
+    },
+    {
+      "make": "Alfa Romeo",
+      "models": 10,
+      "variants": 1225,
+      "requiredValuesPresent": 725,
+      "requiredValuesSupported": 722,
+      "missing": {
+        "engineCc": 56,
+        "powerHpOrKw": 42,
+        "fuel": 7,
+        "trim": 291,
+        "powertrainKind": 417,
+        "power30MinKw": 16
+      },
+      "unsupported": {
+        "year": 335,
+        "trim": 44,
+        "fuel": 334,
+        "powertrainKind": 56,
+        "engineCc": 10,
+        "powerHpOrKw": 11
+      }
+    },
+    {
+      "make": "Alpina",
+      "models": 2,
+      "variants": 52,
+      "requiredValuesPresent": 38,
+      "requiredValuesSupported": 38,
+      "missing": {
+        "engineCc": 7,
+        "powertrainKind": 7
+      },
+      "unsupported": {}
+    },
+    {
+      "make": "Alpine",
+      "models": 2,
+      "variants": 70,
+      "requiredValuesPresent": 27,
+      "requiredValuesSupported": 27,
+      "missing": {
+        "engineCc": 1,
+        "trim": 28,
+        "powertrainKind": 42
+      },
+      "unsupported": {
+        "fuel": 29,
+        "powertrainKind": 1,
+        "year": 28
+      }
+    },
+    {
+      "make": "Aston Martin",
+      "models": 12,
+      "variants": 302,
+      "requiredValuesPresent": 98,
+      "requiredValuesSupported": 95,
+      "missing": {
+        "trim": 136,
+        "powertrainKind": 140,
+        "engineCc": 19,
+        "powerHpOrKw": 30,
+        "fuel": 9,
+        "power30MinKw": 5
+      },
+      "unsupported": {
+        "year": 152,
+        "fuel": 155,
+        "powertrainKind": 48,
+        "engineCc": 27,
+        "powerHpOrKw": 27,
+        "trim": 16
+      }
+    },
+    {
+      "make": "Audi",
+      "models": 72,
+      "variants": 9496,
+      "requiredValuesPresent": 4182,
+      "requiredValuesSupported": 4145,
+      "missing": {
+        "powertrainKind": 3614,
+        "trim": 2071,
+        "engineCc": 425,
+        "powerHpOrKw": 702,
+        "power30MinKw": 1011,
+        "fuel": 188
+      },
+      "unsupported": {
+        "year": 2618,
+        "trim": 547,
+        "fuel": 2595,
+        "powertrainKind": 900,
+        "engineCc": 454,
+        "powerHpOrKw": 361
+      }
+    },
+    {
+      "make": "Avatr",
+      "models": 3,
+      "variants": 75,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 42,
+        "power30MinKw": 74,
+        "trim": 16,
+        "engineCc": 5,
+        "powertrainKind": 1
+      },
+      "unsupported": {
+        "year": 21,
+        "fuel": 21,
+        "powertrainKind": 20,
+        "trim": 5,
+        "engineCc": 4,
+        "powerHpOrKw": 4
+      }
+    },
+    {
+      "make": "BAIC",
+      "models": 18,
+      "variants": 153,
+      "requiredValuesPresent": 46,
+      "requiredValuesSupported": 46,
+      "missing": {
+        "powerHpOrKw": 41,
+        "power30MinKw": 36,
+        "engineCc": 15,
+        "trim": 61,
+        "powertrainKind": 42
+      },
+      "unsupported": {
+        "year": 77,
+        "trim": 16,
+        "fuel": 77,
+        "powertrainKind": 35,
+        "engineCc": 14,
+        "powerHpOrKw": 16
+      }
+    },
+    {
+      "make": "Baojun",
+      "models": 21,
+      "variants": 220,
+      "requiredValuesPresent": 72,
+      "requiredValuesSupported": 72,
+      "missing": {
+        "trim": 54,
+        "powerHpOrKw": 56,
+        "power30MinKw": 118,
+        "fuel": 9,
+        "powertrainKind": 10
+      },
+      "unsupported": {
+        "year": 54,
+        "fuel": 46,
+        "powertrainKind": 45,
+        "engineCc": 24,
+        "powerHpOrKw": 26
+      }
+    },
+    {
+      "make": "BAW",
+      "models": 7,
+      "variants": 45,
+      "requiredValuesPresent": 25,
+      "requiredValuesSupported": 25,
+      "missing": {
+        "engineCc": 4,
+        "powerHpOrKw": 8,
+        "trim": 9,
+        "power30MinKw": 8
+      },
+      "unsupported": {
+        "year": 13,
+        "trim": 4,
+        "fuel": 13,
+        "powertrainKind": 13,
+        "engineCc": 8,
+        "powerHpOrKw": 8
+      }
+    },
+    {
+      "make": "Bentley",
+      "models": 8,
+      "variants": 311,
+      "requiredValuesPresent": 35,
+      "requiredValuesSupported": 35,
+      "missing": {
+        "engineCc": 128,
+        "powerHpOrKw": 119,
+        "trim": 146,
+        "powertrainKind": 104,
+        "power30MinKw": 29,
+        "fuel": 5
+      },
+      "unsupported": {
+        "year": 257,
+        "trim": 111,
+        "fuel": 253,
+        "powertrainKind": 154,
+        "engineCc": 33,
+        "powerHpOrKw": 36
+      }
+    },
+    {
+      "make": "Bestune",
+      "models": 14,
+      "variants": 229,
+      "requiredValuesPresent": 113,
+      "requiredValuesSupported": 113,
+      "missing": {
+        "powerHpOrKw": 40,
+        "power30MinKw": 89,
+        "trim": 35,
+        "engineCc": 7,
+        "powertrainKind": 1
+      },
+      "unsupported": {
+        "year": 39,
+        "fuel": 39,
+        "powertrainKind": 38,
+        "engineCc": 22,
+        "powerHpOrKw": 25,
+        "trim": 4
+      }
+    },
+    {
+      "make": "BMW",
+      "models": 177,
+      "variants": 10204,
+      "requiredValuesPresent": 5633,
+      "requiredValuesSupported": 5554,
+      "missing": {
+        "powerHpOrKw": 1328,
+        "trim": 2262,
+        "fuel": 181,
+        "engineCc": 806,
+        "power30MinKw": 1199,
+        "powertrainKind": 1942
+      },
+      "unsupported": {
+        "year": 3463,
+        "trim": 1201,
+        "fuel": 3433,
+        "powertrainKind": 1535,
+        "engineCc": 725,
+        "powerHpOrKw": 430
+      }
+    },
+    {
+      "make": "Borgward",
+      "models": 2,
+      "variants": 3,
+      "requiredValuesPresent": 2,
+      "requiredValuesSupported": 2,
+      "missing": {
+        "trim": 1
+      },
+      "unsupported": {
+        "year": 1,
+        "fuel": 1,
+        "powertrainKind": 1,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "Brabus",
+      "models": 5,
+      "variants": 41,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 41,
+        "powerHpOrKw": 41,
+        "trim": 2
+      },
+      "unsupported": {
+        "year": 41,
+        "trim": 39,
+        "fuel": 41,
+        "powertrainKind": 41
+      }
+    },
+    {
+      "make": "Brilliance",
+      "models": 1,
+      "variants": 1,
+      "requiredValuesPresent": 1,
+      "requiredValuesSupported": 1,
+      "missing": {},
+      "unsupported": {}
+    },
+    {
+      "make": "Bugatti",
+      "models": 5,
+      "variants": 17,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 10,
+        "power30MinKw": 1,
+        "engineCc": 9,
+        "trim": 7,
+        "powertrainKind": 7
+      },
+      "unsupported": {
+        "year": 17,
+        "trim": 10,
+        "fuel": 17,
+        "powertrainKind": 10
+      }
+    },
+    {
+      "make": "Buick",
+      "models": 25,
+      "variants": 916,
+      "requiredValuesPresent": 328,
+      "requiredValuesSupported": 328,
+      "missing": {
+        "trim": 133,
+        "powerHpOrKw": 96,
+        "power30MinKw": 501,
+        "engineCc": 25,
+        "powertrainKind": 4,
+        "fuel": 2
+      },
+      "unsupported": {
+        "year": 143,
+        "fuel": 142,
+        "powertrainKind": 140,
+        "engineCc": 112,
+        "powerHpOrKw": 119,
+        "trim": 10
+      }
+    },
+    {
+      "make": "BYD",
+      "models": 60,
+      "variants": 1905,
+      "requiredValuesPresent": 51,
+      "requiredValuesSupported": 51,
+      "missing": {
+        "powerHpOrKw": 522,
+        "power30MinKw": 1654,
+        "trim": 362,
+        "powertrainKind": 149,
+        "engineCc": 186,
+        "fuel": 18
+      },
+      "unsupported": {
+        "year": 478,
+        "fuel": 478,
+        "trim": 116,
+        "powertrainKind": 336,
+        "engineCc": 105,
+        "powerHpOrKw": 146
+      }
+    },
+    {
+      "make": "Cadillac",
+      "models": 15,
+      "variants": 647,
+      "requiredValuesPresent": 232,
+      "requiredValuesSupported": 230,
+      "missing": {
+        "trim": 167,
+        "engineCc": 74,
+        "powerHpOrKw": 105,
+        "powertrainKind": 87,
+        "fuel": 7,
+        "power30MinKw": 207
+      },
+      "unsupported": {
+        "year": 234,
+        "fuel": 229,
+        "powertrainKind": 149,
+        "engineCc": 73,
+        "powerHpOrKw": 69,
+        "trim": 67
+      }
+    },
+    {
+      "make": "Caterham",
+      "models": 1,
+      "variants": 44,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 10,
+        "powerHpOrKw": 10,
+        "trim": 34,
+        "powertrainKind": 34
+      },
+      "unsupported": {
+        "year": 44,
+        "trim": 10,
+        "fuel": 44,
+        "powertrainKind": 10
+      }
+    },
+    {
+      "make": "Changan",
+      "models": 55,
+      "variants": 825,
+      "requiredValuesPresent": 388,
+      "requiredValuesSupported": 388,
+      "missing": {
+        "powerHpOrKw": 161,
+        "power30MinKw": 168,
+        "trim": 235,
+        "fuel": 8,
+        "powertrainKind": 8,
+        "engineCc": 93
+      },
+      "unsupported": {
+        "year": 320,
+        "fuel": 316,
+        "powertrainKind": 316,
+        "engineCc": 204,
+        "powerHpOrKw": 206,
+        "trim": 85
+      }
+    },
+    {
+      "make": "Changhe",
+      "models": 3,
+      "variants": 3,
+      "requiredValuesPresent": 2,
+      "requiredValuesSupported": 2,
+      "missing": {
+        "trim": 1
+      },
+      "unsupported": {
+        "year": 1,
+        "fuel": 1,
+        "powertrainKind": 1,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "Chery",
+      "models": 38,
+      "variants": 622,
+      "requiredValuesPresent": 320,
+      "requiredValuesSupported": 320,
+      "missing": {
+        "powerHpOrKw": 103,
+        "power30MinKw": 134,
+        "engineCc": 44,
+        "trim": 165,
+        "powertrainKind": 12
+      },
+      "unsupported": {
+        "year": 204,
+        "trim": 39,
+        "fuel": 204,
+        "powertrainKind": 192,
+        "engineCc": 144,
+        "powerHpOrKw": 144
+      }
+    },
+    {
+      "make": "Chevrolet",
+      "models": 34,
+      "variants": 686,
+      "requiredValuesPresent": 116,
+      "requiredValuesSupported": 79,
+      "missing": {
+        "engineCc": 247,
+        "powerHpOrKw": 274,
+        "trim": 269,
+        "powertrainKind": 199,
+        "power30MinKw": 55,
+        "fuel": 6
+      },
+      "unsupported": {
+        "year": 577,
+        "trim": 308,
+        "fuel": 572,
+        "powertrainKind": 379,
+        "engineCc": 122,
+        "powerHpOrKw": 108
+      }
+    },
+    {
+      "make": "Chrysler",
+      "models": 7,
+      "variants": 54,
+      "requiredValuesPresent": 8,
+      "requiredValuesSupported": 8,
+      "missing": {
+        "trim": 29,
+        "powertrainKind": 27,
+        "engineCc": 10,
+        "powerHpOrKw": 12,
+        "power30MinKw": 10,
+        "fuel": 1
+      },
+      "unsupported": {
+        "year": 38,
+        "fuel": 38,
+        "trim": 9,
+        "powertrainKind": 12,
+        "engineCc": 3,
+        "powerHpOrKw": 3
+      }
+    },
+    {
+      "make": "CIIMO",
+      "models": 1,
+      "variants": 7,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "trim": 2,
+        "powerHpOrKw": 1,
+        "power30MinKw": 7
+      },
+      "unsupported": {
+        "year": 2,
+        "fuel": 2,
+        "powertrainKind": 2,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "Cirelli",
+      "models": 1,
+      "variants": 3,
+      "requiredValuesPresent": 1,
+      "requiredValuesSupported": 1,
+      "missing": {
+        "trim": 2,
+        "powertrainKind": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "fuel": 2
+      }
+    },
+    {
+      "make": "Citroën",
+      "models": 18,
+      "variants": 972,
+      "requiredValuesPresent": 238,
+      "requiredValuesSupported": 238,
+      "missing": {
+        "engineCc": 20,
+        "powerHpOrKw": 27,
+        "trim": 634,
+        "powertrainKind": 647,
+        "power30MinKw": 59,
+        "fuel": 27
+      },
+      "unsupported": {
+        "year": 670,
+        "trim": 36,
+        "fuel": 643,
+        "powertrainKind": 23,
+        "engineCc": 9,
+        "powerHpOrKw": 10
+      }
+    },
+    {
+      "make": "Cupra",
+      "models": 7,
+      "variants": 2424,
+      "requiredValuesPresent": 2111,
+      "requiredValuesSupported": 2111,
+      "missing": {
+        "engineCc": 10,
+        "trim": 174,
+        "powertrainKind": 184,
+        "power30MinKw": 120,
+        "powerHpOrKw": 6,
+        "fuel": 10
+      },
+      "unsupported": {
+        "year": 174,
+        "fuel": 174
+      }
+    },
+    {
+      "make": "Dacia",
+      "models": 8,
+      "variants": 357,
+      "requiredValuesPresent": 146,
+      "requiredValuesSupported": 146,
+      "missing": {
+        "powerHpOrKw": 9,
+        "power30MinKw": 54,
+        "trim": 156,
+        "powertrainKind": 156,
+        "engineCc": 3
+      },
+      "unsupported": {
+        "year": 156,
+        "fuel": 156
+      }
+    },
+    {
+      "make": "Dallara",
+      "models": 1,
+      "variants": 16,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "trim": 15,
+        "powertrainKind": 15,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      },
+      "unsupported": {
+        "year": 16,
+        "fuel": 16,
+        "trim": 1,
+        "powertrainKind": 1
+      }
+    },
+    {
+      "make": "Dayun",
+      "models": 1,
+      "variants": 11,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "power30MinKw": 11,
+        "trim": 2,
+        "powerHpOrKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "fuel": 2,
+        "powertrainKind": 2,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "Deepal",
+      "models": 7,
+      "variants": 267,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 86,
+        "power30MinKw": 260,
+        "engineCc": 4,
+        "trim": 48,
+        "fuel": 1,
+        "powertrainKind": 7
+      },
+      "unsupported": {
+        "year": 52,
+        "trim": 4,
+        "fuel": 52,
+        "powertrainKind": 46,
+        "engineCc": 26,
+        "powerHpOrKw": 27
+      }
+    },
+    {
+      "make": "Denza",
+      "models": 7,
+      "variants": 195,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 73,
+        "power30MinKw": 195,
+        "trim": 33,
+        "engineCc": 6
+      },
+      "unsupported": {
+        "year": 35,
+        "fuel": 35,
+        "powertrainKind": 35,
+        "engineCc": 21,
+        "powerHpOrKw": 21,
+        "trim": 2
+      }
+    },
+    {
+      "make": "DFM",
+      "models": 4,
+      "variants": 5,
+      "requiredValuesPresent": 5,
+      "requiredValuesSupported": 5,
+      "missing": {},
+      "unsupported": {}
+    },
+    {
+      "make": "DFSK",
+      "models": 6,
+      "variants": 27,
+      "requiredValuesPresent": 1,
+      "requiredValuesSupported": 1,
+      "missing": {
+        "power30MinKw": 1,
+        "engineCc": 7,
+        "powerHpOrKw": 7,
+        "trim": 18,
+        "powertrainKind": 18
+      },
+      "unsupported": {
+        "year": 25,
+        "trim": 7,
+        "fuel": 25,
+        "powertrainKind": 7
+      }
+    },
+    {
+      "make": "Dodge",
+      "models": 8,
+      "variants": 441,
+      "requiredValuesPresent": 46,
+      "requiredValuesSupported": 46,
+      "missing": {
+        "trim": 263,
+        "powertrainKind": 260,
+        "fuel": 4,
+        "engineCc": 133,
+        "powerHpOrKw": 131,
+        "power30MinKw": 1
+      },
+      "unsupported": {
+        "year": 394,
+        "fuel": 390,
+        "trim": 131,
+        "powertrainKind": 134,
+        "engineCc": 2,
+        "powerHpOrKw": 3
+      }
+    },
+    {
+      "make": "Dongfeng",
+      "models": 20,
+      "variants": 72,
+      "requiredValuesPresent": 7,
+      "requiredValuesSupported": 7,
+      "missing": {
+        "engineCc": 21,
+        "powerHpOrKw": 49,
+        "power30MinKw": 34,
+        "trim": 16,
+        "fuel": 4,
+        "powertrainKind": 4
+      },
+      "unsupported": {
+        "year": 34,
+        "trim": 18,
+        "fuel": 32,
+        "powertrainKind": 32,
+        "engineCc": 9,
+        "powerHpOrKw": 9
+      }
+    },
+    {
+      "make": "DR",
+      "models": 7,
+      "variants": 118,
+      "requiredValuesPresent": 23,
+      "requiredValuesSupported": 23,
+      "missing": {
+        "trim": 94,
+        "powertrainKind": 94,
+        "power30MinKw": 1
+      },
+      "unsupported": {
+        "year": 94,
+        "fuel": 94
+      }
+    },
+    {
+      "make": "DS Automobiles",
+      "models": 11,
+      "variants": 253,
+      "requiredValuesPresent": 36,
+      "requiredValuesSupported": 36,
+      "missing": {
+        "power30MinKw": 24,
+        "fuel": 2,
+        "powerHpOrKw": 4,
+        "engineCc": 2,
+        "powertrainKind": 188,
+        "trim": 187
+      },
+      "unsupported": {
+        "year": 190,
+        "trim": 3,
+        "fuel": 190,
+        "powertrainKind": 3,
+        "engineCc": 3
+      }
+    },
+    {
+      "make": "EVO",
+      "models": 4,
+      "variants": 23,
+      "requiredValuesPresent": 6,
+      "requiredValuesSupported": 6,
+      "missing": {
+        "trim": 17,
+        "powertrainKind": 17
+      },
+      "unsupported": {
+        "year": 17,
+        "fuel": 17
+      }
+    },
+    {
+      "make": "EXEED",
+      "models": 15,
+      "variants": 137,
+      "requiredValuesPresent": 63,
+      "requiredValuesSupported": 63,
+      "missing": {
+        "powerHpOrKw": 19,
+        "power30MinKw": 45,
+        "trim": 27,
+        "engineCc": 15
+      },
+      "unsupported": {
+        "year": 40,
+        "trim": 13,
+        "fuel": 40,
+        "powertrainKind": 40,
+        "engineCc": 27,
+        "powerHpOrKw": 27
+      }
+    },
+    {
+      "make": "Farizon",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 2,
+        "power30MinKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "Ferrari",
+      "models": 39,
+      "variants": 361,
+      "requiredValuesPresent": 27,
+      "requiredValuesSupported": 27,
+      "missing": {
+        "engineCc": 168,
+        "powerHpOrKw": 169,
+        "power30MinKw": 66,
+        "trim": 141,
+        "powertrainKind": 109,
+        "fuel": 6
+      },
+      "unsupported": {
+        "year": 308,
+        "trim": 167,
+        "fuel": 302,
+        "powertrainKind": 199,
+        "engineCc": 32,
+        "powerHpOrKw": 30
+      }
+    },
+    {
+      "make": "Fiat",
+      "models": 24,
+      "variants": 603,
+      "requiredValuesPresent": 107,
+      "requiredValuesSupported": 107,
+      "missing": {
+        "trim": 293,
+        "powertrainKind": 293,
+        "engineCc": 35,
+        "powerHpOrKw": 61,
+        "fuel": 4,
+        "power30MinKw": 178
+      },
+      "unsupported": {
+        "year": 315,
+        "fuel": 312,
+        "trim": 22,
+        "powertrainKind": 23,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "Force",
+      "models": 1,
+      "variants": 4,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 4,
+        "powerHpOrKw": 4
+      },
+      "unsupported": {
+        "year": 4,
+        "trim": 4,
+        "fuel": 4,
+        "powertrainKind": 4
+      }
+    },
+    {
+      "make": "Ford",
+      "models": 44,
+      "variants": 2863,
+      "requiredValuesPresent": 934,
+      "requiredValuesSupported": 931,
+      "missing": {
+        "fuel": 40,
+        "powertrainKind": 1129,
+        "engineCc": 325,
+        "powerHpOrKw": 366,
+        "trim": 1274,
+        "power30MinKw": 335
+      },
+      "unsupported": {
+        "year": 1597,
+        "trim": 323,
+        "fuel": 1579,
+        "powertrainKind": 490,
+        "engineCc": 165,
+        "powerHpOrKw": 170
+      }
+    },
+    {
+      "make": "Forthing",
+      "models": 3,
+      "variants": 31,
+      "requiredValuesPresent": 25,
+      "requiredValuesSupported": 25,
+      "missing": {
+        "trim": 4,
+        "engineCc": 1,
+        "powerHpOrKw": 2,
+        "power30MinKw": 1
+      },
+      "unsupported": {
+        "year": 6,
+        "fuel": 6,
+        "powertrainKind": 6,
+        "engineCc": 4,
+        "powerHpOrKw": 4,
+        "trim": 2
+      }
+    },
+    {
+      "make": "Foton",
+      "models": 16,
+      "variants": 54,
+      "requiredValuesPresent": 33,
+      "requiredValuesSupported": 33,
+      "missing": {
+        "trim": 13,
+        "fuel": 2,
+        "powertrainKind": 2,
+        "powerHpOrKw": 6,
+        "power30MinKw": 5,
+        "engineCc": 5
+      },
+      "unsupported": {
+        "year": 15,
+        "fuel": 14,
+        "powertrainKind": 14,
+        "engineCc": 9,
+        "powerHpOrKw": 10,
+        "trim": 2
+      }
+    },
+    {
+      "make": "GAC",
+      "models": 23,
+      "variants": 121,
+      "requiredValuesPresent": 21,
+      "requiredValuesSupported": 21,
+      "missing": {
+        "powerHpOrKw": 96,
+        "power30MinKw": 33,
+        "trim": 6,
+        "powertrainKind": 4,
+        "engineCc": 72
+      },
+      "unsupported": {
+        "year": 79,
+        "trim": 73,
+        "fuel": 79,
+        "powertrainKind": 75
+      }
+    },
+    {
+      "make": "Geely",
+      "models": 58,
+      "variants": 763,
+      "requiredValuesPresent": 370,
+      "requiredValuesSupported": 370,
+      "missing": {
+        "powerHpOrKw": 146,
+        "power30MinKw": 136,
+        "engineCc": 85,
+        "trim": 217,
+        "powertrainKind": 8,
+        "fuel": 7
+      },
+      "unsupported": {
+        "year": 277,
+        "trim": 60,
+        "fuel": 277,
+        "powertrainKind": 274,
+        "engineCc": 194,
+        "powerHpOrKw": 194
+      }
+    },
+    {
+      "make": "Genesis",
+      "models": 12,
+      "variants": 475,
+      "requiredValuesPresent": 194,
+      "requiredValuesSupported": 23,
+      "missing": {
+        "powerHpOrKw": 214,
+        "power30MinKw": 19,
+        "engineCc": 58,
+        "trim": 36,
+        "powertrainKind": 58
+      },
+      "unsupported": {
+        "year": 450,
+        "trim": 414,
+        "fuel": 450,
+        "powertrainKind": 392,
+        "engineCc": 319,
+        "powerHpOrKw": 178
+      }
+    },
+    {
+      "make": "GMC",
+      "models": 7,
+      "variants": 96,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 67,
+        "powerHpOrKw": 73,
+        "trim": 23,
+        "powertrainKind": 21,
+        "power30MinKw": 7
+      },
+      "unsupported": {
+        "year": 95,
+        "trim": 72,
+        "fuel": 95,
+        "powertrainKind": 74,
+        "engineCc": 1,
+        "powerHpOrKw": 2
+      }
+    },
+    {
+      "make": "Great Wall",
+      "models": 13,
+      "variants": 201,
+      "requiredValuesPresent": 124,
+      "requiredValuesSupported": 124,
+      "missing": {
+        "trim": 55,
+        "engineCc": 7,
+        "powerHpOrKw": 10,
+        "power30MinKw": 17,
+        "fuel": 3,
+        "powertrainKind": 10
+      },
+      "unsupported": {
+        "year": 57,
+        "fuel": 57,
+        "powertrainKind": 49,
+        "engineCc": 44,
+        "powerHpOrKw": 45,
+        "trim": 2
+      }
+    },
+    {
+      "make": "GWM - WEY",
+      "models": 1,
+      "variants": 3,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 3,
+        "powerHpOrKw": 3,
+        "power30MinKw": 2
+      },
+      "unsupported": {
+        "year": 3,
+        "trim": 3,
+        "fuel": 3,
+        "powertrainKind": 3
+      }
+    },
+    {
+      "make": "Haima",
+      "models": 3,
+      "variants": 6,
+      "requiredValuesPresent": 6,
+      "requiredValuesSupported": 6,
+      "missing": {},
+      "unsupported": {}
+    },
+    {
+      "make": "Haval",
+      "models": 28,
+      "variants": 501,
+      "requiredValuesPresent": 257,
+      "requiredValuesSupported": 257,
+      "missing": {
+        "trim": 171,
+        "engineCc": 38,
+        "powerHpOrKw": 53,
+        "power30MinKw": 77,
+        "powertrainKind": 3
+      },
+      "unsupported": {
+        "year": 186,
+        "fuel": 186,
+        "powertrainKind": 183,
+        "engineCc": 156,
+        "powerHpOrKw": 159,
+        "trim": 15
+      }
+    },
+    {
+      "make": "HiPhi",
+      "models": 2,
+      "variants": 17,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 13,
+        "power30MinKw": 17,
+        "trim": 3
+      },
+      "unsupported": {
+        "year": 4,
+        "fuel": 4,
+        "powertrainKind": 4,
+        "trim": 1
+      }
+    },
+    {
+      "make": "Honda",
+      "models": 37,
+      "variants": 1191,
+      "requiredValuesPresent": 421,
+      "requiredValuesSupported": 419,
+      "missing": {
+        "power30MinKw": 255,
+        "trim": 425,
+        "engineCc": 164,
+        "powerHpOrKw": 213,
+        "powertrainKind": 213,
+        "fuel": 28
+      },
+      "unsupported": {
+        "year": 616,
+        "fuel": 588,
+        "powertrainKind": 403,
+        "engineCc": 228,
+        "powerHpOrKw": 219,
+        "trim": 191
+      }
+    },
+    {
+      "make": "Hongqi",
+      "models": 23,
+      "variants": 486,
+      "requiredValuesPresent": 183,
+      "requiredValuesSupported": 183,
+      "missing": {
+        "powerHpOrKw": 94,
+        "power30MinKw": 252,
+        "trim": 90,
+        "fuel": 2,
+        "powertrainKind": 2,
+        "engineCc": 12
+      },
+      "unsupported": {
+        "year": 100,
+        "fuel": 100,
+        "powertrainKind": 100,
+        "trim": 10,
+        "powerHpOrKw": 72,
+        "engineCc": 70
+      }
+    },
+    {
+      "make": "Hummer",
+      "models": 3,
+      "variants": 12,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 11,
+        "powerHpOrKw": 11,
+        "trim": 1,
+        "fuel": 1,
+        "powertrainKind": 1
+      },
+      "unsupported": {
+        "year": 12,
+        "trim": 11,
+        "fuel": 11,
+        "powertrainKind": 11
+      }
+    },
+    {
+      "make": "Hyundai",
+      "models": 56,
+      "variants": 3293,
+      "requiredValuesPresent": 927,
+      "requiredValuesSupported": 392,
+      "missing": {
+        "engineCc": 444,
+        "powerHpOrKw": 1160,
+        "trim": 1006,
+        "powertrainKind": 941,
+        "power30MinKw": 513,
+        "fuel": 41
+      },
+      "unsupported": {
+        "year": 2643,
+        "trim": 1637,
+        "fuel": 2636,
+        "powertrainKind": 1734,
+        "engineCc": 1209,
+        "powerHpOrKw": 632
+      }
+    },
+    {
+      "make": "iCAR",
+      "models": 4,
+      "variants": 63,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "trim": 8,
+        "powerHpOrKw": 33,
+        "power30MinKw": 63,
+        "engineCc": 1
+      },
+      "unsupported": {
+        "year": 8,
+        "fuel": 8,
+        "powertrainKind": 8,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "iCAUR",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 2,
+        "powerHpOrKw": 2,
+        "power30MinKw": 1
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "IM Motors",
+      "models": 5,
+      "variants": 18,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 18,
+        "power30MinKw": 18
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "INEOS",
+      "models": 1,
+      "variants": 31,
+      "requiredValuesPresent": 3,
+      "requiredValuesSupported": 3,
+      "missing": {
+        "trim": 22,
+        "powertrainKind": 22,
+        "engineCc": 6,
+        "powerHpOrKw": 6
+      },
+      "unsupported": {
+        "year": 28,
+        "fuel": 28,
+        "trim": 6,
+        "powertrainKind": 6
+      }
+    },
+    {
+      "make": "Infiniti",
+      "models": 18,
+      "variants": 217,
+      "requiredValuesPresent": 41,
+      "requiredValuesSupported": 41,
+      "missing": {
+        "trim": 38,
+        "engineCc": 142,
+        "powerHpOrKw": 142,
+        "powertrainKind": 18,
+        "power30MinKw": 8,
+        "fuel": 1
+      },
+      "unsupported": {
+        "year": 169,
+        "fuel": 168,
+        "powertrainKind": 151,
+        "trim": 131,
+        "engineCc": 9,
+        "powerHpOrKw": 9
+      }
+    },
+    {
+      "make": "Isuzu",
+      "models": 7,
+      "variants": 42,
+      "requiredValuesPresent": 18,
+      "requiredValuesSupported": 18,
+      "missing": {
+        "trim": 18,
+        "powertrainKind": 4,
+        "fuel": 1,
+        "engineCc": 16,
+        "powerHpOrKw": 1
+      },
+      "unsupported": {
+        "year": 19,
+        "fuel": 19,
+        "powertrainKind": 16,
+        "powerHpOrKw": 15,
+        "engineCc": 4,
+        "trim": 1
+      }
+    },
+    {
+      "make": "IVECO",
+      "models": 3,
+      "variants": 29,
+      "requiredValuesPresent": 13,
+      "requiredValuesSupported": 13,
+      "missing": {
+        "trim": 12,
+        "fuel": 5,
+        "powertrainKind": 5,
+        "engineCc": 5,
+        "powerHpOrKw": 4
+      },
+      "unsupported": {
+        "year": 16,
+        "fuel": 11,
+        "powertrainKind": 11,
+        "engineCc": 6,
+        "powerHpOrKw": 7,
+        "trim": 4
+      }
+    },
+    {
+      "make": "JAC",
+      "models": 27,
+      "variants": 136,
+      "requiredValuesPresent": 60,
+      "requiredValuesSupported": 60,
+      "missing": {
+        "powerHpOrKw": 40,
+        "power30MinKw": 26,
+        "trim": 29,
+        "fuel": 1,
+        "powertrainKind": 1,
+        "engineCc": 30
+      },
+      "unsupported": {
+        "year": 58,
+        "fuel": 57,
+        "powertrainKind": 57,
+        "engineCc": 22,
+        "powerHpOrKw": 23,
+        "trim": 29
+      }
+    },
+    {
+      "make": "Jaecoo",
+      "models": 3,
+      "variants": 28,
+      "requiredValuesPresent": 9,
+      "requiredValuesSupported": 9,
+      "missing": {
+        "engineCc": 4,
+        "powerHpOrKw": 4,
+        "power30MinKw": 16
+      },
+      "unsupported": {
+        "year": 4,
+        "trim": 4,
+        "fuel": 4,
+        "powertrainKind": 4
+      }
+    },
+    {
+      "make": "Jaguar",
+      "models": 14,
+      "variants": 453,
+      "requiredValuesPresent": 149,
+      "requiredValuesSupported": 149,
+      "missing": {
+        "power30MinKw": 30,
+        "trim": 219,
+        "engineCc": 56,
+        "powerHpOrKw": 62,
+        "powertrainKind": 185,
+        "fuel": 1
+      },
+      "unsupported": {
+        "year": 276,
+        "fuel": 275,
+        "powertrainKind": 91,
+        "engineCc": 38,
+        "powerHpOrKw": 33,
+        "trim": 57
+      }
+    },
+    {
+      "make": "Jeep",
+      "models": 17,
+      "variants": 778,
+      "requiredValuesPresent": 182,
+      "requiredValuesSupported": 178,
+      "missing": {
+        "powerHpOrKw": 240,
+        "power30MinKw": 153,
+        "engineCc": 230,
+        "trim": 224,
+        "powertrainKind": 199,
+        "fuel": 5
+      },
+      "unsupported": {
+        "year": 459,
+        "trim": 235,
+        "fuel": 457,
+        "powertrainKind": 263,
+        "engineCc": 38,
+        "powerHpOrKw": 40
+      }
+    },
+    {
+      "make": "Jetour",
+      "models": 23,
+      "variants": 564,
+      "requiredValuesPresent": 387,
+      "requiredValuesSupported": 387,
+      "missing": {
+        "trim": 60,
+        "powerHpOrKw": 99,
+        "power30MinKw": 57,
+        "engineCc": 73,
+        "powertrainKind": 2
+      },
+      "unsupported": {
+        "year": 122,
+        "fuel": 122,
+        "powertrainKind": 120,
+        "engineCc": 53,
+        "powerHpOrKw": 53,
+        "trim": 62
+      }
+    },
+    {
+      "make": "Jetta",
+      "models": 5,
+      "variants": 271,
+      "requiredValuesPresent": 248,
+      "requiredValuesSupported": 248,
+      "missing": {
+        "trim": 21,
+        "engineCc": 3,
+        "powerHpOrKw": 3
+      },
+      "unsupported": {
+        "year": 22,
+        "fuel": 22,
+        "powertrainKind": 22,
+        "engineCc": 20,
+        "powerHpOrKw": 20,
+        "trim": 1
+      }
+    },
+    {
+      "make": "Jinbei",
+      "models": 7,
+      "variants": 55,
+      "requiredValuesPresent": 40,
+      "requiredValuesSupported": 40,
+      "missing": {
+        "trim": 13,
+        "engineCc": 2,
+        "powerHpOrKw": 1,
+        "fuel": 1,
+        "powertrainKind": 1
+      },
+      "unsupported": {
+        "year": 13,
+        "fuel": 13,
+        "powertrainKind": 13,
+        "engineCc": 12,
+        "powerHpOrKw": 12
+      }
+    },
+    {
+      "make": "Jincheng",
+      "models": 1,
+      "variants": 4,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 4,
+        "powerHpOrKw": 4
+      },
+      "unsupported": {
+        "year": 4,
+        "trim": 4,
+        "fuel": 4,
+        "powertrainKind": 4
+      }
+    },
+    {
+      "make": "JMC",
+      "models": 8,
+      "variants": 78,
+      "requiredValuesPresent": 45,
+      "requiredValuesSupported": 45,
+      "missing": {
+        "trim": 18,
+        "fuel": 1,
+        "powertrainKind": 1,
+        "powerHpOrKw": 3,
+        "power30MinKw": 5,
+        "engineCc": 16
+      },
+      "unsupported": {
+        "year": 18,
+        "fuel": 17,
+        "powertrainKind": 17,
+        "engineCc": 11,
+        "powerHpOrKw": 15
+      }
+    },
+    {
+      "make": "JMEV",
+      "models": 2,
+      "variants": 27,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 17,
+        "power30MinKw": 27,
+        "trim": 6
+      },
+      "unsupported": {
+        "year": 6,
+        "fuel": 6,
+        "powertrainKind": 6
+      }
+    },
+    {
+      "make": "Joylong",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 2,
+        "powerHpOrKw": 2,
+        "trim": 1
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 1,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "Kaiyi",
+      "models": 1,
+      "variants": 5,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 5,
+        "powerHpOrKw": 5,
+        "power30MinKw": 1
+      },
+      "unsupported": {
+        "year": 5,
+        "trim": 5,
+        "fuel": 5,
+        "powertrainKind": 5
+      }
+    },
+    {
+      "make": "KGM",
+      "models": 10,
+      "variants": 151,
+      "requiredValuesPresent": 53,
+      "requiredValuesSupported": 7,
+      "missing": {
+        "powerHpOrKw": 60,
+        "power30MinKw": 9,
+        "trim": 37,
+        "powertrainKind": 37,
+        "engineCc": 1
+      },
+      "unsupported": {
+        "year": 143,
+        "trim": 106,
+        "fuel": 143,
+        "powertrainKind": 106,
+        "engineCc": 98,
+        "powerHpOrKw": 46
+      }
+    },
+    {
+      "make": "Kia",
+      "models": 71,
+      "variants": 2799,
+      "requiredValuesPresent": 803,
+      "requiredValuesSupported": 274,
+      "missing": {
+        "engineCc": 363,
+        "powerHpOrKw": 1166,
+        "power30MinKw": 442,
+        "powertrainKind": 637,
+        "trim": 666,
+        "fuel": 12
+      },
+      "unsupported": {
+        "year": 2385,
+        "trim": 1719,
+        "fuel": 2378,
+        "powertrainKind": 1753,
+        "engineCc": 1299,
+        "powerHpOrKw": 603
+      }
+    },
+    {
+      "make": "King Long",
+      "models": 2,
+      "variants": 3,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 3,
+        "powerHpOrKw": 3,
+        "trim": 2
+      },
+      "unsupported": {
+        "year": 3,
+        "trim": 1,
+        "fuel": 3,
+        "powertrainKind": 3
+      }
+    },
+    {
+      "make": "Koenigsegg",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 2,
+        "powerHpOrKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "KTM",
+      "models": 1,
+      "variants": 12,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "trim": 12,
+        "powertrainKind": 11
+      },
+      "unsupported": {
+        "year": 12,
+        "fuel": 12,
+        "powertrainKind": 1,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "Kuayue",
+      "models": 2,
+      "variants": 4,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 4,
+        "powerHpOrKw": 4
+      },
+      "unsupported": {
+        "year": 4,
+        "trim": 4,
+        "fuel": 4,
+        "powertrainKind": 4
+      }
+    },
+    {
+      "make": "Lamborghini",
+      "models": 10,
+      "variants": 251,
+      "requiredValuesPresent": 23,
+      "requiredValuesSupported": 23,
+      "missing": {
+        "trim": 118,
+        "powertrainKind": 96,
+        "engineCc": 109,
+        "powerHpOrKw": 109,
+        "power30MinKw": 24,
+        "fuel": 1
+      },
+      "unsupported": {
+        "year": 223,
+        "fuel": 222,
+        "trim": 105,
+        "powertrainKind": 127,
+        "engineCc": 19,
+        "powerHpOrKw": 19
+      }
+    },
+    {
+      "make": "Lancia",
+      "models": 2,
+      "variants": 78,
+      "requiredValuesPresent": 6,
+      "requiredValuesSupported": 6,
+      "missing": {
+        "trim": 46,
+        "powertrainKind": 46,
+        "engineCc": 5,
+        "powerHpOrKw": 4,
+        "power30MinKw": 23
+      },
+      "unsupported": {
+        "year": 49,
+        "fuel": 49,
+        "trim": 3,
+        "powertrainKind": 3
+      }
+    },
+    {
+      "make": "Land Rover",
+      "models": 16,
+      "variants": 2028,
+      "requiredValuesPresent": 149,
+      "requiredValuesSupported": 148,
+      "missing": {
+        "engineCc": 495,
+        "powerHpOrKw": 511,
+        "power30MinKw": 664,
+        "trim": 845,
+        "powertrainKind": 732,
+        "fuel": 12
+      },
+      "unsupported": {
+        "year": 1318,
+        "trim": 473,
+        "fuel": 1312,
+        "powertrainKind": 592,
+        "engineCc": 109,
+        "powerHpOrKw": 98
+      }
+    },
+    {
+      "make": "Landian",
+      "models": 1,
+      "variants": 1,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 1,
+        "powerHpOrKw": 1,
+        "power30MinKw": 1
+      },
+      "unsupported": {
+        "year": 1,
+        "trim": 1,
+        "fuel": 1,
+        "powertrainKind": 1
+      }
+    },
+    {
+      "make": "Landwind",
+      "models": 1,
+      "variants": 1,
+      "requiredValuesPresent": 1,
+      "requiredValuesSupported": 1,
+      "missing": {},
+      "unsupported": {}
+    },
+    {
+      "make": "Leapmotor",
+      "models": 14,
+      "variants": 478,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 191,
+        "power30MinKw": 446,
+        "trim": 80,
+        "engineCc": 5,
+        "powertrainKind": 32
+      },
+      "unsupported": {
+        "year": 80,
+        "fuel": 80,
+        "powertrainKind": 48,
+        "engineCc": 12,
+        "powerHpOrKw": 16
+      }
+    },
+    {
+      "make": "LEPAS",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 2,
+        "powerHpOrKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "LEVC",
+      "models": 1,
+      "variants": 6,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "power30MinKw": 4,
+        "trim": 3,
+        "powertrainKind": 2,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      },
+      "unsupported": {
+        "year": 4,
+        "fuel": 4,
+        "trim": 1,
+        "powertrainKind": 2,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "Lexus",
+      "models": 29,
+      "variants": 1126,
+      "requiredValuesPresent": 132,
+      "requiredValuesSupported": 132,
+      "missing": {
+        "trim": 221,
+        "power30MinKw": 427,
+        "powertrainKind": 169,
+        "powerHpOrKw": 527,
+        "engineCc": 485,
+        "fuel": 40
+      },
+      "unsupported": {
+        "year": 730,
+        "fuel": 707,
+        "powertrainKind": 577,
+        "engineCc": 90,
+        "powerHpOrKw": 83,
+        "trim": 509
+      }
+    },
+    {
+      "make": "Li Auto",
+      "models": 16,
+      "variants": 251,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 50,
+        "power30MinKw": 251,
+        "engineCc": 16,
+        "trim": 48
+      },
+      "unsupported": {
+        "year": 54,
+        "trim": 6,
+        "fuel": 54,
+        "powertrainKind": 54,
+        "engineCc": 32,
+        "powerHpOrKw": 32
+      }
+    },
+    {
+      "make": "Ligier",
+      "models": 3,
+      "variants": 7,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 7,
+        "power30MinKw": 1
+      },
+      "unsupported": {}
+    },
+    {
+      "make": "Lincoln",
+      "models": 10,
+      "variants": 356,
+      "requiredValuesPresent": 211,
+      "requiredValuesSupported": 210,
+      "missing": {
+        "trim": 66,
+        "engineCc": 61,
+        "powerHpOrKw": 61,
+        "powertrainKind": 18,
+        "power30MinKw": 26,
+        "fuel": 1
+      },
+      "unsupported": {
+        "year": 124,
+        "fuel": 124,
+        "powertrainKind": 107,
+        "engineCc": 48,
+        "powerHpOrKw": 50,
+        "trim": 58
+      }
+    },
+    {
+      "make": "Livan",
+      "models": 1,
+      "variants": 10,
+      "requiredValuesPresent": 3,
+      "requiredValuesSupported": 3,
+      "missing": {
+        "engineCc": 1,
+        "powerHpOrKw": 1,
+        "trim": 6,
+        "powertrainKind": 5
+      },
+      "unsupported": {
+        "year": 7,
+        "trim": 1,
+        "fuel": 7,
+        "powertrainKind": 2,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "Lotus",
+      "models": 6,
+      "variants": 133,
+      "requiredValuesPresent": 11,
+      "requiredValuesSupported": 11,
+      "missing": {
+        "powerHpOrKw": 32,
+        "power30MinKw": 45,
+        "trim": 78,
+        "powertrainKind": 63,
+        "fuel": 1,
+        "engineCc": 6
+      },
+      "unsupported": {
+        "year": 85,
+        "fuel": 84,
+        "powertrainKind": 22,
+        "engineCc": 9,
+        "powerHpOrKw": 9,
+        "trim": 7
+      }
+    },
+    {
+      "make": "Ls Auto",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 2,
+        "power30MinKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "LUXEED",
+      "models": 3,
+      "variants": 14,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 14,
+        "power30MinKw": 14
+      },
+      "unsupported": {}
+    },
+    {
+      "make": "Lynk & Co",
+      "models": 12,
+      "variants": 310,
+      "requiredValuesPresent": 70,
+      "requiredValuesSupported": 70,
+      "missing": {
+        "powerHpOrKw": 37,
+        "power30MinKw": 214,
+        "trim": 61,
+        "powertrainKind": 7,
+        "engineCc": 5
+      },
+      "unsupported": {
+        "year": 66,
+        "fuel": 66,
+        "powertrainKind": 59,
+        "engineCc": 49,
+        "powerHpOrKw": 49,
+        "trim": 5
+      }
+    },
+    {
+      "make": "M-Hero",
+      "models": 1,
+      "variants": 6,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 6,
+        "power30MinKw": 6
+      },
+      "unsupported": {}
+    },
+    {
+      "make": "Maextro",
+      "models": 3,
+      "variants": 20,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 20,
+        "power30MinKw": 20,
+        "engineCc": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "Mahindra",
+      "models": 2,
+      "variants": 19,
+      "requiredValuesPresent": 3,
+      "requiredValuesSupported": 3,
+      "missing": {
+        "trim": 13,
+        "powertrainKind": 13,
+        "engineCc": 3,
+        "powerHpOrKw": 3
+      },
+      "unsupported": {
+        "year": 16,
+        "fuel": 16,
+        "trim": 3,
+        "powertrainKind": 3
+      }
+    },
+    {
+      "make": "MAN",
+      "models": 1,
+      "variants": 25,
+      "requiredValuesPresent": 1,
+      "requiredValuesSupported": 1,
+      "missing": {
+        "trim": 24,
+        "powertrainKind": 24
+      },
+      "unsupported": {
+        "year": 24,
+        "fuel": 24
+      }
+    },
+    {
+      "make": "Maserati",
+      "models": 7,
+      "variants": 319,
+      "requiredValuesPresent": 35,
+      "requiredValuesSupported": 35,
+      "missing": {
+        "trim": 199,
+        "powertrainKind": 180,
+        "engineCc": 48,
+        "powerHpOrKw": 50,
+        "power30MinKw": 48,
+        "fuel": 2
+      },
+      "unsupported": {
+        "year": 248,
+        "fuel": 247,
+        "trim": 49,
+        "powertrainKind": 69,
+        "engineCc": 23,
+        "powerHpOrKw": 22
+      }
+    },
+    {
+      "make": "Maxus",
+      "models": 27,
+      "variants": 323,
+      "requiredValuesPresent": 193,
+      "requiredValuesSupported": 193,
+      "missing": {
+        "power30MinKw": 56,
+        "trim": 71,
+        "powerHpOrKw": 13,
+        "engineCc": 17,
+        "powertrainKind": 21,
+        "fuel": 7
+      },
+      "unsupported": {
+        "year": 71,
+        "fuel": 67,
+        "powertrainKind": 53,
+        "engineCc": 42,
+        "powerHpOrKw": 49
+      }
+    },
+    {
+      "make": "Mazda",
+      "models": 22,
+      "variants": 1096,
+      "requiredValuesPresent": 207,
+      "requiredValuesSupported": 207,
+      "missing": {
+        "engineCc": 99,
+        "powerHpOrKw": 132,
+        "power30MinKw": 135,
+        "trim": 613,
+        "powertrainKind": 605,
+        "fuel": 54
+      },
+      "unsupported": {
+        "year": 753,
+        "trim": 140,
+        "fuel": 705,
+        "powertrainKind": 153,
+        "powerHpOrKw": 65,
+        "engineCc": 60
+      }
+    },
+    {
+      "make": "McLaren",
+      "models": 15,
+      "variants": 123,
+      "requiredValuesPresent": 3,
+      "requiredValuesSupported": 3,
+      "missing": {
+        "trim": 85,
+        "powertrainKind": 78,
+        "engineCc": 32,
+        "powerHpOrKw": 32,
+        "power30MinKw": 9,
+        "fuel": 6
+      },
+      "unsupported": {
+        "year": 116,
+        "fuel": 113,
+        "powertrainKind": 41,
+        "engineCc": 10,
+        "powerHpOrKw": 10,
+        "trim": 31
+      }
+    },
+    {
+      "make": "Mercedes Maybach",
+      "models": 10,
+      "variants": 47,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 47,
+        "powerHpOrKw": 47,
+        "trim": 11,
+        "power30MinKw": 1
+      },
+      "unsupported": {
+        "year": 47,
+        "trim": 36,
+        "fuel": 47,
+        "powertrainKind": 47
+      }
+    },
+    {
+      "make": "Mercedes-Benz",
+      "models": 170,
+      "variants": 11088,
+      "requiredValuesPresent": 4913,
+      "requiredValuesSupported": 4876,
+      "missing": {
+        "trim": 2705,
+        "engineCc": 1380,
+        "powerHpOrKw": 1821,
+        "power30MinKw": 1981,
+        "powertrainKind": 2243,
+        "fuel": 375
+      },
+      "unsupported": {
+        "year": 4270,
+        "fuel": 4231,
+        "powertrainKind": 2073,
+        "trim": 1565,
+        "engineCc": 656,
+        "powerHpOrKw": 442
+      }
+    },
+    {
+      "make": "MG",
+      "models": 31,
+      "variants": 833,
+      "requiredValuesPresent": 287,
+      "requiredValuesSupported": 287,
+      "missing": {
+        "trim": 251,
+        "powerHpOrKw": 166,
+        "power30MinKw": 189,
+        "engineCc": 96,
+        "powertrainKind": 228,
+        "fuel": 36
+      },
+      "unsupported": {
+        "year": 341,
+        "fuel": 341,
+        "powertrainKind": 149,
+        "trim": 90,
+        "engineCc": 42,
+        "powerHpOrKw": 42
+      }
+    },
+    {
+      "make": "Microcar",
+      "models": 1,
+      "variants": 1,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 1
+      },
+      "unsupported": {}
+    },
+    {
+      "make": "MINI",
+      "models": 6,
+      "variants": 1015,
+      "requiredValuesPresent": 411,
+      "requiredValuesSupported": 360,
+      "missing": {
+        "powerHpOrKw": 166,
+        "power30MinKw": 105,
+        "trim": 373,
+        "powertrainKind": 340,
+        "fuel": 2,
+        "engineCc": 77
+      },
+      "unsupported": {
+        "year": 561,
+        "fuel": 560,
+        "powertrainKind": 222,
+        "engineCc": 135,
+        "powerHpOrKw": 81,
+        "trim": 188
+      }
+    },
+    {
+      "make": "Mitsubishi",
+      "models": 25,
+      "variants": 543,
+      "requiredValuesPresent": 94,
+      "requiredValuesSupported": 94,
+      "missing": {
+        "engineCc": 294,
+        "powerHpOrKw": 292,
+        "trim": 137,
+        "power30MinKw": 24,
+        "powertrainKind": 123,
+        "fuel": 17
+      },
+      "unsupported": {
+        "year": 423,
+        "trim": 286,
+        "fuel": 412,
+        "powertrainKind": 306,
+        "engineCc": 13,
+        "powerHpOrKw": 18
+      }
+    },
+    {
+      "make": "Morgan",
+      "models": 1,
+      "variants": 14,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "trim": 13,
+        "powertrainKind": 13,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      },
+      "unsupported": {
+        "year": 14,
+        "fuel": 14,
+        "trim": 1,
+        "powertrainKind": 1
+      }
+    },
+    {
+      "make": "Neta",
+      "models": 7,
+      "variants": 150,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 36,
+        "power30MinKw": 150,
+        "trim": 26,
+        "engineCc": 9
+      },
+      "unsupported": {
+        "year": 26,
+        "fuel": 26,
+        "powertrainKind": 26,
+        "powerHpOrKw": 14,
+        "engineCc": 4
+      }
+    },
+    {
+      "make": "Nio",
+      "models": 11,
+      "variants": 432,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 236,
+        "power30MinKw": 398,
+        "trim": 80,
+        "powertrainKind": 34,
+        "fuel": 2
+      },
+      "unsupported": {
+        "year": 82,
+        "fuel": 81,
+        "powertrainKind": 49,
+        "trim": 2
+      }
+    },
+    {
+      "make": "Nissan",
+      "models": 44,
+      "variants": 1458,
+      "requiredValuesPresent": 350,
+      "requiredValuesSupported": 350,
+      "missing": {
+        "engineCc": 531,
+        "powerHpOrKw": 583,
+        "trim": 418,
+        "powertrainKind": 281,
+        "power30MinKw": 201,
+        "fuel": 18
+      },
+      "unsupported": {
+        "year": 930,
+        "trim": 512,
+        "fuel": 914,
+        "powertrainKind": 651,
+        "powerHpOrKw": 131,
+        "engineCc": 116
+      }
+    },
+    {
+      "make": "OMODA",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 2,
+        "powerHpOrKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "Opel",
+      "models": 14,
+      "variants": 1253,
+      "requiredValuesPresent": 446,
+      "requiredValuesSupported": 446,
+      "missing": {
+        "powerHpOrKw": 19,
+        "power30MinKw": 136,
+        "trim": 655,
+        "powertrainKind": 656,
+        "engineCc": 16,
+        "fuel": 1
+      },
+      "unsupported": {
+        "year": 659,
+        "fuel": 659,
+        "trim": 4,
+        "powertrainKind": 4,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "ORA",
+      "models": 8,
+      "variants": 223,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 65,
+        "power30MinKw": 221,
+        "trim": 27,
+        "powertrainKind": 2
+      },
+      "unsupported": {
+        "year": 27,
+        "fuel": 27,
+        "powertrainKind": 25,
+        "powerHpOrKw": 10
+      }
+    },
+    {
+      "make": "Pagani",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 2,
+        "powerHpOrKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "Peugeot",
+      "models": 20,
+      "variants": 1224,
+      "requiredValuesPresent": 436,
+      "requiredValuesSupported": 434,
+      "missing": {
+        "trim": 497,
+        "powertrainKind": 482,
+        "power30MinKw": 203,
+        "engineCc": 79,
+        "powerHpOrKw": 109,
+        "fuel": 6
+      },
+      "unsupported": {
+        "year": 582,
+        "fuel": 580,
+        "trim": 85,
+        "powertrainKind": 104,
+        "engineCc": 31,
+        "powerHpOrKw": 20
+      }
+    },
+    {
+      "make": "Pininfarina",
+      "models": 1,
+      "variants": 1,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      },
+      "unsupported": {
+        "year": 1,
+        "trim": 1,
+        "fuel": 1,
+        "powertrainKind": 1
+      }
+    },
+    {
+      "make": "Plymouth",
+      "models": 2,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 2,
+        "powerHpOrKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "Polestar",
+      "models": 3,
+      "variants": 57,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "power30MinKw": 57,
+        "trim": 3,
+        "powerHpOrKw": 26
+      },
+      "unsupported": {
+        "year": 24,
+        "fuel": 24,
+        "powertrainKind": 24,
+        "trim": 21,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "Porsche",
+      "models": 15,
+      "variants": 2092,
+      "requiredValuesPresent": 425,
+      "requiredValuesSupported": 425,
+      "missing": {
+        "trim": 1066,
+        "fuel": 53,
+        "powertrainKind": 945,
+        "powerHpOrKw": 461,
+        "engineCc": 381,
+        "power30MinKw": 245
+      },
+      "unsupported": {
+        "year": 1446,
+        "fuel": 1413,
+        "powertrainKind": 521,
+        "engineCc": 127,
+        "powerHpOrKw": 117,
+        "trim": 380
+      }
+    },
+    {
+      "make": "RAM",
+      "models": 2,
+      "variants": 17,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "trim": 10,
+        "powertrainKind": 16,
+        "engineCc": 1,
+        "powerHpOrKw": 1,
+        "fuel": 11
+      },
+      "unsupported": {
+        "year": 11,
+        "fuel": 6,
+        "trim": 1,
+        "powertrainKind": 1
+      }
+    },
+    {
+      "make": "Renault",
+      "models": 35,
+      "variants": 1224,
+      "requiredValuesPresent": 317,
+      "requiredValuesSupported": 239,
+      "missing": {
+        "powerHpOrKw": 140,
+        "power30MinKw": 197,
+        "engineCc": 65,
+        "trim": 599,
+        "powertrainKind": 599,
+        "fuel": 3
+      },
+      "unsupported": {
+        "year": 794,
+        "trim": 195,
+        "fuel": 793,
+        "powertrainKind": 197,
+        "engineCc": 141,
+        "powerHpOrKw": 79
+      }
+    },
+    {
+      "make": "Roewe",
+      "models": 25,
+      "variants": 371,
+      "requiredValuesPresent": 181,
+      "requiredValuesSupported": 181,
+      "missing": {
+        "powerHpOrKw": 38,
+        "power30MinKw": 147,
+        "trim": 65,
+        "engineCc": 9
+      },
+      "unsupported": {
+        "year": 68,
+        "fuel": 68,
+        "powertrainKind": 68,
+        "engineCc": 50,
+        "powerHpOrKw": 53,
+        "trim": 3
+      }
+    },
+    {
+      "make": "Rolls-Royce",
+      "models": 7,
+      "variants": 372,
+      "requiredValuesPresent": 38,
+      "requiredValuesSupported": 38,
+      "missing": {
+        "engineCc": 145,
+        "powerHpOrKw": 161,
+        "trim": 171,
+        "powertrainKind": 136,
+        "power30MinKw": 19,
+        "fuel": 22
+      },
+      "unsupported": {
+        "year": 318,
+        "trim": 147,
+        "fuel": 309,
+        "powertrainKind": 195,
+        "engineCc": 34,
+        "powerHpOrKw": 34
+      }
+    },
+    {
+      "make": "Rox",
+      "models": 1,
+      "variants": 12,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 8,
+        "powerHpOrKw": 10,
+        "power30MinKw": 12
+      },
+      "unsupported": {
+        "year": 10,
+        "trim": 10,
+        "fuel": 10,
+        "powertrainKind": 10
+      }
+    },
+    {
+      "make": "ROX",
+      "models": 2,
+      "variants": 5,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "power30MinKw": 5,
+        "trim": 1,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      },
+      "unsupported": {
+        "year": 2,
+        "fuel": 2,
+        "powertrainKind": 2,
+        "engineCc": 1,
+        "powerHpOrKw": 1,
+        "trim": 1
+      }
+    },
+    {
+      "make": "Saic",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 2,
+        "power30MinKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "SEAT",
+      "models": 6,
+      "variants": 511,
+      "requiredValuesPresent": 292,
+      "requiredValuesSupported": 292,
+      "missing": {
+        "engineCc": 3,
+        "trim": 206,
+        "powertrainKind": 206,
+        "power30MinKw": 10
+      },
+      "unsupported": {
+        "year": 206,
+        "fuel": 206
+      }
+    },
+    {
+      "make": "Seres",
+      "models": 1,
+      "variants": 8,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "power30MinKw": 8,
+        "trim": 1
+      },
+      "unsupported": {
+        "year": 1,
+        "fuel": 1,
+        "powertrainKind": 1,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "SHANGJIE",
+      "models": 3,
+      "variants": 36,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "trim": 9,
+        "powerHpOrKw": 15,
+        "power30MinKw": 36,
+        "engineCc": 2
+      },
+      "unsupported": {
+        "year": 9,
+        "fuel": 9,
+        "powertrainKind": 9,
+        "engineCc": 2,
+        "powerHpOrKw": 2
+      }
+    },
+    {
+      "make": "Shanhai",
+      "models": 1,
+      "variants": 1,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "power30MinKw": 1
+      },
+      "unsupported": {}
+    },
+    {
+      "make": "Shelby",
+      "models": 1,
+      "variants": 1,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      },
+      "unsupported": {
+        "year": 1,
+        "trim": 1,
+        "fuel": 1,
+        "powertrainKind": 1
+      }
+    },
+    {
+      "make": "Sinogold",
+      "models": 1,
+      "variants": 5,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 5,
+        "power30MinKw": 5
+      },
+      "unsupported": {
+        "year": 5,
+        "trim": 5,
+        "fuel": 5,
+        "powertrainKind": 5
+      }
+    },
+    {
+      "make": "Skoda",
+      "models": 13,
+      "variants": 2105,
+      "requiredValuesPresent": 1037,
+      "requiredValuesSupported": 1037,
+      "missing": {
+        "power30MinKw": 110,
+        "powerHpOrKw": 24,
+        "trim": 933,
+        "powertrainKind": 905,
+        "engineCc": 23,
+        "fuel": 2
+      },
+      "unsupported": {
+        "year": 945,
+        "fuel": 945,
+        "powertrainKind": 42,
+        "engineCc": 30,
+        "powerHpOrKw": 30,
+        "trim": 12
+      }
+    },
+    {
+      "make": "Skywell",
+      "models": 1,
+      "variants": 12,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 2,
+        "power30MinKw": 1,
+        "engineCc": 1,
+        "trim": 10,
+        "powertrainKind": 10
+      },
+      "unsupported": {
+        "year": 12,
+        "trim": 2,
+        "fuel": 12,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "Smart",
+      "models": 6,
+      "variants": 176,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 20,
+        "power30MinKw": 89,
+        "trim": 104,
+        "powertrainKind": 86,
+        "engineCc": 1
+      },
+      "unsupported": {
+        "year": 105,
+        "fuel": 105,
+        "powertrainKind": 19,
+        "powerHpOrKw": 9,
+        "engineCc": 3,
+        "trim": 1
+      }
+    },
+    {
+      "make": "Soueast",
+      "models": 6,
+      "variants": 8,
+      "requiredValuesPresent": 3,
+      "requiredValuesSupported": 3,
+      "missing": {
+        "trim": 2,
+        "engineCc": 3,
+        "powerHpOrKw": 3,
+        "power30MinKw": 1
+      },
+      "unsupported": {
+        "year": 4,
+        "fuel": 4,
+        "powertrainKind": 4,
+        "engineCc": 1,
+        "powerHpOrKw": 1,
+        "trim": 2
+      }
+    },
+    {
+      "make": "Sportequipe",
+      "models": 2,
+      "variants": 23,
+      "requiredValuesPresent": 3,
+      "requiredValuesSupported": 3,
+      "missing": {
+        "trim": 18,
+        "powertrainKind": 18,
+        "power30MinKw": 2
+      },
+      "unsupported": {
+        "year": 18,
+        "fuel": 18
+      }
+    },
+    {
+      "make": "SsangYong",
+      "models": 10,
+      "variants": 393,
+      "requiredValuesPresent": 6,
+      "requiredValuesSupported": 6,
+      "missing": {
+        "trim": 374,
+        "powertrainKind": 380,
+        "power30MinKw": 2,
+        "engineCc": 6,
+        "powerHpOrKw": 6
+      },
+      "unsupported": {
+        "year": 386,
+        "fuel": 386,
+        "trim": 12,
+        "powertrainKind": 6
+      }
+    },
+    {
+      "make": "STELATO",
+      "models": 2,
+      "variants": 24,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 24,
+        "power30MinKw": 24
+      },
+      "unsupported": {}
+    },
+    {
+      "make": "Subaru",
+      "models": 11,
+      "variants": 281,
+      "requiredValuesPresent": 46,
+      "requiredValuesSupported": 46,
+      "missing": {
+        "engineCc": 61,
+        "powerHpOrKw": 41,
+        "trim": 143,
+        "powertrainKind": 157,
+        "fuel": 18,
+        "power30MinKw": 6
+      },
+      "unsupported": {
+        "year": 230,
+        "trim": 87,
+        "fuel": 213,
+        "powertrainKind": 74,
+        "powerHpOrKw": 33,
+        "engineCc": 13
+      }
+    },
+    {
+      "make": "Superformance",
+      "models": 1,
+      "variants": 1,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      },
+      "unsupported": {
+        "year": 1,
+        "trim": 1,
+        "fuel": 1,
+        "powertrainKind": 1
+      }
+    },
+    {
+      "make": "Suzuki",
+      "models": 26,
+      "variants": 440,
+      "requiredValuesPresent": 26,
+      "requiredValuesSupported": 26,
+      "missing": {
+        "engineCc": 173,
+        "powerHpOrKw": 188,
+        "trim": 182,
+        "fuel": 19,
+        "powertrainKind": 191,
+        "power30MinKw": 69
+      },
+      "unsupported": {
+        "year": 357,
+        "trim": 175,
+        "fuel": 341,
+        "powertrainKind": 169
+      }
+    },
+    {
+      "make": "SWM",
+      "models": 6,
+      "variants": 19,
+      "requiredValuesPresent": 13,
+      "requiredValuesSupported": 13,
+      "missing": {
+        "trim": 5,
+        "power30MinKw": 3
+      },
+      "unsupported": {
+        "year": 5,
+        "fuel": 5,
+        "powertrainKind": 5,
+        "engineCc": 5,
+        "powerHpOrKw": 5
+      }
+    },
+    {
+      "make": "Tank",
+      "models": 10,
+      "variants": 293,
+      "requiredValuesPresent": 93,
+      "requiredValuesSupported": 93,
+      "missing": {
+        "engineCc": 25,
+        "powerHpOrKw": 43,
+        "trim": 46,
+        "power30MinKw": 166
+      },
+      "unsupported": {
+        "year": 58,
+        "trim": 12,
+        "fuel": 58,
+        "powertrainKind": 58,
+        "engineCc": 40,
+        "powerHpOrKw": 40
+      }
+    },
+    {
+      "make": "Tesla",
+      "models": 8,
+      "variants": 835,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 254,
+        "power30MinKw": 440,
+        "trim": 434,
+        "powertrainKind": 395,
+        "fuel": 1
+      },
+      "unsupported": {
+        "year": 547,
+        "trim": 113,
+        "fuel": 546,
+        "powertrainKind": 152,
+        "powerHpOrKw": 7
+      }
+    },
+    {
+      "make": "Togg",
+      "models": 1,
+      "variants": 6,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "power30MinKw": 1,
+        "trim": 5,
+        "powertrainKind": 5
+      },
+      "unsupported": {
+        "year": 5,
+        "fuel": 5
+      }
+    },
+    {
+      "make": "Toyota",
+      "models": 82,
+      "variants": 5039,
+      "requiredValuesPresent": 810,
+      "requiredValuesSupported": 801,
+      "missing": {
+        "powerHpOrKw": 2088,
+        "power30MinKw": 1438,
+        "engineCc": 1961,
+        "trim": 1296,
+        "powertrainKind": 1038,
+        "fuel": 155
+      },
+      "unsupported": {
+        "year": 3208,
+        "trim": 1912,
+        "fuel": 3119,
+        "powertrainKind": 2234,
+        "powerHpOrKw": 294,
+        "engineCc": 273
+      }
+    },
+    {
+      "make": "Venucia",
+      "models": 10,
+      "variants": 83,
+      "requiredValuesPresent": 26,
+      "requiredValuesSupported": 26,
+      "missing": {
+        "trim": 15,
+        "powerHpOrKw": 19,
+        "power30MinKw": 48,
+        "engineCc": 3
+      },
+      "unsupported": {
+        "year": 18,
+        "fuel": 18,
+        "powertrainKind": 18,
+        "engineCc": 11,
+        "powerHpOrKw": 11,
+        "trim": 3
+      }
+    },
+    {
+      "make": "VGV",
+      "models": 3,
+      "variants": 4,
+      "requiredValuesPresent": 4,
+      "requiredValuesSupported": 4,
+      "missing": {},
+      "unsupported": {}
+    },
+    {
+      "make": "Victory",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 2,
+        "powerHpOrKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "VinFast",
+      "models": 1,
+      "variants": 11,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "trim": 10,
+        "powertrainKind": 10,
+        "powerHpOrKw": 1,
+        "power30MinKw": 1
+      },
+      "unsupported": {
+        "year": 11,
+        "fuel": 11,
+        "trim": 1,
+        "powertrainKind": 1
+      }
+    },
+    {
+      "make": "Volkswagen",
+      "models": 73,
+      "variants": 20887,
+      "requiredValuesPresent": 16597,
+      "requiredValuesSupported": 16587,
+      "missing": {
+        "trim": 2652,
+        "powertrainKind": 2530,
+        "engineCc": 357,
+        "powerHpOrKw": 405,
+        "fuel": 352,
+        "power30MinKw": 1015
+      },
+      "unsupported": {
+        "year": 2932,
+        "fuel": 2904,
+        "trim": 280,
+        "powertrainKind": 671,
+        "engineCc": 376,
+        "powerHpOrKw": 398
+      }
+    },
+    {
+      "make": "Volvo",
+      "models": 24,
+      "variants": 1487,
+      "requiredValuesPresent": 239,
+      "requiredValuesSupported": 224,
+      "missing": {
+        "trim": 558,
+        "powertrainKind": 501,
+        "fuel": 28,
+        "powerHpOrKw": 191,
+        "power30MinKw": 644,
+        "engineCc": 77
+      },
+      "unsupported": {
+        "year": 695,
+        "fuel": 684,
+        "trim": 137,
+        "powertrainKind": 203,
+        "engineCc": 133,
+        "powerHpOrKw": 83
+      }
+    },
+    {
+      "make": "Voyah",
+      "models": 10,
+      "variants": 208,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 7,
+        "power30MinKw": 193,
+        "trim": 49,
+        "powerHpOrKw": 35,
+        "powertrainKind": 15
+      },
+      "unsupported": {
+        "year": 51,
+        "fuel": 51,
+        "powertrainKind": 36,
+        "engineCc": 23,
+        "powerHpOrKw": 25,
+        "trim": 2
+      }
+    },
+    {
+      "make": "Wey",
+      "models": 2,
+      "variants": 4,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "power30MinKw": 4,
+        "trim": 1
+      },
+      "unsupported": {
+        "year": 1,
+        "fuel": 1,
+        "powertrainKind": 1,
+        "engineCc": 1,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "make": "WEY",
+      "models": 13,
+      "variants": 123,
+      "requiredValuesPresent": 32,
+      "requiredValuesSupported": 32,
+      "missing": {
+        "power30MinKw": 86,
+        "trim": 22,
+        "engineCc": 2,
+        "powerHpOrKw": 11
+      },
+      "unsupported": {
+        "year": 22,
+        "fuel": 22,
+        "powertrainKind": 22,
+        "engineCc": 21,
+        "powerHpOrKw": 21
+      }
+    },
+    {
+      "make": "Wuling",
+      "models": 36,
+      "variants": 641,
+      "requiredValuesPresent": 151,
+      "requiredValuesSupported": 151,
+      "missing": {
+        "powerHpOrKw": 159,
+        "power30MinKw": 375,
+        "trim": 174,
+        "engineCc": 5,
+        "powertrainKind": 28,
+        "fuel": 22
+      },
+      "unsupported": {
+        "year": 175,
+        "fuel": 157,
+        "powertrainKind": 151,
+        "engineCc": 102,
+        "powerHpOrKw": 106,
+        "trim": 1
+      }
+    },
+    {
+      "make": "Xiaomi",
+      "models": 8,
+      "variants": 97,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 54,
+        "power30MinKw": 95,
+        "trim": 20,
+        "powertrainKind": 2
+      },
+      "unsupported": {
+        "year": 23,
+        "fuel": 23,
+        "powertrainKind": 21,
+        "engineCc": 5,
+        "powerHpOrKw": 5,
+        "trim": 3
+      }
+    },
+    {
+      "make": "XPeng",
+      "models": 11,
+      "variants": 528,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 218,
+        "power30MinKw": 454,
+        "trim": 142,
+        "powertrainKind": 74,
+        "engineCc": 4,
+        "fuel": 1
+      },
+      "unsupported": {
+        "year": 153,
+        "fuel": 152,
+        "powertrainKind": 79,
+        "powerHpOrKw": 16,
+        "trim": 11,
+        "engineCc": 6
+      }
+    },
+    {
+      "make": "YANGWANG",
+      "models": 1,
+      "variants": 2,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "engineCc": 2,
+        "powerHpOrKw": 2,
+        "power30MinKw": 2
+      },
+      "unsupported": {
+        "year": 2,
+        "trim": 2,
+        "fuel": 2,
+        "powertrainKind": 2
+      }
+    },
+    {
+      "make": "Yema",
+      "models": 1,
+      "variants": 1,
+      "requiredValuesPresent": 1,
+      "requiredValuesSupported": 1,
+      "missing": {},
+      "unsupported": {}
+    },
+    {
+      "make": "Zeekr",
+      "models": 8,
+      "variants": 303,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "missing": {
+        "powerHpOrKw": 183,
+        "power30MinKw": 291,
+        "trim": 51,
+        "powertrainKind": 11,
+        "engineCc": 11
+      },
+      "unsupported": {
+        "year": 65,
+        "fuel": 65,
+        "powertrainKind": 54,
+        "trim": 14,
+        "engineCc": 4,
+        "powerHpOrKw": 4
+      }
+    }
+  ],
+  "nextPass": "Fill gaps in existing model records. Reuse saved exact source facts first, then manufacturer year tables. Missing certified power stays missing; figures do not prove every offer matches or every specification is verified."
+}

@@ -91,7 +91,7 @@ test('an exact encyclopedia match upgrades a seller card through the real engine
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED='true';resetCatalogRateCache();invalidateEffectiveMarketsCache();
  const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string,fallback:any)=>({found:true,value:key==='fees/exchange-rates.json'?{updatedAt:today,EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:'cbr'},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:'cbr'},AED:{cbrRate:25,nominal:1,rateDate:today,rateSource:'cbr'}}:key==='markets/markets.json'?markets:fallback}));
  const originalRead=fs.readFileSync;
- const bundled=index([{...base,bodyType:'sedan'}]);
+ let bundled=index([{...base,bodyType:'sedan'}]);
  const indexRead=mock.method(fs,'readFileSync',((file:any,...args:any[])=>String(file).endsWith('/knowledge/encyclopedia/calculation-v1.json')?JSON.stringify(bundled):(originalRead as any)(file,...args)) as any);
  resetCalculationIndexForTests();
  try{
@@ -121,6 +121,19 @@ test('an exact encyclopedia match upgrades a seller card through the real engine
    assert.equal((await applyActiveBusinessPricing(complete) as any).drive,card.drive);
    assert.equal(complete.drive,undefined);
   }
+  // Regression: the factory confirms engine/power only; fuel comes from the
+  // original listing and previously lost its evidence in the search projection.
+  const fields=['engineCc','powerHp','powerKw'];
+  bundled=index([{...base,status:'review',researchEvidence:{checkedIdentity:{make:'Audi',model:'A6',year:2023,trim:base.trim},fields,values:{engineCc:1968,powerHp:204,powerKw:150},source:{type:'manufacturer',url:'https://www.audi.com/spec.pdf'}}}]);
+  resetCalculationIndexForTests();
+  const source:any={...offer(),market:'uae',powertrainKind:'combustion',sourcePrice:10000,sourceCurrency:'EUR',catalogPricingMode:'seller',totalRub:null,calculationStatus:'needs_data',bodyType:'sedan',images:[],status:'active',offerType:'fixed',operational:{semanticEvidence:{fuel:{status:'exact'},powertrainKind:{status:'exact'}}}};
+  const matched:any=applyEncyclopediaCalculation(source,bundled);
+  assert.equal(matched.encyclopediaCalculation.values.fuel,undefined);
+  const projected=JSON.parse(JSON.stringify(searchProjectionFromOffer(matched)));
+  const [search]=await applyActiveBusinessPriceBatch([projected],{readOnly:true});
+  const detail=await applyActiveBusinessPricing(matched);
+  assert.ok(Number(search.totalRub)>950000);
+  assert.equal(search.totalRub,detail.totalRub,'source fuel plus factory power calculates identically in search and detail');
  }finally{indexRead.mock.restore();resetCalculationIndexForTests();read.mock.restore();resetCatalogRateCache();invalidateEffectiveMarketsCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
 

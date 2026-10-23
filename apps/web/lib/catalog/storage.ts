@@ -1,4 +1,5 @@
 import {verifyCatalogReadModels} from './verify-read-models';
+import {compactFuelPowertrainEvidence} from './specification-evidence-audit';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {applyEncyclopediaCalculation,readCalculationIndex} from '../encyclopedia/calculation-index';
 import {buildCatalogColorIndex,withCatalogColorFilter,matchesCatalogColor} from './catalog-color-index';
@@ -197,6 +198,7 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  fuelPowertrainEvidence?:VehicleOffer["fuelPowertrainEvidence"];
   encyclopediaCalculation?:VehicleOffer["encyclopediaCalculation"];
   inventorySourceDate?:string; grossVehicleWeightKg?:number; vehicleCategory?:VehicleOffer["vehicleCategory"];
   chinaPriceConversion?:VehicleOffer["chinaPriceConversion"];
@@ -212,7 +214,7 @@ export type CatalogSearchProjection = {
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; sourceGroup?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { offer=applyCatalogEditorial(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safePublicPricing(offer) as any; return { ...dto, chassisCode: /^[A-Za-z0-9][A-Za-z0-9-]{0,19}$/.test(String(operational?.chassisCode || dto.chassisCode || "").trim()) ? String(operational?.chassisCode || dto.chassisCode).trim() : undefined, bodyType:catalogBodyType(offer), catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, role: img.role, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { offer=applyCatalogEditorial(offer); const safe = safePublicPricing(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safe as any; return { ...dto, fuelPowertrainEvidence:compactFuelPowertrainEvidence(safe), chassisCode: /^[A-Za-z0-9][A-Za-z0-9-]{0,19}$/.test(String(operational?.chassisCode || dto.chassisCode || "").trim()) ? String(operational?.chassisCode || dto.chassisCode).trim() : undefined, bodyType:catalogBodyType(offer), catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, role: img.role, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // Source adapters may retain complete HTML/JSON responses in operational.raw
   // for diagnostics. Public generations are immutable and were duplicating that
@@ -445,7 +447,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
     trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
     powerDataConfidence: offer.powerDataConfidence, powerDataSource: offer.powerDataSource, transportToBorderRub: offer.transportToBorderRub,
     modificationSelection: offer.modificationSelection, recoveryQualification: offer.recoveryQualification,
-    encyclopediaCalculation:offer.encyclopediaCalculation, chinaPriceConversion:offer.chinaPriceConversion, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
+    fuelPowertrainEvidence:compactFuelPowertrainEvidence(offer), encyclopediaCalculation:offer.encyclopediaCalculation, chinaPriceConversion:offer.chinaPriceConversion, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
     calculationStatus: offer.calculationStatus, calculationSnapshot: {
       currencyRate: offer.calculationSnapshot?.currencyRate,
       pricingConfidence: offer.calculationSnapshot?.pricingConfidence,

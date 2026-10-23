@@ -2,6 +2,7 @@ import { isGreenCornerOffer } from "./green-corner-contract";
 import type { VehicleOffer } from "./types";
 import { catalogPowerSanity } from "./power-sanity";
 import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-evidence';
+import {hasFuelPowertrainEvidence,fuelPowertrainIdentity,type FuelPowertrainEvidence} from './fuel-powertrain-evidence';
 
 export const SPECIFICATION_AUDIT_FIELDS = [
   "year",
@@ -45,6 +46,7 @@ function explicitEvidenceState(offer: Partial<VehicleOffer>, keys: string[]) {
   if (states.includes("ambiguous")) return "ambiguous" as const;
   if (states.includes("missing")) return "missing" as const;
   if (states.includes("exact") || states.includes("verified")) return "exact" as const;
+  if(keys.length===2&&keys.includes('fuel')&&keys.includes('powertrainKind')&&hasFuelPowertrainEvidence(offer))return 'exact' as const;
   // Public cards omit private operational provenance. Their field-scoped
   // attestation must remain usable by the same calculator after serialization.
   const attestation=(offer.operational as any)?.encyclopediaCalculation||offer.encyclopediaCalculation;
@@ -132,6 +134,13 @@ export function isElectrifiedSpecification(offer: Partial<VehicleOffer>) {
   return ["electric", "series_hybrid", "other_hybrid"].includes(kind)
     || fuel === "electric"
     || HYBRID_FUELS.has(fuel);
+}
+
+/** Export only the existing exact fuel/kind decision before private metadata is removed. */
+export function compactFuelPowertrainEvidence(offer:Partial<VehicleOffer>):FuelPowertrainEvidence|undefined {
+ const result=classifySpecificationEvidence(offer,'fuelPowertrain');
+ if(!offer.id||result.state!=='exact'||result.provenance!=='source_evidence')return undefined;
+ return {version:1,identity:fuelPowertrainIdentity(offer),fuel:String(offer.fuel).replace(/\s+/g,' ').trim(),powertrainKind:String(offer.powertrainKind).replace(/\s+/g,' ').trim()};
 }
 
 export function classifySpecificationEvidence(
