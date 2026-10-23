@@ -1,11 +1,4 @@
 {
-  "requestedAt": "2026-10-23T18:13:35Z",
-  "reason": "One bounded read-only DBX fuel-evidence repair preview; no production writes, no collector or deploy.",
-  "previewFuelEvidenceRepair": {
-    "offerIds": [
-      "b65974b83d5399d588073fc5"
-    ],
-    "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
-    "generationId": "gen_1792702445675_8c312f85"
-  }
+  "requestedAt": "2026-10-23T18:46:30Z",
+  "reason": "Read manifest and writer lease after terminal compact 40001652792; no preview, repair, or deployment."
 }

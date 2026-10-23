@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-23T18:29:00Z",
+  "checkedAt": "2026-10-23T18:46:30Z",
   "state": "prepared_not_applied_not_deployed",
   "targetId": "b65974b83d5399d588073fc5",
   "installedRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
@@ -23,8 +23,19 @@
   "dependency": {
     "runId": 40001652792,
     "jobId": 120578982723,
-    "state": "in_progress",
-    "trigger": "existing push dependency for budget-count-index.ts",
+    "state": "completed",
+    "conclusion": "cancelled",
+    "cancelledAt": "2026-10-23T18:44:40.537Z",
+    "preflight": {
+      "checkedAt": "2026-10-23T18:20:27.788Z",
+      "currentBytes": 415128090301,
+      "limitBytes": 1000000000000,
+      "ok": true,
+      "artifactId": 12523827357
+    },
+    "indexVerified": false,
+    "parityVerified": false,
+    "writerReleaseUnverified": true,
     "doNotCancelOrDuplicate": true
   },
   "liveAcceptance": {
@@ -71,9 +82,5 @@
   ],
   "scheduledJobsChanged": false,
   "collectorRunsStarted": false,
-  "deployRequested": false,
-  "otherActiveWork": {
-    "runId": 40003695342,
-    "scope": "A3 addressed body parity inspection, separate worker; do not duplicate"
-  }
+  "deployRequested": false
 }
