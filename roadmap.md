@@ -12814,3 +12814,8 @@ China 39840733509 IN_PROGRESS,39857878662 PENDING; свежий roadmap 06:41 п
 Точные неизвестные поля всех18 вариантов и5 групп годовых/региональных пробелов записаны в docs/encyclopedia/retry-2026-10-23-aston-rapide-remaining.json. Особенно:2013,календарный AMR2018,регистрационные2020/2021,ошибочное наблюдение2935см³,Rapide E/реальный выпуск/сертифицированная30-минутная мощность. Старые retry сохранены. Новый курсор V12 Vantage95f7940568d492384daba7df; найдены заводские10MY–13MY, отсутствующие в исходном снимке. Handoff docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage.json. Полный проход всех моделей с2008 не завершён; расчётные правила, сборщики, защиты и секреты неизменны.
 
 Отчёт: docs/encyclopedia/reports/2026-10-23-aston-rapide-pass.json; API-readback и публичная parity сохранены отдельными отчётами.
+
+
+### 23.10.2026 07:25 Asia/Krasnoyarsk — Проверка текущей публикации без повторного запуска
+
+Свежие AGENTS и конец roadmap прочитаны на f7457d94. China recovery39840733509/publish120041080822 IN_PROGRESS на штатном шаге публикации; guard years/reserve/restore SUCCESS, collect SKIPPED. Scheduled39857878662 пока jobs[]. Запрошено одно read-only чтение manifest/lease; публикация, источник, deploy, отмена и снятие lock не запускаются. Отдельная энциклопедия сохранила Rapide39875315275: теперь11pending902поля/789расчётных, следующий V12 Vantage. Записи/исследования не дублируются; DBX parity blocker остаётся открытым.
