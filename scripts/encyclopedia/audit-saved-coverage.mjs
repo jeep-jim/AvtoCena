@@ -34,4 +34,4 @@ await Promise.all(Array.from({length:6},async()=>{
 const report=summarizeCoverage(coverage,{createdAt:new Date().toISOString(),indexCreatedAt:index.createdAt,indexDigest,manifestDigest:index.manifestDigest,release,activationConfirmed:false,snapshotOnly:true});
 await fs.mkdir('reports',{recursive:true});
 await fs.writeFile('reports/encyclopedia-coverage.json',JSON.stringify(report,null,2));
-console.log('SAVED_ENCYCLOPEDIA_COVERAGE',JSON.stringify({indexDigest,...report.total,storageWrites:0}));
+console.log('SAVED_ENCYCLOPEDIA_COVERAGE',JSON.stringify({indexDigest,...report.total,byPowertrain:report.byPowertrain,storageWrites:0}));

@@ -30,3 +30,16 @@ test('compiled field sources stay distinct and reports aggregate all models',()=
  const report=summarizeCoverage([one,modelCoverage({...record([]),id:'second',make:'Another'},[])],{indexDigest:'digest'});
  assert.equal(report.total.brands,2);assert.equal(report.total.models,2);assert.equal(report.total.requiredValuesSupported,1);
 });
+test('powertrain denominators partition all variants and distinguish recorded from supported 30-minute power',()=>{
+ const rows=[row,{...row,id:'ev',powertrainKind:'BEV',fuel:'electric',power30MinKw:50},{...row,id:'hev',powertrainKind:'HEV',power30MinKw:30},{...row,id:'unknown',powertrainKind:'unknown'}];
+ const facts=rows.slice(0,2).map(r=>({variantId:r.id,values:{...r},sources:{}}));
+ const report=summarizeCoverage([modelCoverage(record(rows),facts)],{});
+ assert.equal(Object.values(report.byPowertrain).reduce((n:any,g:any)=>n+g.variants,0),4);
+ assert.equal(report.byPowertrain.combustion.completePercent,100);
+ assert.equal(report.byPowertrain.electric.power30MinSupported,1);
+ assert.equal(report.byPowertrain.hybrid.power30MinPresent,1);
+ assert.equal(report.byPowertrain.hybrid.power30MinSupported,0);
+ assert.equal(report.byPowertrain.hybrid.remainingPercent,100);
+ assert.equal(report.byPowertrain.unknown.remaining,1);
+ assert.equal(report.total.requiredValuesSupported,2);
+});

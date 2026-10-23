@@ -1,4 +1,8 @@
 {
-  "requestedAt": "2026-10-23T05:14:15.113402+00:00",
-  "reason": "Read-only fresh writer check before one correction release after evidence-only repair; no source fetch, no inventory listing or source changes."
+  "requestedAt": "2026-10-23T05:58:10.900296+00:00",
+  "reason": "Owner prioritizes full existing encyclopedia completion. Read-only ICE/hybrid/EV denominators and supported 30-minute-power gaps on installed immutable index; no deployment, collection or data writes.",
+  "auditSavedCoverage": {
+    "release": "025980454268fa9841ffab34b119037f348a1a11",
+    "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d"
+  }
 }
