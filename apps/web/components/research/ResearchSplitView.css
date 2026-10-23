@@ -1,0 +1,20 @@
+.ac-research-split{--research-width:420px;--research-bg:#181c23;--research-line:#343943;display:grid;grid-template-columns:minmax(0,1fr);height:100dvh;min-height:360px;overflow:hidden;background:var(--research-bg);color:#edf0f5}
+.ac-research-split.is-open:not(.is-mobile){grid-template-columns:minmax(0,1fr) 7px var(--research-width)}
+.ac-research-page{min-width:0;overflow:auto;overscroll-behavior:contain}
+.ac-research-divider{cursor:col-resize;touch-action:none;position:relative;background:#252a33;z-index:3;outline-offset:-2px}
+.ac-research-divider span{position:absolute;top:50%;left:2px;width:3px;height:34px;border-radius:8px;background:#717986;transform:translateY(-50%)}
+.ac-research-divider:hover,.ac-research-divider:focus-visible,.is-dragging>.ac-research-divider{background:#9476ea}
+.ac-research-divider:focus-visible{outline:2px solid #c5b0ff}
+.ac-research-panel{min-width:0;min-height:0;display:flex;flex-direction:column;background:var(--research-bg);overflow:hidden}
+.ac-research-panel-header{min-height:64px;padding:0 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--research-line);background:linear-gradient(115deg,#22262e,#32273f)}
+.ac-research-panel-header h2{font:600 14px/1.4 system-ui,sans-serif;margin:0;flex:1}
+.ac-research-panel-header button{width:38px;height:38px;border:0;border-radius:10px;background:transparent;color:#cdd3df;font:26px/1 system-ui;cursor:pointer}
+.ac-research-panel-header button:hover{background:#ffffff12;color:white}
+.ac-research-mark{font-size:23px;color:#b59aff}
+.ac-research-panel-content{min-height:0;flex:1;display:flex;flex-direction:column;overflow:auto}
+.is-dragging{user-select:none;cursor:col-resize}
+.is-dragging iframe{pointer-events:none}
+.ac-research-split.is-mobile.is-open .ac-research-page{display:none}
+.ac-research-split.is-mobile .ac-research-divider{display:none}
+.ac-research-split.is-mobile.is-open{grid-template-columns:minmax(0,1fr)}
+@media(prefers-reduced-motion:no-preference){.ac-research-panel-header button{transition:background .15s}}

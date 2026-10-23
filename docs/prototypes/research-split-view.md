@@ -1,0 +1,38 @@
+# Панель ИИ: прототип разделения страницы
+
+Задача владельца: кнопка открывает чат справа в той же вкладке, ширина меняется перетаскиванием; желательно бесплатная Алиса.
+
+## Реализовано
+
+`ResearchSplitView` — независимый React-компонент с содержимым страницы и слотом для разрешённого чата. Панель 320–720 px, мышь/указатель, клавиатурные стрелки, Home/End, двойной щелчок для сброса, сохранение ширины, Escape и возврат фокуса. При ширине контейнера менее 960 px панель занимает экран. Веб-страница и панель прокручиваются независимо. HTML-прототип собирается `node scripts/build-research-panel-preview.mjs` и не требует React с CDN.
+
+`research-split-view.html` содержит пример реальной карточки из проверки фида 25.09.2026, явно отмеченный как снимок. Кнопка проверки загружает настоящий `https://alice.yandex.ru/` в iframe. Ответы ИИ не имитируются, отправка без подключения отключена.
+
+## Подтверждённое ограничение
+
+25.09.2026 HTTP GET https://alice.yandex.ru/ вернул HTTP 200 и:
+
+```
+X-Frame-Options: DENY
+Content-Security-Policy: …; frame-ancestors yandex.ru *.yandex.ru sandbox.toloka.yandex.com sandbox.iframe-toloka.com iframe-toloka.com yang.yandex-team.ru iframe-yang.yandex; …
+```
+
+Avtocena.com в разрешённых родителях отсутствует. Это ограничение ответа Алисы, а не неспособность нашего сайта разделить экран. Вложенность фреймов не отменяет проверку всех предков. Заголовки, авторизация и ограничения сервиса не обходятся.
+
+Официально разрешённый встраиваемый чат AI Studio: https://aistudio.yandex.ru/ru/docs/ai-studio/operations/agents/publish-agent-widget . Он не равен бесплатному пользовательскому чату Алисы; расходы на модель и инструменты отдельно. Платные сервисы не включались.
+
+Справка по поведению браузера: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors .
+
+## Статус интеграции
+
+Это прототип, не завершённое подключение Алисы. Production-кнопка и работающий внешний переход не изменены. Не публиковать вместо действующего перехода пустой/заблокированный iframe. Для завершения нужен разрешённый встраиваемый источник ответов; сам интерфейс готов к такому подключению.
+
+Локальная проверка TypeScript прошла. Браузерная проверка вынесена в workflow `Verify research split preview`: Chromium, Firefox, WebKit; resize, keyboard, mobile, focus, persistence. Результат и скриншоты публикуются в артефакте workflow, не объявлять их пройденными до завершения.
+
+## Фактическая браузерная проверка
+
+[Workflow 36083464531](https://github.com/jeep-jim/AvtoCena/actions/runs/36083464531) завершён success. Chromium 134, Firefox 135 и WebKit 18.4 прошли проверки перетаскивания, клавиатуры, сохранения ширины, возврата фокуса и мобильного режима (1440×960 / 390×844). Исходный screenshot: `research-split-view.png`; результаты: `research-split-view-tests.json`.
+
+При реальном встраивании alice.yandex.ru Chromium записал: `Refused to frame 'https://alice.yandex.ru/' because an ancestor violates ... frame-ancestors ...`. Полный текст без cookies/токенов: `research-split-view-browser-restriction.json`. Чат действительно не загрузился.
+
+Отдельный HTTP-запрос к текущему yandex.ru/search/ из проверочной среды перенаправлен на showcaptcha. Доступ к результатам и возможность их встраивания этим запросом не подтверждены; капча не обходилась.
