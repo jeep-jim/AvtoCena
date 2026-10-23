@@ -1,34 +1,35 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-23T11:03:27.166Z",
-  "lastCompletedBatch": "research-2026-10-23-audi-a3-2021-2022-body",
+  "checkedAt": "2026-10-23T16:03:12.067Z",
+  "lastCompletedBatch": "research-2026-10-23-audi-a3-2022-body",
   "modelId": "f40e34e905b8ca09f3636eda",
   "make": "Audi",
   "model": "A3",
-  "revision": "5102c065-8ede-4287-a26b-2b9229025ff7",
+  "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
   "next": {
-    "variantId": "2885f631c2c0b7c844ed6357",
+    "variantId": "a508272cf730c67bde2fa1e5",
     "year": 2022,
-    "trim": "Sportback 30 TDI advanced ACC NAVI+ Virt 18\"",
+    "trim": "Sportback 35 TFSI S-Tronic AHK, Klima 2-Zonen",
     "missingValueFields": [
       "bodyType",
-      "engineCode"
+      "engineCode",
+      "power30MinKw"
     ],
     "knownValues": {
-      "fuel": "diesel",
-      "powertrainKind": "ice",
-      "engineCc": 1968,
-      "powerHp": 116,
-      "powerKw": 85,
-      "icePowerKw": 85,
+      "fuel": "petrol",
+      "powertrainKind": "mhev",
+      "engineCc": 1498,
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
       "drive": "fwd",
       "transmission": "automatic",
-      "grossVehicleWeightKg": 1920
+      "grossVehicleWeightKg": 1875
     }
   },
-  "nextAction": "Продолжить A3 с точного курсора2022 партиями20–50; затем2023. Все три предыдущие A3партии не повторять. Для2020/2021 спорные8V/8Y и MHEV, привод/GVW/код двигателя остаютсяretry до годовой первичнойтаблицы; известные мощности не переписывать",
-  "remaining2022BodyCandidates": 65,
-  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2021-2022-remaining.json",
+  "nextAction": "Продолжить с a508272cf730c67bde2fa1e5:15оставшихся Sportback2022 безкузова, затем2023, партия20–50. Сначала свежие API/revisions; существующие подтверждённые значения и ASTRA безгода не повторять. Прежние ранние8P/8V/MHEV и A1 retry сохранены.",
+  "remaining2022BodyCandidates": 15,
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2022-remaining.json",
   "earlyRetry": [
     {
       "id": "c98ec4e1792a7635f7ad3f1a",
@@ -139,18 +140,19 @@
   "a1Remainder": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2025-next.json",
   "preparedNextBatch": {
     "path": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
-    "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-prepared.json",
+    "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-pass.json",
     "batch": "research-2026-10-23-audi-a3-2022-body",
-    "state": "prepared_not_applied",
+    "state": "saved_readback_pass_pending_index",
     "variants": 50,
     "fields": 50,
-    "requiresFreshApiPreflight": true,
+    "requiresFreshApiPreflight": false,
     "expectedRevisionAtPreparation": "5102c065-8ede-4287-a26b-2b9229025ff7",
-    "batchSha256": "ffbd575e40d4eb07401282bdcb91a67ef9da291ef73b16affb44d39701fd8840",
-    "blockedByWorkflow": 39949279655,
-    "blocker": "ASTRA preview сохраняет план по всем ревизиям; независимый research apply отложен до согласования с применением этого плана",
-    "afterApplyCursor": "a508272cf730c67bde2fa1e5"
+    "batchSha256": "2ff69af8b3ae2b0e90846d852d1b6db69accb8c8f4183ef2e210f11252c504cc",
+    "afterApplyCursor": "a508272cf730c67bde2fa1e5",
+    "workflow": 39982805443,
+    "job": 120514196873,
+    "afterRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff"
   },
-  "cursorNotAdvanced": true,
+  "cursorNotAdvanced": false,
   "preparationCheckedAt": "2026-10-23T12:01:37.272Z"
 }

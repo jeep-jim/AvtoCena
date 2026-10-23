@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T16:03:12.067Z",
+  "batch": "research-2026-10-23-audi-a3-2022-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+  "commit": "cda51eaf8cf28e36b20e2ceb958c74ec1634c296",
+  "workflow": 39982805443,
+  "job": 120514196873,
+  "variants": 50,
+  "newVariants": 0,
+  "fields": 50,
+  "compiledFields": 50,
+  "apiReadback": true,
+  "includedInIndex": false,
+  "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-pass.json",
+  "afterRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+  "publicParity": {
+    "passed": true,
+    "offers": 7,
+    "comparisons": 91,
+    "matched": 91,
+    "repeatedGroups": 2,
+    "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-public-parity.json",
+    "scope": "Ограниченная выборка Audi A3 Europe: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована."
+  },
+  "nativeExact": 50,
+  "nativeHeld": [],
+  "conclusion": "success",
+  "finishedAt": "2026-10-23T15:59:41.298Z",
+  "batchSha256": "2ff69af8b3ae2b0e90846d852d1b6db69accb8c8f4183ef2e210f11252c504cc",
+  "beforeRevision": "f9f9ce15-2097-5470-a6c5-f820658f3695",
+  "rowsBefore": 3663,
+  "rowsAfter": 3663,
+  "annualRows": 1111,
+  "unknownYearAstraRows": 2552,
+  "untargetedRowsPreserved": 3613,
+  "allExistingValuesPreserved": true,
+  "priorFieldSourcesAndHistoryPreserved": true,
+  "sourceFiles": [
+    {
+      "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+      "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+      "bytes": 79371,
+      "retrievedAt": "2026-10-23T15:56:03.280232+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+      "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+      "bytes": 47629,
+      "retrievedAt": "2026-10-23T15:56:07.308424+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+      "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+      "bytes": 66509,
+      "retrievedAt": "2026-10-23T15:56:13.498129+00:00"
+    }
+  ],
+  "guardTestsPassed": 11,
+  "replayPassed": true,
+  "manualPreserved": true,
+  "unknownCertifiedPowerNotInferred": true,
+  "readbackReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-readback.json",
+  "nextCursor": {
+    "variantId": "a508272cf730c67bde2fa1e5",
+    "year": 2022,
+    "trim": "Sportback 35 TFSI S-Tronic AHK, Klima 2-Zonen",
+    "missingValueFields": [
+      "bodyType",
+      "engineCode",
+      "power30MinKw"
+    ],
+    "knownValues": {
+      "fuel": "petrol",
+      "powertrainKind": "mhev",
+      "engineCc": 1498,
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
+      "drive": "fwd",
+      "transmission": "automatic",
+      "grossVehicleWeightKg": 1875
+    }
+  },
+  "remaining2022BodyCandidates": 15,
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2022-remaining.json",
+  "activationConfirmed": false,
+  "currentServingRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+  "currentServingIndex": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+  "allModelsComplete": false,
+  "knownTransmissionBlockerClosed": false,
+  "note": "Новые50полей сохранены после снимкаa5449c и не объявлены активными в расчётах. Семь публичных карточек проверены на действующем857468e; прежние отдельные transmissionконтроли не закрывались."
+}
