@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
       - run: npm install --prefix "$RUNNER_TEMP/filter-diagnostic" --no-package-lock --ignore-scripts playwright@1.55.0
-      - name: Inspect one public 360px filter transition without rebuilding the app
+      - name: Inspect public 320px consecutive SUV and sedan selections without rebuilding the app
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-diagnostic/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node scripts/catalog-filter-navigation-diagnostic.mjs

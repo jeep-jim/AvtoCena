@@ -1,4 +1,5 @@
 {
-  "operation": "diagnose-mobile-suv-navigation-20261022-1540",
-  "reason": "39803363344 failed at 360px after selecting bodyType=suv; capture URL, pending state and public request timings without full build or supplier collection"
+  "operation": "diagnose-mobile-multiselect-20261023-0340",
+  "reason": "Live run39894690643 failed at320dark on second body selection; bounded two-selection request/state capture without rebuild or collector",
+  "expectedRelease": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7"
 }
