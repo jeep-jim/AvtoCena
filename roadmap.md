@@ -13835,3 +13835,12 @@ Researchwrites сразу разрешены сновымиrevision/checksum/CAS
 Следующий cursor a083a1cc0a9a1708d2df6a0a,2025 Sportback 45 TFSIe S line Navi Matrix ACC AHK. Выбранных Sportback/SB/SPB2024 без кузова осталось0;2025 осталось16, затем2026. Все1111 адресных годовых retry, ранние8P/8V/MHEV, другие кузова, A1возврат сохранены; добавлен1 exact retry (итого5 в этом файле). Queue/handoff/retry/readback/pass/publicparity/indexacceptance обновлены, остальные модели и ручная координация сохранены.
 
 Текущий deploy40019745015/e7a307 остаётся IN_PROGRESS; privateindex93e2ea94/membership SUCCESS, снимок20:35:43.948UTC изолирован. Предыдущие2024body50 входят в него, новые50 послеснимковые. docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0401.json:2pending/100полей,required24/public10,ASTRAplan6d417105 сохранён. Новый deploy не запрошен. DBX exactprice уже закрыт ручной приёмкой10f4579; её статус сохранён. A3bodyfix/публичную адресную приёмку ведёт ручная сессия. ASTRA/DBXapply/Китай/intake с запрещённым redirect не повторялись; скорость, бот/роли и полный проход остаются открыты.
+
+
+## 24.10.2026 04:04 Красноярск — контроль DBX: ограниченная проверка основного фото
+
+Deploy40019745015/job120641315906 terminal SUCCESS; независимый health21:02UTC подтвердил e7a30716fad957202890c82f59274e8f0b2ec38a/calculation8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef. Адресную A3body/активацию партий сопровождает существующая ручная сессия; повторного выпуска нет.
+
+Предыдущий DBXvisual40017888810 проверил видимую цену в4 случаях, но3 снимка сделаны до загрузки фото. В существующий scripts/catalog-offer-price-visual.mjs добавлено optional checkPrimaryPhoto: ожидание visible+complete+naturalWidth>0, отдельный снимок основного фото; цена/идентичность/release/theme/overflow/error gates сохранены. node --check PASS. Запрошен один existing diagnostic mode offer-price-visual на e7a307, DBXb65974b83d5399d588073fc5,25031959RUB,390/1280 light/dark. Результат ещё не подтверждён. Это не проверка всех25 фото/скорости/всего каталога.
+
+REGprices40016528469 SUCCESS20:25:45UTC skippedfalse/verifiedtrue и40017903406 SUCCESS20:26:52UTC already_prepared/verifiedtrue на10f/index07893c/newgen; не повторялись. Новые штатные40023837606prices и40023837615CRM ещё выполняются. Research/ASTRA/DBXapply/Китай/locks/расписания не менялись; реальная приёмка бот/ролей и скорость остаются открыты.

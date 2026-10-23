@@ -1,10 +1,11 @@
 {
-  "operation": "verify-dbx-visible-price-20261024-0320",
+  "operation": "verify-dbx-primary-photo-20261024-0404",
   "mode": "offer-price-visual",
-  "reason": "Bounded public DBX card visual acceptance after verified fuel repair and installed10f4579. Cloud browser502; use existing GitHub Chromium diagnostic, no app rebuild or data writes.",
-  "expectedRelease": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+  "reason": "Close primary-photo readiness gap in prior DBX screenshots, bounded four public cases on installed e7a307.",
+  "expectedRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
   "offerId": "b65974b83d5399d588073fc5",
   "expectedTotalRub": 25031959,
+  "checkPrimaryPhoto": true,
   "checkCatalogFeedback": false,
-  "requestedAt": "2026-10-23 20:15:46 UTC"
+  "requestedAt": "2026-10-23T21:04:00Z"
 }

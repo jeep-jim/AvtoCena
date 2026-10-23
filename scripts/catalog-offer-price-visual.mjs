@@ -39,6 +39,15 @@ try{
    row.heading=await root.locator('h1').innerText();assert.match(row.heading,/DBX/i);
    row.layout=await page.evaluate(()=>({clientWidth:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
    assert.ok(row.layout.scrollWidth<=row.layout.clientWidth+1,'no horizontal overflow');
+   if(marker.checkPrimaryPhoto === true){
+    const photo=root.locator('button[aria-label="Открыть фотографии автомобиля"] img').first();
+    await photo.scrollIntoViewIfNeeded();
+    await photo.waitFor({state:'visible',timeout:30000});
+    await page.waitForFunction(()=>{const img=document.querySelector('main button[aria-label="Открыть фотографии автомобиля"] img');return img instanceof HTMLImageElement&&img.complete&&img.naturalWidth>0;},null,{timeout:30000});
+    row.primaryPhoto=await photo.evaluate(img=>({complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,sourceHost:new URL(img.currentSrc,location.href).hostname}));
+    row.photoScreenshot=width+'-'+theme+'-photo.png';await page.screenshot({path:out+'/'+row.photoScreenshot});
+    await price.scrollIntoViewIfNeeded();
+   }
    row.screenshot=width+'-'+theme+'.png';await page.screenshot({path:out+'/'+row.screenshot});
    assert.deepEqual(row.pageErrors,[]);row.passed=true;
   }catch(error){row.error=String(error);await page.screenshot({path:out+'/'+width+'-'+theme+'-failure.png'}).catch(()=>{});throw error;}
