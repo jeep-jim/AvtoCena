@@ -1,7 +1,7 @@
 {
-  "operation": "verify-interactive-electric-20261023",
-  "reason": "Prior desktop test clicked before hydration: screenshot checkbox reverted with no loader. Wait for existing interactive readiness, then measure unchanged 30s deadline and capture checkbox state. Same installed832 release; no deployment.",
-  "expectedRelease": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+  "operation": "verify-correction-release-20261023",
+  "reason": "One read-only acceptance on corrected installed release, after existing release wait: six Japan previews, yellow Electric both themes, actual pending feedback and measured unchanged30s navigation deadline. No source ingestion or publication.",
+  "expectedRelease": "025980454268fa9841ffab34b119037f348a1a11",
   "checkCatalogFeedback": true,
-  "requestedAt": "2026-10-23T05:10:00.754311+00:00"
+  "requestedAt": "2026-10-23T05:29:02.572565+00:00"
 }
