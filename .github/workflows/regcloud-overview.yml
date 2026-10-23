@@ -44,8 +44,8 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Check immutable source validation
-        run: node --test tests/catalog-overview-source-validation.test.mjs
+        run: node --test tests/catalog-overview-source-validation.test.mjs tests/catalog-refresh-generation-pages.test.mjs
       - name: Validate overview builder syntax
-        run: node --check scripts/catalog-build-overview-read-model.mjs
+        run: node --check scripts/catalog-refresh-generation-pages.mjs
       - name: Build compact current overview read model
-        run: npx tsx scripts/catalog-build-overview-read-model.mjs
+        run: npx tsx scripts/catalog-refresh-generation-pages.mjs
