@@ -1,0 +1,111 @@
+{
+  "version": 3,
+  "createdAt": "2026-10-23T06:01:04.691Z",
+  "indexCreatedAt": "2026-10-23T05:23:09.248Z",
+  "indexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+  "manifestDigest": "25b59b8ce66c174c77a283cce5334310c31be2e5c81d1d2ed8c08d0894ed9744",
+  "release": "025980454268fa9841ffab34b119037f348a1a11",
+  "scope": "Existing permanent encyclopedia only; required field coverage is not proof of exact offer matching or a completed price calculation.",
+  "total": {
+    "brands": 181,
+    "models": 2423,
+    "variants": 114945,
+    "requiredValuesPresent": 49731,
+    "requiredValuesSupported": 48074
+  },
+  "byPowertrain": {
+    "combustion": {
+      "variants": 85676,
+      "requiredValuesPresent": 49731,
+      "requiredValuesSupported": 48074,
+      "power30MinPresent": 0,
+      "power30MinSupported": 0,
+      "missing": {
+        "engineCc": 10748,
+        "powerHpOrKw": 14093,
+        "trim": 23448,
+        "fuel": 572
+      },
+      "unsupported": {
+        "year": 36640,
+        "trim": 13192,
+        "fuel": 36612,
+        "powertrainKind": 36649,
+        "engineCc": 26279,
+        "powerHpOrKw": 22627
+      },
+      "remaining": 37602,
+      "completePercent": 56.11,
+      "remainingPercent": 43.89
+    },
+    "hybrid": {
+      "variants": 13428,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "power30MinPresent": 0,
+      "power30MinSupported": 0,
+      "missing": {
+        "power30MinKw": 13428,
+        "trim": 1616,
+        "powerHpOrKw": 3282,
+        "engineCc": 1403,
+        "fuel": 21
+      },
+      "unsupported": {
+        "year": 3167,
+        "fuel": 3146,
+        "powertrainKind": 3167,
+        "engineCc": 1967,
+        "powerHpOrKw": 1455,
+        "trim": 1551
+      },
+      "remaining": 13428,
+      "completePercent": 0,
+      "remainingPercent": 100
+    },
+    "electric": {
+      "variants": 12742,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "power30MinPresent": 0,
+      "power30MinSupported": 0,
+      "missing": {
+        "trim": 5346,
+        "power30MinKw": 12742,
+        "powerHpOrKw": 3646,
+        "fuel": 20
+      },
+      "unsupported": {
+        "year": 6030,
+        "fuel": 6010,
+        "powertrainKind": 6030,
+        "powerHpOrKw": 4555,
+        "trim": 684
+      },
+      "remaining": 12742,
+      "completePercent": 0,
+      "remainingPercent": 100
+    },
+    "unknown": {
+      "variants": 3099,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "power30MinPresent": 0,
+      "power30MinSupported": 0,
+      "missing": {
+        "trim": 248,
+        "fuel": 1297,
+        "powertrainKind": 3099
+      },
+      "unsupported": {
+        "year": 782,
+        "trim": 534,
+        "fuel": 274
+      },
+      "remaining": 3099,
+      "completePercent": 0,
+      "remainingPercent": 100
+    }
+  },
+  "auditRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/39908764021"
+}
