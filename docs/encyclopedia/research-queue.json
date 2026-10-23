@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T07:01:38.857791+07:00",
+  "updatedAt": "2026-10-23T07:58:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32685,7 +32685,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T07:01:38.857791+07:00",
+    "updatedAt": "2026-10-23T07:58:00+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "rapide_model_years_saved_api_readback_pass_activation_pending",
     "preserveManual": true,
@@ -32956,7 +32956,16 @@
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-rapide-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": {
+      "batch": "research-2026-10-23-aston-v12-vantage-2010-2017",
+      "modelId": "95f7940568d492384daba7df",
+      "state": "prepared_awaiting_workflow_and_api_readback",
+      "operations": 16,
+      "fields": 133,
+      "compiledCalculationFields": 117,
+      "sha256": "55a620e4c94ecbcdb2125ed6cde44a1fc49568157586712db6096a35ff8e7d3c",
+      "baseRevision": "1cdb0d03-67f4-47a8-a438-6622aa41241d"
+    },
     "lastCompletedPass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
       "batch": "research-2026-10-23-aston-rapide-model-years",
