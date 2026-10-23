@@ -12,7 +12,9 @@ import {CatalogMarketFlag} from './CatalogMarketFlag';
 export async function readAjesRailData(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>={}){
  try{await assertCollectionEnabled(`ajes_${market}_feed`);}catch{return {disabled:true,items:[],count:null,unavailable:false,unsupported:false,partial:false,stale:false,filteredByPage:false,hasMore:false};}
  try{
-  const page=await readAjesCatalogPage({...params,market,page:'1',pageSize:'6'});
+  // A supplier page may contain rejected rows. One bounded extra row of candidates
+  // fills the six-card preview without pagination scans or bypassing admission.
+  const page=await readAjesCatalogPage({...params,market,page:'1',pageSize:market==='japan'?'12':'6'});
   return {disabled:false,items:page.items.slice(0,6),count:page.countSummary,unavailable:false,unsupported:false,partial:Boolean(page.partial),stale:Boolean(page.stale),filteredByPage:page.filteredByPage,hasMore:page.hasMore};
  }catch(error){return {disabled:false,items:[],count:null,unavailable:true,unsupported:error instanceof AjesFilterUnavailable,partial:false,stale:false,filteredByPage:false,hasMore:false};}
 }

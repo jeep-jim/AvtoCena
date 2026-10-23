@@ -33,9 +33,13 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-load-more.mjs
+      - name: Verify single-row pagination, electric check and pending feedback in both themes
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-load-more-feedback.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-load-more
-          path: artifacts/catalog-load-more
+          path: artifacts/catalog-load-more*
           retention-days: 3

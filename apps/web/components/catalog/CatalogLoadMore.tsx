@@ -77,7 +77,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   fallbackQuery.set("page", String(page + 1));
   const pageCount = total===null ? page+((batches.at(-1)!.hasMore??(batches.at(-1)!.count===24))?1:0) : Math.ceil(total / 24);
   const windowStart = Math.max(1, Math.min(page - 2, pageCount - 4));
-  const numberedPages = [...new Set(cursorPaging?[1,...batches.map(batch=>batch.page),...(nextCursor?[page+1]:[])]:[1, ...Array.from({length:5},(_,i)=>windowStart+i), pageCount])].filter(n => n >= 1 && n <= pageCount).sort((a,b)=>a-b);
+  const numberedPages = [...new Set(cursorPaging?[1,...batches.map(batch=>batch.page).filter(n=>Math.abs(n-page)<=2),...(nextCursor?[page+1]:[])]:[1, ...Array.from({length:5},(_,i)=>windowStart+i), pageCount])].filter(n => n >= 1 && n <= pageCount).sort((a,b)=>a-b);
   function pageHref(target: number) {
     const params = new URLSearchParams(fallbackQuery);
     params.set("page", String(target));
