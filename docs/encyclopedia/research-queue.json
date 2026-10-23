@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T07:00:04.957Z",
+  "updatedAt": "2026-10-23T07:03:35.053Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1087,9 +1087,9 @@
       ],
       "variants": 394,
       "status": "partial_verified_fields",
-      "researchedVariants": 161,
+      "researchedVariants": 193,
       "checkedAt": "2026-10-22T03:22:09.665262+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a1-remaining.json",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a1-next-remaining.json",
       "researchedYears": [
         2022,
         2024,
@@ -1097,7 +1097,7 @@
         2026
       ],
       "pendingYears": [],
-      "nextAction": "Audi A1: следующий курсор 5f973861584569feb263cbd6 (2021 Sportback S line 35 TFSI S tronic *LED*), затем остальные пробелы существующей модели; после ограниченной группы Audi A3, не начинать снова 50 обработанных",
+      "nextAction": "Продолжить с3851bcdb79e12a0cb313cf3b,2023 Sportback25TFSI Einparkhilfe hinten LM PDC. Пробелы2024–2026 и технические retry отдельно; не повторять50/58 и50/51. После ограниченной группы AudiA3.",
       "searchAttemptedYears": [
         2020,
         2021,
@@ -1116,14 +1116,14 @@
         2025,
         2026
       ],
-      "lastCheckedAt": "2026-10-23T06:08:48.504Z",
-      "lastBatch": "research-2026-10-23-audi-a1-body-and-gaps",
+      "lastCheckedAt": "2026-10-23T07:03:35.053Z",
+      "lastBatch": "research-2026-10-23-audi-a1-next-gaps",
       "lastBatchVariants": 50,
-      "lastBatchFields": 58,
+      "lastBatchFields": 51,
       "newVariantsThisBatch": 0,
-      "lastReadback": "docs/encyclopedia/reports/2026-10-23-audi-a1-body-and-gaps-readback.json",
-      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-next.json",
-      "nextVariantId": "5f973861584569feb263cbd6",
+      "lastReadback": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-readback.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2023-next.json",
+      "nextVariantId": "3851bcdb79e12a0cb313cf3b",
       "fullHistoricalCoverage": false
     },
     {
@@ -32711,12 +32711,37 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T07:00:04.957Z",
+    "updatedAt": "2026-10-23T07:03:35.053Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a1_50_updates_58_fields_saved_api_readback_pending_index",
+    "state": "audi_a1_next_50_updates_51_fields_saved_api_readback_pending_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Audi A1: следующий курсор 5f973861584569feb263cbd6 (2021 Sportback S line 35 TFSI S tronic *LED*), затем остальные пробелы существующей модели; после ограниченной группы Audi A3, не начинать снова 50 обработанных",
+    "nextModel": {
+      "variantId": "3851bcdb79e12a0cb313cf3b",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI Einparkhilfe hinten LM PDC",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "missingSupportedFields": [
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять",
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "revision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7"
+    },
     "lastVerifiedResearch": "audi-a1-body-and-gaps",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
@@ -32733,21 +32758,21 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a1-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a1-next-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-23-audi-a1-body-and-gaps",
-      "commit": "f38cc6172d4266b86b4a91b4e3984104e0cfed91",
-      "workflow": 39909220379,
-      "job": 120268074708,
+      "batch": "research-2026-10-23-audi-a1-next-gaps",
+      "commit": "fbd685f14aabec2a94cbf00b9bddf8275612e123",
+      "workflow": 39914987028,
+      "job": 120286427686,
       "variants": 50,
       "newVariants": 0,
       "updatedVariants": 50,
-      "fields": 58,
-      "compiledCalculationFields": 58,
-      "workflowConclusion": "success",
+      "fields": 51,
+      "compiledFields": 51,
       "apiReadback": true,
-      "includedInIndex": false
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792702445675_8c312f85",
@@ -32806,18 +32831,23 @@
         "includedInIndex": false,
         "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-audi-a1-body-and-gaps-readback.json"
+      },
+      {
+        "batch": "research-2026-10-23-audi-a1-next-gaps",
+        "commit": "fbd685f14aabec2a94cbf00b9bddf8275612e123",
+        "workflow": 39914987028,
+        "job": 120286427686,
+        "variants": 50,
+        "newVariants": 0,
+        "updatedVariants": 50,
+        "fields": 51,
+        "compiledFields": 51,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json"
       }
     ],
-    "inFlightResearch": {
-      "batch": "research-2026-10-23-audi-a1-next-gaps",
-      "state": "requested",
-      "modelId": "d5a8af35e3698aa33eaea9a9",
-      "operations": 50,
-      "fields": 51,
-      "expectedRevision": "90e47836-c51c-4ea4-9337-22fdbdcbb486",
-      "apiReadback": false
-    },
-    "lastCompletedPass": "research-2026-10-23-audi-a1-body-and-gaps",
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -32883,7 +32913,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-next.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2023-next.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -36776,7 +36806,7 @@
     "researchWriteCoordination": {
       "observedMain": "025980454268fa9841ffab34b119037f348a1a11",
       "writesPaused": false,
-      "reason": "Снимок36991f изолирован и установлен; новаяA1партия50/58 сохранена позже. Следующий единый выпуск согласовать черезmain/roadmap, не дублировать ручнуюсессию. Аудит силовыхустановок2ff1a74 read-only.",
+      "reason": "Активен36991f/0259804; A1 58+51 и отдельные BMW5 сохранены после снимка. Следующий единый индекс согласовать через main/roadmap; deploy не дублировать.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -36784,14 +36814,15 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T06:08:48.504Z",
+      "checkedAt": "2026-10-23T07:03:35.053Z",
       "parallelManualResearch": {
-        "state": "two_BMW_batches_saved_api_readback_pending_index",
         "workflows": [
           39909676521,
           39909903065
         ],
+        "state": "saved_independent_api_readback_pass_pending_index",
         "fields": 5,
+        "report": "docs/encyclopedia/reports/2026-10-23-bmw-30min-progress.json",
         "doNotDuplicate": true
       }
     },
@@ -37636,6 +37667,29 @@
       "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-next.json",
       "allModelsComplete": false,
       "collectorsCalculationRulesGuardsSecretsChanged": false
+    },
+    "audiA1NextGapsPass": {
+      "batch": "research-2026-10-23-audi-a1-next-gaps",
+      "commit": "fbd685f14aabec2a94cbf00b9bddf8275612e123",
+      "workflow": 39914987028,
+      "job": 120286427686,
+      "variants": 50,
+      "newVariants": 0,
+      "updatedVariants": 50,
+      "fields": 51,
+      "compiledFields": 51,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json",
+      "afterRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "publicParity": {
+        "passed": true,
+        "offers": 5,
+        "comparisons": 65,
+        "repeatedGroups": 2,
+        "scope": "Ограниченная выборка Europe A1; не весь каталог",
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-public-parity.json"
+      }
     }
   },
   "scope": {

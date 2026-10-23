@@ -1,0 +1,549 @@
+{
+  "version": 3,
+  "checkedAt": "2026-10-23T07:01:56.353Z",
+  "previousHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-next.json",
+  "next": {
+    "modelId": "d5a8af35e3698aa33eaea9a9",
+    "make": "Audi",
+    "model": "A1",
+    "revision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+    "variants": 394,
+    "researchedVariants": 193,
+    "firstCursor": {
+      "variantId": "3851bcdb79e12a0cb313cf3b",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI Einparkhilfe hinten LM PDC",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "missingSupportedFields": [
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+    },
+    "nextBoundedCandidates": [
+      {
+        "variantId": "3851bcdb79e12a0cb313cf3b",
+        "year": 2023,
+        "trim": "Sportback 25 TFSI Einparkhilfe hinten LM PDC",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "fecbc98230f3e791f73c6c1a",
+        "year": 2023,
+        "trim": "1.0 TFSI 25 Car play*SHZ*DAB",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "be92dce52ba919708f074ebd",
+        "year": 2023,
+        "trim": "1.5 TFSI 35 S line ALLSTREET Sportpaket|LED|N",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "c62753f67fb3666fc517a3f8",
+        "year": 2023,
+        "trim": "30 TFSI S Line KAMERA*GARANTIE*1.HAND*LED*ACC",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "24e7c8d5c9aaef340326c4b7",
+        "year": 2023,
+        "trim": "30 TFSI*Virtual*DAB*CarPlay*17\"LM*S-Line*",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "f5053e6cb5d435e874223629",
+        "year": 2023,
+        "trim": "A1 allstreet 35 TFSI S tronic Identity Contrast",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "6b094ee127ba3b7bb2c16d73",
+        "year": 2023,
+        "trim": "allstreet 30 1.0 tfsi identity contrast 110cv s tr",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "e9773545ce3cc9fde1747396",
+        "year": 2023,
+        "trim": "allstreet 30 TFSI S line LED*RFK*Sound*Virtua",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "31a696773ed2d478bda8ec13",
+        "year": 2023,
+        "trim": "allstreet 30 TFSI S tronic LED ACC Intr. S li",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "5dba6ffa5eff897a0c5e04b2",
+        "year": 2023,
+        "trim": "Allstreet 35 1.5 tfsi S-Line Identity Black 150cv LED|ACC|CARPLAY|18'",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "2a94619caba971f47181bebb",
+        "year": 2023,
+        "trim": "allstreet 35 TFSI S tronic *LED*PDC*LANE*",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "495cb75d347c5ada2965f79b",
+        "year": 2023,
+        "trim": "BOITE AUTOMATIQUE GARANTIE",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "6e1c7d983096e2d86c7655ec",
+        "year": 2023,
+        "trim": "S line 40 TFSI LED/ASI/MMI/PBox/18\"",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "82ea8334d96a77a4836f7b58",
+        "year": 2023,
+        "trim": "Sportback 25 TFSI LED KEYLESS DAB+",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "3bae468116f4797be524ea7f",
+        "year": 2023,
+        "trim": "Sportback 25 TFSI LED Parkhilfe Sitzheiz",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "c2e4df0ab27ad7bbc50159c6",
+        "year": 2023,
+        "trim": "Sportback 25 TFSI LED*Virtual*Sound*Sitzh.",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "4c2df5b35458b4ba5def9ce2",
+        "year": 2023,
+        "trim": "Sportback 25 TFSI LED+MMI NAVI+PDC+VCP+KLIMA+",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "73bfd4b20833b46d56a97bc2",
+        "year": 2023,
+        "trim": "Sportback 25 TFSI LM15'' DIGITAL SM.INTERFACE SHZ",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "4ce98588665ff1c2a3329b9c",
+        "year": 2023,
+        "trim": "Sportback 25 TFSI S line Aut.*NAVI*LED*PDC*",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      },
+      {
+        "variantId": "08274c69d53bfe4eaa13ac42",
+        "year": 2023,
+        "trim": "Sportback 25 TFSI S tronic Virtual/LED",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже поддержанные значения не повторять"
+      }
+    ],
+    "nextAction": "Продолжить с точного курсора2023, затем оставшиеся2024–2026 и технические retry. Не повторять партии50/58 и50/51. После ограниченной группы перейти кAudiA3, сохранив непроверенные поля A1."
+  },
+  "completedBatch": {
+    "batch": "research-2026-10-23-audi-a1-next-gaps",
+    "variantIds": [
+      "5f973861584569feb263cbd6",
+      "359539af9a57e53ed829d136",
+      "13ef702646fce9559f8d7048",
+      "1d511efb0049044ca3a4dc44",
+      "cff242f42b256b6562b5a568",
+      "eef7a30a3544f7667e479863",
+      "c628577aed1cd09b6792dbff",
+      "e178bb233eeb304f7ee8f34c",
+      "53dc9a7032c63cc9499fb330",
+      "47d1880f32188ec68e734d58",
+      "ee43a77cb9ef35b30fed3181",
+      "50ee3207dabbe90a89c6216d",
+      "87b4ab748fae6011a9f8e402",
+      "9096f0b25120216131eb96d8",
+      "19457fae5cc31cb4675b1647",
+      "28b836da1f41b1d963dde427",
+      "37caf92edca988c2fd647524",
+      "7c061ecbf63f9d01c733d417",
+      "abc661b18f9fe85369780814",
+      "49b4ece8d16f1bf90a42833b",
+      "cba7c023d6a164b2b56a08c3",
+      "f96f33ba217405d4489b3713",
+      "e307caa93e6d9940a29161aa",
+      "a9bc9d9e7bd9e3595ac0535e",
+      "8c0c930bd4633ae38658e921",
+      "c45488fd0e4d617fc6aeac08",
+      "830675ae2d4901926db2eb48",
+      "a0f15a0ded609bfc8fdb357a",
+      "ea7a334e9af840acba46e6fd",
+      "d1356fff15b23837d9247755",
+      "2cd5b9f8bc5bf7f5b7ceb0bf",
+      "f6b20957967128dbe9af8eb9",
+      "b1b61c41eb95cf2d1ebb734b",
+      "40950b82cfca8a3441c1fa06",
+      "e5549339809776fde30f0f4e",
+      "1d2bd685441e29fb8d4bab92",
+      "84628488b615135c93407ab4",
+      "89bbcb070e0846aa507d95e1",
+      "5dd4a67e4250274b802fac55",
+      "c3d7f6bf5d899e5155424ea7",
+      "87ec11ca0ad0f1b59461e35f",
+      "b038cdc562da1fd711efc729",
+      "8f21dd237d125ec91452937d",
+      "9c01f35d158c9ade1a5169ad",
+      "19ea98304207db8f50c08165",
+      "ad0d22a5cc038f742ed02d33",
+      "4ab7bf47121ca91a33b6194d",
+      "eae8a3779d7643ccede69823",
+      "c1b1f9c7f7d1da858d03a7f1",
+      "2af184aa6c7dbecc1e934463"
+    ],
+    "fields": 51,
+    "apiReadback": true
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a1-next-remaining.json",
+  "coordination": {
+    "writesPaused": false,
+    "servingRelease": "025980454268fa9841ffab34b119037f348a1a11",
+    "servingIndex": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+    "newBatchIncluded": false,
+    "doNotDuplicate": [
+      "manual release",
+      "BMW research",
+      "reference reuse",
+      "full China",
+      "UI code"
+    ]
+  }
+}

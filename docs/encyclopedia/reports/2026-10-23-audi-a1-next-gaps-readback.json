@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-23T07:01:56.168Z",
+  "batch": "research-2026-10-23-audi-a1-next-gaps",
+  "passed": true,
+  "apiReadback": true,
+  "operations": 50,
+  "newVariants": 0,
+  "updatedVariants": 50,
+  "confirmedFields": 51,
+  "compiledCalculationFields": 51,
+  "beforeRevision": "90e47836-c51c-4ea4-9337-22fdbdcbb486",
+  "afterRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+  "variantsBefore": 394,
+  "variantsAfter": 394,
+  "unchangedVariantsPreserved": 344,
+  "allPreexistingValuesPreserved": true,
+  "previousFieldSourcesPreserved": true,
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 50,
+    "manualInputPreserved": true,
+    "unknownCertifiedPowerNotInferred": true
+  }
+}
