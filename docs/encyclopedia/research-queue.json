@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T11:04:45.963Z",
+  "updatedAt": "2026-10-23T12:01:37.272Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32743,7 +32743,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T11:04:45.963Z",
+    "updatedAt": "2026-10-23T12:01:37.272Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2020_2021_50_body_fields_saved_readback_pending_index_public_transmission_retry",
     "preserveManual": true,
@@ -32852,6 +32852,20 @@
         "state": "researched_identities_not_applied",
         "variants": 11,
         "requiresFreshApiPreflight": true
+      },
+      {
+        "path": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-prepared.json",
+        "batch": "research-2026-10-23-audi-a3-2022-body",
+        "state": "prepared_not_applied",
+        "variants": 50,
+        "fields": 50,
+        "requiresFreshApiPreflight": true,
+        "expectedRevisionAtPreparation": "5102c065-8ede-4287-a26b-2b9229025ff7",
+        "batchSha256": "ffbd575e40d4eb07401282bdcb91a67ef9da291ef73b16affb44d39701fd8840",
+        "blockedByWorkflow": 39949279655,
+        "blocker": "ASTRA preview сохраняет план по всем ревизиям; независимый research apply отложен до согласования с применением этого плана",
+        "afterApplyCursor": "a508272cf730c67bde2fa1e5"
       }
     ],
     "pendingNextIndexBatches": [
@@ -37058,7 +37072,18 @@
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
       },
-      "pendingReleaseWorkflow": 39936828093
+      "pendingReleaseWorkflow": 39936828093,
+      "independentResearchReservation": {
+        "checkedAt": "2026-10-23T12:01:37.272Z",
+        "state": "defer_new_apply_while_astra_snapshot_plan_is_active",
+        "workflow": 39949279655,
+        "job": 120399492239,
+        "mode": "preview",
+        "scope": "Независимые research batches; не блокирует основной ASTRA preview/apply",
+        "reason": "apply-astra-corpus.mjs сравнивает identity(manifest) всех model revisions до/после preview и beforeRevision при apply. Новый research save устарит план. Не изменять маркер ASTRA и не запускать competing writer.",
+        "resumeCondition": "Прочесть свежий roadmap и terminal ASTRA preview/apply; после согласованного сохранения проверить текущие API revisions и исключить уже заполненные ASTRA поля. Затем свежий CAS и API-readback research партии.",
+        "preparedBatch": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json"
+      }
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,

@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T11:59:53.675Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-23-audi-a3-2022-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+  "batchSha256": "ffbd575e40d4eb07401282bdcb91a67ef9da291ef73b16affb44d39701fd8840",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "beforeRevision": "5102c065-8ede-4287-a26b-2b9229025ff7",
+  "variantsRead": 1111,
+  "variantsPlanned": 50,
+  "fieldsPlanned": 50,
+  "newVariants": 0,
+  "untargetedRowsPreserved": 1061,
+  "allExistingValuesPreserved": true,
+  "priorFieldSourcesPreserved": true,
+  "nativeExact": 50,
+  "nativeHeld": [],
+  "compiledFields": 50,
+  "guardTestsPassed": 11,
+  "manualPreserved": true,
+  "unknownCertifiedPowerNotInferred": true,
+  "replayPassed": true,
+  "sources": [
+    {
+      "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+      "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+      "bytes": 79371,
+      "retrievedAt": "2026-10-23T11:59:38.561627+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+      "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+      "bytes": 47629,
+      "retrievedAt": "2026-10-23T11:59:46.323893+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+      "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+      "bytes": 66509,
+      "retrievedAt": "2026-10-23T11:59:53.368157+00:00"
+    }
+  ],
+  "cursorBefore": "2885f631c2c0b7c844ed6357",
+  "cursorAfterApply": "a508272cf730c67bde2fa1e5",
+  "remaining2022BodyAfterApply": 15,
+  "apiReadbackAfterApply": false,
+  "activationConfirmed": false,
+  "applyDeferredReason": "Выполняется ASTRA preview39949279655 в общей concurrency permanent-encyclopedia-research. Его план проверяет все model revisions; новая запись сделала бы план устаревшим. Проверить terminal preview/apply и свежую revision, заново снять SHA256/CAS перед записью. Текущий cursor не продвигается до успешного apply и независимого API-readback.",
+  "nextCandidate": {
+    "variantId": "a508272cf730c67bde2fa1e5",
+    "year": 2022,
+    "trim": "Sportback 35 TFSI S-Tronic AHK, Klima 2-Zonen"
+  },
+  "snapshotCoordinationEvidence": {
+    "main": "526d0398cf33e17639f91d048c042988c7354707",
+    "workflow": 39949279655,
+    "job": 120399492239,
+    "observedStatus": "in_progress",
+    "observedStep": "Execute the exact pinned ASTRA request",
+    "sourcePlanSha256": "25e56df33170014e9a53611a3f7c52952fc340984d2bd9846967dd91f789b12d",
+    "code": "scripts/encyclopedia/apply-astra-corpus.mjs",
+    "checks": [
+      "encyclopedia_changed_during_astra_preview",
+      "beforeRevision / beforeChecksum"
+    ],
+    "duplicateRunRequested": false,
+    "applied": false
+  }
+}

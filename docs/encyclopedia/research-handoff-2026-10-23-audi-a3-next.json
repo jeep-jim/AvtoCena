@@ -136,5 +136,21 @@
     }
   ],
   "allModelsComplete": false,
-  "a1Remainder": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2025-next.json"
+  "a1Remainder": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2025-next.json",
+  "preparedNextBatch": {
+    "path": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+    "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-body-prepared.json",
+    "batch": "research-2026-10-23-audi-a3-2022-body",
+    "state": "prepared_not_applied",
+    "variants": 50,
+    "fields": 50,
+    "requiresFreshApiPreflight": true,
+    "expectedRevisionAtPreparation": "5102c065-8ede-4287-a26b-2b9229025ff7",
+    "batchSha256": "ffbd575e40d4eb07401282bdcb91a67ef9da291ef73b16affb44d39701fd8840",
+    "blockedByWorkflow": 39949279655,
+    "blocker": "ASTRA preview сохраняет план по всем ревизиям; независимый research apply отложен до согласования с применением этого плана",
+    "afterApplyCursor": "a508272cf730c67bde2fa1e5"
+  },
+  "cursorNotAdvanced": true,
+  "preparationCheckedAt": "2026-10-23T12:01:37.272Z"
 }
