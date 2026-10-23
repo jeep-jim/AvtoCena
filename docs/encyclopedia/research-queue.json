@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T11:07:00+07:00",
+  "updatedAt": "2026-10-23T12:10:00+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32801,7 +32801,19 @@
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-vantage-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": [
+      {
+        "batch": "research-2026-10-23-aston-vantage-late",
+        "modelId": "0f90ccb1a0cf0280fa416811",
+        "operations": 22,
+        "newVariants": 22,
+        "confirmedFields": 158,
+        "compiledCalculationFields": 136,
+        "state": "prepared_cas_apply_requested",
+        "batchFile": "docs/encyclopedia/batches/2026-10-23-aston-vantage-late.json",
+        "expectedRevision": "6ae62cc5-c4dc-4fe6-a767-d77a8ad8a2d2"
+      }
+    ],
     "lastCompletedPass": {
       "checkedAt": "2026-10-23T11:07:00+07:00",
       "batch": "research-2026-10-23-aston-vantage",
