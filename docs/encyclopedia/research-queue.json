@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T05:13:46Z",
+  "updatedAt": "2026-10-23T06:03:20.829Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32704,7 +32704,7 @@
   "activePriority": {
     "updatedAt": "2026-10-23T05:13:46Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "vantage_late_saved_readback_pass_next_audi_a1_writes_paused_for_manual_repair",
+    "state": "audi_a1_reviewed_batch_pending_apply",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": "Audi A1 — существующие394варианта, заполнять только недостающие поля; уже известные точные данные не собирать повторно",
@@ -32785,7 +32785,16 @@
       }
     ],
     "pendingNextIndexBatches": [],
-    "inFlightResearch": [],
+    "inFlightResearch": [
+      {
+        "batch": "research-2026-10-23-audi-a1-body-and-gaps",
+        "modelId": "d5a8af35e3698aa33eaea9a9",
+        "variants": 50,
+        "fields": 58,
+        "state": "requested",
+        "path": "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json"
+      }
+    ],
     "lastCompletedPass": "research-2026-10-23-aston-vantage-late",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
