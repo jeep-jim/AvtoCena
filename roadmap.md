@@ -13798,3 +13798,10 @@ Diagnostic40017888810/job120634551813 TERMINAL SUCCESS20:16:46.996UTC. На ус
 Свежие AGENTS/Road/queue/план прочитаны; health подтвердил10f4579/calculation2145c6, release40012399412 SUCCESS и artifact encyclopedia-public-release12528961379 существует/digest b9445cfafd12bfa048b9051f35b48fe871f5e606ef65a8c926471a2e7817ad26. Предыдущие163поля активированы, DBXприёмка сохранена. Наш bodyfix1f207982 ещё не установлен; следующий выпуск включает единственную pending A3 2024body50 по checklist0309 (required23/public9). Повторных apply/ASTRA/сборщиков нет.
 
 Запрошена только свежая metadata-only проверка manifest/lease перед выпуском. Текущий sharedprices40016528469 и pending40017903406 не дублируются и не отменяются; launchrelease ещё не выполнен. Researchcursor и записи параллельных сессий сохранены.
+
+
+### 24.10.2026, 03:30 Красноярск — один выпуск исправления кузова A3 и 50 сохранённых полей
+
+Metadata40019528235/job120640158206 SUCCESS:20:29:32.861UTC writeractive=false/lockedUntilпуст, gen_1792702445675_8c312f85. Sharedprices40016528469 и40017903406 TERMINAL SUCCESS; других active deploy/writer в свежем списке Actions нет. Проверен канонический digest партии4f01aacb7d1076a4180505483a717b7a854ba220ac3f9ef82620b5d31a243cd8 (digest JSON, не хеш форматированного файла),50entries/required23/public9.
+
+Запрошен один regcloud-deploy актуального main с уже проверенным bodyfix1f207982 и pending A3 2024body50; ideaReports пуст, ASTRAplan6d417105 сохранён. Researchwrites пауза только до изоляции нового privateindex/membership, затем свежие revisions/CAS. Курсор29f5beff и независимая research работа сохранены. Установка/публичный bodyparity пока НЕ подтверждены; после SUCCESS сверить health, publicrelease artifact,061974search/card кузов/подпись/4105050цену и прежние DBX/трансмиссия/30minguards. Никакого повторного apply, скачивания ASTRA или изменения source controls.

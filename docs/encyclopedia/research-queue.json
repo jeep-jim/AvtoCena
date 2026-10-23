@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T20:17:44Z",
+  "updatedAt": "2026-10-23T20:30:07.587099Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32745,7 +32745,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T20:17:44Z",
+    "updatedAt": "2026-10-23T20:30:07.587099Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2024_50_body_saved_readback_pending_next_index",
     "preserveManual": true,
@@ -32829,7 +32829,7 @@
         }
       ]
     },
-    "indexReleaseRequested": false,
+    "indexReleaseRequested": true,
     "auditGenerationId": "gen_1792702445675_8c312f85",
     "pendingIndexBatches": [],
     "requestedRelease": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
@@ -32983,7 +32983,7 @@
       "duplicateRunStarted": false,
       "nextAction": "Не возобновлять тот же запрещённый redirect и не обходить ограничение. Сборщик и checkpoint не изменены; независимое подтверждение заводских данных продолжается."
     },
-    "releaseRequestedAt": "2026-10-23T01:04:00+07:00",
+    "releaseRequestedAt": "2026-10-23T20:30:07.587099Z",
     "failedAggregateRelease": {
       "workflow": 39733245856,
       "commit": "bb3193f1fd0c37d1afeb23e615e940dadf6758ee",
@@ -37291,9 +37291,9 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "observedMain": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
-      "writesPaused": false,
-      "reason": "Release40012399412 SUCCESS; four batches163fields activated. Research continues with fresh revisions/CAS. A3 2024body50 remains pending; A3bodycode1f207982 outside10f. Do not repeat DBX apply/release, China or ASTRA.",
+      "observedMain": "e941ec64941d520b1f483d7efffbef27fd72c71e",
+      "writesPaused": true,
+      "reason": "One coordinated A3 body fix + saved2024body50 release requested. Pause research writes only until Prepare private index and membership SUCCESS; then resume with fresh revisions/CAS. Do not duplicate deploy or completed imports/applies.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37301,7 +37301,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T20:09:16Z",
+      "checkedAt": "2026-10-23T20:30:07.587099Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37372,7 +37372,7 @@
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       },
       "lastCompletedReleaseWorkflow": 40012399412,
-      "pendingRelease": null
+      "pendingRelease": "requested_by_marker_awaiting_workflow_id"
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -38581,7 +38581,7 @@
       "diagnosticRun": 40012114533,
       "diagnosticJob": 120614837560,
       "rootCauseReport": "docs/encyclopedia/reports/2026-10-24-a3-body-root-cause.json",
-      "fixStatus": "tested_ready_not_installed",
+      "fixStatus": "release_requested_not_installed",
       "activeReleaseExcludesFix": "10f4579",
       "next": "After current release terminal, include factory-backed coarse-body resolution in next coordinated release; verify061974864a6a9708c3084fc8 search/card hatchback + body label + unchanged pricing. Do not repeat diagnostics or research apply."
     },
