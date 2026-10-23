@@ -13945,3 +13945,10 @@ docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0602.json:3pending
 Проверены terminalлоги40033728684/job120688006878:22:39:52UTC catalog_compact_index_v3_not_verified; конкретное несовпавшее поле/связь с China не раскрыты, verified не заявлен, rerun не выполнен. Translation40033728643/job120688006504:22:41:04UTC translation_http_403,254397offers/34521unique/0translated/34521pending; запрет не обходился. REGpages/sharedprices downstream SKIPPED, не readiness. Исправление Korea emptybackground из05:31 сохранено, не дублируется.
 
 Pendingуже3партии/132bodyfields/26required/12public по0602, все послеснимковые относительноe7a307; отдельная researchсессия перешла кA4, записи/курсор не дублируются. DBXprice/photo и A3body/transmission закрыты только в проверенномscope, LiL6 certified134 не означаетготовойцены. Скорость/реальныебот-роли/полнаяприёмка открыты. Новый deploy/apply/ASTRA/сбор/изменениерасписаний не запускались.
+
+
+## 24.10.2026 06:19 Красноярск — свежая lease подтверждает живой China publisher
+
+Read-only40038925349/job120705105717 SUCCESS; снимок23:19:07.938UTC: active=true,operationType=catalog_v3_publish_china,operationId=catalog_v3_publish_china_fbe8ef80-0c43-40af-a5f4-d78cf61b0707,start22:49:28.729UTC,heartbeat23:14:33.144UTC,lease23:44:33.144UTC. Manifest ещёgen_1792702445675_8c312f85. Это текущая активная запись, не основание для cancel/unlock/restart/deploy. После terminalChina иUAE нужны результаты и новая freelease; текущую не переиспользовать как разрешение.
+
+Публичный health23:18UTC HTTP200/e7a30716fad957202890c82f59274e8f0b2ec38a/calculation8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef. Counts/yearcutover в этой проверке не запрашивались и не заявляются. Единственный metadata marker/read запущен и завершён; состояния энциклопедии/данных/расписаний не изменены. Остальные обязательства и контроль сохранены, нового завершённого публичного этапа нет.
