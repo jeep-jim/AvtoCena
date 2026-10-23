@@ -1,0 +1,1830 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-audi-a3-2026-tail-body",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback Advanced TFSI Stronic Navi ACC EPH",
+      "variantId": "5bb44ac456b5005f011b5353",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "efd556c6ed3962df84cc209b967348f94255d8cf3865ef51d3f9ece634f7f046",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback quattro S LINE PANO CAM ACC LM18",
+      "variantId": "28208e1f3946d10c3cc443f9",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "f80a0151b66e4b7bf988885d8e7b9d95a1b1a4f40095f712053f2f170f51b812",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback S line TDI Stronic Navi ACC EPH",
+      "variantId": "96972188aff40b40d462edbc",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "3a08351e52caddaa388c5333ba340f072cccc9bcc7d25b6b4950baec1f6bf10c",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback S line TFSI e AHK/Matrix/12.30Garan",
+      "variantId": "4e2bc0feda8ab1c92a7f9cf2",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "271adf6184caecfc477593850048c938f25dad8d4897a3018be96df242d4f019",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback S line TFSI Stronic ACC Navi EPH",
+      "variantId": "1c82a68306ff0f67f1b351e8",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "1243801d4bd68afd09d649be21add12d43f97e8c106dfd53b736ce8297043712",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI 110 kW advanced SONOS*HuD*LED*",
+      "variantId": "7fe5a99a846859959ce1fd33",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "ec10e5ec026088c1d38178a0bc31075ec515915ed7f658f32b811357dc3b4acd",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI advanced LED ACC KAMERA PDC HuD",
+      "variantId": "5832e1f5118f12cb36f7949e",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "3876cc9d17e12ebbde44e08c161656c8f13cfd14efc76770af5474e5a12fd050",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI S LINE LED KAMERA",
+      "variantId": "d0b4b39e4f028f873088b6e0",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "f515a73ba3518fde77d082a80014f35793d94496c8f2d44cdec2d06acf7fbe69",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI S LINE LED KAMERA OPTIK+ ACC",
+      "variantId": "e015f19705fc8cfc81a732e8",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "ea21587721e5ebb1cf64fb654827efd58afa9897b7ea2179e20a1ce39c705859",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI S LINE LED NAVI SPORTSITZE eKLA",
+      "variantId": "b900af419adc36689ecfb37e",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "9818c0718bbc5514d41d70b9d164a1931bd74f99c522fce1a517145e139e85ed",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI VOLLLEDER ACC LED KAMERA",
+      "variantId": "b3e23e49b3847624dd8719c0",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "736c905c2585c04016f9d13e4703c1967d70cad95c2b6a4a569c37737f18a0ef",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI 110 kW LED*HuD*SONOS*RFK*ACC",
+      "variantId": "9f04639e6cb5b90903e48e61",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "3ab0cbaebc5bfaec18eeb8c16466008b5bd2f67cdd7491f63cac96d1a218b842",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI 110 kW LED*SONOS*HuD*RFK*ACC",
+      "variantId": "1aceadb53dc2cb70e08f779b",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "f04d56d23c1b769b3b430beeb3da1881ea899cc4b16d72a412096a53adb72e0f",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI 110 kW S line LED*SONOS*HuD*",
+      "variantId": "8596a6743949922ff33526b0",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "20aea7d12d94595ce729176e068a6a90439c18a99addd9cc32f7d838669c2493",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI 110 kW S-TRO*RFK*LED*ACC*",
+      "variantId": "344c6d28a772e0dfde79fba8",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "b749fcbf178a792a7538cb062761602648f1d8a497090e3585b872a84061950f",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI advanced Business+*SONOS*HuD*",
+      "variantId": "571183afb2225fe3fa181474",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "6cabb01ef9d1d4f315b3edb64e4e0b30970dd489d1a5443201a30cb0d2317908",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI advanced Rückfahrkamera",
+      "variantId": "925f3ec43d06e90a2d40a27d",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "a257bf561f6eb429711f73096c5e2c6bf76f5b407b3e54e116065a7902975f4d",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI AdvancedS tr. RFK*HUD*Navi*ACC",
+      "variantId": "160560a4d8770399cbb3f887",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "0934c977395ef2eb67aa5874052cb766a5c982955686b4ae761dc3b484fbe8c2",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI e advanced LED KAMERA ACC PDC+",
+      "variantId": "c14a5ca58ce07c2aa01fb606",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "13c793e7dfc87fff11e970bcbb6f269aed8b1fb1244829f243c7629a1b8d3242",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI e advanced LED PDC+ STHZG 17\"",
+      "variantId": "85226a6fe360bfd510b69acc",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "3a930cdc991f212b26a23d37b5cad067c0a7f9d056cfb97dfb879601844b49b9",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI e S line LED ACC KAMERA NAVI+",
+      "variantId": "943db3a0f11026979d67876d",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "3a1e14c01ddfb9e087a377a991c0e71e0a03cc4614487cd40c91ef4981feb99c",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI e S line S tronic AHZV Head-up",
+      "variantId": "91c9dc868fe58f0169b90f5c",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "cc32d4bc5e0aea38e28f194d65d28db06c8a368ff40e93aae53094da7c78c5ef",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI Q S LINE LM18 AHK SONOS NAVI+",
+      "variantId": "d6f7358afcde604b3aa8cfa1",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "6eeb66aee5747c39f4e32308cb462e58564044ff7a34881a654a3f821b6dc855",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI quattro advanced black ACC Nav",
+      "variantId": "69cbf55ed910d14b94b712d3",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "9f3034485ffef0b2242d03cb33bdf5c1574d984f1bcf4d0ad85c39cd933437a3",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI quattro S line HuD Navi SONOS",
+      "variantId": "c724a0cacf9070fa323b292b",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "6798ed5077ad0f581dbb8192a367f48c6a65f06dd683f0a4ff1be4a65493ded8",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI quattro S-LINE, AHK, Navi, el.",
+      "variantId": "94af1fd60ca0a9fa8a340a69",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "ac2306e899003752e9578562756d927198f2b1ed36c1f8b128a4910e8c246a92",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI S tronic advanced AHK*SONOS*LED*...",
+      "variantId": "84a6192c0ab18b1079f650b3",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "377317e8a777f809b29d48ce2fc59790c87c4cb54a1027b04510cf7e70847f79",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI S TRONIC+WINTERRÄDER+HEAD UP+",
+      "variantId": "e87b3c4383f69b26e56e76c5",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "4fd123237d8dfd8db0708cf52f11829fde01b5e8c07bfc4c3e0e85c836adf385",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI S-Tronic Navi LED virtual AHK",
+      "variantId": "817de1d91ca1e7632d436ed1",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "efbda35605b6f2cebeb94e96d519f0ba2d7a8e8d332151720751907e19b59641",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSIe *ACC*LED*R-KAM*17''*",
+      "variantId": "63f9e1c81f39a21a82ed7409",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "376f4ad101c99f51742cc94239faad3c710aa971b6c9e8404466c18e2ba569ab",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSIe 150 kW 140km/WLTP*LED*RFK*ACC",
+      "variantId": "b7ffcbd45166a7cc79f3385e",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "c0c66b2115fc4f1514560f69860a99eb41b0c5cdfc6fe0046926297ab3619ada",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSIe S tronic virt./LED/Standhzg.",
+      "variantId": "8e743573a904acfaa784f546",
+      "expectedRevision": "f53ebfae-22a7-40c2-8d10-163ee758ef3e",
+      "expectedDigest": "29628de56fb4a0e5819ac6807802a5613f6575c133f519d3062716b2b9251ddd",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Дополнены только отсутствующие поля по точной кузовной или технической идентичности Audi A3. Исходные год, trim, объём, мощности и прежние источники сохранены. Мощность, полная масса и неизвестная 30-минутная мощность из названия или соседних версий не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+            "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; используются только технические факты",
+            "selector": "21.04.2021: A3 Sportback — компактный хетчбэк; Sedan назван отдельно. Подтверждается только кузов явно названного Sportback/SB/SPB; год и технические параметры исходной записи сохранены",
+            "previousGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "20.08.2014: Sportback поколения 8V — пятидверный хетчбэк; классификация одинакова для обоих возможных поколений в 2020"
+            },
+            "currentGeneration": {
+              "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+              "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "03.03.2020: европейский запуск пятидверного A3 Sportback поколения 8Y; тип кузова подтверждён для европейской версии"
+            },
+            "modelUpdate2024": {
+              "url": "https://audi-press.jp/press-releases/2024/s5n52g0000001wen.html",
+              "sourceSha256": "bfb9e2e457a27bb15746878b04f618b7d8407260f418dfeaad7f95b34fdb7225",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; используются только технические факты",
+              "selector": "Обновление A3 Sportback/Sedan 2024: кузова различены, Sportback назван хетчбэком; подтверждается только тип кузова, характеристики двигателя не переносятся",
+              "retrievedAt": "2026-10-23T22:55:34.926096+00:00"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
