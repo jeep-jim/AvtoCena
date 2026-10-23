@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T04:54:47.163749+00:00",
+  "scope": "Missing fields in existing permanent model variants only. Exact identity and field provenance retained; no supplier refresh or model rediscovery.",
+  "preview": {
+    "workflow": 39899840943,
+    "job": 120238636851,
+    "conclusion": "success",
+    "modelsRead": 2423,
+    "planDigest": "f7043eff99bb22191dce9822a19c8702c9a81f76b61420a6e63d99edb8132b79"
+  },
+  "apply": {
+    "workflow": 39900179567,
+    "job": 120239722189,
+    "artifact": 12479290113,
+    "conclusion": "success",
+    "completedAt": "2026-10-23T04:37:30.444Z",
+    "modelsSaved": 269,
+    "variantsUpdated": 669,
+    "fieldsSaved": 1398,
+    "existingHumanEditsPreserved": true,
+    "fieldCounts": {
+      "grossVehicleWeightKg": 168,
+      "powerHp": 262,
+      "powerKw": 257,
+      "transmission": 20,
+      "engineCc": 240,
+      "icePowerKw": 138,
+      "bodyType": 239,
+      "drive": 44,
+      "fuel": 23,
+      "powertrainKind": 7
+    }
+  },
+  "preparedIndex": {
+    "indexDigest": "9a83d4be5c8d38f867468bd32731e3e75227ce7cdc958b6bec6215f5975a390b",
+    "manifestDigest": "155b8b58064cc7bcfbabbbf55c57d00ec59d7e6df4fdc3f4cad5bcf9ce5e1591",
+    "createdAt": "2026-10-23T04:47:12.273Z",
+    "artifact": 12479097344,
+    "total": {
+      "brands": 181,
+      "models": 2423,
+      "variants": 114923,
+      "requiredValuesPresent": 49721,
+      "requiredValuesSupported": 48051
+    },
+    "notFullySupportedVariants": 66872,
+    "vantageCompiledFields": 214
+  },
+  "release": {
+    "sha": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+    "workflow": 39901961792,
+    "job": 120245325220,
+    "activationConfirmed": false,
+    "lastObservedStep": "Prepare exact price indexes before activating the release"
+  },
+  "uiVerification": {
+    "fixtureWorkflow": 39900179355,
+    "fixtureArtifact": 12478665889,
+    "fixturePassed": true,
+    "viewportWidths": [
+      320,
+      390,
+      768,
+      1024,
+      1440
+    ],
+    "themes": [
+      "dark",
+      "light"
+    ],
+    "checks": [
+      "yellow electric checkbox",
+      "one-row pagination without horizontal overflow",
+      "mobile header and desktop section pending indicators",
+      "indicator persists until acknowledgement",
+      "no duplicate electric catalog API search"
+    ],
+    "liveStatus": "waiting for release activation"
+  },
+  "limits": [
+    "Required field coverage is not a count of calculated public offers.",
+    "Power30MinKw is never inferred from peak power or copied by this pass.",
+    "Unsupported or ambiguous annual modifications remain incomplete; no permissive fuzzy matching added.",
+    "The live two-second filter target has not been demonstrated.",
+    "Older public projections can still omit fuel/powertrain evidence; DBX search/detail parity requires independent verification."
+  ],
+  "nextPass": "Continue the existing research queue only for remaining missing facts. Future reference reuse requires a fresh reviewed preview, because manifest revisions changed."
+}
