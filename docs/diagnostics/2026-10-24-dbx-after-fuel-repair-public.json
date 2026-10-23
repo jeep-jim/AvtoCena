@@ -1,0 +1,121 @@
+{
+  "checkedAt": "2026-10-23T19:29:53.241029+00:00",
+  "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "rows": [
+    {
+      "name": "dbx",
+      "offerId": "b65974b83d5399d588073fc5",
+      "comparisons": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "Aston Martin DBX707",
+          "card": "Aston Martin DBX707",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 3982,
+          "card": 3982,
+          "equal": true
+        },
+        "fuel": {
+          "search": "petrol",
+          "card": "petrol",
+          "equal": true
+        },
+        "powertrainKind": {
+          "search": "combustion",
+          "card": "combustion",
+          "equal": true
+        },
+        "powerHp": {
+          "search": 707,
+          "card": 707,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 520,
+          "card": 520,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 520,
+          "card": 520,
+          "equal": true
+        },
+        "power30MinKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": 25031959,
+          "equal": false
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "estimated",
+          "equal": false
+        }
+      },
+      "cardTransmissionLabel": "автомат",
+      "generationId": "gen_1792702445675_8c312f85"
+    }
+  ],
+  "requests": [
+    {
+      "name": "health_before",
+      "path": "/api/health",
+      "http": 200,
+      "seconds": 4.309,
+      "bytes": 180,
+      "checkedAt": "2026-10-23T19:29:43.239679+00:00"
+    },
+    {
+      "name": "dbx_search",
+      "path": "/api/catalog/search?market=uae&make=Aston%20Martin&model=DBX&pageSize=48",
+      "http": 200,
+      "seconds": 2.935,
+      "bytes": 10533,
+      "checkedAt": "2026-10-23T19:29:46.178280+00:00"
+    },
+    {
+      "name": "dbx_card",
+      "path": "/cars/offer/b65974b83d5399d588073fc5",
+      "http": 200,
+      "seconds": 7.165,
+      "bytes": 481351,
+      "checkedAt": "2026-10-23T19:29:50.407175+00:00"
+    },
+    {
+      "name": "health_after",
+      "path": "/api/health",
+      "http": 200,
+      "seconds": 2.826,
+      "bytes": 180,
+      "checkedAt": "2026-10-23T19:29:53.240810+00:00"
+    }
+  ],
+  "scope": "Bounded public API and full target RSC; not visual or entire-catalog acceptance."
+}
