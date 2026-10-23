@@ -1,0 +1,105 @@
+{
+  "checkedAt": "2026-10-23T17:58:16.728226+00:00",
+  "offerId": "061974864a6a9708c3084fc8",
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "sameRelease": true,
+  "checks": {
+    "year": {
+      "search": 2020,
+      "card": 2020,
+      "equal": true,
+      "rawCard": 2020
+    },
+    "trim": {
+      "search": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+      "card": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+      "equal": true,
+      "rawCard": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*"
+    },
+    "bodyType": {
+      "search": "hatchback",
+      "card": null,
+      "equal": false,
+      "rawCard": ""
+    },
+    "grossVehicleWeightKg": {
+      "search": null,
+      "card": null,
+      "equal": true,
+      "rawCard": null
+    },
+    "engineCc": {
+      "search": 1968,
+      "card": 1968,
+      "equal": true,
+      "rawCard": 1968
+    },
+    "powerHp": {
+      "search": 150,
+      "card": 150,
+      "equal": true,
+      "rawCard": 150
+    },
+    "powerKw": {
+      "search": 110,
+      "card": 110,
+      "equal": true,
+      "rawCard": 110
+    },
+    "icePowerKw": {
+      "search": 110,
+      "card": 110,
+      "equal": true,
+      "rawCard": 110
+    },
+    "drive": {
+      "search": null,
+      "card": null,
+      "equal": true,
+      "rawCard": "$undefined"
+    },
+    "transmission": {
+      "search": "automatic",
+      "card": "automatic",
+      "equal": true,
+      "rawCard": "automatic"
+    },
+    "powerDataSource": {
+      "search": "permanent_encyclopedia:447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "card": "permanent_encyclopedia:447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "equal": true,
+      "rawCard": "permanent_encyclopedia:447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be"
+    },
+    "totalRub": {
+      "search": 4105050,
+      "card": 4105050,
+      "equal": true,
+      "rawCard": 4105050
+    },
+    "calculationStatus": {
+      "search": "estimated",
+      "card": "estimated",
+      "equal": true,
+      "rawCard": "estimated"
+    }
+  },
+  "rootCause": "not_established",
+  "repeatSearch": {
+    "state": "timeout",
+    "timeoutSeconds": 40,
+    "absenceNotInferred": true
+  },
+  "comparisonScope": "Повторно читается карточка и health; search взят из исходной успешной выборки17:54UTC после timeout повторного search",
+  "newBatchAppliedToPublication": false
+}

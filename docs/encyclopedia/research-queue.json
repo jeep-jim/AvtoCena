@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T17:10:20.729040+00:00",
+  "updatedAt": "2026-10-23T17:57:48.180Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1148,8 +1148,8 @@
       ],
       "variants": 3663,
       "status": "partial_verified_fields",
-      "researchedVariants": 463,
-      "checkedAt": "2026-10-23T17:00:01.002Z",
+      "researchedVariants": 476,
+      "checkedAt": "2026-10-23T17:57:48.180Z",
       "researchedYears": [
         2009,
         2010,
@@ -1197,10 +1197,10 @@
         2025,
         2026
       ],
-      "nextAction": "Продолжить с a9d1e29fc96ba2a231ba2fb2:94 оставшихся явно обозначенных Sportback/SB/SPB 2023 без кузова, затем2024. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
+      "nextAction": "Продолжить с 60c11ad25d56220e7229c26e:44 оставшихся явно обозначенных Sportback/SB/SPB 2023 без кузова, затем2024. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
-      "nextVariantId": "a9d1e29fc96ba2a231ba2fb2",
-      "boundedReadAt": "2026-10-23T17:00:01.002Z",
+      "nextVariantId": "60c11ad25d56220e7229c26e",
+      "boundedReadAt": "2026-10-23T17:57:48.180Z",
       "boundedReadYears": [
         2026,
         2025,
@@ -1217,10 +1217,10 @@
         2010,
         2009
       ],
-      "boundedReadRevision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
-      "revision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2022-2023-remaining.json",
-      "lastBatch": "research-2026-10-23-audi-a3-2022-2023-body",
+      "boundedReadRevision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e",
+      "revision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e",
+      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2023-remaining.json",
+      "lastBatch": "research-2026-10-24-audi-a3-2023-body",
       "lastBatchFields": 50,
       "lastBatchVariants": 50,
       "annualVariants": 1111,
@@ -32745,36 +32745,36 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T17:10:20.729040+00:00",
+    "updatedAt": "2026-10-23T17:57:48.180Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a3_2022_2023_50_body_fields_saved_readback_pending_index",
+    "state": "audi_a3_2023_50_body_saved_readback_pending_index_body_parity_retry",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "a9d1e29fc96ba2a231ba2fb2",
+      "variantId": "60c11ad25d56220e7229c26e",
       "year": 2023,
-      "trim": "Sportback 30 TDI., LED, Smartphone Interface",
+      "trim": "Sportback 35 TFSI S line+DSG+PANO+KAMERA+SHZ+LED",
       "missingValueFields": [
+        "drive",
         "bodyType",
-        "engineCode"
+        "engineCode",
+        "grossVehicleWeightKg"
       ],
       "knownValues": {
-        "fuel": "diesel",
-        "powertrainKind": "ice",
-        "engineCc": 1968,
-        "powerHp": 116,
-        "powerKw": 85,
-        "icePowerKw": 85,
-        "transmission": "manual",
-        "drive": "fwd",
-        "grossVehicleWeightKg": 1905
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic"
       },
       "modelId": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revision": "714cb419-1c3f-4993-af14-0154d29bbcb9"
+      "revision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e"
     },
-    "lastVerifiedResearch": "audi-a3-2022-2023-body",
+    "lastVerifiedResearch": "audi-a3-2023-body",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32790,29 +32790,29 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2022-2023-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2023-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-23-audi-a3-2022-2023-body",
-      "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
-      "commit": "986255742c12d450a9fbbd855f4b11c475f5ccd6",
-      "workflow": 39991099450,
-      "job": 120542751161,
+      "batch": "research-2026-10-24-audi-a3-2023-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+      "commit": "e08002f939e3568d97fcc212aaa430a9519554c1",
+      "workflow": 39999030914,
+      "job": 120569986126,
       "variants": 50,
       "newVariants": 0,
       "fields": 50,
       "compiledFields": 50,
       "apiReadback": true,
       "includedInIndex": false,
-      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-body-pass.json",
-      "afterRevision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-body-pass.json",
+      "afterRevision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e",
       "publicParity": {
-        "passed": true,
+        "passed": false,
         "offers": 7,
         "comparisons": 91,
-        "matched": 91,
+        "matched": 90,
         "repeatedGroups": 2,
-        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-public-parity.json"
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-public-parity.json"
       },
       "nativeExact": 50,
       "nativeHeld": []
@@ -32917,9 +32917,34 @@
         "afterRevision": "e0da5d62-1767-4de7-84e2-0749ee79bc94",
         "nativeExact": 19,
         "nativeHeld": []
+      },
+      {
+        "batch": "research-2026-10-24-audi-a3-2023-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+        "commit": "e08002f939e3568d97fcc212aaa430a9519554c1",
+        "workflow": 39999030914,
+        "job": 120569986126,
+        "variants": 50,
+        "newVariants": 0,
+        "fields": 50,
+        "compiledFields": 50,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-body-pass.json",
+        "afterRevision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e",
+        "publicParity": {
+          "passed": false,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 90,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-public-parity.json"
+        },
+        "nativeExact": 50,
+        "nativeHeld": []
       }
     ],
-    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-body-pass.json",
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -38097,7 +38122,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-index-acceptance.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0059.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -38328,6 +38353,54 @@
       "nonTargetsPreserved": 3704,
       "astraUnknownYearPreserved": 2313,
       "nextAction": "Include reviewed19fields in next coordinated release together with pending A3 batch; then verify public fields and exact index membership. Preserve A3 research cursor. Further A6 power gaps require exact source evidence."
+    },
+    "audiA3Body2023Pass": {
+      "batch": "research-2026-10-24-audi-a3-2023-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+      "commit": "e08002f939e3568d97fcc212aaa430a9519554c1",
+      "workflow": 39999030914,
+      "job": 120569986126,
+      "variants": 50,
+      "newVariants": 0,
+      "fields": 50,
+      "compiledFields": 50,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-body-pass.json",
+      "afterRevision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e",
+      "publicParity": {
+        "passed": false,
+        "offers": 7,
+        "comparisons": 91,
+        "matched": 90,
+        "repeatedGroups": 2,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-public-parity.json"
+      },
+      "nativeExact": 50,
+      "nativeHeld": []
+    },
+    "audiA3BodyPublicParityBlocker": {
+      "offerId": "061974864a6a9708c3084fc8",
+      "year": 2020,
+      "trim": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+      "searchBodyType": "hatchback",
+      "cardBodyType": null,
+      "rawCardBodyType": "",
+      "totalRubSearch": 4105050,
+      "totalRubCard": 4105050,
+      "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+      "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "checkedAt": "2026-10-23T17:58:16.728226+00:00",
+      "rootCause": "not_established",
+      "repeatCardConfirmed": true,
+      "repeatSearch": {
+        "state": "timeout",
+        "timeoutSeconds": 40,
+        "absenceNotInferred": true
+      },
+      "publicParityClosed": false,
+      "newBatchActive": false,
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-body-parity-retry.json"
     }
   },
   "scope": {
