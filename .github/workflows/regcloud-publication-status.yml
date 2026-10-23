@@ -37,6 +37,21 @@ jobs:
           console.log('PUBLICATION_STATUS',JSON.stringify({checkedAt:new Date().toISOString(),generationId:manifest?.generationId,writer:{active:Date.parse(lock?.lockedUntil||'')>Date.now(),operationType:lock?.operationType,operationId:lock?.operationId,startedAt:lock?.startedAt,heartbeatAt:lock?.heartbeatAt,lockedUntil:lock?.lockedUntil}}));
           const {readFile}=await import('node:fs/promises');
           const marker=JSON.parse(await readFile('.github/market-runs/regcloud-publication-status.json','utf8'));
+          if(marker.inspectStagedGeneration === true){
+            const internal=await storage.readJson('catalog/internal/manifest.json',null);
+            const generationId=internal?.generationId;
+            if(!/^gen_[0-9]+_[a-z0-9-]+$/.test(generationId||''))throw Error('invalid_staged_generation');
+            const prefix='catalog/generations/'+generationId+'/';
+            const objects=await storage.listObjects(prefix);
+            const groups={};
+            for(const object of objects){
+              const relative=object.key.slice(prefix.length),parts=relative.split('/');
+              const group=parts.slice(0,2).join('/');
+              const value=groups[group]||{objects:0,bytes:0};value.objects++;value.bytes+=Number(object.size||0);groups[group]=value;
+            }
+            const [facets,brands]=await Promise.all([storage.readJson('catalog/public/facets.json',null),storage.readJson('catalog/public/brand-summary.json',null)]);
+            console.log('STAGED_GENERATION_INVENTORY',JSON.stringify({checkedAt:new Date().toISOString(),generationId,activeGeneration:manifest?.generationId,internalUpdatedAt:internal.updatedAt,groups,facetsGeneration:facets?.generationId,brandsGeneration:brands?.generationId,newest:objects.slice().sort((a,b)=>String(b.lastModified||'').localeCompare(String(a.lastModified||''))).slice(0,12).map(o=>({path:o.key.slice(prefix.length),bytes:o.size,lastModified:o.lastModified}))}));
+          }
           if(marker.inspectTechnicalReferenceState === true){
             const state=await storage.readJson('knowledge/encyclopedia/reference-intake/v1/state.json',null);
             if(!state)throw Error('technical_reference_checkpoint_missing');

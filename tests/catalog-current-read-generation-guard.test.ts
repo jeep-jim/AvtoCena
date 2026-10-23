@@ -16,7 +16,7 @@ test("public read models require a valid engine price and reject peer-median out
   assert.match(storage, /catalogPublicPriority\(o\)\.eligible/);
   assert.match(storage, /findCatalogPriceOutliers\(identityEligibleOffers\)/);
   assert.match(storage, /rejectedPriceIds/);
-  assert.match(storage, /previousAllProjection/);
+  assert.match(storage, /previousBrandSummary/);
 });
 
 test("current search projection is trusted only for the active manifest generation", () => {

@@ -30,7 +30,7 @@ import { compactPricingSnapshot } from "./compact-pricing-snapshot";
 import { readCatalogOverview, catalogOverviewMarketComplete, buildCatalogOverviewPayload, catalogOverviewGenerationPath, CATALOG_OVERVIEW_PATH, resetCatalogOverviewCache } from "./overview";
 import { selectCatalogPublicationMix } from "./china-source-share";
 import { allowedCatalogSourceIds, REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
-import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
+import { boundedDetailShards, writeBoundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
 import { DetailReadCache } from "./detail-read-cache";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { safePublicPricing } from "./safe-public-pricing";
@@ -1648,11 +1648,19 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   // projections AND full offer-detail shards are verified do we expose the new
   // generation. This prevents cards from pointing at temporarily unavailable
   // /cars/offer/:id pages.
+  // A recovery can identify the complete immutable chunks without recollecting
+  // the source. This is evidence only; it never activates a generation.
+  const publicationCheckpoint = {version:1, generationId, expectedBaseGenerationId,
+    producerRevision:process.env.GITHUB_SHA || null, manifest};
+  await writeJsonAtomic(generationPath(generationId, "publication-checkpoint.json"),
+    {...publicationCheckpoint,stage:"generation_indexes_ready",updatedAt:new Date().toISOString()}, false);
   progress("current_read_models_start");
   await writeCurrentCatalogReadModels(generationId, publishedOffers, true);
   progress("current_read_models_written");
   await assertCurrentCatalogReadModelsReady(generationId, publishedOffers);
   progress("all_read_models_verified");
+  await writeJsonAtomic(generationPath(generationId, "publication-checkpoint.json"),
+    {...publicationCheckpoint,stage:"read_models_verified",updatedAt:new Date().toISOString()}, false);
   for (let attempt = 0; attempt < 5; attempt++) {
     await options.beforeManifestCommit?.();
     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", { ...manifest, generationId: "empty" });
@@ -1782,14 +1790,24 @@ export async function backfillCatalogGenerationDirectories() {
 }
 
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false) {
+  const reportStage=(stage:string)=>{if(process.env.CATALOG_PUBLICATION_PROGRESS === "1")
+    console.log(JSON.stringify({stage:"current_read_models_"+stage,generationId,at:new Date().toISOString(),rss:process.memoryUsage().rss}));};
+  reportStage("begin");
   const exactMarkets = alreadyCanonical ? new Set<CatalogMarket>(storedOffers.map((offer) => offer.market).filter(Boolean)) : undefined;
   const protectedIds = alreadyCanonical ? new Set(storedOffers.map((offer) => String(offer.id || "")).filter(Boolean)) : undefined;
   const canonical = await canonicalizePublicCatalogOffers(storedOffers, exactMarkets, protectedIds);
   const { offers, qualityRejected, identityRejected, priceOutliers, deduplicated, quota } = canonical;
   // Derived calculation inputs only: published vehicle records remain unchanged.
   await writeJsonAtomic(japanPreviewInputPath(generationId), buildJapanPreviewInputIndex(generationId, offers.filter(offer=>offer.market === "japan").map(compactPublicStorageOffer)), false);
-  const previousAllProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION).catch(() => ({ generationId: "", items: [] }));
+  reportStage("canonicalized");
+  // Only old selector names are needed to clear removed brands. Loading the
+  // complete previous catalog here retained another full generation in memory.
+  const [previousBrandSummary, previousFacets] = await Promise.all([
+    readDataJson<CatalogBrandSummary>(CURRENT_BRAND_SUMMARY_PATH, {generationId:"", brands:{}}),
+    readDataJson<Partial<CatalogFacets>>(CURRENT_FACETS_PATH, {makes:[]}),
+  ]);
 
+  reportStage("previous_selectors_read");
   const makes = uniqueText(offers.map((offer) => offer.make)).sort((a, b) => a.localeCompare(b, "ru"));
   const models = [...new Map(offers.map((offer) => {
     const make = cleanFacet(offer.make);
@@ -1811,7 +1829,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();
   const projectionsByBrand = new Map<string, CatalogSearchProjection[]>();
   const allProjectionItems: CatalogSearchProjection[] = [];
-  const offersByShard = boundedDetailShards(offers.map(compactPublicStorageOffer), CATALOG_CHUNK_SIZE);
+
   for (const offer of offers) {
     const market = String(offer.market || "");
     if (market) {
@@ -1825,30 +1843,33 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
 
   }
 
+  reportStage("projections_built");
   await writeGenerationDirectoryIndexes(generationId,allProjectionItems);
+  reportStage("directory_written");
   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
   await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId, items: allProjectionItems }, false);
+  reportStage("all_projection_written");
   const brandSummary = buildCatalogBrandSummary(generationId, allProjectionItems);
   await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, brandSummary, false);
   const brandProjectionsToWrite = new Set([
     ...projectionsByBrand.keys(),
-    ...(previousAllProjection.items || []).map((row) => catalogBrandReadModelKey(row.make)).filter(Boolean),
+    ...Object.keys(previousBrandSummary.brands || {}),
+    ...(previousFacets.makes || []).map(catalogBrandReadModelKey).filter(Boolean),
   ]);
   await mapWithConcurrency([...brandProjectionsToWrite], catalogMaintenanceIoConcurrency(), (make) =>
     writeJsonAtomic(currentBrandProjectionPath(make), { generationId, items: projectionsByBrand.get(make) || [] }, false));
   await mapWithConcurrency(MARKETS, catalogMaintenanceIoConcurrency(), (market) =>
     writeJsonAtomic(currentProjectionPath(market), { generationId, items: projectionsByMarket.get(market) || [] }, false));
-  const offerShardsToWrite = new Set([
-    ...offersByShard.keys(),
-    ...(previousAllProjection.items || []).map((row) => currentOfferShardName(row.id)),
-  ]);
-  // Children are immutable and complete before their mutable root advertises them.
-  await mapWithConcurrency([...offersByShard.entries()].filter(([prefix])=>prefix.length>2),catalogMaintenanceIoConcurrency(),([prefix,shard])=>
-    writeJsonAtomic(detailShardPath(generationId,prefix),{generationId,...shard},false));
-  await mapWithConcurrency([...offerShardsToWrite].filter(prefix=>prefix.length===2), catalogMaintenanceIoConcurrency(), (prefix) =>
-    writeJsonAtomic(detailShardPath(generationId,prefix), { generationId, ...(offersByShard.get(prefix) || {items:[]}) }, false));
+  reportStage("brands_markets_written");
+  // Compact only the <=500 rows being written, not every offer at once.
+  // All 256 mutable roots are refreshed, including now-empty buckets.
+  const offerShardCount = await writeBoundedDetailShards(generationId, offers,
+    compactPublicStorageOffer, (path, value) => writeJsonAtomic(path, value, false),
+    CATALOG_CHUNK_SIZE, catalogMaintenanceIoConcurrency());
+  reportStage("details_written");
   const aiProductFeed = await publishAiProductFeed({ generationId, items: allProjectionItems });
 
+  reportStage("ai_feed_written");
   // Stage the small landing snapshot with every publication, before switching
   // the manifest. A separate workflow used to leave it on an old generation,
   // forcing every homepage visit to parse the entire catalog instead.
@@ -1856,6 +1877,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   await writeJsonAtomic(catalogOverviewGenerationPath(generationId), overview, false);
   await writeJsonAtomic(CATALOG_OVERVIEW_PATH, overview, false);
 
+  reportStage("complete");
   return {
     generationId,
     total: offers.length,
@@ -1864,7 +1886,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
     allProjectionCount: allProjectionItems.length,
     brandSummaryCount: Object.keys(brandSummary.brands).length,
     brandProjectionCount: projectionsByBrand.size,
-    offerShards: offersByShard.size,
+    offerShards: offerShardCount,
     identityRejected: identityRejected.length,
     identityRejections: identityRejected.slice(0, 100).map((offer) => ({
       id: offer.id,

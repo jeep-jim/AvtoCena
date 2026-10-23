@@ -32,3 +32,26 @@ export function boundedDetailShards<T extends {id: string}>(rows: T[], limit = 5
   for (const [key,entries] of roots) split(key,entries);
   return result;
 }
+
+/** Keep compaction allocations bounded; children must finish before roots switch. */
+export async function writeBoundedDetailShards<T extends {id:string}, U extends {id:string}>(
+  generationId:string, rows:T[], compact:(row:T)=>U,
+  write:(path:string,value:{generationId:string} & DetailShard<U>)=>Promise<unknown>,
+  limit=500, concurrency=4,
+) {
+  const shards=boundedDetailShards(rows,limit);
+  const writePrefixes=async(prefixes:string[])=>{
+    let cursor=0;
+    await Promise.all(Array.from({length:Math.min(Math.max(1,concurrency),prefixes.length)},async()=>{
+      while(cursor<prefixes.length){
+        const prefix=prefixes[cursor++],shard=shards.get(prefix)||{items:[]};
+        await write(detailShardPath(generationId,prefix),{
+          generationId,...shard,items:shard.items.map(compact),
+        });
+      }
+    }));
+  };
+  await writePrefixes([...shards.keys()].filter(prefix=>prefix.length>2));
+  await writePrefixes(Array.from({length:256},(_,i)=>i.toString(16).padStart(2,'0')));
+  return shards.size;
+}

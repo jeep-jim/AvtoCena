@@ -1,4 +1,1 @@
-{
-  "operation": "check-china-recovery-20261023-0113",
-  "reason": "Read current generation and writer lease only."
-}
+{"requestedAt": "2026-10-23", "reason": "Read staged generation inventory to plan recovery without reprocessing saved feed; no writes or cleanup", "inspectStagedGeneration": true}
