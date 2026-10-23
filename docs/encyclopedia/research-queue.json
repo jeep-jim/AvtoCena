@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T06:08:48.504Z",
+  "updatedAt": "2026-10-23T07:00:04.957Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32711,7 +32711,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T06:08:48.504Z",
+    "updatedAt": "2026-10-23T07:00:04.957Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a1_50_updates_58_fields_saved_api_readback_pending_index",
     "preserveManual": true,
@@ -32808,7 +32808,15 @@
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-audi-a1-body-and-gaps-readback.json"
       }
     ],
-    "inFlightResearch": [],
+    "inFlightResearch": {
+      "batch": "research-2026-10-23-audi-a1-next-gaps",
+      "state": "requested",
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "operations": 50,
+      "fields": 51,
+      "expectedRevision": "90e47836-c51c-4ea4-9337-22fdbdcbb486",
+      "apiReadback": false
+    },
     "lastCompletedPass": "research-2026-10-23-audi-a1-body-and-gaps",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
@@ -36778,9 +36786,12 @@
       "newBatchAwaitingNextIndex": true,
       "checkedAt": "2026-10-23T06:08:48.504Z",
       "parallelManualResearch": {
-        "commit": "bbe15b74b4b616303f79aaaa7fa347e782bf3cd5",
-        "batch": "research-2026-10-23-bmw-i5-2026-30min",
-        "state": "requested_in_separate_session",
+        "state": "two_BMW_batches_saved_api_readback_pending_index",
+        "workflows": [
+          39909676521,
+          39909903065
+        ],
+        "fields": 5,
         "doNotDuplicate": true
       }
     },
