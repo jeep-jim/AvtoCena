@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-10-23T11:00:14.387Z",
+  "batch": "research-2026-10-23-audi-a3-2021-2022-body",
+  "passed": true,
+  "apiReadback": false,
+  "operations": 50,
+  "newVariants": 0,
+  "updatedVariants": 50,
+  "confirmedFields": 50,
+  "compiledCalculationFields": 50,
+  "beforeRevision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8",
+  "afterRevision": "9ca68e82-392e-49ca-a063-b9df06fd44e7",
+  "variantsBefore": 1111,
+  "variantsAfter": 1111,
+  "unchangedVariantsPreserved": 1061,
+  "allPreexistingValuesPreserved": true,
+  "previousFieldSourcesPreserved": true,
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 49,
+    "held": [
+      {
+        "variantId": "9424565f3de0345f3ba95db2",
+        "year": 2021,
+        "trim": "Sportback S line AHK Business-Paket PANO",
+        "field": "bodyType",
+        "reason": "Штатный exact matcher не применяет поле; защита сохранена, готовый расчёт не заявлен"
+      }
+    ],
+    "manualInputPreserved": true,
+    "unknownCertifiedPowerNotInferred": true
+  }
+}
