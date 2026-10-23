@@ -1,0 +1,674 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T09:13:30.580Z",
+  "scope": "Только две перечисленные сохранённые партии A3/Camry после a800304f; поздняя bZ3X отдельно, не общий список всех pending.",
+  "activeIndex": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+  "deployRequested": false,
+  "activationConfirmed": false,
+  "batches": [
+    {
+      "batchId": "research-2026-10-23-audi-a3-early-and-body",
+      "entries": [
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "3e8a3edb1ce3a356c1eb150d",
+          "year": 2009,
+          "trim": "Sports Back 1.4TFSI",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2009/crt6ds0000000sk0.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "fuel",
+              "value": "petrol",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2009/crt6ds0000000sk0.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "powertrainKind",
+              "value": "combustion",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2009/crt6ds0000000sk0.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "transmission",
+              "value": "dct",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2009/crt6ds0000000sk0.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "ed3cb10b5e985e4704417df4",
+          "year": 2009,
+          "trim": "A3 Sports Back 1.4TFSI",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2009/crt6ds0000000sk0.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "fuel",
+              "value": "petrol",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2009/crt6ds0000000sk0.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "powertrainKind",
+              "value": "combustion",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2009/crt6ds0000000sk0.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "923b1bb129b5eb3558d5e955",
+          "year": 2010,
+          "trim": "Sports Back 1.4TFSI",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2010/crt6ds0000000vzw.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "392b5b3562b608a63e97fa5c",
+          "year": 2014,
+          "trim": "A3 SB 1.4TFSI",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "transmission",
+              "value": "dct",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "17f2773d7be2cd3ad8c22b85",
+          "year": 2014,
+          "trim": "1.4 TFSI Cod S Line パッ",
+          "fields": [
+            {
+              "field": "transmission",
+              "value": "dct",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "a47029763c7642c221a14786",
+          "year": 2015,
+          "trim": "Sports Back 1.4TFSI",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "transmission",
+              "value": "dct",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2015/crt6ds00000019ak.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "9e72e66224d5371a6092e673",
+          "year": 2015,
+          "trim": "Sports Back 1.8TFSI 4WD",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "transmission",
+              "value": "dct",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2015/crt6ds00000019ak.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "drive",
+              "value": "awd",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2015/crt6ds00000019ak.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "1cca4c3069be2d3d9fc28ef9",
+          "year": 2016,
+          "trim": "Sports Back 1.4TFSI",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "23c62b8bb08c75e23a80050a",
+          "year": 2020,
+          "trim": "1.5 TFSI Sportback S line Navi LED Kamera",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "0fd6bcf99fd5fccff2d79c10",
+          "year": 2020,
+          "trim": "30 TFSI S line SB-Virt-NAV-AHK-STDHZ-LED-SHZ-",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "3648f36c46263f5e4a22cbac",
+          "year": 2020,
+          "trim": "SPB 35 TDI S tronic Business",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "fa5b069d9bef8038dcca3ba6",
+          "year": 2020,
+          "trim": "SPB 35 TFSI S tronic Business Advanced +18\"",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "4e0949a64b1c77b623b68793",
+          "year": 2020,
+          "trim": "Spb TDI q2.0 R4135 DSG",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "95b7bae2cf54c4429acb5a3d",
+          "year": 2020,
+          "trim": "Sportback 30 1.0 TFSI advanced AHK GRA",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "4464fac14b6c389d6bb364a1",
+          "year": 2020,
+          "trim": "Sportback 30 1.0 TFSI advanced LED PDC AHK",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "f1f70d4af4195a93286a2fa5",
+          "year": 2020,
+          "trim": "Sportback 30 1.0 TFSI LED SHZ DAB",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "0bd152801d613b984bb9e68d",
+          "year": 2020,
+          "trim": "sportback 30 1.6 tdi admired 116cv",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "a26febaa127dea0b4fd500f4",
+          "year": 2020,
+          "trim": "Sportback 30 TDI",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "021a42d61148502d72c5dc1e",
+          "year": 2020,
+          "trim": "Sportback 30 TDI 2x S LINE LM18 LED KAMERA",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "d0890ce66d16faee64c56b01",
+          "year": 2020,
+          "trim": "Sportback 30 TDI 30 TDI basis",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "262a9809809315145bebb914",
+          "year": 2020,
+          "trim": "Sportback 30 TDI S line LED AHK Kamera",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "7e632cae622f1cd8d1a9114e",
+          "year": 2020,
+          "trim": "Sportback 30 TFSI | Business Edition | Navi |",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "6e1001148085ad8081ea8e7a",
+          "year": 2020,
+          "trim": "sportback 35 2.0 tdi admired 150cv s-tronic my20",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "9e1d451702cbb03dd73b21e7",
+          "year": 2020,
+          "trim": "Sportback 35 2.0 TDI LED ACC Virtual Cockpit",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "a650a8a359c4ce9d87ff8cde",
+          "year": 2020,
+          "trim": "Sportback 35 TDI S line/LED/Virtual/97.600km",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "2b87bcd25d86cb99e9005934",
+          "year": 2020,
+          "trim": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "0cd02415cd0dbf66ecddf904",
+          "year": 2020,
+          "trim": "Sportback 35 TFSI 150 PK Automaat Edition One S-Li",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "3616a82935079d50d1757e60",
+          "year": 2020,
+          "trim": "Sportback 35 TFSI Mild-Hybrid advanced Aut.",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "b282e6c770e8a82df0a9d66e",
+          "year": 2020,
+          "trim": "Sportback 35 TFSI Mild-Hybrid Aut.*NAV*ACC*",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        },
+        {
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variantId": "c3e331c18a3d291cf392e4b5",
+          "year": 2020,
+          "trim": "Sportback 35 TFSI S Edition 150 PK - NL AUTO - PAN",
+          "fields": [
+            {
+              "field": "bodyType",
+              "value": "hatchback",
+              "kind": "manufacturer",
+              "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+              "batchId": "research-2026-10-23-audi-a3-early-and-body",
+              "acceptanceLocation": "compiled_index"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batchId": "research-2026-10-23-toyota-camry-2026-factory",
+      "entries": [
+        {
+          "modelId": "76f504335c4103fa35725836",
+          "variantId": "74c689681da6f2476d00362c",
+          "year": 2026,
+          "trim": "Hybrid 2.0HSE Sport Lite Edition",
+          "fields": [
+            {
+              "field": "engineCc",
+              "value": 1987,
+              "kind": "manufacturer",
+              "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+              "batchId": "research-2026-10-23-toyota-camry-2026-factory",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "icePowerKw",
+              "value": 112,
+              "kind": "manufacturer",
+              "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+              "batchId": "research-2026-10-23-toyota-camry-2026-factory",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "motorPeakKw",
+              "value": 83,
+              "kind": "manufacturer",
+              "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+              "batchId": "research-2026-10-23-toyota-camry-2026-factory",
+              "acceptanceLocation": "permanent_encyclopedia_api"
+            },
+            {
+              "field": "systemPowerKw",
+              "value": 145,
+              "kind": "manufacturer",
+              "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+              "batchId": "research-2026-10-23-toyota-camry-2026-factory",
+              "acceptanceLocation": "permanent_encyclopedia_api"
+            }
+          ]
+        },
+        {
+          "modelId": "76f504335c4103fa35725836",
+          "variantId": "87effaf84830ab1133e65fe2",
+          "year": 2026,
+          "trim": "双擎 2.0HGVP 豪华版",
+          "fields": [
+            {
+              "field": "engineCc",
+              "value": 1987,
+              "kind": "manufacturer",
+              "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+              "batchId": "research-2026-10-23-toyota-camry-2026-factory",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "icePowerKw",
+              "value": 112,
+              "kind": "manufacturer",
+              "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+              "batchId": "research-2026-10-23-toyota-camry-2026-factory",
+              "acceptanceLocation": "compiled_index"
+            },
+            {
+              "field": "motorPeakKw",
+              "value": 83,
+              "kind": "manufacturer",
+              "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+              "batchId": "research-2026-10-23-toyota-camry-2026-factory",
+              "acceptanceLocation": "permanent_encyclopedia_api"
+            },
+            {
+              "field": "systemPowerKw",
+              "value": 145,
+              "kind": "manufacturer",
+              "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+              "batchId": "research-2026-10-23-toyota-camry-2026-factory",
+              "acceptanceLocation": "permanent_encyclopedia_api"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "requiredChecks": [
+    "Для acceptanceLocation=compiled_index: value+year+variantId+batchId+source kind+URL в неизменяемом индексе",
+    "Для acceptanceLocation=permanent_encyclopedia_api: значение и происхождение в постоянной записи; описательные поля не требуются в расчётном индексе",
+    "Независимые active health/index digest и публичная проверка точной выдачи/карточки"
+  ],
+  "excludedParallelBatch": {
+    "id": "research-2026-10-23-toyota-bz3x-2026-factory",
+    "workflow": 39929956662,
+    "reason": "Пакет ведёт ручная сессия; её сохранённый независимый readback PASS прочитан. Не включён в ограниченный план A3+Camry."
+  },
+  "fields": 47,
+  "variants": 32,
+  "models": 2,
+  "duplicateFieldTriples": 0,
+  "compiledFieldExpectations": 43,
+  "descriptiveFieldExpectations": 4,
+  "additionalExcludedParallelBatch": {
+    "batch": "research-2026-10-23-toyota-3x-2026-factory",
+    "workflow": 39930319667,
+    "readbackReport": "docs/encyclopedia/reports/2026-10-23-toyota-3x-factory-readback.json",
+    "reason": "Отдельная приёмка ручной сессии, не дублируется."
+  }
+}

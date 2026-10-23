@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T09:01:39.849164+00:00",
+  "updatedAt": "2026-10-23T09:13:30.580Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1148,8 +1148,8 @@
       ],
       "variants": 1111,
       "status": "partial_verified_fields",
-      "researchedVariants": 321,
-      "checkedAt": "2026-10-22T03:43:45.680443+07:00",
+      "researchedVariants": 351,
+      "checkedAt": "2026-10-23T09:13:30.580Z",
       "researchedYears": [
         2022,
         2023,
@@ -1190,16 +1190,21 @@
         2025,
         2026
       ],
-      "nextAction": "Продолжить существующую очередь A3 партиями20–50: точные японские8P/8V отдельно, не переносить соседние годы/COD. Сначала проверить технический источник2009 для8PCAX; если не найден, отдельныйretry и следующий пункт прежней очереди. Полный список моделей не собирать.",
-      "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-resume.json",
-      "nextVariantId": "3e8a3edb1ce3a356c1eb150d",
+      "nextAction": "Продолжить пробелы A3 с точного курсора2020 партиями20–50;7оставшихся Sportback2020 без кузова, затем2021. Техническийretry ранних8P/8V и MHEV2020 вести отдельно, не начинать первую модель заново. Для точного35TFSI6MT2020 приоритет привод/GVW/код двигателя по годовой таблице; известные110кВт/150PS/1498см³ не переписывать.",
+      "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
+      "nextVariantId": "2dc883c46d49ddeed12e5a29",
       "boundedReadAt": "2026-10-23T08:05:11Z",
       "boundedReadYears": [
         2009,
         2010,
         2013
       ],
-      "boundedReadRevision": "b619c16c-de8e-4ede-8349-fc838b2ab91f"
+      "boundedReadRevision": "b619c16c-de8e-4ede-8349-fc838b2ab91f",
+      "revision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-remaining.json",
+      "lastBatch": "research-2026-10-23-audi-a3-early-and-body",
+      "lastBatchFields": 39,
+      "lastBatchVariants": 30
     },
     {
       "id": "e3570ba4a67b01797e57a749",
@@ -32720,38 +32725,36 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T09:01:39.849164+00:00",
+    "updatedAt": "2026-10-23T09:13:30.580Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a1_2023_2025_50_body_fields_saved_api_readback_pending_index_a3_resume",
+    "state": "audi_a3_30_rows_39_fields_saved_api_readback_pending_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "3e8a3edb1ce3a356c1eb150d",
-      "year": 2009,
-      "trim": "Sports Back 1.4TFSI",
-      "chassisCode": "8PCAX",
+      "variantId": "2dc883c46d49ddeed12e5a29",
+      "year": 2020,
+      "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
       "missingValueFields": [
-        "fuel",
-        "powertrainKind",
-        "powerHp",
-        "powerKw",
-        "icePowerKw",
-        "transmission",
+        "drive",
         "bodyType",
         "engineCode",
         "grossVehicleWeightKg"
       ],
-      "existingObservedValues": {
-        "engineCc": 1400,
-        "drive": "fwd"
+      "knownValues": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "Schaltgetriebe"
       },
-      "reason": "Нужна точная годовая техническая таблица8PCAX; округлённые1400см³ не исправлять без проверки, не подставлять8V/COD",
       "modelId": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revision": "b619c16c-de8e-4ede-8349-fc838b2ab91f"
+      "revision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea"
     },
-    "lastVerifiedResearch": "audi-a1-body-and-gaps",
+    "lastVerifiedResearch": "audi-a3-early-and-body",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32767,21 +32770,29 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a3.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-23-audi-a1-2023-2025-body",
-      "commit": "f3e1e0e74ed89a4053010d2c459296aeb7298063",
-      "workflow": 39921661124,
-      "job": 120308087918,
-      "variants": 50,
+      "batch": "research-2026-10-23-audi-a3-early-and-body",
+      "commit": "a8d5ec4fda36de44eb085892220e7bd137cf1e9e",
+      "workflow": 39929472453,
+      "job": 120333876277,
+      "variants": 30,
       "newVariants": 0,
-      "updatedVariants": 50,
-      "fields": 50,
-      "compiledFields": 50,
+      "fields": 39,
+      "compiledFields": 39,
       "apiReadback": true,
       "includedInIndex": false,
-      "report": "docs/encyclopedia/reports/2026-10-23-audi-a1-2023-2025-body-pass.json"
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-early-and-body-pass.json",
+      "afterRevision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
+      "publicParity": {
+        "passed": true,
+        "offers": 7,
+        "comparisons": 91,
+        "repeatedGroups": 2,
+        "scope": "Audi A3 Europe: первая доступная строка новой партии (либо первая строка ответа) и первые две повторяющиеся группы ограниченного ответа; не веськаталог: публичная выдача/карточки наблюдаемого выпуска; новая партия не активирована",
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-public-parity.json"
+      }
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792702445675_8c312f85",
@@ -32824,8 +32835,32 @@
         "requiresFreshApiPreflight": true
       }
     ],
-    "pendingNextIndexBatches": [],
-    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json",
+    "pendingNextIndexBatches": [
+      {
+        "batch": "research-2026-10-23-audi-a3-early-and-body",
+        "commit": "a8d5ec4fda36de44eb085892220e7bd137cf1e9e",
+        "workflow": 39929472453,
+        "job": 120333876277,
+        "variants": 30,
+        "newVariants": 0,
+        "fields": 39,
+        "compiledFields": 39,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-early-and-body-pass.json",
+        "afterRevision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
+        "publicParity": {
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "repeatedGroups": 2,
+          "scope": "Audi A3 Europe: первая доступная строка новой партии (либо первая строка ответа) и первые две повторяющиеся группы ограниченного ответа; не веськаталог: публичная выдача/карточки наблюдаемого выпуска; новая партия не активирована",
+          "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-public-parity.json"
+        },
+        "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-early-and-body.json"
+      }
+    ],
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-23-audi-a3-early-and-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -32891,7 +32926,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-resume.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -36877,7 +36912,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "observedMain": "025980454268fa9841ffab34b119037f348a1a11",
+      "observedMain": "de2ed2ec51516ed5596a8bc902bb04d43e957b18",
       "writesPaused": false,
       "reason": "Release39923658639 installed; six-batch exact value/provenance membership and public health verified. Camry is post-snapshot pending. Public Li L6 parity remains open.",
       "doNotDuplicate": [
@@ -36887,7 +36922,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T09:01:39.849164+00:00",
+      "checkedAt": "2026-10-23T09:13:30.580Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -36914,6 +36949,23 @@
         "variants": 2,
         "includedInIndex": false,
         "report": "docs/encyclopedia/reports/2026-10-23-camry-readback-and-release-coverage.json"
+      },
+      "parallelOwnerToyotaBZ3X": {
+        "commit": "e635aba2cbf281033e591d825baa67bdef64a2b2",
+        "workflow": 39929956662,
+        "observedConclusion": "success",
+        "independentReadbackByThisPass": false,
+        "doNotDuplicate": true,
+        "note": "Прочитан сохранённый отчёт ручной сессии: PASS; собственный повторный apply/readback не выполнялся.",
+        "independentReadbackByOwner": "PASS",
+        "report": "docs/encyclopedia/reports/2026-10-23-bz3x-factory-readback.json"
+      },
+      "parallelOwnerToyota3X": {
+        "workflow": 39930319667,
+        "independentReadbackByOwner": "PASS",
+        "report": "docs/encyclopedia/reports/2026-10-23-toyota-3x-factory-readback.json",
+        "doNotDuplicate": true,
+        "includedInIndex": false
       }
     },
     "audiA1BodyAndGapsPass": {
@@ -37811,7 +37863,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-pending-index-acceptance-1505.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-pending-index-acceptance-1612.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -37820,6 +37872,28 @@
       "cardStatus": "needs_data",
       "rootCause": "not_established",
       "report": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
+    },
+    "audiA3EarlyAndBodyPass": {
+      "batch": "research-2026-10-23-audi-a3-early-and-body",
+      "commit": "a8d5ec4fda36de44eb085892220e7bd137cf1e9e",
+      "workflow": 39929472453,
+      "job": 120333876277,
+      "variants": 30,
+      "newVariants": 0,
+      "fields": 39,
+      "compiledFields": 39,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-early-and-body-pass.json",
+      "afterRevision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
+      "publicParity": {
+        "passed": true,
+        "offers": 7,
+        "comparisons": 91,
+        "repeatedGroups": 2,
+        "scope": "Audi A3 Europe: первая доступная строка новой партии (либо первая строка ответа) и первые две повторяющиеся группы ограниченного ответа; не веськаталог: публичная выдача/карточки наблюдаемого выпуска; новая партия не активирована",
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-public-parity.json"
+      }
     }
   },
   "scope": {

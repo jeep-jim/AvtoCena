@@ -829,3 +829,11 @@ A1 58+51 и отдельные BMW5 остаются для следующего
 - Следующий согласованный индекс: A1 58+51+50 + BMW3+2 =164уникальныхполя/152варианта/3модели. Новый перечень docs/encyclopedia/reports/2026-10-23-pending-index-acceptance-1505.json дополняет ручной14:52. Проверить fieldprovenance/членство/публичныерасчёты; новыйdeploy этойсессией не запрошен. Не дублировать ручныеUI/reuse/Китай/DBX.
 
 Параллельно в mainf479daa появились owner-confirmed LiL6/L7 и обновление компилятора. Marker/код не тронуты; наша A1партия на свежемкоде снова50/50PASS. Перечень164охватывает толькоA1/BMW, поздняяLiпартия учитывается ручнойсессией отдельно.
+
+
+## 23.10.2026,16:12 Красноярск — A3:30/39 сохранены, следующий2020
+- research-2026-10-23-audi-a3-early-and-body, a8d5ec4,39929472453/job120333876277 SUCCESS09:07:38.693UTC, независимый14годовойAPIreadbackPASS.1111строк,revisionf2ba58f3-8bbb-47f5-9d5b-56b88dbaddea;39полей/30updates/0new,1081нецелевых неизменны. Не повторять.
+- 29bodyType/5transmission/2fuel/2powertrainKind/1drive. Мощности, округлённыеобъёмы,GVW иunknown30min не угадывались.11tests и30native/39compiled/manual/replayPASS;7publiccards/91comparisonsPASS,2выбранныеповторяющиесягруппы,не всявыдача780.
+- Активен ручной1ee0c67/a800304f/6e0e9af;6старыхпартий231полеактивированы. Наши39полей post-snapshotpending. Camry8такжеpending. Новыйпереченьприёмки1612:47полей/32варианта/2модели, НЕdeploy. ПоздняяbZ3X39929956662SUCCESS отдельно уручнойсессии,непересохранять.
+- Следующий2dc883c46d49ddeed12e5a29,2020 Sportback35TFSI S line *NAVI*LED*TEMPO*PDC*,7оставшихсяSportback2020безкузова,затем2021. Handoff docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json. Все1111адресныхостатков docs/encyclopedia/retry-2026-10-23-audi-a3-remaining.json. Ранние8PCAX/CXS/CPT иMHEV2020 отдельноretry;PDF404 не отсутствиефактов. A1возврат2025сохранён. Не начинатьсписокмоделейзаново.
+- Отчёт docs/encyclopedia/reports/2026-10-23-audi-a3-early-and-body-pass.json; APIreadback иpublicparityотдельно. DBX/LiL6публичныйparity,полнота/бот/роли открыты;скоростьотложена. Intake39831884392failure redirect_outside_catalog,не возобновляли. Новыйdeploy/reuse/Китай/UI/защиты не тронуты.

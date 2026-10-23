@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T09:09:16.626Z",
+  "lastCompletedBatch": "research-2026-10-23-audi-a3-early-and-body",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "make": "Audi",
+  "model": "A3",
+  "revision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
+  "next": {
+    "variantId": "2dc883c46d49ddeed12e5a29",
+    "year": 2020,
+    "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+    "missingValueFields": [
+      "drive",
+      "bodyType",
+      "engineCode",
+      "grossVehicleWeightKg"
+    ],
+    "knownValues": {
+      "fuel": "petrol",
+      "powertrainKind": "combustion",
+      "engineCc": 1498,
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
+      "transmission": "Schaltgetriebe"
+    }
+  },
+  "nextAction": "Продолжить пробелы A3 с точного курсора2020 партиями20–50;7оставшихся Sportback2020 без кузова, затем2021. Техническийretry ранних8P/8V и MHEV2020 вести отдельно, не начинать первую модель заново. Для точного35TFSI6MT2020 приоритет привод/GVW/код двигателя по годовой таблице; известные110кВт/150PS/1498см³ не переписывать.",
+  "remaining2020BodyCandidates": 7,
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-remaining.json",
+  "earlyRetry": [
+    {
+      "id": "c98ec4e1792a7635f7ad3f1a",
+      "year": 2009,
+      "trim": "Sports Back",
+      "chassisCode": "8PCAX"
+    },
+    {
+      "id": "93bb9e8490cceb9233f11ffd",
+      "year": 2013,
+      "chassisCode": "8VCPT"
+    },
+    {
+      "id": "228c5f65d23abc88dc8ab5ee",
+      "year": 2013,
+      "trim": "1.4 TFSI",
+      "chassisCode": "8PCAX"
+    },
+    {
+      "id": "3c8c9ebd958ba6bdb05e913e",
+      "year": 2014,
+      "chassisCode": "8VCXSL"
+    },
+    {
+      "id": "895b026e671d700fd8475cc0",
+      "year": 2014,
+      "trim": "1.4TFSI",
+      "chassisCode": "8VCXSL"
+    },
+    {
+      "id": "39abec985ad4851b10999d52",
+      "year": 2014,
+      "trim": "1.4 TFSI",
+      "chassisCode": "8VCXS"
+    },
+    {
+      "id": "cac824ebb1c5aa4b012ce5e7",
+      "year": 2015,
+      "trim": "1.4TFSI",
+      "chassisCode": "8VCXSL"
+    },
+    {
+      "id": "c871a78ba9403a40ad1d6c72",
+      "year": 2016,
+      "trim": "1.4 TFSI",
+      "chassisCode": "8VCXS"
+    },
+    {
+      "id": "467c0dd9a7eb4dc7469eb65b",
+      "year": 2016,
+      "trim": "1.4TFSI",
+      "chassisCode": "8VCXSL"
+    },
+    {
+      "id": "b9c60b9972ffafac3e0d27e7",
+      "year": 2017
+    }
+  ],
+  "allModelsComplete": false,
+  "a1Remainder": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2025-next.json"
+}
