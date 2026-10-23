@@ -37074,16 +37074,20 @@
       },
       "pendingReleaseWorkflow": 39936828093,
       "independentResearchReservation": {
-        "checkedAt": "2026-10-23T12:01:37.272Z",
+        "checkedAt": "2026-10-23T14:57:01Z",
         "state": "astra_apply_then_release_snapshot",
-        "workflow": 39949279655,
-        "job": 120399492239,
+        "workflow": 39972729425,
+        "job": 120479350486,
         "mode": "apply",
         "scope": "Независимые research batches; не блокирует основной ASTRA preview/apply",
-        "reason": "apply-astra-corpus.mjs сравнивает identity(manifest) всех model revisions до/после preview и beforeRevision при apply. Новый research save устарит план. Не изменять маркер ASTRA и не запускать competing writer.",
-        "resumeCondition": "Прочесть свежий roadmap и terminal ASTRA preview/apply; после согласованного сохранения проверить текущие API revisions и исключить уже заполненные ASTRA поля. Затем свежий CAS и API-readback research партии.",
+        "reason": "ASTRA apply39972729425 применяет закреплённый план6d417105 с beforeRevision/beforeChecksum. Независимые research saves отложены до завершения apply и изоляции общего индекса согласно roadmap.",
+        "resumeCondition": "Прочесть свежий roadmap, terminal ASTRA apply/readback и SUCCESS Prepare private encyclopedia index согласованного общего выпуска. Затем свежий API A3, исключение уже заполненных полей, пересчёт SHA256/CAS и обязательный API-readback. Не запускать отдельный deploy.",
         "preparedBatch": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
-        "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
+        "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+        "previewWorkflow": 39949279655,
+        "previewJob": 120399492239,
+        "previewConclusion": "success",
+        "previewAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-astra-preview-acceptance.json"
       }
     },
     "audiA1BodyAndGapsPass": {
