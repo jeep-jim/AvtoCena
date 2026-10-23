@@ -8,8 +8,43 @@ import {ASTRA_ROOT,sha,stable} from './astra-bridge.mjs';
 const descriptiveFields=new Set(['motorPeakKw','systemPowerKw','batteryKwh']);
 const parallel=async(items,run)=>{let cursor=0;await Promise.all(Array.from({length:Math.min(6,items.length)},async()=>{for(;;){const item=items[cursor++];if(!item)return;await run(item);}}));};
 
+// Later fill-only research creates a new immutable revision. Require ancestry
+// and preservation of every prior value/proof rather than accepting a revision
+// label alone. Changed values still require a separate reviewed release plan.
+export async function assertAstraRecordContinuation({original,current,readRecord}){
+ if(!current||!Array.isArray(current.variants))throw Error('astra_revision_record_missing');
+ const key=record=>`${ROOT}/revisions/${original.id}/${record.revision}.json`;
+ let cursor=current;const seen=new Set();
+ for(let depth=0;cursor?.revision!==original.revision;depth++){
+  if(depth>=32||cursor?.id!==original.id||!new RegExp(`^${ROOT}/revisions/${original.id}/[a-zA-Z0-9-]+\\.json$`).test(cursor.previousKey||'')||seen.has(cursor.previousKey))throw Error('astra_revision_ancestry_invalid');
+  seen.add(cursor.previousKey);const previous=await readRecord(cursor.previousKey);
+  if(!previous||key(previous)!==cursor.previousKey)throw Error('astra_revision_ancestry_invalid');
+  cursor=previous;
+ }
+ if(sha(cursor)!==sha(original))throw Error('astra_revision_ancestor_changed');
+ for(const field of ['id','make','model'])if(current[field]!==original[field])throw Error('astra_revision_identity_changed');
+ const rows=new Map(current.variants.map(v=>[v.id,v]));
+ if(rows.size!==current.variants.length)throw Error('astra_revision_duplicate_variant');
+ for(const old of original.variants){
+  const next=rows.get(old.id);if(!next)throw Error('astra_revision_variant_removed');
+  if(old.astraEvidence&&!Number.isInteger(old.year)){
+   if(stable(old)!==stable(next))throw Error('astra_source_variant_changed');
+   continue;
+  }
+  for(const [field,value] of Object.entries(old)){
+   if(['notes','status','researchEvidence','researchEvidenceHistory'].includes(field))continue;
+   if(value!==null&&value!==''&&stable(value)!==stable(next[field]))throw Error('astra_revision_existing_value_changed:'+field);
+  }
+  if(old.status!==next.status&&!(old.status==='observed'&&next.status==='review'&&next.researchEvidence))throw Error('astra_revision_status_changed');
+  if(old.notes&&!(next.notes||'').includes(old.notes))throw Error('astra_revision_notes_removed');
+  const proofs=[...(next.researchEvidenceHistory||[]),next.researchEvidence].filter(Boolean);
+  for(const proof of [...(old.researchEvidenceHistory||[]),old.researchEvidence].filter(Boolean))if(!proofs.some(p=>stable(p)===stable(proof)))throw Error('astra_revision_proof_removed');
+ }
+ return current;
+}
+
 /** The release must contain the exact saved plan and every promised annual fact. */
-export async function assertAstraPlanMembership({index,plan,applied,manifest,readPlan,expectedPlanDigest}){
+export async function assertAstraPlanMembership({index,plan,applied,manifest,readPlan,readRecord,expectedPlanDigest}){
  if(!index||!plan||!applied||!Array.isArray(manifest?.models)||!Array.isArray(plan.models))throw Error('required_astra_release_data_missing');
  if(index.version!==1||!index.models||index.digest!==checksum(index.models))throw Error('required_astra_index_digest_invalid');
  if(expectedPlanDigest!==undefined&&plan.planDigest!==expectedPlanDigest)throw Error('required_astra_requested_plan_missing');
@@ -30,21 +65,24 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
  const calculationFields=new Set(factFields),seen=new Set();
  const report={plans:1,models:0,annualVariants:0,calculationFields:0,descriptiveFields:0,unknownYearVariantsOutsideIndex:0,annualChanges:[]};
  await parallel(plan.models,async descriptor=>{
-  if(live.get(descriptor.id)?.revision!==descriptor.afterRevision)throw Error('required_astra_revision_not_active:'+descriptor.id);
-  if(live.get(descriptor.id).key!==`${ROOT}/revisions/${descriptor.id}/${descriptor.afterRevision}.json`)throw Error('required_astra_record_key_not_active:'+descriptor.id);
+  const active=live.get(descriptor.id);
+  if(!active||active.revision!==descriptor.afterRevision&&!readRecord)throw Error('required_astra_revision_not_active:'+descriptor.id);
+  if(active.key!==`${ROOT}/revisions/${descriptor.id}/${active.revision}.json`)throw Error('required_astra_record_key_not_active:'+descriptor.id);
   if(descriptor.planKey!==`${ASTRA_ROOT}/plans/${plan.planDigest}/models/${descriptor.id}.json`)throw Error('required_astra_plan_key_invalid');
   const modelPlan=await readPlan(descriptor.planKey);
   if(!modelPlan||sha(modelPlan)!==descriptor.planChecksum||sha(modelPlan.record)!==descriptor.recordChecksum||modelPlan.id!==descriptor.id||modelPlan.record.id!==descriptor.id||modelPlan.record.revision!==descriptor.afterRevision)throw Error('required_astra_model_plan_changed');
   if(modelPlan.assertions.length!==descriptor.assertions)throw Error('required_astra_assertion_count_mismatch');
-  const variants=new Map(modelPlan.record.variants.map(v=>[v.id,v]));
-  if(variants.size!==modelPlan.record.variants.length)throw Error('required_astra_duplicate_variant_identity');
+  const current=active.revision===descriptor.afterRevision?modelPlan.record:await assertAstraRecordContinuation({original:modelPlan.record,current:await readRecord(active.key),readRecord});
+  if(current.revision!==active.revision)throw Error('required_astra_record_key_not_active:'+descriptor.id);
+  const variants=new Map(current.variants.map(v=>[v.id,v]));
+  if(variants.size!==current.variants.length)throw Error('required_astra_duplicate_variant_identity');
   for(const variant of variants.values())if(variant.astraEvidence&&!Number.isInteger(variant.year)){
    if(facts.has(`${descriptor.id}:${variant.id}`))throw Error('unknown_astra_model_year_promoted');
    report.unknownYearVariantsOutsideIndex++;
   }
   for(const assertion of modelPlan.assertions){
    const identity=`${assertion.modelId}:${assertion.variantId}`,fact=facts.get(identity),variant=variants.get(assertion.variantId);
-   if(seen.has(identity)||assertion.modelId!==descriptor.id||!Number.isInteger(assertion.year)||!fact||!variant||variant.year!==assertion.year||variant.trim!==assertion.trim||fact.revision!==descriptor.afterRevision||fact.year!==assertion.year||!fact.trims.includes(token(assertion.trim)))throw Error('required_astra_annual_variant_missing:'+identity);
+   if(seen.has(identity)||assertion.modelId!==descriptor.id||!Number.isInteger(assertion.year)||!fact||!variant||variant.year!==assertion.year||variant.trim!==assertion.trim||fact.revision!==active.revision||fact.year!==assertion.year||!fact.trims.includes(token(assertion.trim)))throw Error('required_astra_annual_variant_missing:'+identity);
    seen.add(identity);report.annualVariants++;
    report.annualChanges.push({modelId:descriptor.id,make:modelPlan.record.make,model:modelPlan.record.model,variantId:assertion.variantId,year:assertion.year,trim:assertion.trim,fields:assertion.fields,sourceUrl:assertion.sourceUrl});
    for(const [field,value] of Object.entries(assertion.fields)){
@@ -73,7 +111,7 @@ async function main(){
  for(const digest of digests){
   const prefix=`${ASTRA_ROOT}/plans/${digest}`;
   const plan=await storage.readJson(`${prefix}/manifest.json`,null),applied=await storage.readJson(`${prefix}/applied.json`,null);
-  const report=await assertAstraPlanMembership({index,plan,applied,manifest,readPlan:key=>storage.readJson(key,null),expectedPlanDigest:digest});
+  const report=await assertAstraPlanMembership({index,plan,applied,manifest,readPlan:key=>storage.readJson(key,null),readRecord:key=>storage.readJson(key,null),expectedPlanDigest:digest});
   reports.push({planDigest:digest,corpusDigest:plan.corpusDigest,...report});
  }
  if(checksum((await storage.readJson(MANIFEST,null)).models.map(m=>[m.id,m.revision,m.key]))!==index.manifestDigest)throw Error('astra_release_manifest_changed_after_verification');

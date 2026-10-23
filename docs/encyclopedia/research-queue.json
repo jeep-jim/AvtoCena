@@ -37075,8 +37075,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
-      "writesPaused": false,
-      "reason": "ASTRA apply completed; release857468e immutable index prepared and exact ASTRA membership verified. Independent research may resume with fresh revision/CAS; no duplicate deployment.",
+      "writesPaused": true,
+      "reason": "One A3 gearbox correction release requested with saved A3 2022 body50. Pause independent saves only until Prepare private encyclopedia index succeeds; preparation may continue. Do not duplicate deployment.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37084,7 +37084,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T10:04:46.998Z",
+      "checkedAt": "2026-10-23T16:40:53.671Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37136,7 +37136,7 @@
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
       },
-      "pendingReleaseWorkflow": 39975111916,
+      "pendingReleaseWorkflow": null,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
         "state": "released_after_verified_index_snapshot",
@@ -38132,7 +38132,7 @@
       "totalRubCard": 3066889,
       "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
       "newBatchActive": false,
-      "rootCause": "not_established",
+      "rootCause": "customs_replay_semantic_normalizer_erases_schaltgetriebe",
       "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-public-parity.json",
       "latestAdditionalControl": {
         "offerId": "3b783a66af3b69634f611db2",
@@ -38147,7 +38147,11 @@
         "rootCause": "not_established",
         "report": "docs/encyclopedia/reports/2026-10-23-a5449c-blocker-acceptance.json",
         "checkedAt": "2026-10-23T16:12:33.335841+00:00"
-      }
+      },
+      "fixCommit": "1b3c80ea0441ed4c8e87ee3af2b2bab4464c420f",
+      "fixState": "release_requested_not_installed",
+      "diagnosticWorkflow": 39986639109,
+      "diagnosticReport": "docs/diagnostics/2026-10-23-a3-transmission-root-cause.json"
     },
     "audiA3Body2021_2022Pass": {
       "batch": "research-2026-10-23-audi-a3-2021-2022-body",

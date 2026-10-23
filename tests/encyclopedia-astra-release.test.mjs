@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {assertAstraPlanMembership} from '../scripts/encyclopedia/assert-release-astra.mjs';
+import {assertAstraPlanMembership,assertAstraRecordContinuation} from '../scripts/encyclopedia/assert-release-astra.mjs';
 import {previewAstraImport,applyAstraImport} from '../scripts/encyclopedia/apply-astra-corpus.mjs';
 import {ASTRA_ROOT,sha} from '../scripts/encyclopedia/astra-bridge.mjs';
 import {MANIFEST,ROOT,summarize} from '../apps/web/lib/encyclopedia/records.ts';
@@ -48,6 +48,46 @@ async function fixture(t){
 }
 const resealIndex=args=>{args.index.digest=checksum(args.index.models);};
 const fact=args=>Object.values(args.index.models).flat()[0];
+async function continuedArgs(f,change=()=>{}){
+ const record=structuredClone(f.saved);
+ record.previousKey=f.manifest.models[0].key;record.revision='later-research';record.updatedAt='2026-10-23T13:00:00Z';
+ record.variants[0].bodyType='hatchback';change(record);
+ const key=`${ROOT}/revisions/${record.id}/${record.revision}.json`;
+ await f.storage.writeJson(key,record);
+ const args=f.args();args.readRecord=key=>f.storage.readJson(key,null);
+ args.manifest.models[0]=summarize(record,key);
+ args.index.models={[modelKey(record.make,record.model)]:compileModelFacts(record)};
+ args.index.digest=checksum(args.index.models);args.index.manifestDigest=checksum(args.manifest.models.map(m=>[m.id,m.revision,m.key]));
+ return args;
+}
+test('later fill-only revision preserves the applied ASTRA plan and every source-only variant',async t=>{
+ const f=await fixture(t),args=await continuedArgs(f);
+ const report=await assertAstraPlanMembership(args);
+ assert.equal(report.models,1);assert.equal(report.annualVariants,1);assert.equal(report.unknownYearVariantsOutsideIndex,1);
+});
+test('later revision cannot remove or alter old values, source-only rows, or ancestry',async t=>{
+ const cases=[
+  [r=>{r.variants[0].engineCc=1590;},/existing_value_changed/],
+  [r=>{r.variants[0].manualEditedAt='changed';r.variants[0].trim='Different';},/existing_value_changed/],
+  [r=>{r.variants=r.variants.filter(v=>!v.astraEvidence);},/variant_removed/],
+  [r=>{r.variants.find(v=>v.astraEvidence).year=2024;},/source_variant_changed/],
+  [r=>{r.previousKey=`${ROOT}/revisions/${r.id}/missing.json`;},/ancestry_invalid/],
+  [r=>{r.previousKey=`${ROOT}/revisions/${r.id}/${r.revision}.json`;},/ancestry_invalid/],
+ ];
+ for(const [change,error] of cases){const f=await fixture(t);await assert.rejects(assertAstraPlanMembership(await continuedArgs(f,change)),error);}
+});
+test('continuation retains old research proofs and manual values even after new research',async()=>{
+ const proof={batchId:'old',fields:['engineCc'],values:{engineCc:1490}};
+ const original={id:'1'.repeat(24),revision:'old',make:'Toyota',model:'Yaris',variants:[{id:'v',year:2023,trim:'Hybrid',status:'review',engineCc:1490,manualEditedAt:'manual-date',researchEvidence:proof}]};
+ const current={...structuredClone(original),revision:'new',previousKey:`${ROOT}/revisions/${original.id}/old.json`};
+ current.variants[0]={...current.variants[0],bodyType:'hatchback',researchEvidenceHistory:[proof],researchEvidence:{batchId:'new',fields:['bodyType'],values:{bodyType:'hatchback'}}};
+ const args={original,current,readRecord:async()=>structuredClone(original)};
+ await assertAstraRecordContinuation(args);
+ const missingProof=structuredClone(current);missingProof.variants[0].researchEvidenceHistory=[];
+ await assert.rejects(assertAstraRecordContinuation({...args,current:missingProof}),/proof_removed/);
+ const missingManual=structuredClone(current);delete missingManual.variants[0].manualEditedAt;
+ await assert.rejects(assertAstraRecordContinuation({...args,current:missingManual}),/existing_value_changed/);
+});
 async function resealModelPlan(f,change){
  const p=await f.storage.readJson(f.plan.models[0].planKey,null);change(p);
  p.recordChecksum=sha(p.record);
