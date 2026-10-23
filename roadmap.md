@@ -12819,3 +12819,12 @@ China 39840733509 IN_PROGRESS,39857878662 PENDING; свежий roadmap 06:41 п
 ### 23.10.2026 07:25 Asia/Krasnoyarsk — Проверка текущей публикации без повторного запуска
 
 Свежие AGENTS и конец roadmap прочитаны на f7457d94. China recovery39840733509/publish120041080822 IN_PROGRESS на штатном шаге публикации; guard years/reserve/restore SUCCESS, collect SKIPPED. Scheduled39857878662 пока jobs[]. Запрошено одно read-only чтение manifest/lease; публикация, источник, deploy, отмена и снятие lock не запускаются. Отдельная энциклопедия сохранила Rapide39875315275: теперь11pending902поля/789расчётных, следующий V12 Vantage. Записи/исследования не дублируются; DBX parity blocker остаётся открытым.
+
+
+### 23.10.2026 07:26 Asia/Krasnoyarsk — Heartbeat Китая продвинулся; приёмка публикации ещё ожидается
+
+Read-only [39877965217](https://github.com/jeep-jim/AvtoCena/actions/runs/39877965217)/job120168128548 SUCCESS. Снимок2026-10-23T00:25:28.475Z: прежний writer catalog_v3_publish_china_ee8c7d5c-f442-4df2-8849-e28c06dea706 ACTIVE, start2026-10-22T20:22:02.066Z, heartbeat продвинулся до2026-10-23T00:23:00.651Z, lease00:53:00.651Z. Manifest прежний gen_1792660229591_c103ed94. Recovery39840733509 IN_PROGRESS, scheduled39857878662 PENDING. Никаких unlock/cancel/restart/deploy; перед следующим выпуском всё ещё нужны оба terminal, результат публикации и свободный writer.
+
+Ограниченные публичные запросы07:25: healthHTTP200 f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112/calculationVersiona187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44; China2014HTTP200,total0,старыйgeneration. Home один readtimeout20s (23.06s суммарно); это не доказательство потери каталога/недоступности всего сайта. Полнота/стабильность не заявляются.
+
+Последние фоновые логи: REGpages39875717646/job120160703581 FAILURE catalog_overview_publication_in_progress, ожидаемая дата политики23.10, прежняя22.10, публикацияactive. Legacy sharedprices39875717677/job120160704353 FAILURE live_encyclopedia_binding_missing/verifiedfalse на ДРУГОМgen_1791597210034_5b83bc90; не смешивать с REG39839574726 SUCCESS. Compact39875717565/job120160703662 terminalSUCCESS, но deferred/catalog_writer_busy/indexPreparedfalse — не verified. REGsharedprices39875784930 SKIPPED. Ничего не повторялось. Незакрытые storage binding, DBX parity, late11batches и liveUI сохраняются; контроль активен.
