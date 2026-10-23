@@ -40,8 +40,8 @@ async function main(){
  if(!source)throw Error('body_inspection_depth_bound');
  const candidates=(index.models[modelKey(source.make,source.model)]||[]).filter((v:any)=>v.year===source.year&&v.trims.includes(token(source.trim)));
  if(candidates.length>20)throw Error('body_inspection_candidate_bound');
- const fields=['id','make','model','year','trim','generation','chassisCode','engineCode','fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','drive','transmission','bodyType'];
- const stage=(row:any)=>({values:Object.fromEntries(fields.map(f=>[f,row[f]??null])),bodyEvidence:row.operational?.semanticEvidence?.bodyType?{status:row.operational.semanticEvidence.bodyType.status,value:row.operational.semanticEvidence.bodyType.value,source:row.operational.semanticEvidence.bodyType.source}:null,attestation:row.operational?.encyclopediaCalculation||row.encyclopediaCalculation||null});
+ const fields=['id','sourceId','make','model','year','trim','generation','chassisCode','engineCode','fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','drive','transmission','bodyType'];
+ const stage=(row:any)=>({values:Object.fromEntries(fields.map(f=>[f,row[f]??null])),bodyEvidence:row.operational?.semanticEvidence?.bodyType?{status:row.operational.semanticEvidence.bodyType.status,value:row.operational.semanticEvidence.bodyType.value,source:row.operational.semanticEvidence.bodyType.source,rawValues:Array.isArray(row.operational.semanticEvidence.bodyType.rawValues)?row.operational.semanticEvidence.bodyType.rawValues.slice(0,8).map((value:unknown)=>String(value).slice(0,120)):[]}:null,attestation:row.operational?.encyclopediaCalculation||row.encyclopediaCalculation||null});
  const enriched=applyEncyclopediaCalculation(source,index);
  for(const [path,etag] of pinned)if((await storage.readObjectMetadata!(path)).etag!==etag)throw Error('body_inspection_final_changed');
  await writerFree();const afterHealth=await health();if(beforeHealth.calculationVersion!==afterHealth.calculationVersion)throw Error('body_inspection_calculation_changed');
