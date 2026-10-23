@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T11:04:07.905Z",
+  "scope": "Независимая проверка активации двух прежних Audi A3 партий; не весь живой каталог",
+  "release": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+  "workflow": 39936828093,
+  "job": 120358301018,
+  "conclusion": "success",
+  "source": "https://github.com/jeep-jim/AvtoCena/actions/runs/39936828093/job/120358301018",
+  "index": {
+    "stage": "encyclopedia_index_ready",
+    "modelsRead": 2423,
+    "variants": 68335,
+    "factoryFields": 26782,
+    "ownerReferenceFields": 486504,
+    "manualFields": 76,
+    "digest": "b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+    "manifestDigest": "70abf4d657fbc10943071ef5e43848db250b66235ab0e94e83e7e99500886a89",
+    "readback": true
+  },
+  "membership": {
+    "stage": "required_research_batches_verified",
+    "indexDigest": "b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+    "batches": 14,
+    "variants": 314,
+    "fields": 420,
+    "identityFields": 7,
+    "descriptiveFieldsOutsideIndex": 30
+  },
+  "requiredResearchBatches": [
+    "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a1-next-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-bmw-i5-2026-30min.json",
+    "docs/encyclopedia/batches/2026-10-23-bmw-i4-2026-30min.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a1-2023-2025-body.json",
+    "docs/encyclopedia/batches/2026-10-23-owner-li-l6-l7.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-camry-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-bz3x-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-3x-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-camry-2026-petrol.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-aygox-annual-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-aygox-hybrid.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-early-and-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2020-2021-body.json"
+  ],
+  "verifiedAudiA3Batches": [
+    "research-2026-10-23-audi-a3-early-and-body",
+    "research-2026-10-23-audi-a3-2020-2021-body"
+  ],
+  "audiA3Fields": 89,
+  "audiA3Variants": 80,
+  "publicHealth": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+    "calculationVersion": "373bfb1fce689ec8232bd3870547959bfae9b367f2219571d22ce169cd675040"
+  },
+  "publicHealthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+    "calculationVersion": "373bfb1fce689ec8232bd3870547959bfae9b367f2219571d22ce169cd675040"
+  },
+  "publicParity": false,
+  "priceCatalogComplete": false,
+  "new50Included": false,
+  "notes": "Job проверил 14обязательныхпартий:420расчётныхполей,7identity,30описательныхвнеиндекса. Это фактические категории артефакта, не прежние предварительные424. Перед/после публичнойвыборкиhealth8846926, обе прошлыеA3партии в pinnedmarker, шагприёмкиPASS. НоваяA350/50 post-snapshotpending. ASTRA35/LiL6fix сюда не входят."
+}

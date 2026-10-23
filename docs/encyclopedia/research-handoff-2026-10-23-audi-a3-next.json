@@ -1,34 +1,34 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-23T10:03:45.094Z",
-  "lastCompletedBatch": "research-2026-10-23-audi-a3-2020-2021-body",
+  "checkedAt": "2026-10-23T11:03:27.166Z",
+  "lastCompletedBatch": "research-2026-10-23-audi-a3-2021-2022-body",
   "modelId": "f40e34e905b8ca09f3636eda",
   "make": "Audi",
   "model": "A3",
-  "revision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8",
+  "revision": "5102c065-8ede-4287-a26b-2b9229025ff7",
   "next": {
-    "variantId": "74e91c5c36a8a91c18475e22",
-    "year": 2021,
-    "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+    "variantId": "2885f631c2c0b7c844ed6357",
+    "year": 2022,
+    "trim": "Sportback 30 TDI advanced ACC NAVI+ Virt 18\"",
     "missingValueFields": [
-      "drive",
       "bodyType",
-      "engineCode",
-      "grossVehicleWeightKg"
+      "engineCode"
     ],
     "knownValues": {
-      "fuel": "petrol",
-      "powertrainKind": "combustion",
-      "engineCc": 1498,
-      "powerHp": 150,
-      "powerKw": 110,
-      "icePowerKw": 110,
-      "transmission": "Schaltgetriebe"
+      "fuel": "diesel",
+      "powertrainKind": "ice",
+      "engineCc": 1968,
+      "powerHp": 116,
+      "powerKw": 85,
+      "icePowerKw": 85,
+      "drive": "fwd",
+      "transmission": "automatic",
+      "grossVehicleWeightKg": 1920
     }
   },
-  "nextAction": "Продолжить A3 с точного курсора2021 партиями20–50; затем2022. Предыдущие30/39 и текущие50/50 не повторять. Для2020/2021 спорные8V/8Y и MHEV, привод/GVW/код двигателя остаютсяretry до годовой первичнойтаблицы; известные мощности не переписывать",
-  "remaining2021BodyCandidates": 24,
-  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2020-2021-remaining.json",
+  "nextAction": "Продолжить A3 с точного курсора2022 партиями20–50; затем2023. Все три предыдущие A3партии не повторять. Для2020/2021 спорные8V/8Y и MHEV, привод/GVW/код двигателя остаютсяretry до годовой первичнойтаблицы; известные мощности не переписывать",
+  "remaining2022BodyCandidates": 65,
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2021-2022-remaining.json",
   "earlyRetry": [
     {
       "id": "c98ec4e1792a7635f7ad3f1a",

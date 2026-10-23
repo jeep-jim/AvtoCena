@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T10:04:46.998Z",
+  "updatedAt": "2026-10-23T11:04:45.963Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1148,8 +1148,8 @@
       ],
       "variants": 1111,
       "status": "partial_verified_fields",
-      "researchedVariants": 401,
-      "checkedAt": "2026-10-23T10:04:46.998Z",
+      "researchedVariants": 428,
+      "checkedAt": "2026-10-23T11:04:45.963Z",
       "researchedYears": [
         2009,
         2010,
@@ -1197,10 +1197,10 @@
         2025,
         2026
       ],
-      "nextAction": "Продолжить A3 с точного курсора2021 партиями20–50; затем2022. Предыдущие30/39 и текущие50/50 не повторять. Для2020/2021 спорные8V/8Y и MHEV, привод/GVW/код двигателя остаютсяretry до годовой первичнойтаблицы; известные мощности не переписывать",
+      "nextAction": "Продолжить A3 с точного курсора2022 партиями20–50; затем2023. Все три предыдущие A3партии не повторять. Для2020/2021 спорные8V/8Y и MHEV, привод/GVW/код двигателя остаютсяretry до годовой первичнойтаблицы; известные мощности не переписывать",
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
-      "nextVariantId": "74e91c5c36a8a91c18475e22",
-      "boundedReadAt": "2026-10-23T10:03:02.297Z",
+      "nextVariantId": "2885f631c2c0b7c844ed6357",
+      "boundedReadAt": "2026-10-23T11:03:26.973Z",
       "boundedReadYears": [
         2026,
         2025,
@@ -1217,10 +1217,10 @@
         2010,
         2009
       ],
-      "boundedReadRevision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8",
-      "revision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8",
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2020-2021-remaining.json",
-      "lastBatch": "research-2026-10-23-audi-a3-2020-2021-body",
+      "boundedReadRevision": "5102c065-8ede-4287-a26b-2b9229025ff7",
+      "revision": "5102c065-8ede-4287-a26b-2b9229025ff7",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2021-2022-remaining.json",
+      "lastBatch": "research-2026-10-23-audi-a3-2021-2022-body",
       "lastBatchFields": 50,
       "lastBatchVariants": 50
     },
@@ -32743,34 +32743,34 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T10:04:46.998Z",
+    "updatedAt": "2026-10-23T11:04:45.963Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2020_2021_50_body_fields_saved_readback_pending_index_public_transmission_retry",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "74e91c5c36a8a91c18475e22",
-      "year": 2021,
-      "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+      "variantId": "2885f631c2c0b7c844ed6357",
+      "year": 2022,
+      "trim": "Sportback 30 TDI advanced ACC NAVI+ Virt 18\"",
       "missingValueFields": [
-        "drive",
         "bodyType",
-        "engineCode",
-        "grossVehicleWeightKg"
+        "engineCode"
       ],
       "knownValues": {
-        "fuel": "petrol",
-        "powertrainKind": "combustion",
-        "engineCc": 1498,
-        "powerHp": 150,
-        "powerKw": 110,
-        "icePowerKw": 110,
-        "transmission": "Schaltgetriebe"
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
       },
       "modelId": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8"
+      "revision": "5102c065-8ede-4287-a26b-2b9229025ff7"
     },
     "lastVerifiedResearch": "audi-a3-2020-2021-body",
     "rawAuditCalculated": 87,
@@ -32788,7 +32788,7 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2020-2021-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2021-2022-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
       "batch": "research-2026-10-23-audi-a3-2020-2021-body",
@@ -32856,41 +32856,19 @@
     ],
     "pendingNextIndexBatches": [
       {
-        "batch": "research-2026-10-23-audi-a3-early-and-body",
-        "commit": "a8d5ec4fda36de44eb085892220e7bd137cf1e9e",
-        "workflow": 39929472453,
-        "job": 120333876277,
-        "variants": 30,
-        "newVariants": 0,
-        "fields": 39,
-        "compiledFields": 39,
-        "apiReadback": true,
-        "includedInIndex": false,
-        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-early-and-body-pass.json",
-        "afterRevision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
-        "publicParity": {
-          "passed": true,
-          "offers": 7,
-          "comparisons": 91,
-          "repeatedGroups": 2,
-          "scope": "Audi A3 Europe: первая доступная строка новой партии (либо первая строка ответа) и первые две повторяющиеся группы ограниченного ответа; не веськаталог: публичная выдача/карточки наблюдаемого выпуска; новая партия не активирована",
-          "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-public-parity.json"
-        },
-        "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-early-and-body.json"
-      },
-      {
-        "batch": "research-2026-10-23-audi-a3-2020-2021-body",
-        "commit": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
-        "workflow": 39936047003,
-        "job": 120355711236,
+        "batch": "research-2026-10-23-audi-a3-2021-2022-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2021-2022-body.json",
+        "commit": "6612fef797408a5d9414d402d2d8f4cfb86cd988",
+        "workflow": 39943161088,
+        "job": 120379274899,
         "variants": 50,
         "newVariants": 0,
         "fields": 50,
         "compiledFields": 50,
         "apiReadback": true,
         "includedInIndex": false,
-        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-body-pass.json",
-        "afterRevision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8",
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2021-2022-body-pass.json",
+        "afterRevision": "5102c065-8ede-4287-a26b-2b9229025ff7",
         "publicParity": {
           "passed": false,
           "offers": 7,
@@ -32898,11 +32876,21 @@
           "matched": 90,
           "mismatched": 1,
           "repeatedGroups": 2,
-          "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-public-parity.json"
-        }
+          "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2021-2022-public-parity.json"
+        },
+        "nativeExact": 49,
+        "nativeHeld": [
+          {
+            "variantId": "9424565f3de0345f3ba95db2",
+            "year": 2021,
+            "trim": "Sportback S line AHK Business-Paket PANO",
+            "field": "bodyType",
+            "reason": "Штатный exact matcher не применяет поле; защита сохранена, готовый расчёт не заявлен"
+          }
+        ]
       }
     ],
-    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-body-pass.json",
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-23-audi-a3-2021-2022-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -35700,6 +35688,60 @@
         "indexMembershipState": "exact_value_and_batch_source_provenance_verified_then_public_health_confirmed",
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
         "publicPricesFullyAccepted": false
+      },
+      {
+        "batch": "research-2026-10-23-audi-a3-early-and-body",
+        "commit": "a8d5ec4fda36de44eb085892220e7bd137cf1e9e",
+        "workflow": 39929472453,
+        "job": 120333876277,
+        "variants": 30,
+        "newVariants": 0,
+        "fields": 39,
+        "compiledFields": 39,
+        "apiReadback": true,
+        "includedInIndex": true,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-early-and-body-pass.json",
+        "afterRevision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
+        "publicParity": {
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "repeatedGroups": 2,
+          "scope": "Audi A3 Europe: первая доступная строка новой партии (либо первая строка ответа) и первые две повторяющиеся группы ограниченного ответа; не веськаталог: публичная выдача/карточки наблюдаемого выпуска; новая партия не активирована",
+          "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-public-parity.json"
+        },
+        "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-early-and-body.json",
+        "indexDigest": "b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+        "release": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-b7c382-activation.json",
+        "publicPricesFullyAccepted": false
+      },
+      {
+        "batch": "research-2026-10-23-audi-a3-2020-2021-body",
+        "commit": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
+        "workflow": 39936047003,
+        "job": 120355711236,
+        "variants": 50,
+        "newVariants": 0,
+        "fields": 50,
+        "compiledFields": 50,
+        "apiReadback": true,
+        "includedInIndex": true,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-body-pass.json",
+        "afterRevision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8",
+        "publicParity": {
+          "passed": false,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 90,
+          "mismatched": 1,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-public-parity.json"
+        },
+        "indexDigest": "b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+        "release": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+        "activationReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-b7c382-activation.json",
+        "publicPricesFullyAccepted": false
       }
     ],
     "astonDb11Db12Pass": {
@@ -37913,7 +37955,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-next-index-acceptance.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-2021-2022-index-acceptance.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -37933,7 +37975,7 @@
       "fields": 39,
       "compiledFields": 39,
       "apiReadback": true,
-      "includedInIndex": false,
+      "includedInIndex": true,
       "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-early-and-body-pass.json",
       "afterRevision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
       "publicParity": {
@@ -37943,7 +37985,9 @@
         "repeatedGroups": 2,
         "scope": "Audi A3 Europe: первая доступная строка новой партии (либо первая строка ответа) и первые две повторяющиеся группы ограниченного ответа; не веськаталог: публичная выдача/карточки наблюдаемого выпуска; новая партия не активирована",
         "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-public-parity.json"
-      }
+      },
+      "indexDigest": "b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+      "activationReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-b7c382-activation.json"
     },
     "audiA3Body2020_2021Pass": {
       "batch": "research-2026-10-23-audi-a3-2020-2021-body",
@@ -37955,7 +37999,7 @@
       "fields": 50,
       "compiledFields": 50,
       "apiReadback": true,
-      "includedInIndex": false,
+      "includedInIndex": true,
       "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-body-pass.json",
       "afterRevision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8",
       "publicParity": {
@@ -37966,7 +38010,9 @@
         "mismatched": 1,
         "repeatedGroups": 2,
         "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-public-parity.json"
-      }
+      },
+      "indexDigest": "b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+      "activationReport": "docs/encyclopedia/reports/2026-10-23-audi-a3-b7c382-activation.json"
     },
     "audiA3TransmissionPublicParityBlocker": {
       "offerId": "4e3f16f9dc955a3ab40ba0f1",
@@ -37979,7 +38025,54 @@
       "release": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
       "newBatchActive": false,
       "rootCause": "not_established",
-      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-public-parity.json"
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2020-2021-public-parity.json",
+      "latestAdditionalControl": {
+        "offerId": "3b783a66af3b69634f611db2",
+        "searchTransmission": "Schaltgetriebe",
+        "cardTransmission": null,
+        "rawCardTransmission": "$undefined",
+        "totalRubSearch": 3067912,
+        "totalRubCard": 3067912,
+        "release": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+        "indexDigest": "b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+        "confirmedByBoundedRetry": true,
+        "rootCause": "not_established",
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2021-2022-public-parity.json"
+      }
+    },
+    "audiA3Body2021_2022Pass": {
+      "batch": "research-2026-10-23-audi-a3-2021-2022-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2021-2022-body.json",
+      "commit": "6612fef797408a5d9414d402d2d8f4cfb86cd988",
+      "workflow": 39943161088,
+      "job": 120379274899,
+      "variants": 50,
+      "newVariants": 0,
+      "fields": 50,
+      "compiledFields": 50,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2021-2022-body-pass.json",
+      "afterRevision": "5102c065-8ede-4287-a26b-2b9229025ff7",
+      "publicParity": {
+        "passed": false,
+        "offers": 7,
+        "comparisons": 91,
+        "matched": 90,
+        "mismatched": 1,
+        "repeatedGroups": 2,
+        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2021-2022-public-parity.json"
+      },
+      "nativeExact": 49,
+      "nativeHeld": [
+        {
+          "variantId": "9424565f3de0345f3ba95db2",
+          "year": 2021,
+          "trim": "Sportback S line AHK Business-Paket PANO",
+          "field": "bodyType",
+          "reason": "Штатный exact matcher не применяет поле; защита сохранена, готовый расчёт не заявлен"
+        }
+      ]
     }
   },
   "scope": {

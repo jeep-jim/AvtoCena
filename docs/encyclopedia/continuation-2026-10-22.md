@@ -846,3 +846,11 @@ A1 58+51 и отдельные BMW5 остаются для следующего
 - PendingA339+50=89полей, адреснаяприёмка reports/2026-10-23-audi-a3-next-index-acceptance.json дополняетпрочиеToyotaпакеты. Новыйdeployне запрошен,6активированных231неповторять. ToyotaAygoXHybrid39935764359SUCCESS/ASTRAведётручнаясессия. DBX/LiL6/бот/роли/полныйпроход открыты. Intakefailure не возобновляли.
 
 Координация bd7217f: новыеapply временноpaused до Prepare private encyclopedia index следующегоручноговыпуска. НашаA350/50ужеSUCCESS/readbackPASS, разрешена подготовкаисточников; не дублироватьdeploy. Pausedвочередисохранён.
+
+
+## 23.10.2026, 18:05 Красноярск — A3 2021–2022 сохранена; следующий 2022
+- research-2026-10-23-audi-a3-2021-2022-body / 6612fef / 39943161088 / job120379274899 SUCCESS 11:02:24.775UTC. 50 updates / 50 bodyType / 0 new; API14лет readback PASS, revision5102c065-8ede-4287-a26b-2b9229025ff7. 1061 нецелевая строка неизменна; 11tests/50compiled/49native+1generic held. Не повторять.
+- Следующий 2885f631c2c0b7c844ed6357, 2022 Sportback30TDI advanced ACC NAVI+ Virt18; осталось65Sportback2022 безкузова, затем2023. Handoff прежний audi-a3-next; новый retry-2026-10-23-audi-a3-2021-2022-remaining.json сохраняет1111адресныхостатков. A1возврат2025 сохранён.
+- Public7cards/91checks:90match,1transmissiongap; повтор3b783a66af3b69634f611db2 подтвердил Schaltgetriebe/search и$undefined/card, цена3067912 совпала. Health8846926/calculation373bfb1f/indexb7c38297; rootcause неизвестна. Старыйконтроль2020 не закрыт.
+- Старые A339+50 подтверждены в активном8846926 pinned marker + membership jobSUCCESS; изpending удалены толькоони. Новые50 post-snapshotpending; acceptance2021-2022 подготовлен. Никакого duplicate deploy. Actual14batchsplit420calculation/7identity/30descriptive, не предварительные424/26.
+- ASTRA39940470901 ещё IN_PROGRESS на sourceverify; не дублировать. Toyota35/LiL6fix ведёт ручнаясессия. DBX/бот/роли/полныйпроход открыты. Отчёты pass/readback/public-parity2021-2022 и A3b7c382activation опубликованы вместе с этой записью.
