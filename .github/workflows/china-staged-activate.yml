@@ -1,0 +1,56 @@
+name: China — activate fully verified saved generation
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/china-staged-activate.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-staged-recovery
+  cancel-in-progress: false
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require the completed verification from the reviewed revision
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const c=JSON.parse(require('fs').readFileSync('.github/market-runs/china-staged-activate.json','utf8'));
+            if(c.verificationRunId!==39885687828)throw Error('unexpected_verification_run');
+            const r=await github.rest.actions.getWorkflowRun({...context.repo,run_id:c.verificationRunId});
+            if(r.data.status!=='completed'||r.data.conclusion!=='success'||r.data.head_sha!=='eb1703313c69d8a23e39a3c3ecb3691c96b86b38')throw Error('verification_not_successful');
+      - uses: actions/download-artifact@v4
+        with:
+          name: china-staged-verification
+          path: recovery-proof
+          github-token: ${{ github.token }}
+          run-id: 39885687828
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Activate only unchanged files with an exclusive lease and manifest CAS
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/catalog-activate-staged-publication.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-staged-activation
+          path: china-staged-activation.json
+          if-no-files-found: ignore
