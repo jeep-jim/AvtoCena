@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-toyota-aygox-hybrid",
+  "entries": [
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "116hp HEV Comfort | winter p.",
+      "variantId": "bf87a1ea00ab62cb748a414a",
+      "expectedDigest": "c0108aa6ca996bf053618b49a95df4a5e6b29b2af9d5cdace6249a6f0899ca09",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 59,
+        "systemPowerKw": 85,
+        "grossVehicleWeightKg": 1510,
+        "engineCc": 1490
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw",
+        "systemPowerKw",
+        "grossVehicleWeightKg",
+        "engineCc"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/251210-Aygo-X-Hybrid-Press-Pack.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Toyota Aygo X Hybrid, европейское производство с13.11.2025: заводская таблица декабря2025 подтверждает1490см³, электромотор MG2 пик59кВт, систему85кВт/116DINhp, полнуюмассу1510кг и кузов crossover. Применено к шести существующим европейским HEV2026; у явно названной116hp HEV Comfort исправлены ошибочные998см³. ДВС НЕ уточнялся: заводские публикации сентября/декабря расходятся67/68кВт. Исходные powerKw/powerHp сохранены, их смысл не переопределён;30-минутная мощность остаётся неизвестной."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "Aygo X 2025 1.5 hybrid Icon e-cvt",
+      "variantId": "fed2b8f69689fe9ec11bfab4",
+      "expectedDigest": "b0c7dcba4808cd2ca699322df5a2dadb98bd4a10b484e50b71b2a413af3c4283",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 59,
+        "systemPowerKw": 85,
+        "grossVehicleWeightKg": 1510
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw",
+        "systemPowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/251210-Aygo-X-Hybrid-Press-Pack.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Toyota Aygo X Hybrid, европейское производство с13.11.2025: заводская таблица декабря2025 подтверждает1490см³, электромотор MG2 пик59кВт, систему85кВт/116DINhp, полнуюмассу1510кг и кузов crossover. Применено к шести существующим европейским HEV2026; у явно названной116hp HEV Comfort исправлены ошибочные998см³. ДВС НЕ уточнялся: заводские публикации сентября/декабря расходятся67/68кВт. Исходные powerKw/powerHp сохранены, их смысл не переопределён;30-минутная мощность остаётся неизвестной."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "Hybrid 115 play",
+      "variantId": "819c6081e0362587cf2396f1",
+      "expectedDigest": "a3d7a522c7ff842b6ea12654ef6c9d5c5d5e3fa9c74545f08a9f0b19f299dcae",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 59,
+        "systemPowerKw": 85,
+        "grossVehicleWeightKg": 1510
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw",
+        "systemPowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/251210-Aygo-X-Hybrid-Press-Pack.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Toyota Aygo X Hybrid, европейское производство с13.11.2025: заводская таблица декабря2025 подтверждает1490см³, электромотор MG2 пик59кВт, систему85кВт/116DINhp, полнуюмассу1510кг и кузов crossover. Применено к шести существующим европейским HEV2026; у явно названной116hp HEV Comfort исправлены ошибочные998см³. ДВС НЕ уточнялся: заводские публикации сентября/декабря расходятся67/68кВт. Исходные powerKw/powerHp сохранены, их смысл не переопределён;30-минутная мощность остаётся неизвестной."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "Teamplayer 1,5 l Hybrid PDC KLIMA",
+      "variantId": "a732a3f9cabb9ec107d859c4",
+      "expectedDigest": "4c8d895fa18451f9a2adecdb87a00bd72a75089a9ba2520f66e8f37eac9c0501",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 59,
+        "systemPowerKw": 85,
+        "grossVehicleWeightKg": 1510
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw",
+        "systemPowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/251210-Aygo-X-Hybrid-Press-Pack.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Toyota Aygo X Hybrid, европейское производство с13.11.2025: заводская таблица декабря2025 подтверждает1490см³, электромотор MG2 пик59кВт, систему85кВт/116DINhp, полнуюмассу1510кг и кузов crossover. Применено к шести существующим европейским HEV2026; у явно названной116hp HEV Comfort исправлены ошибочные998см³. ДВС НЕ уточнялся: заводские публикации сентября/декабря расходятся67/68кВт. Исходные powerKw/powerHp сохранены, их смысл не переопределён;30-минутная мощность остаётся неизвестной."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "1,5 HEV Teamplayer SHZ PDC KLIMA LM BT",
+      "variantId": "e96af44fbc626f43dd64a02f",
+      "expectedDigest": "0279955e1a2cf23d3d4a19762cd4c7a996fa62887f23787e942b4c2b9238126c",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 59,
+        "systemPowerKw": 85,
+        "grossVehicleWeightKg": 1510
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw",
+        "systemPowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/251210-Aygo-X-Hybrid-Press-Pack.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Toyota Aygo X Hybrid, европейское производство с13.11.2025: заводская таблица декабря2025 подтверждает1490см³, электромотор MG2 пик59кВт, систему85кВт/116DINhp, полнуюмассу1510кг и кузов crossover. Применено к шести существующим европейским HEV2026; у явно названной116hp HEV Comfort исправлены ошибочные998см³. ДВС НЕ уточнялся: заводские публикации сентября/декабря расходятся67/68кВт. Исходные powerKw/powerHp сохранены, их смысл не переопределён;30-минутная мощность остаётся неизвестной."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "Aygo X Hybrid 1.5i zetelverwarming Camera 17 inch",
+      "variantId": "fb6229445f682707cb9807c6",
+      "expectedDigest": "8d3ecd95eb0e0a774cb029c35d02b1bea6dcfed8b592450ecb11c6cbba51501d",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 59,
+        "systemPowerKw": 85,
+        "grossVehicleWeightKg": 1510
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw",
+        "systemPowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/251210-Aygo-X-Hybrid-Press-Pack.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Toyota Aygo X Hybrid, европейское производство с13.11.2025: заводская таблица декабря2025 подтверждает1490см³, электромотор MG2 пик59кВт, систему85кВт/116DINhp, полнуюмассу1510кг и кузов crossover. Применено к шести существующим европейским HEV2026; у явно названной116hp HEV Comfort исправлены ошибочные998см³. ДВС НЕ уточнялся: заводские публикации сентября/декабря расходятся67/68кВт. Исходные powerKw/powerHp сохранены, их смысл не переопределён;30-минутная мощность остаётся неизвестной."
+      }
+    }
+  ]
+}
