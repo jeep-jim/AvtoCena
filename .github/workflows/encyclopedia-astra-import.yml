@@ -43,6 +43,7 @@ jobs:
         run: python3 -m pip install --quiet boto3
       - name: Execute the exact pinned ASTRA request
         env:
+          AWS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
           YC_OBJECT_STORAGE_REGION: us-east-1
