@@ -1,0 +1,179 @@
+{
+  "checkedAt": "2026-10-23T16:12:33.335841+00:00",
+  "scope": "Independent bounded public search/detail acceptance after ASTRA release; not visual acceptance or all-inventory audit",
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+    "calculationVersion": "517a84ded1ba1eca308fea174fb8a0b04d4359a4321c1eb80a20d82cff2e254f"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+    "calculationVersion": "517a84ded1ba1eca308fea174fb8a0b04d4359a4321c1eb80a20d82cff2e254f"
+  },
+  "releaseUnchanged": true,
+  "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+  "rows": [
+    {
+      "name": "dbx",
+      "offerId": "b65974b83d5399d588073fc5",
+      "searchTotal": 6,
+      "searchRowsRead": 6,
+      "search": {
+        "id": "b65974b83d5399d588073fc5",
+        "make": "Aston Martin",
+        "model": "Dbx",
+        "year": 2023,
+        "trim": "Aston Martin DBX707",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3982,
+        "powerHp": 707,
+        "powerKw": 520,
+        "icePowerKw": 520,
+        "power30MinKw": null,
+        "transmission": "automatic",
+        "totalRub": null,
+        "calculationStatus": "needs_data"
+      },
+      "card": {
+        "id": "b65974b83d5399d588073fc5",
+        "make": "Aston Martin",
+        "model": "Dbx",
+        "year": 2023,
+        "trim": "Aston Martin DBX707",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 3982,
+        "powerHp": 707,
+        "powerKw": 520,
+        "icePowerKw": 520,
+        "power30MinKw": null,
+        "transmission": "automatic",
+        "totalRub": 25031959,
+        "calculationStatus": "estimated"
+      },
+      "mismatchedFields": [
+        "totalRub",
+        "calculationStatus"
+      ]
+    },
+    {
+      "name": "li",
+      "offerId": "17b4b13194dc355e6415013f",
+      "searchTotal": 1,
+      "searchRowsRead": 1,
+      "search": {
+        "id": "17b4b13194dc355e6415013f",
+        "make": "Li Auto",
+        "model": "L6",
+        "year": 2026,
+        "trim": "2026款 Ultra",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "engineCc": 1496,
+        "powerHp": null,
+        "powerKw": null,
+        "icePowerKw": null,
+        "power30MinKw": 134,
+        "transmission": "电动车单速变速箱",
+        "totalRub": null,
+        "calculationStatus": "needs_data"
+      },
+      "card": {
+        "id": "17b4b13194dc355e6415013f",
+        "make": "Li Auto",
+        "model": "L6",
+        "year": 2026,
+        "trim": "2026款 Ultra",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "engineCc": 1496,
+        "powerHp": null,
+        "powerKw": null,
+        "icePowerKw": null,
+        "power30MinKw": 134,
+        "transmission": "电动车单速变速箱",
+        "totalRub": null,
+        "calculationStatus": "needs_data"
+      },
+      "mismatchedFields": [],
+      "certifiedPowerParityClosed": true,
+      "deliveredCalculationAccepted": false,
+      "invalidPeakFieldsRemainAbsent": true,
+      "searchUrl": "/api/catalog/search?market=china&make=Li%20Auto&model=L6&yearFrom=2026&yearTo=2026&pageSize=100"
+    },
+    {
+      "name": "a3",
+      "offerId": "3b783a66af3b69634f611db2",
+      "searchTotal": 117,
+      "searchRowsRead": 48,
+      "search": {
+        "id": "3b783a66af3b69634f611db2",
+        "make": "Audi",
+        "model": "A3",
+        "year": 2021,
+        "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "power30MinKw": null,
+        "transmission": "Schaltgetriebe",
+        "totalRub": 3041845,
+        "calculationStatus": "estimated"
+      },
+      "card": {
+        "id": "3b783a66af3b69634f611db2",
+        "make": "Audi",
+        "model": "A3",
+        "year": 2021,
+        "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "power30MinKw": null,
+        "transmission": null,
+        "totalRub": 3041845,
+        "calculationStatus": "estimated"
+      },
+      "mismatchedFields": [
+        "transmission"
+      ]
+    }
+  ],
+  "parsing": "React Flight decoded; exact target ID, full offer with market/sourcePrice, final full matching object; $undefined and absent normalized to null. All requested pages HTTP200 and fully read.",
+  "caveats": [
+    "Initial Li make=Li query returned zero; actual detail make=Li Auto was used for corrected bounded query; no inventory absence inferred.",
+    "DBX old projection migration still open.",
+    "A3 transmission parity still open.",
+    "Currencies refreshed: comparisons use same current release/rates; old RUB amounts are historical.",
+    "Real owner/manager assistant acceptance remains open; speed postponed per owner."
+  ],
+  "releaseVerification": {
+    "workflow": 39975111916,
+    "job": 120490462819,
+    "activeAt": "2026-10-23T15:37:57.081Z",
+    "publicGate": {
+      "verified": true,
+      "groups": 16,
+      "variants": 90,
+      "fields": 234,
+      "finishedAt": "2026-10-23T15:38:03.291Z"
+    },
+    "requiredBatches": 17,
+    "astraModels": 2895,
+    "astraAnnualVariants": 5,
+    "astraCalculationFields": 31,
+    "unknownYearVariantsOutsideIndex": 230447,
+    "installedLiFixBlob": "9dba48ad7ddcf07b10d6f98d58312dc6e0181c22",
+    "sameAsFixCommit": "d7683629162d1e106f889c121dc5b491fc056016"
+  }
+}

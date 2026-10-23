@@ -36342,7 +36342,18 @@
       "fixInstalled": true,
       "existingProjectionMigrationVerified": false,
       "latestReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json",
-      "fixInstalledRelease": "025980454268fa9841ffab34b119037f348a1a11"
+      "fixInstalledRelease": "025980454268fa9841ffab34b119037f348a1a11",
+      "latestControl": {
+        "checkedAt": "2026-10-23T16:12:33.335841+00:00",
+        "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+        "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+        "report": "docs/encyclopedia/reports/2026-10-23-a5449c-blocker-acceptance.json",
+        "searchTotalRub": null,
+        "cardTotalRub": 25031959,
+        "searchStatus": "needs_data",
+        "cardStatus": "estimated",
+        "publicParityClosed": false
+      }
     },
     "latestPublicationCheck": {
       "checkedAt": "2026-10-23T05:52:31.951865+00:00",
@@ -38029,7 +38040,7 @@
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
-      "cardPower30MinKw": null,
+      "cardPower30MinKw": 134,
       "searchStatus": "needs_data",
       "cardStatus": "needs_data",
       "rootCause": "safe_public_pricing_erases_independently_attested_30min_when_peak_power_conflicts",
@@ -38039,12 +38050,14 @@
       "diagnosticJob": 120358818598,
       "rootCauseVerifiedAt": "2026-10-23T10:09:32.833Z",
       "fixCommit": "d7683629162d1e106f889c121dc5b491fc056016",
-      "fixState": "committed_pending_coordinated_release",
-      "productionInstalled": false,
-      "publicParityClosed": false,
+      "fixState": "installed_certified_power_parity_verified",
+      "productionInstalled": true,
+      "publicParityClosed": true,
       "deliveredCalculationAccepted": false,
-      "lastObservedRelease": "8846926f8679b3c43be81af3467fb23ef6d94aec",
-      "lastObservedReleaseCheckedAt": "2026-10-23T13:49:10Z"
+      "lastObservedRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+      "lastObservedReleaseCheckedAt": "2026-10-23T16:12:33.335841+00:00",
+      "publicParityScope": "Independent certified 30-minute power=134 retained in search and full card; not delivered calculation acceptance",
+      "latestReport": "docs/encyclopedia/reports/2026-10-23-a5449c-blocker-acceptance.json"
     },
     "audiA3EarlyAndBodyPass": {
       "batch": "research-2026-10-23-audi-a3-early-and-body",
@@ -38112,13 +38125,14 @@
         "searchTransmission": "Schaltgetriebe",
         "cardTransmission": null,
         "rawCardTransmission": "$undefined",
-        "totalRubSearch": 3067912,
-        "totalRubCard": 3067912,
-        "release": "8846926f8679b3c43be81af3467fb23ef6d94aec",
-        "indexDigest": "b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+        "totalRubSearch": 3041845,
+        "totalRubCard": 3041845,
+        "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+        "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
         "confirmedByBoundedRetry": true,
         "rootCause": "not_established",
-        "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2021-2022-public-parity.json"
+        "report": "docs/encyclopedia/reports/2026-10-23-a5449c-blocker-acceptance.json",
+        "checkedAt": "2026-10-23T16:12:33.335841+00:00"
       }
     },
     "audiA3Body2021_2022Pass": {
