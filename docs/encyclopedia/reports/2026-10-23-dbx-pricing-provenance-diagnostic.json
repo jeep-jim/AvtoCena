@@ -43,7 +43,111 @@
       "transmission",
       "bodyType"
     ],
-    "fullStoredRecordComparison": "pending read-only diagnostic",
-    "fixed": false
-  }
+    "fullStoredRecordComparison": "confirmed by read-only workflow",
+    "fixed": false,
+    "cause": "searchProjectionFromOffer drops source fuel/powertrain provenance while preserving values; required fuelPowertrain audit changes from exact to ambiguous"
+  },
+  "storageInspection": {
+    "runId": 39891906342,
+    "jobId": 120213391909,
+    "conclusion": "success",
+    "checkedAt": "2026-10-23T02:52:44.308Z",
+    "generationId": "gen_1792702445675_8c312f85",
+    "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "rows": [
+      {
+        "id": "b65974b83d5399d588073fc5",
+        "full": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "year": 2023,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        "projection": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "year": 2023,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        "attestedFields": [
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType"
+        ]
+      }
+    ]
+  },
+  "fixed": false
 }
