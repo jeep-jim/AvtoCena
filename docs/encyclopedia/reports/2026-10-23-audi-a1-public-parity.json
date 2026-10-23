@@ -1,0 +1,732 @@
+{
+  "checkedAt": "2026-10-23T06:07:29.282170+00:00",
+  "passed": false,
+  "scope": "Audi A1 Europe: первые8 и повторяющиеся группы первого ответа48строк из313; не веськаталог: публичная выдача/карточки наблюдаемого выпуска; новая партия не активирована",
+  "offersFound": 11,
+  "offersChecked": 9,
+  "comparisons": 117,
+  "generationId": "gen_1792702445675_8c312f85",
+  "rows": [
+    {
+      "offerId": "f2c5a10bc2436dcd45b96cbc",
+      "checks": {
+        "year": {
+          "search": 2020,
+          "card": 2020,
+          "equal": true
+        },
+        "trim": {
+          "search": "Sportback 35 TFSI S TRONIC S LINE",
+          "card": "Sportback 35 TFSI S TRONIC S LINE",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3052015,
+          "card": 3052015,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "2d22b1e3039961f84a598dd3",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "allstreet 30 1.0 tfsi identity contrast 110cv s tr",
+          "card": "allstreet 30 1.0 tfsi identity contrast 110cv s tr",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 999,
+          "card": 999,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 81,
+          "card": 81,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 81,
+          "card": 81,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3343862,
+          "card": 3343862,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "7ac8344a62d591a1cd65ec40",
+      "checks": {
+        "year": {
+          "search": 2021,
+          "card": 2021,
+          "equal": true
+        },
+        "trim": {
+          "search": "Sportback S line 35 TFSI S tronic *LED*",
+          "card": "Sportback S line 35 TFSI S tronic *LED*",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3286273,
+          "card": 3286273,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "41452509a1ca5e97dd76f6ec",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "Sportback 30 1.0 TFSI 116CV Adrenalin Black Editi",
+          "card": "Sportback 30 1.0 TFSI 116CV Adrenalin Black Editi",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": 1680,
+          "card": 1680,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 999,
+          "card": 999,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 116,
+          "card": 116,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 4343834,
+          "card": 4343834,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    },
+    {
+      "offerId": "ac962797d94179ede7aa1a1c",
+      "checks": {
+        "year": {
+          "search": 2021,
+          "card": 2021,
+          "equal": true
+        },
+        "trim": {
+          "search": "Sportback 35 TFSI S line ACC CarPlay Keyless",
+          "card": "Sportback 35 TFSI S line ACC CarPlay Keyless",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3125453,
+          "card": 3125453,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "a9352a900ac4ea01ae796e75",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "sportback 30 1.0 tfsi admired 110cv s-tronic",
+          "card": "sportback 30 1.0 tfsi admired 110cv s-tronic",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 999,
+          "card": 999,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 81,
+          "card": 81,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 81,
+          "card": 81,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3013858,
+          "card": 3013858,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "d6890d16d5513115af4c4a1f",
+      "checks": {
+        "year": {
+          "search": 2021,
+          "card": 2021,
+          "equal": true
+        },
+        "trim": {
+          "search": "citycarver 35 TFSI Aut.*NAVI*LED*ACC*CAM*PDC*",
+          "card": "citycarver 35 TFSI Aut.*NAVI*LED*ACC*CAM*PDC*",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 2880971,
+          "card": 2880971,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "8caac44a0172a87ad53f4dc5",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "II 2019 Sportback Sportback 30 1.0 tfsi S Line Edition 116cv s-tronic",
+          "card": "II 2019 Sportback Sportback 30 1.0 tfsi S Line Edition 116cv s-tronic",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 999,
+          "card": 999,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 116,
+          "card": 116,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 4217656,
+          "card": 4217656,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "a9c9de9ce3160424c0190481",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "A1 SPB 30 TFSI S tronic Identity Black",
+          "card": "A1 SPB 30 TFSI S tronic Identity Black",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": 1680,
+          "card": 1680,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 999,
+          "card": 999,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 116,
+          "card": 116,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 4135632,
+          "card": 4135632,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    }
+  ],
+  "unavailable": [
+    {
+      "offerId": "972ebb253a74720057370e18",
+      "reason": "Карточка не получена; отсутствие данных не доказано"
+    },
+    {
+      "offerId": "05fc486ea893def7802576ed",
+      "reason": "Карточка не получена; отсутствие данных не доказано"
+    }
+  ],
+  "repeatedExactModificationGroups": 2,
+  "repeatedGroups": [
+    {
+      "identity": [
+        "2023",
+        "allstreet 30 1.0 tfsi identity contrast 110cv s tr",
+        "",
+        "automatic",
+        "999",
+        "110"
+      ],
+      "offerIds": [
+        "2d22b1e3039961f84a598dd3",
+        "972ebb253a74720057370e18"
+      ],
+      "allCardsChecked": false
+    },
+    {
+      "identity": [
+        "2025",
+        "A1 SPB 30 TFSI S tronic Identity Black",
+        "",
+        "automatic",
+        "999",
+        "116"
+      ],
+      "offerIds": [
+        "05fc486ea893def7802576ed",
+        "a9c9de9ce3160424c0190481"
+      ],
+      "allCardsChecked": false
+    }
+  ],
+  "duplicateOfferIds": 0,
+  "rowsReturned": 48,
+  "catalogTotalReported": 313,
+  "note": "Повторяющиеся модификации — отдельные объявления с уникальными id, не новые дубликаты энциклопедии. Новые58полей ещё не включены в servingиндекс; это проверка текущейпубликации0259804. React$undefined/пустая строка нормализованы как отсутствие значения; исходные различия сохранены."
+}

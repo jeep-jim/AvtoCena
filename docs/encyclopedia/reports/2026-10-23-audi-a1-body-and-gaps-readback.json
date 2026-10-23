@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-23T06:05:05.432Z",
+  "batch": "research-2026-10-23-audi-a1-body-and-gaps",
+  "passed": true,
+  "apiReadback": true,
+  "operations": 50,
+  "newVariants": 0,
+  "updatedVariants": 50,
+  "confirmedFields": 58,
+  "compiledCalculationFields": 58,
+  "beforeRevision": "4b8a141d-b765-41c1-ad13-529a34f5cc20",
+  "afterRevision": "90e47836-c51c-4ea4-9337-22fdbdcbb486",
+  "variantsBefore": 394,
+  "variantsAfter": 394,
+  "unchangedVariantsPreserved": 344,
+  "allPreexistingValuesPreserved": true,
+  "previousFieldSourcesPreserved": true,
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 50,
+    "manualInputPreserved": true,
+    "unknownCertifiedPowerNotInferred": true
+  }
+}
