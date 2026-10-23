@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-toyota-camry-2026-factory",
+  "entries": [
+    {
+      "modelId": "76f504335c4103fa35725836",
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2026,
+      "trim": "Hybrid 2.0HSE Sport Lite Edition",
+      "variantId": "74c689681da6f2476d00362c",
+      "expectedDigest": "3d9afd18759a850223cbfd971dfc3e6ffbb106b0db120516e57100a3c29fbaa3",
+      "patch": {
+        "engineCc": 1987,
+        "icePowerKw": 112,
+        "motorPeakKw": 83,
+        "systemPowerKw": 145
+      },
+      "confirmedFields": [
+        "engineCc",
+        "icePowerKw",
+        "motorPeakKw",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица 2026款凯美瑞规格配置表, стр.1: китайский Camry 双擎 2.0HSE 运动Lite版 / 2.0HGVP 豪华版, 1987 см³, ДВС 112 кВт, электромотор максимум 83 кВт, гибридная система 145 кВт. Это разные виды мощности. Документ не содержит 30-минутной мощности; она этим пакетом не заполняется. Только две точно сопоставленные существующие китайские модификации 2026."
+      }
+    },
+    {
+      "modelId": "76f504335c4103fa35725836",
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2026,
+      "trim": "双擎 2.0HGVP 豪华版",
+      "variantId": "87effaf84830ab1133e65fe2",
+      "expectedDigest": "c07039453ff7e2dd3388576fabf971ba71a31339f1b5edd7ba789c798ada02d4",
+      "patch": {
+        "engineCc": 1987,
+        "icePowerKw": 112,
+        "motorPeakKw": 83,
+        "systemPowerKw": 145
+      },
+      "confirmedFields": [
+        "engineCc",
+        "icePowerKw",
+        "motorPeakKw",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица 2026款凯美瑞规格配置表, стр.1: китайский Camry 双擎 2.0HSE 运动Lite版 / 2.0HGVP 豪华版, 1987 см³, ДВС 112 кВт, электромотор максимум 83 кВт, гибридная система 145 кВт. Это разные виды мощности. Документ не содержит 30-минутной мощности; она этим пакетом не заполняется. Только две точно сопоставленные существующие китайские модификации 2026."
+      }
+    }
+  ]
+}
