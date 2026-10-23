@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T17:57:48.180Z",
+  "updatedAt": "2026-10-23T19:02:49.660Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1148,8 +1148,8 @@
       ],
       "variants": 3663,
       "status": "partial_verified_fields",
-      "researchedVariants": 476,
-      "checkedAt": "2026-10-23T17:57:48.180Z",
+      "researchedVariants": 509,
+      "checkedAt": "2026-10-23T19:02:49.660Z",
       "researchedYears": [
         2009,
         2010,
@@ -1197,10 +1197,10 @@
         2025,
         2026
       ],
-      "nextAction": "Продолжить с 60c11ad25d56220e7229c26e:44 оставшихся явно обозначенных Sportback/SB/SPB 2023 без кузова, затем2024. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
+      "nextAction": "Продолжить с 658efd8ee9446d35bc9ac33f:58 явно обозначенных Sportback/SB/SPB 2024 без кузова, затем2025. Новая партия20–50, только пробелы; свежиеAPI/revision/CAS, сохранностьASTRA/ручных/истории. Другие кузова и ранние8P/8V/MHEV остаются в retry; A1возврат сохранён.",
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a3-next.json",
-      "nextVariantId": "60c11ad25d56220e7229c26e",
-      "boundedReadAt": "2026-10-23T17:57:48.180Z",
+      "nextVariantId": "658efd8ee9446d35bc9ac33f",
+      "boundedReadAt": "2026-10-23T19:02:49.660Z",
       "boundedReadYears": [
         2026,
         2025,
@@ -1217,12 +1217,12 @@
         2010,
         2009
       ],
-      "boundedReadRevision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e",
-      "revision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e",
-      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2023-remaining.json",
-      "lastBatch": "research-2026-10-24-audi-a3-2023-body",
-      "lastBatchFields": 50,
-      "lastBatchVariants": 50,
+      "boundedReadRevision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
+      "revision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
+      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2023-tail-remaining.json",
+      "lastBatch": "research-2026-10-24-audi-a3-2023-tail-body",
+      "lastBatchFields": 44,
+      "lastBatchVariants": 44,
       "annualVariants": 1111,
       "unknownYearAstraVariants": 2552
     },
@@ -32745,36 +32745,36 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T17:57:48.180Z",
+    "updatedAt": "2026-10-23T19:02:49.660Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a3_2023_50_body_saved_readback_pending_index_body_parity_retry",
+    "state": "audi_a3_2023_tail_44_body_saved_readback_pending_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "60c11ad25d56220e7229c26e",
-      "year": 2023,
-      "trim": "Sportback 35 TFSI S line+DSG+PANO+KAMERA+SHZ+LED",
+      "variantId": "658efd8ee9446d35bc9ac33f",
+      "year": 2024,
+      "trim": "35 TDI SpB S-Line NAV+LED+PANO+17ZOLL",
       "missingValueFields": [
-        "drive",
         "bodyType",
         "engineCode",
         "grossVehicleWeightKg"
       ],
       "knownValues": {
-        "fuel": "petrol",
-        "powertrainKind": "combustion",
-        "engineCc": 1498,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
         "powerHp": 150,
         "powerKw": 110,
         "icePowerKw": 110,
-        "transmission": "automatic"
+        "transmission": "automatic",
+        "drive": "fwd"
       },
       "modelId": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e"
+      "revision": "9315ca88-ca6b-4671-87ac-adebad6c751f"
     },
-    "lastVerifiedResearch": "audi-a3-2023-body",
+    "lastVerifiedResearch": "audi-a3-2023-tail-body",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32790,32 +32790,44 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2023-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a3-2023-tail-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-24-audi-a3-2023-body",
-      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
-      "commit": "e08002f939e3568d97fcc212aaa430a9519554c1",
-      "workflow": 39999030914,
-      "job": 120569986126,
-      "variants": 50,
+      "batch": "research-2026-10-24-audi-a3-2023-tail-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
+      "commit": "721151721228a70c44f02b658050337205807c6d",
+      "workflow": 40008010326,
+      "job": 120600787162,
+      "applyFinishedAt": "2026-10-23T19:01:45.987Z",
+      "variants": 44,
       "newVariants": 0,
-      "fields": 50,
-      "compiledFields": 50,
+      "fields": 44,
+      "compiledFields": 44,
       "apiReadback": true,
       "includedInIndex": false,
-      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-body-pass.json",
-      "afterRevision": "31553dcb-9f76-4c5f-bd51-896dddf30b9e",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-body-pass.json",
+      "afterRevision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
       "publicParity": {
         "passed": false,
         "offers": 7,
         "comparisons": 91,
         "matched": 90,
         "repeatedGroups": 2,
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-public-parity.json"
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-public-parity.json"
       },
-      "nativeExact": 50,
-      "nativeHeld": []
+      "nativeExact": 42,
+      "nativeHeld": [
+        {
+          "variantId": "217e4991c24842b55a08c100",
+          "trim": "Sportback advanced CarPlay|Bremsassistent",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "075c2786549d65dcf988299e",
+          "trim": "Sportback S line Optik-Paket schwarz+ AHK DSP",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        }
+      ]
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792702445675_8c312f85",
@@ -32942,6 +32954,43 @@
         },
         "nativeExact": 50,
         "nativeHeld": []
+      },
+      {
+        "batch": "research-2026-10-24-audi-a3-2023-tail-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
+        "commit": "721151721228a70c44f02b658050337205807c6d",
+        "workflow": 40008010326,
+        "job": 120600787162,
+        "applyFinishedAt": "2026-10-23T19:01:45.987Z",
+        "variants": 44,
+        "newVariants": 0,
+        "fields": 44,
+        "compiledFields": 44,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-body-pass.json",
+        "afterRevision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
+        "publicParity": {
+          "passed": false,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 90,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-public-parity.json"
+        },
+        "nativeExact": 42,
+        "nativeHeld": [
+          {
+            "variantId": "217e4991c24842b55a08c100",
+            "trim": "Sportback advanced CarPlay|Bremsassistent",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          },
+          {
+            "variantId": "075c2786549d65dcf988299e",
+            "trim": "Sportback S line Optik-Paket schwarz+ AHK DSP",
+            "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+          }
+        ]
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-body-pass.json",
@@ -38122,7 +38171,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0059.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0203.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -38400,7 +38449,59 @@
       },
       "publicParityClosed": false,
       "newBatchActive": false,
-      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-body-parity-retry.json"
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-body-parity-retry.json",
+      "latestFreshComparison": {
+        "checkedAt": "2026-10-23T19:02:05.470202+00:00",
+        "searchBodyType": "hatchback",
+        "cardBodyType": null,
+        "totalRubSearch": 4105050,
+        "totalRubCard": 4105050,
+        "healthBeforeAfter": {
+          "ok": true,
+          "service": "avtocena-web",
+          "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+          "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+        },
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-public-parity.json",
+        "publicParityClosed": false
+      }
+    },
+    "audiA3Body2023TailPass": {
+      "batch": "research-2026-10-24-audi-a3-2023-tail-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
+      "commit": "721151721228a70c44f02b658050337205807c6d",
+      "workflow": 40008010326,
+      "job": 120600787162,
+      "applyFinishedAt": "2026-10-23T19:01:45.987Z",
+      "variants": 44,
+      "newVariants": 0,
+      "fields": 44,
+      "compiledFields": 44,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-body-pass.json",
+      "afterRevision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
+      "publicParity": {
+        "passed": false,
+        "offers": 7,
+        "comparisons": 91,
+        "matched": 90,
+        "repeatedGroups": 2,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-public-parity.json"
+      },
+      "nativeExact": 42,
+      "nativeHeld": [
+        {
+          "variantId": "217e4991c24842b55a08c100",
+          "trim": "Sportback advanced CarPlay|Bremsassistent",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        },
+        {
+          "variantId": "075c2786549d65dcf988299e",
+          "trim": "Sportback S line Optik-Paket schwarz+ AHK DSP",
+          "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+        }
+      ]
     }
   },
   "scope": {
