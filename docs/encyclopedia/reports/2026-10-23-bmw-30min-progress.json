@@ -1,0 +1,47 @@
+{
+  "checkedAt": "2026-10-23T06:12:02.935Z",
+  "scope": "Two exact existing European 2026 variants; full database remains incomplete",
+  "baseline": "docs/encyclopedia/reports/2026-10-23-powertrain-baseline.json",
+  "variants": [
+    {
+      "model": "BMW i5 xDrive40 Touring",
+      "variantId": "c31f0df22cec7cf907072ca6",
+      "power30MinKw": 150,
+      "run": 39909676521,
+      "revision": "1b637421-484d-403f-87f0-48dba65f74c0"
+    },
+    {
+      "model": "BMW i4 xDrive40 Gran Coupe",
+      "variantId": "65e831d9ceb6aab1b8c5eb81",
+      "power30MinKw": 125,
+      "run": 39909903065,
+      "revision": "08fe279d-3584-45ea-b1f9-6fe0f0e76b15"
+    }
+  ],
+  "saved": true,
+  "independentApiReadback": true,
+  "compiledMandatoryFieldsSupported": true,
+  "addedFields": 5,
+  "activeCalculationIndex": false,
+  "electricBaselineDenominator": 12742,
+  "electricCompletedDelta": 2,
+  "electricRemainingAfterTheseBatches": 12740,
+  "electricRemainingPercent": 99.98,
+  "otherConcurrentChangesNotIncluded": true,
+  "nextTasks": [
+    "Research exact technical families for electric/hybrid entries in powertrain-completion-queue.json",
+    "Resolve missing identity and required ICE specifications without repeating saved feed references",
+    "Include saved BMW and pending Audi A1 research in next isolated calculation-index release",
+    "Verify catalog offer matching and price calculation separately from field completeness"
+  ],
+  "sourceRetries": [
+    {
+      "model": "BMW X5 PHEV/MHEV",
+      "reason": "Shared nominal/30-minute heading alone is ambiguous; no 30-minute value imported. Current page also covers different generation."
+    },
+    {
+      "model": "Volkswagen ID.3",
+      "reason": "Official PDF search candidates found but direct retrieval failed; not imported."
+    }
+  ]
+}
