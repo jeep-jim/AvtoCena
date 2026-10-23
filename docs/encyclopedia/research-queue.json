@@ -36955,8 +36955,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
-      "writesPaused": true,
-      "reason": "Preparing next immutable index with saved Toyota/Audi batches. Let currently running Audi A3 apply finish; no further research writes until snapshot preparation completes. Read-only research continues.",
+      "writesPaused": false,
+      "reason": "Run39936828093 step Prepare private encyclopedia index and required batch membership completed successfully. Immutable release8846926 snapshot isolated; research can resume, new batches are post-snapshot.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -36984,7 +36984,7 @@
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
       },
       "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json",
-      "isolatedRelease": "1ee0c67bf40949fccd71d5d40eda7fa9ed8a3182",
+      "isolatedRelease": "8846926f8679b3c43be81af3467fb23ef6d94aec",
       "postSnapshotCamry": {
         "workflow": 39925160057,
         "fields": 8,
@@ -37015,7 +37015,8 @@
         "independentReadbackByOwner": "PASS",
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
-      }
+      },
+      "pendingReleaseWorkflow": 39936828093
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
