@@ -32782,7 +32782,18 @@
       }
     ],
     "pendingNextIndexBatches": [],
-    "inFlightResearch": [],
+    "inFlightResearch": [
+      {
+        "batch": "research-2026-10-23-aston-vantage",
+        "modelId": "0f90ccb1a0cf0280fa416811",
+        "operations": 33,
+        "newVariants": 31,
+        "updatedVariants": 2,
+        "fields": 247,
+        "state": "workflow_requested_readback_pending",
+        "checkedAt": "2026-10-23T11:02:00+07:00"
+      }
+    ],
     "lastCompletedPass": {
       "checkedAt": "2026-10-23T10:13:00+07:00",
       "batch": "research-2026-10-23-aston-valhalla-vanquish",
