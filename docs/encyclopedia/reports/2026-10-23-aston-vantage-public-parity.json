@@ -1,0 +1,950 @@
+{
+  "checkedAt": "2026-10-23T04:06:18.787975+00:00",
+  "passed": true,
+  "scope": "Все11 найденных UAE Vantage: публичная выдача/карточки активного index3e2d35; новая партия не активирована",
+  "offersFound": 11,
+  "offersChecked": 11,
+  "comparisons": 121,
+  "generationId": "gen_1792702445675_8c312f85",
+  "rows": [
+    {
+      "offerId": "9d77286dd0e9063b57a52069",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "V8",
+          "card": "V8",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "c87f938248d99ac6d17b5479",
+      "checks": {
+        "year": {
+          "search": 2014,
+          "card": 2014,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "d0b890bd186d2b77bbfd395b",
+      "checks": {
+        "year": {
+          "search": 2016,
+          "card": 2016,
+          "equal": true
+        },
+        "trim": {
+          "search": "Standard",
+          "card": "Standard",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "dd27187aae4ed022d69476b1",
+      "checks": {
+        "year": {
+          "search": 2013,
+          "card": 2013,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "e68620b958b68b10689515f3",
+      "checks": {
+        "year": {
+          "search": 2015,
+          "card": 2015,
+          "equal": true
+        },
+        "trim": {
+          "search": "S",
+          "card": "S",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "97d43abe8d94a30022aea505",
+      "checks": {
+        "year": {
+          "search": 2019,
+          "card": 2019,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "6612a43329eb1f5a2373162c",
+      "checks": {
+        "year": {
+          "search": 2016,
+          "card": 2016,
+          "equal": true
+        },
+        "trim": {
+          "search": "S",
+          "card": "S",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "f694e5898884403645e21a83",
+      "checks": {
+        "year": {
+          "search": 2015,
+          "card": 2015,
+          "equal": true
+        },
+        "trim": {
+          "search": "S",
+          "card": "S",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "fd453c555b5f4bf2875d9794",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "9b55b9d34c42f028aa383d3e",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "0eeb43a748717534c5b4a3a0",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    }
+  ],
+  "unavailable": [],
+  "repeatedExactModificationGroups": 2,
+  "repeatedGroups": [
+    {
+      "identity": [
+        "2015",
+        "S",
+        "coupe",
+        "automatic",
+        "",
+        ""
+      ],
+      "offerIds": [
+        "e68620b958b68b10689515f3",
+        "f694e5898884403645e21a83"
+      ],
+      "allCardsChecked": true
+    },
+    {
+      "identity": [
+        "2025",
+        "STANDARD",
+        "coupe",
+        "automatic",
+        "",
+        ""
+      ],
+      "offerIds": [
+        "fd453c555b5f4bf2875d9794",
+        "9b55b9d34c42f028aa383d3e",
+        "0eeb43a748717534c5b4a3a0"
+      ],
+      "allCardsChecked": true
+    }
+  ],
+  "duplicateOfferIds": 0,
+  "note": "Повторяющиеся модификации — отдельные объявления с уникальными id, не новые дубликаты энциклопедии. GenericSTANDARD/S остаютсяneeds_data; новые поля не приписаны им без точной идентичности. React$undefined/пустая строка нормализованы как отсутствие значения; исходные различия сохранены."
+}

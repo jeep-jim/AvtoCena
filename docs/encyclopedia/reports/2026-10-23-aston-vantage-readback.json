@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-10-23T04:03:59.871Z",
+  "batch": "research-2026-10-23-aston-vantage",
+  "apiReadback": true,
+  "passed": true,
+  "operations": 33,
+  "newVariants": 31,
+  "updatedVariants": 2,
+  "confirmedFields": 247,
+  "compiledCalculationFields": 214,
+  "unchangedVariantsPreserved": 33,
+  "previousFieldSourcesPreserved": true,
+  "beforeRevision": "ea3445ce-4aaa-4294-a65a-8ce1d10ab05c",
+  "afterRevision": "6ae62cc5-c4dc-4fe6-a767-d77a8ad8a2d2",
+  "variantsBefore": 35,
+  "variantsAfter": 66,
+  "researchedVariantsAfter": 33,
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 33,
+    "bodyAndGearboxMassSeparated": true,
+    "genericUaeNoGuessedPower": true,
+    "manualInputPreserved": true,
+    "unknownFieldsNotInferred": true,
+    "originalTrimPreserved": true
+  }
+}
