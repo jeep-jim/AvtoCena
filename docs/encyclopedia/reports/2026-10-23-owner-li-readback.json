@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-23T08:07:21.399Z",
+  "batch": "research-2026-10-23-owner-li-l6-l7",
+  "run": 39922105245,
+  "job": 120309544955,
+  "workflowSuccess": true,
+  "independentApiReadback": true,
+  "checkedVariants": 37,
+  "changedFields": 67,
+  "power30MinFields": 37,
+  "powertrainCorrections": 30,
+  "allOtherExistingValuesPreserved": true,
+  "mandatoryComplete": 35,
+  "models": [
+    {
+      "modelId": "a89063f75687555839b774d7",
+      "model": "Li L6",
+      "revision": "370bff70-1713-4929-bce6-1bfd7ba4c148",
+      "updated": 21,
+      "mandatoryComplete": 21
+    },
+    {
+      "modelId": "b3ca490776504ef749b116ed",
+      "model": "Li L7",
+      "revision": "3485fd82-daa9-43a1-9bee-be1881817ffe",
+      "updated": 15,
+      "mandatoryComplete": 14
+    },
+    {
+      "modelId": "e6c60cefa0b0464429b01622",
+      "model": "L6",
+      "revision": "8b713d0f-7412-4704-90df-daf47a5b00e4",
+      "updated": 1,
+      "mandatoryComplete": 0
+    }
+  ],
+  "brandBaseline": {
+    "make": "Li Auto",
+    "catalogNames": 16,
+    "variants": 251,
+    "completedMandatory": 35,
+    "remaining": 216,
+    "remainingPercent": 86.06
+  },
+  "globalBaselineDelta": {
+    "hybridDenominator": 13428,
+    "mandatoryCompletedDelta": 35,
+    "remainingAfterThisBatch": 13393,
+    "remainingPercent": 99.74,
+    "notFreshGlobalAudit": true
+  },
+  "activeCalculationIndex": false,
+  "remainingScope": "Other Li Auto families, unidentified trims, historical L7 years, missing engine/motor power. Owner reference rows without exact year/variant/component scope remain queued."
+}
