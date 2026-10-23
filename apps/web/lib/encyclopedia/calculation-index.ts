@@ -105,6 +105,16 @@ export function readCalculationIndex(){
  return bundled;
 }
 export function resetCalculationIndexForTests(){bundled=undefined;}
+/** mobile.de's Limousine category does not distinguish a sedan from a hatchback.
+ * An exact, independently reviewed factory body can resolve that empty bucket;
+ * other ambiguous values and actual source contradictions remain blocked. */
+function resolvesCoarseMobileBody(offer:any,evidence:any,entries:CalculationFact[]){
+ return offer.sourceId==='mobile_de_open'&&!exists(offer.bodyType)&&!exists(evidence?.value)
+  &&/^mobile\.de consumer (?:SRP|SRP\/VIP) category$/.test(evidence?.source||'')
+  &&Array.isArray(evidence?.rawValues)&&evidence.rawValues.length>0&&evidence.rawValues.length<=8
+  &&evidence.rawValues.every((value:unknown)=>typeof value==='string'&&/^limousine(?:,\s*(?:gebrauchtfahrzeug|jahreswagen|neufahrzeug|tageszulassung|vorführfahrzeug))?$/i.test(value.trim()))
+  &&entries.every(c=>c.sources.bodyType?.kind==='manufacturer'&&/^https:\/\//.test(c.sources.bodyType.url||'')&&Boolean(c.sources.bodyType.batchId));
+}
 /** Exact modification/year, hard constraints, and per-field unanimity. No score winner. */
 export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex()):T{
  if(!index||!offer.make||!offer.model||!Number.isInteger(offer.year)||!offer.trim)return offer;
@@ -115,7 +125,10 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
   // Retire only values inserted by the previous index, never later manual edits.
   const fresh:any={...offer,operational:{...offer.operational,semanticEvidence:{...offer.operational?.semanticEvidence}}};
   for(const field of previous.filledFields||[])delete fresh[field];
-  for(const field of Object.keys(previous.values))if(fresh.operational.semanticEvidence[field]?.source===`permanent_encyclopedia:${previous.indexDigest}`)delete fresh.operational.semanticEvidence[field];
+  for(const field of Object.keys(previous.values))if(fresh.operational.semanticEvidence[field]?.source===`permanent_encyclopedia:${previous.indexDigest}`){
+   const original=fresh.operational.semanticEvidence[field].resolvedSourceEvidence;
+   if(original)fresh.operational.semanticEvidence[field]=original;else delete fresh.operational.semanticEvidence[field];
+  }
   delete fresh.operational.encyclopediaCalculation;delete fresh.encyclopediaCalculation;
   if(previous.filledFields?.some((f:string)=>['engineCc','powerHp','powerKw','icePowerKw','power30MinKw','fuel','powertrainKind','grossVehicleWeightKg'].includes(f))){fresh.totalRub=null;fresh.publicVisibleRub=undefined;fresh.publicSpecificationVerified=false;fresh.calculationSnapshot=undefined;fresh.catalogPricingMode='seller';}
   if(fresh.powerDataSource===`permanent_encyclopedia:${previous.indexDigest}`){delete fresh.powerDataSource;delete fresh.powerDataConfidence;}
@@ -130,16 +143,19 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  if(!candidates.length)return offer;
  const next:any={...offer},applied:any={},provenance:any={},filledFields:string[]=[],semantic={...offer.operational?.semanticEvidence};
  for(const field of factFields){
-  if(['conflict','ambiguous'].includes(semantic[field]?.status))continue;
+  if(semantic[field]?.status==='conflict')continue;
   const entries=candidates.filter(c=>exists(c.values[field]));
   // A partially documented candidate remains a possible different modification.
   if(entries.length!==candidates.length)continue;
   const value=entries[0].values[field];
   if(!entries.every(c=>same(field,c.values[field],value)))continue;
+  const ambiguous=semantic[field]?.status==='ambiguous';
+  if(ambiguous&&!(field==='bodyType'&&resolvesCoarseMobileBody(offer,semantic[field],entries)))continue;
   if(exists(next[field])&&!same(field,next[field],value))continue;
   if(!exists(next[field])){next[field]=['fuel','powertrainKind','drive','transmission','bodyType'].includes(field)?normalized(field,value):value;filledFields.push(field);}
   applied[field]=next[field];provenance[field]=entries.map(c=>({modelId:c.modelId,variantId:c.variantId,revision:c.revision,...c.sources[field]}));
-  semantic[field]={status:'exact',value:next[field],source:`permanent_encyclopedia:${index.digest}`,provenance:provenance[field]};
+  semantic[field]={status:'exact',value:next[field],source:`permanent_encyclopedia:${index.digest}`,provenance:provenance[field],
+   ...(ambiguous?{resolvedSourceEvidence:semantic[field]}:{})};
  }
  if(!Object.keys(applied).length)return offer;
  if(applied.powerHp||applied.powerKw){next.powerDataSource=`permanent_encyclopedia:${index.digest}`;next.powerDataConfidence=Object.values(provenance).flat().some((s:any)=>s.kind==='owner_reference')?'source_exact':'documented';}

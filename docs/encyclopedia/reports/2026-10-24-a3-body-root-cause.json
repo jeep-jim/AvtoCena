@@ -1,0 +1,476 @@
+{
+  "checkedAt": "2026-10-23T19:32:53.847Z",
+  "productionWrites": 0,
+  "bytesRead": 133717936,
+  "request": {
+    "requestedAt": "2026-10-23T19:29:45.803475+00:00",
+    "offerId": "061974864a6a9708c3084fc8",
+    "generationId": "gen_1792702445675_8c312f85",
+    "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be"
+  },
+  "beforeHealth": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "afterHealth": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "sourceDigest": "cf2d141a3139320671ee3562109ccf5c617cbb848008fd353e8902fb4b325ea5",
+  "source": {
+    "values": {
+      "id": "061974864a6a9708c3084fc8",
+      "sourceId": "mobile_de_open",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2020,
+      "trim": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+      "generation": null,
+      "chassisCode": null,
+      "engineCode": null,
+      "fuel": "diesel",
+      "powertrainKind": "combustion",
+      "engineCc": 1968,
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
+      "power30MinKw": null,
+      "drive": null,
+      "transmission": "automatic",
+      "bodyType": null
+    },
+    "bodyEvidence": {
+      "status": "ambiguous",
+      "source": "mobile.de consumer SRP/VIP category",
+      "rawValues": [
+        "Limousine"
+      ]
+    },
+    "attestation": null
+  },
+  "enriched": {
+    "values": {
+      "id": "061974864a6a9708c3084fc8",
+      "sourceId": "mobile_de_open",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2020,
+      "trim": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+      "generation": null,
+      "chassisCode": null,
+      "engineCode": null,
+      "fuel": "diesel",
+      "powertrainKind": "combustion",
+      "engineCc": 1968,
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
+      "power30MinKw": null,
+      "drive": null,
+      "transmission": "automatic",
+      "bodyType": null
+    },
+    "bodyEvidence": {
+      "status": "ambiguous",
+      "source": "mobile.de consumer SRP/VIP category",
+      "rawValues": [
+        "Limousine"
+      ]
+    },
+    "attestation": {
+      "version": 1,
+      "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "sourceIdentity": "[\"061974864a6a9708c3084fc8\",2020]",
+      "values": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic"
+      },
+      "provenance": {
+        "fuel": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "powertrainKind": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "engineCc": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "powerHp": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "powerKw": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "icePowerKw": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "transmission": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ]
+      },
+      "filledFields": []
+    }
+  },
+  "canonicalized": {
+    "values": {
+      "id": "061974864a6a9708c3084fc8",
+      "sourceId": "mobile_de_open",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2020,
+      "trim": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+      "generation": null,
+      "chassisCode": null,
+      "engineCode": null,
+      "fuel": "diesel",
+      "powertrainKind": "combustion",
+      "engineCc": 1968,
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
+      "power30MinKw": null,
+      "drive": null,
+      "transmission": "automatic",
+      "bodyType": null
+    },
+    "bodyEvidence": {
+      "status": "ambiguous",
+      "source": "mobile.de consumer SRP/VIP category",
+      "rawValues": [
+        "Limousine"
+      ]
+    },
+    "attestation": {
+      "version": 1,
+      "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "sourceIdentity": "[\"061974864a6a9708c3084fc8\",2020]",
+      "values": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic"
+      },
+      "provenance": {
+        "fuel": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "powertrainKind": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "engineCc": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "powerHp": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "powerKw": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "icePowerKw": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "transmission": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ]
+      },
+      "filledFields": []
+    }
+  },
+  "normalized": {
+    "values": {
+      "id": "061974864a6a9708c3084fc8",
+      "sourceId": "mobile_de_open",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2020,
+      "trim": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+      "generation": null,
+      "chassisCode": null,
+      "engineCode": null,
+      "fuel": "diesel",
+      "powertrainKind": "combustion",
+      "engineCc": 1968,
+      "powerHp": 150,
+      "powerKw": 110,
+      "icePowerKw": 110,
+      "power30MinKw": null,
+      "drive": null,
+      "transmission": "automatic",
+      "bodyType": null
+    },
+    "bodyEvidence": {
+      "status": "ambiguous",
+      "source": "mobile.de consumer SRP/VIP category",
+      "rawValues": [
+        "Limousine"
+      ]
+    },
+    "attestation": {
+      "version": 1,
+      "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+      "sourceIdentity": "[\"061974864a6a9708c3084fc8\",2020]",
+      "values": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic"
+      },
+      "provenance": {
+        "fuel": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "powertrainKind": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "engineCc": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "powerHp": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "powerKw": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "icePowerKw": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ],
+        "transmission": [
+          {
+            "modelId": "f40e34e905b8ca09f3636eda",
+            "variantId": "2b87bcd25d86cb99e9005934",
+            "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+            "kind": "owner_reference",
+            "markets": [
+              "europe"
+            ]
+          }
+        ]
+      },
+      "filledFields": []
+    }
+  },
+  "candidates": [
+    {
+      "variantId": "2b87bcd25d86cb99e9005934",
+      "revision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+      "constraints": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic",
+        "bodyType": "hatchback"
+      },
+      "bodyType": "hatchback",
+      "bodySource": {
+        "kind": "manufacturer",
+        "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+        "batchId": "research-2026-10-23-audi-a3-early-and-body"
+      }
+    }
+  ],
+  "workflow": "https://github.com/jeep-jim/AvtoCena/actions/runs/40012114533",
+  "jobId": 120614837560,
+  "status": "root_cause_confirmed_fix_not_installed",
+  "rootCause": "The exact factory body is present in the installed index, but the original mobile_de_open record has an empty body with ambiguous Limousine evidence. applyEncyclopediaCalculation blocks that ambiguous body; compact search rows omit the source restriction and receive hatchback.",
+  "publicParityClosed": false,
+  "fixValidation": {
+    "checkedAt": "2026-10-23T19:35:25.563Z",
+    "unitTests": 26,
+    "redBefore": true,
+    "greenAfter": true,
+    "actualInspectedCandidateReplay": true,
+    "bodyType": "hatchback",
+    "publicSerialization": "hatchback",
+    "searchProjection": "hatchback",
+    "sourceEvidenceRetained": true,
+    "pricePreserved": 4105050,
+    "unknown30MinUnchanged": true,
+    "scope": "Replay of inspected source fields and its exact installed candidate; not live public acceptance and not a full index recompilation.",
+    "webTypeScript": "PASS",
+    "additionalNegativeChecks": "PASS: missing batch/HTTPS and conflicting factory candidates"
+  },
+  "publication": {
+    "status": "fix_ready_not_installed",
+    "activeReleaseExcludesFix": "10f4579",
+    "next": "After current release terminal, include this code in the next coordinated release and verify exact offer search/card body, label, price and evidence; no repeat source apply."
+  }
+}

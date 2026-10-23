@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T19:02:49.660Z",
+  "updatedAt": "2026-10-24T02:37:09.506693+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -38440,7 +38440,7 @@
       "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
       "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
       "checkedAt": "2026-10-23T17:58:16.728226+00:00",
-      "rootCause": "not_established",
+      "rootCause": "confirmed_mobile_de_ambiguous_limousine_blocks_factory_body_on_full_record",
       "repeatCardConfirmed": true,
       "repeatSearch": {
         "state": "timeout",
@@ -38464,7 +38464,13 @@
         },
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-public-parity.json",
         "publicParityClosed": false
-      }
+      },
+      "diagnosticRun": 40012114533,
+      "diagnosticJob": 120614837560,
+      "rootCauseReport": "docs/encyclopedia/reports/2026-10-24-a3-body-root-cause.json",
+      "fixStatus": "tested_ready_not_installed",
+      "activeReleaseExcludesFix": "10f4579",
+      "next": "After current release terminal, include factory-backed coarse-body resolution in next coordinated release; verify061974864a6a9708c3084fc8 search/card hatchback + body label + unchanged pricing. Do not repeat diagnostics or research apply."
     },
     "audiA3Body2023TailPass": {
       "batch": "research-2026-10-24-audi-a3-2023-tail-body",
