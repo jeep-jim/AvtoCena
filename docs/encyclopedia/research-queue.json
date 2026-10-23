@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T21:20:07.457157Z",
+  "updatedAt": "2026-10-23T21:22:50.569522Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32745,7 +32745,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T21:20:07.457157Z",
+    "updatedAt": "2026-10-23T21:22:50.569522Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2024_2025_50_body_saved_readback_pending_next_index",
     "preserveManual": true,
@@ -36659,24 +36659,12 @@
       }
     },
     "latestPublicationCheck": {
-      "verificationLocalDate": "2026-10-24",
-      "checkedAt": "2026-10-23T17:10:20.729040+00:00",
-      "observedRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
-      "activeIndex": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
-      "publicGate": {
-        "version": 1,
-        "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
-        "startedAt": "2026-10-23T17:08:34.234Z",
-        "groups": 16,
-        "variants": 140,
-        "fields": 284,
-        "verified": true,
-        "finishedAt": "2026-10-23T17:09:01.970Z"
-      },
-      "allModelsComplete": false,
-      "newReleaseRequested": false,
-      "report": "docs/encyclopedia/reports/2026-10-24-a3-transmission-554e1bf-acceptance.json",
-      "action": "A3 transmission parity verified on two exact offers. Only the snapshot's A3 2022 batch activated; later research stays pending. DBX price parity and visual browser acceptance remain open."
+      "workflow": 40026042515,
+      "job": 120662380193,
+      "conclusion": "success",
+      "checkedAt": "2026-10-23T21:21:02.570Z",
+      "writerActive": false,
+      "generationId": "gen_1792702445675_8c312f85"
     },
     "astonRapidePass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
@@ -37380,7 +37368,7 @@
     "researchWriteCoordination": {
       "observedMain": "e941ec64941d520b1f483d7efffbef27fd72c71e",
       "writesPaused": false,
-      "reason": "Release40019745015 SUCCESS and actual A3 body/search/card65comparisons PASS. A3 2024body50 activated. Only post-snapshot2024-2025body50 pending; fresh preflight requested for next coordinated release.",
+      "reason": "A3 fix and2024body50 accepted in e7a307. Next2024-2025body50 validated, but scheduled China40026092554 started21:20:57UTC. No duplicate deploy requested; keep research writes allowed. Recheck terminal refresh and fresh lease before next coordinated release.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37388,7 +37376,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T21:20:07.457157Z",
+      "checkedAt": "2026-10-23T21:22:50.569522Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37461,7 +37449,15 @@
       "lastCompletedReleaseWorkflow": 40019745015,
       "pendingRelease": null,
       "isolatedIndexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
-      "isolationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json"
+      "isolationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json",
+      "deferredNextRelease": {
+        "report": "docs/encyclopedia/reports/2026-10-24-next-release-writer-coordination.json",
+        "reason": "active_scheduled_catalog_refresh",
+        "workflow": 40026092554,
+        "pendingFields": 50,
+        "deployRequested": false,
+        "checkedAt": "2026-10-23T21:22:50.569522Z"
+      }
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
