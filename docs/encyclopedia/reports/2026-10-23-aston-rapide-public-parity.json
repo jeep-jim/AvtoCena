@@ -1,0 +1,133 @@
+{
+  "checkedAt": "2026-10-23T00:00:32.168834+00:00",
+  "passed": true,
+  "scope": "Rapide UAE card/search parity in active index; new batch not activated",
+  "undefinedNormalization": "React Flight $undefined interpreted as absent value, equivalent to missing JSON property",
+  "generationId": "gen_1792660229591_c103ed94",
+  "rows": [
+    {
+      "offerId": "f64e069711e5478e80201818",
+      "checks": {
+        "year": {
+          "search": 2014,
+          "card": 2014,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "3a5ac6b8ca27e25b72b43172",
+      "checks": {
+        "year": {
+          "search": 2016,
+          "card": 2016,
+          "equal": true
+        },
+        "trim": {
+          "search": "STANDARD",
+          "card": "STANDARD",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "rwd",
+          "card": "rwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    }
+  ],
+  "market": "uae",
+  "repeatedExactModificationGroups": 0,
+  "offersChecked": 2,
+  "comparisons": 22
+}

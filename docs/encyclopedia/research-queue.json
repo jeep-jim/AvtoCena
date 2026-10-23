@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T06:59:00+07:00",
+  "updatedAt": "2026-10-23T07:01:38.857791+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -946,15 +946,23 @@
       "years": [
         2021,
         2020,
+        2019,
+        2018,
+        2017,
         2016,
-        2014
+        2015,
+        2014,
+        2012,
+        2011,
+        2010
       ],
-      "variants": 6,
-      "status": "needs_exact_source",
-      "researchedVariants": 0,
-      "checkedAt": "2026-10-22T02:37:14.376259+07:00",
-      "retryFile": "docs/encyclopedia/retry-2026-10-22-aston.json",
-      "nextAction": "Повторно искать точный MY/модификацию и неподтверждённые поля; review/ручные значения не заменять."
+      "variants": 18,
+      "status": "partial_verified_fields",
+      "researchedVariants": 12,
+      "checkedAt": "2026-10-23T07:01:38.857791+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-rapide-remaining.json",
+      "nextAction": "12 новых исполнений сохранены и проверены через API; точные оставшиеся поля/годы и прежние6 наблюдений — в retry. Партию не повторять.",
+      "revision": "99832547-5b6f-4500-8078-8747361bc749"
     },
     {
       "id": "95f7940568d492384daba7df",
@@ -32677,12 +32685,12 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T06:59:00+07:00",
+    "updatedAt": "2026-10-23T07:01:38.857791+07:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "dbx_years_mass_saved_api_readback_pass_activation_pending_parity_retry",
+    "state": "rapide_model_years_saved_api_readback_pass_activation_pending",
     "preserveManual": true,
     "noPeakTo30Min": true,
-    "nextModel": "Aston Martin Rapide (62f2bf675810869f68e70d2e), все реальные годы/исполнения с2008; начать со свежих годовых API и заводских10MY/11MY/12MY, отсутствующих в текущем снимке. DBX/DBX707 остаются в точном retry,9 операций не повторять.",
+    "nextModel": "Aston Martin V12 Vantage (95f7940568d492384daba7df): свежие API, все реальные годы с2008, включая отсутствующие10MY–13MY. Rapide/S/AMR остаются в точном retry,12 операций не повторять.",
     "lastVerifiedResearch": "aston-dbs-superleggera-770",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 75,
@@ -32699,24 +32707,24 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-dbx-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-rapide-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "key": "aston-dbx-years-mass",
-      "batch": "research-2026-10-23-aston-dbx-years-mass",
-      "commit": "5afbf10c1d1ad6ebbb0175c3027eb12a68ca8d21",
-      "workflow": 39868864645,
-      "job": 120137927440,
-      "variants": 9,
-      "newVariants": 3,
-      "updatedVariants": 6,
-      "fields": 30,
-      "compiledCalculationFields": 27,
+      "key": "aston-rapide-model-years",
+      "batch": "research-2026-10-23-aston-rapide-model-years",
+      "commit": "695a4198c04e24d9188bb4459a50867bba60d204",
+      "workflow": 39875315275,
+      "job": 120159385289,
+      "variants": 12,
+      "newVariants": 12,
+      "updatedVariants": 0,
+      "fields": 104,
+      "compiledCalculationFields": 92,
       "workflowConclusion": "success",
       "apiReadback": true,
       "includedInIndex": false,
       "indexMembershipState": "saved_after_active_ac711_snapshot",
-      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-dbx-readback.json"
+      "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-rapide-readback.json"
     },
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792660229591_c103ed94",
@@ -32929,98 +32937,90 @@
         "includedInIndex": false,
         "indexMembershipState": "saved_after_active_ac711_snapshot",
         "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-dbx-readback.json"
+      },
+      {
+        "key": "aston-rapide-model-years",
+        "batch": "research-2026-10-23-aston-rapide-model-years",
+        "commit": "695a4198c04e24d9188bb4459a50867bba60d204",
+        "workflow": 39875315275,
+        "job": 120159385289,
+        "variants": 12,
+        "newVariants": 12,
+        "updatedVariants": 0,
+        "fields": 104,
+        "compiledCalculationFields": 92,
+        "workflowConclusion": "success",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "indexMembershipState": "saved_after_active_ac711_snapshot",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-23-aston-rapide-readback.json"
       }
     ],
-    "inFlightResearch": {
-      "batch": "research-2026-10-23-aston-rapide-model-years",
-      "state": "prepared_for_workflow",
-      "operations": 12,
-      "newVariants": 12,
-      "fields": 104,
-      "compiledCalculationFields": 92,
-      "apiReadback": false
-    },
+    "inFlightResearch": [],
     "lastCompletedPass": {
-      "checkedAt": "2026-10-23T06:04:47.661931+07:00",
-      "batch": "research-2026-10-23-aston-dbx-years-mass",
+      "checkedAt": "2026-10-23T07:01:38.857791+07:00",
+      "batch": "research-2026-10-23-aston-rapide-model-years",
       "apiReadback": true,
       "passed": true,
-      "operations": 9,
-      "newVariants": 3,
-      "updatedVariants": 6,
-      "confirmedFields": 30,
-      "compiledCalculationFields": 27,
-      "unchangedVariantsPreserved": 47,
-      "models": [
-        {
-          "modelId": "41c41db2719c2d3b75470cd9",
-          "model": "Dbx",
-          "beforeRevision": "4a6246e4-eb28-41bd-ab68-a8d4ff49ca80",
-          "afterRevision": "c22950a3-0496-42bf-bc18-8f3a3284d782",
-          "variantsBefore": 45,
-          "variantsAfter": 46,
-          "researchedVariantsAfter": 10
-        },
-        {
-          "modelId": "49f0712914bb0925bd328b09",
-          "model": "DBX707",
-          "beforeRevision": "d40b2beb-0f01-4c61-98b7-be04153aa40e",
-          "afterRevision": "035fe994-4950-41e2-b363-f3fa485d49bc",
-          "variantsBefore": 8,
-          "variantsAfter": 10,
-          "researchedVariantsAfter": 4
-        }
-      ],
-      "previousFieldSourcesPreserved": true,
+      "operations": 12,
+      "newVariants": 12,
+      "updatedVariants": 0,
+      "confirmedFields": 104,
+      "compiledCalculationFields": 92,
+      "unchangedVariantsPreserved": 6,
+      "beforeRevision": "af17e5b2-f4de-46c4-98d3-6bca7962772d",
+      "afterRevision": "99832547-5b6f-4500-8078-8747361bc749",
+      "variantsBefore": 6,
+      "variantsAfter": 18,
+      "researchedVariantsAfter": 12,
       "manualWrites": 0,
       "wholeRowVerified": false,
       "duplicatesAdded": 0,
       "nativeMatcher": {
-        "exactCases": 3,
+        "exactCases": 12,
         "genericIdentityStillBlocked": true,
         "manualInputPreserved": true,
         "unknownFieldsNotInferred": true,
-        "yearNotInferred": true
+        "registrationYearNotInferred": true,
+        "performancePackAndCatalystsSeparate": true
       },
       "compilerChanged": false,
       "activationConfirmed": false,
       "version": 1,
-      "commit": "5afbf10c1d1ad6ebbb0175c3027eb12a68ca8d21",
-      "workflow": 39868864645,
-      "job": 120137927440,
+      "modelId": "62f2bf675810869f68e70d2e",
+      "make": "Aston Martin",
+      "model": "Rapide",
+      "commit": "695a4198c04e24d9188bb4459a50867bba60d204",
+      "workflow": 39875315275,
+      "job": 120159385289,
       "workflowConclusion": "success",
       "scopeSinceYear": 2008,
       "allModelsComplete": false,
       "historicalExpansionComplete": false,
       "publicParity": {
-        "passed": false,
-        "offers": 9,
-        "comparisons": 99,
-        "repeatedExactModificationGroups": 2,
-        "mismatches": [
-          {
-            "offerId": "b65974b83d5399d588073fc5",
-            "fields": {
-              "totalRub": {
-                "search": null,
-                "card": 25164851,
-                "equal": false
-              },
-              "calculationStatus": {
-                "search": "needs_data",
-                "card": "estimated",
-                "equal": false
-              }
-            }
-          }
+        "passed": true,
+        "offers": 2,
+        "comparisons": 22,
+        "repeatedExactModificationGroups": 0,
+        "report": "docs/encyclopedia/reports/2026-10-23-aston-rapide-public-parity.json"
+      },
+      "sourceReview": {
+        "factoryGuides": 9,
+        "additionalMidyearGuidesCompared": [
+          "14.5MY",
+          "17.5MY"
         ],
-        "independentlyReproduced": true,
-        "report": "docs/encyclopedia/reports/2026-10-23-aston-dbx-public-parity.json"
+        "sourceHashesOnEveryField": true,
+        "visualTechnicalPageReview": true,
+        "bhpNotMislabelledPs": true,
+        "grossMassNotKerbMass": true,
+        "amrSportsCatalystRegion": "UK/Europe only",
+        "existingDbxParityBlockerStillOpen": true
       },
       "releaseState": {
         "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
         "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
-        "activeIndexFromPublicEvidence": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+        "activeIndexFromLatestVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
         "blockingRuns": [
           {
             "id": 39840733509,
@@ -33032,7 +33032,7 @@
           }
         ],
         "duplicateReleaseRequested": false,
-        "nextAction": "После завершения обоих существующих выпусков и подтверждения writerfree — один штатный совокупный индекс всех pending партий, подготовка цен и проверка фактической активации."
+        "nextAction": "После завершения обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава и активации, включая прежнюю пару DBX."
       },
       "referenceIntake": {
         "run": 39831884392,
@@ -33049,8 +33049,8 @@
         },
         "restarted": false
       },
-      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-dbx-remaining.json",
-      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-rapide.json",
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-rapide-remaining.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage.json",
       "collectorsCalculationRulesGuardsSecretsChanged": false
     },
     "failedIndexRelease": {
@@ -33118,7 +33118,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-rapide.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -35967,7 +35967,7 @@
       "report": "docs/encyclopedia/reports/2026-10-23-aston-dbx-public-parity.json"
     },
     "latestPublicationCheck": {
-      "checkedAt": "2026-10-23T06:03:26.123596+07:00",
+      "checkedAt": "2026-10-23T07:01:38.857791+07:00",
       "runs": [
         {
           "id": 39840733509,
@@ -35983,7 +35983,103 @@
         }
       ],
       "newReleaseRequested": false,
-      "action": "После завершения обоих существующих выпусков и подтверждения writerfree — один штатный совокупный индекс всех pending партий, подготовка цен и проверка фактической активации."
+      "action": "После завершения обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава и активации, включая прежнюю пару DBX."
+    },
+    "astonRapidePass": {
+      "checkedAt": "2026-10-23T07:01:38.857791+07:00",
+      "batch": "research-2026-10-23-aston-rapide-model-years",
+      "apiReadback": true,
+      "passed": true,
+      "operations": 12,
+      "newVariants": 12,
+      "updatedVariants": 0,
+      "confirmedFields": 104,
+      "compiledCalculationFields": 92,
+      "unchangedVariantsPreserved": 6,
+      "beforeRevision": "af17e5b2-f4de-46c4-98d3-6bca7962772d",
+      "afterRevision": "99832547-5b6f-4500-8078-8747361bc749",
+      "variantsBefore": 6,
+      "variantsAfter": 18,
+      "researchedVariantsAfter": 12,
+      "manualWrites": 0,
+      "wholeRowVerified": false,
+      "duplicatesAdded": 0,
+      "nativeMatcher": {
+        "exactCases": 12,
+        "genericIdentityStillBlocked": true,
+        "manualInputPreserved": true,
+        "unknownFieldsNotInferred": true,
+        "registrationYearNotInferred": true,
+        "performancePackAndCatalystsSeparate": true
+      },
+      "compilerChanged": false,
+      "activationConfirmed": false,
+      "version": 1,
+      "modelId": "62f2bf675810869f68e70d2e",
+      "make": "Aston Martin",
+      "model": "Rapide",
+      "commit": "695a4198c04e24d9188bb4459a50867bba60d204",
+      "workflow": 39875315275,
+      "job": 120159385289,
+      "workflowConclusion": "success",
+      "scopeSinceYear": 2008,
+      "allModelsComplete": false,
+      "historicalExpansionComplete": false,
+      "publicParity": {
+        "passed": true,
+        "offers": 2,
+        "comparisons": 22,
+        "repeatedExactModificationGroups": 0,
+        "report": "docs/encyclopedia/reports/2026-10-23-aston-rapide-public-parity.json"
+      },
+      "sourceReview": {
+        "factoryGuides": 9,
+        "additionalMidyearGuidesCompared": [
+          "14.5MY",
+          "17.5MY"
+        ],
+        "sourceHashesOnEveryField": true,
+        "visualTechnicalPageReview": true,
+        "bhpNotMislabelledPs": true,
+        "grossMassNotKerbMass": true,
+        "amrSportsCatalystRegion": "UK/Europe only",
+        "existingDbxParityBlockerStillOpen": true
+      },
+      "releaseState": {
+        "observedRelease": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+        "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+        "activeIndexFromLatestVerifiedCheckpoint": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+        "blockingRuns": [
+          {
+            "id": 39840733509,
+            "status": "in_progress"
+          },
+          {
+            "id": 39857878662,
+            "status": "pending"
+          }
+        ],
+        "duplicateReleaseRequested": false,
+        "nextAction": "После завершения обоих существующих выпусков и writerfree — один штатный совокупный индекс всех pending партий, подготовка цен, проверка состава и активации, включая прежнюю пару DBX."
+      },
+      "referenceIntake": {
+        "run": 39831884392,
+        "job": 120009865681,
+        "status": "completed",
+        "conclusion": "failure",
+        "checkpointFromLatestRoadmap": {
+          "visited": 13045,
+          "saved": 8403,
+          "pending": 253,
+          "completed": false,
+          "error": "redirect_outside_catalog",
+          "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/"
+        },
+        "restarted": false
+      },
+      "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-rapide-remaining.json",
+      "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-aston-v12-vantage.json",
+      "collectorsCalculationRulesGuardsSecretsChanged": false
     }
   },
   "scope": {
