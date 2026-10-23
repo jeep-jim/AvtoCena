@@ -1,0 +1,173 @@
+{
+  "checkedAt": "2026-10-23T20:06:13.740435+00:00",
+  "release": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+    "calculationVersion": "2145c6c096c58083c21251fa53653e0977ccb1631c44b92385e44e436c7eb322"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+    "calculationVersion": "2145c6c096c58083c21251fa53653e0977ccb1631c44b92385e44e436c7eb322"
+  },
+  "rows": [
+    {
+      "name": "dbx",
+      "offerId": "b65974b83d5399d588073fc5",
+      "comparisons": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "Aston Martin DBX707",
+          "card": "Aston Martin DBX707",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 3982,
+          "card": 3982,
+          "equal": true
+        },
+        "fuel": {
+          "search": "petrol",
+          "card": "petrol",
+          "equal": true
+        },
+        "powertrainKind": {
+          "search": "combustion",
+          "card": "combustion",
+          "equal": true
+        },
+        "powerHp": {
+          "search": 707,
+          "card": 707,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 520,
+          "card": 520,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 520,
+          "card": 520,
+          "equal": true
+        },
+        "power30MinKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 25031959,
+          "card": 25031959,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "cardTransmissionLabel": "автомат",
+      "generationId": "gen_1792702445675_8c312f85"
+    }
+  ],
+  "budget": [
+    {
+      "case": "included",
+      "bounds": [
+        25031959,
+        25031959
+      ],
+      "targetCount": 1,
+      "targetPrices": [
+        25031959
+      ],
+      "total": 1,
+      "partial": null,
+      "stale": null
+    },
+    {
+      "case": "excluded",
+      "bounds": [
+        1,
+        25031958
+      ],
+      "targetCount": 0,
+      "targetPrices": [],
+      "total": 0,
+      "partial": null,
+      "stale": null
+    }
+  ],
+  "requests": [
+    {
+      "name": "health_before",
+      "path": "/api/health",
+      "http": 200,
+      "seconds": 4.244,
+      "bytes": 180,
+      "checkedAt": "2026-10-23T20:05:51.966959+00:00"
+    },
+    {
+      "name": "dbx_search",
+      "path": "/api/catalog/search?market=uae&make=Aston%20Martin&model=DBX&pageSize=48",
+      "http": 200,
+      "seconds": 4.202,
+      "bytes": 11752,
+      "checkedAt": "2026-10-23T20:05:56.173867+00:00"
+    },
+    {
+      "name": "dbx_card",
+      "path": "/cars/offer/b65974b83d5399d588073fc5",
+      "http": 200,
+      "seconds": 11.569,
+      "bytes": 516828,
+      "checkedAt": "2026-10-23T20:06:03.539456+00:00"
+    },
+    {
+      "name": "budget_included",
+      "path": "/api/catalog/search?market=uae&make=Aston%20Martin&model=DBX&pageSize=48&budgetFrom=25031959&budgetTo=25031959",
+      "http": 200,
+      "seconds": 3.668,
+      "bytes": 3615,
+      "checkedAt": "2026-10-23T20:06:07.218653+00:00"
+    },
+    {
+      "name": "budget_excluded",
+      "path": "/api/catalog/search?market=uae&make=Aston%20Martin&model=DBX&pageSize=48&budgetFrom=1&budgetTo=25031958",
+      "http": 200,
+      "seconds": 2.945,
+      "bytes": 188,
+      "checkedAt": "2026-10-23T20:06:10.164265+00:00"
+    },
+    {
+      "name": "health_after",
+      "path": "/api/health",
+      "http": 200,
+      "seconds": 3.576,
+      "bytes": 180,
+      "checkedAt": "2026-10-23T20:06:13.740359+00:00"
+    }
+  ],
+  "scope": "Bounded public API and full target RSC; not visual or entire-catalog acceptance.",
+  "passed": true,
+  "visualAcceptance": {
+    "passed": false,
+    "state": "blocked",
+    "checkedAt": "2026-10-23T20:09:16Z",
+    "url": "https://avtocena.com/cars/offer/b65974b83d5399d588073fc5",
+    "observed": "502 Bad Gateway / nginx in cloud browser; API and full target RSC HTTP200. Cause and global availability not established."
+  }
+}

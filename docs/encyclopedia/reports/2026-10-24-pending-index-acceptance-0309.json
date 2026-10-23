@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T20:09:16Z",
+  "state": "saved_readback_verified_pending_next_coordinated_release",
+  "newReleaseRequested": false,
+  "installedRelease": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+  "installedIndex": "07893c43e0f82e0b724c9d03b0dfeac013d3f4f9f23cca7cc6d19254fc55c417",
+  "pendingBatches": [
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json"
+  ],
+  "pendingVariants": 50,
+  "pendingFields": 50,
+  "uniqueModelCount": 1,
+  "duplicateTargetFields": 0,
+  "requiredResearchBatches": [
+    "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a1-next-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-bmw-i5-2026-30min.json",
+    "docs/encyclopedia/batches/2026-10-23-bmw-i4-2026-30min.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a1-2023-2025-body.json",
+    "docs/encyclopedia/batches/2026-10-23-owner-li-l6-l7.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-camry-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-bz3x-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-3x-2026-factory.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-camry-2026-petrol.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-aygox-annual-gaps.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-aygox-hybrid.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-early-and-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2020-2021-body.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-cross.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2021-2022-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a6-2020-2024-avant-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json"
+  ],
+  "publicResearchBatches": [
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
+    "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-cross.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2021-2022-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a6-2020-2024-avant-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json"
+  ],
+  "requiredAstraPlanDigests": [
+    "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
+  ],
+  "guards": "Fresh writer preflight; preserve exact/manual/source/unknown30min, ASTRA ancestry and immutable manifest; verify required batch membership, public gate and health. Do not replay apply or import.",
+  "scope": "Only post-snapshot Audi A3 2024 body50 remains pending. Four previous batches163fields activated in10f4579. Not50 completed prices.",
+  "readbackReports": [
+    {
+      "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+      "report": "docs/encyclopedia/reports/2026-10-23-audi-a3-2022-2023-readback.json"
+    },
+    {
+      "batch": "research-2026-10-24-audi-a6-2020-2024-avant-body",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a6-avant-readback.json"
+    },
+    {
+      "batch": "research-2026-10-24-audi-a3-2023-body",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-readback.json"
+    },
+    "docs/encyclopedia/reports/2026-10-24-audi-a3-2023-tail-readback.json",
+    "docs/encyclopedia/reports/2026-10-24-audi-a3-2024-readback.json"
+  ],
+  "nativeHeld": [
+    {
+      "variantId": "bcdc67fac908f954058be7e4",
+      "trim": "SB TFSI S-tronic*NAV*LED*Virtual*Sitzheizung",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    },
+    {
+      "variantId": "060ecbd39c657ef567ea7cbe",
+      "trim": "Sportback Business Edition S line S-tronic",
+      "reason": "Штатный exact matcher удерживает неоднозначную идентичность; готовый расчёт не заявлен"
+    }
+  ],
+  "currentRelease": {
+    "id": 40012399412,
+    "status": "completed",
+    "conclusion": "success",
+    "checkedAt": "2026-10-23T20:09:16Z",
+    "release": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+    "requestedBatches": [
+      "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+      "docs/encyclopedia/batches/2026-10-24-audi-a6-2020-2024-avant-body.json",
+      "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+      "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json"
+    ],
+    "requestedFields": 163,
+    "privateIndexStep": "success",
+    "membershipStep": "success",
+    "activationConfirmed": true,
+    "activationReport": "docs/encyclopedia/reports/2026-10-24-index-07893c-activation.json"
+  },
+  "postSnapshotBatches": [
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json"
+  ],
+  "postSnapshotFields": 50
+}
