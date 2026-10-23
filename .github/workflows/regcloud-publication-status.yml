@@ -75,6 +75,7 @@ jobs:
               const {getOfferFromCurrentShard,searchProjectionFromOffer}=await import('./apps/web/lib/catalog/storage.ts');
               const {applyEncyclopediaCalculation}=await import('./apps/web/lib/encyclopedia/calculation-index.ts');
               const {applyUaeManualSpecifications}=await import('./apps/web/lib/catalog/uae-manual-specifications.ts');
+              const {safePublicPricing}=await import('./apps/web/lib/catalog/safe-public-pricing.ts');
               const {SPECIFICATION_AUDIT_FIELDS,classifySpecificationEvidence}=await import('./apps/web/lib/catalog/specification-evidence-audit.ts');
               const rows=[];
               for(const id of ids){
@@ -83,8 +84,12 @@ jobs:
                 const full=applyEncyclopediaCalculation(applyUaeManualSpecifications(source),index);
                 const projected=searchProjectionFromOffer(full);
                 const audit=offer=>Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field=>[field,classifySpecificationEvidence(offer,field)]));
-                const values=offer=>Object.fromEntries(['id','market','year','fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw'].map(key=>[key,offer[key]??null]));
-                rows.push({id,full:{values:values(full),audit:audit(full)},projection:{values:values(projected),audit:audit(projected)},attestedFields:Object.keys(full.encyclopediaCalculation?.values||{})});
+                const values=offer=>Object.fromEntries(['id','market','year','fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','calculationStatus','totalRub'].map(key=>[key,offer[key]??null]));
+                const sanitizedSource=safePublicPricing(applyUaeManualSpecifications(source));
+                const enrichedSanitized=applyEncyclopediaCalculation(sanitizedSource,index);
+                const safeEnriched=safePublicPricing(enrichedSanitized);
+                const stage=offer=>({values:values(offer),audit:audit(offer),attestedFields:Object.keys(offer.encyclopediaCalculation?.values||{})});
+                rows.push({id,source:stage(source),sanitizedSource:stage(sanitizedSource),enrichedSanitized:stage(enrichedSanitized),safeEnriched:stage(safeEnriched),full:stage(full),projection:stage(projected),attestedFields:Object.keys(full.encyclopediaCalculation?.values||{})});
               }
               const after=await storage.readJson('catalog/manifest.json',null);
               if(after?.generationId!==manifest?.generationId)throw Error('inspection_generation_changed');
