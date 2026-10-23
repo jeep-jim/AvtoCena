@@ -27,7 +27,12 @@ jobs:
       - name: Inspect public 320px consecutive SUV and sedan selections without rebuilding the app
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-diagnostic/node_modules/playwright/index.mjs
-        run: CHROME_BIN=$(command -v google-chrome) node scripts/catalog-filter-navigation-diagnostic.mjs
+        run: |
+          if node -e "process.exit(JSON.parse(require('fs').readFileSync('.github/market-runs/catalog-filter-navigation-diagnostic.json')).mode === 'offer-price-visual' ? 0 : 1)"; then
+            CHROME_BIN=$(command -v google-chrome) node scripts/catalog-offer-price-visual.mjs
+          else
+            CHROME_BIN=$(command -v google-chrome) node scripts/catalog-filter-navigation-diagnostic.mjs
+          fi
       - name: Check installed electric feedback and six Japan cards
         if: always()
         env:
