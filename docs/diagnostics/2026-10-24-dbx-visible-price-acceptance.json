@@ -1,0 +1,95 @@
+{
+  "startedAt": "2026-10-23T20:16:25.695Z",
+  "offerId": "b65974b83d5399d588073fc5",
+  "expectedRelease": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+  "expectedTotalRub": 25031959,
+  "cases": [
+    {
+      "width": 390,
+      "theme": "light",
+      "pageErrors": [],
+      "passed": true,
+      "http": 200,
+      "priceText": "25 031 959₽",
+      "heading": "Aston Martin Dbx DBX707",
+      "layout": {
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "screenshot": "390-light.png"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "pageErrors": [],
+      "passed": true,
+      "http": 200,
+      "priceText": "25 031 959₽",
+      "heading": "Aston Martin Dbx DBX707",
+      "layout": {
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "screenshot": "390-dark.png"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "pageErrors": [],
+      "passed": true,
+      "http": 200,
+      "priceText": "25 031 959₽",
+      "heading": "Aston Martin Dbx DBX707",
+      "layout": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280
+      },
+      "screenshot": "1280-light.png"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "pageErrors": [],
+      "passed": true,
+      "http": 200,
+      "priceText": "25 031 959₽",
+      "heading": "Aston Martin Dbx DBX707",
+      "layout": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280
+      },
+      "screenshot": "1280-dark.png"
+    }
+  ],
+  "passed": true,
+  "scope": "Bounded public card DOM/screenshots only; no authentication, form submission, data mutation or speed certification.",
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+    "calculationVersion": "2145c6c096c58083c21251fa53653e0977ccb1631c44b92385e44e436c7eb322"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+    "calculationVersion": "2145c6c096c58083c21251fa53653e0977ccb1631c44b92385e44e436c7eb322"
+  },
+  "finishedAt": "2026-10-23T20:16:46.996Z",
+  "workflow": 40017888810,
+  "job": 120634551813,
+  "artifact": 12528723516,
+  "artifactSha256": "c8c22c41d0bde6bc4b510d90863b5e23b00d70b917694e4fe62296d73a335584",
+  "artifactHashVerified": true,
+  "screenshotsReviewed": [
+    "390-light.png",
+    "390-dark.png",
+    "1280-light.png",
+    "1280-dark.png"
+  ],
+  "visualReview": {
+    "visiblePricePassed": true,
+    "scope": "Price panel and bounded layout only. Photo loaded on390light; other three snapshots taken before photo displayed. Image readiness was not awaited, no image failure cause or full card acceptance claimed.",
+    "cloudBrowser502Resolved": false
+  }
+}

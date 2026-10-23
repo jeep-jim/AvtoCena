@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T20:09:16Z",
+  "updatedAt": "2026-10-23T20:17:44Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32745,7 +32745,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-23T20:09:16Z",
+    "updatedAt": "2026-10-23T20:17:44Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a3_2024_50_body_saved_readback_pending_next_index",
     "preserveManual": true,
@@ -36560,7 +36560,16 @@
       },
       "publicParityClosed": true,
       "scope": "Only target b65974b83d5399d588073fc5: 12 public API/RSC fields and budget boundary; not entire DBX catalog or visual acceptance.",
-      "repairReport": "docs/diagnostics/2026-10-24-dbx-fuel-evidence-apply.json"
+      "repairReport": "docs/diagnostics/2026-10-24-dbx-fuel-evidence-apply.json",
+      "visualPriceAcceptance": {
+        "passed": true,
+        "report": "docs/diagnostics/2026-10-24-dbx-visible-price-acceptance.json",
+        "workflow": 40017888810,
+        "job": 120634551813,
+        "checkedAt": "2026-10-23T20:16:46.996Z",
+        "cases": 4,
+        "scope": "Visible price on390/1280 light/dark; not complete image loading or global502 resolution."
+      }
     },
     "latestPublicationCheck": {
       "verificationLocalDate": "2026-10-24",
