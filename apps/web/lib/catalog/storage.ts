@@ -1,3 +1,4 @@
+import {verifyCatalogReadModels} from './verify-read-models';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {applyEncyclopediaCalculation,readCalculationIndex} from '../encyclopedia/calculation-index';
 import {buildCatalogColorIndex,withCatalogColorFilter,matchesCatalogColor} from './catalog-color-index';
@@ -1432,41 +1433,8 @@ function catalogMaintenanceIoConcurrency() {
   return Number.isFinite(value) ? Math.max(1,Math.min(4,Math.floor(value))) : 4;
 }
 async function assertCurrentCatalogReadModelsReady(generationId: string, offers: VehicleOffer[]) {
-  const all = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
-    currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION),
-    { generationId: "", items: [] },
-  );
-  if (all.generationId !== generationId || Number(all.items?.length || 0) !== offers.length) {
-    throw new Error(`catalog_current_projection_not_ready:${all.generationId}:${Number(all.items?.length || 0)}:${generationId}:${offers.length}`);
-  }
-  const byMarket = new Map<string, VehicleOffer[]>();
-  for (const offer of offers) {
-    const key = String(offer.market || ""), rows = byMarket.get(key) || [];
-    rows.push(offer); byMarket.set(key, rows);
-  }
-  for (const [market, rows] of byMarket) {
-    const projection = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
-      currentProjectionPath(market),
-      { generationId: "", items: [] },
-    );
-    if (projection.generationId !== generationId || Number(projection.items?.length || 0) !== rows.length) {
-      throw new Error(`catalog_current_market_projection_not_ready:${market}:${projection.generationId}:${Number(projection.items?.length || 0)}:${generationId}:${rows.length}`);
-    }
-  }
-  // Verify every public ID while reading each physical shard only once. A
-  // representative proves that the object exists, but not that every projected
-  // card was written into it.
-  const expectedShards=boundedDetailShards(offers,CATALOG_CHUNK_SIZE);
-  await mapWithConcurrency([...expectedShards.entries()], catalogMaintenanceIoConcurrency(), async ([prefix, expected]) => {
-    const shard=await readDataJson<{generationId:string} & DetailShard<VehicleOffer>>(
-      detailShardPath(generationId,prefix),{generationId:'',items:[]});
-    const ids=new Set((shard.items || []).map(item=>item.id));
-    const missing=expected.items.find(offer=>!ids.has(offer.id));
-    if(shard.generationId!==generationId || Boolean(shard.children)!==Boolean(expected.children)
-      || (shard.items || []).length!==expected.items.length || missing || ids.size>CATALOG_CHUNK_SIZE) {
-      throw Error(`catalog_current_offer_shard_not_ready:${prefix}:${generationId}`);
-    }
-  });
+  await verifyCatalogReadModels(getJsonStorage(),generationId,offers.map(({id,market})=>({id,market})),
+    (stage,count)=>{if(process.env.CATALOG_PUBLICATION_PROGRESS==='1')console.log(JSON.stringify({stage:'verify_'+stage,count,generationId,rss:process.memoryUsage().rss}));});
 }
 
 export type PersistCatalogOptions = {

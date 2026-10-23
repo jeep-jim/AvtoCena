@@ -40,24 +40,34 @@ export async function writeCatalogProjectionParts(storage: JsonStorage, key: str
   return true;
 }
 
-export async function readCatalogProjectionParts<T>(storage: JsonStorage, key: string, value: T): Promise<T> {
-  if (key !== ROOT || !value || typeof value !== 'object' || !('storageFormat' in value)) return value;
-  const directory = value as unknown as Directory;
-  if (directory.storageFormat !== FORMAT || !Array.isArray(directory.parts) || !Number.isSafeInteger(directory.count) || directory.count < 0) throw Error('catalog_projection_directory_invalid');
-  const base = prefix(directory.generationId);
-  const items: unknown[] = [];
-  for (const [index, descriptor] of directory.parts.entries()) {
-    if (!/^[a-f0-9]{64}$/.test(descriptor.sha256) || descriptor.path !== `${base}${index}-${descriptor.sha256}.json` || !Number.isSafeInteger(descriptor.count) || descriptor.count <= 0 || descriptor.count > ROWS_PER_PART) throw Error('catalog_projection_part_descriptor_invalid');
+export async function* catalogProjectionBatches(storage: JsonStorage, key: string, value: unknown): AsyncGenerator<{generationId:string; items:any[]}> {
+  if (!value || typeof value !== 'object') throw Error('catalog_projection_missing');
+  if (key !== ROOT || !('storageFormat' in value)) {
+    const projection=value as {generationId:string;items:any[]};
+    if(!Array.isArray(projection.items))throw Error('catalog_projection_items_invalid');
+    yield projection; return;
   }
-  // Bound both requests and transient payloads; preserve original row order.
-  for (let offset = 0; offset < directory.parts.length; offset += 4) {
-    const group = await Promise.all(directory.parts.slice(offset, offset + 4).map(async descriptor => {
-      const part = await storage.readJson<{items: unknown[]} | null>(descriptor.path, null);
-      if (!part || !Array.isArray(part.items) || part.items.length !== descriptor.count || digest(part) !== descriptor.sha256) throw Error('catalog_projection_part_integrity_failed');
+  const directory=value as Directory;
+  if(directory.storageFormat!==FORMAT || !Array.isArray(directory.parts) || !Number.isSafeInteger(directory.count) || directory.count<0)throw Error('catalog_projection_directory_invalid');
+  const base=prefix(directory.generationId);
+  for(const [index,descriptor] of directory.parts.entries()){
+    if(!/^[a-f0-9]{64}$/.test(descriptor.sha256) || descriptor.path!==`${base}${index}-${descriptor.sha256}.json` || !Number.isSafeInteger(descriptor.count) || descriptor.count<=0 || descriptor.count>ROWS_PER_PART)throw Error('catalog_projection_part_descriptor_invalid');
+  }
+  let count=0;
+  for(let offset=0;offset<directory.parts.length;offset+=4){
+    const group=await Promise.all(directory.parts.slice(offset,offset+4).map(async descriptor=>{
+      const part=await storage.readJson<{items:any[]}|null>(descriptor.path,null);
+      if(!part || !Array.isArray(part.items) || part.items.length!==descriptor.count || digest(part)!==descriptor.sha256)throw Error('catalog_projection_part_integrity_failed');
       return part.items;
     }));
-    for (const rows of group) for (const row of rows) items.push(row);
+    for(const items of group){count+=items.length;yield {generationId:directory.generationId,items};}
   }
-  if (items.length !== directory.count) throw Error('catalog_projection_count_mismatch');
-  return {generationId: directory.generationId, items} as T;
+  if(count!==directory.count)throw Error('catalog_projection_count_mismatch');
+}
+
+export async function readCatalogProjectionParts<T>(storage: JsonStorage, key: string, value: T): Promise<T> {
+  if(key!==ROOT || !value || typeof value!=='object' || !('storageFormat' in value))return value;
+  const items:unknown[]=[];
+  for await(const batch of catalogProjectionBatches(storage,key,value))for(const row of batch.items)items.push(row);
+  return {generationId:(value as unknown as Directory).generationId,items} as T;
 }
