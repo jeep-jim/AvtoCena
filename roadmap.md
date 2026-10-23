@@ -12880,3 +12880,12 @@ HealthHTTP200: прежний releasef4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112/ca
 ### 23.10.2026 08:13 Asia/Krasnoyarsk — Контроль после восстановления суточных страниц
 
 Прочитаны свежие AGENTS/roadmap на2ea54e83. China39840733509/publish120041080822 IN_PROGRESS; scheduled39857878662 jobs[]. Изменение generation-scoped REGpages97886ada и его успешная приёмка07:44 учтены, повторная подготовка не запрашивается. Запрошено только одно read-only чтение manifest/lease. Deploy/повторный China/сбор/cancel/unlock не запускаются. Отдельная энциклопедия V12Vantage39881234673 сохранена;12pending1035полей/906расчётных, продолжаются поздниеV12Vantage. Исследования не дублируются. Проверяются новые REGsharedprices failures отдельно от legacystorage.
+
+
+### 23.10.2026 08:14 Asia/Krasnoyarsk — Публикация Китая остаётся живой; сжатый APIhome прочитан полностью
+
+Read-only [39882698003](https://github.com/jeep-jim/AvtoCena/actions/runs/39882698003)/job120183575453 SUCCESS. Снимок01:13:16.137UTC: тот же writer catalog_v3_publish_china_ee8c7d5c-f442-4df2-8849-e28c06dea706 ACTIVE,start22.10T20:22:02.066Z,heartbeat продвинулся до23.10T01:09:34.434Z,lease01:39:34.434Z. Manifest gen_1792660229591_c103ed94. Recovery39840733509 IN_PROGRESS; scheduled39857878662 jobs[] при проверке. Cutover/новые China2014–2019 не доказаны; writer не отменялся/не разблокировался, source/deploy/повторная публикация не запрашивались.
+
+Внешние curl --compressed08:12–08:13: healthHTTP200/4.266s f4d/a187; APIhomeHTTP200,firstbyte6.657s,total7.108s,полноеJSON,gen прежний,total930999,countIncompletefalse,CN162449/JP619655/KR78607/UAE22038/EU46125/GE1705. China2014HTTP200/5.852s,total0,старыйgen. Это ограниченные сетевые APIпроверки, не время браузерной отрисовки и не визуальная приёмка; прежний cloud-browser502 и остаточные задержки не объявляются исправленными.
+
+Новые REGsharedprices[39879159412](https://github.com/jeep-jim/AvtoCena/actions/runs/39879159412)/job120172061168 и[39880817526](https://github.com/jeep-jim/AvtoCena/actions/runs/39880817526)/job120177482788 terminalFAIL, но точный результат skippedtrue/verifiedfalse/reasonpublication_in_progress/errorbudget_preparation_deferred_active_publisher на ПРАВИЛЬНОМgen_1792660229591_c103ed94. Это защитная отсрочка подготовки цен, не legacybindingfailure и не повтор V8serialization. Логи подтверждены; защиту не ослабляли, rerun не было. Успешные generation-scoped REGpages не повторялись. Все прежние UI/бот/роли/модели/DBXparity/storage/encyclopedia обязательства сохраняются. Контроль активен.
