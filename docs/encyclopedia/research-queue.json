@@ -37075,8 +37075,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "0ba83a284e4a8dcdc4ff79b804721972d07340a2",
-      "writesPaused": true,
-      "reason": "One A3 gearbox correction release requested with saved A3 2022 body50. Pause independent saves only until Prepare private encyclopedia index succeeds; preparation may continue. Do not duplicate deployment.",
+      "writesPaused": false,
+      "reason": "Release39988848904 private index and mandatory checks SUCCESS; snapshot isolated. Independent research may resume with fresh revisions/CAS; later writes belong to a future index. No duplicate release.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37084,7 +37084,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T16:40:53.671Z",
+      "checkedAt": "2026-10-23T16:50:05.727Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37104,7 +37104,7 @@
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
       },
       "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json",
-      "isolatedRelease": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+      "isolatedRelease": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
       "postSnapshotCamry": {
         "workflow": 39925160057,
         "fields": 8,
@@ -37136,7 +37136,7 @@
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
       },
-      "pendingReleaseWorkflow": null,
+      "pendingReleaseWorkflow": 39988848904,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
         "state": "released_after_verified_index_snapshot",
