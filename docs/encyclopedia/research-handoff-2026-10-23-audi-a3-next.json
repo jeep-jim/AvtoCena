@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-23T09:09:16.626Z",
-  "lastCompletedBatch": "research-2026-10-23-audi-a3-early-and-body",
+  "checkedAt": "2026-10-23T10:03:45.094Z",
+  "lastCompletedBatch": "research-2026-10-23-audi-a3-2020-2021-body",
   "modelId": "f40e34e905b8ca09f3636eda",
   "make": "Audi",
   "model": "A3",
-  "revision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
+  "revision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8",
   "next": {
-    "variantId": "2dc883c46d49ddeed12e5a29",
-    "year": 2020,
-    "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+    "variantId": "74e91c5c36a8a91c18475e22",
+    "year": 2021,
+    "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
     "missingValueFields": [
       "drive",
       "bodyType",
@@ -26,14 +26,32 @@
       "transmission": "Schaltgetriebe"
     }
   },
-  "nextAction": "Продолжить пробелы A3 с точного курсора2020 партиями20–50;7оставшихся Sportback2020 без кузова, затем2021. Техническийretry ранних8P/8V и MHEV2020 вести отдельно, не начинать первую модель заново. Для точного35TFSI6MT2020 приоритет привод/GVW/код двигателя по годовой таблице; известные110кВт/150PS/1498см³ не переписывать.",
-  "remaining2020BodyCandidates": 7,
-  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-remaining.json",
+  "nextAction": "Продолжить A3 с точного курсора2021 партиями20–50; затем2022. Предыдущие30/39 и текущие50/50 не повторять. Для2020/2021 спорные8V/8Y и MHEV, привод/GVW/код двигателя остаютсяretry до годовой первичнойтаблицы; известные мощности не переписывать",
+  "remaining2021BodyCandidates": 24,
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a3-2020-2021-remaining.json",
   "earlyRetry": [
     {
       "id": "c98ec4e1792a7635f7ad3f1a",
       "year": 2009,
       "trim": "Sports Back",
+      "chassisCode": "8PCAX"
+    },
+    {
+      "id": "3e8a3edb1ce3a356c1eb150d",
+      "year": 2009,
+      "trim": "Sports Back 1.4TFSI",
+      "chassisCode": "8PCAX"
+    },
+    {
+      "id": "ed3cb10b5e985e4704417df4",
+      "year": 2009,
+      "trim": "A3 Sports Back 1.4TFSI",
+      "chassisCode": "8PCAX"
+    },
+    {
+      "id": "923b1bb129b5eb3558d5e955",
+      "year": 2010,
+      "trim": "Sports Back 1.4TFSI",
       "chassisCode": "8PCAX"
     },
     {
@@ -65,15 +83,45 @@
       "chassisCode": "8VCXS"
     },
     {
+      "id": "17f2773d7be2cd3ad8c22b85",
+      "year": 2014,
+      "trim": "1.4 TFSI Cod S Line パッ",
+      "chassisCode": "8VCPT"
+    },
+    {
+      "id": "392b5b3562b608a63e97fa5c",
+      "year": 2014,
+      "trim": "A3 SB 1.4TFSI",
+      "chassisCode": "8VCXS"
+    },
+    {
       "id": "cac824ebb1c5aa4b012ce5e7",
       "year": 2015,
       "trim": "1.4TFSI",
       "chassisCode": "8VCXSL"
     },
     {
+      "id": "a47029763c7642c221a14786",
+      "year": 2015,
+      "trim": "Sports Back 1.4TFSI",
+      "chassisCode": "8VCXS"
+    },
+    {
+      "id": "9e72e66224d5371a6092e673",
+      "year": 2015,
+      "trim": "Sports Back 1.8TFSI 4WD",
+      "chassisCode": "8VCJSF"
+    },
+    {
       "id": "c871a78ba9403a40ad1d6c72",
       "year": 2016,
       "trim": "1.4 TFSI",
+      "chassisCode": "8VCXS"
+    },
+    {
+      "id": "1cca4c3069be2d3d9fc28ef9",
+      "year": 2016,
+      "trim": "Sports Back 1.4TFSI",
       "chassisCode": "8VCXS"
     },
     {
