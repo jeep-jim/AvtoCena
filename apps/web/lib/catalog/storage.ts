@@ -1223,7 +1223,7 @@ async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLan
   } catch { return null; } // Existing full search remains the authoritative fallback.
 }
 /** Append only derived indexes; never change catalog pointers, prices or inventory. */
-export async function backfillCatalogMarketLandings(options: {refreshDateSensitive?: boolean} = {}) {
+export async function backfillCatalogMarketLandings(options: {refreshDateSensitive?: boolean; repairLease?: import('./publication-lease').CatalogRepairLease} = {}) {
   const manifest = await readDataJson<CatalogManifest>("catalog/manifest.json", {generationId: "", markets: {}} as CatalogManifest);
   if (!manifest.generationId) throw new Error("catalog_market_landing_no_generation");
   const storage = getJsonStorage();
@@ -1236,7 +1236,8 @@ export async function backfillCatalogMarketLandings(options: {refreshDateSensiti
     ]);
     if (current.generationId !== manifest.generationId) throw Error("catalog_market_landing_generation_changed_retry");
     if (new Date(Date.now()+7*3600000).toISOString().slice(0,10) !== policyDate) throw Error("catalog_market_landing_date_changed_retry");
-    if (lock?.lockedUntil && (!Number.isFinite(Date.parse(lock.lockedUntil)) || Date.parse(lock.lockedUntil)>Date.now())) throw Error("catalog_market_landing_publication_in_progress");
+    const {assertCatalogDerivativeLease} = await import('./publication-lease');
+    assertCatalogDerivativeLease(lock, options.repairLease, 'catalog_market_landing');
   };
   await assertRefreshContext();
   const results = [];
