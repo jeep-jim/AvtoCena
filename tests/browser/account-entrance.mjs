@@ -8,7 +8,7 @@ import tailwindcss from 'tailwindcss';
 import sharp from 'sharp';
 const {chromium} = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const out = 'artifacts/account-entrance'; fs.mkdirSync(out, {recursive: true});
-await build({external:['/fonts/*','/brands/*'],entryPoints: ['tests/browser/account-entrance-fixture.tsx'], bundle: true, format: 'esm', platform: 'browser', jsx: 'automatic', outfile: `${out}/fixture.js`, define: {'process.env.NODE_ENV': '"production"', 'process.env': '{}'}, plugins: [{name: 'next', setup(b) {
+await build({external:['/fonts/*','/brands/*','/map-preview.svg'],entryPoints: ['tests/browser/account-entrance-fixture.tsx'], bundle: true, format: 'esm', platform: 'browser', jsx: 'automatic', outfile: `${out}/fixture.js`, define: {'process.env.NODE_ENV': '"production"', 'process.env': '{}'}, plugins: [{name: 'next', setup(b) {
   b.onResolve({filter: /^next\/(link|navigation)$/}, a => ({path: a.path, namespace: 'mock'}));
   b.onLoad({filter: /.*/, namespace: 'mock'}, a => ({contents: a.path === 'next/navigation' ? 'export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);export const useRouter=()=>({push:()=>{},refresh:()=>{}});' : `import React from 'react';export default function Link(p){return React.createElement('a',p)}`, loader: 'jsx', resolveDir: process.cwd()}));
 }}]});
@@ -17,6 +17,7 @@ const picture = await sharp({create: {width: 240, height: 280, channels: 4, back
 const server = http.createServer((req, res) => {
   if (/^\/fonts\/inter-(latin|cyrillic)-wght-normal\.woff2$/.test(req.url)) {res.setHeader('Content-Type','font/woff2');return res.end(fs.readFileSync('apps/web/public'+req.url));}
   if (/^\/avatars\/customers\/(?:character|city-cars|offroad-cars)-\d+\.svg$/.test(req.url)) {res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public'+req.url));}
+  if (req.url==='/map-preview.svg') {res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public/map-preview.svg'));}
   if (req.url==='/dealers/default-cover.svg'||req.url==='/logo/avtocena-mark-dark.svg'||req.url==='/logo/avtocena-mark-light.svg') {res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public'+req.url));}
   if (req.url.startsWith('/api/site-media/')&&req.url.endsWith('.mp4')) {res.setHeader('Content-Type','video/mp4');return res.end(fs.readFileSync('apps/web/public/account-media/loading-oct05.mp4'));}
   if (req.url.startsWith('/api/site-media/')) {res.setHeader('Content-Type', 'image/webp'); return res.end(picture);}
@@ -80,7 +81,7 @@ try {
     await page.goto(origin + '/login?role=team'); await page.locator('#account-login-form').getByRole('heading',{name:'Автодилер',exact:true}).waitFor(); assert.equal(await page.getByText('Вход для команды', {exact: true}).count(), 0);
     let saved; await page.route('**/api/crm/site-media', route => route.fulfill({json: route.request().headers()['content-type']?.includes('application/json')&&route.request().postDataJSON().action==='start'?{token:'fixture-token',chunkSize:2097152}:{url: '/api/site-media/' + 'a'.repeat(64)}}));
     await page.route('**/api/crm/public-features', route => {saved = route.request().postDataJSON(); return route.fulfill({json: {...saved, version: 1}});});
-    await page.goto(origin + '/crm/site'); await page.evaluate(t => document.documentElement.setAttribute('data-theme', t), theme); assert.equal(await page.locator('input[type="file"]').count(), 17);
+    await page.goto(origin + '/crm/site'); await page.locator('summary').filter({hasText:'Вход и регистрация'}).click(); await page.evaluate(t => document.documentElement.setAttribute('data-theme', t), theme); assert.equal(await page.locator('input[type="file"]').count(), 17); for(const label of ['Пользователь','Автопоставщик','Фото и видео в сцене «Файлы»']) await page.locator('summary').filter({hasText:new RegExp('^'+label+'$')}).click();
     await page.getByLabel('Загрузить фон: Пользователь', {exact: true}).setInputFiles({name: 'banner.webp', mimeType: 'image/webp', buffer: picture});
     await page.getByAltText('Фон: Пользователь', {exact: true}).waitFor();
     await page.getByLabel('Загрузить иконку: Автопоставщик', {exact: true}).setInputFiles({name: 'icon.webp', mimeType: 'image/webp', buffer: picture});
