@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-24T03:21:54Z",
+  "releaseSha": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+  "calculationVersion": "3ac912ac200e8481ba1c0054941af4d4e27fef51a27a96be415c77a8bbe859fe",
+  "workflow": {
+    "runId": 40052647105,
+    "attempt": 2,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/40052647105/attempts/2",
+    "auditJobId": 120764116409,
+    "retainedBrowserJobId": 120764117771,
+    "liveJobId": 120764298388
+  },
+  "reasonForRetry": "Attempt 1 audit stopped at release wait at 02:21:34 UTC before deployment activation; expected release independently confirmed before retry. Only failed jobs and dependencies rerun; successful fixture result reused.",
+  "healthBeforeAndAfter": {
+    "ok": true,
+    "releaseSha": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+    "sameCalculationVersion": true
+  },
+  "publicAccess": {
+    "crmUnauthenticatedStatus": 307,
+    "crmRedirect": "/login?next=%2Fcrm&error=auth_required",
+    "unauthenticatedApiStatus": 401
+  },
+  "live": {
+    "cases": 36,
+    "openings": 168,
+    "pageErrors": 0,
+    "widths": [
+      320,
+      360,
+      390,
+      414,
+      768,
+      1280
+    ],
+    "themes": [
+      "dark",
+      "light"
+    ],
+    "completedAt": "2026-10-24T03:20:15.3818729Z",
+    "offers": [
+      {
+        "kind": "petrol",
+        "market": "china",
+        "id": "d24fa615fb67ae4957a421ba"
+      },
+      {
+        "kind": "hybrid",
+        "market": "georgia",
+        "id": "2e21c3e332d2cb868811ab24"
+      },
+      {
+        "kind": "electric",
+        "market": "china",
+        "id": "7a59c6d37e002258cf65853d"
+      }
+    ],
+    "assertions": [
+      "attached editor geometry and columns",
+      "no horizontal page/panel overflow",
+      "responsive contact positioning and close/inert behavior",
+      "no page errors"
+    ],
+    "formSubmission": false,
+    "readOnlyCalculationPreviewAllowed": true
+  },
+  "artifact": {
+    "id": 12545109986,
+    "sha256": "501db2552fb6f9f97a1d2ebb8ced89eca0c4666117531df8c116807c2579cc49",
+    "downloadedAndHashVerified": true,
+    "resultsJsonRead": true,
+    "representativeScreenshotsInspected": [
+      "electric-dark-390-4.png",
+      "petrol-light-1280-3.png"
+    ]
+  },
+  "auditArtifactId": 12545579309,
+  "limitations": [
+    "No authenticated production owner/manager grant or assistant on/off acceptance",
+    "No <=2-second speed certification or whole-catalog readiness",
+    "Only representative screenshots visually inspected; workflow assertions cover 36 cases",
+    "Legacy cloud configuration section is not REG serving-release evidence"
+  ],
+  "unchanged": [
+    "No deployment, feed collection, writer release or schedule changes",
+    "No duplicate encyclopedia research/apply; late A4L four fields remain pending next index"
+  ]
+}
