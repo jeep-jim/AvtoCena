@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T09:58:43.256Z",
+  "batch": "research-2026-10-24-audi-a5-2024-drive-mass-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2024-drive-mass-body.json",
+  "batchSha256": "9507f5237475e79f25ae6d1f2f6efc4df649de850e5dd8fbe00fd1f10b06ebb2",
+  "commit": "8b81cde6059eea55deddacb6205575011b0ca251",
+  "workflow": 40083924933,
+  "job": 120842883931,
+  "conclusion": "success",
+  "applyFinishedAt": "2026-10-24T09:57:07.903Z",
+  "variants": 6,
+  "fields": 9,
+  "newVariants": 0,
+  "fieldCounts": {
+    "drive": 3,
+    "grossVehicleWeightKg": 3,
+    "bodyType": 3
+  },
+  "apiReadback": true,
+  "beforeRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+  "afterRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+  "includedInIndex": false,
+  "state": "saved_readback_pass_pending_index",
+  "sourceDocuments": {
+    "35tfsi": {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1071/file_de/5b33f6a2a0c8ac5098f1dc993170c6b9cf45cb10/TD-Audi-A5-Sportback-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+      "sha256": "2f29d86b6c7682e7f3331a648e451116b6ef999f33055a83f74e8a09606543ab",
+      "bytes": 102434,
+      "pages": [
+        1,
+        2
+      ],
+      "edition": "13.06.2024"
+    },
+    "35tdi": {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+      "sha256": "51b29c25be99c0831138dac9e0c68c8d56e8e80eba50f0f54858a0ddcf134c11",
+      "bytes": 101712,
+      "pages": [
+        1,
+        2
+      ],
+      "edition": "13.06.2024"
+    },
+    "45tfsi": {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+      "sha256": "7bc60624c670e9c0f11715a0ff16d891cad80e4ae1f03eb1cb5fcf2e706208b2",
+      "bytes": 101964,
+      "pages": [
+        1,
+        2
+      ],
+      "edition": "13.06.2024"
+    },
+    "cabrio": {
+      "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A5__Cabrio_2017-2024_2d_GD_PL.pdf",
+      "sha256": "40307f11b7020f72c33e8b4f638ddd092fb3aaeb34799f591d750f1ad12f13f0",
+      "bytes": 3439659,
+      "pages": [
+        1,
+        2
+      ],
+      "edition": "08/2020; 2017–2024"
+    },
+    "limousine": {
+      "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+      "sha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+      "edition": "02 (04/2025), from 2024",
+      "pages": [
+        1,
+        2
+      ]
+    }
+  },
+  "applyResults": [
+    {
+      "batch": "research-2026-10-24-audi-a5-2024-drive-mass-body",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "8cf3dbb7884fe919bce44c62",
+          "changes": [
+            {
+              "variantId": "c1a026593d2f50395308c8e8",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "b3a2f7b68e7e23054ba75eab",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "63750b261ce43b6a3161e9f3",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "d468db5ac096473e43034c7f",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "1c48c348a9bc3c00144c95c2",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "d56431281f2ed6da59ac6b03",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-24T09:56:53.912Z",
+      "finishedAt": "2026-10-24T09:56:59.058Z"
+    },
+    {
+      "batch": "research-2026-10-24-audi-a5-2024-drive-mass-body",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "8cf3dbb7884fe919bce44c62",
+          "changes": [
+            {
+              "variantId": "c1a026593d2f50395308c8e8",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "b3a2f7b68e7e23054ba75eab",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "63750b261ce43b6a3161e9f3",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "d468db5ac096473e43034c7f",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "1c48c348a9bc3c00144c95c2",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "d56431281f2ed6da59ac6b03",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-24T09:56:59.290Z",
+      "finishedAt": "2026-10-24T09:57:07.903Z"
+    }
+  ],
+  "preflight": {
+    "workflow": 40083862498,
+    "job": 120842697622,
+    "checkedAt": "2026-10-24T09:55:58.115Z",
+    "fullDigests": 6,
+    "readOnly": true
+  },
+  "validation": {
+    "localGuardTests": 11,
+    "passed": true,
+    "workflowGuardsPassed": true,
+    "fullDigestCAS": true,
+    "untargetedRowsUnchanged": 69,
+    "idsPreserved": 75
+  },
+  "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
+  "readbackReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-readback.json",
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2024-remaining.json",
+  "publicParity": {
+    "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-public-parity.json",
+    "passed": true,
+    "offers": 7,
+    "comparisons": 91,
+    "repeatedGroups": 2,
+    "duplicateOfferIds": 0,
+    "newBatchActivationProved": false
+  },
+  "releaseCoordination": {
+    "snapshotWorkflow": 40081936386,
+    "job": 120841065162,
+    "preparePrivateIndex": "success_before_apply",
+    "membership": "success_before_apply",
+    "postSnapshot": true,
+    "duplicateDeployRequested": false
+  },
+  "allModelsComplete": false,
+  "modelComplete": false
+}
