@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T10:08:47.835942+07:00",
+  "updatedAt": "2026-10-24T03:59:12.075Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1337,7 +1337,7 @@
       "variants": 99,
       "status": "partial_verified_fields",
       "researchedVariants": 16,
-      "checkedAt": "2026-10-24T02:56:11.054Z",
+      "checkedAt": "2026-10-24T03:59:12.075Z",
       "researchedYears": [
         2024,
         2023
@@ -1361,19 +1361,24 @@
         2021,
         2020
       ],
-      "nextAction": "Продолжить существующие A4L с2020: точная заводская таблица и identity, затем2021–2025. Неопределённые2019/2025 A4 и6строк2026 A4L остаютсяretry; отсутствиеточногоисточника — retry иследующаястрока. Сначала свежийAPI/CAS; не пересобиратьоснову.",
+      "nextAction": "После verified snapshot и снятияпаузы перечитать целевые2025, получить полные внутренние expectedDigest, применить только3подготовленные массы через штатныйresearch-batch, выполнитьAPIreadback. Если блокерсохраняется — исследовать следующую существующую модель; A4L2020–2024, оставшиеся2025/2026 сохранитьвretry.",
       "revision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
       "lastBatch": "research-2026-10-24-audi-a4l-2026-drive-mass",
       "lastBatchFields": 4,
       "lastBatchVariants": 2,
-      "nextVariantId": "9f1ea35aaaf581e33b2a71c2",
+      "nextVariantId": "af7e4655e9743ce9c42f2532",
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a4l-next.json",
       "boundedReadYears": [
         2020,
-        2026
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
       ],
       "boundedReadRevision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
-      "modelWideCountsRefreshed": false
+      "modelWideCountsRefreshed": false,
+      "latestReview": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2020-2025-review.json"
     },
     {
       "id": "8cf3dbb7884fe919bce44c62",
@@ -32782,22 +32787,21 @@
   "activePriority": {
     "updatedAt": "2026-10-24T02:56:11.054Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a4l_2026_four_fields_saved_pending_next_index",
+    "state": "audi_a4l_2025_mass_prepared_waiting_snapshot",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "9f1ea35aaaf581e33b2a71c2",
-      "year": 2020,
-      "trim": "40 TFSI Fashion Type China V",
-      "missingValueFields": [
-        "grossVehicleWeightKg",
-        "engineCode"
-      ],
-      "reason": "Требуется точное подтверждение года/China V/поколения; не переносить таблицу2026 на2020.",
       "modelId": "c2365f94a908e7e90f14976e",
       "make": "Audi",
       "model": "A4L",
-      "revision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f"
+      "variantId": "af7e4655e9743ce9c42f2532",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg"
+      ],
+      "state": "prepared_not_applied",
+      "reason": "Точная таблица2025.Q3 проверена; ждёт снятияпаузы и полного внутреннего expectedDigest перед штатнымapply."
     },
     "lastVerifiedResearch": "audi-a4l-2026-drive-mass",
     "rawAuditCalculated": 87,
@@ -32911,6 +32915,17 @@
         "appliedBatch": "research-2026-10-24-audi-a4l-2026-drive-mass",
         "workflow": 40056081247,
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-pass.json"
+      },
+      {
+        "path": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2020-2025-review.json",
+        "state": "prepared_not_applied",
+        "modelId": "c2365f94a908e7e90f14976e",
+        "variants": 3,
+        "fields": 3,
+        "sourceSha256": "60121123f1790cdcbeb350467c9ff422f8c5c45ddb944c8eb66b97ed304b7352",
+        "requiresFreshApiPreflight": true,
+        "requiresFullInternalDigest": true,
+        "blockedByWorkflow": 40059430537
       }
     ],
     "pendingNextIndexBatches": [
@@ -39378,7 +39393,8 @@
         "comparisons": 52,
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-public-parity.json"
       }
-    }
+    },
+    "latestResearchReview": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2020-2025-review.json"
   },
   "scope": {
     "minimumYear": 2008,

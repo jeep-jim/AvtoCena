@@ -1,20 +1,23 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T02:56:11.054Z",
+  "checkedAt": "2026-10-24T03:59:12.075Z",
   "modelId": "c2365f94a908e7e90f14976e",
   "make": "Audi",
   "model": "A4L",
   "revision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
   "lastCompletedBatch": "research-2026-10-24-audi-a4l-2026-drive-mass",
   "next": {
-    "variantId": "9f1ea35aaaf581e33b2a71c2",
-    "year": 2020,
-    "trim": "40 TFSI Fashion Type China V",
+    "modelId": "c2365f94a908e7e90f14976e",
+    "make": "Audi",
+    "model": "A4L",
+    "variantId": "af7e4655e9743ce9c42f2532",
+    "year": 2025,
+    "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type",
     "missingValueFields": [
-      "grossVehicleWeightKg",
-      "engineCode"
+      "grossVehicleWeightKg"
     ],
-    "reason": "Требуется точное подтверждение года/China V/поколения; не переносить таблицу2026 на2020."
+    "state": "prepared_not_applied",
+    "reason": "Точная таблица2025.Q3 проверена; ждёт снятияпаузы и полного внутреннего expectedDigest перед штатнымapply."
   },
   "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a4l.json",
   "previousA4Retry": "docs/encyclopedia/retry-2026-10-24-audi-a4-2021-2024-body-tail-remaining.json",
@@ -29,5 +32,75 @@
   ],
   "modelComplete": false,
   "allModelsComplete": false,
-  "nextAction": "Продолжить существующие A4L с2020: точная заводская таблица и identity, затем2021–2025. Неопределённые2019/2025 A4 и6строк2026 A4L остаютсяretry; отсутствиеточногоисточника — retry иследующаястрока. Сначала свежийAPI/CAS; не пересобиратьоснову."
+  "nextAction": "После verified snapshot и снятияпаузы перечитать целевые2025, получить полные внутренние expectedDigest, применить только3подготовленные массы через штатныйresearch-batch, выполнитьAPIreadback. Если блокерсохраняется — исследовать следующую существующую модель; A4L2020–2024, оставшиеся2025/2026 сохранитьвretry.",
+  "latestReview": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2020-2025-review.json",
+  "preparedVariants": [
+    {
+      "variantId": "af7e4655e9743ce9c42f2532",
+      "year": 2025,
+      "originalTrim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type",
+      "sourceTrim": "Luxury Dynamic",
+      "patch": {
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "sourceIndex": 1,
+      "sourcePages": [
+        9,
+        15
+      ],
+      "identityCheck": "Совпадают год,200万辆/2миллиона,40TFSI,отдельное исполнение,1984см³ и передний привод. Исходное имя сохраняется.",
+      "requiresFreshFullRecordDigest": true
+    },
+    {
+      "variantId": "365d04491870787ca8e2d719",
+      "year": 2025,
+      "originalTrim": "200 0k Units Delight Edition 40 TFSI Fashion Dynamic Type",
+      "sourceTrim": "Fashion Dynamic",
+      "patch": {
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "sourceIndex": 1,
+      "sourcePages": [
+        9,
+        15
+      ],
+      "identityCheck": "Совпадают год,200万辆/2миллиона,40TFSI,отдельное исполнение,1984см³ и передний привод. Исходное имя сохраняется.",
+      "requiresFreshFullRecordDigest": true
+    },
+    {
+      "variantId": "b5207ac185ede58209545175",
+      "year": 2025,
+      "originalTrim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type B&O Star Night Edition",
+      "sourceTrim": "Bang&Olufsen Night Edition",
+      "patch": {
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "sourceIndex": 1,
+      "sourcePages": [
+        9,
+        15
+      ],
+      "identityCheck": "Совпадают год,200万辆/2миллиона,40TFSI,отдельное исполнение,1984см³ и передний привод. Исходное имя сохраняется.",
+      "requiresFreshFullRecordDigest": true
+    }
+  ],
+  "reviewedYears": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "reviewedRows": 91,
+  "retryDetails": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2020-2025-review.json"
 }

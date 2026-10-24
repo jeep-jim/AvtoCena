@@ -1,0 +1,1140 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T03:59:12.075Z",
+  "modelId": "c2365f94a908e7e90f14976e",
+  "make": "Audi",
+  "model": "A4L",
+  "revision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
+  "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "rowsRead": 91,
+  "rowsByYear": {
+    "2020": 10,
+    "2021": 18,
+    "2022": 17,
+    "2023": 16,
+    "2024": 17,
+    "2025": 13
+  },
+  "apiProjection": "anonymous_technical_fields_only",
+  "apiProjectionHashes": {
+    "2020": "8ca0ac2aeb0266ea889ffdd158cf2547ab7c43c445cc573456c887b66de9b602",
+    "2021": "d18b77e77f631c8053ac67e207d83a7a061440748b7b0d42e234f287181d1a1e",
+    "2022": "b6885721c79ac4a28fcec45146824915ba828d0381edd29330e33be5ca5a3d30",
+    "2023": "50f2046c4e0a0298ade3e2a006dc2fbacc334b5bd0b446989973154ff41c2520",
+    "2024": "13149449ba5e8a12158bbdc573c9c71ac7ad690e94ad3f9c704c7362d5f443ba",
+    "2025": "206e5ff86ac921f09b5e062ad1890ae451ce23dc8f159c1b8b4959e6efd5b0f1"
+  },
+  "applied": false,
+  "reason": "Пауза research до проверенного immutable snapshot; полные CAS digests текущих внутренних записей не получены через публичную проекцию.",
+  "prepared": [
+    {
+      "variantId": "af7e4655e9743ce9c42f2532",
+      "year": 2025,
+      "originalTrim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type",
+      "sourceTrim": "Luxury Dynamic",
+      "patch": {
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "sourceIndex": 1,
+      "sourcePages": [
+        9,
+        15
+      ],
+      "identityCheck": "Совпадают год,200万辆/2миллиона,40TFSI,отдельное исполнение,1984см³ и передний привод. Исходное имя сохраняется.",
+      "requiresFreshFullRecordDigest": true
+    },
+    {
+      "variantId": "365d04491870787ca8e2d719",
+      "year": 2025,
+      "originalTrim": "200 0k Units Delight Edition 40 TFSI Fashion Dynamic Type",
+      "sourceTrim": "Fashion Dynamic",
+      "patch": {
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "sourceIndex": 1,
+      "sourcePages": [
+        9,
+        15
+      ],
+      "identityCheck": "Совпадают год,200万辆/2миллиона,40TFSI,отдельное исполнение,1984см³ и передний привод. Исходное имя сохраняется.",
+      "requiresFreshFullRecordDigest": true
+    },
+    {
+      "variantId": "b5207ac185ede58209545175",
+      "year": 2025,
+      "originalTrim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type B&O Star Night Edition",
+      "sourceTrim": "Bang&Olufsen Night Edition",
+      "patch": {
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "sourceIndex": 1,
+      "sourcePages": [
+        9,
+        15
+      ],
+      "identityCheck": "Совпадают год,200万辆/2миллиона,40TFSI,отдельное исполнение,1984см³ и передний привод. Исходное имя сохраняется.",
+      "requiresFreshFullRecordDigest": true
+    }
+  ],
+  "retry": [
+    {
+      "variantId": "9e06974b89409654267dc919",
+      "year": 2020,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "fb00edb535e1d07545101bb3",
+      "year": 2020,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "9f1ea35aaaf581e33b2a71c2",
+      "year": 2020,
+      "trim": "40 TFSI Fashion Type China V",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного подтверждения China V и модельного года; 2020.Q2 относится к обновлённой модели, прежний год не исправлять."
+    },
+    {
+      "variantId": "b8045d3d1661985b4ad4e2c8",
+      "year": 2020,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "72f5e1eff7ca3a21a6890f91",
+      "year": 2020,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "a8b2bddac783c2976ef2445f",
+      "year": 2020,
+      "trim": "40 TFSI Luxury Supreme Elegant Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "cb17722be8eaa4fd74aed6bb",
+      "year": 2020,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "f0144d96720502895c4a9a2e",
+      "year": 2020,
+      "trim": "40 TFSI quattro Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "28b59ba1803f2b06dbed2b5a",
+      "year": 2020,
+      "trim": "40 TFSI Fashion Supreme Elegant Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "be7ab702d9947a5334396a8c",
+      "year": 2020,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "6ab92383d98623f8dc48c29a",
+      "year": 2021,
+      "trim": null,
+      "missingValueFields": [
+        "engineCc",
+        "powerHp",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "9822a0b427c86a480ce9d884",
+      "year": 2021,
+      "trim": "40 TFSI quattro Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "efd82b215cf3db3efe2d4b10",
+      "year": 2021,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "798f132b74bd927f81ef7689",
+      "year": 2021,
+      "trim": "35 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "ceb8087c110094281f1ce804",
+      "year": 2021,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "c45b936ec3033df547c57319",
+      "year": 2021,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "9fdfe93d934fc1f1b6150658",
+      "year": 2021,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "c75d8663dca578fd44d6dad2",
+      "year": 2021,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "7f1bcae8b4084aa86c6e500d",
+      "year": 2021,
+      "trim": "40 TFSI Fashion Supreme Elegant Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "f2d8b1f998af4426a38f8c80",
+      "year": 2021,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "0c9f2fc433de7085e5c881eb",
+      "year": 2021,
+      "trim": "40 TFSI Advanced Enjoy Life Edition",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "ef1eeb8910faf000bbc42129",
+      "year": 2021,
+      "trim": "40 TFSI Fashion Type China V",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного подтверждения China V и модельного года; 2020.Q2 относится к обновлённой модели, прежний год не исправлять."
+    },
+    {
+      "variantId": "8a237c511adb803de90f0b4d",
+      "year": 2021,
+      "trim": "2020 40 TFSI Fashion Dynamic Edition",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Год в исходном исполнении отличается от поля year; нужен точный первичный документ, год не менять по догадке."
+    },
+    {
+      "variantId": "5136d45911a1a79c297a3499",
+      "year": 2021,
+      "trim": "40 TFSI Luxury Supreme Elegant Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "e961a21c0782a0cb31ae1e22",
+      "year": 2021,
+      "trim": "2020 40 TFSI Luxury Elegance",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Год в исходном исполнении отличается от поля year; нужен точный первичный документ, год не менять по догадке."
+    },
+    {
+      "variantId": "4db853812dc1e847959e2de6",
+      "year": 2021,
+      "trim": "40 TFSI quattro Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "b7f27d3d1cc8d13681bbbb75",
+      "year": 2021,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "6973bb41104b1ababfaaa8b5",
+      "year": 2021,
+      "trim": "45 TFSI quattro Select Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "dd8a5836f2643ac1e4bcf81d",
+      "year": 2022,
+      "trim": "40 TFSI Advanced Enjoy Life Edition",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "0694efe59157d72b5008b515",
+      "year": 2022,
+      "trim": null,
+      "missingValueFields": [
+        "engineCc",
+        "powerHp",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "7f7be86f0c595b4ca1c7f592",
+      "year": 2022,
+      "trim": "35 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "a489c1611469d5a83cff9aa9",
+      "year": 2022,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "be52d4bfd000ae9f5ad0ff34",
+      "year": 2022,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "17187de49e6606b9310cd8a5",
+      "year": 2022,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "67af182ec7c231eb232d29ce",
+      "year": 2022,
+      "trim": "40 TFSI Advanced Enjoy Life Edition",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "caf84f4aa651d2bf3aa3f147",
+      "year": 2022,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "2273a972f0951e60711c1dfc",
+      "year": 2022,
+      "trim": "40 TFSI Fashion Supreme Elegant Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "5c721f6fd2cd69b25fc0e088",
+      "year": 2022,
+      "trim": "40 TFSI quattro RS Kit Flame Speed Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "55e2f234f19a4c75912b19cb",
+      "year": 2022,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "36523dd3b8e15b4fc4be7ddb",
+      "year": 2022,
+      "trim": "2020 40 TFSI Luxury Dynamic",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Год в исходном исполнении отличается от поля year; нужен точный первичный документ, год не менять по догадке."
+    },
+    {
+      "variantId": "ecfe21feb9c845d95e457c7e",
+      "year": 2022,
+      "trim": "40 TFSI Luxury Supreme Elegant Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "65483ee986fb5ad1666a6918",
+      "year": 2022,
+      "trim": "2022 40 TFSI Fashion Dynamic",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "ad4ff88b35085c19a57b4c15",
+      "year": 2022,
+      "trim": "40 TFSI quattro Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "2ded0d796d65261c05d3d0c3",
+      "year": 2022,
+      "trim": "45 TFSI quattro Select Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "В найденных первичных источниках не подтверждены недостающие поля для точного года/исполнения; таблицы2023–2026 назад не переносить."
+    },
+    {
+      "variantId": "022395b26f072ad96b31775e",
+      "year": 2022,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "bd04c622dfdee0f4c07118c2",
+      "year": 2023,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "620c485a746f06b5dcfec5ea",
+      "year": 2023,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "d9b4e543268b7b17f1d98d18",
+      "year": 2023,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "140f4b6791bcb3e407f8f629",
+      "year": 2023,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "e8d385e77e7bd154192a2c31",
+      "year": 2023,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "773d61f3033bb03d69a28625",
+      "year": 2023,
+      "trim": "40 TFSI Fashion Supreme Elegant Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "86b4c57b4d7da690eb2d9f6f",
+      "year": 2023,
+      "trim": "2023 40 TFSI Fashion Dynamic",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "bd41972055a41863f9618407",
+      "year": 2023,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "31b91dee2144445f4b9edda9",
+      "year": 2023,
+      "trim": "2022 40 TFSI Fashion Dynamic",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Год в исходном исполнении отличается от поля year; нужен точный первичный документ, год не менять по догадке."
+    },
+    {
+      "variantId": "5e5e974f5237ceffcc05e7f3",
+      "year": 2023,
+      "trim": "40 TFSI quattro RS Kit Flame Speed Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "6a79483cea47312825dbcc31",
+      "year": 2023,
+      "trim": "40 TFSI Luxury Supreme Elegant Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "985605c9ac6d661c5afbf9fe",
+      "year": 2023,
+      "trim": "2022 40 TFSI Luxury Dynamic",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Год в исходном исполнении отличается от поля year; нужен точный первичный документ, год не менять по догадке."
+    },
+    {
+      "variantId": "00b4bd66d1a6f5fee2a48981",
+      "year": 2023,
+      "trim": "40 TFSI quattro Luxury Dynamic Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "947388c1c81b76123a37d71d",
+      "year": 2023,
+      "trim": "40 TFSI Bang&Olufsen Star Night Edition",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "25620f7129a6ac85c0d9fe31",
+      "year": 2023,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "f022836e78b2aa0183b5e577",
+      "year": 2023,
+      "trim": "45 TFSI quattro Select Dynamic Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "5481701750371dd3f93c5a14",
+      "year": 2024,
+      "trim": null,
+      "missingValueFields": [
+        "engineCc",
+        "powerHp",
+        "icePowerKw",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "f7dcbdbca8aa140b906df14b",
+      "year": 2024,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "bc34140dd1e1c732c919e09a",
+      "year": 2024,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "e169fc8b1b72f0dd9f5f67e4",
+      "year": 2024,
+      "trim": "2024 40 TFSI Luxury Dynamic",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "ce8f13e394dca239c7005104",
+      "year": 2024,
+      "trim": null,
+      "missingValueFields": [
+        "transmission",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "e982e696dc2b0d0e016357ba",
+      "year": 2024,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "9332863d4e3e4639a3b23c5f",
+      "year": 2024,
+      "trim": "2024 40 TFSI Fashion Dynamic",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "276c77843ba82208567f81df",
+      "year": 2024,
+      "trim": "40 TFSI quattro Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "15f4b19ebed3ad1b7928a691",
+      "year": 2024,
+      "trim": "2023 40 TFSI Luxury Sport",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Год в исходном исполнении отличается от поля year; нужен точный первичный документ, год не менять по догадке."
+    },
+    {
+      "variantId": "6a706259365c04692d406b7d",
+      "year": 2024,
+      "trim": "40 TFSI Luxury Dynamic Type ( Star Night Edition )",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "f520492fa8f1039a803ed6ba",
+      "year": 2024,
+      "trim": "40 TFSI Bang&Olufsen Star Night Edition",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "7b37be5072664c27976b69e6",
+      "year": 2024,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "transmission",
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "28b80e19e1667a64ce7e1ba4",
+      "year": 2024,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "e35007d5448f8b5938f367ee",
+      "year": 2024,
+      "trim": "40 TFSI quattro RS Kit Flame Speed Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "af0f29151fd053a7c01d529f",
+      "year": 2024,
+      "trim": "2024 40 TFSI Luxury Dynamic (Starry Night Edition)",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "b23e050488ea770e8833f082",
+      "year": 2024,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "24708f6f85a17ed88113efb7",
+      "year": 2024,
+      "trim": "45 TFSI quattro Select Dynamic Type",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "af7e4655e9743ce9c42f2532",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Полная масса подготовлена по2025.Q3; прочие недостающие поля не подтверждены, CAS/apply ещё не выполнялись."
+    },
+    {
+      "variantId": "ad00daf0db6efe58a08be153",
+      "year": 2025,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "62e6a247ed7322c04911cb57",
+      "year": 2025,
+      "trim": "2023 40 TFSI Fashion Dynamic",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Год в исходном исполнении отличается от поля year; нужен точный первичный документ, год не менять по догадке."
+    },
+    {
+      "variantId": "365d04491870787ca8e2d719",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Полная масса подготовлена по2025.Q3; прочие недостающие поля не подтверждены, CAS/apply ещё не выполнялись."
+    },
+    {
+      "variantId": "b1dcafbb82671108345b3bb9",
+      "year": 2025,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "ba3c3060dcdfd3dba9d6a100",
+      "year": 2025,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "ed1c73a5f8f68c462ccc04ea",
+      "year": 2025,
+      "trim": "40 TFSI Luxury Dynamic Type ( Star Night Edition )",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "a68794b767135a66367146c3",
+      "year": 2025,
+      "trim": "2025 2 Million Celebration Edition 40 TFSI Luxury Dynamic",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    },
+    {
+      "variantId": "6e947ede8ad34d50c4e82259",
+      "year": 2025,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "b5207ac185ede58209545175",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type B&O Star Night Edition",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Полная масса подготовлена по2025.Q3; прочие недостающие поля не подтверждены, CAS/apply ещё не выполнялись."
+    },
+    {
+      "variantId": "1e29f041e0423a9dbb27c6ae",
+      "year": 2025,
+      "trim": "2024 40 TFSI Luxury Dynamic (Starry Night Edition)",
+      "missingValueFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Год в исходном исполнении отличается от поля year; нужен точный первичный документ, год не менять по догадке."
+    },
+    {
+      "variantId": "8a41b474e4cc32b27bca3f8c",
+      "year": 2025,
+      "trim": null,
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нет точного исполнения; технические числа не заменяют идентичность."
+    },
+    {
+      "variantId": "83e3baf6519375a75ed600ad",
+      "year": 2025,
+      "trim": "45 TFSI quattro Select Dynamic Type",
+      "missingValueFields": [
+        "grossVehicleWeightKg",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Нужны точная редакция/год/исполнение для оставшихся полей; прежние подтверждённые значения не повторять."
+    }
+  ],
+  "sources": [
+    {
+      "type": "manufacturer",
+      "url": "https://contact.audi.cn/uploadfiles/product/A4L.pdf",
+      "sha256": "7f668e3b33e5ff4a83c5b504c1db3d8f6483dee74dc9b492ad8c4eac9e309da3",
+      "bytes": 2586149,
+      "edition": "2020.Q2",
+      "finding": "Буклет подтверждает выпуск/12V MHEV для обновлённой модели, но не содержит таблицы полной массы/кодов двигателя. Применимость к China V не подтверждена; прежний powertrainKind не заменён."
+    },
+    {
+      "type": "manufacturer",
+      "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2025/a4l/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+      "sha256": "60121123f1790cdcbeb350467c9ff422f8c5c45ddb944c8eb66b97ed304b7352",
+      "bytes": 12613170,
+      "edition": "2025.Q3",
+      "pages": [
+        9,
+        15
+      ],
+      "visualVerified": true,
+      "finding": "200万辆悦享版:40 TFSI Fashion Dynamic/Luxury Dynamic/Bang&Olufsen Night Edition: полная масса2080кг; масса1640кг снаряжённая. 45 TFSI quattro в этой редакции2150кг; не переносится с других лет."
+    }
+  ],
+  "preparedFields": 3,
+  "preparedVariants": 3,
+  "releaseObservation": {
+    "workflow": 40059430537,
+    "job": 120769624120,
+    "state": "failure",
+    "stage": "Prepare private encyclopedia index",
+    "error": "unsupported_release_field:chassisCode",
+    "observedAt": "2026-10-24T03:59:12.075Z",
+    "duplicateRequested": false,
+    "ownerManualSessionOwnsRepair": true,
+    "writesPaused": true
+  },
+  "next": {
+    "modelId": "c2365f94a908e7e90f14976e",
+    "make": "Audi",
+    "model": "A4L",
+    "variantId": "af7e4655e9743ce9c42f2532",
+    "year": 2025,
+    "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type",
+    "missingValueFields": [
+      "grossVehicleWeightKg"
+    ],
+    "state": "prepared_not_applied",
+    "reason": "Точная таблица2025.Q3 проверена; ждёт снятияпаузы и полного внутреннего expectedDigest перед штатнымapply."
+  },
+  "health": {
+    "checkedAt": "2026-10-24T03:59:43.450Z",
+    "ok": true,
+    "releaseSha": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+    "calculationVersion": "3ac912ac200e8481ba1c0054941af4d4e27fef51a27a96be415c77a8bbe859fe"
+  }
+}
