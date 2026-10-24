@@ -37,3 +37,13 @@ test('hyphenated production brands retain their ordinary model names',()=>{
  const rows=[{make:'Mercedes-Benz',model:'E-Class'},{make:'Mercedes Maybach',model:'S-Class'}];
  assert.deepEqual(canonicalDirectoryModels(rows).map(m=>m.model),['E-Class','S-Class']);
 });
+
+
+test('owner compound-brand selections use parent brands without duplicating multi-selects',async()=>{
+ const {catalogBrandFilter,catalogBrandPresentation}=await import('../apps/web/lib/catalog/brands');
+ assert.equal(catalogBrandFilter('MERCEDES-ADRIA'),'Mercedes-Benz');
+ assert.equal(catalogBrandFilter('PEUGEOT-BRAVIA,Peugeot,PEUGEOT-DANGEL,PEUGEOT-TOURNE'),'Peugeot');
+ assert.equal(catalogBrandFilter('RENAULT-SPORT,RENAULT-ADRIA'),'Renault');
+ assert.equal(catalogBrandFilter('Mercedes-Benz,Mercedes Maybach'),'Mercedes-Benz,Mercedes-Maybach');
+ assert.equal(catalogBrandPresentation('MERCEDES-ADRIA').conversion,'ADRIA');
+});

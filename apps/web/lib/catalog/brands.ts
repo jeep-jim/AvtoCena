@@ -313,3 +313,8 @@ export function catalogBrandPresentation(value:string){
 export function isCatalogBrandPlaceholder(value:string){
  return /^(?:UEBRIGE \(SIEHE TYP\)|UNKNOWN|UNBEKANNT|OTHER|N\/A|НЕИЗВЕСТНО|ПРОЧИЕ|[-—]+)$/i.test(value.trim())||!value.trim();
 }
+
+/** Public selection names only; does not rewrite stored technical evidence. */
+export function catalogBrandFilter(value:string){
+ return [...new Set(value.split(',').map(v=>v.trim()).filter(Boolean).map(v=>catalogBrandPresentation(v).name))].join(',');
+}

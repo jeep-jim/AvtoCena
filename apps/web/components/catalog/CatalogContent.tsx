@@ -1,3 +1,4 @@
+import {catalogBrandFilter} from '@/lib/catalog/brands';
 import {MARKET_RAIL_CLASS} from './market-rail-layout';
 import {filterSelections} from "@/lib/catalog/filter-selections";
 import {CatalogBreadcrumbs} from "./CatalogBreadcrumbs";
@@ -68,6 +69,7 @@ function pageHref(params: Record<string, string | string[] | undefined>, page: n
 }
 
 export async function CatalogContent({params={},dealer=null,embedded=false}:{params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean}) {
+  params={...params,...(params.make?{make:catalogBrandFilter(first(params.make))}:{}),...(params.brand?{brand:catalogBrandFilter(first(params.brand))}:{})};
   if(first(params.stock)==="green"&&(!dealer||dealer.markets.includes("japan")))return <GreenCornerCatalog params={{...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),dealer:dealer?.id}} embedded={embedded}/>;
   const [liveChina,liveKorea]=await Promise.all([usesAjesMarket('china'),usesAjesMarket('korea')]);
   const liveMarket=(id:string)=>id==='china'&&liveChina||id==='korea'&&liveKorea;
