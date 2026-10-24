@@ -1,3 +1,4 @@
+import {calculatedCatalogPrice} from '../apps/web/lib/catalog/calculated-price.ts';
 import fs from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
@@ -38,6 +39,7 @@ if(process.argv[2]==='--probe'){
   console.error(JSON.stringify({event:'budget_order_mismatch',params,indexed:first.items.map(describe),baseline:baseline.items.map(describe)}));
  }
  assert.deepEqual(first.items.map(row=>row.id),baseline.items.map(row=>row.id),'exact existing page order');
+ assert.deepEqual(first.items.map(row=>[row.id,calculatedCatalogPrice(row),row.sellerPriceRub||null]),baseline.items.map(row=>[row.id,calculatedCatalogPrice(row),row.sellerPriceRub||null]),'exact existing page prices');
  console.log(JSON.stringify({params,total:first.total,ids:first.items.map(row=>row.id),ms:Math.round(elapsed),cpuMs:Math.round((cpuUsed.user+cpuUsed.system)/1000),readBytes:reads.reduce((sum,row)=>sum+row.bytes,0),reads}));
 }else{
 const selectors=await backfillBudgetMarketSelectors();

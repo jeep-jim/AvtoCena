@@ -38,11 +38,11 @@ test('every market retains every high/low/unknown power row and does not mutate 
  assert.equal(catalogHardPriceCap({market} as any),Infinity);
  }
 });
-test('display prefers all affordable stock before luxury, then low power; luxury cheapest first',()=>{
+test('display keeps calculated cars before seller-only prices; calculated luxury stays cheapest first',()=>{
  const rows=[{id:'lux2',totalRub:40000000,powerHp:100},{id:'unknown'},{id:'high',totalRub:8000000,powerHp:500},{id:'lux1',totalRub:16000000,powerHp:600},{id:'low',sellerPriceRub:15000000,powerHp:150}];
- assert.deepEqual(rows.sort(compareCatalogDisplayOrder).map(x=>x.id),['low','high','unknown','lux1','lux2']);
+ assert.deepEqual(rows.sort(compareCatalogDisplayOrder).map(x=>x.id),['high','lux1','lux2','low','unknown']);
  const showcase=selectCatalogShowcaseDiversity(rows.map(x=>({...x,make:x.id,model:x.id,fuel:'petrol'})),5);
- assert.deepEqual(showcase.map(x=>x.id),['low','high','unknown','lux1','lux2']);
+ assert.deepEqual(showcase.map(x=>x.id),['high','lux1','lux2','low','unknown']);
 });
 
 

@@ -1,3 +1,4 @@
+import {calculatedCatalogPrice} from './calculated-price';
 import {catalogDisplayGroup,compareCatalogDisplayOrder} from './display-order';
 import type { VehicleOffer } from "./types";
 
@@ -146,8 +147,8 @@ export function selectCatalogShowcaseDiversity<T extends { market?: unknown; mak
   const lowPowerRows = rows.filter(row => isCatalogCombustionLowPower(row));
   const requestedLowPower = Math.ceil(boundedLimit * CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE);
   const lowPowerTarget = Math.min(requestedLowPower, lowPowerRows.length);
-  for(const group of [0,1,2]){
-    const pool=rows.filter(row=>catalogDisplayGroup(row)===group).sort(compareCatalogDisplayOrder);
+  for(const calculated of [true,false])for(const group of [0,1,2]){
+    const pool=rows.filter(row=>(calculatedCatalogPrice(row)>0)===calculated&&catalogDisplayGroup(row)===group).sort(compareCatalogDisplayOrder);
     if(group===2){for(const row of pool){if(selected.length>=boundedLimit)break;append(row);}continue;}
     fillDiverse(pool.filter(row=>isCatalogCombustionLowPower(row)),Math.min(boundedLimit,selected.length+pool.filter(row=>isCatalogCombustionLowPower(row)).length));
     fillDiverse(pool,boundedLimit);
