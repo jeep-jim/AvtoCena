@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a4-quattro-power-drive",
+  "entries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "b85620ff8c20356a1340865d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "40 TFSI Mild-Hybrid quattro S line Aut.*NAVI*",
+      "expectedDigest": "9a2e5c8febfd6d2c800a783bd3d2b2a96326d9afd61a4ef37742608327a2ad57",
+      "patch": {
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1065/file_en/1269bed89476fdacc4aa99f4d29c8358399423f3/eTD-Audi-A4-Avant-40-TFSI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Заводская таблица Audi от 13.06.2024: A4 Avant 40 TFSI quattro S tronic MHEV, 1984 см³, ДВС 150 кВт/204 PS, полный привод. Совпадают год, кузов универсал, объём, бензиновая техническая версия TFSI и явный quattro; оборудование S line/advanced не меняет эти параметры. Заполняются только отсутствующие поля. Электрическая пиковая и сертифицированная 30-минутная мощность не переносится."
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6f378f43e0eb5ac48920c922",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "45 TFSI Mild-Hybrid quattro advanced Aut.*PDC",
+      "expectedDigest": "342d429f2034df0d3067762438f3642db7e7134a7f16fc1450924a0d7d014856",
+      "patch": {
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/925/file_en/1f6702c56cdd9834cf38e013853ad72eb4c87f7c/eTD-Audi-A4-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Заводская таблица Audi от 13.06.2024: A4 Avant 45 TFSI quattro S tronic MHEV, 1984 см³, ДВС 195 кВт/265 PS, полный привод. Совпадают год, кузов универсал, объём, бензиновая техническая версия TFSI и явный quattro; оборудование S line/advanced не меняет эти параметры. Заполняются только отсутствующие поля. Электрическая пиковая и сертифицированная 30-минутная мощность не переносится."
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "5d7f4486b9ae0a27ce76a867",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "S line 45 TFSI quattro virt.Cockpit/LED/18`",
+      "expectedDigest": "6be4872c2406e120abb483689fc8ff2be586bc71994840bdf6029570199841df",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/925/file_en/1f6702c56cdd9834cf38e013853ad72eb4c87f7c/eTD-Audi-A4-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Заводская таблица Audi от 13.06.2024: A4 Avant 45 TFSI quattro S tronic MHEV, 1984 см³, ДВС 195 кВт/265 PS, полный привод. Совпадают год, кузов универсал, объём, бензиновая техническая версия TFSI и явный quattro; оборудование S line/advanced не меняет эти параметры. Заполняются только отсутствующие поля. Электрическая пиковая и сертифицированная 30-минутная мощность не переносится."
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "328b075a1f3785e0c7f97bdd",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant S line 45TFSI quatt NAVI MATRIX ACC B&O",
+      "expectedDigest": "f4a53bfecab64054ff5a17c8f8adb899f81b914e9fd413657230c0dffbc734bd",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/925/file_en/1f6702c56cdd9834cf38e013853ad72eb4c87f7c/eTD-Audi-A4-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Заводская таблица Audi от 13.06.2024: A4 Avant 45 TFSI quattro S tronic MHEV, 1984 см³, ДВС 195 кВт/265 PS, полный привод. Совпадают год, кузов универсал, объём, бензиновая техническая версия TFSI и явный quattro; оборудование S line/advanced не меняет эти параметры. Заполняются только отсутствующие поля. Электрическая пиковая и сертифицированная 30-минутная мощность не переносится."
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f47e062bf4d46ada17cde8dc",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Av. 45 TFSI qu. S line Matrix Kam. Alcantara",
+      "expectedDigest": "d5570e9a571963406f1d07d93798e4bf5a759fc2e409c70144065abf4be2332c",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/925/file_en/1f6702c56cdd9834cf38e013853ad72eb4c87f7c/eTD-Audi-A4-Avant-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Заводская таблица Audi от 13.06.2024: A4 Avant 45 TFSI quattro S tronic MHEV, 1984 см³, ДВС 195 кВт/265 PS, полный привод. Совпадают год, кузов универсал, объём, бензиновая техническая версия TFSI и явный quattro; оборудование S line/advanced не меняет эти параметры. Заполняются только отсутствующие поля. Электрическая пиковая и сертифицированная 30-минутная мощность не переносится."
+      }
+    }
+  ]
+}
