@@ -14973,6 +14973,13 @@ CI40101987092/job120895860275 TERMINAL SUCCESS для точного PR1519headf
 Полный внешнийhealth14:27UTC HTTP200/curl exit0 подтвердил установленный8ec0d8587d9891757f8cdf019f2c9c55adcaef31/calculation2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07; deploy40097364164/job120882444216SUCCESS. Этотhealth не доказывает установку новыхdrive/pickup/PR1519/массовогоASTRA. Следующий единыйrelease послеexactapply+CI сохраняет прежниеrequiredResearch/ASTRAguards; координация через roadmap, контроль активен.
 
 
+## 24.10.2026 21:09 Красноярск — причина расхождения индекса цен подтверждена
+
+Log40100131705/job120890399974: совпадают count и повторный cold query, но defaultorder отличается. Строки eadeea8449415bae72f064ee/ce58a2587278602bece89c53/884967afdd67dc233bb56d80 имеют рассчитанный preview при totalRubnull, а обычный sort смотрел толькоtotalRub. Compact tuple уже содержал вычисленную цену. Видимые indexed суммы также былистарыми (aa190 2288550 против baseline2241402), потому что default budget page не выполняла currentSearchPrices для выбранныхкарточек.
+
+Исправлено: default ranking использует calculatedCatalogPrice; display order и showcase ставят рассчитанные предложения перед seller-only, включая расчёты изpreview; группацены используетименнорассчитаннуюсумму. Для видимойbudgetстраницы выполняетсятекущийрасчёттехже24карт, безчтениявсегокаталога. Cold parity теперьсравниваетне толькоID/count, но и рассчитанные/seller суммы.16профильныхтестовPASS (regression,combined budget,replay,shared prices,inventory,searchcost,showcase); syntax/typecheckPASS. Production parity ещёпредстоитпослеустановкиruntime. Диагностическаяпроверканеослаблена.
+
+
 ## 24.10.2026 21:30 Красноярск — ограничена память подготовки текущего каталога
 
 После доказанного heapOOM40100131577/exit134 подготовлена отдельная правка repair publisher: вместо одновременного readMarketOffers всех рынков читает по одному immutable chunk, сохраняет поисковые проекции, полные карточки временно складывает в256hash-buckets на диск. Публикация details читает одинbucket, пишет bounded children перед root, очищаетпустыеroots; temp всегдаудаляется. Полныйкаталог неурезается, объёмдиска/числомашин неподлежат искусственномулимиту. Проверены market/chunk/count/provenance и generationдо/после; source-gallerygateповторнонеприменяетсяккомпактнымстрокам. Добавленыстадиипамяти workflow.

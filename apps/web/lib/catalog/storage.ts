@@ -876,7 +876,7 @@ export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sor
   const priceKeys=new WeakMap<CatalogSearchProjection,number>();
   const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=calculatedCatalogPrice(priced); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
   const terms=parseCatalogSort(sort)||[];
-  return rows.sort((a,b)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(Number(b.totalRub)>0)-Number(Number(a.totalRub)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
+  return rows.sort((a,b)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(price(b,0)>0)-Number(price(a,0)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
 
 }
 export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProjection[]) {
@@ -2299,9 +2299,8 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  if(parts.some(part=>part.generationId!==selected.generationId))return null;
  const byId=new Map(parts.flatMap(part=>part.items).map(row=>[row.id,row]));
  if(visible.some(row=>!byId.has(row.id)))return null;
- const {attachJapanSearchValues}=await import("./japan-delivered-preview");
  const visibleCards=visible.map(row=>byId.get(row.id)!);
- const cards=params.budgetFrom || params.budgetTo ? await attachJapanSearchValues(visibleCards,selected.generationId) : visibleCards;
+ const cards=params.budgetFrom || params.budgetTo ? await currentSearchPrices(prepareCatalogProjectionRows(visibleCards),selected.generationId) : visibleCards;
  return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
 }
 const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:14,maxBytes:256*1024*1024,ttlMs:3600_000,concurrency:2});
