@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T15:21:25.453Z",
+  "updatedAt": "2026-10-24T15:39:08.889Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -42680,8 +42680,14 @@
         "activated": false
       },
       "pr1521": {
-        "state": "ci_in_progress",
-        "workflow": 40102863410,
+        "merged": true,
+        "merge": "00e5c4440d8d93986a8771c1e7f17957d88c83ec",
+        "repairWorkflow": 40104679690,
+        "repairJob": 120903797449,
+        "repairConclusion": "failure",
+        "error": "storage_json_serialize_failed:catalog/public/projection/all.json:Invalid string length",
+        "heapOomRepeated": false,
+        "report": "docs/operations/2026-10-24-readmodel-serialization-blocker.json",
         "excludedFromRequestedRelease": true
       },
       "releaseWorkflow": 40103448997,
@@ -42733,17 +42739,59 @@
       "nextAction": "Дождаться artifact; проверить canonicaldigest/counters/newModels0/newUnknownYear0 и новые значения отдельно от подтверждений. Только затем exactCAS apply; не повторять старый b337."
     },
     "retainedTechnicalGroupAudit": {
-      "state": "in_progress",
-      "workflow": 40106364857,
-      "job": 120908770885,
-      "sourceCheckpointInspection": 40106102171,
-      "saved": 8403,
-      "pending": 253,
-      "blocker": "redirect_outside_catalog",
-      "storageWrites": 0,
+      "state": "completed_read_only",
+      "workflow": 40106963530,
+      "job": 120910543950,
+      "artifact": 12565556251,
+      "artifactSha256": "c72e02f259a776f89ce85639044648709df62b65c73f5559b9a8b305ee8f6905",
+      "recordsRead": 8403,
+      "sourceGroups": 219,
+      "uniqueExistingModelGroups": 116,
+      "recordsInUniqueModelGroups": 7286,
+      "unresolvedGroupNames": 103,
+      "sourceSnapshotDigest": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
       "supplierRequests": 0,
-      "verification": "unverified_reference",
-      "connectedToAstraMatcher": false
+      "storageWrites": 0,
+      "verifiedFieldsAdded": 0,
+      "classification": "unverified_reference",
+      "report": "docs/encyclopedia/reports/2026-10-24-retained-reference-inventory.json",
+      "routing": "docs/encyclopedia/reports/2026-10-24-retained-reference-group-routing.json",
+      "noRepeatUnlessSourceChanges": true
+    },
+    "nextRetainedReferenceReview": {
+      "handoff": "docs/encyclopedia/research-handoff-2026-10-24-retained-technical-groups.json",
+      "models": [
+        "f40e34e905b8ca09f3636eda",
+        "e3570ba4a67b01797e57a749",
+        "8cf3dbb7884fe919bce44c62"
+      ],
+      "year": 2024,
+      "rowsChecked": 470,
+      "candidateRows": 27,
+      "fields": [
+        "fuel",
+        "engineCc",
+        "powerHpOrKw",
+        "documentedPower30MinKw",
+        "drive"
+      ],
+      "state": "refresh_after_residual_astra_before_review",
+      "savedFields": 0,
+      "broadBodyCaution": "Passenger car — общая категория, не точный кузов. Анонимный API не доказывает отсутствие приватных homologation IDs; проверить сохранённую идентичность, не угадывать."
+    },
+    "installedAcceptance": {
+      "pr": 1522,
+      "merged": true,
+      "merge": "0de472918d6a430484d1602ec9603e849d3a8d93",
+      "head": "5c738c21f1edbe2e84eb044c5fd761338ee4bb0a",
+      "ci": 40106051871,
+      "conclusion": "success",
+      "state": "await_actual_health_7189",
+      "diagnosticRequested": false,
+      "expectedRelease": "7189a40f73606b46eaeb86e4c37905e1fd0bfcf6",
+      "mode": "pickup-drive-pricing",
+      "checkCatalogFeedback": true,
+      "globalAjesCalculatedOrderClosed": false
     }
   },
   "scope": {
