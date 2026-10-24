@@ -6,7 +6,10 @@ import { randomUUID } from 'node:crypto';
 export async function withCatalogReadModelRepairLock(mutate, repair, now = Date.now) {
   const path = 'catalog/import-lock.json';
   const operationId = `read-model-repair-${randomUUID()}`;
-  await mutate(path, { lockedUntil: '' }, current => {
+  const lease = await mutate(path, { lockedUntil: '' }, current => {
+    if (current.lockedUntil && !Number.isFinite(Date.parse(String(current.lockedUntil)))) {
+      throw new Error('catalog_read_model_repair_publication_lock_invalid');
+    }
     if (Date.parse(String(current.lockedUntil || '')) > now()) {
       throw new Error('catalog_read_model_repair_publication_locked');
     }
@@ -15,7 +18,7 @@ export async function withCatalogReadModelRepairLock(mutate, repair, now = Date.
       lockedUntil: new Date(now() + 100 * 60_000).toISOString() };
   });
   try {
-    return await repair();
+    return await repair(Object.freeze({ ...lease }));
   } finally {
     await mutate(path, { lockedUntil: '' }, current => current.operationId === operationId
       ? { ...current, lockedUntil: '', finishedAt: new Date(now()).toISOString() }

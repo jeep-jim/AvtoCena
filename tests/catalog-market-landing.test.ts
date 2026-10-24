@@ -124,3 +124,18 @@ test('daily refresh refuses active publisher and never hides a competing write',
   t.mock.restoreAll();resetCatalogReadCachesForTests();
  }
 });
+
+test('nested repair landing keeps owner verification and CAS through the write boundary',async(t)=>{
+ const owner={operationId:'read-model-repair-test',operationType:'catalog_read_model_repair' as const,startedAt:new Date().toISOString(),lockedUntil:new Date(Date.now()+60000).toISOString()};
+ for(const loseLease of [false,true]){
+  fixture(t,null);const storage=getJsonStorage(),base=storage.readJsonWithMeta.bind(storage);let writes=0,lockReads=0;
+  t.mock.method(storage,'readJsonWithMeta',async(file:string,fallback:any)=>{
+   if(file==='catalog/import-lock.json'){lockReads++;return {found:true,value:loseLease&&lockReads>1?{...owner,operationId:'other'}:owner};}
+   return base(file,fallback);
+  });
+  t.mock.method(storage,'writeJson',async(_file:string,_value:any,condition:any)=>{writes++;assert.deepEqual(condition,{ifNoneMatch:'*'});});
+  if(loseLease){await assert.rejects(backfillCatalogMarketLandings({refreshDateSensitive:true,repairLease:owner}),/lease_lost/);assert.equal(writes,0);}
+  else {await backfillCatalogMarketLandings({refreshDateSensitive:true,repairLease:owner});assert.equal(writes,1);assert.ok(lockReads>=3);}
+  t.mock.restoreAll();resetCatalogReadCachesForTests();
+ }
+});
