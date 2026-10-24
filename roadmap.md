@@ -14530,3 +14530,14 @@ PR1511 смержен b9e9c609ea811b2ee3bba6f38a9b555010410132 с сохране
 Дополнительно исправлены устаревшие тестовые пределы Japan2008/China2014; rolling age cache проверяется на Корее. В японских grade/budget fixtures использованы разрешённые paid-feed ID вместо выведенных источников. CRM birthday unit test изолирован от account/billing, dealer-program routes собраны в один модуль с общим cache, address test проверяет пустой ответ на короткий запрос вместо прежнего410.27policy+7CRM+3dealer-program+5grade/budget PASS. Права доступа и origin assertions сохранены. Повторный полный прогон ещё выполняется; не объявляется полностью зелёным.
 
 Маркер установки обновлён с прежними32requiredResearchBatches/ASTRA plan и пустыми ideaReports. Запрашивается установка проверенного кода PR1511; terminal deploy и новый публичный health ещё НЕ подтверждены. Дневные сборщики не запускались.
+
+
+## 24.10.2026 14:37 Красноярск — независимый контроль PR1511, аудитов и остаточных проверок
+
+Прочитаны свежие AGENTS fbbc41a/roadmap, сохранена параллельная запись fc202423. Внешний полный health oktrue/release761e5cd8e912dd40f0632b3bd3448b9bcab136c2/calculationfe4aabf54a5e1413399fb26e916c8781b6d51571dbf07488e4fe2f7f319f0984,curl exit0. Ручной следующий [40074712002](https://github.com/jeep-jim/AvtoCena/actions/runs/40074712002),releasefc202423e47c6e483cfd1c7c4eec145c165294ac IN_PROGRESS; установка не подтверждена, дубль не запрашивался.
+
+Terminalлоги40074427489/job120814639301 и40074427472/job120814639029 независимо прочитаны:422японскихлота,4factoryfuel/4ready/4calculated/failures[], дваPassat и дваTwingo. ОбщийshadowJapan4→4,новыхсовпадений0; это другой срез кеша, не падение всего рынка. Артефакты12552985031/12552423505 опубликованы, ZIP этим контролем не скачивались. Аудиты read-only, не новая публикация цен.
+
+Точные остаточные failures: owner-polish40074420118/job120814618379 — heading follows global theme,actualrgb(23,27,36)/expectedrgb(255,255,255); site-controls40074420084/job120814618231 — getByRole('status') strictmode,3элемента вместоодного. Причина последнего в неоднозначном locator, не доказанный отказ чата. Dealer40074427496/job120814639109:29/30PASS,tests/dealer-showcase-api.test.ts:119 actual200/expected410; ручнойfc202423 уже исправляет прежний контракт короткого addressquery, новый40074712019 IN_PROGRESS. Эти проверки/код не дублировались и thresholds не ослаблялись.
+
+CRM40074427447 auditSUCCESS; browser выполнил Real CRM pages и Public dropdown regression SUCCESS, при срезе ещёcleanup, новыйliveне подтверждён. Green40074427504SUCCESS. Производственные права АвтоБота/полнотаEV-HEV/скорость/оставшиесяполныепроверки открыты. Никаких новыхdeploy/apply/сборов/измененийрасписаний; ручная работа по исправлениям продолжается, контроль активен.
