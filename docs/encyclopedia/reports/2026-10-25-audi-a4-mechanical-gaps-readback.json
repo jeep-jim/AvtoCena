@@ -1,0 +1,111 @@
+{
+  "checkedAt": "2026-10-24T20:14:27.698067+00:00",
+  "modelId": "e3570ba4a67b01797e57a749",
+  "revision": "f5899f27-d233-482b-9c1b-ab2453d7d91e",
+  "previousRevision": "4d04c3c3-790f-591b-a18a-905bff48ea9c",
+  "modelUpdatedAt": "2026-10-24T20:13:53.639Z",
+  "checks": [
+    {
+      "variantId": "fc8ef77222122cbe20bfe9af",
+      "values": {
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110
+      },
+      "expected": {
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110
+      },
+      "pass": true
+    },
+    {
+      "variantId": "43310b37acab252112496d4d",
+      "values": {
+        "drive": "fwd",
+        "bodyType": "sedan"
+      },
+      "expected": {
+        "drive": "fwd",
+        "bodyType": "sedan"
+      },
+      "pass": true
+    },
+    {
+      "variantId": "9b2fda22678360fcebfc3199",
+      "values": {
+        "drive": "fwd"
+      },
+      "expected": {
+        "drive": "fwd"
+      },
+      "pass": true
+    },
+    {
+      "variantId": "75064cab4bbc69090a0e79b9",
+      "values": {
+        "engineCc": 1968,
+        "drive": "fwd",
+        "bodyType": "sedan"
+      },
+      "expected": {
+        "engineCc": 1968,
+        "drive": "fwd",
+        "bodyType": "sedan"
+      },
+      "pass": true
+    },
+    {
+      "variantId": "6bd06b26c36bffdb7ce99edd",
+      "values": {
+        "bodyType": "sedan"
+      },
+      "expected": {
+        "bodyType": "sedan"
+      },
+      "pass": true
+    },
+    {
+      "variantId": "1af6843dec3b1f3fe40ad05d",
+      "values": {
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150
+      },
+      "expected": {
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150
+      },
+      "pass": true
+    },
+    {
+      "variantId": "491ca205fb36fd81401e01c2",
+      "values": {
+        "engineCc": 1968,
+        "drive": "awd",
+        "icePowerKw": 150
+      },
+      "expected": {
+        "engineCc": 1968,
+        "drive": "awd",
+        "icePowerKw": 150
+      },
+      "pass": true
+    }
+  ],
+  "allPass": true,
+  "fieldsVerified": 17,
+  "batch": "research-2026-10-25-audi-a4-2024-mechanical-gaps",
+  "batchPath": "docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json",
+  "batchDigest": "30ee37c7c3f5dd2e9b8b4fffcab8357b1ce0986ce307ece12ae4ea834701051b",
+  "applyWorkflow": 40128788085,
+  "applyJob": 120975844009,
+  "applyFinishedAt": "2026-10-24T20:13:57.224Z",
+  "savedValues": 17,
+  "createdModels": 0,
+  "certified30MinAdded": 0,
+  "activated": false
+}

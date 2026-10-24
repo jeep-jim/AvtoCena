@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-24T15:29:40.451784+00:00",
-  "state": "prepared_reference_review_candidates_not_verified",
-  "savedFields": 0,
+  "checkedAt": "2026-10-24T20:16:57.491589+00:00",
+  "state": "23_remaining_candidates_after_a4_manufacturer_batch",
+  "savedFields": 17,
   "sourceInventoryWorkflow": 40106963530,
   "sourceClassification": "unverified_reference",
   "priority": [
@@ -202,44 +202,11 @@
       "id": "e3570ba4a67b01797e57a749",
       "make": "Audi",
       "model": "A4",
-      "revisionAtReview": "4d04c3c3-790f-591b-a18a-905bff48ea9c",
+      "revisionAtReview": "f5899f27-d233-482b-9c1b-ab2453d7d91e",
       "year": 2024,
       "sourceModelGroup": "audi/a4",
       "publicRowsChecked": 269,
       "candidateRows": [
-        {
-          "variantId": "fc8ef77222122cbe20bfe9af",
-          "year": 2024,
-          "trim": "35 TFSI S-LINE",
-          "known": {
-            "fuel": "petrol",
-            "powertrainKind": "combustion",
-            "bodyType": "sedan",
-            "transmission": "automatic",
-            "drive": "fwd"
-          },
-          "missing": [
-            "engineCc",
-            "powerHpOrKw"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
-        {
-          "variantId": "1af6843dec3b1f3fe40ad05d",
-          "year": 2024,
-          "trim": "40 TDI Mild-Hybrid S line Aut.*NAVI*LED*TEMPO",
-          "known": {
-            "fuel": "hybrid",
-            "powertrainKind": "other_hybrid",
-            "engineCc": 1968,
-            "bodyType": "wagon",
-            "transmission": "automatic"
-          },
-          "missing": [
-            "powerHpOrKw"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
         {
           "variantId": "b85620ff8c20356a1340865d",
           "year": 2024,
@@ -296,39 +263,6 @@
             "powertrainKind": "ICE",
             "powerKw": 110,
             "bodyType": "Passenger car"
-          },
-          "missing": [
-            "engineCc"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
-        {
-          "variantId": "75064cab4bbc69090a0e79b9",
-          "year": 2024,
-          "trim": "30 TDI Lim. S-tronic | ACC | virtual cockpit plus | Assistenz-Paket Tour | Audi Drive Select |",
-          "known": {
-            "fuel": "diesel",
-            "powertrainKind": "combustion",
-            "powerHp": 136,
-            "powerKw": 100,
-            "transmission": "automatic"
-          },
-          "missing": [
-            "engineCc"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
-        {
-          "variantId": "491ca205fb36fd81401e01c2",
-          "year": 2024,
-          "trim": "AVANT 2.0 40 TDI MHEV QUATTRO S LINE EDITION S TRONIC STATION WAGON",
-          "known": {
-            "fuel": "hybrid",
-            "powertrainKind": "other_hybrid",
-            "powerHp": 204,
-            "powerKw": 150,
-            "bodyType": "wagon",
-            "transmission": "automatic"
           },
           "missing": [
             "engineCc"
@@ -481,6 +415,131 @@
     }
   ],
   "totalRowsChecked": 470,
-  "candidateRows": 27,
-  "nextAction": "После terminal/apply единственного остаточного ASTRA плана обновить ревизии и убрать уже заполненные поля. Проверять сохранённые вторичные таблицы по точным техническим группам и первичным документам. Сохранять тип источника; не повышать unverified_reference автоматически и не переносить peak в30min."
+  "candidateRows": 23,
+  "nextAction": "Continue23 unresolved candidates and retained page cursor. A4 batch saved17/API17; do not repeat. Missing marketing trim is not a reason to guess technical identity. Recheck revisions before each write.",
+  "resolvedCandidates": [
+    {
+      "variantId": "fc8ef77222122cbe20bfe9af",
+      "year": 2024,
+      "trim": "35 TFSI S-LINE",
+      "known": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "bodyType": "sedan",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "missing": [
+        "engineCc",
+        "powerHpOrKw"
+      ],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a4-2024-mechanical-gaps"
+    },
+    {
+      "variantId": "1af6843dec3b1f3fe40ad05d",
+      "year": 2024,
+      "trim": "40 TDI Mild-Hybrid S line Aut.*NAVI*LED*TEMPO",
+      "known": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "engineCc": 1968,
+        "bodyType": "wagon",
+        "transmission": "automatic"
+      },
+      "missing": [
+        "powerHpOrKw"
+      ],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a4-2024-mechanical-gaps"
+    },
+    {
+      "variantId": "75064cab4bbc69090a0e79b9",
+      "year": 2024,
+      "trim": "30 TDI Lim. S-tronic | ACC | virtual cockpit plus | Assistenz-Paket Tour | Audi Drive Select |",
+      "known": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 136,
+        "powerKw": 100,
+        "transmission": "automatic"
+      },
+      "missing": [
+        "engineCc"
+      ],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a4-2024-mechanical-gaps"
+    },
+    {
+      "variantId": "491ca205fb36fd81401e01c2",
+      "year": 2024,
+      "trim": "AVANT 2.0 40 TDI MHEV QUATTRO S LINE EDITION S TRONIC STATION WAGON",
+      "known": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "powerHp": 204,
+        "powerKw": 150,
+        "bodyType": "wagon",
+        "transmission": "automatic"
+      },
+      "missing": [
+        "engineCc"
+      ],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a4-2024-mechanical-gaps"
+    }
+  ],
+  "retainedPage": {
+    "checkedAt": "2026-10-24T20:16:57.491589+00:00",
+    "workflow": 40128515344,
+    "job": 120975012640,
+    "artifact": 12574666229,
+    "artifactSha256": "b7fab3055388c686da03e00b1e8dad0221c96cc1a6c0a4141ab80a219bdf96f4",
+    "recordsRead": 8403,
+    "recordSnapshotDigest": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
+    "checkpoint": {
+      "digest": "974674b4505d07ca1320702be93136afd94936ef6ee9727c5616ad55eb00cd94",
+      "saved": 8403,
+      "visited": 13045,
+      "pending": 253,
+      "updatedAt": "2026-10-22T19:38:18.897Z",
+      "failures": [
+        {
+          "at": "2026-10-22T09:14:03.805Z",
+          "category": "unclassified"
+        },
+        {
+          "at": "2026-10-22T19:38:18.897Z",
+          "category": "redirect_outside_catalog"
+        }
+      ]
+    },
+    "checkpointCountMatches": true,
+    "groups": [
+      "audi/a3",
+      "audi/a4",
+      "audi/a5"
+    ],
+    "year": 2024,
+    "reviewedRows": 64,
+    "groupsOnPage": {
+      "audi/a5": 31,
+      "audi/a3": 27,
+      "audi/a4": 6
+    },
+    "remainingAfterPage": 203,
+    "nextAfterDigest": "39d127db00febcd73cf670b95b9d3bcbc3e6dc069291b2c4f60becb7a3761464",
+    "sourceClassification": "unverified_reference",
+    "verifiedFieldsAdded": 0,
+    "supplierRequests": 0,
+    "storageWrites": 0,
+    "findings": [
+      "A3 2024 includes1395 and1498 petrol150PS plus999/110PS and1498/116PS. Do not assign displacement or power from the model badge alone.",
+      "A5 1984 petrol varies190/204/252/261/265PS in these retained rows. Exact engine/chassis or technical identity is needed; ordinary equipment names alone do not resolve it.",
+      "A5 record544652 associates F57 with coupe; retain as unresolved source inconsistency, do not create chassis-drive facts from it.",
+      "Periods overlap2024; this is not proof that every included variant was manufactured throughout that year.",
+      "No retained row is promoted automatically. Saved A4 batch uses independently reviewed manufacturer tables."
+    ],
+    "next": "Continue from exact digest with next bounded page; no new collector, no retry of redirect_outside_catalog."
+  }
 }
