@@ -2,6 +2,9 @@ import {namedElectrifiedPowertrainKind} from '../catalog/powertrain-safety';
 // Reviewed fuel-only factory identities. They do not assert model years, trim,
 // horsepower, displacement or certified power; all original fields are retained.
 const references=[
+ {make:'SUZUKI',models:['EVERY'],codes:['DA17V'],cc:[650,660],fuel:'petrol',url:'https://www.suzuki.co.jp/car/every/detail/pdf/detail.pdf'},
+ {make:'SUZUKI',models:['ALTO'],codes:['HA37S'],cc:[650,660],fuel:'petrol',url:'https://www.suzuki.co.jp/suzuki_digital_library/1_auto/alto.html'},
+ {make:'TOYOTA',models:['COROLLAFIELDER'],codes:['NZE164G'],cc:[1490,1500],fuel:'petrol',url:'https://toyota.jp/pages/contents/corollafielder/003_p_008/pdf/spec/corollafielder_ecology_201904.pdf'},
  {make:'NISSAN',models:['TIIDA'],codes:['C11'],cc:[1490,1500],fuel:'petrol',url:'https://history.nissan.co.jp/TIIDA/C11/0801/PDF/tiida_specification.pdf'},
  {make:'NISSAN',models:['MARCH'],codes:['K13'],cc:[1190,1200],fuel:'petrol',url:'https://history.nissan.co.jp/MARCH/K13/1007/PDF/march_specification.pdf'},
  {make:'VOLKSWAGEN',models:['PASSAT','PASSATVARIANT'],codes:['3CDPC'],cc:[1490,1500],fuel:'petrol',url:'https://www.volkswagen.co.jp/idhub/content/dam/onehub_pkw/importers/jp/pc/catalog/equipment_pdf/Passat_Equipment_catalog.pdf'},

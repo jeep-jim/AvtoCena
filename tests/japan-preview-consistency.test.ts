@@ -4,6 +4,18 @@ import {compactJapanPowerEstimate,japanPowerEstimateLabel,ajesPowerEstimateHp} f
 import {japanPreviewParameters} from '../apps/web/lib/catalog/japan-preview-parameters';
 import {publicOffer} from '../apps/web/lib/catalog/storage';
 const raw:any={id:'ajes-stats-example',market:'japan',sourceId:'ajes_japan_feed',make:'RENAULT',model:'TWINGO',year:2017,engineCc:900,images:[],operational:{chassisCode:'AHH4B',semanticEvidence:{engineCc:{status:'exact',value:900,source:'ajes:stats:example:ENG_V',rawValues:['900']}},raw:{sourcePower:'90',sourceFuel:''}}};
+test('screenshot Every, Alto and Fielder regain editable previews without asserting horsepower',()=>{
+ for(const [make,model,chassis,cc,power] of [['SUZUKI','EVERY','HBD-DA17V',660,'46,49,64'],['SUZUKI','ALTO','3BA-HA37S',660,'46'],['TOYOTA','COROLLA FIELDER','NZE164G',1500,'103']] as const){
+  const input={...raw,make,model,engineCc:cc,operational:{chassisCode:chassis,semanticEvidence:{engineCc:{status:"exact",value:cc,source:"ajes:stats:example:ENG_V",rawValues:[String(cc)]}},raw:{sourcePower:power,sourceFuel:''}}};
+  const result=applyJapanFactoryFuel(input);
+  assert.equal(result.fuel,'petrol');assert.equal(result.powerHp,undefined);
+  assert.equal(japanPreviewParameters(result).fuel,'petrol');
+  assert.equal(japanPreviewParameters(result).powerHp,Number(power.split(',')[0]));
+ }
+ for(const [make,model,chassis] of [['SUZUKI','ALTO','HA97S'],['SUZUKI','EVERY','DA64V'],['TOYOTA','COROLLA FIELDER','NKE165G']]){
+  const input={...raw,make,model,engineCc:660,operational:{chassisCode:chassis,raw:{sourceFuel:''}}};assert.equal(applyJapanFactoryFuel(input),input);
+ }
+});
 test('same factory fuel and reported power reach card DTO and editable preview without becoming exact hp',()=>{
  const offer=applyJapanFactoryFuel(raw);assert.equal(offer.fuel,'petrol');assert.equal(raw.fuel,undefined);assert.equal(offer.powerHp,undefined);
  const dto=publicOffer(offer);assert.equal(japanPowerEstimateLabel(dto),'90 л.с. · предварительно');assert.equal(ajesPowerEstimateHp(dto as any),90);assert.equal((dto as any).operational,undefined);
