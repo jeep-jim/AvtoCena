@@ -45,3 +45,25 @@ test('reviewed Nissan and Passat fuel uses exact chassis and volume, not family 
   const input={...raw,make:'NISSAN',model,engineCc,operational:{chassisCode:chassis,raw:{sourceFuel:''}}};assert.equal(applyJapanFactoryFuel(input),input);
  }
 });
+
+test('related Alto cards display the same reported power as their calculated preview',()=>{
+ const offer:any={...raw,make:'SUZUKI',model:'ALTO',year:2023,engineCc:660,operational:{chassisCode:'3BA-HA37S',semanticEvidence:{engineCc:{status:'exact',value:660,source:'ajes:stats:example:ENG_V',rawValues:['660']}},raw:{sourcePower:'46',sourceFuel:''}}};
+ const priced={...applyJapanFactoryFuel(offer),japanDeliveredPreview:{totalRub:509539,estimated:true}};
+ assert.equal(japanPreviewParameters(priced).powerHp,46);
+ assert.equal(japanPowerEstimateLabel(priced),'46 л.с. · предварительно');
+ const dto=publicOffer(priced);
+ assert.equal(japanPowerEstimateLabel(dto),japanPowerEstimateLabel(priced));
+ assert.equal((dto as any).japanDeliveredPreview.totalRub,509539);
+ assert.equal((dto as any).operational,undefined);
+ assert.equal((dto as any).powerHp,undefined);
+ assert.equal((dto as any).power30MinKw,undefined);
+});
+test('full offers retain ambiguous power labels and never invent missing power from a price',()=>{
+ const offer={...raw,operational:{raw:{sourcePower:'49,64'}}};
+ assert.equal(japanPowerEstimateLabel(offer),'49 / 64 л.с. · уточнить');
+ for(const power of ['', 'unknown','0','2501','46<script>']){
+  assert.equal(japanPowerEstimateLabel({...raw,japanDeliveredPreview:{totalRub:500000},operational:{raw:{sourcePower:power}}}), '');
+ }
+ assert.equal(japanPowerEstimateLabel({...offer,sourceId:'other'}),'');
+ assert.equal(japanPowerEstimateLabel({...offer,market:'korea'}),'');
+});

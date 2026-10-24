@@ -32,6 +32,8 @@ export function compactJapanPowerEstimate(offer:any){
  const values=ajesPowerFilterValues(offer);return offer.market==='japan'&&/^ajes-stats-/.test(offer.id||'')&&values.length&&values.length<=20?{offerId:offer.id,values:[...new Set(values)],requiresConfirmation:true as const}:undefined;
 }
 export function japanPowerEstimateLabel(offer:any){
- const estimate=readJapanPowerEstimate(offer);if(!estimate)return '';
+ // Related/dealer rails may still receive the full offer rather than its public
+ // projection. Use the same validated source values as the editable calculator.
+ const estimate=compactJapanPowerEstimate(offer);if(!estimate)return '';
  return estimate.values.length===1?`${estimate.values[0]} л.с. · предварительно`:`${estimate.values.join(' / ')} л.с. · уточнить`;
 }
