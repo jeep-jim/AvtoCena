@@ -37,6 +37,10 @@ jobs:
           console.log('PUBLICATION_STATUS',JSON.stringify({checkedAt:new Date().toISOString(),generationId:manifest?.generationId,writer:{active:Date.parse(lock?.lockedUntil||'')>Date.now(),operationType:lock?.operationType,operationId:lock?.operationId,startedAt:lock?.startedAt,heartbeatAt:lock?.heartbeatAt,lockedUntil:lock?.lockedUntil}}));
           const {readFile}=await import('node:fs/promises');
           const marker=JSON.parse(await readFile('.github/market-runs/regcloud-publication-status.json','utf8'));
+          if(marker.inspectPreparedAstraRelease){
+            const {verifyPreparedAstraRelease}=await import('./scripts/encyclopedia/verify-prepared-astra.mjs');
+            await verifyPreparedAstraRelease(marker.inspectPreparedAstraRelease);
+          }
           if(marker.inspectStagedGeneration === true){
             const internal=await storage.readJson('catalog/internal/manifest.json',null);
             const generationId=internal?.generationId;

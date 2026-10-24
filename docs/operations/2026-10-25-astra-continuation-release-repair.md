@@ -1,0 +1,9 @@
+# Продолжение доказательств ASTRA при выпуске
+
+25.10.2026 00:22 UTC+7. Deploy40112867414/job120928169260 завершился FAILURE24.10 17:17:00UTC до сборки/установки. Private index создан: bd6556d39b1943d7c055d122a415883bdd899667d6f5921d14f04ffb028f2b20, manifest eec8e463217e99c1478b4f85fb7ecca29c556d68fbeaf13c40fd4967477e024e; coverage artifact12568232112 SHA3e93a36cf06a14bcd3dfc57d1a582ec6f36aab7371a468ec88976766d6626094. Это не активация.
+
+Точная ошибка assert-release-astra: astra_revision_existing_value_changed:astraMatchEvidence. Воспроизведена двумя последовательными preview/apply: новый проход сохраняет прежние research proofs и значения, добавляет отсутствующее поле, меняет отдельную сводку ASTRA evidence IDs. Старый verifier отвергал новую сводку даже для полностью применённого плана.
+
+Исправление не игнорирует поле. Все required планы сначала проверяются по descriptor digest и полному applied receipt. Каждое изменение match summary в цепочке ревизий разрешено только при точном checksum соответствующей записи из такого плана и согласованности evidenceIdsDigest/corpusDigest с официальным research proof. Неприменённый план, подмена записи, потеря доказательства, изменение существующих значений и неправильный source в compiled facts отклоняются. Сами source-only/unknown-year строки остаются неизменными.
+
+41 профильный тест PASS. Следующий шаг после green CI/merge: существующая read-only regcloud-publication-status с inspectPreparedAstraRelease=786a5aa9bb5a2efbc5b3ed395e51f3a2ab84616d проверяет сохранённый binding/index, текущий manifest и ВСЕ3 required ASTRA plans без recompilation/apply/remote writes. Удалить старые unrelated inspectRelease/inspectModels из marker. Лишь после успешного фактического read-only результата запрашивать один следующий свободный release со всеми40required/26public/3ASTRA. PR1527 по lease/chunks/Japan идёт отдельно; никаких новых research записей до проверки неизменности manifest.
