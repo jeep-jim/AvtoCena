@@ -191,9 +191,9 @@ function identityMatch(v,source){
  // not discriminate engines. Retain every compatible candidate (including
  // incompletely documented ones) and require field-level unanimity below.
  const outputField=present(v.icePowerKw)?'icePowerKw':present(v.powerKw)?'powerKw':present(v.powerHp)?'powerHp':null;
- const targetCore=present(v.fuel)&&targetDisplacement&&outputField&&(present(v.drive)||present(v.bodyType));
+ const targetCore=present(v.fuel)&&(targetDisplacement||outputField)&&(present(v.drive)||present(v.bodyType));
  if(targetCore){
-  const anchors=['fuel',...(present(v.powertrainKind)?['powertrainKind']:[]),electric?'powerKw':'engineCc',outputField,...['drive','bodyType'].filter(f=>present(v[f]))];
+  const anchors=['fuel',...(present(v.powertrainKind)?['powertrainKind']:[]),...(targetDisplacement?[electric?'powerKw':'engineCc']:[]),...(outputField?[outputField]:[]),...['drive','bodyType'].filter(f=>present(v[f]))];
   return {kind:'cross_market_mechanical_consensus',strong:anchors.every(f=>present(values[f])&&sameAstraValue(f,v[f],values[f]))};
  }
  return null;

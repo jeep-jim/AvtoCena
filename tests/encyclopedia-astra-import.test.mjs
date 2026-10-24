@@ -63,9 +63,9 @@ test('named directory grouping preserves longer models and manufacturer designat
 });
 test('displacement, a generic trim, or a chassis-like type alone never proves an annual modification',()=>{
  const row=evidence(),v=annual({engineCode:undefined,chassisCode:'MXPH11(H)'});
- assert.equal(planAstraExistingVariant(model(),v,[candidate(row)],context).reason,'no_exact_technical_match');
+ assert.equal(planAstraExistingVariant(model(),v,[candidate(row)],context).variant.power30MinKw,undefined);
  assert.equal(planAstraExistingVariant(model(),annual({drive:undefined}),[candidate(row)],context).reason,'no_exact_technical_match');
- assert.equal(planAstraExistingVariant(model(),annual({markets:['japan']}),[candidate(row)],context).reason,'no_exact_technical_match');
+ assert.equal(planAstraExistingVariant(model(),annual({markets:['japan']}),[candidate(row)],context).variant.icePowerKw,68);
 });
 test('Swiss abbreviated and displacement-suffixed names group families without granting technical matches',()=>{
  const cases=[['Peugeot','ExpertTr. 2.0HDi','Expert'],['Skoda','SuperbC 2.0TDI4x4','Superb'],['BMW','740Ld xDrive','7 Series'],['MINI','3door Cooper S','Cooper'],['Citroen','C5 Airc.1.50 HDi','C5 Aircross'],['Land Rover','DiscoverySp.TD4','Discovery Sport'],['Volkswagen','PassatV 2.0TDI4M','Passat'],['Hyundai','Tucson1.6TGDIPHEV','Tucson'],['Audi','A8L 50 TDI','A8']];
@@ -77,7 +77,8 @@ test('Swiss abbreviated and displacement-suffixed names group families without g
  assert.equal(auris.summary.model,'Auris');assert.equal(auris.create,true);assert.equal(auris.groupingAliasOnly,true);
  const ix=resolveAstraModel(evidence({facts:{make:'BMW',commercialName:'iX xDrive60'}}),[]);assert.equal(ix.summary.model,'iX');
  const row=evidence(),source={...candidate(row),groupingAliasOnly:true};
- assert.equal(planAstraExistingVariant(model(),annual(),[source],context).reason,'no_exact_technical_match');
+ assert.equal(planAstraExistingVariant(model(),annual(),[source],context).variant.power30MinKw,undefined);
+ assert.equal(planAstraExistingVariant(model(),annual({fuel:undefined,engineCc:undefined,engineCode:undefined,drive:undefined,transmission:undefined}),[source],context).reason,'no_exact_technical_match');
  const v=annual({astraIdentity:{approval:row.facts.approval,type:row.facts.type,variant:row.facts.variant,version:row.facts.version}});
  assert.equal(planAstraExistingVariant(model(),v,[source],context).variant.power30MinKw,37);
 });
@@ -103,7 +104,7 @@ test('a complete official modification prefix accepts equipment only with power 
  const v=annual({trim:'xDrive30d xLine',engineCode:undefined,fuel:'diesel',powertrainKind:'combustion',engineCc:2993,powerKw:195,drive:'awd',transmission:'automatic'});
  const good=planAstraExistingVariant(record,v,[candidate(row,'xDrive30d')],context);
  assert.equal(good.variant.engineCode,'B57D30');assert.equal(good.variant.icePowerKw,195);
- for(const extra of [{powerKw:210},{powerKw:undefined},{drive:undefined}])assert.equal(planAstraExistingVariant(record,{...v,...extra},[candidate(row,'xDrive30d')],context).reason,'no_exact_technical_match');
+ for(const extra of [{powerKw:210},{drive:undefined}])assert.equal(planAstraExistingVariant(record,{...v,...extra},[candidate(row,'xDrive30d')],context).reason,'no_exact_technical_match');
  for(const markets of [['japan'],['china'],['korea'],['uae'],['georgia']]){const out=planAstraExistingVariant(record,{...v,trim:'Unrelated equipment',markets},[candidate(row,'xDrive30d')],context);assert.equal(out.variant.engineCode,'B57D30');assert.equal(out.variant.icePowerKw,195);}
  const hybrid=evidence({values:{powerKw:180}}),hybridV=annual({engineCode:undefined,trim:'450h Luxury',powerKw:180});
  assert.equal(planAstraExistingVariant(model(),hybridV,[candidate(hybrid,'450h+')],context).variant.power30MinKw,undefined);
@@ -258,4 +259,13 @@ test('stored corpus replan verifies every part and never creates models or unkno
  const part=await f.storage.readJson(archive.parts[0].key,null);part.records[0].values.drive='awd';
  await f.storage.writeJson(archive.parts[0].key,part);
  await assert.rejects(readStoredAstraCorpus(f.storage,digest),/checksum/);
+});
+
+test('missing output or displacement is filled by consensus without requiring the missing field itself',()=>{
+ const row=evidence(), v=annual({markets:['korea'],engineCode:undefined});
+ const result=planAstraExistingVariant(model(),v,[candidate(row)],context);assert.equal(result.variant.icePowerKw,68);assert.equal(result.variant.power30MinKw,undefined);
+ const other=evidence({facts:{version:'other'},values:{icePowerKw:80}});
+ assert.equal(planAstraExistingVariant(model(),v,[candidate(row),candidate(other)],context).variant.icePowerKw,undefined);
+ const sparse=evidence({facts:{version:'unknown'},values:{icePowerKw:undefined}});
+ assert.equal(planAstraExistingVariant(model(),v,[candidate(row),candidate(sparse)],context).variant.icePowerKw,undefined);
 });
