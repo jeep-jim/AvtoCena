@@ -11,16 +11,16 @@ test('liters and exact cubic centimeters use the same units without snapping',()
  assert.equal(validateCustomerParameters({...base,engineCc:'1498'}).engineCc,1498);
 });
 test('Japan budget uses the delivered preview, never the seller price',()=>{
- const row:any={id:'japan-preview',market:'japan',make:'Toyota',model:'Vitz',year:2020,cardProjectionVersion:3,catalogPricingMode:'seller',sellerPriceRub:100000,totalRub:null,japanDeliveredPreview:{totalRub:1800000,engineCc:1498,estimated:true}};
+ const row:any={id:'ajes-stats-preview',market:'japan',make:'Toyota',model:'Vitz',year:2020,cardProjectionVersion:3,catalogPricingMode:'seller',sellerPriceRub:100000,totalRub:null,japanDeliveredPreview:{totalRub:1800000,engineCc:1498,estimated:true}};
  assert.equal(catalogSearchProjectionMatches(row,{budgetTo:2000000}),true);
  assert.equal(catalogSearchProjectionMatches(row,{budgetTo:1500000}),false);
  assert.equal(catalogSearchProjectionMatches(row,{budgetFrom:1800000,budgetTo:1800000,engineTo:1498}),true);
  assert.equal(catalogSearchProjectionMatches({...row,japanDeliveredPreview:undefined},{budgetTo:2000000}),false);
- assert.deepEqual(catalogSearchProjectionSort([row,{...row,id:'cheaper',japanDeliveredPreview:{totalRub:1700000}}],'totalRub').map(r=>r.id),['cheaper','japan-preview']);
+ assert.deepEqual(catalogSearchProjectionSort([row,{...row,id:'ajes-stats-cheaper',japanDeliveredPreview:{totalRub:1700000}}],'totalRub').map(r=>r.id),['ajes-stats-cheaper','ajes-stats-preview']);
 });
 
 test('budget includes the selected city using the card delivery formula',()=>{
- const row:any={id:'city',market:'japan',make:'Toyota',model:'Vitz',year:2020,cardProjectionVersion:3,catalogPricingMode:'seller',japanDeliveredPreview:{totalRub:1950000,engineCc:1498,estimated:true,deliveryPricingBasis:{subtotalRub:1950000,deliveryRub:0,percents:[]}}};
+ const row:any={id:'ajes-stats-city',market:'japan',make:'Toyota',model:'Vitz',year:2020,cardProjectionVersion:3,catalogPricingMode:'seller',japanDeliveredPreview:{totalRub:1950000,engineCc:1498,estimated:true,deliveryPricingBasis:{subtotalRub:1950000,deliveryRub:0,percents:[]}}};
  assert.equal(catalogSearchProjectionMatches(row,{budgetTo:2000000}),true);
  assert.equal(catalogSearchProjectionMatches(row,{budgetTo:2000000,city:'Новокузнецк'}),false);
 });

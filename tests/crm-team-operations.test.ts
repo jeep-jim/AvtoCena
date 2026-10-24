@@ -31,7 +31,7 @@ test('team shifts require confirmation, reject stale edits, validate time and no
 test('unified notices keep recipient/read state separate and birthdays go only to owners/admins',async()=>{
  const today=new Date(Date.now()+7*3600000).toISOString().slice(0,10),birth=`1990-${today.slice(5)}`;
  const state={files:new Map([['crm/staff-profiles.json',{m:{birthDate:birth}}],['crm/notifications.json',[{id:'s',recipientIds:['m'],createdAt:new Date().toISOString(),kind:'schedule',title:'Shift',text:'Changed',href:'/crm/managers'}]]]),users:[owner,admin,manager,other],events:[]};
- const api=await moduleFor('apps/web/lib/crm-unified-notifications.ts',state,{'crm-reminders':`export const readReminders=async()=>[];`});
+ const api=await moduleFor('apps/web/lib/crm-unified-notifications.ts',state,{'crm-reminders':`export const readReminders=async()=>[];`,'crm-accounts':`export const canReadRegisteredCustomers=()=>false;`,'regcloud-balance':`export const readRegcloudBalance=async()=>null;`});
  const mine=await api.readNotifications(manager);assert.equal(mine.notifications.length,1);assert.equal(mine.notifications[0].id,'s');assert.equal((await api.readNotifications(other)).notifications.length,0);
  for(const actor of [owner,admin]){const rows=(await api.readNotifications(actor)).notifications;assert.equal(rows.length,1);assert.equal(rows[0].kind,'birthday');}
  const store=await moduleFor('apps/web/lib/crm-notification-store.ts',state);await store.markNotificationsRead('m',['s']);assert.equal((await api.readNotifications(manager)).notifications[0].unread,false);assert.equal((await api.readNotifications(owner)).notifications[0].unread,true);

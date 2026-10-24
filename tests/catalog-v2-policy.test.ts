@@ -89,12 +89,12 @@ test("commercial priority is <=160 hp and <=15m while low-power ranking is price
   assert.equal(isCatalogLowPowerOffer(offer("high-power", { powerHp: 161 })), false);
 });
 
-test("year gates keep Japan at 2010+ and other markets at 2020+", () => {
+test("year gates keep Japan at 2008+ and the rolling age limit for Korea", () => {
   assert.equal(classifyCatalogV2Offer(offer("korea-2019", { year: 2019 })).reason, "year");
-  const japan2009 = offer("japan-2009", { market: "japan", year: 2009, sourceId: "jpauc_japan_past_open", offerType: "auction", catalogKind: "auction_result", auctionResult: "sold", status: "sold" });
-  assert.equal(classifyCatalogV2Offer(japan2009).reason, "year");
-  const japan2010 = offer("japan-2010", { market: "japan", year: 2010, sourceId: "jpauc_japan_past_open", offerType: "auction", catalogKind: "auction_result", auctionResult: "sold", status: "sold" });
-  assert.equal(classifyCatalogV2Offer(japan2010).eligible, true);
+  const japan2007 = offer("japan-2007", { market: "japan", year: 2007, sourceId: "jpauc_japan_past_open", offerType: "auction", catalogKind: "auction_result", auctionResult: "sold", status: "sold" });
+  assert.equal(classifyCatalogV2Offer(japan2007).reason, "year");
+  const japan2008 = offer("japan-2008", { market: "japan", year: 2008, sourceId: "jpauc_japan_past_open", offerType: "auction", catalogKind: "auction_result", auctionResult: "sold", status: "sold" });
+  assert.equal(classifyCatalogV2Offer(japan2008).eligible, true);
 });
 
 test("low-power cars sort first but high-power cars still fill remaining capacity", () => {

@@ -116,18 +116,10 @@ test("dealer writes enforce current owner role and origin before accepting conte
       ).status,
       200,
     );
-    assert.equal(
-      (
-        await modules.geocode.POST(
-          request("POST", "https://avtocena.com", {
-            city: "Москва",
-            address: "Тест",
-          }),
-          context,
-        )
-      ).status,
-      410,
-    );
+    const suggestions=await modules.geocode.POST(request("POST", "https://avtocena.com", {city:"Москва",query:"Т"}),context);
+    assert.equal(suggestions.status,200);
+    assert.deepEqual(await suggestions.json(),{suggestions:[]},"short queries do not call the address provider");
+
   } finally {
     delete (globalThis as any).__dealerTestActor;
     process.chdir(cwd);

@@ -59,9 +59,9 @@ test("Japan still rejects unfinished auction lots and accepts completed results"
   assert.equal(classifyCatalogV2Offer(completed).reason, "japan_completed_priority");
 });
 
-test("Japan includes model year 2010 but rejects older stock", () => {
-  assert.equal(classifyCatalogV2Offer(japanOffer("year-2010", { year: 2010 })).eligible, true);
-  assert.equal(classifyCatalogV2Offer(japanOffer("year-2009", { year: 2009 })).reason, "year");
+test("Japan includes model year 2008 but rejects older stock", () => {
+  assert.equal(classifyCatalogV2Offer(japanOffer("year-2008", { year: 2008 })).eligible, true);
+  assert.equal(classifyCatalogV2Offer(japanOffer("year-2007", { year: 2007 })).reason, "year");
 });
 
 test("post-publish audit applies sold identity only to Japanese auctions", () => {

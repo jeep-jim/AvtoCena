@@ -10,21 +10,14 @@ const now = new Date('2026-09-13T12:00:00Z');
 const offer = (extra: any = {}) => ({ market: 'china', year: 2024, sourceId: 'autohome_used_china_open', sourceOfferId: '123',
   sourcePrice: 10000, sourceCurrency: 'USD', operational: {sourceUrl: 'https://global.che168.com/zh/detail/123'}, ...extra }) as any;
 
-test('six-year China boundary uses month; production takes precedence over registration', () => {
-  for (const [date, allowed] of [['2020-08', false], ['2020-09', true], ['2020-10', true], ['2026-10', false], ['2020-02-31', true]] as const) {
-    assert.equal(chinaInventoryAgeDecision(offer({year:2020,operational:{registrationDate:date}}),now).eligible,allowed,date);
-  }
-  const row = offer({year:2020,operational:{registrationDate:'2021-01',raw:{detail:{infoid:123,manufacturedate:'2020-08'}}}});
-  assert.equal(chinaInventoryAgeDecision(row,now).eligible,false);
-  assert.equal(chinaInventoryAgeDecision(row,now).basis,'source_month');
-  row.operational.raw.detail.manufacturedate='2020-08-01 00:00:00';
-  assert.equal(chinaInventoryAgeDecision(row,now).eligible,false,'timestamp must not fall back to newer registration');
-  row.operational.raw.detail.manufacturedate='2020-09-01 00:00:00';
-  assert.equal(chinaInventoryAgeDecision(row,now).eligible,false);
-  assert.equal(chinaInventoryAgeDecision(offer({year:2019,operational:{registrationDate:'2021.09'}}),now).eligible,true,'old trim year does not discard an age-qualified detail candidate');
-  assert.equal(chinaInventoryAgeDecision(offer({year:2020}),now).eligible,true);
-  assert.equal(chinaInventoryAgeDecision(offer({year:2021}),now).eligible,true);
-  assert.equal(chinaInventoryAgeDecision(offer({market:'japan',year:2010}),now).eligible,true);
+test('China starts at model year 2014 and rejects future source dates without fabricating them', () => {
+  for (const year of [2014,2019,2020,2026]) assert.equal(chinaInventoryAgeDecision(offer({year}),now).eligible,true);
+  for (const year of [2013,2027]) assert.equal(chinaInventoryAgeDecision(offer({year}),now).eligible,false);
+  assert.equal(chinaInventoryAgeDecision(offer({year:2020,operational:{registrationDate:'2026-10'}}),now).eligible,false);
+  const row=offer({year:2020,operational:{registrationDate:'2021-01',raw:{detail:{infoid:123,manufacturedate:'2026-10-01'}}}});
+  assert.equal(chinaInventoryAgeDecision(row,now).eligible,false,'future manufacture date is not replaced with registration');
+  assert.equal(chinaInventoryAgeDecision(row,now).basis,'china_2014');
+  assert.equal(chinaInventoryAgeDecision(offer({market:'japan',year:2008}),now).eligible,true);
 });
 
 test('Autohome remains new-car source within the shared age policy; no market price cap', () => {

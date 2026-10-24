@@ -13,7 +13,7 @@ test("grade selections keep old single values, decimal commas and special grades
 });
 
 test("catalog projection matches any selected grade while retaining the other filters", () => {
-  const row = {market:"japan",make:"Toyota",model:"Aqua",year:2021,auctionGrade:"4.5"} as CatalogSearchProjection;
+  const row = {id:"ajes-stats-grade-fixture",sourceId:"ajes_japan_feed",market:"japan",make:"Toyota",model:"Aqua",year:2021,auctionGrade:"4.5"} as CatalogSearchProjection;
   assert.equal(catalogSearchProjectionMatches(row, {market:"japan",auctionGrade:"4|4.5"}), true);
   assert.equal(catalogSearchProjectionMatches({...row,auctionGrade:"4"}, {auctionGrade:"4|4.5"}), true);
   assert.equal(catalogSearchProjectionMatches({...row,auctionGrade:"3.5"}, {auctionGrade:"4|4.5"}), false);

@@ -4,7 +4,7 @@ import {BudgetEligibilityCache} from '../apps/web/lib/catalog/budget-eligibility
 import {catalogInventoryAgeDecision} from '../apps/web/lib/catalog/inventory-admission';
 
 test('immutable eligibility expires on day/editorial changes and never crosses index identity',()=>{
- const row:any=['china',1,null,null,false,{id:'car',year:2020,inventorySourceDate:'2020-10-12',block:0}];
+ const row:any=['korea',1,null,null,false,{id:'car',year:2020,inventorySourceDate:'2020-10-12',block:0}];
  const index:any={generationId:'g',rows:[row],otherRows:[]};
  const cache=new BudgetEligibilityCache();let calls=0;
  const predicate=(day:string,hidden=false)=>(r:any)=>{calls++;return !hidden&&catalogInventoryAgeDecision({...r[5],market:r[0]},new Date(day+'T00:00:00Z')).eligible;};
