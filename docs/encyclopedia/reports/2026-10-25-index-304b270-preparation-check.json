@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24 18:08:24 UTC",
+  "release": {
+    "sha": "304b270cfd2b14be47b579f268d8c0d92df7dc17",
+    "workflow": 40117114655,
+    "job": 120940688218,
+    "privateIndex": "success",
+    "build": "success",
+    "pricePreparation": "in_progress",
+    "activationConfirmed": false
+  },
+  "artifact": {
+    "id": 12569586685,
+    "sha256": "169b87229b64c799ddb539b259c2226f729464aed4fb5b8a8c8ac7e7d3e474e1",
+    "checksumVerified": true
+  },
+  "encyclopedia-coverage.json": {
+    "version": 3,
+    "createdAt": "2026-10-24T17:44:05.400Z",
+    "indexDigest": "bd6556d39b1943d7c055d122a415883bdd899667d6f5921d14f04ffb028f2b20",
+    "manifestDigest": "eec8e463217e99c1478b4f85fb7ecca29c556d68fbeaf13c40fd4967477e024e",
+    "byPowertrain": {
+      "combustion": {
+        "variants": 259601,
+        "requiredValuesPresent": 49769,
+        "requiredValuesSupported": 48122,
+        "power30MinPresent": 0,
+        "power30MinSupported": 0,
+        "missing": {
+          "trim": 23448,
+          "engineCc": 10729,
+          "powerHpOrKw": 14086,
+          "year": 173913,
+          "fuel": 572
+        },
+        "unsupported": {
+          "year": 32829,
+          "fuel": 206715,
+          "powertrainKind": 206750,
+          "engineCc": 196595,
+          "powerHpOrKw": 192906,
+          "trim": 187080
+        },
+        "remaining": 211479,
+        "completePercent": 18.54,
+        "remainingPercent": 81.46
+      },
+      "hybrid": {
+        "variants": 57721,
+        "requiredValuesPresent": 70,
+        "requiredValuesSupported": 70,
+        "power30MinPresent": 10953,
+        "power30MinSupported": 72,
+        "missing": {
+          "power30MinKw": 46768,
+          "powerHpOrKw": 47577,
+          "trim": 1616,
+          "engineCc": 1465,
+          "year": 44295,
+          "fuel": 21
+        },
+        "unsupported": {
+          "year": 1646,
+          "trim": 45846,
+          "fuel": 45920,
+          "powertrainKind": 45941,
+          "engineCc": 44767,
+          "powerHpOrKw": 18,
+          "power30MinKw": 10881
+        },
+        "remaining": 57651,
+        "completePercent": 0.12,
+        "remainingPercent": 99.88
+      },
+      "electric": {
+        "variants": 24203,
+        "requiredValuesPresent": 3,
+        "requiredValuesSupported": 3,
+        "power30MinPresent": 4312,
+        "power30MinSupported": 3,
+        "missing": {
+          "year": 11460,
+          "powerHpOrKw": 7218,
+          "power30MinKw": 19891,
+          "trim": 5346,
+          "fuel": 20
+        },
+        "unsupported": {
+          "trim": 12144,
+          "fuel": 16539,
+          "powertrainKind": 16559,
+          "powerHpOrKw": 12275,
+          "power30MinKw": 4309,
+          "year": 5096
+        },
+        "remaining": 24200,
+        "completePercent": 0.01,
+        "remainingPercent": 99.99
+      },
+      "unknown": {
+        "variants": 3871,
+        "requiredValuesPresent": 0,
+        "requiredValuesSupported": 0,
+        "power30MinPresent": 3,
+        "power30MinSupported": 0,
+        "missing": {
+          "trim": 248,
+          "fuel": 2073,
+          "powertrainKind": 3871,
+          "year": 779
+        },
+        "unsupported": {
+          "year": 564,
+          "trim": 1301,
+          "fuel": 271
+        },
+        "remaining": 3871,
+        "completePercent": 0,
+        "remainingPercent": 100
+      }
+    },
+    "scope": "Existing permanent encyclopedia only; required field coverage is not proof of exact offer matching or a completed price calculation.",
+    "total": {
+      "brands": 271,
+      "models": 4451,
+      "variants": 345396,
+      "requiredValuesPresent": 49842,
+      "requiredValuesSupported": 48195
+    }
+  },
+  "astra-release-verification.json": {
+    "version": 1,
+    "indexDigest": "bd6556d39b1943d7c055d122a415883bdd899667d6f5921d14f04ffb028f2b20",
+    "manifestDigest": "eec8e463217e99c1478b4f85fb7ecca29c556d68fbeaf13c40fd4967477e024e",
+    "verified": true,
+    "plans": [
+      {
+        "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+        "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+        "plans": 1,
+        "models": 2895,
+        "annualVariants": 5,
+        "calculationFields": 31,
+        "descriptiveFields": 1,
+        "unknownYearVariantsOutsideIndex": 230447
+      },
+      {
+        "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+        "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+        "plans": 1,
+        "models": 153,
+        "annualVariants": 3854,
+        "calculationFields": 20820,
+        "descriptiveFields": 55,
+        "unknownYearVariantsOutsideIndex": 84733
+      },
+      {
+        "planDigest": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
+        "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+        "plans": 1,
+        "models": 22,
+        "annualVariants": 62,
+        "calculationFields": 245,
+        "descriptiveFields": 6,
+        "unknownYearVariantsOutsideIndex": 5277
+      }
+    ]
+  },
+  "referenceReuse": {
+    "workflow": 40119182400,
+    "job": 120946786529,
+    "mode": "preview",
+    "guardTests": "success",
+    "status": "in_progress",
+    "savedFields": 0,
+    "planDigest": null,
+    "next": "Дождаться terminal, прочитать artifact encyclopedia-reference-reuse, проверить все изменения и planDigest. Не ставить второй preview/apply. При нулевой дельте записать0; при ошибке разобрать точныйlog."
+  },
+  "publicReads": {
+    "health": "timeout25s",
+    "a3": "timeout25s",
+    "japan": "timeout25s",
+    "meaning": "Не доказательство отсутствия данных; новый installed SHA не подтверждён."
+  },
+  "next": "После live scoped-v1 и свежей очереди/lease один repair. Новые ASTRA планы/collectors не запускать. Существующий источник8403 и27-row курсор сохранены; неизвестный30min не угадывать.",
+  "countsCaution": "Coverage включает source-only записи без модельного года; это не число рассчитанных объявлений и не новые добавленные значения."
+}
