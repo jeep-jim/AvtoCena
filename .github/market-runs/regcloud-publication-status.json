@@ -1,5 +1,5 @@
 {
-  "requestedAt": "2026-10-24T21:01:33Z",
+  "requestedAt": "2026-10-24T22:04:36.856462+00:00",
   "inspectBudgetSelectors": true,
-  "reason": "Read actual current lease and selector generation after the previous lease expiry; China remains active. No lock mutation, release or repair."
+  "reason": "Fresh actual lease/generation/selectors while China remains publishing; read-only, no unlock/deploy."
 }
