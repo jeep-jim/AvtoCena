@@ -1,1 +1,7 @@
-{"readOnly":true,"reason":"Owner requested actual market and powertrain price counts"}
+{
+  "readOnly": true,
+  "reason": "Measure five-market delivered totals and powertrain counts after the final specification-matching release price preparation",
+  "targetRelease": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
+  "targetWorkflow": 40068425827,
+  "requestedAt": "2026-10-24T13:42:54.130404+07:00"
+}

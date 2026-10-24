@@ -1,0 +1,131 @@
+{
+  "version": 3,
+  "createdAt": "2026-10-24T06:15:27.036Z",
+  "indexDigest": "8b3f26cd58af545ff0f380bb3ae5b2d0dbb7b3444c1dcf9f0f66a54dfe22b5db",
+  "manifestDigest": "3d40827916ea7c2491b4c7c6a906afd2a1ed23c10a0ea011af007fb66d7016c4",
+  "total": {
+    "brands": 271,
+    "models": 4451,
+    "variants": 345396,
+    "requiredValuesPresent": 49810,
+    "requiredValuesSupported": 48153
+  },
+  "byPowertrain": {
+    "combustion": {
+      "variants": 259597,
+      "requiredValuesPresent": 49738,
+      "requiredValuesSupported": 48081,
+      "power30MinPresent": 0,
+      "power30MinSupported": 0,
+      "missing": {
+        "trim": 23448,
+        "engineCc": 10747,
+        "powerHpOrKw": 14097,
+        "year": 173913,
+        "fuel": 572
+      },
+      "unsupported": {
+        "year": 36639,
+        "fuel": 210524,
+        "powertrainKind": 210561,
+        "engineCc": 200194,
+        "powerHpOrKw": 196537,
+        "trim": 187104
+      },
+      "remaining": 211516,
+      "completePercent": 18.52,
+      "remainingPercent": 81.48
+    },
+    "hybrid": {
+      "variants": 57721,
+      "requiredValuesPresent": 70,
+      "requiredValuesSupported": 70,
+      "power30MinPresent": 10953,
+      "power30MinSupported": 72,
+      "missing": {
+        "power30MinKw": 46768,
+        "trim": 1616,
+        "powerHpOrKw": 47577,
+        "engineCc": 1465,
+        "year": 44295,
+        "fuel": 21
+      },
+      "unsupported": {
+        "year": 3167,
+        "fuel": 47441,
+        "powertrainKind": 47462,
+        "engineCc": 46200,
+        "powerHpOrKw": 1455,
+        "trim": 45846,
+        "power30MinKw": 10881
+      },
+      "remaining": 57651,
+      "completePercent": 0.12,
+      "remainingPercent": 99.88
+    },
+    "electric": {
+      "variants": 24203,
+      "requiredValuesPresent": 2,
+      "requiredValuesSupported": 2,
+      "power30MinPresent": 4311,
+      "power30MinSupported": 2,
+      "missing": {
+        "power30MinKw": 19892,
+        "trim": 5346,
+        "year": 11460,
+        "powerHpOrKw": 7218,
+        "fuel": 20
+      },
+      "unsupported": {
+        "year": 6030,
+        "fuel": 17470,
+        "powertrainKind": 17490,
+        "powerHpOrKw": 12439,
+        "trim": 12144,
+        "power30MinKw": 4309
+      },
+      "remaining": 24201,
+      "completePercent": 0.01,
+      "remainingPercent": 99.99
+    },
+    "unknown": {
+      "variants": 3875,
+      "requiredValuesPresent": 0,
+      "requiredValuesSupported": 0,
+      "power30MinPresent": 3,
+      "power30MinSupported": 0,
+      "missing": {
+        "trim": 248,
+        "fuel": 2074,
+        "powertrainKind": 3875,
+        "year": 779
+      },
+      "unsupported": {
+        "year": 774,
+        "trim": 1305,
+        "fuel": 274
+      },
+      "remaining": 3875,
+      "completePercent": 0,
+      "remainingPercent": 100
+    }
+  },
+  "scope": "Existing permanent encyclopedia only; required field coverage is not proof of exact offer matching or a completed price calculation.",
+  "release": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
+  "workflow": 40068425827,
+  "artifact": 12550143439,
+  "artifactSha256": "b324d28c85e849e76db7736fdf3d624bd5e59f58f71c220f461bb315e5539d18",
+  "astraVerified": true,
+  "astraPlans": [
+    {
+      "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+      "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+      "plans": 1,
+      "models": 2895,
+      "annualVariants": 5,
+      "calculationFields": 31,
+      "descriptiveFields": 1,
+      "unknownYearVariantsOutsideIndex": 230447
+    }
+  ]
+}
