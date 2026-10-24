@@ -32943,7 +32943,7 @@
         "nativeExact": 2,
         "nativeHeld": [],
         "apiReadback": true,
-        "includedInIndex": false,
+        "includedInIndex": true,
         "afterRevision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-pass.json",
         "publicParity": {
@@ -32951,7 +32951,9 @@
           "offers": 4,
           "comparisons": 52,
           "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-public-parity.json"
-        }
+        },
+        "activatedRelease": "d80b8407334ae2d09519a2c895947c68f03a28e8",
+        "publicReleaseGate": true
       },
       {
         "batch": "research-2026-10-24-berlingo-japan-2023-technical",
@@ -32962,9 +32964,11 @@
         "newVariants": 4,
         "fields": 40,
         "apiReadback": true,
-        "includedInIndex": false,
+        "includedInIndex": true,
         "afterRevision": "b6ca03b3-408b-4b64-912e-19c2d5f1f613",
-        "report": "docs/encyclopedia/reports/2026-10-24-japan-technical-activation.json"
+        "report": "docs/encyclopedia/reports/2026-10-24-japan-technical-activation.json",
+        "activatedRelease": "d80b8407334ae2d09519a2c895947c68f03a28e8",
+        "publicReleaseGate": true
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-pass.json",
@@ -37695,16 +37699,16 @@
     },
     "researchWriteCoordination": {
       "observedMain": "81e96a5f64e0488c749c5075d4a84740e261c940",
-      "writesPaused": true,
-      "reason": "Single coordinated Japan technical-identity release requested; pause research mutations until immutable snapshot and membership artifact verified.",
+      "writesPaused": false,
+      "reason": "Release d80b840 installed; immutable artifact SHA verified and public batch gate passed.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
         "UI changes",
         "full China collection"
       ],
-      "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-24T10:42:31.962436+07:00",
+      "newBatchAwaitingNextIndex": false,
+      "checkedAt": "2026-10-24T11:43:11.994252+07:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37724,7 +37728,7 @@
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
       },
       "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json",
-      "isolatedRelease": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+      "isolatedRelease": "d80b8407334ae2d09519a2c895947c68f03a28e8",
       "postSnapshotCamry": {
         "workflow": 39925160057,
         "fields": 8,
@@ -37759,7 +37763,7 @@
       "pendingReleaseWorkflow": null,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
-        "state": "paused_for_verified_snapshot",
+        "state": "released_after_verified_snapshot",
         "workflow": 39972729425,
         "job": 120479350486,
         "mode": "apply",
@@ -37774,9 +37778,9 @@
         "previewAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-astra-preview-acceptance.json",
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       },
-      "lastCompletedReleaseWorkflow": 40052647125,
-      "pendingRelease": "requested_japan_technical_identity",
-      "isolatedIndexDigest": "1b5c4adae4c01317eebd86707dd802d008bbaaf70512eaa7d86976f08efeb75c",
+      "lastCompletedReleaseWorkflow": 40061172533,
+      "pendingRelease": null,
+      "isolatedIndexDigest": "5c71ef244646ad8132908b469edde4d4615b0a477b756684fea3769f8b762d98",
       "isolationReport": "docs/encyclopedia/reports/2026-10-24-unified-index-isolation.json",
       "deferredNextRelease": {
         "report": "docs/encyclopedia/reports/2026-10-24-next-release-writer-coordination.json",
