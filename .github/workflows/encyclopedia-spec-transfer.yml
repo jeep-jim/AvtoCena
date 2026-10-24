@@ -23,7 +23,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/encyclopedia-technical-match.test.ts tests/encyclopedia-calculation-index.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/encyclopedia-spec-consensus.test.ts tests/encyclopedia-technical-match.test.ts tests/encyclopedia-calculation-index.test.ts
       - name: Compare installed facts against all saved markets and Japanese cache
         env:
           JSON_STORAGE_DRIVER: object

@@ -29,7 +29,7 @@ const report={checkedAt:new Date().toISOString(),indexDigest:index.digest,genera
 function identityCode(raw){return raw.chassisCode||raw.operational?.chassisCode;}
 function inspect(raw){
  const source=applyUaeManualSpecifications(raw),before=applyEncyclopediaCalculation(source,index,{technicalIdentity:true}),after=applyEncyclopediaCalculation(source,index,{technicalIdentity:true,specificationIdentity:true});
- const r=report.markets[raw.market]||={rows:0,withTechnicalCode:0,modelYearKnown:0,baselineMatched:0,technicalMatched:0,newlyFilledRecords:0,newlyFilledFields:0,newlyCompleteSpecifications:0,japanPreviewBefore:0,japanPreviewAfter:0};r.rows++;
+ const r=report.markets[raw.market]||={rows:0,withTechnicalCode:0,modelYearKnown:0,baselineMatched:0,technicalMatched:0,newlyFilledRecords:0,newlyFilledFields:0,newlyCompleteSpecifications:0,newlyCompletePending:0,newlyFilledByField:{},newlyCompleteByPowertrain:{},japanPreviewBefore:0,japanPreviewAfter:0};r.rows++;
  r.withTechnicalCode+=Number(Boolean(source.chassisCode||source.engineCode||source.operational?.chassisCode));
  r.modelYearKnown+=Number((index.models[modelKey(raw.make,raw.model)]||[]).some(v=>v.year===raw.year));
  r.baselineMatched+=Number(Boolean(before.operational?.encyclopediaCalculation));r.technicalMatched+=Number(after.operational?.encyclopediaCalculation?.matchMethod==='specification_consensus');
@@ -37,8 +37,8 @@ function inspect(raw){
  const facts=index.models[modelKey(raw.make,raw.model)]||[],annual=facts.filter(v=>v.year===raw.year);
  report.japanMissingLinks.push({id:raw.id,make:raw.make,model:raw.model,year:raw.year,trim:raw.trim,chassisCode:identityCode(source),engineCc:source.engineCc,fuel:source.fuel,transmission:source.transmission,factsForModel:facts.length,factsForYear:annual.length,withChassis:annual.filter(v=>v.constraints.chassisCode).length,donorExamples:annual.slice(0,3).map(v=>({trim:v.trims,chassisCode:v.constraints.chassisCode,engineCode:v.constraints.engineCode}))});
  }
- const fields=factFields.filter(f=>!before[f]&&after[f]);r.newlyFilledRecords+=Number(fields.length>0);r.newlyFilledFields+=fields.length;
- r.newlyCompleteSpecifications+=Number(!specificationEvidenceComplete(before)&&specificationEvidenceComplete(after));
+ const fields=factFields.filter(f=>!before[f]&&after[f]);r.newlyFilledRecords+=Number(fields.length>0);r.newlyFilledFields+=fields.length;for(const f of fields)r.newlyFilledByField[f]=(r.newlyFilledByField[f]||0)+1;
+ const newlyComplete=!specificationEvidenceComplete(before)&&specificationEvidenceComplete(after);r.newlyCompleteSpecifications+=Number(newlyComplete);if(newlyComplete){r.newlyCompleteByPowertrain[after.powertrainKind||'unknown']=(r.newlyCompleteByPowertrain[after.powertrainKind||'unknown']||0)+1;if(!(Number(raw.totalRub)>0&&raw.catalogPricingMode!=='seller'))r.newlyCompletePending++;}
  if(raw.market==='japan'){try{japanPreviewParameters(before);r.japanPreviewBefore++;}catch{}try{japanPreviewParameters(after);r.japanPreviewAfter++;}catch{}}
  if(fields.length&&report.samples.filter(x=>x.market===raw.market).length<20)report.samples.push({id:raw.id,market:raw.market,make:raw.make,model:raw.model,year:raw.year,trim:raw.trim,chassisCode:source.chassisCode||source.operational?.chassisCode,engineCode:source.engineCode,fields,values:Object.fromEntries(fields.map(f=>[f,after[f]]))});
 }
