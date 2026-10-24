@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T17:38:00.447Z",
+  "release": "786a5aa9bb5a2efbc5b3ed395e51f3a2ab84616d",
+  "indexDigest": "bd6556d39b1943d7c055d122a415883bdd899667d6f5921d14f04ffb028f2b20",
+  "manifestDigest": "eec8e463217e99c1478b4f85fb7ecca29c556d68fbeaf13c40fd4967477e024e",
+  "verified": true,
+  "plans": [
+    {
+      "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+      "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+      "plans": 1,
+      "models": 2895,
+      "annualVariants": 5,
+      "calculationFields": 31,
+      "descriptiveFields": 1,
+      "unknownYearVariantsOutsideIndex": 230447
+    },
+    {
+      "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+      "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+      "plans": 1,
+      "models": 153,
+      "annualVariants": 3854,
+      "calculationFields": 20820,
+      "descriptiveFields": 55,
+      "unknownYearVariantsOutsideIndex": 84733
+    },
+    {
+      "planDigest": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
+      "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+      "plans": 1,
+      "models": 22,
+      "annualVariants": 62,
+      "calculationFields": 245,
+      "descriptiveFields": 6,
+      "unknownYearVariantsOutsideIndex": 5277
+    }
+  ],
+  "storageWrites": 0,
+  "sourceRequests": 0,
+  "activationConfirmed": false,
+  "workflow": 40116771159,
+  "job": 120939558921,
+  "workflowConclusion": "success",
+  "publication": {
+    "checkedAt": "2026-10-24T17:35:26.585Z",
+    "generationId": "gen_1792702445675_8c312f85",
+    "writer": {
+      "active": false,
+      "operationType": "catalog_read_model_repair",
+      "operationId": "read-model-repair-bb3d8336-0f92-4122-8422-acc813eff059",
+      "startedAt": "2026-10-24T15:42:48.889Z",
+      "lockedUntil": "2026-10-24T17:22:48.889Z"
+    }
+  },
+  "guardFixPr": 1528,
+  "guardFixMerge": "30aadd126a92acc9ce7b89d34c08bd2cba2740c5",
+  "savedFieldsThisPass": 0,
+  "countsMeaning": "Plan membership assertions, not new saved values, not distinct catalog offers, not public price acceptance."
+}

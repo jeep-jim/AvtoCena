@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T17:34:30Z",
+  "updatedAt": "2026-10-24T17:39:24Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -42895,12 +42895,12 @@
       "repairRequested": false,
       "priorRepair": 40108157776,
       "priorRepairConclusion": "cancelled",
-      "publicationLease": "unknown_after_cancel",
+      "publicationLease": "expired_verified_read_only_2026-10-24T17:35:26.585Z",
       "next": "PR1527/1528 merged. Проверить read-only старый подготовленный индекс и текущий lock; затем один выпуск scoped-v1 reader и только после live подтверждения один guarded repair. Владелец23:52 явно разрешил диагностику и публикацию.",
       "checkpoint": "docs/operations/2026-10-24-bounded-scoped-projections.md"
     },
     "overnightContinuation20261025": {
-      "state": "await_prepared_index_verification",
+      "state": "coordinated_release_requested_after_existing_index_pass",
       "failedRelease": 40112867414,
       "failedReleaseSha": "786a5aa9bb5a2efbc5b3ed395e51f3a2ab84616d",
       "failure": "astra_revision_existing_value_changed:astraMatchEvidence",
@@ -42910,14 +42910,22 @@
       "astraContinuationPr": 1528,
       "savedFieldsThisRun": 0,
       "activationConfirmed": false,
-      "next": "Проверить существующий индекс read-only по всем3 required ASTRA plans; затем один свободный release40/26/3, live scoped-v1, один repair и публичная приёмка. Не повторять ASTRA apply/collectors.",
+      "next": "Сопровождать только новый выпуск, SHA определён commit marker. После live scoped-v1 и свободной очереди один guarded repair; затем pickup-drive-pricing/checkCatalogFeedback и search/detail. Не повторять apply/collectors.",
       "referenceCursorUnchanged": "docs/encyclopedia/research-handoff-2026-10-24-retained-technical-groups.json",
-      "checkedAt": "2026-10-24T17:34:30Z",
+      "checkedAt": "2026-10-24T17:39:24Z",
       "repairPrerequisiteMerge": "1e6440c938a3332a50008d76f9c9e61a915c110c",
       "astraContinuationMerge": "30aadd126a92acc9ce7b89d34c08bd2cba2740c5",
       "astraContinuationCi": 40116008291,
       "astraContinuationCiConclusion": "success",
-      "publicCursorReadback": "A3/A4/A5 requests timed out; no absence inferred"
+      "publicCursorReadback": "A3/A4/A5 requests timed out; no absence inferred",
+      "verificationWorkflow": 40116771159,
+      "verificationJob": 120939558921,
+      "verificationConclusion": "success",
+      "verifiedPlans": 3,
+      "publicationLeaseActive": false,
+      "publicationLeaseCheckedAt": "2026-10-24T17:35:26.585Z",
+      "publicationLeaseReset": false,
+      "report": "docs/encyclopedia/reports/2026-10-25-prepared-astra-verification.json"
     }
   },
   "scope": {
