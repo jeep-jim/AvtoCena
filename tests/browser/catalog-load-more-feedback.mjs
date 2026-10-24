@@ -37,7 +37,7 @@ try{
   const scope=page.locator(width<1024?'.ac-mobile-filter-sheet':'.ac-catalog-filter-panel');
   const checkbox=scope.locator('.ac-electric-filter input[type=checkbox]');await checkbox.check();
   assert.equal(await checkbox.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 210, 31)');
-  const loading=page.locator(width<1024?'.ac-catalog-filter-header-loading':'.ac-catalog-section-loading');await loading.waitFor({state:'visible'});
+  const loading=page.locator('.ac-route-loader[aria-hidden="false"]');await loading.waitFor({state:'visible'});
   // Real request remains unacknowledged; advancing time must not hide the loader.
   if(width===390&&theme==='dark'){await page.clock.install();await page.clock.runFor(16000);assert.ok(await loading.isVisible());}
   await page.waitForURL(/fuel=electrified/);
