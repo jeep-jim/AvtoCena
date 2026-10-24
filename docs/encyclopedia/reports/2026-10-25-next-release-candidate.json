@@ -6,8 +6,9 @@
     "China40124551054 terminal; inspect exact failure if any",
     "no active/pending production release or conflicting writer",
     "PASS: A4 quattro11/API11 and A5 displacement3/API3; do not repeat applies",
-    "Actual fresh lease must be free: China writer was active at2026-10-24T21:02:13.683Z; expires21:29:58.613Z, expiry alone is not proof",
-    "PASS: A3MHEV4/API4 with original public fields/other variants unchanged; batch must be compiled in next index"
+    "PASS: A3MHEV4/API4 with original public fields/other variants unchanged; batch must be compiled in next index",
+    "Actual fresh lease must be free: lastread22:06:35UTC activeChinafc5b3612 heartbeat22:02:31 lockedUntil22:32:31; expiry alone not proof",
+    "PASS:A3PHEV14variants70assertions API70(50new,8corrected,12attested); preserve both batch guards"
   ],
   "markerCandidate": {
     "requiredResearchBatches": [
@@ -54,7 +55,9 @@
       "docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a4-quattro-power-drive.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a5-40tfsi-displacement.json",
-      "docs/encyclopedia/batches/2026-10-25-audi-a3-999-mhev-power.json"
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-999-mhev-power.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-ice-power.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-2021-2023.json"
     ],
     "publicResearchBatches": [
       "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -86,14 +89,16 @@
       "docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a4-quattro-power-drive.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a5-40tfsi-displacement.json",
-      "docs/encyclopedia/batches/2026-10-25-audi-a3-999-mhev-power.json"
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-999-mhev-power.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-ice-power.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-2021-2023.json"
     ],
     "requiredAstraPlanDigests": [
       "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
       "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
       "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
     ],
-    "reason": "After terminal China and freshly verified free publication lease: install scoped-v1 reader plus PR1527/1528/1529, retain all previous guards and include saved reference reuse71434 and A4 mechanical gaps. No repeated collection/import. Verify actual index membership and only then one guarded repair.",
+    "reason": "Coordinated activation of all retained required research/ASTRA and verified reuse559, including AudiPHEV50new/8corrected/12attested. Request only after terminalChina and freshfreelease/currentselectors; no duplicate repair.",
     "ideaReports": []
   },
   "savedReuseDigest": "71434f2a1fab147277b0dd4daf4c0403f10e000f8af220890ac2425e0e10245e",
@@ -104,5 +109,5 @@
     "one chunked repair with current lease and live AJES Japan preflight",
     "counts/parity/details then pinned pickup-drive-pricing/checkCatalogFeedback and actual prices"
   ],
-  "checkedAt": "2026-10-24T21:21:13.098027+00:00"
+  "checkedAt": "2026-10-24T22:21:19.736455+00:00"
 }

@@ -103,6 +103,11 @@
   "certifiedPowerAdded": 0,
   "newModels": 0,
   "state": "saved_public_readback_pass_not_activated",
+  "subsequentBatchReadback": {
+    "checkedAt": "2026-10-24T22:20:36.756481+00:00",
+    "revision": "78a1b805-92ab-42fa-a3c3-eb703664c6d9",
+    "all126PublicRowsUnchangedAfterLaterAnnualBatch": true
+  },
   "workflow": 40137439232,
   "job": 121001852940,
   "conclusion": "success",

@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-24T21:21:13.098027+00:00",
-  "state": "20_remaining_candidates_after_three_manufacturer_batches",
-  "savedFields": 35,
+  "checkedAt": "2026-10-24T22:21:19.736455+00:00",
+  "state": "17_remaining_candidates_after_phev_component_batches",
+  "savedFields": 85,
   "sourceInventoryWorkflow": 40106963530,
   "sourceClassification": "unverified_reference",
   "priority": [
@@ -16,7 +16,7 @@
       "id": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revisionAtReview": "c121ad35-2926-4ecd-825c-d09cbbc7b273",
+      "revisionAtReview": "78a1b805-92ab-42fa-a3c3-eb703664c6d9",
       "year": 2024,
       "sourceModelGroup": "audi/a3",
       "publicRowsChecked": 126,
@@ -132,54 +132,6 @@
             "engineCc"
           ],
           "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
-        {
-          "variantId": "e92bd483447de5b007a572ce",
-          "year": 2024,
-          "trim": "Sportback 40 TFSI e Advanced S-Line",
-          "known": {
-            "engineCc": 1395,
-            "powerHp": 204,
-            "powerKw": 150,
-            "bodyType": "hatchback",
-            "transmission": "automatic"
-          },
-          "missing": [
-            "fuel"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
-        {
-          "variantId": "b4b8e164e959ad294b85fd34",
-          "year": 2024,
-          "trim": "Sportback S-Line 45TFSIe S-Line Interieur",
-          "known": {
-            "engineCc": 1395,
-            "powerHp": 245,
-            "powerKw": 180,
-            "bodyType": "hatchback",
-            "transmission": "automatic"
-          },
-          "missing": [
-            "fuel"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
-        {
-          "variantId": "420d9493f4aa7a04a8f68b9f",
-          "year": 2024,
-          "trim": "Sportback 45 TFSI E S-LINE ACC B&O VIRTUAL KA",
-          "known": {
-            "engineCc": 1395,
-            "powerHp": 245,
-            "powerKw": 180,
-            "bodyType": "hatchback",
-            "transmission": "automatic"
-          },
-          "missing": [
-            "fuel"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
         }
       ]
     },
@@ -220,7 +172,7 @@
           "missing": [
             "engineCc"
           ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+          "reason": "Сохранённая generation=2020–2025 EEA registration observations,Petrol/ICE110кВт бездвигателя/trim. Не доказано,чтоэто2024MHEV35TFSI; нужны сохранённые approval/type/version или точный двигатель. Одингод регистрации не устраняет1.4/2.0 неоднозначность."
         }
       ]
     },
@@ -371,8 +323,8 @@
     }
   ],
   "totalRowsChecked": 470,
-  "candidateRows": 20,
-  "nextAction": "Continue20 unresolved candidates and139 source rows after page2 cursor. This run18 fields/API18; previous run17 unchanged. Existing unnamed research importer merged, but exact private mechanical identity/evidence still required.",
+  "candidateRows": 17,
+  "nextAction": "Do not repeat saved50/corrected8/attested12 or prior35/559reuse. Continue17 precise unresolved2024 identities and final11 retainedrows; inspect private homologation identity for unnamed EEA records before matching. Publication still waits actual terminalChina/freelease.",
   "resolvedCandidates": [
     {
       "variantId": "fc8ef77222122cbe20bfe9af",
@@ -499,115 +451,80 @@
       "missing": [],
       "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
       "batch": "research-2026-10-25-audi-a3-999-mhev-power"
+    },
+    {
+      "variantId": "e92bd483447de5b007a572ce",
+      "year": 2024,
+      "trim": "Sportback 40 TFSI e Advanced S-Line",
+      "known": {
+        "engineCc": 1395,
+        "powerHp": 204,
+        "powerKw": 150,
+        "bodyType": "hatchback",
+        "transmission": "automatic",
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 150,
+        "icePowerKw": 110
+      },
+      "missing": [],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a3-phev-ice-power"
+    },
+    {
+      "variantId": "b4b8e164e959ad294b85fd34",
+      "year": 2024,
+      "trim": "Sportback S-Line 45TFSIe S-Line Interieur",
+      "known": {
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "bodyType": "hatchback",
+        "transmission": "automatic",
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "missing": [],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a3-phev-ice-power"
+    },
+    {
+      "variantId": "420d9493f4aa7a04a8f68b9f",
+      "year": 2024,
+      "trim": "Sportback 45 TFSI E S-LINE ACC B&O VIRTUAL KA",
+      "known": {
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "bodyType": "hatchback",
+        "transmission": "automatic",
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "missing": [],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a3-phev-ice-power"
     }
   ],
   "retainedPage": {
-    "checkedAt": "2026-10-24T21:11:51.874545+00:00",
-    "workflow": 40132396999,
-    "job": 120986695412,
-    "conclusion": "success",
-    "artifact": 12575153749,
-    "artifactSha256": "fa162bde65b8ab8c30df0da0e4f539bbf02fee61c17c4f8ff7ebe07cb2fe7ad7",
-    "recordsRead": 8403,
+    "checkedAt": "2026-10-24T22:21:19.736455+00:00",
+    "workflow": 40137668376,
+    "job": 121002531909,
+    "artifact": 12577782656,
+    "artifactSha256": "c8937bed9bcde729a22a5e6dfc95ae042f0e6dac9d4c91b638a89b87f88003bd",
+    "report": "docs/encyclopedia/reports/2026-10-25-retained-reference-page4-review.json",
+    "reviewedRowsCumulative": 256,
+    "remainingSourceRows": 11,
+    "nextAfterDigest": "f30b762e2aaa933dea0f086332dc10261186f1ded254715f2649b3731b5e430c",
     "recordSnapshotDigest": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
-    "checkpoint": {
-      "digest": "974674b4505d07ca1320702be93136afd94936ef6ee9727c5616ad55eb00cd94",
-      "saved": 8403,
-      "visited": 13045,
-      "pending": 253,
-      "updatedAt": "2026-10-22T19:38:18.897Z",
-      "failures": [
-        {
-          "at": "2026-10-22T09:14:03.805Z",
-          "category": "unclassified"
-        },
-        {
-          "at": "2026-10-22T19:38:18.897Z",
-          "category": "redirect_outside_catalog"
-        }
-      ]
-    },
-    "checkpointCountMatches": true,
-    "page": 2,
-    "groups": [
-      "audi/a3",
-      "audi/a4",
-      "audi/a5"
-    ],
-    "year": 2024,
-    "reviewedRows": 64,
-    "reviewedTotal": 128,
-    "groupsOnPage": {
-      "audi/a5": 33,
-      "audi/a3": 26,
-      "audi/a4": 5
-    },
-    "noOverlapWithPage1": true,
-    "remainingAfterPage": 139,
-    "nextAfterDigest": "714c337c099923f271da4618f98592b51f472e2fde9074d27efdeed0a29c4aa1",
-    "supplierRequests": 0,
-    "storageWrites": 0,
-    "verifiedFieldsAdded": 0,
-    "sourceClassification": "unverified_reference",
-    "findings": [
-      "A3 includes1395/150PS DJS/DLE;1498/116PS and150PS DXD;1498/160PS DSV fromNovember2024. A year/model badge alone cannot settle displacement or power.",
-      "A3 existing999cc candidate can be researched against DLAA/DLA110PS/81kW manufacturer documentation; retained table is not yet approved proof.",
-      "A5 preserved1984 petrol records include190/140,204/150,261/192,265/195. Unit/variant differences remain unresolved; no automatic power transfer.",
-      "A5 source545691 labelsF5A coupe and434749 labelsF57 liftback: require individual source reconciliation before chassis/body/drive mapping.",
-      "A4 DMS/3AA-8WDEM1984/110kW/FWD records offer a research lead for the unnamed110kW existing row. Exact private identity and manufacturer consensus are still required.",
-      "No source access failures bypassed; intake checkpoint unchanged with253 pending afterredirect_outside_catalog."
-    ],
-    "evidenceRefs": [
-      {
-        "url": "https://www.drom.ru/catalog/audi/a5/434457/",
-        "recordDigest": "3b299d09ef8ff538b82f33b17e052be7bb0a22a63758668b04edbfadbaf35753",
-        "contentDigest": "b170e6476bbb73e53b5e406d9ae8a7b05311a0b9f15cb72d56482fdc9e4759d6",
-        "retrievedAt": "2026-10-22T13:29:43.167Z",
-        "period": "ноябрь 2018 - 2024"
-      },
-      {
-        "url": "https://www.drom.ru/catalog/audi/a5/545691/",
-        "recordDigest": "3fe8f2159a65cd7b8a95e4fb8aea74cb300ddaf5d73006c8578fdb59278a0283",
-        "contentDigest": "ed7119d4f283c6868d37160d2acd1204a7a3d5356553f3190ef0f32b287bc88c",
-        "retrievedAt": "2026-10-22T13:38:49.419Z",
-        "period": "2020 - 2024"
-      },
-      {
-        "url": "https://www.drom.ru/catalog/audi/a5/434749/",
-        "recordDigest": "45f80accaaf43e63bc08d11f5cb42a10d32430091668a928e632caef30862293",
-        "contentDigest": "7e4abab91ed20ed06ab64091b9c2afafb12818fbbc9d27027ba1123485f73672",
-        "retrievedAt": "2026-10-22T13:33:40.221Z",
-        "period": "ноябрь 2018 - 2024"
-      },
-      {
-        "url": "https://www.drom.ru/catalog/audi/a4/451214/",
-        "recordDigest": "462ec9c655f429ba8b90eca18032d89d51c3b4ec3b08e2bfc19449759847c28b",
-        "contentDigest": "d5bf0b20c1b48da6ba907849c3825fd6b311a3971c5346458d5cff415ee6724f",
-        "retrievedAt": "2026-10-22T09:08:03.015Z",
-        "period": "2022 - 2025"
-      },
-      {
-        "url": "https://www.drom.ru/catalog/audi/a3/542186/",
-        "recordDigest": "4989b3d163879e6be3be82f6bf2d799f545f5df8bb70c13cb6dce0a5283a6950",
-        "contentDigest": "9de772e41b0308770e33298b318e425081f5c35f4483c02991dece5768b15d50",
-        "retrievedAt": "2026-10-22T07:14:05.408Z",
-        "period": "2024 - 2026"
-      },
-      {
-        "url": "https://www.drom.ru/catalog/audi/a3/509406/",
-        "recordDigest": "4d906090e7d4f98d9ddd91d296b51c35db1081ca7beb6bb7d03865462ade0902",
-        "contentDigest": "31290c0617f2865abf800c8b01ef4961a79211daacf3e5b0c6436b9e363a1a8a",
-        "retrievedAt": "2026-10-22T07:08:10.721Z",
-        "period": "ноябрь 2020 - 2024"
-      },
-      {
-        "url": "https://www.drom.ru/catalog/audi/a3/548915/",
-        "recordDigest": "5c8376288a89d7dfd0ad2366ce966a3ca293e5e42af524984fc3d6f8f87a5876",
-        "contentDigest": "35370ed26b22f6d9d4539ff118eb5a28f2d2192617e02588a595e59b9d36adab",
-        "retrievedAt": "2026-10-22T07:18:51.117Z",
-        "period": "ноябрь 2024 - октябрь 2025"
-      }
-    ]
+    "verifiedFieldsAdded": 0
   },
   "additionalRetries": [
     {
@@ -679,5 +596,19 @@
     "targetTests": 14,
     "fullTests": 2524,
     "typecheck": "pass"
+  },
+  "savedCorrectedValues": 8,
+  "additionalAnnualReview": {
+    "model": "Audi A3",
+    "years": [
+      2021,
+      2022,
+      2023
+    ],
+    "publicRowsChecked": 625,
+    "savedVariants": 11,
+    "newValues": 38,
+    "correctedValues": 5,
+    "attestedUnchanged": 12
   }
 }

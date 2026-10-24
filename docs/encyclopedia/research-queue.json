@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T21:21:13.098027+00:00",
+  "updatedAt": "2026-10-24T22:21:19.736455+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T17:43:16Z",
+    "updatedAt": "2026-10-24T22:21:19.736455+00:00",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -33055,6 +33055,40 @@
         "afterRevision": "c121ad35-2926-4ecd-825c-d09cbbc7b273",
         "apiReadback": true,
         "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-mhev-readback.json"
+      },
+      {
+        "batch": "research-2026-10-25-audi-a3-phev-ice-power",
+        "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-ice-power.json",
+        "sha256": "184d7d6bf9be73e3b4ea852f4c1280150cea867a09d158e5d96c0f85d16047e7",
+        "state": "saved_api_readback_pass_pending_next_index",
+        "modelId": "f40e34e905b8ca09f3636eda",
+        "variants": 3,
+        "fields": 15,
+        "newValues": 12,
+        "correctedValues": 3,
+        "attestedUnchanged": 0,
+        "workflow": 40137439232,
+        "job": 121001852940,
+        "afterRevision": "5962b59e-60c6-49d5-baa7-072c2b46e1a2",
+        "apiReadback": true,
+        "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-phev-2024-readback.json"
+      },
+      {
+        "batch": "research-2026-10-25-audi-a3-phev-2021-2023",
+        "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-2021-2023.json",
+        "sha256": "8bc601e3786512a881e3e92fbb19251cada92639f48f9f727c6a3085ae3ad8c2",
+        "state": "saved_api_readback_pass_pending_next_index",
+        "modelId": "f40e34e905b8ca09f3636eda",
+        "variants": 11,
+        "fields": 55,
+        "newValues": 38,
+        "correctedValues": 5,
+        "attestedUnchanged": 12,
+        "workflow": 40137808086,
+        "job": 121002949989,
+        "afterRevision": "78a1b805-92ab-42fa-a3c3-eb703664c6d9",
+        "apiReadback": true,
+        "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-phev-2021-2023-readback.json"
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
@@ -42908,7 +42942,7 @@
       ],
       "year": 2024,
       "rowsChecked": 470,
-      "candidateRows": 20,
+      "candidateRows": 17,
       "fields": [
         "fuel",
         "engineCc",
@@ -42916,17 +42950,19 @@
         "documentedPower30MinKw",
         "drive"
       ],
-      "state": "128_retained_rows_reviewed_20_candidates_remaining",
-      "savedFields": 35,
+      "state": "256_retained_rows_reviewed_17_candidates_remaining",
+      "savedFields": 85,
       "broadBodyCaution": "Passenger car — общая категория, не точный кузов. Анонимный API не доказывает отсутствие приватных homologation IDs; проверить сохранённую идентичность, не угадывать.",
       "residualPlanChecked": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
       "targetModelsChangedByResidualPlan": 0,
       "reason": "A3 999cc MHEV candidate resolved using official MY2024 and both factory body tables; unknown body preserved. Previous A4/A5 batches not repeated.",
-      "remainingSourceRows": 139,
-      "nextAfterDigest": "714c337c099923f271da4618f98592b51f472e2fde9074d27efdeed0a29c4aa1",
-      "workflow": 40132396999,
-      "artifact": 12575153749,
-      "report": "docs/encyclopedia/reports/2026-10-25-retained-reference-page2-review.json"
+      "remainingSourceRows": 11,
+      "nextAfterDigest": "f30b762e2aaa933dea0f086332dc10261186f1ded254715f2649b3731b5e430c",
+      "workflow": 40137668376,
+      "artifact": 12577782656,
+      "report": "docs/encyclopedia/reports/2026-10-25-retained-reference-page4-review.json",
+      "correctedValues": 8,
+      "reviewedReferenceRows": 256
     },
     "installedAcceptance": {
       "pr": 1522,
@@ -42968,7 +43004,7 @@
       "checkpoint": "docs/operations/2026-10-24-bounded-scoped-projections.md"
     },
     "overnightContinuation20261025": {
-      "state": "saved18_api18_unnamed_importer_merged_wait_china",
+      "state": "saved50_corrected8_api70_wait_china",
       "failedRelease": 40117114655,
       "failedReleaseSha": "304b270cfd2b14be47b579f268d8c0d92df7dc17",
       "failure": "object_storage_PUT_unreachable: budget-markets-v2/china.json bytes=79256913",
@@ -42976,11 +43012,11 @@
       "preparedManifestDigest": "eec8e463217e99c1478b4f85fb7ecca29c556d68fbeaf13c40fd4967477e024e",
       "repairPrerequisitePr": 1527,
       "astraContinuationPr": 1528,
-      "savedFieldsThisRun": 18,
+      "savedFieldsThisRun": 50,
       "activationConfirmed": false,
-      "next": "Do not repeat saved18/previous17/559reuse. TerminalChina40124551054 and exact log if failure; then fresh lease/generation/selectors/all queues. Prepared44required/30public/3ASTRA; one release, actualscoped-v1 then oneguardedrepair and publicacceptance.",
+      "next": "TerminalChina40124551054+exactlogiferror;freshlease/generation/selectors/allqueues;one46required/32public/3ASTRA release preserving559reuse;actualscoped-v1 then oneguardedrepair and pinnedpublicacceptance. Do not repeat70assertions. Nextresearch17identities+11savedreference rows.",
       "referenceCursorUnchanged": "docs/encyclopedia/research-handoff-2026-10-24-retained-technical-groups.json",
-      "checkedAt": "2026-10-24T21:21:13.098027+00:00",
+      "checkedAt": "2026-10-24T22:21:19.736455+00:00",
       "repairPrerequisiteMerge": "1e6440c938a3332a50008d76f9c9e61a915c110c",
       "astraContinuationMerge": "30aadd126a92acc9ce7b89d34c08bd2cba2740c5",
       "astraContinuationCi": 40116008291,
@@ -43024,7 +43060,17 @@
       "referenceReviewArtifact": 12574666229,
       "blockingBudgetWriterConclusion": "cancelled",
       "blockingDeferredBudgetRun": 40124848897,
-      "blockingChinaWorkflow": 40124551054
+      "blockingChinaWorkflow": 40124551054,
+      "correctedValuesThisRun": 8,
+      "attestedUnchangedThisRun": 12,
+      "latestHealth": {
+        "checkedAt": "2026-10-24T22:17:22.980129+00:00",
+        "status": 200,
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+        "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+      }
     },
     "savedReferenceReuse20261025": {
       "planDigest": "71434f2a1fab147277b0dd4daf4c0403f10e000f8af220890ac2425e0e10245e",
@@ -43119,6 +43165,57 @@
       "targetTests": 14,
       "fullTests": 2524,
       "typecheck": "pass"
+    },
+    "audiA3PhevComponentPass": {
+      "state": "saved_api70_pending_activation",
+      "newValues": 50,
+      "correctedValues": 8,
+      "attestedUnchanged": 12,
+      "variants": 14,
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "batches": [
+        {
+          "batch": "research-2026-10-25-audi-a3-phev-ice-power",
+          "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-ice-power.json",
+          "sha256": "184d7d6bf9be73e3b4ea852f4c1280150cea867a09d158e5d96c0f85d16047e7",
+          "state": "saved_api_readback_pass_pending_next_index",
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variants": 3,
+          "fields": 15,
+          "newValues": 12,
+          "correctedValues": 3,
+          "attestedUnchanged": 0,
+          "workflow": 40137439232,
+          "job": 121001852940,
+          "afterRevision": "5962b59e-60c6-49d5-baa7-072c2b46e1a2",
+          "apiReadback": true,
+          "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-phev-2024-readback.json"
+        },
+        {
+          "batch": "research-2026-10-25-audi-a3-phev-2021-2023",
+          "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-2021-2023.json",
+          "sha256": "8bc601e3786512a881e3e92fbb19251cada92639f48f9f727c6a3085ae3ad8c2",
+          "state": "saved_api_readback_pass_pending_next_index",
+          "modelId": "f40e34e905b8ca09f3636eda",
+          "variants": 11,
+          "fields": 55,
+          "newValues": 38,
+          "correctedValues": 5,
+          "attestedUnchanged": 12,
+          "workflow": 40137808086,
+          "job": 121002949989,
+          "afterRevision": "78a1b805-92ab-42fa-a3c3-eb703664c6d9",
+          "apiReadback": true,
+          "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-phev-2021-2023-readback.json"
+        }
+      ],
+      "newModels": 0,
+      "certifiedPowerAdded": 0
     }
   },
   "scope": {
