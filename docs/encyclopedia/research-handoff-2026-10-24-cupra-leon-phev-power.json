@@ -1,7 +1,7 @@
 {
   "version": 1,
   "checkedAt": "2026-10-24T14:49:48.607366+00:00",
-  "state": "prepared_full_digest_verified_wait_snapshot",
+  "state": "apply_retry_requested_correct_canonical_digest",
   "modelId": "36050a1f4ba506db31d21ffd",
   "make": "Cupra",
   "model": "Leon",
@@ -195,7 +195,7 @@
       "reason": "fuel/kind conflict or absent hybrid identity; preserve existing values pending separate exact review"
     }
   ],
-  "applyRequested": false,
+  "applyRequested": true,
   "releaseSnapshotRequired": 40103448997,
   "preflight": {
     "workflow": 40104265322,
@@ -289,9 +289,17 @@
     ]
   },
   "batch": "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
-  "batchSha256": "d9989cf346efe8c45368efb96f0d6c376257e52403551ed2a65311f2d2d9906d",
+  "batchSha256": "ea8d76d597f983e8a62e545fe346c115a6ce169b412ea3bcd89c993f7c91aa29",
   "fields": 16,
   "validation": {
     "validateBatch": true
+  },
+  "fileSha256": "d9989cf346efe8c45368efb96f0d6c376257e52403551ed2a65311f2d2d9906d",
+  "firstApply": {
+    "workflow": 40104662926,
+    "job": 120903743548,
+    "conclusion": "failure",
+    "reason": "batch_review_digest_mismatch",
+    "storageWrites": 0
   }
 }
