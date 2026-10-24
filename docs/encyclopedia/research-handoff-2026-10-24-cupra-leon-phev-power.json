@@ -1,0 +1,305 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T14:49:48.607366+00:00",
+  "state": "apply_retry_requested_correct_canonical_digest",
+  "modelId": "36050a1f4ba506db31d21ffd",
+  "make": "Cupra",
+  "model": "Leon",
+  "expectedRevision": "4f368bf7-60be-573b-a100-1d3d57b3da5b",
+  "source": {
+    "type": "manufacturer",
+    "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+    "sha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+    "page": 44,
+    "checkedAt": "2026-10-24",
+    "selector": "Printed86–87, ENGINE versus ELECTRIC ENGINE versus COMBINED SYSTEM; 1.4 TSI e-HYBRID204/245 columns,1395cc",
+    "supportingUrl": "https://www.seat-cupra-mediacenter.com/CUPRA-Brand/presskits/CUPRA-Leon-Driving-Experience/powertrains",
+    "supportingDate": "2021-06-28"
+  },
+  "proposedPatch": {
+    "icePowerKw": 110,
+    "motorPeakKw": 85
+  },
+  "power30MinKw": null,
+  "note": "Только отсутствующие мощности отдельных двигателей. Одинаковые110кВтДВС/85кВтпиковогоэлектромотора подтвержденыдляобеихсистем204/245PS. 85кВтне30min. СуществующиеpowerHp/powerKw/fuel/kind/trimнеизменять. Без новых вариантов.",
+  "candidates": [
+    {
+      "id": "50812b3b593469303a8e4e0b",
+      "markets": [],
+      "status": "observed",
+      "observedCount": 1,
+      "year": 2021,
+      "engineCc": 1395,
+      "powerHp": 245,
+      "powerKw": 180,
+      "trim": "1.4 e-Hybrid Sportstourer VZ Business | Pano | Sfe",
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "transmission": "automatic"
+    },
+    {
+      "id": "cb43e32cf9e493ec06624c50",
+      "markets": [],
+      "status": "observed",
+      "observedCount": 1,
+      "year": 2022,
+      "engineCc": 1395,
+      "powerHp": 150,
+      "powerKw": 110,
+      "trim": "Cupra Leon Sportstourer 1.4 e-HYBRID 150kW DSG",
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "transmission": "automatic"
+    },
+    {
+      "id": "f1d797cc968a333b16e2054a",
+      "markets": [],
+      "status": "observed",
+      "observedCount": 1,
+      "year": 2022,
+      "engineCc": 1395,
+      "powerHp": 245,
+      "powerKw": 180,
+      "trim": "Sportstourer e-Hybrid 1.4 TSI DSG VZ COPPER DCC...",
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "transmission": "automatic"
+    },
+    {
+      "id": "839824dd02fa5cc47f5258ce",
+      "markets": [],
+      "status": "observed",
+      "observedCount": 1,
+      "year": 2023,
+      "engineCc": 1395,
+      "powerHp": 245,
+      "powerKw": 180,
+      "trim": "1.4 e-Hybrid 245pk DSG-6 Adrenaline",
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "transmission": "automatic"
+    },
+    {
+      "id": "db9ca8bda2f8450044eefd7e",
+      "markets": [],
+      "status": "observed",
+      "observedCount": 1,
+      "year": 2023,
+      "engineCc": 1395,
+      "powerHp": 245,
+      "powerKw": 180,
+      "trim": "1.4 e-hybrid VZ 245cv dsg PLUG-IN",
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "transmission": "automatic"
+    },
+    {
+      "id": "bc1ab97beb1f7a4f92a50822",
+      "markets": [],
+      "status": "review",
+      "observedCount": 1,
+      "year": 2024,
+      "engineCc": 1395,
+      "trim": "VZ e-Hybrid Pano Navi Ambiente SOH 98,5%",
+      "bodyType": "wagon",
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "transmission": "automatic",
+      "drive": "fwd",
+      "engineCode": "DGE"
+    },
+    {
+      "id": "5726c26b3e79069b5643a5da",
+      "markets": [],
+      "status": "observed",
+      "observedCount": 1,
+      "year": 2024,
+      "engineCc": 1395,
+      "powerHp": 150,
+      "powerKw": 110,
+      "trim": "Sportstourer e-Hybrid",
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "transmission": "automatic"
+    },
+    {
+      "id": "f15ca17832ab2a9afc88a35a",
+      "markets": [],
+      "status": "observed",
+      "observedCount": 1,
+      "year": 2024,
+      "engineCc": 1395,
+      "powerHp": 245,
+      "powerKw": 180,
+      "trim": "Sportstourer 1.4 TSI eHybrid DSG VZ 5-J-GAR KAMERA",
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "transmission": "automatic"
+    }
+  ],
+  "held": [
+    {
+      "variantId": "f28dde84789c9a658698880a",
+      "year": 2021,
+      "trim": null,
+      "fuel": "Petrol",
+      "powertrainKind": "ICE",
+      "reason": "fuel/kind conflict or absent hybrid identity; preserve existing values pending separate exact review"
+    },
+    {
+      "variantId": "cab415a0e4872ed7753fa366",
+      "year": 2022,
+      "trim": null,
+      "fuel": "Petrol",
+      "powertrainKind": "ICE",
+      "reason": "fuel/kind conflict or absent hybrid identity; preserve existing values pending separate exact review"
+    },
+    {
+      "variantId": "81516fa03fc3814278375a8d",
+      "year": 2022,
+      "trim": "VZ e-Hybrid 1.4 TSI AHK/VIRTUAL/LED",
+      "fuel": null,
+      "powertrainKind": null,
+      "reason": "fuel/kind conflict or absent hybrid identity; preserve existing values pending separate exact review"
+    },
+    {
+      "variantId": "60bba83ebcc09002e44f543b",
+      "year": 2022,
+      "trim": "Sportstourer VZ 1.4 e-HYBRID*RFK*LED*Navi",
+      "fuel": null,
+      "powertrainKind": null,
+      "reason": "fuel/kind conflict or absent hybrid identity; preserve existing values pending separate exact review"
+    },
+    {
+      "variantId": "53e1a70f021dde947ab790d2",
+      "year": 2023,
+      "trim": null,
+      "fuel": "Petrol",
+      "powertrainKind": "ICE",
+      "reason": "fuel/kind conflict or absent hybrid identity; preserve existing values pending separate exact review"
+    },
+    {
+      "variantId": "71f703f530cfffea4275ce22",
+      "year": 2024,
+      "trim": null,
+      "fuel": "Petrol",
+      "powertrainKind": "ICE",
+      "reason": "fuel/kind conflict or absent hybrid identity; preserve existing values pending separate exact review"
+    },
+    {
+      "variantId": "9cab264a288276deb10536e6",
+      "year": 2024,
+      "trim": "Sportstourer VZ e-Hybrid Vision+ Assist-XL",
+      "fuel": null,
+      "powertrainKind": null,
+      "reason": "fuel/kind conflict or absent hybrid identity; preserve existing values pending separate exact review"
+    }
+  ],
+  "applyRequested": true,
+  "releaseSnapshotRequired": 40103448997,
+  "preflight": {
+    "workflow": 40104265322,
+    "job": 120902570309,
+    "conclusion": "success",
+    "modelId": "36050a1f4ba506db31d21ffd",
+    "make": "Cupra",
+    "model": "Leon",
+    "revision": "4f368bf7-60be-573b-a100-1d3d57b3da5b",
+    "checkedAt": "2026-10-24T14:50:44.911Z",
+    "rows": [
+      {
+        "variantId": "50812b3b593469303a8e4e0b",
+        "expectedDigest": "a4969ab2c0bd7f10832eb1d096d5f0efdd11d4308f02438fd158e9b5fa0882ab",
+        "year": 2021,
+        "trim": "1.4 e-Hybrid Sportstourer VZ Business | Pano | Sfe",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      },
+      {
+        "variantId": "cb43e32cf9e493ec06624c50",
+        "expectedDigest": "0ab7764adfe12dca16cc0fd397f3eb657620688610a72406bbd86b830a6b8905",
+        "year": 2022,
+        "trim": "Cupra Leon Sportstourer 1.4 e-HYBRID 150kW DSG",
+        "engineCc": 1395,
+        "powerHp": 150,
+        "powerKw": 110,
+        "status": "observed"
+      },
+      {
+        "variantId": "f1d797cc968a333b16e2054a",
+        "expectedDigest": "7e2199cc753bca502c2ffc37a11895386102d14c3916461b0d79a14fee3f5c88",
+        "year": 2022,
+        "trim": "Sportstourer e-Hybrid 1.4 TSI DSG VZ COPPER DCC...",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      },
+      {
+        "variantId": "839824dd02fa5cc47f5258ce",
+        "expectedDigest": "06d666d7361a96bca827ddfcaeef97949591505c2b2abb67f115cf97130931e9",
+        "year": 2023,
+        "trim": "1.4 e-Hybrid 245pk DSG-6 Adrenaline",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      },
+      {
+        "variantId": "db9ca8bda2f8450044eefd7e",
+        "expectedDigest": "91a9bf5ffc0742e00d495da135d5c97d2039404740bcf1001f0f70c050966b6d",
+        "year": 2023,
+        "trim": "1.4 e-hybrid VZ 245cv dsg PLUG-IN",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      },
+      {
+        "variantId": "bc1ab97beb1f7a4f92a50822",
+        "expectedDigest": "5a304f22d8d738a989e842a2f62ad5f301f4019ff436600fbcc1a43ab487acc6",
+        "year": 2024,
+        "trim": "VZ e-Hybrid Pano Navi Ambiente SOH 98,5%",
+        "engineCc": 1395,
+        "drive": "fwd",
+        "status": "review"
+      },
+      {
+        "variantId": "5726c26b3e79069b5643a5da",
+        "expectedDigest": "162ab45a8ca408c3f4d307d1e65b661639c25aaadb28d22acae5c11f6f7cca5f",
+        "year": 2024,
+        "trim": "Sportstourer e-Hybrid",
+        "engineCc": 1395,
+        "powerHp": 150,
+        "powerKw": 110,
+        "status": "observed"
+      },
+      {
+        "variantId": "f15ca17832ab2a9afc88a35a",
+        "expectedDigest": "9c2c831411cb569359b5335e39a3e549653b64042c8bbc7cc0dac25578a67691",
+        "year": 2024,
+        "trim": "Sportstourer 1.4 TSI eHybrid DSG VZ 5-J-GAR KAMERA",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      }
+    ]
+  },
+  "batch": "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
+  "batchSha256": "ea8d76d597f983e8a62e545fe346c115a6ce169b412ea3bcd89c993f7c91aa29",
+  "fields": 16,
+  "validation": {
+    "validateBatch": true
+  },
+  "fileSha256": "d9989cf346efe8c45368efb96f0d6c376257e52403551ed2a65311f2d2d9906d",
+  "firstApply": {
+    "workflow": 40104662926,
+    "job": 120903743548,
+    "conclusion": "failure",
+    "reason": "batch_review_digest_mismatch",
+    "storageWrites": 0
+  }
+}

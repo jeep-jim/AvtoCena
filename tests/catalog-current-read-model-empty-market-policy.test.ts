@@ -49,7 +49,7 @@ test("current read-model republisher preserves every immutable public row", () =
   const implementation = storageSource.slice(start, end);
   assert.doesNotMatch(implementation, /\.filter\(isPublicOffer\)/);
   assert.match(implementation, /catalog_current_readmodel_manifest_count_mismatch/);
-  assert.match(implementation, /writeCurrentCatalogReadModels\(manifest\.generationId, storedOffers, true\)/);
+  assert.match(implementation, /writeCurrentCatalogReadModels\(manifest\.generationId, \[\], true,/);
 });
 
 test("manual parity audit checks all six live markets without an automatic deployment trigger", () => {

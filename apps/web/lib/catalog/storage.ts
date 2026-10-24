@@ -1763,7 +1763,13 @@ export async function backfillCatalogGenerationDirectories() {
   return {generationId:manifest.generationId,...result};
 }
 
-async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false) {
+type PreparedCurrentReadModels = {
+  facets: CatalogFacets;
+  projections: CatalogSearchProjection[];
+  japanInputs: ReturnType<typeof buildJapanPreviewInputIndex>;
+  writeDetails: () => Promise<number>;
+};
+async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false, prepared?: PreparedCurrentReadModels) {
   const reportStage=(stage:string)=>{if(process.env.CATALOG_PUBLICATION_PROGRESS === "1")
     console.log(JSON.stringify({stage:"current_read_models_"+stage,generationId,at:new Date().toISOString(),rss:process.memoryUsage().rss}));};
   reportStage("begin");
@@ -1772,7 +1778,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   const canonical = await canonicalizePublicCatalogOffers(storedOffers, exactMarkets, protectedIds);
   const { offers, qualityRejected, identityRejected, priceOutliers, deduplicated, quota } = canonical;
   // Derived calculation inputs only: published vehicle records remain unchanged.
-  await writeJsonAtomic(japanPreviewInputPath(generationId), buildJapanPreviewInputIndex(generationId, offers.filter(offer=>offer.market === "japan").map(compactPublicStorageOffer)), false);
+  await writeJsonAtomic(japanPreviewInputPath(generationId), prepared?.japanInputs || buildJapanPreviewInputIndex(generationId, offers.filter(offer=>offer.market === "japan").map(compactPublicStorageOffer)), false);
   reportStage("canonicalized");
   // Only old selector names are needed to clear removed brands. Loading the
   // complete previous catalog here retained another full generation in memory.
@@ -1789,7 +1795,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
     return [`${make}:${model}`, { make, model }];
   })).values()].filter((item) => item.make && item.model)
     .sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru"));
-  const facets: CatalogFacets = {
+  const facets: CatalogFacets = prepared?.facets || {
     generationId,
     makes,
     models,
@@ -1804,10 +1810,9 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   const projectionsByBrand = new Map<string, CatalogSearchProjection[]>();
   const allProjectionItems: CatalogSearchProjection[] = [];
 
-  for (const offer of offers) {
-    const market = String(offer.market || "");
+  for (const row of prepared?.projections || offers.map(searchProjectionFromOffer)) {
+    const market = String(row.market || "");
     if (market) {
-      const row = searchProjectionFromOffer(offer);
       allProjectionItems.push(row);
       const marketRows=projectionsByMarket.get(market)||[];marketRows.push(row);projectionsByMarket.set(market,marketRows);
       const make = cleanFacet(row.make);
@@ -1837,7 +1842,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   reportStage("brands_markets_written");
   // Compact only the <=500 rows being written, not every offer at once.
   // All 256 mutable roots are refreshed, including now-empty buckets.
-  const offerShardCount = await writeBoundedDetailShards(generationId, offers,
+  const offerShardCount = prepared ? await prepared.writeDetails() : await writeBoundedDetailShards(generationId, offers,
     compactPublicStorageOffer, (path, value) => writeJsonAtomic(path, value, false),
     CATALOG_CHUNK_SIZE, catalogMaintenanceIoConcurrency());
   reportStage("details_written");
@@ -1854,8 +1859,8 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   reportStage("complete");
   return {
     generationId,
-    total: offers.length,
-    markets: Object.fromEntries(MARKETS.map((market) => [market, offers.filter((offer) => offer.market === market).length])),
+    total: allProjectionItems.length,
+    markets: Object.fromEntries(MARKETS.map((market) => [market, projectionsByMarket.get(market)?.length || 0])),
     projectionMarkets: projectionsByMarket.size,
     allProjectionCount: allProjectionItems.length,
     brandSummaryCount: Object.keys(brandSummary.brands).length,
@@ -1890,27 +1895,56 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
 export async function publishCurrentCatalogReadModels() {
   const manifest = await readManifest();
   const marketIds = MARKETS.filter((market) => Number(manifest.markets?.[market]?.count || 0) > 0);
-  // Rows in the immutable public generation were already admitted by the
-  // strict source/publication gates. Re-running isPublicOffer here would
-  // apply source-gallery checks to compact storage rows whose raw
-  // provenance was intentionally removed and can collapse a healthy
-  // market (notably Goo-net Japan) in the one-hop read model.
-  const storedOffers = (await mapWithConcurrency(
-    marketIds,
-    Math.min(7, Math.max(1, marketIds.length)),
-    (market) => readMarketOffers(market),
-  )).flat();
-  const expectedTotal = marketIds.reduce((sum, market) => sum + Number(manifest.markets[market]?.count || 0), 0);
-  if (storedOffers.length !== expectedTotal) {
-    throw new Error(`catalog_current_readmodel_manifest_count_mismatch:${storedOffers.length}:${expectedTotal}`);
-  }
-  for (const market of marketIds) {
-    const expected = Number(manifest.markets[market]?.count || 0);
-    const actual = storedOffers.filter((offer) => String(offer.market || '') === market).length;
-    if (actual !== expected) throw new Error(`catalog_current_readmodel_manifest_count_mismatch:${market}:${actual}:${expected}`);
-  }
-  return writeCurrentCatalogReadModels(manifest.generationId, storedOffers, true);
+  const {createDetailSpool}=await import('./detail-spool');
+  const spool=await createDetailSpool<VehicleOffer>(CATALOG_CHUNK_SIZE);
+  const projections:CatalogSearchProjection[]=[], japanInputs=buildJapanPreviewInputIndex(manifest.generationId,[]);
+  const values={makes:new Set<string>(),bodyTypes:new Set<string>(),fuels:new Set<string>(),transmissions:new Set<string>(),drives:new Set<string>()};
+  const models=new Map<string,{make:string;model:string}>();
+  const assertGeneration=async()=>{
+    const current=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
+    if(current.generationId!==manifest.generationId)throw Error('catalog_current_readmodel_generation_changed');
+  };
+  try {
+    // Immutable rows have already passed source/publication gates. Read exactly
+    // one source chunk, retain its compact projection, and spool full details.
+    for(const market of marketIds) {
+      let actual=0;
+      for(const chunk of manifest.markets[market].chunks) {
+        const rows=await readDataJson<VehicleOffer[]|null>(storedOfferChunkPath(manifest.generationId,market,chunk),null);
+        if(!Array.isArray(rows))throw Error(`catalog_current_readmodel_chunk_missing:${market}:${chunk}`);
+        const compact:VehicleOffer[]=[];
+        for(const offer of rows) {
+          if(offer.market!==market)throw Error(`catalog_current_readmodel_chunk_market_mismatch:${market}`);
+          if(!hasAllowedCatalogSourceProvenance(offer))throw Error(`catalog_current_readmodel_source_provenance:${market}:${offer.id}`);
+          actual++;projections.push(searchProjectionFromOffer(offer));compact.push(compactPublicStorageOffer(offer));
+          const make=cleanFacet(offer.make),model=cleanFacet(offer.model);
+          if(make)values.makes.add(make);
+          if(make&&model)models.set(`${make}:${model}`,{make,model});
+          for(const [key,field] of [['bodyTypes','bodyType'],['fuels','fuel'],['transmissions','transmission'],['drives','drive']] as const) {
+            const value=cleanFacet(offer[field]);if(value)values[key].add(value);
+          }
+        }
+        Object.assign(japanInputs.entries,buildJapanPreviewInputIndex(manifest.generationId,compact).entries);
+        await spool.append(compact);
+      }
+      if(actual!==Number(manifest.markets[market].count))throw Error(`catalog_current_readmodel_manifest_count_mismatch:${market}:${actual}:${manifest.markets[market].count}`);
+      if(process.env.CATALOG_PUBLICATION_PROGRESS==='1')console.log(JSON.stringify({stage:'current_read_models_market_spooled',market,count:actual,rss:process.memoryUsage().rss}));
+    }
+    const expectedTotal=marketIds.reduce((sum,market)=>sum+Number(manifest.markets[market].count),0);
+    if(projections.length!==expectedTotal)throw Error('catalog_current_readmodel_manifest_count_mismatch');
+    await assertGeneration();
+    const facets:CatalogFacets={generationId:manifest.generationId,
+      makes:[...values.makes].sort((a,b)=>a.localeCompare(b,'ru')),
+      models:[...models.values()].sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru')),
+      markets:[...marketIds].sort(),bodyTypes:[...values.bodyTypes].sort(),fuels:[...values.fuels].sort(),
+      transmissions:[...values.transmissions].sort(),drives:[...values.drives].sort()};
+    const result=await writeCurrentCatalogReadModels(manifest.generationId, [], true, {facets,projections,japanInputs,
+      writeDetails:()=>spool.publish(manifest.generationId,(key,value)=>writeJsonAtomic(key,value,false))});
+    await assertGeneration();
+    return result;
+  } finally {await spool.close();}
 }
+
 export async function getOfferWithoutEditorial(id: string) {
   if (/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id)) return (await import('./ajes-public')).getAjesOffer(id);
   if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
