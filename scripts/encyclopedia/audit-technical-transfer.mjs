@@ -28,11 +28,11 @@ const snapshot=await readCurrentCatalogProjectionSnapshot();
 const report={checkedAt:new Date().toISOString(),indexDigest:index.digest,generationId:snapshot.generationId,previewChanges,scope:'Five-market saved projection plus bounded existing Japanese query cache. No supplier requests, no database writes; not whole Japan inventory.',markets:{},japanCache:{slots:128,uniqueLots:0,converted:0,rejected:0},samples:[],japanMissingLinks:[],savedDetailProbe:[]};
 function identityCode(raw){return raw.chassisCode||raw.operational?.chassisCode;}
 function inspect(raw){
- const source=applyUaeManualSpecifications(raw),before=applyEncyclopediaCalculation(source,index,{technicalIdentity:false}),after=applyEncyclopediaCalculation(source,index,{technicalIdentity:true});
- const r=report.markets[raw.market]||={rows:0,withTechnicalCode:0,modelYearKnown:0,baselineMatched:0,technicalMatched:0,newlyFilledRecords:0,newlyFilledFields:0,newlyCompleteSpecifications:0,japanPreviewBefore:0,japanPreviewAfter:0};r.rows++;
+ const source=applyUaeManualSpecifications(raw),before=applyEncyclopediaCalculation(source,index,{technicalIdentity:false}),after=applyEncyclopediaCalculation(source,index);
+ const r=report.markets[raw.market]||={rows:0,withTechnicalCode:0,modelYearKnown:0,baselineMatched:0,technicalMatched:0,specificationMatched:0,newlyFilledRecords:0,newlyFilledFields:0,newlyCompleteSpecifications:0,japanPreviewBefore:0,japanPreviewAfter:0};r.rows++;
  r.withTechnicalCode+=Number(Boolean(source.chassisCode||source.engineCode||source.operational?.chassisCode));
  r.modelYearKnown+=Number((index.models[modelKey(raw.make,raw.model)]||[]).some(v=>v.year===raw.year));
- r.baselineMatched+=Number(Boolean(before.operational?.encyclopediaCalculation));r.technicalMatched+=Number(after.operational?.encyclopediaCalculation?.matchMethod==='technical_identity');
+ r.baselineMatched+=Number(Boolean(before.operational?.encyclopediaCalculation));r.technicalMatched+=Number(after.operational?.encyclopediaCalculation?.matchMethod==='technical_identity');r.specificationMatched+=Number(after.operational?.encyclopediaCalculation?.matchMethod==='specification_consensus');
  if(raw.market==='japan'&&!after.operational?.encyclopediaCalculation&&report.japanMissingLinks.length<40){
  const facts=index.models[modelKey(raw.make,raw.model)]||[],annual=facts.filter(v=>v.year===raw.year);
  report.japanMissingLinks.push({id:raw.id,make:raw.make,model:raw.model,year:raw.year,trim:raw.trim,chassisCode:identityCode(source),engineCc:source.engineCc,fuel:source.fuel,transmission:source.transmission,factsForModel:facts.length,factsForYear:annual.length,withChassis:annual.filter(v=>v.constraints.chassisCode).length,donorExamples:annual.slice(0,3).map(v=>({trim:v.trims,chassisCode:v.constraints.chassisCode,engineCode:v.constraints.engineCode}))});
