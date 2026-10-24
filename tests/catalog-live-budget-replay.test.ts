@@ -47,8 +47,10 @@ test('live budget moves offers across both bounds after FX changes and shares ex
   assert.equal(count.total,1);assert.deepEqual(facets.makes,['Hyundai']);assert.deepEqual(brands.counts,{Hyundai:1});
   assert.equal(reads.some(key=>key.includes('budget-cards')),false,'v3 counts never load photographs or full cards');
   const result=await searchOffers(params);assert.equal(result.total,1);assert.deepEqual(result.items.map(row=>row.id),['now-affordable']);
+  assert.equal(result.items[0].totalRub,live[1].totalRub,'visible budget card must use the same current calculation as selection');
   const page2=await searchOffers({...params,page:2});assert.equal(page2.total,1);assert.deepEqual(page2.items,[]);
   const higher=await searchOffers({market:'korea',budgetFrom:budgetTo});assert.deepEqual(higher.items.map(row=>row.id),['now-expensive']);
+  assert.equal(higher.items[0].totalRub,live[0].totalRub,'lower-bound result must also show its current total');
   const city='Новокузнецк',delivered=priceCardForCity(live[1],city).offer.totalRub;
   assert.equal((await countCatalogOffers({market:'korea',city,budgetTo:delivered})).total,1);
   assert.equal((await countCatalogOffers({market:'korea',city,budgetTo:delivered-1})).total,0);

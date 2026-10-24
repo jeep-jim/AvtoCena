@@ -2265,9 +2265,10 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  if(parts.some(part=>part.generationId!==selected.generationId))return null;
  const byId=new Map(parts.flatMap(part=>part.items).map(row=>[row.id,row]));
  if(visible.some(row=>!byId.has(row.id)))return null;
- const {attachJapanSearchValues}=await import("./japan-delivered-preview");
  const visibleCards=visible.map(row=>byId.get(row.id)!);
- const cards=params.budgetFrom || params.budgetTo ? await attachJapanSearchValues(visibleCards,selected.generationId) : visibleCards;
+ // Selection replays today's calculation. Render the same current inputs for
+ // the visible page instead of returning the historical card-block total.
+ const cards=params.budgetFrom || params.budgetTo ? await currentSearchPrices(prepareCatalogProjectionRows(visibleCards),selected.generationId) : visibleCards;
  return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
 }
 const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:14,maxBytes:256*1024*1024,ttlMs:3600_000,concurrency:2});
