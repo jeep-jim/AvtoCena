@@ -1,0 +1,992 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-screenshot-combustion",
+  "entries": [
+    {
+      "modelId": "a5edfedfe66bc73a8e72c178",
+      "variantId": "ab26341b82db765c0bdbf128",
+      "make": "Genesis",
+      "model": "GV80",
+      "year": 2021,
+      "trim": "2.5T 가솔린 2WD",
+      "expectedRevision": "c791453c-ecb9-53c8-aeeb-b11bd01926db",
+      "expectedDigest": "d11c6e46ad0ce6c71ccddfd691992d1c2b878a213bfa30cefbce74785e328172",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2497,
+        "powerHp": 304,
+        "powerKw": 223.59,
+        "icePowerKw": 223.59,
+        "transmission": "automatic",
+        "bodyType": "suv",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/09/Genesis-GV80-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Genesis GV80 2021, корейская спецификация: 2.5 T-GDi, 2497 см³, 304 PS, 8AT, SUV; 2WD задний либо AWD по точному названию версии. Таблица производителя проверена в поисковом индексе; 2497 см³ и конфигурация подтверждены официальным July 2021 AU spec, 304 PS — Genesis News Europe GV80 2021. кВт из 304 PS, округлено до сотых. Только существующие записи с совпадением 2.5/2497/бензин; противоречивые названия исключены. Не используется для российских 249 PS или гибридов."
+      }
+    },
+    {
+      "modelId": "a5edfedfe66bc73a8e72c178",
+      "variantId": "d976ff1f88d5093496114c27",
+      "make": "Genesis",
+      "model": "GV80",
+      "year": 2021,
+      "trim": "2.5T 가솔린 AWD (세부등급 없음)",
+      "expectedRevision": "c791453c-ecb9-53c8-aeeb-b11bd01926db",
+      "expectedDigest": "11e81a0907cea5de959282959bed9ef70a84fde8802c14c82e9c4f1b9b000734",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2497,
+        "powerHp": 304,
+        "powerKw": 223.59,
+        "icePowerKw": 223.59,
+        "transmission": "automatic",
+        "bodyType": "suv",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/09/Genesis-GV80-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Genesis GV80 2021, корейская спецификация: 2.5 T-GDi, 2497 см³, 304 PS, 8AT, SUV; 2WD задний либо AWD по точному названию версии. Таблица производителя проверена в поисковом индексе; 2497 см³ и конфигурация подтверждены официальным July 2021 AU spec, 304 PS — Genesis News Europe GV80 2021. кВт из 304 PS, округлено до сотых. Только существующие записи с совпадением 2.5/2497/бензин; противоречивые названия исключены. Не используется для российских 249 PS или гибридов."
+      }
+    },
+    {
+      "modelId": "a5edfedfe66bc73a8e72c178",
+      "variantId": "c4f8169632548adb82c3f99d",
+      "make": "Genesis",
+      "model": "GV80",
+      "year": 2021,
+      "trim": "2.5T Gasoline AWD",
+      "expectedRevision": "c791453c-ecb9-53c8-aeeb-b11bd01926db",
+      "expectedDigest": "cea142dc19a1c7b92ecf1bfcecc936f0d2214163987ce22d69d8cd9f31a02fb7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2497,
+        "powerHp": 304,
+        "powerKw": 223.59,
+        "icePowerKw": 223.59,
+        "transmission": "automatic",
+        "bodyType": "suv",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/09/Genesis-GV80-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Genesis GV80 2021, корейская спецификация: 2.5 T-GDi, 2497 см³, 304 PS, 8AT, SUV; 2WD задний либо AWD по точному названию версии. Таблица производителя проверена в поисковом индексе; 2497 см³ и конфигурация подтверждены официальным July 2021 AU spec, 304 PS — Genesis News Europe GV80 2021. кВт из 304 PS, округлено до сотых. Только существующие записи с совпадением 2.5/2497/бензин; противоречивые названия исключены. Не используется для российских 249 PS или гибридов."
+      }
+    },
+    {
+      "modelId": "a5edfedfe66bc73a8e72c178",
+      "variantId": "f7d45748b9aa12e11b9184dd",
+      "make": "Genesis",
+      "model": "GV80",
+      "year": 2021,
+      "trim": "가솔린 2.5 AWD (5인승)",
+      "expectedRevision": "c791453c-ecb9-53c8-aeeb-b11bd01926db",
+      "expectedDigest": "7debf5c8def0f4b196cad1e9801b543a878708d58959e2b7f575a621f56378c9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2497,
+        "powerHp": 304,
+        "powerKw": 223.59,
+        "icePowerKw": 223.59,
+        "transmission": "automatic",
+        "bodyType": "suv",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/09/Genesis-GV80-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Genesis GV80 2021, корейская спецификация: 2.5 T-GDi, 2497 см³, 304 PS, 8AT, SUV; 2WD задний либо AWD по точному названию версии. Таблица производителя проверена в поисковом индексе; 2497 см³ и конфигурация подтверждены официальным July 2021 AU spec, 304 PS — Genesis News Europe GV80 2021. кВт из 304 PS, округлено до сотых. Только существующие записи с совпадением 2.5/2497/бензин; противоречивые названия исключены. Не используется для российских 249 PS или гибридов."
+      }
+    },
+    {
+      "modelId": "a5edfedfe66bc73a8e72c178",
+      "variantId": "c47e982c8a3b45648e24636d",
+      "make": "Genesis",
+      "model": "GV80",
+      "year": 2021,
+      "trim": "가솔린 2.5 AWD (7인승)",
+      "expectedRevision": "c791453c-ecb9-53c8-aeeb-b11bd01926db",
+      "expectedDigest": "03239a033f1d0cee81c5afd8d5fee7f0dd95038b34a2d855ffacab0f85f89492",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2497,
+        "powerHp": 304,
+        "powerKw": 223.59,
+        "icePowerKw": 223.59,
+        "transmission": "automatic",
+        "bodyType": "suv",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/09/Genesis-GV80-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Genesis GV80 2021, корейская спецификация: 2.5 T-GDi, 2497 см³, 304 PS, 8AT, SUV; 2WD задний либо AWD по точному названию версии. Таблица производителя проверена в поисковом индексе; 2497 см³ и конфигурация подтверждены официальным July 2021 AU spec, 304 PS — Genesis News Europe GV80 2021. кВт из 304 PS, округлено до сотых. Только существующие записи с совпадением 2.5/2497/бензин; противоречивые названия исключены. Не используется для российских 249 PS или гибридов."
+      }
+    },
+    {
+      "modelId": "a5edfedfe66bc73a8e72c178",
+      "variantId": "066133b30332b8a248030115",
+      "make": "Genesis",
+      "model": "GV80",
+      "year": 2021,
+      "trim": "가솔린 2.5 2WD (5인승)",
+      "expectedRevision": "c791453c-ecb9-53c8-aeeb-b11bd01926db",
+      "expectedDigest": "56fa2d5619e4d2624da817789d2fa56f225d50a7ab2a3e58cfca4aa5a6632718",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2497,
+        "powerHp": 304,
+        "powerKw": 223.59,
+        "icePowerKw": 223.59,
+        "transmission": "automatic",
+        "bodyType": "suv",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/09/Genesis-GV80-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Genesis GV80 2021, корейская спецификация: 2.5 T-GDi, 2497 см³, 304 PS, 8AT, SUV; 2WD задний либо AWD по точному названию версии. Таблица производителя проверена в поисковом индексе; 2497 см³ и конфигурация подтверждены официальным July 2021 AU spec, 304 PS — Genesis News Europe GV80 2021. кВт из 304 PS, округлено до сотых. Только существующие записи с совпадением 2.5/2497/бензин; противоречивые названия исключены. Не используется для российских 249 PS или гибридов."
+      }
+    },
+    {
+      "modelId": "a5edfedfe66bc73a8e72c178",
+      "variantId": "2848e351fcfc251fe1b863ef",
+      "make": "Genesis",
+      "model": "GV80",
+      "year": 2021,
+      "trim": "2.5T 가솔린 AWD (세부등급 없음)",
+      "expectedRevision": "c791453c-ecb9-53c8-aeeb-b11bd01926db",
+      "expectedDigest": "47d758f36f67dfe00fe70ead128b93e149b940f8bc5680b7d795b6e4c41cd614",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2497,
+        "powerHp": 304,
+        "powerKw": 223.59,
+        "icePowerKw": 223.59,
+        "transmission": "automatic",
+        "bodyType": "suv",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/09/Genesis-GV80-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Genesis GV80 2021, корейская спецификация: 2.5 T-GDi, 2497 см³, 304 PS, 8AT, SUV; 2WD задний либо AWD по точному названию версии. Таблица производителя проверена в поисковом индексе; 2497 см³ и конфигурация подтверждены официальным July 2021 AU spec, 304 PS — Genesis News Europe GV80 2021. кВт из 304 PS, округлено до сотых. Только существующие записи с совпадением 2.5/2497/бензин; противоречивые названия исключены. Не используется для российских 249 PS или гибридов."
+      }
+    },
+    {
+      "modelId": "a5edfedfe66bc73a8e72c178",
+      "variantId": "ae9e9b5acdbcd14fb6b94861",
+      "make": "Genesis",
+      "model": "GV80",
+      "year": 2021,
+      "trim": "2.5T 가솔린 2WD",
+      "expectedRevision": "c791453c-ecb9-53c8-aeeb-b11bd01926db",
+      "expectedDigest": "c2937b54c01c3e6c1091d7f8208b568cc21f873f27f1858c23970f74391bb18c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 2497,
+        "powerHp": 304,
+        "powerKw": 223.59,
+        "icePowerKw": 223.59,
+        "transmission": "automatic",
+        "bodyType": "suv",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/09/Genesis-GV80-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Genesis GV80 2021, корейская спецификация: 2.5 T-GDi, 2497 см³, 304 PS, 8AT, SUV; 2WD задний либо AWD по точному названию версии. Таблица производителя проверена в поисковом индексе; 2497 см³ и конфигурация подтверждены официальным July 2021 AU spec, 304 PS — Genesis News Europe GV80 2021. кВт из 304 PS, округлено до сотых. Только существующие записи с совпадением 2.5/2497/бензин; противоречивые названия исключены. Не используется для российских 249 PS или гибридов."
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "be70dc31bc4ab72feb879308",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 2.2 (9인승) 프레스티지",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "56bbd438d0e1cf91ca0409c65b02cfd47a37a25e1ba7043cc2220f02599a9582",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "ffee242105a9534d978041f5",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 2.2 (9인승) 노블레스",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "6379b68da1366c22fa887488c5e0317de5b2cff8dc49751a8dbddfe3bdad42c2",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "ba1cf23a386af0abd22b4b84",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 9인승 시그니처",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "6537e91bc212531257993adf5b0dc07a98fa6af6ef1730fceef21338e2653088",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "38c825f9d59173785a59d79e",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 9인승 프레스티지",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "e2e4c40265a9d7b45a9344e2b488f61bc8c6209e256ec62db896a1ace1ee7905",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "5cc1a23bc202a4cbe17c7136",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 9인승 노블레스",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "34c66a2e753762bef2fea7c2af81595ecadf8388f4f27a09d9d9ae9add2f9411",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "6bfa09b01593d371b025f2cb",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 7인승 시그니처",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "5012fe143d6e38a446fcef5a86b241f141b065ce8c24ccb4b4591fcfefc5fed6",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "0944fbf5f57041982af4fb94",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 7인승 노블레스",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "98c06e2c54b4a8eaa483e609440a64af0e4bab60dc6073e604784f489bb023b9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "069d4fafeb40d0b507a4c090",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "4 GENERATION Diesel 9 Seater Noblesse",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "44f7598118893b8cdb1834dbab1e8f2e905b2b1b261701e78eb7a72806bd5fbb",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "5324cf5c48080d44ac62e144",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "4 GENERATION Diesel 7 Seater Noblesse",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "964481359ad7a7ed3b003d197e6a3a4de644aca9bdb4de3c6c7759177b13c973",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "6387fa24cc193889fd41f795",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 2.2 (9인승) 노블레스",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "f48cebfe60e3d9fc828d3fa4863bb4f6290133c419bb11f5777bee90bfda4794",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "9e12e4abccd3bbd31b197ca5",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 2.2 (9인승) 프레스티지",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "bae51b7d02cc6c481adb7f20f7f3f55d1aaa7d7040b1a4b821a8e58d078f3a63",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "063615f5fc07fe45f6ccaf1d",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 2.2 (9인승) 시그니처",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "6013017d88a3c9e6d7a62b5dbef23ef7e96333f6906537911acef4c6c1e5557f",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "69419dc2640471d5cc1a98af",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 2.2 (7인승) 시그니처",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "9efff6f3bc0e360b5321fe06dc5d67e17b41413652191f279f61708c8f3539e1",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3e77ac1173c0feb865315cd",
+      "variantId": "0e87801038b5bd5ba9fed234",
+      "make": "Kia",
+      "model": "Carnival",
+      "year": 2021,
+      "trim": "디젤 2.2 (7인승) 노블레스",
+      "expectedRevision": "63eb756d-abff-5f5a-ac11-3a38f7ee2d4a",
+      "expectedDigest": "f9afe44ffa81f0942222c6da691b41b48754443c8457553630a05bade90b9599",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2151,
+        "powerHp": 202,
+        "powerKw": 148.57,
+        "icePowerKw": 148.57,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2021/06/Kia-Carnival-2021-INT.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог Kia Carnival, PDF reference 01.05.2021: Smartstream 2.2 diesel, 2151 см³, 202 PS при 3800 об/мин, 8AT. Проверена таблица производителя в поисковом индексе; совпадает с заводским каталогом Kia Singapore October 2021, стр.10/16. кВт = PS × 0.73549875, округление до сотых. Только существующие дизельные версии 2151 см³ 2021 года; лимузины, 11 мест, LPG и конфликтующие бензиновые записи исключены. Сертифицированная 30-минутная мощность не заполняется.",
+        "fieldSources": {
+          "powerHp": {
+            "url": "https://www.kia.com/content/dam/kwcms/sg/en/pdf/Brochure/Brochure_Specs/CarnivalBrochureSpecsSheet_Oct2021.pdf"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "6663e7b3a53330eeab697fd4",
+      "variantId": "34b928d4884994c4f4c22dd8",
+      "make": "Kia",
+      "model": "Seltos",
+      "year": 2023,
+      "trim": "가솔린 2.0 2WD 프레스티지",
+      "expectedRevision": "d292bf66-9e7e-55eb-aa71-fd29eca29181",
+      "expectedDigest": "cedd036b5f7c7cabe6b3bf995f0d17bcf03a2b05ad63cc70b1e3be3412dad341",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1999,
+        "powerHp": 149,
+        "powerKw": 109.59,
+        "icePowerKw": 109.59,
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.kia.com/content/dam/kwcms/kr/ko/files/SPR/catalog/catalog_mo_seltos.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Официальный корейский каталог Seltos 202208 для обновлённой модели 2023: Nu 2.0 MPI бензин, 1999 см³, 149 PS при 6200 об/мин, SUV. Проверены technical data и таблица расхода для 2WD/4WD. кВт = PS × 0.73549875 с округлением до сотых. Подтверждаются только существующие версии 2023 с явным 2.0 и 1999 см³. 1.6 turbo и региональные 147 hp не смешиваются; привод и коробка этой записью не меняются."
+      }
+    },
+    {
+      "modelId": "6663e7b3a53330eeab697fd4",
+      "variantId": "fdd8b5e0ce158b8106decb8c",
+      "make": "Kia",
+      "model": "Seltos",
+      "year": 2023,
+      "trim": "가솔린 2.0 2WD 시그니처",
+      "expectedRevision": "d292bf66-9e7e-55eb-aa71-fd29eca29181",
+      "expectedDigest": "ee79e0c9830b4a93f0dc9a62c544c78fce691565baab4d9e4fe95aa8a8621fb3",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1999,
+        "powerHp": 149,
+        "powerKw": 109.59,
+        "icePowerKw": 109.59,
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.kia.com/content/dam/kwcms/kr/ko/files/SPR/catalog/catalog_mo_seltos.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Официальный корейский каталог Seltos 202208 для обновлённой модели 2023: Nu 2.0 MPI бензин, 1999 см³, 149 PS при 6200 об/мин, SUV. Проверены technical data и таблица расхода для 2WD/4WD. кВт = PS × 0.73549875 с округлением до сотых. Подтверждаются только существующие версии 2023 с явным 2.0 и 1999 см³. 1.6 turbo и региональные 147 hp не смешиваются; привод и коробка этой записью не меняются."
+      }
+    },
+    {
+      "modelId": "6663e7b3a53330eeab697fd4",
+      "variantId": "5f2f151be9241c35c4dc7807",
+      "make": "Kia",
+      "model": "Seltos",
+      "year": 2023,
+      "trim": "가솔린 2.0 2WD 트렌디",
+      "expectedRevision": "d292bf66-9e7e-55eb-aa71-fd29eca29181",
+      "expectedDigest": "b45dc80f09368bb88139ae5e62f3d0f2dede3dd1adce9c15c8e091cd0597e46a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1999,
+        "powerHp": 149,
+        "powerKw": 109.59,
+        "icePowerKw": 109.59,
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.kia.com/content/dam/kwcms/kr/ko/files/SPR/catalog/catalog_mo_seltos.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Официальный корейский каталог Seltos 202208 для обновлённой модели 2023: Nu 2.0 MPI бензин, 1999 см³, 149 PS при 6200 об/мин, SUV. Проверены technical data и таблица расхода для 2WD/4WD. кВт = PS × 0.73549875 с округлением до сотых. Подтверждаются только существующие версии 2023 с явным 2.0 и 1999 см³. 1.6 turbo и региональные 147 hp не смешиваются; привод и коробка этой записью не меняются."
+      }
+    },
+    {
+      "modelId": "6663e7b3a53330eeab697fd4",
+      "variantId": "5a1897a8a4bb171a845df5e5",
+      "make": "Kia",
+      "model": "Seltos",
+      "year": 2023,
+      "trim": "가솔린 2.0 2WD 시그니처",
+      "expectedRevision": "d292bf66-9e7e-55eb-aa71-fd29eca29181",
+      "expectedDigest": "11558703681bc89b8fef651d2613cb1410b5e77e48e84c391a6f5bcc7ba9219c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1999,
+        "powerHp": 149,
+        "powerKw": 109.59,
+        "icePowerKw": 109.59,
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.kia.com/content/dam/kwcms/kr/ko/files/SPR/catalog/catalog_mo_seltos.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Официальный корейский каталог Seltos 202208 для обновлённой модели 2023: Nu 2.0 MPI бензин, 1999 см³, 149 PS при 6200 об/мин, SUV. Проверены technical data и таблица расхода для 2WD/4WD. кВт = PS × 0.73549875 с округлением до сотых. Подтверждаются только существующие версии 2023 с явным 2.0 и 1999 см³. 1.6 turbo и региональные 147 hp не смешиваются; привод и коробка этой записью не меняются."
+      }
+    }
+  ]
+}
