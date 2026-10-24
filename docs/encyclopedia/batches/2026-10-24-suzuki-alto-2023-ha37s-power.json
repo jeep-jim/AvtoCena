@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-suzuki-alto-2023-ha37s-power",
+  "entries": [
+    {
+      "modelId": "2ab5223df203c25d980af841",
+      "variantId": "453b9230d027ab3fd83e6b81",
+      "make": "Suzuki",
+      "model": "Alto",
+      "year": 2023,
+      "trim": "L Back アイカメラツ Key ディスプレイオ-ディオツ Key",
+      "expectedRevision": "3778856d-e77e-5f62-a908-625c7f2eecbc",
+      "expectedDigest": "662adc29f31f3bdf405dbafdd92adb2c3db159a845e5a6ba25057ff68ed598bc",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCode": "R06A",
+        "powerHp": 46,
+        "powerKw": 34,
+        "icePowerKw": 34
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Suzuki Alto, редакция 12/2021, стр. 1: 3BA-HA37S, L/A, обе версии привода — бензиновый R06A, 34 кВт (46 PS) при 6500 об/мин. Совпадают кузовной код HA37S, исполнение L и 2023 год девятого поколения; заводское сообщение 20.11.2023 сохраняет L/A с Энечардж, отдельно от HYBRID S/X. Заполнены только отсутствующие топливо, тип силовой установки, код и мощность ДВС. Привод требует полного кода ABLE/ABLQ и остаётся неизвестным. Существующие 660 см³ и automatic не изменены; таблица указывает 658 см³, это отдельная проверка округления. 30-минутная мощность не добавляется.",
+        "fieldSources": {
+          "fuel": {
+            "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+            "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+            "checkedAt": "2026-10-24",
+            "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+            "edition": "12/2021"
+          },
+          "powertrainKind": {
+            "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+            "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+            "checkedAt": "2026-10-24",
+            "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+            "edition": "12/2021"
+          },
+          "engineCode": {
+            "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+            "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+            "checkedAt": "2026-10-24",
+            "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+            "edition": "12/2021"
+          },
+          "powerHp": {
+            "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+            "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+            "checkedAt": "2026-10-24",
+            "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+            "edition": "12/2021"
+          },
+          "powerKw": {
+            "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+            "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+            "checkedAt": "2026-10-24",
+            "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+            "edition": "12/2021"
+          },
+          "icePowerKw": {
+            "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+            "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+            "checkedAt": "2026-10-24",
+            "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+            "edition": "12/2021"
+          }
+        }
+      }
+    }
+  ]
+}
