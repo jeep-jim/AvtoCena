@@ -1,5 +1,5 @@
 {
-  "requestedAt": "2026-10-24T20:06:48.506Z",
+  "requestedAt": "2026-10-24T21:01:33Z",
   "inspectBudgetSelectors": true,
-  "reason": "Fresh read-only lease/selector check after cancelled budget run40124113621 and deferred40124848897; no lock reset, no rebuild."
+  "reason": "Read actual current lease and selector generation after the previous lease expiry; China remains active. No lock mutation, release or repair."
 }

@@ -1,12 +1,13 @@
 {
-  "requestedAt": "2026-10-24T20:09:12.285Z",
+  "requestedAt": "2026-10-24T21:01:33Z",
   "review": {
     "groups": [
       "audi/a3",
       "audi/a4",
       "audi/a5"
     ],
-    "year": 2024
+    "year": 2024,
+    "afterDigest": "39d127db00febcd73cf670b95b9d3bcbc3e6dc069291b2c4f60becb7a3761464"
   },
-  "reason": "Review at most64 retained factual rows for the existing27 annual candidates; no supplier requests, data writes or automatic promotion."
+  "reason": "Continue next bounded page of saved factual rows for23 remaining annual candidates; no supplier requests or automatic promotion."
 }
