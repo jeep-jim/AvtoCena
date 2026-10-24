@@ -14962,6 +14962,17 @@ Replan40100441431/job120891320310 SUCCESS. Artifact12562893701 SHA256 11b1b3b309
 Локальный полный npm test точного PR1519 c69484a2:2490/2490PASS, typecheckPASS. Актуальный объединённыйheadf3b1af8a CI40101987092 ещёожидается; PR1520 закрытбезmerge, повторныйкод не переносится.
 
 
+## 24.10.2026 21:27 Красноярск — контроль единственного exact ASTRA apply
+
+Независимо прочитаны актуальные AGENTS d3ae798 (приоритет массовых технических фактов без equipment-name), roadmap ce6c8d3, overnight-plan d44d4e0 и проверенный основной сессией отчёт astra-bulk-plan-verified. Подтверждён main0b9addc6cfe46dd6c39223960ed31c189230c23f и marker fc417819980fea2465b92fec3564295ab165a050: modeapply, expectedPlanDigest b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0, sourcePlanSha25625e56df33170014e9a53611a3f7c52952fc340984d2bd9846967dd91f789b12d. Artifact12562893701 в этом контрольном проходе повторно не скачивался; проверка canonical digest/153 ревизий выполнена основной сессией и описана в её отчёте.
+
+Единственный apply40102493368/job120897327155 IN_PROGRESS: npmci/identity/source-completeness/interruption-recovery guards SUCCESS, Execute the exact pinned ASTRA request выполняется. План153models/3854annualvariants/3664filled/17211attested НЕ объявляется уже записанным/активированным; требуется terminal applyreport и независимый153revision readback основной сессии. Второй apply/marker, единичные encyclopediawrites и новыйrelease данным контролем не создавались.
+
+CI40101987092/job120895860275 TERMINAL SUCCESS для точного PR1519headf3b1af8a720558f1226468a0eb12219d40af5f2b. PR1519 ещё open/unmerged при чтении; merge остаётся ручной сессии, duplicatePR1520 не открывается заново. Streamingreadmodelfix также не дублируется. Все status in_progress/queued/pending проверены: activeASTRA40102493368 и dealerbilling40102503665, pending0; четыре историческихqueued38994950593/38994894574/38994824794/31164670128 нетронуты. Отмен/измененийрасписаний/повторКитая нет.
+
+Полный внешнийhealth14:27UTC HTTP200/curl exit0 подтвердил установленный8ec0d8587d9891757f8cdf019f2c9c55adcaef31/calculation2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07; deploy40097364164/job120882444216SUCCESS. Этотhealth не доказывает установку новыхdrive/pickup/PR1519/массовогоASTRA. Следующий единыйrelease послеexactapply+CI сохраняет прежниеrequiredResearch/ASTRAguards; координация через roadmap, контроль активен.
+
+
 ## 24.10.2026 21:09 Красноярск — причина расхождения индекса цен подтверждена
 
 Log40100131705/job120890399974: совпадают count и повторный cold query, но defaultorder отличается. Строки eadeea8449415bae72f064ee/ce58a2587278602bece89c53/884967afdd67dc233bb56d80 имеют рассчитанный preview при totalRubnull, а обычный sort смотрел толькоtotalRub. Compact tuple уже содержал вычисленную цену. Видимые indexed суммы также былистарыми (aa190 2288550 против baseline2241402), потому что default budget page не выполняла currentSearchPrices для выбранныхкарточек.
