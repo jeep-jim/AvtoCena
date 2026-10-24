@@ -15311,3 +15311,8 @@ PR1530 merge35ec2b65ca0876ff6af5753d2db86a2663cd05d4 послеCI40133250180SUCC
 ### 25.10.2026 05:04 UTC+7 — продолжение сохранённых фактов и проверка текущего writer
 
 Свежий main49ad6c1/AGENTS/ночной план/queue прочитаны. Единственный activeChina40124551054, pending0; четыре историческихqueued не тронуты. Запрошены независимые read-only publication-status (фактические lease/generation/selectors) и следующая bounded-страница сохранённых reference после714c337c,128ранее просмотренных не повторяются.20технических кандидатов остаются; новых saved/activated от этих запросов0. Ни release/repair/collector, ни сброс lock не выполняются. Следующее: прочитать artifacts и точную техническую идентичность, сохранять доказанные отсутствующие поля; выпуск только после terminalChina и свежих prerequisites.
+
+
+### 25.10.2026 05:12 UTC+7 — проверка конфликтующей мощности ДВС в A3 PHEV
+
+В3существующихA3/2024/1395/40–45TFSIe publicicePowerKw150/180 совпадаетссистемноймощностью; Audiтаблицы18.07.2023 отделяют110кВтДВС от150/180кВтsystem. Дополнен существующий boundedpreflight: толькофлагручногоредактирования и типы/значениядоказательствicePowerKw, безвыводаисточников/заметок/корпуса. Запрошены3точныхdigest приrevisionc121ad35; правкиданныхпока0. Сначала доказать,чтоошибочноеполе неmanual/attested,затем CASисправление+подтверждениеfuel/drive,30minневыводитьизContinuous. Фактическийpublication-status40137089006SUCCESS22:06:35UTC:Chinafc5b3612leaseactive,heartbeat22:02:31,lockedUntil22:32:31;generationпрежний,5selectorsvalid. Release/repairнеразрешеныэтимсостоянием.
