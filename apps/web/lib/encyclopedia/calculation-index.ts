@@ -116,8 +116,8 @@ function resolvesCoarseMobileBody(offer:any,evidence:any,entries:CalculationFact
   &&entries.every(c=>c.sources.bodyType?.kind==='manufacturer'&&/^https:\/\//.test(c.sources.bodyType.url||'')&&Boolean(c.sources.bodyType.batchId));
 }
 /** Exact modification/year, hard constraints, and per-field unanimity. No score winner. */
-export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean;specificationIdentity?:boolean}={technicalIdentity:true}):T{
- if(!index||!offer.make||!offer.model||!Number.isInteger(offer.year)||(!offer.trim&&!options.technicalIdentity))return offer;
+export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean;specificationIdentity?:boolean}={technicalIdentity:true,specificationIdentity:true}):T{
+ if(!index||!offer.make||!offer.model||!Number.isInteger(offer.year)||(!offer.trim&&!options.technicalIdentity&&!options.specificationIdentity))return offer;
  if(/customer_input|manual/i.test(offer.powerDataSource||'')||offer.calculationSnapshot?.modificationScenario)return offer;
  if(hasEncyclopediaCalculationEvidence(offer)){
   const previous=offer.operational?.encyclopediaCalculation||offer.encyclopediaCalculation;
@@ -152,7 +152,7 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
   candidates=annual.filter(v=>compatible(v)&&['chassisCode','engineCode'].some(f=>exists(identity[f])&&exists(v.constraints[f])&&same(f,identity[f],v.constraints[f])));
   technicalMatch=candidates.length>0;
  }
- // Opt-in specification consensus: independent known mechanical anchors,
+ // Specification consensus: independent known mechanical anchors,
  // same annual model, and every compatible candidate retained for unanimity.
  if(options.specificationIdentity&&!candidates.length&&!exact.length){
   const power=(v:any)=>Number(v.powerKw)||(Number(v.powerHp)*0.73549875);
