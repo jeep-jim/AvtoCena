@@ -14068,3 +14068,10 @@ Preview40050603489/job120742195151 SUCCESS. Artifact12543450766 SHA2567f0bf2f490
 Apply40051072189/job120743657524 SUCCESS, savedModels1/savedFields0, revisionNio9b7d92fe-cf3c-43f3-9c81-50a79e6cb17e; независимый API2026 подтверждает новыйproof, но powertrainKind осталсяunknown. Это неуспешноеисправлениезначения. Причина: calculation-index считаетunknown/0пустыми, reference-reuse.empty — нет. План создавалповторныйproof, которыйcompilerправильнонепринималдляunknown.
 
 Семантикаempty выровнена ссуществующимmatcher, безослабленияidentity/unanimity/manualguard; certified30min по-прежнему не переносится. Новыйрегрессионныйтест проверяетсохранениезначений/пригодностьисточника/idempotentreplay/manual.24целевыхтестаPASS; на свежемограниченномNio2026срезе теперь1реальныйpowertrainKind= electric,30minnull. Новый полныйpreview запрошен передapply; прежние0fields отражалиошибкуэтойпроверки, неокончательныйостаток. Ранееzodfix117releaseтестовPASS.
+
+
+## 24.10.2026 08:54 Красноярск — исправленный полныйreusepreview:1точное значение, план принят
+
+40051556923/job120745141821 SUCCESS:4451моделей,1модель/1вариант/1поле powertrainKind NioET5T2026 75kWhTouring. Artifact12543956439 SHA2568c0b83d6e9ad0785fd36c4c53a60cdd20f433c8f602dee4e757ecf478538bb03 скачан/проверен. Новый plan1460250ab533c147c9b68cf3169fba55adfc1b47c73078c8fe5ba327e3fc6d4e, expectedrevision9b7d92fe-cf3c-43f3-9c81-50a79e6cb17e. Запрошенapply толькоэтогоплана; успехещёнеобъявлен. Массовогонеперенесённогоостатка точныхзначений поэтойпроверке нет;80%неподтверждены.
+
+Fix6e6a2bd:24целевыхтеста/TypeScript PASS, штатныеCRM/greenCIпроходят. Предыдущаяпубличнаявыборка01:42UTC:65/65полей5карточек совпали наe7a307, необщаяготовность. Контрактfeedrefresh с конкретнымиточкамиизменений/критериями приёмки сохранён docs/catalog-feed-price-only-contract-2026-10-24.md; end-to-endинкрементальность ещё не реализована. Следующийшагпослеapply/readback — единыйrelease224+1, безновогосбора.
