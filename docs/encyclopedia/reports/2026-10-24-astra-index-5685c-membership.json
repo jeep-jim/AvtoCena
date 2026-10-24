@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T14:55:30.736Z",
+  "release": "7189a40f73606b46eaeb86e4c37905e1fd0bfcf6",
+  "workflow": 40103448997,
+  "job": 120900269071,
+  "artifact": 12564192032,
+  "indexDigest": "5685c5147920cef54287a9a21579af60ea1c281e6da9d01669f2351d45f29376",
+  "manifestDigest": "5fd789c79193709db6b4a328dec0a2bde52514fe2172ca06eba3f6432e83c7a1",
+  "verified": true,
+  "plans": [
+    {
+      "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+      "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+      "plans": 1,
+      "models": 2895,
+      "annualVariants": 5,
+      "calculationFields": 31,
+      "descriptiveFields": 1,
+      "unknownYearVariantsOutsideIndex": 230447
+    },
+    {
+      "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+      "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+      "plans": 1,
+      "models": 153,
+      "annualVariants": 3854,
+      "calculationFields": 20820,
+      "descriptiveFields": 55,
+      "unknownYearVariantsOutsideIndex": 84733
+    }
+  ],
+  "newPlanFieldsByName": {
+    "fuel": 3441,
+    "powertrainKind": 3453,
+    "engineCc": 3319,
+    "powerKw": 3022,
+    "icePowerKw": 3001,
+    "drive": 2079,
+    "engineCode": 1465,
+    "grossVehicleWeightKg": 579,
+    "transmission": 267,
+    "bodyType": 194,
+    "motorPeakKw": 55
+  },
+  "activationConfirmed": false
+}

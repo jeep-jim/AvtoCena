@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T14:39:00.921Z",
+  "updatedAt": "2026-10-24T14:55:30.736Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,9 +32796,9 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T14:39:00.921Z",
+    "updatedAt": "2026-10-24T14:55:30.736Z",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
-    "state": "bulk_astra_saved_readback_pass_release_requested",
+    "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
@@ -32958,6 +32958,20 @@
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json",
         "afterRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
         "apiReadback": true
+      },
+      {
+        "path": "docs/encyclopedia/research-handoff-2026-10-24-cupra-leon-phev-power.json",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
+        "batchSha256": "d9989cf346efe8c45368efb96f0d6c376257e52403551ed2a65311f2d2d9906d",
+        "state": "apply_requested_post_snapshot",
+        "variants": 8,
+        "fields": 16,
+        "modelId": "36050a1f4ba506db31d21ffd",
+        "expectedRevision": "4f368bf7-60be-573b-a100-1d3d57b3da5b",
+        "preflightWorkflow": 40104265322,
+        "preflightJob": 120902570309,
+        "requiresFreshApiPreflight": false,
+        "includedInIndex": false
       }
     ],
     "pendingNextIndexBatches": [],
@@ -38891,129 +38905,11 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "observedMain": "437468b8f7336edc5891a1aa1c324e930616dcba",
-      "writesPaused": true,
-      "reason": "Массовый plan применён и API153/153 подтверждён; до SUCCESS Prepare private encyclopedia index не менять manifest.",
-      "doNotDuplicate": [
-        "reference repair preview/apply",
-        "production deploy",
-        "UI changes",
-        "full China collection"
-      ],
-      "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-24T14:39:00.921Z",
-      "parallelManualResearch": {
-        "workflows": [
-          39909676521,
-          39909903065
-        ],
-        "state": "included_in_active_index",
-        "fields": 5,
-        "report": "docs/encyclopedia/reports/2026-10-23-bmw-30min-progress.json",
-        "doNotDuplicate": true,
-        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
-      },
-      "parallelOwnerLiResearch": {
-        "commit": "f479daa794d2bc82f24cb0800667e2fdf8ef11e8",
-        "batchPath": "docs/encyclopedia/batches/2026-10-23-owner-li-l6-l7.json",
-        "doNotDuplicate": true,
-        "status": "saved_readback_and_active_index_membership_confirmed_public_parity_not_closed",
-        "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
-      },
-      "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json",
-      "isolatedRelease": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
-      "postSnapshotCamry": {
-        "workflow": 39925160057,
-        "fields": 8,
-        "variants": 2,
-        "includedInIndex": false,
-        "report": "docs/encyclopedia/reports/2026-10-23-camry-readback-and-release-coverage.json"
-      },
-      "parallelOwnerToyotaBZ3X": {
-        "commit": "e635aba2cbf281033e591d825baa67bdef64a2b2",
-        "workflow": 39929956662,
-        "observedConclusion": "success",
-        "independentReadbackByThisPass": false,
-        "doNotDuplicate": true,
-        "note": "Прочитан сохранённый отчёт ручной сессии: PASS; собственный повторный apply/readback не выполнялся.",
-        "independentReadbackByOwner": "PASS",
-        "report": "docs/encyclopedia/reports/2026-10-23-bz3x-factory-readback.json"
-      },
-      "parallelOwnerToyota3X": {
-        "workflow": 39930319667,
-        "independentReadbackByOwner": "PASS",
-        "report": "docs/encyclopedia/reports/2026-10-23-toyota-3x-factory-readback.json",
-        "doNotDuplicate": true,
-        "includedInIndex": false
-      },
-      "parallelOwnerToyotaAygoXHybrid": {
-        "workflow": 39935764359,
-        "conclusion": "success",
-        "independentReadbackByOwner": "PASS",
-        "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
-        "doNotDuplicate": true
-      },
-      "pendingReleaseWorkflow": null,
-      "independentResearchReservation": {
-        "checkedAt": "2026-10-23T14:57:01Z",
-        "state": "released_after_verified_snapshot",
-        "workflow": 39972729425,
-        "job": 120479350486,
-        "mode": "apply",
-        "scope": "Независимые research batches; не блокирует основной ASTRA preview/apply",
-        "reason": "Owner-requested combined224field release after cancellation; resume after isolated index + membership + artifact verified.",
-        "resumeCondition": "Resume after successful immutable index/readback, required batch/ASTRA membership and verified artifact; later batches await next release.",
-        "preparedBatch": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
-        "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
-        "previewWorkflow": 39949279655,
-        "previewJob": 120399492239,
-        "previewConclusion": "success",
-        "previewAcceptanceReport": "docs/encyclopedia/reports/2026-10-23-astra-preview-acceptance.json",
-        "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
-      },
-      "lastCompletedReleaseWorkflow": 40068425827,
-      "pendingRelease": null,
-      "isolatedIndexDigest": "8b3f26cd58af545ff0f380bb3ae5b2d0dbb7b3444c1dcf9f0f66a54dfe22b5db",
-      "isolationReport": "docs/encyclopedia/reports/2026-10-24-final-release-coverage.json",
-      "deferredNextRelease": {
-        "report": "docs/encyclopedia/reports/2026-10-24-next-release-writer-coordination.json",
-        "reason": "release_requested_after_owner_cancel",
-        "workflow": 40026092554,
-        "pendingFields": 224,
-        "deployRequested": true,
-        "checkedAt": "2026-10-24T01:27:26.923469+00:00",
-        "readbackReport": "docs/encyclopedia/reports/2026-10-24-pending132-live-readback.json",
-        "workflows": [
-          40042142717,
-          40038476075,
-          40026092554
-        ],
-        "acceptanceChecklist": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0800.json",
-        "latestResearchReport": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-body-pass.json"
-      },
-      "lastKoreaRefreshFailure": {
-        "workflow": 40032114341,
-        "job": 120683058459,
-        "report": "docs/diagnostics/2026-10-24-korea-empty-background-run.json",
-        "reason": "no_fresh_source_offers",
-        "previousManifestPreserved": true,
-        "rerunRequested": false
-      },
-      "latestResearch": {
-        "checkedAt": "2026-10-24T09:58:43.256Z",
-        "batch": "research-2026-10-24-audi-a5-2024-drive-mass-body",
-        "fields": 9,
-        "apiReadback": true,
-        "activationConfirmed": false,
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json"
-      },
-      "targetRelease": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
-      "targetWorkflow": 40068425827,
-      "snapshotReady": true,
-      "workflow": 40100441431,
-      "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
-      "state": "await_release_snapshot_isolation",
-      "noDuplicatePending": true
+      "writesPaused": false,
+      "state": "snapshot_isolated_bounded_cupra_writer_requested",
+      "checkedAt": "2026-10-24T14:55:30.736Z",
+      "reservedModelId": "36050a1f4ba506db31d21ffd",
+      "reason": "Prepare private encyclopedia index SUCCESS; последующая Cupra партия не входит в индекс5685c514."
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -42683,7 +42579,7 @@
       "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
       "workflow": 40100441431,
       "job": 120891320310,
-      "status": "saved_readback_pass_release_requested",
+      "status": "index_prepared_await_activation",
       "artifactExpected": "astra-import-preview.json",
       "applyRequested": true,
       "nextActions": [
@@ -42767,7 +42663,17 @@
         "state": "ci_in_progress",
         "workflow": 40102863410,
         "excludedFromRequestedRelease": true
-      }
+      },
+      "releaseWorkflow": 40103448997,
+      "releaseJob": 120900269071,
+      "release": "7189a40f73606b46eaeb86e4c37905e1fd0bfcf6",
+      "snapshotIsolated": true,
+      "indexDigest": "5685c5147920cef54287a9a21579af60ea1c281e6da9d01669f2351d45f29376",
+      "manifestDigest": "5fd789c79193709db6b4a328dec0a2bde52514fe2172ca06eba3f6432e83c7a1",
+      "coverageArtifact": 12564192032,
+      "membershipVerified": true,
+      "calculationFields": 20820,
+      "descriptiveFields": 55
     }
   },
   "scope": {
