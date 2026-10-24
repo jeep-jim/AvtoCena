@@ -13,7 +13,11 @@ export function validateBatch(batch){
   if(ids.has(id)||! /^[a-f0-9]{24}$/.test(e.modelId)||!e.variantId||! /^[a-f0-9]{64}$/.test(e.expectedDigest))throw Error('invalid_entry_identity');ids.add(id);
   if(e.operation!==undefined&&e.operation!=='create')throw Error('invalid_operation');
   if(e.operation==='create'&&(e.expectedDigest!==digest(null)||!e.expectedRevision||e.year<2008||!['manufacturer','official_registry'].includes(e.source?.type)))throw Error('invalid_new_variant_evidence');
-  if(!e.make||!e.model||!e.trim||!Number.isInteger(e.year)||e.year<1900||e.year>new Date().getUTCFullYear()+1)throw Error('missing_exact_identity');
+  // Existing annual rows may have no equipment name. Their exact ID, year,
+  // original trim representation and full-record digest still bind the write.
+  const validTrim=e.trim===undefined||e.trim===null||typeof e.trim==='string';
+  const namedCreate=e.operation!=='create'||(typeof e.trim==='string'&&e.trim.trim().length>0);
+  if(!e.make||!e.model||!validTrim||!namedCreate||!Number.isInteger(e.year)||e.year<1900||e.year>new Date().getUTCFullYear()+1)throw Error('missing_exact_identity');
   if(!e.source || !['manufacturer','official_registry','observation_translation','owner_confirmed'].includes(e.source.type)||!e.source.statement||e.source.statement.length>1200||!/^\d{4}-\d{2}-\d{2}$/.test(e.source.checkedAt))throw Error('missing_field_source');
   if(e.source.type==='owner_confirmed'&&(!isOwnerConfirmedEvidence(e.source)||e.operation==='create'))throw Error('invalid_owner_confirmation');
   const url=new URL(e.source.url);if(url.protocol!=='https:'||url.username||url.password)throw Error('invalid_source_url');
