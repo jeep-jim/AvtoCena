@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T14:26:11.664Z",
+  "updatedAt": "2026-10-24T14:39:00.921Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,14 +32796,14 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T14:26:11.664Z",
+    "updatedAt": "2026-10-24T14:39:00.921Z",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
-    "state": "bulk_astra_apply_requested",
+    "state": "bulk_astra_saved_readback_pass_release_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
       "scope": "all_existing_annual_models",
-      "state": "await_exact_apply_readback",
+      "state": "await_index_membership_and_public_activation",
       "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0"
     },
     "lastVerifiedResearch": "audi-a5-2024-drive-mass-body",
@@ -38893,7 +38893,7 @@
     "researchWriteCoordination": {
       "observedMain": "437468b8f7336edc5891a1aa1c324e930616dcba",
       "writesPaused": true,
-      "reason": "Новый массовый план должен видеть неизменные ревизии; единичные партии не сохранять до его штатного применения и изоляции следующего index snapshot.",
+      "reason": "Массовый plan применён и API153/153 подтверждён; до SUCCESS Prepare private encyclopedia index не менять manifest.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -38901,7 +38901,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-24T14:19:12Z",
+      "checkedAt": "2026-10-24T14:39:00.921Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -39012,7 +39012,7 @@
       "snapshotReady": true,
       "workflow": 40100441431,
       "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
-      "state": "reserved_for_bulk_astra_replan_apply",
+      "state": "await_release_snapshot_isolation",
       "noDuplicatePending": true
     },
     "audiA1BodyAndGapsPass": {
@@ -42679,11 +42679,11 @@
       "state": "prepared_waiting_release_snapshot"
     },
     "massTechnicalPass": {
-      "checkedAt": "2026-10-24T14:26:11.664Z",
+      "checkedAt": "2026-10-24T14:39:00.921Z",
       "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
       "workflow": 40100441431,
       "job": 120891320310,
-      "status": "preview_success_apply_requested",
+      "status": "saved_readback_pass_release_requested",
       "artifactExpected": "astra-import-preview.json",
       "applyRequested": true,
       "nextActions": [
@@ -42744,9 +42744,30 @@
           "conflicting_or_incomplete_evidence": 421
         }
       },
-      "applied": false,
-      "apiReadback": false,
-      "activationConfirmed": false
+      "applied": true,
+      "apiReadback": true,
+      "activationConfirmed": false,
+      "applyWorkflow": 40102493368,
+      "applyJob": 120897327155,
+      "applyArtifact": 12563522825,
+      "applyConclusion": "success",
+      "savedModels": 153,
+      "apiReadbackModels": 153,
+      "releaseRequested": true,
+      "report": "docs/encyclopedia/reports/2026-10-24-astra-bulk-apply-readback.json",
+      "pr1519": {
+        "merged": true,
+        "merge": "6cf5b5e8335cbfca2c39ab0759258adbcf6047d3",
+        "head": "ffbb375b5cd3f0f4a328825c3ab9a4bc84a5afb6",
+        "ci": 40102684116,
+        "conclusion": "success",
+        "activated": false
+      },
+      "pr1521": {
+        "state": "ci_in_progress",
+        "workflow": 40102863410,
+        "excludedFromRequestedRelease": true
+      }
     }
   },
   "scope": {
