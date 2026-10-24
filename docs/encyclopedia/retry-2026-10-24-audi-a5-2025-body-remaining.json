@@ -1,0 +1,1319 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T06:56:52.885744+00:00",
+  "modelId": "8cf3dbb7884fe919bce44c62",
+  "year": 2025,
+  "inspectedRows": 99,
+  "selectedBodyVariants": 14,
+  "remainingBody": [
+    {
+      "variantId": "9ef59e4eede4c43e0ee67a16",
+      "trim": "40 TFSI 콰트로 S Line",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "e0bdae94b5cf8cf587d7cd2a",
+      "trim": "45 TFSI 콰트로 S Line",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "bc3c86d78c5de78feb3dded3",
+      "trim": "TFSI Q LM19 AHK KAMERA eSITZE",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "b5bf1258d0d0818c47ef3794",
+      "trim": "TFSI Q AHK SPORTSITZE LM18",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "fe646dcdd9905882624f453c",
+      "trim": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "6fc7d8a9e64bd5cd25d48870",
+      "trim": "2.0 TDI S Line Plus S Tronic*Navi*Matrix*Na",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "5e9184b5d92e0428617b9b5c",
+      "trim": "TFSI 150 kW S tronic Exterieur S line Keyless Go/Klima/LED/Soundsystem/Sitzhzg./MF-Lenkrad/BC/Tempomat/L-R Sensor/eFH.",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "d2f135c8fbaa1fc2455d22b9",
+      "trim": "TDI S tronic mHEV+ S Line edition",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "faf4ae7980445b02dedd77ad",
+      "trim": "Avant 2.0 e quattro TFSI W edition one 360 LM",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "5532c3fe92dd4d9512ba2585",
+      "trim": "Sportback 45 TFSI quattro S tronic Matrix-LED",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    },
+    {
+      "variantId": "16722521eda13a935286b75a",
+      "trim": "SLINE AHK MATRIX LEDER NP83k Avant eHYBRID 270kWqu",
+      "reason": "Нет однозначной идентичности Avant/Saloon в применяемой заводской карте; отдельный документ поколения Sportback/гибрида либо уточнение комплектации."
+    }
+  ],
+  "remainingFields": [
+    {
+      "variantId": "9ef59e4eede4c43e0ee67a16",
+      "year": 2025,
+      "trim": "40 TFSI 콰트로 S Line",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "e0bdae94b5cf8cf587d7cd2a",
+      "year": 2025,
+      "trim": "45 TFSI 콰트로 S Line",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "9c795407ed63b506b1568c3c",
+      "year": 2025,
+      "trim": "S-Line",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "2dcf1f7b4c043a6364e70d45",
+      "year": 2025,
+      "trim": "S-Line",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "e28751d1718e136ab83da3b4",
+      "year": 2025,
+      "trim": "35 TFSI",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "ebfcbb6ecd95f40114df2fea",
+      "year": 2025,
+      "trim": "S-Line",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "ec4afea98926efc4a6d2068e",
+      "year": 2025,
+      "trim": "45 TFSI EXCLUSIVE EDITION",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "0fd9bb15d6712b227f9520f3",
+      "year": 2025,
+      "trim": "40 TFSI LAUNCH EDITION",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "9d4cbc3246ded8e2f7493830",
+      "year": 2025,
+      "trim": "S-Line",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "5b66c9e1a44bf738dc84e04e",
+      "year": 2025,
+      "trim": "Other",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "767d422d4f336d0eb2963121",
+      "year": 2025,
+      "trim": "40 TFSI PROGRESS BLACK",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "4a7e9c430e4ef19debeb7bd2",
+      "year": 2025,
+      "trim": "S-Line",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "6cc852a286b481e5bc5ed4a6",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "f9e569e101ed070a6799e4fc",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "0b1b7d381a990c35c426824b",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "0da8bd9a8f9a111bbb0a60d1",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "97b7cbfbaa2cb1894b4fbdaf",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "09cf2a3ddc45904961b394f5",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "1faedd96695063b040c4c5e6",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "c3e00719d91b4a4a7bd4d35f",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "e66c83be8b57245f7101d5e1",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "82aaa8a15372de4f685626dc",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "973c3bf712dda50ecd5549c6",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "e6dc976d99fedddd6a311fa4",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "88ac0bc8d6c9e66041c40b38",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "d510c1bff375455f1d47a723",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "6386bd92f3aceed684c65fe3",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "3fe6855836bc04e154ed5ea0",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "bbce8d26f782f7152c303fe3",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "7950258811d989c09b3a5951",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "5fe66f51a77a44e86be20ce5",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "d897e647aabe039ead1e4eda",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "273e7be459b3127586a11305",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "transmission",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "af2a26156ba9288af231a267",
+      "year": 2025,
+      "trim": "Avant TFSI*Navi*Alu*Virtual*Audi Connect*Kame",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "ae6c6d78fe213a9578ed345e",
+      "year": 2025,
+      "trim": "Avant S line TFSI 110 kW S-tronic",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "75a948ea0c1391280f1bad66",
+      "year": 2025,
+      "trim": "Avant 2.0 TFSI Stronic Advanced",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "e17c6048487cbad41982e966",
+      "year": 2025,
+      "trim": "2025款 Sportback 典藏版 40 TFSI 时尚动感型",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "471a892c6c5905ea8d08ebbc",
+      "year": 2025,
+      "trim": "2025款 Sportback 典藏版 40 TFSI quattro 豪华动感型",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "8ee8b2cd1f521abbc8e945fe",
+      "year": 2025,
+      "trim": "Coupe 40 TFSI Fashion Dynamic Type",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "60ae39563c2434d630bd8205",
+      "year": 2025,
+      "trim": null,
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "f743046006a3428bba74db66",
+      "year": 2025,
+      "trim": "Sportback 40 TFSI quattro Luxury Dynamic Type",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "f63a924727f798a406cba46a",
+      "year": 2025,
+      "trim": "Avant TDI S tronic RearView LED Memory ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "f54e51d602c5f71ac27f1df5",
+      "year": 2025,
+      "trim": "Avant TDI LED plus/Navi/ACC/El.Sitze/R-Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "93c850f87e98804219aad1cb",
+      "year": 2025,
+      "trim": "Avant TFSI S tronic | inkl. Winterräder |",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "edade5761fe25a26d469289c",
+      "year": 2025,
+      "trim": "Avant 40 TFSI S tronic APP+VIRT+ACC+LED+NAVI",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "aca84101958063e50a5e5161",
+      "year": 2025,
+      "trim": "Avant 40 TDI 150 kW S tro*LED*Virtual*Navi+*S",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "87d5ec1952262f7ba23f25bb",
+      "year": 2025,
+      "trim": "Avant TFSI S tronic virt.Cockpit Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "bc3c86d78c5de78feb3dded3",
+      "year": 2025,
+      "trim": "TFSI Q LM19 AHK KAMERA eSITZE",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "5766a8eb6eb07e178ef54c69",
+      "year": 2025,
+      "trim": "Avant 2.0 TFSI LED EINPARKHILFE RÜCKFAHRKAMER",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "5e5fc88ebb7d6851838d3b67",
+      "year": 2025,
+      "trim": "Avant TDI 150 kW Tech*LED*Rückfahrkamera*ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "c803792747fdfb46794cdad3",
+      "year": 2025,
+      "trim": "Avant TDI LED*VIRTUAL*NAV*LEDER*LANE*PDC*18\"",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "4d6c8d831d80e6ed233767c7",
+      "year": 2025,
+      "trim": "Avant 2.0 TFSI LED KAMERA NAVI PDC KLIMA SHZ",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "17f4a4b4ae1658189f507b07",
+      "year": 2025,
+      "trim": "Limousine TDI 150 kW Business*LED*RFK*ACC*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "7cba44fc49b28b2272d1c03e",
+      "year": 2025,
+      "trim": "Avant TFSI quattro Stronic NAVI LED AHK ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "0e0abcec6e0c1e2bc34f0a24",
+      "year": 2025,
+      "trim": "Avant TDI ST.HEIZ LED+ ASSIST SPORTSITZE",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "4b13efa06c63cda7213ab562",
+      "year": 2025,
+      "trim": "Avant TDI S-Tronic",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "614dafafadbfc3ddf69d7a13",
+      "year": 2025,
+      "trim": "Avant TDI LEDER HuD KAMERA BuO",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "f1363e217eeba81efd88787d",
+      "year": 2025,
+      "trim": "Avant TFSI Q LEDER LM18 MATRIX 360",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "853d823ce6b9f82b18973f3e",
+      "year": 2025,
+      "trim": "Avant TDI*Navi*LED*Alu*B&O*HUD*Virtual Cockpi",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "9b346242d6f38df86817936f",
+      "year": 2025,
+      "trim": "Limousine TFSI S tronic *ACC*AHK*R-KAM*18''*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "eb9892a5494e05138a749eec",
+      "year": 2025,
+      "trim": "Avant TFSI quattro S tronic *ACC*AHK*R-KAM*18",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "bfd2f3ffd5418f469c7977c8",
+      "year": 2025,
+      "trim": "Avant TFSI Q LM18 LEDER AHK KAMERA",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "a057a8b6d683acb9d28a54d7",
+      "year": 2025,
+      "trim": "Avant TDI LM18 HuD KAMERA BuO LEDER",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "3fab2bcac051ad2c6978e13d",
+      "year": 2025,
+      "trim": "Limousine TFSI S tronic *ACC*AHK*LED-Plus*19*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "57a50687b60f373f9cf0b03b",
+      "year": 2025,
+      "trim": "Avant TDI*Memory*AHK*Pano*Einparkhilfe*Tempom",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "b5bf1258d0d0818c47ef3794",
+      "year": 2025,
+      "trim": "TFSI Q AHK SPORTSITZE LM18",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "73c8f794bdac05b22f4fa31d",
+      "year": 2025,
+      "trim": "Avant TFSI Q LEDER BF-DISPLAY AHK MATRIX",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "17327ee4c09c0b239d9e011c",
+      "year": 2025,
+      "trim": "Limousine TDI LEDER PANO MATRIX 360° BF-DISPL",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "53d160fdfb7dfa3d28cdeaed",
+      "year": 2025,
+      "trim": "Avant TDI Q LM19 MATRIX ASSSIST AHK",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "fe646dcdd9905882624f453c",
+      "year": 2025,
+      "trim": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "79f48a65f44ecba0d280007e",
+      "year": 2025,
+      "trim": "Avant TDI Q S LINE LEDER AHK MATRIX OLED",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "e1ef7ad0f51e3a9ad381032f",
+      "year": 2025,
+      "trim": "Avant TDI Leder/HUD/RFK/AHK-Vorb.",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "6fc7d8a9e64bd5cd25d48870",
+      "year": 2025,
+      "trim": "2.0 TDI S Line Plus S Tronic*Navi*Matrix*Na",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "5e9184b5d92e0428617b9b5c",
+      "year": 2025,
+      "trim": "TFSI 150 kW S tronic Exterieur S line Keyless Go/Klima/LED/Soundsystem/Sitzhzg./MF-Lenkrad/BC/Tempomat/L-R Sensor/eFH.",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "0f5f3961b465d28c3e5172f4",
+      "year": 2025,
+      "trim": "Avant TDI quattro +STANDHZ+NAV+LED-SW+ASSIST+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "bb5ba17d1431d9ce12c6417d",
+      "year": 2025,
+      "trim": "Avant TDI S line S-tronic Matrix Navi ACC AHK",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "05956c03671b03710867a5eb",
+      "year": 2025,
+      "trim": "Avant 2.0 TFSI S-Line 19Zoll*ACC*Matrix*Sound",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "6d883e3546e95131df01a86f",
+      "year": 2025,
+      "trim": "Avant TDI quattro 150 kW ACC*Matrix*AHK*360°",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "5d1341c45a05c8a4f36b8e2f",
+      "year": 2025,
+      "trim": "A5 Avant 2.0 TFSI S-Line 19Zoll*ACC*Matrix*Sound",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "4ef1f1fb00fabbd669a69d06",
+      "year": 2025,
+      "trim": "Avant TFSI Q S LINE EDITION 1 LM19 LEDER BF-D",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "bb4c14c8ff2dc13432b5058c",
+      "year": 2025,
+      "trim": "Avant TFSI Q S LINE EDITION 1 LM19 LEDER AHK",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "a1f90c5b0713ace623433bcc",
+      "year": 2025,
+      "trim": "Avant TDI S-Tronic Assistenzpaket",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "3b76a8b80496bfa82ff25f67",
+      "year": 2025,
+      "trim": "Avant TDI 150 kW S tronic*TECHPLUS*2xS-Line*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "690e1eae227659a31b7b164d",
+      "year": 2025,
+      "trim": "Avant TFSI edition one S line Navi+AHK+Matrix",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "ac7a39a5edab2e12d09c3da7",
+      "year": 2025,
+      "trim": "Avant Q. S Line Compe. Pano Matrix Beifdp 19'",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "179c41517625a54d112bb7af",
+      "year": 2025,
+      "trim": "2.0 TDI Avant quattro /MATRIX-LED/STANDH./ACC/RÜC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "61b41be3e0846622fde77828",
+      "year": 2025,
+      "trim": "Avant 40 TDI S tro*B&O*HUD*LED*Virtual*Navi+*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "55f3d39cfb48e1afeb3aae09",
+      "year": 2025,
+      "trim": "Avant edition one MATRIX LED KAMERA LEDER HEAD ...",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "d2f135c8fbaa1fc2455d22b9",
+      "year": 2025,
+      "trim": "TDI S tronic mHEV+ S Line edition",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "1761dcc23c7203f96f4fb51e",
+      "year": 2025,
+      "trim": "Avant 2.0 tdi mhev 204CV Business Advanced s-tronic",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "8fce91ed11bd97ed8fe60294",
+      "year": 2025,
+      "trim": "avant 2.0 tdi mhev+ business advanced 204cv s-tron",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "11a533a6ce912bd2fec9a7c3",
+      "year": 2025,
+      "trim": "Avant TDI 150 kW mHEV+ S tronic S Line ed. NAVI",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "faf4ae7980445b02dedd77ad",
+      "year": 2025,
+      "trim": "Avant 2.0 e quattro TFSI W edition one 360 LM",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "5532c3fe92dd4d9512ba2585",
+      "year": 2025,
+      "trim": "Sportback 45 TFSI quattro S tronic Matrix-LED",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "6b31309e2f97c2eeb9994b57",
+      "year": 2025,
+      "trim": "Avant eHybrid Q LM19 SPORTSITZE KAMERA eSITZE",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "60cc5d0c01639029d3b97696",
+      "year": 2025,
+      "trim": "Avant eHybrid LM19 SPORTSITZE eSITZE KAMERA",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "da3923ed942d3acb732488ee",
+      "year": 2025,
+      "trim": "Avant eHybrid Q LM19 SPORTSITZE KAMERA",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "16722521eda13a935286b75a",
+      "year": 2025,
+      "trim": "SLINE AHK MATRIX LEDER NP83k Avant eHYBRID 270kWqu",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    },
+    {
+      "variantId": "40febd9436817e777bf9d84a",
+      "year": 2025,
+      "trim": "Avant Qu.e-hybrid S Line Comp.Matrix Beifahr.",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов; для остальных полей требуется точный источник."
+    }
+  ],
+  "priorRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
+  "modelComplete": false
+}

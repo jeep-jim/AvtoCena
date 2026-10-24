@@ -1,12 +1,11 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T05:59:05.121914+00:00",
+  "checkedAt": "2026-10-24 07:00:27 UTC",
   "modelId": "8cf3dbb7884fe919bce44c62",
   "make": "Audi",
   "model": "A5",
   "revision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
   "lastCompletedBatch": "research-2026-10-24-audi-a5-2026-body",
-  "lastReadback": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-readback.json",
   "next": {
     "modelId": "8cf3dbb7884fe919bce44c62",
     "make": "Audi",
@@ -17,220 +16,320 @@
     "missingValueFields": [
       "bodyType"
     ],
-    "state": "requires_exact_source_review"
+    "state": "prepared_not_applied",
+    "reason": "Не менять модель во время подготовки согласованного снимка."
   },
-  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
-  "previousRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
+  "preparedBatch": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
+  "preparedReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-prepared.json",
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
+  "previous2026Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
+  "priorRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
+  "nextAction": "После successful Prepare private index/membership: свежий API и полный digest; при неизменной ревизии штатный apply, затем независимый API readback. Не повторять исследование источника.",
   "nextYearRead": {
-    "year": 2025,
-    "rows": 99,
-    "missingBodyType": 25,
-    "revision": "a8789e5c-38d2-5340-a89c-ff13fa65ae54",
-    "requiresFreshRead": true,
+    "year": 2024,
+    "rows": 75,
+    "missingBodyType": 37,
+    "firstExplicitVariantId": "c1a026593d2f50395308c8e8",
+    "sourceReviewRequired": true,
     "candidates": [
       {
-        "variantId": "9ef59e4eede4c43e0ee67a16",
-        "trim": "40 TFSI 콰트로 S Line",
+        "variantId": "ab1092f162265f288cd5662d",
+        "trim": "40 TFSI S-LINE",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "e0bdae94b5cf8cf587d7cd2a",
-        "trim": "45 TFSI 콰트로 S Line",
+        "variantId": "2d2f3b974538628e11293cb6",
+        "trim": "30 TDI admired",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "ae6c6d78fe213a9578ed345e",
-        "trim": "Avant S line TFSI 110 kW S-tronic",
+        "variantId": "c1a026593d2f50395308c8e8",
+        "trim": "Sportback S-Line",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "75a948ea0c1391280f1bad66",
-        "trim": "Avant 2.0 TFSI Stronic Advanced",
+        "variantId": "8da4bd63f5f78c75fd8877db",
+        "trim": "A5 Sportback 35 TFSI 3x S-Line Competition Black Edition S-Tronic",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "bc3c86d78c5de78feb3dded3",
-        "trim": "TFSI Q LM19 AHK KAMERA eSITZE",
+        "variantId": "b3a2f7b68e7e23054ba75eab",
+        "trim": "SB 35d AT7 Advan LED/APPLE/SHZ/RFK/18\"LM/8Fa",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "17f4a4b4ae1658189f507b07",
-        "trim": "Limousine TDI 150 kW Business*LED*RFK*ACC*",
+        "variantId": "7eb3e0ae4de98e99b561c8f5",
+        "trim": "Sportback 35 TDI Matrix,Kamera,PDC+,Sportsitz",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "9b346242d6f38df86817936f",
-        "trim": "Limousine TFSI S tronic *ACC*AHK*R-KAM*18''*",
+        "variantId": "b529b0b3524ab82441f09493",
+        "trim": "Sportback 35 TDI S tronic adv Navi,Leder,Spor",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "3fab2bcac051ad2c6978e13d",
-        "trim": "Limousine TFSI S tronic *ACC*AHK*LED-Plus*19*",
+        "variantId": "ac7bbd9a325c423c9db95353",
+        "trim": "Sportback 35 TDI S line/PANO/Carbon/",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "b5bf1258d0d0818c47ef3794",
-        "trim": "TFSI Q AHK SPORTSITZE LM18",
+        "variantId": "50390e2960303c94a501815e",
+        "trim": "35 TDI Sportback LED ACC Kamera Sitzheizung",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "17327ee4c09c0b239d9e011c",
-        "trim": "Limousine TDI LEDER PANO MATRIX 360° BF-DISPL",
+        "variantId": "cea36c16304848d0f7c9adc0",
+        "trim": "A5 Sportback 35 TDi Business Edition S tronic",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "fe646dcdd9905882624f453c",
-        "trim": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+        "variantId": "2663537b689a7370715dfdb7",
+        "trim": "Cabrio 35 TFSI S line*SUNSET*NAVI*CARPLAY*ELEC.SEATS*360°CAMERA*B&O",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "6fc7d8a9e64bd5cd25d48870",
-        "trim": "2.0 TDI S Line Plus S Tronic*Navi*Matrix*Na",
+        "variantId": "ae44ea5274d423ff681c7833",
+        "trim": "SB 40d S-Tr S LINE SPORT NAV+KAM+LEDER+LED+",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "5e9184b5d92e0428617b9b5c",
-        "trim": "TFSI 150 kW S tronic Exterieur S line Keyless Go/Klima/LED/Soundsystem/Sitzhzg./MF-Lenkrad/BC/Tempomat/L-R Sensor/eFH.",
+        "variantId": "9d1ab22208eff2b99998d050",
+        "trim": "SB 40d S LINE SPORT 5SI+LEDER+SHZ+NAV+KAM+LED",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "5d1341c45a05c8a4f36b8e2f",
-        "trim": "A5 Avant 2.0 TFSI S-Line 19Zoll*ACC*Matrix*Sound",
+        "variantId": "1b9fcdaca950427a5ac1848e",
+        "trim": "SB 40d S-Tr. S LINE SPORT NAVI+KAM+LEDER+LED+",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "3b76a8b80496bfa82ff25f67",
-        "trim": "Avant TDI 150 kW S tronic*TECHPLUS*2xS-Line*",
+        "variantId": "c3d9300117e53128304eb2f5",
+        "trim": "Sportback 40 TDI qu S line Leder Navi RFK ACC",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "690e1eae227659a31b7b164d",
-        "trim": "Avant TFSI edition one S line Navi+AHK+Matrix",
+        "variantId": "3ba194b224d79a66ff24deed",
+        "trim": "Sportback 40TFSI S-tronic 320,-ohne Anzahlung",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "179c41517625a54d112bb7af",
-        "trim": "2.0 TDI Avant quattro /MATRIX-LED/STANDH./ACC/RÜC",
+        "variantId": "b2cec889deaa7af0a7da1665",
+        "trim": "SB 40 TDI S-Line ACC/LEDER/KAMERA",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "55f3d39cfb48e1afeb3aae09",
-        "trim": "Avant edition one MATRIX LED KAMERA LEDER HEAD ...",
+        "variantId": "c0801a924ff1018a5677557c",
+        "trim": "Sportback 40 TFSI qu. S-Line*Matrix*Navi*Lede",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "d2f135c8fbaa1fc2455d22b9",
-        "trim": "TDI S tronic mHEV+ S Line edition",
+        "variantId": "f81af7c3e33884c737b730ed",
+        "trim": "Sportback advanced AHK*Pano*LED*NaviTouch*18",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "1761dcc23c7203f96f4fb51e",
-        "trim": "Avant 2.0 tdi mhev 204CV Business Advanced s-tronic",
+        "variantId": "5b37d48f6ba8007a0bf12f58",
+        "trim": "Sportback 40 TDI quattro S line LED/NAVI/LEDE",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "8fce91ed11bd97ed8fe60294",
-        "trim": "avant 2.0 tdi mhev+ business advanced 204cv s-tron",
+        "variantId": "eef9eb35a40afce43cb56dda",
+        "trim": "Sportback 40 TFSI S line LED NAV KAMERA",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "11a533a6ce912bd2fec9a7c3",
-        "trim": "Avant TDI 150 kW mHEV+ S tronic S Line ed. NAVI",
+        "variantId": "63a7f16296c17c4566851154",
+        "trim": "Sportback 40 TDI quattro S line*DAB*NAVI*",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "faf4ae7980445b02dedd77ad",
-        "trim": "Avant 2.0 e quattro TFSI W edition one 360 LM",
+        "variantId": "ea35e09f60c0535c213d1f35",
+        "trim": "Sportback 40 TFSI quattro S line RFK*Matrix",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "5532c3fe92dd4d9512ba2585",
-        "trim": "Sportback 45 TFSI quattro S tronic Matrix-LED",
+        "variantId": "d3d5126cfb7beb631d0f5c31",
+        "trim": "40 TFSI*S LINE*COMPETITION-LED-ACC-KESSY-R.KA",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
       },
       {
-        "variantId": "16722521eda13a935286b75a",
-        "trim": "SLINE AHK MATRIX LEDER NP83k Avant eHYBRID 270kWqu",
+        "variantId": "63750b261ce43b6a3161e9f3",
+        "trim": "Cabriolet 40 TFSI S tronic S line Virtual/Nav",
+        "year": 2024,
         "missingValueFields": [
           "bodyType"
-        ],
-        "state": "requires_exact_source_review"
+        ]
+      },
+      {
+        "variantId": "c0aac8ea5e9160b22fc43c89",
+        "trim": "TFSI S LINE EDT ONE LM19 ASSIST LED",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "7953989ae0b9e0671f9ca009",
+        "trim": "Advanced 40 TFSI qu. S tr. MATRIX R",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "d468db5ac096473e43034c7f",
+        "trim": "NeuesModTFSI 150kW_TechPak_SLine_Lim.",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "bfc59114ef06db8ae6d1c5bd",
+        "trim": "II 2020 Sportback - A5 Sportback 40 2.0 tdi mhev S",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "aeb37a7d76e398e5637a344e",
+        "trim": "Sportback 45 TFSI quattro Matrix ACC Navi SHZ",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "25be71cc04ae89573ee803e2",
+        "trim": "S-Line LED|Keyless-Go|Tempo|Einparkhilfe",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "74b3c0c5f7e33633281bb1b9",
+        "trim": "Sportback 45TFSI quattro NAVI MATRIX B&O 360°",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "1c48c348a9bc3c00144c95c2",
+        "trim": "Cabrio S line 45 TFSI quattro ACC B+O HUD SHZ",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "5482efcfd1989a97d4968cfe",
+        "trim": "Sportback 45 TFSI quattro S tronic S line bus",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "033f8382ad1ce950b102f13a",
+        "trim": "Sportback S line 45 TFSI quattro S tronic AHK",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "d56431281f2ed6da59ac6b03",
+        "trim": "Sportback S line 45 TFSI MATRIX LED SHZ RFK",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "f7ccf8fea1f68a81de670abf",
+        "trim": "SPORTBACK 45 TFSI QUATTRO S-TRONIC 3x S-LINE 265CV",
+        "year": 2024,
+        "missingValueFields": [
+          "bodyType"
+        ]
       }
     ]
   },
   "modelComplete": false,
-  "allModelsComplete": false,
-  "nextAction": "Продолжить A5 2025 по сохранённому курсору;30 выбранных кузовов2026 сохранены. Шесть кузовных2026 и другие неизвестные поля остаются в retry, повторно применённые партии не запускать. Старые годы/отсутствующие2008+ не объявлены полными."
+  "allModelsComplete": false
 }

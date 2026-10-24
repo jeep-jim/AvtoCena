@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T13:05:38.083958+07:00",
+  "updatedAt": "2026-10-24 07:00:27 UTC",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1403,7 +1403,7 @@
       "variants": 602,
       "status": "partial_verified_fields",
       "researchedVariants": 131,
-      "checkedAt": "2026-10-24T05:59:05.121914+00:00",
+      "checkedAt": "2026-10-24 07:00:27 UTC",
       "researchedYears": [
         2026,
         2025,
@@ -1437,15 +1437,16 @@
         2014,
         2013
       ],
-      "nextAction": "Продолжить A5 2025 по сохранённому курсору;30 выбранных кузовов2026 сохранены. Шесть кузовных2026 и другие неизвестные поля остаются в retry, повторно применённые партии не запускать. Старые годы/отсутствующие2008+ не объявлены полными.",
+      "nextAction": "После successful Prepare private index/membership: свежий API и полный digest; при неизменной ревизии штатный apply, затем независимый API readback. Не повторять исследование источника.",
       "revision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
       "lastBatch": "research-2026-10-24-audi-a5-2026-body",
       "lastBatchFields": 30,
       "lastBatchVariants": 30,
       "lastReadback": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-readback.json",
-      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
+      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
       "nextVariantId": "ae6c6d78fe213a9578ed345e",
-      "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a5-next.json"
+      "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a5-next.json",
+      "latestReview": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-prepared.json"
     },
     {
       "id": "5dfeb75b8f1fc86b298d3b9a",
@@ -32795,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T05:59:05.121914+00:00",
+    "updatedAt": "2026-10-24 07:00:27 UTC",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a4l_2025_mass_prepared_waiting_snapshot",
     "preserveManual": true,
@@ -32810,7 +32811,8 @@
       "missingValueFields": [
         "bodyType"
       ],
-      "state": "requires_exact_source_review"
+      "state": "prepared_not_applied",
+      "reason": "Не менять модель во время подготовки согласованного снимка."
     },
     "lastVerifiedResearch": "audi-a5-2026-body",
     "rawAuditCalculated": 87,
@@ -32916,6 +32918,17 @@
         "workflow": 40064456017,
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2025-mass-pass.json",
         "afterRevision": "73e24623-5418-48b3-9c7a-9e0ea0ff5d64"
+      },
+      {
+        "path": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-prepared.json",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
+        "state": "prepared_not_applied",
+        "modelId": "8cf3dbb7884fe919bce44c62",
+        "variants": 14,
+        "fields": 14,
+        "requiresFreshApiPreflight": true,
+        "requiresFullInternalDigest": true,
+        "blockedByWorkflow": 40071996832
       }
     ],
     "pendingNextIndexBatches": [],
@@ -39352,7 +39365,7 @@
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-public-parity.json"
       }
     },
-    "latestResearchReview": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2020-2025-review.json",
+    "latestResearchReview": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-prepared.json",
     "audiA4L2025MassPass": {
       "version": 1,
       "checkedAt": "2026-10-24T05:01:40.762805+00:00",

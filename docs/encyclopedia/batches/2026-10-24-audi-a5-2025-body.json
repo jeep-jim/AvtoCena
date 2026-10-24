@@ -1,0 +1,440 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-audi-a5-2025-body",
+  "entries": [
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "ae6c6d78fe213a9578ed345e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant S line TFSI 110 kW S-tronic",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "cd83aa219daa0b8bc1af2cf096e0310caf42efd43ca6ce79fea2a30d5aa8d07c",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "75a948ea0c1391280f1bad66",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant 2.0 TFSI Stronic Advanced",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "c01f86c861ac4d19e3fd4062cef62ed7494819804f9f3b4269991519e2983454",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "17f4a4b4ae1658189f507b07",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Limousine TDI 150 kW Business*LED*RFK*ACC*",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "8a097858b1eaa37e1472a28c7b85f98c62fe544ccd7eed997d4cd53f678cc74b",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Limousine/Lim./Limo — седан (Saloon). Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "9b346242d6f38df86817936f",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Limousine TFSI S tronic *ACC*AHK*R-KAM*18''*",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "cd54d8136d6e6ce3eb01c1b484e45723ae35d70e26827aa2f03bde52967ea32e",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Limousine/Lim./Limo — седан (Saloon). Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "3fab2bcac051ad2c6978e13d",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Limousine TFSI S tronic *ACC*AHK*LED-Plus*19*",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "fdef3219bf2f00f970a26eb99d7d28293fbb68c28239466337b3121b96d7a1a9",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Limousine/Lim./Limo — седан (Saloon). Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "17327ee4c09c0b239d9e011c",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Limousine TDI LEDER PANO MATRIX 360° BF-DISPL",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "92bf37175e251c99c6d5b8dba9db5ff6bd8e5626582ca3429ca80d8ec676d401",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Limousine/Lim./Limo — седан (Saloon). Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "5d1341c45a05c8a4f36b8e2f",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "A5 Avant 2.0 TFSI S-Line 19Zoll*ACC*Matrix*Sound",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "cb5db6181455890602847c5c7a9ced86e0098293532a8f488693f332720a008a",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "3b76a8b80496bfa82ff25f67",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant TDI 150 kW S tronic*TECHPLUS*2xS-Line*",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "0762bdd6bba55cb619cc79a6c2c82ed08a52d2adae7498e1769d448942a38be2",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "690e1eae227659a31b7b164d",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant TFSI edition one S line Navi+AHK+Matrix",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "d294b59a0a55b8090dee152c3f308afd8868c51e262f059953e7e2e73703a1fa",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "179c41517625a54d112bb7af",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "2.0 TDI Avant quattro /MATRIX-LED/STANDH./ACC/RÜC",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "b046394830daa860eb679b451cc0f6d8692075a09c519d2a98f6500425654970",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "55f3d39cfb48e1afeb3aae09",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant edition one MATRIX LED KAMERA LEDER HEAD ...",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "73a9d56036609797fd5fbd05a8e44dd5edcd3d57362b417a2be7adee84538fae",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "1761dcc23c7203f96f4fb51e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant 2.0 tdi mhev 204CV Business Advanced s-tronic",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "90eea97fdb24914e5135d31b76c08bca0f5f5400a587177450fe435b7312c5d9",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "8fce91ed11bd97ed8fe60294",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "avant 2.0 tdi mhev+ business advanced 204cv s-tron",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "0da58e7d9df4940ba4b3d449e3b026dd1aaf325035ca8c212ff47f745a768745",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "11a533a6ce912bd2fec9a7c3",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant TDI 150 kW mHEV+ S tronic S Line ed. NAVI",
+      "expectedRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "expectedDigest": "c29c2ce3409bec4cd39dde7b8d18cc5081fffed88dc5cb0870dc91361cf5739f",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi A5/S5 rds_au_402_022_en, версия02(04/2025), применимость с2024 года: Avant / Saloon, страницы1–2. Исходная запись2025 явно обозначает Avant — универсал. Подтверждается только тип кузова; двигатель, мощность, привод, комплектация и30-минутная мощность не переносятся. Исходное название и год сохранены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: Avant / Saloon, From2024; Identification / recognition",
+            "edition": "02 (04/2025)"
+          }
+        }
+      }
+    }
+  ]
+}
