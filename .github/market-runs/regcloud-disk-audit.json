@@ -1,1 +1,4 @@
-{"requestedAt":"2026-10-20T02:04:11.799Z","reason":"Confirm free disk and live object-storage routing after emergency cleanup"}
+{
+  "requestedAt": "2026-10-24T15:46:00Z",
+  "reason": "Read-only container state after release 40103448997 timed out during candidate activation; verify whether the candidate is stopped before any subsequent release."
+}
