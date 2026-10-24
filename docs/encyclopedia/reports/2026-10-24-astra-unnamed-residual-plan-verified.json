@@ -1,0 +1,249 @@
+{
+  "passed": true,
+  "planDigest": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
+  "counters": {
+    "sourceRecords": 466987,
+    "uniqueTechnicalRecords": 466987,
+    "detailRecords": 1768599,
+    "originalSourceRows": 1038355,
+    "eligibleSourceRecords": 300947,
+    "assignedSourceRecords": 300811,
+    "rejectedSourceRecords": 166176,
+    "sourceDatasets": {
+      "edatenblatt": 44829,
+      "targa": 210673,
+      "tas": 211485
+    },
+    "rejectedReasons": {
+      "outside_passenger_light_van_pickup_scope": 150628,
+      "unknown_commercial_name": 182,
+      "unknown_vehicle_category": 12512,
+      "excluded_vehicle_family": 2718,
+      "not_existing_model": 136
+    },
+    "existingModelsTotal": 4473,
+    "existingVariantsTotal": 345462,
+    "targetedExistingAnnualVariants": 87802,
+    "targetModels": 2893,
+    "newModels": 0,
+    "changedExistingModels": 22,
+    "newUnknownYearVariants": 0,
+    "existingAnnualVariantsChanged": 62,
+    "fieldsFilled": 70,
+    "existingFieldsAttested": 181,
+    "existingAnnualPower30Filled": 1,
+    "heldExistingVariants": 87740,
+    "heldReasons": {
+      "no_exact_technical_match": 83501,
+      "conflicting_or_incomplete_evidence": 4239
+    }
+  },
+  "topModels": [
+    {
+      "id": "b6ea2fd06673d2d881a5cf60",
+      "make": "Honda",
+      "model": "Civic",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 4,
+        "fieldsFilled": 16,
+        "existingFieldsAttested": 16,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "639c4e325e55255b58dbe92e",
+      "make": "Mercedes-Benz",
+      "model": "EQE",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 4,
+        "fieldsFilled": 8,
+        "existingFieldsAttested": 12,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "ff2d0a1e18c4c0d18249de20",
+      "make": "Audi",
+      "model": "Q4 e-tron",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 2,
+        "fieldsFilled": 8,
+        "existingFieldsAttested": 8,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "d4c6efee8cca022629c991db",
+      "make": "Nissan",
+      "model": "Ariya",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 5,
+        "fieldsFilled": 5,
+        "existingFieldsAttested": 15,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "264fdb1d86b9152d1909d30a",
+      "make": "Mercedes-Benz",
+      "model": "EQS",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 4,
+        "fieldsFilled": 4,
+        "existingFieldsAttested": 12,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "4a459a330d1ddf1eed32e113",
+      "make": "Lexus",
+      "model": "UX",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 2,
+        "fieldsFilled": 4,
+        "existingFieldsAttested": 6,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "fcd96f3b7dd9a11724bbd696",
+      "make": "Volkswagen",
+      "model": "ID.4",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 7,
+        "fieldsFilled": 4,
+        "existingFieldsAttested": 21,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "1771d9cb82cfa85dbe286dca",
+      "make": "Isuzu",
+      "model": "D-Max",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 1,
+        "fieldsFilled": 3,
+        "existingFieldsAttested": 7,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "a82d70a3f970d3ddfb0235d6",
+      "make": "Mercedes-Benz",
+      "model": "EQB",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 3,
+        "fieldsFilled": 3,
+        "existingFieldsAttested": 9,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "f26049af804fb2b8890eb77a",
+      "make": "Citroën",
+      "model": "C3",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 3,
+        "fieldsFilled": 3,
+        "existingFieldsAttested": 0,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "0689657da5a646a5bb34e96d",
+      "make": "Polestar",
+      "model": "4",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 1,
+        "fieldsFilled": 2,
+        "existingFieldsAttested": 3,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "2d48428398805876faf7e021",
+      "make": "Toyota",
+      "model": "bZ4X",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 1,
+        "fieldsFilled": 2,
+        "existingFieldsAttested": 3,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "c8856783de93588310929346",
+      "make": "Smart",
+      "model": "#1",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 6,
+        "fieldsFilled": 2,
+        "existingFieldsAttested": 18,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "0eb3c4b39b404ae2fec4525b",
+      "make": "Volvo",
+      "model": "XC90",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 1,
+        "fieldsFilled": 1,
+        "existingFieldsAttested": 6,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "27f4186e3fcdde37a9687b9b",
+      "make": "Maxus",
+      "model": "T90",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 1,
+        "fieldsFilled": 1,
+        "existingFieldsAttested": 0,
+        "existingAnnualPower30Filled": 1
+      }
+    }
+  ],
+  "indexAssertions": 62,
+  "checkedAt": "2026-10-24T15:48:36.352Z",
+  "previewRun": 40106076748,
+  "previewJob": 120907922537,
+  "artifact": 12565273971,
+  "artifactSha256": "aeade2873077917ff28231b272d459aefa2fb32f087e46217135f9daccd99c64",
+  "priorAppliedPlanDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+  "sourceCorpusReused": true,
+  "newDownload": false,
+  "applyRequested": true,
+  "applied": false,
+  "apiReadback": false,
+  "publicActivationProved": false,
+  "power30MinReview": {
+    "models": [
+      {
+        "id": "27f4186e3fcdde37a9687b9b",
+        "make": "Maxus",
+        "model": "T90",
+        "count": 1
+      }
+    ],
+    "guard": "astra-bridge.mjs excludes ordinary cross_market_mechanical_consensus for power30MinKw; source must carry explicit certified30Min from edatenblatt/TAS and a documented field. Existing gates unchanged.",
+    "exactValuesVisibleInPreview": false
+  },
+  "scope": "Новая дельта после уже сохранённого b337; 70 заполнений и181 подтверждение — не повтор3664. Не равнозначно публичным расчётам всех объявлений."
+}

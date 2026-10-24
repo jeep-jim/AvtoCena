@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T15:46:26.922Z",
+  "updatedAt": "2026-10-24T15:48:36.352Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -38930,7 +38930,8 @@
       "writesPaused": true,
       "state": "single_residual_astra_preview_in_progress",
       "checkedAt": "2026-10-24T15:21:25.453Z",
-      "reason": "PR1523 merged95eef985; единственный replan40106076748 закрепляет текущие ревизии. До проверки/применения плана не запускать конкурирующие единичные записи; анализ сохранённых8403records40106364857 read-only."
+      "reason": "Exact residual ASTRA4a621 apply requested. Do not change target revisions until terminal/readback; no duplicate apply.",
+      "paused": true
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -42760,7 +42761,52 @@
       "merge": "95eef9856394682bf6fbcc9aa1dee7e424cca237",
       "previousAppliedPlan": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
       "newGainsConfirmed": false,
-      "nextAction": "Дождаться artifact; проверить canonicaldigest/counters/newModels0/newUnknownYear0 и новые значения отдельно от подтверждений. Только затем exactCAS apply; не повторять старый b337."
+      "nextAction": "Дождаться artifact; проверить canonicaldigest/counters/newModels0/newUnknownYear0 и новые значения отдельно от подтверждений. Только затем exactCAS apply; не повторять старый b337.",
+      "status": "verified_apply_requested",
+      "previewConclusion": "success",
+      "artifact": 12565273971,
+      "planDigest": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
+      "counters": {
+        "sourceRecords": 466987,
+        "uniqueTechnicalRecords": 466987,
+        "detailRecords": 1768599,
+        "originalSourceRows": 1038355,
+        "eligibleSourceRecords": 300947,
+        "assignedSourceRecords": 300811,
+        "rejectedSourceRecords": 166176,
+        "sourceDatasets": {
+          "edatenblatt": 44829,
+          "targa": 210673,
+          "tas": 211485
+        },
+        "rejectedReasons": {
+          "outside_passenger_light_van_pickup_scope": 150628,
+          "unknown_commercial_name": 182,
+          "unknown_vehicle_category": 12512,
+          "excluded_vehicle_family": 2718,
+          "not_existing_model": 136
+        },
+        "existingModelsTotal": 4473,
+        "existingVariantsTotal": 345462,
+        "targetedExistingAnnualVariants": 87802,
+        "targetModels": 2893,
+        "newModels": 0,
+        "changedExistingModels": 22,
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 62,
+        "fieldsFilled": 70,
+        "existingFieldsAttested": 181,
+        "existingAnnualPower30Filled": 1,
+        "heldExistingVariants": 87740,
+        "heldReasons": {
+          "no_exact_technical_match": 83501,
+          "conflicting_or_incomplete_evidence": 4239
+        }
+      },
+      "report": "docs/encyclopedia/reports/2026-10-24-astra-unnamed-residual-plan-verified.json",
+      "applyRequested": true,
+      "applied": false,
+      "apiReadback": false
     },
     "retainedTechnicalGroupAudit": {
       "state": "completed_read_only",
