@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {assertAstraPlanMembership,assertAstraRecordContinuation} from '../scripts/encyclopedia/assert-release-astra.mjs';
+import {assertAstraPlanMembership,assertAstraRecordContinuation,appliedAstraRevisionVerifier} from '../scripts/encyclopedia/assert-release-astra.mjs';
 import {previewAstraImport,applyAstraImport} from '../scripts/encyclopedia/apply-astra-corpus.mjs';
 import {ASTRA_ROOT,sha} from '../scripts/encyclopedia/astra-bridge.mjs';
 import {MANIFEST,ROOT,summarize} from '../apps/web/lib/encyclopedia/records.ts';
@@ -203,4 +203,35 @@ test('release verifies unnamed annual technical facts by unchanged record identi
  const args=f.args(),report=await assertAstraPlanMembership(args);assert.equal(report.annualVariants,1);
  const changed=f.args();fact(changed).trims=['invented equipment'];resealIndex(changed);
  await assert.rejects(assertAstraPlanMembership(changed),/annual_variant_missing/);
+});
+
+
+test('a later applied ASTRA pass may update its match summary while old facts and proofs remain required',async t=>{
+ const f=await fixture(t),row=sourceEvidence();
+ row.values.bodyType='hatchback';delete row.evidenceId;row.evidenceId=sha(row);
+ const second=await previewAstraImport({storage:f.storage,corpus:{corpusDigest:'c'.repeat(64),records:[row],manifest:{}},reportDirectory:f.directory,at:'2026-10-24T15:00:00Z',annualOnly:true});
+ assert.equal(second.models.length,1);
+ await applyAstraImport({storage:f.storage,planDigest:second.planDigest,reportDirectory:f.directory,
+  mutateManifest:async update=>f.storage.writeJson(MANIFEST,update(await f.storage.readJson(MANIFEST,null)))});
+ const receipt=await f.storage.readJson(`${ASTRA_ROOT}/plans/${second.planDigest}/applied.json`,null);
+ const manifest=await f.storage.readJson(MANIFEST,null),current=await f.storage.readJson(manifest.models[0].key,null);
+ assert.notDeepEqual(current.variants[0].astraMatchEvidence,f.saved.variants[0].astraMatchEvidence);
+ const verifier=()=>appliedAstraRevisionVerifier([{plan:f.plan,applied:f.applied,expectedPlanDigest:f.plan.planDigest},{plan:second,applied:receipt,expectedPlanDigest:second.planDigest}]);
+ const args=f.args();args.readRecord=key=>f.storage.readJson(key,null);args.manifest=manifest;
+ args.index.models={[modelKey(current.make,current.model)]:compileModelFacts(current)};resealIndex(args);args.index.manifestDigest=checksum(manifest.models.map(m=>[m.id,m.revision,m.key]));
+ await assert.rejects(assertAstraPlanMembership(args),/match_summary_not_applied/);
+ args.isAppliedAstraRevision=verifier();
+ const report=await assertAstraPlanMembership(args);assert.equal(report.annualVariants,1);
+ await assertAstraPlanMembership({...args,plan:second,applied:receipt,expectedPlanDigest:second.planDigest});
+ const later=structuredClone(current);later.previousKey=manifest.models[0].key;later.revision='later-research-after-second-astra';later.updatedAt='2026-10-24T16:00:00Z';
+ await assertAstraRecordContinuation({original:f.saved,current:later,readRecord:args.readRecord,isAppliedAstraRevision:verifier()});
+ const run=record=>assertAstraRecordContinuation({original:f.saved,current:record,readRecord:args.readRecord,isAppliedAstraRevision:verifier()});
+ for(const mutate of [r=>{r.variants[0].astraMatchEvidence.evidenceIds[0]='forged';},r=>{r.variants[0].researchEvidenceHistory=[];},r=>{r.variants[0].icePowerKw=99;}]){
+  const changed=structuredClone(current);mutate(changed);await assert.rejects(run(changed),/match_summary_not_applied|existing_value_changed|proof_removed/);
+ }
+ assert.throws(()=>appliedAstraRevisionVerifier([{plan:second,applied:{...receipt,models:[]},expectedPlanDigest:second.planDigest}]),/apply_incomplete/);
+ const tampered=structuredClone(second);tampered.models[0].recordChecksum='e'.repeat(64);
+ assert.throws(()=>appliedAstraRevisionVerifier([{plan:tampered,applied:receipt,expectedPlanDigest:second.planDigest}]),/plan_digest_mismatch/);
+ const argsWrongSource=structuredClone(args.index);const fact=Object.values(argsWrongSource.models).flat()[0];fact.sources.icePowerKw.batchId='forged';argsWrongSource.digest=checksum(argsWrongSource.models);
+ await assert.rejects(assertAstraPlanMembership({...args,index:argsWrongSource}),/field_or_provenance_missing/);
 });
