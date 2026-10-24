@@ -1,0 +1,245 @@
+{
+  "batch": "research-2026-10-24-audi-a4-2020-2023-avant-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4-2020-2023-avant-body.json",
+  "commit": "c3419ab51f8d248a1b080f77202d9d388875f4e7",
+  "workflow": 40042528958,
+  "job": 120716676323,
+  "applyFinishedAt": "2026-10-23T23:58:45.184Z",
+  "variants": 50,
+  "newVariants": 0,
+  "fields": 50,
+  "compiledFields": 50,
+  "apiReadback": true,
+  "includedInIndex": false,
+  "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2020-2023-avant-body-pass.json",
+  "afterRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+  "publicParity": {
+    "version": 1,
+    "checkedAt": "2026-10-23T23:59:25.442492+00:00",
+    "passed": true,
+    "scope": "Ограниченная выборка Audi A4 Europe: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована.",
+    "offersChecked": 1,
+    "comparisons": 13,
+    "matched": 13,
+    "rows": [
+      {
+        "offerId": "dcff92dd75cff7861df02177",
+        "checks": {
+          "year": {
+            "search": 2023,
+            "card": 2023,
+            "equal": true
+          },
+          "trim": {
+            "search": "Avant 35 TFSI S-Tronic Attraction Business Ed. LED",
+            "card": "Avant 35 TFSI S-Tronic Attraction Business Ed. LED",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1984,
+            "card": 1984,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "AutoScout24 named vehicleDetails Power",
+            "card": "AutoScout24 named vehicleDetails Power",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3358596,
+            "card": 3358596,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {}
+      }
+    ],
+    "unavailable": [],
+    "repeatedGroups": [],
+    "duplicateOfferIds": 0,
+    "rowsReturned": 48,
+    "catalogTotalReported": 1196,
+    "healthBefore": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+    },
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+    },
+    "sameRelease": true,
+    "generationId": "gen_1792702445675_8c312f85"
+  },
+  "nativeExact": 50,
+  "nativeHeld": [],
+  "checkedAt": "2026-10-23T23:59:41.927Z",
+  "state": "saved_readback_pass_pending_index",
+  "batchSha256": "b8349239c87d50f52140098045a869520aaafdd58bc8d53a38dd08a8d30993af",
+  "years": {
+    "2020": 6,
+    "2021": 9,
+    "2022": 18,
+    "2023": 17
+  },
+  "beforeRevision": "faf11b62-1ba3-5d26-a1f2-a571dcda09f4",
+  "readback": {
+    "version": 1,
+    "checkedAt": "2026-10-23T23:59:41.538Z",
+    "passed": true,
+    "modelId": "e3570ba4a67b01797e57a749",
+    "batch": "research-2026-10-24-audi-a4-2020-2023-avant-body",
+    "beforeRevision": "faf11b62-1ba3-5d26-a1f2-a571dcda09f4",
+    "afterRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+    "rowsBefore": 3978,
+    "rowsAfter": 3978,
+    "annualRows": 1342,
+    "unknownYearRows": 2636,
+    "updatedVariants": 50,
+    "fields": 50,
+    "newVariants": 0,
+    "untargetedUnchanged": 3928,
+    "allExpectedValuesAndSourcesMatch": true,
+    "historyPreserved": true,
+    "replayPassed": true,
+    "compiledFields": 50,
+    "apiYearSlices": 9
+  },
+  "preflight": {
+    "version": 1,
+    "checkedAt": "2026-10-23T23:57:06.815Z",
+    "state": "prepared_not_applied",
+    "batch": "research-2026-10-24-audi-a4-2020-2023-avant-body",
+    "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4-2020-2023-avant-body.json",
+    "batchSha256": "b8349239c87d50f52140098045a869520aaafdd58bc8d53a38dd08a8d30993af",
+    "modelId": "e3570ba4a67b01797e57a749",
+    "beforeRevision": "faf11b62-1ba3-5d26-a1f2-a571dcda09f4",
+    "variantsRead": 3978,
+    "variantsPlanned": 50,
+    "fieldsPlanned": 50,
+    "newVariants": 0,
+    "untargetedRowsPreserved": 3928,
+    "allExistingValuesPreserved": true,
+    "priorFieldSourcesPreserved": true,
+    "nativeExact": 50,
+    "nativeHeld": [],
+    "compiledFields": 50,
+    "guardTestsPassed": 11,
+    "manualPreserved": true,
+    "unknownCertifiedPowerNotInferred": true,
+    "replayPassed": true,
+    "sources": [
+      {
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+        "bytes": 83590,
+        "retrievedAt": "2026-10-23T23:56:38.964971+00:00",
+        "checkedAt": "2026-10-24",
+        "sourcePublisher": "AUDI AG / Audi Japan",
+        "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant"
+      },
+      {
+        "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+        "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+        "bytes": 63666,
+        "retrievedAt": "2026-10-23T23:56:42.309879+00:00",
+        "checkedAt": "2026-10-24",
+        "sourcePublisher": "AUDI AG / Audi Japan",
+        "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant"
+      },
+      {
+        "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+        "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+        "bytes": 65001,
+        "retrievedAt": "2026-10-23T23:56:48.709550+00:00",
+        "checkedAt": "2026-10-24",
+        "sourcePublisher": "AUDI AG / Audi Japan",
+        "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant"
+      }
+    ],
+    "cursorBefore": "c5550e1e89adbe91501ac38c",
+    "cursorAfterApply": "63e13fd86745b01f89dcf80a",
+    "remainingSelectedYearBodyAfterApply": 7,
+    "apiReadbackAfterApply": false,
+    "activationConfirmed": false,
+    "applyDeferredReason": null,
+    "isolatedSnapshotWorkflow": 40019745015,
+    "annualRowsRead": 1342,
+    "unknownYearAstraRowsPreserved": 2636,
+    "nextCandidate": {
+      "id": "63e13fd86745b01f89dcf80a",
+      "year": 2024,
+      "trim": "30 TDI Avant S-Tronic Business Advanced - ADAS/FULL LED/BAULE ELETTRICO"
+    }
+  },
+  "next": {
+    "variantId": "63e13fd86745b01f89dcf80a",
+    "year": 2024,
+    "trim": "30 TDI Avant S-Tronic Business Advanced - ADAS/FULL LED/BAULE ELETTRICO",
+    "missingValueFields": [
+      "power30MinKw",
+      "bodyType",
+      "engineCode"
+    ],
+    "knownValues": {
+      "fuel": "diesel",
+      "powertrainKind": "mhev",
+      "engineCc": 1968,
+      "powerHp": 136,
+      "powerKw": 100,
+      "icePowerKw": 100,
+      "transmission": "automatic",
+      "drive": "fwd",
+      "grossVehicleWeightKg": 2160
+    }
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a4-2020-2023-avant-remaining.json",
+  "researchedAnnualRows": 509,
+  "scope": "Только50полейbodyType, не50полностью проверенных автомобилей/готовыхцен.",
+  "activationConfirmed": false,
+  "newDeployRequested": false,
+  "allModelsComplete": false
+}

@@ -1,63 +1,39 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-23T23:00:59.822Z",
+  "checkedAt": "2026-10-23T23:59:41.927Z",
+  "lastCompletedBatch": "research-2026-10-24-audi-a4-2020-2023-avant-body",
   "modelId": "e3570ba4a67b01797e57a749",
   "make": "Audi",
   "model": "A4",
-  "revision": "faf11b62-1ba3-5d26-a1f2-a571dcda09f4",
+  "revision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
   "next": {
-    "variantId": "39980c5572c0e098b7d91f67",
-    "year": 2019,
-    "trim": "40 TFSI S-LINE",
+    "variantId": "63e13fd86745b01f89dcf80a",
+    "year": 2024,
+    "trim": "30 TDI Avant S-Tronic Business Advanced - ADAS/FULL LED/BAULE ELETTRICO",
     "missingValueFields": [
-      "engineCc",
-      "powerHp",
-      "powerKw",
-      "icePowerKw",
-      "engineCode",
-      "grossVehicleWeightKg"
+      "power30MinKw",
+      "bodyType",
+      "engineCode"
     ],
     "knownValues": {
-      "fuel": "petrol",
-      "powertrainKind": "combustion",
+      "fuel": "diesel",
+      "powertrainKind": "mhev",
+      "engineCc": 1968,
+      "powerHp": 136,
+      "powerKw": 100,
+      "icePowerKw": 100,
       "transmission": "automatic",
       "drive": "fwd",
-      "bodyType": "sedan"
+      "grossVehicleWeightKg": 2160
     }
   },
-  "boundedRead": {
-    "years": [
-      2015,
-      2019
-    ],
-    "rows": 2,
-    "modelWideCountsRefreshed": false
-  },
-  "sourceCandidate": {
-    "url": "https://media.audi.com/is/content/audi/nemo/ee/Mudelikataloogid/tehniline_info/Tehniline%20info%20A4%20Limousine_1.pdf",
-    "sourceSha256": "984138588d4326e240871610c85491cdad03b1ce8d9b1bc047053e5cb4e7b48c",
-    "bytes": 1210471,
-    "retrievedAt": "2026-10-23T22:57:19.761537+00:00",
-    "sourceNature": "Заводская техническая таблица Audi; кандидат для проверки точной применимости, в записи не перенесён",
-    "documentMarket": "Germany",
-    "documentStatus": "06/10/2019",
-    "exactApplicabilityConfirmed": false,
-    "reason": "Заводская таблица для Германии; применимость к наблюдаемой UAE 2019 40 TFSI S-LINE не подтверждена. Числа не перенесены."
-  },
-  "deferred": [
-    {
-      "variantId": "624ab5ebc8972c64cddb7b27",
-      "year": 2015,
-      "reason": "Нет trim и точной технической идентичности; мощность и объём продавца UAE использовать запрещено."
-    }
-  ],
+  "remainingSelectedAvantBody": 7,
+  "nextAction": "Продолжить7явных Avant2024 без кузова с сохранённого cursor; затем другие недостающие поля существующих A4, неподтверждённые2015/2019 повторить по retry. Сначала свежий API/revision/CAS и проверка источников, не переносить двигатель по названию/объёму. Отсутствующие2008+ годы подтверждать отдельно, не пересобирать основу.",
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a4-2020-2023-avant-remaining.json",
   "previousModelRetry": "docs/encyclopedia/retry-2026-10-24-audi-a3-2026-tail-remaining.json",
   "a1Remainder": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2025-next.json",
-  "nextAction": "Свежий API/revision/CAS; подтвердить точную годовую и региональную применимость для 2019 40 TFSI S-LINE. Нет подтверждения — отдельный retry и перейти к существующим 2020 и последующим годам. Отсутствующие годы с2008 подтверждать отдельно, основу не пересобирать.",
-  "newFactsApplied": false,
-  "allModelsComplete": false,
-  "notApplicableFields": [
-    "power30MinKw: наблюдаемая запись combustion; сертифицированную 30-минутную мощность не выводить из пиковой"
-  ],
-  "knownValuesProvenance": "Наблюдаемые поля API, не подтверждены этой проверкой как заводские"
+  "annualVariants": 1342,
+  "unknownYearAstraVariants": 2636,
+  "modelComplete": false,
+  "allModelsComplete": false
 }
