@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
 import { withCatalogReadModelRepairLock } from '../scripts/lib/catalog-read-model-repair-lock.mjs';
 
 function fixture(initial: Record<string, unknown> = {}) {
@@ -17,7 +18,11 @@ test('repair holds the shared publisher lock and releases it after success', asy
   const state = fixture();
   const result = await withCatalogReadModelRepairLock(state.mutate, async () => {
     assert.equal(state.value.operationType, 'catalog_read_model_repair');
-    assert.equal(Date.parse(String(state.value.lockedUntil)), 2_400_000);
+    const workflow = readFileSync(new URL('../.github/workflows/catalog-current-read-models.yml', import.meta.url), 'utf8');
+    const timeoutMinutes = Number(workflow.match(/timeout-minutes:\s*(\d+)/)?.[1]);
+    assert.ok(timeoutMinutes > 0);
+    assert.ok(Date.parse(String(state.value.lockedUntil)) > timeoutMinutes * 60_000,
+      'publication lock must outlive the entire repair job');
     return 'repaired';
   }, () => 0);
   assert.equal(result, 'repaired');
