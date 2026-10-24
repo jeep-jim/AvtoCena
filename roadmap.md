@@ -14241,3 +14241,14 @@ Upload-artifact сообщил No files were found:reports/encyclopedia-technica
 Свежий полный health oktrue/release3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226/calculation3ac912ac200e8481ba1c0054941af4d4e27fef51a27a96be415c77a8bbe859fe. Deploy40059430537/job120769624120 FAILURE на Prepare private encyclopedia index подтверждён; код исправления и дальнейший coordinatedrelease ведёт ручная сессия. Исследовательская pause до проверенного immutablegate сохранена; Berlingo40/A4L4 не объявлены активированными. Новыйdeploy/apply/сбор/writerunlock/изменениерасписаний не выполнялись.
 
 CRM40060946283 auditSUCCESS/browserIN_PROGRESS, mobile40060946257 productionbuildIN_PROGRESS на момент проверки. Их завершение и liveприёмка нового кода не заявлены; уже закрытая CRM3d40cad не повторялась. Productionowner/managergrant/on-off, скорость и полный каталог остаются открыты; контроль активен.
+
+
+## 2026-10-24T11:07:30.374540+07:00 — приёмка японских расчётов и единый исправленный выпуск
+
+[40060946261](https://github.com/jeep-jim/AvtoCena/actions/runs/40060946261)/job120774100964 SUCCESS:497 существующихкеш-лотов,64получилиfactoryfuel,63прошлиpreviewparameters,20/20boundedрасчётовготовы/0ошибок. Первые20оказалисьBerlingo; не объявляетсяприёмкойвсехмоделей. Дополнительнаяпроверка ограничена4примерамина модель, чтобыохватитьTwingo/Clipper/Megane при наличиикеша. Все суммы предварительные,неverifiedpublishedfacts.
+
+БраузерChromium/Playwright1.55: реальныеTailwindutilities+catalog-sidebar.css,ширины390/768/1280/1617,сsidebar/без: геометрия4рынковсовпала во всех8сценариях. Desktopбезsidebar5колонок/5видимыхкарточек; сsidebar3колонки/6карточек; мобильнаялента6. Этоизолированнаягеометрия,неполнаяприёмкаliveUI/энциклопедии.69focused+30regression+TypeScript PASS.
+
+Запрошен один исправленный productionrelease послеterminalfailure40059430537: все ранее сохранённые партии включены, guardchassisнеослаблен. Производственный сайт пока остаётсянапрежнемrelease; завершениепроверитьпоhealth/publicbatchgate. Паузаисследованийдоverifiedsnapshot сохраняется. Дневные сборы не запускались.
+
+Параллельная запись dc4152a сохранена черезCAS. Диагностический workflow исправлен: JSON теперь сохраняется в фактический artifactpath.

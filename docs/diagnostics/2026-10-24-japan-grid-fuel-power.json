@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-24T11:07:30.374540+07:00",
+  "auditRun": 40060946261,
+  "rows": 497,
+  "fuelFilled": 64,
+  "readyInputs": 63,
+  "calculated": 20,
+  "attempts": 20,
+  "calculatedModels": [
+    "BERLINGO"
+  ],
+  "scope": "Existing Japanese cache only; not whole inventory; estimates, not verified prices",
+  "browser": {
+    "widths": [
+      390,
+      768,
+      1280,
+      1617
+    ],
+    "sidebar": [
+      false,
+      true
+    ],
+    "scenarios": 8,
+    "passed": true,
+    "scope": "Isolated real CSS geometry"
+  },
+  "tests": {
+    "focused": 69,
+    "regression": 30,
+    "typescript": "PASS"
+  },
+  "releaseStatus": "requested_not_installed",
+  "remaining": [
+    "Live layout and offer parity",
+    "Broader factory fuel identities",
+    "Unknown or ambiguous power and certification",
+    "Encyclopedia layout issue not reproduced from provided screenshots"
+  ]
+}

@@ -38,6 +38,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: encyclopedia-technical-transfer
-          path: reports/encyclopedia-technical-transfer.json
+          name: japan-fuel-audit
+          path: reports/japan-fuel-audit.json
           if-no-files-found: ignore
