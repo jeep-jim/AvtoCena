@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T16:23:10.083Z",
+  "updatedAt": "2026-10-24T17:34:30Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T16:23:10.083Z",
+    "updatedAt": "2026-10-24T17:34:30Z",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -42896,15 +42896,36 @@
       "priorRepair": 40108157776,
       "priorRepairConclusion": "cancelled",
       "publicationLease": "unknown_after_cancel",
-      "next": "Сначала подтверждение publication lease и установка reader scoped-v1; затем ровно одна пересборка. Не сбрасывать неизвестный lock и не обходить блок автоматической проверки разрешений на диагностический запуск.",
+      "next": "PR1527/1528 merged. Проверить read-only старый подготовленный индекс и текущий lock; затем один выпуск scoped-v1 reader и только после live подтверждения один guarded repair. Владелец23:52 явно разрешил диагностику и публикацию.",
       "checkpoint": "docs/operations/2026-10-24-bounded-scoped-projections.md"
+    },
+    "overnightContinuation20261025": {
+      "state": "await_prepared_index_verification",
+      "failedRelease": 40112867414,
+      "failedReleaseSha": "786a5aa9bb5a2efbc5b3ed395e51f3a2ab84616d",
+      "failure": "astra_revision_existing_value_changed:astraMatchEvidence",
+      "preparedIndexDigest": "bd6556d39b1943d7c055d122a415883bdd899667d6f5921d14f04ffb028f2b20",
+      "preparedManifestDigest": "eec8e463217e99c1478b4f85fb7ecca29c556d68fbeaf13c40fd4967477e024e",
+      "repairPrerequisitePr": 1527,
+      "astraContinuationPr": 1528,
+      "savedFieldsThisRun": 0,
+      "activationConfirmed": false,
+      "next": "Проверить существующий индекс read-only по всем3 required ASTRA plans; затем один свободный release40/26/3, live scoped-v1, один repair и публичная приёмка. Не повторять ASTRA apply/collectors.",
+      "referenceCursorUnchanged": "docs/encyclopedia/research-handoff-2026-10-24-retained-technical-groups.json",
+      "checkedAt": "2026-10-24T17:34:30Z",
+      "repairPrerequisiteMerge": "1e6440c938a3332a50008d76f9c9e61a915c110c",
+      "astraContinuationMerge": "30aadd126a92acc9ce7b89d34c08bd2cba2740c5",
+      "astraContinuationCi": 40116008291,
+      "astraContinuationCiConclusion": "success",
+      "publicCursorReadback": "A3/A4/A5 requests timed out; no absence inferred"
     }
   },
   "scope": {
     "minimumYear": 2008,
-    "includeMissingModelsAndVariants": true,
+    "includeMissingModelsAndVariants": false,
     "yearDiscoveryRequired": true,
     "preserveExistingOlderRecords": true,
-    "rule": "Подтверждать реальные годы выпуска; отсутствие объявлений не исключает модификацию из энциклопедии."
+    "rule": "Актуальное поручение владельца: заполнять существующую базу без создания моделей; реальные годы и техническую идентичность подтверждать, старые записи сохранять.",
+    "ownerScopeUpdatedAt": "2026-10-24T23:52:00+07:00"
   }
 }
