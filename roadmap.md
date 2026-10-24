@@ -14394,3 +14394,14 @@ Readonly40068364961/job120796274772 SUCCESS (актуальныйaf3index иgene
 ## 2026-10-24T13:12:06.952219+07:00 — исправление устаревшей проверки ИИ Бро
 
 Browser40068044378/job120795322679 failedтолькона8staffcases: тесттребовалpermission_assistantпослеявногоудалениявладельцем. Исправленоожидание: отсутствуетassistant, сохраненыassistantPageControl/assistantCodeиостальныеправа. ЛокальныйrealChromiumCRM_TEST_PAGES=staff:8/8PASS (320/390/768/1440 ×dark/light); проверкивсехостальныхразделовнеослаблялись. Test-onlycommitнесоздаётновыйproductionrelease; общий6c347ef/40068425827остаётсяцелевым.
+
+
+## 24.10.2026 13:16 Красноярск — независимое подтверждение 2b87 и контроль следующего снимка
+
+Прочитаны свежие AGENTS fbbc41a и конец roadmap на ddb3f24. [40066793422](https://github.com/jeep-jim/AvtoCena/actions/runs/40066793422)/job120793510845 TERMINAL SUCCESS. Прочитанный terminalлог: index af3b1dce3eb131e3f196f5e1a79bdd2421178ac7e131d4e76ee07732ab4f3830, manifest d4a7755cc48fe03de8a896e061ae9bf959e3376f707431e00311601d9579ba7f; Release active06:11:03UTC. Public gate06:11:21UTC:33группы/586вариантов/768полей verifiedtrue; artifact12550368422 опубликован, ZIP отдельно не скачивался. Это выпуск2b87b63f66c1e80c76e14e0775a2a9ea4ed0d8cc с удалением ИИ Бро/подписями и A4L2025mass3; новый specificationIdentity и A5body30 остаются в следующем6c347ef.
+
+Первый внешний health получил HTTP503/curl22. Один ограниченный повтор06:15:51UTC вернул HTTP200, полный JSON oktrue/release2b87b63f66c1e80c76e14e0775a2a9ea4ed0d8cc/calculationac4ddb599c84aef1880f1496bcf63fd03d9d23a26973b2c68515d1c92e8be28b, curl exit0. Причина первого503 не установлена; общий outage и стабильность не заявлены.
+
+Текущий [40068425827](https://github.com/jeep-jim/AvtoCena/actions/runs/40068425827)/job120798938257 IN_PROGRESS на Prepare private encyclopedia index; wait-for-astra/exact/security/storage SUCCESS. Research apply-pause пока сохраняется до успешного immutableindex; установка6c347ef не подтверждена. Новый CRM40069291249: audit120799043783 SUCCESS, browser120799043651 ещё Real CRM pages. Старые staff-failures не переписаны; новый полный прогон ещё не завершён.
+
+Новых deploy/apply/research/сборщиков/marker и изменений guards/расписаний не выполнялось. Ручная сессия сопровождает свой единый выпуск; исследования существующей задачи продолжаются отдельно. Скорость, подтверждение производственных прав АвтоБота и полное подключение EV/HEV остаются открыты; контроль активен.
