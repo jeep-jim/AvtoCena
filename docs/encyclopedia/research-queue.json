@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T14:19:12Z",
+  "updatedAt": "2026-10-24T14:26:11.664Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,16 +32796,15 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T14:19:12Z",
+    "updatedAt": "2026-10-24T14:26:11.664Z",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
-    "state": "bulk_astra_replan_in_progress",
+    "state": "bulk_astra_apply_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
       "scope": "all_existing_annual_models",
-      "state": "await_exact_replan",
-      "workflow": 40100441431,
-      "job": 120891320310
+      "state": "await_exact_apply_readback",
+      "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0"
     },
     "lastVerifiedResearch": "audi-a5-2024-drive-mass-body",
     "rawAuditCalculated": 87,
@@ -42680,13 +42679,13 @@
       "state": "prepared_waiting_release_snapshot"
     },
     "massTechnicalPass": {
-      "checkedAt": "2026-10-24T14:19:12Z",
+      "checkedAt": "2026-10-24T14:26:11.664Z",
       "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
       "workflow": 40100441431,
       "job": 120891320310,
-      "status": "in_progress",
+      "status": "preview_success_apply_requested",
       "artifactExpected": "astra-import-preview.json",
-      "applyRequested": false,
+      "applyRequested": true,
       "nextActions": [
         "Прочитать terminal artifact; проверить planDigest и sums counters.",
         "Требовать newModels=0 и newUnknownYearVariants=0; отдельно оценить documented30min.",
@@ -42703,7 +42702,51 @@
       },
       "priceFixPr": 1519,
       "duplicatePr1520": "closed_unmerged",
-      "diagnostics": "docs/encyclopedia/reports/2026-10-24-bulk-replan-preparation-diagnostics.json"
+      "diagnostics": "docs/encyclopedia/reports/2026-10-24-bulk-replan-preparation-diagnostics.json",
+      "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+      "artifact": 12562893701,
+      "previewVerified": true,
+      "plannedCounters": {
+        "sourceRecords": 466987,
+        "uniqueTechnicalRecords": 466987,
+        "detailRecords": 1768599,
+        "originalSourceRows": 1038355,
+        "eligibleSourceRecords": 300947,
+        "assignedSourceRecords": 300811,
+        "rejectedSourceRecords": 166176,
+        "sourceDatasets": {
+          "edatenblatt": 44829,
+          "targa": 210673,
+          "tas": 211485
+        },
+        "rejectedReasons": {
+          "outside_passenger_light_van_pickup_scope": 150628,
+          "unknown_commercial_name": 182,
+          "unknown_vehicle_category": 12512,
+          "excluded_vehicle_family": 2718,
+          "not_existing_model": 136
+        },
+        "existingModelsTotal": 4473,
+        "existingVariantsTotal": 345462,
+        "targetedExistingAnnualVariants": 87802,
+        "targetModels": 2893,
+        "newModels": 0,
+        "changedExistingModels": 153,
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 3854,
+        "fieldsFilled": 3664,
+        "existingFieldsAttested": 17211,
+        "existingAnnualPower30Filled": 0,
+        "heldExistingVariants": 83948,
+        "heldReasons": {
+          "no_exact_technical_match": 57960,
+          "manual_or_unknown_year": 25567,
+          "conflicting_or_incomplete_evidence": 421
+        }
+      },
+      "applied": false,
+      "apiReadback": false,
+      "activationConfirmed": false
     }
   },
   "scope": {

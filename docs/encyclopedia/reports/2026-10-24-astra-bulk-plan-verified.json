@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T14:26:11.664Z",
+  "workflow": 40100441431,
+  "job": 120891320310,
+  "artifact": 12562893701,
+  "artifactSha256": "11b1b3b309aaeae4764e405fbdd678f2874ac11841099bbc6d290ad31e392740",
+  "passed": true,
+  "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+  "counters": {
+    "sourceRecords": 466987,
+    "uniqueTechnicalRecords": 466987,
+    "detailRecords": 1768599,
+    "originalSourceRows": 1038355,
+    "eligibleSourceRecords": 300947,
+    "assignedSourceRecords": 300811,
+    "rejectedSourceRecords": 166176,
+    "sourceDatasets": {
+      "edatenblatt": 44829,
+      "targa": 210673,
+      "tas": 211485
+    },
+    "rejectedReasons": {
+      "outside_passenger_light_van_pickup_scope": 150628,
+      "unknown_commercial_name": 182,
+      "unknown_vehicle_category": 12512,
+      "excluded_vehicle_family": 2718,
+      "not_existing_model": 136
+    },
+    "existingModelsTotal": 4473,
+    "existingVariantsTotal": 345462,
+    "targetedExistingAnnualVariants": 87802,
+    "targetModels": 2893,
+    "newModels": 0,
+    "changedExistingModels": 153,
+    "newUnknownYearVariants": 0,
+    "existingAnnualVariantsChanged": 3854,
+    "fieldsFilled": 3664,
+    "existingFieldsAttested": 17211,
+    "existingAnnualPower30Filled": 0,
+    "heldExistingVariants": 83948,
+    "heldReasons": {
+      "no_exact_technical_match": 57960,
+      "manual_or_unknown_year": 25567,
+      "conflicting_or_incomplete_evidence": 421
+    }
+  },
+  "topModels": [
+    {
+      "id": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 458,
+        "fieldsFilled": 1169,
+        "existingFieldsAttested": 2497,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "1d2dfca4e510626f5daec218",
+      "make": "Volkswagen",
+      "model": "Passat",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 803,
+        "fieldsFilled": 412,
+        "existingFieldsAttested": 4095,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "cd6d409358abd933a2b10e22",
+      "make": "Volkswagen",
+      "model": "Arteon",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 259,
+        "fieldsFilled": 274,
+        "existingFieldsAttested": 1296,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "9fdbf9265296da07ea93e5be",
+      "make": "Mercedes-Benz",
+      "model": "CLA",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 199,
+        "fieldsFilled": 238,
+        "existingFieldsAttested": 994,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "53e3594d3bfd24b0c47a73ce",
+      "make": "Volkswagen",
+      "model": "Golf",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 764,
+        "fieldsFilled": 169,
+        "existingFieldsAttested": 3070,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 106,
+        "fieldsFilled": 136,
+        "existingFieldsAttested": 373,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 90,
+        "fieldsFilled": 132,
+        "existingFieldsAttested": 325,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "296965c95e42800c757012ac",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 63,
+        "fieldsFilled": 89,
+        "existingFieldsAttested": 4,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "7efa3d4933728bc66771084b",
+      "make": "Volkswagen",
+      "model": "Caddy",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 81,
+        "fieldsFilled": 86,
+        "existingFieldsAttested": 411,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "91cf8f686eb66c4fde6be5ec",
+      "make": "Mercedes-Benz",
+      "model": "Vito",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 82,
+        "fieldsFilled": 81,
+        "existingFieldsAttested": 412,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "b89b827fcb144f8ea8a5dc60",
+      "make": "Ford",
+      "model": "Focus",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 31,
+        "fieldsFilled": 61,
+        "existingFieldsAttested": 153,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "88f7a478d764f730b5792d54",
+      "make": "Volkswagen",
+      "model": "ID.7",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 20,
+        "fieldsFilled": 41,
+        "existingFieldsAttested": 79,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "ff2d0a1e18c4c0d18249de20",
+      "make": "Audi",
+      "model": "Q4 e-tron",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 10,
+        "fieldsFilled": 40,
+        "existingFieldsAttested": 40,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "f6a0383efa6478ccd56de9db",
+      "make": "Skoda",
+      "model": "Superb",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 39,
+        "fieldsFilled": 37,
+        "existingFieldsAttested": 206,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "id": "639c4e325e55255b58dbe92e",
+      "make": "Mercedes-Benz",
+      "model": "EQE",
+      "counts": {
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 22,
+        "fieldsFilled": 36,
+        "existingFieldsAttested": 66,
+        "existingAnnualPower30Filled": 0
+      }
+    }
+  ],
+  "indexAssertions": 3854,
+  "applyRequested": true,
+  "applied": false,
+  "apiReadback": false,
+  "activationConfirmed": false
+}
