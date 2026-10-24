@@ -1,0 +1,862 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a3-2025-2026-drive-phev",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b1d87a005d416b4b5af15342",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TFSI Advanced S tro*LED*Virtual*",
+      "expectedDigest": "43c987a4e1246678d3032bc70844df2beb8b4e4211f2e0c9d3e81ee7cc1aa0ec",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5bb44ac456b5005f011b5353",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback Advanced TFSI Stronic Navi ACC EPH",
+      "expectedDigest": "a409a9fbbd19f438e6b2c7dcfbd00924565466086900628c06d8bda3a5477d7a",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a3a401052918106a51cf533c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TFSI advanced LED/Sonos/Head-up/",
+      "expectedDigest": "27d7276d616a8ff297721cbf27128d08b8c4114dbef21cf0fa6fdf2437e4f8a4",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1aceadb53dc2cb70e08f779b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI 110 kW LED*SONOS*HuD*RFK*ACC",
+      "expectedDigest": "66a77afe447271e267ee0689ca581c4c66c332c2d2f7a312e226b6f7f441ae7d",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e87b3c4383f69b26e56e76c5",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI S TRONIC+WINTERRÄDER+HEAD UP+",
+      "expectedDigest": "3208aef1c0a008ca1355a22fff7e87d8bc05c5887e12854f150397e7d7fdeff4",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "160560a4d8770399cbb3f887",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI AdvancedS tr. RFK*HUD*Navi*ACC",
+      "expectedDigest": "ba9e6e2d50a790921c79edc92e574b41f30f8569a8042ab116d45bd977b69232",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a68e02a2b8be0dae022ff716",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TFSI LED HuD SONOS CAM ACC",
+      "expectedDigest": "0417003b0bf522e4b979f13777439a6b7649af19fa3abcb81e6f054062f547ca",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9f04639e6cb5b90903e48e61",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI 110 kW LED*HuD*SONOS*RFK*ACC",
+      "expectedDigest": "74075e0449d2807213b1c3c1257c5f9c20989da429d158dcaca1d4987f3750b3",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "129d210bd80fdf9700013c74",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TFSI S-Line LED HuD SONOS CAM",
+      "expectedDigest": "cf589110ceef7ecf77d7968cb061ec74d22294b04152e5c40dfbcc5d1f52249b",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1c82a68306ff0f67f1b351e8",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback S line TFSI Stronic ACC Navi EPH",
+      "expectedDigest": "17f3ad7782b95ca115d31c2b19637420763fd0d185de6b45e5dc6d6e89591291",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "344c6d28a772e0dfde79fba8",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI 110 kW S-TRO*RFK*LED*ACC*",
+      "expectedDigest": "af7231509a1c46052a05182b5293af358220d45218475a62e7b217b0fcf88515",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1f68665b9bbd94db2c17ec61",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35TFSI 4*J.Gar/LED/ACC/Keyless/el.K",
+      "expectedDigest": "e80e0ed37c88dce6ea9ca661b66dead08eef483e672c584eeb86eb490eebc1c8",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "73ff25d297354a3e94639f9f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TFSI S line NAV/RFK/ACC/HUD",
+      "expectedDigest": "c21670bafa827d6dcee5843a816612bcc0548f6af6c9c07f59692b66509326cb",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8596a6743949922ff33526b0",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI 110 kW S line LED*SONOS*HuD*",
+      "expectedDigest": "848c04f271ea4c4755f933e58a6779f76586e689cb7d1b103b25799a0fcd8e73",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e314d7b1cdde5f410fbf2261",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback Advanced TFSI 110 kW S tronic",
+      "expectedDigest": "7a5630e955619a979c16ba78ad812cd0524b5a79e03ba89ba82ca69118bfed45",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "0d56fa4c6c73e4640e4c297c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TFSI S line S-tronic LED Navi AC",
+      "expectedDigest": "0059a67deb97902ff3035806c7603793bf02b11d171d2616af6fdaa9fc0b06c8",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9b84e0e36a3a65c3ba69fc6b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TFSI S line S-tronic Navi HuD AC",
+      "expectedDigest": "44c59bc5df55e4066c63046750eb195f241d10222bb374f39599445636f63854",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1166dca261cb9151d63ea1ad",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35TFSI S line",
+      "expectedDigest": "f32845f698e027d6b45fd3cdb4b19bcfda3f5d503f3ae6c932e80b4281583cae",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "62e3f6abab939444b38b2882",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TFSI 2x S LINE LM19 MATRIX 360°",
+      "expectedDigest": "434c846fca9a58b647a6b6bea2c2f582b623f0bd89665ba7048c824a80c2cd62",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c03aa104a10d8cc5bc361291",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+      "expectedDigest": "638fdabd0162e4c8dd75d745e5cacb3bb1fd37b5d1b7f797442676fa05b0f8fb",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi Sportback1498см³/110кВт/150PS/автоматS tronic: таблицы05.06.2025 и30.06.2026 независимо подтверждают передний привод. Сопоставлены год2026,объём,мощность,кузовhatchback икоробка; оборудование не требуется. Заполняется только отсутствующийdrive. Ручныеправки исключены preflight,прочиеполя и30min неизменны.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "sourceSha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8505b9fca1f0da3db02fac4c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "40 TFSIe S LINE LM18 SONOS AHK KAME",
+      "expectedDigest": "6f60c2b16e19dbc45d26818e16db075d00e3a58ae989114964500af3acb9c0da",
+      "patch": {
+        "drive": "fwd",
+        "icePowerKw": 110,
+        "systemPowerKw": 150
+      },
+      "confirmedFields": [
+        "drive",
+        "icePowerKw",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-TFSIe-150kW_250929.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi A3 PHEV2025/1498см³/S tronic: точная системнаямощность150/200кВт определяет ДВС110/130кВт; заводскаятаблица отдельно подтверждает FWD и бензиновый подключаемыйгибрид. Сохранённые год,объём,общаямощность икоробка совпадают; неизвестныйкузов не назначается. Для исправленияice200→130 preflight подтвердил manualEdited=false и отсутствие research/ASTRA/referenceiceEvidence. Continuous55кВт не считается сертифицированной30min.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-TFSIe-150kW_250929.pdf",
+            "date": "2025-09-29",
+            "pages": [
+              1
+            ],
+            "sha256": "5e377c672ce112169731d9198d845f2208b0f6a275beab722af7b2c1ec0e062d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ],
+        "sourceSha256": "5e377c672ce112169731d9198d845f2208b0f6a275beab722af7b2c1ec0e062d"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b2ad08df5ba29520df7c527d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "45 TFSI e S line Navi LED Fernlichtassistent",
+      "expectedDigest": "97a92e6e307292aa8e70865ea464ff6702cfd552bff7fc42dfcdbfbaf91bcad8",
+      "patch": {
+        "drive": "fwd",
+        "icePowerKw": 130,
+        "systemPowerKw": 200,
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid"
+      },
+      "confirmedFields": [
+        "drive",
+        "icePowerKw",
+        "systemPowerKw",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Audi A3 PHEV2025/1498см³/S tronic: точная системнаямощность150/200кВт определяет ДВС110/130кВт; заводскаятаблица отдельно подтверждает FWD и бензиновый подключаемыйгибрид. Сохранённые год,объём,общаямощность икоробка совпадают; неизвестныйкузов не назначается. Для исправленияice200→130 preflight подтвердил manualEdited=false и отсутствие research/ASTRA/referenceiceEvidence. Continuous55кВт не считается сертифицированной30min.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+            "date": "2025-08-21",
+            "pages": [
+              1
+            ],
+            "sha256": "4be6e62f72f05acde6e0347de837905034e31f41fa01b434a830787ae48796f2",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ],
+        "sourceSha256": "4be6e62f72f05acde6e0347de837905034e31f41fa01b434a830787ae48796f2"
+      }
+    }
+  ]
+}

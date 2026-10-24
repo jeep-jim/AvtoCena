@@ -15352,3 +15352,8 @@ Health2026-10-24T22:17:22.980129+00:00HTTP200 всёещё8ec0d858,scoped-v1не
 ### 25.10.2026 06:09 UTC+7 — повторное использование заводских технических групп Audi
 
 Просмотрено1093 существующих строкA3/2020–2026;81кандидат требует проверки. Для boundedpreflight выбраны20Sportback2026 с точными1498см³/110кВт/automatic и отсутствующимприводом, плюс2PHEV2025/1498/150–200system. Используются сохранённые заводскиетаблицы2025–2026; неизвестные кузоваPHEV и30min не заполняются. Запросpreflight22 manual/digest, записи пока0. Новаяфактическаяlease23:04UTCactive сheartbeat23:02:31,до23:32:31;5selectorsvalid. Release/repairотложены.
+
+
+### 25.10.2026 06:16 UTC+7 — разрешённая CAS-партия22 Audi A3
+
+Preflight40141376030/job121013651347SUCCESS:22manualEdited=false,точныеdigests; ошибочнаяicePowerKw200уPHEVне имеет research/ASTRA/referenceproof. Партия01985b29e1fc30c21c5ffe38443e22b0aa0b95b884d699db1a5be9a7cab8cca9 validatePASS:27новыхзначений и1исправлениеice200→130,20приводовSportback2026 и2PHEV2025. ТристарыхPDFхеша повторно совпали,дополнительно подтверждена таблица30.06.2026. Прежниекузова/общаямощность/30minне меняются. Privateindex/applyсвободны,pending0;запрошенодинapply,результатпокаожидается. Chinaactive,release/repair/unlockне запрошены.
