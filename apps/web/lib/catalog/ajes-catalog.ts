@@ -75,9 +75,9 @@ export async function readAjesCatalogPage(params:Record<string,unknown>){
   return {...page,items:priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v))};
  };
  const firstPromise=params.after?null:read(query.page||1);
- // Unfiltered markets retain direct numbered pagination. Filtered pages need
- // a continuation because a supplier page is not a page of matching cars.
- if(query.table!=='china'&&!filter.active){
+ // Japanese admission can remove rows even without visitor filters. Fill its
+ // visible page through a continuation so borrowed rows are not repeated.
+ if(query.table!=='china'&&query.table!=='stats'&&!filter.active){
   const [page,total]=await Promise.all([firstPromise??read(query.page||1),totalPromise]);
   return {...page,filteredByPage:false,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:page.items.map((v:any)=>publicOffer(v)),generationId:page.observedAt,nextCursor:undefined,scanLimited:false,interrupted:false};
  }

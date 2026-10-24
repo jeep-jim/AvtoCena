@@ -11,7 +11,7 @@ const fusoModels=['CANTER','FIGHTER','SUPER GREAT','SUPERGREAT','AERO QUEEN','AE
 export const heavyVehicleFamilies = [
   // Toyota official Coaster bus/Big Van specification: GVW exceeds 3500 kg.
   // https://toyota.jp/pages/contents/coaster/004_b_022/pdf/spec/coaster_bigvan_spec_201608.pdf
-  {make:'TOYOTA',models:['COASTER']},
+  {make:'TOYOTA',models:['COASTER','DYNA','TOYOACE']},
   {make:'HINO',models:['DUTRO','RANGER','PROFIA','SELEGA','SEREGA']},
   {make:'ISUZU',models:['ELF','FORWARD','GIGA','GALA','ERGA']},
   {make:'MITSUBISHI',models:fusoModels},

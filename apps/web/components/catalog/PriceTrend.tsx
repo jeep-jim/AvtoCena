@@ -581,3 +581,13 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
     {sheetRate ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} sourcePrice={Number(pricedOffer.sourcePrice || 0)} totalDeltaRub={savedPriceDelta(pricedOffer)} priceChangedAt={pricedOffer.priceChangedAt} statusLabel={trendUsesCurrency ? "Изменение курса" : "Изменение курса"} /> : null}
   </div>;
 }
+
+/** Calculated auction totals share the rate colour, while retaining auction badges. */
+export function CalculatedAuctionPrice({offer,...props}: Omit<Parameters<typeof AuctionCardPrice>[0], 'offer'> & {offer:PriceLike}) {
+ const currency=String(offer.sourceCurrency||offer.calculationSnapshot?.currencyRate?.currency||'JPY').toUpperCase();
+ const [live,setLive]=useState<LiveRate|null>(null);
+ useEffect(()=>{let active=true;const apply=(rates:PublicCurrencyRate[])=>{if(active)setLive(rates.find(r=>r.currency.toUpperCase()===currency) as LiveRate||null);};
+ const stop=subscribePublicRates(apply);void loadLiveRates().then(rates=>{if(active)setLive(rates[currency]||null);});return()=>{active=false;stop();};},[currency]);
+ const trend=resolvePriceTrend(withLiveRate({...offer,sourceCurrency:currency},live));
+ return <AuctionCardPrice {...props} offer={offer} priceDirection={trend?.direction}/>;
+}

@@ -1,4 +1,5 @@
 "use client";
+import {CalculatedAuctionPrice} from "./PriceTrend";
 import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
 import {isRetroOffer} from "@/lib/catalog/retro-offer";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
@@ -6,7 +7,6 @@ import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useSelectedCity } from "../../lib/location/selected-city";
 import { priceCardForCity } from "../../lib/catalog/card-city-delivery";
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
-import { AuctionCardPrice } from "@/components/catalog/AuctionCardPrice";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { isCatalogPowerScenario } from "@/lib/catalog/power-scenario";
@@ -34,9 +34,9 @@ function CatalogPriceContent({
     }
   }
   if (offer.savedCalculationPreview) return offer.market === "japan" && !isGreenCornerOffer(offer)
-    ? <AuctionCardPrice showSaleDate={showSaleDate} offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
+    ? <CalculatedAuctionPrice showSaleDate={showSaleDate} offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
     : <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
-  if (offer.market === "japan" && !isGreenCornerOffer(offer) && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><AuctionCardPrice showSaleDate={showSaleDate} offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
+  if (offer.market === "japan" && !isGreenCornerOffer(offer) && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><CalculatedAuctionPrice showSaleDate={showSaleDate} offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub, calculationSnapshot:{...offer.calculationSnapshot,currencyRate:offer.japanDeliveredPreview.currencyRate||offer.calculationSnapshot?.currencyRate}}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
   if (isSellerPricedOffer(offer)) return <SellerPrice showSaleDate={showSaleDate} deliveryCity={deliveryCity} offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
   const totalRub = Number(offer?.totalRub || 0);
   const japanAuction = !isGreenCornerOffer(offer) && (String(offer?.market || "").toLowerCase() === "japan"
@@ -44,7 +44,7 @@ function CatalogPriceContent({
   const highlightElectrified = isElectrifiedPrice(offer);
 
   if (totalRub > 0) {
-    if (japanAuction) return <AuctionCardPrice showSaleDate={showSaleDate} offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
+    if (japanAuction) return <CalculatedAuctionPrice showSaleDate={showSaleDate} offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
     const preliminary = isCatalogPowerScenario(offer)
       || String(offer?.calculationStatus || "") === "preliminary_power_pending"
       || offer?.calculationSnapshot?.pricingConfidence === "preliminary";
