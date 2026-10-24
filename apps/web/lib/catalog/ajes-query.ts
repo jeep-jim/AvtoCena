@@ -1,3 +1,4 @@
+import {japanDriveSql} from './japan-drive';
 import {auctionSaleRange} from "./auction-sale-period";
 import {japanExcludedMake,japanMakeSqlExclusion} from './japan-vehicle-policy';
 import {CHINA_MIN_MODEL_YEAR} from './china-year-policy';
@@ -64,7 +65,8 @@ export function ajesQuery(input: unknown) {
   const coded=(value:string|undefined,column:string,map:Record<string,string[]>)=>{if(!value)return;const selected=value.split('|');if(selected.length>20||selected.some(v=>!map[v]))throw new AjesInputError();const codes=[...new Set(selected.flatMap(v=>map[v]))];where.push(`${column} in (${codes.map(v=>`'${v}'`).join(',')})`);};
   coded(q.fuel,'time',{petrol:['P'],diesel:['D'],electric:['E'],electrified:['E','H','HE'],hybrid:['H','HE'],lpg:['L'],cng:['C']});
   coded(q.transmission,'kpp',{automatic:['AT'],manual:['MT'],cvt:['CVT'],dct:['DCT']});
-  coded(q.drive,'priv',{fwd:['FF','FWD'],rwd:['FR','RWD'],awd:['4WD','AWD','FULLTIME4WD']});
+  if(!stock&&q.drive)where.push(japanDriveSql(q.drive));
+  else coded(q.drive,'priv',{fwd:['FF','FWD'],rwd:['FR','RWD'],awd:['4WD','AWD','FULLTIME4WD']});
   if(q.auctionGrade){const grades=values(q.auctionGrade,'|');if(grades.some(v=>! /^(?:[0-6](?:\.5)?|S|R|RA|A|B|C)$/.test(v)))throw new AjesInputError();where.push(`rate in (${grades.map(v=>`'${v}'`).join(',')})`);}
 
   if(q.chassis!==undefined)where.push(`kuzov='${name(q.chassis)}'`);
