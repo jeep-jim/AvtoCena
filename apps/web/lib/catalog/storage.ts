@@ -1980,11 +1980,16 @@ const liveBudgetBlockCache = new DetailReadCache<BudgetCountIndex|null>({maxEntr
 async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:string){
  const {applyActiveBusinessPriceBatch}=await import("./live-business-pricing");
  const {attachJapanSearchValues}=await import("./japan-delivered-preview");
+ const {attachSellerDeliveredPreviews}=await import('./seller-delivered-preview');
+ const configurations=await (await import('../effective-market-settings')).getEffectiveMarketsWithDefaults();
  const result:CatalogSearchProjection[]=[];
  for(let start=0;start<rows.length;start+=128){
   const prepared=rows.slice(start,start+128);
   const priced=await applyActiveBusinessPriceBatch(prepared as any[],{readOnly:true}) as CatalogSearchProjection[];
-  result.push(...await attachJapanSearchValues(priced,generationId));
+  // Use only retained projection inputs here: no per-listing detail or supplier scan.
+  // The same preview must exist before ordering, not only after a page is selected.
+  const delivered=await attachSellerDeliveredPreviews(priced as any[],configurations,{projectionOnly:true}) as CatalogSearchProjection[];
+  result.push(...await attachJapanSearchValues(delivered,generationId));
  }
  return result;
 }
