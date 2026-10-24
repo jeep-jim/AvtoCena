@@ -29,7 +29,8 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a4-2020-2023-avant-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
     "docs/encyclopedia/batches/2026-10-24-berlingo-japan-2023-technical.json",
-    "docs/encyclopedia/batches/2026-10-24-audi-a4l-2026-drive-mass.json"
+    "docs/encyclopedia/batches/2026-10-24-audi-a4l-2026-drive-mass.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a4l-2025-mass.json"
   ],
   "publicResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -47,12 +48,13 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a4-2020-2023-avant-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
     "docs/encyclopedia/batches/2026-10-24-berlingo-japan-2023-technical.json",
-    "docs/encyclopedia/batches/2026-10-24-audi-a4l-2026-drive-mass.json"
+    "docs/encyclopedia/batches/2026-10-24-audi-a4l-2026-drive-mass.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a4l-2025-mass.json"
   ],
   "requiredAstraPlanDigests": [
     "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
   ],
-  "requestedAt": "2026-10-24T11:57:08.501052+07:00",
-  "reason": "Complete Japan calculated price colours, bounded full pages, and Toyota truck exclusions; retain loading fix",
+  "requestedAt": "2026-10-24T12:34:11.721714+07:00",
+  "reason": "Remove owner-disabled team assistant, clarify missing specification labels, accept saved A4L 2025 mass batch",
   "ideaReports": []
 }
