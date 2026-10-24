@@ -1,0 +1,567 @@
+{
+  "checkedAt": "2026-10-24T02:09:30.454261+00:00",
+  "release": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+  },
+  "rows": [
+    {
+      "name": "a3_body",
+      "offerId": "061974864a6a9708c3084fc8",
+      "comparisons": {
+        "bodyType": {
+          "search": "hatchback",
+          "card": "hatchback",
+          "equal": true
+        },
+        "year": {
+          "search": 2020,
+          "card": 2020,
+          "equal": true
+        },
+        "trim": {
+          "search": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+          "card": "Sportback 35 TDI S-Line *PANO*MATRIX*B&O*",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1968,
+          "card": 1968,
+          "equal": true
+        },
+        "fuel": {
+          "search": "diesel",
+          "card": "diesel",
+          "equal": true
+        },
+        "powertrainKind": {
+          "search": "combustion",
+          "card": "combustion",
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "power30MinKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 4105050,
+          "card": 4105050,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "cardTransmissionLabel": "автомат",
+      "cardBodyLabel": "Хэтчбек",
+      "encyclopediaCalculation": {
+        "version": 1,
+        "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+        "sourceIdentity": "[\"061974864a6a9708c3084fc8\",2020]",
+        "values": {
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "engineCc": 1968,
+          "powerHp": 150,
+          "powerKw": 110,
+          "icePowerKw": 110,
+          "transmission": "automatic",
+          "bodyType": "hatchback"
+        },
+        "filledFields": [
+          "bodyType"
+        ]
+      },
+      "generationId": "gen_1792702445675_8c312f85"
+    },
+    {
+      "name": "a3_2021",
+      "offerId": "3b783a66af3b69634f611db2",
+      "comparisons": {
+        "bodyType": {
+          "search": "hatchback",
+          "card": "hatchback",
+          "equal": true
+        },
+        "year": {
+          "search": 2021,
+          "card": 2021,
+          "equal": true
+        },
+        "trim": {
+          "search": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+          "card": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "fuel": {
+          "search": "petrol",
+          "card": "petrol",
+          "equal": true
+        },
+        "powertrainKind": {
+          "search": "combustion",
+          "card": "combustion",
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "power30MinKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "Schaltgetriebe",
+          "card": "Schaltgetriebe",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3041845,
+          "card": 3041845,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "cardTransmissionLabel": "механика",
+      "cardBodyLabel": "Хэтчбек",
+      "encyclopediaCalculation": {
+        "version": 1,
+        "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+        "sourceIdentity": "[\"3b783a66af3b69634f611db2\",2021]",
+        "values": {
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1498,
+          "powerHp": 150,
+          "powerKw": 110,
+          "icePowerKw": 110,
+          "transmission": "Schaltgetriebe",
+          "bodyType": "hatchback"
+        },
+        "filledFields": [
+          "bodyType"
+        ]
+      },
+      "generationId": "gen_1792702445675_8c312f85"
+    },
+    {
+      "name": "a3_2020",
+      "offerId": "4e3f16f9dc955a3ab40ba0f1",
+      "comparisons": {
+        "bodyType": {
+          "search": "hatchback",
+          "card": "hatchback",
+          "equal": true
+        },
+        "year": {
+          "search": 2020,
+          "card": 2020,
+          "equal": true
+        },
+        "trim": {
+          "search": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+          "card": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "fuel": {
+          "search": "petrol",
+          "card": "petrol",
+          "equal": true
+        },
+        "powertrainKind": {
+          "search": "combustion",
+          "card": "combustion",
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "power30MinKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "Schaltgetriebe",
+          "card": "Schaltgetriebe",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3040832,
+          "card": 3040832,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "cardTransmissionLabel": "механика",
+      "cardBodyLabel": "Хэтчбек",
+      "encyclopediaCalculation": {
+        "version": 1,
+        "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+        "sourceIdentity": "[\"4e3f16f9dc955a3ab40ba0f1\",2020]",
+        "values": {
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1498,
+          "powerHp": 150,
+          "powerKw": 110,
+          "icePowerKw": 110,
+          "transmission": "Schaltgetriebe",
+          "bodyType": "hatchback"
+        },
+        "filledFields": [
+          "bodyType"
+        ]
+      },
+      "generationId": "gen_1792702445675_8c312f85"
+    },
+    {
+      "name": "dbx",
+      "offerId": "b65974b83d5399d588073fc5",
+      "comparisons": {
+        "bodyType": {
+          "search": "suv",
+          "card": "suv",
+          "equal": true
+        },
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "Aston Martin DBX707",
+          "card": "Aston Martin DBX707",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 3982,
+          "card": 3982,
+          "equal": true
+        },
+        "fuel": {
+          "search": "petrol",
+          "card": "petrol",
+          "equal": true
+        },
+        "powertrainKind": {
+          "search": "combustion",
+          "card": "combustion",
+          "equal": true
+        },
+        "powerHp": {
+          "search": 707,
+          "card": 707,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 520,
+          "card": 520,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 520,
+          "card": 520,
+          "equal": true
+        },
+        "power30MinKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 25031959,
+          "card": 25031959,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "cardTransmissionLabel": "автомат",
+      "cardBodyLabel": "Кроссовер",
+      "encyclopediaCalculation": {
+        "version": 1,
+        "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+        "sourceIdentity": "[\"b65974b83d5399d588073fc5\",2023]",
+        "values": {
+          "engineCc": 3982,
+          "powerHp": 707,
+          "powerKw": 520,
+          "icePowerKw": 520,
+          "transmission": "automatic",
+          "bodyType": "suv"
+        },
+        "filledFields": [
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw"
+        ]
+      },
+      "generationId": "gen_1792702445675_8c312f85"
+    },
+    {
+      "name": "li",
+      "offerId": "17b4b13194dc355e6415013f",
+      "comparisons": {
+        "bodyType": {
+          "search": "suv",
+          "card": "suv",
+          "equal": true
+        },
+        "year": {
+          "search": 2026,
+          "card": 2026,
+          "equal": true
+        },
+        "trim": {
+          "search": "2026款 Ultra",
+          "card": "2026款 Ultra",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1496,
+          "card": 1496,
+          "equal": true
+        },
+        "fuel": {
+          "search": "hybrid",
+          "card": "hybrid",
+          "equal": true
+        },
+        "powertrainKind": {
+          "search": "series_hybrid",
+          "card": "series_hybrid",
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "power30MinKw": {
+          "search": 134,
+          "card": 134,
+          "equal": true
+        },
+        "transmission": {
+          "search": "电动车单速变速箱",
+          "card": "电动车单速变速箱",
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "cardTransmissionLabel": null,
+      "cardBodyLabel": null,
+      "encyclopediaCalculation": {
+        "version": 1,
+        "indexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+        "sourceIdentity": "[\"17b4b13194dc355e6415013f\",2026]",
+        "values": "$44:props:children:2:props:price:props:offer:operational:encyclopediaCalculation:values",
+        "filledFields": "$44:props:children:2:props:price:props:offer:operational:encyclopediaCalculation:filledFields"
+      },
+      "generationId": "gen_1792702445675_8c312f85"
+    }
+  ],
+  "requests": [
+    {
+      "name": "health_before",
+      "path": "/api/health",
+      "http": 200,
+      "seconds": 5.523,
+      "bytes": 180,
+      "checkedAt": "2026-10-24T02:08:54.601520+00:00"
+    },
+    {
+      "name": "a3_2020_card",
+      "path": "/cars/offer/4e3f16f9dc955a3ab40ba0f1",
+      "http": 200,
+      "seconds": 13.143,
+      "bytes": 521974,
+      "checkedAt": "2026-10-24T02:09:07.748864+00:00"
+    },
+    {
+      "name": "a3_2021_card",
+      "path": "/cars/offer/3b783a66af3b69634f611db2",
+      "http": 200,
+      "seconds": 13.145,
+      "bytes": 514614,
+      "checkedAt": "2026-10-24T02:09:07.749105+00:00"
+    },
+    {
+      "name": "a3_body_card",
+      "path": "/cars/offer/061974864a6a9708c3084fc8",
+      "http": 200,
+      "seconds": 13.152,
+      "bytes": 516945,
+      "checkedAt": "2026-10-24T02:09:07.755698+00:00"
+    },
+    {
+      "name": "a3_2020_search",
+      "path": "/api/catalog/search?market=europe&make=Audi&model=A3&yearFrom=2020&yearTo=2020&pageSize=48",
+      "http": 200,
+      "seconds": 6.395,
+      "bytes": 137027,
+      "checkedAt": "2026-10-24T02:09:14.150345+00:00"
+    },
+    {
+      "name": "dbx_card",
+      "path": "/cars/offer/b65974b83d5399d588073fc5",
+      "http": 200,
+      "seconds": 12.265,
+      "bytes": 479267,
+      "checkedAt": "2026-10-24T02:09:20.013891+00:00"
+    },
+    {
+      "name": "li_card",
+      "path": "/cars/offer/17b4b13194dc355e6415013f",
+      "http": 200,
+      "seconds": 12.364,
+      "bytes": 399129,
+      "checkedAt": "2026-10-24T02:09:20.114567+00:00"
+    },
+    {
+      "name": "a3_2021_search",
+      "path": "/api/catalog/search?market=europe&make=Audi&model=A3&yearFrom=2021&yearTo=2021&pageSize=48",
+      "http": 200,
+      "seconds": 6.251,
+      "bytes": 155292,
+      "checkedAt": "2026-10-24T02:09:20.401509+00:00"
+    },
+    {
+      "name": "dbx_search",
+      "path": "/api/catalog/search?market=uae&make=Aston%20Martin&model=DBX&pageSize=48",
+      "http": 200,
+      "seconds": 4.319,
+      "bytes": 11752,
+      "checkedAt": "2026-10-24T02:09:24.433705+00:00"
+    },
+    {
+      "name": "li_search",
+      "path": "/api/catalog/search?market=china&make=Li%20Auto&model=L6&yearFrom=2026&yearTo=2026&pageSize=48",
+      "http": 200,
+      "seconds": 4.037,
+      "bytes": 2055,
+      "checkedAt": "2026-10-24T02:09:24.439024+00:00"
+    },
+    {
+      "name": "a3_body_search",
+      "path": "/api/catalog/search?market=europe&make=Audi&model=A3&yearFrom=2020&yearTo=2020&pageSize=48",
+      "http": 200,
+      "seconds": 4.861,
+      "bytes": 137027,
+      "checkedAt": "2026-10-24T02:09:24.875074+00:00"
+    },
+    {
+      "name": "health_after",
+      "path": "/api/health",
+      "http": 200,
+      "seconds": 5.549,
+      "bytes": 180,
+      "checkedAt": "2026-10-24T02:09:30.453905+00:00"
+    }
+  ],
+  "scope": "Bounded public API and full target RSC; not visual or entire-catalog acceptance."
+}

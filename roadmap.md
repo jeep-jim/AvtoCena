@@ -14102,3 +14102,10 @@ docs/encyclopedia/reports/2026-10-24-a4-2025-retry-a4l-2026-prepared.json сох
 По скриншоту владельца удалены из просмотра sourceUrl и внутренние notes, заголовок заменён на «Дополнительные сведения». Anonymous API использует явную проекцию технических полей без ссылок, свободных примечаний и вложенных evidence; owner/admin сохраняют внутренние поля для редактирования. Источник объявления в каталоге сохранён. Записи, ручные правки, доказательства и расчётный индекс не очищались. Тест отсутствия утечки/неизменности оригинала и TypeScript PASS. Публикация ещё не подтверждена.
 
 Exact apply40051933362/job120746286854 SUCCESS: savedModels1/savedFields1. Независимый API Nio2026 подтвердил powertrainKind=electric, revision7fd5f43b-3c0f-454c-8b4b-271167fb8935. Запрошен общий production release с текущими28required/14public batches, ASTRA receipt и ранее сохранёнными224полями плюс1Nio. Дневные сборы не перезапускались; active Actions перед выпуском пуст. Пауза research до проверки immutable index/membership сохраняется. Оценка80% не заявляется.
+
+
+## 24.10.2026 09:10 Красноярск — проверены живые примеры расчётов перед общим выпуском
+
+Проверка02:09:30UTC: health HTTP200/e7a30716fad957202890c82f59274e8f0b2ec38a до/после. Пять карточек и выдача:65/65сопоставленных полей совпадают. DBX2023 b65974b83d5399d588073fc5:3982cc/707hp/520kW из encyclopediaCalculation, totalRub25031959 estimated. AudiA3 2021 3b783a66af3b69634f611db2:3041845 estimated, bodyType из энциклопедии, КПП механика сохранена. LiL6 2026:134kW30min, totalRubnull/needs_data — не объявлен рассчитанным. Китай Camry2014 fd35d74f6c627c05f244fa25 search1825609 estimated, без encyclopediaCalculation: это не доказательство нового подключения.
+
+Общий выпуск40052647125/job120748606727 IN_PROGRESS на Prepare private encyclopedia index; receipt ASTRA/exact matching/security/storage проверки SUCCESS. Новый3d40cad ещё не активен. Дубликаты deploy/apply/сборов не запускались; срок полной базы/80%не подтверждён. Отчёт bounded-check сохранён; частная история/параметры не менялись.
