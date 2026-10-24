@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-10-24T15:27:40.760Z",
+  "workflow": 40104679690,
+  "job": 120903797449,
+  "head": "00e5c4440d8d93986a8771c1e7f17957d88c83ec",
+  "conclusion": "failure",
+  "failureAt": "2026-10-24T15:24:04.399Z",
+  "error": "storage_json_serialize_failed:path=catalog/public/projection/all.json:Invalid string length",
+  "heapOomRepeated": false,
+  "lastReportedRss": 1717379072,
+  "spooledMarkets": {
+    "china": 244471,
+    "korea": 9926,
+    "uae": 22045,
+    "europe": 46127,
+    "georgia": 1706
+  },
+  "lastSuccessfulStage": "current_read_models_directory_written",
+  "activationProved": false,
+  "operationRetried": false,
+  "cancelledRuns": 0,
+  "remaining": "Нужна ограниченная по размеру публикация общей проекции с совместимыми читателями и безопасным порядком переключения. Не сокращать каталог, не считать новые directories завершённой публикацией. Не запускать слепой повтор.",
+  "ownership": "Existing manual memory/read-model repair; no duplicate code patch in this run."
+}
