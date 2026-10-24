@@ -14405,3 +14405,10 @@ Browser40068044378/job120795322679 failedтолькона8staffcases: тестт
 Текущий [40068425827](https://github.com/jeep-jim/AvtoCena/actions/runs/40068425827)/job120798938257 IN_PROGRESS на Prepare private encyclopedia index; wait-for-astra/exact/security/storage SUCCESS. Research apply-pause пока сохраняется до успешного immutableindex; установка6c347ef не подтверждена. Новый CRM40069291249: audit120799043783 SUCCESS, browser120799043651 ещё Real CRM pages. Старые staff-failures не переписаны; новый полный прогон ещё не завершён.
 
 Новых deploy/apply/research/сборщиков/marker и изменений guards/расписаний не выполнялось. Ручная сессия сопровождает свой единый выпуск; исследования существующей задачи продолжаются отдельно. Скорость, подтверждение производственных прав АвтоБота и полное подключение EV/HEV остаются открыты; контроль активен.
+
+
+## 2026-10-24T13:21:07.480284+07:00 — финальный снимок готов, исследования продолжены
+
+В [40068425827](https://github.com/jeep-jim/AvtoCena/actions/runs/40068425827), job 120798938257, шаг Prepare private encyclopedia index и сохранение coverage завершились SUCCESS. Выпуск 6c347ef перешёл к сборке приложения. Пауза research apply снята сразу после подтверждения снимка; последующие партии не объявляются включёнными в этот выпуск. ASTRA повторно не импортируется, сборщики рынков не запускаются.
+
+Новый браузерный прогон [40069291249](https://github.com/jeep-jim/AvtoCena/actions/runs/40069291249): browser 120799043651 SUCCESS (CRM в четырёх ширинах и обеих темах, публичные dropdown/calculation regression), audit 120799043783 SUCCESS. Отдельный live job ещё выполняется. На сайте подтверждён release 2b87b63 и ok=true; финальный 6c347ef пока не установлен.

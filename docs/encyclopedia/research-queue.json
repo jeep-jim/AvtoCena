@@ -38304,9 +38304,9 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "observedMain": "11bddf7a2e798b58536915ae9deaf67a566e4a1a",
-      "writesPaused": true,
-      "reason": "Короткая пауза apply до SUCCESS Prepare private encyclopedia index в 40068425827/6c347ef. Исследование и подготовка партий продолжаются; после неизменяемого снимка немедленно снять паузу. Не отменять активный40066793422 и не запускать дубликаты.",
+      "observedMain": "c4424c7fc5072962346c7e07dcf4cf0b3a41add8",
+      "writesPaused": false,
+      "reason": "Снимок финального выпуска 6c347ef успешно подготовлен; step 8 и сохранение coverage SUCCESS в 40068425827. Исследования и согласованные apply можно продолжать с revision/checksum/CAS/readback. Новые партии после снимка относятся к следующему выпуску; текущую сборку не дублировать.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -38314,7 +38314,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-24T13:05:38.083958+07:00",
+      "checkedAt": "2026-10-24T13:21:07.480284+07:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -38420,7 +38420,8 @@
         "activationConfirmed": false
       },
       "targetRelease": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
-      "targetWorkflow": 40068425827
+      "targetWorkflow": 40068425827,
+      "snapshotReady": true
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
