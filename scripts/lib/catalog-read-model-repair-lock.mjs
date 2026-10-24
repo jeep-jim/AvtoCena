@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-// The repair workflow has a 30-minute hard timeout. Keep the storage lease
+// The repair workflow has a 90-minute hard timeout. Keep the storage lease
 // longer than that entire job, including verification, so the Japan publisher
 // (which uses this same lock) cannot start while aliases are being restored.
 export async function withCatalogReadModelRepairLock(mutate, repair, now = Date.now) {
@@ -12,7 +12,7 @@ export async function withCatalogReadModelRepairLock(mutate, repair, now = Date.
     }
     return { operationId, operationType: 'catalog_read_model_repair',
       startedAt: new Date(now()).toISOString(),
-      lockedUntil: new Date(now() + 40 * 60_000).toISOString() };
+      lockedUntil: new Date(now() + 100 * 60_000).toISOString() };
   });
   try {
     return await repair();
