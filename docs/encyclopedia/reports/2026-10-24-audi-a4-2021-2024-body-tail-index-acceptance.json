@@ -1,0 +1,396 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T00:59:07.261Z",
+  "batch": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
+  "batchSha256": "cfb47a7113439f57d2645c31f71945130b4fc8e7111a35b726c315402e059f2b",
+  "requiredFields": 42,
+  "variants": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7337a9ca9f80dfa28391fd25",
+      "year": 2021,
+      "trim": "35 TFSI LIMOUSINE|S-LINE SPORTPAKET|VIRTUAL",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4a57ba5a44a56a6bd2378196",
+      "year": 2021,
+      "trim": "Limousine 2.0 TDI S-TRO*NAVI*KLIMA*PDC*ZVR**",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7e0fc694f5ceb46ccedec972",
+      "year": 2021,
+      "trim": "Limousine 35 TDI ADVANCED *LED*NAVI*PDC*ALU*",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "502a20d89b3b872536794bcb",
+      "year": 2021,
+      "trim": "Limousine 40 TDI advanced LED Navigation SHZ",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "eaf70b09dcafc46515a74954",
+      "year": 2021,
+      "trim": "Limousine 40 TDI advanced Stronic,LED,Tour,Le",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "977f1a74514c472f5569da10",
+      "year": 2021,
+      "trim": "Limousine 40 TDI advanced Stronic,LED,Tour,Leder,N",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "cdaf349a183cf1e4ae8afc95",
+      "year": 2021,
+      "trim": "Limousine 40 TDI S tronic advanced | LED |",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f93963972c4e5ffb2c97c564",
+      "year": 2021,
+      "trim": "Limousine 40 TDI S-tronic *ACC*SSD*LED*NAVI*",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6c63fcb068ed85a38f5872a2",
+      "year": 2021,
+      "trim": "Limousine 40TDI quattro 273,-ohne Anzahlung N",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "b7c69e73981517fcbc8b9b8e",
+      "year": 2022,
+      "trim": "40 TDI Limousine Advanced S-Tronic Kamera",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "97d5a20aca40c4b705f0e098",
+      "year": 2022,
+      "trim": "Limousine 35 TDI advanced Business*Tour*EPH+*",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "08a7c83f5c89c6687136f6e3",
+      "year": 2022,
+      "trim": "Limousine 40 quattro 2.0 TDI advanced DSG LE",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "8447d45f8744487cc193ad91",
+      "year": 2022,
+      "trim": "Limousine 40 TDI",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3bc970b4b328bfd94d3c0023",
+      "year": 2022,
+      "trim": "Limousine 40 TDI Kamera Navi virtual Advanced",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "c5431c5341aea689d8ec9856",
+      "year": 2022,
+      "trim": "Limousine 40 TDI KEYLESS,ACC,KAMERA,VIRTUAL",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "d68b5edede6f1b52936f44d0",
+      "year": 2022,
+      "trim": "Limousine 40 TDI qu S LINE 18Z KEYLESS,KAMERA",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "c454b0d3506312f5b57fa4d5",
+      "year": 2022,
+      "trim": "Limousine 40 TDI qu S LINE KEYLESS,KAMERA,SH",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "918d459c2a0b86fac065afca",
+      "year": 2022,
+      "trim": "Limousine 40 TDI QU S-TR ADVANCED LED+NAV+RFK",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "bd1edafa077ab4fd5fde8fee",
+      "year": 2022,
+      "trim": "Limousine 40 TDI S LINE 18 Z. KEYLESS,KAMERA",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4fda8cd24ca1e50ce7c43e34",
+      "year": 2022,
+      "trim": "Limousine 40 TFSI Q. Kamera LED Navi",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "928d80a19ca0feb4e214fe82",
+      "year": 2022,
+      "trim": "Limousine 40 TFSI S LINE VIRTUAL,ACC,LEDER",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e074b13d8700c037e02c5520",
+      "year": 2022,
+      "trim": "Limousine 40 TFSI S tronic S line Navi Kamera",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0ba2ec48688ad1f6dc0b5bd7",
+      "year": 2023,
+      "trim": "35 2.0 tdi mhev S line SEDAN REAR|ACC|CARPLAY|18'",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "66b89d3c5a100a6acf379c95",
+      "year": 2023,
+      "trim": "Limousine 35 TFSI Advanced, LED, AHK, Ambient",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0c7b209a2ccd1f85a071db24",
+      "year": 2023,
+      "trim": "Limousine 35 TFSI S tronic S line BlackEditio",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f28976524a224aacbb2b28f2",
+      "year": 2023,
+      "trim": "Limousine 35 TFSI S-Line LED PANO AHK AMBIENT",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "80d78c52da005fae2f46597e",
+      "year": 2023,
+      "trim": "Limousine 40 TDI qu S LINE 18 Z. KEYLESS,ACC",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "57496639d4b45730cd78372c",
+      "year": 2023,
+      "trim": "Limousine 45 TFSI quattro S tronic Navi Plus",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4f699d3b0e6d9d13cf16b4a0",
+      "year": 2023,
+      "trim": "Limousine advanced 35 TFSI Kamera, Business",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2b3ccbd37d3febf436143ce4",
+      "year": 2023,
+      "trim": "Limousine advanced 40 TDI Navi, LED",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "63e13fd86745b01f89dcf80a",
+      "year": 2024,
+      "trim": "30 TDI Avant S-Tronic Business Advanced - ADAS/FULL LED/BAULE ELETTRICO",
+      "values": {
+        "bodyType": "wagon"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9a25b435f03ff9ad07957627",
+      "year": 2024,
+      "trim": "30 TDI Avant S-Tronic Business Advanced - TELECAMERA/ADAS/FULL LED/BAULE ELETTRICO",
+      "values": {
+        "bodyType": "wagon"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3ef2ce55591065e2977158d6",
+      "year": 2024,
+      "trim": "35 TDI Avant S-Tronic S-Line - MATRIX/ADAS/CERCHI 19\"/LUCI PLUS",
+      "values": {
+        "bodyType": "wagon"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "491ca205fb36fd81401e01c2",
+      "year": 2024,
+      "trim": "AVANT 2.0 40 TDI MHEV QUATTRO S LINE EDITION S TRONIC STATION WAGON",
+      "values": {
+        "bodyType": "wagon"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "ff69300ffd620c27e1bdb0ba",
+      "year": 2024,
+      "trim": "Avant 35 TFSI | 2024 | 99.654 km | Automaat | AdaptiveCruise | Led | PDC | ParkPilot | Navi | CarPlay | DAB",
+      "values": {
+        "bodyType": "wagon"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "b5e2432ce1b5c6aa4a7c5d00",
+      "year": 2024,
+      "trim": "Avant 40 TDI S tronic Business Advanced",
+      "values": {
+        "bodyType": "wagon"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "cdd1ded316d1f22a3f4e552a",
+      "year": 2024,
+      "trim": "Avant 40 TFSI S line/MASSAGE/SHZ//ACC/NAVI",
+      "values": {
+        "bodyType": "wagon"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a8854828fa54a9f30e2b1f92",
+      "year": 2024,
+      "trim": "Limousine 35 TFSi S-Line Competition 150 Pk a",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "b2c0d452350b55c55ab6633c",
+      "year": 2024,
+      "trim": "Limousine 40 TDI QU S-TR LED+2xPDC+PANO+B&O",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "b376dab12d1698f5d2953f0d",
+      "year": 2024,
+      "trim": "Limousine 40 TDI quattro advanced LED*RFK*",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "151e2939f10b4addb65bfe16",
+      "year": 2024,
+      "trim": "Limousine 40 TDI S tronic S line competiton V",
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2effff876a2dae0ee37235a4",
+      "year": 2024,
+      "trim": "Limousine 40 TFSI S tronic line MATRIX AHK KA",
+      "values": {
+        "bodyType": "sedan"
+      }
+    }
+  ],
+  "state": "pending_next_coordinated_index",
+  "newDeployRequested": false,
+  "requiredChecks": [
+    "exact batch membership and field provenance",
+    "manual/source/unknown30min guards",
+    "immutable index and prices preparation",
+    "active release health and public search/card parity"
+  ]
+}

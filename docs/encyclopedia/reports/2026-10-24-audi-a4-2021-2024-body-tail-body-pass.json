@@ -1,0 +1,249 @@
+{
+  "batch": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
+  "commit": "9abe11eaf25880894d49400753aebf051f5c3d3e",
+  "workflow": 40047343553,
+  "job": 120731981133,
+  "applyFinishedAt": "2026-10-24T00:56:02.017Z",
+  "variants": 42,
+  "newVariants": 0,
+  "fields": 42,
+  "compiledFields": 42,
+  "apiReadback": true,
+  "includedInIndex": false,
+  "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-body-pass.json",
+  "afterRevision": "db5ba009-6f50-45ad-a730-44a9b67bd937",
+  "publicParity": {
+    "version": 1,
+    "checkedAt": "2026-10-24T00:56:05.379345+00:00",
+    "passed": true,
+    "scope": "Ограниченная выборка Audi A4 Europe: 48 предложений, одна контрольная карточка/13 сравнений; повторяющихся точных групп в этой выборке нет. Новая партия послеснимковая, не активирована.",
+    "offersChecked": 1,
+    "comparisons": 13,
+    "matched": 13,
+    "rows": [
+      {
+        "offerId": "3415b52e8c4bc8274de0fafe",
+        "checks": {
+          "year": {
+            "search": 2023,
+            "card": 2023,
+            "equal": true
+          },
+          "trim": {
+            "search": "Limousine 35 TFSI S tronic S line BlackEditio",
+            "card": "Limousine 35 TFSI S tronic S line BlackEditio",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1984,
+            "card": 1984,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "saved_source:mobile_de_open:49140916965664",
+            "card": "saved_source:mobile_de_open:49140916965664",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3592397,
+            "card": 3592397,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "drive": {
+            "search": "",
+            "card": "$undefined"
+          }
+        }
+      }
+    ],
+    "unavailable": [],
+    "repeatedGroups": [],
+    "duplicateOfferIds": 0,
+    "rowsReturned": 48,
+    "catalogTotalReported": 1196,
+    "healthBefore": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+    },
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+    },
+    "sameRelease": true,
+    "generationId": "gen_1792702445675_8c312f85"
+  },
+  "nativeExact": 42,
+  "nativeHeld": [],
+  "checkedAt": "2026-10-24T00:59:07.261Z",
+  "state": "saved_readback_pass_pending_index",
+  "batchSha256": "cfb47a7113439f57d2645c31f71945130b4fc8e7111a35b726c315402e059f2b",
+  "years": {
+    "2021": 9,
+    "2022": 13,
+    "2023": 8,
+    "2024": 12
+  },
+  "beforeRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+  "readback": {
+    "version": 1,
+    "checkedAt": "2026-10-24T00:58:49.579Z",
+    "passed": true,
+    "modelId": "e3570ba4a67b01797e57a749",
+    "batch": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+    "beforeRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+    "afterRevision": "db5ba009-6f50-45ad-a730-44a9b67bd937",
+    "rowsBefore": 3978,
+    "rowsAfter": 3978,
+    "annualRows": 1342,
+    "unknownYearRows": 2636,
+    "updatedVariants": 42,
+    "fields": 42,
+    "newVariants": 0,
+    "untargetedUnchanged": 3936,
+    "allExpectedValuesAndSourcesMatch": true,
+    "historyPreserved": true,
+    "replayPassed": true,
+    "compiledFields": 42,
+    "apiYearSlices": 9
+  },
+  "preflight": {
+    "version": 1,
+    "checkedAt": "2026-10-24T00:55:05.768Z",
+    "state": "prepared_not_applied",
+    "batch": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+    "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
+    "batchSha256": "cfb47a7113439f57d2645c31f71945130b4fc8e7111a35b726c315402e059f2b",
+    "modelId": "e3570ba4a67b01797e57a749",
+    "beforeRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+    "variantsRead": 3978,
+    "variantsPlanned": 42,
+    "fieldsPlanned": 42,
+    "newVariants": 0,
+    "untargetedRowsPreserved": 3936,
+    "allExistingValuesPreserved": true,
+    "priorFieldSourcesPreserved": true,
+    "nativeExact": 42,
+    "nativeHeld": [],
+    "compiledFields": 42,
+    "guardTestsPassed": 11,
+    "manualPreserved": true,
+    "unknownCertifiedPowerNotInferred": true,
+    "replayPassed": true,
+    "sources": [
+      {
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+        "bytes": 83590,
+        "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+        "checkedAt": "2026-10-24",
+        "sourcePublisher": "AUDI AG / Audi Japan",
+        "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant"
+      },
+      {
+        "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+        "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+        "bytes": 63666,
+        "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+        "checkedAt": "2026-10-24",
+        "sourcePublisher": "AUDI AG / Audi Japan",
+        "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant"
+      },
+      {
+        "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+        "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+        "bytes": 65001,
+        "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+        "checkedAt": "2026-10-24",
+        "sourcePublisher": "AUDI AG / Audi Japan",
+        "sourceNature": "Заводская публикация Audi; классификация A4 sedan и A4 Avant station wagon, только тип кузова."
+      }
+    ],
+    "cursorBefore": "7337a9ca9f80dfa28391fd25",
+    "cursorAfterApply": null,
+    "remainingSelectedYearBodyAfterApply": 0,
+    "apiReadbackAfterApply": false,
+    "activationConfirmed": false,
+    "applyDeferredReason": null,
+    "isolatedSnapshotWorkflow": 40019745015,
+    "annualRowsRead": 1342,
+    "unknownYearAstraRowsPreserved": 2636,
+    "nextCandidate": null
+  },
+  "next": {
+    "variantId": "889d1703033d1ef5c805209c",
+    "year": 2025,
+    "trim": "Limousine ADVANCED 40 TFSI+WINTERRÄDER+MATRIX",
+    "missingValueFields": [
+      "drive",
+      "bodyType",
+      "engineCode",
+      "grossVehicleWeightKg"
+    ],
+    "knownValues": {
+      "fuel": "petrol",
+      "powertrainKind": "combustion",
+      "engineCc": 1984,
+      "powerHp": 204,
+      "powerKw": 150,
+      "icePowerKw": 150,
+      "transmission": "automatic"
+    }
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a4-2021-2024-body-tail-remaining.json",
+  "researchedAnnualRows": 530,
+  "scope": "Только42поляbodyType, не42полностью проверенных автомобилей/готовыхцен.",
+  "activationConfirmed": false,
+  "newDeployRequested": false,
+  "allModelsComplete": false,
+  "bodyTypes": {
+    "sedan": 35,
+    "wagon": 7
+  }
+}

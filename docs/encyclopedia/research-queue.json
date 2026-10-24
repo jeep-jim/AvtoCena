@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T00:00:26.787Z",
+  "updatedAt": "2026-10-24T00:59:50.926Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1242,8 +1242,8 @@
       ],
       "variants": 3978,
       "status": "partial_verified_fields",
-      "researchedVariants": 509,
-      "checkedAt": "2026-10-24T00:00:26.787Z",
+      "researchedVariants": 530,
+      "checkedAt": "2026-10-24T00:59:50.926Z",
       "researchedYears": [
         2024,
         2023,
@@ -1270,7 +1270,7 @@
         2019,
         2015
       ],
-      "nextAction": "Продолжить7явных Avant2024 без кузова с сохранённого cursor; затем другие недостающие поля существующих A4, неподтверждённые2015/2019 повторить по retry. Сначала свежий API/revision/CAS и проверка источников, не переносить двигатель по названию/объёму. Отсутствующие2008+ годы подтверждать отдельно, не пересобирать основу.",
+      "nextAction": "Проверить оставшуюся Limousine2025 по точной дате/редакции; если год не подтверждён, retry и перейти к следующей существующей модели A4L, сохранив возврат к прочим полям A4. Выбранная кузовная группа2020–2024 исчерпана; неподтверждённые2015/2019 повторить по retry. Сначала свежий API/revision/CAS и проверка источников, не переносить двигатель по названию/объёму. Отсутствующие2008+ годы подтверждать отдельно, не пересобирать основу.",
       "inspectedYears": [
         2025,
         2024,
@@ -1281,7 +1281,7 @@
         2019,
         2015
       ],
-      "boundedReadAt": "2026-10-24T00:00:26.787Z",
+      "boundedReadAt": "2026-10-24T00:58:49.579Z",
       "boundedReadYears": [
         2015,
         2019,
@@ -1293,17 +1293,17 @@
         2025,
         "unknown"
       ],
-      "boundedReadRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "boundedReadRevision": "db5ba009-6f50-45ad-a730-44a9b67bd937",
       "modelWideCountsRefreshed": true,
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a4-next.json",
-      "nextVariantId": "63e13fd86745b01f89dcf80a",
+      "nextVariantId": "889d1703033d1ef5c805209c",
       "annualVariants": 1342,
       "unknownYearAstraVariants": 2636,
-      "revision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
-      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a4-2020-2023-avant-remaining.json",
-      "lastBatch": "research-2026-10-24-audi-a4-2020-2023-avant-body",
-      "lastBatchFields": 50,
-      "lastBatchVariants": 50
+      "revision": "db5ba009-6f50-45ad-a730-44a9b67bd937",
+      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a4-2021-2024-body-tail-remaining.json",
+      "lastBatch": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+      "lastBatchFields": 42,
+      "lastBatchVariants": 42
     },
     {
       "id": "7a296c2cbde73725fc3d6bd4",
@@ -32768,37 +32768,36 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T00:00:26.787Z",
+    "updatedAt": "2026-10-24T00:59:50.926Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a4_2020_2023_avant_50_body_saved_readback_pending_index",
+    "state": "audi_a4_2021_2024_body_tail_42_saved_readback_pending_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "variantId": "63e13fd86745b01f89dcf80a",
-      "year": 2024,
-      "trim": "30 TDI Avant S-Tronic Business Advanced - ADAS/FULL LED/BAULE ELETTRICO",
+      "variantId": "889d1703033d1ef5c805209c",
+      "year": 2025,
+      "trim": "Limousine ADVANCED 40 TFSI+WINTERRÄDER+MATRIX",
       "missingValueFields": [
-        "power30MinKw",
+        "drive",
         "bodyType",
-        "engineCode"
+        "engineCode",
+        "grossVehicleWeightKg"
       ],
       "knownValues": {
-        "fuel": "diesel",
-        "powertrainKind": "mhev",
-        "engineCc": 1968,
-        "powerHp": 136,
-        "powerKw": 100,
-        "icePowerKw": 100,
-        "transmission": "automatic",
-        "drive": "fwd",
-        "grossVehicleWeightKg": 2160
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "transmission": "automatic"
       },
       "modelId": "e3570ba4a67b01797e57a749",
       "make": "Audi",
       "model": "A4",
-      "revision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e"
+      "revision": "db5ba009-6f50-45ad-a730-44a9b67bd937"
     },
-    "lastVerifiedResearch": "audi-a4-2020-2023-avant-body",
+    "lastVerifiedResearch": "audi-a4-2021-2024-body-tail",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32814,32 +32813,32 @@
       "Catalog API performance remains below the requested target"
     ],
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
-    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a4-2020-2023-avant-remaining.json",
+    "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a4-2021-2024-body-tail-remaining.json",
     "historicalExpansionComplete": false,
     "lastVerifiedBatch": {
-      "batch": "research-2026-10-24-audi-a4-2020-2023-avant-body",
-      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4-2020-2023-avant-body.json",
-      "commit": "c3419ab51f8d248a1b080f77202d9d388875f4e7",
-      "workflow": 40042528958,
-      "job": 120716676323,
-      "applyFinishedAt": "2026-10-23T23:58:45.184Z",
-      "variants": 50,
+      "batch": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
+      "commit": "9abe11eaf25880894d49400753aebf051f5c3d3e",
+      "workflow": 40047343553,
+      "job": 120731981133,
+      "applyFinishedAt": "2026-10-24T00:56:02.017Z",
+      "variants": 42,
       "newVariants": 0,
-      "fields": 50,
-      "compiledFields": 50,
+      "fields": 42,
+      "compiledFields": 42,
       "apiReadback": true,
       "includedInIndex": false,
-      "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2020-2023-avant-body-pass.json",
-      "afterRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-body-pass.json",
+      "afterRevision": "db5ba009-6f50-45ad-a730-44a9b67bd937",
       "publicParity": {
         "passed": true,
         "offers": 1,
         "comparisons": 13,
         "matched": 13,
         "repeatedGroups": 0,
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2020-2023-avant-public-parity.json"
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-public-parity.json"
       },
-      "nativeExact": 50,
+      "nativeExact": 42,
       "nativeHeld": []
     },
     "indexReleaseRequested": false,
@@ -33137,9 +33136,35 @@
         },
         "nativeExact": 50,
         "nativeHeld": []
+      },
+      {
+        "batch": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
+        "commit": "9abe11eaf25880894d49400753aebf051f5c3d3e",
+        "workflow": 40047343553,
+        "job": 120731981133,
+        "applyFinishedAt": "2026-10-24T00:56:02.017Z",
+        "variants": 42,
+        "newVariants": 0,
+        "fields": 42,
+        "compiledFields": 42,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-body-pass.json",
+        "afterRevision": "db5ba009-6f50-45ad-a730-44a9b67bd937",
+        "publicParity": {
+          "passed": true,
+          "offers": 1,
+          "comparisons": 13,
+          "matched": 13,
+          "repeatedGroups": 0,
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-public-parity.json"
+        },
+        "nativeExact": 42,
+        "nativeHeld": []
       }
     ],
-    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a4-2020-2023-avant-body-pass.json",
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -37680,7 +37705,7 @@
         "report": "docs/encyclopedia/reports/2026-10-24-next-release-writer-coordination.json",
         "reason": "active_china_publication_and_uae_refresh",
         "workflow": 40026092554,
-        "pendingFields": 182,
+        "pendingFields": 224,
         "deployRequested": false,
         "checkedAt": "2026-10-23T23:27:29.811654+00:00",
         "readbackReport": "docs/encyclopedia/reports/2026-10-24-pending132-live-readback.json",
@@ -37689,8 +37714,8 @@
           40038476075,
           40026092554
         ],
-        "acceptanceChecklist": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0701.json",
-        "latestResearchReport": "docs/encyclopedia/reports/2026-10-24-audi-a4-2020-2023-avant-body-pass.json"
+        "acceptanceChecklist": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0800.json",
+        "latestResearchReport": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-body-pass.json"
       },
       "lastKoreaRefreshFailure": {
         "workflow": 40032114341,
@@ -37701,9 +37726,9 @@
         "rerunRequested": false
       },
       "latestResearch": {
-        "checkedAt": "2026-10-24T00:00:26.787Z",
-        "batch": "research-2026-10-24-audi-a4-2020-2023-avant-body",
-        "fields": 50,
+        "checkedAt": "2026-10-24T00:59:50.926Z",
+        "batch": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+        "fields": 42,
         "apiReadback": true,
         "activationConfirmed": false
       }
@@ -38603,7 +38628,7 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json",
       "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b"
     },
-    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0701.json",
+    "pendingIndexAcceptanceReport": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0800.json",
     "liL6PublicParityBlocker": {
       "offerId": "17b4b13194dc355e6415013f",
       "searchPower30MinKw": 134,
@@ -39240,6 +39265,32 @@
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2020-2023-avant-public-parity.json"
       },
       "nativeExact": 50,
+      "nativeHeld": []
+    },
+    "audiA4Body2021_2024TailPass": {
+      "batch": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
+      "commit": "9abe11eaf25880894d49400753aebf051f5c3d3e",
+      "workflow": 40047343553,
+      "job": 120731981133,
+      "applyFinishedAt": "2026-10-24T00:56:02.017Z",
+      "variants": 42,
+      "newVariants": 0,
+      "fields": 42,
+      "compiledFields": 42,
+      "apiReadback": true,
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-body-pass.json",
+      "afterRevision": "db5ba009-6f50-45ad-a730-44a9b67bd937",
+      "publicParity": {
+        "passed": true,
+        "offers": 1,
+        "comparisons": 13,
+        "matched": 13,
+        "repeatedGroups": 0,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a4-2021-2024-body-tail-public-parity.json"
+      },
+      "nativeExact": 42,
       "nativeHeld": []
     }
   },
