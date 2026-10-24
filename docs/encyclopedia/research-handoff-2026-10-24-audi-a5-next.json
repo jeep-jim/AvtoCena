@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T09:58:43.256Z",
+  "checkedAt": "2026-10-24T11:00:09.468Z",
   "modelId": "8cf3dbb7884fe919bce44c62",
   "make": "Audi",
   "model": "A5",
@@ -11,21 +11,19 @@
     "make": "Audi",
     "model": "A5",
     "year": 2023,
-    "variantId": "06cf38f6bfedea5f6103d8eb",
-    "trim": "Sportback 35 TDI S-line LED*VIRTUAL*ACC*KAM",
+    "variantId": "e088f3c8423c7911e65070bb",
+    "trim": "Cabriolet 35 TFSI S-Tronic*Navi*Leder*LED*Win",
     "missingValueFields": [
-      "bodyType",
-      "grossVehicleWeightKg"
+      "bodyType"
     ],
-    "state": "requires_exact_source_review",
-    "reason": "67 строк2023 прочитаны. Нужна заводская таблица соответствующего года; массы2024 назад автоматически не переносить. Пробелы2024 остаютсявretry."
+    "state": "prepared_waiting_release_snapshot"
   },
-  "preparedBatch": null,
-  "preparedReport": null,
-  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2024-remaining.json",
+  "preparedBatch": "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
+  "preparedReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2021-2023-body-prepared.json",
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2021-2023-remaining.json",
   "previous2026Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
   "priorRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
-  "nextAction": "67 строк2023 прочитаны. Нужна заводская таблица соответствующего года; массы2024 назад автоматически не переносить. Пробелы2024 остаютсявretry.",
+  "nextAction": "Дождаться SUCCESS Prepare private encyclopedia index и membership40085909587; затем свежая ревизия/digest, apply32 и независимый API readback. Не повторять исследования/старые apply.",
   "nextYearRead": {
     "year": 2023,
     "rows": 67,
@@ -47,5 +45,7 @@
   "applyStatusReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
   "completedBatchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2024-drive-mass-body.json",
   "completedReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
-  "previous2025Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json"
+  "previous2025Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
+  "preparedBatchSha256": "c6d6d7b2ff5b8c120c69f444e2fc1bd71d212bbd3e5fbf0af1afcbf0a686098d",
+  "previous2024Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2024-remaining.json"
 }

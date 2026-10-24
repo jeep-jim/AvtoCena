@@ -1,0 +1,998 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-audi-a5-2021-2023-body",
+  "entries": [
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "e088f3c8423c7911e65070bb",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Cabriolet 35 TFSI S-Tronic*Navi*Leder*LED*Win",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "c4e68633f0c4d5c7101e0c3299f66c69f94a7ad2a4589ada9d2d5d7dfda912bb",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2023 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c60db646a7f8d536f8aaabd7",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Coupe 45 TFSI qu. S line 360° MATRIX-LED PANO",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "d7326534b67a95c468820cb0a6b11b1be44d3148543c27924269f0db743797db",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2023 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c32da076344d19ad130d701f",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "trim": "Coupe 50 quattro LED*NaviTouch*DAB*LM*Tempo",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "4d59bb1f129d9beff6ac0cf22a27b32714df0e7f306f5718196832649c1d4f7a",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2023 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "0af7764544b4df55d4d0566a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabrio S line 35 TFSI",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "f03fd4f213a8242121020fc471a4d7be9e717a19673e5b4906e6f5c77e603daa",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "7a8ba3240af039a3580257ce",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Coupe 35 TDI|S-LINE|ALCANTARA|VIRTUAL|LED|",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "51b5cf0bd939a8ff7eb2f45140eeade3ed9646520ba4a4119b7af18afdd414e2",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "13c2fc4ab5150d46c2d26617",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet 35 TDI S line AHK*LED*Sound*Virtual",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "994165d62c3e218fc0af41dac2390e21f5281ca26a0aa91b30077886d957d5c3",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "6e27f6ecc69ab140db382202",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "40 Cabriolet 2.0 TFSI Matrix-LED*Kamera*",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "8118d8181f384e5391391c5f825bb5e023bfa07599bfac9e4d6148f83d83631b",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c3cf9744f5337d7004803ea9",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "CABRIOLET 40TFSi ADVANCED 18Z./LED/KAMERA/DSP",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "ccabc1d8434e0b3b20f8ede6a1280ae85f01de60ff84aa3a1f82bdc99bf77ad8",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "ba4e6cb6832ec6e394e48b83",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet Advanced 40 TFSI Navi, Parken, Soun",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "2a35473e3ccfaca751ef5756c360d0db244d97aa78805a3c726fa2f2d6f4b419",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "af0648ac175abc381603f86f",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabrio 40 TFSI Q S LINE LM20 LEDER MATRIX KAM",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "8fd89bfcb6b0a66f3a23c6309eb142787dee3f7a2b2d5466b994fb2336b8d91c",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "4afa9d45020df312756c94c8",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabrio°S-Line°Laser°B&O°Leder°HeadUp°Memory",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "0fdedb9117aacbd879de4d7e132a368129773d683dc1c6a152be1e3cd6c2c4d1",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "f57ad27f827b48431e18aa24",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet 40 TFSI qu. S tronic S line Matrix/",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "de4f4aa9c3ecff0761c43013ab2180fb08f14a90e8299d64786143ba2ddf5068",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "b3ffdc180643272f470a68d4",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet 40 TFSI quattro advanced Navi Lede",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "816d165799e1a858f519a1fb9a2347bc1022c8f2c1be8bb112f1e7dec7980db2",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "7776f3b52c18e5fd0265d50b",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet Advanced QU. 2.0 40TFSI S-Tronic",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "8ed7e05919c9759560a64666fdfe4e35b8c73fb4c62885fa8d8e2d8cf8336668",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "4c2cba3b820943dfb7187a9a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet 45 TFSI S-Line MATRIX KAMERA VC ACC",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "d98e85177d53e27241e3dfff0466bee6ee91e0b7290935c165bfea5c59db8750",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "cbf08ec3466505479b3516dd",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabrio 45 TFSI qu. S line MATRIX-LED ACC NAVI",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "04720dfd318b1c23654ccbf32d8be3342cb25888b0ee34ce1a81c9c4fbd057dd",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d79bc3cedc94203a00af216a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Coupé 45 2.0 TSFI S line quattro Pano*Navi**K",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "af514d41c5f856e72848c24319dde276ed5f7478cdcc7bb082251ad7a70e46e5",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "6a313db110ff22d72010393a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet S line 45 TFSI Matrix, Assist, B&O",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "493a6634693b3e7ba39d9849392af3f42cf81c5851e89694f6b6fa1d769b45b8",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "25e2f74e2abc8f32cc67d601",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Coupe S line 50 TDI quattro MATRIX/PANO/RFK++",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "3d02984c51304febd6f494e25734157e94b08ce8fdb6e295e21a98652673c7ad",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "6d6a773bc35b6426bf9c9b4c",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Coupe 50 TDI quattro S line*PANO*SHZ*MATRIX*",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "48ce9bbf3b33e6b9f9b23ca78d6025d26d35ccb9c9f332f5fe9838cc65329616",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2022 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "9245acaab83568cfc39b0951",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupé 35 TDI ADVANCED LED+NAV+ACC+RFK+AHK+SHZ",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "019ba574eb7ac323fdac443d57a7a558e814f1e68e748b8ba9fd38e1fbe0373e",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "9650aacd6a5c5cf0764732ba",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupe 40 TDI qu S LINE VIRTUAL,MATRIX,CARPLAY",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "2c9f87c0a6ac5f735e39a8241e1c55b7b83cf6535ed66642ea6ea9ccd5b749c6",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "8769a400d2607850913e376d",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "40 2.0 TDI quattro Coupe LED+NAVI+RFK+SHZ+BC",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "184250ae25de365596e26f42cba062b804a10b14b5c609a3348d25b2ccfb7009",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d7014134600ef056fa09b7bf",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupé 40 TDI QU S-TR ADVANCED LED+NAVI+PANO",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "48ecbdc4d4139698119122b13068adc176f2862fceba108702335fb26714f6ce",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c98ec08ba1af41c5c7d1c7fd",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupe 40 TDI qu advanced PANO Kam Memory 18\"",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "7ac9be35481035a6b3e4914e71b381ad4f36dfaa3c6b2d264d6d5ca5bd29ca97",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d8327ba60657e91fcf9799dc",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Cabriolet 40 TDI advanced 1.Hand",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "b429f5e9d1ba5c363f7fbc5704399e11d2e571ac7d73be5ae2dcdce996497a36",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "cbca8ae6f30c247f5e4a3312",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "CABRIO 40 TDI ALLRAD| S LINE|MATRIX|2.HAND",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "9a359cc0e2ab17652c1ac059a475a370d366b22a36b5a005d169c9140c5fa000",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "92821eb81ea08f75ec435c1c",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Cabriolet 2x S line 40 TFSI *MATRIX*B&O*19''*",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "dbea4747a22210dc3302eb29f56c7e7b534027a9dad21633851f4e6b0fd65e18",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "b3478fff04db2baf53e9beb9",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Cabriolet 40 TFSI S line Sport Plus Paket",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "1f54853179810ebab57c69ceb62409e33d17953247f0663369e5cd8c26325c83",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "b7aa9c24b4f287bd60cdf09f",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupé 45 TFSI QU S-TR ADVANCED LED+NAV+SHZ+VC",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "9169403106ff9fc8a0863f1af7135352247f473a6ddd1561034fb484f4fd3fe8",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "0651b1b04f27276fbaaafd4c",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Cabrio 45 TFSI qu S line LED VIRTUAL eSITZE",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "6ef23697372f28b363330bbd7313218f4c9e0cc74b6cda3cf5a077fad4c4f674",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5 Cabriolet, 2017–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Cabrio/Cabriolet, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+            "sourceSha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "48fc268a8620dce1d64ddb5e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupe 50 TDI S line tiptronic quattro",
+      "expectedRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "expectedDigest": "58d125db26bda7055937e685b0fa5fecc28dfa72e4884ef82ea28a5aa23f5a28",
+      "patch": {
+        "bodyType": "coupe"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта AUDI AG, редакция 08/2020: A5/S5/RS5 Coupé, 2016–2024, страницы 1–2. Год 2021 входит в прямо указанную применимость. Исходное название содержит Coupe/Coupé, поэтому заполнен только отсутствующий тип кузова. Двигатель, мощность, привод, масса, год и исходная идентичность не изменяются. Электрическая мощность и тип гибрида из аварийной карты не выводятся.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+            "sourceSha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы 1–2: название кузова и диапазон лет",
+            "edition": "08/2020"
+          }
+        }
+      }
+    }
+  ]
+}
