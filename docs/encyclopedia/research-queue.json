@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T12:16:15.688Z",
+  "updatedAt": "2026-10-24T12:18:02.531Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32843,9 +32843,28 @@
         "research-2026-10-24-audi-a5-2021-2023-body",
         "research-2026-10-24-audi-a5-2024-drive-mass-body"
       ],
-      "pr": 1515
+      "pr": 1515,
+      "workflow": 40093257230,
+      "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
+      "checkedAt": "2026-10-24T12:18:02.531Z",
+      "activationConfirmed": false,
+      "jobs": [
+        {
+          "id": 120870114339,
+          "name": "wait-for-astra",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120870221483,
+          "name": "prepare",
+          "status": "in_progress",
+          "conclusion": null,
+          "currentStep": "Prepare private encyclopedia index for this release"
+        }
+      ]
     },
-    "requestedReleaseWorkflow": 40068425827,
+    "requestedReleaseWorkflow": 40093257230,
     "additionalPreparedResearch": [
       {
         "path": "docs/encyclopedia/research-handoff-2026-10-22-giulietta-2011-manual-retry.json",
@@ -38863,7 +38882,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-24T13:47:55.206386+07:00",
+      "checkedAt": "2026-10-24T12:18:02.531Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -38971,7 +38990,11 @@
       },
       "targetRelease": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
       "targetWorkflow": 40068425827,
-      "snapshotReady": true
+      "snapshotReady": true,
+      "workflow": 40093257230,
+      "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
+      "state": "wait_for_private_index_and_membership_before_next_data_write",
+      "noDuplicatePending": true
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -42599,7 +42622,16 @@
         "passed": true,
         "fullDigestCAS": true
       },
-      "allModelsComplete": false
+      "allModelsComplete": false,
+      "publicParity": {
+        "report": "docs/encyclopedia/reports/2026-10-24-alto-public-baseline-parity.json",
+        "passed": true,
+        "offers": 4,
+        "comparisons": 52,
+        "newBatchActivationProved": false,
+        "relatedChecked": false,
+        "driveFilterChecked": false
+      }
     }
   },
   "scope": {

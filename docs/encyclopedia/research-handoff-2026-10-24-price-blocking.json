@@ -29,7 +29,7 @@
     "state": "saved_pending_activation_and_exact_catalog_match",
     "offerId": "ajes-stats-2QFQ2qkxr4bP4Ru",
     "chassisCode": "HA37S",
-    "action": "Проверить активацию шести полей и точное сопоставление list/detail/related/filter. У объявления trim4WD, у сохранённой строкиL: связь не считать доказанной по одному имени. Привод только по полному коду/точному источнику."
+    "action": "Сначала проверить40093257230/private index+membership иhealth. Не повторятьapply Alto6/A5 32 и не ставитьвторойpendingrelease. Послеактивации проверитьточное HA37S сопоставление list/detail/related/filter;4WD trim в каталоге не равен сохранённойLстроке автоматически."
   },
   "catalogGapCursor": "docs/encyclopedia/reports/2026-10-24-alto-price-gap-cursor.json",
   "remaining": [
@@ -63,5 +63,35 @@
     "Не обогащать manual-строки без chassis по японской спецификации.",
     "Не считать пиковую/системную мощность сертифицированной30мин."
   ],
-  "allModelsComplete": false
+  "allModelsComplete": false,
+  "release": {
+    "workflow": 40093257230,
+    "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
+    "checkedAt": "2026-10-24T12:18:02.531Z",
+    "activationConfirmed": false,
+    "jobs": [
+      {
+        "id": 120870114339,
+        "name": "wait-for-astra",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120870221483,
+        "name": "prepare",
+        "status": "in_progress",
+        "conclusion": null,
+        "currentStep": "Prepare private encyclopedia index for this release"
+      }
+    ]
+  },
+  "publicBaseline": {
+    "report": "docs/encyclopedia/reports/2026-10-24-alto-public-baseline-parity.json",
+    "passed": true,
+    "offers": 4,
+    "comparisons": 52,
+    "newBatchActivationProved": false,
+    "relatedChecked": false,
+    "driveFilterChecked": false
+  }
 }

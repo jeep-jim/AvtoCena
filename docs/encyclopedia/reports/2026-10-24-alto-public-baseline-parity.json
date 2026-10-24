@@ -1,0 +1,373 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T12:15:26.717075+00:00",
+  "passed": true,
+  "scope": "Ограниченная выборка Suzuki Alto Japan; partial/stale. Шесть новых полей пока не активированы; исходная проверка list/detail, не доказательство новой партии.",
+  "offersChecked": 4,
+  "comparisons": 52,
+  "matched": 52,
+  "rows": [
+    {
+      "offerId": "ajes-stats-2QFQ2qkxr4bP4Ru",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "4WD",
+          "card": "4WD",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 660,
+          "card": 660,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "bodyType": {
+          "search": "",
+          "card": null
+        },
+        "drive": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "transmission": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "ajes-stats-2RUpVosRnEySFSJ",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "4WD",
+          "card": "4WD",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 660,
+          "card": 660,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "bodyType": {
+          "search": "",
+          "card": null
+        },
+        "drive": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "transmission": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "ajes-stats-26thBI2ZvoaXGII",
+      "checks": {
+        "year": {
+          "search": 2018,
+          "card": 2018,
+          "equal": true
+        },
+        "trim": {
+          "search": "L",
+          "card": "L",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 660,
+          "card": 660,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "bodyType": {
+          "search": "",
+          "card": null
+        },
+        "drive": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "ajes-stats-NwQATmlBEnGfj4",
+      "checks": {
+        "year": {
+          "search": 2018,
+          "card": 2018,
+          "equal": true
+        },
+        "trim": {
+          "search": "L",
+          "card": "L",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 660,
+          "card": 660,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "bodyType": {
+          "search": "",
+          "card": null
+        },
+        "drive": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    }
+  ],
+  "unavailable": [],
+  "repeatedGroups": [
+    {
+      "offerIds": [
+        "ajes-stats-2QFQ2qkxr4bP4Ru",
+        "ajes-stats-2RUpVosRnEySFSJ"
+      ],
+      "allCardsChecked": true
+    },
+    {
+      "offerIds": [
+        "ajes-stats-26thBI2ZvoaXGII",
+        "ajes-stats-NwQATmlBEnGfj4"
+      ],
+      "allCardsChecked": true
+    }
+  ],
+  "duplicateOfferIds": 0,
+  "rowsReturned": 24,
+  "catalogTotalReported": null,
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+    "calculationVersion": "5d458f646c67329d167586f6cae1944082458f5f17910f79df745ff974d87730"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+    "calculationVersion": "5d458f646c67329d167586f6cae1944082458f5f17910f79df745ff974d87730"
+  },
+  "sameRelease": true,
+  "generationId": "2026-10-24T12:01:47.371Z"
+}
