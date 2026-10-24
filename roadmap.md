@@ -15366,3 +15366,12 @@ Apply40141534268/job121014117519SUCCESS:22variants28assertions,27new/1correctedi
 Retainedpage5/12578413907:11новыхстрок,267uniqueвсего,остатоквыбраннойгруппы2024=0; это не8403полностьюпроверенныхзаписи. Статусunverifiedне повышен.17прежнихнеоднозначныхидентичностейи61новыйannualкандидатотложены с точнымсписком. Queue2423modelrecordsсохранены,candidate47required/33public/3ASTRA,559reuseguardсохранён.
 
 Healthостаётся8ec0d858,scoped-v1нет;China40124551054на последнейпроверкеactive,leaseheartbeat23:02:31UTC/до23:32:31,5selectorsvalid. Deploy/repair/unlock/collectorне запрошены. СледующееterminalChina+freshlease/selectors/allqueues→одинrelease→actualscoped-v1→одинguardedrepair→публичныеcounts/prices/JapanAWD. Заголовки06:09/06:16выше былиручнымиопережающимиоценками: считать точнымиGitHubtimestamps иcheckedAtартефактов,а не этизаголовки.
+
+
+### 25.10.2026 06:16 UTC+7 — независимый контроль установки и согласованного кандидата
+
+Свежие AGENTS, ночной план, Road и main74c1cb2a3cc2891a107fd635208bd3e50599127a прочитаны. Полный внешний health HTTP200/curl exit0 вновь подтверждает release8ec0d8587d9891757f8cdf019f2c9c55adcaef31 и calculationVersion2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07; catalogProjectionParts=scoped-v1 отсутствует. Установка нового reader и новая публичная приёмка пока не состоялись.
+
+Единственный active China40124551054/job120972509862 остаётся на Publish markets through calculation and retention guards; collect/intake/reserve/year checks SUCCESS, terminal outcome ещё отсутствует. Pending0, четыре исторических queued не тронуты. Учтён свежий read-only основного исполнителя: heartbeat23:02:31UTC/lease до23:32:31, пять selectors valid; эти сведения не заменяют свежую проверку после terminal.
+
+Прочитан candidate47required/33public/3ASTRA, state prepared_not_requested, сохранён559reuseguard. Новые27значений/1исправление Audi22 и прежние партии подтверждены основным исполнителем, но не объявляются активированными. Контроль не дублировал apply, collectors, код, release или repair. Следующее: terminalChina и фактические freshlease/generation/selectors/allqueues, затем один согласованный выпуск; после actualscoped-v1 — один repair и публичные counts/search-detail prices/JapanAWD/pickup-drive-pricing/checkCatalogFeedback на установленном SHA. Незавершённые DBX/globalAJESorder/скорость/полнота сохраняются.
