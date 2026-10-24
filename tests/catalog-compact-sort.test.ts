@@ -11,7 +11,7 @@ import {sortCatalogRows} from '../apps/web/lib/catalog/market-page';
 test('compact sorting keeps exact order, shares direction price reads and bounds concurrent blocks',async()=>{
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
  const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,year:2020+i%7,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
- rows.push({...base,id:'unknown',year:2024,totalRub:null,publicVisibleRub:undefined} as any);
+ rows.push({...base,id:'unknown',year:2024,totalRub:null,publicVisibleRub:undefined,catalogPricingMode:'seller',sellerPriceRub:1} as any);
  rows.forEach((row:any,i:number)=>{row.color=i%2?'black':'white';row.mileageKm=i===1?0:i===2?undefined:(60-i)*100;});
  const generationId='compact-sort',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,Math.floor(i/10)])));
  const storage=getJsonStorage(),original=storage.readJsonWithMeta,reads:string[]=[];let active=0,peak=0;
@@ -134,4 +134,14 @@ test('visible-page seller order uses the labelled seller value',()=>{
  assert.deepEqual(sortCatalogRows([a,b],'totalRub').map(r=>r.id),['b','a']);
  assert.deepEqual(sortCatalogRows([a,b],'totalRubDesc').map(r=>r.id),['a','b']);
  assert.equal(a.totalRub,null);
+});
+
+
+test('delivered sorting keeps seller-only and hybrid rows after every calculated price in both directions',()=>{
+ const rows=[{id:'hybrid',fuel:'hybrid',catalogPricingMode:'seller',sellerPriceRub:100,totalRub:null},
+ {id:'expensive',totalRub:5500000},{id:'cheap',totalRub:1750000},
+ {id:'seller',catalogPricingMode:'seller',sellerPriceRub:900000,totalRub:900000},
+ {id:'calculated-hybrid',fuel:'hybrid',totalRub:2000000}];
+ assert.deepEqual(sortCatalogRows(rows,'totalRub').map(r=>r.id),['cheap','calculated-hybrid','expensive','hybrid','seller']);
+ assert.deepEqual(sortCatalogRows(rows,'totalRubDesc').map(r=>r.id),['expensive','calculated-hybrid','cheap','seller','hybrid']);
 });

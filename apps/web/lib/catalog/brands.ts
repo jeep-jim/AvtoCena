@@ -229,6 +229,8 @@ const ALIASES: Record<string, string> = {
   xiaomiauto: "Xiaomi",
   yashengauto: "Yasheng",
   ds: "DS",
+  gwmwey: "WEY",
+  mercedesmaybach: "Mercedes-Maybach",
   benz: "Mercedes-Benz",
   mercedes: "Mercedes-Benz",
   mercedesbenz: "Mercedes-Benz",
@@ -299,4 +301,15 @@ export function catalogBrandMatches(value:string,query:string){
  const aliases:Record<string,string[]>={Hyundai:['хендай','хендэ','хундай','хюндай','хюндэ'],Toyota:['тойота','тоета'],Kia:['киа','кия'],Nissan:['ниссан'],Honda:['хонда'],Mazda:['мазда'],Mitsubishi:['митсубиси','мицубиси'],Volkswagen:['фольксваген'],BMW:['бмв'], 'Mercedes-Benz':['мерседес'],Renault:['рено'],Skoda:['шкода'],Chevrolet:['шевроле'],Geely:['джили'],Haval:['хавал','хавейл']};
  const needle=normalize(query),canonical=canonicalCatalogBrand(value);
  return !needle||[value,canonical,...(aliases[canonical]||[])].some(v=>normalize(v).includes(needle));
+}
+
+/** Display grouping only: coachbuilder identities remain separate in stored evidence. */
+export function catalogBrandPresentation(value:string){
+ const canonical=canonicalCatalogBrand(value);
+ if(byKey.has(key(canonical))||canonical==='Mercedes-Maybach')return {name:canonical,conversion:''};
+ const match=/^(CITROEN|FIAT|FORD|IVECO|MAN|MAYBACH|MERCEDES|OPEL|PEUGEOT|RENAULT|VW)-(.+)$/i.exec(canonical);
+ return match?{name:canonicalCatalogBrand(match[1].toUpperCase()==='VW'?'Volkswagen':match[1]),conversion:match[2].toUpperCase()}:{name:canonical,conversion:''};
+}
+export function isCatalogBrandPlaceholder(value:string){
+ return /^(?:UEBRIGE \(SIEHE TYP\)|UNKNOWN|UNBEKANNT|OTHER|N\/A|НЕИЗВЕСТНО|ПРОЧИЕ|[-—]+)$/i.test(value.trim())||!value.trim();
 }

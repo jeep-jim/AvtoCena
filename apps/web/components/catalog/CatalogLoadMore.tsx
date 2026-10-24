@@ -119,7 +119,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
       if (mounted.current && activeKey.current===key) setError("Не удалось загрузить автомобили. Попробуйте ещё раз — список сохранён.");
     } finally {lock.current = false; if (mounted.current && activeKey.current===key) setBusy(false);}
   }
-  return <div ref={list}><CatalogSectionLoading/>
+  return <div ref={list}><CatalogSectionLoading active={busy}/>
     {batches.map(batch => <div key={batch.page} data-catalog-batch={batch.page} className="mb-2.5 grid min-w-0 grid-cols-2 gap-2.5 sm:mb-3 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{batch.cards}</div>)}
     <div className="mx-auto mt-7 flex w-full flex-col items-center gap-3">
       <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} {total!==null?`из ${total.toLocaleString("ru-RU")}`:""}</p>
@@ -132,7 +132,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
         </Fragment>)}
         {page < pageCount ? <a href={pageHref(page+1)} aria-label="Следующая страница"><ChevronRight size={20}/></a> : <span aria-disabled="true"><ChevronRight size={20}/></span>}
       </nav> : null}
-      {more ? <a href={pageHref(page+1)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)] rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label" role="status">Загружаем варианты</span></> : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">{"Вы посмотрели все доступные предложения"}</p>}
+      {more ? <a href={pageHref(page+1)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)] rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <span>Загружаем варианты</span> : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">{"Вы посмотрели все доступные предложения"}</p>}
       {error ? <p role="alert" className="max-w-md text-center text-sm text-[var(--ac-text)]">{error}</p> : null}
     </div>
   </div>;

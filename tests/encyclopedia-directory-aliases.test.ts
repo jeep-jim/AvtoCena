@@ -5,12 +5,14 @@ import {ajesPaginationCountText} from '../apps/web/lib/catalog/ajes-count-displa
 test('brand aliases share headings and old filter links retain every source record',()=>{
  const rows=['Citroen','Citroën','DS','DS Automobiles','Ford-CNG-Technik','FORD-CNG-TECHNIK','Fiat','FIAT-ADRIA'].map((make,i)=>({id:String(i),make,model:'Example',years:[2023],fuels:['petrol'],needs30:0}));
  const view=canonicalDirectoryModels(rows);
- assert.equal(new Set(view.map(r=>r.make)).size,5);
+ assert.equal(new Set(view.map(r=>r.make)).size,4);
  assert.deepEqual(view.map(r=>r.id),rows.map(r=>r.id));
  assert.equal(rows[1].make,'Citroën');
  assert.equal(filterModels(view as any,{make:'Citroën'}).length,2);
  assert.equal(filterModels(view as any,{make:'DS Automobiles'}).length,2);
- assert.notEqual(view[6].make,view[7].make,'coachbuilder identity is not erased');
+ assert.equal(view[6].make,view[7].make);
+ assert.equal(view[7].model,'Example (ADRIA)','coachbuilder remains explicit without a duplicate brand');
+ assert.equal(rows[7].make,'FIAT-ADRIA','stored technical identity is unchanged');
 });
 test('cursor page totals expose the aggregate rather than just the first 24 cards',()=>{
  const s={total:577000,stale:false,upperBound:false,observedAt:'now'};
@@ -19,4 +21,19 @@ test('cursor page totals expose the aggregate rather than just the first 24 card
  assert.match(ajesPaginationCountText({...s,upperBound:true}),/Найдено до/);
  assert.match(ajesPaginationCountText({...s,stale:true}),/последним данным/);
  assert.equal(ajesPaginationCountText(null),'Количество уточняется');
+});
+
+test('service labels are hidden while unfamiliar real brands and record IDs are preserved',()=>{
+ const rows=[{id:'placeholder',make:'UEBRIGE (SIEHE TYP)',model:'Type'},
+ {id:'real',make:'BINZ',model:'X'},{id:'wey1',make:'GWM - WEY',model:'Coffee 01'},
+ {id:'wey2',make:'WEY',model:'Coffee 02'}];
+ const view=canonicalDirectoryModels(rows);
+ assert.deepEqual(view.map(v=>v.id),['real','wey1','wey2']);
+ assert.deepEqual(view.map(v=>v.make),['BINZ','WEY','WEY']);
+ assert.equal(rows.length,4);
+});
+
+test('hyphenated production brands retain their ordinary model names',()=>{
+ const rows=[{make:'Mercedes-Benz',model:'E-Class'},{make:'Mercedes Maybach',model:'S-Class'}];
+ assert.deepEqual(canonicalDirectoryModels(rows).map(m=>m.model),['E-Class','S-Class']);
 });

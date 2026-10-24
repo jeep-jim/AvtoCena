@@ -34,6 +34,7 @@ export async function AjesRail({market='japan',params={},prepared}:{market?:'jap
   </div>
 
   <CatalogSectionLoading/>
+  {String(params.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке.</p>}
   {unsupported?<p role="status" className="text-sm text-[var(--ac-muted)]">Отбор по мощности доступен в <Link href={href+'&stock=green'} className="underline">Зелёном углу</Link>.</p>:unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className={MARKET_RAIL_CLASS}>{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p className="text-sm text-[var(--ac-muted)]">{filteredByPage||partial||hasMore?'В загруженной подборке совпадений нет.':'Подходящих автомобилей пока нет.'} {(filteredByPage||partial||hasMore)&&<Link href={href} className="underline">Продолжить поиск</Link>}</p>}
  </section>;
 }

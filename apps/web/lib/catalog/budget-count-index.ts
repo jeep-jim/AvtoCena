@@ -1,3 +1,4 @@
+import {calculatedCatalogPrice} from './calculated-price';
 import {includedDepositCost} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate} from './reviewed-source-duplicates';
 import {deliveryPricingBasis,priceCardForCity,type DeliveryPricingBasis} from './card-city-delivery';
@@ -40,10 +41,10 @@ export function buildBudgetCountIndex(generationId:string,rows:CatalogSearchProj
  const compact:BudgetCountRow[]=[],otherRows:BudgetCountRow[]=[];
  for(const row of rows){
   if(isReviewedSourceDuplicate(row))continue;
-  const total=Number(row.totalRub||0);
+  const total=calculatedCatalogPrice(row)||Number(row.totalRub||0);
   const target=hasModificationSelection(row)||(!(total>0)&&row.market!=='japan')?otherRows:compact;
-  target.push([row.market,total,deliveryPricingBasis(row.calculationSnapshot)||null,
-   row.market==='japan'?{id:row.id,updatedAt:row.updatedAt,sourcePrice:row.sourcePrice??null,sourceCurrency:row.sourceCurrency??null}:null,row.catalogPricingMode==='seller', {inventorySourceDate:row.inventorySourceDate,grossVehicleWeightKg:row.grossVehicleWeightKg,vehicleCategory:row.vehicleCategory,powerHp:row.powerHp,publicSpecificationVerified:row.publicSpecificationVerified,id:row.id,make:row.make,model:row.model,year:row.year,mileageKm:row.mileageKm,bodyType:row.bodyType,fuel:row.fuel,transmission:row.transmission,drive:row.drive,sourceGroup:row.sourceGroup,auctionDate:row.auctionDate,sourcePublishedAt:row.sourcePublishedAt,firstSeenAt:row.firstSeenAt,updatedAt:row.updatedAt,block:blocks.get(row.id)??0},includedDepositCost(row.calculationSnapshot),version===3 ? budgetPriceReplay(row) : undefined]);
+  target.push([row.market,total,(row as any).deliveredCalculationPreview?.deliveryPricingBasis||deliveryPricingBasis(row.calculationSnapshot)||null,
+   row.market==='japan'?{id:row.id,updatedAt:row.updatedAt,sourcePrice:row.sourcePrice??null,sourceCurrency:row.sourceCurrency??null}:null,row.catalogPricingMode==='seller'&&!calculatedCatalogPrice(row), {inventorySourceDate:row.inventorySourceDate,grossVehicleWeightKg:row.grossVehicleWeightKg,vehicleCategory:row.vehicleCategory,powerHp:row.powerHp,publicSpecificationVerified:row.publicSpecificationVerified,id:row.id,make:row.make,model:row.model,year:row.year,mileageKm:row.mileageKm,bodyType:row.bodyType,fuel:row.fuel,transmission:row.transmission,drive:row.drive,sourceGroup:row.sourceGroup,auctionDate:row.auctionDate,sourcePublishedAt:row.sourcePublishedAt,firstSeenAt:row.firstSeenAt,updatedAt:row.updatedAt,block:blocks.get(row.id)??0},includedDepositCost(row.calculationSnapshot),version===3 ? budgetPriceReplay(row) : undefined]);
   Object.assign(target[target.length-1][5],budgetSpecifications(row));
  }
  return {version,filterVersion:1,specificationFilterVersion:1,bodyFilterVersion:1,inventoryPolicyVersion:1,generationId,sourceRows:rows.length,rows:compact,otherRows};
@@ -73,7 +74,7 @@ export function matchingBudgetIndex(index:BudgetCountIndex,params:CatalogSearchP
   const preview=candidate&&japan&&matchesJapanPreviewInput(candidate,japan)?candidate:undefined;
   const offer={market,totalRub,catalogPricingMode:seller?'seller':undefined,calculationSnapshot:{deliveryPricingBasis:basis},japanDeliveredPreview:preview};
   const priced=params.city?priceCardForCity(offer,params.city).offer:offer;
-  const price=Number(priced.japanDeliveredPreview?.totalRub||priced.totalRub||0);
+  const price=calculatedCatalogPrice(priced);
   if(!(price>0)||(params.budgetFrom&&price<params.budgetFrom)||(params.budgetTo&&price>params.budgetTo))continue;
   matching.push(row);
  }

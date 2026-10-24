@@ -4,6 +4,7 @@ on:
     paths:
       - 'apps/web/components/**'
       - 'tests/browser/owner-polish*'
+      - 'tests/browser/catalog-single-loader*'
       - 'tests/assistant-retirement.test.mjs'
       - 'apps/web/public/assistant-connector/**'
       - '.github/workflows/verify-owner-polish.yml'
@@ -26,6 +27,7 @@ jobs:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/owner-browser/node_modules/playwright/index.mjs
         run: |
           CHROME_BIN=$(command -v google-chrome) node tests/browser/owner-polish.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-single-loader.mjs
           node --test tests/assistant-retirement.test.mjs
       - uses: actions/upload-artifact@v4
         if: always()

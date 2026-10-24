@@ -1,3 +1,4 @@
+import {calculatedCatalogPrice} from './calculated-price';
 import {compactJapanPowerEstimate} from './ajes-power-estimate';
 import {verifyCatalogReadModels} from './verify-read-models';
 import {compactFuelPowertrainEvidence} from './specification-evidence-audit';
@@ -823,7 +824,7 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     if (!canonicalMatch && !literalMatch) return false;
   }
   const priced = params.city && (params.budgetFrom || params.budgetTo || params.hasPrice) ? priceCardForCity(row,params.city).offer : row;
-  const filterPrice = hasModificationSelection(row) ? 0 : Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub || 0);
+  const filterPrice = calculatedCatalogPrice(priced);
   if ((params.budgetFrom || params.budgetTo) && !(filterPrice > 0)) return false;
   if (params.hasPrice) { const value = filterPrice > 0 ? "yes" : "no"; if (value !== params.hasPrice) return false; }
   if (params.budgetFrom && filterPrice < params.budgetFrom) return false;
@@ -873,7 +874,7 @@ export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sor
   const dates=new WeakMap<CatalogSearchProjection,number>();
   const freshness=(row:CatalogSearchProjection)=>{let value=dates.get(row);if(value===undefined){value=projectionFreshness(row);dates.set(row,value);}return value;};
   const priceKeys=new WeakMap<CatalogSearchProjection,number>();
-  const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub || (priced.catalogPricingMode==="seller"?priced.sellerPriceRub:0)); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
+  const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=calculatedCatalogPrice(priced); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
   const terms=parseCatalogSort(sort)||[];
   return rows.sort((a,b)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(Number(b.totalRub)>0)-Number(Number(a.totalRub)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
 
@@ -1979,11 +1980,16 @@ const liveBudgetBlockCache = new DetailReadCache<BudgetCountIndex|null>({maxEntr
 async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:string){
  const {applyActiveBusinessPriceBatch}=await import("./live-business-pricing");
  const {attachJapanSearchValues}=await import("./japan-delivered-preview");
+ const {attachSellerDeliveredPreviews}=await import('./seller-delivered-preview');
+ const configurations=await (await import('../effective-market-settings')).getEffectiveMarketsWithDefaults();
  const result:CatalogSearchProjection[]=[];
  for(let start=0;start<rows.length;start+=128){
   const prepared=rows.slice(start,start+128);
   const priced=await applyActiveBusinessPriceBatch(prepared as any[],{readOnly:true}) as CatalogSearchProjection[];
-  result.push(...await attachJapanSearchValues(priced,generationId));
+  // Use only retained projection inputs here: no per-listing detail or supplier scan.
+  // The same preview must exist before ordering, not only after a page is selected.
+  const delivered=await attachSellerDeliveredPreviews(priced as any[],configurations,{projectionOnly:true}) as CatalogSearchProjection[];
+  result.push(...await attachJapanSearchValues(delivered,generationId));
  }
  return result;
 }
@@ -2165,7 +2171,7 @@ let budgetSelectionOrder=new WeakMap<BudgetCountIndex['rows'],OrderedBudgetRow[]
 // Sort compact identities, not full card payloads. A direction toggle shares the
 // same price pass. Weak ownership cannot outlive the existing bounded selection cache.
 type CompactSelection={generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']};
-let compactSortCache=new WeakMap<BudgetCountIndex['rows'],{prices?:Promise<Float64Array|null>;orders:Map<string,Uint32Array>}>();
+let compactSortCache=new WeakMap<BudgetCountIndex['rows'],{prices?:Promise<Float64Array|null>;sellerPrices?:Float64Array;orders:Map<string,Uint32Array>}>();
 async function searchSortedBudgetSelection(selected:CompactSelection,params:CatalogSearchParams,internalPageLimit:number){
  const mode=params.sort||"year";
  const terms=parseCatalogSort(mode);if(!terms?.length)return null;
@@ -2177,6 +2183,7 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
   if(terms.some(term=>term.startsWith("totalRub"))){
    if(!cache.prices)cache.prices=(async()=>{
     const values=new Float64Array(selected.rows.length);values.fill(NaN);
+    const sellerValues=new Float64Array(selected.rows.length);sellerValues.fill(NaN);cache!.sellerPrices=sellerValues;
     // V3 already has bounded price-only replay and a validated shared snapshot.
     // Sorting must not fetch every full card (including images and ledgers).
     const index=selected.cardVersion===3?await readBudgetCountIndex(selected.generationId,params.market):null;
@@ -2195,8 +2202,8 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
        const preview=candidate&&japan&&matchesJapanPreviewInput(candidate,japan)?candidate:undefined;
        const offer={market,totalRub,catalogPricingMode:seller?"seller" as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis},japanDeliveredPreview:preview};
        const priced=params.city?priceCardForCity(offer,params.city).offer:offer;
-       const rub=Number(priced.japanDeliveredPreview?.totalRub||priced.totalRub);
-       if(rub>0)values[position]=rub;
+       const rub=calculatedCatalogPrice(priced);
+       if(rub>0)values[position]=rub;else if(seller&&totalRub>0)sellerValues[position]=totalRub;
       }
       return values;
      }
@@ -2211,8 +2218,8 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
      for(const row of priced){
       const position=positions.get(row.id)!;
       const offer=params.city?priceCardForCity(row,params.city).offer:row;
-      const rub=Number(offer.japanDeliveredPreview?.totalRub||offer.totalRub||(offer.catalogPricingMode==="seller"?offer.sellerPriceRub:0));
-      if(!hasModificationSelection(row)&&rub>0)values[position]=rub;
+      const rub=calculatedCatalogPrice(offer);
+      if(!hasModificationSelection(row)&&rub>0)values[position]=rub;else if(Number(offer.sellerPriceRub)>0)sellerValues[position]=Number(offer.sellerPriceRub);
      }
     });
     return incomplete||seen!==selected.rows.length?null:values;
@@ -2224,6 +2231,7 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
    for(const term of terms){
     const value=(index:number)=>term.startsWith('totalRub')?keys[index]:term.startsWith('mileage')?sortNumber(selected.rows[index][5].mileageKm,true):sortNumber(selected.rows[index][5].year);
     const delta=compareSortNumbers(value(a),value(b),term);if(delta)return delta;
+    if(term.startsWith("totalRub")&&!Number.isFinite(keys[a])&&!Number.isFinite(keys[b])){const seller=compareSortNumbers(cache!.sellerPrices?.[a]??NaN,cache!.sellerPrices?.[b]??NaN,term);if(seller)return seller;}
    }
    return selected.rows[a][5].id.localeCompare(selected.rows[b][5].id);
   });

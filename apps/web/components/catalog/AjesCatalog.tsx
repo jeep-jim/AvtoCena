@@ -48,6 +48,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
  </div>
  {result&&<div>
+ {String(initial.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке. На следующих страницах могут быть более дешёвые автомобили.</p>}
  {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}
  <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor} resultCountLabel={ajesPaginationCountText(sourceTotal)}/>
  </div>}

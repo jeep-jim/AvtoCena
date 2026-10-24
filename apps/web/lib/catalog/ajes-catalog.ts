@@ -1,3 +1,4 @@
+import {sortCatalogRows} from './market-page';
 import {japanPreviewParameters} from './japan-preview-parameters';
 import {readFilteredAjesPage} from './ajes-filtered-page';
 import {resolveAjesMakeNames} from './ajes-make-resolution';
@@ -79,7 +80,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>){
  // visible page through a continuation so borrowed rows are not repeated.
  if(query.table!=='china'&&query.table!=='stats'&&!filter.active){
   const [page,total]=await Promise.all([firstPromise??read(query.page||1),totalPromise]);
-  return {...page,filteredByPage:false,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:page.items.map((v:any)=>publicOffer(v)),generationId:page.observedAt,nextCursor:undefined,scanLimited:false,interrupted:false};
+  return {...page,filteredByPage:false,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:page.observedAt,nextCursor:undefined,scanLimited:false,interrupted:false};
  }
  const [initialPage,total]=await Promise.all([firstPromise,totalPromise]);
  // Reuse the first read only when it is the requested continuation's source page.
@@ -88,7 +89,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>){
   read:async sourcePage=>{if(firstPromise&&sourcePage===(query.page||1))return first!;const value=await read(sourcePage);first??=value;return value;}});
  const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:first!.observedAt}:total;
- return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,items:page.items.map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
+ return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{

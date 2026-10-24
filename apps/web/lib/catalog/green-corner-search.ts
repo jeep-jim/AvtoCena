@@ -1,3 +1,4 @@
+import {calculatedCatalogPrice} from './calculated-price';
 import {matchesCatalogColor} from './catalog-color-index';
 import {parseCatalogSort,compareCatalogTerms} from './catalog-sort';
 import {matchesFilterSelection} from './filter-selections';
@@ -32,7 +33,7 @@ export function greenCornerBudgetPrice(row:VehicleOffer, city = ""):number|undef
  const saved = savedCalculationPreviewRub((row as any).savedCalculationPreview);
  if(saved)return saved;
  const priced = priceCardForCity(row,city).offer;
- const value = Number(priced.japanDeliveredPreview?.totalRub) || catalogOfferVisibleRub(priced);
+ const value = calculatedCatalogPrice(priced);
  return Number.isFinite(value) && value > 0 ? value : undefined;
 }
 export function filterGreenCorner(items:VehicleOffer[], params:GreenFilters) {
