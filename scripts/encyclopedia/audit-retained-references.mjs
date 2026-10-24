@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 
 export const ROOT='knowledge/encyclopedia/reference-intake/v1';
 const digest=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
-const categories={fuel:/топлив|тип двигателя/i,engine:/объем двигателя|объём двигателя|марка двигателя/i,power:/максимальная мощность/i,drive:/тип привода/i,chassis:/марка кузова|код кузова/i,body:/тип кузова/i,transmission:/коробка передач|трансмиссия/i,power30:/30[ -]?(?:мин|minute)/i};
+const categories={fuel:/^Используемое топливо$/i,engineCc:/^Об[ъь][её]м двигателя, куб\.см$/i,engineCode:/^Марка двигателя$/i,power:/^(?:Максимальная мощность, л\.с\.|Мощность, л\.с\.$)/i,drive:/^(?:Тип привода|Привод)$/i,chassis:/^(?:Марка кузова|Код кузова)$/i,body:/^Тип кузова$/i,transmission:/^(?:Коробка передач|Тип трансмиссии)$/i,power30:/^Электродвигатель: 30-минутная мощность, л\.с\.$/i};
 const errorCategory=x=>String(x||'').match(/redirect_outside_catalog|robots_disallow|HTTP Error \d{3}|timeout|timed out|captcha|access denied/i)?.[0]||'unclassified';
 
 // Inventory only. Counts are not verified specifications, donors or calculated cars.
@@ -15,7 +15,7 @@ export async function auditRetainedReferences(storage,{concurrency=6}={}){
  const objects=await storage.listObjects(`${ROOT}/records/`);
  const keys=objects.map(o=>o.key).sort();
  if(new Set(keys).size!==keys.length||keys.some(k=>!new RegExp(`^${ROOT}/records/[a-f0-9]{64}\\.json$`).test(k)))throw Error('invalid_reference_object_list');
- const report={version:1,checkedAt:new Date().toISOString(),scope:'retained_unverified_reference_inventory',storageWrites:0,supplierRequests:0,verifiedFieldsAdded:0,
+ const report={version:2,checkedAt:new Date().toISOString(),scope:'retained_unverified_reference_inventory',storageWrites:0,supplierRequests:0,verifiedFieldsAdded:0,
   checkpoint:{digest:digest(before),saved:before.saved,visited:before.visited?.length,pending:before.pending?.length,updatedAt:before.updatedAt,failures:(before.failed||[]).slice(-5).map(f=>({at:f.at,category:errorCategory(f.message)}))},
   recordsListed:keys.length,recordsRead:0,eligiblePeriods:0,unknownOrInvalidPeriods:0,fieldLabels:{},fieldPresence:{},groups:[],classification:{},rawCorpusExported:false};
  const groups=new Map(),fingerprints=[];let cursor=0;
@@ -32,7 +32,7 @@ export async function auditRetainedReferences(storage,{concurrency=6}={}){
    const groupKey=parts.slice(1,3).join('/');
    let g=groups.get(groupKey);if(!g){g={sourceModelGroup:groupKey,records:0,withExplicitPeriod:0,fieldPresence:{},chassisYearGroups:new Set(),exampleRecordDigests:[]};groups.set(groupKey,g);}
    g.records++;if(eligible)g.withExplicitPeriod++;
-   if(g.exampleRecordDigests.length<3)g.exampleRecordDigests.push(digest(row.url));
+   g.exampleRecordDigests=[...g.exampleRecordDigests,digest(row.url)].sort().slice(0,3);
    const labels=Object.keys(row.facts);for(const label of labels)report.fieldLabels[label]=(report.fieldLabels[label]||0)+1;
    for(const [category,re]of Object.entries(categories))if(labels.some(l=>re.test(l)&&String(row.facts[l]).trim())){report.fieldPresence[category]=(report.fieldPresence[category]||0)+1;g.fieldPresence[category]=(g.fieldPresence[category]||0)+1;}
    const chassis=labels.filter(l=>categories.chassis.test(l)).map(l=>String(row.facts[l]).trim()).filter(Boolean);
