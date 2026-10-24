@@ -1,0 +1,342 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T12:14:27.624052+00:00",
+  "passed": true,
+  "fields": 32,
+  "untargetedUnchanged": 221,
+  "variantIdsPreserved": 253,
+  "privateProvenanceExposed": false,
+  "years": [
+    {
+      "year": 2023,
+      "beforeRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "afterRevision": "574d8114-c74b-4813-b4af-8f09814d1458",
+      "targetedVariants": 3,
+      "untargetedUnchanged": 64,
+      "variantIdsPreserved": 67,
+      "rows": [
+        {
+          "variantId": "e088f3c8423c7911e65070bb",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "c60db646a7f8d536f8aaabd7",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "c32da076344d19ad130d701f",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "beforeRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "afterRevision": "574d8114-c74b-4813-b4af-8f09814d1458",
+      "targetedVariants": 17,
+      "untargetedUnchanged": 78,
+      "variantIdsPreserved": 95,
+      "rows": [
+        {
+          "variantId": "0af7764544b4df55d4d0566a",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "7a8ba3240af039a3580257ce",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "13c2fc4ab5150d46c2d26617",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "6e27f6ecc69ab140db382202",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "c3cf9744f5337d7004803ea9",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "ba4e6cb6832ec6e394e48b83",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "af0648ac175abc381603f86f",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "4afa9d45020df312756c94c8",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "f57ad27f827b48431e18aa24",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "b3ffdc180643272f470a68d4",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "7776f3b52c18e5fd0265d50b",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "4c2cba3b820943dfb7187a9a",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "cbf08ec3466505479b3516dd",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "d79bc3cedc94203a00af216a",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "6a313db110ff22d72010393a",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "25e2f74e2abc8f32cc67d601",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "6d6a773bc35b6426bf9c9b4c",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "beforeRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+      "afterRevision": "574d8114-c74b-4813-b4af-8f09814d1458",
+      "targetedVariants": 12,
+      "untargetedUnchanged": 79,
+      "variantIdsPreserved": 91,
+      "rows": [
+        {
+          "variantId": "9245acaab83568cfc39b0951",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "9650aacd6a5c5cf0764732ba",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "8769a400d2607850913e376d",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "d7014134600ef056fa09b7bf",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "c98ec08ba1af41c5c7d1c7fd",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "d8327ba60657e91fcf9799dc",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "cbca8ae6f30c247f5e4a3312",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "92821eb81ea08f75ec435c1c",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "b3478fff04db2baf53e9beb9",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType",
+            "status"
+          ]
+        },
+        {
+          "variantId": "b7aa9c24b4f287bd60cdf09f",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "0651b1b04f27276fbaaafd4c",
+          "patch": {
+            "bodyType": "convertible"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        },
+        {
+          "variantId": "48fc268a8620dce1d64ddb5e",
+          "patch": {
+            "bodyType": "coupe"
+          },
+          "changedFields": [
+            "bodyType"
+          ]
+        }
+      ]
+    }
+  ]
+}

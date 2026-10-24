@@ -35,7 +35,10 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
     "docs/encyclopedia/batches/2026-10-24-screenshot-combustion.json",
     "docs/encyclopedia/batches/2026-10-24-countryman-2020-volume.json",
-    "docs/encyclopedia/batches/2026-10-24-countryman-2020-fuel.json"
+    "docs/encyclopedia/batches/2026-10-24-countryman-2020-fuel.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a5-2024-drive-mass-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-suzuki-alto-2023-ha37s-power.json"
   ],
   "publicResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -59,12 +62,15 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
     "docs/encyclopedia/batches/2026-10-24-screenshot-combustion.json",
     "docs/encyclopedia/batches/2026-10-24-countryman-2020-volume.json",
-    "docs/encyclopedia/batches/2026-10-24-countryman-2020-fuel.json"
+    "docs/encyclopedia/batches/2026-10-24-countryman-2020-fuel.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a5-2024-drive-mass-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-suzuki-alto-2023-ha37s-power.json"
   ],
   "requiredAstraPlanDigests": [
     "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
   ],
-  "requestedAt": "2026-10-24T11:06:05.709Z",
-  "reason": "Countryman compact/full parity: bounded diagnosis40088204804 proved new generic engine-only fact prevented unanimous fuel evidence. Manufacturer batch research-2026-10-24-countryman-2020-fuel applied successfully40088419868,4variants8unchanged fuel/powertrain confirmations. Local real-fact regression now passes exact year/fuel/cc/power; preserve all prior35batches and ASTRA. No runtime change.",
+  "requestedAt": "2026-10-24T12:16:15.688Z",
+  "reason": "Single coordinated release after40088542508SUCCESS: merged PR1515/426cc670 public compound-brand routes; Alto HA37S factory fuel/R06A/46PS34kW6fields saved40092947510 and APIreadbackPASS; prepared A5 annual32fields saved40093042195 and APIreadbackPASS. Include prior A52024 drive/mass/body9fields membership and preserve all previous batches/ASTRA. No market collectors restarted.",
   "ideaReports": []
 }

@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T12:16:15.688Z",
+  "batch": "research-2026-10-24-suzuki-alto-2023-ha37s-power",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-suzuki-alto-2023-ha37s-power.json",
+  "batchSha256": "dd15fb16516409a89383cb9da2514e8875cb720fd02884c2c532c0d1ef3bdde1",
+  "commit": "9a4c1a3255338c13f2aa6e658511ef363a1ca7e6",
+  "workflow": 40092947510,
+  "job": 120869203470,
+  "conclusion": "success",
+  "variants": 1,
+  "fields": 6,
+  "apiReadback": true,
+  "state": "saved_api_readback_pass_pending_index",
+  "includedInIndex": false,
+  "preflight": {
+    "modelId": "2ab5223df203c25d980af841",
+    "make": "Suzuki",
+    "model": "Alto",
+    "revision": "3778856d-e77e-5f62-a908-625c7f2eecbc",
+    "checkedAt": "2026-10-24T12:11:19.837Z",
+    "rows": [
+      {
+        "variantId": "453b9230d027ab3fd83e6b81",
+        "expectedDigest": "662adc29f31f3bdf405dbafdd92adb2c3db159a845e5a6ba25057ff68ed598bc",
+        "year": 2023,
+        "trim": "L Back アイカメラツ Key ディスプレイオ-ディオツ Key",
+        "engineCc": 660,
+        "status": "observed"
+      }
+    ]
+  },
+  "applyResults": [
+    {
+      "batch": "research-2026-10-24-suzuki-alto-2023-ha37s-power",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "2ab5223df203c25d980af841",
+          "changes": [
+            {
+              "variantId": "453b9230d027ab3fd83e6b81",
+              "fields": [
+                "fuel",
+                "powertrainKind",
+                "engineCode",
+                "powerHp",
+                "powerKw",
+                "icePowerKw"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-24T12:12:38.243Z",
+      "finishedAt": "2026-10-24T12:12:41.739Z"
+    },
+    {
+      "batch": "research-2026-10-24-suzuki-alto-2023-ha37s-power",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "2ab5223df203c25d980af841",
+          "changes": [
+            {
+              "variantId": "453b9230d027ab3fd83e6b81",
+              "fields": [
+                "fuel",
+                "powertrainKind",
+                "engineCode",
+                "powerHp",
+                "powerKw",
+                "icePowerKw"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-24T12:12:41.974Z",
+      "finishedAt": "2026-10-24T12:12:50.099Z"
+    }
+  ],
+  "readback": {
+    "checkedAt": "2026-10-24T12:13:02.685009+00:00",
+    "passed": true,
+    "modelId": "2ab5223df203c25d980af841",
+    "variantId": "453b9230d027ab3fd83e6b81",
+    "beforeRevision": "3778856d-e77e-5f62-a908-625c7f2eecbc",
+    "afterRevision": "4a1f8a6c-e146-46b1-8a8a-f03056e926e8",
+    "fields": {
+      "fuel": "petrol",
+      "powertrainKind": "combustion",
+      "engineCode": "R06A",
+      "powerHp": 46,
+      "powerKw": 34,
+      "icePowerKw": 34
+    },
+    "changedFields": [
+      "status",
+      "powerHp",
+      "engineCode",
+      "icePowerKw",
+      "powertrainKind",
+      "fuel",
+      "powerKw"
+    ],
+    "untargetedUnchanged": 2,
+    "engineCcPreserved": 660,
+    "driveStillUnknown": true,
+    "power30MinStillUnknown": true,
+    "privateProvenanceExposed": false
+  },
+  "source": {
+    "type": "manufacturer",
+    "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+    "checkedAt": "2026-10-24",
+    "statement": "Заводская таблица Suzuki Alto, редакция 12/2021, стр. 1: 3BA-HA37S, L/A, обе версии привода — бензиновый R06A, 34 кВт (46 PS) при 6500 об/мин. Совпадают кузовной код HA37S, исполнение L и 2023 год девятого поколения; заводское сообщение 20.11.2023 сохраняет L/A с Энечардж, отдельно от HYBRID S/X. Заполнены только отсутствующие топливо, тип силовой установки, код и мощность ДВС. Привод требует полного кода ABLE/ABLQ и остаётся неизвестным. Существующие 660 см³ и automatic не изменены; таблица указывает 658 см³, это отдельная проверка округления. 30-минутная мощность не добавляется.",
+    "fieldSources": {
+      "fuel": {
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+        "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+        "checkedAt": "2026-10-24",
+        "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+        "edition": "12/2021"
+      },
+      "powertrainKind": {
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+        "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+        "checkedAt": "2026-10-24",
+        "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+        "edition": "12/2021"
+      },
+      "engineCode": {
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+        "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+        "checkedAt": "2026-10-24",
+        "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+        "edition": "12/2021"
+      },
+      "powerHp": {
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+        "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+        "checkedAt": "2026-10-24",
+        "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+        "edition": "12/2021"
+      },
+      "powerKw": {
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+        "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+        "checkedAt": "2026-10-24",
+        "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+        "edition": "12/2021"
+      },
+      "icePowerKw": {
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+        "sourceSha256": "824669b0650d8d897b3c0a0ac3e29dd2ae2c507cd17323d8292e854b05156433",
+        "checkedAt": "2026-10-24",
+        "selector": "Стр. 1, основные характеристики: 3BA-HA37S L/A, двигатель R06A, 34(46PS)/6500, неэтилированный бензин; обе колонки привода",
+        "edition": "12/2021"
+      }
+    }
+  },
+  "additionalYearReview": "https://www.suzuki.co.jp/release/a/2023/1120/",
+  "remaining": [
+    "Привод HA37S L: требуется полный ABLE/ABLQ код; FWD/4WD не выбран.",
+    "658 см³ в заводской таблице против имеющихся660 см³: существующее значение сохранено, нужен отдельный разбор происхождения и округления.",
+    "6 строк2023/2024/2025 с manual без chassis не подтверждены японской таблицей.",
+    "2022 API пуст: модельный год не исключён из постоянного охвата.",
+    "24 строки публичной выдачи partial/stale имеют неизвестную powerHp; включение новой партии в расчёты пока не доказано."
+  ],
+  "validation": {
+    "localGuardTests": 11,
+    "passed": true,
+    "fullDigestCAS": true
+  },
+  "allModelsComplete": false
+}

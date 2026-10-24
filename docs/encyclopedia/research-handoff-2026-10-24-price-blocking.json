@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T12:16:15.688Z",
+  "priority": [
+    "fuel",
+    "engineCc",
+    "powerHp",
+    "documented30min",
+    "drive"
+  ],
+  "completed": [
+    {
+      "batch": "research-2026-10-24-suzuki-alto-2023-ha37s-power",
+      "workflow": 40092947510,
+      "fields": 6
+    },
+    {
+      "batch": "research-2026-10-24-audi-a5-2021-2023-body",
+      "workflow": 40093042195,
+      "fields": 32
+    }
+  ],
+  "next": {
+    "modelId": "2ab5223df203c25d980af841",
+    "make": "Suzuki",
+    "model": "Alto",
+    "year": 2023,
+    "variantId": "453b9230d027ab3fd83e6b81",
+    "state": "saved_pending_activation_and_exact_catalog_match",
+    "offerId": "ajes-stats-2QFQ2qkxr4bP4Ru",
+    "chassisCode": "HA37S",
+    "action": "Проверить активацию шести полей и точное сопоставление list/detail/related/filter. У объявления trim4WD, у сохранённой строкиL: связь не считать доказанной по одному имени. Привод только по полному коду/точному источнику."
+  },
+  "catalogGapCursor": "docs/encyclopedia/reports/2026-10-24-alto-price-gap-cursor.json",
+  "remaining": [
+    "Привод HA37S L: требуется полный ABLE/ABLQ код; FWD/4WD не выбран.",
+    "658 см³ в заводской таблице против имеющихся660 см³: существующее значение сохранено, нужен отдельный разбор происхождения и округления.",
+    "6 строк2023/2024/2025 с manual без chassis не подтверждены японской таблицей.",
+    "2022 API пуст: модельный год не исключён из постоянного охвата.",
+    "24 строки публичной выдачи partial/stale имеют неизвестную powerHp; включение новой партии в расчёты пока не доказано."
+  ],
+  "alphabeticalHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a5-next.json",
+  "technicalReferenceIntake": {
+    "workflow": 39831884392,
+    "job": 120009865681,
+    "state": "blocked_redirect_outside_catalog",
+    "completed": false,
+    "referenceOnly": true,
+    "visited": 13045,
+    "saved": 8403,
+    "pending": 253,
+    "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/",
+    "error": "redirect_outside_catalog",
+    "checkpointAt": "2026-10-22T19:38:18.897Z",
+    "inspectionWorkflow": 39844493209,
+    "inspectionJob": 120054063098,
+    "checkpointReset": false,
+    "duplicateRunStarted": false,
+    "nextAction": "Не возобновлять тот же запрещённый redirect и не обходить ограничение. Сборщик и checkpoint не изменены; независимое подтверждение заводских данных продолжается."
+  },
+  "guards": [
+    "Не перезапускать запрещённый redirect Drom.",
+    "Не обогащать manual-строки без chassis по японской спецификации.",
+    "Не считать пиковую/системную мощность сертифицированной30мин."
+  ],
+  "allModelsComplete": false
+}
