@@ -19,7 +19,7 @@ test('all six projection markets and Green Corner OR each field and AND across f
 test('all AJES tables expand selected fuel, gearbox and drive into validated unions',()=>{
  for(const table of ['stats','china','korea'] as const){
   const sql=ajesQuery({table,fuel:selection.fuel,transmission:selection.transmission,drive:selection.drive}).sql;
-  assert.match(sql,/time in \('P','D'\)/);assert.match(sql,/kpp in \('AT','CVT'\)/);assert.match(sql,/priv in \('FF','FWD','4WD','AWD','FULLTIME4WD'\)/);
+  assert.match(sql,/time in \('P','D'\)/);assert.match(sql,/kpp in \('AT','CVT'\)/);if(table==='stats'){assert.match(sql,/grade like '%FWD%'/);assert.match(sql,/grade like '%4WD%'/);assert.doesNotMatch(sql,/priv in/);}else assert.match(sql,/priv in \('FF','FWD','4WD','AWD','FULLTIME4WD'\)/);
   assert.throws(()=>ajesQuery({table,fuel:"petrol|x' OR 1=1"}));
  }
  assert.throws(()=>ajesQuery({table:'china',transmission:'IAT'}),'source-specific Green code is not a normalized gearbox type');

@@ -13,7 +13,7 @@ export const CALCULATION_INDEX_PATH='knowledge/encyclopedia/calculation-v1.json'
 export const factFields=['fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','transmission','drive','bodyType','engineCode','grossVehicleWeightKg'] as const;
 type Field=typeof factFields[number];
 type Source={kind:'manufacturer'|'official_registry'|'manual'|'owner_reference';url?:string;batchId?:string;markets?:string[]};
-export type CalculationFact={modelId:string;variantId:string;revision:string;year:number;trims:string[];constraints:Record<string,any>;values:Partial<Record<Field,any>>;sources:Partial<Record<Field,Source>>};
+export type CalculationFact={make?:string;model?:string;chassisDriveComplete?:boolean;modelId:string;variantId:string;revision:string;year:number;trims:string[];constraints:Record<string,any>;values:Partial<Record<Field,any>>;sources:Partial<Record<Field,Source>>};
 export type CalculationIndex={version:1;digest:string;manifestDigest:string;createdAt:string;models:Record<string,CalculationFact[]>};
 export const token=(v:unknown)=>String(v??'').normalize('NFKC').toLowerCase().replace(/ё/g,'е').replace(/[^\p{L}\p{N}]/gu,'');
 export const modelKey=(make:unknown,model:unknown)=>`${token(canonicalCatalogBrand(String(make||'')))}:${token(model)}`;
@@ -89,9 +89,19 @@ export function compileModelFacts(record:any,ancestors:any[]=[]):CalculationFact
    }
   }
   if(!Object.keys(values).length)continue;
-  out.push({modelId:record.id,variantId:v.id,revision:record.revision,year:v.year,trims:[...trims],
+  out.push({make:record.make,model:record.model,modelId:record.id,variantId:v.id,revision:record.revision,year:v.year,trims:[...trims],
    constraints:Object.fromEntries([...factFields,'generation','chassisCode'].filter(f=>exists(v[f])).map(f=>[f,v[f]])),values,sources});
  }
+ // A code shared by an undocumented sibling must not become a drive proof.
+ const code=(v:any)=>token(String(v||'').replace(/^(?:E|GF|TA|ABA|CBA|DBA|DAA|DLA|3BA|4BA|5BA|5AA|6AA|6LA|7BA|ZAA)-/i,''));
+ const byId=new Map(out.map(f=>[f.variantId,f]));
+ const groups=new Map<string,boolean>();
+ for(const v of record.variants||[]){
+  if(!v.chassisCode||!Number.isInteger(v.year))continue;
+  const key=v.year+':'+code(v.chassisCode);
+  groups.set(key,(groups.get(key)??true)&&exists(byId.get(v.id)?.values.drive));
+ }
+ for(const fact of out)if(fact.constraints.chassisCode)fact.chassisDriveComplete=groups.get(fact.year+':'+code(fact.constraints.chassisCode))===true;
  return out;
 }
 let bundled:CalculationIndex|null|undefined;

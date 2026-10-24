@@ -1,3 +1,4 @@
+import {readCalculationIndex} from '../encyclopedia/calculation-index';
 import 'server-only';
 import {ajesEndpoint} from './ajes-routing';
 import {readAjesQueryCache,readPreviousTruckPolicyRows,readExpandedJapanRows,readUncappedChinaRows,saveAjesQueryCache} from './ajes-query-cache';
@@ -32,6 +33,7 @@ async function readListedDetail(table:string,id:string){
  return index[table+':'+id]||null;
 }
 export const ajesClient=createAjesClient({
+ calculationIndex:readCalculationIndex,
   password:ajesPassword,
   endpoint:ajesEndpoint,
   readListedDetail,
