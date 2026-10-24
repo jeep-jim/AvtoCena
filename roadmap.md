@@ -15316,3 +15316,8 @@ PR1530 merge35ec2b65ca0876ff6af5753d2db86a2663cd05d4 послеCI40133250180SUCC
 ### 25.10.2026 05:12 UTC+7 — проверка конфликтующей мощности ДВС в A3 PHEV
 
 В3существующихA3/2024/1395/40–45TFSIe publicicePowerKw150/180 совпадаетссистемноймощностью; Audiтаблицы18.07.2023 отделяют110кВтДВС от150/180кВтsystem. Дополнен существующий boundedpreflight: толькофлагручногоредактирования и типы/значениядоказательствicePowerKw, безвыводаисточников/заметок/корпуса. Запрошены3точныхdigest приrevisionc121ad35; правкиданныхпока0. Сначала доказать,чтоошибочноеполе неmanual/attested,затем CASисправление+подтверждениеfuel/drive,30minневыводитьизContinuous. Фактическийpublication-status40137089006SUCCESS22:06:35UTC:Chinafc5b3612leaseactive,heartbeat22:02:31,lockedUntil22:32:31;generationпрежний,5selectorsvalid. Release/repairнеразрешеныэтимсостоянием.
+
+
+### 25.10.2026 05:10 UTC+7 — A3 PHEV: доказано отсутствие ручных правок, запрошено исправление
+
+Preflight40137276762/job121001355877 SUCCESS22:09:20UTC:3точныхdigest,manualEdited=false,research/ASTRA/referenceiceproofпусты. ЗаводскиеAudiтаблицы40/45TFSIe18.07.2023 независимо скачаны,hash3af4c80a/2f8790f9. Подготовлен одинCASresearchapply184d7d6bf9be73e3b4ea852f4c1280150cea867a09d158e5d96c0f85d16047e7:3строки,12новыхполей(fuel/kind/drive/system),3исправленияicePowerKw150/180→110. Исходныеyear/engineCc/powerHp/powerKw/body/trim сохранены;30minненазначается. validateBatchPASS,privateindex/applyочередьсвободна,Chinaнеперезапускается. Savedпока0,обязателенterminal+APIreadback. Предыдущийзаголовок05:12 былручнымопережающимвременем; точноеpreflightвремя22:09:20UTC,идентичностьсобытиянеизменна.
