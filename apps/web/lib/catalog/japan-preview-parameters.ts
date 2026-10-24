@@ -1,3 +1,4 @@
+import {ajesPowerEstimateHp} from './ajes-power-estimate';
 import { restoreProAuctionsPower, proAuctionsReportedVolume } from "./proauctions-source-parameters";
 import { safePublicPricing } from "./safe-public-pricing";
 import { confirmedProductionMonth, confirmedProductionDay } from "./production-month";
@@ -16,7 +17,7 @@ export function japanPreviewParameters(input: VehicleOffer) {
   return validateCustomerParameters({
     year: offer.year, productionMonth: confirmedProductionMonth(offer), productionDay: confirmedProductionDay(offer),
     fuel: offer.fuel, engineCc: offer.engineCc || proAuctionsReportedVolume(offer),
-    powerHp: scenario?.source === "fallback_100" ? undefined : publicCatalogPowerHp(offer), powerKw: scenario ? undefined : recyclingPowerInfo(offer)?.kw, hybridKind: offer.powertrainKind,
+    powerHp: scenario?.source === "fallback_100" ? undefined : publicCatalogPowerHp(offer)||ajesPowerEstimateHp(offer), powerKw: scenario ? undefined : recyclingPowerInfo(offer)?.kw, hybridKind: offer.powertrainKind,
     power30MinKw: catalogPowerDisplay(offer)?.thirtyMinutePowerKw, icePowerKw: offer.icePowerKw,
     vehicleCategory: /pickup|pick-up|пикап/i.test(String(offer.bodyType || "")) ? "N1" : offer.vehicleCategory === "unknown" ? "" : offer.vehicleCategory,
     grossVehicleWeightKg: offer.grossVehicleWeightKg, n1IceFuel: offer.n1IceFuel, transportToBorderRub: offer.transportToBorderRub,

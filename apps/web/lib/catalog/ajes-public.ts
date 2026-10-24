@@ -1,3 +1,4 @@
+import {applyJapanFactoryFuel} from '../encyclopedia/japan-fuel-reference';
 import {newerKoreaDetail} from './ajes-korea-detail-cache';
 import {DetailReadCache} from './detail-read-cache';
 import {getJsonStorage} from '../data';
@@ -40,7 +41,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   let offer=ajesOffer(lot,rate,result.observedAt);
   // Exact local release facts also cover auction records. No supplier/detail
   // request or legacy approximate matching is needed for this lookup.
-  offer=applyEncyclopediaCalculation(offer);
+  offer=applyJapanFactoryFuel(applyEncyclopediaCalculation(offer));
   if(lot.table==='china'||lot.table==='korea'){
    const [{enrichOfferWithKnowledgeCore},{normalizeVehicleOfferSpecs}]=await Promise.all([import('./knowledge-core'),import('./spec-normalization')]);
    offer=normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));

@@ -1,3 +1,4 @@
+import {japanPreviewParameters} from './japan-preview-parameters';
 import {readFilteredAjesPage} from './ajes-filtered-page';
 import {resolveAjesMakeNames} from './ajes-make-resolution';
 import 'server-only';
@@ -68,7 +69,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>){
   else {
    // Only newly attested auction cards need the existing delivered-preview path.
    // Leave unmatched supplier rows on their current inexpensive path.
-   const matched=page.items.filter(hasEncyclopediaCalculationEvidence);
+   const matched=page.items.filter(v=>{if(hasEncyclopediaCalculationEvidence(v))return true;try{japanPreviewParameters(v);return true;}catch{return false;}});
    if(matched.length){const updated=new Map((await applyActiveBusinessPricingBatch(matched)).map(v=>[v.id,v]));priced=page.items.map(v=>updated.get(v.id)||v);}
   }
   return {...page,items:priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v))};

@@ -13,6 +13,10 @@ export function assertResearchBatchMembership(index,batches,factFields,token){
     if(!fact.trims.includes(token(e.patch.trim)))throw Error('required_trim_missing:'+e.variantId);
     identityFields++;continue;
    }
+   if(field==='chassisCode'){
+    if(!fact.constraints?.chassisCode||token(fact.constraints.chassisCode)!==token(e.patch.chassisCode))throw Error('required_identity_missing:'+e.variantId+':'+field);
+    identityFields++;continue;
+   }
    if(descriptiveFields.has(field)){descriptiveFieldsOutsideIndex++;continue;}
    if(!calculationFields.has(field))throw Error('unsupported_release_field:'+field);
    const source=fact.sources[field],expectedKind=e.source.type==='owner_confirmed'?'manual':e.source.type;

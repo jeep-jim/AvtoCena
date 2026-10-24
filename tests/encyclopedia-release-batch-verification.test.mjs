@@ -15,3 +15,9 @@ test('missing variant, year, renamed trim and unsupported fields fail closed',()
   const f=fixture();change(f);assert.throws(()=>check(f),/required_|unsupported_release_field/);
  }
 });
+test('factory chassis identity must be present and exact in index constraints',()=>{
+ const f=fixture(),fact=f.index.models.toyota[0],entry=f.batches[0].entries[0];entry.patch.chassisCode='K9CYH01';entry.confirmedFields.push('chassisCode');fact.constraints={chassisCode:'K9CYH01'};
+ assert.equal(check(f).identityFields,2);
+ fact.constraints.chassisCode='K9CYH01L';assert.throws(()=>check(f),/required_identity_missing/);
+ delete fact.constraints.chassisCode;assert.throws(()=>check(f),/required_identity_missing/);
+});
