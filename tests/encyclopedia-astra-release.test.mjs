@@ -47,6 +47,18 @@ async function fixture(t){
   args(){return {index:structuredClone(this.index),plan:structuredClone(this.plan),applied:structuredClone(this.applied),manifest:structuredClone(this.manifest),expectedPlanDigest:this.plan.planDigest,readPlan:key=>this.storage.readJson(key,null)};}};
 }
 const resealIndex=args=>{args.index.digest=checksum(args.index.models);};
+test('reviewed literal Korean AWD translation preserves meaning without allowing layout or manual changes',async()=>{
+ const original={id:'1'.repeat(24),revision:'old',make:'Genesis',model:'GV80',variants:[{id:'v',year:2021,trim:'2.5 AWD',status:'observed',drive:'4륜'}]};
+ const current={...structuredClone(original),revision:'new',previousKey:`${ROOT}/revisions/${original.id}/old.json`};
+ current.variants[0]={...current.variants[0],status:'review',drive:'awd',researchEvidence:{source:{type:'manufacturer'},fields:['drive'],values:{drive:'awd'},checkedIdentity:{make:'Genesis',model:'GV80',year:2021,trim:'2.5 AWD'}}};
+ const run=(o=original,c=current)=>assertAstraRecordContinuation({original:o,current:c,readRecord:async()=>structuredClone(o)});
+ await run();
+ for(const change of [v=>{v.drive='fwd';},v=>{v.drive='rwd';},v=>{delete v.researchEvidence;},v=>{v.researchEvidence.checkedIdentity.year=2022;},v=>{v.researchEvidence.source.type='observation';}]){
+  const c=structuredClone(current);change(c.variants[0]);await assert.rejects(run(original,c),/existing_value_changed/);
+ }
+ const manual=structuredClone(original);manual.variants[0].manualEditedAt='2026-10-24';
+ const c=structuredClone(current);c.variants[0].manualEditedAt='2026-10-24';await assert.rejects(run(manual,c),/existing_value_changed/);
+});
 const fact=args=>Object.values(args.index.models).flat()[0];
 async function continuedArgs(f,change=()=>{}){
  const record=structuredClone(f.saved);

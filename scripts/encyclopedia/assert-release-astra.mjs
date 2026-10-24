@@ -6,6 +6,16 @@ import {readCalculationIndex,factFields,token,checksum} from '../../apps/web/lib
 import {ASTRA_ROOT,sha,stable} from './astra-bridge.mjs';
 
 const descriptiveFields=new Set(['motorPeakKw','systemPowerKw','batteryKwh']);
+// Literal Korean four-wheel-drive label, not a change to vehicle layout.
+// Only a reviewed manufacturer assertion may translate an observed value;
+// manual/ASTRA values and all other changes retain byte-for-byte protection.
+function reviewedDriveTranslation(original,old,next,field){
+ const proof=next.researchEvidence,identity=proof?.checkedIdentity;
+ return field==='drive'&&old.drive==='4륜'&&next.drive==='awd'
+  &&old.status==='observed'&&!old.manualEditedAt&&!old.astraEvidence
+  &&proof?.source?.type==='manufacturer'&&proof.fields?.includes('drive')&&proof.values?.drive==='awd'
+  &&identity?.make===original.make&&identity?.model===original.model&&identity?.year===old.year&&identity?.trim===old.trim;
+}
 const parallel=async(items,run)=>{let cursor=0;await Promise.all(Array.from({length:Math.min(6,items.length)},async()=>{for(;;){const item=items[cursor++];if(!item)return;await run(item);}}));};
 
 // Later fill-only research creates a new immutable revision. Require ancestry
@@ -33,7 +43,7 @@ export async function assertAstraRecordContinuation({original,current,readRecord
   }
   for(const [field,value] of Object.entries(old)){
    if(['notes','status','researchEvidence','researchEvidenceHistory'].includes(field))continue;
-   if(value!==null&&value!==''&&stable(value)!==stable(next[field]))throw Error('astra_revision_existing_value_changed:'+field);
+   if(value!==null&&value!==''&&stable(value)!==stable(next[field])&&!reviewedDriveTranslation(original,old,next,field))throw Error('astra_revision_existing_value_changed:'+field);
   }
   if(old.status!==next.status&&!(old.status==='observed'&&next.status==='review'&&next.researchEvidence))throw Error('astra_revision_status_changed');
   if(old.notes&&!(next.notes||'').includes(old.notes))throw Error('astra_revision_notes_removed');
