@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T15:48:36.352Z",
+  "updatedAt": "2026-10-24T15:51:47.058Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T15:46:26.922Z",
+    "updatedAt": "2026-10-24T15:51:47.058Z",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -38930,8 +38930,8 @@
       "writesPaused": true,
       "state": "single_residual_astra_preview_in_progress",
       "checkedAt": "2026-10-24T15:21:25.453Z",
-      "reason": "Exact residual ASTRA4a621 apply requested. Do not change target revisions until terminal/readback; no duplicate apply.",
-      "paused": true
+      "reason": "Residual ASTRA4a621 apply40108670970 SUCCESS,22/22 independent API revisions PASS. New independent research permitted until next release starts private snapshot; refresh model revision/CAS before any write.",
+      "paused": false
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -42605,7 +42605,7 @@
       "artifactExpected": "astra-import-preview.json",
       "applyRequested": true,
       "nextActions": [
-        "Дождаться единственного остаточного ASTRA preview40106076748: проверить artifact, канонический planDigest, newModels0/newUnknownYearVariants0 и реальную дельту после b337; только затем штатный CAS apply и API-readback. Не запускать второй preview/apply.",
+        "Оба ASTRAпрохода saved/APIreadback: b337153/153 и4a62122/22. Не повторять. В следующий индекс включить оба и прежний6d417; новаядельта70+181/62годовые версии, одна документированная30min.",
         "Сопровождать repair40108157776 после merged1524 и CI40108229371/PR1525 (timeout подготовки90мин). Выпуск40103448997 завершён cancelled после SUCCESS подготовки цен; health15:42UTC ещё8ec0d858.",
         "Следующий единственный release — после terminal repair и принятого решения по новому ASTRA plan; сохранить39required/25public research и оба прежнихASTRAplan, добавить pendingCupra и новый план только после фактического apply. Проверить active/pending/queued перед marker.",
         "Запустить существующую pickup-drive-pricing/checkCatalogFeedback QA только после подтверждённого health точной новой версии, с expectedRelease фактически установленного согласованного release. Прежнюю7189 не объявлять активной.",
@@ -42760,9 +42760,9 @@
       "pr": 1523,
       "merge": "95eef9856394682bf6fbcc9aa1dee7e424cca237",
       "previousAppliedPlan": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
-      "newGainsConfirmed": false,
+      "newGainsConfirmed": true,
       "nextAction": "Дождаться artifact; проверить canonicaldigest/counters/newModels0/newUnknownYear0 и новые значения отдельно от подтверждений. Только затем exactCAS apply; не повторять старый b337.",
-      "status": "verified_apply_requested",
+      "status": "saved_api_readback_pass_pending_index",
       "previewConclusion": "success",
       "artifact": 12565273971,
       "planDigest": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
@@ -42803,10 +42803,20 @@
           "conflicting_or_incomplete_evidence": 4239
         }
       },
-      "report": "docs/encyclopedia/reports/2026-10-24-astra-unnamed-residual-plan-verified.json",
+      "report": "docs/encyclopedia/reports/2026-10-24-astra-unnamed-residual-apply-readback.json",
       "applyRequested": true,
-      "applied": false,
-      "apiReadback": false
+      "applied": true,
+      "apiReadback": true,
+      "applyWorkflow": 40108670970,
+      "applyJob": 120915594220,
+      "applyArtifact": 12564719667,
+      "applyConclusion": "success",
+      "filledValues": 70,
+      "attestedValues": 181,
+      "savedModels": 22,
+      "annualVariants": 62,
+      "power30MinFields": 1,
+      "activationConfirmed": false
     },
     "retainedTechnicalGroupAudit": {
       "state": "completed_read_only",
@@ -42847,7 +42857,10 @@
       ],
       "state": "refresh_after_residual_astra_before_review",
       "savedFields": 0,
-      "broadBodyCaution": "Passenger car — общая категория, не точный кузов. Анонимный API не доказывает отсутствие приватных homologation IDs; проверить сохранённую идентичность, не угадывать."
+      "broadBodyCaution": "Passenger car — общая категория, не точный кузов. Анонимный API не доказывает отсутствие приватных homologation IDs; проверить сохранённую идентичность, не угадывать.",
+      "residualPlanChecked": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
+      "targetModelsChangedByResidualPlan": 0,
+      "reason": "A3/A4/A5 не входят в22 изменённые модели;27кандидатов остаются исходным курсором. Перед записью перечитатьAPIревизии."
     },
     "installedAcceptance": {
       "pr": 1522,
@@ -42865,7 +42878,8 @@
       "failedReleaseWorkflow": 40103448997,
       "previousExpectedRelease": "7189a40f73606b46eaeb86e4c37905e1fd0bfcf6",
       "reason": "7189 activation was not confirmed; prepare job cancelled at its 60-minute limit. Pin acceptance to the next actually activated coordinated release."
-    }
+    },
+    "nextCoordinatedReleasePlan": "docs/encyclopedia/reports/2026-10-24-next-coordinated-release-plan.json"
   },
   "scope": {
     "minimumYear": 2008,

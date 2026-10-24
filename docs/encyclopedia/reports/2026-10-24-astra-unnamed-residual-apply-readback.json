@@ -1,0 +1,290 @@
+{
+  "checkedAt": "2026-10-24T15:51:47.058Z",
+  "applyWorkflow": 40108670970,
+  "applyJob": 120915594220,
+  "applyArtifact": 12564719667,
+  "artifactSha256": "a77c6323854dbcc9e3a89c68319a210fda12c9d7c04db527eaefea9800ce8762",
+  "version": 1,
+  "mode": "apply",
+  "startedAt": "2026-10-24T15:49:26.669Z",
+  "planDigest": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
+  "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+  "counters": {
+    "sourceRecords": 466987,
+    "uniqueTechnicalRecords": 466987,
+    "detailRecords": 1768599,
+    "originalSourceRows": 1038355,
+    "eligibleSourceRecords": 300947,
+    "assignedSourceRecords": 300811,
+    "rejectedSourceRecords": 166176,
+    "sourceDatasets": {
+      "edatenblatt": 44829,
+      "targa": 210673,
+      "tas": 211485
+    },
+    "rejectedReasons": {
+      "outside_passenger_light_van_pickup_scope": 150628,
+      "unknown_commercial_name": 182,
+      "unknown_vehicle_category": 12512,
+      "excluded_vehicle_family": 2718,
+      "not_existing_model": 136
+    },
+    "existingModelsTotal": 4473,
+    "existingVariantsTotal": 345462,
+    "targetedExistingAnnualVariants": 87802,
+    "targetModels": 2893,
+    "newModels": 0,
+    "changedExistingModels": 22,
+    "newUnknownYearVariants": 0,
+    "existingAnnualVariantsChanged": 62,
+    "fieldsFilled": 70,
+    "existingFieldsAttested": 181,
+    "existingAnnualPower30Filled": 1,
+    "heldExistingVariants": 87740,
+    "heldReasons": {
+      "no_exact_technical_match": 83501,
+      "conflicting_or_incomplete_evidence": 4239
+    }
+  },
+  "plannedModels": 22,
+  "savedModels": 22,
+  "alreadySavedModels": 0,
+  "batches": 1,
+  "indexAssertions": 62,
+  "status": "completed",
+  "finishedAt": "2026-10-24T15:49:45.504Z",
+  "apiReadback": {
+    "checkedAt": "2026-10-24T15:50:28.343191+00:00",
+    "planDigest": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
+    "scope": "Independent public API readback of all22 model revisions; year2008 is a bounded selector, not an assertion of coverage",
+    "models": [
+      {
+        "id": "0689657da5a646a5bb34e96d",
+        "make": "Polestar",
+        "model": "4",
+        "expectedRevision": "789fcf17-9773-54f1-ab99-92301488c5b7",
+        "actualRevision": "789fcf17-9773-54f1-ab99-92301488c5b7",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "0eb3c4b39b404ae2fec4525b",
+        "make": "Volvo",
+        "model": "XC90",
+        "expectedRevision": "c63ef47a-300f-537e-aa18-0357ae961599",
+        "actualRevision": "c63ef47a-300f-537e-aa18-0357ae961599",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "0ed4c4f93b9b704730f266ac",
+        "make": "Ford",
+        "model": "Mustang Mach-E",
+        "expectedRevision": "3f4af84f-fd8c-5a76-a4bd-198b1ef21993",
+        "actualRevision": "3f4af84f-fd8c-5a76-a4bd-198b1ef21993",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "1771d9cb82cfa85dbe286dca",
+        "make": "Isuzu",
+        "model": "D-Max",
+        "expectedRevision": "a908c9cd-9c70-5450-abce-5e5ddd46567b",
+        "actualRevision": "a908c9cd-9c70-5450-abce-5e5ddd46567b",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "264fdb1d86b9152d1909d30a",
+        "make": "Mercedes-Benz",
+        "model": "EQS",
+        "expectedRevision": "a2b91709-faf2-516a-accb-7c7bf29ccdc3",
+        "actualRevision": "a2b91709-faf2-516a-accb-7c7bf29ccdc3",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "27f4186e3fcdde37a9687b9b",
+        "make": "Maxus",
+        "model": "T90",
+        "expectedRevision": "f8873949-511d-5d4b-a426-e85666cdcb9f",
+        "actualRevision": "f8873949-511d-5d4b-a426-e85666cdcb9f",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "2d48428398805876faf7e021",
+        "make": "Toyota",
+        "model": "bZ4X",
+        "expectedRevision": "1b80aacc-a988-5fa7-a67d-76905ab68111",
+        "actualRevision": "1b80aacc-a988-5fa7-a67d-76905ab68111",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "2f8409f72d0ba5a380f6533e",
+        "make": "Ferrari",
+        "model": "SF90",
+        "expectedRevision": "05657788-66bc-530a-a522-f46e93c659ef",
+        "actualRevision": "05657788-66bc-530a-a522-f46e93c659ef",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "4a459a330d1ddf1eed32e113",
+        "make": "Lexus",
+        "model": "UX",
+        "expectedRevision": "3542a96d-0095-5480-ae4c-a5e578f5dc95",
+        "actualRevision": "3542a96d-0095-5480-ae4c-a5e578f5dc95",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "639c4e325e55255b58dbe92e",
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "expectedRevision": "13629942-d508-5376-a673-f5cf6824eb4a",
+        "actualRevision": "13629942-d508-5376-a673-f5cf6824eb4a",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "9a3b85d951d36353a04624bc",
+        "make": "BYD",
+        "model": "SEAL",
+        "expectedRevision": "59d51fab-1550-590b-a4ad-c5a3dc48a968",
+        "actualRevision": "59d51fab-1550-590b-a4ad-c5a3dc48a968",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "9fdbf9265296da07ea93e5be",
+        "make": "Mercedes-Benz",
+        "model": "CLA",
+        "expectedRevision": "04a28a29-5415-5ecc-aecb-c59cc4cb6dce",
+        "actualRevision": "04a28a29-5415-5ecc-aecb-c59cc4cb6dce",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "a82d70a3f970d3ddfb0235d6",
+        "make": "Mercedes-Benz",
+        "model": "EQB",
+        "expectedRevision": "2318db5f-9f29-527b-a2d3-b05eaa07ec8f",
+        "actualRevision": "2318db5f-9f29-527b-a2d3-b05eaa07ec8f",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "b6ea2fd06673d2d881a5cf60",
+        "make": "Honda",
+        "model": "Civic",
+        "expectedRevision": "1fa609df-fc97-55e1-a949-0c5e3d4d9409",
+        "actualRevision": "1fa609df-fc97-55e1-a949-0c5e3d4d9409",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "c42e987581ec2eda29e95139",
+        "make": "Tesla",
+        "model": "Model 3",
+        "expectedRevision": "81c37eec-8534-54d0-ac65-9dd4d9ef0093",
+        "actualRevision": "81c37eec-8534-54d0-ac65-9dd4d9ef0093",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "c8856783de93588310929346",
+        "make": "Smart",
+        "model": "#1",
+        "expectedRevision": "62607bde-8949-5978-a4eb-93a85ecfaca4",
+        "actualRevision": "62607bde-8949-5978-a4eb-93a85ecfaca4",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "c89037d100b99a1e4ecafe6b",
+        "make": "Volkswagen",
+        "model": "Touran",
+        "expectedRevision": "950e32da-740d-5f40-a6fb-3622a5bb4563",
+        "actualRevision": "950e32da-740d-5f40-a6fb-3622a5bb4563",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "cfba7c0a28979fe42d92e2ec",
+        "make": "Cadillac",
+        "model": "Escalade",
+        "expectedRevision": "f7c28f2e-cffd-5dbf-a4fc-69691ca094ab",
+        "actualRevision": "f7c28f2e-cffd-5dbf-a4fc-69691ca094ab",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "d4c6efee8cca022629c991db",
+        "make": "Nissan",
+        "model": "Ariya",
+        "expectedRevision": "78ae9401-2907-55d3-a57b-0f8f1a302a22",
+        "actualRevision": "78ae9401-2907-55d3-a57b-0f8f1a302a22",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "f26049af804fb2b8890eb77a",
+        "make": "Citroën",
+        "model": "C3",
+        "expectedRevision": "b2cf08da-0f45-5ad8-acd4-b94e2e146ea5",
+        "actualRevision": "b2cf08da-0f45-5ad8-acd4-b94e2e146ea5",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "fcd96f3b7dd9a11724bbd696",
+        "make": "Volkswagen",
+        "model": "ID.4",
+        "expectedRevision": "522e84d8-2c73-5c7f-a2a4-a7f4821291ff",
+        "actualRevision": "522e84d8-2c73-5c7f-a2a4-a7f4821291ff",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      },
+      {
+        "id": "ff2d0a1e18c4c0d18249de20",
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "expectedRevision": "c021c252-d42f-5b39-adb1-d5d5bda94daa",
+        "actualRevision": "c021c252-d42f-5b39-adb1-d5d5bda94daa",
+        "passed": true,
+        "year": 2008,
+        "publicVariants": 0
+      }
+    ],
+    "passed": true,
+    "total": 22,
+    "passedModels": 22,
+    "publicActivationProved": false
+  },
+  "activationConfirmed": false,
+  "heldCounterMeaning": "heldExistingVariants включает неизменённые/ранее подтверждённые строки; это не количество незаполненных автомобилей. Новая дельта70 не повторяет прежние3664.",
+  "publication": "pending_next_coordinated_index"
+}
