@@ -14944,3 +14944,10 @@ PR1517 head07da107 CI40099703022SUCCESS, merged d33944ac7450d8cc0fc4dc21201c90e2
 One-hop40100131577/job120890399939 наREG завершился heapOOM14:00:39UTC/exit134;36tests/typecheckPASS. Это новая причина, не прежний YC binding и не доказательство отсутствия Japan. Публикационныйguard не ослаблялся, повтор не запрошен. Основной массовый replan имеет приоритет.
 
 Предыдущийrelease40097364164SUCCESS; внешнийhealth8ec0d858/calculation2104e015 подтверждён. Реальные HTML ответы трёх старыхссылок MERCEDES-ADRIA/PEUGEOT-DANGEL/RENAULT-SPORT содержат Next redirect на Mercedes-Benz/Peugeot/Renault с сохранённым year2023 —3/3PASS. HTTP200 здесь streamingredirect, не доказательствоотсутствияперехода. Следующийшаг: дождаться replan artifact, проверитьdigest/newModels0/newUnknownYearVariants0/причиныудержания, применитьпланштатнымCASimporter и затемединыйrelease со всеми прежнимитребованиями.
+
+
+## 24.10.2026 21:19 Красноярск — очередь переключена на массовый план, дубликат правки закрыт
+
+Обнаружена устаревшая верхняя записьqueue: A52024 saved_pending и A52023next, хотя этипартииужеактивированы. Верхнийприоритет обновлённаобщийASTRAreplan40100441431; прежниеmodel/retry/handoff сохранены, перезапускаалфавита нет. Явноустановлена паузаединичныхзаписей доexactapply+изоляцииснимка. Планещёвыполняется, artifact/digest ещёнеполучены; массовоsaved пока0 вэтойсессии.
+
+Независимыйтестподтвердилстаруюсуммуdefaultbudgetкарточки: offlinebefore2397582/expected1481149; идентичнаяправкаcurrentSearchPrices даёт11/11targettestsPASS,typecheckPASS. Одновременно ручнаясессияоткрыла более полныйPR1519 c69484a2, содержащийтужеисправленнуюстроку+previewranking. СозданныйдубликатPR1520 закрытбезmerge/deploy; независимые2regressionassertions сохраненыветкой. Никакиеwriter/deploy неотменялись. ДляединогоPR1519 запущенлокальныйполныйnpm test наточномc69484a2, результатещёожидается; доуспешногоCI несливать/невыпускать. Новыеrelease/apply не запрашивались.
