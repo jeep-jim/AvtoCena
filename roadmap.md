@@ -14688,3 +14688,8 @@ Read-only40084348290SUCCESS: уCountryman fullsemantic.engineCc ambiguous; exist
 ## 24.10.2026 — заводское подтверждение объёма Countryman отправлено
 
 Boundedpreflight40084707535/job120845146412SUCCESS:4privatevariantdigest/revisionсовпали. Подготовленbatchresearch-2026-10-24-countryman-2020-volume,sha2567ff52eaa8326b972e04953ed2fddf358e5323a534d420c1c32b22458e53422e9;4engineCc1499подтверждения(3existing+1missing),11guardtestsPASS. ИсточникофициальныйBMW/MINI2018+07/2020,обычныеCooper/ALL4 136PS/100kW,гибридыисключены. Запрошенштатныйdry-run/apply;сохранениеиноваятехническаяактивацияещёожидаются. Matcherguardsнеослаблены;5d64Seltosreleaseпродолжаетподготовкуцен.
+
+
+## 24.10.2026 — исправлен контрольный digest партии Countryman до записи
+
+40084806972 остановилсядоизмененияданных: вмаркеребылSHAбайтовфайла7ff52eaa,авходнойguardожидаетcanonicaldigest(parsedbatch). Маркерисправленна3d9c2fc7e60a83f2e8fcdcb8de2b950316b1c0332930f26ba6928ac82763ac59,полученныйштатнымdigest(validateBatch). Содержаниепартии4engineCcнетронуто;публичнаяrevisionосталасьисходной. Повторныйapplyзапрошенпослеterminalfailure,guardнеснят.
