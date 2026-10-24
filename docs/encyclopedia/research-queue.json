@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T17:39:24Z",
+  "updatedAt": "2026-10-24T17:43:16Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T17:34:30Z",
+    "updatedAt": "2026-10-24T17:43:16Z",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -42869,15 +42869,17 @@
       "head": "5c738c21f1edbe2e84eb044c5fd761338ee4bb0a",
       "ci": 40106051871,
       "conclusion": "success",
-      "state": "await_coordinated_replacement_release",
+      "state": "await_actual_live_scoped_v1_then_repair",
       "diagnosticRequested": false,
-      "expectedRelease": "7189a40f73606b46eaeb86e4c37905e1fd0bfcf6",
+      "expectedRelease": null,
       "mode": "pickup-drive-pricing",
       "checkCatalogFeedback": true,
       "globalAjesCalculatedOrderClosed": false,
       "failedReleaseWorkflow": 40103448997,
       "previousExpectedRelease": "7189a40f73606b46eaeb86e4c37905e1fd0bfcf6",
-      "reason": "7189 activation was not confirmed; prepare job cancelled at its 60-minute limit. Pin acceptance to the next actually activated coordinated release."
+      "reason": "7189 activation was not confirmed; prepare job cancelled at its 60-minute limit. Pin acceptance to the next actually activated coordinated release.",
+      "candidateRelease": "304b270cfd2b14be47b579f268d8c0d92df7dc17",
+      "releaseWorkflow": 40117114655
     },
     "nextCoordinatedReleasePlan": "docs/encyclopedia/reports/2026-10-24-next-coordinated-release-plan.json",
     "scopedProjectionRepair": {
@@ -42900,7 +42902,7 @@
       "checkpoint": "docs/operations/2026-10-24-bounded-scoped-projections.md"
     },
     "overnightContinuation20261025": {
-      "state": "coordinated_release_requested_after_existing_index_pass",
+      "state": "release_in_progress_reader_not_live",
       "failedRelease": 40112867414,
       "failedReleaseSha": "786a5aa9bb5a2efbc5b3ed395e51f3a2ab84616d",
       "failure": "astra_revision_existing_value_changed:astraMatchEvidence",
@@ -42912,7 +42914,7 @@
       "activationConfirmed": false,
       "next": "Сопровождать только новый выпуск, SHA определён commit marker. После live scoped-v1 и свободной очереди один guarded repair; затем pickup-drive-pricing/checkCatalogFeedback и search/detail. Не повторять apply/collectors.",
       "referenceCursorUnchanged": "docs/encyclopedia/research-handoff-2026-10-24-retained-technical-groups.json",
-      "checkedAt": "2026-10-24T17:39:24Z",
+      "checkedAt": "2026-10-24T17:43:16Z",
       "repairPrerequisiteMerge": "1e6440c938a3332a50008d76f9c9e61a915c110c",
       "astraContinuationMerge": "30aadd126a92acc9ce7b89d34c08bd2cba2740c5",
       "astraContinuationCi": 40116008291,
@@ -42925,7 +42927,17 @@
       "publicationLeaseActive": false,
       "publicationLeaseCheckedAt": "2026-10-24T17:35:26.585Z",
       "publicationLeaseReset": false,
-      "report": "docs/encyclopedia/reports/2026-10-25-prepared-astra-verification.json"
+      "report": "docs/encyclopedia/reports/2026-10-25-prepared-astra-verification.json",
+      "releaseWorkflow": 40117114655,
+      "releaseSha": "304b270cfd2b14be47b579f268d8c0d92df7dc17",
+      "prepareJob": 120940688218,
+      "health": {
+        "checkedAt": "2026-10-24T17:42:31.832842+00:00",
+        "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+        "catalogProjectionParts": null,
+        "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+      },
+      "checkpoint": "docs/operations/2026-10-25-release-304b270-continuation.json"
     }
   },
   "scope": {
