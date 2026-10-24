@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T11:13:54.056Z",
-  "release": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
-  "status": "seven_detail_calculations_verified_countryman_catalog_fuel_release_pending",
+  "checkedAt": "2026-10-24T12:08:05.228Z",
+  "release": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+  "status": "verified_public_calculations_catalog_parity_and_browser",
   "tests": {
     "full": {
       "passed": 2483,
@@ -22,6 +22,24 @@
       "status": "success",
       "liveCases": 36,
       "liveOpenings": 168
+    },
+    "catalogLiveJourney": {
+      "runId": 40085885448,
+      "jobId": 120862487365,
+      "status": "success",
+      "viewportWidths": [
+        390,
+        1440
+      ],
+      "initialCards": 24,
+      "appendedCards": 48,
+      "koreaPhotos": 4
+    },
+    "sevenPublicCards": {
+      "runId": 40092574653,
+      "jobId": 120868107872,
+      "passed": 7,
+      "failed": 0
     }
   },
   "deployments": [
@@ -43,7 +61,7 @@
     {
       "runId": 40088542508,
       "release": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
-      "status": "pending"
+      "status": "success"
     }
   ],
   "japanReadOnlyAcceptance": {
@@ -245,10 +263,10 @@
     "publiclyConfirmed": true
   },
   "limitations": [
-    "Unknown engines and certified hybrid/electric power remain unknown.",
-    "No supplier collection restart or schedule change.",
-    "Korea search returned HTTP503 on2026-10-24T10:58UTC; saved GV80/Carnival detail calculations HTTP200.",
-    "Countryman detail2155149 verified on7d329; catalog still seller until pending71e571 fuel evidence release is accepted."
+    "Totals exclude domestic Russia delivery.",
+    "Japanese examples use reported source horsepower and remain preliminary/requiresConfirmation.",
+    "Unproven displacement, certified hybrid/electric power, category and mass remain unknown; this is acceptance of the listed examples, not a claim that every catalog listing is complete.",
+    "Supplier availability was intermittent during acceptance; successful final checks do not guarantee future upstream availability."
   ],
   "firstPublicVerification": {
     "checkedAt": "2026-10-24T09:45:30.997883+00:00",
@@ -603,16 +621,17 @@
     "fieldsVerified": 4,
     "untouchedVariantsVerified": 5,
     "revision": "8cbe5f65-9791-411f-8927-0c7a00af0b52",
-    "release": "7d32942c38f631711dfb577bec698099087f3447",
-    "deployRun": 40085069428,
-    "status": "fuel_confirmation_applied_release_pending",
+    "release": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+    "deployRun": 40088542508,
+    "status": "verified",
     "catalogRub": 2155149,
     "detailPriceConfirmed": true,
     "fuelApplyRun": 40088419868,
     "fuelRevision": "ce750f06-5878-4271-9c57-ae845f9f4763",
-    "catalogPriceConfirmed": false,
+    "catalogPriceConfirmed": true,
     "fuelRelease": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
-    "fuelDeployRun": 40088542508
+    "fuelDeployRun": 40088542508,
+    "detailRub": 2155149
   },
   "finalDataGate": {
     "groups": 39,
@@ -620,5 +639,223 @@
     "fields": 1014,
     "verified": true,
     "release": "7d32942c38f631711dfb577bec698099087f3447"
-  }
+  },
+  "finalPublicVerification": {
+    "checkedAt": "2026-10-24T12:06:39.170972+00:00",
+    "health": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+      "calculationVersion": "5d458f646c67329d167586f6cae1944082458f5f17910f79df745ff974d87730"
+    },
+    "checks": [
+      {
+        "id": "bbdc9f4661719617765f19ec",
+        "url": "https://avtocena.com/cars/offer/kia-seltos-2023--bbdc9f4661719617765f19ec",
+        "status": 200,
+        "pricePanels": [
+          "Ориентир без доставки2 727 280₽"
+        ],
+        "breakdownSum": 2727280,
+        "expected": 2727280,
+        "passed": true
+      },
+      {
+        "id": "ajes-korea-6d1nkfP5H0ngqu",
+        "url": "https://avtocena.com/cars/offer/genesis-gv80-2-5t-gasoline-awd-2021--ajes-korea-6d1nkfP5H0ngqu",
+        "status": 200,
+        "pricePanels": [
+          "Ориентир без доставки7 254 985₽"
+        ],
+        "breakdownSum": 7254985,
+        "expected": 7254985,
+        "passed": true
+      },
+      {
+        "id": "ajes-korea-6d1nIGC880T51e",
+        "url": "https://avtocena.com/cars/offer/kia-carnival-4-generation-diesel-9-seater-noblesse-2021--ajes-korea-6d1nIGC880T51e",
+        "status": 200,
+        "pricePanels": [
+          "Ориентир без доставки5 999 801₽"
+        ],
+        "breakdownSum": 5999801,
+        "expected": 5999801,
+        "passed": true
+      },
+      {
+        "id": "367c09969707c8221e8abf9e",
+        "url": "https://avtocena.com/cars/offer/mini-countryman-2020--367c09969707c8221e8abf9e",
+        "status": 200,
+        "pricePanels": [
+          "Ориентир без доставки2 155 149₽"
+        ],
+        "breakdownSum": 2155149,
+        "expected": 2155149,
+        "passed": true
+      },
+      {
+        "id": "ajes-stats-2NgfFLkogQyQo",
+        "status": 200,
+        "totalRub": 474961,
+        "requiresConfirmation": true,
+        "passed": true
+      },
+      {
+        "id": "ajes-stats-2QFQ2qkxr4bP4Ru",
+        "status": 200,
+        "totalRub": 509539,
+        "requiresConfirmation": true,
+        "passed": true
+      },
+      {
+        "id": "ajes-stats-2QzWNA1OYHeOMD6",
+        "status": 200,
+        "totalRub": 1215162,
+        "requiresConfirmation": true,
+        "passed": true
+      },
+      {
+        "id": "bbdc9f4661719617765f19ec",
+        "surface": "catalog",
+        "totalRub": 2727280,
+        "expected": 2727280,
+        "passed": true
+      },
+      {
+        "id": "367c09969707c8221e8abf9e",
+        "surface": "catalog",
+        "totalRub": 2155149,
+        "expected": 2155149,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "finalBrowserVerification": [
+    {
+      "id": "bbdc9f4661719617765f19ec",
+      "totalRub": 2727280,
+      "url": "https://avtocena.com/cars/offer/kia-seltos-2023--bbdc9f4661719617765f19ec",
+      "panel": [
+        "Ориентир без доставки2 727 280₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-korea-6d1nkfP5H0ngqu",
+      "totalRub": 7254985,
+      "url": "https://avtocena.com/cars/offer/genesis-gv80-2-5t-gasoline-awd-2021--ajes-korea-6d1nkfP5H0ngqu",
+      "panel": [
+        "Ориентир без доставки7 254 985₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-korea-6d1nIGC880T51e",
+      "totalRub": 5999801,
+      "url": "https://avtocena.com/cars/offer/kia-carnival-4-generation-diesel-9-seater-noblesse-2021--ajes-korea-6d1nIGC880T51e",
+      "panel": [
+        "Ориентир без доставки5 999 801₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "367c09969707c8221e8abf9e",
+      "totalRub": 2155149,
+      "url": "https://avtocena.com/cars/offer/mini-countryman-2020--367c09969707c8221e8abf9e",
+      "panel": [
+        "Ориентир без доставки2 155 149₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-stats-2NgfFLkogQyQo",
+      "totalRub": 474961,
+      "url": "https://avtocena.com/cars/offer/suzuki-every-4wd-pc-2016--ajes-stats-2NgfFLkogQyQo",
+      "panel": [
+        "Ориентир без доставки+266474 961₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-stats-2QFQ2qkxr4bP4Ru",
+      "totalRub": 509539,
+      "url": "https://avtocena.com/cars/offer/suzuki-alto-4wd-2023--ajes-stats-2QFQ2qkxr4bP4Ru",
+      "panel": [
+        "Ориентир без доставки+741509 539₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-stats-2QzWNA1OYHeOMD6",
+      "totalRub": 1215162,
+      "url": "https://avtocena.com/cars/offer/toyota-corolla-fielder-4wd-2021--ajes-stats-2QzWNA1OYHeOMD6",
+      "panel": [
+        "Ориентир без доставки+2,1K1 215 162₽"
+      ],
+      "passed": true
+    }
+  ],
+  "finalPublicGate": {
+    "groups": 39,
+    "variants": 664,
+    "fields": 1022,
+    "verified": true,
+    "indexDigest": "747dcb985a21221075c25cf30dae0e37584c0e781271ee99785051b7544cfbb2"
+  },
+  "finalMarkets": {
+    "japan": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "korea": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "georgia": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "uae": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "china": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "europe": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    }
+  },
+  "sourceIncidents": [
+    {
+      "market": "korea",
+      "event": "Search HTTP503 observed earlier; final search HTTP200, browser four320px photos passed in3012ms."
+    },
+    {
+      "market": "japan",
+      "event": "Two transient detail/calculation HTTP503 during simultaneous acceptance; subsequent three calculation responses200, browser all three passed."
+    }
+  ],
+  "quoteChanges": [
+    {
+      "id": "ajes-korea-6d1nkfP5H0ngqu",
+      "currency": "KRW",
+      "beforeSourcePrice": 33900000,
+      "afterSourcePrice": 31500000,
+      "beforeTotalRub": 7405286,
+      "afterTotalRub": 7254985,
+      "afterCarRub": 1915257,
+      "afterExchangeReserveRub": 57458,
+      "reason": "Supplier listing price changed during acceptance; current server ledger and browser agree."
+    }
+  ]
 }
