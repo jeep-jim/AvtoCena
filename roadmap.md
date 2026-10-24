@@ -15321,3 +15321,10 @@ PR1530 merge35ec2b65ca0876ff6af5753d2db86a2663cd05d4 послеCI40133250180SUCC
 ### 25.10.2026 05:10 UTC+7 — A3 PHEV: доказано отсутствие ручных правок, запрошено исправление
 
 Preflight40137276762/job121001355877 SUCCESS22:09:20UTC:3точныхdigest,manualEdited=false,research/ASTRA/referenceiceproofпусты. ЗаводскиеAudiтаблицы40/45TFSIe18.07.2023 независимо скачаны,hash3af4c80a/2f8790f9. Подготовлен одинCASresearchapply184d7d6bf9be73e3b4ea852f4c1280150cea867a09d158e5d96c0f85d16047e7:3строки,12новыхполей(fuel/kind/drive/system),3исправленияicePowerKw150/180→110. Исходныеyear/engineCc/powerHp/powerKw/body/trim сохранены;30minненазначается. validateBatchPASS,privateindex/applyочередьсвободна,Chinaнеперезапускается. Savedпока0,обязателенterminal+APIreadback. Предыдущийзаголовок05:12 былручнымопережающимвременем; точноеpreflightвремя22:09:20UTC,идентичностьсобытиянеизменна.
+
+
+### 25.10.2026 05:13 UTC+7 — A3 PHEV2024 сохранено15/API15; расширение проверки на2021–2023
+
+Apply40137439232/job121001852940 SUCCESS22:11:50UTC,3variants15fields,skip0:12new и3correctedicePowerKw. НезависимыйAPI подтверждает15/15,revision5962b59e-60c6-49d5-baa7-072c2b46e1a2;остальные123строки2024 ипрочиепубличныеполянеизменны,30min0. ДанныеsavedНЕactivated. Retainedpage3 run40137089009/job121000787787 SUCCESS,artifact12578161035 ZIP6d93f405проверен:64rows(A3=34/A4=5/A5=25),192uniqueвсегобезпересечений,75осталосьпослеa49c0c14. Snapshot4833738b/checkpoint974674b неизменны,unverifiedнеповышены.
+
+Прочитаны625существующихA3строк2021–2023(163/201/261);найдены11точных1395/40–45TFSIe/150–180кВт/автоматкандидатов. Запрошенboundedpreflight11manual/evidence/digest; данныеещёнеизменены. Проверяетсятаже заводскаяразница110кВтДВС против150/180system,непереносятсямассы/peak/30min. Запрошенаследующаячетвёртаяretainedстраницапослекурсора,безповтора192. Release/repairпо-прежнемуожидаютterminalChina+freshprerequisites.

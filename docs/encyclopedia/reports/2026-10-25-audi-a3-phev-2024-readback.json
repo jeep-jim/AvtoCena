@@ -1,0 +1,110 @@
+{
+  "checkedAt": "2026-10-24T22:12:16.248331+00:00",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "revision": "5962b59e-60c6-49d5-baa7-072c2b46e1a2",
+  "batch": "research-2026-10-25-audi-a3-phev-ice-power",
+  "newValues": 12,
+  "correctedValues": 3,
+  "checkedFields": 15,
+  "checks": [
+    {
+      "variantId": "e92bd483447de5b007a572ce",
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 150,
+          "actual": 150,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "b4b8e164e959ad294b85fd34",
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 180,
+          "actual": 180,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "420d9493f4aa7a04a8f68b9f",
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 180,
+          "actual": 180,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    }
+  ],
+  "otherRowsUnchanged": true,
+  "otherExistingPublicFieldsPreserved": true,
+  "certifiedPowerAdded": 0,
+  "newModels": 0,
+  "state": "saved_public_readback_pass_not_activated",
+  "workflow": 40137439232,
+  "job": 121001852940,
+  "conclusion": "success",
+  "finishedAt": "2026-10-24T22:11:50.267Z"
+}
