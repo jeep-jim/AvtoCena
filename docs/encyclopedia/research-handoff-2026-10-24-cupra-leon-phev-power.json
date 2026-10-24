@@ -1,7 +1,7 @@
 {
   "version": 1,
   "checkedAt": "2026-10-24T14:49:48.607366+00:00",
-  "state": "apply_retry_requested_correct_canonical_digest",
+  "state": "saved_api_readback_pass_pending_next_index",
   "modelId": "36050a1f4ba506db31d21ffd",
   "make": "Cupra",
   "model": "Leon",
@@ -301,5 +301,10 @@
     "conclusion": "failure",
     "reason": "batch_review_digest_mismatch",
     "storageWrites": 0
-  }
+  },
+  "applied": true,
+  "apiReadback": true,
+  "workflow": 40104764934,
+  "afterRevision": "8fd196dd-6745-4c04-9622-fd1738ca2942",
+  "report": "docs/encyclopedia/reports/2026-10-24-cupra-leon-phev-power-pass.json"
 }

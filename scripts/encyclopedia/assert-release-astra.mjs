@@ -92,7 +92,7 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
   }
   for(const assertion of modelPlan.assertions){
    const identity=`${assertion.modelId}:${assertion.variantId}`,fact=facts.get(identity),variant=variants.get(assertion.variantId);
-   if(seen.has(identity)||assertion.modelId!==descriptor.id||!Number.isInteger(assertion.year)||!fact||!variant||variant.year!==assertion.year||variant.trim!==assertion.trim||fact.revision!==active.revision||fact.year!==assertion.year||!fact.trims.includes(token(assertion.trim)))throw Error('required_astra_annual_variant_missing:'+identity);
+   if(seen.has(identity)||assertion.modelId!==descriptor.id||!Number.isInteger(assertion.year)||!fact||!variant||variant.year!==assertion.year||variant.trim!==assertion.trim||fact.revision!==active.revision||fact.year!==assertion.year||(token(assertion.trim)?!fact.trims.includes(token(assertion.trim)):fact.trims.length!==0))throw Error('required_astra_annual_variant_missing:'+identity);
    seen.add(identity);report.annualVariants++;
    report.annualChanges.push({modelId:descriptor.id,make:modelPlan.record.make,model:modelPlan.record.model,variantId:assertion.variantId,year:assertion.year,trim:assertion.trim,fields:assertion.fields,sourceUrl:assertion.sourceUrl});
    for(const [field,value] of Object.entries(assertion.fields)){

@@ -205,7 +205,7 @@ function consensus(sources,field){
  return sources.every(s=>stable(s.values[field])===stable(first))?first:undefined;
 }
 export function planAstraExistingVariant(record,v,sources,context){
- if(!Number.isInteger(v.year)||!v.trim||v.status==='verified'||v.researchEvidence?.source?.type==='owner_confirmed')return {reason:'manual_or_unknown_year'};
+ if(!Number.isInteger(v.year)||v.status==='verified'||v.researchEvidence?.source?.type==='owner_confirmed')return {reason:'manual_or_unknown_year'};
  const priorEvidence=[...(v.researchEvidenceHistory||[]),v.researchEvidence].filter(Boolean);
  const protectedFields=new Set(priorEvidence.flatMap(e=>e.source?.type==='owner_confirmed'?(e.fields||[]):['official_registry','manufacturer'].includes(e.source?.type)?(e.fields||[]).filter(f=>present(v[f])&&stable(v[f])===stable(e.values?.[f])):[]));
  const candidates=sources.map(s=>({...s,match:identityMatch(v,s)})).filter(s=>s.match&&compatible(v,s));

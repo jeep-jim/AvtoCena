@@ -269,3 +269,16 @@ test('missing output or displacement is filled by consensus without requiring th
  const sparse=evidence({facts:{version:'unknown'},values:{icePowerKw:undefined}});
  assert.equal(planAstraExistingVariant(model(),v,[candidate(row),candidate(sparse)],context).variant.icePowerKw,undefined);
 });
+
+
+test('dry annual technical identity needs no equipment name and never fabricates one',()=>{
+ const v=annual({trim:undefined,markets:['japan'],engineCode:undefined,icePowerKw:undefined});
+ const result=planAstraExistingVariant(model([v]),v,[candidate(evidence())],context);
+ assert.ok(result.variant);assert.equal(result.variant.trim,undefined);
+ assert.equal(result.variant.icePowerKw,68);assert.equal(result.variant.power30MinKw,undefined);
+ assert.equal(result.variant.year,2023);
+ const facts=compileModelFacts(model([result.variant]));
+ assert.equal(facts.length,1);assert.deepEqual(facts[0].trims,[]);assert.equal(facts[0].values.icePowerKw,68);
+ assert.equal(planAstraExistingVariant(model(),{...v,status:'verified'},[candidate(evidence())],context).reason,'manual_or_unknown_year');
+ assert.equal(planAstraExistingVariant(model(),{...v,year:undefined},[candidate(evidence())],context).reason,'manual_or_unknown_year');
+});

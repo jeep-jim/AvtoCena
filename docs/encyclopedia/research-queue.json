@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T14:55:30.736Z",
+  "updatedAt": "2026-10-24T15:00:51.862Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T14:55:30.736Z",
+    "updatedAt": "2026-10-24T15:00:51.862Z",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -32962,8 +32962,8 @@
       {
         "path": "docs/encyclopedia/research-handoff-2026-10-24-cupra-leon-phev-power.json",
         "batchPath": "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
-        "batchSha256": "d9989cf346efe8c45368efb96f0d6c376257e52403551ed2a65311f2d2d9906d",
-        "state": "apply_requested_post_snapshot",
+        "batchSha256": "ea8d76d597f983e8a62e545fe346c115a6ce169b412ea3bcd89c993f7c91aa29",
+        "state": "saved_api_readback_pass_pending_next_index",
         "variants": 8,
         "fields": 16,
         "modelId": "36050a1f4ba506db31d21ffd",
@@ -32971,10 +32971,31 @@
         "preflightWorkflow": 40104265322,
         "preflightJob": 120902570309,
         "requiresFreshApiPreflight": false,
-        "includedInIndex": false
+        "includedInIndex": false,
+        "workflow": 40104764934,
+        "job": 120904050954,
+        "apiReadback": true,
+        "afterRevision": "8fd196dd-6745-4c04-9622-fd1738ca2942",
+        "report": "docs/encyclopedia/reports/2026-10-24-cupra-leon-phev-power-pass.json"
       }
     ],
-    "pendingNextIndexBatches": [],
+    "pendingNextIndexBatches": [
+      {
+        "batch": "research-2026-10-24-cupra-leon-phev-component-power",
+        "path": "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
+        "sha256": "ea8d76d597f983e8a62e545fe346c115a6ce169b412ea3bcd89c993f7c91aa29",
+        "state": "saved_api_readback_pass_pending_next_index",
+        "modelId": "36050a1f4ba506db31d21ffd",
+        "variants": 8,
+        "fields": 16,
+        "workflow": 40104764934,
+        "job": 120904050954,
+        "afterRevision": "8fd196dd-6745-4c04-9622-fd1738ca2942",
+        "apiReadback": true,
+        "report": "docs/encyclopedia/reports/2026-10-24-cupra-leon-phev-power-pass.json",
+        "excludedFromIndex": "5685c5147920cef54287a9a21579af60ea1c281e6da9d01669f2351d45f29376"
+      }
+    ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
@@ -33041,7 +33062,7 @@
       "indexDigest": "78efc32fa0312f6a18521844273cad2009a6fc82996dbb0822a59b17570599cd",
       "activated": false
     },
-    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-24-price-blocking.json",
+    "nextResearchHandoff": "docs/encyclopedia/research-handoff-2026-10-24-cupra-leon-phev-power.json",
     "lastActivationReport": "docs/encyclopedia/reports/2026-10-24-index-9dabf-activation.json",
     "comparisonReferenceIntake": {
       "workflow": 39781954271,
@@ -33057,12 +33078,13 @@
       "completed": false
     },
     "observedProductionRelease": {
-      "checkedAt": "2026-10-24T14:19:12Z",
+      "checkedAt": "2026-10-24T15:00:51.862Z",
       "release": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
       "workflow": 40097364164,
       "conclusion": "success",
       "externalHealth": true,
-      "compoundRedirectsPassed": 3
+      "compoundRedirectsPassed": 3,
+      "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
     },
     "mito2012_2013Pass": {
       "checkedAt": "2026-10-22T17:23:25+07:00",
@@ -38906,10 +38928,9 @@
     },
     "researchWriteCoordination": {
       "writesPaused": false,
-      "state": "snapshot_isolated_bounded_cupra_writer_requested",
-      "checkedAt": "2026-10-24T14:55:30.736Z",
-      "reservedModelId": "36050a1f4ba506db31d21ffd",
-      "reason": "Prepare private encyclopedia index SUCCESS; последующая Cupra партия не входит в индекс5685c514."
+      "state": "snapshot_isolated_research_writer_free",
+      "checkedAt": "2026-10-24T15:00:51.862Z",
+      "reason": "Cupra apply40104764934 и независимый APIreadback завершены; перед следующей записью снова проверить все active/pending/queued."
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -42575,7 +42596,7 @@
       "state": "prepared_waiting_release_snapshot"
     },
     "massTechnicalPass": {
-      "checkedAt": "2026-10-24T14:39:00.921Z",
+      "checkedAt": "2026-10-24T15:00:51.862Z",
       "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
       "workflow": 40100441431,
       "job": 120891320310,
@@ -42583,11 +42604,10 @@
       "artifactExpected": "astra-import-preview.json",
       "applyRequested": true,
       "nextActions": [
-        "Прочитать terminal artifact; проверить planDigest и sums counters.",
-        "Требовать newModels=0 и newUnknownYearVariants=0; отдельно оценить documented30min.",
-        "Проверить active/pending общей permanent-encyclopedia-research группы; применить этот exact plan штатным importer.",
-        "Независимый API readback ревизий; сохранить прежний ASTRA plan и все research requirements в одном свободном release.",
-        "После активации проверить list/detail/related/filter; затем остаточные технические группы."
+        "Не повторять replan/apply153 моделей. Дождаться единственногоrelease40103448997; при failure прочитать конкретныйguard/log, не ослаблять его.",
+        "Подтвердить health7189a40f/index5685c514 и публичные list/detail/related/filter; Korea visitor_restricted считать доступом источника, не пустым рынком.",
+        "После свободной очереди включить pending Cupra batch в следующий единый release вместе с уже merged1521; сохранить39required/25public и обаASTRAplan, добавитьCupra вrequired/public.",
+        "Продолжить только остаточные технические группы, включая документированную30min; не возвращаться к повторному импорту/полной основе."
       ],
       "pr1518": {
         "merged": true,
@@ -42673,7 +42693,33 @@
       "coverageArtifact": 12564192032,
       "membershipVerified": true,
       "calculationFields": 20820,
-      "descriptiveFields": 55
+      "descriptiveFields": 55,
+      "releaseStatus": "in_progress",
+      "releaseStage": "Prepare exact price indexes before activating the release"
+    },
+    "nextTechnicalGroup": {
+      "modelId": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "state": "review_held_technical_identities_and_documented_hybrid_30min",
+      "heldVariantIds": [
+        "f28dde84789c9a658698880a",
+        "cab415a0e4872ed7753fa366",
+        "81516fa03fc3814278375a8d",
+        "60bba83ebcc09002e44f543b",
+        "53e1a70f021dde947ab790d2",
+        "71f703f530cfffea4275ce22",
+        "9cab264a288276deb10536e6"
+      ],
+      "completedBatch": "research-2026-10-24-cupra-leon-phev-component-power",
+      "noRepeatApply": true,
+      "remaining": "7 неоднозначных строк1395см³; подтверждённая30-минутная мощность отсутствует. Сохранённые110кВтДВС/85кВтpeak не заменяют30min."
     }
   },
   "scope": {
