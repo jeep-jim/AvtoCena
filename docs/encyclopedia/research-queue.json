@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T15:00:51.862Z",
+  "updatedAt": "2026-10-24T15:21:25.453Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -38927,10 +38927,10 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "writesPaused": false,
-      "state": "snapshot_isolated_research_writer_free",
-      "checkedAt": "2026-10-24T15:00:51.862Z",
-      "reason": "Cupra apply40104764934 и независимый APIreadback завершены; перед следующей записью снова проверить все active/pending/queued."
+      "writesPaused": true,
+      "state": "single_residual_astra_preview_in_progress",
+      "checkedAt": "2026-10-24T15:21:25.453Z",
+      "reason": "PR1523 merged95eef985; единственный replan40106076748 закрепляет текущие ревизии. До проверки/применения плана не запускать конкурирующие единичные записи; анализ сохранённых8403records40106364857 read-only."
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
@@ -42720,6 +42720,30 @@
       "completedBatch": "research-2026-10-24-cupra-leon-phev-component-power",
       "noRepeatApply": true,
       "remaining": "7 неоднозначных строк1395см³; подтверждённая30-минутная мощность отсутствует. Сохранённые110кВтДВС/85кВтpeak не заменяют30min."
+    },
+    "residualUnnamedTechnicalPass": {
+      "state": "preview_in_progress",
+      "workflow": 40106076748,
+      "job": 120907922537,
+      "commit": "2ba1b07886c5d9c7bad5e71921706f529f64fdb8",
+      "pr": 1523,
+      "merge": "95eef9856394682bf6fbcc9aa1dee7e424cca237",
+      "previousAppliedPlan": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+      "newGainsConfirmed": false,
+      "nextAction": "Дождаться artifact; проверить canonicaldigest/counters/newModels0/newUnknownYear0 и новые значения отдельно от подтверждений. Только затем exactCAS apply; не повторять старый b337."
+    },
+    "retainedTechnicalGroupAudit": {
+      "state": "in_progress",
+      "workflow": 40106364857,
+      "job": 120908770885,
+      "sourceCheckpointInspection": 40106102171,
+      "saved": 8403,
+      "pending": 253,
+      "blocker": "redirect_outside_catalog",
+      "storageWrites": 0,
+      "supplierRequests": 0,
+      "verification": "unverified_reference",
+      "connectedToAstraMatcher": false
     }
   },
   "scope": {
