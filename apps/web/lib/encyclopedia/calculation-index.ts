@@ -116,8 +116,8 @@ function resolvesCoarseMobileBody(offer:any,evidence:any,entries:CalculationFact
   &&entries.every(c=>c.sources.bodyType?.kind==='manufacturer'&&/^https:\/\//.test(c.sources.bodyType.url||'')&&Boolean(c.sources.bodyType.batchId));
 }
 /** Exact modification/year, hard constraints, and per-field unanimity. No score winner. */
-export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex()):T{
- if(!index||!offer.make||!offer.model||!Number.isInteger(offer.year)||!offer.trim)return offer;
+export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean}={}):T{
+ if(!index||!offer.make||!offer.model||!Number.isInteger(offer.year)||(!offer.trim&&!options.technicalIdentity))return offer;
  if(/customer_input|manual/i.test(offer.powerDataSource||'')||offer.calculationSnapshot?.modificationScenario)return offer;
  if(hasEncyclopediaCalculationEvidence(offer)){
   const previous=offer.operational?.encyclopediaCalculation||offer.encyclopediaCalculation;
@@ -135,14 +135,25 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
   offer=fresh;
  }
  const trim=token(offer.trim);
- // Marketing labels such as Base, Premium or Luxury do not identify an engine.
- if((!/\d/u.test(trim)||!/[\p{L}]/u.test(trim))&&!offer.engineCode&&!offer.chassisCode)return offer;
- const all=(index.models[modelKey(offer.make,offer.model)]||[]).filter(v=>v.year===offer.year&&v.trims.includes(trim));
- const candidates=all.filter(v=>Object.entries(v.constraints).every(([f,value])=>!exists(offer[f])||same(f,offer[f],value))
-  &&['generation','chassisCode','engineCode'].every(f=>!exists(offer[f])||exists(v.constraints[f])&&same(f,offer[f],v.constraints[f])));
+ const identity={...offer,chassisCode:offer.chassisCode||offer.operational?.chassisCode};
+ const annual=(index.models[modelKey(offer.make,offer.model)]||[]).filter(v=>v.year===offer.year);
+ const compatible=(v:CalculationFact)=>Object.entries(v.constraints).every(([f,value])=>!exists(identity[f])||same(f,identity[f],value))
+  &&['generation','chassisCode','engineCode'].every(f=>!exists(identity[f])||exists(v.constraints[f])&&same(f,identity[f],v.constraints[f]));
+ const exact=annual.filter(v=>v.trims.includes(trim));
+ const specificTrim=(/\d/u.test(trim)&&/[\p{L}]/u.test(trim))||identity.engineCode||identity.chassisCode;
+ let candidates=specificTrim?exact.filter(compatible):[];
+ let technicalMatch=false;
+ // Never bypass a conflicting exact named modification. Different trim names
+ // require an explicit chassis/engine anchor; all compatible facts must agree.
+ if(options.technicalIdentity&&!exact.length&&(exists(identity.chassisCode)||exists(identity.engineCode))){
+  candidates=annual.filter(v=>compatible(v)&&['chassisCode','engineCode'].some(f=>exists(identity[f])&&exists(v.constraints[f])&&same(f,identity[f],v.constraints[f])));
+  technicalMatch=candidates.length>0;
+ }
  if(!candidates.length)return offer;
  const next:any={...offer},applied:any={},provenance:any={},filledFields:string[]=[],semantic={...offer.operational?.semanticEvidence};
  for(const field of factFields){
+  // Certification belongs to an exact modification; a code-only bridge is not sufficient.
+  if(technicalMatch&&field==='power30MinKw')continue;
   if(semantic[field]?.status==='conflict')continue;
   const entries=candidates.filter(c=>exists(c.values[field]));
   // A partially documented candidate remains a possible different modification.
@@ -160,7 +171,7 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  if(!Object.keys(applied).length)return offer;
  if(applied.powerHp||applied.powerKw){next.powerDataSource=`permanent_encyclopedia:${index.digest}`;next.powerDataConfidence=Object.values(provenance).flat().some((s:any)=>s.kind==='owner_reference')?'source_exact':'documented';}
  next.operational={...offer.operational,semanticEvidence:semantic,encyclopediaCalculation:{version:1,indexDigest:index.digest,
-  sourceIdentity:calculationSourceIdentity(offer),values:applied,provenance,filledFields}};
+  sourceIdentity:calculationSourceIdentity(offer),values:applied,provenance,filledFields,matchMethod:technicalMatch?'technical_identity':'exact_trim'}};
  next.encyclopediaCalculation={version:1,indexDigest:index.digest,sourceIdentity:calculationSourceIdentity(offer),
   values:applied,filledFields};
  return next;
