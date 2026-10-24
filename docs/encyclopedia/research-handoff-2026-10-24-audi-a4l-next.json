@@ -1,23 +1,23 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T03:59:12.075Z",
+  "checkedAt": "2026-10-24T05:01:40.762805+00:00",
   "modelId": "c2365f94a908e7e90f14976e",
   "make": "Audi",
   "model": "A4L",
-  "revision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
-  "lastCompletedBatch": "research-2026-10-24-audi-a4l-2026-drive-mass",
+  "revision": "73e24623-5418-48b3-9c7a-9e0ea0ff5d64",
+  "lastCompletedBatch": "research-2026-10-24-audi-a4l-2025-mass",
   "next": {
-    "modelId": "c2365f94a908e7e90f14976e",
+    "modelId": "8cf3dbb7884fe919bce44c62",
     "make": "Audi",
-    "model": "A4L",
-    "variantId": "af7e4655e9743ce9c42f2532",
-    "year": 2025,
-    "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type",
+    "model": "A5",
+    "year": 2026,
+    "variantId": "2e602edc93de1056d0435651",
+    "trim": "Avant TFSI 110 kW S tronic virt.Cockpit/Navi plus/",
     "missingValueFields": [
-      "grossVehicleWeightKg"
+      "bodyType"
     ],
-    "state": "prepared_not_applied",
-    "reason": "Точная таблица2025.Q3 проверена; ждёт снятияпаузы и полного внутреннего expectedDigest перед штатнымapply."
+    "state": "requires_exact_source_review",
+    "reason": "Следующая существующая модель после ограниченной группы A4L; 129 строк 2026 прочитаны, 36 без кузова. Сохранённые источники и точный год ещё требуется проверить."
   },
   "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a4l.json",
   "previousA4Retry": "docs/encyclopedia/retry-2026-10-24-audi-a4-2021-2024-body-tail-remaining.json",
@@ -32,7 +32,7 @@
   ],
   "modelComplete": false,
   "allModelsComplete": false,
-  "nextAction": "После verified snapshot и снятияпаузы перечитать целевые2025, получить полные внутренние expectedDigest, применить только3подготовленные массы через штатныйresearch-batch, выполнитьAPIreadback. Если блокерсохраняется — исследовать следующую существующую модель; A4L2020–2024, оставшиеся2025/2026 сохранитьвretry.",
+  "nextAction": "Ограниченная партия трёх масс A4L2025 сохранена и независимо прочитана. Перейти к существующей Audi A5 по новому handoff; остальные поля A4L2020–2026 и шесть неоднозначных2026 сохранить в retry. Полнота модели не заявлена.",
   "latestReview": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2020-2025-review.json",
   "preparedVariants": [
     {
@@ -52,7 +52,9 @@
         15
       ],
       "identityCheck": "Совпадают год,200万辆/2миллиона,40TFSI,отдельное исполнение,1984см³ и передний привод. Исходное имя сохраняется.",
-      "requiresFreshFullRecordDigest": true
+      "requiresFreshFullRecordDigest": false,
+      "state": "applied_api_readback_pass_pending_index",
+      "appliedBatch": "research-2026-10-24-audi-a4l-2025-mass"
     },
     {
       "variantId": "365d04491870787ca8e2d719",
@@ -71,7 +73,9 @@
         15
       ],
       "identityCheck": "Совпадают год,200万辆/2миллиона,40TFSI,отдельное исполнение,1984см³ и передний привод. Исходное имя сохраняется.",
-      "requiresFreshFullRecordDigest": true
+      "requiresFreshFullRecordDigest": false,
+      "state": "applied_api_readback_pass_pending_index",
+      "appliedBatch": "research-2026-10-24-audi-a4l-2025-mass"
     },
     {
       "variantId": "b5207ac185ede58209545175",
@@ -90,7 +94,9 @@
         15
       ],
       "identityCheck": "Совпадают год,200万辆/2миллиона,40TFSI,отдельное исполнение,1984см³ и передний привод. Исходное имя сохраняется.",
-      "requiresFreshFullRecordDigest": true
+      "requiresFreshFullRecordDigest": false,
+      "state": "applied_api_readback_pass_pending_index",
+      "appliedBatch": "research-2026-10-24-audi-a4l-2025-mass"
     }
   ],
   "reviewedYears": [
@@ -102,5 +108,6 @@
     2025
   ],
   "reviewedRows": 91,
-  "retryDetails": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2020-2025-review.json"
+  "retryDetails": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2020-2025-review.json",
+  "latestAppliedReport": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2025-mass-pass.json"
 }
