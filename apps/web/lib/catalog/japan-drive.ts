@@ -5,7 +5,7 @@ const drive=(v:unknown)=>({AWD:'awd','4WD':'awd',FWD:'fwd',FF:'fwd',RWD:'rwd',FR
 /** Only explicit drivetrain tokens; equipment names alone convey no drive. */
 export function explicitJapanDrive(trim:unknown){
  const matches=[...text(trim).matchAll(/(?:^|[\s/(),-])(4WD|AWD|FWD|RWD|FF|FR)(?=$|[\s/(),-])/g)].map(m=>drive(m[1]));
- const unique=new Set(matches);return unique.size===1?[...unique][0]:undefined;
+ const unique=new Set(matches);if(unique.has('awd')&&/(?:^|[\s/(),-])2WD(?=$|[\s/(),-])/.test(text(trim)))return undefined;return unique.size===1?[...unique][0]:undefined;
 }
 type Group={make:string;model:string;year:number;chassis:string;drive?:string};
 const cache=new WeakMap<CalculationIndex,Group[]>();
@@ -26,7 +26,6 @@ export function enrichJapanDrive<T extends Record<string,any>>(offer:T,index=rea
  if(offer.market!=='japan'||offer.drive||offer.editorialSpecifications?.drive)return offer;
  const explicit=explicitJapanDrive(offer.trim),code=chassis(offer.chassisCode||offer.operational?.chassisCode);
  const group=japanDriveGroups(index).find(g=>g.make===text(offer.make)&&g.model===text(offer.model)&&g.year===offer.year&&g.chassis===code);
- if(explicit&&group?.drive&&explicit!==group.drive)return offer;
  const resolved=explicit||group?.drive;
  return resolved?{...offer,drive:resolved,operational:{...offer.operational,driveEvidence:{source:explicit?'source_grade_explicit_drive':'encyclopedia_chassis_drive_consensus',indexDigest:explicit?undefined:index?.digest,chassisCode:code||undefined}}}:offer;
 }
@@ -37,12 +36,12 @@ export function japanDriveSql(selection:string,index=readCalculationIndex()){
  const clauses:string[]=[];
  for(const value of new Set(selected)){
   const tokens=value==='awd'?['4WD','AWD']:value==='fwd'?['FWD','FF']:['RWD','FR'];
-  for(const token of tokens)clauses.push(`(grade='${token}' or grade like '${token} %' or grade like '% ${token}' or grade like '% ${token} %')`);
+  for(const token of tokens)clauses.push(token.length>2?`grade like '%${token}%'`:`(grade='${token}' or grade like '${token} %' or grade like '% ${token}' or grade like '% ${token} %' or grade like '%(${token})%' or grade like '%/${token}/%')`);
  }
  for(const g of japanDriveGroups(index)){
   if(!g.drive||!selected.includes(g.drive))continue;
   const make=quote(g.make),model=quote(g.model),code=quote(g.chassis);if(!make||!model||!code)continue;
-  clauses.push(`(marka_name=${make} and model_name=${model} and year=${g.year} and kuzov=${code})`);
+  clauses.push(`(marka_name=${make} and model_name=${model} and year=${g.year} and (kuzov=${code} or kuzov like '%-${g.chassis}'))`);
  }
  return '('+clauses.join(' or ')+')';
 }

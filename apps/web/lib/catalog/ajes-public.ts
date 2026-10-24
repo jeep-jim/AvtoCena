@@ -42,7 +42,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   let offer=ajesOffer(lot,rate,result.observedAt);
   // Exact local release facts also cover auction records. No supplier/detail
   // request or legacy approximate matching is needed for this lookup.
-  offer=enrichJapanDrive(applyJapanFactoryFuel(applyEncyclopediaCalculation(offer)));
+  offer=applyJapanFactoryFuel(applyEncyclopediaCalculation(enrichJapanDrive(offer)));
   if(lot.table==='china'||lot.table==='korea'){
    const [{enrichOfferWithKnowledgeCore},{normalizeVehicleOfferSpecs}]=await Promise.all([import('./knowledge-core'),import('./spec-normalization')]);
    offer=normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
