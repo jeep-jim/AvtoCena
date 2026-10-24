@@ -14252,3 +14252,10 @@ CRM40060946283 auditSUCCESS/browserIN_PROGRESS, mobile40060946257 productionbuil
 Запрошен один исправленный productionrelease послеterminalfailure40059430537: все ранее сохранённые партии включены, guardchassisнеослаблен. Производственный сайт пока остаётсянапрежнемrelease; завершениепроверитьпоhealth/publicbatchgate. Паузаисследованийдоverifiedsnapshot сохраняется. Дневные сборы не запускались.
 
 Параллельная запись dc4152a сохранена черезCAS. Диагностический workflow исправлен: JSON теперь сохраняется в фактический artifactpath.
+
+
+## 24.10.2026 11:11 Красноярск — разные японские модели рассчитаны, установка продолжается
+
+[40061172546](https://github.com/jeep-jim/AvtoCena/actions/runs/40061172546)/job120774802299 SUCCESS:507сохранённыхлотов,66fuelFilled/64readyInputs;13/13boundedрасчётовготовы,0ошибок:4Berlingo/4Twingo/3Megane/2Clipper. Среди них Twingo2017 ZaeoQssZkHWDbr, Megane2021 i6tMpOruUTDho7, Clipper2020 490SKYIxnUyL97 со скриншота. Предварительные суммы по действующим параметрам/базовому маршруту,не обещание цены доНовокузнецка. Artifact12547880216 SHA2569f86f3ad70547286b6d1b49a0dc984115d535f8f3978987c5e27c9372ade54ff; terminalлог прочитан,zip отдельно не сверялся.
+
+[Исправленный production40061172533](https://github.com/jeep-jim/AvtoCena/actions/runs/40061172533), release d80b8407334ae2d09519a2c895947c68f03a28e8: ASTRA receipt/tests/security/storage SUCCESS, privateindex IN_PROGRESS; установка пока не подтверждена. Дубликат не запускать. Следить за immutablegate/artifact, затем снять researchpause и проверитьhealth/publicbatchgate/Японию на сайте. Главная/ОАЭ/энциклопедия открылись в браузере без горизонтального переполнения; измерениеstreamedhiddenконтейнеров не принимается за liveгеометрию. Изолированные8геометрических сценариев PASS сохраняются отдельно.

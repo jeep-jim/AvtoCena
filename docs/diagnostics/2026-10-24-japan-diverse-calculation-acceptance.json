@@ -1,0 +1,134 @@
+{
+  "checkedAt": "2026-10-24T04:09:32.921Z",
+  "auditRun": 40061172546,
+  "job": 120774802299,
+  "artifact": 12547880216,
+  "rows": 507,
+  "fuelFilled": 66,
+  "readyInputs": 64,
+  "calculationAttempts": 13,
+  "calculated": 13,
+  "failures": [],
+  "examples": [
+    {
+      "id": "ajes-stats-PlG2APQPuYvIlc",
+      "model": "BERLINGO",
+      "year": 2023,
+      "fuel": "diesel",
+      "powerHp": 130,
+      "totalRub": 1704387,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-50OqxEeBT9pKGS",
+      "model": "BERLINGO",
+      "year": 2023,
+      "fuel": "diesel",
+      "powerHp": 130,
+      "totalRub": 1704429,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-SQh1js4X7uJ7Gv",
+      "model": "BERLINGO",
+      "year": 2021,
+      "fuel": "diesel",
+      "powerHp": 130,
+      "totalRub": 1488730,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-aPcAKNzUor1dhrA",
+      "model": "BERLINGO",
+      "year": 2023,
+      "fuel": "diesel",
+      "powerHp": 130,
+      "totalRub": 1420629,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-ZaeoQssZkHWDbr",
+      "model": "TWINGO",
+      "year": 2017,
+      "fuel": "petrol",
+      "powerHp": 90,
+      "totalRub": 634450,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-i6tMpOruUTDho7",
+      "model": "MEGANE",
+      "year": 2021,
+      "fuel": "petrol",
+      "powerHp": 159,
+      "totalRub": 848297,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-2PXEaGpocP9sSr0",
+      "model": "MEGANE",
+      "year": 2023,
+      "fuel": "petrol",
+      "powerHp": 159,
+      "totalRub": 1217720,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-0xopbYrAgrJLnXk",
+      "model": "MEGANE",
+      "year": 2023,
+      "fuel": "petrol",
+      "powerHp": 159,
+      "totalRub": 1192516,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-Or3gkeSA2PmyKx",
+      "model": "TWINGO",
+      "year": 2017,
+      "fuel": "petrol",
+      "powerHp": 90,
+      "totalRub": 577741,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-5keAJ9lJ98SRkG",
+      "model": "TWINGO",
+      "year": 2018,
+      "fuel": "petrol",
+      "powerHp": 90,
+      "totalRub": 635944,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-70MCqNsSQNZcjds",
+      "model": "TWINGO",
+      "year": 2020,
+      "fuel": "petrol",
+      "powerHp": 90,
+      "totalRub": 830486,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-490SKYIxnUyL97",
+      "model": "CLIPPER VAN",
+      "year": 2020,
+      "fuel": "petrol",
+      "powerHp": 49,
+      "totalRub": 540596,
+      "estimated": true
+    },
+    {
+      "id": "ajes-stats-2BUjfTfdIGujpE",
+      "model": "CLIPPER VAN",
+      "year": 2020,
+      "fuel": "petrol",
+      "powerHp": 49,
+      "totalRub": 548997,
+      "estimated": true
+    }
+  ],
+  "release": "d80b8407334ae2d09519a2c895947c68f03a28e8",
+  "deployRun": 40061172533,
+  "publicationConfirmed": false
+}
