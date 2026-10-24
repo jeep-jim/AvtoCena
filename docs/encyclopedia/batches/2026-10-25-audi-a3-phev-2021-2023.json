@@ -1,0 +1,435 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a3-phev-2021-2023",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c09ed77e97b80cc32c6592db",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2021,
+      "trim": "Sportback 40 TFSIe 204PK S-line Advanced edition P",
+      "expectedDigest": "45bc25be5592dcb2da51a0e399e804069dc0962d4614372057abcdc4a4498599",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 150,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+        "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+        "additionalUrls": [
+          "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive"
+        ],
+        "periodEvidence": {
+          "url": "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive",
+          "sourceSha256": "ea3f91ade622b00e035fd467265ec1617741303c745006f75d9dbe62794ed645",
+          "publisher": "AUDI AG technical portal",
+          "publishedAt": "2020-06"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "26a525d199cf7c7116d23459",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2021,
+      "trim": "45 TFSIe S line Competition Sportback PHEV /Alcantara/Phone Box/Carplay/Keyless/Zetelverwarming/",
+      "expectedDigest": "5f96682ff84b9b716f31a92131506011b8da1dfbc1b3b5ed764898e5a95bb2bc",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+        "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+        "additionalUrls": [
+          "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e"
+        ],
+        "periodEvidence": {
+          "url": "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e",
+          "sourceSha256": "57cee3c6463f38ec65c3d5fb55887d7b34461826c0b942c3141b9c63adf98f76",
+          "publisher": "Audi press release / Porsche Holding newsroom",
+          "publishedAt": "2020-12-10"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "da5c708c2cc1d74db44caf5a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2021,
+      "trim": "Sportback 45 TFSIe S line Aut.*NAVI*VC*PDC*",
+      "expectedDigest": "67ab424dcb131584b892d1be69d3e51ca5a0aac77b561d145a42c1c2a52e2c97",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+        "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+        "additionalUrls": [
+          "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e"
+        ],
+        "periodEvidence": {
+          "url": "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e",
+          "sourceSha256": "57cee3c6463f38ec65c3d5fb55887d7b34461826c0b942c3141b9c63adf98f76",
+          "publisher": "Audi press release / Porsche Holding newsroom",
+          "publishedAt": "2020-12-10"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "03259e37a6118b191687000c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2021,
+      "trim": "45 TFSI e S tronic S line Edition",
+      "expectedDigest": "40ff134f8457a292fa08d96d5a04e2e66d565ca29fd38f2d0146f8bc458feb3c",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+        "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+        "additionalUrls": [
+          "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e"
+        ],
+        "periodEvidence": {
+          "url": "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e",
+          "sourceSha256": "57cee3c6463f38ec65c3d5fb55887d7b34461826c0b942c3141b9c63adf98f76",
+          "publisher": "Audi press release / Porsche Holding newsroom",
+          "publishedAt": "2020-12-10"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "10e80f5885b4cd8d4b83c457",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 40 TFSI e S-Tronic Navi/Virt.Cockpi",
+      "expectedDigest": "a2eb48f5e73c430a6944c08c867b24e5806e7c819225e516e2ee5f18e8a91605",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 150,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+        "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+        "additionalUrls": [
+          "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive"
+        ],
+        "periodEvidence": {
+          "url": "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive",
+          "sourceSha256": "ea3f91ade622b00e035fd467265ec1617741303c745006f75d9dbe62794ed645",
+          "publisher": "AUDI AG technical portal",
+          "publishedAt": "2020-06"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c81cee689c79e9b653ddb7be",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 40 TFSIe S LINE *NAVI*LED*KAMERA*VC",
+      "expectedDigest": "e84654a865b326d8b4166243f7e81930be5f6103c1180a4dc9995348f5ec0f6d",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 150,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+        "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+        "additionalUrls": [
+          "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive"
+        ],
+        "periodEvidence": {
+          "url": "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive",
+          "sourceSha256": "ea3f91ade622b00e035fd467265ec1617741303c745006f75d9dbe62794ed645",
+          "publisher": "AUDI AG technical portal",
+          "publishedAt": "2020-06"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a2b21c9e0ce0f571c313eaad",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback PHEV 40 TFSI e S line S tronic - GPS - APP - CLIM AUTO - SIEGES SPORT",
+      "expectedDigest": "a1f50647432aad78012310eeffe556d70d0042c1606668f4c60dfafb091f38dd",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 150,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+        "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+        "additionalUrls": [
+          "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive"
+        ],
+        "periodEvidence": {
+          "url": "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive",
+          "sourceSha256": "ea3f91ade622b00e035fd467265ec1617741303c745006f75d9dbe62794ed645",
+          "publisher": "AUDI AG technical portal",
+          "publishedAt": "2020-06"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2c65fc85263c093b232000f0",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "40 TFSIe S-line+ ViCo Pano AmbienteB B&O ACC",
+      "expectedDigest": "aae301f472705a679809133f4d85e84ce03f5138945485a456e52fcc780969ce",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 150,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+        "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+        "additionalUrls": [
+          "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive"
+        ],
+        "periodEvidence": {
+          "url": "https://www.audi-technology-portal.de/en/drivetrain/hybrid-technologies/audi-a3-sportback-40-tfsi-e-drive",
+          "sourceSha256": "ea3f91ade622b00e035fd467265ec1617741303c745006f75d9dbe62794ed645",
+          "publisher": "AUDI AG technical portal",
+          "publishedAt": "2020-06"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7bbd90b677f59fb70de3d348",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 45 TFSIe hybrid S Line +Interieur RFK VC",
+      "expectedDigest": "9f58088fba4ca15d52970303f5a55633e86c8c1441db386494112543246a1894",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+        "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+        "additionalUrls": [
+          "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e"
+        ],
+        "periodEvidence": {
+          "url": "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e",
+          "sourceSha256": "57cee3c6463f38ec65c3d5fb55887d7b34461826c0b942c3141b9c63adf98f76",
+          "publisher": "Audi press release / Porsche Holding newsroom",
+          "publishedAt": "2020-12-10"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b9be32418f5fe0ba64bb2faf",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback S-Line 45TFSIe S-Line Interieur",
+      "expectedDigest": "4c1fdb697616fffc0938a761ce7918b01603204c94328c288a80fc281353b098",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+        "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+        "additionalUrls": [
+          "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e"
+        ],
+        "periodEvidence": {
+          "url": "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e",
+          "sourceSha256": "57cee3c6463f38ec65c3d5fb55887d7b34461826c0b942c3141b9c63adf98f76",
+          "publisher": "Audi press release / Porsche Holding newsroom",
+          "publishedAt": "2020-12-10"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1b5a32d82d94c1c0959009e1",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2023,
+      "trim": "Sportback 45 TFSI e S line NAVI+VIRT+LED+ACC",
+      "expectedDigest": "e0ed46128f67d417009457e7b30bd8c4ce378b6cd568632e1c47b330ab5530de",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+        "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+        "additionalUrls": [
+          "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e"
+        ],
+        "periodEvidence": {
+          "url": "https://www.porscheholding-newsroom.at/pressemeldungen/detail/2020-12-11-kompakter-hybrid-mit-245-ps-systemleistung-der-audi-a3-sportback-45-tfsi-e",
+          "sourceSha256": "57cee3c6463f38ec65c3d5fb55887d7b34461826c0b942c3141b9c63adf98f76",
+          "publisher": "Audi press release / Porsche Holding newsroom",
+          "publishedAt": "2020-12-10"
+        },
+        "checkedAt": "2026-10-25",
+        "statement": "Audi: публикация запуска2020 и таблица18.07.2023 подтверждают одну техническую установку1395см³,40/45TFSIe,S tronic,FWD:ДВС110кВт,система150/180кВт,бензиновый подключаемый гибрид. Совпадают сохранённые год2021–2023,объём,системнаямощность и автомат; оборудование комплектации не требуется. Preflight исключил manualEdited и research/ASTRA/reference-защиту старойicePowerKw; ошибочнаясистемнаямощность в полеДВС исправлена,прочиеизвестныеполянеизменны. Подтверждены уже известные fuel/kind. Неизвестные кузов и сертифицированная30min остаются пустыми."
+      }
+    }
+  ]
+}

@@ -15328,3 +15328,8 @@ Preflight40137276762/job121001355877 SUCCESS22:09:20UTC:3точныхdigest,manu
 Apply40137439232/job121001852940 SUCCESS22:11:50UTC,3variants15fields,skip0:12new и3correctedicePowerKw. НезависимыйAPI подтверждает15/15,revision5962b59e-60c6-49d5-baa7-072c2b46e1a2;остальные123строки2024 ипрочиепубличныеполянеизменны,30min0. ДанныеsavedНЕactivated. Retainedpage3 run40137089009/job121000787787 SUCCESS,artifact12578161035 ZIP6d93f405проверен:64rows(A3=34/A4=5/A5=25),192uniqueвсегобезпересечений,75осталосьпослеa49c0c14. Snapshot4833738b/checkpoint974674b неизменны,unverifiedнеповышены.
 
 Прочитаны625существующихA3строк2021–2023(163/201/261);найдены11точных1395/40–45TFSIe/150–180кВт/автоматкандидатов. Запрошенboundedpreflight11manual/evidence/digest; данныеещёнеизменены. Проверяетсятаже заводскаяразница110кВтДВС против150/180system,непереносятсямассы/peak/30min. Запрошенаследующаячетвёртаяretainedстраницапослекурсора,безповтора192. Release/repairпо-прежнемуожидаютterminalChina+freshprerequisites.
+
+
+### 25.10.2026 05:15 UTC+7 — A3 PHEV2021–2023: одна партия11вариантов
+
+Preflight40137668342/job121002531851SUCCESS:все11manualEdited=false,research/ASTRA/referenceiceproofпусты. Партия8bc601e3786512a881e3e92fbb19251cada92639f48f9f727c6a3085ae3ad8c2 validatePASS,запрошенодинштатныйapply.55fieldassertions разделенычестно:38новыхзначений,5исправленийice150/180→110,12неизменённыхfuel/kindполучаютзаводскиедоказательства. ExistingID/year/trim/digest,история,неизвестныйкузов/30minсохранены;новыхмоделей0. ИсточникиAudi2020launch(40TFSIeAudiTechnologyPortal,45TFSIeAudi/PorscheHoldingnewsroom)+18.07.2023таблицы,точныеURL/SHA256сохранены. SavedпокаНЕподтверждён;следующееterminal/API55readback. China40124551054active,pending0,release/repairнедублированы.
