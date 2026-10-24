@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T11:00:09.468Z",
+  "checkedAt": "2026-10-24T11:03:19.881Z",
   "modelId": "8cf3dbb7884fe919bce44c62",
   "make": "Audi",
   "model": "A5",
@@ -23,7 +23,7 @@
   "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2021-2023-remaining.json",
   "previous2026Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
   "priorRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
-  "nextAction": "Дождаться SUCCESS Prepare private encyclopedia index и membership40085909587; затем свежая ревизия/digest, apply32 и независимый API readback. Не повторять исследования/старые apply.",
+  "nextAction": "После SUCCESS private index/membership40085909587 проверить свежие CAS и применить существующую32-партию; затем независимыйAPIreadback.",
   "nextYearRead": {
     "year": 2023,
     "rows": 67,
@@ -47,5 +47,19 @@
   "completedReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
   "previous2025Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
   "preparedBatchSha256": "c6d6d7b2ff5b8c120c69f444e2fc1bd71d212bbd3e5fbf0af1afcbf0a686098d",
-  "previous2024Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2024-remaining.json"
+  "previous2024Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2024-remaining.json",
+  "nextAfterPreparedBatch": {
+    "modelId": "8cf3dbb7884fe919bce44c62",
+    "make": "Audi",
+    "model": "A5",
+    "year": 2020,
+    "variantId": "afca546b95a6ef461163e66c",
+    "trim": "Coupe 45 TFSI qu.*S LINE*MATRIX-R.KAM-ACC-DSP",
+    "missingValueFields": [
+      "bodyType"
+    ],
+    "state": "candidate_requires_fresh_cas",
+    "rowsRead": 38
+  },
+  "preApplyRevisionVerifiedAt": "2026-10-24T11:03:19.881Z"
 }

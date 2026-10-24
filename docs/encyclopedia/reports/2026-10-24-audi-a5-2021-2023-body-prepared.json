@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T11:00:09.468Z",
+  "checkedAt": "2026-10-24T11:03:19.881Z",
   "batch": "research-2026-10-24-audi-a5-2021-2023-body",
   "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
   "batchSha256": "c6d6d7b2ff5b8c120c69f444e2fc1bd71d212bbd3e5fbf0af1afcbf0a686098d",
@@ -58,8 +58,23 @@
     "workflow": 40085909587,
     "job": 120854944005,
     "snapshotReady": false,
-    "duplicateDeployRequested": false
+    "duplicateDeployRequested": false,
+    "preparePrivateIndex": "in_progress",
+    "membership": "pending"
   },
   "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2021-2023-remaining.json",
-  "allModelsComplete": false
+  "allModelsComplete": false,
+  "preApplyAnonymousReadback": {
+    "passed": true,
+    "revision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+    "rowsUnchanged": 253
+  },
+  "publicParity": {
+    "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2021-2023-prepared-public-parity.json",
+    "offers": 7,
+    "comparisons": 91,
+    "passed": true,
+    "newBatchActivationProved": false
+  },
+  "nextAction": "После SUCCESS private index/membership40085909587 проверить свежие CAS и применить существующую32-партию; затем независимыйAPIreadback."
 }
