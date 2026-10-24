@@ -14389,3 +14389,8 @@ Read-only preflight40068252368/job120795933678 SUCCESS,30полных digest,р�
 Readonly40068364961/job120796274772 SUCCESS (актуальныйaf3index иgenerictrimfix):3436карточек/5096новыхполей; completeSpecifications+48890, изних ранееpending234 (China230,Korea2,Europe2). Все234 combustion, этоещёне234готовыесуммы: нужноразрешениеостальныхусловийдвижком. Добавлено30min однойкарточкеиICEодной, ноновыхполныхHEV/EVвэтомshadow нет. Японскийcache462лота, новыхсовпадений0; срездругой, неутверждениепаденияготовыхцен.
 
 Дляснимка40068425827/6c347ef установленresearchWriteCoordination.writesPaused=true; pauseтолькоapplyдоновогонеизменяемогоиндекса, исследование/подготовкапартийразрешены. ПослеSUCCESSprivateindexснятьсразу, не ждатьinstall. Это предотвращаетencyclopedia_changed_during_preparation; предыдущий2b87ужеимеетснимокинаподготовкецен.
+
+
+## 2026-10-24T13:12:06.952219+07:00 — исправление устаревшей проверки ИИ Бро
+
+Browser40068044378/job120795322679 failedтолькона8staffcases: тесттребовалpermission_assistantпослеявногоудалениявладельцем. Исправленоожидание: отсутствуетassistant, сохраненыassistantPageControl/assistantCodeиостальныеправа. ЛокальныйrealChromiumCRM_TEST_PAGES=staff:8/8PASS (320/390/768/1440 ×dark/light); проверкивсехостальныхразделовнеослаблялись. Test-onlycommitнесоздаётновыйproductionrelease; общий6c347ef/40068425827остаётсяцелевым.
