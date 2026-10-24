@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a5-40tfsi-displacement",
+  "entries": [
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "0c127bfbf3a0d73d920715ee",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "40 TFSI ADVANCED SPORTBACK",
+      "expectedDigest": "da3a84abd5c7a8ca566cd4212babd8ced62c5d696affbef989d435714c54631e",
+      "patch": {
+        "engineCc": 1984
+      },
+      "confirmedFields": [
+        "engineCc"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/964/file_en/1efb854a2a376cbaeaba745c036c20e5805ecd0a/eTD-Audi-A5-Sportback-40-TFSI-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблица Audi от 13.06.2024: A5 Sportback 40 TFSI с передним приводом подтверждает объём 1984 см³. Совпадают год 2024, бензиновая техническая версия TFSI, кузов, автоматическая трансмиссия и сохранённый привод. Дополнительно сохранённые reference-таблицы показывают одинаковый объём при нескольких мощностях; переносится только подтверждённый объём. Мощность, классификация гибрида и 30-минутная мощность не изменяются."
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "18b41fb2835845cf38485884",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "40 TFSI S-LINE",
+      "expectedDigest": "d6ad46085769b043ae6effdd3d068711afa8ccf1ccf0e72dac0d6bb8c95da4a7",
+      "patch": {
+        "engineCc": 1984
+      },
+      "confirmedFields": [
+        "engineCc"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1075/file_de/1d18313921f87a55058e49514ecb4d8b7208c4dc/TD-Audi-A5-Coupe-40-TFSI-quattro-S_tronic-150kW_MHEV_240320.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблица Audi от 20.03.2024: A5 Coupé 40 TFSI quattro подтверждает объём 1984 см³. Совпадают год 2024, бензиновая техническая версия TFSI, кузов, автоматическая трансмиссия и сохранённый привод. Дополнительно сохранённые reference-таблицы показывают одинаковый объём при нескольких мощностях; переносится только подтверждённый объём. Мощность, классификация гибрида и 30-минутная мощность не изменяются."
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "a3eee39d462bfc013edaf629",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "40 TFSI S-LINE SPORTBACK",
+      "expectedDigest": "4241b87a67fe3563b5f8eb125d55598de74c7a3fe31a2a9c2d9a35395c982314",
+      "patch": {
+        "engineCc": 1984
+      },
+      "confirmedFields": [
+        "engineCc"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/964/file_en/1efb854a2a376cbaeaba745c036c20e5805ecd0a/eTD-Audi-A5-Sportback-40-TFSI-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблица Audi от 13.06.2024: A5 Sportback 40 TFSI с передним приводом подтверждает объём 1984 см³. Совпадают год 2024, бензиновая техническая версия TFSI, кузов, автоматическая трансмиссия и сохранённый привод. Дополнительно сохранённые reference-таблицы показывают одинаковый объём при нескольких мощностях; переносится только подтверждённый объём. Мощность, классификация гибрида и 30-минутная мощность не изменяются."
+      }
+    }
+  ]
+}
