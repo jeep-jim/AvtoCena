@@ -1,12 +1,13 @@
 {
-  "preparedAt": "2026-10-24T15:51:47.058Z",
-  "status": "prepared_not_dispatched",
+  "preparedAt": "2026-10-24T16:23:10.083Z",
+  "status": "prepared_reader_first_not_dispatched",
   "requiredBeforeDispatch": [
-    "Check freshest main and all active/pending/queued runs; do not replace another pending release.",
-    "Read terminal repair40108157776 and all nonempty/market parity results. Do not permit missing Japan by weakening guards.",
-    "PR1525 exact head must have green CI and be merged.",
-    "Refresh deployed health and release marker; do not duplicate a release already requested by manual session.",
-    "Set requestedAt at actual dispatch; after real activation run pickup-drive-pricing/checkCatalogFeedback pinned to that SHA."
+    "Перечитать main и ВСЕ active/pending/queued; не вытеснять чужой pending.",
+    "40108157776 отменён по просьбе владельца. Состояние lease после отмены неизвестно. В checkpoint отмечен отказ автоматической проверки разрешений для read-only diagnostic; не повторять тот же запрещённый запуск обходным способом и не сбрасывать lock.",
+    "PR1525 merged78267709, PR1526 merged10d6dbc8; CI точногоhead5dd627b0 SUCCESS40110551110. Следующий выпуск должен сначала установить scoped-v1 reader. Прежнее требование успешного scoped repair ДО reader создаёт неверный порядок и заменено.",
+    "Сохранить40required/26publicresearch и3ASTRAplan из draftMarker; повторных ASTRA apply не делать.",
+    "После разрешённой проверки lease и готовности очереди установить reader, проверить точный health scoped-v1, затем ровно одна chunked пересборка и все market/parity guards.",
+    "Запуск pickup-drive-pricing/checkCatalogFeedback привязать к фактически установленному SHA; не использовать старый7189 как подтверждённый."
   ],
   "draftMarker": {
     "requiredResearchBatches": [

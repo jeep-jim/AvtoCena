@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T15:51:47.058Z",
+  "updatedAt": "2026-10-24T16:23:10.083Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T15:51:47.058Z",
+    "updatedAt": "2026-10-24T16:23:10.083Z",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -42879,7 +42879,26 @@
       "previousExpectedRelease": "7189a40f73606b46eaeb86e4c37905e1fd0bfcf6",
       "reason": "7189 activation was not confirmed; prepare job cancelled at its 60-minute limit. Pin acceptance to the next actually activated coordinated release."
     },
-    "nextCoordinatedReleasePlan": "docs/encyclopedia/reports/2026-10-24-next-coordinated-release-plan.json"
+    "nextCoordinatedReleasePlan": "docs/encyclopedia/reports/2026-10-24-next-coordinated-release-plan.json",
+    "scopedProjectionRepair": {
+      "pr": 1526,
+      "head": "5dd627b07fa21a04c1ee034e3e0c25ee83b6b01a",
+      "merge": "10d6dbc8945cb4f2a50420e5b459a4b7db40e542",
+      "ci": 40110551110,
+      "conclusion": "success",
+      "targetTestsPassed": 18,
+      "otherChecks": [
+        40110551117,
+        40110551012
+      ],
+      "installed": false,
+      "repairRequested": false,
+      "priorRepair": 40108157776,
+      "priorRepairConclusion": "cancelled",
+      "publicationLease": "unknown_after_cancel",
+      "next": "Сначала подтверждение publication lease и установка reader scoped-v1; затем ровно одна пересборка. Не сбрасывать неизвестный lock и не обходить блок автоматической проверки разрешений на диагностический запуск.",
+      "checkpoint": "docs/operations/2026-10-24-bounded-scoped-projections.md"
+    }
   },
   "scope": {
     "minimumYear": 2008,

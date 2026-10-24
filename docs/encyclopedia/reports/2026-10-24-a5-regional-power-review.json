@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-24T16:23:10.083Z",
+  "status": "source_review_only_not_saved",
+  "scope": "Audi A5 2024, остаточные строки из существующего27-row handoff",
+  "sources": [
+    {
+      "url": "https://www.audi.com.mx/content/dam/nemo/mx/FichasTecnicas/fichasOne24/A5-SB_FICHA-TECNICA_2024.pdf",
+      "observed": "Официальная таблица2024:40TFSI,1984см³,190hp. Поисковое извлечение доступно, прямоеopen вернулоDisabledError; байты/SHA не подтверждены."
+    },
+    {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1072/file_en/56084865a128268c5e39f803a44d8a454daf5298/eTD-Audi-A5-Sportback-40-TFSI-quattro-S_tronic-150kW-MHEV_240613.pdf?1718361370=",
+      "observed": "Заводская немецкая таблица13.06.2024,стр1:40TFSI quattro,1984см³,150кВт/204PS."
+    },
+    {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/964/file_de/1efb854a2a376cbaeaba745c036c20e5805ecd0a/TD-Audi-A5-Sportback-40-TFSI-S_tronic-150kW-MHEV_240613.pdf?1718361368=&disposition=attachment",
+      "observed": "Заводская немецкая таблица13.06.2024,стр1:40TFSI FWD,1984см³,150кВт/204PS."
+    }
+  ],
+  "decision": "Мощность нельзя назначить по одному badge40TFSI. Объём1984 является кандидатом для дополнительной точной проверки; batch/revision/SHA preflight ещё не выполнен. Никаких полей не записано,30min не выводилась.",
+  "savedFields": 0
+}
