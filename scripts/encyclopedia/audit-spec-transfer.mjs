@@ -29,7 +29,11 @@ const report={checkedAt:new Date().toISOString(),indexDigest:index.digest,genera
 function identityCode(raw){return raw.chassisCode||raw.operational?.chassisCode;}
 function inspect(raw){
  const source=applyUaeManualSpecifications(raw),before=applyEncyclopediaCalculation(source,index,{technicalIdentity:true}),after=applyEncyclopediaCalculation(source,index,{technicalIdentity:true,specificationIdentity:true});
- const r=report.markets[raw.market]||={rows:0,withTechnicalCode:0,modelYearKnown:0,baselineMatched:0,technicalMatched:0,newlyFilledRecords:0,newlyFilledFields:0,newlyCompleteSpecifications:0,newlyCompletePending:0,newlyFilledByField:{},newlyCompleteByPowertrain:{},japanPreviewBefore:0,japanPreviewAfter:0};r.rows++;
+ const r=report.markets[raw.market]||={rows:0,withTechnicalCode:0,modelYearKnown:0,baselineMatched:0,technicalMatched:0,newlyFilledRecords:0,newlyFilledFields:0,newlyCompleteSpecifications:0,newlyCompletePending:0,newlyFilledByField:{},newlyCompleteByPowertrain:{},japanPreviewBefore:0,japanPreviewAfter:0,afterComplete:0,afterMissingByField:{},unmatchedReasons:{},retainedDelivered:0};r.rows++;
+ r.afterComplete+=Number(specificationEvidenceComplete(after));
+ r.retainedDelivered+=Number(Number(raw.totalRub)>0&&raw.catalogPricingMode!=='seller');
+ for(const field of factFields)if(after[field]===undefined||after[field]===null||after[field]===''||after[field]==='unknown')r.afterMissingByField[field]=(r.afterMissingByField[field]||0)+1;
+ if(!after.operational?.encyclopediaCalculation){const facts=index.models[modelKey(raw.make,raw.model)]||[];const reason=!facts.length?'model_absent_from_calculation_index':!facts.some(v=>v.year===raw.year)?'year_absent_from_calculation_index':'no_compatible_field_consensus';r.unmatchedReasons[reason]=(r.unmatchedReasons[reason]||0)+1;}
  r.withTechnicalCode+=Number(Boolean(source.chassisCode||source.engineCode||source.operational?.chassisCode));
  r.modelYearKnown+=Number((index.models[modelKey(raw.make,raw.model)]||[]).some(v=>v.year===raw.year));
  r.baselineMatched+=Number(Boolean(before.operational?.encyclopediaCalculation));r.technicalMatched+=Number(after.operational?.encyclopediaCalculation?.matchMethod==='specification_consensus');

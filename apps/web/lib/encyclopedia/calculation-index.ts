@@ -140,7 +140,8 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  const roundedJapanVolume=(v:CalculationFact,f:string,value:any)=>options.technicalIdentity&&f==='engineCc'&&offer.market==='japan'
   &&exists(identity.chassisCode)&&same('chassisCode',identity.chassisCode,v.constraints.chassisCode)
   &&Number(identity.engineCc)%100===0&&Math.abs(Number(identity.engineCc)-Number(value))<=25;
- const compatible=(v:CalculationFact)=>Object.entries(v.constraints).every(([f,value])=>!exists(identity[f])||same(f,identity[f],value)||roundedJapanVolume(v,f,value))
+ const nonConflicting=(v:CalculationFact)=>Object.entries(v.constraints).every(([f,value])=>!exists(identity[f])||same(f,identity[f],value)||roundedJapanVolume(v,f,value));
+ const compatible=(v:CalculationFact)=>nonConflicting(v)
   &&['generation','chassisCode','engineCode'].every(f=>!exists(identity[f])||exists(v.constraints[f])&&same(f,identity[f],v.constraints[f]));
  const exact=annual.filter(v=>v.trims.includes(trim));
  const specificTrim=(/\d/u.test(trim)&&/[\p{L}]/u.test(trim))||identity.engineCode||identity.chassisCode;
@@ -158,14 +159,23 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
   const power=(v:any)=>Number(v.powerKw)||(Number(v.powerHp)*0.73549875);
   const strong=(v:CalculationFact)=>{
    const x=v.values;
-   if(!['fuel','powertrainKind'].every(f=>exists(identity[f])&&exists(x[f as Field])&&same(f,identity[f],x[f as Field])))return false;
-   if(!(power(identity)>0&&power(x)>0&&Math.abs(power(identity)-power(x))<=0.75))return false;
+   if(!exists(identity.fuel)||!exists(x.fuel)||!same('fuel',identity.fuel,x.fuel))return false;
+   if(exists(identity.powertrainKind)&&(!exists(x.powertrainKind)||!same('powertrainKind',identity.powertrainKind,x.powertrainKind)))return false;
+   // Feed records often omit the redundant powertrain kind. Keep all fuel-
+   // compatible candidates; any missing/divergent output still blocks that field.
+   // An explicitly supplied ICE measurement must compare with ICE, never system power.
+   const useIce=Number(identity.icePowerKw)>0;
+   const a=useIce?Number(identity.icePowerKw):power(identity),b=useIce?Number(x.icePowerKw):power(x);
+   if(!(a>0&&b>0&&Math.abs(a-b)<=0.75))return false;
    const anchor=(f:Field)=>exists(identity[f])&&exists(x[f])&&same(f,identity[f],x[f]);
-   return normalized('powertrainKind',identity.powertrainKind)==='electric'
+   return normalized('fuel',identity.fuel)==='electric'
     ?anchor('drive')&&anchor('bodyType')
     :anchor('engineCc')&&(anchor('drive')||anchor('bodyType'));
   };
-  const pool=annual.filter(compatible);
+  // A source-only code is not a contradiction with an undocumented donor code.
+  // Known conflicting codes are still rejected by nonConflicting. Keep incomplete
+  // donors in the pool instead of dropping them to manufacture consensus.
+  const pool=annual.filter(nonConflicting);
   if(pool.some(strong)){candidates=pool;specificationMatch=true;}
  }
  if(!candidates.length)return offer;
@@ -173,6 +183,7 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  for(const field of factFields){
   // Certification belongs to an exact modification; a code-only bridge is not sufficient.
   if(technicalMatch&&field==='power30MinKw')continue;
+  if(specificationMatch&&field==='power30MinKw'&&candidates.some(v=>!compatible(v)))continue;
   if(semantic[field]?.status==='conflict')continue;
   const entries=candidates.filter(c=>exists(c.values[field]));
   // A partially documented candidate remains a possible different modification.

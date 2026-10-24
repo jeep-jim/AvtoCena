@@ -12,7 +12,7 @@ import {readAjesCatalogPage,readAjesCountSummary,readAjesMakes,readAjesDirectory
 import {AjesInputError} from '@/lib/catalog/ajes-query';
 import {readSavedAjesFacets} from '@/lib/catalog/ajes-runtime';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
-import {ajesCountText,exactAjesCount} from '@/lib/catalog/ajes-count-display';
+import {ajesCountText,exactAjesCount,ajesPaginationCountText} from '@/lib/catalog/ajes-count-display';
 type Params=Record<string,string|string[]|undefined>;
 export async function AjesCatalog({params,embedded=false}:{params:Params;embedded?:boolean}){
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));const market=initial.market==='china'?'china':initial.market==='korea'?'korea':'japan';const label=market==='china'?'Китай':market==='korea'?'Корея':'Япония';initial.market=market;if(market!=='japan')initial.source='ajes';if(!initial.make&&initial.brand)initial.make=initial.brand;
@@ -49,7 +49,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  </div>
  {result&&<div>
  {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}
- <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor}/>
+ <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor} resultCountLabel={ajesPaginationCountText(sourceTotal)}/>
  </div>}
 </CatalogSidebar>
  </section>
