@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T09:33:42.212Z",
+  "release": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
+  "status": "awaiting_production",
+  "tests": {
+    "full": {
+      "passed": 2479,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 266029.609465
+    },
+    "targeted": {
+      "passed": 84
+    },
+    "typecheck": "passed",
+    "crmLocalClientCases": 8,
+    "crmCiBrowserJob": 120837108484
+  },
+  "deployments": [
+    {
+      "runId": 40081064561,
+      "release": "a2c1f1a9786c3a745dbc096888d8c7e67835c11b",
+      "status": "preparing_price_indexes"
+    },
+    {
+      "runId": 40081936386,
+      "release": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
+      "status": "pending"
+    }
+  ],
+  "japanReadOnlyAcceptance": {
+    "rows": 417,
+    "fuelFilled": 48,
+    "readyInputs": 46,
+    "calculationAttempts": 20,
+    "calculated": 20,
+    "failures": [],
+    "examples": [
+      {
+        "id": "ajes-stats-X2apkhstFF3mSl",
+        "model": "PASSAT",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 150,
+        "totalRub": 1566967,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2uNPKQmfgUvYjrX",
+        "model": "PASSAT",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 150,
+        "totalRub": 1552790,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-ZaeoQssZkHWDbr",
+        "model": "TWINGO",
+        "year": 2017,
+        "fuel": "petrol",
+        "powerHp": 90,
+        "totalRub": 634450,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-i6tMpOruUTDho7",
+        "model": "MEGANE",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 159,
+        "totalRub": 848297,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2BUjfTfdIGujpE",
+        "model": "CLIPPER VAN",
+        "year": 2020,
+        "fuel": "petrol",
+        "powerHp": 49,
+        "totalRub": 548997,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2NgfFLkogQyQo",
+        "model": "EVERY",
+        "year": 2016,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 474961,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2QFQ2qkxr4bP4Ru",
+        "model": "ALTO",
+        "year": 2023,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 509539,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2QoalTno4ZkOeah",
+        "model": "ALTO",
+        "year": 2022,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 473833,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2Qu4zJH7wlhOvoG",
+        "model": "EVERY",
+        "year": 2022,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 527572,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2QzWNA1OYHeOMD6",
+        "model": "COROLLA FIELDER",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 103,
+        "totalRub": 1215162,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2R4oUNBpgsZQaN7",
+        "model": "EVERY",
+        "year": 2018,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 492289,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2RUpVosRnEySFSJ",
+        "model": "ALTO",
+        "year": 2023,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 527572,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2RwR32bZyeKRyX8",
+        "model": "EVERY",
+        "year": 2015,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 510666,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2f01P7IiNivukRS",
+        "model": "CLIPPER VAN",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 49,
+        "totalRub": 648943,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-490SKYIxnUyL97",
+        "model": "CLIPPER VAN",
+        "year": 2020,
+        "fuel": "petrol",
+        "powerHp": 49,
+        "totalRub": 540596,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2WgfhIgtrNNdObd",
+        "model": "CLIPPER VAN",
+        "year": 2017,
+        "fuel": "petrol",
+        "powerHp": 49,
+        "totalRub": 550031,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-4vIM9fAmNIzS4I",
+        "model": "TIIDA",
+        "year": 2011,
+        "fuel": "petrol",
+        "powerHp": 109,
+        "totalRub": 731021,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2l0HxMdKetc1HDD",
+        "model": "TIIDA",
+        "year": 2008,
+        "fuel": "petrol",
+        "powerHp": 109,
+        "totalRub": 711593,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-27L3awbojpFWGkk",
+        "model": "TIIDA",
+        "year": 2009,
+        "fuel": "petrol",
+        "powerHp": 109,
+        "totalRub": 707393,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-27qDVYVBlpZQWZ6",
+        "model": "TIIDA",
+        "year": 2010,
+        "fuel": "petrol",
+        "powerHp": 109,
+        "totalRub": 712118,
+        "estimated": true
+      }
+    ]
+  },
+  "seltosReadOnlyAcceptance": {
+    "id": "bbdc9f4661719617765f19ec",
+    "engineCc": 1999,
+    "powerHp": 149,
+    "totalRub": 2727280,
+    "complete": true,
+    "publiclyConfirmed": false
+  },
+  "limitations": [
+    "Read-only audit amounts are not yet verified public prices.",
+    "Unknown engines and certified hybrid/electric power remain unknown.",
+    "No supplier collection restart or schedule change."
+  ]
+}

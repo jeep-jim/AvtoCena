@@ -14650,3 +14650,8 @@ Seltos2023 149PS на скриншоте не имеетдажекузова/п�
 ## 24.10.2026 — грузинский расчёт подтверждён, итоговый выпуск запрошен
 
 Audit40081640843/job120836247889 SUCCESS. Точный screenshotSeltos bbdc9f4661719617765f19ec: до —149PS/no cc/no total; после —1999cc/149PS/2727280RUB/complete=true. BuickEncore137/Qashqai141/Taos158 остаютсяneeds_data: неподтверждённые двигатели/региональныеидентичности не угаданы. Кузов/объём Seltos взятыизуже сохранённойmanufacturerпартии. Дополнительно factory-only sparse путь требует точногоHP(<0.01), либоkW(<0.1), не соседнейокруглённоймощности.84targettests PASS; typecheckPASS. Первыйвыпускa2c1f1a строится; следующий содержитнеповторныйruntimeфикс Seltos иожиданиеPOST+реальнойстроки reminders вCRMbrowser. CRMclient8/8dark/light320/390/768/1440 PASSлокально. Запрошенследующийdeploy, всепредыдущие34batch+ASTRAсохранены. Публичныецены ещёожидаютвнешнейпроверки.
+
+
+## 24.10.2026 — итоговые проверки расчётного выпуска
+
+Финальный полный npm test2479/2479 PASS,0FAIL/0SKIP,266030мс; typecheckPASS и84целевыхPASS. CRMbrowser40081936446/job120837108484 прошёл Real CRM pages at four widths in both themes и Public dropdown and calculation regression; прежняягонка reminders устранена ожиданиемPOST и реальнойстроки. Выпускa2c1f1a/40081064561 готовитточныеценовыеиндексы; окончательный5d64b2a/40081936386 ожидаетего. Публичнаяактивация и суммы ещёНЕподтверждены; работа продолжаетсядофактическойпроверки. Отчёт docs/encyclopedia/reports/2026-10-24-screenshot-calculation-acceptance.json хранит аудиторскиесуммы отдельноотпубличных. Сборы/расписания не изменены.
