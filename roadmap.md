@@ -14655,3 +14655,10 @@ Audit40081640843/job120836247889 SUCCESS. Точный screenshotSeltos bbdc9f46
 ## 24.10.2026 — итоговые проверки расчётного выпуска
 
 Финальный полный npm test2479/2479 PASS,0FAIL/0SKIP,266030мс; typecheckPASS и84целевыхPASS. CRMbrowser40081936446/job120837108484 прошёл Real CRM pages at four widths in both themes и Public dropdown and calculation regression; прежняягонка reminders устранена ожиданиемPOST и реальнойстроки. Выпускa2c1f1a/40081064561 готовитточныеценовыеиндексы; окончательный5d64b2a/40081936386 ожидаетего. Публичнаяактивация и суммы ещёНЕподтверждены; работа продолжаетсядофактическойпроверки. Отчёт docs/encyclopedia/reports/2026-10-24-screenshot-calculation-acceptance.json хранит аудиторскиесуммы отдельноотпубличных. Сборы/расписания не изменены.
+
+
+## 24.10.2026 16:49 Красноярск — первые новые расчёты проверены на сайте
+
+Deploy40081064561 SUCCESS; внешнийhealtha2c1f1a9786c3a745dbc096888d8c7e67835c11b/calculation17f9c42ed3c72dd791328afc2a33a65c4ef2b9a96239355f65e8e7ac4c08aa05. Publicgate38групп/656версий/1010полей verifiedtrue. Все6marketAPIpageSize24 HTTP200 (это ограниченныйсрез, не полнота). Детальныестраницы screenshotGV80/Carnival теперьпоказывают7405286/5999801RUB «Ориентир без доставки» ирасшифровкувместоценыпродавца. ЯпонскийAPIвозвращает estimated previews Every2016 474961/Alto2023 509539/Fielder2021 1215162RUB; публичныйcalculatePOST подтвердилвсе3суммы сrequiresConfirmation=true, безизменениясохранённыхпараметров. HTMLотдаётsellerдоавтоматическогоклиентскогопересчёта; черновикEveryпроверенfuelpetrol/660/46, liveвизуальнаягидратация отдельнымcloudbrowserнеподтверждена (502вэтойсреде, прямыеHTTPполныеHTML200).
+
+Окончательный5d64b2a/40081936386 ужеIN_PROGRESS; Seltosноваясумма ещёнепубличная. CRMbrowser120837108484SUCCESS; audit120837108358FAILтолькоиз-за15миножиданиянеустановленной5d64версии, послеустановкинуженповторfailedjobs. Сборы/расписания/ручныеполянеизменены.

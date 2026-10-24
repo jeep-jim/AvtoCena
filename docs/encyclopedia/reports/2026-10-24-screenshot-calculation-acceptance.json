@@ -2,7 +2,7 @@
   "version": 1,
   "checkedAt": "2026-10-24T09:33:42.212Z",
   "release": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
-  "status": "awaiting_production",
+  "status": "first_release_publicly_verified_final_release_in_progress",
   "tests": {
     "full": {
       "passed": 2479,
@@ -231,5 +231,298 @@
     "Read-only audit amounts are not yet verified public prices.",
     "Unknown engines and certified hybrid/electric power remain unknown.",
     "No supplier collection restart or schedule change."
-  ]
+  ],
+  "firstPublicVerification": {
+    "checkedAt": "2026-10-24T09:45:30.997883+00:00",
+    "health": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "a2c1f1a9786c3a745dbc096888d8c7e67835c11b",
+        "calculationVersion": "17f9c42ed3c72dd791328afc2a33a65c4ef2b9a96239355f65e8e7ac4c08aa05"
+      }
+    },
+    "markets": {
+      "japan": {
+        "status": 200,
+        "total": null,
+        "returned": 24
+      },
+      "korea": {
+        "status": 200,
+        "total": 78607,
+        "returned": 24
+      },
+      "georgia": {
+        "status": 200,
+        "total": 1705,
+        "returned": 24
+      },
+      "uae": {
+        "status": 200,
+        "total": 22038,
+        "returned": 24
+      },
+      "china": {
+        "status": 200,
+        "total": 244471,
+        "returned": 24
+      },
+      "europe": {
+        "status": 200,
+        "total": 46125,
+        "returned": 24
+      }
+    },
+    "japan": [
+      {
+        "id": "ajes-stats-2NgfFLkogQyQo",
+        "model": "Every",
+        "year": 2016,
+        "japanDeliveredPreview": {
+          "totalRub": 474961,
+          "currencyRate": {
+            "currency": "JPY",
+            "cbrRate": 51.4785,
+            "nominal": 100,
+            "effectiveRate": 0.5147849999999999,
+            "rateDate": "2026-10-24",
+            "fetchedAt": "2026-10-24T09:42:54.389Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 132000,
+            "sourcePriceRub": 67952
+          },
+          "deliveryPricingBasis": {
+            "subtotalRub": 442602,
+            "deliveryRub": 0,
+            "percents": []
+          },
+          "engineCc": 660,
+          "estimated": true
+        },
+        "japanPowerEstimate": {
+          "offerId": "ajes-stats-2NgfFLkogQyQo",
+          "values": [
+            46,
+            49,
+            64
+          ],
+          "requiresConfirmation": true
+        }
+      },
+      {
+        "id": "ajes-stats-2QFQ2qkxr4bP4Ru",
+        "model": "Alto",
+        "year": 2023,
+        "japanDeliveredPreview": {
+          "totalRub": 509539,
+          "currencyRate": {
+            "currency": "JPY",
+            "cbrRate": 51.4785,
+            "nominal": 100,
+            "effectiveRate": 0.5147849999999999,
+            "rateDate": "2026-10-24",
+            "fetchedAt": "2026-10-24T09:42:54.389Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 368000,
+            "sourcePriceRub": 189441
+          },
+          "deliveryPricingBasis": {
+            "subtotalRub": 474750,
+            "deliveryRub": 0,
+            "percents": []
+          },
+          "engineCc": 660,
+          "estimated": true
+        },
+        "japanPowerEstimate": {
+          "offerId": "ajes-stats-2QFQ2qkxr4bP4Ru",
+          "values": [
+            46
+          ],
+          "requiresConfirmation": true
+        }
+      },
+      {
+        "id": "ajes-stats-2QzWNA1OYHeOMD6",
+        "model": "Corolla Fielder",
+        "year": 2021,
+        "japanDeliveredPreview": {
+          "totalRub": 1215162,
+          "currencyRate": {
+            "currency": "JPY",
+            "cbrRate": 51.4785,
+            "nominal": 100,
+            "effectiveRate": 0.5147849999999999,
+            "rateDate": "2026-10-24",
+            "fetchedAt": "2026-10-24T09:42:54.389Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 1050000,
+            "sourcePriceRub": 540524
+          },
+          "deliveryPricingBasis": {
+            "subtotalRub": 1173352,
+            "deliveryRub": 0,
+            "percents": []
+          },
+          "engineCc": 1500,
+          "estimated": true
+        },
+        "japanPowerEstimate": {
+          "offerId": "ajes-stats-2QzWNA1OYHeOMD6",
+          "values": [
+            103
+          ],
+          "requiresConfirmation": true
+        }
+      }
+    ],
+    "koreaDetail": [
+      {
+        "id": "ajes-korea-6d1nkfP5H0ngqu",
+        "url": "https://avtocena.com/cars/offer/genesis-gv80-2-5t-gasoline-awd-2021--ajes-korea-6d1nkfP5H0ngqu",
+        "pricePanels": [
+          "Ориентир без доставки7 405 286₽"
+        ],
+        "breakdown": [
+          {
+            "id": "car",
+            "rub": "2061181",
+            "text": "Цена автомобиля2 061 181 ₽"
+          },
+          {
+            "id": "contract-services",
+            "rub": "110000",
+            "text": "Обеспечительный платёж110 000 ₽"
+          },
+          {
+            "id": "topavto-commission",
+            "rub": "90000",
+            "text": "Комиссия Автодилера90 000 ₽"
+          },
+          {
+            "id": "logistics",
+            "rub": "96646",
+            "text": "Логистика96 646 ₽"
+          },
+          {
+            "id": "broker",
+            "rub": "35000",
+            "text": "Брокер35 000 ₽"
+          },
+          {
+            "id": "svh",
+            "rub": "15000",
+            "text": "СВХ15 000 ₽"
+          },
+          {
+            "id": "laboratory",
+            "rub": "25000",
+            "text": "Лаборатория, СБКТС, ЭПТС25 000 ₽"
+          },
+          {
+            "id": "customs-clearance",
+            "rub": "13541",
+            "text": "Таможенный сбор за оформление13 541 ₽"
+          },
+          {
+            "id": "import-duty",
+            "rub": "1126683",
+            "text": "Единая ставка таможенных платежей1 126 683 ₽"
+          },
+          {
+            "id": "utilization-fee",
+            "rub": "3770400",
+            "text": "Утилизационный сбор3 770 400 ₽?223,59 кВт — выше льготного порога223,59 кВт > 117,68 кВт. Для M1 с ДВС превышен порог мощности льготного утильсбора.Для выбора диапазона утильсбора используется мощность в кВт. Лошадиные силы в объявлении могут быть округлены: 160 л.с. и 118 кВт не означают льготный сбор.Порог 117,68 кВт относится к M1 с ДВС. Для льготы также важны объём до 3 000 см³, ввоз физлицом для личного пользования и соблюдение остальных условий. Для N1, электромобилей и гибридов действуют отдельные правила. Характеристики и право на льготу нужно подтвердить по документам.Разъяснение ФНС о мощности в кВт ↗"
+          },
+          {
+            "id": "exchange-reserve",
+            "rub": "61835",
+            "text": "Резерв на изменение курса61 835 ₽"
+          }
+        ]
+      },
+      {
+        "id": "ajes-korea-6d1nIGC880T51e",
+        "url": "https://avtocena.com/cars/offer/kia-carnival-4-generation-diesel-9-seater-noblesse-2021--ajes-korea-6d1nIGC880T51e",
+        "pricePanels": [
+          "Ориентир без доставки5 999 801₽"
+        ],
+        "breakdown": [
+          {
+            "id": "car",
+            "rub": "1155234",
+            "text": "Цена автомобиля1 155 234 ₽"
+          },
+          {
+            "id": "contract-services",
+            "rub": "110000",
+            "text": "Обеспечительный платёж110 000 ₽"
+          },
+          {
+            "id": "topavto-commission",
+            "rub": "90000",
+            "text": "Комиссия Автодилера90 000 ₽"
+          },
+          {
+            "id": "logistics",
+            "rub": "96646",
+            "text": "Логистика96 646 ₽"
+          },
+          {
+            "id": "broker",
+            "rub": "35000",
+            "text": "Брокер35 000 ₽"
+          },
+          {
+            "id": "svh",
+            "rub": "15000",
+            "text": "СВХ15 000 ₽"
+          },
+          {
+            "id": "laboratory",
+            "rub": "25000",
+            "text": "Лаборатория, СБКТС, ЭПТС25 000 ₽"
+          },
+          {
+            "id": "customs-clearance",
+            "rub": "4924",
+            "text": "Таможенный сбор за оформление4 924 ₽"
+          },
+          {
+            "id": "import-duty",
+            "rub": "931740",
+            "text": "Единая ставка таможенных платежей931 740 ₽"
+          },
+          {
+            "id": "utilization-fee",
+            "rub": "3501600",
+            "text": "Утилизационный сбор3 501 600 ₽?148,57 кВт — выше льготного порога148,57 кВт > 117,68 кВт. Для M1 с ДВС превышен порог мощности льготного утильсбора.Для выбора диапазона утильсбора используется мощность в кВт. Лошадиные силы в объявлении могут быть округлены: 160 л.с. и 118 кВт не означают льготный сбор.Порог 117,68 кВт относится к M1 с ДВС. Для льготы также важны объём до 3 000 см³, ввоз физлицом для личного пользования и соблюдение остальных условий. Для N1, электромобилей и гибридов действуют отдельные правила. Характеристики и право на льготу нужно подтвердить по документам.Разъяснение ФНС о мощности в кВт ↗"
+          },
+          {
+            "id": "exchange-reserve",
+            "rub": "34657",
+            "text": "Резерв на изменение курса34 657 ₽"
+          }
+        ]
+      }
+    ]
+  },
+  "firstPublicGate": {
+    "groups": 38,
+    "variants": 656,
+    "fields": 1010,
+    "verified": true
+  },
+  "firstPublicJapanCalculate": {
+    "status": 200,
+    "matchedCatalogPreview": true,
+    "totals": {
+      "Every2016": 474961,
+      "Alto2023": 509539,
+      "Fielder2021": 1215162
+    },
+    "requiresConfirmation": true
+  }
 }
