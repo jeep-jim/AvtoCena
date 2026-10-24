@@ -9,7 +9,7 @@ test('factory output and known gearbox recover missing volume on the sparse Geor
  const d={id:'factory',year:2025,trim:'2.0 automatic',status:'review',...fields,researchEvidence:{batchId:'research-factory',source:{type:'manufacturer',url:'https://manufacturer.example/spec'},checkedIdentity:{make:'Test',model:'EV',year:2025,trim:'2.0 automatic'},fields:Object.keys(fields),values:fields}};
  const o={...offer,fuel:'petrol',powertrainKind:'combustion',powerKw:undefined,powerHp:149,icePowerKw:109.6,transmission:'automatic',bodyType:undefined,drive:undefined};
  assert.equal(apply(o,[d]).engineCc,1999);
- for(const patch of [{transmission:undefined},{transmission:'manual'},{powerHp:undefined,icePowerKw:undefined},{year:2024}])assert.equal(apply({...o,...patch},[d]).engineCc,undefined);
+ for(const patch of [{transmission:undefined},{transmission:'manual'},{powerHp:150,icePowerKw:110.32},{powerHp:undefined,icePowerKw:undefined},{year:2024}])assert.equal(apply({...o,...patch},[d]).engineCc,undefined);
  assert.equal(apply(o,[{...d,status:'observed',researchEvidence:undefined,markets:['china']}]).engineCc,undefined);
  assert.equal(apply(o,[d,{...d,id:'unknown',engineCc:undefined,researchEvidence:{...d.researchEvidence,fields:['fuel'],values:{fuel:'petrol'}}}]).engineCc,undefined);
  const ambiguous=(value:string,status='ambiguous')=>({...o,sourceId:'autopapa_georgia_open',operational:{semanticEvidence:{engineCc:{status,source:'autopapa_listing_card_engine',rawValues:[value]}}}});

@@ -197,7 +197,8 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
    // A reviewed factory output, known gearbox and annual model may recover
    // missing displacement even when the source omitted both body and drive.
    // Unreviewed observations alone cannot open this narrower path.
-   const factoryGearboxAnchor=exists(identity.transmission)&&exists(v.constraints.transmission)&&same('transmission',identity.transmission,v.constraints.transmission)
+   const exactFactoryOutput=Number(identity.powerHp)>0&&Number(x.powerHp)>0?Math.abs(Number(identity.powerHp)-Number(x.powerHp))<0.01:Math.abs(a-b)<0.1;
+   const factoryGearboxAnchor=exactFactoryOutput&&exists(identity.transmission)&&exists(v.constraints.transmission)&&same('transmission',identity.transmission,v.constraints.transmission)
     &&v.sources.engineCc?.kind==='manufacturer'&&Boolean(v.sources.engineCc.batchId)
     &&['powerHp','powerKw','icePowerKw'].some(f=>(v.sources as any)[f]?.kind==='manufacturer'&&Boolean((v.sources as any)[f]?.batchId));
    return (powerAnchor&&(volumeAnchor||factoryGearboxAnchor))||((powerAnchor||volumeAnchor)&&layoutAnchor);

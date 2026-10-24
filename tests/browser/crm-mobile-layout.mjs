@@ -115,7 +115,8 @@ try{
     assert.equal(await page.locator('.crm-reminder-editor .crm-date-placeholder').count(),0,'no duplicate date text');
     if(width===390||width===1440)await page.locator('.crm-reminder-date').screenshot({path:`${out}/date-empty-${theme}-${width}.png`});
     await page.getByLabel('Дата и время напоминания',{exact:true}).fill('2027-01-10T15:30');await page.getByLabel('Что сделать',{exact:true}).fill('Позвонить клиенту');if(width===390||width===1440){await page.locator('.crm-reminder-editor').scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/reminder-form-${theme}-${width}.png`});}
-    await page.getByRole('button',{name:'Добавить напоминание',exact:true}).click();await page.locator('.crm-reminder-editor').getByText('Позвонить клиенту',{exact:true}).waitFor();
+    await Promise.all([page.waitForResponse(r=>new URL(r.url()).pathname==='/api/crm/reminders'&&r.request().method()==='POST'&&r.request().postDataJSON()?.text==='Позвонить клиенту'),page.getByRole('button',{name:'Добавить напоминание',exact:true}).click()]);
+    await page.locator('.crm-reminder-editor .crm-reminder-row').getByText('Позвонить клиенту',{exact:true}).waitFor();
     assert.equal(reminders[0].dueAt,'2027-01-10T08:30:00.000Z');
     await page.getByRole('button',{name:'Уведомления: 0',exact:true}).click();await page.locator('.ac-unified-notifications').getByText('Позвонить клиенту',{exact:true}).waitFor();
     await page.locator('.ac-unified-notifications').getByRole('button',{name:'Напоминание выполнено',exact:true}).click();await page.locator('.ac-unified-notifications .crm-reminder-row').waitFor({state:'detached'});
