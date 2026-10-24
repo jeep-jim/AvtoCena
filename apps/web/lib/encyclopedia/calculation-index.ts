@@ -36,8 +36,8 @@ function same(field:string,a:any,b:any){
 export function compileModelFacts(record:any,ancestors:any[]=[]):CalculationFact[]{
  const out:CalculationFact[]=[];
  for(const v of record.variants||[]){
-  if(!Number.isInteger(v.year)||!v.trim)continue;
-  const values:any={},sources:any={},trims=new Set([token(v.trim)]);
+  if(!Number.isInteger(v.year))continue;
+  const values:any={},sources:any={},trims=new Set<string>(token(v.trim)?[token(v.trim)]:[]);
   const evidence=[...(v.researchEvidenceHistory||[]),v.researchEvidence].filter(Boolean).reverse();
   const identityTrims=new Set([v.trim]);
   const retainedReferences:any={};
