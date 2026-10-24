@@ -38,7 +38,8 @@
     "docs/encyclopedia/batches/2026-10-24-countryman-2020-fuel.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2024-drive-mass-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
-    "docs/encyclopedia/batches/2026-10-24-suzuki-alto-2023-ha37s-power.json"
+    "docs/encyclopedia/batches/2026-10-24-suzuki-alto-2023-ha37s-power.json",
+    "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json"
   ],
   "publicResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -65,13 +66,15 @@
     "docs/encyclopedia/batches/2026-10-24-countryman-2020-fuel.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2024-drive-mass-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
-    "docs/encyclopedia/batches/2026-10-24-suzuki-alto-2023-ha37s-power.json"
+    "docs/encyclopedia/batches/2026-10-24-suzuki-alto-2023-ha37s-power.json",
+    "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json"
   ],
   "requiredAstraPlanDigests": [
     "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
-    "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0"
+    "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+    "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "requestedAt": "2026-10-24T14:39:00.921Z",
-  "reason": "Single free release after exact ASTRA apply40102493368 SUCCESS and independent153/153 public model revision readback:153 models/3854 annual variants/3664 values/17211 attestations. Include merged1518 Japan drive/pickup and1519 budget preview/visible-price parity (CI40102684116 SUCCESS). Preserve all39 required research batches,25 public batches and priorASTRA6d417. PR1521 memory fix is still CI and excluded; no incomplete markets hidden.",
-  "ideaReports": []
+  "reason": "Owner confirmed reader-first rollout for bounded scoped catalog projection chunks; install scoped-v1 reader before one guarded read-model rebuild.",
+  "ideaReports": [],
+  "requestedAt": "2026-10-24T16:43:14.129Z"
 }
