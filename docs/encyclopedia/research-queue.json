@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T15:39:08.889Z",
+  "updatedAt": "2026-10-24T15:46:26.922Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T15:00:51.862Z",
+    "updatedAt": "2026-10-24T15:46:26.922Z",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -42604,10 +42604,11 @@
       "artifactExpected": "astra-import-preview.json",
       "applyRequested": true,
       "nextActions": [
-        "Не повторять replan/apply153 моделей. Дождаться единственногоrelease40103448997; при failure прочитать конкретныйguard/log, не ослаблять его.",
-        "Подтвердить health7189a40f/index5685c514 и публичные list/detail/related/filter; Korea visitor_restricted считать доступом источника, не пустым рынком.",
-        "После свободной очереди включить pending Cupra batch в следующий единый release вместе с уже merged1521; сохранить39required/25public и обаASTRAplan, добавитьCupra вrequired/public.",
-        "Продолжить только остаточные технические группы, включая документированную30min; не возвращаться к повторному импорту/полной основе."
+        "Дождаться единственного остаточного ASTRA preview40106076748: проверить artifact, канонический planDigest, newModels0/newUnknownYearVariants0 и реальную дельту после b337; только затем штатный CAS apply и API-readback. Не запускать второй preview/apply.",
+        "Сопровождать repair40108157776 после merged1524 и CI40108229371/PR1525 (timeout подготовки90мин). Выпуск40103448997 завершён cancelled после SUCCESS подготовки цен; health15:42UTC ещё8ec0d858.",
+        "Следующий единственный release — после terminal repair и принятого решения по новому ASTRA plan; сохранить39required/25public research и оба прежнихASTRAplan, добавить pendingCupra и новый план только после фактического apply. Проверить active/pending/queued перед marker.",
+        "Запустить существующую pickup-drive-pricing/checkCatalogFeedback QA только после подтверждённого health точной новой версии, с expectedRelease фактически установленного согласованного release. Прежнюю7189 не объявлять активной.",
+        "Остаточные8403reference уже инвентаризированы: использовать сохранённые219групп/116сопоставлений и27кандидатовhandoff; не пересчитывать весь корпус без изменения snapshot. Документированную30min не подменять secondary label/peak."
       ],
       "pr1518": {
         "merged": true,
@@ -42700,8 +42701,31 @@
       "membershipVerified": true,
       "calculationFields": 20820,
       "descriptiveFields": 55,
-      "releaseStatus": "in_progress",
-      "releaseStage": "Prepare exact price indexes before activating the release"
+      "releaseStatus": "completed",
+      "releaseStage": "Deploy with rollback and resource measurements",
+      "releaseConclusion": "cancelled",
+      "releaseTimeout": {
+        "job": 120900269071,
+        "timeoutMinutes": 60,
+        "cancelledAt": "2026-10-24T15:40:05.906Z",
+        "pricePreparation": "success",
+        "publicVerification": "not_run",
+        "healthObservedAt": "2026-10-24T15:42:00Z",
+        "healthRelease": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+        "fixPr": 1525,
+        "fixHead": "90d2cb8951e3583b1507571cd2638d70285a5916",
+        "fixCi": 40108229371,
+        "fixCiState": "in_progress",
+        "report": "docs/operations/2026-10-24-release-prepare-timeout.md"
+      },
+      "pr1524": {
+        "merged": true,
+        "merge": "9545271b074252da2c916470f3efbded518c233c",
+        "repairWorkflow": 40108157776,
+        "repairJob": 120914067980,
+        "repairStatus": "in_progress",
+        "action": "Сопровождать существующий chunked projection repair; не повторять run и не разрешать пустой Japan без доказательств."
+      }
     },
     "nextTechnicalGroup": {
       "modelId": "36050a1f4ba506db31d21ffd",
@@ -42786,12 +42810,15 @@
       "head": "5c738c21f1edbe2e84eb044c5fd761338ee4bb0a",
       "ci": 40106051871,
       "conclusion": "success",
-      "state": "await_actual_health_7189",
+      "state": "await_coordinated_replacement_release",
       "diagnosticRequested": false,
       "expectedRelease": "7189a40f73606b46eaeb86e4c37905e1fd0bfcf6",
       "mode": "pickup-drive-pricing",
       "checkCatalogFeedback": true,
-      "globalAjesCalculatedOrderClosed": false
+      "globalAjesCalculatedOrderClosed": false,
+      "failedReleaseWorkflow": 40103448997,
+      "previousExpectedRelease": "7189a40f73606b46eaeb86e4c37905e1fd0bfcf6",
+      "reason": "7189 activation was not confirmed; prepare job cancelled at its 60-minute limit. Pin acceptance to the next actually activated coordinated release."
     }
   },
   "scope": {
