@@ -17,3 +17,9 @@ test('multiple power versions do not choose one; incomplete candidates block mis
 });
 test('same model and year without a technical code never imply identity',()=>{const raw={...offer,operational:{}};assert.equal(applyEncyclopediaCalculation(raw,idx([donor]),{technicalIdentity:true}),raw);});
 test('conflicting named modification cannot fall through to another technical version',()=>{const raw={...offer,trim:donor.trim,engineCc:2000};assert.equal(applyEncyclopediaCalculation(raw,idx([donor]),{technicalIdentity:true}),raw);});
+
+test('search projection preserves technical identity from the full saved card',async()=>{
+ const {searchProjectionFromOffer}=await import('../apps/web/lib/catalog/storage');
+ const out=searchProjectionFromOffer({...offer,engineCode:'M15A-FXE',generation:'XP210',images:[],sourcePrice:1000000,sourceCurrency:'JPY',catalogPricingMode:'seller'} as any);
+ assert.equal(out.chassisCode,'MXPH10');assert.equal(out.engineCode,'M15A-FXE');assert.equal(out.generation,'XP210');
+});

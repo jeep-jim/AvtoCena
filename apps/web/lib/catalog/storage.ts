@@ -198,6 +198,7 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  chassisCode?:string; engineCode?:string; generation?:string;
   fuelPowertrainEvidence?:VehicleOffer["fuelPowertrainEvidence"];
   encyclopediaCalculation?:VehicleOffer["encyclopediaCalculation"];
   inventorySourceDate?:string; grossVehicleWeightKg?:number; vehicleCategory?:VehicleOffer["vehicleCategory"];
@@ -438,6 +439,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   const visibleRub = catalogOfferVisibleRub(offer);
   const raw: any = offer.operational?.raw || {};
   return {
+    chassisCode:(offer as any).chassisCode||offer.operational?.chassisCode,engineCode:(offer as any).engineCode,generation:(offer as any).generation,
     inventorySourceDate:catalogInventoryDate(offer),grossVehicleWeightKg:catalogGrossVehicleWeightKg(offer),vehicleCategory:offer.vehicleCategory,
     catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, catalogKind: offer.catalogKind,
     id: offer.id, market: String(offer.market || ""), make: cleanFacet(offer.make), model: cleanFacet(offer.model), year: Number(offer.year || 0),

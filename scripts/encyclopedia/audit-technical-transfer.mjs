@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import {getJsonStorage} from '../../apps/web/lib/data.ts';
-import {readCurrentCatalogProjectionSnapshot} from '../../apps/web/lib/catalog/storage.ts';
+import {readCurrentCatalogProjectionSnapshot,getOfferWithoutEditorial} from '../../apps/web/lib/catalog/storage.ts';
 import {applyEncyclopediaCalculation,checksum,factFields,modelKey} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
 import {applyUaeManualSpecifications} from '../../apps/web/lib/catalog/uae-manual-specifications.ts';
 import {specificationEvidenceComplete} from '../../apps/web/lib/catalog/modification-matching.ts';
@@ -15,13 +15,18 @@ if(!/^[a-f0-9]{64}$/.test(marker.indexDigest))throw Error('invalid_index_digest'
 const index=await store.readJson(`knowledge/encyclopedia/calculation-indexes/${marker.indexDigest}.json`,null);
 if(!index||index.digest!==marker.indexDigest||checksum(index.models)!==index.digest)throw Error('index_digest_mismatch');
 const snapshot=await readCurrentCatalogProjectionSnapshot();
-const report={checkedAt:new Date().toISOString(),indexDigest:index.digest,generationId:snapshot.generationId,scope:'Five-market saved projection plus bounded existing Japanese query cache. No supplier requests, no database writes; not whole Japan inventory.',markets:{},japanCache:{slots:128,uniqueLots:0,converted:0,rejected:0},samples:[]};
+const report={checkedAt:new Date().toISOString(),indexDigest:index.digest,generationId:snapshot.generationId,scope:'Five-market saved projection plus bounded existing Japanese query cache. No supplier requests, no database writes; not whole Japan inventory.',markets:{},japanCache:{slots:128,uniqueLots:0,converted:0,rejected:0},samples:[],japanMissingLinks:[],savedDetailProbe:[]};
+function identityCode(raw){return raw.chassisCode||raw.operational?.chassisCode;}
 function inspect(raw){
  const source=applyUaeManualSpecifications(raw),before=applyEncyclopediaCalculation(source,index),after=applyEncyclopediaCalculation(source,index,{technicalIdentity:true});
  const r=report.markets[raw.market]||={rows:0,withTechnicalCode:0,modelYearKnown:0,baselineMatched:0,technicalMatched:0,newlyFilledRecords:0,newlyFilledFields:0,newlyCompleteSpecifications:0,japanPreviewBefore:0,japanPreviewAfter:0};r.rows++;
  r.withTechnicalCode+=Number(Boolean(source.chassisCode||source.engineCode||source.operational?.chassisCode));
  r.modelYearKnown+=Number((index.models[modelKey(raw.make,raw.model)]||[]).some(v=>v.year===raw.year));
  r.baselineMatched+=Number(Boolean(before.operational?.encyclopediaCalculation));r.technicalMatched+=Number(after.operational?.encyclopediaCalculation?.matchMethod==='technical_identity');
+ if(raw.market==='japan'&&!after.operational?.encyclopediaCalculation&&report.japanMissingLinks.length<40){
+ const facts=index.models[modelKey(raw.make,raw.model)]||[],annual=facts.filter(v=>v.year===raw.year);
+ report.japanMissingLinks.push({id:raw.id,make:raw.make,model:raw.model,year:raw.year,trim:raw.trim,chassisCode:identityCode(source),factsForModel:facts.length,factsForYear:annual.length,withChassis:annual.filter(v=>v.constraints.chassisCode).length,donorExamples:annual.slice(0,3).map(v=>({trim:v.trims,chassisCode:v.constraints.chassisCode,engineCode:v.constraints.engineCode}))});
+ }
  const fields=factFields.filter(f=>!before[f]&&after[f]);r.newlyFilledRecords+=Number(fields.length>0);r.newlyFilledFields+=fields.length;
  r.newlyCompleteSpecifications+=Number(!specificationEvidenceComplete(before)&&specificationEvidenceComplete(after));
  if(raw.market==='japan'){try{japanPreviewParameters(before);r.japanPreviewBefore++;}catch{}try{japanPreviewParameters(after);r.japanPreviewAfter++;}catch{}}
@@ -29,6 +34,12 @@ function inspect(raw){
 }
 for(const row of snapshot.items)inspect(row);
 console.log('SAVED_MARKETS_CHECKED',JSON.stringify(report.markets));
+// A bounded diagnostic of stored full records, never AJES/Green live getters.
+for(const market of ['china','europe','korea','uae','georgia']){
+ const rows=snapshot.items.filter(r=>r.market===market&&/^[a-f0-9]{24}$/.test(r.id)&&!r.totalRub).slice(0,8);
+ for(const row of rows){const full=await getOfferWithoutEditorial(row.id);report.savedDetailProbe.push({id:row.id,market,found:!!full,projectionChassis:identityCode(row),fullChassis:full&&identityCode(full),fullEngine:full?.engineCode,fullGeneration:full?.generation});}
+}
+
 const lots=new Map();
 for(let start=0;start<128;start+=8){const slots=await Promise.all(Array.from({length:8},(_,n)=>store.readJson(`catalog/partner-cache/ajes/queries/${start+n}.json`,null)));for(const slot of slots)for(const lot of slot?.value?.items||[])if(lot.table==='stats'&&(!lots.has(lot.id)||Date.parse(slot.value.observedAt)>Date.parse(lots.get(lot.id).observedAt)))lots.set(lot.id,{lot,observedAt:slot.value.observedAt});}
 report.japanCache.uniqueLots=lots.size;

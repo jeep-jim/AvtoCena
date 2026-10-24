@@ -14171,3 +14171,10 @@ Live terminal03:20:15UTC:36cases/168openings/PASS. Артефакт12545109986 �
 Health до/после:3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226, calculation3ac912ac200e8481ba1c0054941af4d4e27fef51a27a96be415c77a8bbe859fe,oktrue. Auditartifact12545579309 подтверждает публичный health200 и отсутствие anonymousCRMдоступа(307login/API401); legacycloudсекция не принимается за REGservingrelease. Отчёт docs/diagnostics/2026-10-24-crm-live-release-3d40cad.json.
 
 Закрыт пропущенный liveэтап этого выпуска. Productionowner/managergrant/on-off,<=2сек/общаястабильность/полнаябаза не объявлены готовыми. Поздние4поляA4L остаютсяpending; ручнойtechnicalIdentityaudit6126174/исследование не дублируются. Сборы/расписания/writer/productionкод/данные не менялись, повторapply/deploy не запускался. Контроль сохраняется до остальных подтверждённых результатов.
+
+
+## 24.10.2026 10:25 Красноярск — первый technical audit завершён, найдена потеря кодов в проекции
+
+40057963770/job120765040614 SUCCESS:324275сохранённых строк пяти рынков не содержат technical codes; bounded Japan querycache389карточек,389сchassis,102сmodel/yearвэнциклопедии,1прежнее exactсовпадение,0дополнительныхпереносов,0готовыхpreview. Это не весьяпонскийрынок. Новыйmatcher не включён наproduction, успех заполнения не выдуман. Artifact12546441111 digest31e75659de38c0348e40468b880610d50772c6cb64a5827f123ae8521ee91c36.
+
+Код searchProjectionFromOffer действительно опускал chassisCode/engineCode/generation. Добавлено сохранение только существующих полей (включая operational.chassisCode), бездогадок ибезмассовойперезаписи.20тестов/TypeScript PASS. Запрошен iteration2 read-only audit:40bounded fullrecord probes по nonAJES IDs идо40японских missing-link примеров с donorcodes. Никаких suppliercalls/корпусныхимпортов/productiondeploy. Следующийшаг зависит отфактическихкодовыхсвязей, неизвестные30min не перенесены.
