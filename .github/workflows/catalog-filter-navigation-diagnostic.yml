@@ -30,6 +30,8 @@ jobs:
         run: |
           if node -e "process.exit(JSON.parse(require('fs').readFileSync('.github/market-runs/catalog-filter-navigation-diagnostic.json')).mode === 'offer-price-visual' ? 0 : 1)"; then
             CHROME_BIN=$(command -v google-chrome) node scripts/catalog-offer-price-visual.mjs
+          elif node -e "process.exit(JSON.parse(require('fs').readFileSync('.github/market-runs/catalog-filter-navigation-diagnostic.json')).mode === 'pickup-drive-pricing' ? 0 : 1)"; then
+            CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-pickup-drive-live.mjs
           else
             CHROME_BIN=$(command -v google-chrome) node scripts/catalog-filter-navigation-diagnostic.mjs
           fi
