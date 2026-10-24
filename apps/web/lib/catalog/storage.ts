@@ -1,3 +1,4 @@
+import {inspectCompressedSelectors,publishCompressedSelectors} from './budget-selector-publication';
 import {calculatedCatalogPrice} from './calculated-price';
 import {compactJapanPowerEstimate} from './ajes-power-estimate';
 import {verifyCatalogReadModels} from './verify-read-models';
@@ -14,7 +15,7 @@ import {compressedBudgetSelectors,verifiedCompressedBudgetSelector,specification
 import {enrichBudgetSpecifications} from './budget-specification-index';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
 import {withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
-import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
+import {validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
@@ -2356,43 +2357,27 @@ async function readBudgetCountIndex(generationId:string,market?:string){
  return budgetIndexCache.get(generationId,async()=>await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v3.json",null) ?? await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v2.json",null) ?? await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v1.json",null));
 }
 async function writeBudgetMarketSelectors(index:BudgetCountIndex){
- const packed=splitPackedBudgetSelectors(index);
- for(const [market,part] of packed.parts)await writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v2/${market}.json`),part);
- for(const market of packed.parts.keys())if(!verifiedPackedBudgetSelector(packed.directory,market,await readIndex<PackedBudgetSelector|null>(index.generationId,`budget-markets-v2/${market}.json`,null)))throw Error('catalog_packed_selector_verification_failed');
- await writeJsonAtomic(generationPath(index.generationId,'indexes/budget-markets-v2/ready.json'),packed.directory);
- const compressed=compressedBudgetSelectors(packed);
- for(const [market,part] of compressed.parts)await writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v3/${market}.json`),part);
- for(const market of compressed.parts.keys())if(!verifiedCompressedBudgetSelector(compressed.directory,market,await readIndex<CompressedBudgetSelector|null>(index.generationId,`budget-markets-v3/${market}.json`,null)))throw Error('catalog_compressed_selector_verification_failed');
- await writeJsonAtomic(generationPath(index.generationId,'indexes/budget-markets-v3/ready.json'),compressed.directory);
- // The generic source index has not been enriched by this release's encyclopedia.
- // Only backfillBudgetSpecificationSelectors may certify that derived namespace.
- // Keep v1 for a still-running previous web release and rollback.
- const {directory,parts}=splitBudgetMarketIndex(index);
- for(const [market,part] of parts)await writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v1/${market}.json`),part);
- await writeJsonAtomic(generationPath(index.generationId,'indexes/budget-markets-v1/ready.json'),directory);
- return directory;
+ return publishCompressedSelectors(index,
+  name=>readIndex(index.generationId,`budget-markets-v3/${name}.json`,null),
+  (name,value)=>writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v3/${name}.json`),value));
+}
+/** Read existing selectors without supplier calls or derived writes. */
+export async function inspectBudgetMarketSelectors(){
+ const manifest=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
+ const result=await inspectCompressedSelectors(manifest,name=>readIndex(manifest.generationId,`budget-markets-v3/${name}.json`,null));
+ const after=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
+ if(JSON.stringify(after)!==JSON.stringify(manifest))throw Error('publication_changed');
+ return result;
 }
 /** Append disposable selectors to the existing generation, never rewrite cards or manifest. */
 export async function backfillBudgetMarketSelectors(){
- const manifest=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
- // Price/rate/UI changes do not change a generation's immutable selector.
- // Validate and reuse each compact partition before considering a full rebuild.
- const existing=await readIndex<CompressedBudgetDirectory|null>(manifest.generationId,'budget-markets-v3/ready.json',null);
- if(existing?.version===3 && existing.generationId===manifest.generationId && MARKETS.every(market=>existing.markets?.[market])){
-  let complete=true;
-  for(const market of MARKETS){
-   const part=await budgetIndexCache.get(`${manifest.generationId}:compressed:${market}`,async()=>verifiedCompressedBudgetSelector(existing,market,await readIndex<CompressedBudgetSelector|null>(manifest.generationId,`budget-markets-v3/${market}.json`,null)));
-   if(!part){complete=false;break;}
-  }
-  if(complete)return existing;
- }
- const index=await readIndex<BudgetCountIndex|null>(manifest.generationId,'budget-count-v3.json',null);
- if(!index || index.generationId!==manifest.generationId)throw Error('catalog_budget_market_source_missing');
+ const inspected=await inspectBudgetMarketSelectors();
+ if(inspected.valid)return inspected.directory!;
+ const index=await readIndex<BudgetCountIndex|null>(inspected.generationId,'budget-count-v3.json',null);
+ if(!index || index.generationId!==inspected.generationId)throw Error('catalog_budget_market_source_missing');
+ const present=[...new Set([...index.rows,...(index.otherRows||[])].map(row=>row[0]))].sort();
+ if(JSON.stringify(present)!==JSON.stringify(inspected.requiredMarkets))throw Error('catalog_budget_market_ownership_mismatch');
  const directory=await writeBudgetMarketSelectors(index);
- for(const market of Object.keys(directory.markets)){
-  const part=await readIndex<BudgetCountIndex|null>(manifest.generationId,`budget-markets-v1/${market}.json`,null);
-  if(!validBudgetMarketIndex(directory,market,part))throw Error('catalog_budget_market_verification_failed');
- }
  resetCatalogReadCachesForTests();
  return directory;
 }
