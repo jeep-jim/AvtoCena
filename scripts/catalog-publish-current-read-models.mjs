@@ -2,6 +2,7 @@ import { publishCurrentCatalogReadModels } from "../apps/web/lib/catalog/storage
 import { mutateDataJson, readDataJson } from "../apps/web/lib/data.ts";
 import { withCatalogReadModelRepairLock } from "./lib/catalog-read-model-repair-lock.mjs";
 import {verifyRepairLiveJapan} from './lib/catalog-repair-live-japan.mjs';
+import {retainedRepairMarketCounts} from './lib/catalog-repair-market-counts.mjs';
 
 await withCatalogReadModelRepairLock(mutateDataJson, async (repairLease) => {
 
@@ -25,7 +26,7 @@ if (!manifest.generationId || preflightMissing.length) throw Error(`catalog_curr
 console.log(JSON.stringify({event:'catalog_repair_live_japan_verified',...liveJapan}));
 const result = await publishCurrentCatalogReadModels();
 if (result.generationId !== manifest.generationId) throw Error('catalog_current_read_models_preflight_generation_changed');
-const marketCounts = result.markets || {};
+const marketCounts = retainedRepairMarketCounts(manifest, result.markets || {});
 const hasMarket = (market) => Object.prototype.hasOwnProperty.call(marketCounts, market);
 const allowedAbsentMarkets = requiredMarkets.filter((market) => !hasMarket(market) && allowedEmptyMarkets.has(market));
 const missingMarkets = requiredMarkets.filter((market) => {
