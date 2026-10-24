@@ -1,4 +1,12 @@
 {
-  "requestedAt": "2026-10-24T15:26:12.547Z",
-  "reason": "Sequential v2 audit after successful v1 run40106364857: correct observed transmission label, exclude charging power from engine output counters, separate engineCc/engineCode. Same retained corpus, no source requests or writes."
+  "requestedAt": "2026-10-24T20:09:12.285Z",
+  "review": {
+    "groups": [
+      "audi/a3",
+      "audi/a4",
+      "audi/a5"
+    ],
+    "year": 2024
+  },
+  "reason": "Review at most64 retained factual rows for the existing27 annual candidates; no supplier requests, data writes or automatic promotion."
 }
