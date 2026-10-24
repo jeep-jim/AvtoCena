@@ -9,15 +9,16 @@ permissions:
 jobs:
   stop:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 10
+    environment: regcloud-staging
     steps:
-      - name: Cancel only the four owner-approved market runs
+      - name: Cancel owner-approved market runs and their derived index
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python - <<'PYCODE'
           import json, os, time, urllib.request, urllib.error
-          targets = {40047702136:'europe',40042142717:'georgia',40038476075:'uae',40026092554:'china'}
+          targets = {40047702136:'europe',40042142717:'georgia',40038476075:'uae',40026092554:'china',40049541295:'budget'}
           base = 'https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/'
           headers = {'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
           def request(run_id, suffix='', method='GET'):
@@ -28,8 +29,9 @@ jobs:
           def check(run_id):
               run=request(run_id)
               assert run['repository']['full_name']=='jeep-jim/AvtoCena'
-              assert run['event']=='schedule'
-              assert run['path']=='.github/workflows/catalog-refresh-'+targets[run_id]+'.yml'
+              assert run['event']==('workflow_run' if targets[run_id]=='budget' else 'schedule')
+              expected='.github/workflows/backfill-budget-count-index.yml' if targets[run_id]=='budget' else '.github/workflows/catalog-refresh-'+targets[run_id]+'.yml'
+              assert run['path']==expected
               return run
           def cancel(run_id,suffix):
               try:request(run_id,suffix,'POST')
@@ -51,3 +53,32 @@ jobs:
               print(json.dumps({'stage':'after','run':run_id,'status':run['status'],'conclusion':run['conclusion']}),flush=True)
               assert run['status']=='completed','Cancellation incomplete'
           PYCODE
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - name: Release only the lease of the confirmed cancelled China run
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          const storage=getJsonStorage(),path='catalog/import-lock.json';
+          const expected='catalog_v3_publish_china_fbe8ef80-0c43-40af-a5f4-d78cf61b0707';
+          const first=await storage.readJsonWithMeta(path,null);
+          if(first.value?.operationId!==expected)throw Error('different_writer_do_not_release');
+          await new Promise(r=>setTimeout(r,20000));
+          const second=await storage.readJsonWithMeta(path,null);
+          if(!second.etag||second.etag!==first.etag||JSON.stringify(second.value)!==JSON.stringify(first.value))throw Error('writer_changed_do_not_release');
+          await storage.writeJson(path,{...second.value,lockedUntil:'',finishedAt:new Date().toISOString(),releaseReason:'owner_cancelled_terminal_github_run_40026092554'}, {ifMatch:second.etag});
+          const [lock,manifest]=await Promise.all([storage.readJson(path,null),storage.readJson('catalog/manifest.json',null)]);
+          if(lock.operationId!==expected||lock.lockedUntil!=='')throw Error('release_readback_changed');
+          console.log('CANCELLED_WRITER_RELEASED',JSON.stringify({checkedAt:new Date().toISOString(),operationId:lock.operationId,writerActive:false,generationId:manifest?.generationId}));
+          JS
