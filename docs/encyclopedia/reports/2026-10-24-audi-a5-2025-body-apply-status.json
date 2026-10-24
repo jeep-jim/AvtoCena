@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T08:01:13.722Z",
+  "checkedAt": "2026-10-24T08:04:48.565Z",
   "batch": "research-2026-10-24-audi-a5-2025-body",
   "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
   "batchSha256": "849b59c1d152382f25b4fe61e06572c8553f0424a3f7931fda84eb16ae2e33cb",
@@ -45,5 +45,24 @@
     "newBatchIsPostSnapshot": true,
     "duplicateDeploy": false
   },
-  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json"
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
+  "pendingEnvironmentApprovals": 0,
+  "blocker": {
+    "kind": "github_actions_queued",
+    "workflow": 40076087248,
+    "job": 120819611827,
+    "startedSteps": false,
+    "reasonNotExposed": true,
+    "transient": true
+  },
+  "publicParity": {
+    "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-queued-public-parity.json",
+    "passed": true,
+    "offers": 7,
+    "comparisons": 91,
+    "repeatedGroups": 2,
+    "duplicateOfferIds": 0,
+    "newBatchActivationProved": false
+  },
+  "nextAction": "Проверить тот же40076087248, не запускать дубль. ПослеSUCCESS выполнить независимыйAPI2025readback99строк; только затем pendingNextIndex и переходк2024. ПриCASfailure сначала свежий полныйpreflight, не ослаблятьзащиты."
 }
