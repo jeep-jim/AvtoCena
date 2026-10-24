@@ -32,7 +32,7 @@ test("manual inputs normalize liters to cc and require separate certified power 
 test("manual calculation uses the pricing engine without mutating the published offer",async()=>{
  const markets=JSON.parse(fs.readFileSync("data/markets/markets.json","utf8")),today=new Date().toISOString();
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED="true";resetCatalogRateCache();
- const read=mock.method(LocalJsonStorage.prototype,"readJsonWithMeta",async(key:string)=>({found:true,value:key==="fees/exchange-rates.json"?{updatedAt:today,EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:"cbr"},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:"cbr"}}:key==="markets/markets.json"?markets:{}}));
+ const read=mock.method(LocalJsonStorage.prototype,"readJsonWithMeta",async(key:string,fallback:any)=>({found:["fees/exchange-rates.json","markets/markets.json"].includes(key),value:key==="fees/exchange-rates.json"?{updatedAt:today,EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:"cbr"},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:"cbr"}}:key==="markets/markets.json"?markets:fallback}));
  try {
   const input=seller(),before=JSON.stringify(input);
   const result=await calculateOfferWithCustomerParameters(input,validateCustomerParameters({year:2021,engineCc:1598,powerHp:150,fuel:"petrol"}));

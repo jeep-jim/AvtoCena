@@ -1,4 +1,4 @@
-import {auctionSaleDateLabel} from "@/lib/catalog/auction-sale-period";
+import {auctionSaleDateLabel} from "../../lib/catalog/auction-sale-period";
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { JapanAuctionBadges } from "./JapanAuctionBadges";
 import type { JapanExportRestriction } from "../../lib/catalog/japan-export-restriction";

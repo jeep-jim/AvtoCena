@@ -2,7 +2,10 @@ import fs from 'node:fs';
 const expected=process.env.EXPECTED_RELEASE;
 if(!/^[a-f0-9]{40}$/.test(expected||''))throw Error('Invalid expected release');
 const repository=process.env.GITHUB_REPOSITORY||'jeep-jim/AvtoCena';
-for(let attempt=0;attempt<90;attempt++){
+const waitSeconds=Number(process.env.RELEASE_WAIT_SECONDS||900);
+if(!Number.isInteger(waitSeconds)||waitSeconds<10||waitSeconds>3600)throw Error('Invalid release wait duration');
+const deadline=Date.now()+waitSeconds*1000;
+while(Date.now()<deadline){
  try{
   const response=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});
   const health=await response.json(),actual=health.releaseSha;
