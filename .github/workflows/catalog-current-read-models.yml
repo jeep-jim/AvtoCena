@@ -37,6 +37,7 @@ env:
   NODE_OPTIONS: --max-old-space-size=8192
   CATALOG_PUBLICATION_PROGRESS: "1"
   CATALOG_CHUNKED_ALL_PROJECTION_WRITE: "1"
+  CATALOG_CHUNKED_PROJECTIONS_WRITE: "1"
   JSON_STORAGE_DRIVER: object
   YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
   YC_OBJECT_STORAGE_REGION: us-east-1
@@ -60,6 +61,9 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Require installed scoped projection reader before publication
+        run: |
+          node --input-type=module -e "import {assertScopedProjectionReaderReady} from './scripts/lib/catalog-projection-reader-readiness.mjs'; console.log(JSON.stringify(await assertScopedProjectionReaderReady()))"
       - name: Reserve memory for full catalog read models
         run: |
           set -euo pipefail
@@ -73,6 +77,7 @@ jobs:
       - name: Validate current read-model publisher
         run: |
           node --check scripts/catalog-publish-current-read-models.mjs
+          node --import tsx --test tests/catalog-projection-parts.test.ts tests/catalog-projection-scoped-parts.test.ts tests/catalog-projection-counts.test.ts tests/catalog-projection-reader-readiness.test.ts
           node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-filter-search.test.ts tests/catalog-current-read-model-empty-market-policy.test.ts tests/ai-product-feed.test.ts
           npm run typecheck
       - name: Publish one-hop projections and offer shards

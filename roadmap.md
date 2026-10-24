@@ -15072,3 +15072,11 @@ Preview40106076748/job120907922537SUCCESS, artifact12565273971 SHA aeade28730779
 Сохранён подготовленный, НЕ отправленный releaseplan docs/encyclopedia/reports/2026-10-24-next-coordinated-release-plan.json:40requiredResearch/26publicResearch/3ASTRAplan с сохранением всех прежних, добавленыCupraи4a621. Dispatch только послеterminalrepair40108157776 иgreen/mergePR1525, свежейпроверкиочередей/health. Repair ещё Publishone-hop; CI1525 перешёлProductionbuild. Health15:47UTC ещё8ec0d858, новыйиндекс/полнотацен не заявлены. Никакого новогоrelease/QAсневернымexpectedSHA не запрошено.
 
 Единичнаяresearchпауза снята после22/22APIreadback до следующегоprivateindex. A3/A4/A5 не входят в22изменённые модели, поэтому27кандидатов сохранённогоhandoff остаются курсором; передзаписью обязательныfreshrevision иточныеисточники. Все8403references остаются unverified_reference до отдельного подтверждения, повторногоcrawl нет. ГлобальнаясортировкаAJESмеждустраницами и прежниеоткрытыезадачи сохранены.
+
+## 24.10.2026 — по просьбе владельца остановлена пересборка, подготовлены ограниченные чанки рынков и марок
+
+Отменён repair40108157776/job120914067980; API подтвердил cancelled. Лог:324275 записей, последнийproductionэтапprojections_built, RSS1504239616; успешнойпубликации нет. Существовавшийwriter делил толькоall.json. Подготовлена поддержкаpublic/immutablemarketиbrandprojection:1000строк/4МиБнаpart, contenthash/CAS, rootпослеchildren, asyncbatches, последовательныйparityaudit. Healthcapabilityscoped-v1 проверяетсяworkflowдоproductionwrites. Не включатьновыйформатнастаромсервере.
+
+Локальныецелевыетестыуспешны:старыйallформат,isolatedscopeparts,Unicodeбайтовыйлимит,неизменностьrootприошибке,backpressure,CAS,повреждения,readinessgate,потоковыйподсчёт1000000синтетическихстрок. ПолныйCI/productionпокаожидаются. Полныймассивcompactprojectionsвпостроителесортировокещёсохраняется; нулеваязависимостьRAMотразмеракаталоганезаявлена.
+
+Read-onlyзапускregcloud-publication-status.yml дваждыотклонёнавтоматическойпроверкойразрешенийкакновыйexternalworkflowlaunch. Действие необходиличерезmarker/API. Leaseпослеотменынепроверен; deploymentиrestartнеобъявленывыполненными. Дальнейшийпорядок,ограниченияиJapanmanifestblocker:docs/operations/2026-10-24-bounded-scoped-projections.md. ПредыдущиеASTRA/Cupraданные,защитыиисториясохранены.
