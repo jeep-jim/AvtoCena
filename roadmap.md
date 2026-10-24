@@ -14230,3 +14230,14 @@ Read-only40060445122/job120772575966 SUCCESS:476сохранённых япон�
 Добавлены fuel-only заводские соответствия exactmake/model/chassis + проверкаобъёма для TwingoAHH4B, MeganeBBH5H/KBH5H, NBOXJF3/JF4, ClipperDR17V, BerlingoK9CYH01/L. Известное топливо/конфликт/гибрид/другойкод не заменяются. Проверены документы производителей; современные таблицы используются только для топлива тойже заводскойидентичности, не дляпереноса мощности/года/комплектации. Внутренние ссылки в japan-fuel-reference.ts, публичноне выводятся.
 
 Предыдущий deploy40059430537 FAILURE на requiredmembership unsupported_release_field:chassisCode, доbuild/установки. Исправлена проверка identityconstraints (не пропускпроверки); добавлен regression на неверный/отсутствующийкод.69focused/30regression PASS. Запрошена read-only приёмка по существующему японскому кешу с20bounded реальными расчётами, без запросов поставщику/записи базы. Productionповтор пока не запущен; researchpause сохранена доисправленногоimmutablegate.
+
+
+## 24.10.2026 11:07 Красноярск — независимый контроль японской приёмки до выпуска
+
+Прочитаны свежие AGENTS fbbc41a и roadmap на1d7aa7d. Read-only [40060946261](https://github.com/jeep-jim/AvtoCena/actions/runs/40060946261)/job120774100964 TERMINAL SUCCESS. Лог04:05:51–54UTC:497 сохранённых японских лотов;422 с пустым топливом,70H/5E; мощность278single/98alternatives_or_other/121empty. JAPAN_FUEL_ACCEPTANCE:64fuelFilled/63readyInputs/20calculationAttempts/20calculated/failures[]. Это ограниченный расчёт на сохранённой выборке новым кодом, не20 опубликованных новых цен/не весь рынок/не доказательство установленного matcher.
+
+Upload-artifact сообщил No files were found:reports/encyclopedia-technical-transfer.json — артефакт этого прогона не загружен; источник чисел — прочитанный terminalлог, не скачанный JSON. Повтор audit не запускался. Для следующего штатного запуска следует согласовать путь сохраняемого отчёта; текущие логи сохраняют результат.
+
+Свежий полный health oktrue/release3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226/calculation3ac912ac200e8481ba1c0054941af4d4e27fef51a27a96be415c77a8bbe859fe. Deploy40059430537/job120769624120 FAILURE на Prepare private encyclopedia index подтверждён; код исправления и дальнейший coordinatedrelease ведёт ручная сессия. Исследовательская pause до проверенного immutablegate сохранена; Berlingo40/A4L4 не объявлены активированными. Новыйdeploy/apply/сбор/writerunlock/изменениерасписаний не выполнялись.
+
+CRM40060946283 auditSUCCESS/browserIN_PROGRESS, mobile40060946257 productionbuildIN_PROGRESS на момент проверки. Их завершение и liveприёмка нового кода не заявлены; уже закрытая CRM3d40cad не повторялась. Productionowner/managergrant/on-off, скорость и полный каталог остаются открыты; контроль активен.
