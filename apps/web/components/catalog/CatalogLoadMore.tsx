@@ -17,7 +17,8 @@ type Saved = {batches: Batch[]; total: number|null; scrollY: number; savedAt: nu
 const visits = new Map<string, Saved>();
 const TTL = 30 * 60_000;
 
-export function CatalogLoadMore({query, initialPage, initialTotal, initialCount, initialCards, greenQuery, initialHasMore, initialNextCursor}: {
+export function CatalogLoadMore({query, initialPage, initialTotal, initialCount, initialCards, greenQuery, initialHasMore, initialNextCursor, resultCountLabel}: {
+  resultCountLabel?:string;
   initialNextCursor?:string|null; initialHasMore?:boolean; greenQuery?: Record<string,string|undefined>; query: CatalogSearchParams; initialPage: number; initialTotal: number|null; initialCount: number; initialCards: ReactNode;
 }) {
   const dealer=useDealerBrowsing();
@@ -122,6 +123,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     {batches.map(batch => <div key={batch.page} data-catalog-batch={batch.page} className="mb-2.5 grid min-w-0 grid-cols-2 gap-2.5 sm:mb-3 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{batch.cards}</div>)}
     <div className="mx-auto mt-7 flex w-full flex-col items-center gap-3">
       <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} {total!==null?`из ${total.toLocaleString("ru-RU")}`:""}</p>
+      {total===null&&resultCountLabel&&<p className="text-xs font-bold text-[var(--ac-muted)]">{resultCountLabel}</p>}
       {pageCount > 1 ? <nav aria-label="Страницы каталога" className="ac-pagination">
         {page > 1 && (!cursorPaging||page===2||batches.some(batch=>batch.page===page-1)) ? <a href={pageHref(page-1)} aria-label="Предыдущая страница"><ChevronLeft size={20}/></a> : <span aria-disabled="true"><ChevronLeft size={20}/></span>}
         {numberedPages.map((number,index)=><Fragment key={number}>
