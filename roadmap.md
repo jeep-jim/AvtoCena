@@ -14061,3 +14061,10 @@ Read-only reusepreview40050603489 запущен поfad6031 длявсехсу�
 Preview40050603489/job120742195151 SUCCESS. Artifact12543450766 SHA2567f0bf2f4907c45d26491e971d630d82f65411f26e7252bfe70f758b091f31af8 скачан/проверен. Plan c5b9212fad31e03d0b7209689102433f416b8ad263b154f264da0e0efe74f0a7:4451моделей прочитано,0новыхзначений; только1proof powertrainKind NioET5T/7f52470e6594a81a79fbf80d/revisionbadff664-77eb-47ad-b336-15c568a5faeb. Это неготовность80%: ранее1398полей669вариантов ужеперенесены/активированы,230447ASTRAбезмодельногогода по-прежнему внегодовогоиндекса.
 
 Проверенныйплан запрошеннаapply сexactdigest; значениянеперезаписываются, manual/exact/CAS сохраняются. Послеapply — повторноеподтверждение иобщийrelease224плюсproof. Zodfix3df5a9c готов. Сохраненыотчёты all-models-reuse-preview/unified-release-readiness; ownerfeedpolicy зафиксирована, end-to-endincremental ещё не заявлен.
+
+
+## 24.10.2026 08:50 Красноярск — найден и исправлен пропуск unknown при сохранении точного совпадения
+
+Apply40051072189/job120743657524 SUCCESS, savedModels1/savedFields0, revisionNio9b7d92fe-cf3c-43f3-9c81-50a79e6cb17e; независимый API2026 подтверждает новыйproof, но powertrainKind осталсяunknown. Это неуспешноеисправлениезначения. Причина: calculation-index считаетunknown/0пустыми, reference-reuse.empty — нет. План создавалповторныйproof, которыйcompilerправильнонепринималдляunknown.
+
+Семантикаempty выровнена ссуществующимmatcher, безослабленияidentity/unanimity/manualguard; certified30min по-прежнему не переносится. Новыйрегрессионныйтест проверяетсохранениезначений/пригодностьисточника/idempotentreplay/manual.24целевыхтестаPASS; на свежемограниченномNio2026срезе теперь1реальныйpowertrainKind= electric,30minnull. Новый полныйpreview запрошен передapply; прежние0fields отражалиошибкуэтойпроверки, неокончательныйостаток. Ранееzodfix117releaseтестовPASS.

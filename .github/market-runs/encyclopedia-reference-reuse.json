@@ -1,6 +1,5 @@
 {
-  "mode": "apply",
-  "requestedAt": "2026-10-24T01:42:59.474918+00:00",
-  "expectedPlanDigest": "c5b9212fad31e03d0b7209689102433f416b8ad263b154f264da0e0efe74f0a7",
-  "reason": "Reviewed preview40050603489 artifact12543450766 SHA2567f0bf2f4907c45d26491e971d630d82f65411f26e7252bfe70f758b091f31af8:4451models, one Nio ET5T variant7f52470e6594a81a79fbf80d, zero values changed, one powertrainKind evidence repair. Existing exact matcher/revisions/CAS/manual protection; no source requests or ASTRA repeat."
+  "mode": "preview",
+  "requestedAt": "2026-10-24T01:49:35.935051+00:00",
+  "reason": "Fix proven unknown/zero sentinel mismatch between exact calculator and persisted reference reuse. Previous full preview4451 found only a proof because unknown was treated as filled. Recompute full reviewed plan before apply; same exact/manual/source/30min guards."
 }

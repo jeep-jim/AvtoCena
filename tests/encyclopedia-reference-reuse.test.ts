@@ -52,6 +52,19 @@ test('missing certified power is never copied from observed peak or nominal powe
  const r=record([{...donor,fuel:'electric',powertrainKind:'electric',engineCc:undefined,power30MinKw:80},{...target,fuel:'electric'}]);
  const result=planReferenceReuse(r,index(r));assert.equal(result.record.variants[1].power30MinKw,undefined);
 });
+test('unknown and zero sentinels receive exact values once, with usable evidence and stable replay',()=>{
+ const r=record([donor,{...target,powertrainKind:'unknown',engineCc:0,powerHp:0}]);
+ const result=planReferenceReuse(r,index(r));
+ const saved=result.record.variants[1];
+ assert.equal(saved.powertrainKind,'combustion');
+ assert.equal(saved.engineCc,1968);assert.equal(saved.powerHp,204);
+ assert.ok(result.changes[0].fields.includes('powertrainKind'));
+ const rebuilt=index(result.record),fact=rebuilt.models['audi:a6'].find(v=>v.variantId==='kr')!;
+ assert.equal(fact.values.powertrainKind,'combustion');
+ assert.equal(fact.sources.powertrainKind?.kind,'owner_reference');
+ assert.equal(planReferenceReuse(result.record,rebuilt).changes.length,0);
+ assert.equal(planReferenceReuse({...r,editedBy:'human-owner'},index(r)).changes.length,0);
+});
 test('changing values or identity invalidates retained evidence and public edits cannot install it',async()=>{
  const r=record([donor,target]),saved=planReferenceReuse(r,index(r)).record;
  for(const patch of [{powerHp:999},{year:2024},{trim:'45 TFSI'},{engineCode:'other'}]){

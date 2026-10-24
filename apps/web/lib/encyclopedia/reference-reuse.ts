@@ -1,10 +1,13 @@
 import {randomUUID} from 'node:crypto';
-import {applyEncyclopediaCalculation,checksum,compileModelFacts,factFields,modelKey,type CalculationIndex} from './calculation-index';
+import {applyEncyclopediaCalculation,checksum,compileModelFacts,factFields,modelKey,token,type CalculationIndex} from './calculation-index';
 
 const identity=(record:any,v:any)=>({modelId:record.id,variantId:v.id,make:record.make,model:record.model,year:v.year,trim:v.trim,
  generation:v.generation||'',chassisCode:v.chassisCode||'',engineCode:v.engineCode||''});
 export const referenceIdentity=identity;
-const empty=(value:any)=>value===undefined||value===null||value==='';
+// Match the calculator's missing-value semantics. Otherwise an exact match
+// fills "unknown" in memory but reuse saves only a proof for the unchanged
+// sentinel, which the compiler correctly rejects on every subsequent pass.
+const empty=(value:any)=>value===undefined||value===null||value===''||value===0||token(value)==='unknown';
 
 /** Existing variants only. Same matcher as the catalog; no source requests. */
 export function planReferenceReuse(record:any,index:CalculationIndex,at=new Date().toISOString()){
