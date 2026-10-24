@@ -1,3 +1,5 @@
+import {redirect} from 'next/navigation';
+import {catalogBrandPresentation} from '@/lib/catalog/brands';
 import {protectedPhotoUrl} from '@/lib/catalog/photo-proxy-policy';
 import type {Metadata} from 'next';
 import {CatalogBreadcrumbs} from '@/components/catalog/CatalogBreadcrumbs';
@@ -15,7 +17,7 @@ export const dynamic='force-dynamic';
 export const metadata:Metadata={title:'Энциклопедия автомобилей — годы, модификации и характеристики | АвтоЦена',description:'Постоянная энциклопедия АвтоЦена: марки, модели, модификации по годам, двигатели, привод и 30-минутная мощность. Таблица характеристик по годам.',alternates:{canonical:'/cars/autocatalog'},robots:{index:true,follow:true}};
 export default async function EncyclopediaPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){
  const user=await getCurrentUser();
- const raw=await searchParams,p=Object.fromEntries(Object.entries(raw).map(([k,v])=>[k,Array.isArray(v)?v[0]:v]));const manifest=await readEncyclopedia(),models=canonicalDirectoryModels(manifest?.models||[]),filtered=filterModels(models,p);
+ const raw=await searchParams,p=Object.fromEntries(Object.entries(raw).map(([k,v])=>[k,Array.isArray(v)?v[0]:v]));if(p.make){const make=catalogBrandPresentation(p.make).name;if(make!==p.make){const canonical=new URLSearchParams();for(const [key,value] of Object.entries(p))if(value!==undefined)canonical.set(key,key==='make'?make:value);redirect(`/cars/autocatalog?${canonical}`);}}const manifest=await readEncyclopedia(),models=canonicalDirectoryModels(manifest?.models||[]),filtered=filterModels(models,p);
  const makes=[...new Set(models.map(m=>m.make))].sort((a,b)=>a.localeCompare(b,'ru')),years=[...new Set(models.flatMap(m=>m.years))].sort((a,b)=>b-a),fuels=[...new Set(models.flatMap(m=>m.fuels.map(fuelFilterKey)))].sort();
  return <main className="ac-ency-page ac-page-copy"><PublicHeader backHref="/cars" backLabel="В каталог"/><div className="ac-ency-container">
   <CatalogBreadcrumbs items={[{label:'Главная',href:'/'},{label:'Каталог автомобилей',href:'/cars'},{label:'Энциклопедия',href:'/cars/autocatalog'},...(p.make?[{label:p.make,href:`/cars/autocatalog?make=${encodeURIComponent(p.make)}`}]:[])]}/>
