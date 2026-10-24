@@ -1,5 +1,5 @@
 {
-  "requestedAt": "2026-10-24T19:12:57.207Z",
+  "requestedAt": "2026-10-24T20:06:48.506Z",
   "inspectBudgetSelectors": true,
-  "reason": "Read-only verification of retained compressed v3 selectors after PR1529; inspect current lease; no rebuild/collector/repair/deploy."
+  "reason": "Fresh read-only lease/selector check after cancelled budget run40124113621 and deferred40124848897; no lock reset, no rebuild."
 }
