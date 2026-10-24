@@ -14946,6 +14946,22 @@ One-hop40100131577/job120890399939 наREG завершился heapOOM14:00:39U
 Предыдущийrelease40097364164SUCCESS; внешнийhealth8ec0d858/calculation2104e015 подтверждён. Реальные HTML ответы трёх старыхссылок MERCEDES-ADRIA/PEUGEOT-DANGEL/RENAULT-SPORT содержат Next redirect на Mercedes-Benz/Peugeot/Renault с сохранённым year2023 —3/3PASS. HTTP200 здесь streamingredirect, не доказательствоотсутствияперехода. Следующийшаг: дождаться replan artifact, проверитьdigest/newModels0/newUnknownYearVariants0/причиныудержания, применитьпланштатнымCASimporter и затемединыйrelease со всеми прежнимитребованиями.
 
 
+## 24.10.2026 21:19 Красноярск — очередь переключена на массовый план, дубликат правки закрыт
+
+Обнаружена устаревшая верхняя записьqueue: A52024 saved_pending и A52023next, хотя этипартииужеактивированы. Верхнийприоритет обновлённаобщийASTRAreplan40100441431; прежниеmodel/retry/handoff сохранены, перезапускаалфавита нет. Явноустановлена паузаединичныхзаписей доexactapply+изоляцииснимка. Планещёвыполняется, artifact/digest ещёнеполучены; массовоsaved пока0 вэтойсессии.
+
+Независимыйтестподтвердилстаруюсуммуdefaultbudgetкарточки: offlinebefore2397582/expected1481149; идентичнаяправкаcurrentSearchPrices даёт11/11targettestsPASS,typecheckPASS. Одновременно ручнаясессияоткрыла более полныйPR1519 c69484a2, содержащийтужеисправленнуюстроку+previewranking. СозданныйдубликатPR1520 закрытбезmerge/deploy; независимые2regressionassertions сохраненыветкой. Никакиеwriter/deploy неотменялись. ДляединогоPR1519 запущенлокальныйполныйnpm test наточномc69484a2, результатещёожидается; доуспешногоCI несливать/невыпускать. Новыеrelease/apply не запрашивались.
+
+
+## 24.10.2026 21:27 Красноярск — проверен массовый ASTRA план, запрошен exact apply
+
+Replan40100441431/job120891320310 SUCCESS. Artifact12562893701 SHA256 11b1b3b309aaeae4764e405fbdd678f2874ac11841099bbc6d290ad31e392740 проверен; canonical planDigest b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0 пересчитан, per-model суммы/ключи/ревизии/уникальность153models PASS. План:3854 годовые версии/153 модели,3664 новых значения/17211 подтверждений,0 новыхмоделей/0unknown-year/0annual30min. Это план, ещё не saved. Удержаны83948:57960 no_exact_technical_match,25567 manual_or_unknown_year,421 conflicting_or_incomplete_evidence. Новыйкорпус нескачивался.
+
+После проверки всех in_progress/queued/pending: permanent-encyclopedia-research и regcloud-production-release свободны; запрошен единственный штатный apply точногоdigest через marker. Сохранены sourcePlan/hash и CAS. Report docs/encyclopedia/reports/2026-10-24-astra-bulk-plan-verified.json. Единичные researchwrites остаются приостановлены доapply+изоляциииндекса. Далее: terminal applyreport, независимыйAPIreadback153ревизий, единыйrelease с прежнимASTRA6d417+новымb337 и всемиresearchrequirements; новые факты пока не активированы.
+
+Локальный полный npm test точного PR1519 c69484a2:2490/2490PASS, typecheckPASS. Актуальный объединённыйheadf3b1af8a CI40101987092 ещёожидается; PR1520 закрытбезmerge, повторныйкод не переносится.
+
+
 ## 24.10.2026 21:09 Красноярск — причина расхождения индекса цен подтверждена
 
 Log40100131705/job120890399974: совпадают count и повторный cold query, но defaultorder отличается. Строки eadeea8449415bae72f064ee/ce58a2587278602bece89c53/884967afdd67dc233bb56d80 имеют рассчитанный preview при totalRubnull, а обычный sort смотрел толькоtotalRub. Compact tuple уже содержал вычисленную цену. Видимые indexed суммы также былистарыми (aa190 2288550 против baseline2241402), потому что default budget page не выполняла currentSearchPrices для выбранныхкарточек.

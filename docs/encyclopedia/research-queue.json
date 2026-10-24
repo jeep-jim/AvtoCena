@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T13:15:26.245Z",
+  "updatedAt": "2026-10-24T14:26:11.664Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,22 +32796,15 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T12:16:15.688Z",
-    "task": "Подтверждённые fuel/engine/power/30min для расчётов всех6рынков, затемdrive; существующий алфавитный курсор сохранён.",
-    "state": "audi_a5_2024_saved_pending_index",
+    "updatedAt": "2026-10-24T14:26:11.664Z",
+    "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
+    "state": "bulk_astra_apply_requested",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
-      "modelId": "8cf3dbb7884fe919bce44c62",
-      "make": "Audi",
-      "model": "A5",
-      "year": 2023,
-      "variantId": "e088f3c8423c7911e65070bb",
-      "trim": "Cabriolet 35 TFSI S-Tronic*Navi*Leder*LED*Win",
-      "missingValueFields": [
-        "bodyType"
-      ],
-      "state": "prepared_waiting_release_snapshot"
+      "scope": "all_existing_annual_models",
+      "state": "await_exact_apply_readback",
+      "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0"
     },
     "lastVerifiedResearch": "audi-a5-2024-drive-mass-body",
     "rawAuditCalculated": 87,
@@ -33049,7 +33042,14 @@
       "nextAction": "Предыдущая порция39781954271 SUCCESS по свежему roadmap; не считать весь каталог законченным. Проверить дальнейший запуск перед возобновлением.",
       "completed": false
     },
-    "observedProductionRelease": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
+    "observedProductionRelease": {
+      "checkedAt": "2026-10-24T14:19:12Z",
+      "release": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+      "workflow": 40097364164,
+      "conclusion": "success",
+      "externalHealth": true,
+      "compoundRedirectsPassed": 3
+    },
     "mito2012_2013Pass": {
       "checkedAt": "2026-10-22T17:23:25+07:00",
       "modelId": "81a4b290257d227a5fd86ee6",
@@ -38891,9 +38891,9 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "observedMain": "c4424c7fc5072962346c7e07dcf4cf0b3a41add8",
-      "writesPaused": false,
-      "reason": "Финальный выпуск установлен и публично проверен. Исследования разрешены; новые партии после зафиксированного снимка относятся к следующему выпуску. Не повторять ASTRA apply и не запускать дубликаты deploy.",
+      "observedMain": "437468b8f7336edc5891a1aa1c324e930616dcba",
+      "writesPaused": true,
+      "reason": "Новый массовый план должен видеть неизменные ревизии; единичные партии не сохранять до его штатного применения и изоляции следующего index snapshot.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -38901,7 +38901,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-24T12:18:02.531Z",
+      "checkedAt": "2026-10-24T14:19:12Z",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -39010,9 +39010,9 @@
       "targetRelease": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
       "targetWorkflow": 40068425827,
       "snapshotReady": true,
-      "workflow": 40093257230,
+      "workflow": 40100441431,
       "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
-      "state": "wait_for_private_index_and_membership_before_next_data_write",
+      "state": "reserved_for_bulk_astra_replan_apply",
       "noDuplicatePending": true
     },
     "audiA1BodyAndGapsPass": {
@@ -42665,6 +42665,88 @@
       "report": "docs/encyclopedia/reports/2026-10-24-installed-technical-transfer.json",
       "noSupplierRequests": true,
       "storageWrites": 0
+    },
+    "priorSingleModelCursor": {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2023,
+      "variantId": "e088f3c8423c7911e65070bb",
+      "trim": "Cabriolet 35 TFSI S-Tronic*Navi*Leder*LED*Win",
+      "missingValueFields": [
+        "bodyType"
+      ],
+      "state": "prepared_waiting_release_snapshot"
+    },
+    "massTechnicalPass": {
+      "checkedAt": "2026-10-24T14:26:11.664Z",
+      "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+      "workflow": 40100441431,
+      "job": 120891320310,
+      "status": "preview_success_apply_requested",
+      "artifactExpected": "astra-import-preview.json",
+      "applyRequested": true,
+      "nextActions": [
+        "Прочитать terminal artifact; проверить planDigest и sums counters.",
+        "Требовать newModels=0 и newUnknownYearVariants=0; отдельно оценить documented30min.",
+        "Проверить active/pending общей permanent-encyclopedia-research группы; применить этот exact plan штатным importer.",
+        "Независимый API readback ревизий; сохранить прежний ASTRA plan и все research requirements в одном свободном release.",
+        "После активации проверить list/detail/related/filter; затем остаточные технические группы."
+      ],
+      "pr1518": {
+        "merged": true,
+        "merge": "8442ab716c85bf058786809abbe506073ab4f473",
+        "ci": 40100581070,
+        "conclusion": "success",
+        "activated": false
+      },
+      "priceFixPr": 1519,
+      "duplicatePr1520": "closed_unmerged",
+      "diagnostics": "docs/encyclopedia/reports/2026-10-24-bulk-replan-preparation-diagnostics.json",
+      "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+      "artifact": 12562893701,
+      "previewVerified": true,
+      "plannedCounters": {
+        "sourceRecords": 466987,
+        "uniqueTechnicalRecords": 466987,
+        "detailRecords": 1768599,
+        "originalSourceRows": 1038355,
+        "eligibleSourceRecords": 300947,
+        "assignedSourceRecords": 300811,
+        "rejectedSourceRecords": 166176,
+        "sourceDatasets": {
+          "edatenblatt": 44829,
+          "targa": 210673,
+          "tas": 211485
+        },
+        "rejectedReasons": {
+          "outside_passenger_light_van_pickup_scope": 150628,
+          "unknown_commercial_name": 182,
+          "unknown_vehicle_category": 12512,
+          "excluded_vehicle_family": 2718,
+          "not_existing_model": 136
+        },
+        "existingModelsTotal": 4473,
+        "existingVariantsTotal": 345462,
+        "targetedExistingAnnualVariants": 87802,
+        "targetModels": 2893,
+        "newModels": 0,
+        "changedExistingModels": 153,
+        "newUnknownYearVariants": 0,
+        "existingAnnualVariantsChanged": 3854,
+        "fieldsFilled": 3664,
+        "existingFieldsAttested": 17211,
+        "existingAnnualPower30Filled": 0,
+        "heldExistingVariants": 83948,
+        "heldReasons": {
+          "no_exact_technical_match": 57960,
+          "manual_or_unknown_year": 25567,
+          "conflicting_or_incomplete_evidence": 421
+        }
+      },
+      "applied": false,
+      "apiReadback": false,
+      "activationConfirmed": false
     }
   },
   "scope": {

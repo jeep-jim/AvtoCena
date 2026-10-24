@@ -1,8 +1,8 @@
 {
-  "requestedAt": "2026-10-23T14:47:28.244481+00:00",
+  "requestedAt": "2026-10-24T14:26:11.664Z",
   "mode": "apply",
   "sourcePlan": "docs/encyclopedia/astra/source-plan-2026-10-23.json",
   "sourcePlanSha256": "25e56df33170014e9a53611a3f7c52952fc340984d2bd9846967dd91f789b12d",
-  "reason": "Apply exact successful ASTRA preview39949279655. 33 archived sources verified, 2895 model plans, 230447 unknown-year technical variants; 5 annual variants /8 missing fields /24 attestations, zero new annual30min. Preserve revisions, manual values and source identities; no re-download or broad guessed matching.",
-  "expectedPlanDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
+  "reason": "Apply verified annual-only ASTRA mechanical-consensus replan40100441431/artifact12562893701:153 existing models,3854 annual variants,3664 missing values,17211 attestations,newModels0,newUnknownYearVariants0,annualPower30Filled0. Reuse pinned corpus without download; preserve manual fields, exact identities and revision CAS. Owner authorized.",
+  "expectedPlanDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0"
 }
