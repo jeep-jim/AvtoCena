@@ -3,13 +3,13 @@ import {Fragment,useEffect,useId,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {Pencil,Plus,X} from 'lucide-react';
 import {CatalogChevron} from '@/components/catalog/CatalogChevron';
-import {fieldGroups,fieldChoices,filterVariants,astraDetails} from '@/lib/encyclopedia/presentation';
+import {fieldGroups,editorFieldGroups,fieldChoices,filterVariants,astraDetails} from '@/lib/encyclopedia/presentation';
 import {type ModelRecord,type Variant,labels,numberFields,displayValue,statusLabels} from '@/lib/encyclopedia/schema';
 const pageSize=25;
 type Draft={mode:'model'|'variant';value:Record<string,any>;target:string};
 function RecordDetails({variant}:{variant:Variant}){
  const official=astraDetails(variant);
- return <div className="ac-ency-record-details">{fieldGroups.map(group=><section key={group.title}><h3>{group.title}</h3><dl>{group.fields.map(field=><div key={field}><dt>{labels[field]}</dt><dd>{field==='sourceUrl'&&variant.sourceUrl?<a href={variant.sourceUrl} target="_blank" rel="noreferrer">Открыть источник</a>:displayValue(variant[field])}</dd></div>)}</dl></section>)}{!!official.length&&<section><h3>Одобрение типа</h3><dl>{official.map(row=><div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}</dl></section>}</div>;
+ return <div className="ac-ency-record-details">{fieldGroups.map(group=><section key={group.title}><h3>{group.title}</h3><dl>{group.fields.map(field=><div key={field}><dt>{labels[field]}</dt><dd>{displayValue(variant[field])}</dd></div>)}</dl></section>)}{!!official.length&&<section><h3>Одобрение типа</h3><dl>{official.map(row=><div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}</dl></section>}</div>;
 }
 export function ModelEditor({record,canEdit,onSaved,defaultYear,onEditingChange,filterFuel='',onlyMissing30=false}:{record:ModelRecord;canEdit:boolean;onSaved?:()=>void|Promise<void>;defaultYear?:number;onEditingChange?:(editing:boolean)=>void;filterFuel?:string;onlyMissing30?:boolean}){
  const router=useRouter(),formId=useId(),form=useRef<HTMLFormElement>(null);
@@ -39,7 +39,7 @@ export function ModelEditor({record,canEdit,onSaved,defaultYear,onEditingChange,
  const editor=draft&&<form ref={form} className="ac-ency-inline-editor" aria-label={draft.mode==='model'?'Редактирование модели':'Редактирование модификации'} onSubmit={e=>{e.preventDefault();void save();}}>
   <header><h3>{draft.mode==='model'?`${record.make} ${record.model}`:draft.target==='new'?'Новая модификация':`Изменить: ${draft.value.trim||draft.value.chassisCode||'модификация'}${draft.value.year?' · '+draft.value.year:''}`}</h3><button className="ac-ency-button ac-ency-primary" disabled={busy} type="submit">{busy?'Сохраняем…':'Сохранить'}</button><button className="ac-ency-button" type="button" disabled={busy} onClick={cancel}><X size={16} aria-hidden/>Отмена</button></header>
   {error&&<p role="alert" className="ac-ency-error">{error}</p>}
-  <fieldset disabled={busy} className="ac-ency-editor-body">{draft.mode==='model'?<div className="ac-ency-fields">{['make','model','photo'].map(field)}</div>:<>{fieldGroups.map(group=><fieldset className="ac-ency-field-group" key={group.title}><legend>{group.title}</legend><div className="ac-ency-fields">{group.fields.map(field)}</div></fieldset>)}<label className="ac-ency-verification">Проверка<select value={draft.value.status==='observed'?'review':draft.value.status} onChange={e=>setDraft(d=>d&&({...d,value:{...d.value,status:e.target.value}}))}><option value="review">На проверке</option><option value="verified">Подтверждено источником</option></select></label></>}</fieldset>
+  <fieldset disabled={busy} className="ac-ency-editor-body">{draft.mode==='model'?<div className="ac-ency-fields">{['make','model','photo'].map(field)}</div>:<>{editorFieldGroups.map(group=><fieldset className="ac-ency-field-group" key={group.title}><legend>{group.title}</legend><div className="ac-ency-fields">{group.fields.map(field)}</div></fieldset>)}<label className="ac-ency-verification">Проверка<select value={draft.value.status==='observed'?'review':draft.value.status} onChange={e=>setDraft(d=>d&&({...d,value:{...d.value,status:e.target.value}}))}><option value="review">На проверке</option><option value="verified">Подтверждено источником</option></select></label></>}</fieldset>
  </form>;
  const filtered=filterVariants(record.variants,query,filter,{fuel:filterFuel,missing30:onlyMissing30}),pages=Math.max(1,Math.ceil(filtered.length/pageSize)),current=Math.min(page,pages),rows=filtered.slice((current-1)*pageSize,current*pageSize);
  return <section className="ac-ency-model-editor" aria-label="Характеристики и редактирование">

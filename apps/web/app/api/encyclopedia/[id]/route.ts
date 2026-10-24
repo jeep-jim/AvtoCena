@@ -1,3 +1,4 @@
+import {publicEncyclopediaRecord} from '@/lib/encyclopedia/public-record';
 import {getCurrentUser} from '@/lib/auth';
 import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-origin';
 import {readAccountJson} from '@/lib/account/request';
@@ -19,5 +20,6 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string}>}
  if(year===null)return Response.json({error:'Выберите год.'},{status:400,headers});
  const {editedBy,previousKey,...publicRecord}=record;
  publicRecord.variants=record.variants.filter(v=>year==='unknown'?!v.year:v.year===Number(year));
- return Response.json(publicRecord,{headers});
+ const user=await getCurrentUser();
+ return Response.json(canEditEncyclopedia(user)?publicRecord:publicEncyclopediaRecord(publicRecord),{headers});
 }

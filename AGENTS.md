@@ -135,3 +135,8 @@
 # Owner feed mutation policy — 24.10.2026
 
 - Routine feed refresh may create newly observed listings, update seller price when changed and remove confirmed withdrawn/sold listings. Preserve existing vehicle specifications and manual edits; do not reimport technical fields unless the owner explicitly requests it or a reviewed supplier schema/data change calls for it. Unchanged listings need no content rewrite; separate operational freshness/cursor metadata from technical facts. Supplier failure/missing partial page is not withdrawal evidence. Recompute affected price previews when seller price changes; never keep a stale delivered total. Preserve partner restrictions and midnight schedule.
+
+
+# Owner encyclopedia source privacy — 24.10.2026
+
+- Do not display database suppliers, source download links or internal provenance notes in public encyclopedia descriptions/details or anonymous API responses. Preserve provenance and evidence internally for authorized administration and calculation checks. Keep the original listing source in the catalog disclosure. No source corpus export.

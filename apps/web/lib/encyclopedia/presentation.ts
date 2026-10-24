@@ -3,8 +3,9 @@ export const fieldGroups=[
  {title:'Модификация',fields:['year','trim','generation','chassisCode','bodyType','drive','transmission']},
  {title:'Двигатель',fields:['fuel','powertrainKind','engineCode','engineCc','powerHp','powerKw','icePowerKw']},
  {title:'Электрическая часть',fields:['power30MinKw','frontMotor30MinKw','rearMotor30MinKw','motors30MinKw','motorPeakKw','systemPowerKw','batteryKwh']},
- {title:'Источник и дополнительные сведения',fields:['grossVehicleWeightKg','sourceUrl','notes']},
+ {title:'Дополнительные сведения',fields:['grossVehicleWeightKg']},
 ] as const;
+export const editorFieldGroups=[...fieldGroups,{title:'Внутренние сведения',fields:['sourceUrl','notes']}] as const;
 export const fieldChoices:Record<string,string[]>={
  bodyType:['sedan','suv','crossover','hatchback','wagon','minivan','coupe'],
  fuel:['petrol','diesel','electric','hybrid','phev','hev','mhev','lpg','cng'],
@@ -16,7 +17,7 @@ export function astraDetails(variant:Variant){
  const names={approval:'Номер одобрения типа',approvalCH:'Швейцарское одобрение типа',type:'Тип по одобрению',variant:'Вариант по одобрению',version:'Версия по одобрению'} as const;
  for(const field of Object.keys(names) as (keyof typeof names)[]){const value=variant.astraIdentity?.[field];if(typeof value==='string'&&value.trim())rows.push({label:names[field],value});}
  const years=variant.astraEvidence?.manufactureYears;
- if(Array.isArray(years)){const valid=[...new Set(years.filter(year=>Number.isInteger(year)&&year>=1900&&year<=new Date().getUTCFullYear()))].sort((a,b)=>a-b);if(valid.length)rows.push({label:'Годы изготовления в источнике',value:valid.join(', ')});}
+ if(Array.isArray(years)){const valid=[...new Set(years.filter(year=>Number.isInteger(year)&&year>=1900&&year<=new Date().getUTCFullYear()))].sort((a,b)=>a-b);if(valid.length)rows.push({label:'Годы изготовления',value:valid.join(', ')});}
  return rows;
 }
 export function filterVariants(variants:Variant[],query:string,filter:string,scope:{fuel?:string;missing30?:boolean}={}){

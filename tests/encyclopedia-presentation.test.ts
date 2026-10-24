@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {fieldGroups,filterVariants,astraDetails} from '../apps/web/lib/encyclopedia/presentation';
+import {fieldGroups,editorFieldGroups,filterVariants,astraDetails} from '../apps/web/lib/encyclopedia/presentation';
 import {textFields,numberFields,type Variant} from '../apps/web/lib/encyclopedia/schema';
 
 test('compact table keeps every editable specification available exactly once in its details',()=>{
- const fields=fieldGroups.flatMap(g=>[...g.fields]);
+ const fields=editorFieldGroups.flatMap(g=>[...g.fields]);
  assert.equal(new Set(fields).size,fields.length);
  assert.deepEqual([...fields].sort(),[...textFields,...numberFields].sort());
 });
@@ -29,5 +29,5 @@ test('official approval identity is searchable without promoting manufacture yea
  assert.equal(filterVariants([v],'e6*0437','').length,1);
  assert.equal(filterVariants([v],'MXPH11','').length,1);
  assert.equal(v.year,undefined);
- assert.deepEqual(astraDetails(v).at(-1),{label:'Годы изготовления в источнике',value:'2021, 2024'});
+ assert.deepEqual(astraDetails(v).at(-1),{label:'Годы изготовления',value:'2021, 2024'});
 });
