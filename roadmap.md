@@ -15109,3 +15109,12 @@ Read-onlyзапускregcloud-publication-status.yml дваждыотклонё�
 Владелец подтвердил диагностику, установку после CI и повторную пересборку. PR1526 уже объединён с успешным CI40110551110; запуск40111237749 остановлен reader guard до записи данных. Read-only40112202295 прочитал lock в16:35:16UTC: operationId read-model-repair-bb3d8336-0f92-4122-8422-acc813eff059, startedAt15:42:48.889, lockedUntil17:22:48.889; прежний repair40108157776 завершён cancelled. Последующая старая Countryman-проверка этого diagnostic завершилась inspection_release_changed; сам результат чтения lock получен, общее SUCCESS не заявлено.
 
 Подготовлена ручная операция снятия только этой блокировки: GitHub run и единственный job должны быть completed/cancelled, время lease обязано попадать внутрь отменённого publication step, operationId/start/expiry проверяются повторно при CAS. Параллельный writer или изменённая блокировка приводят к отказу. Данные каталога не меняются. Два поведенческих теста PASS. Запуск и readback пока предстоят; не объявлять lock свободным заранее.
+
+
+## 24.10.2026 — подтверждённый запуск установки scoped-v1 reader
+
+Владелец подтвердил диагностику, установку и переход на чанки. Запущен Regcloud deploy 40112867414 с commit 786a5aa9bb5a2efbc5b3ed395e51f3a2ab84616d. Marker сохраняет 40 required research batches, 26 public batches и 3 ASTRA plan digests; повторных apply нет. wait-for-astra SUCCESS, prepare ещё выполняется. Установка и runtime health scoped-v1 ещё не подтверждены.
+
+Диагностика 40112202295 прочитала оставшийся lease отменённого 40108157776: read-model-repair-bb3d8336-0f92-4122-8422-acc813eff059, до 17:22:48.889 UTC. Поздний unrelated inspectRelease guard завершил диагностический job ошибкой; весь diagnostic не считать успешным. Ручная форма release exact cancelled repair lease отправлена, но GitHub не зарегистрировал run: блокировку снятой не считать, не запускать дубликаты.
+
+Открытые препятствия перед repair: immutable manifest содержит 324275 записей пяти рынков, Japan отсутствует; existing completeness guard не отключён. В catalog-publish-current-read-models.mjs overview builder вызывается внутри repair lease, тогда как builder отказывает при любом active publication lock; также его raw source validator ожидает items, а scoped chunks используют directory. Эти проверки надо согласовать до полноценного перезапуска; большой запуск заведомо с такими конфликтами не выполнен. Live Japan probe вернул partial/stale, items=[] и total=null при cached countSummary.total=615131 — этого недостаточно для приёмки живого рынка.
