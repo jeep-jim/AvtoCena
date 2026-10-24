@@ -23,3 +23,10 @@ test('search projection preserves technical identity from the full saved card',a
  const out=searchProjectionFromOffer({...offer,engineCode:'M15A-FXE',generation:'XP210',images:[],sourcePrice:1000000,sourceCurrency:'JPY',catalogPricingMode:'seller'} as any);
  assert.equal(out.chassisCode,'MXPH10');assert.equal(out.engineCode,'M15A-FXE');assert.equal(out.generation,'XP210');
 });
+
+test('rounded Japanese auction displacement only qualifies with an exact chassis and never overwrites it',()=>{
+ const raw={...offer,engineCc:1500};const result=applyEncyclopediaCalculation(raw,idx([donor]),{technicalIdentity:true});
+ assert.equal(result.powerHp,91);assert.equal(result.engineCc,1500);
+ assert.equal(result.operational.encyclopediaCalculation.values.engineCc,undefined);
+ for(const patch of [{engineCc:1600},{engineCc:1501},{market:'korea'},{operational:{}}]){const bad={...raw,...patch};assert.equal(applyEncyclopediaCalculation(bad,idx([donor]),{technicalIdentity:true}),bad);}
+});

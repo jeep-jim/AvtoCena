@@ -137,7 +137,10 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  const trim=token(offer.trim);
  const identity={...offer,chassisCode:offer.chassisCode||offer.operational?.chassisCode};
  const annual=(index.models[modelKey(offer.make,offer.model)]||[]).filter(v=>v.year===offer.year);
- const compatible=(v:CalculationFact)=>Object.entries(v.constraints).every(([f,value])=>!exists(identity[f])||same(f,identity[f],value))
+ const roundedJapanVolume=(v:CalculationFact,f:string,value:any)=>options.technicalIdentity&&f==='engineCc'&&offer.market==='japan'
+  &&exists(identity.chassisCode)&&same('chassisCode',identity.chassisCode,v.constraints.chassisCode)
+  &&Number(identity.engineCc)%100===0&&Math.abs(Number(identity.engineCc)-Number(value))<=25;
+ const compatible=(v:CalculationFact)=>Object.entries(v.constraints).every(([f,value])=>!exists(identity[f])||same(f,identity[f],value)||roundedJapanVolume(v,f,value))
   &&['generation','chassisCode','engineCode'].every(f=>!exists(identity[f])||exists(v.constraints[f])&&same(f,identity[f],v.constraints[f]));
  const exact=annual.filter(v=>v.trims.includes(trim));
  const specificTrim=(/\d/u.test(trim)&&/[\p{L}]/u.test(trim))||identity.engineCode||identity.chassisCode;
