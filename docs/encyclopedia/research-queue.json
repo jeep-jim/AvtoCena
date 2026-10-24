@@ -32897,6 +32897,17 @@
         "workflow": 39982805443,
         "job": 120514196873,
         "afterRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff"
+      },
+      {
+        "path": "docs/encyclopedia/reports/2026-10-24-a4-2025-retry-a4l-2026-prepared.json",
+        "state": "prepared_candidates_not_applied_release_snapshot_pause",
+        "modelId": "c2365f94a908e7e90f14976e",
+        "variants": 2,
+        "fields": 4,
+        "applied": false,
+        "requiresFreshApiPreflight": true,
+        "beforeRevision": "04240a9c-c707-433c-b85a-407bf48a4717",
+        "sourceSha256": "0d5b2b3b6525fcb7668da9cf7dfbde9e16206ae899c42dd39ff2b42819ed546b"
       }
     ],
     "pendingNextIndexBatches": [

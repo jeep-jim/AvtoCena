@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T01:59:18.617531+00:00",
+  "state": "prepared_candidates_not_applied_release_snapshot_pause",
+  "source": {
+    "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a4/%E5%A5%A5%E8%BF%AAA4L%E6%8A%98%E9%A1%B5.pdf",
+    "sha256": "0d5b2b3b6525fcb7668da9cf7dfbde9e16206ae899c42dd39ff2b42819ed546b",
+    "bytes": 14124199,
+    "publisher": "一汽–大众 / Audi China",
+    "edition": "2026.Q1",
+    "technicalPage": 9,
+    "editionPage": 14,
+    "visualTableReviewed": true,
+    "sourceNature": "Заводская таблица Audi A4L 200万辆悦享版. Факты извлечены; изображения и оформление не копируются."
+  },
+  "modelId": "c2365f94a908e7e90f14976e",
+  "beforeRevision": "04240a9c-c707-433c-b85a-407bf48a4717",
+  "candidateVariants": 2,
+  "candidateMissingFields": 4,
+  "candidates": [
+    {
+      "variantId": "4675f0047702b30735be4fe2",
+      "year": 2026,
+      "trim": "2026款 200万辆悦享版 40 TFSI 时尚动感型",
+      "proposedMissingValues": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2080
+      }
+    },
+    {
+      "variantId": "68352bf85e49c0cde9ea17ad",
+      "year": 2026,
+      "trim": "2026款 200万辆悦享版 40 TFSI 豪华动感型",
+      "proposedMissingValues": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2080
+      }
+    }
+  ],
+  "notTransferred": [
+    "Пиковая мощность140kW не является30-минутной. Существующие139.74/140kW не исправлялись.",
+    "Остальные6строк2026 требуют точной сверки идентичности: одна безtrim, одна с2025вtrim, у остальных нет явного модельного2026 вназвании.",
+    "Издание2026.Q1 не переносится автоматически на2020–2025."
+  ],
+  "a4Retry": {
+    "modelId": "e3570ba4a67b01797e57a749",
+    "revision": "db5ba009-6f50-45ad-a730-44a9b67bd937",
+    "variantId": "889d1703033d1ef5c805209c",
+    "year": 2025,
+    "reason": "Точная применимость источника к2025 European Limousine advanced остаётся неподтверждённой. Официальный Swiss MY25 URL вернул404; это недоступность источника, не отсутствие модификации. Немецкий PDF датирован15.03.2024 и явно предупреждает о региональных различиях. Год не изменён.",
+    "attemptedSources": [
+      {
+        "url": "https://www.audi.ch/content/dam/nemo/ch/preislisten/mj25/Audi_A4_Preisliste_MJ25_ab_01.07.24_DE.pdf",
+        "result": "HTTP404; search snippet not accepted as verified source"
+      },
+      {
+        "url": "https://www.audi-zentrum-ingolstadt.de/media/preisliste_a4-limousine_a4-avant_a4-allroad-quattro.pdf",
+        "result": "Заводской PDF на сайте дилера;стр8 содержит40TFSIadvanced,стр136 дата15.03.2024;точный2025 не подтверждён"
+      }
+    ]
+  },
+  "applyRequested": false,
+  "apiReadbackAfterApply": false,
+  "activationConfirmed": false,
+  "existingPendingFields": 224,
+  "resumeCondition": "После immutable index/membership/readback ручного выпуска; перед созданием research-batch повторить свежий API/CAS/sourceSHA и manualguards. Не запускать параллельныйapply/deploy.",
+  "cursorAdvanced": false
+}
