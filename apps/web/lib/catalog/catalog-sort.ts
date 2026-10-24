@@ -30,6 +30,6 @@ export function compareSortNumbers(a:number,b:number,term:CatalogSortTerm){
  return term==='auctionDateDesc'||term==='year'||term==='totalRubDesc'||term==='mileageDesc'?b-a:a-b;
 }
 export function compareCatalogTerms<T extends {year?:unknown;mileageKm?:unknown;auctionDate?:unknown}>(a:T,b:T,terms:CatalogSortTerm[],price:(row:T)=>number){
- for(const term of terms){const value=(row:T)=>term.startsWith('auctionDate')?Date.parse(String(row.auctionDate||'')):term.startsWith('totalRub')?sortNumber(price(row)):term.startsWith('mileage')?sortNumber(row.mileageKm,true):sortNumber(row.year);const delta=compareSortNumbers(value(a),value(b),term);if(delta)return delta;}
+ for(const term of terms){const value=(row:T)=>term.startsWith('auctionDate')?Date.parse(String(row.auctionDate||'')):term.startsWith('totalRub')?sortNumber(price(row)):term.startsWith('mileage')?sortNumber(row.mileageKm,true):sortNumber(row.year);const delta=compareSortNumbers(value(a),value(b),term);if(delta)return delta;if(term.startsWith('totalRub')&&!Number.isFinite(value(a))&&!Number.isFinite(value(b))){const seller=compareSortNumbers(sortNumber((a as any).sellerPriceRub),sortNumber((b as any).sellerPriceRub),term);if(seller)return seller;}}
  return 0;
 }

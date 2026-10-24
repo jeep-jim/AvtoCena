@@ -1,3 +1,4 @@
+import {calculatedCatalogPrice} from './calculated-price';
 import {parseCatalogSort,compareCatalogTerms} from './catalog-sort';
 import {hasModificationSelection} from "./modification-contract";
 import {priceCardForCity} from "./card-city-delivery";
@@ -56,7 +57,7 @@ export function businessOrder(left: any, right: any) {
 export function sortCatalogRows(rows: any[], sort: string, city?: string) {
   const sorted = [...rows];
   const values=new Map<any,number>();
-  const price=(row:any)=>{if(!values.has(row)){const offer=city?priceCardForCity(row,city).offer:row;values.set(row,hasModificationSelection(row)?0:Number(offer.japanDeliveredPreview?.totalRub||offer.totalRub||(offer.catalogPricingMode==="seller"?offer.sellerPriceRub:0))||0);}return values.get(row)!;};
+  const price=(row:any)=>{if(!values.has(row)){const offer=city?priceCardForCity(row,city).offer:row;values.set(row,calculatedCatalogPrice(offer));}return values.get(row)!;};
   const terms=parseCatalogSort(sort)||[];
   if(terms.length)return sorted.sort((a,b)=>compareCatalogTerms(a,b,terms,price)||String(a.id||'').localeCompare(String(b.id||'')));
   return sorted.sort(businessOrder);

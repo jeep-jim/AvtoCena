@@ -1,3 +1,4 @@
+import {calculatedCatalogPrice} from './calculated-price';
 import {includedDepositCost} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate} from './reviewed-source-duplicates';
 import {deliveryPricingBasis,priceCardForCity,type DeliveryPricingBasis} from './card-city-delivery';
@@ -73,7 +74,7 @@ export function matchingBudgetIndex(index:BudgetCountIndex,params:CatalogSearchP
   const preview=candidate&&japan&&matchesJapanPreviewInput(candidate,japan)?candidate:undefined;
   const offer={market,totalRub,catalogPricingMode:seller?'seller':undefined,calculationSnapshot:{deliveryPricingBasis:basis},japanDeliveredPreview:preview};
   const priced=params.city?priceCardForCity(offer,params.city).offer:offer;
-  const price=Number(priced.japanDeliveredPreview?.totalRub||priced.totalRub||0);
+  const price=calculatedCatalogPrice(priced);
   if(!(price>0)||(params.budgetFrom&&price<params.budgetFrom)||(params.budgetTo&&price>params.budgetTo))continue;
   matching.push(row);
  }

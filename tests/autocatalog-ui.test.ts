@@ -19,7 +19,8 @@ test("brand logos never disappear and the public request path does not crawl a t
   const visual = source("apps/web/components/catalog/BrandLogoRail.tsx");
   const route = source("apps/web/app/api/catalog/brand-logo/[slug]/route.ts");
 
-  assert.match(visual, /Логотип \$\{brand\} проверяется/);
+  assert.match(visual, /aria-label=\{brand\}/);
+  assert.doesNotMatch(visual, /Логотип \$\{brand\} проверяется/);
   assert.match(visual, /const initials/);
   assert.match(visual, /`\/brand-logos\/local\/\$\{theme\}\/\$\{slug\}\.png`[\s\S]*`\/api\/catalog\/brand-logo/);
   assert.match(visual, /\(previous\?\.count \|\| 0\) \+ count/);

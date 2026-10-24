@@ -8,7 +8,7 @@ import Link from "next/link";
 import {brandContextQuery,brandSelectionQuery} from "@/lib/catalog/brand-navigation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
-import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
+import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug, catalogBrandPresentation } from "@/lib/catalog/brands";
 
 const BRAND_COUNT_FORMATTER = new Intl.NumberFormat("ru-RU");
 const BRAND_COUNT_CACHE_MS = 30_000;
@@ -50,7 +50,7 @@ function loadBrandCounts(query: string) {
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [sourceIndex, setSourceIndex] = useState(0);
-  const slug = catalogBrandSlug(brand);
+  const slug = catalogBrandSlug(catalogBrandPresentation(brand).name);
 
   useEffect(() => setSourceIndex(0), [brand, theme]);
   useEffect(() => {
@@ -70,7 +70,7 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
   if (sourceIndex >= sources.length) {
     const initials = brand.split(/[\s&-]+/).map((part) => part[0] || "").join("").slice(0, 2).toUpperCase() || "·";
     return <span
-      aria-label={`Логотип ${brand} проверяется`}
+      aria-label={brand}
       title={`${brand}`}
       className={`flex h-10 w-[76px] shrink-0 items-center justify-center rounded-xl border border-current/10 bg-[var(--ac-surface-2)] text-sm font-black tracking-[0.08em] text-[var(--ac-muted)] ${className}`}
     >{initials}</span>;
