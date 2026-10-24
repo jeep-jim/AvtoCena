@@ -1,0 +1,860 @@
+{
+  "checkedAt": "2026-10-24T13:12:42.045Z",
+  "indexDigest": "9dabf68d7daee52bbcde50414365fd3794aa76e44b2a642fd1e43da071b9cb19",
+  "generationId": "gen_1792702445675_8c312f85",
+  "previewChanges": 0,
+  "scope": "Five-market saved projection plus bounded existing Japanese query cache. No supplier requests, no database writes; not whole Japan inventory.",
+  "markets": {
+    "korea": {
+      "rows": 9926,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 4340,
+      "baselineMatched": 153,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "uae": {
+      "rows": 22045,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 11722,
+      "baselineMatched": 12,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "europe": {
+      "rows": 46127,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 46095,
+      "baselineMatched": 36723,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "georgia": {
+      "rows": 1706,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 1192,
+      "baselineMatched": 0,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "china": {
+      "rows": 244471,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 161351,
+      "baselineMatched": 72320,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "japan": {
+      "rows": 337,
+      "withTechnicalCode": 337,
+      "modelYearKnown": 68,
+      "baselineMatched": 0,
+      "technicalMatched": 2,
+      "newlyFilledRecords": 2,
+      "newlyFilledFields": 12,
+      "newlyCompleteSpecifications": 2,
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 2
+    }
+  },
+  "japanCache": {
+    "slots": 128,
+    "uniqueLots": 337,
+    "converted": 337,
+    "rejected": 0
+  },
+  "samples": 2,
+  "japanMissingLinks": [
+    {
+      "id": "ajes-stats-2UN3KS5I3DhNzY0",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2023,
+      "trim": "RZ",
+      "chassisCode": "DB06",
+      "engineCc": 3000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2keBGFUkJ0OfB1s",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2020,
+      "trim": "RZ",
+      "chassisCode": "DB42",
+      "engineCc": 3000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-PZowPAdWQRTbcL",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2019,
+      "trim": "SZ-R",
+      "chassisCode": "DB22",
+      "engineCc": 2000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-7o28XgmHC0j69X",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2019,
+      "trim": "SZ-R",
+      "chassisCode": "DB22",
+      "engineCc": 2000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-mRganXvYnGxf4ZU",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2019,
+      "trim": "SZ-R",
+      "chassisCode": "DB22",
+      "engineCc": 2000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-JbGHpB8Cy837b0",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2021,
+      "trim": "RZ",
+      "chassisCode": "DB02",
+      "engineCc": 3000,
+      "factsForModel": 7,
+      "factsForYear": 2,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "grsupra20t标准型"
+          ]
+        },
+        {
+          "trim": [
+            "2021grsupra30tstandard"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-qe856dlqvvhDFoa",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2020,
+      "trim": "RZ",
+      "chassisCode": "DB42",
+      "engineCc": 3000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-25qu0qx7u8SWrdp",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2020,
+      "trim": "SZ-R",
+      "chassisCode": "DB22",
+      "engineCc": 2000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-DgEtL1UdwIQ1wB",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2020,
+      "trim": "SZ-R",
+      "chassisCode": "DB22",
+      "engineCc": 2000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-aB2kq8FTgmx32Y",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2022,
+      "trim": "SZ-R",
+      "chassisCode": "DB22",
+      "engineCc": 2000,
+      "factsForModel": 7,
+      "factsForYear": 5,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "grsupra30tstandardtype"
+          ]
+        },
+        {
+          "trim": [
+            "gr30legendpremiumjblnavihud"
+          ]
+        },
+        {
+          "trim": [
+            "2022grsupra30tstandard"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-oiav7i2OChAOwFF",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2019,
+      "trim": "SZ",
+      "chassisCode": "DB82",
+      "engineCc": 2000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-rEOtrmosTPh5krU",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2020,
+      "trim": "SZ",
+      "chassisCode": "DB82",
+      "engineCc": 2000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-yP0gBdwvy3FUgM",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2019,
+      "trim": "SZ",
+      "chassisCode": "DB82",
+      "engineCc": 2000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-ecqmwLziGsGuJJc",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2024,
+      "trim": "RZ",
+      "chassisCode": "DB06",
+      "engineCc": 3000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-TGBOVQPRsYq8uo",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2025,
+      "trim": "RZ",
+      "chassisCode": "DB06",
+      "engineCc": 3000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-51CzWJUdhq120Dx",
+      "make": "TOYOTA",
+      "model": "SUPRA",
+      "year": 2024,
+      "trim": "RZ",
+      "chassisCode": "DB06",
+      "engineCc": 3000,
+      "factsForModel": 7,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-Q6HQezQZGWCBJ",
+      "make": "SCION",
+      "model": "OTHER",
+      "year": 2009,
+      "trim": "Xb",
+      "chassisCode": "フメイ",
+      "engineCc": 2360,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-ZaeoQssZkHWDbr",
+      "make": "RENAULT",
+      "model": "TWINGO",
+      "year": 2017,
+      "trim": "ゼン",
+      "chassisCode": "AHH4B",
+      "engineCc": 900,
+      "factsForModel": 8,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-i6tMpOruUTDho7",
+      "make": "RENAULT",
+      "model": "MEGANE",
+      "year": 2021,
+      "trim": "Sports Tourer - インテンス",
+      "chassisCode": "KBH5H",
+      "engineCc": 1400,
+      "factsForModel": 38,
+      "factsForYear": 13,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "16pluginhybrideetechautomaattopstaat"
+          ]
+        },
+        {
+          "trim": [
+            "estate16pluginhybrid160intenssoh89n"
+          ]
+        },
+        {
+          "trim": [
+            "sw15bluedcilimited62000km"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-0uRqReQHreLQ0",
+      "make": "NISSAN",
+      "model": "CONDOR",
+      "year": 2008,
+      "trim": "2.35 tons",
+      "chassisCode": "MK36C",
+      "engineCc": 6400,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-25vfOB6ZzDUZcQI",
+      "make": "HONDA",
+      "model": "ACTY TRUCK",
+      "year": 2008,
+      "trim": "",
+      "chassisCode": "HA6",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2BUjfTfdIGujpE",
+      "make": "NISSAN",
+      "model": "CLIPPER VAN",
+      "year": 2020,
+      "trim": "",
+      "chassisCode": "DR17V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2HNx7cXG5DuAE4",
+      "make": "HONDA",
+      "model": "N BOX",
+      "year": 2018,
+      "trim": "",
+      "chassisCode": "JF3",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2NGKWwG9qAuRSs",
+      "make": "NISSAN",
+      "model": "ROOX",
+      "year": 2023,
+      "trim": "",
+      "chassisCode": "B44A",
+      "engineCc": 660,
+      "fuel": "hybrid",
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2NgfFLkogQyQo",
+      "make": "SUZUKI",
+      "model": "EVERY",
+      "year": 2016,
+      "trim": "4WD PC",
+      "chassisCode": "DA17V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2POP1Pt6jRCMyLR",
+      "make": "HONDA",
+      "model": "GRACE",
+      "year": 2017,
+      "trim": "",
+      "chassisCode": "GM4",
+      "engineCc": 1500,
+      "fuel": "hybrid",
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2PUIeFMNMdzMQ1g",
+      "make": "NISSAN",
+      "model": "AD",
+      "year": 2021,
+      "trim": "4WD",
+      "chassisCode": "VZNY12",
+      "engineCc": 1600,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2Q1Bsw7wezwN8eF",
+      "make": "SUZUKI",
+      "model": "CARRY TRUCK",
+      "year": 2014,
+      "trim": "4WD",
+      "chassisCode": "DA16T",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2Qih944FBDnNWVS",
+      "make": "TOYOTA",
+      "model": "TOWN ACE TRUCK",
+      "year": 2021,
+      "trim": "4WD",
+      "chassisCode": "S413U",
+      "engineCc": 1500,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2QoalTno4ZkOeah",
+      "make": "SUZUKI",
+      "model": "ALTO",
+      "year": 2022,
+      "trim": "4WD",
+      "chassisCode": "HA37S",
+      "engineCc": 660,
+      "factsForModel": 1,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2Qu4zJH7wlhOvoG",
+      "make": "SUZUKI",
+      "model": "EVERY",
+      "year": 2022,
+      "trim": "4WD",
+      "chassisCode": "DA17V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2QzWNA1OYHeOMD6",
+      "make": "TOYOTA",
+      "model": "COROLLA FIELDER",
+      "year": 2021,
+      "trim": "4WD",
+      "chassisCode": "NZE164G",
+      "engineCc": 1500,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2R0i9DV8IOWQs2v",
+      "make": "HONDA",
+      "model": "FREED",
+      "year": 2019,
+      "trim": "",
+      "chassisCode": "GB7",
+      "engineCc": 1500,
+      "fuel": "hybrid",
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2R4oUNBpgsZQaN7",
+      "make": "SUZUKI",
+      "model": "EVERY",
+      "year": 2018,
+      "trim": "4WD",
+      "chassisCode": "DA17V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2RfbmueQbaTQJfU",
+      "make": "TOYOTA",
+      "model": "PROBOX",
+      "year": 2021,
+      "trim": "",
+      "chassisCode": "NSP160V",
+      "engineCc": 1300,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2Rl5AkyyDwQR1uj",
+      "make": "TOYOTA",
+      "model": "PRIUS",
+      "year": 2017,
+      "trim": "4WD",
+      "chassisCode": "ZVW55",
+      "engineCc": 1800,
+      "fuel": "hybrid",
+      "factsForModel": 3,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2RwR32bZyeKRyX8",
+      "make": "SUZUKI",
+      "model": "EVERY",
+      "year": 2015,
+      "trim": "4WD",
+      "chassisCode": "DA17V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2TzYMQoAMxv07R",
+      "make": "NISSAN",
+      "model": "SERENA",
+      "year": 2022,
+      "trim": "",
+      "chassisCode": "HFC27",
+      "engineCc": 1200,
+      "fuel": "electric",
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-4mqaCwiCC1088X",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2011,
+      "trim": "パサ-トTSI High Line",
+      "chassisCode": "3CCAX",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-31TZ3opJjrphA94",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2013,
+      "trim": "",
+      "chassisCode": "3CCAX",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    }
+  ],
+  "savedDetailProbe": [
+    {
+      "id": "c5dc98348f491e5d205ca38b",
+      "market": "china",
+      "found": true
+    },
+    {
+      "id": "39aa885d29e2b98c8eec6fa8",
+      "market": "china",
+      "found": true
+    },
+    {
+      "id": "37fac6b32f0319680e0aa1cc",
+      "market": "china",
+      "found": true
+    },
+    {
+      "id": "ac03beafec88ff180e5710d1",
+      "market": "china",
+      "found": true
+    },
+    {
+      "id": "7c59bc3ddf6f39b1eae0cd9f",
+      "market": "china",
+      "found": true
+    },
+    {
+      "id": "9738dc416604e468734b499f",
+      "market": "china",
+      "found": true
+    },
+    {
+      "id": "d1074abc550c6a6295193b91",
+      "market": "china",
+      "found": true
+    },
+    {
+      "id": "f33ae3d3dc745bfbf25335c7",
+      "market": "china",
+      "found": true
+    },
+    {
+      "id": "7d64c740118764707303b3f7",
+      "market": "europe",
+      "found": true
+    },
+    {
+      "id": "e423cd9d7b1b0ec70aa413a3",
+      "market": "europe",
+      "found": true
+    },
+    {
+      "id": "6d83bfc656200874170ecd6f",
+      "market": "europe",
+      "found": true
+    },
+    {
+      "id": "d1f6cfaa9449574bd80155b0",
+      "market": "europe",
+      "found": true
+    },
+    {
+      "id": "b40f8d47cbc147c9805cd899",
+      "market": "europe",
+      "found": true
+    },
+    {
+      "id": "46ef024b658535fb979112c6",
+      "market": "europe",
+      "found": true
+    },
+    {
+      "id": "c144906b70f405d7ba0895bd",
+      "market": "europe",
+      "found": true
+    },
+    {
+      "id": "63a2f7112ddff110718cd73f",
+      "market": "europe",
+      "found": true
+    },
+    {
+      "id": "a11b9e4906fbffdc1d0475e4",
+      "market": "korea",
+      "found": true
+    },
+    {
+      "id": "c660396e405d894f05c14cc3",
+      "market": "korea",
+      "found": true
+    },
+    {
+      "id": "903cf1670a49cecc3bc3ddb0",
+      "market": "korea",
+      "found": true
+    },
+    {
+      "id": "c201dcae52a4eaea5b19751c",
+      "market": "korea",
+      "found": true
+    },
+    {
+      "id": "0bef443263d7ce3ad44abcec",
+      "market": "korea",
+      "found": true
+    },
+    {
+      "id": "055b9832a9c375704a5adb02",
+      "market": "korea",
+      "found": true
+    },
+    {
+      "id": "c95f874eb2a0aa0b074770e4",
+      "market": "korea",
+      "found": true
+    },
+    {
+      "id": "884967afdd67dc233bb56d80",
+      "market": "korea",
+      "found": true
+    },
+    {
+      "id": "7911cf141189bfe93f2efe4e",
+      "market": "uae",
+      "found": true
+    },
+    {
+      "id": "905df81633cf2e2dfa7c1f17",
+      "market": "uae",
+      "found": true
+    },
+    {
+      "id": "aad5105af6af46367564f177",
+      "market": "uae",
+      "found": true
+    },
+    {
+      "id": "a7294e469595e98c12b488cf",
+      "market": "uae",
+      "found": true
+    },
+    {
+      "id": "cf903214c73c85c399794c45",
+      "market": "uae",
+      "found": true
+    },
+    {
+      "id": "d0699df58eed22def4a24d84",
+      "market": "uae",
+      "found": true
+    },
+    {
+      "id": "4e25da37d54251beef7150b9",
+      "market": "uae",
+      "found": true
+    },
+    {
+      "id": "058675305ec7ef91724f49fe",
+      "market": "uae",
+      "found": true
+    },
+    {
+      "id": "14ba9d581700a578cedda01a",
+      "market": "georgia",
+      "found": true
+    },
+    {
+      "id": "9f3399931f588c7b688edbd2",
+      "market": "georgia",
+      "found": true
+    },
+    {
+      "id": "8288a2c34fc83d6480cfc26e",
+      "market": "georgia",
+      "found": true
+    },
+    {
+      "id": "b3aacb279fd1bde5d9df5cf5",
+      "market": "georgia",
+      "found": true
+    },
+    {
+      "id": "6617c1b9ef1d10c6b1edc16f",
+      "market": "georgia",
+      "found": true
+    },
+    {
+      "id": "5c54435a1f773cc7c0135e4d",
+      "market": "georgia",
+      "found": true
+    },
+    {
+      "id": "18376f62d4868ae1028cbbcf",
+      "market": "georgia",
+      "found": true
+    },
+    {
+      "id": "706d84abdb4b9f0d14176f28",
+      "market": "georgia",
+      "found": true
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T12:16:15.688Z",
+  "checkedAt": "2026-10-24T13:15:26.245Z",
   "priority": [
     "fuel",
     "engineCc",
@@ -24,12 +24,11 @@
     "modelId": "2ab5223df203c25d980af841",
     "make": "Suzuki",
     "model": "Alto",
-    "year": 2023,
-    "variantId": "453b9230d027ab3fd83e6b81",
-    "state": "saved_pending_activation_and_exact_catalog_match",
-    "offerId": "ajes-stats-2QFQ2qkxr4bP4Ru",
+    "year": 2022,
+    "offerId": "ajes-stats-2QoalTno4ZkOeah",
     "chassisCode": "HA37S",
-    "action": "Сначала проверить40093257230/private index+membership иhealth. Не повторятьapply Alto6/A5 32 и не ставитьвторойpendingrelease. Послеактивации проверитьточное HA37S сопоставление list/detail/related/filter;4WD trim в каталоге не равен сохранённойLстроке автоматически."
+    "state": "annual_factory_identity_gap",
+    "action": "Подтвердить реальный2022год и точные заводские исполнения; APIгодовойсрез ранее пуст. Guardedcreateтолько с подтверждённойидентичностью/свежейrevision. Не копировать2023год назад безисточника. ЗатемгруппыSupra изtechnical-transfer audit."
   },
   "catalogGapCursor": "docs/encyclopedia/reports/2026-10-24-alto-price-gap-cursor.json",
   "remaining": [
@@ -65,25 +64,10 @@
   ],
   "allModelsComplete": false,
   "release": {
-    "workflow": 40093257230,
     "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
-    "checkedAt": "2026-10-24T12:18:02.531Z",
-    "activationConfirmed": false,
-    "jobs": [
-      {
-        "id": 120870114339,
-        "name": "wait-for-astra",
-        "status": "completed",
-        "conclusion": "success"
-      },
-      {
-        "id": 120870221483,
-        "name": "prepare",
-        "status": "in_progress",
-        "conclusion": null,
-        "currentStep": "Prepare private encyclopedia index for this release"
-      }
-    ]
+    "workflow": 40093257230,
+    "activationConfirmed": true,
+    "indexDigest": "9dabf68d7daee52bbcde50414365fd3794aa76e44b2a642fd1e43da071b9cb19"
   },
   "publicBaseline": {
     "report": "docs/encyclopedia/reports/2026-10-24-alto-public-baseline-parity.json",
@@ -93,5 +77,27 @@
     "newBatchActivationProved": false,
     "relatedChecked": false,
     "driveFilterChecked": false
+  },
+  "publicActivationReport": "docs/encyclopedia/reports/2026-10-24-index-9dabf-activation.json",
+  "relatedChecked": true,
+  "driveFilterBlocker": {
+    "checkedAt": "2026-10-24T13:12:41.639Z",
+    "awd": "HTTP503",
+    "fwd": "HTTP503",
+    "passed": false,
+    "scope": "bounded public Suzuki Alto Japan filters",
+    "cause": "not_diagnosed"
+  },
+  "technicalAudit": {
+    "workflow": 40097057195,
+    "job": 120881404851,
+    "conclusion": "success",
+    "report": "docs/encyclopedia/reports/2026-10-24-installed-technical-transfer.json",
+    "noSupplierRequests": true,
+    "storageWrites": 0
+  },
+  "compoundLinkFix": {
+    "state": "validated_release_requested",
+    "cases": 6
   }
 }
