@@ -4,8 +4,7 @@ on:
     paths:
       - 'apps/web/components/**'
       - 'tests/browser/owner-polish*'
-      - 'tests/browser/assistant-layout.mjs'
-      - 'tests/browser/assistant-extension.mjs'
+      - 'tests/assistant-retirement.test.mjs'
       - 'apps/web/public/assistant-connector/**'
       - '.github/workflows/verify-owner-polish.yml'
 permissions:
@@ -27,9 +26,7 @@ jobs:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/owner-browser/node_modules/playwright/index.mjs
         run: |
           CHROME_BIN=$(command -v google-chrome) node tests/browser/owner-polish.mjs
-          CHROME_BIN=$(command -v google-chrome) node tests/browser/assistant-layout.mjs
-          node "$RUNNER_TEMP/owner-browser/node_modules/playwright/cli.js" install chromium --no-shell
-          node tests/browser/assistant-extension.mjs
+          node --test tests/assistant-retirement.test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
