@@ -1,0 +1,243 @@
+{
+  "checkedAt": "2026-10-24T13:47:55.206386+07:00",
+  "release": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
+  "workflow": 40068425827,
+  "job": 120798938257,
+  "conclusion": "success",
+  "health": {
+    "ok": true,
+    "releaseSha": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
+    "calculationVersion": "5910795afec50ea9971a62539fe69456b0e60b6bac28926156474666b3b01766"
+  },
+  "publicGate": {
+    "version": 1,
+    "release": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
+    "startedAt": "2026-10-24T06:43:52.446Z",
+    "groups": 34,
+    "variants": 616,
+    "fields": 798,
+    "verified": true,
+    "finishedAt": "2026-10-24T06:44:11.120Z"
+  },
+  "publicArtifact": {
+    "id": 12551357807,
+    "sha256": "c1f876f5bb2e40d2f970c6f9430724235c2ce42031d3eaeb484822c0006defe2",
+    "downloadVerified": true
+  },
+  "priceAudit": {
+    "workflow": 40071307718,
+    "job": 120805131552,
+    "conclusion": "success",
+    "report": {
+      "checkedAt": "2026-10-24T06:44:19.195Z",
+      "generationId": "gen_1792702445675_8c312f85",
+      "scope": "Retained five-market price snapshots, checksum-verified and joined by offer ID; not all supplier Japan inventory; not a new calculation.",
+      "markets": {
+        "china": {
+          "retainedOffers": 244471,
+          "snapshotAt": "2026-10-24T06:35:39.858Z",
+          "snapshotKey": "c5dbf5ebfb1c434b7c86d9b457d3ba17ca257fb63910f814815a25b67636b9b1",
+          "pricedOffers": 160818,
+          "sellerOnly": 0,
+          "deliveredTotals": 160818,
+          "unmatchedIds": 0,
+          "byPowertrain": {
+            "combustion": 160776,
+            "hybrid": 41,
+            "electric": 0,
+            "unknown": 1
+          }
+        },
+        "europe": {
+          "retainedOffers": 46127,
+          "snapshotAt": "2026-10-24T06:39:09.066Z",
+          "snapshotKey": "4ea1a7ba8cdbd98faa2ba0c0a4e626ea6be57d00548df6878088936012c58996",
+          "pricedOffers": 38575,
+          "sellerOnly": 0,
+          "deliveredTotals": 38575,
+          "unmatchedIds": 0,
+          "byPowertrain": {
+            "combustion": 38538,
+            "hybrid": 32,
+            "electric": 2,
+            "unknown": 3
+          }
+        },
+        "korea": {
+          "retainedOffers": 9926,
+          "snapshotAt": "2026-10-24T06:38:13.032Z",
+          "snapshotKey": "02d746a48840a2923eb47bdbfb7f51e6a4d1af3ebc1b34490f2690789fe2d7a3",
+          "pricedOffers": 2781,
+          "sellerOnly": 0,
+          "deliveredTotals": 2781,
+          "unmatchedIds": 0,
+          "byPowertrain": {
+            "combustion": 2781,
+            "hybrid": 0,
+            "electric": 0,
+            "unknown": 0
+          }
+        },
+        "uae": {
+          "retainedOffers": 22045,
+          "snapshotAt": "2026-10-24T06:38:27.621Z",
+          "snapshotKey": "e5e2806effe6bd593787db99c9530f5f3e03803f2caad8d35313f770fc8cdd94",
+          "pricedOffers": 7,
+          "sellerOnly": 0,
+          "deliveredTotals": 7,
+          "unmatchedIds": 0,
+          "byPowertrain": {
+            "combustion": 7,
+            "hybrid": 0,
+            "electric": 0,
+            "unknown": 0
+          }
+        },
+        "georgia": {
+          "retainedOffers": 1706,
+          "snapshotAt": "2026-10-24T06:39:33.935Z",
+          "snapshotKey": "6172c0ba9feffb90278c07e637b73f0e90114c6cfe9ce7ee3fb75afed92b4548",
+          "pricedOffers": 0,
+          "sellerOnly": 0,
+          "deliveredTotals": 0,
+          "unmatchedIds": 0,
+          "byPowertrain": {
+            "combustion": 0,
+            "hybrid": 0,
+            "electric": 0,
+            "unknown": 0
+          }
+        }
+      },
+      "storageWrites": 0
+    }
+  },
+  "deliveredTotals": 202181,
+  "previousDeliveredTotals": 202138,
+  "deliveredIncrease": 43,
+  "hybridDelivered": 73,
+  "electricDelivered": 2,
+  "scope": "Five retained market price snapshots; not all supplier Japan inventory. Prices were independently matched to deployment budget log. Coverage variants are not offers.",
+  "specificationShadow": {
+    "newFields": 5096,
+    "offersWithNewFields": 3436,
+    "newlyCompletePending": 234,
+    "scope": "Pre-publication audit on af3 index; final release additionally includes A5 body30. 234 are parameter-complete candidates, not new delivered totals."
+  },
+  "liveSpecificationChecks": [
+    {
+      "id": "68306e347f1b0d05b4baf950",
+      "before": {
+        "sedanLabel": 0,
+        "frontDriveLabel": 4,
+        "price": "1904679"
+      },
+      "after": {
+        "sedanLabel": 6,
+        "frontDriveLabel": 4,
+        "price": "1904679"
+      }
+    },
+    {
+      "id": "adada895ba3c9160b6e40f4d",
+      "before": {
+        "sedanLabel": 0,
+        "frontDriveLabel": 0,
+        "price": "5117883"
+      },
+      "after": {
+        "sedanLabel": 0,
+        "frontDriveLabel": 4,
+        "price": "5117883"
+      }
+    }
+  ],
+  "liveElectrifiedExamples": [
+    {
+      "id": "1b7700af07caec154dc99da6",
+      "url": "https://avtocena.com/cars/offer/bmw-i4-gran-coupe-xdrive40-m-sportpaket-pro-harman-kardon-ahk-2026--1b7700af07caec154dc99da6",
+      "status": 200,
+      "title": "BMW i4 Gran Coupe xDrive40 *M-Sportpaket Pro *Harman/Kardon *AHK",
+      "expectedTotal": 10355064,
+      "mainTotal": "10355064",
+      "totalPresent": true,
+      "powerText": [
+        "1 / 30",
+        "401 л.с.",
+        "/ 295 кВт",
+        "125 кВт · 30 минут",
+        "340 л.с.",
+        "/ 250 кВт",
+        "340 л.с.",
+        "/ 250 кВт",
+        "104 306 км",
+        "340 л.с.",
+        "/ 250 кВт",
+        "286 л.с.",
+        "/ 210 кВт",
+        "340 л.с.",
+        "/ 250,07 кВт",
+        "340 л.с.",
+        "/ 250,07 кВт",
+        "286 л.с."
+      ]
+    },
+    {
+      "id": "2c7482b22cc73bfaccbfb1cf",
+      "url": "https://avtocena.com/cars/offer/toyota-yaris-1-5-hybrid-comfort-carplay-2023--2c7482b22cc73bfaccbfb1cf",
+      "status": 200,
+      "title": "Toyota Yaris 1.5 Hybrid Comfort CARPLAY",
+      "expectedTotal": 2367386,
+      "mainTotal": "2367386",
+      "totalPresent": true,
+      "powerText": [
+        "Обновлено 21.10.2026, 00:54:30",
+        "116 л.с.",
+        "/ 85 кВт",
+        "37 кВт · 30 минут",
+        "2 368 306₽",
+        "125 л.с.",
+        "/ 92 кВт",
+        "72 л.с.",
+        "/ 53 кВт",
+        "111 л.с.",
+        "/ 82 кВт",
+        "72 л.с.",
+        "/ 53 кВт",
+        "107 л.с.",
+        "/ 78,7 кВт",
+        "107 л.с.",
+        "/ 78,7 кВт",
+        "112 л.с."
+      ]
+    }
+  ],
+  "crmRegression": {
+    "workflow": 40069291249,
+    "browser": "success",
+    "audit": "success",
+    "live": "success",
+    "liveCases": 36,
+    "liveOpenings": 168
+  },
+  "limitations": [
+    "No measured increase in calculated HEV/EV in this release.",
+    "Japan has live verified calculated cards, but no complete calculated-total inventory count was obtained.",
+    "ASTRA technical records without model year are preserved; certified power is not assigned to unsupported annual variants.",
+    "Five EQE consensus candidates require applicability evidence; no blanket 30-minute power or petrol assignment."
+  ],
+  "finalCatalogLayout": [
+    {
+      "market": "japan",
+      "cards": 20,
+      "overflow": false,
+      "visibleBanners": 0
+    },
+    {
+      "market": "uae",
+      "cards": 24,
+      "overflow": false,
+      "visibleBanners": 0
+    }
+  ]
+}
