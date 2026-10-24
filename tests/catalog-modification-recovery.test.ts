@@ -146,8 +146,8 @@ test("retained listing fields repair fuel; ranges, guesses and wrong identity do
 test("selected modification calculates a full isolated scenario using existing engine", async () => {
   const markets = JSON.parse(fs.readFileSync("data/markets/markets.json", "utf8"));
   const today = new Date().toISOString();
-  const read = mock.method(LocalJsonStorage.prototype, "readJsonWithMeta", async (key: string) => ({ found: true,
-    value: key === "fees/exchange-rates.json" ? { updatedAt: today, EUR: { cbrRate: 95, nominal: 1, rateDate: today, rateSource: "cbr" }, USD: { cbrRate: 90, nominal: 1, rateDate: today, rateSource: "cbr" } } : key === "markets/markets.json" ? markets : {} }));
+  const read = mock.method(LocalJsonStorage.prototype, "readJsonWithMeta", async (key: string, fallback:any) => ({ found: ["fees/exchange-rates.json", "markets/markets.json"].includes(key),
+    value: key === "fees/exchange-rates.json" ? { updatedAt: today, EUR: { cbrRate: 95, nominal: 1, rateDate: today, rateSource: "cbr" }, USD: { cbrRate: 90, nominal: 1, rateDate: today, rateSource: "cbr" } } : key === "markets/markets.json" ? markets : fallback }));
   process.env.CATALOG_LIVE_RATE_DISABLED = "true";
   try {
     const input = selection({ fuel: "unknown", powerHp: 99, engineCc: 999, utilizationPowerKw: 999 });

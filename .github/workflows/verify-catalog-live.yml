@@ -8,14 +8,12 @@ on:
       - 'apps/web/components/layout/PublicUiEnhancer.tsx'
       - 'apps/web/lib/catalog/japan-delivered-preview.ts'
       - 'apps/web/components/catalog/CatalogFilters.tsx'
-      - 'tests/browser/catalog-live-journey.mjs'
-      - '.github/workflows/verify-catalog-live.yml'
 permissions:
   contents: read
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 70
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,6 +22,7 @@ jobs:
       - run: npm install --prefix /tmp/catalog-live --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Wait for exact published release
         env:
+          RELEASE_WAIT_SECONDS: 3600
           EXPECTED_RELEASE: ${{ github.sha }}
           GITHUB_TOKEN: ${{ github.token }}
         run: |

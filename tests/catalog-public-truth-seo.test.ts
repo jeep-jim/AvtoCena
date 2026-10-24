@@ -149,7 +149,10 @@ test("normalization removes a historical 997 hp marketplace typo and its derived
   } as any);
   assert.equal(normalized.powerHp, undefined);
   assert.equal(normalized.powerKw, undefined);
-  assert.equal(normalized.operational?.powerSanity?.rejected, true);
+  assert.equal(normalized.engineCc, undefined);
+  assert.equal(normalized.operational?.semanticEvidence?.powerHp?.source, "uae_manual_specifications_required");
+  assert.equal(normalized.catalogPricingMode, "seller");
+  assert.equal(normalized.totalRub, null);
 });
 
 test("DubiCars source typo 1,997 HP is retained as source reality but not published as vehicle power", () => {

@@ -21,3 +21,15 @@ test('ambiguous reported power stays labelled, bound to offer, and separate from
 test('N-BOX and Clipper fuel follows exact chassis, without guessing turbo power',()=>{
  for(const [make,model,chassis] of [['HONDA','N BOX','DBA-JF3'],['HONDA','N-BOX','JF4'],['NISSAN','CLIPPER VAN','HBD-DR17V']]){const v=applyJapanFactoryFuel({...raw,make,model,engineCc:660,operational:{chassisCode:chassis,raw:{sourceFuel:''}}});assert.equal(v.fuel,'petrol');assert.equal(v.powerHp,undefined);}
 });
+
+test('reviewed Nissan and Passat fuel uses exact chassis and volume, not family names',()=>{
+ for(const [make,model,chassis,engineCc,fuel] of [['NISSAN','TIIDA','DBA-C11',1500,'petrol'],['NISSAN','MARCH','K13',1200,'petrol'],['VOLKSWAGEN','PASSAT','3BA-3CDPC',1500,'petrol'],['VOLKSWAGEN','PASSAT VARIANT','3DA-3CDFH',2000,'diesel']]){
+  const input={...raw,make,model,engineCc,operational:{chassisCode:chassis,raw:{sourceFuel:''}}};
+  const result=applyJapanFactoryFuel(input);
+  assert.equal(result.fuel,fuel);assert.equal(result.powerHp,undefined);assert.equal(result.power30MinKw,undefined);assert.equal(result.engineCc,engineCc);
+  assert.equal(applyJapanFactoryFuel({...input,engineCc:3000}).fuel,undefined);
+ }
+ for(const [model,chassis,engineCc] of [['TIIDA','NC11',1500],['MARCH','NK13',1200],['NOTE','HE12',1200]]){
+  const input={...raw,make:'NISSAN',model,engineCc,operational:{chassisCode:chassis,raw:{sourceFuel:''}}};assert.equal(applyJapanFactoryFuel(input),input);
+ }
+});

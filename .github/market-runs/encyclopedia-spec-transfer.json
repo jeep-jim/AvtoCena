@@ -1,6 +1,6 @@
 {
-  "indexDigest": "af3b1dce3eb131e3f196f5e1a79bdd2421178ac7e131d4e76ee07732ab4f3830",
+  "indexDigest": "8b3f26cd58af545ff0f380bb3ae5b2d0dbb7b3444c1dcf9f0f66a54dfe22b5db",
   "readOnly": true,
-  "iteration": 3,
-  "reason": "Owner-requested whole retained catalog audit: missing powertrain, undocumented donor codes, ICE power identity, field gaps and unmatched model/year breakdown. No supplier collection or storage writes."
+  "iteration": 4,
+  "reason": "Owner-requested read-only check against installed index; Japanese audit now includes factory fuel in the same order as production. No supplier collection or storage writes."
 }

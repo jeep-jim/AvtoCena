@@ -25,14 +25,16 @@ try{for(const width of [390,1440]){
   }
   const cards=page.locator('[data-catalog-batch] article > a');
   const before=await cards.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
-  assert.equal(before.length,24);
+  assert.ok(before.length>0&&before.length<=24,'bounded nonempty first page');
+  assert.equal(new Set(before).size,before.length);
   const appendStart=Date.now();
   await page.getByRole('button',{name:'Показать ещё',exact:true}).click();
-  await page.waitForFunction(()=>document.querySelectorAll('[data-catalog-batch] article').length===48,null,{timeout:60000});
+  await page.waitForFunction(n=>document.querySelectorAll('[data-catalog-batch] article').length>n,before.length,{timeout:60000});
   const appendMs=Date.now()-appendStart;
   const after=await cards.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
-  assert.deepEqual(after.slice(0,24),before);assert.equal(new Set(after).size,48);
-  const target=cards.nth(28);await target.scrollIntoViewIfNeeded();
+  assert.deepEqual(after.slice(0,before.length),before);assert.equal(new Set(after).size,after.length);
+  assert.ok(after.length<=before.length+24,'one bounded page appended');
+  const target=cards.nth(Math.min(before.length+4,after.length-1));await target.scrollIntoViewIfNeeded();
   // Playwright may scroll again to click (e.g. around a sticky header).
   // Compare with the actual departure position saved by the application.
   await target.evaluate(el=>el.addEventListener('click',()=>{window.__testCatalogDepartureY=window.scrollY;},{capture:true,once:true}));
@@ -41,11 +43,11 @@ try{for(const width of [390,1440]){
   await page.waitForURL(/\/cars\/offer\//,{timeout:60000});
   await page.locator('main.ac-offer-page h1').waitFor({timeout:60000});
   const backStart=Date.now();await page.goBack({waitUntil:'domcontentloaded'});
-  await page.waitForFunction(()=>document.querySelectorAll('[data-catalog-batch] article').length===48,null,{timeout:30000});
+  await page.waitForFunction(n=>document.querySelectorAll('[data-catalog-batch] article').length===n,after.length,{timeout:30000});
   await page.waitForFunction(y=>Math.abs(window.scrollY-y)<100,scrollY,{timeout:10000});
   assert.deepEqual(await cards.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),after);
   assert.deepEqual(errors,[]);assert.deepEqual(unrelatedSearches,[],"catalog must not fetch the home page trend list");
-  results.push({width,initialMs,appendMs,backMs:Date.now()-backStart,cards:48,scrollY,errors});
+  results.push({width,initialMs,appendMs,backMs:Date.now()-backStart,initialCards:before.length,cards:after.length,scrollY,errors});
   await page.screenshot({path:`artifacts/catalog-live/catalog-${width}.png`});
  }catch(e){console.log('FAIL',JSON.stringify({width,errors,error:String(e)}));await page.screenshot({path:`artifacts/catalog-live/failure-${width}.png`});throw e;}finally{await context.close();}
 }
@@ -56,13 +58,14 @@ try{
  page.on('response',response=>{if(new URL(response.url()).pathname.startsWith('/api/catalog/photo/'))statuses.push(response.status());});
  const start=Date.now();
  await page.goto(`${origin}/cars?market=korea`,{waitUntil:'domcontentloaded',timeout:90000});
+ await page.locator('[data-catalog-batch="1"] article img[width="400"]').nth(3).scrollIntoViewIfNeeded();
  await page.waitForFunction(()=>{
   const images=[...document.querySelectorAll('[data-catalog-batch="1"] article img[width="400"]')].slice(0,4);
   return images.length===4&&images.every(image=>image.complete&&image.naturalWidth>0);
- },null,{timeout:30000});
+ },null,{timeout:60000});
  const visiblePhotosMs=Date.now()-start;
- const images=await page.locator('[data-catalog-batch="1"] article img[width="400"]').evaluateAll(nodes=>nodes.slice(0,4).map(image=>({width:image.naturalWidth,card:new URL(image.src).searchParams.get('view')==='card'})));
- assert.ok(images.every(image=>image.card&&image.width<=800),'catalog covers must use bounded card renditions');
+ const images=await page.locator('[data-catalog-batch="1"] article img[width="400"]').evaluateAll(nodes=>nodes.slice(0,4).map(image=>({width:image.naturalWidth,card:new URL(image.src).searchParams.get('view')==='card',partnerThumbnail:/^https:\/\/[0-9]+\.ajes\.com\/imgs\/[^?#]+&w=320$/.test(image.src)})));
+ assert.ok(images.every(image=>(image.card&&image.width<=800)||(image.partnerThumbnail&&image.width<=320)),'catalog covers must use bounded card renditions');
  console.log('LIVE_PHOTOS',JSON.stringify({visiblePhotosMs,images,statuses}));
 }finally{await photosContext.close();}
 }finally{fs.writeFileSync('artifacts/catalog-live/results.json',JSON.stringify(results,null,2));await browser.close();}

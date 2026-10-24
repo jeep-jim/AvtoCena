@@ -2,6 +2,10 @@ import {namedElectrifiedPowertrainKind} from '../catalog/powertrain-safety';
 // Reviewed fuel-only factory identities. They do not assert model years, trim,
 // horsepower, displacement or certified power; all original fields are retained.
 const references=[
+ {make:'NISSAN',models:['TIIDA'],codes:['C11'],cc:[1490,1500],fuel:'petrol',url:'https://history.nissan.co.jp/TIIDA/C11/0801/PDF/tiida_specification.pdf'},
+ {make:'NISSAN',models:['MARCH'],codes:['K13'],cc:[1190,1200],fuel:'petrol',url:'https://history.nissan.co.jp/MARCH/K13/1007/PDF/march_specification.pdf'},
+ {make:'VOLKSWAGEN',models:['PASSAT','PASSATVARIANT'],codes:['3CDPC'],cc:[1490,1500],fuel:'petrol',url:'https://www.volkswagen.co.jp/idhub/content/dam/onehub_pkw/importers/jp/pc/catalog/equipment_pdf/Passat_Equipment_catalog.pdf'},
+ {make:'VOLKSWAGEN',models:['PASSAT','PASSATVARIANT'],codes:['3CDFH'],cc:[1960,2000],fuel:'diesel',url:'https://www.volkswagen.co.jp/idhub/content/dam/onehub_pkw/importers/jp/pc/catalog/equipment_pdf/Passat_Equipment_catalog.pdf'},
  {make:'RENAULT',models:['TWINGO'],codes:['AHH4B'],cc:[890,900],fuel:'petrol',url:'https://dcms.renault.jp/car_lineup/twingo/gps_pdf/TWINGO_webspec.pdf'},
  {make:'RENAULT',models:['MEGANE'],codes:['BBH5H','KBH5H'],cc:[1300,1400],fuel:'petrol',url:'https://dcms.renault.jp/car_lineup/megane/gps_pdf/MEGANE_webspec.pdf'},
  {make:'HONDA',models:['NBOX','NBOXCUSTOM'],codes:['JF3','JF4'],cc:[650,660],fuel:'petrol',url:'https://www.honda.co.jp/factbook/auto/nbox/201708/P26.pdf'},

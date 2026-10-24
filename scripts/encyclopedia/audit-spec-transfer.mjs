@@ -8,6 +8,7 @@ import {applyUaeManualSpecifications} from '../../apps/web/lib/catalog/uae-manua
 import {specificationEvidenceComplete} from '../../apps/web/lib/catalog/modification-matching.ts';
 import {ajesOffer} from '../../apps/web/lib/catalog/ajes-offer.ts';
 import {convertToRub} from '../../apps/web/lib/catalog/rates.ts';
+import {applyJapanFactoryFuel} from '../../apps/web/lib/encyclopedia/japan-fuel-reference.ts';
 import {japanPreviewParameters} from '../../apps/web/lib/catalog/japan-preview-parameters.ts';
 const store=getJsonStorage();
 if(store.driver!=='object')throw Error('object_storage_required');
@@ -28,7 +29,7 @@ const snapshot=await readCurrentCatalogProjectionSnapshot();
 const report={checkedAt:new Date().toISOString(),indexDigest:index.digest,generationId:snapshot.generationId,previewChanges,scope:'Five-market saved projection plus bounded existing Japanese query cache. No supplier requests, no database writes; not whole Japan inventory.',markets:{},japanCache:{slots:128,uniqueLots:0,converted:0,rejected:0},samples:[],japanMissingLinks:[],savedDetailProbe:[]};
 function identityCode(raw){return raw.chassisCode||raw.operational?.chassisCode;}
 function inspect(raw){
- const source=applyUaeManualSpecifications(raw),before=applyEncyclopediaCalculation(source,index,{technicalIdentity:true}),after=applyEncyclopediaCalculation(source,index,{technicalIdentity:true,specificationIdentity:true});
+ const source=applyUaeManualSpecifications(raw),before=applyJapanFactoryFuel(applyEncyclopediaCalculation(source,index,{technicalIdentity:true})),after=applyJapanFactoryFuel(applyEncyclopediaCalculation(source,index,{technicalIdentity:true,specificationIdentity:true}));
  const r=report.markets[raw.market]||={rows:0,withTechnicalCode:0,modelYearKnown:0,baselineMatched:0,technicalMatched:0,newlyFilledRecords:0,newlyFilledFields:0,newlyCompleteSpecifications:0,newlyCompletePending:0,newlyFilledByField:{},newlyCompleteByPowertrain:{},japanPreviewBefore:0,japanPreviewAfter:0,afterComplete:0,afterMissingByField:{},unmatchedReasons:{},retainedDelivered:0};r.rows++;
  r.afterComplete+=Number(specificationEvidenceComplete(after));
  r.retainedDelivered+=Number(Number(raw.totalRub)>0&&raw.catalogPricingMode!=='seller');
