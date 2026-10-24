@@ -22,7 +22,12 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a6-2020-2024-avant-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
-    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json"
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2026-tail-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a4-2020-2023-avant-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json"
   ],
   "publicResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -33,12 +38,17 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a6-2020-2024-avant-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json",
-    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json"
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2026-tail-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a4-2020-2023-avant-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json"
   ],
   "requiredAstraPlanDigests": [
     "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
   ],
-  "requestedAt": "2026-10-23T20:30:07.587099Z",
-  "reason": "Install tested A3 factory-backed coarse body resolution1f207982 with saved A3 2024body50. Fresh writerfree40019528235 at20:29:32UTC; both price preparations40016528469/40017903406 SUCCESS; no active deploy. Preserve exact/manual/source/unknown30min and ASTRA plan; no repeated import/apply/collection.",
+  "requestedAt": "2026-10-24T01:27:26.923469+00:00",
+  "reason": "Owner cancelled all daytime market refreshes. All four runs terminal cancelled40049339539; exact abandoned China lease CAS-released and read back40049724827 at01:26:26.975UTC, unchanged public generation. Publish all5pending Audi A3/A4 batches224bodyFields. No source collection/import/reapply. Preserve exact/manual/unknown30min and ASTRA ancestry.",
   "ideaReports": []
 }

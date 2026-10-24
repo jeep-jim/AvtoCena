@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T00:59:50.926Z",
+  "updatedAt": "2026-10-24T01:27:26.923469+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -36905,17 +36905,18 @@
       }
     },
     "latestPublicationCheck": {
-      "workflow": 40038925349,
-      "job": 120705105717,
-      "conclusion": "success",
-      "checkedAt": "2026-10-23T23:19:07.938Z",
-      "writerActive": true,
+      "workflow": 40049724827,
+      "job": 120739489515,
+      "checkedAt": "2026-10-24T01:26:26.975Z",
+      "writerActive": false,
       "generationId": "gen_1792702445675_8c312f85",
-      "operationType": "catalog_v3_publish_china",
-      "operationId": "catalog_v3_publish_china_fbe8ef80-0c43-40af-a5f4-d78cf61b0707",
-      "heartbeatAt": "2026-10-23T23:14:33.144Z",
-      "lockedUntil": "2026-10-23T23:44:33.144Z",
-      "note": "Existing metadata snapshot independently verified from terminal logs; not a fresh free lease."
+      "cancelledMarkets": [
+        40047702136,
+        40042142717,
+        40038476075,
+        40026092554
+      ],
+      "note": "Terminal cancellation confirmed; only exact abandoned China lease released with unchanged etag/heartbeat and CAS; fresh readback free."
     },
     "astonRapidePass": {
       "checkedAt": "2026-10-23T07:01:38.857791+07:00",
@@ -37617,9 +37618,9 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "observedMain": "ea2a4148f4853b83c0aa8c431011d65bb9f66033",
-      "writesPaused": false,
-      "reason": "132 pending bodyType fields independently read back with exact year/trim/source evidence. China40026092554 publication and UAE40038476075 collection are active. Wait both terminal outcomes and fresh free writer lease before one combined release; research writes allowed.",
+      "observedMain": "81e96a5f64e0488c749c5075d4a84740e261c940",
+      "writesPaused": true,
+      "reason": "Freeze research writes only until this release immutable index and required batch/ASTRA membership verification succeeds. All market refreshes cancelled by owner; writerfree confirmed40049724827. Combined224field release requested; do not duplicate deploy.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37627,7 +37628,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-23T23:27:29.811654+00:00",
+      "checkedAt": "2026-10-24T01:27:26.923469+00:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37682,13 +37683,13 @@
       "pendingReleaseWorkflow": null,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
-        "state": "released_after_verified_index_snapshot",
+        "state": "paused_for_release_snapshot",
         "workflow": 39972729425,
         "job": 120479350486,
         "mode": "apply",
         "scope": "Независимые research batches; не блокирует основной ASTRA preview/apply",
-        "reason": "ASTRA apply and release39975111916 completed successfully; public gate90variants/234fields and live health857468e confirmed. Independent research may continue with fresh revisions/CAS.",
-        "resumeCondition": "Resume independent saved research with fresh API/revision/checksum, omit already filled fields, preserve manual edits and read back. Existing release39975111916 continues; do not duplicate deploy or ASTRA import.",
+        "reason": "Owner-requested combined224field release after cancellation; resume after isolated index + membership + artifact verified.",
+        "resumeCondition": "After successful immutable index/readback and required batches/ASTRA membership, set writesPaused false; subsequent batches wait next release.",
         "preparedBatch": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
         "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
         "previewWorkflow": 39949279655,
@@ -37698,16 +37699,16 @@
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       },
       "lastCompletedReleaseWorkflow": 40019745015,
-      "pendingRelease": null,
+      "pendingRelease": "requested_by_marker_after_owner_cancel",
       "isolatedIndexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
       "isolationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json",
       "deferredNextRelease": {
         "report": "docs/encyclopedia/reports/2026-10-24-next-release-writer-coordination.json",
-        "reason": "active_china_publication_and_uae_refresh",
+        "reason": "release_requested_after_owner_cancel",
         "workflow": 40026092554,
         "pendingFields": 224,
-        "deployRequested": false,
-        "checkedAt": "2026-10-23T23:27:29.811654+00:00",
+        "deployRequested": true,
+        "checkedAt": "2026-10-24T01:27:26.923469+00:00",
         "readbackReport": "docs/encyclopedia/reports/2026-10-24-pending132-live-readback.json",
         "workflows": [
           40042142717,
