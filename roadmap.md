@@ -14412,3 +14412,12 @@ Browser40068044378/job120795322679 failedтолькона8staffcases: тестт
 В [40068425827](https://github.com/jeep-jim/AvtoCena/actions/runs/40068425827), job 120798938257, шаг Prepare private encyclopedia index и сохранение coverage завершились SUCCESS. Выпуск 6c347ef перешёл к сборке приложения. Пауза research apply снята сразу после подтверждения снимка; последующие партии не объявляются включёнными в этот выпуск. ASTRA повторно не импортируется, сборщики рынков не запускаются.
 
 Новый браузерный прогон [40069291249](https://github.com/jeep-jim/AvtoCena/actions/runs/40069291249): browser 120799043651 SUCCESS (CRM в четырёх ширинах и обеих темах, публичные dropdown/calculation regression), audit 120799043783 SUCCESS. Отдельный live job ещё выполняется. На сайте подтверждён release 2b87b63 и ok=true; финальный 6c347ef пока не установлен.
+
+
+## 24.10.2026 13:30 Красноярск — контроль финального выпуска и завершение CRM live
+
+Свежие AGENTS fbbc41a/roadmap прочитаны на741489b. [40068425827](https://github.com/jeep-jim/AvtoCena/actions/runs/40068425827)/job120798938257: privateindex/membership/build SUCCESS, сейчас Prepare exact price indexes IN_PROGRESS. Ручная запись13:21 уже сняла researchpause после immutableindex; повторно координация не менялась. Release6c347ef пока не объявлен установленным; полный внешний health снова oktrue/2b87b63f66c1e80c76e14e0775a2a9ea4ed0d8cc/calculationac4ddb599c84aef1880f1496bcf63fd03d9d23a26973b2c68515d1c92e8be28b.
+
+[CRM40069291249](https://github.com/jeep-jim/AvtoCena/actions/runs/40069291249) все три jobs TERMINAL SUCCESS: browser120799043651/audit120799043783/live120800186601. Terminal liveлог06:21:00UTC подтверждает36cases/168openings/passedtrue; artifact12551165517 опубликован, ZIP отдельно не скачивался. Это регрессия интерфейса действующего выпуска, не подтверждение производственных owner/managergrant и не приёмка будущего6c347ef. Sharedbudget40069216027 иdelivery40069216082 SUCCESS, не перезапускались.
+
+Дополнительныхdeploy/apply/research/сборов/marker/измененийguards или расписаний нет. Основная ручная сессия ведёт matcher/полноту каталога и текущую установку; независимое исследование не дублируется. Скорость, полнота расчётов EV/HEV и права АвтоБота остаются открыты. Повторное сообщение пользователю о ранее подтверждённой установке2b87 не требуется; контроль активен.
