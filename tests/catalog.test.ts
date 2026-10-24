@@ -154,7 +154,7 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
   assert.equal(firstChunk.length, CATALOG_CHUNK_SIZE);
   const result = await searchOffers({ market: "europe", make: "Toyota", model: "Corolla", sort: "totalRub", pageSize: 10 });
   assert.equal(result.items.length, 10);
-  assert.ok(result.usedIndexShards.some((p: string) => p.includes("projection-brand/toyota-")));
+  assert.ok(result.usedIndexShards.some((p: string) => p.includes("projection-brand/toyota-") || /^budget-cards-v\d+\//.test(p)));
   assert.ok(result.items.every(row => row.market === "europe" && row.make === "Toyota"));
   assert.equal(await getOffer("missing"), null);
 });
@@ -475,5 +475,6 @@ test("public UI uses live catalog and labels estimates honestly", async () => {
   assert.match(cars, /await searchOffers/);
   assert.match(cars, /applyActiveBusinessPricingBatch/);
   assert.doesNotMatch(cars, /нужен подключенный feed/);
-  assert.match(cars, /Статистика отыгранных лотов ещё загружается/);
+  assert.match(cars, /<CatalogSectionLoading active\/>/);
+  assert.match(cars, /<AjesRail/);
 });

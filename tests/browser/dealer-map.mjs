@@ -32,7 +32,7 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
   await page.screenshot({path:`${out}/photos-${theme}-${width}.png`});await page.getByRole('button',{name:'Закрыть медиа'}).click();await dock.getByRole('button',{name:'Каталог',exact:true}).click();
   const box=await dock.boundingBox();assert.ok(Math.abs(box.y+box.height-1000)<1,'Menu is attached to viewport bottom');
   await dock.getByRole('button',{name:'Адреса',exact:true}).click();await page.getByRole('button',{name:'Информация о компании',exact:true}).click();
- }else{assert.equal(await page.locator('.dealer-dock').isVisible(),true);await page.locator('.dealer-dock').getByRole('button',{name:'Адреса',exact:true}).click();await page.getByRole('button',{name:'Информация о компании',exact:true}).click();}
+ }else{assert.equal(await page.locator('.dealer-dock').isVisible(),false);await page.evaluate(()=>{location.hash='#about';});await page.getByRole('button',{name:'Информация о компании',exact:true}).click();}
  await page.locator('.dealer-info-dialog[open]').waitFor();
  await page.screenshot({path:`${out}/office-${theme}-${width}.png`});
  assert.equal(await page.locator('.dealer-info-dialog iframe').count(),0);

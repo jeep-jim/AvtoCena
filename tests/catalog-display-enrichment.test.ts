@@ -11,7 +11,7 @@ test("a knowledge power correction invalidates the stored customs price", () => 
   assert.equal(catalogPricingSpecificationsChanged(enriched, { ...enriched }), false);
 });
 
-test("fills known BMW i3 eDrive display fields instead of showing unresolved placeholders", async () => {
+test("UAE display does not infer technical specifications from a BMW trim name", async () => {
   const offer = {
     id: "bmw-i3-edrive-40l",
     sourceId: "dubicars_uae_exact",
@@ -40,10 +40,10 @@ test("fills known BMW i3 eDrive display fields instead of showing unresolved pla
 
   const enriched = await enrichOfferForDisplay(offer);
 
-  assert.equal(enriched.powertrainKind, "electric");
-  assert.equal(enriched.fuel, "electric");
-  assert.equal(enriched.transmission, "automatic");
-  assert.equal(enriched.drive, "rwd");
+  assert.equal(enriched.powertrainKind, "unknown");
+  assert.equal(enriched.fuel, undefined);
+  assert.equal(enriched.transmission, undefined);
+  assert.equal(enriched.drive, undefined);
   assert.equal(enriched.engineCc, undefined);
 });
 
@@ -157,8 +157,8 @@ test("frozen Dubizzle bucket boundaries are removed only with retained range evi
     id: "dubizzle-exact-coincidence",
     operational: { semanticEvidence:{engineCc:{status:'exact',value:1499}}, raw: { parsed: { rawText: JSON.stringify({ details: {} }) } } },
   });
-  assert.equal(exactCoincidence.engineCc, 1499);
-  assert.equal(exactCoincidence.powerHp, 99);
+  assert.equal(exactCoincidence.engineCc, undefined);
+  assert.equal(exactCoincidence.powerHp, undefined);
 });
 
 test("Swift GLX bucket interiors never survive as exact power, displacement or old pricing", async () => {

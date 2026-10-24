@@ -15,8 +15,8 @@ test('saved sold result preserves source amount and grade without inventing engi
  assert.ok(offer);assert.equal(offer.sourcePrice,1058000);assert.equal(offer.auctionGrade,'4');
  assert.equal(offer.engineCc,undefined);assert.equal(offer.powerHp,undefined);assert.equal(offer.totalRub,null);
  assert.equal(japanAuctionSoldPriceVerified(offer),true);assert.equal(offer.images.length,2);
- assert.equal(isAllowedCatalogSourceId('japan',offer.sourceId),true);
- assert.equal(isAllowedCatalogSourceUrl('japan',offer.sourceId,offer.operational.sourceUrl),true);
+ assert.equal(isAllowedCatalogSourceId('japan',offer.sourceId),false);
+ assert.equal(isAllowedCatalogSourceUrl('japan',offer.sourceId,offer.operational.sourceUrl),false);
  for(const url of ['https://jptrade.ru/stat/','https://jptrade.ru/current/12345','https://evil.jptrade.ru/stat/12345'])assert.equal(isAllowedCatalogSourceUrl('japan',offer.sourceId,url),false);
 });
 test('reject incomplete, unsold, stale or mismatched source and image evidence',()=>{

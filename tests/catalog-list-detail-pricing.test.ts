@@ -19,6 +19,7 @@ for(const market of ['china','korea','uae','georgia','europe']) test(`${market}:
   if(market==='china') row.calculationSnapshot.sourcePriceAdjustment=che168GlobalPriceAdjustment(row,2000000);
   const full=repriceOfferWithBusinessConfig(row,(CATALOG_MARKET_DEFAULTS as any)[market]);
   const list=repriceOfferWithBusinessConfig(compact(row),(CATALOG_MARKET_DEFAULTS as any)[market]);
+  if(market==='uae'){for(const result of [full,list]){assert.equal(result.totalRub,null);assert.equal(result.engineCc,undefined);assert.equal(result.powerHp,undefined);assert.equal(result.catalogPricingMode,'seller');}return;}
   assert.ok(full.totalRub>0);
   assert.equal(list.totalRub,full.totalRub);
   assert.equal(list.publicVisibleRub,full.totalRub);

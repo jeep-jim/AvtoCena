@@ -76,7 +76,7 @@ try {
    const sold=page.getByRole('heading',{name:'Этот автомобиль продан',exact:true});await sold.waitFor();
    assert.ok(await sold.evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=40),'large unavailable heading');
    assert.equal(await page.locator('.ac-unavailable-page').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','page inherits global theme background');
-   assert.equal(await sold.evaluate(e=>getComputedStyle(e).color),await page.locator('body').evaluate(e=>getComputedStyle(e).color),'heading follows global theme');
+   assert.equal(await sold.evaluate(e=>getComputedStyle(e).color),await sold.evaluate(e=>{const probe=document.createElement('span');probe.style.color='var(--ac-text)';e.parentElement.appendChild(probe);const color=getComputedStyle(probe).color;probe.remove();return color;}),'heading follows the global text token');
    assert.ok(await page.locator('.ac-unavailable-key').evaluate(e=>e.complete&&e.naturalWidth>0),'key image loads');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'unavailable page fits');
    await page.screenshot({path:`${out}/unavailable-${width}-${theme}.png`});

@@ -19,8 +19,8 @@ test('hybrid motor and certified utilization ratings are not overwritten with co
  assert.equal(synchronizeCombustionPower(o),o);
 });
 test('Autohome excludes old and used cars while Che168 remains used inventory',()=>{
- assert.equal(sourceInventoryInScope({sourceId:'autohome_new_china_open',year:2024}),false);
- assert.equal(sourceInventoryInScope({sourceId:'autohome_new_china_open',year:2025}),false);
+ assert.equal(sourceInventoryInScope({sourceId:'autohome_new_china_open',year:new Date().getUTCFullYear()-7}),false);
+ assert.equal(sourceInventoryInScope({sourceId:'autohome_new_china_open',year:new Date().getUTCFullYear()-6}),true);
  assert.equal(sourceInventoryInScope({sourceId:'autohome_new_china_open',year:2026}),true);
  assert.equal(sourceInventoryInScope({sourceId:'autohome_new_china_open',year:2026,mileageKm:10000}),false);
  assert.equal(sourceInventoryInScope({sourceId:'autohome_used_china_open',year:2021,mileageKm:10000}),true);

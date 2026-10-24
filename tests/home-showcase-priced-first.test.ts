@@ -7,13 +7,12 @@ const card = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard
 
 test("homepage prefers safe delivered-price projections before pending inventory", () => {
   assert.match(storage, /function selectHomepageShowcase\(rows: CatalogSearchProjection\[\], limit: number\)/);
-  assert.match(storage, /const priced = rows\.filter\(\(row\) => Number\(row\.totalRub \|\| 0\) > 0\)/);
-  assert.match(storage, /const pending = rows\.filter\(\(row\) => Number\(row\.totalRub \|\| 0\) <= 0/);
+  assert.match(storage, /selectCatalogShowcaseDiversity\(rows\.filter\(projectionCanRenderCard\)\.sort\(compareCatalogDisplayOrder\),limit\)/);
   assert.match(storage, /return selectHomepageShowcase\(rows, limit\)\.map\(publicOfferFromProjection\)/);
   assert.match(storage, /const diverse = selectHomepageShowcase\(candidates, limit\)/);
 });
 
 test("unqualified pending inventory is not rendered as a public card", () => {
-  assert.match(card, /const visibleRub = savedCalculationPreviewRub\(savedPreview\) \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
-  assert.match(card, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
+  assert.match(card, /const visibleRub = retro \? 0 : savedCalculationPreviewRub\(savedPreview\) \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.match(card, /if \(!retro && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(normalizedOffer\)\) return null/);
 });

@@ -23,9 +23,10 @@ test('homepage uses a complete compact snapshot when policy hides a few records'
   try {
     resetCatalogReadCachesForTests();
     const result = await readHomeCatalogSnapshot(6);
-    assert.equal(result.total, 48);
-    assert.equal(result.items.length, 36);
+    assert.equal(result.total, 40);
+    assert.equal(result.items.length, 30);
     assert.equal(result.marketCounts.korea, 8);
+    assert.equal(result.items.some(item=>item.market==='japan'),false,'legacy Japan overview is not paid inventory');
     const china = result.items.find(item => item.market === 'china')!;
     assert.match((china as any).cardImageUrl, /^\/api\/catalog\/photo\//);
     assert.equal(china.images[0].url, (china as any).cardImageUrl);

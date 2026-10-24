@@ -37,6 +37,7 @@ test('older Korean cars and other M1 markets retain vehicle-only customs value',
  for(const market of ['korea','china','uae','europe','georgia']){
  const offer=fixture(market,`${new Date().getUTCFullYear()-(['korea','china'].includes(market)?4:1)}-01-01`);
  const result=repriceOfferWithBusinessConfig(offer,{...(CATALOG_MARKET_DEFAULTS as any)[market],logisticsRub:100181});
+ if(market==='uae'){assert.equal(result.totalRub,null);assert.equal(result.calculationSnapshot.customsInput,undefined);continue;}
  assert.equal(result.calculationSnapshot.customsInput.customsValueRub,914909,market);
  assert.equal(result.calculationSnapshot.customsValue.transportIncludedInCustomsValue,false);
  }

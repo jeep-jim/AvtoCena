@@ -222,7 +222,7 @@ test("cards convert source prices to rubles while customs calculation is pending
   assert.match(livePricing, /attachCurrentCurrencyRate/);
   assert.match(livePricing, /sourcePriceRub: rate\.sourcePriceRub/);
   assert.match(catalogCard, /catalogOfferVisibleRub/);
-  assert.match(catalogCard, /const visibleRub = savedCalculationPreviewRub\(savedPreview\) \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.match(catalogCard, /const visibleRub = retro \? 0 : savedCalculationPreviewRub\(savedPreview\) \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
   assert.match(catalogCard, /<CatalogPrice offer=\{displayOffer\} label=\{priceLabel\}/);
   assert.doesNotMatch(catalogCard, /function sourceMoney/);
@@ -264,7 +264,7 @@ test("bootstrap replacements follow current regional public routes", () => {
 test("brand rail opens existing brand and model SEO pages", () => {
   assert.match(brandRail, /const hrefForBrand = \(brand: string\) => homeBrandDirectory/);
   assert.match(brandRail, /`\/cars\/brand\/\$\{catalogBrandSlug\(brand\)\}`/);
-  assert.match(brandRail, /`\/cars\?make=\$\{encodeURIComponent\(brand\)\}`/);
+  assert.match(brandRail, /`\/cars\?\$\{brandSelectionQuery\(/);
   assert.match(brandPage, /BrandModelDirectory/);
   assert.match(brandPage, /readBrandModelDirectory/);
   assert.match(modelPage, /generateMetadata/);

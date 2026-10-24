@@ -53,9 +53,9 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
   const modelDirectory = source("apps/web/components/catalog/BrandModelDirectory.tsx");
 
   assert.match(brandPage, /modelsWithPreviews/);
-  assert.match(brandPage, /\/cars\/autocatalog/);
+  assert.match(brandPage, /backHref="\/cars"/);
   assert.match(brandPage, /MARKET_ORDER\.map/);
-  assert.match(brandPage, /result\.total\.toLocaleString/);
+  assert.match(brandPage, /BrandMarketOffers/);
   assert.doesNotMatch(brandPage, /makeResults\.reduce/);
   assert.doesNotMatch(brandPage, /availableMarkets\.length \|\| 7/);
   assert.match(modelPage, /heroImageUrl/);
@@ -73,7 +73,7 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
 test("removed offers explain availability and offer catalog navigation", () => {
   const offerPage = source("apps/web/app/(public)/cars/offer/[id]/page.tsx");
   assert.match(offerPage, /if \(!storedOffer\) return <UnavailableOffer/);
-  assert.match(offerPage, /if \(!directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing\) return <UnavailableOffer/);
+  assert.match(offerPage, /if \(!retro && !directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(raw\)\) return <UnavailableOffer/);
   assert.doesNotMatch(offerPage, /notFound\(\)/);
   assert.doesNotMatch(offerPage, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
   assert.doesNotMatch(offerPage, /function MissingOffer/);

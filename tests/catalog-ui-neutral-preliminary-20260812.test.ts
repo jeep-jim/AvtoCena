@@ -48,13 +48,13 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
 });
 
 test("pending cards require an admitted modification selector to enter the public grid", () => {
-  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
+  assert.match(catalogCard, /if \(!retro && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(normalizedOffer\)\) return null/);
   assert.match(catalogCard, /totalRub:\s*visibleRub \|\| null/);
 });
 
 test("Japanese auction cards retain historical pricing with source badges instead of a gavel", () => {
   assert.match(catalogPrice, /japanAuction/);
-  assert.match(catalogPrice, /AuctionCardPrice/);
+  assert.match(catalogPrice, /CalculatedAuctionPrice/);
   assert.match(auctionCardPrice, /JapanAuctionBadges/);
   assert.doesNotMatch(auctionCardPrice, /Gavel|onClick/);
   assert.match(priceTrend, /export function AuctionResultPrice/);

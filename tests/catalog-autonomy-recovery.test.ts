@@ -42,7 +42,7 @@ test('independent verified publication resolves an old failed summary only for t
 test('stale source observations trigger recovery even when publication timestamps are fresh',()=>{
  assert.equal(recoveryDecision(input).action,'none');
  assert.equal(recoveryDecision({...input,journal:{lastCollectionSuccess:'2026-09-15T00:00:00Z',lastPublicationSuccess:'2026-09-22T11:00:00Z'}}).action,'dispatch');
- assert.equal(recoveryDecision({...input,market:'japan',japan:{complete:false}}).reason,'resume_incomplete_checkpoint');
+ assert.equal(recoveryDecision({...input,market:'japan',japan:{complete:false}}).reason,'market_withdrawn');
 });
 test('only transient failures retry; bad data, denied source access and safety gates remain stopped',()=>{
  for(const error of ['object_storage_GET_unreachable:fetch failed','ETIMEDOUT','transport_error_checkpointed']) assert.equal(transientOperationFailure(error),true,error);
@@ -108,13 +108,13 @@ test('a blocked budget continuation is reported instead of being called current'
  assert.deepEqual(result.blockers,['checkpoint_missing_or_invalid','checkpoint_generation_mismatch','checkpoint_stale','cursor_not_committed']);
 });
 
-test('Japan watchdog shares the collector schedule instead of relying on a missing generic journal',()=>{
+test('retired Japan watchdog never restarts collection from old journal dates',()=>{
  const japan={startedAt:new Date(now-86400000).toISOString(),complete:true,published:true};
  const args={...input,market:'japan',journal:null,japan};
  assert.equal(recoveryDecision(args).action,'none');
  assert.equal(recoveryDecision({...args,now:now+3*86400000}).action,'none');
- assert.equal(recoveryDecision({...args,now:now+14*86400000}).reason,'refresh_interval');
- assert.equal(recoveryDecision({...args,japan:{...japan,published:false}}).reason,'retry_publication');
+ assert.equal(recoveryDecision({...args,now:now+14*86400000}).reason,'market_withdrawn');
+ assert.equal(recoveryDecision({...args,japan:{...japan,published:false}}).reason,'market_withdrawn');
  assert.equal(recoveryDecision({...args,japanRefreshIntervalDays:14,now:now+4*86400000}).action,'none');
 });
 

@@ -52,7 +52,7 @@ test('all markets quarantine explicit conflicting specifications without guessin
   row.operational.semanticEvidence.engineCc={status:'conflict',rawValues:['1998','2497']};
   const clean=safePublicPricing(row);
   assert.equal(clean.engineCc,undefined,market);assert.equal(clean.totalRub,null,market);
-  assert.equal(clean.powerHp,304,market);assert.equal(isSellerPricedOffer(clean),true,market);
+  assert.equal(clean.powerHp,market==='uae'?undefined:304,market);assert.equal(isSellerPricedOffer(clean),true,market);
  }
 });
 test('search cards retain seller price but never old horsepower or delivered-price attestation',()=>{
@@ -77,14 +77,14 @@ test('business replay itself cannot revive an unsafe saved customs total',()=>{
  const clean=repriceOfferWithBusinessConfig(fixture(),{});
  assert.equal(clean.totalRub,null);assert.equal(isSellerPricedOffer(clean),true);
 });
-test('old attested compact quotes retain the full audit rejection even after raw evidence was dropped',()=>{
+test('UAE compact quotes remain manual-only regardless of old attestation and refresh timestamp',()=>{
  const row=fixture();Object.assign(row,{id:'b923ba40a0055a4bb5665398',market:'uae',updatedAt:'2026-09-01T00:00:00Z',cardProjectionVersion:3,
   powerHp:103,powerKw:75.75,icePowerKw:75.75,utilizationPowerKw:75.75,powerDataSource:'manufacturer_official'});
  delete row.operational;
  const clean=safePublicPricing(row);assert.equal(clean.totalRub,null);assert.equal(clean.engineCc,undefined);
- assert.equal(clean.fuel,undefined);assert.equal(isSellerPricedOffer(clean),true);
+ assert.equal(clean.fuel,row.fuel);assert.equal(isSellerPricedOffer(clean),true);
  const refreshed={...row,updatedAt:'2026-09-17T00:00:00Z'};
- assert.equal(safePublicPricing(refreshed),refreshed);
+ const recent=safePublicPricing(refreshed);assert.equal(recent.totalRub,null);assert.equal(recent.engineCc,undefined);assert.equal(recent.powerHp,undefined);
 });
 
 test('public projection reader returns sanitized seller rows on current and generation paths', async () => {

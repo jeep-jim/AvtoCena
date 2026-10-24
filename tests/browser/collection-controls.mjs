@@ -29,9 +29,9 @@ try{for(const width of [1440,390]){
  await page.getByText('Обновление каталога · парсеры и фиды',{exact:true}).click();
  const feed=page.getByRole('switch',{name:'Che168 · платный фид',exact:true}),reserve=page.getByRole('switch',{name:'Che168 · резервный парсер',exact:true}),market=page.getByRole('switch',{name:'Обновление рынка Китай',exact:true});
  await feed.waitFor();assert.equal(await feed.getAttribute('aria-checked'),'true');assert.equal(await reserve.getAttribute('aria-checked'),'false');
- await market.click();await page.getByRole('status').waitFor();assert.equal(await feed.getAttribute('aria-checked'),'true');await page.getByText('Остановлен выключателем рынка',{exact:true}).waitFor();
+ await market.click();await page.getByRole('status').filter({hasText:'Сохранено. Новые задания учтут настройку'}).waitFor();assert.equal(await feed.getAttribute('aria-checked'),'true');await page.getByText('Остановлен выключателем рынка',{exact:true}).waitFor();
  await market.click();await feed.click();await reserve.click();await page.waitForFunction(()=>document.querySelector('[aria-label="Che168 · резервный парсер"]')?.getAttribute('aria-checked')==='true');assert.equal(puts,4);
- await page.getByText('Источник, частота и настройки',{exact:true}).nth(1).click();
+ await page.locator('div.py-3').filter({has:reserve}).getByText('Источник, частота и настройки',{exact:true}).click();
  await page.getByText(/Прямой сбор подержанных автомобилей/).waitFor();
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'no mobile overflow');
  await page.screenshot({path:`${out}/controls-${width}.png`,fullPage:true});

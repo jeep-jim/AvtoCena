@@ -4,7 +4,7 @@ import test from "node:test";
 import { PUBLIC_CATALOG_MARKETS } from "../apps/web/lib/catalog/runtime-config";
 import { MARKET_IDS } from "../apps/web/lib/settings-validation";
 
-const activeMarkets = ["korea", "china", "japan", "uae", "europe", "georgia"];
+const activeMarkets = ["china", "japan", "korea", "uae", "europe", "georgia"];
 const storageSource = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
 const catalogPageSource = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogContent.tsx", import.meta.url), "utf8");
 const engineTypes = fs.readFileSync(new URL("../packages/engine/src/types/index.ts", import.meta.url), "utf8");

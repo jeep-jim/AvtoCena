@@ -22,7 +22,7 @@ test("V3 keeps the two-photo general admission contract while source-specific ga
 });
 
 test("ordinary unpriced inventory needs an admitted selector or seller price; retro remains price on request", () => {
-  assert.match(catalogCard, /if \(!retro && !visibleRub && !selectionRequired && !sellerPricing\) return null/);
+  assert.match(catalogCard, /if \(!retro && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(normalizedOffer\)\) return null/);
   assert.match(catalogCard, /hasModificationSelection\(offer\)/);
   assert.match(catalogCard, /Выбрать модификацию/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);

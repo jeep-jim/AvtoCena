@@ -5,7 +5,7 @@ import {LocalJsonStorage} from '../apps/web/lib/data';
 import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
 import {searchProjectionFromOffer} from '../apps/web/lib/catalog/storage';
 
-test('complete source evidence calculates before projecting cards in each non-Japan market',async()=>{
+test('complete source evidence calculates except UAE manual-only specifications',async()=>{
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED='true';resetCatalogRateCache();
  const now=new Date().toISOString();
  const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string)=>({found:true,value:key==='fees/exchange-rates.json'?{updatedAt:now,EUR:{cbrRate:95,nominal:1,rateDate:now,rateSource:'cbr'},USD:{cbrRate:100,nominal:1,rateDate:now,rateSource:'cbr'}}:[]}));
@@ -18,7 +18,7 @@ test('complete source evidence calculates before projecting cards in each non-Ja
    offer.images=Array.from({length:5},(_,i)=>({url:`https://img.autoimg.cn/vehicle-${i}.jpg`,size:100000}));
    Object.assign(offer.operational,{galleryVerified:true,exactPhotos:true,galleryImageCount:5,photoIdentityVerified:true});
    const result=await prepareSellerInventory(offer,{preservePublishedPrice:true});
-   assert.ok(result,market);assert.ok(Number(result.totalRub)>1000000,`${market}: ${JSON.stringify(result.calculationSnapshot)}`);
+   assert.ok(result,market);if(market==='uae'){assert.equal(result.totalRub,null);assert.equal(result.engineCc,undefined);assert.equal(result.powerHp,undefined);assert.equal(result.catalogPricingMode,'seller');continue;}assert.ok(Number(result.totalRub)>1000000,`${market}: ${JSON.stringify(result.calculationSnapshot)}`);
    assert.equal(result.catalogPricingMode,undefined);assert.equal(searchProjectionFromOffer(result).totalRub,result.totalRub,market);
    if(market==='china') {
     assert.equal(result.sourcePrice,10000); assert.equal(result.sourceCurrency,'USD');

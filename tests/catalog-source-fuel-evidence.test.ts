@@ -18,6 +18,7 @@ for (const [market, label] of sixMarketHybridLabels) {
   test(`${market} combustion plus electricity is normalized as hybrid`, () => {
     assert.equal(canonicalSourceFuel(label), "hybrid");
     const offer = normalizeVehicleOfferSpecs({ market, make: "Example", model: "Exact source vehicle", fuel: label, engineCc: 1580 });
+    if(market==='uae'){assert.equal(offer.fuel,label);assert.equal(offer.engineCc,undefined);assert.equal((offer as any).totalRub,null);return;}
     assert.equal(offer.fuel, "hybrid");
     assert.equal(offer.powertrainKind, "other_hybrid");
   });

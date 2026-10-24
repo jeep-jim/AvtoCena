@@ -49,8 +49,8 @@ test('gallery identity, image decoding and retention cannot be bypassed',()=>{
   assert.equal(proAuctionsOffer(e,identity,witness,bad,'b'.repeat(64),now),null);
  assert.equal(proAuctionsOffer(e,identity,witness,photos,'b'.repeat(64),now+60*86400000),null);
 });
-test('allowlist restricts source links to canonical statistics details',()=>{
- assert.equal(isAllowedCatalogSourceUrl('japan','proauctions_japan_stat',url),true);
+test('retired ProAuctions links stay excluded even for canonical statistics details',()=>{
+ assert.equal(isAllowedCatalogSourceUrl('japan','proauctions_japan_stat',url),false);
  for(const bad of ['https://demo.pro-auctions.ru/auction/123.html',url+'?x=1',url.replace('demo.','evil.'),url.replace('https:','http:')])
   assert.equal(isAllowedCatalogSourceUrl('japan','proauctions_japan_stat',bad),false);
 });
@@ -60,12 +60,12 @@ test('breadcrumb identity must agree with primary title',()=>{
  assert.deepEqual(proAuctionsIdentity(crumbs+html,e),{make:'Mazda',model:'CX-5'});
  assert.throws(()=>proAuctionsIdentity(crumbs.replace('Mazda','Toyota')+html,e),/identity/);
 });
-test('commercial names alone do not exclude inventory; confirmed heavy vehicles remain excluded',()=>{
+test('passenger vans remain eligible while trucks are excluded regardless of missing or low gross mass',()=>{
  const kei={market:'japan',sourceId:'proauctions_japan_stat',make:'Daihatsu',model:'Hijet Cargo',operational:{chassisCode:'S321V'}};
  assert.equal(isCommercialInventoryOffer(kei),false);
  assert.equal(isCommercialInventoryOffer({...kei,operational:{chassisCode:'OTHER'}}),false);
- assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck'}),false);
- assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck',grossVehicleWeightKg:3500}),false);
+ assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck'}),true);
+ assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck',grossVehicleWeightKg:3500}),true);
  assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck',grossVehicleWeightKg:3501}),true);
  assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck',vehicleCategory:'N2'}),true);
 });

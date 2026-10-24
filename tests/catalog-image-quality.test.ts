@@ -222,7 +222,7 @@ test("rejects an advertising payment string used as the source title", () => {
   } as any), false);
 });
 
-test("business liquidity remains a ranking signal but does not override Japan's year gate", () => {
+test("business liquidity cannot republish withdrawn Japanese sources", () => {
   const olderJapan = {
     ...rawOffer,
     market: "japan",
@@ -235,7 +235,7 @@ test("business liquidity remains a ranking signal but does not override Japan's 
     powerDataSource: "vehicle-model-representative:toyota/crown",
   };
   assert.equal(isCatalogOfferBusinessLiquid(olderJapan as any), true);
-  assert.equal(isCrediblePublicOffer(olderJapan as any), true);
+  assert.equal(isCrediblePublicOffer(olderJapan as any), false);
   assert.equal(isCatalogOfferBusinessLiquid({
     ...olderJapan,
     powerDataConfidence: "reference",

@@ -12,15 +12,15 @@ test("catalog counts group every thousand, including four digits and zero", () =
 test("invalid counts are not silently shown as zero", () => {
   for (const n of [NaN,Infinity,-1,1.5,Number.MAX_SAFE_INTEGER+1]) assert.equal(formatCatalogCount(n),"—");
 });
-test("counter renders once outside the mobile-hidden heading wrapper before filters", () => {
+test("counter renders once in the sidebar header outside mobile-hidden wrappers", () => {
   const source = readFileSync("apps/web/components/catalog/CatalogContent.tsx","utf8");
   assert.equal((source.match(/data-catalog-result-count=/g)||[]).length,1);
-  assert.match(source,/<\/div>\s*<p className="ac-catalog-result-count/);
-  const counter = source.slice(source.indexOf('<p className="ac-catalog-result-count'),source.indexOf('<CatalogFilters initial='));
+  assert.match(source,/<\/div>\s*\{!selectedMarket&&<p className="ac-catalog-result-count/);
+  const counter = source.slice(source.indexOf('<p className="ac-catalog-result-count'),source.indexOf('</p>',source.indexOf('<p className="ac-catalog-result-count')));
   assert.ok(!/\bhidden\b|lg:block|display:\s*none/.test(counter.replace('aria-hidden="true"','')));
   assert.match(counter,/ac-pulse-dot ac-pulse-dot--status/);
   assert.match(counter,/role="status"/);
-  assert.match(counter,/formatCatalogCount\(total\)/);
+  assert.match(counter,/ResolvedCatalogCount summary=\{countSummary\}/);
   assert.ok(!source.includes('Найдено: {total}'));
 });
 test("both home and catalog use the same count formatter without changing source totals", () => {

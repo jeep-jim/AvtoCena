@@ -17,9 +17,9 @@ test("overview alias is accepted only for the active manifest generation", () =>
 });
 
 test("unfiltered catalog landing alone uses the compact overview with a fallback", () => {
-  assert.match(carsPage, /const overviewEligible = !selectedMarket && !hasFilters && !customSort && requestedPage === 1/);
-  assert.match(carsPage, /readCatalogOverview\(\)/);
-  assert.match(carsPage, /readCatalogFacets\(\{ \.\.\.common, market: selectedMarket \|\| undefined \}\)/);
+  assert.match(carsPage, /const overviewEligible = !requestedMarkets.length && !hasFilters && !customSort && requestedPage === 1/);
+  assert.match(carsPage, /readPublicCatalogOverview\(\)/);
+  assert.match(carsPage, /readCatalogFacets\(selectedMarket \? \{market:selectedMarket\} : \{\}\)/);
   assert.match(carsPage, /searchOffers\(\{ \.\.\.common, market: market\.id, page, pageSize \}\)/);
 });
 
