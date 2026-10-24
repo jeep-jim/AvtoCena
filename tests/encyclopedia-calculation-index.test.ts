@@ -177,3 +177,14 @@ test('legacy reviews recover only unchanged reference fields from immutable ance
  assert.equal(compileModelFacts(current,[record([{...base,status:'review',engineCc:1968}]),old])[0].values.engineCc,undefined,'manual edits do not restore stale provenance');
  assert.equal(compileModelFacts(current,[record([{...base,markets:['uae']}])])[0].values.engineCc,undefined);
 });
+
+
+test('unnamed technical records compile without empty-name matches and enrich by real chassis',()=>{
+ const donor={...base,trim:undefined,chassisCode:'TEST123'};
+ const facts=compileModelFacts(record([donor]));assert.equal(facts.length,1);assert.deepEqual(facts[0].trims,[]);
+ const input={...offer(),trim:undefined,chassisCode:'TEST123',drive:undefined};
+ const out:any=applyEncyclopediaCalculation(input,index([donor]));assert.equal(out.drive,'fwd');assert.equal(out.powerHp,204);assert.equal(out.trim,undefined);
+ const vague={make:'Audi',model:'A6',year:2023,trim:undefined};assert.equal(applyEncyclopediaCalculation(vague,index([donor])),vague);
+ const conflict={...input,chassisCode:'OTHER'};assert.equal(applyEncyclopediaCalculation(conflict,index([donor])),conflict);
+ assert.deepEqual(compileModelFacts(record([{...donor,year:undefined}])),[]);
+});

@@ -24,12 +24,12 @@ function sourceEvidence(){
   values:{fuel:'hybrid',powertrainKind:'other_hybrid',engineCc:1490,engineCode:'M15A',icePowerKw:68,motorPeakKw:59,power30MinKw:37,drive:'fwd',transmission:'cvt',grossVehicleWeightKg:1615}};
  return {...row,evidenceId:sha(row)};
 }
-async function fixture(t){
+async function fixture(t,options={}){
  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'astra-release-test-'));
  t.after(()=>fs.rm(directory,{recursive:true,force:true}));
  const storage=new MemoryStorage();
  const original={id:'1'.repeat(24),make:'Toyota',model:'Yaris',revision:'before',updatedAt:at,variants:[
-  {id:'annual-1',year:2023,trim:'1.5 Hybrid 115',status:'observed',markets:['europe'],observedCount:1,
+  {id:'annual-1',year:2023,trim:options.withoutTrim?undefined:'1.5 Hybrid 115',status:'observed',markets:['europe'],observedCount:1,
    fuel:'hybrid',powertrainKind:'other_hybrid',engineCc:1490,engineCode:'M15A',drive:'fwd',transmission:'cvt',powerKw:85}]};
  const key=`${ROOT}/revisions/${original.id}/${original.revision}.json`;
  await storage.writeJson(key,original);
@@ -194,4 +194,13 @@ test('assertion model year must agree with the saved variant even if the index r
  const f=await fixture(t);await resealModelPlan(f,p=>{p.assertions[0].year=2024;});
  const args=f.args();fact(args).year=2024;resealIndex(args);
  await assert.rejects(assertAstraPlanMembership(args),/annual_variant_missing/);
+});
+
+
+test('release verifies unnamed annual technical facts by unchanged record identity',async t=>{
+ const f=await fixture(t,{withoutTrim:true});
+ assert.ok(f.plan.counters.existingAnnualVariantsChanged>0);
+ const args=f.args(),report=await assertAstraPlanMembership(args);assert.equal(report.annualVariants,1);
+ const changed=f.args();fact(changed).trims=['invented equipment'];resealIndex(changed);
+ await assert.rejects(assertAstraPlanMembership(changed),/annual_variant_missing/);
 });
