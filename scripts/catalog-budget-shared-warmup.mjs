@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import assert from 'node:assert/strict';
+import {catalogPowerBand} from '../apps/web/lib/catalog/power-mix.ts';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
 import {backfillBudgetSpecificationSelectors,backfillBudgetMarketSelectors,warmBudgetPriceCaches,searchOffers,searchOffersWithoutBudgetIndexForTests,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage.ts';
 
@@ -31,6 +32,11 @@ if(process.argv[2]==='--probe'){
  assert.equal(repeated.total,first.total);assert.deepEqual(repeated.items.map(row=>row.id),first.items.map(row=>row.id));
  const baseline=await searchOffersWithoutBudgetIndexForTests(params);
  assert.equal(first.total,baseline.total,'exact existing search count');
+ if(JSON.stringify(first.items.map(row=>row.id))!==JSON.stringify(baseline.items.map(row=>row.id))){
+  // Public ordering inputs only; never dump full offers, provider payloads or credentials.
+  const describe=row=>({id:row.id,totalRub:row.totalRub,powerHp:row.powerHp,utilizationPowerKw:row.utilizationPowerKw,powertrainKind:row.powertrainKind,fuel:row.fuel,powerBand:catalogPowerBand(row),sourceGroup:row.sourceGroup,auctionDate:row.auctionDate,sourcePublishedAt:row.sourcePublishedAt,firstSeenAt:row.firstSeenAt,updatedAt:row.updatedAt});
+  console.error(JSON.stringify({event:'budget_order_mismatch',params,indexed:first.items.map(describe),baseline:baseline.items.map(describe)}));
+ }
  assert.deepEqual(first.items.map(row=>row.id),baseline.items.map(row=>row.id),'exact existing page order');
  console.log(JSON.stringify({params,total:first.total,ids:first.items.map(row=>row.id),ms:Math.round(elapsed),cpuMs:Math.round((cpuUsed.user+cpuUsed.system)/1000),readBytes:reads.reduce((sum,row)=>sum+row.bytes,0),reads}));
 }else{
