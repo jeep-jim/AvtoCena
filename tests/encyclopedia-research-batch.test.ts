@@ -69,3 +69,43 @@ test('historical manufacturer variants are appended with revision protection and
  assert.throws(()=>validateBatch({...b,entries:[{...e,source:{...e.source,type:'observation_translation'}}]}));
  assert.throws(()=>validateBatch({...b,entries:[{...e,confirmedFields:['engineCc']}]}));
 });
+
+test('existing unnamed annual rows accept reviewed facts without inventing a trim',()=>{
+ for(const trim of [undefined,null,'']){
+  const row={...v,trim};
+  if(trim===undefined)delete row.trim;
+  const e={...entry,trim,expectedDigest:digest(row)};
+  if(trim===undefined)delete e.trim;
+  const b={...batch,entries:[e]};validateBatch(b);
+  const first=planModelResearch({...current,variants:[row]},[e],b);
+  assert.equal(first.changes.length,1);
+  assert.equal(first.record.variants[0].batteryKwh,81);
+  assert.equal(first.record.variants[0].trim,trim);
+  assert.equal(Object.hasOwn(first.record.variants[0],'trim'),Object.hasOwn(row,'trim'));
+  assert.equal(first.record.variants[0].power30MinKw,undefined);
+  const again=planModelResearch(first.record,[e],b);
+  assert.equal(again.record.revision,first.record.revision);
+  assert.equal(again.skipped[0].reason,'already_applied');
+ }
+});
+
+test('unnamed research keeps exact original trim and full-record concurrency checks',()=>{
+ const row={...v,trim:undefined};delete row.trim;
+ const e={...entry,trim:undefined,expectedDigest:digest(row)};delete e.trim;
+ const b={...batch,entries:[e]};validateBatch(b);
+ for(const changed of [{...row,trim:'Employee name'},{...row,trim:null},{...row,powerHp:301},{...row,year:2025}]){
+  const result=planModelResearch({...current,variants:[changed]},[e],b);
+  assert.equal(result.changes.length,0);assert.equal(result.record.variants[0],changed);
+  assert.equal(result.skipped[0].reason,'changed_since_review');
+ }
+ const missing=planModelResearch({...current,variants:[]},[e],b);
+ assert.equal(missing.changes.length,0);assert.equal(missing.skipped[0].reason,'variant_missing');
+});
+
+test('unnamed support rejects malformed trim and cannot create anonymous variants',()=>{
+ for(const trim of [false,0,{},[]])assert.throws(()=>validateBatch({...batch,entries:[{...entry,trim}]}),/missing_exact_identity/);
+ for(const trim of [undefined,null,'',' ']){
+  const e={...entry,operation:'create',trim,expectedRevision:current.revision,expectedDigest:digest(null)};
+  assert.throws(()=>validateBatch({...batch,entries:[e]}),/missing_exact_identity/);
+ }
+});

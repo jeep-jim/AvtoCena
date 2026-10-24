@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T21:08:32.195939+00:00",
+  "updatedAt": "2026-10-24T21:11:51.874545+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -42893,7 +42893,7 @@
       ],
       "year": 2024,
       "rowsChecked": 470,
-      "candidateRows": 23,
+      "candidateRows": 21,
       "fields": [
         "fuel",
         "engineCc",
@@ -42901,16 +42901,17 @@
         "documentedPower30MinKw",
         "drive"
       ],
-      "state": "first64_retained_facts_reviewed_23_candidates_remaining",
-      "savedFields": 17,
+      "state": "128_retained_rows_reviewed_21_candidates_remaining",
+      "savedFields": 31,
       "broadBodyCaution": "Passenger car — общая категория, не точный кузов. Анонимный API не доказывает отсутствие приватных homologation IDs; проверить сохранённую идентичность, не угадывать.",
       "residualPlanChecked": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
       "targetModelsChangedByResidualPlan": 0,
-      "reason": "Four of27candidate rows resolved by factory A4 batch; retained source variation needs exact technical review, no automatic promotion.",
-      "remainingSourceRows": 203,
-      "nextAfterDigest": "39d127db00febcd73cf670b95b9d3bcbc3e6dc069291b2c4f60becb7a3761464",
-      "workflow": 40128515344,
-      "artifact": 12574666229
+      "reason": "Two additionalA4candidates fully resolved;3A5displacements filled with power remaining. Page2 reviewed without duplicate source rows or automatic promotion.",
+      "remainingSourceRows": 139,
+      "nextAfterDigest": "714c337c099923f271da4618f98592b51f472e2fde9074d27efdeed0a29c4aa1",
+      "workflow": 40132396999,
+      "artifact": 12575153749,
+      "report": "docs/encyclopedia/reports/2026-10-25-retained-reference-page2-review.json"
     },
     "installedAcceptance": {
       "pr": 1522,
