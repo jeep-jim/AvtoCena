@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24 07:00:27 UTC",
+  "updatedAt": "2026-10-24T08:01:13.722Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24 07:00:27 UTC",
+    "updatedAt": "2026-10-24T08:01:13.722Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a4l_2025_mass_prepared_waiting_snapshot",
     "preserveManual": true,
@@ -32811,8 +32811,8 @@
       "missingValueFields": [
         "bodyType"
       ],
-      "state": "prepared_not_applied",
-      "reason": "Не менять модель во время подготовки согласованного снимка."
+      "state": "apply_queued_pending_readback",
+      "reason": "Fresh full CAS matched; standard writer40076087248 queued. Do not reapply; await success and independent API readback."
     },
     "lastVerifiedResearch": "audi-a5-2026-body",
     "rawAuditCalculated": 87,
@@ -32922,13 +32922,17 @@
       {
         "path": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-prepared.json",
         "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
-        "state": "prepared_not_applied",
+        "state": "apply_queued_pending_readback",
         "modelId": "8cf3dbb7884fe919bce44c62",
         "variants": 14,
         "fields": 14,
-        "requiresFreshApiPreflight": true,
+        "requiresFreshApiPreflight": false,
         "requiresFullInternalDigest": true,
-        "blockedByWorkflow": 40071996832
+        "blockedByWorkflow": null,
+        "workflow": 40076087248,
+        "job": 120819611827,
+        "applyCommit": "1137a51197d99ff69d7039c3a767a278c691c96c",
+        "statusReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-apply-status.json"
       }
     ],
     "pendingNextIndexBatches": [],

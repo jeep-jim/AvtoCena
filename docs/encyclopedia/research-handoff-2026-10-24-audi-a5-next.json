@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24 07:00:27 UTC",
+  "checkedAt": "2026-10-24T08:01:13.722Z",
   "modelId": "8cf3dbb7884fe919bce44c62",
   "make": "Audi",
   "model": "A5",
@@ -16,15 +16,15 @@
     "missingValueFields": [
       "bodyType"
     ],
-    "state": "prepared_not_applied",
-    "reason": "Не менять модель во время подготовки согласованного снимка."
+    "state": "apply_queued_pending_readback",
+    "reason": "Fresh full CAS matched; standard writer40076087248 queued. Do not reapply; await success and independent API readback."
   },
   "preparedBatch": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
   "preparedReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-prepared.json",
   "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
   "previous2026Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
   "priorRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
-  "nextAction": "После successful Prepare private index/membership: свежий API и полный digest; при неизменной ревизии штатный apply, затем независимый API readback. Не повторять исследование источника.",
+  "nextAction": "Дождаться40076087248; не дублироватьapply. ПослеSUCCESS независимыйAPI-readback99строк2025, затемpendingNextIndex и курсор2024.",
   "nextYearRead": {
     "year": 2024,
     "rows": 75,
@@ -331,5 +331,16 @@
     ]
   },
   "modelComplete": false,
-  "allModelsComplete": false
+  "allModelsComplete": false,
+  "nextSourceCandidate": {
+    "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5__Hatchback_2016-2024_5d_GD_EN.pdf",
+    "sha256": "882c44acfbea42691b58305ca017ae7a35b9ca93b6505effc0697acb878ce3ae",
+    "bytes": 2033327,
+    "edition": "08/2020",
+    "headerApplicability": "2016–2024; отдельная страница 48 V MHEV 2020–2024",
+    "checkedAt": "2026-10-24T07:57:56.732Z",
+    "state": "candidate_source_read_not_applied",
+    "remainingReview": "Проверить точную годовую/кузовную идентичность и нормализацию типа кузова; название файла не заменяет техническое подтверждение. Существующие sedan/hatchback и ручные поля не переписывать."
+  },
+  "applyStatusReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-apply-status.json"
 }

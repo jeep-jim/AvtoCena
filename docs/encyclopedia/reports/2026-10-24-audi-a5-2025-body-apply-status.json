@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T08:01:13.722Z",
+  "batch": "research-2026-10-24-audi-a5-2025-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
+  "batchSha256": "849b59c1d152382f25b4fe61e06572c8553f0424a3f7931fda84eb16ae2e33cb",
+  "variants": 14,
+  "fields": 14,
+  "workflow": 40076087248,
+  "job": 120819611827,
+  "commit": "1137a51197d99ff69d7039c3a767a278c691c96c",
+  "state": "queued_not_confirmed_applied",
+  "apiReadback": false,
+  "includedInIndex": false,
+  "preflight": {
+    "workflow": 40076014682,
+    "job": 120819391460,
+    "commit": "2f6c377b3d02a061830d31ca9df0e9fcd0587819",
+    "checkedAt": "2026-10-24T07:55:51.532Z",
+    "revision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+    "fullDigestsMatched": 14,
+    "conclusion": "success"
+  },
+  "source": {
+    "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+    "sha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+    "edition": "02 (04/2025)",
+    "pages": [
+      1,
+      2
+    ],
+    "reusedPreviouslyVerifiedSource": true,
+    "localHashVerified": true
+  },
+  "validation": {
+    "guardTests": 11,
+    "passed": true,
+    "batchShaVerified": true
+  },
+  "releaseCoordination": {
+    "snapshotWorkflow": 40074712002,
+    "job": 120815625387,
+    "prepareIndex": "success",
+    "membership": "success",
+    "newBatchIsPostSnapshot": true,
+    "duplicateDeploy": false
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json"
+}
