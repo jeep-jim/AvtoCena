@@ -2,7 +2,7 @@
   "version": 1,
   "checkedAt": "2026-10-24T09:33:42.212Z",
   "release": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
-  "status": "first_release_publicly_verified_final_release_in_progress",
+  "status": "six_public_calculations_verified_countryman_release_in_progress",
   "tests": {
     "full": {
       "passed": 2479,
@@ -230,7 +230,8 @@
   "limitations": [
     "Read-only audit amounts are not yet verified public prices.",
     "Unknown engines and certified hybrid/electric power remain unknown.",
-    "No supplier collection restart or schedule change."
+    "No supplier collection restart or schedule change.",
+    "Korea pageSize24 returned503 at second acceptance; previously saved GV80/Carnival detail calculations verified. Supplier availability remains unresolved."
   ],
   "firstPublicVerification": {
     "checkedAt": "2026-10-24T09:45:30.997883+00:00",
@@ -524,5 +525,71 @@
       "Fielder2021": 1215162
     },
     "requiresConfirmation": true
+  },
+  "seltosPublicVerification": {
+    "health": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
+        "calculationVersion": "6ef7044874e002026f2352e0e5a92647b1c877c9e6f95cafd1cf055e06f4370b"
+      }
+    },
+    "checkedAt": "2026-10-24T10:17:32.569375+00:00",
+    "seltos": {
+      "id": "bbdc9f4661719617765f19ec",
+      "url": "https://avtocena.com/cars/offer/kia-seltos-2023--bbdc9f4661719617765f19ec",
+      "pricePanels": [
+        "Ориентир без доставки2 727 280₽"
+      ],
+      "totalRub": 2727280,
+      "breakdownSum": 2727280,
+      "engineCc": 1999,
+      "powerHp": 149
+    },
+    "markets": {
+      "japan": {
+        "status": 200,
+        "error": null,
+        "returned": 21
+      },
+      "korea": {
+        "status": 503,
+        "error": "japan_search_unavailable",
+        "returned": 0
+      },
+      "georgia": {
+        "status": 200,
+        "error": null,
+        "returned": 24
+      },
+      "uae": {
+        "status": 200,
+        "error": null,
+        "returned": 24
+      },
+      "china": {
+        "status": 200,
+        "error": null,
+        "returned": 24
+      },
+      "europe": {
+        "status": 200,
+        "error": null,
+        "returned": 24
+      }
+    }
+  },
+  "countryman": {
+    "applyRun": 40084909047,
+    "fieldsVerified": 4,
+    "untouchedVariantsVerified": 5,
+    "revision": "8cbe5f65-9791-411f-8927-0c7a00af0b52",
+    "release": "7d32942c38f631711dfb577bec698099087f3447",
+    "deployRun": 40085069428,
+    "status": "in_progress",
+    "catalogRub": 2155149,
+    "detailPriceConfirmed": false
   }
 }
