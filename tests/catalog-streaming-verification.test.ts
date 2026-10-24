@@ -25,6 +25,11 @@ test('stream verifier rejects altered details and calls content verifier for eve
 });
 test('batch reader is lazy and retains the existing integrity checks',async()=>{
  const f=fixture();let reads=0;const read=f.storage.readJson;f.storage.readJson=async(k:string)=>{reads++;return read(k)};
- const iterator=catalogProjectionBatches(f.storage,'catalog/public/projection/all.json',f.directory);assert.equal(reads,0);assert.equal((await iterator.next()).value.items.length,1000);assert.equal(reads,3);await iterator.return(undefined);
+ const iterator=catalogProjectionBatches(f.storage,'catalog/public/projection/all.json',f.directory);assert.equal(reads,0);assert.equal((await iterator.next()).value.items.length,1000);assert.equal(reads,1);await iterator.return(undefined);assert.equal(reads,1);
+ const complete=catalogProjectionBatches(f.storage,'catalog/public/projection/all.json',f.directory);
+ assert.equal((await complete.next()).value.items.length,1000);assert.equal(reads,2);
+ assert.equal((await complete.next()).value.items.length,1000);assert.equal(reads,3);
+ assert.equal((await complete.next()).value.items.length,501);assert.equal(reads,4);
+ assert.equal((await complete.next()).done,true);assert.equal(reads,4);
  f.objects.get(f.directory.parts[0].path).items[0].id='changed';await assert.rejects(async()=>{for await(const _ of catalogProjectionBatches(f.storage,'catalog/public/projection/all.json',f.directory)){}},/integrity_failed/);
 });
