@@ -14382,3 +14382,10 @@ Read-only preflight40068252368/job120795933678 SUCCESS,30полных digest,р�
 Ограниченная публичная выборка A5Europe:7карточек/91из91полей совпали,2повторяющиесягруппы,duplicateID0 на48строках. Healthдо/после5410216/calculation7b288212. Это проверка действующего списка/карточек, не доказательство подключения новой партии. Доapply privateindex/membership40066793422 ужеSUCCESS; следующие30полей послеснимковые, pendingдоmembership/publicgate. Ручной40068044382 ужеpending; новогоdeploy не запрашивал.
 
 Отчёты docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-pass.json, docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-readback.json, docs/encyclopedia/reports/2026-10-24-audi-a5-2026-public-parity.json; адресный остаток docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json сохраняет все129строк с неизвестными полями, включая6незаполненныхкузовов. Курсор A5 2025 ae6c6d78fe213a9578ed345e «Avant S line TFSI110kW S-tronic»:99строк прочитаны,25безкузова; источники следующейпартии ещё проверить,передapply свежийCAS. Старыеretry/2008+обязательства сохранены. Полнота базы/расчётов/30min не заявлена.
+
+
+## 2026-10-24T13:05:38.083958+07:00 — точный прирост и координация снимка
+
+Readonly40068364961/job120796274772 SUCCESS (актуальныйaf3index иgenerictrimfix):3436карточек/5096новыхполей; completeSpecifications+48890, изних ранееpending234 (China230,Korea2,Europe2). Все234 combustion, этоещёне234готовыесуммы: нужноразрешениеостальныхусловийдвижком. Добавлено30min однойкарточкеиICEодной, ноновыхполныхHEV/EVвэтомshadow нет. Японскийcache462лота, новыхсовпадений0; срездругой, неутверждениепаденияготовыхцен.
+
+Дляснимка40068425827/6c347ef установленresearchWriteCoordination.writesPaused=true; pauseтолькоapplyдоновогонеизменяемогоиндекса, исследование/подготовкапартийразрешены. ПослеSUCCESSprivateindexснятьсразу, не ждатьinstall. Это предотвращаетencyclopedia_changed_during_preparation; предыдущий2b87ужеимеетснимокинаподготовкецен.

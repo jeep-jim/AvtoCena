@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T05:59:05.121914+00:00",
+  "updatedAt": "2026-10-24T13:05:38.083958+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -38304,9 +38304,9 @@
       "activationReport": "docs/encyclopedia/reports/2026-10-23-index-36991f-activation.json"
     },
     "researchWriteCoordination": {
-      "observedMain": "81e96a5f64e0488c749c5075d4a84740e261c940",
-      "writesPaused": false,
-      "reason": "Release d80b840 installed; immutable artifact SHA verified and public batch gate passed.",
+      "observedMain": "11bddf7a2e798b58536915ae9deaf67a566e4a1a",
+      "writesPaused": true,
+      "reason": "Короткая пауза apply до SUCCESS Prepare private encyclopedia index в 40068425827/6c347ef. Исследование и подготовка партий продолжаются; после неизменяемого снимка немедленно снять паузу. Не отменять активный40066793422 и не запускать дубликаты.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -38314,7 +38314,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-24T11:43:11.994252+07:00",
+      "checkedAt": "2026-10-24T13:05:38.083958+07:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -38418,7 +38418,9 @@
         "fields": 30,
         "apiReadback": true,
         "activationConfirmed": false
-      }
+      },
+      "targetRelease": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
+      "targetWorkflow": 40068425827
     },
     "audiA1BodyAndGapsPass": {
       "version": 1,
