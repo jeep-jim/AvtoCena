@@ -1,7 +1,7 @@
 {
   "version": 1,
   "checkedAt": "2026-10-24T14:49:48.607366+00:00",
-  "state": "prepared_not_applied_wait_snapshot_and_full_digest",
+  "state": "prepared_full_digest_verified_wait_snapshot",
   "modelId": "36050a1f4ba506db31d21ffd",
   "make": "Cupra",
   "model": "Leon",
@@ -196,5 +196,102 @@
     }
   ],
   "applyRequested": false,
-  "releaseSnapshotRequired": 40103448997
+  "releaseSnapshotRequired": 40103448997,
+  "preflight": {
+    "workflow": 40104265322,
+    "job": 120902570309,
+    "conclusion": "success",
+    "modelId": "36050a1f4ba506db31d21ffd",
+    "make": "Cupra",
+    "model": "Leon",
+    "revision": "4f368bf7-60be-573b-a100-1d3d57b3da5b",
+    "checkedAt": "2026-10-24T14:50:44.911Z",
+    "rows": [
+      {
+        "variantId": "50812b3b593469303a8e4e0b",
+        "expectedDigest": "a4969ab2c0bd7f10832eb1d096d5f0efdd11d4308f02438fd158e9b5fa0882ab",
+        "year": 2021,
+        "trim": "1.4 e-Hybrid Sportstourer VZ Business | Pano | Sfe",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      },
+      {
+        "variantId": "cb43e32cf9e493ec06624c50",
+        "expectedDigest": "0ab7764adfe12dca16cc0fd397f3eb657620688610a72406bbd86b830a6b8905",
+        "year": 2022,
+        "trim": "Cupra Leon Sportstourer 1.4 e-HYBRID 150kW DSG",
+        "engineCc": 1395,
+        "powerHp": 150,
+        "powerKw": 110,
+        "status": "observed"
+      },
+      {
+        "variantId": "f1d797cc968a333b16e2054a",
+        "expectedDigest": "7e2199cc753bca502c2ffc37a11895386102d14c3916461b0d79a14fee3f5c88",
+        "year": 2022,
+        "trim": "Sportstourer e-Hybrid 1.4 TSI DSG VZ COPPER DCC...",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      },
+      {
+        "variantId": "839824dd02fa5cc47f5258ce",
+        "expectedDigest": "06d666d7361a96bca827ddfcaeef97949591505c2b2abb67f115cf97130931e9",
+        "year": 2023,
+        "trim": "1.4 e-Hybrid 245pk DSG-6 Adrenaline",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      },
+      {
+        "variantId": "db9ca8bda2f8450044eefd7e",
+        "expectedDigest": "91a9bf5ffc0742e00d495da135d5c97d2039404740bcf1001f0f70c050966b6d",
+        "year": 2023,
+        "trim": "1.4 e-hybrid VZ 245cv dsg PLUG-IN",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      },
+      {
+        "variantId": "bc1ab97beb1f7a4f92a50822",
+        "expectedDigest": "5a304f22d8d738a989e842a2f62ad5f301f4019ff436600fbcc1a43ab487acc6",
+        "year": 2024,
+        "trim": "VZ e-Hybrid Pano Navi Ambiente SOH 98,5%",
+        "engineCc": 1395,
+        "drive": "fwd",
+        "status": "review"
+      },
+      {
+        "variantId": "5726c26b3e79069b5643a5da",
+        "expectedDigest": "162ab45a8ca408c3f4d307d1e65b661639c25aaadb28d22acae5c11f6f7cca5f",
+        "year": 2024,
+        "trim": "Sportstourer e-Hybrid",
+        "engineCc": 1395,
+        "powerHp": 150,
+        "powerKw": 110,
+        "status": "observed"
+      },
+      {
+        "variantId": "f15ca17832ab2a9afc88a35a",
+        "expectedDigest": "9c2c831411cb569359b5335e39a3e549653b64042c8bbc7cc0dac25578a67691",
+        "year": 2024,
+        "trim": "Sportstourer 1.4 TSI eHybrid DSG VZ 5-J-GAR KAMERA",
+        "engineCc": 1395,
+        "powerHp": 245,
+        "powerKw": 180,
+        "status": "observed"
+      }
+    ]
+  },
+  "batch": "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
+  "batchSha256": "d9989cf346efe8c45368efb96f0d6c376257e52403551ed2a65311f2d2d9906d",
+  "fields": 16,
+  "validation": {
+    "validateBatch": true
+  }
 }
