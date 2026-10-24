@@ -1,0 +1,14 @@
+import fs from 'node:fs/promises';
+import {getJsonStorage} from '../../apps/web/lib/data.ts';
+import {MANIFEST} from '../../apps/web/lib/encyclopedia/records.ts';
+import {digest} from './research-batch.mjs';
+const m=JSON.parse(await fs.readFile('.github/market-runs/encyclopedia-research-preflight.json','utf8'));
+if(!/^[a-f0-9]{24}$/.test(m.modelId)||!m.expectedRevision||!Array.isArray(m.variantIds)||!m.variantIds.length||m.variantIds.length>64||m.variantIds.some(id=>!/^[a-f0-9]{24}$/.test(id))||new Set(m.variantIds).size!==m.variantIds.length)throw Error('invalid_bounded_request');
+const s=getJsonStorage();if(s.driver!=='object')throw Error('durable_object_storage_required');
+const manifest=await s.readJson(MANIFEST,null),summary=manifest?.models.find(x=>x.id===m.modelId);
+if(!summary||summary.revision!==m.expectedRevision)throw Error('revision_changed');
+const record=await s.readJson(summary.key,null);
+if(record?.revision!==summary.revision)throw Error('record_revision_mismatch');
+const rows=m.variantIds.map(id=>{const v=record.variants.find(v=>v.id===id);if(!v)throw Error('missing_variant');return {variantId:id,expectedDigest:digest(v),year:v.year,trim:v.trim,engineCc:v.engineCc,powerHp:v.powerHp,powerKw:v.powerKw,drive:v.drive,grossVehicleWeightKg:v.grossVehicleWeightKg,status:v.status};});
+const after=await s.readJson(MANIFEST,null);if(after?.models.find(x=>x.id===m.modelId)?.revision!==record.revision)throw Error('concurrent_editor_change');
+console.log('RESEARCH_PREFLIGHT '+JSON.stringify({modelId:record.id,make:record.make,model:record.model,revision:record.revision,checkedAt:new Date().toISOString(),rows}));
