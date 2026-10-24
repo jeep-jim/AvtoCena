@@ -1,31 +1,48 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T09:33:42.212Z",
+  "checkedAt": "2026-10-24T11:13:54.056Z",
   "release": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
-  "status": "six_public_calculations_verified_countryman_release_in_progress",
+  "status": "seven_detail_calculations_verified_countryman_catalog_fuel_release_pending",
   "tests": {
     "full": {
-      "passed": 2479,
+      "passed": 2483,
       "failed": 0,
       "skipped": 0,
-      "durationMs": 266029.609465
+      "durationMs": 337221.186366,
+      "release": "71e571f0ba3598f07f569a19d14cb3dae35086dd"
     },
     "targeted": {
       "passed": 84
     },
     "typecheck": "passed",
     "crmLocalClientCases": 8,
-    "crmCiBrowserJob": 120837108484
+    "crmCiBrowserJob": 120837108484,
+    "crmCi": {
+      "runId": 40081936446,
+      "status": "success",
+      "liveCases": 36,
+      "liveOpenings": 168
+    }
   },
   "deployments": [
     {
       "runId": 40081064561,
       "release": "a2c1f1a9786c3a745dbc096888d8c7e67835c11b",
-      "status": "preparing_price_indexes"
+      "status": "success"
     },
     {
       "runId": 40081936386,
       "release": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
+      "status": "success"
+    },
+    {
+      "runId": 40085069428,
+      "release": "7d32942c38f631711dfb577bec698099087f3447",
+      "status": "success"
+    },
+    {
+      "runId": 40088542508,
+      "release": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
       "status": "pending"
     }
   ],
@@ -225,13 +242,13 @@
     "powerHp": 149,
     "totalRub": 2727280,
     "complete": true,
-    "publiclyConfirmed": false
+    "publiclyConfirmed": true
   },
   "limitations": [
-    "Read-only audit amounts are not yet verified public prices.",
     "Unknown engines and certified hybrid/electric power remain unknown.",
     "No supplier collection restart or schedule change.",
-    "Korea pageSize24 returned503 at second acceptance; previously saved GV80/Carnival detail calculations verified. Supplier availability remains unresolved."
+    "Korea search returned HTTP503 on2026-10-24T10:58UTC; saved GV80/Carnival detail calculations HTTP200.",
+    "Countryman detail2155149 verified on7d329; catalog still seller until pending71e571 fuel evidence release is accepted."
   ],
   "firstPublicVerification": {
     "checkedAt": "2026-10-24T09:45:30.997883+00:00",
@@ -588,8 +605,20 @@
     "revision": "8cbe5f65-9791-411f-8927-0c7a00af0b52",
     "release": "7d32942c38f631711dfb577bec698099087f3447",
     "deployRun": 40085069428,
-    "status": "in_progress",
+    "status": "fuel_confirmation_applied_release_pending",
     "catalogRub": 2155149,
-    "detailPriceConfirmed": false
+    "detailPriceConfirmed": true,
+    "fuelApplyRun": 40088419868,
+    "fuelRevision": "ce750f06-5878-4271-9c57-ae845f9f4763",
+    "catalogPriceConfirmed": false,
+    "fuelRelease": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+    "fuelDeployRun": 40088542508
+  },
+  "finalDataGate": {
+    "groups": 39,
+    "variants": 660,
+    "fields": 1014,
+    "verified": true,
+    "release": "7d32942c38f631711dfb577bec698099087f3447"
   }
 }
