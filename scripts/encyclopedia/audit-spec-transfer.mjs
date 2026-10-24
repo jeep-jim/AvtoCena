@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import {validateBatch,planModelResearch} from './research-batch.mjs';
+import {validateBatch,planModelResearch,digest} from './research-batch.mjs';
 import {MANIFEST} from '../../apps/web/lib/encyclopedia/records.ts';
 import {getJsonStorage} from '../../apps/web/lib/data.ts';
 import {readCurrentCatalogProjectionSnapshot,getOfferWithoutEditorial} from '../../apps/web/lib/catalog/storage.ts';
@@ -29,7 +29,7 @@ const snapshot=await readCurrentCatalogProjectionSnapshot();
 const report={checkedAt:new Date().toISOString(),indexDigest:index.digest,generationId:snapshot.generationId,previewChanges,scope:'Five-market saved projection plus bounded existing Japanese query cache. No supplier requests, no database writes; not whole Japan inventory.',markets:{},japanCache:{slots:128,uniqueLots:0,converted:0,rejected:0},samples:[],japanMissingLinks:[],savedDetailProbe:[]};
 function identityCode(raw){return raw.chassisCode||raw.operational?.chassisCode;}
 function inspect(raw){
- const source=applyUaeManualSpecifications(raw),before=applyJapanFactoryFuel(applyEncyclopediaCalculation(source,index,{technicalIdentity:true})),after=applyJapanFactoryFuel(applyEncyclopediaCalculation(source,index,{technicalIdentity:true,specificationIdentity:true}));
+ const source=applyUaeManualSpecifications(raw),before=applyJapanFactoryFuel(applyEncyclopediaCalculation(source,index,{technicalIdentity:true,specificationIdentity:true,ordinarySpecificationIdentity:false})),after=applyJapanFactoryFuel(applyEncyclopediaCalculation(source,index,{technicalIdentity:true,specificationIdentity:true}));
  const r=report.markets[raw.market]||={rows:0,withTechnicalCode:0,modelYearKnown:0,baselineMatched:0,technicalMatched:0,newlyFilledRecords:0,newlyFilledFields:0,newlyCompleteSpecifications:0,newlyCompletePending:0,newlyFilledByField:{},newlyCompleteByPowertrain:{},japanPreviewBefore:0,japanPreviewAfter:0,afterComplete:0,afterMissingByField:{},unmatchedReasons:{},retainedDelivered:0};r.rows++;
  r.afterComplete+=Number(specificationEvidenceComplete(after));
  r.retainedDelivered+=Number(Number(raw.totalRub)>0&&raw.catalogPricingMode!=='seller');
@@ -54,5 +54,16 @@ for(let start=0;start<128;start+=8){const slots=await Promise.all(Array.from({le
 report.japanCache.uniqueLots=lots.size;
 for(const {lot,observedAt} of lots.values()){try{const rate=await convertToRub(lot.finalPriceJpy,'JPY');if(!rate)throw Error('rate_missing');const offer=ajesOffer(lot,rate,observedAt);inspect(offer);report.japanCache.converted++;}catch{report.japanCache.rejected++;}}
 if((await store.readJson('catalog/manifest.json',null))?.generationId!==snapshot.generationId)throw Error('catalog_changed');
+if(Array.isArray(marker.researchModels)){
+ const manifest=await store.readJson(MANIFEST,null);report.researchModels=[];
+ for(const target of marker.researchModels.slice(0,16)){
+  const summary=manifest.models.find(m=>modelKey(m.make,m.model)===modelKey(target.make,target.model));
+  if(!summary){report.researchModels.push({...target,missing:true});continue;}
+  const record=await store.readJson(summary.key,null);
+  const variants=record.variants.filter(v=>target.years.includes(v.year)).slice(0,128).map(v=>({id:v.id,year:v.year,trim:v.trim,status:v.status,expectedDigest:digest(v),values:Object.fromEntries([...factFields,'chassisCode','generation'].filter(f=>v[f]!==undefined).map(f=>[f,v[f]]))}));
+  report.researchModels.push({modelId:record.id,make:record.make,model:record.model,revision:record.revision,variants});
+ }
+ console.log('RESEARCH_MODEL_PROBE',JSON.stringify(report.researchModels));
+}
 await fs.mkdir('reports',{recursive:true});await fs.writeFile('reports/encyclopedia-spec-transfer.json',JSON.stringify(report,null,2));
 console.log('SPEC_TRANSFER_AUDIT',JSON.stringify({...report,samples:report.samples.length}));

@@ -29,7 +29,7 @@ function normalized(field:string,value:any):any{
  return typeof value==='number'?value:t;
 }
 function same(field:string,a:any,b:any){
- if(['powerHp','powerKw'].includes(field))return Math.abs(Number(a)-Number(b))<= (field==='powerHp'?1:0.74);
+ if(['powerHp','powerKw','icePowerKw'].includes(field))return Math.abs(Number(a)-Number(b))<= (field==='powerHp'?1:0.74);
  return normalized(field,a)===normalized(field,b);
 }
 /** Research review is field-level; stale evidence never certifies a later edit. */
@@ -116,7 +116,7 @@ function resolvesCoarseMobileBody(offer:any,evidence:any,entries:CalculationFact
   &&entries.every(c=>c.sources.bodyType?.kind==='manufacturer'&&/^https:\/\//.test(c.sources.bodyType.url||'')&&Boolean(c.sources.bodyType.batchId));
 }
 /** Exact modification/year, hard constraints, and per-field unanimity. No score winner. */
-export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean;specificationIdentity?:boolean}={technicalIdentity:true,specificationIdentity:true}):T{
+export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean;specificationIdentity?:boolean;ordinarySpecificationIdentity?:boolean}={technicalIdentity:true,specificationIdentity:true}):T{
  if(!index||!offer.make||!offer.model||!Number.isInteger(offer.year)||(!offer.trim&&!options.technicalIdentity&&!options.specificationIdentity))return offer;
  if(/customer_input|manual/i.test(offer.powerDataSource||'')||offer.calculationSnapshot?.modificationScenario)return offer;
  if(hasEncyclopediaCalculationEvidence(offer)){
@@ -146,7 +146,7 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  const exact=annual.filter(v=>v.trims.includes(trim));
  const specificTrim=(/\d/u.test(trim)&&/[\p{L}]/u.test(trim))||identity.engineCode||identity.chassisCode;
  let candidates=specificTrim?exact.filter(compatible):[];
- let technicalMatch=false,specificationMatch=false;
+ let technicalMatch=false,specificationMatch=false,ordinarySpecificationMatch=false;
  // Never bypass a conflicting exact named modification. Different trim names
  // require an explicit chassis/engine anchor; all compatible facts must agree.
  if(options.technicalIdentity&&!exact.length&&(exists(identity.chassisCode)||exists(identity.engineCode))){
@@ -177,12 +177,27 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
   // donors in the pool instead of dropping them to manufacture consensus.
   const pool=annual.filter(nonConflicting);
   if(pool.some(strong)){candidates=pool;specificationMatch=true;}
+  else if(options.ordinarySpecificationIdentity!==false&&['petrol','diesel'].includes(normalized('fuel',identity.fuel))&&pool.some(v=>{
+   const x=v.values;
+   if(!exists(x.fuel)||!same('fuel',identity.fuel,x.fuel))return false;
+   if(exists(identity.powertrainKind)&&(!exists(x.powertrainKind)||!same('powertrainKind',identity.powertrainKind,x.powertrainKind)))return false;
+   const a=Number(identity.icePowerKw)||power(identity),b=Number(identity.icePowerKw)>0?Number(x.icePowerKw):power(x);
+   const powerAnchor=a>0&&b>0&&Math.abs(a-b)<=0.75;
+   const volumeAnchor=exists(identity.engineCc)&&exists(x.engineCc)&&same('engineCc',identity.engineCc,x.engineCc);
+   const layoutAnchor=['drive','bodyType'].some(f=>exists(identity[f])&&exists(x[f])&&same(f,identity[f],x[f]));
+   return (powerAnchor&&volumeAnchor)||((powerAnchor||volumeAnchor)&&layoutAnchor);
+  })){
+   // Missing displacement or output cannot be required to recover itself.
+   // Every compatible annual variant remains in the consensus pool; this
+   // narrower evidence path never transfers certified thirty-minute power.
+   candidates=pool;specificationMatch=true;ordinarySpecificationMatch=true;
+  }
  }
  if(!candidates.length)return offer;
  const next:any={...offer},applied:any={},provenance:any={},filledFields:string[]=[],semantic={...offer.operational?.semanticEvidence};
  for(const field of factFields){
   // Certification belongs to an exact modification; a code-only bridge is not sufficient.
-  if(technicalMatch&&field==='power30MinKw')continue;
+  if((technicalMatch||ordinarySpecificationMatch)&&field==='power30MinKw')continue;
   if(specificationMatch&&field==='power30MinKw'&&candidates.some(v=>!compatible(v)))continue;
   if(semantic[field]?.status==='conflict')continue;
   const entries=candidates.filter(c=>exists(c.values[field]));

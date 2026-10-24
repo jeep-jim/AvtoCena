@@ -35,3 +35,23 @@ test('missing powertrain does not select between compatible combustion and hybri
  const result=apply(o,[d,{...d,id:'hybrid',powertrainKind:'other_hybrid',power30MinKw:40}]);
  assert.equal(result.powertrainKind,undefined);assert.equal(result.power30MinKw,undefined);
 });
+
+test('missing combustion displacement is recovered from annual fuel output and body consensus',()=>{
+ const d={...row,fuel:'petrol',powertrainKind:'combustion',engineCc:1999,powerHp:149,powerKw:undefined,icePowerKw:109.59,bodyType:'suv',power30MinKw:undefined};
+ const o={...offer,fuel:'petrol',powertrainKind:'combustion',powerKw:undefined,powerHp:149,icePowerKw:109.6,drive:undefined,bodyType:'suv'};
+ assert.equal(apply(o,[d]).engineCc,1999);
+ assert.equal(apply(o,[d,{...d,id:'other',engineCc:1598}]).engineCc,undefined);
+ assert.equal(apply(o,[d,{...d,id:'unknown',engineCc:undefined}]).engineCc,undefined);
+ assert.equal(apply({...o,year:2024},[d]).engineCc,undefined);
+ assert.equal(apply({...o,powerHp:undefined,icePowerKw:undefined},[d]).engineCc,undefined);
+});
+test('missing combustion output is recovered from volume and body but not layout alone',()=>{
+ const d={...row,fuel:'diesel',powertrainKind:'combustion',engineCc:2151,powerHp:202,powerKw:undefined,bodyType:'minivan',power30MinKw:80};
+ const o={...offer,fuel:'diesel',powertrainKind:'combustion',engineCc:2151,powerKw:undefined,drive:undefined,bodyType:'minivan'};
+ assert.equal(apply(o,[d]).powerHp,202);
+ assert.equal(apply(o,[d]).power30MinKw,undefined);
+ assert.equal(apply(o,[d,{...d,id:'other',powerHp:200}]).powerHp,undefined);
+ assert.equal(apply(o,[d,{...d,id:'unknown',powerHp:undefined}]).powerHp,undefined);
+ assert.equal(apply({...o,engineCc:undefined},[d]).powerHp,undefined);
+ const manual={...o,powerDataSource:'customer_input'};assert.equal(apply(manual,[d]),manual);
+});
