@@ -9,12 +9,13 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 process.env.AUTH_SECRET='isolated-browser-auth-secret';
 const auth=await customerAuthHarness();
 const out='artifacts/customer-auth';fs.mkdirSync(out,{recursive:true});
-await build({stdin:{contents:"import './tests/browser/account-entrance-fixture';import React from 'react';import {createRoot} from 'react-dom/client';import {RoutePreloader} from './apps/web/components/layout/RoutePreloader';const root=document.body.appendChild(document.createElement('div'));createRoot(root).render(<RoutePreloader/>);",loader:'tsx',resolveDir:process.cwd()},outfile:`${out}/fixture.js`,external:['/fonts/*','/brands/*'],bundle:true,platform:'browser',format:'esm',jsx:'automatic',define:{'process.env.NODE_ENV':'"production"','process.env':'{}'},plugins:[{name:'next',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},a=>({path:a.path,namespace:'mock'}));b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:a.path==='next/navigation'?'export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);export const useRouter=()=>({push:()=>{},refresh:()=>{},prefetch:()=>{}});':`import React from 'react';export default function Link(p){return React.createElement('a',p)}`,loader:'jsx',resolveDir:process.cwd()}));}}]});
+await build({stdin:{contents:"import './tests/browser/account-entrance-fixture';import React from 'react';import {createRoot} from 'react-dom/client';import {RoutePreloader} from './apps/web/components/layout/RoutePreloader';const root=document.body.appendChild(document.createElement('div'));createRoot(root).render(<RoutePreloader/>);",loader:'tsx',resolveDir:process.cwd()},outfile:`${out}/fixture.js`,external:['/fonts/*','/brands/*','/map-preview.svg'],bundle:true,platform:'browser',format:'esm',jsx:'automatic',define:{'process.env.NODE_ENV':'"production"','process.env':'{}'},plugins:[{name:'next',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},a=>({path:a.path,namespace:'mock'}));b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:a.path==='next/navigation'?'export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);export const useRouter=()=>({push:()=>{},refresh:()=>{},prefetch:()=>{}});':`import React from 'react';export default function Link(p){return React.createElement('a',p)}`,loader:'jsx',resolveDir:process.cwd()}));}}]});
 const publicVisualFixes=fs.readFileSync('apps/web/app/(public)/template.tsx','utf8').match(/const publicVisualFixes = `([\s\S]*?)`;/)[1];
 const css=await postcss([tailwindcss({content:['apps/web/components/**/*.tsx'],theme:{extend:{}},plugins:[]})]).process('@tailwind base;@tailwind components;@tailwind utilities;',{from:undefined});
 const server=http.createServer(async(req,res)=>{
  try{
  const url=new URL(req.url,'http://'+req.headers.host);
+ if(url.pathname==='/map-preview.svg'){res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public/map-preview.svg'));}
  if(url.pathname==='/key-logo.png'){res.setHeader('Content-Type','image/png');return res.end(fs.readFileSync('apps/web/public/key-logo.png'));}
  if(url.pathname==='/api/account/default-avatar'){res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public/logo/avtocena-mark-light.svg'));}
  if(url.pathname==='/api/account/auth'||url.pathname==='/api/account/profile'){
@@ -72,7 +73,8 @@ try{
   const panel=await page.locator('.customer-notice-panel').boundingBox();assert.ok(panel.x>=0&&panel.x+panel.width<=width,JSON.stringify({width,panel}));
   await page.getByRole('button',{name:'Включить push на устройстве'}).waitFor();
   await page.getByRole('button',{name:'Закрыть уведомления'}).click();
-  assert.equal(await page.getByRole('heading',{name:'Восстановление доступа'}).count(),0);
+  await page.getByRole('heading',{name:'Восстановление доступа'}).waitFor();
+  await page.getByRole('button',{name:'Подключить Telegram',exact:true}).waitFor();
   assert.equal(await page.getByLabel('Как к вам обращаться').inputValue(),'');
   assert.equal(await page.locator('.account-profile-identity .account-logout-button').count(),1);
   const avatar=page.locator('.account-profile-identity>img');await avatar.evaluate(img=>img.decode());assert.ok(await avatar.evaluate(img=>img.naturalWidth>0));
