@@ -131,3 +131,7 @@
 # Owner market refresh timing — 24.10.2026
 
 - Owner explicitly requested cancelling all currently running market refreshes and moving scheduled collection to 00:00 Asia/Novokuznetsk (17:00 UTC). Preserve source switches, existing cadence, supplier restrictions and publication safeguards. Do not restart cancelled daytime collectors; the next permitted scheduled window is midnight. Encyclopedia work and its coordinated release remain authorized.
+
+# Owner feed mutation policy — 24.10.2026
+
+- Routine feed refresh may create newly observed listings, update seller price when changed and remove confirmed withdrawn/sold listings. Preserve existing vehicle specifications and manual edits; do not reimport technical fields unless the owner explicitly requests it or a reviewed supplier schema/data change calls for it. Unchanged listings need no content rewrite; separate operational freshness/cursor metadata from technical facts. Supplier failure/missing partial page is not withdrawal evidence. Recompute affected price previews when seller price changes; never keep a stale delivered total. Preserve partner restrictions and midnight schedule.
