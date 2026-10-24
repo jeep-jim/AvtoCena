@@ -165,7 +165,6 @@ function compatible(v,source){
 }
 function identityMatch(v,source){
  if(fullIdentityMatch(v,source.row))return {kind:'approval_type_variant_version',strong:true};
- if(source.groupingAliasOnly)return null;
  const values=source.values;
  // Exact engine codes can still span power/drive/transmission variants. Require
  // these independently supplied discriminators, then unanimity across the corpus.
@@ -176,7 +175,7 @@ function identityMatch(v,source){
  const electric=comparable('powertrainKind',v.powertrainKind)==='electric';
  const targetDisplacement=electric?present(v.powerKw):present(v.engineCc);
  const displacement=electric?present(values.powerKw)&&sameAstraValue('powerKw',v.powerKw,values.powerKw):present(values.engineCc)&&v.engineCc===values.engineCc;
- if(engine&&targetMechanical&&targetDisplacement&&(v.markets||[]).includes('europe'))return {kind:'european_engine_and_powertrain_consensus',strong:mechanical&&displacement};
+ if(!source.groupingAliasOnly&&engine&&targetMechanical&&targetDisplacement&&(v.markets||[]).includes('europe'))return {kind:'european_engine_and_powertrain_consensus',strong:mechanical&&displacement};
  // An exact official commercial modification name has regional scope. A generic
  // Base/Premium or only matching displacement never proves a modification.
  const official=designation(source.sourceSuffix),trim=designation(v.trim);
@@ -187,7 +186,16 @@ function identityMatch(v,source){
  // discarded to obtain agreement in the one field being filled.
  const powerField=present(v.icePowerKw)?'icePowerKw':present(v.powerKw)?'powerKw':null;
  const power=powerField&&present(values[powerField])&&sameAstraValue(powerField,v[powerField],values[powerField]);
- if(exactName&&targetMechanical&&targetDisplacement&&powerField&&(v.markets||[]).includes('europe'))return {kind:'official_european_modification_consensus',strong:mechanical&&displacement&&power};
+ if(!source.groupingAliasOnly&&exactName&&targetMechanical&&targetDisplacement&&powerField&&(v.markets||[]).includes('europe'))return {kind:'official_european_modification_consensus',strong:mechanical&&displacement&&power};
+ // Ordinary calculation facts are country-independent. Equipment names do
+ // not discriminate engines. Retain every compatible candidate (including
+ // incompletely documented ones) and require field-level unanimity below.
+ const outputField=present(v.icePowerKw)?'icePowerKw':present(v.powerKw)?'powerKw':present(v.powerHp)?'powerHp':null;
+ const targetCore=present(v.fuel)&&(targetDisplacement||outputField)&&(present(v.drive)||present(v.bodyType));
+ if(targetCore){
+  const anchors=['fuel',...(present(v.powertrainKind)?['powertrainKind']:[]),...(targetDisplacement?[electric?'powerKw':'engineCc']:[]),...(outputField?[outputField]:[]),...['drive','bodyType'].filter(f=>present(v[f]))];
+  return {kind:'cross_market_mechanical_consensus',strong:anchors.every(f=>present(values[f])&&sameAstraValue(f,v[f],values[f]))};
+ }
  return null;
 }
 function consensus(sources,field){
@@ -205,6 +213,7 @@ export function planAstraExistingVariant(record,v,sources,context){
  const confirmed={},filled=[],attested=[];
  for(const field of ASTRA_FIELDS){
   if(protectedFields.has(field))continue;
+  if(field==='power30MinKw'&&candidates.some(s=>s.match.kind==='cross_market_mechanical_consensus'))continue;
   const value=consensus(candidates,field);if(value===undefined)continue;
   // Matching tolerance never upgrades a different numeric value to official fact.
   if(present(v[field])&&(numeric.has(field)?Number(v[field])!==Number(value):!sameAstraValue(field,v[field],value)))continue;
@@ -237,7 +246,7 @@ export function planAstraModel(current,sources,context){
   changes.push({variantId:v.id,operation:'fill_or_attest',filled:result.filled,attested:result.attested,candidates:result.candidateCount});
  }
  const existing=new Map(variants.map(v=>[v.id,v])),originalIds=new Set(current.variants.map(v=>v.id));
- for(const source of sources){
+ for(const source of context.annualOnly?[]:sources){
   const added=astraVariant(source.row,context.corpusDigest),old=existing.get(added.id);
   if(old){
    // User-edited or previously imported source records are never replaced.

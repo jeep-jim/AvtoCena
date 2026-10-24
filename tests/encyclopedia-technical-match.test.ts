@@ -30,3 +30,11 @@ test('rounded Japanese auction displacement only qualifies with an exact chassis
  assert.equal(result.operational.encyclopediaCalculation.values.engineCc,undefined);
  for(const patch of [{engineCc:1600},{engineCc:1501},{market:'korea'},{operational:{}}]){const bad={...raw,...patch};assert.equal(applyEncyclopediaCalculation(bad,idx([donor]),{technicalIdentity:true}),bad);}
 });
+
+test('shared equipment name cannot veto a different mechanically matching chassis',()=>{
+ const wrong={...donor,engineCc:2000,chassisCode:'OTHER'};
+ const right={...donor,id:'right',trim:'Completely different equipment'};
+ const raw={...offer,trim:donor.trim};
+ const out=applyEncyclopediaCalculation(raw,idx([wrong,right]));
+ assert.equal(out.powerHp,91);assert.equal(out.drive,'fwd');
+});
