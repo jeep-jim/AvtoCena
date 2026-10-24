@@ -1,0 +1,1233 @@
+{
+  "checkedAt": "2026-10-24T14:38:32.978924+00:00",
+  "planDigest": "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
+  "applyRun": 40102493368,
+  "models": 153,
+  "passed": 153,
+  "rows": [
+    {
+      "id": "005d78f00f5edafed7c7d677",
+      "make": "Mercedes-Benz",
+      "model": "V-Class",
+      "expectedRevision": "994ea0d6-23d1-572d-a2b3-73e4439cde4f",
+      "actualRevision": "994ea0d6-23d1-572d-a2b3-73e4439cde4f",
+      "pass": true
+    },
+    {
+      "id": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "expectedRevision": "80b9e8c5-41ef-5b6a-a397-f3b749b702bd",
+      "actualRevision": "80b9e8c5-41ef-5b6a-a397-f3b749b702bd",
+      "pass": true
+    },
+    {
+      "id": "021be4b2ada8ef8593ee77a9",
+      "make": "Zeekr",
+      "model": "7X",
+      "expectedRevision": "1fa2156a-604f-5101-afff-970d1b3f4c7e",
+      "actualRevision": "1fa2156a-604f-5101-afff-970d1b3f4c7e",
+      "pass": true
+    },
+    {
+      "id": "0269672be88ca8b567c073b1",
+      "make": "Renault",
+      "model": "Megane",
+      "expectedRevision": "54561f9b-10c6-55af-a2bc-ca91f2a82dc1",
+      "actualRevision": "54561f9b-10c6-55af-a2bc-ca91f2a82dc1",
+      "pass": true
+    },
+    {
+      "id": "054db847a6c3b74cf5678328",
+      "make": "Audi",
+      "model": "SQ2",
+      "expectedRevision": "8316d3c4-a1f3-58dd-aa2d-304ac529251c",
+      "actualRevision": "8316d3c4-a1f3-58dd-aa2d-304ac529251c",
+      "pass": true
+    },
+    {
+      "id": "0689657da5a646a5bb34e96d",
+      "make": "Polestar",
+      "model": "4",
+      "expectedRevision": "9fbaeca7-7404-5dba-af22-37f899a8caeb",
+      "actualRevision": "9fbaeca7-7404-5dba-af22-37f899a8caeb",
+      "pass": true
+    },
+    {
+      "id": "06925ff45adfb4686e9f0c97",
+      "make": "Ford",
+      "model": "Mondeo",
+      "expectedRevision": "5693dec3-75bb-527e-a0f3-ec34e73725c4",
+      "actualRevision": "5693dec3-75bb-527e-a0f3-ec34e73725c4",
+      "pass": true
+    },
+    {
+      "id": "07194b57d781009d02d8c065",
+      "make": "BMW",
+      "model": "X5",
+      "expectedRevision": "d8abbca7-e048-552b-a7b5-ec505f8e5628",
+      "actualRevision": "d8abbca7-e048-552b-a7b5-ec505f8e5628",
+      "pass": true
+    },
+    {
+      "id": "09e7aeefa554c48ecc9b6e23",
+      "make": "Volvo",
+      "model": "V60",
+      "expectedRevision": "df7251ea-68ba-5a78-a82d-768c871da675",
+      "actualRevision": "df7251ea-68ba-5a78-a82d-768c871da675",
+      "pass": true
+    },
+    {
+      "id": "0cbec92026a5d7c549e5b72f",
+      "make": "Volkswagen",
+      "model": "Amarok",
+      "expectedRevision": "5c5b0fd5-1381-553d-a17e-e39e1392b745",
+      "actualRevision": "5c5b0fd5-1381-553d-a17e-e39e1392b745",
+      "pass": true
+    },
+    {
+      "id": "0d2a63de5a497a47027d0eac",
+      "make": "BMW",
+      "model": "i4",
+      "expectedRevision": "564660c2-316f-525d-af9c-1b5096823cdc",
+      "actualRevision": "564660c2-316f-525d-af9c-1b5096823cdc",
+      "pass": true
+    },
+    {
+      "id": "0d734c400f4417df7f272d30",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "expectedRevision": "799baa68-581e-5118-a690-0d357fc25342",
+      "actualRevision": "799baa68-581e-5118-a690-0d357fc25342",
+      "pass": true
+    },
+    {
+      "id": "0e241548c0f4a35af398a87c",
+      "make": "Audi",
+      "model": "RS3",
+      "expectedRevision": "bb3ee984-5f7c-55fa-aab5-54e7dcb0872f",
+      "actualRevision": "bb3ee984-5f7c-55fa-aab5-54e7dcb0872f",
+      "pass": true
+    },
+    {
+      "id": "0eb3c4b39b404ae2fec4525b",
+      "make": "Volvo",
+      "model": "XC90",
+      "expectedRevision": "342856fd-fcab-55fb-a3e4-9b85fd53f495",
+      "actualRevision": "342856fd-fcab-55fb-a3e4-9b85fd53f495",
+      "pass": true
+    },
+    {
+      "id": "0ed4c4f93b9b704730f266ac",
+      "make": "Ford",
+      "model": "Mustang Mach-E",
+      "expectedRevision": "738cffc6-686b-59f6-a152-94b7223b2841",
+      "actualRevision": "738cffc6-686b-59f6-a152-94b7223b2841",
+      "pass": true
+    },
+    {
+      "id": "1314a66b16c62faefdaa7675",
+      "make": "Audi",
+      "model": "A8",
+      "expectedRevision": "c062e9d4-3853-5916-a962-d3bac300a3fd",
+      "actualRevision": "c062e9d4-3853-5916-a962-d3bac300a3fd",
+      "pass": true
+    },
+    {
+      "id": "13ef9730f17986b9674d45ea",
+      "make": "Leapmotor",
+      "model": "C10",
+      "expectedRevision": "89730454-c2ab-5cec-a300-eb9df252a3a4",
+      "actualRevision": "89730454-c2ab-5cec-a300-eb9df252a3a4",
+      "pass": true
+    },
+    {
+      "id": "176aa4ae82487f5947d84619",
+      "make": "Volvo",
+      "model": "EX30",
+      "expectedRevision": "2c4dbb1b-c097-51cf-aaa3-b6234430d0d6",
+      "actualRevision": "2c4dbb1b-c097-51cf-aaa3-b6234430d0d6",
+      "pass": true
+    },
+    {
+      "id": "1771d9cb82cfa85dbe286dca",
+      "make": "Isuzu",
+      "model": "D-Max",
+      "expectedRevision": "4b06dbf3-0a60-59b4-a6cd-1385be66e1b6",
+      "actualRevision": "4b06dbf3-0a60-59b4-a6cd-1385be66e1b6",
+      "pass": true
+    },
+    {
+      "id": "1a7502ee604718384340a315",
+      "make": "Mercedes-Benz",
+      "model": "GLC",
+      "expectedRevision": "2cea0364-db1c-5012-aa40-9f12dae1b0d6",
+      "actualRevision": "2cea0364-db1c-5012-aa40-9f12dae1b0d6",
+      "pass": true
+    },
+    {
+      "id": "1c7928819e7d7d0ab2e5a18d",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "expectedRevision": "54389839-72fa-5251-a434-9fbd20094e27",
+      "actualRevision": "54389839-72fa-5251-a434-9fbd20094e27",
+      "pass": true
+    },
+    {
+      "id": "1d2dfca4e510626f5daec218",
+      "make": "Volkswagen",
+      "model": "Passat",
+      "expectedRevision": "3d7d5259-8114-5d32-a506-5945bae5f5e5",
+      "actualRevision": "3d7d5259-8114-5d32-a506-5945bae5f5e5",
+      "pass": true
+    },
+    {
+      "id": "1e46f861011cb86b981b306b",
+      "make": "MINI",
+      "model": "Cooper",
+      "expectedRevision": "94f09401-a1e7-52ed-a9a2-d09f3f389c9c",
+      "actualRevision": "94f09401-a1e7-52ed-a9a2-d09f3f389c9c",
+      "pass": true
+    },
+    {
+      "id": "1e95509c46efa96a4019613e",
+      "make": "Lexus",
+      "model": "LS",
+      "expectedRevision": "2b390ade-9dbb-556e-acb8-27eef7ecb4eb",
+      "actualRevision": "2b390ade-9dbb-556e-acb8-27eef7ecb4eb",
+      "pass": true
+    },
+    {
+      "id": "1f01c309c2f1e029d135ae29",
+      "make": "Jeep",
+      "model": "Renegade",
+      "expectedRevision": "99de7a54-7799-5d29-a77f-10dc080238e9",
+      "actualRevision": "99de7a54-7799-5d29-a77f-10dc080238e9",
+      "pass": true
+    },
+    {
+      "id": "22663f60ecd991aa8777fde0",
+      "make": "Toyota",
+      "model": "Gr Yaris",
+      "expectedRevision": "9196dcf7-de3d-5cde-aa80-03f560a49c93",
+      "actualRevision": "9196dcf7-de3d-5cde-aa80-03f560a49c93",
+      "pass": true
+    },
+    {
+      "id": "234667c9af66e06d1534fbb7",
+      "make": "Mercedes-Benz",
+      "model": "EQC",
+      "expectedRevision": "06133f0b-2612-5de9-a585-195e14cfca2d",
+      "actualRevision": "06133f0b-2612-5de9-a585-195e14cfca2d",
+      "pass": true
+    },
+    {
+      "id": "23a02484410a0cd3c683eb29",
+      "make": "Mercedes-Benz",
+      "model": "A250",
+      "expectedRevision": "04f2e490-c9f1-5a6b-af69-3343df925391",
+      "actualRevision": "04f2e490-c9f1-5a6b-af69-3343df925391",
+      "pass": true
+    },
+    {
+      "id": "25c5c73a6924b5b75f9e6b22",
+      "make": "Fiat",
+      "model": "Ducato",
+      "expectedRevision": "afa23412-7cd2-5adc-ab55-5a694f522a0b",
+      "actualRevision": "afa23412-7cd2-5adc-ab55-5a694f522a0b",
+      "pass": true
+    },
+    {
+      "id": "264fdb1d86b9152d1909d30a",
+      "make": "Mercedes-Benz",
+      "model": "EQS",
+      "expectedRevision": "66abb5b8-1dbe-582b-af78-ac7f1108aeb6",
+      "actualRevision": "66abb5b8-1dbe-582b-af78-ac7f1108aeb6",
+      "pass": true
+    },
+    {
+      "id": "279c38e6eb848e93fbf71c10",
+      "make": "Peugeot",
+      "model": "Expert",
+      "expectedRevision": "3f7df198-e33e-59e9-a887-85f16f4cba4a",
+      "actualRevision": "3f7df198-e33e-59e9-a887-85f16f4cba4a",
+      "pass": true
+    },
+    {
+      "id": "27bc0ffb0e48b652356db020",
+      "make": "Volvo",
+      "model": "XC40",
+      "expectedRevision": "1b2bbe47-4dd5-58b3-a3fd-b910ca8d1576",
+      "actualRevision": "1b2bbe47-4dd5-58b3-a3fd-b910ca8d1576",
+      "pass": true
+    },
+    {
+      "id": "27f4186e3fcdde37a9687b9b",
+      "make": "Maxus",
+      "model": "T90",
+      "expectedRevision": "8fd43d3b-df11-517e-aa89-8a77b697b73f",
+      "actualRevision": "8fd43d3b-df11-517e-aa89-8a77b697b73f",
+      "pass": true
+    },
+    {
+      "id": "290e258bf799ed843d76b32a",
+      "make": "Lotus",
+      "model": "Eletre",
+      "expectedRevision": "1c2d509c-f569-58b3-a12e-dff9e0c6111c",
+      "actualRevision": "1c2d509c-f569-58b3-a12e-dff9e0c6111c",
+      "pass": true
+    },
+    {
+      "id": "296965c95e42800c757012ac",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "expectedRevision": "d5c8b948-4576-5dc0-adf6-aa08f3eb8e86",
+      "actualRevision": "d5c8b948-4576-5dc0-adf6-aa08f3eb8e86",
+      "pass": true
+    },
+    {
+      "id": "2be535ee87d178422820281d",
+      "make": "Mercedes-Benz",
+      "model": "A",
+      "expectedRevision": "8e2a246d-4d29-5744-a327-d2cb27132200",
+      "actualRevision": "8e2a246d-4d29-5744-a327-d2cb27132200",
+      "pass": true
+    },
+    {
+      "id": "2d48428398805876faf7e021",
+      "make": "Toyota",
+      "model": "bZ4X",
+      "expectedRevision": "cf6025eb-c335-545d-ac61-87f3006a9336",
+      "actualRevision": "cf6025eb-c335-545d-ac61-87f3006a9336",
+      "pass": true
+    },
+    {
+      "id": "2fb62a20041dc867bf9ac54f",
+      "make": "Mercedes-Benz",
+      "model": "GLE",
+      "expectedRevision": "9b59e498-b5b4-5c42-a02a-6408aa0829e5",
+      "actualRevision": "9b59e498-b5b4-5c42-a02a-6408aa0829e5",
+      "pass": true
+    },
+    {
+      "id": "2fea72ff8b4faa767139a71d",
+      "make": "Volvo",
+      "model": "S60",
+      "expectedRevision": "271f273a-fc46-5943-ad2c-e893d43ab754",
+      "actualRevision": "271f273a-fc46-5943-ad2c-e893d43ab754",
+      "pass": true
+    },
+    {
+      "id": "302e07e7d7e743c6ca17c884",
+      "make": "Hyundai",
+      "model": "Kona",
+      "expectedRevision": "65c2b6c8-1fbf-50e5-a048-8f4bde9468bc",
+      "actualRevision": "65c2b6c8-1fbf-50e5-a048-8f4bde9468bc",
+      "pass": true
+    },
+    {
+      "id": "30a682a0753c20db3adefddd",
+      "make": "Audi",
+      "model": "RS4",
+      "expectedRevision": "883b982a-53b4-587a-a127-33adf59c7ec5",
+      "actualRevision": "883b982a-53b4-587a-a127-33adf59c7ec5",
+      "pass": true
+    },
+    {
+      "id": "32250066f1b915316ec6fa5a",
+      "make": "Jaguar",
+      "model": "E-Pace",
+      "expectedRevision": "24c88407-4c26-5207-a3cf-f5d2d0cbcd7e",
+      "actualRevision": "24c88407-4c26-5207-a3cf-f5d2d0cbcd7e",
+      "pass": true
+    },
+    {
+      "id": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "expectedRevision": "4f368bf7-60be-573b-a100-1d3d57b3da5b",
+      "actualRevision": "4f368bf7-60be-573b-a100-1d3d57b3da5b",
+      "pass": true
+    },
+    {
+      "id": "36bb4ecd42217dfe530ac9f4",
+      "make": "BMW",
+      "model": "i7",
+      "expectedRevision": "a38b0a42-5eda-525d-aac7-1c54082f8e07",
+      "actualRevision": "a38b0a42-5eda-525d-aac7-1c54082f8e07",
+      "pass": true
+    },
+    {
+      "id": "382c455ae322ace7c979d868",
+      "make": "Mercedes-Benz",
+      "model": "Marco Polo",
+      "expectedRevision": "bbc56761-02e1-5e25-a93e-3e2ab706ac26",
+      "actualRevision": "bbc56761-02e1-5e25-a93e-3e2ab706ac26",
+      "pass": true
+    },
+    {
+      "id": "3906b5f0be3932b38471f703",
+      "make": "Audi",
+      "model": "Q5",
+      "expectedRevision": "e3cdd24d-0b64-537a-a039-4b1aa2c723d9",
+      "actualRevision": "e3cdd24d-0b64-537a-a039-4b1aa2c723d9",
+      "pass": true
+    },
+    {
+      "id": "39df4168d77a3ae59f1d9db0",
+      "make": "Mercedes-Benz",
+      "model": "B-Class",
+      "expectedRevision": "17cc8777-5d64-5038-ab0b-423eb6a3a513",
+      "actualRevision": "17cc8777-5d64-5038-ab0b-423eb6a3a513",
+      "pass": true
+    },
+    {
+      "id": "3ad01f42ca67f153e24d0c67",
+      "make": "Jaguar",
+      "model": "I-Pace",
+      "expectedRevision": "ea1282dd-778d-52e4-a7b2-74666b574b5f",
+      "actualRevision": "ea1282dd-778d-52e4-a7b2-74666b574b5f",
+      "pass": true
+    },
+    {
+      "id": "3bd1dcb0b0a7e8099cce12d4",
+      "make": "BMW",
+      "model": "5 Series",
+      "expectedRevision": "9b0eadde-3314-5a2f-ac47-cfef50bba8e5",
+      "actualRevision": "9b0eadde-3314-5a2f-ac47-cfef50bba8e5",
+      "pass": true
+    },
+    {
+      "id": "3c0aa9487d812b39c767a1bc",
+      "make": "Mazda",
+      "model": "CX-5",
+      "expectedRevision": "ef9e52a7-3541-56ad-ad06-9b0ae3dd571f",
+      "actualRevision": "ef9e52a7-3541-56ad-ad06-9b0ae3dd571f",
+      "pass": true
+    },
+    {
+      "id": "3ef8500928ed78d08e8f4ae1",
+      "make": "Mercedes-Benz",
+      "model": "eSprinter",
+      "expectedRevision": "b45fa289-b807-5555-aa48-f1c8e08167c3",
+      "actualRevision": "b45fa289-b807-5555-aa48-f1c8e08167c3",
+      "pass": true
+    },
+    {
+      "id": "40a6ce6826ee460ae0d7d6b5",
+      "make": "Mercedes-Benz",
+      "model": "E220",
+      "expectedRevision": "7fec90ca-e104-55f8-aecd-6f640884ace1",
+      "actualRevision": "7fec90ca-e104-55f8-aecd-6f640884ace1",
+      "pass": true
+    },
+    {
+      "id": "4145ce56203cd216cf1de2e6",
+      "make": "Audi",
+      "model": "e-tron",
+      "expectedRevision": "04a09173-8555-5173-aec0-e8172a24a87d",
+      "actualRevision": "04a09173-8555-5173-aec0-e8172a24a87d",
+      "pass": true
+    },
+    {
+      "id": "449043853b632114a992db27",
+      "make": "Mercedes-Benz",
+      "model": "eVito",
+      "expectedRevision": "b68860c7-9acc-5ec7-a68a-4aae5b88cc13",
+      "actualRevision": "b68860c7-9acc-5ec7-a68a-4aae5b88cc13",
+      "pass": true
+    },
+    {
+      "id": "44aa7b24233e4e0f5e0b3003",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT",
+      "expectedRevision": "98237807-7864-5ac9-a457-59514a491ec7",
+      "actualRevision": "98237807-7864-5ac9-a457-59514a491ec7",
+      "pass": true
+    },
+    {
+      "id": "473c4d9842518db044aaa4d1",
+      "make": "Land Rover",
+      "model": "Range Rover Evoque",
+      "expectedRevision": "e1a24340-334a-5d43-ab17-3985b1942f4e",
+      "actualRevision": "e1a24340-334a-5d43-ab17-3985b1942f4e",
+      "pass": true
+    },
+    {
+      "id": "49a8dfadf7af14aa1dd50672",
+      "make": "Audi",
+      "model": "S3",
+      "expectedRevision": "bc6c0b9f-3997-5ee1-a7df-5ac9346544f7",
+      "actualRevision": "bc6c0b9f-3997-5ee1-a7df-5ac9346544f7",
+      "pass": true
+    },
+    {
+      "id": "4a459a330d1ddf1eed32e113",
+      "make": "Lexus",
+      "model": "UX",
+      "expectedRevision": "29d3dbf8-71cf-5ffc-adb5-c1cc9dbdce8c",
+      "actualRevision": "29d3dbf8-71cf-5ffc-adb5-c1cc9dbdce8c",
+      "pass": true
+    },
+    {
+      "id": "51119e40087364f69843a318",
+      "make": "Hyundai",
+      "model": "Staria",
+      "expectedRevision": "0d68df96-b9a8-5247-a90d-2737ef11d7c0",
+      "actualRevision": "0d68df96-b9a8-5247-a90d-2737ef11d7c0",
+      "pass": true
+    },
+    {
+      "id": "529545ea1e50ad0a38e230d8",
+      "make": "Opel",
+      "model": "Astra",
+      "expectedRevision": "5ec8ea87-a1c0-5451-adb1-36b20d314815",
+      "actualRevision": "5ec8ea87-a1c0-5451-adb1-36b20d314815",
+      "pass": true
+    },
+    {
+      "id": "53e3594d3bfd24b0c47a73ce",
+      "make": "Volkswagen",
+      "model": "Golf",
+      "expectedRevision": "b9689dd9-5a0f-55d6-a450-6208dd27222f",
+      "actualRevision": "b9689dd9-5a0f-55d6-a450-6208dd27222f",
+      "pass": true
+    },
+    {
+      "id": "56f8ef01e8b2d3d1c297a5ed",
+      "make": "Audi",
+      "model": "TT",
+      "expectedRevision": "8bf15d6c-c119-5ea1-aab8-72759b8fc7f2",
+      "actualRevision": "8bf15d6c-c119-5ea1-aab8-72759b8fc7f2",
+      "pass": true
+    },
+    {
+      "id": "5aeb752b18dfaa1f668dbea8",
+      "make": "Mercedes-Benz",
+      "model": "GLB",
+      "expectedRevision": "bdae6489-484d-5e86-acfa-25f3ed531b4d",
+      "actualRevision": "bdae6489-484d-5e86-acfa-25f3ed531b4d",
+      "pass": true
+    },
+    {
+      "id": "5b5dd4c8f339c833db8ebea2",
+      "make": "Genesis",
+      "model": "GV60",
+      "expectedRevision": "61053edb-9a37-580a-a90d-54ca6bd583f4",
+      "actualRevision": "61053edb-9a37-580a-a90d-54ca6bd583f4",
+      "pass": true
+    },
+    {
+      "id": "5d30fa8789fe9612f29b0f65",
+      "make": "Mercedes-Benz",
+      "model": "CLS",
+      "expectedRevision": "bf0ea8d9-4045-5203-a6b9-aea0efe40453",
+      "actualRevision": "bf0ea8d9-4045-5203-a6b9-aea0efe40453",
+      "pass": true
+    },
+    {
+      "id": "5e429e98222b446cc64dcc09",
+      "make": "Polestar",
+      "model": "2",
+      "expectedRevision": "67a12a23-5276-5204-ab81-b774a8ba9767",
+      "actualRevision": "67a12a23-5276-5204-ab81-b774a8ba9767",
+      "pass": true
+    },
+    {
+      "id": "5e6881b38de66aae0b13c4d3",
+      "make": "BMW",
+      "model": "M4",
+      "expectedRevision": "685cdeed-6415-5cc8-a02b-b09113255196",
+      "actualRevision": "685cdeed-6415-5cc8-a02b-b09113255196",
+      "pass": true
+    },
+    {
+      "id": "5ea789b6bc2d4382f9831943",
+      "make": "Mercedes-Benz",
+      "model": "GLS",
+      "expectedRevision": "3bf4577e-9c0f-544a-a4f1-c2212be054c5",
+      "actualRevision": "3bf4577e-9c0f-544a-a4f1-c2212be054c5",
+      "pass": true
+    },
+    {
+      "id": "5edd3c1730fd6dd43d5862c1",
+      "make": "Kia",
+      "model": "Ceed",
+      "expectedRevision": "1dd2a556-9143-56ff-a7fe-7993dc5c1012",
+      "actualRevision": "1dd2a556-9143-56ff-a7fe-7993dc5c1012",
+      "pass": true
+    },
+    {
+      "id": "5f2b73d8f662820d3c809a36",
+      "make": "Volkswagen",
+      "model": "Crafter",
+      "expectedRevision": "9028e1c3-d31b-544f-adf4-6b9bb8c5ff3c",
+      "actualRevision": "9028e1c3-d31b-544f-adf4-6b9bb8c5ff3c",
+      "pass": true
+    },
+    {
+      "id": "5f2ff23f60a1f7feffb18bc3",
+      "make": "Volvo",
+      "model": "C40",
+      "expectedRevision": "0aee6ab0-8ab4-5014-a6e5-942a6b4a8084",
+      "actualRevision": "0aee6ab0-8ab4-5014-a6e5-942a6b4a8084",
+      "pass": true
+    },
+    {
+      "id": "6122b35d554bb99de877d5fa",
+      "make": "Peugeot",
+      "model": "308",
+      "expectedRevision": "a38bdf26-8ac9-5d6a-ae2a-0d3aafa58279",
+      "actualRevision": "a38bdf26-8ac9-5d6a-ae2a-0d3aafa58279",
+      "pass": true
+    },
+    {
+      "id": "639c4e325e55255b58dbe92e",
+      "make": "Mercedes-Benz",
+      "model": "EQE",
+      "expectedRevision": "14359d4c-f567-5da9-aae6-6c6fcb3b994a",
+      "actualRevision": "14359d4c-f567-5da9-aae6-6c6fcb3b994a",
+      "pass": true
+    },
+    {
+      "id": "691b825b77f20bd4fcb0052c",
+      "make": "Skoda",
+      "model": "Octavia",
+      "expectedRevision": "0b25a39d-a8a5-5c89-acdc-0ced6ab888f1",
+      "actualRevision": "0b25a39d-a8a5-5c89-acdc-0ced6ab888f1",
+      "pass": true
+    },
+    {
+      "id": "6bb176ac7798eaeac84d56f9",
+      "make": "Audi",
+      "model": "Q2",
+      "expectedRevision": "fd57c89a-eaad-5072-a6af-c0678e40e51e",
+      "actualRevision": "fd57c89a-eaad-5072-a6af-c0678e40e51e",
+      "pass": true
+    },
+    {
+      "id": "72fea0515e7ee4802eb99a66",
+      "make": "BMW",
+      "model": "X1",
+      "expectedRevision": "a2cc2fdc-a108-5727-aba3-b73053443213",
+      "actualRevision": "a2cc2fdc-a108-5727-aba3-b73053443213",
+      "pass": true
+    },
+    {
+      "id": "798e68e31cb46462096f309d",
+      "make": "Audi",
+      "model": "RS5",
+      "expectedRevision": "3c4c5abe-9cf8-5cb0-a005-8f298784c370",
+      "actualRevision": "3c4c5abe-9cf8-5cb0-a005-8f298784c370",
+      "pass": true
+    },
+    {
+      "id": "7ecb1015e52632f330ccddba",
+      "make": "Suzuki",
+      "model": "Vitara",
+      "expectedRevision": "a0e03251-2bf6-5e29-ac8f-f45096c62ec4",
+      "actualRevision": "a0e03251-2bf6-5e29-ac8f-f45096c62ec4",
+      "pass": true
+    },
+    {
+      "id": "7efa3d4933728bc66771084b",
+      "make": "Volkswagen",
+      "model": "Caddy",
+      "expectedRevision": "5c420b30-7ad3-5694-a8a8-e8a49e6f973f",
+      "actualRevision": "5c420b30-7ad3-5694-a8a8-e8a49e6f973f",
+      "pass": true
+    },
+    {
+      "id": "81a4b290257d227a5fd86ee6",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "expectedRevision": "08687ccb-ab3c-5f02-a372-f221a0765f95",
+      "actualRevision": "08687ccb-ab3c-5f02-a372-f221a0765f95",
+      "pass": true
+    },
+    {
+      "id": "81c32d9832c6289d34091a9b",
+      "make": "Dacia",
+      "model": "Duster",
+      "expectedRevision": "a38133f1-bbb6-5e90-abb1-f6aa0ac7fda6",
+      "actualRevision": "a38133f1-bbb6-5e90-abb1-f6aa0ac7fda6",
+      "pass": true
+    },
+    {
+      "id": "82af1b1094c14f79816398b8",
+      "make": "Mercedes-Benz",
+      "model": "E 450",
+      "expectedRevision": "41d7fb3c-e189-5eec-a196-5581563cc503",
+      "actualRevision": "41d7fb3c-e189-5eec-a196-5581563cc503",
+      "pass": true
+    },
+    {
+      "id": "87057f77bcab58a0d74514c4",
+      "make": "Renault",
+      "model": "Koleos",
+      "expectedRevision": "c98a9d6b-d9f0-5020-aa34-b89d706c2a7e",
+      "actualRevision": "c98a9d6b-d9f0-5020-aa34-b89d706c2a7e",
+      "pass": true
+    },
+    {
+      "id": "88f7a478d764f730b5792d54",
+      "make": "Volkswagen",
+      "model": "ID.7",
+      "expectedRevision": "65b6139d-816d-53ca-a4cb-169a86d59d70",
+      "actualRevision": "65b6139d-816d-53ca-a4cb-169a86d59d70",
+      "pass": true
+    },
+    {
+      "id": "8c4716ae7894580a2bf352c2",
+      "make": "SEAT",
+      "model": "Leon",
+      "expectedRevision": "8f2e4030-f4bf-5046-ac61-523e55a37305",
+      "actualRevision": "8f2e4030-f4bf-5046-ac61-523e55a37305",
+      "pass": true
+    },
+    {
+      "id": "8cf3dbb7884fe919bce44c62",
+      "make": "Audi",
+      "model": "A5",
+      "expectedRevision": "bd7653c4-0fb1-57d6-a7d6-d3c754cec092",
+      "actualRevision": "bd7653c4-0fb1-57d6-a7d6-d3c754cec092",
+      "pass": true
+    },
+    {
+      "id": "8d260392bd4983a9b7a85837",
+      "make": "MINI",
+      "model": "Jcw",
+      "expectedRevision": "ae1ff289-70f8-56d1-a984-9e209c0d32b4",
+      "actualRevision": "ae1ff289-70f8-56d1-a984-9e209c0d32b4",
+      "pass": true
+    },
+    {
+      "id": "8e97569c9bad79d3e12d2182",
+      "make": "Smart",
+      "model": "#3",
+      "expectedRevision": "93a8f34a-a709-5b7a-a5b3-7bfc2d68fe23",
+      "actualRevision": "93a8f34a-a709-5b7a-a5b3-7bfc2d68fe23",
+      "pass": true
+    },
+    {
+      "id": "91cf8f686eb66c4fde6be5ec",
+      "make": "Mercedes-Benz",
+      "model": "Vito",
+      "expectedRevision": "f9aa4618-e21f-5451-a340-fa5b553d0b44",
+      "actualRevision": "f9aa4618-e21f-5451-a340-fa5b553d0b44",
+      "pass": true
+    },
+    {
+      "id": "97eb8be1d046afc504197547",
+      "make": "BMW",
+      "model": "M3",
+      "expectedRevision": "ad05210c-bd20-5a56-adef-d5d8f0e665bc",
+      "actualRevision": "ad05210c-bd20-5a56-adef-d5d8f0e665bc",
+      "pass": true
+    },
+    {
+      "id": "989f3937be4b9ac9555be794",
+      "make": "Suzuki",
+      "model": "Jimny",
+      "expectedRevision": "72811e20-ef38-5172-af8d-223ebcc864f4",
+      "actualRevision": "72811e20-ef38-5172-af8d-223ebcc864f4",
+      "pass": true
+    },
+    {
+      "id": "98cc9b43ac5bfaef86b4e2ad",
+      "make": "Mercedes-Benz",
+      "model": "S",
+      "expectedRevision": "f3f42ccb-d053-5208-a295-aa859b3f405a",
+      "actualRevision": "f3f42ccb-d053-5208-a295-aa859b3f405a",
+      "pass": true
+    },
+    {
+      "id": "991d5ba92aae9969834e39d4",
+      "make": "Volvo",
+      "model": "XC60",
+      "expectedRevision": "f16cf8ce-c053-52fa-a9e4-ede041810426",
+      "actualRevision": "f16cf8ce-c053-52fa-a9e4-ede041810426",
+      "pass": true
+    },
+    {
+      "id": "994c47ef14d46c2435fea9f9",
+      "make": "Ford",
+      "model": "Transit Custom",
+      "expectedRevision": "0150c817-7c35-5aa6-af53-47ccae3ae0a3",
+      "actualRevision": "0150c817-7c35-5aa6-af53-47ccae3ae0a3",
+      "pass": true
+    },
+    {
+      "id": "995f1eeae5d9d88fd37e64c3",
+      "make": "Audi",
+      "model": "RSQ3",
+      "expectedRevision": "f8213408-1dc2-52c3-afa0-78fda332f589",
+      "actualRevision": "f8213408-1dc2-52c3-afa0-78fda332f589",
+      "pass": true
+    },
+    {
+      "id": "9ce21ee064ca95d099306019",
+      "make": "BMW",
+      "model": "iX3",
+      "expectedRevision": "b9d5fab8-6510-546d-a43c-a761ad783a44",
+      "actualRevision": "b9d5fab8-6510-546d-a43c-a761ad783a44",
+      "pass": true
+    },
+    {
+      "id": "9e0f1ff0a9f3387ffee87759",
+      "make": "MG",
+      "model": "Cyberster",
+      "expectedRevision": "6e908bcd-d21d-5395-aed6-7cf8e6b08d50",
+      "actualRevision": "6e908bcd-d21d-5395-aed6-7cf8e6b08d50",
+      "pass": true
+    },
+    {
+      "id": "9f23c75ab6a73713bf64580a",
+      "make": "Alpine",
+      "model": "A290",
+      "expectedRevision": "aacbe844-2775-5871-a98a-61cd9ec72b50",
+      "actualRevision": "aacbe844-2775-5871-a98a-61cd9ec72b50",
+      "pass": true
+    },
+    {
+      "id": "9fdbf9265296da07ea93e5be",
+      "make": "Mercedes-Benz",
+      "model": "CLA",
+      "expectedRevision": "2bb3bd5c-5b84-506c-a45d-5d9730b42799",
+      "actualRevision": "2bb3bd5c-5b84-506c-a45d-5d9730b42799",
+      "pass": true
+    },
+    {
+      "id": "a16637f17e8d73fe335dddaf",
+      "make": "Jeep",
+      "model": "Compass",
+      "expectedRevision": "ff0570b2-5e0f-5526-ae33-db81950bd43c",
+      "actualRevision": "ff0570b2-5e0f-5526-ae33-db81950bd43c",
+      "pass": true
+    },
+    {
+      "id": "a39062e4acc4080acce02363",
+      "make": "BMW",
+      "model": "M240i",
+      "expectedRevision": "b0aaf7c5-eef8-5604-a9ac-f6408fd5b738",
+      "actualRevision": "b0aaf7c5-eef8-5604-a9ac-f6408fd5b738",
+      "pass": true
+    },
+    {
+      "id": "a3d9ac039399353bd57792b9",
+      "make": "BMW",
+      "model": "iX1",
+      "expectedRevision": "7b572a3b-75d5-5552-a6ca-1a2d41009d11",
+      "actualRevision": "7b572a3b-75d5-5552-a6ca-1a2d41009d11",
+      "pass": true
+    },
+    {
+      "id": "a3ff21ffcff13ea3a68e26fd",
+      "make": "Mercedes-Benz",
+      "model": "GLA",
+      "expectedRevision": "ddd79eba-2d16-5594-acba-053b01d57f5a",
+      "actualRevision": "ddd79eba-2d16-5594-acba-053b01d57f5a",
+      "pass": true
+    },
+    {
+      "id": "a4c4d200062861f95c9cac41",
+      "make": "BMW",
+      "model": "M8",
+      "expectedRevision": "9d9462ef-8150-5ec2-a001-67b6d6979dd4",
+      "actualRevision": "9d9462ef-8150-5ec2-a001-67b6d6979dd4",
+      "pass": true
+    },
+    {
+      "id": "a559e92f3b18883562ca336a",
+      "make": "Audi",
+      "model": "Q3",
+      "expectedRevision": "df64d5cb-c05f-5c0c-a033-2ecae1f4d01e",
+      "actualRevision": "df64d5cb-c05f-5c0c-a033-2ecae1f4d01e",
+      "pass": true
+    },
+    {
+      "id": "a6be348528899ff042a5badf",
+      "make": "Jaguar",
+      "model": "F-Pace",
+      "expectedRevision": "f201d532-ed53-5cef-a43b-5bb1514c9857",
+      "actualRevision": "f201d532-ed53-5cef-a43b-5bb1514c9857",
+      "pass": true
+    },
+    {
+      "id": "a82d70a3f970d3ddfb0235d6",
+      "make": "Mercedes-Benz",
+      "model": "EQB",
+      "expectedRevision": "9b3ccf7b-c13a-51b9-a20c-3845dde260d6",
+      "actualRevision": "9b3ccf7b-c13a-51b9-a20c-3845dde260d6",
+      "pass": true
+    },
+    {
+      "id": "aa483096e3141305752cd48b",
+      "make": "BMW",
+      "model": "X3",
+      "expectedRevision": "8eb8cfdb-0587-5826-afb9-f64910498b65",
+      "actualRevision": "8eb8cfdb-0587-5826-afb9-f64910498b65",
+      "pass": true
+    },
+    {
+      "id": "aaa69c7f71193594d2a00402",
+      "make": "MINI",
+      "model": "Aceman",
+      "expectedRevision": "cc1e0f2b-9d3f-5c8c-a226-3f46f778e5d0",
+      "actualRevision": "cc1e0f2b-9d3f-5c8c-a226-3f46f778e5d0",
+      "pass": true
+    },
+    {
+      "id": "ac52817cecbc01d3ce8773ff",
+      "make": "Nissan",
+      "model": "Primastar",
+      "expectedRevision": "f0eddfa4-7234-5bc4-aa1f-c9396e4bbfc5",
+      "actualRevision": "f0eddfa4-7234-5bc4-aa1f-c9396e4bbfc5",
+      "pass": true
+    },
+    {
+      "id": "acaf6423f6a964f803b1b56b",
+      "make": "Jeep",
+      "model": "Avenger",
+      "expectedRevision": "27bb4ef4-9e57-5758-ae61-e8f46e642d50",
+      "actualRevision": "27bb4ef4-9e57-5758-ae61-e8f46e642d50",
+      "pass": true
+    },
+    {
+      "id": "ad86b5d995c40ca15f60d68d",
+      "make": "Toyota",
+      "model": "Hilux",
+      "expectedRevision": "99d6a91e-ae53-5192-a284-dddecbc38717",
+      "actualRevision": "99d6a91e-ae53-5192-a284-dddecbc38717",
+      "pass": true
+    },
+    {
+      "id": "adf826107dc65aa8aa3d2c74",
+      "make": "Mercedes-Benz",
+      "model": "Sprinter",
+      "expectedRevision": "81943b41-b8d4-552f-ae41-17f87fa7fc64",
+      "actualRevision": "81943b41-b8d4-552f-ae41-17f87fa7fc64",
+      "pass": true
+    },
+    {
+      "id": "b3cebe205b24919dfe7b00b7",
+      "make": "MG",
+      "model": "MG4",
+      "expectedRevision": "26c6003c-aa92-52b3-a40f-e05e13f29dca",
+      "actualRevision": "26c6003c-aa92-52b3-a40f-e05e13f29dca",
+      "pass": true
+    },
+    {
+      "id": "b89b827fcb144f8ea8a5dc60",
+      "make": "Ford",
+      "model": "Focus",
+      "expectedRevision": "d1e53192-2873-549f-acc9-51a015b168f8",
+      "actualRevision": "d1e53192-2873-549f-acc9-51a015b168f8",
+      "pass": true
+    },
+    {
+      "id": "b9ee561b284c7dc71b51b3b0",
+      "make": "BMW",
+      "model": "7 Series",
+      "expectedRevision": "a7927153-9cbd-554f-a20f-40c932ef1d90",
+      "actualRevision": "a7927153-9cbd-554f-a20f-40c932ef1d90",
+      "pass": true
+    },
+    {
+      "id": "ba3da9d8305c0b01570075f9",
+      "make": "MG",
+      "model": "MG3",
+      "expectedRevision": "9d5f328a-04cf-5310-af5e-d4cf68ce5b78",
+      "actualRevision": "9d5f328a-04cf-5310-af5e-d4cf68ce5b78",
+      "pass": true
+    },
+    {
+      "id": "c361c4ba8a03188a7126df58",
+      "make": "BMW",
+      "model": "M135",
+      "expectedRevision": "2bae5da3-e800-5b75-a4b2-4d787f66d795",
+      "actualRevision": "2bae5da3-e800-5b75-a4b2-4d787f66d795",
+      "pass": true
+    },
+    {
+      "id": "c8856783de93588310929346",
+      "make": "Smart",
+      "model": "#1",
+      "expectedRevision": "bcde8d96-ccfb-511f-a275-2bf7110f76b8",
+      "actualRevision": "bcde8d96-ccfb-511f-a275-2bf7110f76b8",
+      "pass": true
+    },
+    {
+      "id": "c89037d100b99a1e4ecafe6b",
+      "make": "Volkswagen",
+      "model": "Touran",
+      "expectedRevision": "e04e4d8d-e0cf-5cb7-abd6-f6b99c904f7c",
+      "actualRevision": "e04e4d8d-e0cf-5cb7-abd6-f6b99c904f7c",
+      "pass": true
+    },
+    {
+      "id": "cb49c6bb46e8dd8caf106b34",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "expectedRevision": "4531da8d-3888-5587-a7f1-58de33064f5d",
+      "actualRevision": "4531da8d-3888-5587-a7f1-58de33064f5d",
+      "pass": true
+    },
+    {
+      "id": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "expectedRevision": "98483821-5329-567c-ab59-6beaa670f50e",
+      "actualRevision": "98483821-5329-567c-ab59-6beaa670f50e",
+      "pass": true
+    },
+    {
+      "id": "cd6d409358abd933a2b10e22",
+      "make": "Volkswagen",
+      "model": "Arteon",
+      "expectedRevision": "c825caa0-768d-56fc-a2c0-9c16c6805946",
+      "actualRevision": "c825caa0-768d-56fc-a2c0-9c16c6805946",
+      "pass": true
+    },
+    {
+      "id": "cff8e70d11f692cfd96d750e",
+      "make": "BMW",
+      "model": "X4",
+      "expectedRevision": "37ff163d-a33a-5ef8-aeb4-e4ae0fe5952d",
+      "actualRevision": "37ff163d-a33a-5ef8-aeb4-e4ae0fe5952d",
+      "pass": true
+    },
+    {
+      "id": "d34ba437980cd15b2b6cc71b",
+      "make": "Tesla",
+      "model": "Model Y",
+      "expectedRevision": "86707808-c541-5175-a89e-59e7c28f1a03",
+      "actualRevision": "86707808-c541-5175-a89e-59e7c28f1a03",
+      "pass": true
+    },
+    {
+      "id": "d4c6efee8cca022629c991db",
+      "make": "Nissan",
+      "model": "Ariya",
+      "expectedRevision": "50e946e3-8bb2-58ab-a0c3-2a1dbb560e51",
+      "actualRevision": "50e946e3-8bb2-58ab-a0c3-2a1dbb560e51",
+      "pass": true
+    },
+    {
+      "id": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "expectedRevision": "0fcf3eb8-3e17-5cd5-a1c5-24daad9b148c",
+      "actualRevision": "0fcf3eb8-3e17-5cd5-a1c5-24daad9b148c",
+      "pass": true
+    },
+    {
+      "id": "d6963ef87fed159077b5b7d0",
+      "make": "Mercedes-Benz",
+      "model": "EQA",
+      "expectedRevision": "7fae7e59-dfcf-5640-ada8-a6839086ebc9",
+      "actualRevision": "7fae7e59-dfcf-5640-ada8-a6839086ebc9",
+      "pass": true
+    },
+    {
+      "id": "d6c3bc9571a69e19927f7ea8",
+      "make": "Volkswagen",
+      "model": "ID.3",
+      "expectedRevision": "f54d1336-dfa8-568e-a324-e6348a263f44",
+      "actualRevision": "f54d1336-dfa8-568e-a324-e6348a263f44",
+      "pass": true
+    },
+    {
+      "id": "d972ad4b60f008a89b934f3f",
+      "make": "Smart",
+      "model": "#5",
+      "expectedRevision": "6cfb3382-77e2-540b-a20d-cfcec5eccdda",
+      "actualRevision": "6cfb3382-77e2-540b-a20d-cfcec5eccdda",
+      "pass": true
+    },
+    {
+      "id": "dac550818988e5f737756a0a",
+      "make": "Audi",
+      "model": "S5",
+      "expectedRevision": "d8bc2bb3-e9e1-5214-a846-c52a5dad8532",
+      "actualRevision": "d8bc2bb3-e9e1-5214-a846-c52a5dad8532",
+      "pass": true
+    },
+    {
+      "id": "daf1f6d3f8e2d6c44d2a0b11",
+      "make": "Kia",
+      "model": "EV5",
+      "expectedRevision": "aed817b7-3c90-5e4b-ae70-94c6b40c85a0",
+      "actualRevision": "aed817b7-3c90-5e4b-ae70-94c6b40c85a0",
+      "pass": true
+    },
+    {
+      "id": "dd4435e896692c1ed58b4ba6",
+      "make": "Hyundai",
+      "model": "Santa FE",
+      "expectedRevision": "358a3626-25f3-5ffc-aa46-824c4d0e8b99",
+      "actualRevision": "358a3626-25f3-5ffc-aa46-824c4d0e8b99",
+      "pass": true
+    },
+    {
+      "id": "e15682683a44d4c2a3e27f30",
+      "make": "Mercedes-Benz",
+      "model": "S-Class",
+      "expectedRevision": "1e121225-6145-5fb4-a33a-b934a6e12a34",
+      "actualRevision": "1e121225-6145-5fb4-a33a-b934a6e12a34",
+      "pass": true
+    },
+    {
+      "id": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "expectedRevision": "4d04c3c3-790f-591b-a18a-905bff48ea9c",
+      "actualRevision": "4d04c3c3-790f-591b-a18a-905bff48ea9c",
+      "pass": true
+    },
+    {
+      "id": "e4c9144cc31f9d9c0c7a9ca1",
+      "make": "Volvo",
+      "model": "S90",
+      "expectedRevision": "2fa1e20d-6b31-59da-ac84-ab38ac548894",
+      "actualRevision": "2fa1e20d-6b31-59da-ac84-ab38ac548894",
+      "pass": true
+    },
+    {
+      "id": "ebc72bdf08d74bad5eab2a55",
+      "make": "Mercedes-Benz",
+      "model": "Citan",
+      "expectedRevision": "752454cc-5eeb-55fd-aff0-00fa3580d36e",
+      "actualRevision": "752454cc-5eeb-55fd-aff0-00fa3580d36e",
+      "pass": true
+    },
+    {
+      "id": "ebcdc949a550fd159424faf9",
+      "make": "XPeng",
+      "model": "G6",
+      "expectedRevision": "7fe0047c-2fc2-5c00-a831-1680ed5e6b85",
+      "actualRevision": "7fe0047c-2fc2-5c00-a831-1680ed5e6b85",
+      "pass": true
+    },
+    {
+      "id": "ed4542954692df2830784bd0",
+      "make": "BMW",
+      "model": "M235",
+      "expectedRevision": "80e08065-4bc4-5d44-abf4-1330ee373744",
+      "actualRevision": "80e08065-4bc4-5d44-abf4-1330ee373744",
+      "pass": true
+    },
+    {
+      "id": "efe7e941f3c9614867d97597",
+      "make": "Leapmotor",
+      "model": "B10",
+      "expectedRevision": "0f19af1f-ff0b-5102-a514-de5339541315",
+      "actualRevision": "0f19af1f-ff0b-5102-a514-de5339541315",
+      "pass": true
+    },
+    {
+      "id": "f0caf0f5bd45982abc673d27",
+      "make": "Mercedes-Benz",
+      "model": "E",
+      "expectedRevision": "c5725b30-b759-5066-aab0-5dd90238ba82",
+      "actualRevision": "c5725b30-b759-5066-aab0-5dd90238ba82",
+      "pass": true
+    },
+    {
+      "id": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "expectedRevision": "a7b051a5-d325-5411-a5a7-ed61b964fa9c",
+      "actualRevision": "a7b051a5-d325-5411-a5a7-ed61b964fa9c",
+      "pass": true
+    },
+    {
+      "id": "f4885e5e0e810dea33900f75",
+      "make": "Mazda",
+      "model": "MX-5",
+      "expectedRevision": "da4034cb-aed2-5abd-acbc-f295d8af3384",
+      "actualRevision": "da4034cb-aed2-5abd-acbc-f295d8af3384",
+      "pass": true
+    },
+    {
+      "id": "f568c685be633038ace22661",
+      "make": "XPeng",
+      "model": "G9",
+      "expectedRevision": "174ed041-bf69-541b-a77f-b86703d15756",
+      "actualRevision": "174ed041-bf69-541b-a77f-b86703d15756",
+      "pass": true
+    },
+    {
+      "id": "f6a0383efa6478ccd56de9db",
+      "make": "Skoda",
+      "model": "Superb",
+      "expectedRevision": "a54acb55-0aaf-5f9f-aef4-1d573d716df0",
+      "actualRevision": "a54acb55-0aaf-5f9f-aef4-1d573d716df0",
+      "pass": true
+    },
+    {
+      "id": "f9539474efd1eacc817e260e",
+      "make": "Jeep",
+      "model": "Wrangler",
+      "expectedRevision": "2aebbda2-dfbd-51a7-a658-11fd6e6cbda5",
+      "actualRevision": "2aebbda2-dfbd-51a7-a658-11fd6e6cbda5",
+      "pass": true
+    },
+    {
+      "id": "fb5c30c8f20295b21a24201c",
+      "make": "Kia",
+      "model": "Stinger",
+      "expectedRevision": "573eef8f-def9-5226-adfb-6b7bc6193b76",
+      "actualRevision": "573eef8f-def9-5226-adfb-6b7bc6193b76",
+      "pass": true
+    },
+    {
+      "id": "fb8615d10fe495a8a39b9cfb",
+      "make": "Kia",
+      "model": "Sorento",
+      "expectedRevision": "e3913ea4-2559-5026-a8f7-e4a13dd7fd5d",
+      "actualRevision": "e3913ea4-2559-5026-a8f7-e4a13dd7fd5d",
+      "pass": true
+    },
+    {
+      "id": "fbb9b61a6b6a0e21619e2f96",
+      "make": "Ford",
+      "model": "Kuga",
+      "expectedRevision": "e2a30d80-b2c8-5b55-aea9-0652ceb321f5",
+      "actualRevision": "e2a30d80-b2c8-5b55-aea9-0652ceb321f5",
+      "pass": true
+    },
+    {
+      "id": "fcd96f3b7dd9a11724bbd696",
+      "make": "Volkswagen",
+      "model": "ID.4",
+      "expectedRevision": "43650a04-5378-5c07-a8ed-311f3e6d9dc8",
+      "actualRevision": "43650a04-5378-5c07-a8ed-311f3e6d9dc8",
+      "pass": true
+    },
+    {
+      "id": "fdf5b91340e903de8e85558e",
+      "make": "Kia",
+      "model": "Sportage",
+      "expectedRevision": "a1c0b632-69a4-50c1-af77-dc66e152e826",
+      "actualRevision": "a1c0b632-69a4-50c1-af77-dc66e152e826",
+      "pass": true
+    },
+    {
+      "id": "fee94571486326055378702b",
+      "make": "Volkswagen",
+      "model": "Id. Buzz",
+      "expectedRevision": "18e6ea09-8995-5e0e-a51e-b51a47fe41e6",
+      "actualRevision": "18e6ea09-8995-5e0e-a51e-b51a47fe41e6",
+      "pass": true
+    },
+    {
+      "id": "ff2d0a1e18c4c0d18249de20",
+      "make": "Audi",
+      "model": "Q4 e-tron",
+      "expectedRevision": "6b4e9090-0dad-5fe7-a0d0-81341d522f5e",
+      "actualRevision": "6b4e9090-0dad-5fe7-a0d0-81341d522f5e",
+      "pass": true
+    }
+  ]
+}

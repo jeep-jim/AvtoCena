@@ -14989,3 +14989,14 @@ Exactapply40102493368/job120897327155 SUCCESS, закончен14:31:22.580UTC. 
 PR1519конфликтразрешёнappend-only с обеимиисториями и контрольнойзаписью38bb918; headffbb375b CI40102684116SUCCESS, все4headchecksPASS, merged6cf5b5e8335cbfca2c39ab0759258adbcf6047d3. После проверки in_progress/queued/pending: researchwriter/releaseсвободны, запрошенОДИНregcloud-deploy marker с b337+прежним6d417, всеми39required/25publicresearchbatches. Включены1518drive/pickup и1519priceparity;1521memoryfix ещёCI40102863410, вэтотснимокнеобещан. Новыеresearchwrites удержаныдоизоляцииprivateindex. Полнаяпубличнаяприёмканеобъявлена.
 
 Предрелизныйконтроль: CupraLeon2024search356/12получено, ввыборкеестьнеизвестныйdrive; этиконкретныестрокитакжеосталисьбезdriveвпостоянныхзаписях, нельзяобещатьзаполнениекаждойкарточкиэтимпланом. Korea budgetTo3m:0items,totalnull,interrupted/scanLimited/filteredByPagetrue,hasMoretrue; это незакрытаяполнотапубличногоAJESзапроса, неотсутствиеавто. Послеактивациисверитьlist/detail/related/filter иbudgetparity; неослаблятьguards.
+
+
+## 24.10.2026 21:46 Красноярск — проверка выпуска и оставшаяся граница живого поиска
+
+Release40103448997/7189a40 выполняется, wait-for-astraSUCCESS, privateindex готовится. Второйdeploy не создаётся. Дополнительный независимый publicAPIreadback14:38:32UTC также153/153revisionPASS, отчёт astra-bulk-public-readback.json; новыеанонcыsaved неравныактивации. PR1521memoryrepair имеет отдельныйcheckpoint docs/operations/2026-10-24-readmodel-memory-repair.md, чтобы параллельныеappend-onlyроад-записи неостанавливалиCI. Итог1521 дописатьсюдапослеmerge.
+
+Подготовлены livechecks всех6рынков, непустойpickupJP/KR, ForesterAWD, рассчитанногоprice/budget, pickupcardcontrols; feedbacktestтеперьизмеряетмаксимумодновременно видимыхpreloaders и требует<=1. Проверкивыдаютошибкупри503/пустойизвестнойвыдаче; неполныеответы невыдаютсязаготовность. Облачныйбраузердважды502на/cars?bodyType=pickup, независимыйHTTP200страницыза7.3сек/health200за4.0сек — глобальныйoutageнедоказан.
+
+ВАЖНАЯОТКРЫТАЯГРАНИЦА:1519 устраняетрасхождениерасчётногоиндекса/сумм и сортировкуполученныхстрок, но AJES SQL всёещёупорядочиваетsource FINISH, затемприложениепересортировываетполученнуюстраницу. Это НЕ доказанноглобальноточныйпорядокрассчитанныхценмеждувсемистраницами. Живойbudgetтожеимеетboundedscan/continuation; верхниесчётчикичестные. Следующийприоритетпослепубличнойприёмки — разрешённыйсерверныйотбор/полнотапо итоговойцене, беззапрещённойполнойвыгрузкиAJES/подменыIP/угадываниямощности. Не закрыватьисходнуюжалобувладельцатолькопоуспеху1519.
+
+ДополнительныеофициальныелеадыJapan: Subaru for_180727.pdf(2018-07) — SK9/SKE AWD; forester_specifications.pdf(2024-04) — SKE/SK5 AWD. НовыеполяизэтихPDF вэтойсессииещёнесохранены; годовыедиапазоны/30minневыводились. Сохранённые8403reference-intake recordsещёнужноотдельномассовосопоставить; failure39831884392оставилcheckpoint, причинуaccessузнатьдоresume.

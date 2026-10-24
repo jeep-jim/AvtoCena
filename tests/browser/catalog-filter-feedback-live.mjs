@@ -19,13 +19,25 @@ try{
  const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});if(await cookie.isVisible())await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
  const filter=page.locator('.ac-catalog-filter-panel'),electric=filter.locator('.ac-electric-filter input[type=checkbox]');
  const extraSearches=[];page.on('request',r=>{if(new URL(r.url()).pathname==='/api/catalog/search')extraSearches.push(r.url());});
+ await page.evaluate(()=>{
+  window.__catalogLoaderProbe={max:0,seen:false};
+  window.__catalogLoaderTimer=setInterval(()=>{
+   const count=[...document.querySelectorAll('.ac-route-loader,.ac-catalog-section-loading.is-active')].filter(el=>{
+    const style=getComputedStyle(el);return el.getAttribute('aria-hidden')!=='true'&&style.display!=='none'&&style.visibility!=='hidden'&&Number(style.opacity)>0&&el.getClientRects().length;
+   }).length;
+   window.__catalogLoaderProbe.max=Math.max(window.__catalogLoaderProbe.max,count);window.__catalogLoaderProbe.seen ||= count>0;
+  },25);
+ });
  const selectedAt=Date.now();await electric.check();
  report.checkedAfterClick=await electric.isChecked();
- report.loaderVisible=await page.locator('.ac-catalog-section-loading').filter({visible:true}).first().waitFor({state:'visible',timeout:1000}).then(()=>true,()=>false);
+ report.loaderVisible=await page.locator('.ac-route-loader[aria-hidden="false"]').waitFor({state:'visible',timeout:1000}).then(()=>true,()=>false);
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('fuel')==='electrified'&&document.querySelector('.ac-catalog-filter-panel')?.getAttribute('aria-busy')==='false',null,{timeout:30000});
  report.filterAcknowledgedMs=Date.now()-selectedAt;
  await page.waitForFunction(()=>![...document.querySelectorAll('.ac-catalog-section-loading.is-active')].some(el=>el.getClientRects().length),null,{timeout:30000});
  report.filterCompleteMs=Date.now()-selectedAt;report.withinTwoSeconds=report.filterCompleteMs<=2000;
+ const loaders=await page.evaluate(()=>{clearInterval(window.__catalogLoaderTimer);return window.__catalogLoaderProbe;});
+ report.maximumSimultaneousLoaders=loaders.max;report.loaderVisible ||= loaders.seen;
+ assert.ok(loaders.max<=1,'at most one loading indicator may be visible');
  assert.ok(report.loaderVisible||report.filterCompleteMs<2000,'a slow request must show its indicator');
  report.colors={};for(const theme of ['dark','light']){
   await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
