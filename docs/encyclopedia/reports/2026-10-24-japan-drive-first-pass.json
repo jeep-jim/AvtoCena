@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-10-24T11:17:20.099331+00:00",
+  "status": "source_review_only_not_applied",
+  "sources": [
+    {
+      "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/altolapin/39.pdf",
+      "publisher": "Suzuki",
+      "page": 1,
+      "finding": "HA37S and HA97S each include front-wheel-drive and full-time4WD variants. Chassis alone is insufficient; exact grade/model code is needed."
+    },
+    {
+      "url": "https://ucar.subaru.jp/img/catalog/201906_for.pdf",
+      "publisher": "Subaru",
+      "finding": "Search indexed official2019catalog lists AWD; direct fetch403. Exact chassis/year rows not verified; no facts applied."
+    }
+  ],
+  "next": [
+    "Extract existing Japanese chassis+full model code+explicit drive evidence coverage.",
+    "Match factory table variant identifiers, preserving ambiguous cases.",
+    "Implement filter using enriched drive before pagination; provider PRIV-only filtering currently omits rows without sourceDrive."
+  ]
+}

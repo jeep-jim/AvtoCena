@@ -1,6 +1,8 @@
 import {
   CATALOG_BRANDS,
   canonicalCatalogBrand,
+  catalogBrandPresentation,
+  isCatalogBrandPlaceholder,
   catalogBrandBySlug,
   catalogBrandSlug,
   type CatalogBrand,
@@ -38,7 +40,10 @@ export async function readCatalogBrandDirectory() {
     readSourceBackedEncyclopediaModels(),
   ]);
   const brands = new Map<string, CatalogBrand>();
-  const add = (brand: CatalogBrand) => {
+  const add = (input: CatalogBrand) => {
+    if(isCatalogBrandPlaceholder(input.name))return;
+    const name=catalogBrandPresentation(input.name).name;
+    const brand={...input,name,slug:catalogBrandSlug(name),aliases:[...new Set([input.name,...(input.aliases||[])])]};
     const key = brand.slug || catalogBrandSlug(brand.name);
     const current = brands.get(key);
     brands.set(key, current ? {
@@ -84,7 +89,7 @@ export async function resolveCatalogBrandBySlug(rawSlug: string): Promise<Catalo
     const match = new EncyclopediaIdentitySlugResolver(dataset).resolveBrand(rawSlug);
     if (match) {
       const source = dataset.brands.find((brand) => brand.id === match.brandId);
-      const publicName = canonicalCatalogBrand(match.canonicalName);
+      const publicName = catalogBrandPresentation(match.canonicalName).name;
       return toBrand(publicName, catalogBrandSlug(publicName), [match.canonicalName, match.canonicalSlug, ...safeAliasValues(source?.aliases)]);
     }
   }
