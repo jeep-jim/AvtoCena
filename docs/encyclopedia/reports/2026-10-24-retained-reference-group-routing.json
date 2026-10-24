@@ -1,0 +1,3070 @@
+{
+  "preparedAt": "2026-10-24T15:31:52.401667+00:00",
+  "scope": "Только маршрутизация групп по точному нормализованному имени существующей модели. Это не доказательство идентичности варианта, периода или характеристик. Новые модели не создаются.",
+  "indexDigest": "5685c5147920cef54287a9a21579af60ea1c281e6da9d01669f2351d45f29376",
+  "sourceSnapshotDigest": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
+  "groups": [
+    {
+      "sourceModelGroup": "audi/a3",
+      "retainedRecords": 1363,
+      "matchingExistingModels": [
+        {
+          "id": "f40e34e905b8ca09f3636eda",
+          "make": "Audi",
+          "model": "A3"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "00239e9317369dc3d95c9a8f31145d958be45cfd590f92cc77f46107d854e5fe",
+        "00300ff1e243812454fec536c6b66d37a20f36900960adf51eec094e8d964135",
+        "0070424b206fcd14a4eb1d5a83a4f4b3d59337c1ba5586396f52963a1129b4ff"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a4",
+      "retainedRecords": 1144,
+      "matchingExistingModels": [
+        {
+          "id": "e3570ba4a67b01797e57a749",
+          "make": "Audi",
+          "model": "A4"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0028e6cacaa1c22ca7656c8b027c5b9d3b2cb430f95e0764a805ac86d06be066",
+        "0068f064c90438f6a388e1d000342bd917649a8becb68e18e6d3865252d63230",
+        "0085506e1a32ef497550de85b3f36d8e3390f66ab0624ea38ebd2255142cf289"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a5",
+      "retainedRecords": 864,
+      "matchingExistingModels": [
+        {
+          "id": "8cf3dbb7884fe919bce44c62",
+          "make": "Audi",
+          "model": "A5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "00062f925c32677cb4c6cf2a3317e1cbb299d0f937a66bfd4627b123effdc323",
+        "00a7335b43b83dd95f100c14e8d6f3f730d32e392052e8b57b2f5a1efd406af3",
+        "00e2701e85849da664ef11aa52cc4169b6bc8974505a8e94cecb270d5bd2f2e2"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a6",
+      "retainedRecords": 782,
+      "matchingExistingModels": [
+        {
+          "id": "00624e6c77b6541109a32d66",
+          "make": "Audi",
+          "model": "A6"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0017eec6334fed2e145a03bf9c8a7d67250dd07f5c94cf91db8226e9d17a403b",
+        "003e6da0eef7fdadf5a41744cfb984c4be1e0eb904da0fbdd3fa9e18f2ab1fd8",
+        "00590210efa83bed49f807f45c51d8d35290b375398fb077e8ef99c273e8f0ff"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q5",
+      "retainedRecords": 224,
+      "matchingExistingModels": [
+        {
+          "id": "3906b5f0be3932b38471f703",
+          "make": "Audi",
+          "model": "Q5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "00065f59ec4fc4ca1372ef1d66a01e0301d451f6cb75bd400ef549db3e20b9be",
+        "007b5bd5dc905cb9ad74671fa7cd2ed2c45a0f8aaaf5375f3eee92a09fec52eb",
+        "00f4c67ae1da8a6725f7d0e1d2667fa035ba8e00559410ac1798cd387e086058"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a1",
+      "retainedRecords": 219,
+      "matchingExistingModels": [
+        {
+          "id": "d5a8af35e3698aa33eaea9a9",
+          "make": "Audi",
+          "model": "A1"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0035c74400f0c41c22c5255df8119f30ee2d1be3858d2bd48339e18e30cb5f37",
+        "01290703a4b33998ff31fc261ffa376510af2636b16d3af27c49c8a8e8131532",
+        "015de54fc0ef75e27e429f04b20f981baffb96f1016a6977ddf3af1cf72b60d2"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a7",
+      "retainedRecords": 187,
+      "matchingExistingModels": [
+        {
+          "id": "1db9a9057b9919c24b8a0e67",
+          "make": "Audi",
+          "model": "A7"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0360f25517d9043dcd4964a3e9d1827bce287c39ae3e0bb6ffce0d3cea037fd6",
+        "03cda11731ad3c58c095e5287e382074d170714f065fd14127b8729de10aa4d4",
+        "03d1fb378f5d150805d94397e656ef5f96aab01c415ce05b85fbdc147d33201a"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q7",
+      "retainedRecords": 169,
+      "matchingExistingModels": [
+        {
+          "id": "ccf19a32969379f768c0743b",
+          "make": "Audi",
+          "model": "Q7"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "00fa8dbd2e7373db01a67be7b5a67619f0b0a696f580b832510ba1499012453a",
+        "012397ab3b895b5cd48c73623a94dc97b73294f9fccbad0839ee0854d6039736",
+        "033d6ca9fe4e66e0dcf01fa703f3b20931783c2c230d7102227afb7ef3d0aabd"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a8",
+      "retainedRecords": 166,
+      "matchingExistingModels": [
+        {
+          "id": "1314a66b16c62faefdaa7675",
+          "make": "Audi",
+          "model": "A8"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "000a818e4eb32d83b0115c94c662642836ce28a13ea94a597dbf29e1a0287c0b",
+        "02a60324482e4ebc956d4e4b913efd83fb66e8994134aaeb28b70a0e3492a4df",
+        "04af6aa1bf1954e342f050fffa6bc3e8d736b0a6caed0e70f9ee435943f716e2"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/159",
+      "retainedRecords": 148,
+      "matchingExistingModels": [
+        {
+          "id": "89a8480e5a2077e38d500dad",
+          "make": "Alfa Romeo",
+          "model": "159"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "012fcb48fa13bd4bc45ab706f68ed7553030e482ffcf7389707c985203620eb3",
+        "01d21be337afb14a2c742e91a3e2076df90d3b3c42a5707dd84dcec1bf9de071",
+        "022fdd4d6fd1de956fa839b5c16a8d4b710ab4e5102fe30181356ffe8e17e122"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q3",
+      "retainedRecords": 146,
+      "matchingExistingModels": [
+        {
+          "id": "a559e92f3b18883562ca336a",
+          "make": "Audi",
+          "model": "Q3"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "001b8a70c36481609d1923d16d8f8647eec3eb76ce79e2b21e90d137d36dbaf3",
+        "00943e65bf15268e664140dc766b46f7d159e9110faa937003ba099865686604",
+        "06eb6744bb89d8acd83dd2307e8b0405c2434855726b457717ca5b3524bfb20e"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/tt",
+      "retainedRecords": 143,
+      "matchingExistingModels": [
+        {
+          "id": "56f8ef01e8b2d3d1c297a5ed",
+          "make": "Audi",
+          "model": "TT"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0299dae1a33ab537e62d5f45102775fee5d040fe438159d1eca61153a04a58f2",
+        "091e21a79dc1a12bf2df11219c8e58af6ac74c066201e203322c786f372c9793",
+        "0b300a18aa7e918eb05f783f4c6aee01797d212f2740e69655f7677511365e5d"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q2",
+      "retainedRecords": 81,
+      "matchingExistingModels": [
+        {
+          "id": "6bb176ac7798eaeac84d56f9",
+          "make": "Audi",
+          "model": "Q2"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "00b85aacdd13a0c886a92ad1074013ad1ec4bba6ebecb3ecca72af6d78b08bd0",
+        "00c61de0791acb8afa8abff7c2fa62f3babac96d8a6c9570b6afd1898ff57d94",
+        "010dee450a836a5290c6a09cab4d441a4015e50bc364b9d72f287ebeaf3a9948"
+      ]
+    },
+    {
+      "sourceModelGroup": "baw/ace_m7",
+      "retainedRecords": 67,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "03c7add1ed280b49e5bb8d231f82c2603ada927e621f4b0688151835567e79d1",
+        "06e9352a9804da3b20a40efb29ee3ef3b46035ebfc308ddff35358ec7d025a87",
+        "085c2aa95e94a1f43bf5fd2ff9145f1bca91c5334c6540b2ac0443810d99e5ef"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_bj40",
+      "retainedRecords": 66,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0041bd72f28619209cbdd20b9a239599bbcc04c3cd2dfe0ccfdbc24ff79eb2ba",
+        "018f12451bf8937790d2a311721ca950bfcd5f17726e56e9f9b20ad1b7d7730c",
+        "069981043bd12eb492369aae02544a49914eb32e07385041a0919c87702a480f"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/rdx",
+      "retainedRecords": 59,
+      "matchingExistingModels": [
+        {
+          "id": "4d958d92ab5c90cd78582a28",
+          "make": "Acura",
+          "model": "Rdx"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "032476eaace076b8f596d39ce8586ff499591002f361c16e36eac1f198dd482f",
+        "0365b50ffa4b4e8e12426bf5fa025d062345aac0dcf83eac1332136005fb7690",
+        "0b0f5ca870a0f0371e8defe08ed86060a5feed6c3ec443eb0fba57bce2e9f43e"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/r8",
+      "retainedRecords": 59,
+      "matchingExistingModels": [
+        {
+          "id": "0d10d0dda93b05e94f69e554",
+          "make": "Audi",
+          "model": "R8"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "06979d7b0978102b1ab888e13ed08ee3d0e27073ad618d4ea595505b0774758e",
+        "094189bc2cffcc1ada990982a2d019063ec84beeacb22ba80efe5fa12c7ba860",
+        "0ccbf098194c9a865dcb22e79cbe3681ed7b1741b00e99c5452eeddebcafd060"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a6_allroad_quattro",
+      "retainedRecords": 58,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0746b30545453cae367d7e019e1c05421a4076d07b0aa62a245fae043cf3fff8",
+        "0c4e1d281045fdc2ba5464d82a011c32f8675df1299f65ae766b45b82aa52c4c",
+        "1ce82ed93654084ed179efd02430812727b04e8be9dfa0dfbbbdb663334698a4"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/530",
+      "retainedRecords": 56,
+      "matchingExistingModels": [
+        {
+          "id": "821a1691a04973e5c244b3f6",
+          "make": "Baojun",
+          "model": "530"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0064404a0b5ae375c654a17c3e17e6586fe47e674cc7b904577a3c9b1aaf99d9",
+        "0652a53a2695f151bf156b7fc0303eb17725b8640cc3088ca798af0d64c05129",
+        "098a3ed579ef474d9793c31903d40f8207bc215e845a7e0cc351ba97ef8d6564"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/730",
+      "retainedRecords": 55,
+      "matchingExistingModels": [
+        {
+          "id": "b64443d99b479b8514f3cd8b",
+          "make": "Baojun",
+          "model": "730"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "123ad5d1de155a7c727fac084b3253972b5e61d965d8ca19b29b14eb75d2b318",
+        "12d730441579d3118e6e8a2881e5fd2c5221fc7b4aefb005814508c2883c4208",
+        "1b3f34db8d875cacc0e25bf427526276acdf0d07a7a2e8f3a29150683e371fa4"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/s3",
+      "retainedRecords": 50,
+      "matchingExistingModels": [
+        {
+          "id": "49a8dfadf7af14aa1dd50672",
+          "make": "Audi",
+          "model": "S3"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "053fbeeeb1886bb683f4bb3cf266f3a73770fd381d05e63fce7924fd1a96ab03",
+        "1bbdaa16144d3777876f643f6c5d3d47511fdc57ec5c4ce98c26700aefe08e00",
+        "20c99691bdc1c3f01f2aa33f36ebd98fe340d070295f8668b0c956b8f21d3d28"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q3_sportback",
+      "retainedRecords": 49,
+      "matchingExistingModels": [
+        {
+          "id": "c9b18589876b24d4e1b8238c",
+          "make": "Audi",
+          "model": "Q3 Sportback"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0c15c97f2b0a77c9bbdf13c58b64066561d10710b6202a27afd368124ff27071",
+        "125e9ecbf5e0c7f2faae392d2b734998b2979ef535ed7f23f3e608ba580024d5",
+        "14802667a9612f973fd4087a84ec29833c1740ada94057850a35b64b8a7bef79"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q8",
+      "retainedRecords": 49,
+      "matchingExistingModels": [
+        {
+          "id": "e6838d1e2db9ba5bcfedc938",
+          "make": "Audi",
+          "model": "Q8"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "000305570c47c54e5a6206c9f8e5a59b292086b65298a4832a5c4071f3e0e860",
+        "0039bcddf87b57b398dbdfb9245e1ab26abc03fc2264448d303142b3492e159d",
+        "02bbf0ed71024048a2b356c950a08ee95591e5f3fec2c854582080553a080c83"
+      ]
+    },
+    {
+      "sourceModelGroup": "baw/bj212",
+      "retainedRecords": 47,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "077ced3a323e839a55d22f19c2b6ebe5995177bd645a1803b1f4810489e95115",
+        "0969633645b51384158ce0f7c478884332190e68cdd9005328b377719c47ac16",
+        "0f671266327b467a9c3706ce5f4e398119ec75541a088926fe851f889d7697ad"
+      ]
+    },
+    {
+      "sourceModelGroup": "abarth/595",
+      "retainedRecords": 45,
+      "matchingExistingModels": [
+        {
+          "id": "f1a594b37ed0983c19c4dd81",
+          "make": "Abarth",
+          "model": "595"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "055b709616538c27f784afcd9e88b222ed5f750d140ca57ab6205f6141017789",
+        "0819a7458535161fbb02adc3242c0de40d9b7ca0e82e72c528a7d1635230560b",
+        "0b3b8591756a8ba76bbf1b438382b7974687307426a6c9d1d264c6e3789cd8e3"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q5_sportback",
+      "retainedRecords": 44,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "02ea5adf11f5065086ac4a3f34a5cb9fe583913dfdb30a33168005916f2537b8",
+        "02ed496d1938508720cebefeac952fee623f439a124239eea7c913d05b0ec3fa",
+        "039fed19a2fb0e8a75f791e81745c188afa1043ed452df797cbabb0718c3f0bb"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/s4",
+      "retainedRecords": 44,
+      "matchingExistingModels": [
+        {
+          "id": "508fbe99ac519a9136aeb57a",
+          "make": "Audi",
+          "model": "S4"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "013747333f3b0452d5380db63299fe357dd085063aa2ce700ab345712b5f4bd4",
+        "07cd3c4c75c84b52faf98d1dafdb067649d53b352a0ae39472ad88c4b4d92b01",
+        "0bdfae2c6f3d7e71fe000f3f4eb5f89a6c58991599091d57e8a18acbc743b1bc"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/vantage",
+      "retainedRecords": 42,
+      "matchingExistingModels": [
+        {
+          "id": "0f90ccb1a0cf0280fa416811",
+          "make": "Aston Martin",
+          "model": "Vantage"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0b537fcf11af7df89985886e220d64c8a251dce19fc396c5028869c593d4889b",
+        "0bc431dfe2e46f3a10155c1c2abac59cb4bd5d4016c72b42e3c28e6bc5978670",
+        "254a125412ca2d94607567acc8ecf889ca5d0dd6f4997450ca15822d7eb7037c"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a4_allroad_quattro",
+      "retainedRecords": 41,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0bf26ab9a2c252e5eb2e81f9cd227e424d545fd5f2a5a4c2b2cd143761bd1066",
+        "14186e8a4d2d10eb8a5fa1871169d8067f542b25afb048c78448621d381e0e8c",
+        "16b98fbdddbdaf309743252d78395623bdf793c41d1e10ba16ca0ce1b82cb705"
+      ]
+    },
+    {
+      "sourceModelGroup": "avatr/11",
+      "retainedRecords": 40,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "008dc77538285d919e7674537fc918a3ae029c7d1fcb6211b4fb54f9ae5c14b7",
+        "0ea5ce12e17f4c2cd33b45b92f0daf52d242dd6fd5292b1fdab766ac1ec55f28",
+        "1d69e39dfb6c575747df7ab81891e7fa3e537b6c4a8792be39da2dc6cdcc44a1"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/s5",
+      "retainedRecords": 39,
+      "matchingExistingModels": [
+        {
+          "id": "dac550818988e5f737756a0a",
+          "make": "Audi",
+          "model": "S5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "14edef0f1c4145d404eee5e6ddf43175c9d60b31750415b0df4e4ade29756d75",
+        "2c07b886c99525624228b59ec9188106bae800a88721621ca4284a6d116d6661",
+        "3f45689ce6e4de71f31eaf3d74fc3586575cf1859321177755d2e1f96a630ea1"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/510",
+      "retainedRecords": 34,
+      "matchingExistingModels": [
+        {
+          "id": "73c0ecea75622dfe8ffb9a95",
+          "make": "Baojun",
+          "model": "510"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "046f7b0904f5356bc79325bf9f07273a63bb03ad43a9c13b83844d8da2036280",
+        "0760ae04448801aa9000fbe3578eff6c0f70c8830dd656518e39fe476ed786c3",
+        "0b63d6d64e6b408a02edc5301ab9398e1bdf80c8a5bd6ba2735bbe75435d8deb"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/tlx",
+      "retainedRecords": 33,
+      "matchingExistingModels": [
+        {
+          "id": "c7f2e449e151306388048fa9",
+          "make": "Acura",
+          "model": "Tlx"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1830eaeab295255db440ece0bd03c7c5cae4504c08677d575dec838035f29799",
+        "26d24064035682ef690f91caca142b139775e07ac9e5294e2c7e855f0a70f5bd",
+        "2905e7b1ef4f3c749e2239c3c3e2c354b5cce2cca51d1454c8eefe1b80b51d77"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/alpha-s",
+      "retainedRecords": 32,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "030bce28188916b1cab57e31759480cc4863e99b83ea1208ff8ae87ade18ac6a",
+        "048355c2187d6040a23c7a0ebe5ccce5dfefb8cd110f0a73352c6f93813cdb88",
+        "12752dfe6fc979108af0a3d2ea22839071afbee7321d21c40a7a27f720852133"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/alpha-t",
+      "retainedRecords": 32,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "02a5c57f7a833f621e679f0fc7b2f7bb5101b6180698e7eb8f3098332e40f10d",
+        "048460a8526f9fb9b4d690e7a9cff49f5fcf145b384ab92a938efa5c3030cb21",
+        "04df7c64aefd21fdadac827a988d2c2fa415cc0f4111828421ef3019d3bd166e"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/mdx",
+      "retainedRecords": 30,
+      "matchingExistingModels": [
+        {
+          "id": "93d751e6058d8dbf6d33bae5",
+          "make": "Acura",
+          "model": "Mdx"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0160943ca35a55664672789dbf42178b98a78d2981faee40004799723d8960d3",
+        "24006dffd6a196e00a282869e43813fae637bf0207e6b7875d5996e3c50c8d9d",
+        "2c4babebcbd0a5a3de833f6bf38219d473a43c9bc2ae5c3bfe99548416f98185"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/tts",
+      "retainedRecords": 30,
+      "matchingExistingModels": [
+        {
+          "id": "f60424c92df987ecce75addb",
+          "make": "Audi",
+          "model": "TTS"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "02339c93c79d35cee72ee610f146cff69d6a3e1ceeed8ad8cb70c9fdaad1b2dc",
+        "03657123b71a54953847fe40a63739a2dc928cfc76b581e7bfd8d155bb16560b",
+        "18431d8e3cb8fce03800ce17a996265d4006974bf14d081c8a8c0cb7996e3ce8"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/cdx",
+      "retainedRecords": 29,
+      "matchingExistingModels": [
+        {
+          "id": "31e9488e5c02b7f92d637f15",
+          "make": "Acura",
+          "model": "CDX"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "02097da43482064a0b0f25066734aedbfa91fb97998ead94789992333f6f8aa9",
+        "093c4383529cd1a137396fe01ab9a3585b83db9251bc01970fac95f86e113c63",
+        "096588f171b7f7aebdc572224e030519fd90827811c1708e950f9e8c3dc8140b"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/giulia",
+      "retainedRecords": 29,
+      "matchingExistingModels": [
+        {
+          "id": "296965c95e42800c757012ac",
+          "make": "Alfa Romeo",
+          "model": "Giulia"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "026cf8d10d7830d328881506cb55578f956a78cbe9a7702206803ba79eb4344b",
+        "0581c0003446c2721bbf5bc7aacd2406c324f47a031ff40b52ec58380476fc14",
+        "12878955fd243142d406ef7db1ead59774308d8b874e00144a27c0ad70c0c907"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/giulietta",
+      "retainedRecords": 29,
+      "matchingExistingModels": [
+        {
+          "id": "cb49c6bb46e8dd8caf106b34",
+          "make": "Alfa Romeo",
+          "model": "Giulietta"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "04664cec6d91c09c64c96b9e4654321abe036e85c1ace018f0a40d412c223096",
+        "0b5546d6e2241749a24b4ccfa9654e4aaabb4e4351f029032c412a95d95c7e8a",
+        "278b4bf696a2d8819fa8c431bd742794d541b100e92a5b2bf8396702c3b44b55"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/b3",
+      "retainedRecords": 29,
+      "matchingExistingModels": [
+        {
+          "id": "4507f55fff1d9a396093a1b3",
+          "make": "Alpina",
+          "model": "B3"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0653c1436c4ad7acd964df699d4401ec72ebc908f873dc278cdd3626394fcad6",
+        "0a475017656a0a5da468d9460a241ea89d785009dea68cb689a640f882b90bf6",
+        "1841a28eac09dc0f912e0df89fcc6471acdd05edc04cefa7eda27a613be7b7ce"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/310",
+      "retainedRecords": 28,
+      "matchingExistingModels": [
+        {
+          "id": "7fe0a7d47ab193bfc21c6b6f",
+          "make": "Baojun",
+          "model": "310"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1e26c9344bdf37fe7bd671d0e7b94f261ef1bc2e34ecc0ec5e8512358df61e53",
+        "2a87a6786bd09bf6b6a7db09bad94d30b9d502e01facdb7a358e31d86c643f3d",
+        "3a2b6d5750390f9b8b16a501960cbbeb04e5c2de8df081d2f500af9404928a48"
+      ]
+    },
+    {
+      "sourceModelGroup": "avatr/07",
+      "retainedRecords": 26,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0e1aa91fcf3660a0107540b10b65875d3344b187097a396202873d1279e552e4",
+        "0e7f62a07aa764a6212624340e2d0ae6ccafbf6d81fd52e37fe6eafb9dc369f2",
+        "0f2339e163cbcc9a6f970cd026c112c4c55de1661a5ba651dd89cc0384b05cdc"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/tl",
+      "retainedRecords": 25,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0fc66064bb092d2797f73e4576957d463671aa57f98a95873955bca8b933635c",
+        "1846cf2c3a23d3a3076dbe2f891d944a685e7186fd6d999c2f34e5649a9bb68c",
+        "1ba6e87b5ce0f29562b1a7e35feb11252bfcd67f1c0f7e679b28becda38e242d"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/s6",
+      "retainedRecords": 24,
+      "matchingExistingModels": [
+        {
+          "id": "098b1592221b41908ac94899",
+          "make": "Audi",
+          "model": "S6"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "015d041aaa5312558a43827b2472b926989bfc4086f58d3e1fa787506a083e6b",
+        "04b602bea3227de098f4ec23940596c6aa38c3b5bec8fc6ceb77a5eccd82256b",
+        "06b5dcacd4d8d087a0128558ad452f06dd6e9e2ba263b2b94d757d62b15be38f"
+      ]
+    },
+    {
+      "sourceModelGroup": "avatr/12",
+      "retainedRecords": 24,
+      "matchingExistingModels": [
+        {
+          "id": "ae9c95bec45eed9c02fb3c7f",
+          "make": "Avatr",
+          "model": "12"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "008b5212a307c79b6005a953c6d7bb35bcf4a53fa172814efdc7a3608845f3e3",
+        "034ce808a701380b9e9a80705dffb665f8f77b6e4828b0feba42444321abe215",
+        "1d9334172381b06e432b57ddb23c20c209d61a3e0a6a172ea8b00868063d2270"
+      ]
+    },
+    {
+      "sourceModelGroup": "212/t01",
+      "retainedRecords": 23,
+      "matchingExistingModels": [
+        {
+          "id": "397dafd58568424776ec74d6",
+          "make": "212",
+          "model": "T01"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "069fa080dd2d8e32ed62d190ed65ab118e4f809ede1dbe20173f814d950dff52",
+        "22cfe93e98ee4fe15c9a31d239b055d088c45fb81c067ad6188fab1e4a50ad47",
+        "28549da2e4fd66f3e8abf7343a94de06ce5540ecef3fd05db3d4d133b746fbf1"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/u5_plus",
+      "retainedRecords": 23,
+      "matchingExistingModels": [
+        {
+          "id": "1fc7b765bb9c68e651ac71fb",
+          "make": "BAIC",
+          "model": "U5 Plus"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "02e17b0e88d82e6f50357fa5bb7a53a8aa17ed7810d645feed4aebc0b6a13859",
+        "0b9545d70c4030bf64dd9f5fcb4128d00990db4b36c57e0b7fe148a744f04f89",
+        "0cb3265510f472dffaca185ee1e9e43365036f433ce227be0e287dd0c3033716"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/dbx",
+      "retainedRecords": 22,
+      "matchingExistingModels": [
+        {
+          "id": "41c41db2719c2d3b75470cd9",
+          "make": "Aston Martin",
+          "model": "Dbx"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "028d1d66a79dd0afa925bf11cada962bbc13edef083d8a4968cb34b581a97d5d",
+        "1e63d392bbee88192316abcc6b285545b41246f1a67e3725a592136c672a3e10",
+        "47c9b8b4d15f6105a55593d08bd4770c236127b8f132ff8acf0228a844c5c92a"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_bj80",
+      "retainedRecords": 22,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "09a5a31265bbdc6b05e8e7ed4396b70f9d270ae89edbc0e195c986af3dcd5c54",
+        "0e599fddd003594f6d05e13620876238ad64800795a6878efd69896bb383c8ea",
+        "138d2ebd3fd276327191f27649190563809e1413463967048c40d816cbd8b78b"
+      ]
+    },
+    {
+      "sourceModelGroup": "abarth/695",
+      "retainedRecords": 21,
+      "matchingExistingModels": [
+        {
+          "id": "0d4ee508e91027c53c0860f0",
+          "make": "Abarth",
+          "model": "695"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "081e63ce577b8fe1411b2641db59fc186e06edfba82d1165fa20dc9da0a04e3a",
+        "1239c3531d3feec31dc658e9b6cf3f9b75122941cd370714b298f4f205cc888d",
+        "1734fde003907ef4426cff575661ea8c543ffc8c5a1886df2c95090ec031b6b8"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq5",
+      "retainedRecords": 20,
+      "matchingExistingModels": [
+        {
+          "id": "bb7955e61182b2abc1148401",
+          "make": "Audi",
+          "model": "SQ5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "17f8502754574d91bea7ed7e05011c13cd00c19136f0b52399159117ff5f05f4",
+        "1f126d2c9898b16e6e7cd82b44ace5fe4bd5fc535b4dbebc77b1daaaf76fe43e",
+        "2b467385c5767f5895d7799d69af41128d86d013cc67e53c79138f1d2d6d4b9d"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/eu5",
+      "retainedRecords": 20,
+      "matchingExistingModels": [
+        {
+          "id": "3a288716204dcaa08a0da6a0",
+          "make": "BAIC",
+          "model": "EU5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "02fa23bfdc254b981ef2fb8792a1c7ca9ff07eb5756c751b8e9a439aeaf5177a",
+        "05bf65ab151883316302ebbe978194addd4a8b5c1fae496ad5db52d70d535646",
+        "2425fd3ec77e015f3a446963aa3f33789da43d7c82bbf273743c415645ba0b92"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/360",
+      "retainedRecords": 20,
+      "matchingExistingModels": [
+        {
+          "id": "9e245421f51d415c6e944b8e",
+          "make": "Baojun",
+          "model": "360"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0ea635936b2033c499f31b051045f27dce7360d2c13ed798e8b07266e47539e0",
+        "181e5a6758eff76fe82b757b52ca7a95e5447c4c744754e912e5e2c055cb233f",
+        "1f4cab859211605d0c1fc90ebd68587c9d23fb616760815df00688faa80faa55"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/rc-5",
+      "retainedRecords": 20,
+      "matchingExistingModels": [
+        {
+          "id": "9ea2b351f9f803f555a47fdf",
+          "make": "Baojun",
+          "model": "RC-5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "09fcf3ebe7c5874148ed27e55c915da79cc4a8324b0d5ab723860c6147f23cd9",
+        "22825dfdcba4dea9fbee30c710182eb6a496ba2c95b8442e6f7c9c919d790241",
+        "2815267ab93af54ced45be13d3d3fbed23f66122ae574553252f39564b8369ce"
+      ]
+    },
+    {
+      "sourceModelGroup": "aito/m5",
+      "retainedRecords": 19,
+      "matchingExistingModels": [
+        {
+          "id": "cfb5857e13b7258b88b369f4",
+          "make": "AITO",
+          "model": "M5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "074e81d0a9aac2764f522df1c27787713f5065661d4a0cdffe963fc037953d77",
+        "08c6eceb46bde33316113c3fb70ed8f67a2410a7dd3c878e6156c36ab4075103",
+        "0d49f59a603998dfc53ef9e0334cb75f92e5acd8f046af65bdc9bdc772e4bb72"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/mi-to",
+      "retainedRecords": 19,
+      "matchingExistingModels": [
+        {
+          "id": "81a4b290257d227a5fd86ee6",
+          "make": "Alfa Romeo",
+          "model": "Mito"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "01b0cb4e986d7b7a45fe7508618d4d45b1355ec6718ab11f4e0bc14f8c6dadb3",
+        "0905abbb676b308bd34fb07d517783f51d4c96748ac32d0095fd6e416b85570d",
+        "12f61630fba9b48fa3e81af59f4752f40db60ec7bae2ebc66eb8141a14042d11"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a6_e-tron",
+      "retainedRecords": 19,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0d6a55f4effe6dfcd7341c42215145d348b8eb05bb13e683121b689b4d0ae113",
+        "119024cceefc013f197b7129a4e2c56a5779b287aa1387ae6ce07a24a49e87df",
+        "2bd36adda383e52272f88cdf84b01e8b9104a7df5b4c8e3dc489ef393717191e"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_x7",
+      "retainedRecords": 19,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "03868541596d699b1feb8cdd2aafe909d4f848edd727aae758780777dd199c34",
+        "03db1934e7baf3ba8653bc3fa6b83fc5477edcdb20ecaa77b26f943e8a579018",
+        "19cbc02e46ae44741f80187c2ecfb3604b012d7155abbf069edde5444276174d"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/alpha-s5",
+      "retainedRecords": 18,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0e448ca665b57ff6a5e9c8c7dd25b01693968e11a4b81b108a97d6019edd27de",
+        "1d737afeb49792d54d11ca72b2e0e12a3102bdd363421fe5ecd4f9bd82193e24",
+        "1e5cf6dda94ed9d0c96dfe10bf0b6b49d4c396ed96f07d1b62fc66ecdb59c0db"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/rm-5",
+      "retainedRecords": 18,
+      "matchingExistingModels": [
+        {
+          "id": "1881761a502e040695ddca2a",
+          "make": "Baojun",
+          "model": "RM-5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "02f93f0315fca42ed2f7ca00d681bbb659e48e576d51b6eee1b03282f4f5884a",
+        "1032bf5ada1744aa3516a91e1a483f3d4dc7540610120cccf425621b213788e2",
+        "140591541b67bd9810598bbb10b4a3c1359cc804ba448c7ff9a9a5030e42be4b"
+      ]
+    },
+    {
+      "sourceModelGroup": "aito/m7",
+      "retainedRecords": 17,
+      "matchingExistingModels": [
+        {
+          "id": "b3f19fa0f1975e57410dd272",
+          "make": "AITO",
+          "model": "M7"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0bce16b6a81199986dbedb05bd98be1294596fb81b3d08a912ce2df0bdb91f06",
+        "11d53d179b1e5f94004e6e563178d51ae6ae561c8e43c2181a82b890705bf64b",
+        "1a51fa184a55b43c1b0e8bf7fa596a9aa14feb001cfef9d93c2ad6af126ed475"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/tt_rs",
+      "retainedRecords": 17,
+      "matchingExistingModels": [
+        {
+          "id": "5705250fdbff0f1e2e3cac85",
+          "make": "Audi",
+          "model": "TT RS"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "06767564e6bce2ff727d5c280f830136e07423c4c3f45fe1e5a82551eb6540bf",
+        "1dee7224e23c86761d0eb2f86294b5f27b5d4ff7585307712ecc965664bb333f",
+        "20f1fa3bc11ebe4ecd4061876f0e50929905f7c06752e2b85a55bb56b1a427e9"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_x3",
+      "retainedRecords": 17,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "18b481dfa5838e40adab72670d497e460a4989145b8692d6bfccd660d1504e79",
+        "18f9aec46b475e8f73f94e50244c62e6242b0baacf0281f1f04f73a006dee354",
+        "25da85b956d76e2f77ebff31465b3a4cc729cdf94ecd153be9419791f0b1a0a6"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/senova_e_series",
+      "retainedRecords": 17,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0da964797bf967f6bf02425b25fc4db92bd5e2117df07272b4f3b3cd17b18e57",
+        "2e2b16144a91855b658249666d91bc53169f9c476c16b52113792404420369d8",
+        "31e850260538253cbb36e5751511f94cfb0c9c707d5e4cdee513046ea0674bb9"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/x35",
+      "retainedRecords": 17,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0184f082dfbe6235f601a93c81912bf752106eeb6a33175aa6e86472ab484c4c",
+        "02e173adb435a1db50b87041c794897f13083add39c9f618ae9f0db8693da11a",
+        "0c098df03c32be8775cd195083b73ef608d806822833098bfc6bb15ede6c8d7d"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/rs-5",
+      "retainedRecords": 17,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "00f90cf9f94e074d96917cc05d5324bf586e3b2b4042eaf1e966eed0d061b6e9",
+        "0c4b90470dd46520d0c70bd9118cb8529052a35bc46236c047805003dce53658",
+        "26ce40336a8b9864b8d9d88e64c093952091c1fe5805ec2c79fd4e34fd57a628"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/ilx",
+      "retainedRecords": 16,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "03f54223d03a4f98e1a0a2d42d42ba9446289bea7206038fd800a9b1c9f2f7d5",
+        "0499ed712b87f7460f58d08e58f30f8e3c94009db836a004d0bc24f5ac5426bf",
+        "1225298c00c0b4861032cdbbb04bfa6837e7e48db2edda68b53ddefe74236e9c"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/tonale",
+      "retainedRecords": 16,
+      "matchingExistingModels": [
+        {
+          "id": "cff3b237a2a26a9e00708f89",
+          "make": "Alfa Romeo",
+          "model": "Tonale"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "4d252b1911d514011cf8e63477012a6646a1b37c7b82751137dda3aaa4454cc5",
+        "56d8c1b05db0b798a027ea86ad157c2ce8571784b033f4e0d6d8dd4e92d3aada",
+        "5fd9ec93e84a954cda77d08b9a28d7e132a4d32ba17aee5b899109155708e785"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/alpha-t5",
+      "retainedRecords": 16,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "05870ae0fa7b57b6a1cb509f9b0efe6d0e114d5dd7c03766ce971f4226220980",
+        "061bbf46c7b7011c1b4cae82630a41b675ce782672beb99df2dffea7f7040198",
+        "11536bfe50894e8c25ea1a82cd39746f139b249af623a56ab8716a1f6dc2b829"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/rs5",
+      "retainedRecords": 16,
+      "matchingExistingModels": [
+        {
+          "id": "798e68e31cb46462096f309d",
+          "make": "Audi",
+          "model": "RS5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "077088a3df5fd093448fe1aa7a7c5c7862732ac6eeb01b243399ccf906b97b02",
+        "240ae673631207209cc3c24a0239c88cf0d416b94438319427314b18439a2f35",
+        "244b97eb7691418f529e031757da367a455c1553cd2c07ef31deb3470f61e4ae"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/e-tron",
+      "retainedRecords": 15,
+      "matchingExistingModels": [
+        {
+          "id": "4145ce56203cd216cf1de2e6",
+          "make": "Audi",
+          "model": "e-tron"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "796b40f854f6a5ed3d6d41492dff657393ffc5f572eedb1da860aafc1f073902",
+        "8879118f8a9b7981423e7004413d5b66d9e0e1b99c690b889a42e1dd25486dd0",
+        "8b8e1af9311ea9375f53537cbc468677a0b95281747f2e2b5448e31557fe6ed2"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_bj30",
+      "retainedRecords": 15,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "059da5d386ef8d1943ddaf389ab0e163f151dfcb822f86a95afd3e7bffbd7d93",
+        "06d1993fba38b0694bff5ed20d4af5c67b5e1f967958b0b5f32920685a47e598",
+        "154cf74f7976e14b3659bfa3d90a091ce5d5923e07c8c9c04a945c316f6177c2"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_eu5_plus",
+      "retainedRecords": 15,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0ca277b2d50147746186b6cadb20e23c9bb353b1d169d6b10fbd5e6cc0b21cc6",
+        "1b4fa048564c51717c6f8f961f4786662f757fb086a34681f60711c07a4f4b20",
+        "313a0dc8c2a5f41185dc568a1afb6507242ab6419cd407923cd1cf937e5c5cc4"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/rs-3",
+      "retainedRecords": 15,
+      "matchingExistingModels": [
+        {
+          "id": "a17ca79b7eb3632ca5084cea",
+          "make": "Baojun",
+          "model": "RS-3"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1436e639b993f8576d6780d81227539e8007e8328588b65981a4f0205e13d71f",
+        "34ac535dc3620db932866b0f52e4415e92983c14be9eac3058396065dd77224c",
+        "3aebeed6901deb06d63bc40c8c5deb217ffda311beda56481ae84c040d3c0177"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/stelvio",
+      "retainedRecords": 14,
+      "matchingExistingModels": [
+        {
+          "id": "0d734c400f4417df7f272d30",
+          "make": "Alfa Romeo",
+          "model": "Stelvio"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1c9e7129ee7e33eb8bb38b3ad81d3d2dd9b56dacc9d8b1640ff99fdcf8e194b8",
+        "48115afa48927047ff857ae4aa7adb62dc3302b52b1b531a8f6b1e1f15583200",
+        "4b1768ea3ebfe9e22f9cce8eec390cb61144fa0cbc71aaf6b8585f3cbde701e4"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/b5",
+      "retainedRecords": 14,
+      "matchingExistingModels": [
+        {
+          "id": "b63721cda095c7d165fb37eb",
+          "make": "Alpina",
+          "model": "B5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "005a2034722ff96c3eddfca214b3a5e4778e858136e23a08fe4cdc269eac4cb7",
+        "0a3b559752f7ca12a4cbcc8664a08cf43660ad9f5c99b9c93fe03508a7875647",
+        "0ceee915850a9cd7f727a0edd9f952dc6f0c3bdf37175dd311a6ac0f2509d312"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/e-tron_sportback",
+      "retainedRecords": 14,
+      "matchingExistingModels": [
+        {
+          "id": "a211289420c064f17276c9d3",
+          "make": "Audi",
+          "model": "etron Sportback"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0479e89fa684d505a0fc8501be25ad33e3c712e93394b8866585ecd5d8aa8da3",
+        "0585a392bdb63970a135545f4f09b882c9d576b6971b0c0fdc0a478efde589b4",
+        "1a30b85c5eb9dcad71f5853f70b99dcfff04e65e416ec51c0224ff0ef2df1512"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q4_e-tron",
+      "retainedRecords": 14,
+      "matchingExistingModels": [
+        {
+          "id": "ff2d0a1e18c4c0d18249de20",
+          "make": "Audi",
+          "model": "Q4 e-tron"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0b1bd4c647993bc4c296140cea3891ea363967afa99f4e69451bab4d8bd172b3",
+        "113b44db2bb1d9c391d408ec32ef4c4a47532c3f4881dcb4792c82e48fb24a11",
+        "23478d5b54065e8b82f27609f8085175914aa5ca6d40a90a1f9308b923ac1cec"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/rs3",
+      "retainedRecords": 14,
+      "matchingExistingModels": [
+        {
+          "id": "0e241548c0f4a35af398a87c",
+          "make": "Audi",
+          "model": "RS3"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "10778d2aa05d65a2eeb573f5e9cb214766fdc6dca3d7182625d084360da28654",
+        "10df9448542fb22c15f55294d9d99b52657a98d9f7862a0e3ce4cff04115dcb7",
+        "18e5285e5a023c87e537ec657c011675adf7ec5c4d4112deb5fd846c26ba0c14"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/rs6",
+      "retainedRecords": 14,
+      "matchingExistingModels": [
+        {
+          "id": "3fda5fb3918a8e9f4a79dc39",
+          "make": "Audi",
+          "model": "RS6"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "185cc0dd791a25296863ad622c3e08c798d0a5f648c57bd2c25ad31335aecefe",
+        "1d30aa2a42a59cb87abf847a43236054819e4c5c5f8bbfcb934941be3df7e725",
+        "3d50e1c3323af233d929422115e96b5d19efb96107fa68bdae03b735127505fd"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/s8",
+      "retainedRecords": 14,
+      "matchingExistingModels": [
+        {
+          "id": "8958d8518b5d9ae8e44f1a6d",
+          "make": "Audi",
+          "model": "S8"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "244f0ec3f9bc9cc244f66d96f97979f5caefdae622c6f79949a6bff23f791730",
+        "32a534167b13f954e359b49f6830c3b1b6ac0500a8f6f8715748f12337c3a8a7",
+        "3eaf4def1a0ae3b460fb871b16d0dbbf676592e1eae6ef6c1b994801e6cf5950"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/bj40_plus",
+      "retainedRecords": 14,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "15428cde4e0c23fecc86fdb782dc0c045211bd46392566e4036f5042874b16dd",
+        "308b08a103dd4b00f2dcafe6fc93e2da391ed7f4d85502736b5802c4e952d7d3",
+        "532deea421cac648aa7367472251a57922328bad950174ae7af6fe6cc18d5d3c"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/senova_x55",
+      "retainedRecords": 14,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "1bd153a6f8760e15e1392e7799d11abf14c5bf896b5e5062717990eefb26a8e4",
+        "4282e53331263764eaf89a8c08cd4382e101407938db2b63063b499a19824e8a",
+        "54d7a8be92d1b069334ba4485016321bf2bcaac3c065fb7396482189643e0457"
+      ]
+    },
+    {
+      "sourceModelGroup": "baw/luba",
+      "retainedRecords": 14,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "1c35a6922d4eef80435e7169770087e21e9138004d455d5534eb4ea71779cc51",
+        "1f9d5ebc26b9948ebc022871703b8898abb3cf96115a2cc420cebc65b61f17c4",
+        "3282cb178fd6a3adad404e620babfb06820a0dbe119507a7e6777dabd2139728"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/d3",
+      "retainedRecords": 13,
+      "matchingExistingModels": [
+        {
+          "id": "5dfcc65f1b57038636b1cce6",
+          "make": "Alpina",
+          "model": "D3"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0c7281bd554e5ff452e35b10d4f010c89719c7d464692c7c920d5ccd06ad7840",
+        "11db835a3387207420d0360e6a6996ecf9ccc0e73e82051ddd63c4440ac139eb",
+        "12cd0d616850278da4510e88d25e5e708f1593cde3a73425e4ad2eab57e1a65c"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a2",
+      "retainedRecords": 13,
+      "matchingExistingModels": [
+        {
+          "id": "34659e9a4371b24017961742",
+          "make": "Audi",
+          "model": "A2"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0a0a1485a10ef55c03df617076e58157bef495adb6ce2645c8b79d221ceb4495",
+        "1475b6b91fa50c286ffc4bcf5891ba712eade22e7edec1690f3944523c63366b",
+        "2d4b9fad409b8f5536520480aa576446ce591fd1e691d210797d6933b9b18457"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/senova_zhixing",
+      "retainedRecords": 13,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0f163c5b181ed07d1bcaf721d042a335367f5a03dac9efcfbdf17521815b4c5b",
+        "13f5a1fb423eb56c1efa602e9553eb591ca960057d38593bfb72457f9678a9fd",
+        "3daf24569e7ccd8c483037e8ff94dc7f87a0153347eca72ccf9b24007063e212"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/db9",
+      "retainedRecords": 12,
+      "matchingExistingModels": [
+        {
+          "id": "d9beb45b880f70fa01286ee4",
+          "make": "Aston Martin",
+          "model": "DB9"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "08b7f539b36c7f5854e7877a1f3b24faee2c1b03da28a718cb5bc1aeebb2c24e",
+        "6bfc64d46cef0fe1824f57162e025c81b9a3f295ba50e9cb89c4ece4abd2ec9a",
+        "73b0e39ab51d5f9fe6eefac6f5eb64d98c238c59b3a012216a68dc13a2bd281d"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/a5l",
+      "retainedRecords": 12,
+      "matchingExistingModels": [
+        {
+          "id": "e024a48871eadd5a09dc133b",
+          "make": "Audi",
+          "model": "A5L"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1c8b7b7c441d6dad49cdb47125e29ecccada1d0257fa935a31f008358b3b5493",
+        "20fba21c383855582bb7ac3221b2ab99047bee19c76d34fc527d247998f9721d",
+        "40cf7c2ce2d1669b41c83ffc350e386f07368dc42086e545ea94ebfcce22b5bf"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q4_sportback_e-tron",
+      "retainedRecords": 12,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "19f3bd27dcc76620d105eba09b4074fd5076faecf1d89b9df0fa894ce19066ed",
+        "1de6afb49707954e9ab876bdfe4af13cb701ac96d3757dead680216db388595f",
+        "3b061b6b47c8b608f006f9a943ee822807bb5cede20528a5139f7936d3dbc342"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q6_e-tron",
+      "retainedRecords": 12,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "09d279b25144b8a7a06b4a76f664a746faa55148aa3a8d92123b13c59d54c604",
+        "0b52b5bc706cc59d194497eca9da66ec220f6e4e4c302aee875a541d775eeb94",
+        "4b824cef198a767cb2108b901cc8a60ec24797f31524fd6b39b7d5bad6bb8993"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/s7",
+      "retainedRecords": 12,
+      "matchingExistingModels": [
+        {
+          "id": "a2c9c65c16095dc014c0cc14",
+          "make": "Audi",
+          "model": "S7"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0b3ff38a78a59f0a0529a31217a526a40e7c29691e9c0537be7e6138070858f2",
+        "0cf6d9c42246d33a31c06d30e83ff710de523ee51aafaf777ef9b0ea27121d86",
+        "224243e548c455f415af8e80bf7ba44c21076475fcc1e35e810fbf3d43ebb061"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/u5",
+      "retainedRecords": 12,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "1bd0e88f0ca8109909076b2da0bfac4a24222968690c265f20ca9eaca090b845",
+        "31cdfd699a9cf71273c3a0cacbb1012a4aa92c717d7ff7e063825b80def7eed1",
+        "4d27e9530bb8e711a64d8cd84c28bb56c5f74b23a8d01a17236a618f461a07fe"
+      ]
+    },
+    {
+      "sourceModelGroup": "abarth/punto",
+      "retainedRecords": 11,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0681dd133ca76dfe6e2ae0887686fb85bd2e79c04380441f26b2a97ed7c99bed",
+        "34ad133246aabba08738fd30ea8ee0b70e859800b062cb8d6b6702f5f88e4508",
+        "408c9c5e0274fa562b3c85dfe4f210c8b4cf3acc96608d2b9645f63e66f2b9e0"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/rl",
+      "retainedRecords": 11,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "2fb64e6e35ce675ad20764050d62253381057c84f40686ac37f4294a8448f5b4",
+        "574c1e4350a4bcc526980f339d547fb6304f34aba753d319d5ece0c536ac5fe0",
+        "67875ea329b9775d8785c2b85f2519483b38ffaf7da027678da142a34d7578ab"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/rlx",
+      "retainedRecords": 11,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "04f97d10741add6c0d1daef3b77f76945c529d43bbe89f09b739d7a8531cc80f",
+        "0adede1a293877250ccbda3c07e781ce1bbc84976bc7aad699cc162586f96ecc",
+        "25af79572ff5b620930efdc70ccdad39c65031fbd527b9dc1ed3507cc132d2e6"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/tsx",
+      "retainedRecords": 11,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "18d2f3b873b2cd3b571b5e11e8d44912cbf06e6afc8e8369a264a26809179342",
+        "2c89c6d3776848f85ab29a7e42a75c7c38b24cd53d5957232a86b884fa258a2c",
+        "2d1cae2734736d74e803aad3b17838b3878dafaabcd06d7b0b2c4b4792025b14"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/kaola",
+      "retainedRecords": 11,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "05462c74355c72ebd50aff2a13a41681006c5ed2d49e4aba6fd257086e48e91a",
+        "3a9dfa772d339442627e541b83a1b3e8d0a824133aa9040e2cd987b0b7258092",
+        "3e4e37151dd851058fff39196b88a2d05111200639326434b87bb34b0f0e77c2"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q8_e-tron",
+      "retainedRecords": 11,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "1715f39eca146333fd343ded61e020347fe87eadc1075f630ce0e1e02e7411a5",
+        "38619e826ba2cf24f36de1924ad29b478ef86bdf7efc0b892f1a80e7eb93bb38",
+        "4aa61244e66d2b5937281a5ecb84efe50a84e6ea089c0b90e687347ac0ebb4d0"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/rs7",
+      "retainedRecords": 11,
+      "matchingExistingModels": [
+        {
+          "id": "0d86bd5b076e30b7d32784c2",
+          "make": "Audi",
+          "model": "RS7"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1df9d485e25fd8899a9f8ee59884832d9df30b8e36faf182be85720d39a5c6f2",
+        "2d584c318d142509ca2b5cf0dac1d8d12616d3d896c4df7bc2504b36369f11b9",
+        "35ee2acb16d226543ca14e99e6b7f0dcc042bd665c1fdc8397837414c7a2f48f"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/yunhai",
+      "retainedRecords": 11,
+      "matchingExistingModels": [
+        {
+          "id": "ed74ac9a21dfda62fa51f374",
+          "make": "Baojun",
+          "model": "Yunhai"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0ecb869d7670e52b8c11fcac33680f3ed5bd7dda602c8337476141c353b946bf",
+        "3d2259c9e08e10781db7514ca9a7cf7d5b48c278dae3c5a0f368f3ea869248aa",
+        "547f3aced7a1bfc05296f11b9cd0a74a2a622fde5518655bdd4122a0e938f4cf"
+      ]
+    },
+    {
+      "sourceModelGroup": "baw/007",
+      "retainedRecords": 11,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "1698777006bd8f934c476be67f593249af1a799a72532ee2b1001f88cd24fcc2",
+        "4d3b60cb046dcd03856a0af0359e8094e52e4e022590534a445529f88267a07c",
+        "5fe10a729e66a164ce7544d7cd99c2cff43ad22ea26b448b4789c8941a9647c9"
+      ]
+    },
+    {
+      "sourceModelGroup": "abarth/500",
+      "retainedRecords": 10,
+      "matchingExistingModels": [
+        {
+          "id": "a1110cc532749b4397f6b684",
+          "make": "Abarth",
+          "model": "500"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1151df0488ed92dacfeb9da162730f7add6124351e44c1b58f4cb1522713fc4e",
+        "4327375532563a290d922b3192cad6846594f0b4ab3e16560756938b813afcac",
+        "545ef7f420ca092a6a021e6787bea84d632660cb86300d5b5d91275af2fb1316"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/integra",
+      "retainedRecords": 10,
+      "matchingExistingModels": [
+        {
+          "id": "704cf1bf161e2d9733e2f1e0",
+          "make": "Acura",
+          "model": "Integra"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "01456306d7169a7a468f139e430ef3f8e8ed818b0372d97306b0b7aae4835610",
+        "3449655c78e2adbaf39ec0d58d4cb21b7d4a7331d41235b86b09b4b86f504685",
+        "44bb0a07c7e6e9c7345fc1a5a694f38cad1e6437a7d5044ba79b79712a1d9f0b"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/junior",
+      "retainedRecords": 10,
+      "matchingExistingModels": [
+        {
+          "id": "76763ca9fc792df61980328c",
+          "make": "Alfa Romeo",
+          "model": "Junior"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0fb83d1f99ad7004910c216572679952e5d7af5cd1658b759738caee38f8ea6b",
+        "5a9e38ed1b34cbe8cea05b02efe3dfc215a6bec39c2b5a55bd8810bcef30170c",
+        "5aa063497c4ce70ca8166212866d03840d8209fdb9b8d3b9a915dd1f7cb86bfa"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q8_sportback_e-tron",
+      "retainedRecords": 10,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0f24bd0aee952241ccdb2fd1bde55852755f0bdab9ba0aafde9326c2ddbf49bc",
+        "14269966d0e8412912c293bde36857bd3a4ca28fe76c991f3b9c867a7c3be9c0",
+        "16ef851d4e6e47dc1ecc507587fe3c77e5ae47ade8816815435f7efc04e614c5"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/rs4",
+      "retainedRecords": 10,
+      "matchingExistingModels": [
+        {
+          "id": "30a682a0753c20db3adefddd",
+          "make": "Audi",
+          "model": "RS4"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "18b0b0e189315953db4b28ca9c43fc4ed541098f0306dfb47413ae2df843895b",
+        "230d6d02f9d635390f8029fad3c87c505d49a372a97a9a87dea940a73f986aef",
+        "37306c99fdd3bd4b1e79cd546e7bc54e55de9fa9484fda9e02324f60bf04a769"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_bj90",
+      "retainedRecords": 10,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "18d2b3079d27ccc9bc83376f83451f8e246d2b78f8e2721e013ef087d406f6a3",
+        "5296f393ab229b88565455ce4d2fbe70ee6160093ac31a2b0dd7551bfe386f70",
+        "6212aeb64a4a013f5d38cdf9669580a13bac5171b52f295a2a9b480d4bd25e66"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/zdx",
+      "retainedRecords": 9,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "2481c92a2902cdd1ddbf6eb31f116001b0a68b313ce177fae40ca5234cfb1a16",
+        "507644887ba717703e248ced6b46f0a1aebb83209fcf1b28aae1ab2d48f2b548",
+        "7580c44a34f6417258d4c625ebcb01fb82788020156b479df25dbc2849c319d5"
+      ]
+    },
+    {
+      "sourceModelGroup": "aito/m6",
+      "retainedRecords": 9,
+      "matchingExistingModels": [
+        {
+          "id": "a509545256f3729336fdfc6f",
+          "make": "AITO",
+          "model": "M6"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "12f020c33500dee4a293f55ebd0a84641c144ea15598806140da4bbe7fe44cba",
+        "285544f26750f43ee9e2b1d4f40f2454acc292aa078ce9d6fcc75f9b94186595",
+        "2933ab645287410692f8ef136fd2d721bd6ae4c0bc2282d9a8d0bc98582778dd"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/alpha-t7",
+      "retainedRecords": 9,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0124d9ba4fa427c20e823c17e103ebf6fde557b423cb510e0d15293bea85bc42",
+        "11b86bcaa3ea6f8bb363c7a7c85c2e531672e49b14edc3079d9ee663f61371f2",
+        "2964d0150263ea5bf028b82f3f441c2c1578808cf9c85300c6c42004e9f9b5a0"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/db11",
+      "retainedRecords": 9,
+      "matchingExistingModels": [
+        {
+          "id": "eff6651568e364a8a5a40e97",
+          "make": "Aston Martin",
+          "model": "DB11"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0a6764d35fcf7e2f32741533f2b37ee13c9b8a345cdf3142f65ac59ea7ae38b8",
+        "22a5c4d88d25936a5a4fbbfc81329f6bbdf188371b81ed093214542d2b9ef2a2",
+        "357d1fc6addc4b4d46aef03539c2e2a8b5b0313c69a653b12b74b24350cd24b6"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/s6_e-tron",
+      "retainedRecords": 9,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "22780a5dd513a38ea408ae8be4c71e061eedf9ef1cab09fe6b892ba767b9ee72",
+        "3617933c2863316d58eb8ff243a41e687b48f23386abd74dad5462cc128bf7ed",
+        "69b8d86593942383a664012722536f6b4903b43194391010ad7a9c12ea284290"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_bj60",
+      "retainedRecords": 9,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "34d57249a3ad961d43bd0c05335ff12840fce9392100f73c32e97e3d0d9db4ea",
+        "460378ca8744f90d46bbf2086f002881d18fbc7491effc304018d28ded960393",
+        "6c54bbfe15f1c2bdfe3d59f34070fcf0842f388089f6362f0c02605c2702ef0c"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_x5",
+      "retainedRecords": 9,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "1190de2c720facdbad649265981c25050163c4ef7488754125da212b067fbd35",
+        "19c1a76ee2120e74e2888c84f136c6e7eb884698639d9890c1be8fc1280826ac",
+        "2b84ce1a569bcda346ccaa584142599d8951b521b5334242809ba236863c79d7"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/147",
+      "retainedRecords": 8,
+      "matchingExistingModels": [
+        {
+          "id": "163d6c7582ac3791112988be",
+          "make": "Alfa Romeo",
+          "model": "147"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "2af3c627dc03ed0794333797b52921d7f5a8903e10e08af23f421face3c78597",
+        "3f1f5bfae60e04dfe998ac683a7f6c675f89b4815cb9a3b52546dccf93238237",
+        "4b79c538ff3bd55a32a43fa14e20c0d4571894b8823cdc2b4390fe9ea1396a99"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/beta_s3",
+      "retainedRecords": 8,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "54d20f0b584f93f71e3169f50bf44ca46af21ae0b9832c79e72558c9fa5ec17c",
+        "644e8618440ecad99204d1a48475510ab29e622731a73df74c14e6937b43444b",
+        "8e408b6fbaa01ddfe0e7ef938085fcf2cfd7b44724a14cf1db0b5386709438e9"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/e-tron_gt",
+      "retainedRecords": 8,
+      "matchingExistingModels": [
+        {
+          "id": "704f9fc759c3badc3822f67b",
+          "make": "Audi",
+          "model": "e-tron GT"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0f7ec969786e550800a68be0ef8964b51d2e97453cf3fa25392798d1e4665c13",
+        "1b8ef42abcd60ed1c8304acad92b52bda44b75c8c7590d57e9bf18f7b8173214",
+        "239f90c8390493dcb2bcfb3497f83359d221fc39809def5dd89137245fb28cbe"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq5_sportback",
+      "retainedRecords": 8,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "4916c6f84fd2033424fe7e1e5488eb7534598ba4f7c2491b2f1f8614c81f4ec7",
+        "6b3b9bb529647bf595a3bf090f2922d3edc00d2bca9328a79915c25ecfa2491d",
+        "a267228e3a68862a3c92aabe5c9b2bd7984348d93b16449531773fb7245541dc"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq7",
+      "retainedRecords": 8,
+      "matchingExistingModels": [
+        {
+          "id": "80fec7687a2f5fbb99a8ec54",
+          "make": "Audi",
+          "model": "SQ7"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "5722b758d354f00e836139def4398ca7a3c3c470eb33b9636c31e8c6163686c3",
+        "5f736fea691bae40c409d72ea9b1f01edfd42ae338c0eef0b6d7472f8ba61f62",
+        "94cc3b0b688daca9aaa5198dc955dc6a40d6b7aa5ab4d1dc3020aed446b0a97b"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/ruixiang_x5",
+      "retainedRecords": 8,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "00a7cc189dc23f98e629e560a054b506851e71e5897da1c3fe937e4f5451b4a2",
+        "111d67b714e62b5ced01b1932e7bdcb360d1acb44abdd881eca8409f5e5d23b1",
+        "6798a3794de590eb936ae1946d20f3301df68153c970bbebb71c4e8aa9119ce9"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/x55",
+      "retainedRecords": 8,
+      "matchingExistingModels": [
+        {
+          "id": "2ebbf87f73eed42f444d33f6",
+          "make": "BAIC",
+          "model": "X55"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "051100f953c2741186fec8177f53b0686c8c70fa6fbfe28c1b2c6cc9ec7b999f",
+        "3cea3d8177da06e370aefa1c7c7c63f8de5443aaaeeff0bbb58e5f98083afd63",
+        "a3ad8ee887a43b87040318ea7d727cae49f092fd5077dedcaf5cd79e93275171"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/e100",
+      "retainedRecords": 8,
+      "matchingExistingModels": [
+        {
+          "id": "dd35f30f35ae734f15f05eb5",
+          "make": "Baojun",
+          "model": "E100"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1660fb8a466569eb31d4ff965ab010c217561bbf3c305e51d17f4bea671b2acd",
+        "2078668f45ab3871331a7708ef077190f63b8164284d408c22470e3d1d03ff58",
+        "3876e14445fd75ac36c33f44693dd11298d5841b50bc8f5bb9515661426b5118"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/xiangjing",
+      "retainedRecords": 8,
+      "matchingExistingModels": [
+        {
+          "id": "7b0403e5c1176d57d6823d1f",
+          "make": "Baojun",
+          "model": "Xiangjing"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "00096ffbbdb7b32366a90fc23c550723d95631d102122b61dc711a71185d124a",
+        "1c6987b68276a71e1e29c90a8147d48ec72962260f880bc201dd8ade28660894",
+        "40fe241d489dd0303f7276eaf0ce10b46e47827a63dc856ed339793b7d007131"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/yep_plus",
+      "retainedRecords": 8,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "31c7f3deac1042abcfab112b0b1e19f631023565dbeb56b209f14390d8dbdd82",
+        "43e3057963762648224f62acc517e52679ad8e9a8647b2980e8c1daf81035a88",
+        "55fde0cd542bc7ea80d0a112e12a40a3283a8d3366e43f30c3ec51b27aa6af67"
+      ]
+    },
+    {
+      "sourceModelGroup": "aito/m8",
+      "retainedRecords": 7,
+      "matchingExistingModels": [
+        {
+          "id": "b0972339b8a7f3fc37bf8d6b",
+          "make": "AITO",
+          "model": "M8"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "385c1dc93de25742854303aaa1a818edff2c75210441d42ec3bdaba790a7cb82",
+        "5e740c0422891f9c6478e307e2b267e0d0c1843e5bedf5b1205c3eaea0c09f09",
+        "968ec09bf5914bbaa70dbdd666d8322a7de5a8ca13f95c6dcb584d2d49868da5"
+      ]
+    },
+    {
+      "sourceModelGroup": "aito/m9",
+      "retainedRecords": 7,
+      "matchingExistingModels": [
+        {
+          "id": "06aa61c491bf051c20b852b8",
+          "make": "AITO",
+          "model": "M9"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "14b1895e5dc1593bbe0b68bd79b4232cec8366be9e2b92fd8364fea0c3ae5f6e",
+        "544098bcd56f0ac9b70abe262ecae8d203ce969db204eda823a984bd7b76395e",
+        "55d9db0c85cd45fd5045465dfc60793810533b8de8fb30ba25ea63f56bb5d91c"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/brera",
+      "retainedRecords": 7,
+      "matchingExistingModels": [
+        {
+          "id": "5e281736d72934af9f681930",
+          "make": "Alfa Romeo",
+          "model": "Brera"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1e22183e9d57f222136948025059dc69ab865632156822015ef825c6a9c8c0ce",
+        "5d74845e75bf751c1b5ed10fc9aea4ead8f9afe6b83e2920d5104c2a3e1f02e3",
+        "6e97346c44f06128a796ce955efad7e9d8b94df3a729c2a38c4daf0fb4aaa10a"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/spider",
+      "retainedRecords": 7,
+      "matchingExistingModels": [
+        {
+          "id": "d9d48f8457c33f7e466d6c6e",
+          "make": "Alfa Romeo",
+          "model": "Spider"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "4c5d51ea5c1ae4bc77115557c1dddc4db682ccf3118191a24c4a0818b2c1f898",
+        "7408d96c816918146e1cab79f45e6bee19b4d1ec5cee662b29e14a008c2fad8a",
+        "7516f32d1585b285e46fb6822994d115fb242538b5f1989404b5e274098349da"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/beta_t1",
+      "retainedRecords": 7,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "3e92e797bb6791fdd36382530e4b6c92157b0846b3fe274abb0ebd935a01901e",
+        "5e2448a7e502781a92e74f0b1061fb39cd7fdb3af8ab1d9437b03c76e50cf212",
+        "615cdb3c6db3e28660a55bb4c942f945d89fd63db6699f7fa1f31d71bf914fd7"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/lite",
+      "retainedRecords": 7,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "119635d2957d9aa3a1f17eb42d5c5553e7deafe23139977390c821ad6b8a20cf",
+        "2bf76bbebecec85de8a86dd23eb5d760617b515f6fcf33f7d67a0a3c826a013c",
+        "5df21f9d572d4693abccde7320fe7ea596f898adade1fd21b0b10d957e82fee6"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/vanquish",
+      "retainedRecords": 7,
+      "matchingExistingModels": [
+        {
+          "id": "6311069a3ae15cc6b5c54e8a",
+          "make": "Aston Martin",
+          "model": "Vanquish"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "08adcb3f61f4241e8297824627aea638888531f11390adf8cfd6be7a709a3586",
+        "41c394631c18102c26b7fce350fd9e479108d1a69deb19d34decf2b6de79f22b",
+        "64027f4585f7c076f7a90410db31dde76324be2588c731ae0d35373b451c299b"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq8",
+      "retainedRecords": 7,
+      "matchingExistingModels": [
+        {
+          "id": "da44b98335aaea528ea37100",
+          "make": "Audi",
+          "model": "SQ8"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "26cbf615ab035e8851eba1d7024aecdc479e66b5f2ec031526447478e5a53468",
+        "700d7ea0fed226017411de046ad6e9074db39e83f17e9dfc047c8dacec567575",
+        "8582fd69e4fdda4a942faa17471396d7ba343bf7237dca479991796b761e7f78"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/xingtan_5x",
+      "retainedRecords": 7,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0c1378581298006608f38b8debb646db5bec5225f57ffc19bb4eaa7c41a3746b",
+        "234131605ae36b26d149bcc0bf4c9d5b38dd9bbb86394f346c75cedadc06ce44",
+        "30236a1180b1f9b9527a02da563dbc07cf24f9719900fad90c63917e126ef724"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/yunduo",
+      "retainedRecords": 7,
+      "matchingExistingModels": [
+        {
+          "id": "49dc6ae249432ba1daa2044d",
+          "make": "Baojun",
+          "model": "Yunduo"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1c2f2671124ebf1f751f22ca239083fa642f15101ff34e9c95417e6db1d6221a",
+        "347f3b3e839b00ff9ef1bfe0f19274fb7c3a3831073328d0a004a52a0dad3ebf",
+        "8f10be402bd6e85e48d31237161b44ac19d0446f258edd2b57c7754283fc16f2"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/adx",
+      "retainedRecords": 6,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "153994e9b632bc9269f4f5afc48e74c60bf799588aa4c9494b3bb61750f40efa",
+        "226df062d8fc9228c3bc64a8821647f4344303e8c1a6b617f3623b611ffc9c88",
+        "25aafa3f39c1cc6fcc8f2e99fb8b3c76fe5b9b28d7415b5e561c1ba5c5055a73"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpine/a110",
+      "retainedRecords": 6,
+      "matchingExistingModels": [
+        {
+          "id": "cc5a28958f2b1bd3eac176d4",
+          "make": "Alpine",
+          "model": "A110"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0064d24f1911d37fd5b72fb025994cbc67cd605d7d164bb93e5e860fce15f839",
+        "3ea12bd42e4eeea76fc45e7cd7093a48bfa5fa0790dae921640c016def0d8a5e",
+        "4f522a021aa402104ae2832931340eb8468c6abc1171fd49b08224fb3b59c4aa"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/alpha_s6",
+      "retainedRecords": 6,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "143dcd452602c0008e1a929310e5f839a7938de9c22b74f466c900a9ab69117c",
+        "7059ae5a1b43578005a1316e81688b59660be70701dac6e665e2ff8095b2f4ab",
+        "9fecbf1d7c89bbd51509d65b8bde7fd6633a7a542e715a4967a2b8e5227015a7"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/alpha-t1",
+      "retainedRecords": 6,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "02af5182490134e6879b5a148a148967660d75180f1448284803476492ee00ba",
+        "30abd4c58b7cdadec1ceef21afb55c2622c2894d922ed56b5df2cc258abcf518",
+        "5b23e1a630fb9ef003f3d572a553d726297420e669f3ba4e80adfcb1b72f04ff"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/rapide",
+      "retainedRecords": 6,
+      "matchingExistingModels": [
+        {
+          "id": "62f2bf675810869f68e70d2e",
+          "make": "Aston Martin",
+          "model": "Rapide"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1b732d5ab54daad92ef0bb4abb508c2f33c924950e9c5916f827f9e4fbc00114",
+        "3523c431c74c449a5361040dc61c8c39ed8683abaf4bd2704e16511f5a8b681b",
+        "777611445c12adb46ab71c3cc9f73a8aaeac0d3c73016f53fff4bff2ad43051c"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/e5_sportback",
+      "retainedRecords": 6,
+      "matchingExistingModels": [
+        {
+          "id": "c8f651d1a032db6eb7ea881f",
+          "make": "Audi",
+          "model": "E5 Sportback"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0d9101cd61e2e89431cd2972c1a3047a9331c1fd3c1d09494391f33043dc06fb",
+        "2a35b96bd95c344d4522e74bb131e0a2260e150207556b52b887f5bb9318c01a",
+        "972d815c079f8dbeadbf0e5c1cb6798d205e1e6523c336a3dd1c3a96d5e19223"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq2",
+      "retainedRecords": 6,
+      "matchingExistingModels": [
+        {
+          "id": "054db847a6c3b74cf5678328",
+          "make": "Audi",
+          "model": "SQ2"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "23c35dd297f98742d587728f83e0a84519c827c9b4f879dfad5084bbdead7093",
+        "618f9afb6a5877f3bbc3197dea23bf0d4c2291d813354b4c70b3c8fe82618086",
+        "6cb75c9b444014c151e96e8d14c63214b2b7f51618085d017c93e9367c856e59"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_eu7",
+      "retainedRecords": 6,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "425ca7037eaa0477189a172d33fb88af5e7ee2aa4d629c88e87aba32277f9398",
+        "56bb088df1240f9c5348edc30794840b029024f0a3bf412044ba2ff65ea02154",
+        "df434e69ef8483aaa33c09d387d5a708eb0fa2c8b5e3cd54cfb2bcb4c001282c"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/beijing_rubics_cube",
+      "retainedRecords": 6,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "66897f3bd4bcfa7cef1bc6e08028eb72f3040989f627cd5e8bf9b70d669e7477",
+        "85de632714867ed457a8a35046588627bba85c32f1b2b2e827c6dc0e8863f14b",
+        "8ee2e6092ba96155c7195cb4e0893120e1f1e72d45df53fbb50dcd3a0913dde9"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/e200",
+      "retainedRecords": 6,
+      "matchingExistingModels": [
+        {
+          "id": "00db8a18c6b82b30900391f2",
+          "make": "Baojun",
+          "model": "E200"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "2ef1e4fab8537fca26eda4f0b38470c155b62e54c46101d5516b4ea7e04299ff",
+        "6054448ee98c58fed47ac4564e1aca7287b1b7f50bd71fd12cb10906efcdbaaa",
+        "85b13a6073c3e550c37a6d7e34bd81387f456bc90f5136f5de12ce6343045353"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/e300",
+      "retainedRecords": 6,
+      "matchingExistingModels": [
+        {
+          "id": "b7c44b14007e10c7ec22449d",
+          "make": "Baojun",
+          "model": "E300"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "4a1769d894a2b6368b6dd2cc3b7f6a159b907da75026c32bf5fbfe4e846b1c2a",
+        "6e46a43247a1997aae616e03eee413bf1e43541f64f10ed1d66a8c2034da0bc3",
+        "ad6c3fa892d33ae175cad5bfabb248fdd425469e742ef7b1c7ec4e664197dba9"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/rc-6",
+      "retainedRecords": 6,
+      "matchingExistingModels": [
+        {
+          "id": "370ddbc1fa683a6b1b72eb16",
+          "make": "Baojun",
+          "model": "RC-6"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "589732f819dbdb8482c154ac9fab5a73e1f3dc2cbb9a2ec939e2741e50d6bb86",
+        "9b06de138da2741263b8fbfa579b364cb2b036cfa44ecc75c096995e8cdcaaf0",
+        "a1272f3cbc76ee89225d299b13e158e18b317bfd1946a367b63bfd377840fe97"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/gt",
+      "retainedRecords": 5,
+      "matchingExistingModels": [
+        {
+          "id": "2e13acd5d3a01bf6b04a9747",
+          "make": "Alfa Romeo",
+          "model": "GT"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "428c6299af6d17070ec8974f3f694cf088a3358b6838fbf00b8c59bd19a46df1",
+        "768b855f7cacf2576fac9045a9dc9aee1a00ec111e4efccdae63ec32f2adefd8",
+        "c31e0295619787e3d637ba9e11d5333378f121ab71970da6e41d219aaced3a83"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/dbs",
+      "retainedRecords": 5,
+      "matchingExistingModels": [
+        {
+          "id": "a49dff8aecc0f27d5149f172",
+          "make": "Aston Martin",
+          "model": "Dbs"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0cee1432443d164341881689633773eba401b08ab9d7e89314ca861707e2b5ba",
+        "468b5a09cd709b894d6e20d07648d9a31f751a7e5e766d4268783fed6bde6ff2",
+        "4b7a506f750c2a28e85e378546cec4b0b03b9f27042dce6e394452af04828821"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/e7x",
+      "retainedRecords": 5,
+      "matchingExistingModels": [
+        {
+          "id": "9c7b334ccb13d94cb667d782",
+          "make": "Audi",
+          "model": "E7X"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0280c61377a4920794bd9f20ce8c25dfe92c57df536461fb929823b30362b3d5",
+        "251a1f2fa264a8bd058db15c0a9e7cc3137f58bfe0aa6129b9ae04f434341077",
+        "9adc472b315ebc68d7188fccf928ee7e3c07455d5e7ad0c67f5aefadd4670c6e"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/rs_e-tron_gt",
+      "retainedRecords": 5,
+      "matchingExistingModels": [
+        {
+          "id": "05f40e89d308a8455cef6511",
+          "make": "Audi",
+          "model": "RS E-Tron GT"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "063858b666ef572058bf5b815110be96acef5b7822dd3830d975ed74ec54d54a",
+        "7a1cc846ca64febb8a899ed7cd2af16eb009b1be95e02529883844ed02889ab6",
+        "c222530b88b624de481b308ffa01b166ee800f735707f98c283c7ba40e0edf61"
+      ]
+    },
+    {
+      "sourceModelGroup": "avatr/06t",
+      "retainedRecords": 5,
+      "matchingExistingModels": [
+        {
+          "id": "12ff7307c8f35037df5d937e",
+          "make": "Avatr",
+          "model": "06T"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "8692ff9c41ded3dd5464fc9ab85395cc402f7c9b243fd213e7243af1928ce280",
+        "9f1b5a59252aad49be858e5226daa1f95cf2387b24b7d696e6f6c2acaf9aac6e",
+        "acde9e3f5a6c51cb40f10ac097d471a67d3c6d30165d87955b9a3ada4e57d671"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/bj60_thunder",
+      "retainedRecords": 5,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0cf32944434fdd320dcbb5b686d0f1cf99609a9ffe67b763d589174119d13662",
+        "19db7a618c0a4c116fc029a293a674cb51ffaea98dad8960eefded6edc04ba64",
+        "3eacb3f96920ecb998f29382a1e9f593a4a5e74cdb5c270efbb806f6d114dbdd"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/ruixiang_x3",
+      "retainedRecords": 5,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "2655a7f507508acf675d6d1fe3d9fa2cea29620c295e41a07d396ea3a4cfb0dc",
+        "642d30ae7a48c3b835247e87c8481a96fea42e0fe21407572d9d9e9cf6143066",
+        "7dac472d45dd0c73068041d31f41cfab1a67be726eb77e412425897d3af83a3e"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/u7",
+      "retainedRecords": 5,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0aa0972f37fe6d958fbe2ff6c412ef1a68e5867c087493c18d0fbbd7df9f0ca0",
+        "aaa307de724c6fede8aa2eb3d411fda65722da0b59685be2cbd7ed2a3ef33b66",
+        "be571617e9c11b1dc6666df01c3c53af09be63827aa55dde15ed484360ab7859"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/x75",
+      "retainedRecords": 5,
+      "matchingExistingModels": [
+        {
+          "id": "c2dc5cbd5ad166e2323a7630",
+          "make": "BAIC",
+          "model": "X75"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "55b6c1c94cad72d259f67182a46c9ff60b85ebab747b43149ceca67e5c145b93",
+        "705367a18e164cc050227a97e5c9b8257590c34b5aabedd2751a9334eabaac0c",
+        "b15439194e94e2cd2308fe5c2f60fc3a05712fa45bf4f2f1a6f5aac36b444904"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/kiwi_ev",
+      "retainedRecords": 5,
+      "matchingExistingModels": [
+        {
+          "id": "029a67bbf8be66ba6add91cc",
+          "make": "Baojun",
+          "model": "KiWi EV"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1291a958c3fffc99f6ac43b0c1183c3e2e7664a6eb8563f03b1d16fb9c3ba786",
+        "375983b8dd56adc66e87eb0b8c4da9bd23d41bccd65294545a46d36840d26989",
+        "ad6e64ef94a05f00997c6066a14644123afd9d6ee7ccdb5882137ad74866d1a2"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/yep",
+      "retainedRecords": 5,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "5f2ba31c0b121f5ef9d9163fd6e54af5c149c1628ee5b9289f17201bd1405a9f",
+        "ae889b2cb5df57d99b125de97f386401ebf09ed0fa71bd7743fb838da603b49b",
+        "bab25518ae6accf2c30483c5190918b832ba9cdd2b0d34e961d1476cfcca198f"
+      ]
+    },
+    {
+      "sourceModelGroup": "baw/calorie",
+      "retainedRecords": 5,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "1314cad50bcdaabe811c92da480c97aec56c6c81d5423bc8764d50caf746fe78",
+        "8f4b8558413d35fa02be6921a8e7006eef862a8150be7b6d9827b62222bb9773",
+        "9fa9ff3c0330450e77430d26c91b28bdcf79ce97d5145ac0200004e6d5830443"
+      ]
+    },
+    {
+      "sourceModelGroup": "acura/nsx",
+      "retainedRecords": 4,
+      "matchingExistingModels": [
+        {
+          "id": "5390fe7410ebf5c337ed39a0",
+          "make": "Acura",
+          "model": "NSX"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "30cb114631a1f77a95afbeeb1983b76ee0f67e212d66f5e17cc239299734efe0",
+        "32772a4d53b2c13a08a7f3cf5940ec838b759098da4677a2ff408725624c1e2e",
+        "8562da6ddfc914aa29ad35c8a2108aabfad727ed353e9d7f5cb8263ba34f7dfd"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/b6",
+      "retainedRecords": 4,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "044f9e99dcc1f437e15574e4c1b49e92d89931a4beeea18333d338e4b8e399d2",
+        "3685001c8aa6964a51cdebb31c03103528b6b42e67513c439af9c102cce77707",
+        "aeff1640515991ce4f3f3ed16a0406beecdec3471b2a874eb422e4f95163d794"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/b7",
+      "retainedRecords": 4,
+      "matchingExistingModels": [
+        {
+          "id": "60b8ffa62e0a55a9c6a56565",
+          "make": "Alpina",
+          "model": "B7"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "293f561ed129f407643bc074dfb4b85383b05713ffd1235a32011a0055c1c6bf",
+        "6580a8f5414c3405144bece9adfc5ca9dc1e133f39e60a15247ab05a987bf629",
+        "9d127d930cdf1a7620f97a403c2e50bb882a1629221a76262a71ddc9e3f5ba21"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/xb7",
+      "retainedRecords": 4,
+      "matchingExistingModels": [
+        {
+          "id": "06172defd5304718bfee2aa8",
+          "make": "Alpina",
+          "model": "XB7"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "078c6fe10565d89367691c57e23dadffea5a28a56afc7b8dc7d8f22c99c545e7",
+        "3dc96b77e2fb2b978e0e4be60721aba7eff640622d80ec368883620c1feefdb2",
+        "8889bc505a0a4992d09cb98cf65d411996e2d835cb412132816d5c077edd81d5"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/wendao_v9",
+      "retainedRecords": 4,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0b5964db100bdda87cafced3227a5f02cc8a63b07fe71a254c72b11f61676dbe",
+        "5fa5ce72ea519039ccc36f92f3eb5c66be9218f96f937fad5bdcb973f53ff908",
+        "78eed6c1e187a0cd019008018d70464ea52e0b60391c0165cede75e87377851a"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q5_e-tron",
+      "retainedRecords": 4,
+      "matchingExistingModels": [
+        {
+          "id": "d0da71456720c6743db525dd",
+          "make": "Audi",
+          "model": "Q5 e-tron"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "2a3a7e37d35018b2db3623f2b08281786e5ffe1a2f7c04330135dbcfd7ed39d1",
+        "2c9977033f3e1ff9326207f5ef6ea05b5b1a6eae73345db582746ca1f8cb75b8",
+        "dff05b00c290ba0d457d63bbe23874353b2b48b9f4af49bd8523de13bc1d8816"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q6",
+      "retainedRecords": 4,
+      "matchingExistingModels": [
+        {
+          "id": "7dede0c59e8e759b80bf1a62",
+          "make": "Audi",
+          "model": "Q6"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "19e96f86c5174563bd9c79b122aae01c20c38ecc36aacb6d7dd7249cdda27ee7",
+        "3ffc385d6f4580251caf46856134bba93785be6c3b7cb3966a8f2bc7957d31b8",
+        "822e7c8793ad526b1fcc4f2dba5d6444ede019821444ec6c46210a7b2a4423ce"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/rs_q8",
+      "retainedRecords": 4,
+      "matchingExistingModels": [
+        {
+          "id": "81fa38441b1daf38e1468c04",
+          "make": "Audi",
+          "model": "RSQ8"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "2579bfb6dafe74d72d42e617dd831685be7351c3a6f15a2c7794194e3d3aff35",
+        "4b9aa4fb3385bac75dc04fc6753243ed5e57528fd7d2e7dbf6559d1cfd597914",
+        "c10a384905bce3b83bd0fc662607544705f0cb657c782fc13ddd41c2fbc1a089"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/bjev_ex5",
+      "retainedRecords": 4,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "79c9c67f0825b5161068c9cd8204af93657eef259b8fc9be0d042d2602aed02e",
+        "92579ecc6de028a1cb7bab2b238bfdbb8d9c9f4be3c5c651c43f2b9f0b9819d5",
+        "92fde00742927d96b210daf68d3e8eedac9dd3cd9054068f3579f91781d8d930"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/eu8",
+      "retainedRecords": 4,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0cf21f567549be3fa5f17e1f740d619bd4b6998e7d8ee61be2d9bf60ca8578de",
+        "401f79dbbc2e4e1de347243b9e5d8c5c74a830681d4061ea7d52a695fd80f679",
+        "47c3155116c5dcdd54a5129ac79f8e851868d6a677a1b11aaf36ff483f954901"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/huansu_s6",
+      "retainedRecords": 4,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "6db972bdf05b72a9c521563f720c50cdb397a74f242d8b315946e183472aac85",
+        "abcf6c0123e383b74ff7c37e47fc1f591a89ef82c3fd635f89e3347fb06d1f01",
+        "b374677426896304c2c6418d8a376a695997833c8ab0b4c750247ba4cc13f07e"
+      ]
+    },
+    {
+      "sourceModelGroup": "bajaj/qute",
+      "retainedRecords": 4,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "089434b5e0e8c4db45706b6c1a8720819c1cc1b0d5757a64df5d64a89338d29a",
+        "1836bbc2bfbdbbeb43aa30b8cadc006f8fb8b41904a964dbe6dfc7c06d2774ec",
+        "8e2c799df4f30b5f206296d49ab0adde1b851b208e62e754f7c479500b9b4aea"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/valli",
+      "retainedRecords": 4,
+      "matchingExistingModels": [
+        {
+          "id": "4dd4984aa8a0a87be2c93595",
+          "make": "Baojun",
+          "model": "Valli"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0e7e5af11201ea34122f4c5b56e880a24dbdda42bc987716da559b0e911f37f7",
+        "a56f53d50a48c857c6ce87a5b3b4c48e776edcaf7c424d7f37cd69350da330c1",
+        "c3bbd0de8d348cd7f1de32b59e388733b9f4c27e7a1fcfe07c5a9c1dba4da9fa"
+      ]
+    },
+    {
+      "sourceModelGroup": "abarth/124_spider",
+      "retainedRecords": 3,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "a0b49d159f1956b5b02e4e0dd57009d66d9bf9a47646581e9079d7785f017f76",
+        "c2ecb1950aa5d8f0da7782f0f049d7c432c0171ea25cd74061975e33cd4b4e21",
+        "ec05fbbb5ae856a985bff7621f053191e464104804e94acadcc82c816d3fb58c"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/4c",
+      "retainedRecords": 3,
+      "matchingExistingModels": [
+        {
+          "id": "c73056068974cb178c84d0b6",
+          "make": "Alfa Romeo",
+          "model": "4C"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0d996e946c62f5ba6bd93453a56a7f62882f33bc155eeac14bb7b94f88869ae4",
+        "a8dfec7ced5b5302b820ed556db77d69a86cd572e81987ef3e884fe091a23d93",
+        "efa20b6e258672b7edd92aeb180b344a215e60d68c844f65b55564adeed65a69"
+      ]
+    },
+    {
+      "sourceModelGroup": "amber/a5",
+      "retainedRecords": 3,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "8e95b2f119f21b1ec98b64cb113724a3e6290405245e56fa7ae7ac4a253e3f25",
+        "d2aa3acc23b7e0d1bd0accba0e7d58ce25e8d2a398fd424aec31ab5988f47ff4",
+        "f201fb01bc56284e4f9a0d0a8972a217f1f10136aa4fed15617272f8b961bbe3"
+      ]
+    },
+    {
+      "sourceModelGroup": "arcfox/alpha-t6",
+      "retainedRecords": 3,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "58a461db65708714a0ad1bc981e2c3a519bc7f2e77f379362d2b49d9c5ab1d7f",
+        "823b628b7fccc13261d33f3a62b4471dfa17480004eb820b308cf466cc66bfbe",
+        "ad8a5bcaa4065de558118fef1ff071835d9562a4066ddb122b63cf5d406eb3c6"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/db12",
+      "retainedRecords": 3,
+      "matchingExistingModels": [
+        {
+          "id": "1c7928819e7d7d0ab2e5a18d",
+          "make": "Aston Martin",
+          "model": "DB12"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "01078f33eb590435327055f0f5dca742b8a10f4315b56186f3174404108a9d79",
+        "69b45bb4c22169624ce783fd268794460d5d7167a4e363fd87de9e4dac19f66f",
+        "aa01929a045c77e9d5e13402e89ba26b422063747b7ca53fe71502b3da4e7ed1"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/virage",
+      "retainedRecords": 3,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "6c1925728dc9a5236b2a9b792fe21481cccf70c2aadfd8f9ff444ffcdc4eb787",
+        "8526da66f79a4202eb520af013c0e4fb2a0c066d80b2b113db17ba5a24854fc5",
+        "fba4388c87f17d8fff26ad63e6f4cbfd6b8e97b47a5c63e354dfcd3e652c8821"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/e-tron_s",
+      "retainedRecords": 3,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "9e4eb3921e26172ca3a8db18d938460edb8fb6d70f0e57017c5f77060f215b71",
+        "b611cd03b0c03c0fc6cd0df84da3cd92adc0b50b02f98e8e3c4fd028fed10f4d",
+        "fad6062707c4c8bdcd7ce7ea0a6ef10ec2fe99ecb4e161f8f0dc4502e55f6b72"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/e-tron_sportback_s",
+      "retainedRecords": 3,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "6b1fbd524f92ac0a172779a161ce825a270a514ea923b270a23c15f32aa5de8f",
+        "6e70e62673a3059a4d3d0be0ca30cb03d45e4f832f0d6dbb05d86ff80d8f99a5",
+        "95d65ed82a0145e882d9dc244dfb5afc4642d6deb394cb51df3c2f854a7724fd"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/rs_q3",
+      "retainedRecords": 3,
+      "matchingExistingModels": [
+        {
+          "id": "995f1eeae5d9d88fd37e64c3",
+          "make": "Audi",
+          "model": "RSQ3"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "3d6127b76ee22cfcd843b73a6fee3e92d7dc3ba4a9d0d16343aebaeb4a33a9be",
+        "6736d7f204e04077879d7c0ad1fcf658b71d07e201a10d27c94a5b344c90cbd4",
+        "8a0de9bf8a3bf45bbea818ff6ce885056e28bcba3713fbe6d0143c42e6f1b75b"
+      ]
+    },
+    {
+      "sourceModelGroup": "aurus/komendant",
+      "retainedRecords": 3,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "05c5179eda1c4e40b13388a04c113488e8f50af70adc7aabd8eeb6becc05d59b",
+        "31d962feba18918b01e7952e25007204c5224cb4eb543cce0cd16ac76781d6e6",
+        "57d6b27be596e49222f0c7b11727cfeb2e7657c609e9ac90d3984bd77e2a365c"
+      ]
+    },
+    {
+      "sourceModelGroup": "avatr/06",
+      "retainedRecords": 3,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "07d7b6b22b2919ee29e4333fea17e18f4fbbb98a961142afb43a091e2c9cc617",
+        "1661c7a6719a2d57af2b1e2c6a3fda3eaf879a13e59d2e2fe050170731fa5ddd",
+        "8d3bb2e11471d1e3b25fbee6f6a0a4d00723d9037bccbffff17e6fd7a4cc108f"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/taitan_700",
+      "retainedRecords": 3,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "70e5b1ec37dedb0268868712352a2d828a7f78a4af145149566e8d2aa4820f0f",
+        "9eb8529306ea3e70ce0e952360f1b0a845aa3d0f4ac59b26aca3f1672847e19e",
+        "f48da36e240a42a8892d512104f107f54f3f20225cad43a069269f4592bd3642"
+      ]
+    },
+    {
+      "sourceModelGroup": "212/p01",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "c6ad6724a2de40c618a892e9590b40011c1af01b491247d744e6946d8db047e4",
+        "d3c5912470a730bd31a308960590781cf2018ac0ffb0b357810f27714fd4a8ac"
+      ]
+    },
+    {
+      "sourceModelGroup": "aiways/u6",
+      "retainedRecords": 2,
+      "matchingExistingModels": [
+        {
+          "id": "27bbdd5699e940664620c0df",
+          "make": "AIWAYS",
+          "model": "U6"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1a3a717cebea4cdacf1cec3fea77613f4ef8fa199c2286e058367c7a174f1fed",
+        "787110baffe2b4ed2f79afc9435ddf9025994f96c82c010f20dd4829398bd70d"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/33_stradale",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "130f977ed3a79f03c3f8a51943e93e1d3e12532f75299742e914b0c3f22c5a19",
+        "1c0e72568c47d17db2fd1c35711efe06c3b4637bb73b9abf5bb6de3ee50928c9"
+      ]
+    },
+    {
+      "sourceModelGroup": "alfa_romeo/8c",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "36ddac13fbe39a879c406dc6bc48ba48a29be89a15ad67c639aa148bf354e3c2",
+        "8177bff0502ced5a154007b0f5598a3db56c06facf222b860ad500ecb3f87173"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/b4",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "c4b250e6f276135faa77e18c3c7a7314222a6d3c7e0178ddb2ee468884802e2f",
+        "ce8feb14beb2ef212236be14bcffa7e5ae75c55c2ba5411ee526b3d7f688aed8"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/d4",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0a273d5eddd5a97e26cb167938e4f6c85b52b24c0d94abbef83f400e5ea1a026",
+        "1b272898526081ad59645f1e4ee0744193fdb738cba54bd04b193b60be4177a3"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/d5",
+      "retainedRecords": 2,
+      "matchingExistingModels": [
+        {
+          "id": "c26b4f6cf8e267db5d1f7503",
+          "make": "Alpina",
+          "model": "D5"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "0bc85563433d39629dde1c6c94d5763e5d8cea8c86442649349461d9e72c65d6",
+        "3f41758418263569c23b1ff2760c39982e8e17c7e7301c87fee611bc8d1275f2"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpine/a290",
+      "retainedRecords": 2,
+      "matchingExistingModels": [
+        {
+          "id": "9f23c75ab6a73713bf64580a",
+          "make": "Alpine",
+          "model": "A290"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "1740e4fda6d1bab71833170350f47a774be7cc65437d56b483d62dd6bcba649e",
+        "2f0a5f339a712b7aca407e382345644edf67a7e700d949e130ee534f353549c4"
+      ]
+    },
+    {
+      "sourceModelGroup": "ambertruck/work",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "376a58437789639011421b724c7668ec33fd2ffda7592985db6853f4e05f8185",
+        "3f5011cec2902eb7135335338f4209085df1e1dbe8c9d10799cd34195d0e6517"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/cygnet",
+      "retainedRecords": 2,
+      "matchingExistingModels": [
+        {
+          "id": "161cb0944d6de225613eeaf6",
+          "make": "Aston Martin",
+          "model": "Cygnet"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "03c06ed05ce08a4fc6990d83d62832d042799bcf4264a2c9bb64d4a9dec1c370",
+        "8e9bdc496b72f170dce825befbe6c74ac96f9fec37d02f18c2dceec207b51c8f"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q2_e-tron",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "082627538b1c236ed3d8e1683a769c6ba7f33d14a48a0f309024f7872fd69a19",
+        "0918d458e1bc3fa73726726672bf25770345667630d6de8ecd8ff394ca99efdb"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q6_e-tron_sportback",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "62a26dd5353391058bdd6828e7aa3862e3585e9d0e171ca36d66e6104fdb4a08",
+        "f114e884f9af1462ab1b80aca2251ca4cba03b3365b65eccd088ac628c1ab303"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/q9",
+      "retainedRecords": 2,
+      "matchingExistingModels": [
+        {
+          "id": "57bb929c6a8824561bc1474d",
+          "make": "Audi",
+          "model": "Q9"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "6e6cfc3433ba9dfe80aaa10d61a43c68645cc90ec4e900071d742535c24e03a0",
+        "c305d446889b23033b466de0658a55a7e0c0c6f666f3f210cf429fb74b4b0145"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/s1",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "9f8fda458f554dc13a7122c86fc7a5a9ce3837b11328a5350926ecadbb3ad7a4",
+        "e708f3b7fffd9c3f0035e228828ab112139775d3e19559222487f0e263616cb5"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq6_e-tron",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "500f362e9b0079140c581a5da25a0714f342bec64891b7a551176cdb12c6213a",
+        "a07702eb776bf792321896e422cb5ee4295e3733805f77891d511b005465513a"
+      ]
+    },
+    {
+      "sourceModelGroup": "aurus/senat",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "2ae454cd9f6954d8b78d018d8375401cadf0ed65999a4973314e481030a8dc45",
+        "db2a74b5a9d7af2c7b6fba65fb71ee1965fd14aafd16d52b893cf2a0498b460d"
+      ]
+    },
+    {
+      "sourceModelGroup": "baic/bj41",
+      "retainedRecords": 2,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "2922d98022e21a2c46688dca9870a79b3c35083d94df7d5fe215bcbd2c41d81a",
+        "d88dd74a1a6dd1c0b5efab87aad22b988f9580b41977f2ff8d1319e8a26dddac"
+      ]
+    },
+    {
+      "sourceModelGroup": "212/explorer_01",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "d87884ae00937c7af96f3546b0e7376386b58949a7179a785a1ec23c44195804"
+      ]
+    },
+    {
+      "sourceModelGroup": "alpina/xd4",
+      "retainedRecords": 1,
+      "matchingExistingModels": [
+        {
+          "id": "457f8adfb15f56bcd35dda77",
+          "make": "Alpina",
+          "model": "XD4"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "e0dde08271edbcd49cdc8f0f6c7570815386c6836756684678b14de6ff7616b0"
+      ]
+    },
+    {
+      "sourceModelGroup": "amber",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "8dc14ec17b1423c231df9e12a25b4e9e48fb4cc9b2d786e826869bda547cb2d8"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/one-77",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "a86a15f224ae8103cb35e743d8030453939f8c1337813ea7720a2211959a7a2a"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/valen",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "6a1cbbbcbdd543f4019cd7e6f883223105790da54b5d9c93bcda3a7b32ce2894"
+      ]
+    },
+    {
+      "sourceModelGroup": "aston_martin/zagato",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "e1ad02c3b7953a16d883ec0048bea62652a0545221b2da8c9409852c99147e7c"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/nuvolari",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0f4d655af1b4b6d919d02afe9b8e80686f28f7a181232859b0ce44f8bf556cb7"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/rs_q3_sportback",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "3ade6725c0fe96c3dea0b2af57e71d9f66fc7988fc6286f465f8eb73578cb20f"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq6_e-tron_sportback",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "fbfbbb2b4f2b5f0f152f376d3d6059bbfe1902737d1c874a042676dfda0d0762"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq8_e-tron",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "04f23796827722e5bef5d6676da76f0c41b232fb67c025162d2f14d3f7e04d19"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq8_sportback_e-tron",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "2e7ec1c3b906200f085f537dec64100b613514b692a09c7168afdae378057090"
+      ]
+    },
+    {
+      "sourceModelGroup": "audi/sq9",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "c3cf01c01e1afc3945b31d8c287292162d560e3e99647480b263aa1ecb0afa1f"
+      ]
+    },
+    {
+      "sourceModelGroup": "aurus",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "0b2c068cc02359cb82ca033025e65e196a97627a05b2dbce267ebe0f54d2d25c"
+      ]
+    },
+    {
+      "sourceModelGroup": "aurus/arsenal",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "7868bf64749440b04ef24788afcec0fc4ee7621cf8049f5b315e60480dd6b28d"
+      ]
+    },
+    {
+      "sourceModelGroup": "baojun/e6",
+      "retainedRecords": 1,
+      "matchingExistingModels": [
+        {
+          "id": "d9eece83db740c455f0722d5",
+          "make": "Baojun",
+          "model": "E6"
+        }
+      ],
+      "state": "unique_model_group_requires_annual_technical_review",
+      "exampleRecordDigests": [
+        "9a0e0bc30cc7ad8210ee98551b3635ce75843100c58e4198885422e4bf242343"
+      ]
+    },
+    {
+      "sourceModelGroup": "baw/leichi",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "e836c015dd3a2c025c282cf94d1295a4632fa1c32b4339527d82f8f3294cb251"
+      ]
+    },
+    {
+      "sourceModelGroup": "baw/mpv",
+      "retainedRecords": 1,
+      "matchingExistingModels": [],
+      "state": "no_exact_existing_model_group",
+      "exampleRecordDigests": [
+        "18c8305c87c75d17480ff7d5b501322d54955cd9910024b5a56f7383ea340b74"
+      ]
+    }
+  ],
+  "counts": {
+    "sourceGroups": 219,
+    "uniqueExistingModelGroups": 116,
+    "ambiguous": 0,
+    "unmatched": 103,
+    "recordsInUniqueModelGroups": 7286
+  },
+  "savedFields": 0
+}

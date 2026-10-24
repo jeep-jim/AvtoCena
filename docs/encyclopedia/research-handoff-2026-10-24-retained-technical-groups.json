@@ -1,0 +1,486 @@
+{
+  "checkedAt": "2026-10-24T15:29:40.451784+00:00",
+  "state": "prepared_reference_review_candidates_not_verified",
+  "savedFields": 0,
+  "sourceInventoryWorkflow": 40106963530,
+  "sourceClassification": "unverified_reference",
+  "priority": [
+    "fuel",
+    "engineCc",
+    "powerHpOrKw",
+    "documented power30MinKw",
+    "drive"
+  ],
+  "models": [
+    {
+      "id": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "revisionAtReview": "a7b051a5-d325-5411-a5a7-ed61b964fa9c",
+      "year": 2024,
+      "sourceModelGroup": "audi/a3",
+      "publicRowsChecked": 126,
+      "candidateRows": [
+        {
+          "variantId": "843c14b379fcf4b639f9ded6",
+          "year": 2024,
+          "trim": "35 TFSI ADVANCED",
+          "known": {
+            "fuel": "hybrid",
+            "powertrainKind": "other_hybrid",
+            "bodyType": "sedan",
+            "transmission": "automatic",
+            "drive": "fwd"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "fb61e5242118ffbbfa3d9866",
+          "year": 2024,
+          "trim": "35 TFSI",
+          "known": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "bodyType": "sedan",
+            "transmission": "automatic",
+            "drive": "fwd"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "750f7169acc83103d2eb3c4e",
+          "year": 2024,
+          "trim": "Audi A3",
+          "known": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "bodyType": "sedan",
+            "transmission": "automatic"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "d13dbaae2d2bb417df3289fa",
+          "year": 2024,
+          "trim": "30 TFSI S LINE MHEV S tronic | KEYLESS | LED | VIRTUAL COCKPIT | 18\" | ZETELVERW. | PDC | CRUISE CONTROL",
+          "known": {
+            "fuel": "hybrid",
+            "powertrainKind": "other_hybrid",
+            "engineCc": 999,
+            "transmission": "automatic"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "443e6b5e070683de53bb0902",
+          "year": 2024,
+          "trim": null,
+          "known": {
+            "fuel": "Diesel",
+            "powertrainKind": "ICE",
+            "engineCc": 1968,
+            "bodyType": "Passenger car"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "40cb093e4335f61facdf45bb",
+          "year": 2024,
+          "trim": null,
+          "known": {
+            "fuel": "Petrol",
+            "powertrainKind": "ICE",
+            "engineCc": 1984,
+            "bodyType": "Passenger car"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "74b35577ec4b26b05fc097de",
+          "year": 2024,
+          "trim": null,
+          "known": {
+            "fuel": "Petrol",
+            "powertrainKind": "ICE",
+            "engineCc": 1498,
+            "bodyType": "Passenger car"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "6555d2c1b7b3af1b843649ce",
+          "year": 2024,
+          "trim": "Sportback 30 TFSI Pano,Kamera,SmartphoneInt,S",
+          "known": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "powerHp": 116,
+            "powerKw": 85,
+            "bodyType": "hatchback",
+            "transmission": "Schaltgetriebe"
+          },
+          "missing": [
+            "engineCc"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "e92bd483447de5b007a572ce",
+          "year": 2024,
+          "trim": "Sportback 40 TFSI e Advanced S-Line",
+          "known": {
+            "engineCc": 1395,
+            "powerHp": 204,
+            "powerKw": 150,
+            "bodyType": "hatchback",
+            "transmission": "automatic"
+          },
+          "missing": [
+            "fuel"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "b4b8e164e959ad294b85fd34",
+          "year": 2024,
+          "trim": "Sportback S-Line 45TFSIe S-Line Interieur",
+          "known": {
+            "engineCc": 1395,
+            "powerHp": 245,
+            "powerKw": 180,
+            "bodyType": "hatchback",
+            "transmission": "automatic"
+          },
+          "missing": [
+            "fuel"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "420d9493f4aa7a04a8f68b9f",
+          "year": 2024,
+          "trim": "Sportback 45 TFSI E S-LINE ACC B&O VIRTUAL KA",
+          "known": {
+            "engineCc": 1395,
+            "powerHp": 245,
+            "powerKw": 180,
+            "bodyType": "hatchback",
+            "transmission": "automatic"
+          },
+          "missing": [
+            "fuel"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        }
+      ]
+    },
+    {
+      "id": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "revisionAtReview": "4d04c3c3-790f-591b-a18a-905bff48ea9c",
+      "year": 2024,
+      "sourceModelGroup": "audi/a4",
+      "publicRowsChecked": 269,
+      "candidateRows": [
+        {
+          "variantId": "fc8ef77222122cbe20bfe9af",
+          "year": 2024,
+          "trim": "35 TFSI S-LINE",
+          "known": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "bodyType": "sedan",
+            "transmission": "automatic",
+            "drive": "fwd"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "1af6843dec3b1f3fe40ad05d",
+          "year": 2024,
+          "trim": "40 TDI Mild-Hybrid S line Aut.*NAVI*LED*TEMPO",
+          "known": {
+            "fuel": "hybrid",
+            "powertrainKind": "other_hybrid",
+            "engineCc": 1968,
+            "bodyType": "wagon",
+            "transmission": "automatic"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "b85620ff8c20356a1340865d",
+          "year": 2024,
+          "trim": "40 TFSI Mild-Hybrid quattro S line Aut.*NAVI*",
+          "known": {
+            "fuel": "hybrid",
+            "powertrainKind": "other_hybrid",
+            "engineCc": 1984,
+            "bodyType": "wagon",
+            "transmission": "automatic"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "6f378f43e0eb5ac48920c922",
+          "year": 2024,
+          "trim": "45 TFSI Mild-Hybrid quattro advanced Aut.*PDC",
+          "known": {
+            "fuel": "hybrid",
+            "powertrainKind": "other_hybrid",
+            "engineCc": 1984,
+            "bodyType": "wagon",
+            "transmission": "automatic"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "955d4df52291a748c3241ecf",
+          "year": 2024,
+          "trim": null,
+          "known": {
+            "fuel": "Petrol",
+            "powertrainKind": "ICE",
+            "engineCc": 1984,
+            "bodyType": "Passenger car"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "20dd339bc19827a7896df317",
+          "year": 2024,
+          "trim": null,
+          "known": {
+            "fuel": "Petrol",
+            "powertrainKind": "ICE",
+            "powerKw": 110,
+            "bodyType": "Passenger car"
+          },
+          "missing": [
+            "engineCc"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "75064cab4bbc69090a0e79b9",
+          "year": 2024,
+          "trim": "30 TDI Lim. S-tronic | ACC | virtual cockpit plus | Assistenz-Paket Tour | Audi Drive Select |",
+          "known": {
+            "fuel": "diesel",
+            "powertrainKind": "combustion",
+            "powerHp": 136,
+            "powerKw": 100,
+            "transmission": "automatic"
+          },
+          "missing": [
+            "engineCc"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "491ca205fb36fd81401e01c2",
+          "year": 2024,
+          "trim": "AVANT 2.0 40 TDI MHEV QUATTRO S LINE EDITION S TRONIC STATION WAGON",
+          "known": {
+            "fuel": "hybrid",
+            "powertrainKind": "other_hybrid",
+            "powerHp": 204,
+            "powerKw": 150,
+            "bodyType": "wagon",
+            "transmission": "automatic"
+          },
+          "missing": [
+            "engineCc"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        }
+      ]
+    },
+    {
+      "id": "8cf3dbb7884fe919bce44c62",
+      "make": "Audi",
+      "model": "A5",
+      "revisionAtReview": "bd7653c4-0fb1-57d6-a7d6-d3c754cec092",
+      "year": 2024,
+      "sourceModelGroup": "audi/a5",
+      "publicRowsChecked": 75,
+      "candidateRows": [
+        {
+          "variantId": "ab1092f162265f288cd5662d",
+          "year": 2024,
+          "trim": "40 TFSI S-LINE",
+          "known": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "transmission": "automatic",
+            "drive": "fwd"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "fd546fffe46abb2e4a555fb5",
+          "year": 2024,
+          "trim": "40 TFSI ADVANCED SPORTBACK",
+          "known": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "bodyType": "sedan",
+            "transmission": "automatic",
+            "drive": "awd"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "0c127bfbf3a0d73d920715ee",
+          "year": 2024,
+          "trim": "40 TFSI ADVANCED SPORTBACK",
+          "known": {
+            "fuel": "hybrid",
+            "powertrainKind": "other_hybrid",
+            "bodyType": "hatchback",
+            "transmission": "automatic",
+            "drive": "fwd"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "18b41fb2835845cf38485884",
+          "year": 2024,
+          "trim": "40 TFSI S-LINE",
+          "known": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "bodyType": "coupe",
+            "transmission": "automatic",
+            "drive": "awd"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "a3eee39d462bfc013edaf629",
+          "year": 2024,
+          "trim": "40 TFSI S-LINE SPORTBACK",
+          "known": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "bodyType": "hatchback",
+            "transmission": "automatic",
+            "drive": "fwd"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "20a1bbec4f02d2f9a8c8c0ba",
+          "year": 2024,
+          "trim": "40 TFSI EXCLUSIVE EDITION S",
+          "known": {
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "bodyType": "sedan",
+            "transmission": "automatic",
+            "drive": "fwd"
+          },
+          "missing": [
+            "engineCc",
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "ac4f490afe2fdf9c75fd92b8",
+          "year": 2024,
+          "trim": null,
+          "known": {
+            "fuel": "Diesel",
+            "powertrainKind": "ICE",
+            "engineCc": 1968,
+            "bodyType": "Passenger car"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        },
+        {
+          "variantId": "93ea167b77a776aba36b29b9",
+          "year": 2024,
+          "trim": null,
+          "known": {
+            "fuel": "Petrol",
+            "powertrainKind": "ICE",
+            "engineCc": 1984,
+            "bodyType": "Passenger car"
+          },
+          "missing": [
+            "powerHpOrKw"
+          ],
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+        }
+      ]
+    }
+  ],
+  "totalRowsChecked": 470,
+  "candidateRows": 27,
+  "nextAction": "После terminal/apply единственного остаточного ASTRA плана обновить ревизии и убрать уже заполненные поля. Проверять сохранённые вторичные таблицы по точным техническим группам и первичным документам. Сохранять тип источника; не повышать unverified_reference автоматически и не переносить peak в30min."
+}
