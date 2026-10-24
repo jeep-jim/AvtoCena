@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T01:27:26.923469+00:00",
+  "updatedAt": "2026-10-24T02:19:16.382274+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -37630,8 +37630,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "81e96a5f64e0488c749c5075d4a84740e261c940",
-      "writesPaused": true,
-      "reason": "Freeze research writes only until this release immutable index and required batch/ASTRA membership verification succeeds. All market refreshes cancelled by owner; writerfree confirmed40049724827. Combined224field release requested; do not duplicate deploy.",
+      "writesPaused": false,
+      "reason": "Immutable release index and required batch/ASTRA assertions succeeded; artifact SHA verified. Further research may resume; new changes await next release. Current deployment remains active, do not duplicate.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37639,7 +37639,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-24T01:27:26.923469+00:00",
+      "checkedAt": "2026-10-24T02:19:16.382274+00:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37659,7 +37659,7 @@
         "activationReport": "docs/encyclopedia/reports/2026-10-23-index-a80030-activation.json"
       },
       "pendingReleaseMarker": ".github/market-runs/regcloud-deploy.json",
-      "isolatedRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+      "isolatedRelease": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
       "postSnapshotCamry": {
         "workflow": 39925160057,
         "fields": 8,
@@ -37691,10 +37691,10 @@
         "report": "docs/encyclopedia/reports/2026-10-23-aygox-hybrid-readback.json",
         "doNotDuplicate": true
       },
-      "pendingReleaseWorkflow": null,
+      "pendingReleaseWorkflow": 40052647125,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
-        "state": "paused_for_release_snapshot",
+        "state": "resumed_after_verified_snapshot",
         "workflow": 39972729425,
         "job": 120479350486,
         "mode": "apply",
@@ -37710,9 +37710,9 @@
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       },
       "lastCompletedReleaseWorkflow": 40019745015,
-      "pendingRelease": "requested_by_marker_after_owner_cancel",
-      "isolatedIndexDigest": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
-      "isolationReport": "docs/encyclopedia/reports/2026-10-24-a3-e7a307-index-isolation.json",
+      "pendingRelease": "image_load_in_progress",
+      "isolatedIndexDigest": "1b5c4adae4c01317eebd86707dd802d008bbaaf70512eaa7d86976f08efeb75c",
+      "isolationReport": "docs/encyclopedia/reports/2026-10-24-unified-index-isolation.json",
       "deferredNextRelease": {
         "report": "docs/encyclopedia/reports/2026-10-24-next-release-writer-coordination.json",
         "reason": "release_requested_after_owner_cancel",

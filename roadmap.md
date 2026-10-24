@@ -14109,3 +14109,10 @@ Exact apply40051933362/job120746286854 SUCCESS: savedModels1/savedFields1. Не�
 Проверка02:09:30UTC: health HTTP200/e7a30716fad957202890c82f59274e8f0b2ec38a до/после. Пять карточек и выдача:65/65сопоставленных полей совпадают. DBX2023 b65974b83d5399d588073fc5:3982cc/707hp/520kW из encyclopediaCalculation, totalRub25031959 estimated. AudiA3 2021 3b783a66af3b69634f611db2:3041845 estimated, bodyType из энциклопедии, КПП механика сохранена. LiL6 2026:134kW30min, totalRubnull/needs_data — не объявлен рассчитанным. Китай Camry2014 fd35d74f6c627c05f244fa25 search1825609 estimated, без encyclopediaCalculation: это не доказательство нового подключения.
 
 Общий выпуск40052647125/job120748606727 IN_PROGRESS на Prepare private encyclopedia index; receipt ASTRA/exact matching/security/storage проверки SUCCESS. Новый3d40cad ещё не активен. Дубликаты deploy/apply/сборов не запускались; срок полной базы/80%не подтверждён. Отчёт bounded-check сохранён; частная история/параметры не менялись.
+
+
+## 24.10.2026 09:20 Красноярск — общий индекс проверен, исследовательская пауза снята
+
+40052647125/job120748606727: prepare private index/required batch assertions/ASTRA assertions/audit SUCCESS, build SUCCESS, image load IN_PROGRESS. Artifact12543759829 скачан, SHA2567f9bcebfaca0a71faea72ab703ae290fbf60a47e23dd5520008e289ffba08608 независимо совпал. Индекс1b5c4adae4c01317eebd86707dd802d008bbaaf70512eaa7d86976f08efeb75c, manifest4fca79c34301dfd35e9d6af2cc5020a32736a609c3d3a2cc44c1baee080329fb; ASTRA verification true. По выполненному resumeCondition writesPaused=false; последующие партии ждут следующий индекс, текущий выпуск не дублировать. Исходные pending224 не объявлены публично активными до финального gate.
+
+Владелец повторно указал, что134kW LiL6 взяты из его таблицы. Авторство сохранено как owner evidence; не считать самостоятельным поиском/новым результатом текущего выпуска. Скриншот таблицы не применялся массово к неоднозначным годам/комплектациям. Полная готовность каталога не заявлена.

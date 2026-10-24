@@ -1,0 +1,119 @@
+{
+  "checkedAt": "2026-10-24T02:19:16.382274+00:00",
+  "release": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+  "run": 40052647125,
+  "job": 120748606727,
+  "indexDigest": "1b5c4adae4c01317eebd86707dd802d008bbaaf70512eaa7d86976f08efeb75c",
+  "artifact": 12543759829,
+  "artifactSha256": "7f9bcebfaca0a71faea72ab703ae290fbf60a47e23dd5520008e289ffba08608",
+  "artifactShaVerified": true,
+  "indexAndRequiredAssertionsStep": "success",
+  "astraVerification": {
+    "version": 1,
+    "indexDigest": "1b5c4adae4c01317eebd86707dd802d008bbaaf70512eaa7d86976f08efeb75c",
+    "manifestDigest": "4fca79c34301dfd35e9d6af2cc5020a32736a609c3d3a2cc44c1baee080329fb",
+    "verified": true,
+    "plans": [
+      {
+        "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+        "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+        "plans": 1,
+        "models": 2895,
+        "annualVariants": 5,
+        "calculationFields": 31,
+        "descriptiveFields": 1,
+        "unknownYearVariantsOutsideIndex": 230447,
+        "annualChanges": [
+          {
+            "modelId": "0d734c400f4417df7f272d30",
+            "make": "Alfa Romeo",
+            "model": "Stelvio",
+            "variantId": "1d1981aef0a48ea44141e130",
+            "year": 2020,
+            "trim": "Super Q4 8-FACH-ALU*NAVI*CARPLAY*RFK*PDC",
+            "fields": {
+              "powerKw": 206,
+              "icePowerKw": 206
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "70d0ce1a064bab6a09f30184",
+            "make": "BMW",
+            "model": "X2",
+            "variantId": "2c88956153fa4e45660291bf",
+            "year": 2025,
+            "trim": "M35i xDrive LED~HEADUP~KAMERA360~H&K~ACC~",
+            "fields": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1998,
+              "powerKw": 221,
+              "icePowerKw": 221,
+              "drive": "awd",
+              "engineCode": "B48A20H",
+              "grossVehicleWeightKg": 2270
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "70d0ce1a064bab6a09f30184",
+            "make": "BMW",
+            "model": "X2",
+            "variantId": "572ad1ae2ab2c50aa5092d1d",
+            "year": 2025,
+            "trim": "M35i xDrive AHK|20\"LM|Head-Up|Parkassist.-Plu",
+            "fields": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1998,
+              "powerKw": 221,
+              "icePowerKw": 221,
+              "drive": "awd",
+              "engineCode": "B48A20H",
+              "grossVehicleWeightKg": 2270
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "70d0ce1a064bab6a09f30184",
+            "make": "BMW",
+            "model": "X2",
+            "variantId": "724ccf336cb1e7aacb4eec9e",
+            "year": 2023,
+            "trim": "M35i xDrive",
+            "fields": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1998,
+              "powerKw": 221,
+              "icePowerKw": 221,
+              "drive": "awd",
+              "engineCode": "B48A20H",
+              "grossVehicleWeightKg": 2270
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "e71c8376467b1da6bc08a8b7",
+            "make": "BMW",
+            "model": "i5",
+            "variantId": "c31f0df22cec7cf907072ca6",
+            "year": 2026,
+            "trim": "xDrive40 Touring",
+            "fields": {
+              "fuel": "electric",
+              "powertrainKind": "electric",
+              "powerKw": 290,
+              "motorPeakKw": 290,
+              "transmission": "automatic",
+              "engineCode": "HA0002N0"
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv"
+          }
+        ]
+      }
+    ]
+  },
+  "publicActivationVerified": false
+}
