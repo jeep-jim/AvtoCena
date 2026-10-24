@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a4-2024-mechanical-gaps",
+  "entries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "fc8ef77222122cbe20bfe9af",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "35 TFSI S-LINE",
+      "expectedDigest": "82b55e40ca1aaee53d0056e46c2e104457f6c1c6bb1b14d4f41574d3ec6f8212",
+      "patch": {
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/816/file_en/cd22704fc6ea58ac2814dabc5a480bbf42a32691/eTD-Audi-A4-Sedan-35-TFSI-S_tronic-110kW-MHEV_240320.pdf?1711377235=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблица Audi от20.03.2024: A4 Sedan35 TFSI S tronic,1984см³,ДВС110кВт/150PS,бензин,FWD. Техническая версия35TFSI,год2024,седан,бензин,автомат,FWD совпадают; комплектацияS-line не меняет эти параметры.",
+        "additionalUrls": []
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "43310b37acab252112496d4d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Lim. 30 TDI S tronic Navi/Kamera/ACC/Alu16 Rückfah",
+      "expectedDigest": "1022525978d9d5f713b80edb25fade3b8eee2ce7715715ce8262d3ab19afb062",
+      "patch": {
+        "drive": "fwd",
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "drive",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/927/file_en/a2fc32c372a4ea13a5ccf32e567317dee02e0991/eTD-Audi-A4-Sedan-30-TDI-S_tronic-100kW-MHEV_240613.pdf?1718355085=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблица Audi от13.06.2024: A4 Sedan30 TDI S tronic,1968см³,100кВт/136PS,FWD. Совпадают год2024,дизель,1968см³,136PS,автомат; Lim. обозначает седан.",
+        "additionalUrls": []
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9b2fda22678360fcebfc3199",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "30 TDI",
+      "expectedDigest": "66a1506e75cd644370211d8dc5a9fa505b7b980f6139c2e194e93d80b5847386",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/927/file_en/a2fc32c372a4ea13a5ccf32e567317dee02e0991/eTD-Audi-A4-Sedan-30-TDI-S_tronic-100kW-MHEV_240613.pdf?1718355085=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблицы Audi от13.06.2024: обе версии A4 Sedan/Avant30 TDI S tronic,1968см³,100кВт/136PS имеютFWD. Известные год2024,дизель,1968см³,136PS,автомат совпадают. Неизвестный кузов не заполняется.",
+        "additionalUrls": [
+          "https://uploads.audi-mediacenter.com/system/production/car_motorizations/921/file_en/6761efb37ce6a3a81d1737bb72b0c9859aac9ee7/eTD-Audi-A4-Avant-30-TDI-S_tronic-100kW-MHEV_240613.pdf?1718353691=&disposition=attachment"
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "75064cab4bbc69090a0e79b9",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "30 TDI Lim. S-tronic | ACC | virtual cockpit plus | Assistenz-Paket Tour | Audi Drive Select |",
+      "expectedDigest": "b882d9b6326d871830bdf60a43703f32cb6b4b475505eb8853d49394155fe50a",
+      "patch": {
+        "engineCc": 1968,
+        "drive": "fwd",
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "drive",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/927/file_en/a2fc32c372a4ea13a5ccf32e567317dee02e0991/eTD-Audi-A4-Sedan-30-TDI-S_tronic-100kW-MHEV_240613.pdf?1718355085=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблица Audi от13.06.2024: A4 Sedan30 TDI S tronic,1968см³,100кВт/136PS,FWD. Совпадают год2024,дизель,136PS/100кВт иS-tronic; Lim. подтверждает седан. Объём взят из таблицы, не вычислен по мощности.",
+        "additionalUrls": []
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6bd06b26c36bffdb7ce99edd",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Limo 35 TFSI S tronic Navi Sitzheizung Temp.",
+      "expectedDigest": "f2193d41a17c83ddd43b25e7f9e0fc3f85c0fce9ea74b5d47664ca0be09d8620",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/816/file_en/cd22704fc6ea58ac2814dabc5a480bbf42a32691/eTD-Audi-A4-Sedan-35-TFSI-S_tronic-110kW-MHEV_240320.pdf?1711377235=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблица Audi от20.03.2024 описывает A4 Sedan35 TFSI S tronic. Совпадают год2024,1984см³,110кВт/150PS,бензин,FWD,автомат; Limo соответствует кузову Sedan.",
+        "additionalUrls": []
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "1af6843dec3b1f3fe40ad05d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "40 TDI Mild-Hybrid S line Aut.*NAVI*LED*TEMPO",
+      "expectedDigest": "75c7ced8b9021dd8ca236b013814691fe861399fc5896e640136776428e17756",
+      "patch": {
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150
+      },
+      "confirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/945/file_en/5e587ec65606b30fd4247553650e621de8c1be5c/eTD-Audi-A4-Avant-40-TDI-S_tronic-150kW-MHEV_240613.pdf?1718353694=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблицы Audi от13.06.2024 для A4 Avant40 TDI S tronic MHEV сFWD иquattro одинаково подтверждают ДВС1968см³,150кВт/204PS. Совпадают год2024,универсал,1968см³,40TDI,Mild-Hybrid,автомат. Неизвестный привод не заполняется.",
+        "additionalUrls": [
+          "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf?1718353696=&disposition=attachment"
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "491ca205fb36fd81401e01c2",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "AVANT 2.0 40 TDI MHEV QUATTRO S LINE EDITION S TRONIC STATION WAGON",
+      "expectedDigest": "800acfd49033a4944ce6bf52f99fa1cae15462dcf5e06cd746d035840cb91f9f",
+      "patch": {
+        "engineCc": 1968,
+        "drive": "awd",
+        "icePowerKw": 150
+      },
+      "confirmedFields": [
+        "engineCc",
+        "drive",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf?1718353696=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "statement": "Таблица Audi от13.06.2024: A4 Avant40 TDI quattro S tronic MHEV,1968см³,ДВС150кВт/204PS,полныйпривод. Совпадают год2024,Avant,40TDI,quattro,MHEV,S-tronic,204PS/150кВт; 30-минутная мощность не выводится.",
+        "additionalUrls": []
+      }
+    }
+  ]
+}

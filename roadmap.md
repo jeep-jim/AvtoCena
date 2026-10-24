@@ -15240,3 +15240,10 @@ Read-only40128343468/job120974487905 SUCCESS20:07:32UTC: прежнийceba1e40 
 ### 25.10.2026 03:16 UTC+7 — A4 2024: подготовка технической партии по заводским таблицам
 
 Для реальных оставшихся пробелов7существующихстрок A4 проверены официальныеAudiPDF 35TFSISedan20.03.2024,30TDISedan/Avant13.06.2024,40TDIAvantFWD/quattro13.06.2024. РазличияFWD/AWD иsedan/wagon сохраняются: неизвестныйкузов30TDIнеугадывается,40TDIбезявногоquattroнеполучаетdrive. Плантолькоотсутствующиеполя17значений, известныезначения/30min/ручныеправкинеперезаписываются. Запрошенштатныйboundedpreflight7полныхdigest приrevision4d04c3c3-790f-591b-a18a-905bff48ea9c; savedпока0. Retainedreview40128515344/job120975012640работаетнезависимо,неповторять. Дляследующегорелизаисследовательскиезаписипокаразрешены: privateindexнестроится.
+
+
+### 25.10.2026 03:13 UTC+7 — один CAS apply A4:7вариантов/17отсутствующихполей
+
+Preflight40128671446/job120975492570 SUCCESS20:12:07UTC;7privatevariantdigestsполученыприактуальнойrevision4d04c3c3-790f-591b-a18a-905bff48ea9c. Batch docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json, stableSHA25630ee37c7c3f5dd2e9b8b4fffcab8357b1ce0986ce307ece12ae4ea834701051b, validateBatchPASS. ЗапрошенОДИНштатныйresearchapply; writerочередьсвободна,deploy/privateindexнет. План17полей:engineCc3,powerHp2,powerKw2,icePowerKw3,drive4,body3. ИсточникmanufacturerAudiPDF2024,исходныеURLсохранены; общие30TDI/40TDIпараметрыпровереныпообоимкузовам/приводам. Неизвестныеbody/driveоставлены,новыхмоделей/30min0. SavedещёНЕподтверждён,обязателенterminal+publicfieldreadback.
+
+Уточнениехронологии: заголовокпредыдущегоappend03:16опережалфактическийзапуск; preflightсозданоколо03:11UTC+7,его точныйreadtimestamp20:12:07.880UTC. ID/порядоксобытийнеизменны.
