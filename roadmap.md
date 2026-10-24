@@ -14328,3 +14328,10 @@ Public bounded A4LChina:4карточки/52из52полейсовпали,2по
 Помимо привода, неизвестные кузов/КПП в строке CatalogCard подписаны явно. TypeScript PASS. Запрошен единый следующий выпуск удаления ИИ Бро/подписей; сохранил все предыдущие required/public batches и добавил уже применённую Audi A4L2025 mass3 для обязательной приёмки. Текущий5410216/40064400814 не отменён: последовательная concurrency защищает установку.
 
 Spec-consensus40066574442/job120790984062 выполняется, не дублируется. Добавлен read-only отчёт retained-prices:5runtime budget snapshots с SHA checksum, unique IDs, сопоставлением сохранённой generation, разделением seller-only/delivered и известного powertrain. Snapshot timestamp выводится; это не полный JP inventory и не новый пересчёт. Цена без доказанной сохранённой суммы не объявляется рассчитанной.
+
+
+## 2026-10-24T12:38:06.845163+07:00 — результаты ASTRA fingerprint и новый годовой matcher
+
+Read-only40066574442/job120790984062 SUCCESS:4451модель,26169годовыхEV/HEV,26095без30min.72имеют strong технических кандидатов;67неполных/противоречивых,5unanimous (Mercedes EQE2024/2025 5004MATIC,135кВт). Все5 только кандидаты: заводской китайскийPDF2024nov подтверждает300кВт peak/96.1кВтч, не30min; автоматическая запись135не выполнялась. Manifestunchangedtrue. Совпадения широкихпараметров не объявленысертификацией региональныхмашин.
+
+Добавлен opt-in specificationIdentity для уже подтверждённых ГОДОВЫХ facts:make/model/year, fuel/powertrain, comparablepower; EV дополнительноdrive/body, ДВСобъём иdrive/body. Все совместимые доноры сохраняются дляper-fieldunanimity, втомчисле неполные; exactnamedconflict/manualvalues не обходятся.18tests/TypeScript PASS. Default пока прежний. Запрошен read-only сравнения по5сохранённымрынкам+японскомуcache; suppliercalls/данныхзаписи нет. После фактическихрезультатов — включение иприёмка.
