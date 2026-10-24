@@ -14054,3 +14054,10 @@ TerminalChina120671602291 объясняетзатраты: before_persist23:40U
 Для failure40049890164/job120740167358 обновлён только zod4.4.3→4.6.7 с точным pin вместоlatest; lockfile integrity обновлёнnpm. npmci PASS, npm audit --omit=dev --audit-level=high PASS (остаётсяmoderate nodemailer, не скрыт), TypeScript PASS,38exact/reference/ASTRAтестов PASS. Advisory GHSA-mrhx-c7xc-m3w5 проверен. Исходные117releaseтестов ранее PASS. Защитааудита неослаблена.
 
 Read-only reusepreview40050603489 запущен поfad6031 длявсехсуществующихмоделей; неapply и нескачивание. Послеотчёта — точныйreviewdigest/возможныйapply ивыпуск224плюсрезультатreuse одниминдексом. Публичнаяактивация ещё не произошла; действующийe7a307 сохранён.
+
+
+## 24.10.2026 08:44 Красноярск — повторное точное сопоставление4451моделей завершено
+
+Preview40050603489/job120742195151 SUCCESS. Artifact12543450766 SHA2567f0bf2f4907c45d26491e971d630d82f65411f26e7252bfe70f758b091f31af8 скачан/проверен. Plan c5b9212fad31e03d0b7209689102433f416b8ad263b154f264da0e0efe74f0a7:4451моделей прочитано,0новыхзначений; только1proof powertrainKind NioET5T/7f52470e6594a81a79fbf80d/revisionbadff664-77eb-47ad-b336-15c568a5faeb. Это неготовность80%: ранее1398полей669вариантов ужеперенесены/активированы,230447ASTRAбезмодельногогода по-прежнему внегодовогоиндекса.
+
+Проверенныйплан запрошеннаapply сexactdigest; значениянеперезаписываются, manual/exact/CAS сохраняются. Послеapply — повторноеподтверждение иобщийrelease224плюсproof. Zodfix3df5a9c готов. Сохраненыотчёты all-models-reuse-preview/unified-release-readiness; ownerfeedpolicy зафиксирована, end-to-endincremental ещё не заявлен.
