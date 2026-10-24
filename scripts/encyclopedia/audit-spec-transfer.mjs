@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {applyActiveBusinessPriceBatch} from '../../apps/web/lib/catalog/live-business-pricing.ts';
 import {validateBatch,planModelResearch,digest} from './research-batch.mjs';
 import {MANIFEST} from '../../apps/web/lib/encyclopedia/records.ts';
 import {getJsonStorage} from '../../apps/web/lib/data.ts';
@@ -49,6 +50,14 @@ function inspect(raw){
 }
 for(const row of snapshot.items)inspect(row);
 console.log('SAVED_MARKETS_CHECKED',JSON.stringify(report.markets));
+report.targetOffers=[];
+for(const id of (marker.targetOfferIds||[]).slice(0,12)){
+ const raw=snapshot.items.find(x=>x.id===id);if(!raw){report.targetOffers.push({id,missing:true});continue;}
+ const enriched=applyEncyclopediaCalculation(applyUaeManualSpecifications(raw),index);
+ const [priced]=await applyActiveBusinessPriceBatch([enriched],{readOnly:true});
+ report.targetOffers.push({id,make:raw.make,model:raw.model,year:raw.year,before:{engineCc:raw.engineCc,powerHp:raw.powerHp,totalRub:raw.totalRub,mode:raw.catalogPricingMode},after:{engineCc:priced.engineCc,powerHp:priced.powerHp,totalRub:priced.totalRub,mode:priced.catalogPricingMode,complete:specificationEvidenceComplete(enriched),status:priced.calculationStatus},fields:enriched.operational?.encyclopediaCalculation?.filledFields});
+}
+console.log('TARGET_CALCULATION_PROBE',JSON.stringify(report.targetOffers));
 const lots=new Map();
 for(let start=0;start<128;start+=8){const slots=await Promise.all(Array.from({length:8},(_,n)=>store.readJson(`catalog/partner-cache/ajes/queries/${start+n}.json`,null)));for(const slot of slots)for(const lot of slot?.value?.items||[])if(lot.table==='stats'&&(!lots.has(lot.id)||Date.parse(slot.value.observedAt)>Date.parse(lots.get(lot.id).observedAt)))lots.set(lot.id,{lot,observedAt:slot.value.observedAt});}
 report.japanCache.uniqueLots=lots.size;

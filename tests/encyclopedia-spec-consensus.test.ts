@@ -4,6 +4,20 @@ const row:any={id:'a',year:2025,trim:'Factory long name',status:'verified',sourc
 const offer:any={id:'offer',make:'Test',model:'EV',year:2025,trim:'Local translated name',fuel:'electric',powertrainKind:'electric',drive:'awd',bodyType:'sedan',powerKw:300};
 function index(rows:any[]){const models={[modelKey('Test','EV')]:compileModelFacts({id:'m',make:'Test',model:'EV',revision:'r',variants:rows})};return {version:1 as const,createdAt:'now',manifestDigest:'m',digest:checksum(models),models};}
 const apply=(o:any,rows:any[])=>applyEncyclopediaCalculation(o,index(rows),{specificationIdentity:true});
+test('factory output and known gearbox recover missing volume on the sparse Georgian screenshot card',()=>{
+ const fields={fuel:'petrol',powertrainKind:'combustion',engineCc:1999,powerHp:149,icePowerKw:109.59,transmission:'automatic'};
+ const d={id:'factory',year:2025,trim:'2.0 automatic',status:'review',...fields,researchEvidence:{batchId:'research-factory',source:{type:'manufacturer',url:'https://manufacturer.example/spec'},checkedIdentity:{make:'Test',model:'EV',year:2025,trim:'2.0 automatic'},fields:Object.keys(fields),values:fields}};
+ const o={...offer,fuel:'petrol',powertrainKind:'combustion',powerKw:undefined,powerHp:149,icePowerKw:109.6,transmission:'automatic',bodyType:undefined,drive:undefined};
+ assert.equal(apply(o,[d]).engineCc,1999);
+ for(const patch of [{transmission:undefined},{transmission:'manual'},{powerHp:undefined,icePowerKw:undefined},{year:2024}])assert.equal(apply({...o,...patch},[d]).engineCc,undefined);
+ assert.equal(apply(o,[{...d,status:'observed',researchEvidence:undefined,markets:['china']}]).engineCc,undefined);
+ assert.equal(apply(o,[d,{...d,id:'unknown',engineCc:undefined,researchEvidence:{...d.researchEvidence,fields:['fuel'],values:{fuel:'petrol'}}}]).engineCc,undefined);
+ const ambiguous=(value:string,status='ambiguous')=>({...o,sourceId:'autopapa_georgia_open',operational:{semanticEvidence:{engineCc:{status,source:'autopapa_listing_card_engine',rawValues:[value]}}}});
+ const resolved=apply(ambiguous('2.0 l'),[d]);assert.equal(resolved.engineCc,1999);
+ assert.deepEqual(resolved.operational.semanticEvidence.engineCc.resolvedSourceEvidence.rawValues,['2.0 l']);
+ for(const value of ['1.5 l','2-3 l','unknown','2 l'])assert.equal(apply(ambiguous(value),[d]).engineCc,undefined);
+ assert.equal(apply(ambiguous('2.0 l','conflict'),[d]).engineCc,undefined);
+});
 test('complete annual mechanical identity can bridge different trim wording',()=>{assert.equal(apply(offer,[row]).power30MinKw,135);assert.equal(applyEncyclopediaCalculation(offer,index([row])).power30MinKw,135);assert.equal(applyEncyclopediaCalculation(offer,index([row]),{technicalIdentity:true,specificationIdentity:false}),offer);});
 test('wrong year and partial mechanical anchors do not transfer',()=>{for(const patch of [{year:2024},{drive:undefined},{bodyType:undefined},{powerKw:undefined},{fuel:'hybrid'},{powerDataSource:'customer_input'}]){const o={...offer,...patch};assert.equal(apply(o,[row]),o);}});
 test('conflicting or incomplete compatible versions block thirty minute transfer',()=>{for(const power30MinKw of [140,undefined])assert.equal(apply(offer,[row,{...row,id:'b',power30MinKw}]).power30MinKw,undefined);});

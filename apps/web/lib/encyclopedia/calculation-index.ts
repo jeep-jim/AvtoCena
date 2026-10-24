@@ -115,6 +115,15 @@ function resolvesCoarseMobileBody(offer:any,evidence:any,entries:CalculationFact
   &&evidence.rawValues.every((value:unknown)=>typeof value==='string'&&/^limousine(?:,\s*(?:gebrauchtfahrzeug|jahreswagen|neufahrzeug|tageszulassung|vorführfahrzeug))?$/i.test(value.trim()))
   &&entries.every(c=>c.sources.bodyType?.kind==='manufacturer'&&/^https:\/\//.test(c.sources.bodyType.url||'')&&Boolean(c.sources.bodyType.batchId));
 }
+function resolvesRoundedAutoPapaVolume(offer:any,evidence:any,entries:CalculationFact[]){
+ if(offer.sourceId!=='autopapa_georgia_open'||exists(offer.engineCc)||exists(evidence?.value)||evidence?.source!=='autopapa_listing_card_engine')return false;
+ const raw=evidence.rawValues;
+ return Array.isArray(raw)&&raw.length>0&&raw.length<=4&&entries.every(c=>c.sources.engineCc?.kind==='manufacturer'&&Boolean(c.sources.engineCc.batchId))
+  &&raw.every((v:unknown)=>{const m=String(v).trim().match(/^(\d{1,2})[.,](\d{1,2})\s*l$/i);if(!m)return false;
+   const cc=Number(m[1]+'.'+m[2])*1000,rounding=500/10**m[2].length;
+   return entries.every(c=>Math.abs(Number(c.values.engineCc)-cc)<=rounding);
+  });
+}
 /** Exact modification/year, hard constraints, and per-field unanimity. No score winner. */
 export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean;specificationIdentity?:boolean;ordinarySpecificationIdentity?:boolean}={technicalIdentity:true,specificationIdentity:true}):T{
  if(!index||!offer.make||!offer.model||!Number.isInteger(offer.year)||(!offer.trim&&!options.technicalIdentity&&!options.specificationIdentity))return offer;
@@ -185,7 +194,13 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
    const powerAnchor=a>0&&b>0&&Math.abs(a-b)<=0.75;
    const volumeAnchor=exists(identity.engineCc)&&exists(x.engineCc)&&same('engineCc',identity.engineCc,x.engineCc);
    const layoutAnchor=['drive','bodyType'].some(f=>exists(identity[f])&&exists(x[f])&&same(f,identity[f],x[f]));
-   return (powerAnchor&&volumeAnchor)||((powerAnchor||volumeAnchor)&&layoutAnchor);
+   // A reviewed factory output, known gearbox and annual model may recover
+   // missing displacement even when the source omitted both body and drive.
+   // Unreviewed observations alone cannot open this narrower path.
+   const factoryGearboxAnchor=exists(identity.transmission)&&exists(v.constraints.transmission)&&same('transmission',identity.transmission,v.constraints.transmission)
+    &&v.sources.engineCc?.kind==='manufacturer'&&Boolean(v.sources.engineCc.batchId)
+    &&['powerHp','powerKw','icePowerKw'].some(f=>(v.sources as any)[f]?.kind==='manufacturer'&&Boolean((v.sources as any)[f]?.batchId));
+   return (powerAnchor&&(volumeAnchor||factoryGearboxAnchor))||((powerAnchor||volumeAnchor)&&layoutAnchor);
   })){
    // Missing displacement or output cannot be required to recover itself.
    // Every compatible annual variant remains in the consensus pool; this
@@ -206,7 +221,7 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
   const value=entries[0].values[field];
   if(!entries.every(c=>same(field,c.values[field],value)))continue;
   const ambiguous=semantic[field]?.status==='ambiguous';
-  if(ambiguous&&!(field==='bodyType'&&resolvesCoarseMobileBody(offer,semantic[field],entries)))continue;
+  if(ambiguous&&!(field==='bodyType'&&resolvesCoarseMobileBody(offer,semantic[field],entries))&&!(field==='engineCc'&&resolvesRoundedAutoPapaVolume(offer,semantic[field],entries)))continue;
   if(exists(next[field])&&!same(field,next[field],value))continue;
   if(!exists(next[field])){next[field]=['fuel','powertrainKind','drive','transmission','bodyType'].includes(field)?normalized(field,value):value;filledFields.push(field);}
   applied[field]=next[field];provenance[field]=entries.map(c=>({modelId:c.modelId,variantId:c.variantId,revision:c.revision,...c.sources[field]}));

@@ -1,74 +1,12 @@
 {
-  "indexDigest": "8b3f26cd58af545ff0f380bb3ae5b2d0dbb7b3444c1dcf9f0f66a54dfe22b5db",
+  "indexDigest": "d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
   "readOnly": true,
-  "iteration": 5,
-  "reason": "Owner screenshot calculation failures: compare ordinary missing-field consensus against full-anchor baseline; read-only source-backed research digests. No supplier requests.",
-  "researchModels": [
-    {
-      "make": "Genesis",
-      "model": "GV80",
-      "years": [
-        2021
-      ]
-    },
-    {
-      "make": "Kia",
-      "model": "Carnival",
-      "years": [
-        2021
-      ]
-    },
-    {
-      "make": "Kia",
-      "model": "Seltos",
-      "years": [
-        2023
-      ]
-    },
-    {
-      "make": "Volkswagen",
-      "model": "Taos",
-      "years": [
-        2022
-      ]
-    },
-    {
-      "make": "Nissan",
-      "model": "Qashqai",
-      "years": [
-        2021
-      ]
-    },
-    {
-      "make": "Buick",
-      "model": "Encore",
-      "years": [
-        2023
-      ]
-    },
-    {
-      "make": "Honda",
-      "model": "N-BOX",
-      "years": [
-        2018
-      ]
-    },
-    {
-      "make": "Suzuki",
-      "model": "Every",
-      "years": [
-        2016,
-        2018,
-        2022
-      ]
-    },
-    {
-      "make": "Suzuki",
-      "model": "Alto",
-      "years": [
-        2022,
-        2023
-      ]
-    }
+  "iteration": 6,
+  "reason": "Verify sparse Georgia screenshot factory-output/gearbox identity and exact cc replacement of rounded litres; bounded target real pricing, no supplier calls or writes.",
+  "targetOfferIds": [
+    "bbdc9f4661719617765f19ec",
+    "dc7c298f69c3792d1ad3ccd2",
+    "426b55b93f6d6c1704d99d8c",
+    "a8081ef8ca1b2bdc15ec6fcd"
   ]
 }
