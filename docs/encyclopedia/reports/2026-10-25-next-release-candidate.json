@@ -6,7 +6,8 @@
     "China40124551054 terminal; inspect exact failure if any",
     "no active/pending production release or conflicting writer",
     "PASS: A4 quattro11/API11 and A5 displacement3/API3; do not repeat applies",
-    "Actual fresh lease must be free: China writer was active at2026-10-24T21:02:13.683Z; expires21:29:58.613Z, expiry alone is not proof"
+    "Actual fresh lease must be free: China writer was active at2026-10-24T21:02:13.683Z; expires21:29:58.613Z, expiry alone is not proof",
+    "PASS: A3MHEV4/API4 with original public fields/other variants unchanged; batch must be compiled in next index"
   ],
   "markerCandidate": {
     "requiredResearchBatches": [
@@ -52,7 +53,8 @@
       "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a4-quattro-power-drive.json",
-      "docs/encyclopedia/batches/2026-10-25-audi-a5-40tfsi-displacement.json"
+      "docs/encyclopedia/batches/2026-10-25-audi-a5-40tfsi-displacement.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-999-mhev-power.json"
     ],
     "publicResearchBatches": [
       "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -83,7 +85,8 @@
       "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a4-quattro-power-drive.json",
-      "docs/encyclopedia/batches/2026-10-25-audi-a5-40tfsi-displacement.json"
+      "docs/encyclopedia/batches/2026-10-25-audi-a5-40tfsi-displacement.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-999-mhev-power.json"
     ],
     "requiredAstraPlanDigests": [
       "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
@@ -101,5 +104,5 @@
     "one chunked repair with current lease and live AJES Japan preflight",
     "counts/parity/details then pinned pickup-drive-pricing/checkCatalogFeedback and actual prices"
   ],
-  "checkedAt": "2026-10-24T21:08:32.195939+00:00"
+  "checkedAt": "2026-10-24T21:21:13.098027+00:00"
 }

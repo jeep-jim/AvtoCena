@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T21:11:51.874545+00:00",
+  "updatedAt": "2026-10-24T21:21:13.098027+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -33040,6 +33040,21 @@
         "afterRevision": "44e42cca-52bd-415d-8868-223aa6592384",
         "apiReadback": true,
         "report": "docs/encyclopedia/reports/2026-10-25-audi-a5-displacement-readback.json"
+      },
+      {
+        "batch": "research-2026-10-25-audi-a3-999-mhev-power",
+        "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-999-mhev-power.json",
+        "sha256": "c938cc8e70696fc5f6a6a1d0cbaad970fff1f93a7fd8e382d2e4bc50efbd4b57",
+        "workflow": 40133471975,
+        "job": 120989950801,
+        "preflightWorkflow": 40133371388,
+        "variants": 1,
+        "fields": 4,
+        "state": "saved_api_readback_pass_pending_next_index",
+        "modelId": "f40e34e905b8ca09f3636eda",
+        "afterRevision": "c121ad35-2926-4ecd-825c-d09cbbc7b273",
+        "apiReadback": true,
+        "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-mhev-readback.json"
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
@@ -42893,7 +42908,7 @@
       ],
       "year": 2024,
       "rowsChecked": 470,
-      "candidateRows": 21,
+      "candidateRows": 20,
       "fields": [
         "fuel",
         "engineCc",
@@ -42901,12 +42916,12 @@
         "documentedPower30MinKw",
         "drive"
       ],
-      "state": "128_retained_rows_reviewed_21_candidates_remaining",
-      "savedFields": 31,
+      "state": "128_retained_rows_reviewed_20_candidates_remaining",
+      "savedFields": 35,
       "broadBodyCaution": "Passenger car — общая категория, не точный кузов. Анонимный API не доказывает отсутствие приватных homologation IDs; проверить сохранённую идентичность, не угадывать.",
       "residualPlanChecked": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
       "targetModelsChangedByResidualPlan": 0,
-      "reason": "Two additionalA4candidates fully resolved;3A5displacements filled with power remaining. Page2 reviewed without duplicate source rows or automatic promotion.",
+      "reason": "A3 999cc MHEV candidate resolved using official MY2024 and both factory body tables; unknown body preserved. Previous A4/A5 batches not repeated.",
       "remainingSourceRows": 139,
       "nextAfterDigest": "714c337c099923f271da4618f98592b51f472e2fde9074d27efdeed0a29c4aa1",
       "workflow": 40132396999,
@@ -42953,7 +42968,7 @@
       "checkpoint": "docs/operations/2026-10-24-bounded-scoped-projections.md"
     },
     "overnightContinuation20261025": {
-      "state": "saved14_api14_wait_active_china_publication",
+      "state": "saved18_api18_unnamed_importer_merged_wait_china",
       "failedRelease": 40117114655,
       "failedReleaseSha": "304b270cfd2b14be47b579f268d8c0d92df7dc17",
       "failure": "object_storage_PUT_unreachable: budget-markets-v2/china.json bytes=79256913",
@@ -42961,11 +42976,11 @@
       "preparedManifestDigest": "eec8e463217e99c1478b4f85fb7ecca29c556d68fbeaf13c40fd4967477e024e",
       "repairPrerequisitePr": 1527,
       "astraContinuationPr": 1528,
-      "savedFieldsThisRun": 14,
+      "savedFieldsThisRun": 18,
       "activationConfirmed": false,
-      "next": "Do not repeat saved14/previous17/559reuse. Wait existing China40124551054 terminal, then fresh lease/generation/selectors and all queues. Prepared candidate43required/29public/3ASTRA; exactly one release. Actual scoped-v1 before guardedrepair/public acceptance.",
+      "next": "Do not repeat saved18/previous17/559reuse. TerminalChina40124551054 and exact log if failure; then fresh lease/generation/selectors/all queues. Prepared44required/30public/3ASTRA; one release, actualscoped-v1 then oneguardedrepair and publicacceptance.",
       "referenceCursorUnchanged": "docs/encyclopedia/research-handoff-2026-10-24-retained-technical-groups.json",
-      "checkedAt": "2026-10-24T21:08:32.195939+00:00",
+      "checkedAt": "2026-10-24T21:21:13.098027+00:00",
       "repairPrerequisiteMerge": "1e6440c938a3332a50008d76f9c9e61a915c110c",
       "astraContinuationMerge": "30aadd126a92acc9ce7b89d34c08bd2cba2740c5",
       "astraContinuationCi": 40116008291,
@@ -42983,9 +42998,12 @@
       "releaseSha": "304b270cfd2b14be47b579f268d8c0d92df7dc17",
       "prepareJob": 120940688218,
       "health": {
-        "checkedAt": "2026-10-24T20:13:21.864419+00:00",
+        "checkedAt": "2026-10-24T21:20:06.003952+00:00",
+        "status": 200,
+        "ok": true,
+        "service": "avtocena-web",
         "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
-        "catalogProjectionParts": null
+        "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
       },
       "checkpoint": "docs/operations/2026-10-25-release-304b270-continuation.json",
       "newReleaseRequested": false,
@@ -43077,6 +43095,30 @@
       "comparedWith": "fad9b29",
       "allEarlierPriorityKeysPreserved": true,
       "reason": "Repository file began with tool-output truncation warning and was not JSON. Recovered full checkpoint, then appended current verified batches. Encyclopedia storage was not overwritten."
+    },
+    "audiA3Mhev2024Pass": {
+      "batch": "research-2026-10-25-audi-a3-999-mhev-power",
+      "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-999-mhev-power.json",
+      "sha256": "c938cc8e70696fc5f6a6a1d0cbaad970fff1f93a7fd8e382d2e4bc50efbd4b57",
+      "workflow": 40133471975,
+      "job": 120989950801,
+      "preflightWorkflow": 40133371388,
+      "variants": 1,
+      "fields": 4,
+      "state": "saved_api_readback_pass_pending_next_index",
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "afterRevision": "c121ad35-2926-4ecd-825c-d09cbbc7b273",
+      "apiReadback": true,
+      "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-mhev-readback.json"
+    },
+    "unnamedResearchImporter": {
+      "pr": 1530,
+      "merge": "35ec2b65ca0876ff6af5753d2db86a2663cd05d4",
+      "ci": 40133250180,
+      "conclusion": "success",
+      "targetTests": 14,
+      "fullTests": 2524,
+      "typecheck": "pass"
     }
   },
   "scope": {

@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-24T21:11:51.874545+00:00",
-  "state": "21_remaining_candidates_after_a4_quattro_and_a5_displacement",
-  "savedFields": 31,
+  "checkedAt": "2026-10-24T21:21:13.098027+00:00",
+  "state": "20_remaining_candidates_after_three_manufacturer_batches",
+  "savedFields": 35,
   "sourceInventoryWorkflow": 40106963530,
   "sourceClassification": "unverified_reference",
   "priority": [
@@ -16,7 +16,7 @@
       "id": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revisionAtReview": "a7b051a5-d325-5411-a5a7-ed61b964fa9c",
+      "revisionAtReview": "c121ad35-2926-4ecd-825c-d09cbbc7b273",
       "year": 2024,
       "sourceModelGroup": "audi/a3",
       "publicRowsChecked": 126,
@@ -67,21 +67,6 @@
           },
           "missing": [
             "engineCc",
-            "powerHpOrKw"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
-        {
-          "variantId": "d13dbaae2d2bb417df3289fa",
-          "year": 2024,
-          "trim": "30 TFSI S LINE MHEV S tronic | KEYLESS | LED | VIRTUAL COCKPIT | 18\" | ZETELVERW. | PDC | CRUISE CONTROL",
-          "known": {
-            "fuel": "hybrid",
-            "powertrainKind": "other_hybrid",
-            "engineCc": 999,
-            "transmission": "automatic"
-          },
-          "missing": [
             "powerHpOrKw"
           ],
           "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
@@ -386,8 +371,8 @@
     }
   ],
   "totalRowsChecked": 470,
-  "candidateRows": 21,
-  "nextAction": "Continue21 remaining candidates and retained cursor. New14 fields saved/API14; do not repeat applies. A5 power remains unresolved; unnamed records require exact mechanical evidence.",
+  "candidateRows": 20,
+  "nextAction": "Continue20 unresolved candidates and139 source rows after page2 cursor. This run18 fields/API18; previous run17 unchanged. Existing unnamed research importer merged, but exact private mechanical identity/evidence still required.",
   "resolvedCandidates": [
     {
       "variantId": "fc8ef77222122cbe20bfe9af",
@@ -496,6 +481,24 @@
       "missing": [],
       "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
       "batch": "research-2026-10-25-audi-a4-quattro-power-drive"
+    },
+    {
+      "variantId": "d13dbaae2d2bb417df3289fa",
+      "year": 2024,
+      "trim": "30 TFSI S LINE MHEV S tronic | KEYLESS | LED | VIRTUAL COCKPIT | 18\" | ZETELVERW. | PDC | CRUISE CONTROL",
+      "known": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "engineCc": 999,
+        "transmission": "automatic",
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd"
+      },
+      "missing": [],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a3-999-mhev-power"
     }
   ],
   "retainedPage": {
@@ -667,5 +670,14 @@
       ],
       "next": "Continue from exact digest with next bounded page; no new collector, no retry of redirect_outside_catalog."
     }
-  ]
+  ],
+  "unnamedResearchImporter": {
+    "pr": 1530,
+    "merge": "35ec2b65ca0876ff6af5753d2db86a2663cd05d4",
+    "ci": 40133250180,
+    "conclusion": "success",
+    "targetTests": 14,
+    "fullTests": 2524,
+    "typecheck": "pass"
+  }
 }
