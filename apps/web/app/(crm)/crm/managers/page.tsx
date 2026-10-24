@@ -1,5 +1,4 @@
 import {GPT_PROFILE} from "@/lib/crm-gpt-profile";
-import {AssistantLauncher} from "@/components/crm/assistant/AssistantLauncher";
 import {TeamSchedulePanel} from "@/components/crm/TeamSchedulePanel";
 import {hasCrmPermission,ROLE_DETAILS} from "@/lib/crm-permissions";
 import { redirect } from "next/navigation";
@@ -31,7 +30,6 @@ export default async function CrmManagersPage({searchParams}:{searchParams?:Prom
 
   return (
     <CrmShell activeHref="/crm/managers" title="Команда и права" subtitle="Сотрудники компании, их роли, назначенные заявки и доступ к разделам CRM.">
-      {hasCrmPermission(actor,'assistant')&&<aside className="team-assistant-card"><img src={GPT_PROFILE.avatarUrl} alt="" width={42} height={42}/><strong>ИИ-помощник команды</strong><p>Поиск, подсказки и помощь с заполнением — прямо на сайте.</p>{hasCrmPermission(actor,'assistant')?<AssistantLauncher/>:null}</aside>}
       <TeamSchedulePanel initialMonth={month} initialDate={typeof query.date==="string"?query.date:undefined}/>
       <section className="crm-team-intro glass mb-5 rounded-[1.8rem] p-5">
         <div className="flex flex-wrap items-start justify-between gap-4">
