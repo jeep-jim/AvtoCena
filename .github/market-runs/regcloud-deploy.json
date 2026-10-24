@@ -34,7 +34,8 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2026-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
     "docs/encyclopedia/batches/2026-10-24-screenshot-combustion.json",
-    "docs/encyclopedia/batches/2026-10-24-countryman-2020-volume.json"
+    "docs/encyclopedia/batches/2026-10-24-countryman-2020-volume.json",
+    "docs/encyclopedia/batches/2026-10-24-countryman-2020-fuel.json"
   ],
   "publicResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -57,12 +58,13 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2026-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
     "docs/encyclopedia/batches/2026-10-24-screenshot-combustion.json",
-    "docs/encyclopedia/batches/2026-10-24-countryman-2020-volume.json"
+    "docs/encyclopedia/batches/2026-10-24-countryman-2020-volume.json",
+    "docs/encyclopedia/batches/2026-10-24-countryman-2020-fuel.json"
   ],
   "requiredAstraPlanDigests": [
     "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
   ],
-  "requestedAt": "2026-10-24T10:26:15.872Z",
-  "reason": "Deploy merged PR1513 d229ee24: calculate seller delivered previews before catalog pagination and budget filtering, keep uncalculated offers last, one shared route loader, canonical directory brand groups. CI40085309645 regression/typecheck/build PASS and seven browser/profile workflows PASS; local2483tests PASS. Preserves Countryman/Seltos and all research batches/ASTRA. AJES online global delivered ordering and rare logos remain unresolved; no collectors started.",
+  "requestedAt": "2026-10-24T11:06:05.709Z",
+  "reason": "Countryman compact/full parity: bounded diagnosis40088204804 proved new generic engine-only fact prevented unanimous fuel evidence. Manufacturer batch research-2026-10-24-countryman-2020-fuel applied successfully40088419868,4variants8unchanged fuel/powertrain confirmations. Local real-fact regression now passes exact year/fuel/cc/power; preserve all prior35batches and ASTRA. No runtime change.",
   "ideaReports": []
 }
