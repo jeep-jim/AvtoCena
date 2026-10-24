@@ -1,86 +1,236 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T05:01:40.764203+00:00",
+  "checkedAt": "2026-10-24T05:59:05.121914+00:00",
   "modelId": "8cf3dbb7884fe919bce44c62",
   "make": "Audi",
   "model": "A5",
-  "year": 2026,
-  "revision": "a8789e5c-38d2-5340-a89c-ff13fa65ae54",
-  "rowsRead": 129,
-  "missingBodyType": 36,
-  "firstCandidate": {
-    "id": "2e602edc93de1056d0435651",
-    "markets": [],
-    "status": "review",
-    "observedCount": 1,
-    "year": 2026,
-    "engineCc": 1984,
-    "powerHp": 150,
-    "powerKw": 110,
-    "icePowerKw": 110,
-    "grossVehicleWeightKg": 2315,
-    "trim": "Avant TFSI 110 kW S tronic virt.Cockpit/Navi plus/",
-    "fuel": "petrol",
-    "powertrainKind": "combustion",
-    "transmission": "automatic",
-    "drive": "fwd"
-  },
-  "candidateIds": [
-    "2e602edc93de1056d0435651",
-    "c440c6afbd734ad5940412b1",
-    "77bc341a120da9bb66f2a2a9",
-    "803b15313402e864969ec2d3",
-    "034690b5af204cebd48cdc15",
-    "86f53c2db83e21a781e744df",
-    "9871f131e3d0d970829f1556",
-    "0668efd2a1dcfbf683c63915",
-    "b0acb170774f1a5f274dc46d",
-    "645bd20d279b841a3326b2e3",
-    "ea440915816d9eb96a10e2ac",
-    "23352a52929f61885237b6c8",
-    "48eabe99a5a9e2fb5786a63c",
-    "537aa5ed0e60b50a5bd637d5",
-    "5eb44b4f2d6244b2415b91c1",
-    "c9693bdc6f08451ebe112cac",
-    "f9516abc0ca83b1dd322c8c4",
-    "b0c72437d151ebabf974aa30",
-    "8cd919bcf83faf6dedb1e4f1",
-    "85b5e4e15b3c2ebb7a858b78",
-    "14b0c5a4253e0f70ce3f181d",
-    "0420d86ca47582a7f0e55afc",
-    "d74db60d7e5bf49020e5245b",
-    "1a406d9be49ba55e2a0ef32e",
-    "6ab2820e6b1173799561fe8d",
-    "19f2e5716bec3a3548b2f3ac",
-    "960a50a57fc0289f635c5937",
-    "00c165853cca6f02bba4b863",
-    "7c9460b732f115d8b596a98b",
-    "8c27975295e1b158224278d3",
-    "d84ca863d74b79410b2f418a",
-    "5abfd48356edf59c0801c044",
-    "4f422cba14962234bc8ae9e5",
-    "9b267de126ef4a2dd88e07d5",
-    "1213cfad559a67b7458a674c",
-    "e761bcd0e0375eed1f7452f1"
-  ],
-  "state": "read_only_candidates_not_verified",
-  "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
-  "nextAction": "Сверить сохранённые источники и точные годовые исполнения A5 2026, начиная с первого кандидата; заполнять только отсутствующие поля, не выводить двигатель или 30-минутную мощность из названия. Перед apply — свежая полная запись и CAS.",
+  "revision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+  "lastCompletedBatch": "research-2026-10-24-audi-a5-2026-body",
+  "lastReadback": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-readback.json",
   "next": {
     "modelId": "8cf3dbb7884fe919bce44c62",
     "make": "Audi",
     "model": "A5",
-    "year": 2026,
-    "variantId": "2e602edc93de1056d0435651",
-    "trim": "Avant TFSI 110 kW S tronic virt.Cockpit/Navi plus/",
+    "year": 2025,
+    "variantId": "ae6c6d78fe213a9578ed345e",
+    "trim": "Avant S line TFSI 110 kW S-tronic",
     "missingValueFields": [
       "bodyType"
     ],
-    "state": "requires_exact_source_review",
-    "reason": "Следующая существующая модель после ограниченной группы A4L; 129 строк 2026 прочитаны, 36 без кузова. Сохранённые источники и точный год ещё требуется проверить."
+    "state": "requires_exact_source_review"
   },
-  "previousA4LHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a4l-next.json",
-  "previousA4LReport": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2025-mass-pass.json",
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
+  "previousRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
+  "nextYearRead": {
+    "year": 2025,
+    "rows": 99,
+    "missingBodyType": 25,
+    "revision": "a8789e5c-38d2-5340-a89c-ff13fa65ae54",
+    "requiresFreshRead": true,
+    "candidates": [
+      {
+        "variantId": "9ef59e4eede4c43e0ee67a16",
+        "trim": "40 TFSI 콰트로 S Line",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "e0bdae94b5cf8cf587d7cd2a",
+        "trim": "45 TFSI 콰트로 S Line",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "ae6c6d78fe213a9578ed345e",
+        "trim": "Avant S line TFSI 110 kW S-tronic",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "75a948ea0c1391280f1bad66",
+        "trim": "Avant 2.0 TFSI Stronic Advanced",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "bc3c86d78c5de78feb3dded3",
+        "trim": "TFSI Q LM19 AHK KAMERA eSITZE",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "17f4a4b4ae1658189f507b07",
+        "trim": "Limousine TDI 150 kW Business*LED*RFK*ACC*",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "9b346242d6f38df86817936f",
+        "trim": "Limousine TFSI S tronic *ACC*AHK*R-KAM*18''*",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "3fab2bcac051ad2c6978e13d",
+        "trim": "Limousine TFSI S tronic *ACC*AHK*LED-Plus*19*",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "b5bf1258d0d0818c47ef3794",
+        "trim": "TFSI Q AHK SPORTSITZE LM18",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "17327ee4c09c0b239d9e011c",
+        "trim": "Limousine TDI LEDER PANO MATRIX 360° BF-DISPL",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "fe646dcdd9905882624f453c",
+        "trim": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "6fc7d8a9e64bd5cd25d48870",
+        "trim": "2.0 TDI S Line Plus S Tronic*Navi*Matrix*Na",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "5e9184b5d92e0428617b9b5c",
+        "trim": "TFSI 150 kW S tronic Exterieur S line Keyless Go/Klima/LED/Soundsystem/Sitzhzg./MF-Lenkrad/BC/Tempomat/L-R Sensor/eFH.",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "5d1341c45a05c8a4f36b8e2f",
+        "trim": "A5 Avant 2.0 TFSI S-Line 19Zoll*ACC*Matrix*Sound",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "3b76a8b80496bfa82ff25f67",
+        "trim": "Avant TDI 150 kW S tronic*TECHPLUS*2xS-Line*",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "690e1eae227659a31b7b164d",
+        "trim": "Avant TFSI edition one S line Navi+AHK+Matrix",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "179c41517625a54d112bb7af",
+        "trim": "2.0 TDI Avant quattro /MATRIX-LED/STANDH./ACC/RÜC",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "55f3d39cfb48e1afeb3aae09",
+        "trim": "Avant edition one MATRIX LED KAMERA LEDER HEAD ...",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "d2f135c8fbaa1fc2455d22b9",
+        "trim": "TDI S tronic mHEV+ S Line edition",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "1761dcc23c7203f96f4fb51e",
+        "trim": "Avant 2.0 tdi mhev 204CV Business Advanced s-tronic",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "8fce91ed11bd97ed8fe60294",
+        "trim": "avant 2.0 tdi mhev+ business advanced 204cv s-tron",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "11a533a6ce912bd2fec9a7c3",
+        "trim": "Avant TDI 150 kW mHEV+ S tronic S Line ed. NAVI",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "faf4ae7980445b02dedd77ad",
+        "trim": "Avant 2.0 e quattro TFSI W edition one 360 LM",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "5532c3fe92dd4d9512ba2585",
+        "trim": "Sportback 45 TFSI quattro S tronic Matrix-LED",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      {
+        "variantId": "16722521eda13a935286b75a",
+        "trim": "SLINE AHK MATRIX LEDER NP83k Avant eHYBRID 270kWqu",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      }
+    ]
+  },
+  "modelComplete": false,
   "allModelsComplete": false,
-  "modelComplete": false
+  "nextAction": "Продолжить A5 2025 по сохранённому курсору;30 выбранных кузовов2026 сохранены. Шесть кузовных2026 и другие неизвестные поля остаются в retry, повторно применённые партии не запускать. Старые годы/отсутствующие2008+ не объявлены полными."
 }

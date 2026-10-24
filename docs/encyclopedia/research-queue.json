@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T05:01:40.762805+00:00",
+  "updatedAt": "2026-10-24T05:59:05.121914+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1403,7 +1403,7 @@
       "variants": 602,
       "status": "partial_verified_fields",
       "researchedVariants": 131,
-      "checkedAt": "2026-10-22T05:23:29.142352+07:00",
+      "checkedAt": "2026-10-24T05:59:05.121914+00:00",
       "researchedYears": [
         2026,
         2025,
@@ -1437,7 +1437,15 @@
         2014,
         2013
       ],
-      "nextAction": "131 модификаций/1080 полевых подтверждений сохранены и прочитаны;471 пропусков и пробелы вretry-2026-10-22-audi-a5.json. Не повторять применённые партии. ДалееAudi A5L;A5 F5 требует точного Premium Coupe источника."
+      "nextAction": "Продолжить A5 2025 по сохранённому курсору;30 выбранных кузовов2026 сохранены. Шесть кузовных2026 и другие неизвестные поля остаются в retry, повторно применённые партии не запускать. Старые годы/отсутствующие2008+ не объявлены полными.",
+      "revision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "lastBatch": "research-2026-10-24-audi-a5-2026-body",
+      "lastBatchFields": 30,
+      "lastBatchVariants": 30,
+      "lastReadback": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-readback.json",
+      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
+      "nextVariantId": "ae6c6d78fe213a9578ed345e",
+      "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a5-next.json"
     },
     {
       "id": "5dfeb75b8f1fc86b298d3b9a",
@@ -32787,7 +32795,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T05:01:40.762805+00:00",
+    "updatedAt": "2026-10-24T05:59:05.121914+00:00",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
     "state": "audi_a4l_2025_mass_prepared_waiting_snapshot",
     "preserveManual": true,
@@ -32796,16 +32804,15 @@
       "modelId": "8cf3dbb7884fe919bce44c62",
       "make": "Audi",
       "model": "A5",
-      "year": 2026,
-      "variantId": "2e602edc93de1056d0435651",
-      "trim": "Avant TFSI 110 kW S tronic virt.Cockpit/Navi plus/",
+      "year": 2025,
+      "variantId": "ae6c6d78fe213a9578ed345e",
+      "trim": "Avant S line TFSI 110 kW S-tronic",
       "missingValueFields": [
         "bodyType"
       ],
-      "state": "requires_exact_source_review",
-      "reason": "Следующая существующая модель после ограниченной группы A4L; 129 строк 2026 прочитаны, 36 без кузова. Сохранённые источники и точный год ещё требуется проверить."
+      "state": "requires_exact_source_review"
     },
-    "lastVerifiedResearch": "audi-a4l-2025-mass",
+    "lastVerifiedResearch": "audi-a5-2026-body",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32823,7 +32830,7 @@
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
     "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a4l.json",
     "historicalExpansionComplete": false,
-    "lastVerifiedBatch": "research-2026-10-24-audi-a4l-2025-mass",
+    "lastVerifiedBatch": "research-2026-10-24-audi-a5-2026-body",
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792702445675_8c312f85",
     "pendingIndexBatches": [],
@@ -33097,9 +33104,480 @@
           "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2025-mass-public-parity.json",
           "newBatchActivationProved": false
         }
+      },
+      {
+        "version": 1,
+        "checkedAt": "2026-10-24T05:59:05.121914+00:00",
+        "batch": "research-2026-10-24-audi-a5-2026-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2026-body.json",
+        "batchSha256": "05c2fa1aa7ee1f31a27d97f2de84ca89c003fafc669d868a75671e56dacf4c95",
+        "commit": "69755130825c8cf777bc697b8ba3313a901f9f43",
+        "workflow": 40068309862,
+        "job": 120796108570,
+        "applyFinishedAt": "2026-10-24T05:58:42.728Z",
+        "conclusion": "success",
+        "variants": 30,
+        "fields": 30,
+        "newVariants": 0,
+        "bodyCounts": {
+          "sedan": 26,
+          "wagon": 4
+        },
+        "apiReadback": true,
+        "beforeRevision": "a8789e5c-38d2-5340-a89c-ff13fa65ae54",
+        "afterRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+        "includedInIndex": false,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-pass.json",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-readback.json",
+        "source": {
+          "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+          "sha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+          "edition": "02 (04/2025)",
+          "pages": [
+            1,
+            2
+          ],
+          "document": "rds_au_402_022_en"
+        },
+        "preflight": {
+          "workflow": 40068252368,
+          "job": 120795933678,
+          "commit": "e670872a7468f54ec94e117eb200a5ff53058d62",
+          "readOnly": true,
+          "fullDigestCAS": true
+        },
+        "validation": {
+          "localGuardTests": 11,
+          "passed": true,
+          "workflowGuardsPassed": true,
+          "batchValid": true,
+          "independentApiReadback": true,
+          "untargeted2026Unchanged": 99
+        },
+        "publicParity": {
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "matched": 91,
+          "repeatedGroups": 2,
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-public-parity.json",
+          "newBatchActivationConfirmed": false
+        },
+        "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
+        "next": {
+          "modelId": "8cf3dbb7884fe919bce44c62",
+          "make": "Audi",
+          "model": "A5",
+          "year": 2025,
+          "variantId": "ae6c6d78fe213a9578ed345e",
+          "trim": "Avant S line TFSI 110 kW S-tronic",
+          "missingValueFields": [
+            "bodyType"
+          ],
+          "state": "requires_exact_source_review"
+        },
+        "allModelsComplete": false,
+        "modelComplete": false,
+        "releaseCoordination": {
+          "snapshotWorkflow": 40066793422,
+          "preparePrivateIndex": "success_before_apply",
+          "membershipStep": "success_before_apply",
+          "pendingManualRelease": 40068044382,
+          "duplicateReleaseRequested": false
+        },
+        "applyResults": [
+          {
+            "batch": "research-2026-10-24-audi-a5-2026-body",
+            "dryRun": true,
+            "models": [
+              {
+                "id": "8cf3dbb7884fe919bce44c62",
+                "changes": [
+                  {
+                    "variantId": "2e602edc93de1056d0435651",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "c440c6afbd734ad5940412b1",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "77bc341a120da9bb66f2a2a9",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "803b15313402e864969ec2d3",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "034690b5af204cebd48cdc15",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "86f53c2db83e21a781e744df",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "9871f131e3d0d970829f1556",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "0668efd2a1dcfbf683c63915",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "b0acb170774f1a5f274dc46d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "645bd20d279b841a3326b2e3",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "ea440915816d9eb96a10e2ac",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "23352a52929f61885237b6c8",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "48eabe99a5a9e2fb5786a63c",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "537aa5ed0e60b50a5bd637d5",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "5eb44b4f2d6244b2415b91c1",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "c9693bdc6f08451ebe112cac",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "f9516abc0ca83b1dd322c8c4",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "8cd919bcf83faf6dedb1e4f1",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "14b0c5a4253e0f70ce3f181d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "0420d86ca47582a7f0e55afc",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "d74db60d7e5bf49020e5245b",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "6ab2820e6b1173799561fe8d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "19f2e5716bec3a3548b2f3ac",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "960a50a57fc0289f635c5937",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "00c165853cca6f02bba4b863",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "7c9460b732f115d8b596a98b",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "8c27975295e1b158224278d3",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "d84ca863d74b79410b2f418a",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "4f422cba14962234bc8ae9e5",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "9b267de126ef4a2dd88e07d5",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  }
+                ],
+                "skipped": []
+              }
+            ],
+            "startedAt": "2026-10-24T05:58:31.649Z",
+            "finishedAt": "2026-10-24T05:58:35.699Z"
+          },
+          {
+            "batch": "research-2026-10-24-audi-a5-2026-body",
+            "dryRun": false,
+            "models": [
+              {
+                "id": "8cf3dbb7884fe919bce44c62",
+                "changes": [
+                  {
+                    "variantId": "2e602edc93de1056d0435651",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "c440c6afbd734ad5940412b1",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "77bc341a120da9bb66f2a2a9",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "803b15313402e864969ec2d3",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "034690b5af204cebd48cdc15",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "86f53c2db83e21a781e744df",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "9871f131e3d0d970829f1556",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "0668efd2a1dcfbf683c63915",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "b0acb170774f1a5f274dc46d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "645bd20d279b841a3326b2e3",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "ea440915816d9eb96a10e2ac",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "23352a52929f61885237b6c8",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "48eabe99a5a9e2fb5786a63c",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "537aa5ed0e60b50a5bd637d5",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "5eb44b4f2d6244b2415b91c1",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "c9693bdc6f08451ebe112cac",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "f9516abc0ca83b1dd322c8c4",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "8cd919bcf83faf6dedb1e4f1",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "14b0c5a4253e0f70ce3f181d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "0420d86ca47582a7f0e55afc",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "d74db60d7e5bf49020e5245b",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "6ab2820e6b1173799561fe8d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "19f2e5716bec3a3548b2f3ac",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "960a50a57fc0289f635c5937",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "00c165853cca6f02bba4b863",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "7c9460b732f115d8b596a98b",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "8c27975295e1b158224278d3",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "d84ca863d74b79410b2f418a",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "4f422cba14962234bc8ae9e5",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "9b267de126ef4a2dd88e07d5",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  }
+                ],
+                "skipped": []
+              }
+            ],
+            "startedAt": "2026-10-24T05:58:35.949Z",
+            "finishedAt": "2026-10-24T05:58:42.728Z"
+          }
+        ]
       }
     ],
-    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2025-mass-pass.json",
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -37935,9 +38413,9 @@
         "rerunRequested": false
       },
       "latestResearch": {
-        "checkedAt": "2026-10-24T05:01:40.762805+00:00",
-        "batch": "research-2026-10-24-audi-a4l-2025-mass",
-        "fields": 3,
+        "checkedAt": "2026-10-24T05:59:05.121914+00:00",
+        "batch": "research-2026-10-24-audi-a5-2026-body",
+        "fields": 30,
         "apiReadback": true,
         "activationConfirmed": false
       }
@@ -39671,6 +40149,477 @@
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2025-mass-public-parity.json",
         "newBatchActivationProved": false
       }
+    },
+    "audiA5Body2026Pass": {
+      "version": 1,
+      "checkedAt": "2026-10-24T05:59:05.121914+00:00",
+      "batch": "research-2026-10-24-audi-a5-2026-body",
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2026-body.json",
+      "batchSha256": "05c2fa1aa7ee1f31a27d97f2de84ca89c003fafc669d868a75671e56dacf4c95",
+      "commit": "69755130825c8cf777bc697b8ba3313a901f9f43",
+      "workflow": 40068309862,
+      "job": 120796108570,
+      "applyFinishedAt": "2026-10-24T05:58:42.728Z",
+      "conclusion": "success",
+      "variants": 30,
+      "fields": 30,
+      "newVariants": 0,
+      "bodyCounts": {
+        "sedan": 26,
+        "wagon": 4
+      },
+      "apiReadback": true,
+      "beforeRevision": "a8789e5c-38d2-5340-a89c-ff13fa65ae54",
+      "afterRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "includedInIndex": false,
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-pass.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-readback.json",
+      "source": {
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "sha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+        "edition": "02 (04/2025)",
+        "pages": [
+          1,
+          2
+        ],
+        "document": "rds_au_402_022_en"
+      },
+      "preflight": {
+        "workflow": 40068252368,
+        "job": 120795933678,
+        "commit": "e670872a7468f54ec94e117eb200a5ff53058d62",
+        "readOnly": true,
+        "fullDigestCAS": true
+      },
+      "validation": {
+        "localGuardTests": 11,
+        "passed": true,
+        "workflowGuardsPassed": true,
+        "batchValid": true,
+        "independentApiReadback": true,
+        "untargeted2026Unchanged": 99
+      },
+      "publicParity": {
+        "passed": true,
+        "offers": 7,
+        "comparisons": 91,
+        "matched": 91,
+        "repeatedGroups": 2,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-public-parity.json",
+        "newBatchActivationConfirmed": false
+      },
+      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
+      "next": {
+        "modelId": "8cf3dbb7884fe919bce44c62",
+        "make": "Audi",
+        "model": "A5",
+        "year": 2025,
+        "variantId": "ae6c6d78fe213a9578ed345e",
+        "trim": "Avant S line TFSI 110 kW S-tronic",
+        "missingValueFields": [
+          "bodyType"
+        ],
+        "state": "requires_exact_source_review"
+      },
+      "allModelsComplete": false,
+      "modelComplete": false,
+      "releaseCoordination": {
+        "snapshotWorkflow": 40066793422,
+        "preparePrivateIndex": "success_before_apply",
+        "membershipStep": "success_before_apply",
+        "pendingManualRelease": 40068044382,
+        "duplicateReleaseRequested": false
+      },
+      "applyResults": [
+        {
+          "batch": "research-2026-10-24-audi-a5-2026-body",
+          "dryRun": true,
+          "models": [
+            {
+              "id": "8cf3dbb7884fe919bce44c62",
+              "changes": [
+                {
+                  "variantId": "2e602edc93de1056d0435651",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "c440c6afbd734ad5940412b1",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "77bc341a120da9bb66f2a2a9",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "803b15313402e864969ec2d3",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "034690b5af204cebd48cdc15",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "86f53c2db83e21a781e744df",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "9871f131e3d0d970829f1556",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "0668efd2a1dcfbf683c63915",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "b0acb170774f1a5f274dc46d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "645bd20d279b841a3326b2e3",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "ea440915816d9eb96a10e2ac",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "23352a52929f61885237b6c8",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "48eabe99a5a9e2fb5786a63c",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "537aa5ed0e60b50a5bd637d5",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "5eb44b4f2d6244b2415b91c1",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "c9693bdc6f08451ebe112cac",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "f9516abc0ca83b1dd322c8c4",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "8cd919bcf83faf6dedb1e4f1",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "14b0c5a4253e0f70ce3f181d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "0420d86ca47582a7f0e55afc",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "d74db60d7e5bf49020e5245b",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "6ab2820e6b1173799561fe8d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "19f2e5716bec3a3548b2f3ac",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "960a50a57fc0289f635c5937",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "00c165853cca6f02bba4b863",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "7c9460b732f115d8b596a98b",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "8c27975295e1b158224278d3",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "d84ca863d74b79410b2f418a",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "4f422cba14962234bc8ae9e5",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "9b267de126ef4a2dd88e07d5",
+                  "fields": [
+                    "bodyType"
+                  ]
+                }
+              ],
+              "skipped": []
+            }
+          ],
+          "startedAt": "2026-10-24T05:58:31.649Z",
+          "finishedAt": "2026-10-24T05:58:35.699Z"
+        },
+        {
+          "batch": "research-2026-10-24-audi-a5-2026-body",
+          "dryRun": false,
+          "models": [
+            {
+              "id": "8cf3dbb7884fe919bce44c62",
+              "changes": [
+                {
+                  "variantId": "2e602edc93de1056d0435651",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "c440c6afbd734ad5940412b1",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "77bc341a120da9bb66f2a2a9",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "803b15313402e864969ec2d3",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "034690b5af204cebd48cdc15",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "86f53c2db83e21a781e744df",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "9871f131e3d0d970829f1556",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "0668efd2a1dcfbf683c63915",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "b0acb170774f1a5f274dc46d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "645bd20d279b841a3326b2e3",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "ea440915816d9eb96a10e2ac",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "23352a52929f61885237b6c8",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "48eabe99a5a9e2fb5786a63c",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "537aa5ed0e60b50a5bd637d5",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "5eb44b4f2d6244b2415b91c1",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "c9693bdc6f08451ebe112cac",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "f9516abc0ca83b1dd322c8c4",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "8cd919bcf83faf6dedb1e4f1",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "14b0c5a4253e0f70ce3f181d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "0420d86ca47582a7f0e55afc",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "d74db60d7e5bf49020e5245b",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "6ab2820e6b1173799561fe8d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "19f2e5716bec3a3548b2f3ac",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "960a50a57fc0289f635c5937",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "00c165853cca6f02bba4b863",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "7c9460b732f115d8b596a98b",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "8c27975295e1b158224278d3",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "d84ca863d74b79410b2f418a",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "4f422cba14962234bc8ae9e5",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "9b267de126ef4a2dd88e07d5",
+                  "fields": [
+                    "bodyType"
+                  ]
+                }
+              ],
+              "skipped": []
+            }
+          ],
+          "startedAt": "2026-10-24T05:58:35.949Z",
+          "finishedAt": "2026-10-24T05:58:42.728Z"
+        }
+      ]
     }
   },
   "scope": {
