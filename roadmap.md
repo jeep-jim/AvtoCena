@@ -15198,3 +15198,10 @@ Deploy40117114655 остановлен на PUT79,256,913байт budget-markets
 Добавлен read-only inspectBudgetSelectors в существующий publication-status: фактическиеmarket/bytes/counts/generation без данных предложений и безwrites.12targettestsPASS,typecheckPASS. ПолныйCI/merge/фактическаядиагностикаещёпредстоят; releaseНЕперезапущен. Health02:01UTC+7 остаётся8ec0d858, scoped-v1отсутствует. Apply40123387423/job120959559881 выполняет согласованныйreuse71434; savedпокаНЕподтверждены. Послеgreenmerge сначалаread-onlyselectorinspection, затемрешениео единственномrelease, сохранив40required/26public/3ASTRA и новуюreuseпартиюпослефактическогоуспеха/readback.
 
 Дополнение02:06UTC+7: прежняя fixture reuse содержала manifest без markets. Приведена к реальному immutable manifest пяти рынков;18профильныхтестовPASS. В предыдущем append02:07 время заголовка указано неточно: apply246c9f84 фактически запрошен около02:01UTC+7; порядок/ID событий неизменны.
+
+
+### 25.10.2026 02:13 UTC+7 — reuse559 сохранён; PR1529 merged, read-only selector inspection
+
+Apply40123387423/job120959559881 SUCCESS19:11:24UTC24.10: plan71434f2a1fab147277b0dd4daf4c0403f10e000f8af220890ac2425e0e10245e,219/219models,415variants,559savedfields,579evidenceFields; исходныйmanifest eec8e463/indexbd6556. Immutable checksum-readback до16модельныхCASmanifestbatches иpublicationreadbackPASS. Повторныйapplyзапрещён. Независимыйpublicrevisionreadback ещё идёт (75PASS); активированныхновыхзначенийпока0.
+
+PR1529 finalhead92cefba3e32e4b9b3564999b49086ffc41bac3d9 merged7734c3ade1fed4e9e15ea529ec13fd1a558537e2 после полногоCI40123701196SUCCESS и трёхдополнительныхSUCCESS. Локально2521testsPASS/18target/typecheckPASS. Запрошен один существующийpublication-status с inspectBudgetSelectors:true и свежимlockread, БЕЗstoragewrites. Active40124151754/sharedprices,40124113621/budgetcounts и pending40124198552/sharedprices не отменены/не вытеснены; новыйdeploy/repair ещёнеставились. Доединственноговыпуска прочитатьфактическийv3readiness/bytes/counts; послеустановкиscoped-v1 толькоguardedrepair ипубличнаяприёмка. Все40required/26public/3ASTRA сохранены.

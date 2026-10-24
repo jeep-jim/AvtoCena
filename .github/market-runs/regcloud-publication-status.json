@@ -1,5 +1,5 @@
 {
-  "requestedAt": "2026-10-24T17:34:30Z",
-  "reason": "Read-only verify all three required applied ASTRA plans against the existing isolated 786a5aa9 index after exact-checksum continuation repair; inspect current publication lease. No recompile, source collection, storage mutation or activation.",
-  "inspectPreparedAstraRelease": "786a5aa9bb5a2efbc5b3ed395e51f3a2ab84616d"
+  "requestedAt": "2026-10-24T19:12:57.207Z",
+  "inspectBudgetSelectors": true,
+  "reason": "Read-only verification of retained compressed v3 selectors after PR1529; inspect current lease; no rebuild/collector/repair/deploy."
 }
