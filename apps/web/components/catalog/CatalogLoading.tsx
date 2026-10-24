@@ -1,3 +1,4 @@
+import './catalog-loading.css';
 /** Shared stripe treatment for a pending result section and streamed results. */
 export function CatalogSectionLoading({active=false}:{active?:boolean}) {
  return <div className={`ac-catalog-section-loading ac-catalog-more ${active?'is-active':''}`} role="status" aria-live="polite">

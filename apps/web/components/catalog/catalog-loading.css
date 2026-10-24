@@ -1,0 +1,3 @@
+.ac-catalog-section-loading{display:none;min-height:48px;margin-bottom:12px;border-radius:12px;text-align:center;align-items:center;justify-content:center}
+.ac-catalog-section-loading.is-active{display:flex}
+@media(min-width:1024px){.ac-catalog-layout:has([data-catalog-pending="true"]) .ac-catalog-section-loading{display:flex}}

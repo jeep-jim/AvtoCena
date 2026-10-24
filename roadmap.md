@@ -14266,3 +14266,10 @@ CRM40060946283 auditSUCCESS/browserIN_PROGRESS, mobile40060946257 productionbuil
 Проверен terminal SUCCESS [40061172533](https://github.com/jeep-jim/AvtoCena/actions/runs/40061172533), job120774954137. Публичный /api/health oktrue и exact d80b840, calculation9a28dc2da5b8afb0c7c7d68549cb5f9a1a0e88db227d15e265ceb930287c2490. Public gate:32группы/583варианта/765полей verifiedtrue. Artifact12548097487 опубликован; его ZIP отдельно не скачивался. Coverage artifact12547108464 скачан, SHA25686823f6a2e7709304c2d9d322fff1ae7a59e7a254c5e3abb4284341848d41d12 совпал. ASTRA verification verifiedtrue, index5c71ef244646ad8132908b469edde4d4615b0a477b756684fea3769f8b762d98;230447 технических вариантов безгода вне годовогоиндекса. Research pause снята; pending Berlingo40/A4L4 отмечены включёнными после successful membership/publicgate.
 
 Проверенный coverage по всей базе, не только ASTRA: hybrid power30MinPresent10953/power30MinSupported72; electric4311/2. Наличие значения не означает подтверждённое использование в расчёте. Разрыв требует адресного анализа evidence/идентичности, не повторного импорта или снятия защит. Новая сборка техже данных не запускалась; полное подключение гибридов/EV и live list/card приёмка не объявлены завершёнными.
+
+
+## 2026-10-24T11:46:49.586166+07:00 — диагностика 30min и плашка обновления
+
+Код coverage считает заполненные значения во всех вариантах, а supported — только в compiled annual facts. compileModelFacts пропускает записи без целого модельного года/trim. Для точных количеств причин подготовлен read-only аудит всех сохранённых моделей относительно установленного index5c71ef24: checksum/revision, отдельные причины и bounded примеры; никаких supplier calls/записей базы/повторного ASTRA apply. Запуск по marker power30-blockers.
+
+Плашка использовала CSS из CatalogSidebar, хотя AjesRail используется и без sidebar. Правила loading перенесены в собственный CSS, импортируемый самим CatalogLoading: скрытие больше не зависит от страницы. Chromium PASS: idle hidden/active visible/pending visible/settled hidden. Изменение подготовлено, ещё не опубликовано; production release не запрошен до результатов аудита.
