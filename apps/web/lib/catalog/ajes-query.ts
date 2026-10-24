@@ -1,3 +1,4 @@
+import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
 import {auctionSaleRange} from "./auction-sale-period";
 import {japanExcludedMake,japanMakeSqlExclusion} from './japan-vehicle-policy';
@@ -12,8 +13,8 @@ import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main' | 'korea' | 'china';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
-export type AjesQuery = {salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; modelFamilies?:string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
-const keys = new Set(['salePeriod','aggregate','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','model','modelFamilies','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
+export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; modelFamilies?:string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+const keys = new Set(['pickup','salePeriod','aggregate','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','model','modelFamilies','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 function integer(value: unknown, fallback: number, min: number, max: number) {
   if (value === undefined) return fallback;
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < min || value > max) throw new AjesInputError();
@@ -67,6 +68,7 @@ export function ajesQuery(input: unknown) {
   coded(q.transmission,'kpp',{automatic:['AT'],manual:['MT'],cvt:['CVT'],dct:['DCT']});
   if(!stock&&q.drive)where.push(japanDriveSql(q.drive));
   else coded(q.drive,'priv',{fwd:['FF','FWD'],rwd:['FR','RWD'],awd:['4WD','AWD','FULLTIME4WD']});
+  if(q.pickup!==undefined){if(q.pickup!==true)throw new AjesInputError();where.push(pickupSourceCandidateSql(stock));}
   if(q.auctionGrade){const grades=values(q.auctionGrade,'|');if(grades.some(v=>! /^(?:[0-6](?:\.5)?|S|R|RA|A|B|C)$/.test(v)))throw new AjesInputError();where.push(`rate in (${grades.map(v=>`'${v}'`).join(',')})`);}
 
   if(q.chassis!==undefined)where.push(`kuzov='${name(q.chassis)}'`);
@@ -152,6 +154,7 @@ export function ajesCatalogQuery(params:Record<string,unknown>):AjesQuery {
  if(q.table==='stats'&&first(params.salePeriod))q.salePeriod=first(params.salePeriod);
  if(!q.make&&first(params.brand))q.make=first(params.brand);
  for(const k of ['yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','powerFrom','powerTo','page','pageSize'] as const){const v=first(params[k]);if(v){const n=k.startsWith('engine')?parseEngineCc(v):Number(v);if(n==null||!Number.isFinite(n))throw new AjesInputError();q[k]=n;}}
+ if(first(params.bodyType||params.body)==='pickup')q.pickup=true;
  const sort=first(params.sort);if(sort)q.sort=sort as AjesQuery['sort'];
  return q;
 }

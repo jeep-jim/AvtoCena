@@ -38,3 +38,13 @@ export function catalogPickupBody(offer:Carrier):boolean {
 export function catalogBodyType(offer:Carrier):string {
  return catalogPickupBody(offer)?'pickup':String(offer.editorialSpecifications?.bodyType||offer.bodyType||'');
 }
+
+/** Broad source candidates, then catalogBodyType performs the precise check.
+ * These are WHERE predicates, not a cap or a list of allowed public makes. */
+export function pickupSourceCandidateSql(stock:boolean){
+ const fragments=['HILUX','TACOMA','TUNDRA','RANGER','F-150','F150','F 150','AMAROK','L200','L-200','L 200','TRITON','NAVARA','FRONTIER','NP300','TITAN','D-MAX','D MAX','DMAX','RE-MAX','RE MAX','REMAX','RUIMAI','COLORADO','SILVERADO','S10','SIERRA','CANYON','GLADIATOR','1500','2500','3500','REXTON','MUSSO','렉스턴','무쏘','POER','PAO','CANNON','WINGLE','KING KONG','RIDGELINE','SANTA CRUZ','ALASKAN','BT-50','BT 50','BT50','LANDTREK','T60','T70','T90','MAVERICK','PICKUP','PICK-UP','PICK UP','DOUBLE CAB','SINGLE CAB','CREW CAB','ПИКАП','皮卡','픽업'];
+ const clauses=fragments.flatMap(value=>['model_name','grade'].map(column=>`${column} like '%${value}%'`));
+ // Stock INFO contains the source body label even for an unfamiliar model.
+ if(stock)for(const value of ['pickup','pick-up','pick up','пикап','皮卡','픽업'])clauses.push(`info like '%${value}%'`);
+ return '('+clauses.join(' or ')+')';
+}
