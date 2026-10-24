@@ -8,3 +8,5 @@ test('complete annual mechanical identity can bridge different trim wording',()=
 test('wrong year and partial mechanical anchors do not transfer',()=>{for(const patch of [{year:2024},{drive:undefined},{bodyType:undefined},{powerKw:undefined},{fuel:'hybrid'},{powerDataSource:'customer_input'}]){const o={...offer,...patch};assert.equal(apply(o,[row]),o);}});
 test('conflicting or incomplete compatible versions block thirty minute transfer',()=>{for(const power30MinKw of [140,undefined])assert.equal(apply(offer,[row,{...row,id:'b',power30MinKw}]).power30MinKw,undefined);});
 test('existing exact named conflict cannot fall through',()=>{const o={...offer,trim:row.trim,powerKw:250};assert.equal(apply(o,[row]),o);});
+
+test('generic equal trim wording still needs mechanical anchors and unanimity',()=>{const o={...offer,trim:'Comfort'},r={...row,trim:'Comfort'};assert.equal(apply(o,[r]).power30MinKw,135);assert.equal(apply({...o,powerKw:undefined},[r]).power30MinKw,undefined);assert.equal(apply(o,[r,{...r,id:'other',power30MinKw:140}]).power30MinKw,undefined);});

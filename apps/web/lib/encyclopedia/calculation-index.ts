@@ -154,7 +154,7 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  }
  // Specification consensus: independent known mechanical anchors,
  // same annual model, and every compatible candidate retained for unanimity.
- if(options.specificationIdentity&&!candidates.length&&!exact.length){
+ if(options.specificationIdentity&&!candidates.length&&(!exact.length||!specificTrim)){
   const power=(v:any)=>Number(v.powerKw)||(Number(v.powerHp)*0.73549875);
   const strong=(v:CalculationFact)=>{
    const x=v.values;
