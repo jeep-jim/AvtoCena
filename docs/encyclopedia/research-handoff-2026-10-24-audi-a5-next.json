@@ -1,30 +1,30 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T08:01:13.722Z",
+  "checkedAt": "2026-10-24T08:57:25.755Z",
   "modelId": "8cf3dbb7884fe919bce44c62",
   "make": "Audi",
   "model": "A5",
-  "revision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
-  "lastCompletedBatch": "research-2026-10-24-audi-a5-2026-body",
+  "revision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+  "lastCompletedBatch": "research-2026-10-24-audi-a5-2025-body",
   "next": {
     "modelId": "8cf3dbb7884fe919bce44c62",
     "make": "Audi",
     "model": "A5",
-    "year": 2025,
-    "variantId": "ae6c6d78fe213a9578ed345e",
-    "trim": "Avant S line TFSI 110 kW S-tronic",
+    "year": 2024,
+    "variantId": "c1a026593d2f50395308c8e8",
+    "trim": "Sportback S-Line",
     "missingValueFields": [
       "bodyType"
     ],
-    "state": "apply_queued_pending_readback",
-    "reason": "Fresh full CAS matched; standard writer40076087248 queued. Do not reapply; await success and independent API readback."
+    "state": "requires_exact_source_review",
+    "reason": "75 записей2024 перечитаны;37безкузова. ЗаводскаякартаSportback2016–2024 найдена, точную нормализацию/применимость ещё подтвердить."
   },
-  "preparedBatch": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
-  "preparedReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-prepared.json",
+  "preparedBatch": null,
+  "preparedReport": null,
   "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
   "previous2026Retry": "docs/encyclopedia/retry-2026-10-24-audi-a5-2026-body-remaining.json",
   "priorRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
-  "nextAction": "Дождаться40076087248; не дублироватьapply. ПослеSUCCESS независимыйAPI-readback99строк2025, затемpendingNextIndex и курсор2024.",
+  "nextAction": "Проверить точную идентичностьSportback2024 по сохранённому источнику; заполнить только пробелы, свежий fullCAS перед записью.2025body14 не повторять.",
   "nextYearRead": {
     "year": 2024,
     "rows": 75,
@@ -328,7 +328,10 @@
           "bodyType"
         ]
       }
-    ]
+    ],
+    "checkedAt": "2026-10-24T08:57:25.755Z",
+    "revision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+    "unchanged75RowsVerified": true
   },
   "modelComplete": false,
   "allModelsComplete": false,
@@ -342,5 +345,7 @@
     "state": "candidate_source_read_not_applied",
     "remainingReview": "Проверить точную годовую/кузовную идентичность и нормализацию типа кузова; название файла не заменяет техническое подтверждение. Существующие sedan/hatchback и ручные поля не переписывать."
   },
-  "applyStatusReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-apply-status.json"
+  "applyStatusReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json",
+  "completedBatchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
+  "completedReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json"
 }

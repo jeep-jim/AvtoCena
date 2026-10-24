@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T08:04:48.565Z",
+  "updatedAt": "2026-10-24T08:57:25.755Z",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1403,7 +1403,7 @@
       "variants": 602,
       "status": "partial_verified_fields",
       "researchedVariants": 131,
-      "checkedAt": "2026-10-24 07:00:27 UTC",
+      "checkedAt": "2026-10-24T08:57:25.755Z",
       "researchedYears": [
         2026,
         2025,
@@ -1437,16 +1437,16 @@
         2014,
         2013
       ],
-      "nextAction": "После successful Prepare private index/membership: свежий API и полный digest; при неизменной ревизии штатный apply, затем независимый API readback. Не повторять исследование источника.",
-      "revision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
-      "lastBatch": "research-2026-10-24-audi-a5-2026-body",
-      "lastBatchFields": 30,
-      "lastBatchVariants": 30,
-      "lastReadback": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-readback.json",
+      "nextAction": "ПродолжитьA5 2024 поhandoff;2025body14 сохранены, не повторять.",
+      "revision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+      "lastBatch": "research-2026-10-24-audi-a5-2025-body",
+      "lastBatchFields": 14,
+      "lastBatchVariants": 14,
+      "lastReadback": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-readback.json",
       "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
-      "nextVariantId": "ae6c6d78fe213a9578ed345e",
+      "nextVariantId": "c1a026593d2f50395308c8e8",
       "resumeHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a5-next.json",
-      "latestReview": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-prepared.json"
+      "latestReview": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json"
     },
     {
       "id": "5dfeb75b8f1fc86b298d3b9a",
@@ -32796,25 +32796,25 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T08:04:48.565Z",
+    "updatedAt": "2026-10-24T08:57:25.755Z",
     "task": "Connect exact permanent encyclopedia and owner-approved China/Europe reference data to catalog calculations",
-    "state": "audi_a4l_2025_mass_prepared_waiting_snapshot",
+    "state": "audi_a5_2025_saved_pending_index",
     "preserveManual": true,
     "noPeakTo30Min": true,
     "nextModel": {
       "modelId": "8cf3dbb7884fe919bce44c62",
       "make": "Audi",
       "model": "A5",
-      "year": 2025,
-      "variantId": "ae6c6d78fe213a9578ed345e",
-      "trim": "Avant S line TFSI 110 kW S-tronic",
+      "year": 2024,
+      "variantId": "c1a026593d2f50395308c8e8",
+      "trim": "Sportback S-Line",
       "missingValueFields": [
         "bodyType"
       ],
-      "state": "apply_queued_pending_readback",
-      "reason": "Fresh full CAS matched; standard writer40076087248 queued. Do not reapply; await success and independent API readback."
+      "state": "requires_exact_source_review",
+      "reason": "75 записей2024 перечитаны;37безкузова. ЗаводскаякартаSportback2016–2024 найдена, точную нормализацию/применимость ещё подтвердить."
     },
-    "lastVerifiedResearch": "audi-a5-2026-body",
+    "lastVerifiedResearch": "audi-a5-2025-body",
     "rawAuditCalculated": 87,
     "publicSerializationParity": 87,
     "allModelsComplete": false,
@@ -32832,7 +32832,7 @@
     "priorAlphabeticalCheckpoint": "Audi A8 D5",
     "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a4l.json",
     "historicalExpansionComplete": false,
-    "lastVerifiedBatch": "research-2026-10-24-audi-a5-2026-body",
+    "lastVerifiedBatch": "research-2026-10-24-audi-a5-2025-body",
     "indexReleaseRequested": false,
     "auditGenerationId": "gen_1792702445675_8c312f85",
     "pendingIndexBatches": [],
@@ -32922,23 +32922,301 @@
       {
         "path": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-prepared.json",
         "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
-        "state": "apply_queued_pending_readback",
+        "state": "saved_api_readback_pass_pending_index",
         "modelId": "8cf3dbb7884fe919bce44c62",
         "variants": 14,
         "fields": 14,
         "requiresFreshApiPreflight": false,
-        "requiresFullInternalDigest": true,
+        "requiresFullInternalDigest": false,
         "blockedByWorkflow": null,
         "workflow": 40076087248,
         "job": 120819611827,
         "applyCommit": "1137a51197d99ff69d7039c3a767a278c691c96c",
         "statusReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-apply-status.json",
         "lastCheckedAt": "2026-10-24T08:04:48.565Z",
-        "pendingEnvironmentApprovals": 0
+        "pendingEnvironmentApprovals": 0,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json",
+        "afterRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+        "apiReadback": true
       }
     ],
-    "pendingNextIndexBatches": [],
-    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2026-body-pass.json",
+    "pendingNextIndexBatches": [
+      {
+        "version": 1,
+        "checkedAt": "2026-10-24T08:57:25.755Z",
+        "batch": "research-2026-10-24-audi-a5-2025-body",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
+        "batchSha256": "849b59c1d152382f25b4fe61e06572c8553f0424a3f7931fda84eb16ae2e33cb",
+        "variants": 14,
+        "fields": 14,
+        "workflow": 40076087248,
+        "job": 120819611827,
+        "commit": "1137a51197d99ff69d7039c3a767a278c691c96c",
+        "state": "saved_api_readback_pass_pending_index",
+        "apiReadback": true,
+        "includedInIndex": false,
+        "preflight": {
+          "workflow": 40076014682,
+          "job": 120819391460,
+          "commit": "2f6c377b3d02a061830d31ca9df0e9fcd0587819",
+          "checkedAt": "2026-10-24T07:55:51.532Z",
+          "revision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+          "fullDigestsMatched": 14,
+          "conclusion": "success"
+        },
+        "source": {
+          "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+          "sha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+          "edition": "02 (04/2025)",
+          "pages": [
+            1,
+            2
+          ],
+          "reusedPreviouslyVerifiedSource": true,
+          "localHashVerified": true
+        },
+        "validation": {
+          "guardTests": 11,
+          "passed": true,
+          "batchShaVerified": true,
+          "workflowGuardsPassed": true,
+          "fullDigestCAS": true,
+          "untargeted2025Unchanged": 85,
+          "variantIdsPreserved": 99
+        },
+        "releaseCoordination": {
+          "snapshotWorkflow": 40074712002,
+          "job": 120815625387,
+          "prepareIndex": "success",
+          "membership": "success",
+          "newBatchIsPostSnapshot": true,
+          "duplicateDeploy": false
+        },
+        "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
+        "pendingEnvironmentApprovals": 0,
+        "blocker": null,
+        "publicParity": {
+          "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-public-parity.json",
+          "passed": true,
+          "offers": 7,
+          "comparisons": 91,
+          "repeatedGroups": 2,
+          "duplicateOfferIds": 0,
+          "newBatchActivationProved": false
+        },
+        "nextAction": "Включить в следующий согласованный immutable index и проверить membership/publicgate; не повторятьapply. Продолжить A5 2024 с новым источником и fresh fullCAS.",
+        "conclusion": "success",
+        "applied": true,
+        "applyFinishedAt": "2026-10-24T08:07:34.568Z",
+        "bodyCounts": {
+          "wagon": 10,
+          "sedan": 4
+        },
+        "beforeRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+        "afterRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json",
+        "readbackReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-readback.json",
+        "applyResults": [
+          {
+            "batch": "research-2026-10-24-audi-a5-2025-body",
+            "dryRun": true,
+            "models": [
+              {
+                "id": "8cf3dbb7884fe919bce44c62",
+                "changes": [
+                  {
+                    "variantId": "ae6c6d78fe213a9578ed345e",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "75a948ea0c1391280f1bad66",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "17f4a4b4ae1658189f507b07",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "9b346242d6f38df86817936f",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "3fab2bcac051ad2c6978e13d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "17327ee4c09c0b239d9e011c",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "5d1341c45a05c8a4f36b8e2f",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "3b76a8b80496bfa82ff25f67",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "690e1eae227659a31b7b164d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "179c41517625a54d112bb7af",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "55f3d39cfb48e1afeb3aae09",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "1761dcc23c7203f96f4fb51e",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "8fce91ed11bd97ed8fe60294",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "11a533a6ce912bd2fec9a7c3",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  }
+                ],
+                "skipped": []
+              }
+            ],
+            "startedAt": "2026-10-24T08:07:20.999Z",
+            "finishedAt": "2026-10-24T08:07:26.061Z"
+          },
+          {
+            "batch": "research-2026-10-24-audi-a5-2025-body",
+            "dryRun": false,
+            "models": [
+              {
+                "id": "8cf3dbb7884fe919bce44c62",
+                "changes": [
+                  {
+                    "variantId": "ae6c6d78fe213a9578ed345e",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "75a948ea0c1391280f1bad66",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "17f4a4b4ae1658189f507b07",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "9b346242d6f38df86817936f",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "3fab2bcac051ad2c6978e13d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "17327ee4c09c0b239d9e011c",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "5d1341c45a05c8a4f36b8e2f",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "3b76a8b80496bfa82ff25f67",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "690e1eae227659a31b7b164d",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "179c41517625a54d112bb7af",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "55f3d39cfb48e1afeb3aae09",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "1761dcc23c7203f96f4fb51e",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "8fce91ed11bd97ed8fe60294",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  },
+                  {
+                    "variantId": "11a533a6ce912bd2fec9a7c3",
+                    "fields": [
+                      "bodyType"
+                    ]
+                  }
+                ],
+                "skipped": []
+              }
+            ],
+            "startedAt": "2026-10-24T08:07:26.293Z",
+            "finishedAt": "2026-10-24T08:07:34.568Z"
+          }
+        ]
+      }
+    ],
+    "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json",
     "failedIndexRelease": {
       "commit": "f3f733172241a35369c270dc4409921ffeaa6fde",
       "workflow": 39755527627,
@@ -37676,7 +37954,7 @@
         "UI changes",
         "full China collection"
       ],
-      "newBatchAwaitingNextIndex": false,
+      "newBatchAwaitingNextIndex": true,
       "checkedAt": "2026-10-24T13:47:55.206386+07:00",
       "parallelManualResearch": {
         "workflows": [
@@ -37776,12 +38054,12 @@
         "rerunRequested": false
       },
       "latestResearch": {
-        "checkedAt": "2026-10-24T05:59:05.121914+00:00",
-        "batch": "research-2026-10-24-audi-a5-2026-body",
-        "fields": 30,
+        "checkedAt": "2026-10-24T08:57:25.755Z",
+        "batch": "research-2026-10-24-audi-a5-2025-body",
+        "fields": 14,
         "apiReadback": true,
-        "activationConfirmed": true,
-        "activationReport": "docs/encyclopedia/reports/2026-10-24-final-release-acceptance.json"
+        "activationConfirmed": false,
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json"
       },
       "targetRelease": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
       "targetWorkflow": 40068425827,
@@ -40659,7 +40937,7 @@
     ],
     "lastResearchAttempt": {
       "version": 1,
-      "checkedAt": "2026-10-24T08:04:48.565Z",
+      "checkedAt": "2026-10-24T08:57:25.755Z",
       "batch": "research-2026-10-24-audi-a5-2025-body",
       "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
       "batchSha256": "849b59c1d152382f25b4fe61e06572c8553f0424a3f7931fda84eb16ae2e33cb",
@@ -40668,8 +40946,8 @@
       "workflow": 40076087248,
       "job": 120819611827,
       "commit": "1137a51197d99ff69d7039c3a767a278c691c96c",
-      "state": "queued_not_confirmed_applied",
-      "apiReadback": false,
+      "state": "saved_api_readback_pass_pending_index",
+      "apiReadback": true,
       "includedInIndex": false,
       "preflight": {
         "workflow": 40076014682,
@@ -40694,7 +40972,11 @@
       "validation": {
         "guardTests": 11,
         "passed": true,
-        "batchShaVerified": true
+        "batchShaVerified": true,
+        "workflowGuardsPassed": true,
+        "fullDigestCAS": true,
+        "untargeted2025Unchanged": 85,
+        "variantIdsPreserved": 99
       },
       "releaseCoordination": {
         "snapshotWorkflow": 40074712002,
@@ -40706,16 +40988,9 @@
       },
       "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
       "pendingEnvironmentApprovals": 0,
-      "blocker": {
-        "kind": "github_actions_queued",
-        "workflow": 40076087248,
-        "job": 120819611827,
-        "startedSteps": false,
-        "reasonNotExposed": true,
-        "transient": true
-      },
+      "blocker": null,
       "publicParity": {
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-queued-public-parity.json",
+        "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-public-parity.json",
         "passed": true,
         "offers": 7,
         "comparisons": 91,
@@ -40723,7 +40998,216 @@
         "duplicateOfferIds": 0,
         "newBatchActivationProved": false
       },
-      "nextAction": "Проверить тот же40076087248, не запускать дубль. ПослеSUCCESS выполнить независимыйAPI2025readback99строк; только затем pendingNextIndex и переходк2024. ПриCASfailure сначала свежий полныйpreflight, не ослаблятьзащиты."
+      "nextAction": "Включить в следующий согласованный immutable index и проверить membership/publicgate; не повторятьapply. Продолжить A5 2024 с новым источником и fresh fullCAS.",
+      "conclusion": "success",
+      "applied": true,
+      "applyFinishedAt": "2026-10-24T08:07:34.568Z",
+      "bodyCounts": {
+        "wagon": 10,
+        "sedan": 4
+      },
+      "beforeRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+      "afterRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+      "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-readback.json",
+      "applyResults": [
+        {
+          "batch": "research-2026-10-24-audi-a5-2025-body",
+          "dryRun": true,
+          "models": [
+            {
+              "id": "8cf3dbb7884fe919bce44c62",
+              "changes": [
+                {
+                  "variantId": "ae6c6d78fe213a9578ed345e",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "75a948ea0c1391280f1bad66",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "17f4a4b4ae1658189f507b07",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "9b346242d6f38df86817936f",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "3fab2bcac051ad2c6978e13d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "17327ee4c09c0b239d9e011c",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "5d1341c45a05c8a4f36b8e2f",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "3b76a8b80496bfa82ff25f67",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "690e1eae227659a31b7b164d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "179c41517625a54d112bb7af",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "55f3d39cfb48e1afeb3aae09",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "1761dcc23c7203f96f4fb51e",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "8fce91ed11bd97ed8fe60294",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "11a533a6ce912bd2fec9a7c3",
+                  "fields": [
+                    "bodyType"
+                  ]
+                }
+              ],
+              "skipped": []
+            }
+          ],
+          "startedAt": "2026-10-24T08:07:20.999Z",
+          "finishedAt": "2026-10-24T08:07:26.061Z"
+        },
+        {
+          "batch": "research-2026-10-24-audi-a5-2025-body",
+          "dryRun": false,
+          "models": [
+            {
+              "id": "8cf3dbb7884fe919bce44c62",
+              "changes": [
+                {
+                  "variantId": "ae6c6d78fe213a9578ed345e",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "75a948ea0c1391280f1bad66",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "17f4a4b4ae1658189f507b07",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "9b346242d6f38df86817936f",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "3fab2bcac051ad2c6978e13d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "17327ee4c09c0b239d9e011c",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "5d1341c45a05c8a4f36b8e2f",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "3b76a8b80496bfa82ff25f67",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "690e1eae227659a31b7b164d",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "179c41517625a54d112bb7af",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "55f3d39cfb48e1afeb3aae09",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "1761dcc23c7203f96f4fb51e",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "8fce91ed11bd97ed8fe60294",
+                  "fields": [
+                    "bodyType"
+                  ]
+                },
+                {
+                  "variantId": "11a533a6ce912bd2fec9a7c3",
+                  "fields": [
+                    "bodyType"
+                  ]
+                }
+              ],
+              "skipped": []
+            }
+          ],
+          "startedAt": "2026-10-24T08:07:26.293Z",
+          "finishedAt": "2026-10-24T08:07:34.568Z"
+        }
+      ]
     }
   },
   "scope": {

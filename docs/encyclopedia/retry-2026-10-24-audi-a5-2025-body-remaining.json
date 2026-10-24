@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T06:56:52.885744+00:00",
+  "checkedAt": "2026-10-24T08:57:25.755Z",
   "modelId": "8cf3dbb7884fe919bce44c62",
   "year": 2025,
   "inspectedRows": 99,
@@ -1315,5 +1315,9 @@
     }
   ],
   "priorRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
-  "modelComplete": false
+  "modelComplete": false,
+  "appliedBatch": "research-2026-10-24-audi-a5-2025-body",
+  "appliedBodyFields": 14,
+  "afterRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+  "apiReadback": true
 }

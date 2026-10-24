@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-24T08:04:48.565Z",
+  "checkedAt": "2026-10-24T08:57:25.755Z",
   "batch": "research-2026-10-24-audi-a5-2025-body",
   "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2025-body.json",
   "batchSha256": "849b59c1d152382f25b4fe61e06572c8553f0424a3f7931fda84eb16ae2e33cb",
@@ -9,8 +9,8 @@
   "workflow": 40076087248,
   "job": 120819611827,
   "commit": "1137a51197d99ff69d7039c3a767a278c691c96c",
-  "state": "queued_not_confirmed_applied",
-  "apiReadback": false,
+  "state": "saved_api_readback_pass_pending_index",
+  "apiReadback": true,
   "includedInIndex": false,
   "preflight": {
     "workflow": 40076014682,
@@ -35,7 +35,11 @@
   "validation": {
     "guardTests": 11,
     "passed": true,
-    "batchShaVerified": true
+    "batchShaVerified": true,
+    "workflowGuardsPassed": true,
+    "fullDigestCAS": true,
+    "untargeted2025Unchanged": 85,
+    "variantIdsPreserved": 99
   },
   "releaseCoordination": {
     "snapshotWorkflow": 40074712002,
@@ -47,16 +51,9 @@
   },
   "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2025-body-remaining.json",
   "pendingEnvironmentApprovals": 0,
-  "blocker": {
-    "kind": "github_actions_queued",
-    "workflow": 40076087248,
-    "job": 120819611827,
-    "startedSteps": false,
-    "reasonNotExposed": true,
-    "transient": true
-  },
+  "blocker": null,
   "publicParity": {
-    "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-queued-public-parity.json",
+    "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-public-parity.json",
     "passed": true,
     "offers": 7,
     "comparisons": 91,
@@ -64,5 +61,214 @@
     "duplicateOfferIds": 0,
     "newBatchActivationProved": false
   },
-  "nextAction": "Проверить тот же40076087248, не запускать дубль. ПослеSUCCESS выполнить независимыйAPI2025readback99строк; только затем pendingNextIndex и переходк2024. ПриCASfailure сначала свежий полныйpreflight, не ослаблятьзащиты."
+  "nextAction": "Включить в следующий согласованный immutable index и проверить membership/publicgate; не повторятьapply. Продолжить A5 2024 с новым источником и fresh fullCAS.",
+  "conclusion": "success",
+  "applied": true,
+  "applyFinishedAt": "2026-10-24T08:07:34.568Z",
+  "bodyCounts": {
+    "wagon": 10,
+    "sedan": 4
+  },
+  "beforeRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+  "afterRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+  "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-pass.json",
+  "readbackReport": "docs/encyclopedia/reports/2026-10-24-audi-a5-2025-body-readback.json",
+  "applyResults": [
+    {
+      "batch": "research-2026-10-24-audi-a5-2025-body",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "8cf3dbb7884fe919bce44c62",
+          "changes": [
+            {
+              "variantId": "ae6c6d78fe213a9578ed345e",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "75a948ea0c1391280f1bad66",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "17f4a4b4ae1658189f507b07",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "9b346242d6f38df86817936f",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "3fab2bcac051ad2c6978e13d",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "17327ee4c09c0b239d9e011c",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "5d1341c45a05c8a4f36b8e2f",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "3b76a8b80496bfa82ff25f67",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "690e1eae227659a31b7b164d",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "179c41517625a54d112bb7af",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "55f3d39cfb48e1afeb3aae09",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "1761dcc23c7203f96f4fb51e",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "8fce91ed11bd97ed8fe60294",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "11a533a6ce912bd2fec9a7c3",
+              "fields": [
+                "bodyType"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-24T08:07:20.999Z",
+      "finishedAt": "2026-10-24T08:07:26.061Z"
+    },
+    {
+      "batch": "research-2026-10-24-audi-a5-2025-body",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "8cf3dbb7884fe919bce44c62",
+          "changes": [
+            {
+              "variantId": "ae6c6d78fe213a9578ed345e",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "75a948ea0c1391280f1bad66",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "17f4a4b4ae1658189f507b07",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "9b346242d6f38df86817936f",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "3fab2bcac051ad2c6978e13d",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "17327ee4c09c0b239d9e011c",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "5d1341c45a05c8a4f36b8e2f",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "3b76a8b80496bfa82ff25f67",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "690e1eae227659a31b7b164d",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "179c41517625a54d112bb7af",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "55f3d39cfb48e1afeb3aae09",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "1761dcc23c7203f96f4fb51e",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "8fce91ed11bd97ed8fe60294",
+              "fields": [
+                "bodyType"
+              ]
+            },
+            {
+              "variantId": "11a533a6ce912bd2fec9a7c3",
+              "fields": [
+                "bodyType"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-24T08:07:26.293Z",
+      "finishedAt": "2026-10-24T08:07:34.568Z"
+    }
+  ]
 }
