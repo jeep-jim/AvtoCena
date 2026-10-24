@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-audi-a4l-2025-mass",
+  "entries": [
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "af7e4655e9743ce9c42f2532",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type",
+      "expectedRevision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
+      "expectedDigest": "4941dd945909da9f109368946308f9961d82a60e464005bbd7207b2eafd9ab5b",
+      "patch": {
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2025/a4l/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Audi A4L 200万辆悦享版, редакция2025.Q3: страница9, дата на странице15. Точное исполнение Luxury Dynamic; 40TFSI,1984см³, передний привод, допустимая полная масса2080кг. Снаряжённая1640кг не используется. Добавляется только отсутствующая полная масса; исходные год/название/мощности/ручные значения сохраняются. 30-минутная мощность не подтверждается.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2025/a4l/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "sourceSha256": "60121123f1790cdcbeb350467c9ff422f8c5c45ddb944c8eb66b97ed304b7352",
+            "checkedAt": "2026-10-24",
+            "selector": "Страница9: 允许总重量[Kg], 40 TFSI,2080",
+            "edition": "2025.Q3",
+            "editionPage": 15
+          }
+        }
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "365d04491870787ca8e2d719",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Fashion Dynamic Type",
+      "expectedRevision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
+      "expectedDigest": "7cff8b91973228384bce3fcc19765947e7bbdbda39f8e9bae2cc26fc88c0dbbe",
+      "patch": {
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2025/a4l/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Audi A4L 200万辆悦享版, редакция2025.Q3: страница9, дата на странице15. Точное исполнение Fashion Dynamic; 40TFSI,1984см³, передний привод, допустимая полная масса2080кг. Снаряжённая1640кг не используется. Добавляется только отсутствующая полная масса; исходные год/название/мощности/ручные значения сохраняются. 30-минутная мощность не подтверждается.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2025/a4l/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "sourceSha256": "60121123f1790cdcbeb350467c9ff422f8c5c45ddb944c8eb66b97ed304b7352",
+            "checkedAt": "2026-10-24",
+            "selector": "Страница9: 允许总重量[Kg], 40 TFSI,2080",
+            "edition": "2025.Q3",
+            "editionPage": 15
+          }
+        }
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "b5207ac185ede58209545175",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type B&O Star Night Edition",
+      "expectedRevision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
+      "expectedDigest": "55a3c105b58301725f8d4de4faace3c032e7bcbe686285f1a6bbdc91e3771549",
+      "patch": {
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2025/a4l/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Audi A4L 200万辆悦享版, редакция2025.Q3: страница9, дата на странице15. Точное исполнение Bang&Olufsen Night Edition; 40TFSI,1984см³, передний привод, допустимая полная масса2080кг. Снаряжённая1640кг не используется. Добавляется только отсутствующая полная масса; исходные год/название/мощности/ручные значения сохраняются. 30-минутная мощность не подтверждается.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2025/a4l/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "sourceSha256": "60121123f1790cdcbeb350467c9ff422f8c5c45ddb944c8eb66b97ed304b7352",
+            "checkedAt": "2026-10-24",
+            "selector": "Страница9: 允许总重量[Kg], 40 TFSI,2080",
+            "edition": "2025.Q3",
+            "editionPage": 15
+          }
+        }
+      }
+    }
+  ]
+}
