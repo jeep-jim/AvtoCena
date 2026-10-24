@@ -1,6 +1,5 @@
 {
-  "mode": "apply",
-  "requestedAt": "2026-10-24T01:54:44.236759+00:00",
-  "expectedPlanDigest": "1460250ab533c147c9b68cf3169fba55adfc1b47c73078c8fe5ba327e3fc6d4e",
-  "reason": "Reviewed corrected preview40051556923, artifact12543956439 SHA2568c0b83d6e9ad0785fd36c4c53a60cdd20f433c8f602dee4e757ecf478538bb03. All4451models: one exact NioET5T2026 75kWh Touring powertrainKind unknown->electric; no inferred30min, no manual overwrite. Correct sentinel semantics6e6a2bd; CAS/readback required."
+  "mode": "preview",
+  "requestedAt": "2026-10-24T18:05:18.260224+00:00",
+  "reason": "Один read-only план по уже сохранённым точным данным после ASTRA b337/4a621 и изоляции индекса304b270. Не повторять прежний apply146025; измерить новые возможные переносы. Без новых моделей, источников, записи или догадок30min. Проверить planDigest и поля до отдельного CAS apply."
 }
