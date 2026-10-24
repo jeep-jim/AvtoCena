@@ -1,0 +1,53 @@
+name: Owner requested stop of market refreshes 2026-10-24
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/owner-stop-market-refreshes-20261024.yml']
+  workflow_dispatch:
+permissions:
+  actions: write
+jobs:
+  stop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Cancel only the four owner-approved market runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PYCODE'
+          import json, os, time, urllib.request, urllib.error
+          targets = {40047702136:'europe',40042142717:'georgia',40038476075:'uae',40026092554:'china'}
+          base = 'https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/'
+          headers = {'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
+          def request(run_id, suffix='', method='GET'):
+              req=urllib.request.Request(base+str(run_id)+suffix,headers=headers,method=method)
+              with urllib.request.urlopen(req,timeout=30) as response:
+                  body=response.read()
+                  return json.loads(body) if body else {}
+          def check(run_id):
+              run=request(run_id)
+              assert run['repository']['full_name']=='jeep-jim/AvtoCena'
+              assert run['event']=='schedule'
+              assert run['path']=='.github/workflows/catalog-refresh-'+targets[run_id]+'.yml'
+              return run
+          def cancel(run_id,suffix):
+              try:request(run_id,suffix,'POST')
+              except urllib.error.HTTPError as error:
+                  if error.code!=409:raise
+                  assert check(run_id)['status']=='completed'
+          for run_id in targets:
+              run=check(run_id)
+              print(json.dumps({'stage':'before','run':run_id,'status':run['status'],'conclusion':run['conclusion']}),flush=True)
+              if run['status']!='completed':cancel(run_id,'/cancel')
+          for attempt in range(36):
+              pending=[run_id for run_id in targets if check(run_id)['status']!='completed']
+              if not pending:break
+              if attempt==24:
+                  for run_id in pending:cancel(run_id,'/force-cancel')
+              time.sleep(5)
+          for run_id in targets:
+              run=check(run_id)
+              print(json.dumps({'stage':'after','run':run_id,'status':run['status'],'conclusion':run['conclusion']}),flush=True)
+              assert run['status']=='completed','Cancellation incomplete'
+          PYCODE

@@ -2,7 +2,8 @@ name: Catalog refresh korea
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 19 * * *"
+    # 00:00 Asia/Novokuznetsk (UTC+7); existing source/cadence guards remain.
+    - cron: "0 17 * * *"
   push:
     branches: [main]
     paths: ['.github/market-runs/korea-refresh.json']

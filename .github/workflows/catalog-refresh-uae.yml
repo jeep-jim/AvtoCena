@@ -2,7 +2,8 @@ name: Catalog refresh uae
 on:
   workflow_dispatch:
   schedule:
-    - cron: "23 20 * * *"
+    # 00:00 Asia/Novokuznetsk (UTC+7); existing source/cadence guards remain.
+    - cron: "0 17 * * *"
   push:
     branches: [main]
     paths: ['.github/market-runs/uae-refresh.json']

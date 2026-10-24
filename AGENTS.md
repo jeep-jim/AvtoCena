@@ -127,3 +127,7 @@
 # Owner ASTRA bulk encyclopedia authorization — 23.10.2026
 
 - The owner explicitly authorizes importing all useful open ASTRA vehicle data, including 3000-eDatenblatt and 4000-Typengenehmigungen_TAS, and its exact technical catalog. This supersedes the no-discovery restriction for this open source only. Preserve existing canonical records, manual edits, revisions and evidence history. Keep international makes/models/type codes unchanged; translate ordinary parameter labels to Russian. Retain exact approval/type/variant/version identities and unresolved conflicts; never derive certified 30-minute power from peak power or mistake manufacture dates for model years. Durable source corpora belong in REG object storage, not the production disk or public git. Partner feed restrictions remain unchanged.
+
+# Owner market refresh timing — 24.10.2026
+
+- Owner explicitly requested cancelling all currently running market refreshes and moving scheduled collection to 00:00 Asia/Novokuznetsk (17:00 UTC). Preserve source switches, existing cadence, supplier restrictions and publication safeguards. Do not restart cancelled daytime collectors; the next permitted scheduled window is midnight. Encyclopedia work and its coordinated release remain authorized.

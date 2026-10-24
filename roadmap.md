@@ -14020,3 +14020,12 @@ Public health00:35UTC вернул oktrue/e7a30716fad957202890c82f59274e8f0b2ec3
 Курсор7 Avant2024 закрыт. Следующий variant889d1703033d1ef5c805209c,2025,Limousine ADVANCED 40 TFSI+WINTERRÄDER+MATRIX: требуется точная дата/редакция; при отсутствии подтверждения отдельный retry и переход к существующей A4L. Прочие недостающие поля1342 годовых A4 сохранены в docs/encyclopedia/retry-2026-10-24-audi-a4-2021-2024-body-tail-remaining.json;2015 без trim и2019 UAE остаются retry с прежними причинами. Годы/двигатели/30min не угаданы, основу не пересобирали. A1/A3 retry и остальные обязательства сохранены.
 
 docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0800.json:5 pending/224 fields/2 models,28 required/14 public, ASTRA plan6d417105 сохранён. Нового deploy/apply/сбора/ASTRA/unlock не запрошено. Ручная координация выпуска сохраняется: нужны terminal результаты China/UAE/Georgia и свежая свободная lease; последняя roadmap-проверка00:35UTC показывала живой China writer. Полный проход не завершён.
+
+
+## 24.10.2026 08:20 Новокузнецк — по прямому указанию владельца остановка рынков и перенос на полночь
+
+Владелец поручил отменить все текущие обновления рынков и запускать ночью в24:00. Запрошена адресная отмена Europe40047702136/Georgia40042142717/UAE40038476075/China40026092554 через один workflow owner-stop-market-refreshes-20261024.yml: проверяются repo/path/schedule, сначала обычнаяотмена, force толькоеслине завершитсяза120с. Успехотмены ещё не заявлен. Данные/manifest/lease этотworkflow не изменяет.
+
+Шесть существующих cron China/Korea/UAE/Georgia/Europe/Green перенесены на0 17 * * * —00:00 Asia/Novokuznetsk UTC+7; это nightly wake-up, прежняя периодичность/owner source switches сохранены. Japan/Korea AJES остаются по запросу; запрещённыйbulk не включён. GitHubschedule допускаетзадержки. Следующееокно25.10 00:00 местного. Дневныеповторныесборы не запускать. Послеterminalотмен прочитатьлоги/freshlease/health и продолжить выпуск224pendingпараметров, сохранив snapshot/cursor готовогоChe168.
+
+Кодподтверждает разделениеcollect/publish: фидChina уже collected, затем catalog-publish-market.mjs делает подготовку/расчёт/retention и persistCatalogOffers с общейwriterlease. Наличиеdeltafeed само по себе не делает текущую полнуюпубликациюинкрементальной. Точное распределениевремени требуетterminalлогов; причина не приписываетсяскорости поставщика.
