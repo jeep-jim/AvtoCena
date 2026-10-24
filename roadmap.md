@@ -14933,3 +14933,14 @@ ASTRA fallback дополнительно разрешает восстанов�
 ### Полный CI: массовый проход запущен, исправления drive доуточнены
 
 PR1517 head07da107 CI40099703022SUCCESS, merged d33944ac7450d8cc0fc4dc21201c90e240659fa8. Массовый replan40100441431 подтверждён in_progress; результаты/запись плана ещё не объявлены. PR1518 CI40099922580:2490PASS/2FAIL. Ошибки: query helper затянул файловую зависимость calculation-index в изолированную editorial fixture; старый multiselect test ожидал PRIV дляJapan. Исправлено разделением: japan-drive/query чистые, server runtime инъецирует calculation index в AJES client; public enrichment получаетindexявно. Multiselect проверяет новый японский предикат и сохранённый KR/CN PRIV.76targettestsPASS,typecheckPASS; полный CI повторяется, не считать релиз готовым заранее.
+
+
+## 24.10.2026 21:13 Красноярск — массовый ASTRA: план выполняется, диагностика подготовки сохранена
+
+Проверены свежие AGENTS/main/ночной план/queue/continuation. Единственный replan40100441431/job120891320310 остаётся IN_PROGRESS на reconciliation, artifact ещё отсутствует. Единичные research записи/повтор replan/apply/deploy не запускались; ревизии для общего плана не менялись. PR1518 уже merged8442ab716c85bf058786809abbe506073ab4f473 ручной сессией; все8check-runs точного e47dbff1 SUCCESS. Это ещё не production приёмка drive/pickup.
+
+Прочитаны terminal: regcloud-prices40100131705/job120890399974 FAILURE14:01:43UTC budget_order_mismatch Korea budgetTo3m. Count/cold-repeat совпали, но порядок и суммы различаются: aa190c6b индекс2288550/контроль2241402, три indexed totalRub=null. Нельзя чинить только сортировку или выключать assert. Код возвращает default budget visibleCards без currentSearchPrices; compact replay также восстанавливает прежнюю metadata. Требуется сверка входов/порядка до удаленияsourceGroup изpublicDTO. Подробности/12+12публичныхorderinginputs сохранены в docs/encyclopedia/reports/2026-10-24-bulk-replan-preparation-diagnostics.json. Полныеoffers/секреты не опубликованы.
+
+One-hop40100131577/job120890399939 наREG завершился heapOOM14:00:39UTC/exit134;36tests/typecheckPASS. Это новая причина, не прежний YC binding и не доказательство отсутствия Japan. Публикационныйguard не ослаблялся, повтор не запрошен. Основной массовый replan имеет приоритет.
+
+Предыдущийrelease40097364164SUCCESS; внешнийhealth8ec0d858/calculation2104e015 подтверждён. Реальные HTML ответы трёх старыхссылок MERCEDES-ADRIA/PEUGEOT-DANGEL/RENAULT-SPORT содержат Next redirect на Mercedes-Benz/Peugeot/Renault с сохранённым year2023 —3/3PASS. HTTP200 здесь streamingredirect, не доказательствоотсутствияперехода. Следующийшаг: дождаться replan artifact, проверитьdigest/newModels0/newUnknownYearVariants0/причиныудержания, применитьпланштатнымCASimporter и затемединыйrelease со всеми прежнимитребованиями.

@@ -1,0 +1,377 @@
+{
+  "checkedAt": "2026-10-24T14:12:44Z",
+  "pricePreparation": {
+    "run": 40100131705,
+    "job": 120890399974,
+    "status": "failure",
+    "release": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+    "generation": "gen_1792702445675_8c312f85",
+    "failure": "budget_order_mismatch",
+    "diagnostic": {
+      "event": "budget_order_mismatch",
+      "params": {
+        "market": "korea",
+        "budgetTo": 3000000,
+        "pageSize": 12
+      },
+      "indexed": [
+        {
+          "id": "aa190c6bc7d3d0576614e93b",
+          "totalRub": 2288550,
+          "powerHp": 123,
+          "utilizationPowerKw": 90.47,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:47:07.153Z",
+          "updatedAt": "2026-10-18T00:47:07.153Z"
+        },
+        {
+          "id": "ea4d805d6503f5598dfad820",
+          "totalRub": 2406716,
+          "powerHp": 146,
+          "utilizationPowerKw": 107.38,
+          "powertrainKind": "combustion",
+          "fuel": "lpg",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:32:05.448Z",
+          "updatedAt": "2026-10-07T03:32:05.448Z"
+        },
+        {
+          "id": "eadeea8449415bae72f064ee",
+          "totalRub": null,
+          "powerHp": 123,
+          "utilizationPowerKw": 90.47,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:46:34.773Z",
+          "updatedAt": "2026-10-18T00:46:34.773Z"
+        },
+        {
+          "id": "ad7b587871675ee6f3f6a87e",
+          "totalRub": 1876334,
+          "powerHp": 120,
+          "utilizationPowerKw": 88.26,
+          "powertrainKind": "combustion",
+          "fuel": "lpg",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:31:24.430Z",
+          "updatedAt": "2026-10-07T03:31:24.430Z"
+        },
+        {
+          "id": "b7b94abbd7f0fcb36558a719",
+          "totalRub": 2557921,
+          "powerHp": 160,
+          "utilizationPowerKw": 117.68,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:44:31.978Z",
+          "updatedAt": "2026-10-18T00:44:31.978Z"
+        },
+        {
+          "id": "d44ec641b35d65da4b6fe2fb",
+          "totalRub": 1298867,
+          "powerHp": 140,
+          "utilizationPowerKw": 102.97,
+          "powertrainKind": "combustion",
+          "fuel": "lpg",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:29:45.219Z",
+          "updatedAt": "2026-10-07T03:29:45.219Z"
+        },
+        {
+          "id": "ce58a2587278602bece89c53",
+          "totalRub": null,
+          "powerHp": 123,
+          "utilizationPowerKw": 90.47,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:41:03.397Z",
+          "updatedAt": "2026-10-18T00:41:03.397Z"
+        },
+        {
+          "id": "429027357c99c56258404a73",
+          "totalRub": 2141653,
+          "powerHp": 123,
+          "utilizationPowerKw": 90.47,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:28:27.215Z",
+          "updatedAt": "2026-10-07T03:28:27.215Z"
+        },
+        {
+          "id": "68afc2060cec0f2c03d674cc",
+          "totalRub": 1521892,
+          "powerHp": 76,
+          "utilizationPowerKw": 55.9,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:40:35.748Z",
+          "updatedAt": "2026-10-18T00:40:35.748Z"
+        },
+        {
+          "id": "075509cd04c1c32df6276423",
+          "totalRub": 2490227,
+          "powerHp": 160,
+          "utilizationPowerKw": 117.68,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:28:27.214Z",
+          "updatedAt": "2026-10-07T03:28:27.214Z"
+        },
+        {
+          "id": "884967afdd67dc233bb56d80",
+          "totalRub": null,
+          "powerHp": 144,
+          "utilizationPowerKw": 105.91,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:39:37.511Z",
+          "updatedAt": "2026-10-18T00:39:37.511Z"
+        },
+        {
+          "id": "f8aac051907539fa6b964171",
+          "totalRub": 1541928,
+          "powerHp": 123,
+          "utilizationPowerKw": 90.47,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:28:13.452Z",
+          "updatedAt": "2026-10-07T03:28:13.452Z"
+        }
+      ],
+      "baseline": [
+        {
+          "id": "aa190c6bc7d3d0576614e93b",
+          "totalRub": 2241402,
+          "powerHp": 123,
+          "utilizationPowerKw": 90.47,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:47:07.153Z",
+          "updatedAt": "2026-10-18T00:47:07.153Z"
+        },
+        {
+          "id": "ea4d805d6503f5598dfad820",
+          "totalRub": 2363002,
+          "powerHp": 146,
+          "utilizationPowerKw": 107.38,
+          "powertrainKind": "combustion",
+          "fuel": "lpg",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:32:05.448Z",
+          "updatedAt": "2026-10-07T03:32:05.448Z"
+        },
+        {
+          "id": "b7b94abbd7f0fcb36558a719",
+          "totalRub": 2496278,
+          "powerHp": 160,
+          "utilizationPowerKw": 117.68,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:44:31.978Z",
+          "updatedAt": "2026-10-18T00:44:31.978Z"
+        },
+        {
+          "id": "ad7b587871675ee6f3f6a87e",
+          "totalRub": 1834401,
+          "powerHp": 120,
+          "utilizationPowerKw": 88.26,
+          "powertrainKind": "combustion",
+          "fuel": "lpg",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:31:24.430Z",
+          "updatedAt": "2026-10-07T03:31:24.430Z"
+        },
+        {
+          "id": "68afc2060cec0f2c03d674cc",
+          "totalRub": 1491143,
+          "powerHp": 76,
+          "utilizationPowerKw": 55.9,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:40:35.748Z",
+          "updatedAt": "2026-10-18T00:40:35.748Z"
+        },
+        {
+          "id": "d44ec641b35d65da4b6fe2fb",
+          "totalRub": 1269114,
+          "powerHp": 140,
+          "utilizationPowerKw": 102.97,
+          "powertrainKind": "combustion",
+          "fuel": "lpg",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:29:45.219Z",
+          "updatedAt": "2026-10-07T03:29:45.219Z"
+        },
+        {
+          "id": "bad47eecf593366da585dedb",
+          "totalRub": 1406152,
+          "powerHp": 76,
+          "utilizationPowerKw": 55.9,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:39:37.506Z",
+          "updatedAt": "2026-10-18T00:39:37.506Z"
+        },
+        {
+          "id": "429027357c99c56258404a73",
+          "totalRub": 2097363,
+          "powerHp": 123,
+          "utilizationPowerKw": 90.47,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:28:27.215Z",
+          "updatedAt": "2026-10-07T03:28:27.215Z"
+        },
+        {
+          "id": "3346fc5891fad531d298c410",
+          "totalRub": 2042229,
+          "powerHp": 123,
+          "utilizationPowerKw": 90.47,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:36:02.523Z",
+          "updatedAt": "2026-10-18T00:36:02.523Z"
+        },
+        {
+          "id": "075509cd04c1c32df6276423",
+          "totalRub": 2436839,
+          "powerHp": 160,
+          "utilizationPowerKw": 117.68,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:28:27.214Z",
+          "updatedAt": "2026-10-07T03:28:27.214Z"
+        },
+        {
+          "id": "40ba60fa28d4c2a2bb66fc49",
+          "totalRub": 2197744,
+          "powerHp": 76,
+          "utilizationPowerKw": 55.9,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-18T00:33:03.481Z",
+          "updatedAt": "2026-10-18T00:33:03.481Z"
+        },
+        {
+          "id": "f8aac051907539fa6b964171",
+          "totalRub": 1506495,
+          "powerHp": 123,
+          "utilizationPowerKw": 90.47,
+          "powertrainKind": "combustion",
+          "fuel": "petrol",
+          "powerBand": "low",
+          "firstSeenAt": "2026-10-07T03:28:13.452Z",
+          "updatedAt": "2026-10-07T03:28:13.452Z"
+        }
+      ]
+    },
+    "commonPriceDifferences": [
+      {
+        "id": "aa190c6bc7d3d0576614e93b",
+        "indexed": 2288550,
+        "baseline": 2241402,
+        "delta": 47148
+      },
+      {
+        "id": "ea4d805d6503f5598dfad820",
+        "indexed": 2406716,
+        "baseline": 2363002,
+        "delta": 43714
+      },
+      {
+        "id": "ad7b587871675ee6f3f6a87e",
+        "indexed": 1876334,
+        "baseline": 1834401,
+        "delta": 41933
+      },
+      {
+        "id": "b7b94abbd7f0fcb36558a719",
+        "indexed": 2557921,
+        "baseline": 2496278,
+        "delta": 61643
+      },
+      {
+        "id": "d44ec641b35d65da4b6fe2fb",
+        "indexed": 1298867,
+        "baseline": 1269114,
+        "delta": 29753
+      },
+      {
+        "id": "429027357c99c56258404a73",
+        "indexed": 2141653,
+        "baseline": 2097363,
+        "delta": 44290
+      },
+      {
+        "id": "68afc2060cec0f2c03d674cc",
+        "indexed": 1521892,
+        "baseline": 1491143,
+        "delta": 30749
+      },
+      {
+        "id": "075509cd04c1c32df6276423",
+        "indexed": 2490227,
+        "baseline": 2436839,
+        "delta": 53388
+      },
+      {
+        "id": "f8aac051907539fa6b964171",
+        "indexed": 1541928,
+        "baseline": 1506495,
+        "delta": 35433
+      }
+    ],
+    "finding": "Счётчик и холодный повтор прошли; расходятся порядок и сами суммы. В индексной странице 3 totalRub=null. Это не только перестановка равных элементов; причина ещё не доказана.",
+    "codeReview": [
+      "searchBudgetIndex возвращает visibleCards без currentSearchPrices, только attachJapanSearchValues для budget. Поэтому публичная индексная карточка может сохранить старую сумму, пока отбор использует пересчитанный compact replay.",
+      "currentBudgetReplay заменяет metadata вновь рассчитанной строки прежней metadata. Требуется проверить поля сортировки до publicOfferFromProjection, который удаляет sourceGroup; текущий лог не доказывает совпадение sourceGroup.",
+      "Контрольный путь currentProjectionRows→currentSearchPrices отличается от компактного replay; нужна точная сверка replay-входов/выходов до исправления порядка."
+    ],
+    "guardsPreserved": true
+  },
+  "readModelPublication": {
+    "run": 40100131577,
+    "job": 120890399939,
+    "status": "failure",
+    "failure": "JavaScript heap out of memory",
+    "at": "2026-10-24T14:00:39Z",
+    "exitCode": 134,
+    "tests": 36,
+    "typecheck": "pass",
+    "binding": "REG",
+    "memoryEvidence": "Mark-Compact 6665.3→6661.3MB; NODE_OPTIONS max-old-space-size=8192. Стадии публикации не логировались; точное место удержания памяти не доказано.",
+    "codeReview": "publishCurrentCatalogReadModels читает все рынки параллельно и удерживает полные rows; writeCurrentCatalogReadModels затем canonical/projections. Нужен bounded memory разбор, не разрешение пустого Japan."
+  },
+  "astraReplan": {
+    "run": 40100441431,
+    "job": 120891320310,
+    "status": "in_progress",
+    "writesPaused": true
+  },
+  "pr1518": {
+    "merged": true,
+    "mergeSha": "8442ab716c85bf058786809abbe506073ab4f473",
+    "testedHead": "e47dbff1de4b13a724c122de965d42e31f08b17c",
+    "headChecks": 8,
+    "headChecksAllSuccess": true,
+    "productionActivated": false
+  }
+}
