@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-countryman-2020-fuel",
+  "entries": [
+    {
+      "modelId": "b726f2f19d3ba44888882c95",
+      "variantId": "134d7eb9c3610000c36c1dbb",
+      "make": "MINI",
+      "model": "Countryman",
+      "year": 2020,
+      "trim": "2019 1.5T COOPER Artist Weekend Travel",
+      "expectedRevision": "8cbe5f65-9791-411f-8927-0c7a00af0b52",
+      "expectedDigest": "2eb6c4fdca24e34c12106735ea000541a8a5c47ee49454f1397517cb78beb6eb",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.press.bmwgroup.com/global/article/attachment/T0309037EN/454931",
+        "checkedAt": "2026-10-24",
+        "statement": "MINI manufacturer technical specification 07/2020, pages 1 and 3: Cooper / Cooper ALL4 with 1499 cc, 100 kW / 136 hp uses petrol RON 91–98 and a conventional combustion powertrain. Confirm only existing fuel=petrol and powertrainKind=combustion for these four identified 2020 variants. Preserve engine volume, output, gearbox, drive, body, year and manual data. PHEV / Cooper S E ALL4 and 189/192 hp variants excluded. Generic Mini Countryman is constrained by its existing 2020, 1499 cc, 100 kW / 136 hp identity; no drivetrain inference."
+      }
+    },
+    {
+      "modelId": "b726f2f19d3ba44888882c95",
+      "variantId": "84ed9674a487c7148c02fffa",
+      "make": "MINI",
+      "model": "Countryman",
+      "year": 2020,
+      "trim": "2021 1.5T COOPER ALL4",
+      "expectedRevision": "8cbe5f65-9791-411f-8927-0c7a00af0b52",
+      "expectedDigest": "430cdde67c44b15f941d030f057f11ec6ebe5172c8ee1326095d05c1982e3647",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.press.bmwgroup.com/global/article/attachment/T0309037EN/454931",
+        "checkedAt": "2026-10-24",
+        "statement": "MINI manufacturer technical specification 07/2020, pages 1 and 3: Cooper / Cooper ALL4 with 1499 cc, 100 kW / 136 hp uses petrol RON 91–98 and a conventional combustion powertrain. Confirm only existing fuel=petrol and powertrainKind=combustion for these four identified 2020 variants. Preserve engine volume, output, gearbox, drive, body, year and manual data. PHEV / Cooper S E ALL4 and 189/192 hp variants excluded. Generic Mini Countryman is constrained by its existing 2020, 1499 cc, 100 kW / 136 hp identity; no drivetrain inference."
+      }
+    },
+    {
+      "modelId": "b726f2f19d3ba44888882c95",
+      "variantId": "6fb1da45a1aae8ae4b7a55be",
+      "make": "MINI",
+      "model": "Countryman",
+      "year": 2020,
+      "trim": "2021 1.5T COOPER ALL4 Connoisseur",
+      "expectedRevision": "8cbe5f65-9791-411f-8927-0c7a00af0b52",
+      "expectedDigest": "a86195d9cc2074e468881074bf1bb6161541927f049d40f408d6483e99dd32b1",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.press.bmwgroup.com/global/article/attachment/T0309037EN/454931",
+        "checkedAt": "2026-10-24",
+        "statement": "MINI manufacturer technical specification 07/2020, pages 1 and 3: Cooper / Cooper ALL4 with 1499 cc, 100 kW / 136 hp uses petrol RON 91–98 and a conventional combustion powertrain. Confirm only existing fuel=petrol and powertrainKind=combustion for these four identified 2020 variants. Preserve engine volume, output, gearbox, drive, body, year and manual data. PHEV / Cooper S E ALL4 and 189/192 hp variants excluded. Generic Mini Countryman is constrained by its existing 2020, 1499 cc, 100 kW / 136 hp identity; no drivetrain inference."
+      }
+    },
+    {
+      "modelId": "b726f2f19d3ba44888882c95",
+      "variantId": "98bb3a49e8b6978ceb339ad0",
+      "make": "MINI",
+      "model": "Countryman",
+      "year": 2020,
+      "trim": "Mini Countryman",
+      "expectedRevision": "8cbe5f65-9791-411f-8927-0c7a00af0b52",
+      "expectedDigest": "9dc54a443014bdca1a8193dd5ba69e5ca6235808832a97b1dab2c4ca2c96a941",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.press.bmwgroup.com/global/article/attachment/T0309037EN/454931",
+        "checkedAt": "2026-10-24",
+        "statement": "MINI manufacturer technical specification 07/2020, pages 1 and 3: Cooper / Cooper ALL4 with 1499 cc, 100 kW / 136 hp uses petrol RON 91–98 and a conventional combustion powertrain. Confirm only existing fuel=petrol and powertrainKind=combustion for these four identified 2020 variants. Preserve engine volume, output, gearbox, drive, body, year and manual data. PHEV / Cooper S E ALL4 and 189/192 hp variants excluded. Generic Mini Countryman is constrained by its existing 2020, 1499 cc, 100 kW / 136 hp identity; no drivetrain inference."
+      }
+    }
+  ]
+}
