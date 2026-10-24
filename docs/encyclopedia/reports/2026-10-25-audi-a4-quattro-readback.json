@@ -1,0 +1,98 @@
+{
+  "batch": "research-2026-10-25-audi-a4-quattro-power-drive",
+  "path": "docs/encyclopedia/batches/2026-10-25-audi-a4-quattro-power-drive.json",
+  "sha256": "95b63db0fba9eb691849372fbbead5a42b3b1114727a1fe0413bc3479817d180",
+  "workflow": 40132593985,
+  "job": 120987295796,
+  "commit": "7f82edff6bae7cb6e7c6c8c1dfad5667d0a4d439",
+  "preflightWorkflow": 40132490613,
+  "variants": 5,
+  "fields": 11,
+  "checkedAt": "2026-10-24T21:05:38.040913+00:00",
+  "modelId": "e3570ba4a67b01797e57a749",
+  "revision": "9496c03b-e1ec-4a9c-a033-92e031a1240c",
+  "passed": true,
+  "fieldChecks": [
+    {
+      "variantId": "b85620ff8c20356a1340865d",
+      "field": "powerHp",
+      "expected": 204,
+      "actual": 204,
+      "pass": true
+    },
+    {
+      "variantId": "b85620ff8c20356a1340865d",
+      "field": "powerKw",
+      "expected": 150,
+      "actual": 150,
+      "pass": true
+    },
+    {
+      "variantId": "b85620ff8c20356a1340865d",
+      "field": "icePowerKw",
+      "expected": 150,
+      "actual": 150,
+      "pass": true
+    },
+    {
+      "variantId": "b85620ff8c20356a1340865d",
+      "field": "drive",
+      "expected": "awd",
+      "actual": "awd",
+      "pass": true
+    },
+    {
+      "variantId": "6f378f43e0eb5ac48920c922",
+      "field": "powerHp",
+      "expected": 265,
+      "actual": 265,
+      "pass": true
+    },
+    {
+      "variantId": "6f378f43e0eb5ac48920c922",
+      "field": "powerKw",
+      "expected": 195,
+      "actual": 195,
+      "pass": true
+    },
+    {
+      "variantId": "6f378f43e0eb5ac48920c922",
+      "field": "icePowerKw",
+      "expected": 195,
+      "actual": 195,
+      "pass": true
+    },
+    {
+      "variantId": "6f378f43e0eb5ac48920c922",
+      "field": "drive",
+      "expected": "awd",
+      "actual": "awd",
+      "pass": true
+    },
+    {
+      "variantId": "5d7f4486b9ae0a27ce76a867",
+      "field": "drive",
+      "expected": "awd",
+      "actual": "awd",
+      "pass": true
+    },
+    {
+      "variantId": "328b075a1f3785e0c7f97bdd",
+      "field": "drive",
+      "expected": "awd",
+      "actual": "awd",
+      "pass": true
+    },
+    {
+      "variantId": "f47e062bf4d46ada17cde8dc",
+      "field": "drive",
+      "expected": "awd",
+      "actual": "awd",
+      "pass": true
+    }
+  ],
+  "state": "saved_api_readback_pass_pending_next_index",
+  "newModels": 0,
+  "power30MinKw": 0,
+  "activationConfirmed": false
+}

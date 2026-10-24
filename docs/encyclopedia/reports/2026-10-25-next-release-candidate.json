@@ -4,8 +4,9 @@
     "PASS: A4apply40128788085 saved17 and public17field readback revisionf5899f27-d233-482b-9c1b-ab2453d7d91e",
     "retained existing v3 selector validation still matches current generation",
     "China40124551054 terminal; inspect exact failure if any",
-    "actual fresh publication lease free; old ce ba lease expiry20:51:38.606UTC does not prove freedom",
-    "no active/pending production release or conflicting writer"
+    "no active/pending production release or conflicting writer",
+    "PASS: A4 quattro11/API11 and A5 displacement3/API3; do not repeat applies",
+    "Actual fresh lease must be free: China writer was active at2026-10-24T21:02:13.683Z; expires21:29:58.613Z, expiry alone is not proof"
   ],
   "markerCandidate": {
     "requiredResearchBatches": [
@@ -49,7 +50,9 @@
       "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
       "docs/encyclopedia/batches/2026-10-24-suzuki-alto-2023-ha37s-power.json",
       "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
-      "docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json"
+      "docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a4-quattro-power-drive.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a5-40tfsi-displacement.json"
     ],
     "publicResearchBatches": [
       "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -78,7 +81,9 @@
       "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
       "docs/encyclopedia/batches/2026-10-24-suzuki-alto-2023-ha37s-power.json",
       "docs/encyclopedia/batches/2026-10-24-cupra-leon-phev-component-power.json",
-      "docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json"
+      "docs/encyclopedia/batches/2026-10-25-audi-a4-2024-mechanical-gaps.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a4-quattro-power-drive.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a5-40tfsi-displacement.json"
     ],
     "requiredAstraPlanDigests": [
       "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
@@ -95,5 +100,6 @@
     "health actual releaseSha and catalogProjectionParts scoped-v1",
     "one chunked repair with current lease and live AJES Japan preflight",
     "counts/parity/details then pinned pickup-drive-pricing/checkCatalogFeedback and actual prices"
-  ]
+  ],
+  "checkedAt": "2026-10-24T21:08:32.195939+00:00"
 }

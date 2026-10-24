@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-24T20:16:57.491589+00:00",
-  "state": "23_remaining_candidates_after_a4_manufacturer_batch",
-  "savedFields": 17,
+  "checkedAt": "2026-10-24T21:08:32.195939+00:00",
+  "state": "21_remaining_candidates_after_a4_quattro_and_a5_displacement",
+  "savedFields": 31,
   "sourceInventoryWorkflow": 40106963530,
   "sourceClassification": "unverified_reference",
   "priority": [
@@ -202,43 +202,11 @@
       "id": "e3570ba4a67b01797e57a749",
       "make": "Audi",
       "model": "A4",
-      "revisionAtReview": "f5899f27-d233-482b-9c1b-ab2453d7d91e",
+      "revisionAtReview": "9496c03b-e1ec-4a9c-a033-92e031a1240c",
       "year": 2024,
       "sourceModelGroup": "audi/a4",
       "publicRowsChecked": 269,
       "candidateRows": [
-        {
-          "variantId": "b85620ff8c20356a1340865d",
-          "year": 2024,
-          "trim": "40 TFSI Mild-Hybrid quattro S line Aut.*NAVI*",
-          "known": {
-            "fuel": "hybrid",
-            "powertrainKind": "other_hybrid",
-            "engineCc": 1984,
-            "bodyType": "wagon",
-            "transmission": "automatic"
-          },
-          "missing": [
-            "powerHpOrKw"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
-        {
-          "variantId": "6f378f43e0eb5ac48920c922",
-          "year": 2024,
-          "trim": "45 TFSI Mild-Hybrid quattro advanced Aut.*PDC",
-          "known": {
-            "fuel": "hybrid",
-            "powertrainKind": "other_hybrid",
-            "engineCc": 1984,
-            "bodyType": "wagon",
-            "transmission": "automatic"
-          },
-          "missing": [
-            "powerHpOrKw"
-          ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
-        },
         {
           "variantId": "955d4df52291a748c3241ecf",
           "year": 2024,
@@ -275,7 +243,7 @@
       "id": "8cf3dbb7884fe919bce44c62",
       "make": "Audi",
       "model": "A5",
-      "revisionAtReview": "bd7653c4-0fb1-57d6-a7d6-d3c754cec092",
+      "revisionAtReview": "44e42cca-52bd-415d-8868-223aa6592384",
       "year": 2024,
       "sourceModelGroup": "audi/a5",
       "publicRowsChecked": 75,
@@ -322,13 +290,14 @@
             "powertrainKind": "other_hybrid",
             "bodyType": "hatchback",
             "transmission": "automatic",
-            "drive": "fwd"
+            "drive": "fwd",
+            "engineCc": 1984
           },
           "missing": [
-            "engineCc",
             "powerHpOrKw"
           ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+          "partiallyFilledBy": "research-2026-10-25-audi-a5-40tfsi-displacement"
         },
         {
           "variantId": "18b41fb2835845cf38485884",
@@ -339,13 +308,14 @@
             "powertrainKind": "combustion",
             "bodyType": "coupe",
             "transmission": "automatic",
-            "drive": "awd"
+            "drive": "awd",
+            "engineCc": 1984
           },
           "missing": [
-            "engineCc",
             "powerHpOrKw"
           ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+          "partiallyFilledBy": "research-2026-10-25-audi-a5-40tfsi-displacement"
         },
         {
           "variantId": "a3eee39d462bfc013edaf629",
@@ -356,13 +326,14 @@
             "powertrainKind": "combustion",
             "bodyType": "hatchback",
             "transmission": "automatic",
-            "drive": "fwd"
+            "drive": "fwd",
+            "engineCc": 1984
           },
           "missing": [
-            "engineCc",
             "powerHpOrKw"
           ],
-          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится."
+          "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+          "partiallyFilledBy": "research-2026-10-25-audi-a5-40tfsi-displacement"
         },
         {
           "variantId": "20a1bbec4f02d2f9a8c8c0ba",
@@ -415,8 +386,8 @@
     }
   ],
   "totalRowsChecked": 470,
-  "candidateRows": 23,
-  "nextAction": "Continue23 unresolved candidates and retained page cursor. A4 batch saved17/API17; do not repeat. Missing marketing trim is not a reason to guess technical identity. Recheck revisions before each write.",
+  "candidateRows": 21,
+  "nextAction": "Continue21 remaining candidates and retained cursor. New14 fields saved/API14; do not repeat applies. A5 power remains unresolved; unnamed records require exact mechanical evidence.",
   "resolvedCandidates": [
     {
       "variantId": "fc8ef77222122cbe20bfe9af",
@@ -487,6 +458,44 @@
       ],
       "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
       "batch": "research-2026-10-25-audi-a4-2024-mechanical-gaps"
+    },
+    {
+      "variantId": "b85620ff8c20356a1340865d",
+      "year": 2024,
+      "trim": "40 TFSI Mild-Hybrid quattro S line Aut.*NAVI*",
+      "known": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "engineCc": 1984,
+        "bodyType": "wagon",
+        "transmission": "automatic",
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd"
+      },
+      "missing": [],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a4-quattro-power-drive"
+    },
+    {
+      "variantId": "6f378f43e0eb5ac48920c922",
+      "year": 2024,
+      "trim": "45 TFSI Mild-Hybrid quattro advanced Aut.*PDC",
+      "known": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "engineCc": 1984,
+        "bodyType": "wagon",
+        "transmission": "automatic",
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd"
+      },
+      "missing": [],
+      "reason": "Нужны совместимая техническая группа и доказательство каждого поля. Пустое trim само по себе не является отказом; мощность из названия не выводится.",
+      "batch": "research-2026-10-25-audi-a4-quattro-power-drive"
     }
   ],
   "retainedPage": {
@@ -541,5 +550,12 @@
       "No retained row is promoted automatically. Saved A4 batch uses independently reviewed manufacturer tables."
     ],
     "next": "Continue from exact digest with next bounded page; no new collector, no retry of redirect_outside_catalog."
-  }
+  },
+  "additionalRetries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "446d2b0b1120f5c191bca8d4",
+      "reason": "Limousine name conflicts with wagon body; excluded from this manufacturer Avant batch, no body inference."
+    }
+  ]
 }
