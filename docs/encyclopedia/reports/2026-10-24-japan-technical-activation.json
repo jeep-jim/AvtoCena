@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-24T10:42:31.962436+07:00",
+  "applyRun": 40059287386,
+  "applyJob": 120769080632,
+  "failedBeforeWriteRun": 40059208397,
+  "failure": "Marker used raw-file hash instead of canonical batch JSON digest; corrected before retry",
+  "readback": {
+    "revision": "b6ca03b3-408b-4b64-912e-19c2d5f1f613",
+    "matched": 4,
+    "comparisons": 40,
+    "mismatches": []
+  },
+  "auditRun": 40058762235,
+  "auditArtifact": 12546656511,
+  "japanSample": {
+    "rows": 441,
+    "newFilledOffers": 10,
+    "newFields": 52,
+    "previewInputsBefore": 0,
+    "previewInputsAfter": 9,
+    "actualDeliveredPricesVerified": false
+  },
+  "publication": "requested_not_yet_installed",
+  "tests": {
+    "release": 118,
+    "focused": 34,
+    "typescript": "PASS"
+  }
+}

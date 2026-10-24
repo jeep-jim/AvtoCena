@@ -27,7 +27,9 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a3-2026-tail-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a4-2020-2023-avant-body.json",
-    "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json"
+    "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
+    "docs/encyclopedia/batches/2026-10-24-berlingo-japan-2023-technical.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a4l-2026-drive-mass.json"
   ],
   "publicResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -43,12 +45,14 @@
     "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a3-2026-tail-body.json",
     "docs/encyclopedia/batches/2026-10-24-audi-a4-2020-2023-avant-body.json",
-    "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json"
+    "docs/encyclopedia/batches/2026-10-24-audi-a4-2021-2024-body-tail.json",
+    "docs/encyclopedia/batches/2026-10-24-berlingo-japan-2023-technical.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a4l-2026-drive-mass.json"
   ],
   "requiredAstraPlanDigests": [
     "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e"
   ],
-  "requestedAt": "2026-10-24T09:04:19.554538+07:00",
-  "reason": "Owner source privacy correction; verified exact Nio apply40051933362; publish saved224+1 fields with zod and sentinel fixes",
+  "requestedAt": "2026-10-24T10:42:31.962436+07:00",
+  "reason": "Activate audited technical identity matching including Japan, saved Berlingo annual identities and pending A4L fields",
   "ideaReports": []
 }

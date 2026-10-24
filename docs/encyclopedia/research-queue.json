@@ -32937,6 +32937,19 @@
           "comparisons": 52,
           "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-public-parity.json"
         }
+      },
+      {
+        "batch": "research-2026-10-24-berlingo-japan-2023-technical",
+        "batchPath": "docs/encyclopedia/batches/2026-10-24-berlingo-japan-2023-technical.json",
+        "workflow": 40059287386,
+        "job": 120769080632,
+        "variants": 4,
+        "newVariants": 4,
+        "fields": 40,
+        "apiReadback": true,
+        "includedInIndex": false,
+        "afterRevision": "b6ca03b3-408b-4b64-912e-19c2d5f1f613",
+        "report": "docs/encyclopedia/reports/2026-10-24-japan-technical-activation.json"
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-pass.json",
@@ -37667,8 +37680,8 @@
     },
     "researchWriteCoordination": {
       "observedMain": "81e96a5f64e0488c749c5075d4a84740e261c940",
-      "writesPaused": false,
-      "reason": "Immutable release index and required batch/ASTRA assertions succeeded; artifact SHA verified. Further research may resume; new changes await next release. Current deployment remains active, do not duplicate.",
+      "writesPaused": true,
+      "reason": "Single coordinated Japan technical-identity release requested; pause research mutations until immutable snapshot and membership artifact verified.",
       "doNotDuplicate": [
         "reference repair preview/apply",
         "production deploy",
@@ -37676,7 +37689,7 @@
         "full China collection"
       ],
       "newBatchAwaitingNextIndex": true,
-      "checkedAt": "2026-10-24T02:19:16.382274+00:00",
+      "checkedAt": "2026-10-24T10:42:31.962436+07:00",
       "parallelManualResearch": {
         "workflows": [
           39909676521,
@@ -37731,13 +37744,13 @@
       "pendingReleaseWorkflow": null,
       "independentResearchReservation": {
         "checkedAt": "2026-10-23T14:57:01Z",
-        "state": "resumed_after_verified_snapshot",
+        "state": "paused_for_verified_snapshot",
         "workflow": 39972729425,
         "job": 120479350486,
         "mode": "apply",
         "scope": "Независимые research batches; не блокирует основной ASTRA preview/apply",
         "reason": "Owner-requested combined224field release after cancellation; resume after isolated index + membership + artifact verified.",
-        "resumeCondition": "After successful immutable index/readback and required batches/ASTRA membership, set writesPaused false; subsequent batches wait next release.",
+        "resumeCondition": "Resume after successful immutable index/readback, required batch/ASTRA membership and verified artifact; later batches await next release.",
         "preparedBatch": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
         "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
         "previewWorkflow": 39949279655,
@@ -37747,7 +37760,7 @@
         "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
       },
       "lastCompletedReleaseWorkflow": 40052647125,
-      "pendingRelease": "installed_public_checks_passed",
+      "pendingRelease": "requested_japan_technical_identity",
       "isolatedIndexDigest": "1b5c4adae4c01317eebd86707dd802d008bbaaf70512eaa7d86976f08efeb75c",
       "isolationReport": "docs/encyclopedia/reports/2026-10-24-unified-index-isolation.json",
       "deferredNextRelease": {
