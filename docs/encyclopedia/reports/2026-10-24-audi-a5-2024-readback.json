@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T09:57:42.871323+00:00",
+  "passed": true,
+  "beforeRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+  "afterRevision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+  "targetedVariants": 6,
+  "fields": 9,
+  "untargetedUnchanged": 69,
+  "variantIdsPreserved": 75,
+  "privateProvenanceExposed": false,
+  "rows": [
+    {
+      "variantId": "c1a026593d2f50395308c8e8",
+      "patch": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2080
+      },
+      "changedFields": [
+        "drive",
+        "status",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "b3a2f7b68e7e23054ba75eab",
+      "patch": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2120
+      },
+      "changedFields": [
+        "drive",
+        "status",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "d56431281f2ed6da59ac6b03",
+      "patch": {
+        "drive": "awd",
+        "grossVehicleWeightKg": 2175
+      },
+      "changedFields": [
+        "drive",
+        "status",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "63750b261ce43b6a3161e9f3",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "changedFields": [
+        "status",
+        "bodyType"
+      ]
+    },
+    {
+      "variantId": "1c48c348a9bc3c00144c95c2",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "changedFields": [
+        "status",
+        "bodyType"
+      ]
+    },
+    {
+      "variantId": "d468db5ac096473e43034c7f",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "changedFields": [
+        "status",
+        "bodyType"
+      ]
+    }
+  ]
+}
