@@ -71,7 +71,7 @@ test("post-deploy gate fails when one-hop read models diverge from the immutable
   assert.match(parityAudit, /catalog\/public\/projection\/\$\{market\}\.json/);
   assert.match(parityAudit, /catalog_current_readmodel_manifest_mismatch/);
   assert.match(parityAudit, /projectionGenerationId !== generationId/);
-  assert.match(parityAudit, /items\.length !== expected/);
+  assert.match(parityAudit, /projection\.count !== expected/);
   assert.match(postDeployWorkflow, /catalog-audit-current-readmodel-parity\.mjs/);
   assert.match(postDeployWorkflow, /catalog-current-readmodel-parity-\$\{\{ github\.event\.workflow_run\.head_sha \|\| github\.sha \}\}/);
 });
