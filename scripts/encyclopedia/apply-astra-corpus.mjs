@@ -128,10 +128,29 @@ async function archiveCorpus(storage,corpus){
  await putImmutable(storage,`${prefix}/manifest.json`,descriptor);
  return descriptor;
 }
-export async function previewAstraImport({storage,corpus,reportDirectory='reports',at=new Date().toISOString()}){
+/** Reuse the immutable verified corpus; no downloads or model discovery. */
+export async function readStoredAstraCorpus(storage,corpusDigest){
+ if(storage.driver!=='object'||!/^[a-f0-9]{64}$/.test(corpusDigest))throw Error('invalid_stored_astra_corpus');
+ const prefix=`${ASTRA_ROOT}/corpora/${corpusDigest}`;
+ const archive=await storage.readJson(`${prefix}/manifest.json`,null);
+ if(!archive||archive.corpusDigest!==corpusDigest||!Array.isArray(archive.parts)||!archive.parts.length)throw Error('astra_archive_missing');
+ const m=archive.inputManifest;
+ if(!m||sha({version:1,files:m.files,detailFiles:m.detailFiles||[],sources:m.sources})!==corpusDigest)throw Error('astra_archive_digest');
+ const records=[],seen=new Set();let inputRecords=0;
+ for(const part of archive.parts){
+  if(!new RegExp('^'+prefix+'/parts/[0-9]{6}\\.json$').test(part.key))throw Error('astra_archive_part_path');
+  const value=await storage.readJson(part.key,null);
+  if(!value||sha(value)!==part.sha256||value.records?.length!==part.rows)throw Error('astra_archive_part_checksum');
+  inputRecords+=value.records.length;
+  for(const row of value.records){assertNoPrivateFields(row);if(!seen.has(row.evidenceId)){seen.add(row.evidenceId);records.push(row);}}
+ }
+ if(inputRecords!==archive.records)throw Error('astra_archive_record_count');
+ return {manifest:m,corpusDigest,records,inputRecords,uniqueRecords:records.length,detailRows:archive.detailRecords||0,verifiedStoredArchive:true};
+}
+export async function previewAstraImport({storage,corpus,reportDirectory='reports',at=new Date().toISOString(),annualOnly=false}){
  if(storage.driver!=='object')throw Error('durable_object_storage_required');
  const manifest=await storage.readJson(MANIFEST,null);if(!manifest?.models?.length)throw Error('encyclopedia_missing');
- const context={corpusDigest:corpus.corpusDigest,at,checkedAt:at.slice(0,10)},groups=new Map(),rejected={...corpus.preRejectedReasons},datasets={...corpus.sourceDatasets},resolutionCache=new Map();
+ const context={corpusDigest:corpus.corpusDigest,at,checkedAt:at.slice(0,10),annualOnly},groups=new Map(),rejected={...corpus.preRejectedReasons},datasets={...corpus.sourceDatasets},resolutionCache=new Map();
  const makePools=new Map();for(const summary of manifest.models){const name=key(makeName(summary.make));if(!makePools.has(name))makePools.set(name,[]);makePools.get(name).push(summary);}
  let eligible=0,assigned=0;
  for(const row of corpus.records){
@@ -139,11 +158,12 @@ export async function previewAstraImport({storage,corpus,reportDirectory='report
   const eligibility=eligibleAstraRow(row);if(!eligibility.eligible){increment(rejected,eligibility.reason);continue;}eligible++;
   const nameKey=JSON.stringify([row.facts.make,row.facts.commercialName]);let match=resolutionCache.get(nameKey);
   if(!match){match=resolveAstraModel(row,makePools.get(key(makeName(row.facts.make)))||[]);resolutionCache.set(nameKey,match);}if(match.reason){increment(rejected,match.reason);continue;}
+  if(annualOnly&&match.create){increment(rejected,'not_existing_model');continue;}
   assigned++;
   let group=groups.get(match.summary.id);if(!group){group={summary:match.summary,create:match.create,sources:[]};groups.set(match.summary.id,group);}
   group.sources.push({row,sourceSuffix:match.sourceSuffix,groupingAliasOnly:match.groupingAliasOnly===true,values:normalizeAstraValues(row)});
  }
- await archiveCorpus(storage,corpus);
+ if(!corpus.verifiedStoredArchive)await archiveCorpus(storage,corpus);
  await fs.mkdir(reportDirectory,{recursive:true});
  const planDirectory=await fs.mkdtemp(path.join(path.resolve(reportDirectory),'astra-model-plans-')),plans=[];
  const sourceRecords=corpus.inputRecords??corpus.records.length;
@@ -236,7 +256,11 @@ export async function applyAstraImport({storage,planDigest,mutateManifest,report
 async function main(){
  const args=process.argv.slice(2),value=name=>{const i=args.indexOf(name);return i<0?undefined:args[i+1];};
  const mode=value('--mode')||'preview',storage=getJsonStorage(),reportDirectory=value('--reports')||'reports';
- if(mode==='preview'){
+ if(mode==='replan'){
+  const corpus=await readStoredAstraCorpus(storage,value('--corpus-digest'));
+  const report=await previewAstraImport({storage,corpus,reportDirectory,annualOnly:true});
+  console.log('ASTRA_IMPORT_PREVIEW',JSON.stringify({...report,models:undefined}));
+ }else if(mode==='preview'){
   const input=value('--manifest');if(!input)throw Error('astra_corpus_manifest_required');
   const corpus=await readAstraCorpus(input),report=await previewAstraImport({storage,corpus,reportDirectory});
   console.log('ASTRA_IMPORT_PREVIEW',JSON.stringify({...report,models:undefined}));

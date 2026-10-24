@@ -6,7 +6,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {eligibleAstraRow,normalizeAstraValues,astraVariant,resolveAstraModel,planAstraExistingVariant,planAstraModel,sha,ASTRA_ROOT} from '../scripts/encyclopedia/astra-bridge.mjs';
-import {readAstraCorpus,previewAstraImport,applyAstraImport} from '../scripts/encyclopedia/apply-astra-corpus.mjs';
+import {readAstraCorpus,readStoredAstraCorpus,previewAstraImport,applyAstraImport} from '../scripts/encyclopedia/apply-astra-corpus.mjs';
 import {MANIFEST,ROOT,summarize} from '../apps/web/lib/encyclopedia/records.ts';
 import {compileModelFacts} from '../apps/web/lib/encyclopedia/calculation-index.ts';
 
@@ -103,9 +103,10 @@ test('a complete official modification prefix accepts equipment only with power 
  const v=annual({trim:'xDrive30d xLine',engineCode:undefined,fuel:'diesel',powertrainKind:'combustion',engineCc:2993,powerKw:195,drive:'awd',transmission:'automatic'});
  const good=planAstraExistingVariant(record,v,[candidate(row,'xDrive30d')],context);
  assert.equal(good.variant.engineCode,'B57D30');assert.equal(good.variant.icePowerKw,195);
- for(const extra of [{trim:'xDrive30dXYZ'},{powerKw:210},{powerKw:undefined},{drive:undefined},{markets:['japan']}])assert.equal(planAstraExistingVariant(record,{...v,...extra},[candidate(row,'xDrive30d')],context).reason,'no_exact_technical_match');
+ for(const extra of [{powerKw:210},{powerKw:undefined},{drive:undefined}])assert.equal(planAstraExistingVariant(record,{...v,...extra},[candidate(row,'xDrive30d')],context).reason,'no_exact_technical_match');
+ for(const markets of [['japan'],['china'],['korea'],['uae'],['georgia']]){const out=planAstraExistingVariant(record,{...v,trim:'Unrelated equipment',markets},[candidate(row,'xDrive30d')],context);assert.equal(out.variant.engineCode,'B57D30');assert.equal(out.variant.icePowerKw,195);}
  const hybrid=evidence({values:{powerKw:180}}),hybridV=annual({engineCode:undefined,trim:'450h Luxury',powerKw:180});
- assert.equal(planAstraExistingVariant(model(),hybridV,[candidate(hybrid,'450h+')],context).reason,'no_exact_technical_match');
+ assert.equal(planAstraExistingVariant(model(),hybridV,[candidate(hybrid,'450h+')],context).variant.power30MinKw,undefined);
 });
 test('manual values and research history survive; protected historical fields are never re-certified',()=>{
  const confirmation={batchId:'owner-old',source:{type:'owner_confirmed'},fields:['power30MinKw'],values:{power30MinKw:37}};
@@ -230,4 +231,31 @@ test('an interrupted multi-batch publication resumes from exact revisions withou
  const resumed=await applyAstraImport({storage:f.storage,planDigest:plan.planDigest,mutateManifest,reportDirectory:f.directory});
  assert.equal(resumed.savedModels,8);assert.equal(resumed.alreadySavedModels,32);assert.equal(resumed.status,'completed');
  const final=await f.storage.readJson(MANIFEST,null);assert.equal(final.models.length,41);assert.equal(new Set(final.models.map(m=>m.id)).size,41);
+});
+
+test('mechanical fallback retains ambiguous drive and incomplete output without guessing certification',()=>{
+ const v=annual({markets:['japan'],trim:'Unknown grade',icePowerKw:68,drive:undefined,bodyType:'hatchback'});
+ const a=evidence({values:{bodyType:'hatchback'}}),b=evidence({facts:{version:'awd'},values:{bodyType:'hatchback',drive:'awd'}});
+ const result=planAstraExistingVariant(model(),v,[candidate(a),candidate(b)],context);
+ assert.equal(result.variant.drive,undefined);assert.equal(result.variant.power30MinKw,undefined);
+ assert.equal(result.variant.engineCc,1490);assert.equal(result.candidateCount,2);
+ const partial=evidence({facts:{version:'partial'},values:{bodyType:'hatchback',drive:undefined}});
+ assert.equal(planAstraExistingVariant(model(),v,[candidate(a),candidate(partial)],context).variant.drive,undefined);
+});
+
+test('stored corpus replan verifies every part and never creates models or unknown-year trims',async t=>{
+ const f=await fixture();t.after(()=>fs.rm(f.directory,{recursive:true,force:true}));
+ const manifest={version:1,sourceRows:2,files:[],detailFiles:[],sources:[]};
+ const digest=sha({version:1,files:[],detailFiles:[],sources:[]});
+ const corpus={corpusDigest:digest,records:[evidence()],manifest};
+ await previewAstraImport({storage:f.storage,corpus,reportDirectory:f.directory,at});
+ const stored=await readStoredAstraCorpus(f.storage,digest);
+ assert.equal(stored.records.length,1);
+ const plan=await previewAstraImport({storage:f.storage,corpus:stored,reportDirectory:f.directory,at,annualOnly:true});
+ assert.equal(plan.counters.newModels,0);assert.equal(plan.counters.newUnknownYearVariants,0);
+ assert.equal(plan.counters.existingAnnualVariantsChanged,1);
+ const archive=await f.storage.readJson(`${ASTRA_ROOT}/corpora/${digest}/manifest.json`,null);
+ const part=await f.storage.readJson(archive.parts[0].key,null);part.records[0].values.drive='awd';
+ await f.storage.writeJson(archive.parts[0].key,part);
+ await assert.rejects(readStoredAstraCorpus(f.storage,digest),/checksum/);
 });

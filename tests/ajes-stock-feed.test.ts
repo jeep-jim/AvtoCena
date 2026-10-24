@@ -80,3 +80,15 @@ test('Korean detail requests full supplier information and does not accept a rec
  const cached=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>saved,fetcher:async()=>{throw Error('unexpected_request');}});
  assert.equal((await cached.read({table:'korea',id:row.ID},'203.0.113.45')).items[0].sourcePower,'150');
 });
+
+test('Rexton Sports keeps pickup identity when presentation shortens its model name',async()=>{
+ const {catalogBodyType}=await import('../apps/web/lib/catalog/pickup-body');
+ const {commercialParameters}=await import('../apps/web/lib/catalog/commercial-parameters');
+ const lot=ajesLot({...row,MARKA_NAME:'SSANGYONG',MODEL_NAME:'REXTON SPORTS CAR',GRADE:'2.2 Diesel 4WD Coolmen Prestige'},'korea',true)!;
+ const offer=ajesOffer(lot,{rateSource:'cbr',currency:'KRW',sourcePrice:17400000,effectiveRate:0.06} as any,'2026-10-24T13:30:12Z');
+ const presented={...offer,model:'Rexton',trim:'2.2 Diesel 4WD Coolmen Prestige'};
+ assert.equal(catalogBodyType(presented),'pickup');assert.equal(commercialParameters(presented).showCommercial,true);
+ assert.match(presented.sourceTitle!,/REXTON SPORTS CAR/);assert.equal(presented.grossVehicleWeightKg,undefined);
+ const suv=ajesOffer(ajesLot({...row,MARKA_NAME:'SSANGYONG',MODEL_NAME:'REXTON'},'korea',true)!,{rateSource:'cbr',currency:'KRW',sourcePrice:17400000,effectiveRate:0.06} as any,'2026-10-24');
+ assert.notEqual(catalogBodyType(suv),'pickup');
+});

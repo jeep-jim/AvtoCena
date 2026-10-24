@@ -1,3 +1,4 @@
+import {catalogBodyType} from './pickup-body';
 import {ajesSourceDetails,ajesDetailValues} from './ajes-source-details';
 import {ajesOriginalListingUrl} from './ajes-source-url';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
@@ -13,7 +14,7 @@ export function ajesOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:Curre
  const sellerPriceRub=Math.round(lot.finalPriceJpy*rate.effectiveRate);
  return {id:`ajes-stats-${lot.id}`,sourceId:'ajes_japan_feed',sourceOfferId:lot.id,market:'japan',offerType:'auction',status:'sold',catalogKind:'auction_result',auctionResult:'sold',auctionPriceKind:'published_result',
  make:ajesText(lot.make),model:ajesText(lot.model),trim:ajesText(lot.trim),year:lot.year,mileageKm:lot.mileageKm??undefined,engineCc:lot.engineCc||undefined,
- fuel,
+ fuel,bodyType:catalogBodyType({make:lot.make,model:lot.model,trim:lot.trim,year:lot.year})||undefined,sourceTitle:[lot.make,lot.model,lot.trim].filter(Boolean).join(' '),
  powertrainKind:ajesText(lot.sourceFuel).toUpperCase()==='HE'?'series_hybrid':ajesText(lot.sourceFuel).toUpperCase()==='E'?'electric':undefined,
  transmission:({AT:'automatic',MT:'manual',CVT:'cvt',DCT:'dct'} as Record<string,string>)[ajesText(lot.sourceTransmission).toUpperCase()],
  drive:({FF:'fwd',FR:'rwd',FWD:'fwd',RWD:'rwd',AWD:'awd','4WD':'awd',FULLTIME4WD:'awd'} as Record<string,string>)[ajesText(lot.sourceDrive).toUpperCase()],
@@ -40,7 +41,7 @@ function ajesStockOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:Currenc
  return {id:`ajes-${market}-${lot.id}`,sourceId,sourceOfferId:lot.id,market,offerType:'fixed',status:'active',catalogKind:'listing',
  make:lot.make,model:lot.model,trim:lot.trim,year:lot.year,
  productionDate:lot.productionMonth&&lot.productionMonth>=1&&lot.productionMonth<=12?`${lot.year}-${String(lot.productionMonth).padStart(2,'0')}`:undefined,
- mileageKm:lot.mileageKm??undefined,engineCc:engineCc||undefined,powerHp,fuel,bodyType:extra.bodyType,
+ mileageKm:lot.mileageKm??undefined,engineCc:engineCc||undefined,powerHp,fuel,bodyType:catalogBodyType({make:lot.make,model:lot.model,trim:lot.trim,year:lot.year,bodyType:extra.bodyType})||undefined,sourceTitle:[lot.make,lot.model,lot.trim].filter(Boolean).join(' '),
  powerDataConfidence:powerHp?'source_exact':undefined,powerDataSource:powerHp?`ajes:${market}:${lot.id}:${powerField}`:undefined,
  powertrainKind:lot.sourceFuel==='HE'?'series_hybrid':fuel==='electric'?'electric':undefined,
  transmission:({AT:'automatic',MT:'manual',CVT:'cvt',DCT:'dct'} as Record<string,string>)[lot.sourceTransmission.toUpperCase()]||extra.transmission,

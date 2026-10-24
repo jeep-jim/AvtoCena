@@ -156,15 +156,15 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  const specificTrim=(/\d/u.test(trim)&&/[\p{L}]/u.test(trim))||identity.engineCode||identity.chassisCode;
  let candidates=specificTrim?exact.filter(compatible):[];
  let technicalMatch=false,specificationMatch=false,ordinarySpecificationMatch=false;
- // Never bypass a conflicting exact named modification. Different trim names
- // require an explicit chassis/engine anchor; all compatible facts must agree.
- if(options.technicalIdentity&&!exact.length&&(exists(identity.chassisCode)||exists(identity.engineCode))){
+ // A conflicting equipment name cannot block an independently matching
+ // technical code. Real mechanical contradictions still exclude the donor.
+ if(options.technicalIdentity&&!candidates.length&&(exists(identity.chassisCode)||exists(identity.engineCode))){
   candidates=annual.filter(v=>compatible(v)&&['chassisCode','engineCode'].some(f=>exists(identity[f])&&exists(v.constraints[f])&&same(f,identity[f],v.constraints[f])));
   technicalMatch=candidates.length>0;
  }
  // Specification consensus: independent known mechanical anchors,
  // same annual model, and every compatible candidate retained for unanimity.
- if(options.specificationIdentity&&!candidates.length&&(!exact.length||!specificTrim)){
+ if(options.specificationIdentity&&!candidates.length){
   const power=(v:any)=>Number(v.powerKw)||(Number(v.powerHp)*0.73549875);
   const strong=(v:CalculationFact)=>{
    const x=v.values;

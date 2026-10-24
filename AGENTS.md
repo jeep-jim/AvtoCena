@@ -140,3 +140,8 @@
 # Owner encyclopedia source privacy — 24.10.2026
 
 - Do not display database suppliers, source download links or internal provenance notes in public encyclopedia descriptions/details or anonymous API responses. Preserve provenance and evidence internally for authorized administration and calculation checks. Keep the original listing source in the catalog disclosure. No source corpus export.
+
+
+# Owner technical facts priority — 24.10.2026
+
+- Fill calculation facts in bulk by make/model/year and known mechanical attributes (power, displacement, fuel, body, drive), not equipment/marketing trim wording. Do not require identical trim names or European market membership for ordinary technical consensus. Preserve real mechanical conflicts, manual values and per-field provenance. Certified 30-minute power remains a distinct documented measurement; ordinary mechanical fallback must not manufacture it. Japan drive must be available in cards and filtering before pagination, with unknown or conflicting chassis-drive relationships kept explicit.
