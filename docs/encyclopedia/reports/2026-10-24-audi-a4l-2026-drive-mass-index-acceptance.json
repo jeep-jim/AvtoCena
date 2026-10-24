@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T02:56:49.470Z",
+  "batch": "research-2026-10-24-audi-a4l-2026-drive-mass",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4l-2026-drive-mass.json",
+  "batchSha256": "8e610f061ac673e16b61acca4b65163db657771d62c5055e8ac3db783ba5f7fd",
+  "state": "pending_next_coordinated_index",
+  "requiredFields": 4,
+  "variants": [
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "4675f0047702b30735be4fe2",
+      "year": 2026,
+      "trim": "2026款 200万辆悦享版 40 TFSI 时尚动感型",
+      "values": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2080
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "68352bf85e49c0cde9ea17ad",
+      "year": 2026,
+      "trim": "2026款 200万辆悦享版 40 TFSI 豪华动感型",
+      "values": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2080
+      }
+    }
+  ],
+  "requiredChecks": [
+    "batch membership and provenance",
+    "exact/manual/unknown30min guards",
+    "public search/card parity after activation"
+  ],
+  "newDeployRequested": false
+}

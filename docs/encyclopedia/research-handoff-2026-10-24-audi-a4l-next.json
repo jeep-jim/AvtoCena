@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T02:56:11.054Z",
+  "modelId": "c2365f94a908e7e90f14976e",
+  "make": "Audi",
+  "model": "A4L",
+  "revision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
+  "lastCompletedBatch": "research-2026-10-24-audi-a4l-2026-drive-mass",
+  "next": {
+    "variantId": "9f1ea35aaaf581e33b2a71c2",
+    "year": 2020,
+    "trim": "40 TFSI Fashion Type China V",
+    "missingValueFields": [
+      "grossVehicleWeightKg",
+      "engineCode"
+    ],
+    "reason": "Требуется точное подтверждение года/China V/поколения; не переносить таблицу2026 на2020."
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a4l.json",
+  "previousA4Retry": "docs/encyclopedia/retry-2026-10-24-audi-a4-2021-2024-body-tail-remaining.json",
+  "previousA4Year2025Retry": "docs/encyclopedia/reports/2026-10-24-a4-2025-retry-a4l-2026-prepared.json",
+  "unresolved2026VariantIds": [
+    "6f65d71aa8a4e367db5b7cb3",
+    "4ae18f93ddb62a301b4d4cbc",
+    "17a559b71e86fc026cea7f7c",
+    "7ac0a12d428b78dd8d1445ec",
+    "13700c24892db00440cf561e",
+    "0a68663f949a04e9f1a25892"
+  ],
+  "modelComplete": false,
+  "allModelsComplete": false,
+  "nextAction": "Продолжить существующие A4L с2020: точная заводская таблица и identity, затем2021–2025. Неопределённые2019/2025 A4 и6строк2026 A4L остаютсяretry; отсутствиеточногоисточника — retry иследующаястрока. Сначала свежийAPI/CAS; не пересобиратьоснову."
+}

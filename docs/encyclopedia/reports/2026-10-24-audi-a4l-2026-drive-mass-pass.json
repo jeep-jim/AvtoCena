@@ -1,0 +1,420 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T02:56:49.470Z",
+  "batch": "research-2026-10-24-audi-a4l-2026-drive-mass",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4l-2026-drive-mass.json",
+  "commit": "020d45c67d46719d88cf35b11b37c2804b265f50",
+  "workflow": 40056081247,
+  "job": 120759258773,
+  "applyFinishedAt": "2026-10-24T02:54:40.272Z",
+  "variants": 2,
+  "fields": 4,
+  "newVariants": 0,
+  "compiledFields": 4,
+  "nativeExact": 2,
+  "nativeHeld": [],
+  "apiReadback": true,
+  "includedInIndex": false,
+  "afterRevision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
+  "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-pass.json",
+  "publicParity": {
+    "version": 1,
+    "checkedAt": "2026-10-24T02:55:58.309196+00:00",
+    "passed": true,
+    "scope": "Ограниченная выборка Audi A4L China: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована.",
+    "offersChecked": 4,
+    "comparisons": 52,
+    "matched": 52,
+    "rows": [
+      {
+        "offerId": "07f99d493cbbcbe14def4a56",
+        "checks": {
+          "year": {
+            "search": 2015,
+            "card": 2015,
+            "equal": true
+          },
+          "trim": {
+            "search": "30 TFSI Auto Comfort Type",
+            "card": "30 TFSI Auto Comfort Type",
+            "equal": true
+          },
+          "bodyType": {
+            "search": "sedan",
+            "card": "sedan",
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1798,
+            "card": 1798,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 160,
+            "card": 160,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 117.68,
+            "card": 117.68,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 117.68,
+            "card": 117.68,
+            "equal": true
+          },
+          "drive": {
+            "search": "fwd",
+            "card": "fwd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "auto_api_che168_source",
+            "card": "auto_api_che168_source",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 1521882,
+            "card": 1521882,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {}
+      },
+      {
+        "offerId": "bd411bea0bd59bc65c4f9525",
+        "checks": {
+          "year": {
+            "search": 2015,
+            "card": 2015,
+            "equal": true
+          },
+          "trim": {
+            "search": "30 TFSI Auto Comfort Type",
+            "card": "30 TFSI Auto Comfort Type",
+            "equal": true
+          },
+          "bodyType": {
+            "search": "sedan",
+            "card": "sedan",
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1798,
+            "card": 1798,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 160,
+            "card": 160,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 117.68,
+            "card": 117.68,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 117.68,
+            "card": 117.68,
+            "equal": true
+          },
+          "drive": {
+            "search": "fwd",
+            "card": "fwd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "auto_api_che168_source",
+            "card": "auto_api_che168_source",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 1620450,
+            "card": 1620450,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {}
+      },
+      {
+        "offerId": "defc7642a96c5b2250c37bf4",
+        "checks": {
+          "year": {
+            "search": 2016,
+            "card": 2016,
+            "equal": true
+          },
+          "trim": {
+            "search": "30 TFSI Collection Edition Auto Comfort Type",
+            "card": "30 TFSI Collection Edition Auto Comfort Type",
+            "equal": true
+          },
+          "bodyType": {
+            "search": "sedan",
+            "card": "sedan",
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1798,
+            "card": 1798,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 160,
+            "card": 160,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 117.68,
+            "card": 117.68,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 117.68,
+            "card": 117.68,
+            "equal": true
+          },
+          "drive": {
+            "search": "fwd",
+            "card": "fwd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "auto_api_che168_source",
+            "card": "auto_api_che168_source",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 1657412,
+            "card": 1657412,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {}
+      },
+      {
+        "offerId": "e06cbf34b3c00c00dae73dfb",
+        "checks": {
+          "year": {
+            "search": 2016,
+            "card": 2016,
+            "equal": true
+          },
+          "trim": {
+            "search": "30 TFSI Collection Edition Auto Comfort Type",
+            "card": "30 TFSI Collection Edition Auto Comfort Type",
+            "equal": true
+          },
+          "bodyType": {
+            "search": "sedan",
+            "card": "sedan",
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1798,
+            "card": 1798,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 160,
+            "card": 160,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 117.68,
+            "card": 117.68,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 117.68,
+            "card": 117.68,
+            "equal": true
+          },
+          "drive": {
+            "search": "fwd",
+            "card": "fwd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "auto_api_che168_source",
+            "card": "auto_api_che168_source",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 1608128,
+            "card": 1608128,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {}
+      }
+    ],
+    "unavailable": [],
+    "repeatedGroups": [
+      {
+        "offerIds": [
+          "07f99d493cbbcbe14def4a56",
+          "bd411bea0bd59bc65c4f9525"
+        ],
+        "allCardsChecked": true
+      },
+      {
+        "offerIds": [
+          "defc7642a96c5b2250c37bf4",
+          "e06cbf34b3c00c00dae73dfb"
+        ],
+        "allCardsChecked": true
+      }
+    ],
+    "duplicateOfferIds": 0,
+    "rowsReturned": 48,
+    "catalogTotalReported": 2095,
+    "healthBefore": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+      "calculationVersion": "3ac912ac200e8481ba1c0054941af4d4e27fef51a27a96be415c77a8bbe859fe"
+    },
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+      "calculationVersion": "3ac912ac200e8481ba1c0054941af4d4e27fef51a27a96be415c77a8bbe859fe"
+    },
+    "sameRelease": true,
+    "generationId": "gen_1792702445675_8c312f85"
+  },
+  "state": "saved_readback_verified_pending_next_index",
+  "batchSha256": "8e610f061ac673e16b61acca4b65163db657771d62c5055e8ac3db783ba5f7fd",
+  "preflight": {
+    "batchSha256": "8e610f061ac673e16b61acca4b65163db657771d62c5055e8ac3db783ba5f7fd",
+    "variants": 2,
+    "fields": 4,
+    "revision": "04240a9c-c707-433c-b85a-407bf48a4717",
+    "visibleBaselineMatches": true,
+    "oldFullDigestProtected": true,
+    "sourceHash": "0d5b2b3b6525fcb7668da9cf7dfbde9e16206ae899c42dd39ff2b42819ed546b",
+    "sourceRetry": "HTTP503; reviewed cached source hash unchanged",
+    "untargetedYearRowsPreserved": 6,
+    "replay": true
+  },
+  "guardTestsPassed": 11,
+  "readback": {
+    "checkedAt": "2026-10-24T02:55:15.691201+00:00",
+    "passed": true,
+    "beforeRevision": "04240a9c-c707-433c-b85a-407bf48a4717",
+    "afterRevision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
+    "updatedVariants": 2,
+    "fields": 4,
+    "untargetedYearRowsUnchanged": 6,
+    "publicSourcePrivacyPassed": true,
+    "scope": "Независимое API-чтение8строк2026:4значения и прочиепубличныеполя. Внутренниеevidence скрыты;не заявлена независимаяAPIпроверка закрытыхполей. Штатныйworkflow выполнилполныйdigest/CAS иdurable readback."
+  },
+  "apply": {
+    "batch": "research-2026-10-24-audi-a4l-2026-drive-mass",
+    "dryRun": false,
+    "models": [
+      {
+        "id": "c2365f94a908e7e90f14976e",
+        "changes": [
+          {
+            "variantId": "4675f0047702b30735be4fe2",
+            "fields": [
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "variantId": "68352bf85e49c0cde9ea17ad",
+            "fields": [
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "skipped": []
+      }
+    ],
+    "startedAt": "2026-10-24T02:54:33.799Z",
+    "finishedAt": "2026-10-24T02:54:40.272Z"
+  },
+  "scope": "Только4поля drive/grossVehicleWeightKg двухверсий2026. Не полнаяпроверка автомобилей или всего каталога.",
+  "next": {
+    "variantId": "9f1ea35aaaf581e33b2a71c2",
+    "year": 2020,
+    "trim": "40 TFSI Fashion Type China V",
+    "missingValueFields": [
+      "grossVehicleWeightKg",
+      "engineCode"
+    ],
+    "reason": "Требуется точное подтверждение года/China V/поколения; не переносить таблицу2026 на2020."
+  },
+  "activationConfirmed": false,
+  "currentRelease": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+  "snapshotIndex": "1b5c4adae4c01317eebd86707dd802d008bbaaf70512eaa7d86976f08efeb75c",
+  "currentReleaseExcludesThisBatch": true,
+  "privateEvidenceReadback": "Штатныйworkflow прочитал durable manifest/saved revision. Независимый anonymousAPI подтвердилзначения;privateevidence не раскрывается.",
+  "newDeployRequested": false
+}
