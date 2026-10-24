@@ -15357,3 +15357,12 @@ Health2026-10-24T22:17:22.980129+00:00HTTP200 всёещё8ec0d858,scoped-v1не
 ### 25.10.2026 06:16 UTC+7 — разрешённая CAS-партия22 Audi A3
 
 Preflight40141376030/job121013651347SUCCESS:22manualEdited=false,точныеdigests; ошибочнаяicePowerKw200уPHEVне имеет research/ASTRA/referenceproof. Партия01985b29e1fc30c21c5ffe38443e22b0aa0b95b884d699db1a5be9a7cab8cca9 validatePASS:27новыхзначений и1исправлениеice200→130,20приводовSportback2026 и2PHEV2025. ТристарыхPDFхеша повторно совпали,дополнительно подтверждена таблица30.06.2026. Прежниекузова/общаямощность/30minне меняются. Privateindex/applyсвободны,pending0;запрошенодинapply,результатпокаожидается. Chinaactive,release/repair/unlockне запрошены.
+
+
+### 25.10.2026 06:11 UTC+7 — Audi22 сохранено и проверено; выбранная reference-группа просмотрена
+
+Apply40141534268/job121014117519SUCCESS:22variants28assertions,27new/1correctedice200→130; API28/28PASS revisiondab6a586-2841-47c3-a058-ff736969b27d. Прочиепубличныеполя и223нетронутыхстрок2025–2026сохранены;2неизвестныхкузова/30minне заполнены,manualEdited=false. Новыйотчёт docs/encyclopedia/reports/2026-10-25-drive-phev-and-retained-group-checkpoint.json.
+
+Retainedpage5/12578413907:11новыхстрок,267uniqueвсего,остатоквыбраннойгруппы2024=0; это не8403полностьюпроверенныхзаписи. Статусunverifiedне повышен.17прежнихнеоднозначныхидентичностейи61новыйannualкандидатотложены с точнымсписком. Queue2423modelrecordsсохранены,candidate47required/33public/3ASTRA,559reuseguardсохранён.
+
+Healthостаётся8ec0d858,scoped-v1нет;China40124551054на последнейпроверкеactive,leaseheartbeat23:02:31UTC/до23:32:31,5selectorsvalid. Deploy/repair/unlock/collectorне запрошены. СледующееterminalChina+freshlease/selectors/allqueues→одинrelease→actualscoped-v1→одинguardedrepair→публичныеcounts/prices/JapanAWD. Заголовки06:09/06:16выше былиручнымиопережающимиоценками: считать точнымиGitHubtimestamps иcheckedAtартефактов,а не этизаголовки.

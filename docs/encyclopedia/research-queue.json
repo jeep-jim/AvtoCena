@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T22:21:19.736455+00:00",
+  "updatedAt": "2026-10-24T23:11:06.022724+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T22:21:19.736455+00:00",
+    "updatedAt": "2026-10-24T23:11:06.022724+00:00",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -33089,6 +33089,22 @@
         "afterRevision": "78a1b805-92ab-42fa-a3c3-eb703664c6d9",
         "apiReadback": true,
         "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-phev-2021-2023-readback.json"
+      },
+      {
+        "batch": "research-2026-10-25-audi-a3-2025-2026-drive-phev",
+        "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-2025-2026-drive-phev.json",
+        "sha256": "01985b29e1fc30c21c5ffe38443e22b0aa0b95b884d699db1a5be9a7cab8cca9",
+        "state": "saved_api_readback_pass_pending_next_index",
+        "modelId": "f40e34e905b8ca09f3636eda",
+        "variants": 22,
+        "fields": 28,
+        "newValues": 27,
+        "correctedValues": 1,
+        "workflow": 40141534268,
+        "job": 121014117519,
+        "afterRevision": "dab6a586-2841-47c3-a058-ff736969b27d",
+        "apiReadback": true,
+        "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-drive-phev-readback.json"
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
@@ -40612,86 +40628,7 @@
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-public-parity.json"
       }
     },
-    "latestResearchReview": {
-      "version": 1,
-      "checkedAt": "2026-10-24T11:03:19.881Z",
-      "batch": "research-2026-10-24-audi-a5-2021-2023-body",
-      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
-      "batchSha256": "c6d6d7b2ff5b8c120c69f444e2fc1bd71d212bbd3e5fbf0af1afcbf0a686098d",
-      "state": "prepared_waiting_release_snapshot",
-      "variants": 32,
-      "fields": 32,
-      "newVariants": 0,
-      "counts": {
-        "convertible": 19,
-        "coupe": 13
-      },
-      "years": {
-        "2021": 12,
-        "2022": 17,
-        "2023": 3
-      },
-      "reviewedRows": 253,
-      "sourceDocuments": {
-        "coupe": {
-          "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
-          "sha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
-          "bytes": 2470103,
-          "edition": "08/2020",
-          "pages": [
-            1,
-            2
-          ]
-        },
-        "cabrio": {
-          "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
-          "sha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
-          "bytes": 1668445,
-          "edition": "08/2020",
-          "pages": [
-            1,
-            2
-          ]
-        }
-      },
-      "preflight": {
-        "workflow": 40088003570,
-        "job": 120854766351,
-        "conclusion": "success",
-        "checkedAt": "2026-10-24T10:58:58.759Z",
-        "fullDigests": 32
-      },
-      "validation": {
-        "guardTests": 11,
-        "passed": true
-      },
-      "applyRequested": false,
-      "apiReadback": false,
-      "includedInIndex": false,
-      "releaseCoordination": {
-        "workflow": 40085909587,
-        "job": 120854944005,
-        "snapshotReady": false,
-        "duplicateDeployRequested": false,
-        "preparePrivateIndex": "in_progress",
-        "membership": "pending"
-      },
-      "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2021-2023-remaining.json",
-      "allModelsComplete": false,
-      "preApplyAnonymousReadback": {
-        "passed": true,
-        "revision": "043cc960-7b74-46d1-8809-e5a531067f5b",
-        "rowsUnchanged": 253
-      },
-      "publicParity": {
-        "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2021-2023-prepared-public-parity.json",
-        "offers": 7,
-        "comparisons": 91,
-        "passed": true,
-        "newBatchActivationProved": false
-      },
-      "nextAction": "После SUCCESS private index/membership40085909587 проверить свежие CAS и применить существующую32-партию; затем независимыйAPIreadback."
-    },
+    "latestResearchReview": "docs/encyclopedia/reports/2026-10-25-drive-phev-and-retained-group-checkpoint.json",
     "audiA4L2025MassPass": {
       "version": 1,
       "checkedAt": "2026-10-24T05:01:40.762805+00:00",
@@ -42914,55 +42851,70 @@
       "activationConfirmed": false
     },
     "retainedTechnicalGroupAudit": {
-      "state": "completed_read_only",
-      "workflow": 40106963530,
-      "job": 120910543950,
-      "artifact": 12565556251,
-      "artifactSha256": "c72e02f259a776f89ce85639044648709df62b65c73f5559b9a8b305ee8f6905",
+      "checkedAt": "2026-10-24T23:11:06.022724+00:00",
+      "workflow": 40141151246,
+      "job": 121012981498,
+      "artifact": 12578413907,
+      "artifactSha256": "f860eee5f6088b5261f032a60617a9a569a6141f3cb38e3dc06f1cb88d5a19a2",
       "recordsRead": 8403,
-      "sourceGroups": 219,
-      "uniqueExistingModelGroups": 116,
-      "recordsInUniqueModelGroups": 7286,
-      "unresolvedGroupNames": 103,
-      "sourceSnapshotDigest": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
+      "recordSnapshotDigest": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
+      "checkpoint": {
+        "digest": "974674b4505d07ca1320702be93136afd94936ef6ee9727c5616ad55eb00cd94",
+        "saved": 8403,
+        "visited": 13045,
+        "pending": 253,
+        "updatedAt": "2026-10-22T19:38:18.897Z",
+        "failures": [
+          {
+            "at": "2026-10-22T09:14:03.805Z",
+            "category": "unclassified"
+          },
+          {
+            "at": "2026-10-22T19:38:18.897Z",
+            "category": "redirect_outside_catalog"
+          }
+        ]
+      },
+      "reviewedRows": 11,
+      "reviewedRowsCumulative": 267,
+      "remainingSourceRows": 0,
+      "nextAfterDigest": "fe687a556b684f89b8dcda393d63ad37a41fc83f4cce873f38a5aeeeadbdad1e",
+      "groupsOnPage": {
+        "audi/a3": 7,
+        "audi/a5": 4
+      },
+      "scope": "audi/a3,audi/a4,audi/a5;2024 only",
+      "classification": "unverified_reference",
+      "verifiedFieldsAdded": 0,
       "supplierRequests": 0,
       "storageWrites": 0,
-      "verifiedFieldsAdded": 0,
-      "classification": "unverified_reference",
-      "report": "docs/encyclopedia/reports/2026-10-24-retained-reference-inventory.json",
-      "routing": "docs/encyclopedia/reports/2026-10-24-retained-reference-group-routing.json",
-      "noRepeatUnlessSourceChanges": true
+      "recordDigests": [
+        "f3b0fcff50f6e6d53b02c58e6d1e0adca7e57aecd2f6d0494abbcab62b32b6e3",
+        "f3e4ca70fc902687941af91fb3dc06204c6adc246d88911ba7dee83488ca0806",
+        "f40f08623bab797f8c323c1c75aec2e6b72f3e88f6e3a1f60b344122ff12095a",
+        "f508724696b064234025226f4b390b349c71e9fd6b4d0062fc46dfc1963f2a55",
+        "f51f516367b86b22538707618cccbf0b65d1ea2e347193e4849e9655aecab75d",
+        "f6cc61cff6522de82f4d147a83d49c859a627d7fb422e30c79231260b429d26c",
+        "f8f9b630127c1113ade0bac1857c4a702e0c3acd588a71f7a01521b27ab000b8",
+        "f9e01d5909aaaa9b7b85035756043d04c5e00bfca8438c4fa31043c2f3e19304",
+        "f9e35fa628c5ad2697407bab29bbdf7c61a51bd2fee0acf2a2ceb56c2c21f8ad",
+        "fa400eb3a54295698d7b3452ada6c78cd10c375aed987c2dcb5bff2ac03a677f",
+        "fe687a556b684f89b8dcda393d63ad37a41fc83f4cce873f38a5aeeeadbdad1e"
+      ],
+      "findings": [
+        "A3/2024:1395 DJS150PS and1498 DPCA150PS coexist with same8Y chassis; year/body/power alone cannot choose displacement. Retain unnamed and35TFSI ambiguity.",
+        "A3/late2024:1498 DSV160PS exists alongside1498 DXD116PS andDPCA150PS; no power imputation from1498 alone.",
+        "A5/2024:F53 coupe1984 has190/204/265PS andFWD/AWD. Require engine code or equally exact technical identity; no badge-only transfer.",
+        "All11 rows remain unverified_reference; sources retained asDrom, not manufacturer. No new corpus/collector/supplier request."
+      ],
+      "report": "docs/encyclopedia/reports/2026-10-25-retained-reference-page5-review.json"
     },
     "nextRetainedReferenceReview": {
-      "handoff": "docs/encyclopedia/research-handoff-2026-10-24-retained-technical-groups.json",
-      "models": [
-        "f40e34e905b8ca09f3636eda",
-        "e3570ba4a67b01797e57a749",
-        "8cf3dbb7884fe919bce44c62"
-      ],
-      "year": 2024,
-      "rowsChecked": 470,
-      "candidateRows": 17,
-      "fields": [
-        "fuel",
-        "engineCc",
-        "powerHpOrKw",
-        "documentedPower30MinKw",
-        "drive"
-      ],
-      "state": "256_retained_rows_reviewed_17_candidates_remaining",
-      "savedFields": 85,
-      "broadBodyCaution": "Passenger car — общая категория, не точный кузов. Анонимный API не доказывает отсутствие приватных homologation IDs; проверить сохранённую идентичность, не угадывать.",
-      "residualPlanChecked": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93",
-      "targetModelsChangedByResidualPlan": 0,
-      "reason": "A3 999cc MHEV candidate resolved using official MY2024 and both factory body tables; unknown body preserved. Previous A4/A5 batches not repeated.",
-      "remainingSourceRows": 11,
-      "nextAfterDigest": "f30b762e2aaa933dea0f086332dc10261186f1ded254715f2649b3731b5e430c",
-      "workflow": 40137668376,
-      "artifact": 12577782656,
-      "report": "docs/encyclopedia/reports/2026-10-25-retained-reference-page4-review.json",
-      "correctedValues": 8,
-      "reviewedReferenceRows": 256
+      "state": "selected_2024_group267_reviewed_next_group_not_started",
+      "remainingSelectedSourceRows": 0,
+      "unresolved2024Identities": 17,
+      "annualCandidateReport": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-candidates.json",
+      "annualCandidates": 61
     },
     "installedAcceptance": {
       "pr": 1522,
@@ -43216,6 +43168,22 @@
       ],
       "newModels": 0,
       "certifiedPowerAdded": 0
+    },
+    "audiA3DrivePhev2025_2026Pass": {
+      "batch": "research-2026-10-25-audi-a3-2025-2026-drive-phev",
+      "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-2025-2026-drive-phev.json",
+      "sha256": "01985b29e1fc30c21c5ffe38443e22b0aa0b95b884d699db1a5be9a7cab8cca9",
+      "state": "saved_api_readback_pass_pending_next_index",
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variants": 22,
+      "fields": 28,
+      "newValues": 27,
+      "correctedValues": 1,
+      "workflow": 40141534268,
+      "job": 121014117519,
+      "afterRevision": "dab6a586-2841-47c3-a058-ff736969b27d",
+      "apiReadback": true,
+      "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-drive-phev-readback.json"
     }
   },
   "scope": {
