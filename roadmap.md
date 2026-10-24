@@ -15102,3 +15102,10 @@ Read-onlyзапускregcloud-publication-status.yml дваждыотклонё�
 Обновлён docs/encyclopedia/reports/2026-10-24-next-coordinated-release-plan.json: сначала читательscoped-v1, затемпересборка; старое требование успешногоrepairдоreader заменено, иначе возникалневерныйпорядок. Все40required/26publicresearch/3ASTRAplan сохранены. Состояниеpublicationleaseпослеотменынеизвестно; checkpoint docs/operations/2026-10-24-bounded-scoped-projections.md фиксирует, что read-onlydiagnostic был блокирован автоматическойпроверкойразрешений в ручнойсессии. Этототказ не обходился, lock не сбрасывался, новыйdeploy/repair/collector не запрошен.
 
 Независимо продолжена первичнаяпроверка27остаточныхстрок: docs/encyclopedia/reports/2026-10-24-a5-regional-power-review.json фиксирует несовпадающие мощности официальных A5 40TFSI2024 для разныхрынков. Название40TFSI само не доказываетмощность; неизвестныеполя неугаданы, объём1984оставленкандидатомдоточногоreview/SHA/revision. Новыхresearchfieldsвэтомпроходенесохранено; прежние3664+70 ASTRA иCupra8/16 не повторялись.
+
+
+## 24.10.2026 — подтверждён запуск диагностики; обнаружена блокировка отменённой пересборки
+
+Владелец подтвердил диагностику, установку после CI и повторную пересборку. PR1526 уже объединён с успешным CI40110551110; запуск40111237749 остановлен reader guard до записи данных. Read-only40112202295 прочитал lock в16:35:16UTC: operationId read-model-repair-bb3d8336-0f92-4122-8422-acc813eff059, startedAt15:42:48.889, lockedUntil17:22:48.889; прежний repair40108157776 завершён cancelled. Последующая старая Countryman-проверка этого diagnostic завершилась inspection_release_changed; сам результат чтения lock получен, общее SUCCESS не заявлено.
+
+Подготовлена ручная операция снятия только этой блокировки: GitHub run и единственный job должны быть completed/cancelled, время lease обязано попадать внутрь отменённого publication step, operationId/start/expiry проверяются повторно при CAS. Параллельный writer или изменённая блокировка приводят к отказу. Данные каталога не меняются. Два поведенческих теста PASS. Запуск и readback пока предстоят; не объявлять lock свободным заранее.

@@ -1,0 +1,46 @@
+name: Catalog — release exact cancelled repair lease
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Confirmed cancelled read-model repair run ID
+        required: true
+        type: string
+      operation_id:
+        description: Exact observed read-model-repair lease operationId
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/release-cancelled-repair-lock.test.mjs
+      - name: Verify cancelled owner then release only its unchanged lease
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CANCELLED_REPAIR_RUN_ID: ${{ inputs.run_id }}
+          CANCELLED_REPAIR_OPERATION_ID: ${{ inputs.operation_id }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/release-cancelled-repair-lock.mjs
