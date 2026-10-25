@@ -48,11 +48,12 @@ export function verifiedPackedBudgetSelector(directory:PackedBudgetDirectory,mar
 }
 
 
-export const BUDGET_SELECTOR_STORAGE_VERSION = 6;
+export const BUDGET_SELECTOR_STORAGE_VERSION = 7;
 // Keep release/data revisions immutable alongside one another during cutover.
-export const specificationSelectorDirectory=(encyclopediaDigest:string|null,calculationVersion:string)=>`budget-markets-v6/${digest([encyclopediaDigest,calculationVersion])}`;
+export const specificationSelectorDirectory=(encyclopediaDigest:string|null,calculationVersion:string)=>`budget-markets-v7/${digest([encyclopediaDigest,calculationVersion])}`;
 export type CompressedBudgetSelector = {encoding:'gzip-base64';payload:string};
-export type CompressedBudgetDirectory = Omit<PackedBudgetDirectory,'version'> & {version:3;encyclopediaDigest?:string|null};
+export type SelectorChunk = {name:string;rows:number;otherRows:number;checksum:string;bytes:number};
+export type CompressedBudgetDirectory = Omit<PackedBudgetDirectory,'version'|'markets'> & {version:3|4;encyclopediaDigest?:string|null;markets:Record<string,{rows:number;otherRows:number;checksum:string;chunks?:SelectorChunk[]}>};
 // Derived, immutable selectors only. Bound inflation even if an object is corrupt.
 const MAX_SELECTOR_BYTES = 128 * 1024 * 1024;
 export function compressBudgetSelector(packed:PackedBudgetSelector):CompressedBudgetSelector {

@@ -15415,3 +15415,10 @@ Apply40145557656/job121026002640SUCCESS;41variants/44новыхполей,skip0.
 ### 25.10.2026 08:06 UTC+7 — восстановление после terminal China
 
 Свежий main c858316/AGENTS/ночной план/queue прочитаны. China40124551054 завершён с budget_selector_requires_bounded_parts; прежняя публикация сохранена. Running0/pending0, четыре исторических queued не тронуты. Запрошена свежая read-only проверка lease/generation/selectors перед единым reader release48/34/3+559reuse. Повторного collector/apply/repair/unlock нет; bounded-selector blocker подлежит исправлению без ослабления размера/integrity guards.
+
+
+### 25.10.2026 08:11 UTC+7 — исправление доказанного bounded-selector blocker
+
+Read-only40149538202/job121037950634SUCCESS:01:10:24UTC writer.active=false, lockedUntil пустой; активныйgen_1792702445675_8c312f85 сохранён, пятьстарыхv3selectorsvalid. China40124551054 terminalfailure budget_selector_requires_bounded_parts не требует повторногоcollector.
+
+Подготовлено реальное v4-разбиение бюджетных selectors: части<=1000строк и<=4MiB, content-addressed keys, checksum/bytes/generation/market/header/count/order readback и readyпоследним; старыйv3readerсохранён. Runtime и specification backfill читают части, отдельныйnamespacev7 не заменяет livev6. Writeallowlist расширен только на точные derivedchunkpaths, traversal/inventory запрещены. Проверки повреждённых/отсутствующих частей и неделимой сверхбольшой строки проходят, WebtypecheckPASS. Это ограничение размера объектов, не полностью boundedRAM: итоговые компактные массивы остаются. До greenCI/merge/live не считать productionисправленным. Следующее: одинrelease48/34/3+559reuse, затемactualscoped-v1 и одинguardedrepair сpublicprices/JapanAWD.

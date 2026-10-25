@@ -48,12 +48,12 @@ test('specification backfill accepts empty markets but rejects a missing populat
   const ready=await backfillBudgetSpecificationSelectors();
   assert.deepEqual(Object.keys(ready.markets),['china']);
   assert.equal(ready.markets.china.rows+ready.markets.china.otherRows,1);
-  assert.equal([...values.keys()].some(key=>/budget-markets-v6\/[^/]+\/japan.json$/.test(key)),false);
-  const firstKeys=[...values.keys()].filter(key=>key.includes('/budget-markets-v6/'));
+  assert.equal([...values.keys()].some(key=>/budget-markets-v7\/[^/]+\/japan.json$/.test(key)),false);
+  const firstKeys=[...values.keys()].filter(key=>key.includes('/budget-markets-v7/'));
   const firstValues=firstKeys.map(key=>JSON.stringify(values.get(key)));
   process.env.AVTOCENA_CALCULATION_VERSION='b'.repeat(64);resetCatalogReadCachesForTests();
   await backfillBudgetSpecificationSelectors();
-  assert.equal([...values.keys()].filter(key=>key.includes('/budget-markets-v6/')).length,firstKeys.length*2,'a new release has its own immutable selector namespace');
+  assert.equal([...values.keys()].filter(key=>key.includes('/budget-markets-v7/')).length,firstKeys.length*2,'a new release has its own immutable selector namespace');
   assert.deepEqual(firstKeys.map(key=>JSON.stringify(values.get(key))),firstValues,'previous live selectors remain byte-for-byte unchanged');
   await backfillBudgetSpecificationSelectors();
   manifest.markets.japan.count=1;resetCatalogReadCachesForTests();
