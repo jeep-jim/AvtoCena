@@ -1,0 +1,53 @@
+[
+  {
+    "model": "A6 allroad",
+    "date": "2024-08-29",
+    "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/919/file_en/496975c7e76dc30047a05c823b47e349e9385069/eTD-Audi-A6-allroad-quattro-50-TDI-tiptronic-210kW-MHEV_240829.pdf?1725008024=&disposition=attachment",
+    "sha256": "936057b8f7bcd48a245578c35d951dedd55be9ba8b375c617133375db57e899a",
+    "pages": [
+      1,
+      2
+    ],
+    "checkedAt": "2026-10-25",
+    "candidateFacts": {
+      "drive": "awd",
+      "engineCc": 2967,
+      "powerKw": 210
+    },
+    "state": "source_verified_not_saved"
+  },
+  {
+    "model": "A7",
+    "date": "2024-09-06",
+    "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1198/file_en/180c57c92fcb9805a4951e8a12c4b777de55c0db/eTD-Audi-A7-Sportback-45-TDI-quattro-S_tronic-180kW-MHEV_240906.pdf?1725886548=",
+    "sha256": "781a80983096833fb02c87893717978e0ee17196ade71218eeaf244ec41cc558",
+    "pages": [
+      1,
+      2
+    ],
+    "checkedAt": "2026-10-25",
+    "candidateFacts": {
+      "drive": "awd",
+      "engineCc": 2967,
+      "powerKw": 180
+    },
+    "state": "source_verified_not_saved"
+  },
+  {
+    "model": "A8",
+    "date": "2024-06-13",
+    "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/633/file_en/b07606be3f245e1b199726a58b573a9331dc4b21/eTD-Audi-A8-50-TDI-quattro-tiptronic-210kW-MHEV_240613.pdf?1718609970=&disposition=attachment",
+    "sha256": "a783e975af359c2a8e1f913a8c4a45e226a419a7b7f271d59ad2d8db4bf6db48",
+    "pages": [
+      1,
+      2
+    ],
+    "checkedAt": "2026-10-25",
+    "candidateFacts": {
+      "drive": "awd",
+      "engineCc": 2967,
+      "powerKw": 210
+    },
+    "state": "source_verified_not_saved"
+  }
+]

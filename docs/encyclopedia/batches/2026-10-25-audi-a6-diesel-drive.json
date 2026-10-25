@@ -1,0 +1,361 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a6-diesel-drive",
+  "entries": [
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "0041f463150f5e34ba8f013e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "expectedDigest": "71ee889aa63631898981cfc9fc388d613ebf46504ddab888fea99a2ca0a03eaa",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+        "sourceSha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/747/file_en/86dc212dfb58ecc0c63b0edf3afbb43b21d381b2/eTD-Audi-A6-Sedan-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "sha256": "d16913a7248c7ab3d02bc41716a6b4890af63243c05c99916fdac967e981aa6b",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические листы Audi A6 от29.08.2024: дизель1968см³/120кВт имеет передний привод;2967см³/180кВт Avant и2967см³/210кВт Sedan/Avant — quattro AWD. Сопоставлены точные год,топливо,объём,мощность иизвестный кузов либо единогласие обеих подтверждённыхформ. Маркетинговое имя не требуется. Добавляется только отсутствующий привод; остальныеполя иисточники сохраняются. Электрические3/3.1кВт MHEV не записываются как30-минутнаямощность."
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "94d5ae7e115d703ca1da8d45",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "expectedDigest": "d938d32ad9b88f251ee5e0fcf1442fa3ad27182272838e79c45000c63f196108",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+        "sourceSha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "sha256": "a7d3a4002bf64c00962c61a2bad896d5c86c1f16378011703269dea67210e330",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические листы Audi A6 от29.08.2024: дизель1968см³/120кВт имеет передний привод;2967см³/180кВт Avant и2967см³/210кВт Sedan/Avant — quattro AWD. Сопоставлены точные год,топливо,объём,мощность иизвестный кузов либо единогласие обеих подтверждённыхформ. Маркетинговое имя не требуется. Добавляется только отсутствующий привод; остальныеполя иисточники сохраняются. Электрические3/3.1кВт MHEV не записываются как30-минутнаямощность."
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "153820f11b1d486fff307811",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "expectedDigest": "83d1da6bfd0f61b792bf4069fbd0893a20b2da8ec1018705e1169ba87816c7b6",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+        "sourceSha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "sha256": "a7d3a4002bf64c00962c61a2bad896d5c86c1f16378011703269dea67210e330",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические листы Audi A6 от29.08.2024: дизель1968см³/120кВт имеет передний привод;2967см³/180кВт Avant и2967см³/210кВт Sedan/Avant — quattro AWD. Сопоставлены точные год,топливо,объём,мощность иизвестный кузов либо единогласие обеих подтверждённыхформ. Маркетинговое имя не требуется. Добавляется только отсутствующий привод; остальныеполя иисточники сохраняются. Электрические3/3.1кВт MHEV не записываются как30-минутнаямощность."
+      },
+      "trim": "advanced Sound*Virtual*ACC*LED*Memory*Panoram"
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "786159f984691584b418c190",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "expectedDigest": "9030a8e4feee5da0a48dc8f3f6372436894e4c9f70f17f73904d450603981a52",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+        "sourceSha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "sha256": "a7d3a4002bf64c00962c61a2bad896d5c86c1f16378011703269dea67210e330",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические листы Audi A6 от29.08.2024: дизель1968см³/120кВт имеет передний привод;2967см³/180кВт Avant и2967см³/210кВт Sedan/Avant — quattro AWD. Сопоставлены точные год,топливо,объём,мощность иизвестный кузов либо единогласие обеих подтверждённыхформ. Маркетинговое имя не требуется. Добавляется только отсутствующий привод; остальныеполя иисточники сохраняются. Электрические3/3.1кВт MHEV не записываются как30-минутнаямощность."
+      },
+      "trim": "Facelift ACC/VIRTUAL/MATRIX/HUD/STANDH/AHK/19"
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "318c703e7c95986931a74a2a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "expectedDigest": "d063619f2923c2f96841f9dc3fd3587b5e5ea7b7a90209c5caef577ae20fd6c9",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+        "sourceSha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+            "sha256": "a7d3a4002bf64c00962c61a2bad896d5c86c1f16378011703269dea67210e330",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические листы Audi A6 от29.08.2024: дизель1968см³/120кВт имеет передний привод;2967см³/180кВт Avant и2967см³/210кВт Sedan/Avant — quattro AWD. Сопоставлены точные год,топливо,объём,мощность иизвестный кузов либо единогласие обеих подтверждённыхформ. Маркетинговое имя не требуется. Добавляется только отсутствующий привод; остальныеполя иисточники сохраняются. Электрические3/3.1кВт MHEV не записываются как30-минутнаямощность."
+      },
+      "trim": "35 TDI LED StandHZ HuD AHK Kamera ACC Keyless"
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ecdb862adf2e355a9eb33cc9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "expectedDigest": "b6ca9eddba8180bcb6e01c204a217d4f38446242f951c2d1242656997feb191f",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+        "sourceSha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+            "sha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические листы Audi A6 от29.08.2024: дизель1968см³/120кВт имеет передний привод;2967см³/180кВт Avant и2967см³/210кВт Sedan/Avant — quattro AWD. Сопоставлены точные год,топливо,объём,мощность иизвестный кузов либо единогласие обеих подтверждённыхформ. Маркетинговое имя не требуется. Добавляется только отсутствующий привод; остальныеполя иисточники сохраняются. Электрические3/3.1кВт MHEV не записываются как30-минутнаямощность."
+      },
+      "trim": "Avant 45 3.0 TDI quattro S line T-Leder Navi"
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7c8d7cd743da3e02112087f5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "expectedDigest": "fba96fbe943d542f6938b780ea2d87a86b981e8bf3f1d04dbf2d61b64a598db0",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+        "sourceSha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/747/file_en/86dc212dfb58ecc0c63b0edf3afbb43b21d381b2/eTD-Audi-A6-Sedan-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "sha256": "d16913a7248c7ab3d02bc41716a6b4890af63243c05c99916fdac967e981aa6b",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические листы Audi A6 от29.08.2024: дизель1968см³/120кВт имеет передний привод;2967см³/180кВт Avant и2967см³/210кВт Sedan/Avant — quattro AWD. Сопоставлены точные год,топливо,объём,мощность иизвестный кузов либо единогласие обеих подтверждённыхформ. Маркетинговое имя не требуется. Добавляется только отсутствующий привод; остальныеполя иисточники сохраняются. Электрические3/3.1кВт MHEV не записываются как30-минутнаямощность."
+      },
+      "trim": "V6 50 TDI Quattro Tiptronic/LED/ACC/Lane/AHK"
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "091fe2978d6068f4b89ef327",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "expectedDigest": "50d6058ef7b3ab64f0e362d1fce24af7fb392ab18dbcbe38f58a566b3c7f739d",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+        "sourceSha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/747/file_en/86dc212dfb58ecc0c63b0edf3afbb43b21d381b2/eTD-Audi-A6-Sedan-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+            "sha256": "d16913a7248c7ab3d02bc41716a6b4890af63243c05c99916fdac967e981aa6b",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические листы Audi A6 от29.08.2024: дизель1968см³/120кВт имеет передний привод;2967см³/180кВт Avant и2967см³/210кВт Sedan/Avant — quattro AWD. Сопоставлены точные год,топливо,объём,мощность иизвестный кузов либо единогласие обеих подтверждённыхформ. Маркетинговое имя не требуется. Добавляется только отсутствующий привод; остальныеполя иисточники сохраняются. Электрические3/3.1кВт MHEV не записываются как30-минутнаямощность."
+      },
+      "trim": "Lim. quattro advanced *AHK*B&O*STHZ*MATRIX*SH"
+    }
+  ]
+}

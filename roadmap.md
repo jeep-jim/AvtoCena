@@ -15502,3 +15502,10 @@ Healthдо/после8ec0d858,scoped-v1 отсутствует. China/UAE/Europe
 Deploy40151914908/job121045139065 terminalFAILURE: assert-release-astra astra_revision_existing_value_changed:icePowerKw. Privateindex461e4883/man71f380a5 успешно создан/readback; все51required batches1090variants1654fields проверены. ASTRAcontinuation не пройдена,build/deploy skipped,live8ec0d858 сохранён. Ни повторногоapply,ниrepair,ниослабленияguard не выполнено.
 
 Подготовлен строгий путь для уже одобренных исправлений непроверенныхнаблюдений: requiredmanufacturerbatch +точныйfull-parentSHA256 +воспроизведение штатногоplanModelResearch +полное совпадение следующейстроки; каждыйизменённыйшаг ancestry проверяется. ДопустимытолькоicePowerKw/fuel/powertrainKind без прежнихmanual/ASTRA/research/reference доказательств. ВсеASTRAassertions всёещётребуют прежнихзначений/источников;30min,модели,год/trim,прочиеполя неразрешеныэтимпутём.38targettestsPASS/webtypecheckPASS; полныйCI/mergeещёпредстоят. Отчёт docs/encyclopedia/reports/2026-10-25-astra-reviewed-correction-gate.json. Следом один исправленныйrelease51/37/3+559reuse после greenCI и свободнойочереди.
+
+
+### 25.10.2026 09:03 UTC+7 —8A6 drive CAS и завершение108retained-строк
+
+Preflight40152183933/job121045829161SUCCESS:8manualEdited=false,revisionfcb4d99c,актуальныеfull-rowdigests. Preparedbatch d4b16553ee23aa56e063ad7d1bbe0fb2868d5b92cee03151c0600c9ca6ba39b0 добавляет только8missingdrive, безновыхмоделей/30min/перезаписей. Предыдущийdeploy40151914908terminalFAILURE,поэтому activeprivateindexнет;сохранённыйснимок461e4883не меняется. ЗапрошенодинCASapply,далееterminal/API8/8 иcandidate52/38/3.
+
+Последние44retainedA6/A7 строки40152017239SUCCESS,artifact12582673013 проверен SHA256, snapshot совпал, повторов0. Всего108=74A6+34A7; A8с2024period ввыборке0, это не отсутствиеA8. RemainingAfterPage0, supplierrequests0/storagewrites0/verifiedfields0. Реальные конфликтыFWD/AWD сохранены,год/объём/мощность неугадывались. ДополнительныеA6allroad/A7/A8 factoryPDF2024 проверены/SHA256сохранены какsource-onlyготовность: соответствующие новые значенияещёНЕsaved.
