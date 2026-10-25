@@ -37,7 +37,7 @@ export const ajesClient=createAjesClient({
   password:ajesPassword,
   endpoint:ajesEndpoint,
   readListedDetail,
-  readSavedSearch:async input=>input.table==='china'||input.table==='korea'?(input.make&&input.model?findSavedAjesStockSearch(input,await readSavedListIndex()):null):findSavedAjesSearch(input,await readSavedListIndex()),
+  readSavedSearch:async input=>input.table==='china'||input.table==='korea'?(input.make&&input.model?findSavedAjesStockSearch(input,await readSavedListIndex()):null):findSavedAjesSearch(input,await readSavedListIndex(),Date.now(),readCalculationIndex()),
   saveAggregateEvidence:(kind,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${kind}-last.json`,value),
   saveEvidence:(table,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${table}-last-detail.json`,value),
   // Bounded list and count pools; exact hashes prevent unrelated cache hits.

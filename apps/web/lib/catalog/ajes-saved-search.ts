@@ -2,15 +2,18 @@ import {ajesPowerFilterValues} from './ajes-power-estimate';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {ajesQuery,type AjesQuery} from './ajes-query';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
+import {enrichJapanDrive} from './japan-drive';
+import type {CalculationIndex} from '../encyclopedia/calculation-index';
 
 /** Recover bounded saved Japan results, always labelled partial; never claim a complete catalog. */
-export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now()){
- const query=ajesQuery(input);
+export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now(),driveIndex:CalculationIndex|null=null){
+ const query=ajesQuery(input,driveIndex);
  if(query.kind!=='list'||query.table!=='stats'||query.page!==1)return null;
- const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','sort','yearFrom','yearTo','powerFrom','powerTo']);
+ const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','modelFamilies','drive','sort','yearFrom','yearTo','powerFrom','powerTo']);
  if(Object.keys(input).some(k=>!supported.has(k)&&input[k as keyof AjesQuery]!==undefined)||input.sort&&input.sort!=='updatedAt')return null;
  const normalized=(v:unknown)=>String(v??'').trim().toUpperCase();
  const makes=input.make?.split(',').map(normalized),models=input.model?.split('|').map(normalized);
+ const families=input.modelFamilies?.split('|').map(normalized),drives=input.drive?.split('|');
  const matches=Object.values(snapshots).filter(saved=>{
   const age=now-Date.parse(saved?.observedAt||''),lot=saved?.items?.[0];
   return age>=0&&age<7*86400000&&lot?.table==='stats'&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')&&lot.make&&lot.model&&lot.year>=JAPAN_MIN_MODEL_YEAR&&lot.year<=new Date(now).getUTCFullYear()+1
@@ -19,7 +22,9 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
     const values=ajesPowerFilterValues({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:lot.sourcePower}}});
     return values.length>0&&values.every(hp=>(input.powerFrom===undefined||hp>=input.powerFrom)&&(input.powerTo===undefined||hp<=input.powerTo));
    })())
-   &&(!makes||makes.includes(normalized(lot.make)))&&(!models||models.includes(normalized(lot.model)))
+   &&(!makes||makes.includes(normalized(lot.make)))
+   &&(!models&&!families||Boolean(models?.includes(normalized(lot.model)))||Boolean(families?.some(model=>normalized(lot.model).startsWith(model+' '))))
+   &&(!drives||drives.includes(enrichJapanDrive({drive:undefined as string|undefined,market:'japan',make:lot.make,model:lot.model,year:lot.year,trim:lot.trim,chassisCode:lot.chassisCode,operational:{raw:{sourceDrive:lot.sourceDrive}}},driveIndex).drive||''))
    &&(input.yearFrom===undefined||lot.year>=input.yearFrom)&&(input.yearTo===undefined||lot.year<=input.yearTo)
    &&(!input.chassis||normalized(lot.chassisCode)===normalized(input.chassis))
    &&(!input.frameNumber||normalized(lot.frameNumber)===normalized(input.frameNumber))
