@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-25T01:45:49.401544+00:00",
+  "updatedAt": "2026-10-25T01:47:32.840795+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -43320,6 +43320,56 @@
         "Only after healthy nonpartial AJES Japan perform one guarded chunked repair; no collector.",
         "Verify counts/parity/details and pinned pickup-drive-pricing/checkCatalogFeedback including actual search/detail prices on6markets."
       ]
+    },
+    "nextA6A7A8ReferencePage": {
+      "checkedAt": "2026-10-25T01:47:32.840795+00:00",
+      "workflow": 40151380145,
+      "artifact": 12583006308,
+      "artifactSha256": "08589c254b00bcf04a79ff860dcd0b536b68fc94e8b819697be1b1dda9c29e67",
+      "snapshot": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
+      "checkpoint": {
+        "digest": "974674b4505d07ca1320702be93136afd94936ef6ee9727c5616ad55eb00cd94",
+        "saved": 8403,
+        "visited": 13045,
+        "pending": 253,
+        "updatedAt": "2026-10-22T19:38:18.897Z",
+        "failures": [
+          {
+            "at": "2026-10-22T09:14:03.805Z",
+            "category": "unclassified"
+          },
+          {
+            "at": "2026-10-22T19:38:18.897Z",
+            "category": "redirect_outside_catalog"
+          }
+        ]
+      },
+      "checkpointCountMatches": true,
+      "page": 1,
+      "groups": [
+        "audi/a6",
+        "audi/a7",
+        "audi/a8"
+      ],
+      "year": 2024,
+      "reviewedRows": 64,
+      "groupsOnPage": {
+        "audi/a6": 42,
+        "audi/a7": 22
+      },
+      "remainingAfterPage": 44,
+      "nextAfterDigest": "a401a03e1344075a2868961af1bb3eb6fff19df642299c6f773e62c8a3756fc0",
+      "supplierRequests": 0,
+      "storageWrites": 0,
+      "verifiedFieldsAdded": 0,
+      "findings": [
+        "A6 1984cc195kW exists with FWD and AWD; model/year/displacement/power alone cannot choose drive.",
+        "A6 1968cc120kW FWD and2967cc180kW AWD are targeted leads, but require full remaining page and manufacturer cross-check.",
+        "A7 retained sedan records include2994cc250kW and1984cc180kW; do not force2995cc corrections or Sportback body from European defaults.",
+        "Annual registration rows with old-generation powers or inconsistent displacement require original technical identity, not marketing trim guesses.",
+        "Certified30min unchanged; engine displacement absent on BEV is not a missing combustion specification."
+      ],
+      "report": "docs/encyclopedia/reports/2026-10-25-a6-a7-a8-retained-page1.json"
     }
   },
   "scope": {
