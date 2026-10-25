@@ -1,3 +1,4 @@
+import {applyAstraPower30,astraPower30Key} from './astra-power30';
 import {isOwnerConfirmedEvidence} from './owner-evidence.mjs';
 import {hasEncyclopediaCalculationEvidence,calculationSourceIdentity} from './calculation-evidence';
 export {hasEncyclopediaCalculationEvidence} from './calculation-evidence';
@@ -135,7 +136,7 @@ function resolvesRoundedAutoPapaVolume(offer:any,evidence:any,entries:Calculatio
   });
 }
 /** Exact modification/year, hard constraints, and per-field unanimity. No score winner. */
-export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean;specificationIdentity?:boolean;ordinarySpecificationIdentity?:boolean}={technicalIdentity:true,specificationIdentity:true}):T{
+function applyAnnualEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean;specificationIdentity?:boolean;ordinarySpecificationIdentity?:boolean}={technicalIdentity:true,specificationIdentity:true}):T{
  if(!index||!offer.make||!offer.model||!Number.isInteger(offer.year)||(!offer.trim&&!options.technicalIdentity&&!options.specificationIdentity))return offer;
  if(/customer_input|manual/i.test(offer.powerDataSource||'')||offer.calculationSnapshot?.modificationScenario)return offer;
  if(hasEncyclopediaCalculationEvidence(offer)){
@@ -246,4 +247,10 @@ export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer
  next.encyclopediaCalculation={version:1,indexDigest:index.digest,sourceIdentity:calculationSourceIdentity(offer),
   values:applied,filledFields};
  return next;
+}
+
+/** Annual facts and immutable ASTRA technical certificates have separate matching rules. */
+export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean;specificationIdentity?:boolean;ordinarySpecificationIdentity?:boolean}={technicalIdentity:true,specificationIdentity:true}):T {
+ const annual=applyAnnualEncyclopediaCalculation(offer,index,options);
+ return index?applyAstraPower30(annual,index.models[astraPower30Key(modelKey(offer.make,offer.model))]||[],index.digest):annual;
 }

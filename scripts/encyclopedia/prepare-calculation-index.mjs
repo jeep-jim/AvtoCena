@@ -1,3 +1,4 @@
+import {compileAstraPower30Facts,astraPower30Key} from '../../apps/web/lib/encyclopedia/astra-power30.ts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {getJsonStorage,getDataRoot} from '../../apps/web/lib/data.ts';
@@ -9,7 +10,7 @@ const storage=getJsonStorage();
 if(storage.driver!=='object')throw Error('durable_object_storage_required');
 const manifest=await storage.readJson(MANIFEST,null);
 if(!manifest?.models?.length)throw Error('encyclopedia_missing');
-const models={},report={modelsRead:0,variants:0,factoryFields:0,ownerReferenceFields:0,manualFields:0};
+const models={},report={modelsRead:0,variants:0,factoryFields:0,ownerReferenceFields:0,manualFields:0,astraTechnicalReferences:0,astraPower30Values:0};
 const rows=manifest.models.filter(isEncyclopediaCar);let cursor=0;
 const coverageModels=[];
 await Promise.all(Array.from({length:6},async()=>{
@@ -26,6 +27,8 @@ await Promise.all(Array.from({length:6},async()=>{
   }
   const facts=compileModelFacts(record,ancestors),key=modelKey(record.make,record.model);
   coverageModels.push(modelCoverage(record,facts));
+  const technical=compileAstraPower30Facts(record);
+  if(technical.length){models[astraPower30Key(key)]=[...(models[astraPower30Key(key)]||[]),...technical];report.astraTechnicalReferences+=technical.length;report.astraPower30Values+=technical.filter(f=>f.values.power30MinKw>0).length;}
   if(facts.length)models[key]=[...(models[key]||[]),...facts];
   report.modelsRead++;report.variants+=facts.length;
   for(const fact of facts)for(const source of Object.values(fact.sources))report[source.kind==='owner_reference'?'ownerReferenceFields':source.kind==='manual'?'manualFields':'factoryFields']++;

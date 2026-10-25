@@ -204,6 +204,8 @@ export type CatalogSearchProjection = {
   chassisCode?:string; engineCode?:string; generation?:string;
   fuelPowertrainEvidence?:VehicleOffer["fuelPowertrainEvidence"];
   encyclopediaCalculation?:VehicleOffer["encyclopediaCalculation"];
+  motorPeakKw?:number; batteryKwh?:number;
+  astraPower30Evidence?:VehicleOffer["astraPower30Evidence"];
   inventorySourceDate?:string; grossVehicleWeightKg?:number; vehicleCategory?:VehicleOffer["vehicleCategory"];
   chinaPriceConversion?:VehicleOffer["chinaPriceConversion"];
   japanDeliveredPreview?: {totalRub:number;engineCc?:number;estimated:boolean};
@@ -449,10 +451,11 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
     totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, color:cleanFacet(offer.color), fuel: cleanFacet(offer.fuel), bodyType: catalogBodyType(offer),
     transmission: cleanFacet(offer.transmission), drive: cleanFacet(offer.drive), auctionGrade: cleanFacet(offer.auctionGrade), japanExportRestriction: assessJapanExportRestriction(offer), auctionDate: offer.auctionDate, updatedAt: offer.updatedAt,
     firstSeenAt: offer.firstSeenAt, sourcePublishedAt: String((offer.operational as any)?.sourcePublishedAt || "") || undefined,
+    motorPeakKw:offer.motorPeakKw,batteryKwh:offer.batteryKwh,
     trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
     powerDataConfidence: offer.powerDataConfidence, powerDataSource: offer.powerDataSource, transportToBorderRub: offer.transportToBorderRub,
     modificationSelection: offer.modificationSelection, recoveryQualification: offer.recoveryQualification,
-    fuelPowertrainEvidence:compactFuelPowertrainEvidence(offer), encyclopediaCalculation:offer.encyclopediaCalculation, chinaPriceConversion:offer.chinaPriceConversion, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
+    fuelPowertrainEvidence:compactFuelPowertrainEvidence(offer), encyclopediaCalculation:offer.encyclopediaCalculation, astraPower30Evidence:offer.astraPower30Evidence, chinaPriceConversion:offer.chinaPriceConversion, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
     calculationStatus: offer.calculationStatus, calculationSnapshot: {
       currencyRate: offer.calculationSnapshot?.currencyRate,
       pricingConfidence: offer.calculationSnapshot?.pricingConfidence,

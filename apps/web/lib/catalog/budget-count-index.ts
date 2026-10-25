@@ -16,7 +16,7 @@ export function budgetPriceReplay(row:CatalogSearchProjection):Partial<CatalogSe
  if(row.market==='japan' || hasModificationSelection(row) || !(Number(row.totalRub)>0))return undefined;
  // Fuel proof binds the exact trim as well as ID/make/model/year and values.
  // Preserve both when compacting a priced row for a later calculation replay.
- const keys=['trim','fuelPowertrainEvidence','encyclopediaCalculation','sourcePrice','sourceCurrency','chinaPriceConversion','priceMode','calculationStatus','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','power30MinKwByMotor','utilizationPowerKw','powertrainKind','powerDataSource','transportToBorderRub','productionDate','productionMonth','productionYear','vehicleCategory','tnVedCode','grossVehicleWeightKg','n1IceFuel','personalUseEligible','cardProjectionVersion','publicSpecificationVerified'];
+ const keys=['trim','fuelPowertrainEvidence','encyclopediaCalculation','astraPower30Evidence','sourcePrice','sourceCurrency','chinaPriceConversion','priceMode','calculationStatus','engineCc','powerHp','powerKw','icePowerKw','motorPeakKw','batteryKwh','power30MinKw','power30MinKwByMotor','utilizationPowerKw','powertrainKind','powerDataSource','transportToBorderRub','productionDate','productionMonth','productionYear','vehicleCategory','tnVedCode','grossVehicleWeightKg','n1IceFuel','personalUseEligible','cardProjectionVersion','publicSpecificationVerified'];
  const replay:any=Object.fromEntries(keys.filter(key=>(row as any)[key]!==undefined).map(key=>[key,(row as any)[key]]));
  const snapshot=row.calculationSnapshot;
  // The shared engine consumes inputs and the attested customs gate. Historical

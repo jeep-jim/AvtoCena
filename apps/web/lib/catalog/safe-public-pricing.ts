@@ -1,3 +1,4 @@
+import {hasAstraPower30Evidence} from '../encyclopedia/astra-power30-evidence';
 import {applyJapanOwnerSpecifications,isOwnerStepwgnNonHybrid} from './japan-owner-specifications';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import { restoreSourceModelName } from "./source-model-name";
@@ -36,10 +37,10 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
     && !rejected.has('engineCc') && !rejected.has('fuelPowertrain')
     && classifySpecificationEvidence(input, 'certifiedPower').state === 'exact'
     && Number(input.power30MinKw) > 0
-    && Object.prototype.hasOwnProperty.call(encyclopediaEvidence?.values || {}, 'power30MinKw')
+    && (hasAstraPower30Evidence({...input,powerHp:undefined,powerKw:undefined,icePowerKw:undefined}) || Object.prototype.hasOwnProperty.call(encyclopediaEvidence?.values || {}, 'power30MinKw')
     && hasEncyclopediaCalculationEvidence({...input, powerHp:undefined,
       powerKw:undefined, icePowerKw:undefined, power30MinKwByMotor:undefined,
-      utilizationPowerKw:undefined});
+      utilizationPowerKw:undefined}));
   const rate = input.calculationSnapshot?.currencyRate;
   const price = Number(input.sourcePrice);
   const effectiveRate = Number(rate?.effectiveRate);

@@ -27,6 +27,8 @@ export type CatalogImage = {
 
 export type VehicleOffer = {
   fuelPowertrainEvidence?:import('./fuel-powertrain-evidence').FuelPowertrainEvidence;
+  motorPeakKw?:number; batteryKwh?:number;
+  astraPower30Evidence?:import('../encyclopedia/astra-power30-evidence').AstraPower30Evidence;
   encyclopediaCalculation?: {version:1;indexDigest:string;sourceIdentity:string;values:Record<string,unknown>;filledFields:string[]};
   editorialSpecifications?: import('./editorial-specifications').EditorialSpecifications;
   chinaPriceConversion?:import("./china-cny-price").ChinaPriceConversion;

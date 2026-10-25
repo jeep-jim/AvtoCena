@@ -1,3 +1,4 @@
+import {hasAstraPower30Evidence} from '../encyclopedia/astra-power30-evidence';
 import { isGreenCornerOffer } from "./green-corner-contract";
 import type { VehicleOffer } from "./types";
 import { catalogPowerSanity } from "./power-sanity";
@@ -201,6 +202,7 @@ export function classifySpecificationEvidence(
   if (!isElectrifiedSpecification(offer)) return { state: "not_applicable", reason: "combustion_vehicle", provenance: "none" };
   const guard = evidenceGuard(offer, ["power30MinKw", "power30MinKwByMotor", "certifiedPower"], ["power30MinKw", "power30MinKwByMotor"]);
   if (guard) return guard;
+  if(hasAstraPower30Evidence(offer))return {state:'exact',reason:'bound_astra_30min_certificate',provenance:'source_evidence'};
   const byMotor = Array.isArray(offer.power30MinKwByMotor)
     ? offer.power30MinKwByMotor.map((value) => positive(value, 2_000)).filter(Boolean)
     : [];
