@@ -14,7 +14,7 @@ import {readCatalogEditorial,applyCatalogEditorial} from "@/lib/catalog/editoria
 import {commercialParameters} from "@/lib/catalog/commercial-parameters";
 import {decodeShareDraft} from '@/lib/catalog/offer-share';
 import {SpecTile,type SpecItem} from "@/components/catalog/OfferSpecTile";
-import {offerParameterDraft} from '@/lib/catalog/offer-parameter-draft';
+import {offerPrecedentParameterDraft as offerParameterDraft} from '@/lib/catalog/power30-precedent';
 import {sharedOfferScenario} from '@/lib/catalog/shared-offer-scenario';
 import {resolveOfferDisplay} from '@/lib/catalog/offer-display-data';
 export {generateOfferMetadata as generateMetadata} from '@/lib/catalog/offer-metadata';
