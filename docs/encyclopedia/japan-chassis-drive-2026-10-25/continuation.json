@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-25T05:39:31.387340+00:00",
+  "checkedAt": "2026-10-25T06:00:49.984Z",
   "commit": "5bfcbb97f5c6f44468689e810238a53c48908bb4",
   "reference": {
     "runId": 40166164797,
@@ -30,8 +30,8 @@
     "step": "Prepare private encyclopedia index"
   },
   "nextSteps": [
-    "Wait for40165188901 and queued40166164858; verify exact external health releaseSHA before claiming263installed. Do not launch duplicate deployment.",
-    "After activation, verify normal Japan AWD/FWD/RWD search; preserve supplier refusals and do not bypass access restrictions.",
+    "40165188901 succeeded and exact health verified. 40166164858 is installing263; verify its completion and external health before claiming263installed. Do not launch duplicate deployment.",
+    "Live AWD verification blocked by explicit supplier visitor_restricted after compact SQL release. Do not retry or bypass; obtain legitimate access resolution before another live check.",
     "Continue9missingprimaryproof and46ambiguous groups from remaining.json; inspect evidence-limit-review.json before repeating research.",
     "Preserve55required/41publicbatches/3ASTRA and95annualpatches; old automations remain stopped."
   ],
@@ -48,13 +48,24 @@
   "replacementDeploy": {
     "runId": 40165188901,
     "commit": "5fc6705650c45459c060b748ac41b609f5d33d89",
-    "observedStatus": "in_progress",
-    "step": "Prepare exact price indexes before activating the release"
+    "observedStatus": "success",
+    "step": "Complete job",
+    "externalHealthVerified": true,
+    "publicEncyclopedia": {
+      "version": 1,
+      "release": "5fc6705650c45459c060b748ac41b609f5d33d89",
+      "startedAt": "2026-10-25T05:55:07.561Z",
+      "groups": 525,
+      "variants": 4851,
+      "fields": 22551,
+      "verified": true,
+      "finishedAt": "2026-10-25T06:00:08.632Z"
+    }
   },
   "queuedDeploy": {
     "runId": 40166164858,
     "commit": "5bfcbb97f5c6f44468689e810238a53c48908bb4",
-    "observedStatus": "pending",
+    "observedStatus": "in_progress",
     "confirmed": 263
   },
   "verification": {
@@ -62,6 +73,6 @@
     "latestDriveTests": 12,
     "typecheck": "PASS",
     "newMappingsExecutedInSql": 17,
-    "latestExternalFilter": "HTTP503 before compact SQL deployment; not verified after"
+    "latestExternalFilter": "5fc6705650c45459c060b748ac41b609f5d33d89 installed; 2026-10-25 05:55 UTC AWD HTTP503 visitor_restricted. No further supplier attempts."
   }
 }

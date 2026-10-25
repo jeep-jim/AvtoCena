@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-25T05:25:17.650Z",
+  "checkedAt": "2026-10-25T06:00:49.984Z",
   "installedBeforeFix": {
     "release": "51c72e667390835eedd22368d05f24f25f939918",
     "runId": 40161739675,
@@ -13,8 +13,21 @@
   "fix": {
     "release": "5fc6705650c45459c060b748ac41b609f5d33d89",
     "runId": 40165188901,
-    "observedStage": "Prepare private encyclopedia index for this release",
-    "installed": false
+    "observedStage": "completed",
+    "installed": true,
+    "externalHealthVerified": true,
+    "calculationVersion": "19abe3cf57479f3f1611943071b5af20520a9585a20cfd6e3cfc7d6fe77cad2a",
+    "conclusion": "success",
+    "publicEncyclopedia": {
+      "version": 1,
+      "release": "5fc6705650c45459c060b748ac41b609f5d33d89",
+      "startedAt": "2026-10-25T05:55:07.561Z",
+      "groups": 525,
+      "variants": 4851,
+      "fields": 22551,
+      "verified": true,
+      "finishedAt": "2026-10-25T06:00:08.632Z"
+    }
   },
   "superseded": {
     "release": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
@@ -41,8 +54,15 @@
     "ambiguousChassisNotGuessed": true
   },
   "lastPublicAwdCheck": {
-    "httpStatus": 503,
-    "reason": "operation_failed",
+    "status": 503,
+    "body": {
+      "ok": false,
+      "error": "japan_search_unavailable",
+      "reason": "visitor_restricted"
+    },
+    "count": 0,
+    "drives": {},
+    "checkedAt": "2026-10-25T05:55:28.666563+00:00",
     "resolved": false
   },
   "notes": [
@@ -50,6 +70,32 @@
     "Two invalid-name stacks could not be attributed to the AWD requests.",
     "No IP substitution or supplier-restriction bypass. No new supplier calls in diagnostic workflows.",
     "A cancellation click was followed by a rejected repeat attempt; no retry or workaround after rejection. Later API status showed the old run cancelled.",
-    "Verify the exact fix release externally and record the actual AWD response before claiming live filtering works."
-  ]
+    "Verify the exact fix release externally and record the actual AWD response before claiming live filtering works.",
+    "Post-fix AWD request at 05:55 UTC returned explicit visitor_restricted. No further supplier requests or restriction bypass attempted."
+  ],
+  "latestReference": {
+    "confirmed": 263,
+    "ambiguous": 46,
+    "unresolved": 26,
+    "groups": 335,
+    "parts": 6,
+    "durableReadbackVerified": true,
+    "runId": 40166164797,
+    "digest": "4b9f3225824dc3b237ce57929603c92555d8cf7c6e23a1c62adad6f990e953fe"
+  },
+  "queuedRelease": {
+    "commit": "5bfcbb97f5c6f44468689e810238a53c48908bb4",
+    "runId": 40166164858,
+    "confirmed": 263,
+    "installed": false,
+    "status": "in_progress"
+  },
+  "annualChanges": {
+    "filled": 95,
+    "awd": 42,
+    "fwd": 48,
+    "rwd": 5,
+    "remainingAmbiguous": 65,
+    "remainingUnconfirmedOrInvalid": 8
+  }
 }
