@@ -39,7 +39,12 @@ export async function readCompressedSelector(directory:CompressedBudgetDirectory
   for(const chunk of entry.chunks){
    if(!/^[a-f0-9]{64}$/.test(chunk.checksum)||chunk.name!==`parts/${market}/${chunk.checksum}`||names.has(chunk.name)||!Number.isSafeInteger(chunk.bytes)||chunk.bytes<=0||chunk.bytes>MAX_PUBLISHED_SELECTOR_BYTES)return null;
    if(!Number.isSafeInteger(chunk.rows)||chunk.rows<0||!Number.isSafeInteger(chunk.otherRows)||chunk.otherRows<0||chunk.rows+chunk.otherRows<1||chunk.rows+chunk.otherRows>MAX_SELECTOR_CHUNK_ROWS)return null;
-   names.add(chunk.name);const wire=await read(chunk.name);
+   names.add(chunk.name);
+  }
+  for(let offset=0;offset<entry.chunks.length;offset+=4){
+   const group=entry.chunks.slice(offset,offset+4),wires=await Promise.all(group.map(chunk=>read(chunk.name)));
+   for(let i=0;i<group.length;i++){
+   const chunk=group[i],wire=wires[i];
    if(!wire||Buffer.byteLength(JSON.stringify(wire))!==chunk.bytes||digest(wire)!==chunk.checksum)return null;
    const packed=decompressBudgetSelector(wire),part=unpackBudgetSelector(packed);
    if(part.generationId!==directory.generationId||part.rows.length!==chunk.rows||part.otherRows?.length!==chunk.otherRows||[...part.rows,...part.otherRows].some(row=>row[0]!==market))return null;
@@ -47,6 +52,7 @@ export async function readCompressedSelector(directory:CompressedBudgetDirectory
    if(header&&header!==nextHeader)return null;header=nextHeader;
    if(!result)result={...part,rows:[],otherRows:[]};
    result.rows.push(...part.rows);result.otherRows!.push(...part.otherRows);
+   }
   }
   if(!result||result.rows.length!==entry.rows||result.otherRows!.length!==entry.otherRows||result.sourceRows!==entry.rows+entry.otherRows)return null;
   return result;
@@ -84,7 +90,6 @@ export async function publishCompressedSelectors(index:BudgetCountIndex,read:Rea
  const {parts}=splitBudgetMarketIndex(index);
  const directory:CompressedBudgetDirectory={version:4,generationId:index.generationId,markets:{}};
  for(const [market,part] of parts)directory.markets[market]=await publishSelectorMarket(part,market,read,write);
- if(!Object.keys(directory.markets).length)throw Error('budget_selector_manifest_empty');
  if(Buffer.byteLength(JSON.stringify(directory))>MAX_PUBLISHED_SELECTOR_BYTES)throw Error('budget_selector_directory_too_large');
  await write('ready',directory);return directory;
 }

@@ -76,3 +76,11 @@ test('an indivisible oversized row fails without publishing readiness or changin
  await assert.rejects(publishCompressedSelectors(source,async n=>objects.get(n),async(n,v)=>{writes.push(n);objects.set(n,v);}),/requires_bounded_parts/);
  assert.deepEqual(writes,[]);assert.equal(objects.get('ready'),old);
 });
+
+test('confirmed full withdrawal can publish an empty selector directory without synthesizing markets',async()=>{
+ const source=buildBudgetCountIndex('gen_empty',[],new Map(),3),objects=new Map<string,any>();
+ const dir=await publishCompressedSelectors(source,async n=>objects.get(n),async(n,v)=>{objects.set(n,json(v));});
+ assert.deepEqual(dir,{version:4,generationId:'gen_empty',markets:{}});assert.deepEqual([...objects.keys()],['ready']);
+ // Publication admission owns withdrawals; retained nonempty inspection still fails closed.
+ await assert.rejects(inspectCompressedSelectors({generationId:'gen_empty',markets:{china:{count:0}}},async n=>objects.get(n)),/manifest_empty/);
+});
