@@ -41,9 +41,11 @@ jobs:
           if(index?.digest!==binding.digest)throw Error('index_mismatch');
           const groups=japanDriveGroups(index);
           console.log('DRIVE_GROUP_COUNTS',JSON.stringify({groups:groups.length,confirmed:groups.filter(g=>g.drive).length}));
-          for(const drive of [undefined,'awd','fwd','rwd']){
+          for(const drive of [undefined,'awd','fwd','rwd','awd|fwd','awd|fwd|rwd']){
             const query=ajesQuery({drive},index);
-            console.log('DRIVE_QUERY_SIZE',JSON.stringify({drive:drive||'none',characters:query.sql.length,encodedBytes:new URLSearchParams({sql:query.sql}).toString().length}));
+            const encodedBytes=new URLSearchParams({sql:query.sql}).toString().length;
+            console.log('DRIVE_QUERY_SIZE',JSON.stringify({drive:drive||'none',characters:query.sql.length,encodedBytes}));
+            if(drive&&!drive.includes('|')&&encodedBytes>7500)throw Error('single_drive_query_budget_exceeded');
           }
           JS
       - name: Read only stack locations for rejected drive queries

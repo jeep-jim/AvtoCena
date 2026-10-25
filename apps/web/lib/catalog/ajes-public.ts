@@ -27,7 +27,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
  const ip=(await headers()).get('x-real-ip')||'';
  const result=await ajesClient.read(query,ip).catch(error=>{
   // Fixed local error codes only: never log visitor IPs, SQL, URLs or supplier bodies.
-  const allowed=new Set(['client_ip_missing','not_configured','invalid_response','visitor_restricted','request_failed','request_timeout','connect_timeout','response_too_large','empty_response','identity_mismatch','quota_invalid','quota_exhausted','quota_busy']);
+  const allowed=new Set(['client_ip_missing','not_configured','invalid_response','visitor_restricted','request_failed','request_timeout','connect_timeout','response_too_large','empty_response','identity_mismatch','quota_invalid','quota_exhausted','quota_busy','query_too_large']);
   const reason=error instanceof AjesUnavailable&&allowed.has(error.reason)?error.reason:'operation_failed';
   console.warn('AJES_PUBLIC_FAILURE',reason);
   throw error;

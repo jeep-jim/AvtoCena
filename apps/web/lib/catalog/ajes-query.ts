@@ -58,7 +58,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   }
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
-  where.push(heavyVehicleSqlExclusion(),motorcycleSqlExclusion());
+  where.push(heavyVehicleSqlExclusion(false,false,!stock&&Boolean(q.drive)),motorcycleSqlExclusion());
   if(!stock)where.push(japanMakeSqlExclusion());
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const modelClauses=[...models.map(v=>`model_name='${v}'`),...families.map(v=>`model_name like '${v} %'`)];

@@ -104,7 +104,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Japan chassis continuation: 19 additional exact official/factory drive relationships and one shared Alto code, total238confirmed/46ambiguous/51unresolved. Batch0002 applied3drive-only annual updates and read back by40163441281; cumulative95. Retain54required/40public/3ASTRA, add one verified batch. Source/manual precedence and unknown/ambiguous guards retained. Supplier access restrictions remain; no full-Japan coverage claim. Serial deployment queue preserves current release checks.",
+  "reason": "Deploy the current reviewed chassis reference and bounded Japan drivetrain SQL. Grouped fixed MySQL regex predicates preserve source precedence, shared-code and truck exclusions; 77 targeted tests and TypeScript pass. Explicitly classify upstream HTTP 414. Preserve 55 required/41 public batches and all ASTRA guards. The older f73f2cac release has not activated and is superseded by this filter correction; no supplier/IP restrictions are bypassed.",
   "ideaReports": [],
-  "requestedAt": "2026-10-25T04:55:03.327177+00:00"
+  "requestedAt": "2026-10-25T05:20:09.252Z"
 }

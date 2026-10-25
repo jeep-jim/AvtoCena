@@ -18,7 +18,7 @@ test('explicit source drive works independently of trim naming and never guesses
  assert.equal(enrichJapanDrive({...offer,trim:'L 4WD'},index([{drive:'fwd'}])).drive,'awd');
 });
 test('Japan drive predicate precedes pagination and count; Korea retains its source column',()=>{
- for(const aggregate of [undefined,'count'] as const){const query=ajesQuery({drive:'awd',aggregate});assert.match(query.sql,/grade like/);assert.match(query.sql,/priv in/);if(!aggregate)assert.ok(query.sql.indexOf('grade like')<query.sql.indexOf('limit'));}
+ for(const aggregate of [undefined,'count'] as const){const query=ajesQuery({drive:'awd',aggregate});assert.match(query.sql,/grade regexp/);assert.match(query.sql,/priv in/);if(!aggregate)assert.ok(query.sql.indexOf('grade regexp')<query.sql.indexOf('limit'));}
  assert.match(ajesQuery({table:'korea',drive:'awd'}).sql,/priv in/);
  const sql=japanDriveSql('fwd',index([{drive:'fwd'}]));assert.match(sql,/marka_name='SUZUKI' and model_name='ALTO' and year=2023 and \(kuzov='HA37S'/);
  assert.throws(()=>japanDriveSql("awd' OR 1=1"));

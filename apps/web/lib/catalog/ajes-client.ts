@@ -56,7 +56,7 @@ export function createAjesClient(deps:Dependencies) {
           if(cooldown)throw new AjesUnavailable(cooldown);
           await deps.reserve(query.table,query.kind);
           const response=await (deps.fetcher??fetch)(url,{signal:controller.signal,redirect:'error',cache:'no-store'});
-          if(!response.ok)throw new AjesUnavailable(`http_${response.status}`);
+          if(!response.ok)throw new AjesUnavailable(response.status===414?'query_too_large':`http_${response.status}`);
           if(Number(response.headers.get('content-length'))>2*1024*1024)throw new AjesUnavailable('response_too_large');
           const reader=response.body?.getReader();
           if(!reader)throw new AjesUnavailable('empty_response');

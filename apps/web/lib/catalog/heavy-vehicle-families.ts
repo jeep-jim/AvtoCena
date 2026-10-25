@@ -28,8 +28,16 @@ export function knownHeavyVehicleFamily(make:unknown,model:unknown){
   name===family||[' ','-','/'].some(separator=>name.startsWith(family+separator))));
 }
 /** Fixed identifiers only; same family boundary as the local guard. */
-export function heavyVehicleSqlExclusion(legacyCache=false,beforeLightTrucks=false){
+export function heavyVehicleSqlExclusion(legacyCache=false,beforeLightTrucks=false,compact=false){
  const light=new Set<string>(beforeLightTrucks?['ELF','CANTER','DUTRO']:[]);
+ if(compact){
+  const groups=new Map<string,{makes:string[];models:string[]}>();
+  for(const group of heavyVehicleFamilies.filter(g=>!legacyCache||g.make!=='TOYOTA')){
+   const models=group.models.filter(model=>!light.has(model)),key=models.join('|'),saved=groups.get(key)||{makes:[],models};
+   saved.makes.push(group.make);groups.set(key,saved);
+  }
+  return [...groups.values()].map(g=>`not (marka_name in (${g.makes.map(m=>`'${m}'`).join(',')}) and model_name regexp '^(${g.models.join('|')})($|[ /-])')`).join(' and ');
+ }
  return heavyVehicleFamilies.filter(group=>!legacyCache||group.make!=='TOYOTA').map(group=>`not (marka_name='${group.make}' and (${group.models.filter(model=>!light.has(model)).flatMap(model=>[
   `model_name='${model}'`,...[' ','-','/'].map(separator=>`model_name like '${model}${separator}%'`),
  ]).join(' or ')}))`).join(' and ');
