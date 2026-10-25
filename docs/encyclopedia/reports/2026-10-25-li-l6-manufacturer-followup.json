@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-10-25T15:22:09.100Z",
+  "status": "reviewed_source_not_applied",
+  "model": {
+    "make": "Li Auto",
+    "model": "Li L6",
+    "modelYear": 2025,
+    "manualVariant": "Max 智能焕新版"
+  },
+  "manufacturerManual": "https://manuals.lixiang.com/zh-cn/X042025MAX/20250916133524/index.html",
+  "powerSource": "https://manuals.lixiang.com/zh-cn/X042025MAX/20250916133524/topic-2023-6A98AC50.html",
+  "driveSource": "https://manuals.lixiang.com/zh-cn/X042025MAX/20250916133524/topic-2023-9DCCA123.html",
+  "discoverySource": "https://manuals.lixiang.com/zh-cn/X042025MAX/20250916133524/js/fulltext.js",
+  "facts": {
+    "engineCode": "L2E15M",
+    "engineCc": 1496,
+    "iceMaximumNetPowerKw": 110,
+    "iceRatedPowerKw": 113,
+    "drive": "awd",
+    "frontMotorRatedPowerKw": 65,
+    "rearMotorRatedPowerKw": 69,
+    "frontMotorPeakPowerKw": 130,
+    "rearMotorPeakPowerKw": 170
+  },
+  "limitations": [
+    "The manufacturer labels 65/69 kW as rated power, not explicitly 30-minute power. Do not replace certifiedPower30MinKw or claim a reviewed certificate.",
+    "Evidence directly reviewed for the 2025 Max manual only; do not automatically apply across all years/generations.",
+    "Current public Li L6 samples retain generic other_hybrid and missing ICE power. Correct only policy-derived classification, preserving explicit supplier/manual conflicts.",
+    "This source review is not included in release f12fb5867f4db1bb838968af4df8f7ab36c8bee1. No catalog fields changed by this report."
+  ]
+}
