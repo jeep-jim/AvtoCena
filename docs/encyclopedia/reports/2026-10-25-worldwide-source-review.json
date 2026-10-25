@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-25",
+  "scope": "worldwide official-source EV/HEV gap research",
+  "findings": [
+    {
+      "source": "https://www.bmw.de/de/neufahrzeuge/bmw-i/i4/bmw-i4-gran-coupe-technical-data.html",
+      "type": "manufacturer",
+      "model": "BMW i4",
+      "confirmed": [
+        {
+          "variant": "eDrive35",
+          "peakKw": 210,
+          "power30MinKw": 85
+        },
+        {
+          "variant": "eDrive40",
+          "peakKw": 250,
+          "power30MinKw": 105
+        },
+        {
+          "variant": "xDrive40",
+          "peakKw": 295,
+          "power30MinKw": 125
+        },
+        {
+          "variant": "M50",
+          "peakKw": 400,
+          "power30MinKw": 125
+        },
+        {
+          "variant": "M60",
+          "peakKw": 442,
+          "power30MinKw": 145
+        }
+      ],
+      "scopeLimit": "Current table. No automatic historical model-year transfer; only reviewed existing 2026 eDrive40 written in this batch."
+    },
+    {
+      "source": "https://www.bmw.de/de/neufahrzeuge/x/ix3/bmw-ix3-technische-daten.html",
+      "type": "manufacturer",
+      "model": "BMW iX3 NA5",
+      "confirmed": [
+        {
+          "variant": "50 xDrive",
+          "peakKw": 345,
+          "power30MinKw": 170,
+          "drive": "awd"
+        }
+      ],
+      "scopeLimit": "Not old G08 210kW. Only existing exact 2026 50 xDrive reviewed."
+    },
+    {
+      "source": "https://www.sgmw.com.cn/carDetail?id=292",
+      "type": "manufacturer",
+      "model": "Baojun Yueye Plus",
+      "confirmed": {
+        "fuel": "electric",
+        "bodyType": "suv",
+        "motorPeakKw": 75,
+        "drive": "fwd"
+      },
+      "scopeLimit": "2025/2026 table. No documented 30-minute figure."
+    },
+    {
+      "source": "https://news.gm.com.cn/zh/home.detail.html/Pages/news/cn/zh/2024/jan/0115-baojun.html",
+      "type": "manufacturer",
+      "model": "Baojun Yueye Plus",
+      "confirmed": {
+        "fuel": "electric",
+        "bodyType": "suv",
+        "motorPeakKw": 75
+      },
+      "scopeLimit": "2024 launch. Not three-door Yueye; no 30-minute value."
+    },
+    {
+      "source": "https://www.zeekrlife.com/global/posts/imagining-beyond-the-zeekr-mix-arrives",
+      "type": "manufacturer",
+      "model": "Zeekr MIX",
+      "confirmed": {
+        "launchDate": "2024-10-23",
+        "batteryOptionsKwh": [
+          76,
+          102
+        ]
+      },
+      "scopeLimit": "Does not state 30-minute motor power. No guessed motor power applied."
+    },
+    {
+      "source": "https://www.ereg-association.eu/media/2353/version-16-ivi-messagebook.pdf",
+      "type": "registry_schema",
+      "scopeLimit": "Defines CoC27.4 vehicle maximum continuous rated /30-minute power. Does not prove generic RDW open-data nominal field is the same field."
+    },
+    {
+      "source": "https://rdw.azure-westeurope-prod.socrata.com/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen_brandstof/8ys7-d773",
+      "type": "registry_dataset",
+      "scopeLimit": "nominaal_continu_maximumvermogen description does not explicitly establish 30-minute measurement. Not imported as certified30."
+    },
+    {
+      "source": "https://usa.infinitinews.com/en-US/releases/release-540cf37f6b2149798c895efe95fb3353-infiniti-what-s-new-for2016",
+      "type": "manufacturer",
+      "scopeLimit": "Search metadata confirms separate combustion230hp and electric15kW, but full source fetch403 and current DB records 2020-2022 China. No cross-year US→China correction applied."
+    }
+  ],
+  "remaining": "Full calculation coverage not achieved. Unknown peak output, displacement, powertrain and exact certified modification identity remain blocking. Never substitute charging duration or maximum motor output for30-minute power."
+}
