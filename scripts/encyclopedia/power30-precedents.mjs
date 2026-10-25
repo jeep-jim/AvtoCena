@@ -13,7 +13,7 @@ export function selectPower30Precedent(offer,facts){
  const target=physical(offer),ranked=[];
  for(const f of facts){
   const source=f.sources?.power30MinKw,value=Number(f.values?.power30MinKw);
-  if(!positive(value)||value>2000||!['official_registry','manufacturer','manual'].includes(source?.kind)||!/^https:\/\//.test(source.url||''))continue;
+  if(!positive(value)||value>2000||!['official_registry','manufacturer','manual','reported_precedent'].includes(source?.kind)||!/^https:\/\//.test(source.url||''))continue;
   const c=physical(f.constraints||{});
   if(!known(c.fuel)||normal('fuel',c.fuel)!==normal('fuel',offer.fuel))continue;
   // Known incompatible propulsion and generations are not close variants.
@@ -58,3 +58,11 @@ export const regionalPrecedentFamilies=[
  {keys:['byd:seagull','byd:dolphinmini','byd:dolphinsurf'],url:'https://www.byd.com/en/news-list/First-BYD-Electric-Vehicle-Rolls-off-the-Line-in-Brazil',checkedAt:'2026-10-25'},
 ];
 export function precedentModelKeys(key){const family=regionalPrecedentFamilies.find(f=>f.keys.includes(key));return {keys:family?.keys||[key],...(family?{regionalNameEvidence:{url:family.url,checkedAt:family.checkedAt}}:{})};}
+
+/** Prefer the existing documented corpus; reports fill only otherwise unresolved inputs. */
+export function selectWithReportedPrecedents(offer,facts,reports){
+ const documented=selectPower30Precedent(offer,facts);
+ if(documented.status!=='no_compatible_documented_precedent')return documented;
+ const reported=selectPower30Precedent(offer,reports);
+ return reported.references?{...reported,evidenceTier:'reported_precedent',originalCertificateReviewed:false}:reported;
+}
