@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-25",
+  "checkedAt": "2026-10-25T12:40:09.754Z",
   "scope": "worldwide official-source EV/HEV gap research",
   "findings": [
     {
@@ -100,7 +100,44 @@
       "source": "https://usa.infinitinews.com/en-US/releases/release-540cf37f6b2149798c895efe95fb3353-infiniti-what-s-new-for2016",
       "type": "manufacturer",
       "scopeLimit": "Search metadata confirms separate combustion230hp and electric15kW, but full source fetch403 and current DB records 2020-2022 China. No cross-year US→China correction applied."
+    },
+    {
+      "source": "https://www.tesla.com/en_gb/support/second-hand-purchase",
+      "type": "manufacturer",
+      "model": "Tesla",
+      "scopeLimit": "Official support offers a vehicle-specific CoC request. No universal Model3/Y certified30 value supplied; missing variant/engine/power anchors cannot be filled by a model-wide guess."
+    },
+    {
+      "source": "https://liautoofficial.ru/about/brand/faq/",
+      "type": "manufacturer_representative",
+      "model": "Li Auto L series",
+      "scopeLimit": "Describes series-hybrid architecture and mentions30-minute power without publishing variant-specific numeric values. Not imported as a certified numeric fact."
+    },
+    {
+      "source": "https://liautoofficial.ru/models/li-l9/",
+      "type": "manufacturer_representative",
+      "model": "Li L9",
+      "scopeLimit": "2025 Ultra page lists peak448hp and52.3kWh; neither is a30-minute power rating. No blanket cross-generation application."
     }
   ],
-  "remaining": "Full calculation coverage not achieved. Unknown peak output, displacement, powertrain and exact certified modification identity remain blocking. Never substitute charging duration or maximum motor output for30-minute power."
+  "remaining": "Full calculation coverage not achieved. Unknown peak output, displacement, powertrain and exact certified modification identity remain blocking. Never substitute charging duration or maximum motor output for30-minute power.",
+  "result": {
+    "appliedBatch": "research-2026-10-25-worldwide-electric-reviewed",
+    "appliedEntries": 11,
+    "models": 3,
+    "readbackRun": 40192424153,
+    "completeWorldwideCoverage": false,
+    "additionalWith30FromMatcher": 546,
+    "totalAdditionalWith30": 549,
+    "completeTechnicalSets": 723
+  },
+  "searchCoverage": [
+    "Swiss ASTRA installed corpus and eCoC27.4 semantics",
+    "German BMW manufacturer technical tables",
+    "Chinese SGMW/GM and Zeekr manufacturer material",
+    "US Infiniti manufacturer material",
+    "Netherlands RDW dataset and schema review",
+    "Russian Li Auto representative technical material",
+    "Tesla official certificate support"
+  ]
 }
