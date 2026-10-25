@@ -1,0 +1,82 @@
+{
+  "checkedAt": "2026-10-25T02:05:13.664228+00:00",
+  "state": "corrected_release_requested_pending_isolation_and_activation",
+  "currentPass": {
+    "uniqueVariants": 36,
+    "newValues": 56,
+    "correctedValues": 7,
+    "attestedUnchanged": 5,
+    "apiChecks": 68
+  },
+  "nightlyAudi": {
+    "batches": 12,
+    "uniqueVariants": 129,
+    "assertions": 245,
+    "newValues": 212,
+    "correctedValues": 16,
+    "attestedUnchanged": 17
+  },
+  "lastResearch": {
+    "batch": "research-2026-10-25-audi-a6-diesel-drive",
+    "path": "docs/encyclopedia/batches/2026-10-25-audi-a6-diesel-drive.json",
+    "sha256": "d4b16553ee23aa56e063ad7d1bbe0fb2868d5b92cee03151c0600c9ca6ba39b0",
+    "state": "saved_api_readback_pass_pending_next_index",
+    "modelId": "00624e6c77b6541109a32d66",
+    "variants": 8,
+    "fields": 8,
+    "newValues": 8,
+    "correctedValues": 0,
+    "attestedUnchanged": 0,
+    "workflow": 40153026208,
+    "job": 121048354530,
+    "afterRevision": "640ffb5a-ab0f-4716-b044-37196a8bd982",
+    "apiReadback": true,
+    "report": "docs/encyclopedia/reports/2026-10-25-a6-diesel-drive-readback.json"
+  },
+  "failedRelease": {
+    "run": 40151914908,
+    "sha": "486af476003314f3631f3b1299bc15cccce57cc1",
+    "error": "astra_revision_existing_value_changed:icePowerKw",
+    "installed": false
+  },
+  "continuationFix": {
+    "pr": 1532,
+    "merge": "99744a8af14bf550b7e155999444aecb9f90e6b2",
+    "ci": 40152444241,
+    "fullTests": 2526,
+    "targetedTests": 38,
+    "conclusion": "success"
+  },
+  "publicationPreflight": {
+    "workflow": 40149538202,
+    "attempt": 4,
+    "job": 121047540877,
+    "checkedAt": "2026-10-25T02:00:24.907Z",
+    "writerActive": false,
+    "selectorMarketsValid": 5
+  },
+  "releaseRequirements": {
+    "required": 52,
+    "public": 38,
+    "astraPlans": 3,
+    "reuseDigest": "71434f2a1fab147277b0dd4daf4c0403f10e000f8af220890ac2425e0e10245e",
+    "reuseFields": 559
+  },
+  "retainedReview": {
+    "rows": 108,
+    "A6": 74,
+    "A7": 34,
+    "A8": 0,
+    "remainingThisPage": 0,
+    "sourceUnverifiedRemain": true
+  },
+  "liveNotUpdated": true,
+  "open": [
+    "scoped-v1 notyetlive",
+    "oneguardedrepair notyetperformed",
+    "Japanpartial/Korea503 beforepublication",
+    "public6marketprices/details/drive/pickups",
+    "globalAJESsort",
+    "remainingresearchqueue"
+  ]
+}

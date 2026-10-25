@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-25T02:03:26.355100+00:00",
+  "updatedAt": "2026-10-25T02:05:13.664228+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-25T01:45:49.401544+00:00",
+    "updatedAt": "2026-10-25T02:05:13.664228+00:00",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -33170,6 +33170,23 @@
         "afterRevision": "fcb4d99c-087b-4b2a-bcdf-492158c435e9",
         "apiReadback": true,
         "report": "docs/encyclopedia/reports/2026-10-25-audi-a6-phev-components-readback.json"
+      },
+      {
+        "batch": "research-2026-10-25-audi-a6-diesel-drive",
+        "path": "docs/encyclopedia/batches/2026-10-25-audi-a6-diesel-drive.json",
+        "sha256": "d4b16553ee23aa56e063ad7d1bbe0fb2868d5b92cee03151c0600c9ca6ba39b0",
+        "state": "saved_api_readback_pass_pending_next_index",
+        "modelId": "00624e6c77b6541109a32d66",
+        "variants": 8,
+        "fields": 8,
+        "newValues": 8,
+        "correctedValues": 0,
+        "attestedUnchanged": 0,
+        "workflow": 40153026208,
+        "job": 121048354530,
+        "afterRevision": "640ffb5a-ab0f-4716-b044-37196a8bd982",
+        "apiReadback": true,
+        "report": "docs/encyclopedia/reports/2026-10-25-a6-diesel-drive-readback.json"
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
@@ -43306,20 +43323,28 @@
       "report": "docs/encyclopedia/reports/2026-10-25-audi-a6-phev-components-readback.json"
     },
     "boundedSelectorRelease20261025": {
-      "state": "release_requested_not_installed",
+      "state": "corrected_release_requested_pending_isolation_and_activation",
       "pr": 1531,
       "ci": 40149987618,
       "publicationWriterActive": false,
-      "requiredBatches": 51,
-      "publicBatches": 37,
+      "requiredBatches": 52,
+      "publicBatches": 38,
       "astraPlans": 3,
-      "report": "docs/encyclopedia/reports/2026-10-25-bounded-selector-release-checkpoint.json",
+      "report": "docs/encyclopedia/reports/2026-10-25-corrected-release-checkpoint.json",
       "next": [
         "Follow sole deployment; inspect exact logs on failure. No research writes until private snapshot isolated.",
         "Check index51/37/3 and confirmed559reuse, actual health scoped-v1.",
         "Only after healthy nonpartial AJES Japan perform one guarded chunked repair; no collector.",
         "Verify counts/parity/details and pinned pickup-drive-pricing/checkCatalogFeedback including actual search/detail prices on6markets."
-      ]
+      ],
+      "continuationFix": {
+        "pr": 1532,
+        "merge": "99744a8af14bf550b7e155999444aecb9f90e6b2",
+        "ci": 40152444241,
+        "fullTests": 2526,
+        "targetedTests": 38,
+        "conclusion": "success"
+      }
     },
     "nextA6A7A8ReferencePage": {
       "checkedAt": "2026-10-25T02:03:26.355100+00:00",
@@ -43368,6 +43393,23 @@
       ],
       "report": "docs/encyclopedia/reports/2026-10-25-a6-a7-a8-retained-page2.json",
       "next": "Confirm existing yearly rows with retained manufacturer evidence; drive8preflight done, apply requested; extraAllroad/A7/A8 source-only plans need exact manual/digest checks."
+    },
+    "audiA6DieselDrivePass": {
+      "batch": "research-2026-10-25-audi-a6-diesel-drive",
+      "path": "docs/encyclopedia/batches/2026-10-25-audi-a6-diesel-drive.json",
+      "sha256": "d4b16553ee23aa56e063ad7d1bbe0fb2868d5b92cee03151c0600c9ca6ba39b0",
+      "state": "saved_api_readback_pass_pending_next_index",
+      "modelId": "00624e6c77b6541109a32d66",
+      "variants": 8,
+      "fields": 8,
+      "newValues": 8,
+      "correctedValues": 0,
+      "attestedUnchanged": 0,
+      "workflow": 40153026208,
+      "job": 121048354530,
+      "afterRevision": "640ffb5a-ab0f-4716-b044-37196a8bd982",
+      "apiReadback": true,
+      "report": "docs/encyclopedia/reports/2026-10-25-a6-diesel-drive-readback.json"
     }
   },
   "scope": {

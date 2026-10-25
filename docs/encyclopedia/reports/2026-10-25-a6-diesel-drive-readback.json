@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-10-25T02:05:05.632897+00:00",
+  "batch": "research-2026-10-25-audi-a6-diesel-drive",
+  "sha256": "d4b16553ee23aa56e063ad7d1bbe0fb2868d5b92cee03151c0600c9ca6ba39b0",
+  "modelId": "00624e6c77b6541109a32d66",
+  "afterRevision": "640ffb5a-ab0f-4716-b044-37196a8bd982",
+  "apiReadback": true,
+  "fieldsChecked": 8,
+  "variants": 8,
+  "years": [
+    {
+      "year": 2024,
+      "revision": "640ffb5a-ab0f-4716-b044-37196a8bd982",
+      "rows": 130,
+      "checkedFields": 8,
+      "otherRowsUnchanged": 122
+    }
+  ],
+  "counts": {
+    "newValues": 8,
+    "correctedValues": 0,
+    "attestedUnchanged": 0
+  },
+  "unknownBodiesPreserved": [],
+  "newModels": 0,
+  "certified30minAdded": 0,
+  "installed": false,
+  "workflow": 40153026208,
+  "job": 121048354530,
+  "preflightWorkflow": 40152183933
+}

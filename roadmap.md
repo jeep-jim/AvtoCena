@@ -15509,3 +15509,10 @@ Deploy40151914908/job121045139065 terminalFAILURE: assert-release-astra astra_re
 Preflight40152183933/job121045829161SUCCESS:8manualEdited=false,revisionfcb4d99c,актуальныеfull-rowdigests. Preparedbatch d4b16553ee23aa56e063ad7d1bbe0fb2868d5b92cee03151c0600c9ca6ba39b0 добавляет только8missingdrive, безновыхмоделей/30min/перезаписей. Предыдущийdeploy40151914908terminalFAILURE,поэтому activeprivateindexнет;сохранённыйснимок461e4883не меняется. ЗапрошенодинCASapply,далееterminal/API8/8 иcandidate52/38/3.
 
 Последние44retainedA6/A7 строки40152017239SUCCESS,artifact12582673013 проверен SHA256, snapshot совпал, повторов0. Всего108=74A6+34A7; A8с2024period ввыборке0, это не отсутствиеA8. RemainingAfterPage0, supplierrequests0/storagewrites0/verifiedfields0. Реальные конфликтыFWD/AWD сохранены,год/объём/мощность неугадывались. ДополнительныеA6allroad/A7/A8 factoryPDF2024 проверены/SHA256сохранены какsource-onlyготовность: соответствующие новые значенияещёНЕsaved.
+
+
+### 25.10.2026 09:05 UTC+7 — A6drive API8/8; исправленныйrelease52/38/3
+
+Apply40153026208/job121048354530SUCCESS/API8/8:4FWD+4AWD,8существующихA6variants,revision640ffb5a-ab0f-4716-b044-37196a8bd982;122прочихстроки2024неизменны. Заэтотпроход56new/7corrected/5attested,36variants/API68checks. Ночные12Audiпартий129uniquevariants245assertions=212new/16corrected/17attested. Все30min/модели/прочиеполя сохранены; это не количестворассчитанныхобъявлений.
+
+PR1532merged99744a8a,CI40152444241/job121046611977SUCCESS2526+productionbuild;38targettests/typecheckPASS. Freshlease40149538202attempt4/job12104754087702:00:24UTC writerfree,5selectorsvalid. Старыйwarmup40152218928/job121045929736terminalFAILURE exactexistingpageprices на8ec0d858;неповторять. Active/pending проверены:ОДИН исправленныйrelease52required/38public/3ASTRA+559reuse запрошен. Исходный40151914908 завершилсядоbuild;егоindex461e4883readback и51batchesPASSне означаютASTRA/publicactivation. Новыересерчзаписиотложеныдоизоляцииснимка. Дальше exactASTRAproof→build/priceprep→actualhealth/scoped-v1→guardedrepairтолькоприжизнеспособномJapan→6marketpublicprices/details/pickup/AWD/feedback.
