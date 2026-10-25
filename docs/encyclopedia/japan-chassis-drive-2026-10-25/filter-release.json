@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-25T05:25:17.650Z",
+  "installedBeforeFix": {
+    "release": "51c72e667390835eedd22368d05f24f25f939918",
+    "runId": 40161739675,
+    "verified": true,
+    "publicEncyclopedia": {
+      "groups": 522,
+      "variants": 4848,
+      "fields": 22548
+    }
+  },
+  "fix": {
+    "release": "5fc6705650c45459c060b748ac41b609f5d33d89",
+    "runId": 40165188901,
+    "observedStage": "Prepare private encyclopedia index for this release",
+    "installed": false
+  },
+  "superseded": {
+    "release": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
+    "runId": 40163645953,
+    "observedConclusion": "cancelled"
+  },
+  "diagnostic": {
+    "runId": 40165188904,
+    "jobId": 121084674235,
+    "verified": true,
+    "encodedSqlBytes": {
+      "awd": 5163,
+      "fwd": 5164,
+      "rwd": 2812,
+      "awd_fwd": 8480,
+      "awd_fwd_rwd": 9007
+    }
+  },
+  "validation": {
+    "targetedTestsPassed": 77,
+    "typeScriptPassed": true,
+    "truckSqlParity": true,
+    "sourcePrecedence": true,
+    "ambiguousChassisNotGuessed": true
+  },
+  "lastPublicAwdCheck": {
+    "httpStatus": 503,
+    "reason": "operation_failed",
+    "resolved": false
+  },
+  "notes": [
+    "The previously suspected URI-size failure is not confirmed as upstream HTTP 414; the new implementation classifies 414 explicitly.",
+    "Two invalid-name stacks could not be attributed to the AWD requests.",
+    "No IP substitution or supplier-restriction bypass. No new supplier calls in diagnostic workflows.",
+    "A cancellation click was followed by a rejected repeat attempt; no retry or workaround after rejection. Later API status showed the old run cancelled.",
+    "Verify the exact fix release externally and record the actual AWD response before claiming live filtering works."
+  ]
+}
