@@ -31,9 +31,8 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
         run: |
           node --import tsx --input-type=module <<'JS'
-          import {getJsonStorage} from './apps/web/lib/data.ts';
-          import {ajesQuery} from './apps/web/lib/catalog/ajes-query.ts';
-          import {japanDriveGroups} from './apps/web/lib/catalog/japan-drive.ts';
+          const data=await import('./apps/web/lib/data.ts'),queryModule=await import('./apps/web/lib/catalog/ajes-query.ts'),driveModule=await import('./apps/web/lib/catalog/japan-drive.ts');
+          const getJsonStorage=data.getJsonStorage||data.default?.getJsonStorage,ajesQuery=queryModule.ajesQuery||queryModule.default?.ajesQuery,japanDriveGroups=driveModule.japanDriveGroups||driveModule.default?.japanDriveGroups;
           const storage=getJsonStorage();
           const release='51c72e667390835eedd22368d05f24f25f939918';
           const binding=await storage.readJson('knowledge/encyclopedia/calculation-releases/'+release+'.json',null);
@@ -47,3 +46,23 @@ jobs:
             console.log('DRIVE_QUERY_SIZE',JSON.stringify({drive:drive||'none',characters:query.sql.length,encodedBytes:new URLSearchParams({sql:query.sql}).toString().length}));
           }
           JS
+      - name: Read only stack locations for rejected drive queries
+        if: always()
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
+          import subprocess,re,json
+          r=subprocess.run(['docker','logs','--since','30m','--tail','12000','avtocena-production'],capture_output=True,text=True)
+          lines=(r.stdout+r.stderr).splitlines();out=[]
+          for i,line in enumerate(lines):
+              if re.search(r'\bajes_invalid_query\b',line):
+                  out.append({'error':'ajes_invalid_query','locations':[m.group(0) for x in lines[i+1:i+7] for m in re.finditer(r'\.next/server/[A-Za-z0-9_./-]+\.js:\d+:\d+',x)]})
+          print('INVALID_QUERY_STACKS',json.dumps(out[-10:]))
+          PY
