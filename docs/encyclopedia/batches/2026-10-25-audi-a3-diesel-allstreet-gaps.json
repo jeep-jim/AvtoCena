@@ -1,0 +1,475 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a3-diesel-allstreet-gaps",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7db8901984bebba4a3236e3a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TDI adv. S-tronic NAVI Sport Virtual Cockp",
+      "expectedDigest": "482cff49898ec97d4f334ce252cd08497e7aa327221eed507a0150b4c9142813",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "pages": [
+              132,
+              133,
+              137,
+              138
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводской прайс Audi от10.03.2022, технические таблицы Sportback и Limousine:1968см³85/110кВт TDI имеют передний привод,1968см³147кВт TDI — quattro. Сопоставлены существующие год,топливо,объём,мощность иКПП; привод единогласен для обоих кузовов. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2ad761bf54afb977ca82264c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TDI advanced Navi LED virt.Cockpit SHZ PDC",
+      "expectedDigest": "9ef2bde52d4e5a0e1c00b2bf3864bf5fa7b5b09c0baf4110b72c1366b68d9ad2",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "pages": [
+              132,
+              133,
+              137,
+              138
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводской прайс Audi от10.03.2022, технические таблицы Sportback и Limousine:1968см³85/110кВт TDI имеют передний привод,1968см³147кВт TDI — quattro. Сопоставлены существующие год,топливо,объём,мощность иКПП; привод единогласен для обоих кузовов. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "78fe46dcde9937bf000a081a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine S-Line LED*KAM*ACC*",
+      "expectedDigest": "f659cfa35978ed28cf6d48f03cdae8fec4b6ba1b0106d31b5754acc7daf0d8dc",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "pages": [
+              132,
+              133,
+              137,
+              138
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводской прайс Audi от10.03.2022, технические таблицы Sportback и Limousine:1968см³85/110кВт TDI имеют передний привод,1968см³147кВт TDI — quattro. Сопоставлены существующие год,топливо,объём,мощность иКПП; привод единогласен для обоих кузовов. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f63e2946eabfad942875a19e",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TDI advanced ext.",
+      "expectedDigest": "6b995fe31c46127870e6e019765d439c64b2edffda520878a9c6859304d751de",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "pages": [
+              132,
+              133,
+              137,
+              138
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводской прайс Audi от10.03.2022, технические таблицы Sportback и Limousine:1968см³85/110кВт TDI имеют передний привод,1968см³147кВт TDI — quattro. Сопоставлены существующие год,топливо,объём,мощность иКПП; привод единогласен для обоих кузовов. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "d28a8ff5a0a44d8d9f87fd09",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "35 TDI S-Line LED+NAV+SHZ+T-LEDER+MMI+PDC+DAB",
+      "expectedDigest": "c85657423280e7ad2f3e2af7354c02bac5df9ff02f016523cae0e07f152d7abc",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "pages": [
+              132,
+              133,
+              137,
+              138
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводской прайс Audi от10.03.2022, технические таблицы Sportback и Limousine:1968см³85/110кВт TDI имеют передний привод,1968см³147кВт TDI — quattro. Сопоставлены существующие год,топливо,объём,мощность иКПП; привод единогласен для обоих кузовов. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "0dce12e0f0f6d89392567707",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "🔺A3*S*LINE2l 150ch *XENON/CARPASS*TOIT OUVRANT*CARPLAY🔺",
+      "expectedDigest": "8e10dec38ba1b6d77a20e2d522853f6bb622a94e601d9181d692352045fcc541",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "pages": [
+              132,
+              133,
+              137,
+              138
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводской прайс Audi от10.03.2022, технические таблицы Sportback и Limousine:1968см³85/110кВт TDI имеют передний привод,1968см³147кВт TDI — quattro. Сопоставлены существующие год,топливо,объём,мощность иКПП; привод единогласен для обоих кузовов. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "af19476e1304e55f389d5ffb",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "S-line 40 TDI quattro *AHK*B&O*ACC*KAMERA*NAV",
+      "expectedDigest": "67fb72cb9ee67b89c70c977527f9163c8d7eb5baee9a88709ea0fbf7b3723ac0",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "pages": [
+              132,
+              133,
+              137,
+              138
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводской прайс Audi от10.03.2022, технические таблицы Sportback и Limousine:1968см³85/110кВт TDI имеют передний привод,1968см³147кВт TDI — quattro. Сопоставлены существующие год,топливо,объём,мощность иКПП; привод единогласен для обоих кузовов. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "baba9113b26d8065ea7098c6",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "allstreet 35 TFSI S tronic LED SHZ",
+      "expectedDigest": "86d0cd27990f98d5a137b5dcdd802234d492f49981572646168e796be6a49893",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+        "additionalSources": [
+          {
+            "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+            "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+            "pages": [
+              55
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводская таблица Audi A3 allstreet MY2025 от03.03.2025,стр.55:1498см³110кВт,7-ступенчатая S tronic,передний привод. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9f545a2fbd74aa163c8d8565",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "allstreet 35 TFSI S tronic | NAVI | AHK |",
+      "expectedDigest": "78c12d79e4afc6b609c4a19edde0c0233ac7c0bdcc6d605698166df7ebadf40e",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+        "additionalSources": [
+          {
+            "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+            "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+            "pages": [
+              55
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводская таблица Audi A3 allstreet MY2025 от03.03.2025,стр.55:1498см³110кВт,7-ступенчатая S tronic,передний привод. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "dfc1a8a3504251268baea274",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "allstreet 35 TFSI S-Tronic, AHK, RFK, Navi",
+      "expectedDigest": "7212d5cbe00f8fac7a32d25882ddd678951c8fdfcc83778422b464a33b215c8a",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+        "additionalSources": [
+          {
+            "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+            "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+            "pages": [
+              55
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводская таблица Audi A3 allstreet MY2025 от03.03.2025,стр.55:1498см³110кВт,7-ступенчатая S tronic,передний привод. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "962415bf2c1bdd558f3c2f3f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Allstreet 1.5 TFSI Stronic",
+      "expectedDigest": "28252e9d236d21c95ef8bc255115c142f41ba2e436349df892e30dbe29244fcb",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+        "additionalSources": [
+          {
+            "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+            "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+            "pages": [
+              55
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводская таблица Audi A3 allstreet MY2025 от03.03.2025,стр.55:1498см³110кВт,7-ступенчатая S tronic,передний привод. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9f1f6e858bb37c934852bd42",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "A3 allstreet 35 TFSI S tronic Identity Contrast",
+      "expectedDigest": "7c451019bb6ecaeb1823f93d81abdcc1b579613534b5553dc18dff85f12b1d6b",
+      "patch": {
+        "drive": "fwd",
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "drive",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1376/file_en/864b6c93e7afe28d9d0eaca4d8109850b5d6e849/eTD-Audi-A3-allstreet-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782830014=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "3653dee1c00b0423f3a115e7835d78d3ae94164ed71ec6c0529913f193095d86",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1376/file_en/864b6c93e7afe28d9d0eaca4d8109850b5d6e849/eTD-Audi-A3-allstreet-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782830014=&disposition=attachment",
+            "sha256": "3653dee1c00b0423f3a115e7835d78d3ae94164ed71ec6c0529913f193095d86",
+            "pages": [
+              1
+            ],
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводская таблица Audi A3 allstreet от30.06.2026,стр.1:1498см³110кВт/150PS ДВС,MHEV,7-ступенчатая S tronic,передний привод. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "90bdd3c2748a143a0189eb1a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "allstreet 1.5 tfsi mhev identity contrast 150cv s-",
+      "expectedDigest": "447b2d08af663a4d4e299310f99d3c87fede65a87aa32b50b84f671f7f64ccd1",
+      "patch": {
+        "drive": "fwd",
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "drive",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1376/file_en/864b6c93e7afe28d9d0eaca4d8109850b5d6e849/eTD-Audi-A3-allstreet-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782830014=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "3653dee1c00b0423f3a115e7835d78d3ae94164ed71ec6c0529913f193095d86",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1376/file_en/864b6c93e7afe28d9d0eaca4d8109850b5d6e849/eTD-Audi-A3-allstreet-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782830014=&disposition=attachment",
+            "sha256": "3653dee1c00b0423f3a115e7835d78d3ae94164ed71ec6c0529913f193095d86",
+            "pages": [
+              1
+            ],
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводская таблица Audi A3 allstreet от30.06.2026,стр.1:1498см³110кВт/150PS ДВС,MHEV,7-ступенчатая S tronic,передний привод. Добавляются только отсутствующие поля; оборудование не определяет идентичность. Неизвестный кузов и прежние значения не меняются; электрические3кВт12В не являются30-минутной тяговой мощностью. ManualEdited=false проверен по текущему полному digest; источник сохраняется как заводской документ."
+      }
+    }
+  ]
+}

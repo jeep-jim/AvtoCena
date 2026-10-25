@@ -15438,3 +15438,8 @@ PR1531 merged1ba6dfba/CI40149987618SUCCESS2526. Merge автоматически
 REGprices40150504235/job121040890792 IN_PROGRESS на Prepare shared prices on GitHub and verify cold-instance reuse; предыдущие context/budget gates SUCCESS. В01:29:44UTC active также CRM40150504351 и mobile40150504238; pending0, четыре историческихqueued сохранены. Новый production deploy не обнаружен. Основной исполнитель ведёт очередь и candidate48required/34public/3ASTRA+559reuse; контроль не дублировал код, apply, release, repair, collector или lockreset.
 
 Следующий шаг: получить terminal существующего REGprices и его verified/context результат, сверить freshlease и Road основного исполнителя; после единственного согласованного выпуска проверить actualscoped-v1 и публичные search/detail цены, JapanAWD/pickups/checkCatalogFeedback на установленном SHA. Новые сохранённые значения не объявлены активированными; Китай, DBX, globalAJESorder и скорость не закрыты.
+
+
+### 25.10.2026 08:30 UTC+7 — CAS-партия Audi A3: 13 существующих вариантов / 15 отсутствующих значений
+
+Preflight40150692347/job121041458771 SUCCESS: revision de1c9d41-62cb-4a42-93c4-a9b95b238201, все13 manualEdited=false, актуальные full-record digests. Заводские таблицы2022 TDI и2025/2026 allstreet подтверждают13 drive и2 icePowerKw; меняются только отсутствующие значения, новых моделей/версий/30min нет. Опубликован штатный research marker; результат ещё не объявлен сохранённым, далее terminal и независимый API readback15/15. Очередь permanent research свободна, pending0; REG prices40150504235 работает на старом live, release/repair не дублируются.
