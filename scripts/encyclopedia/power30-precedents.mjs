@@ -66,3 +66,6 @@ export function selectWithReportedPrecedents(offer,facts,reports){
  const reported=selectPower30Precedent(offer,reports);
  return reported.references?{...reported,evidenceTier:'reported_precedent',originalCertificateReviewed:false}:reported;
 }
+
+/** A literal Plus suffix identifies a different model, not ignorable punctuation. */
+export function precedentIdentityKey(key,model){return /\+\s*$/.test(String(model||''))?key+'plus':key;}
