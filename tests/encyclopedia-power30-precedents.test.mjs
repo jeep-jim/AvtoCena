@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {selectPower30Precedent as select} from '../scripts/encyclopedia/power30-precedents.mjs';
+import {selectPower30Precedent as select,precedentModelKeys} from '../scripts/encyclopedia/power30-precedents.mjs';
 const offer={fuel:'electric',powerKw:150,drive:'rwd',year:2024};
 const fact=(value=70,extra={})=>({modelId:'m',variantId:'v',revision:'r',year:0,constraints:{fuel:'electric',powerKw:150,drive:'rwd',...extra},values:{power30MinKw:value},sources:{power30MinKw:{kind:'official_registry',url:'https://opendata.astra.admin.ch/ivzod/test'}}});
 test('closest documented value stays an estimate without mutating the target',()=>{const input=structuredClone(offer),r=select(input,[fact(70),fact(80,{powerKw:165})]);assert.equal(r.estimatedPower30MinKw,70);assert.equal(r.certified,false);assert.equal(r.requiresConfirmation,true);assert.equal(r.power30MinKw,undefined);assert.deepEqual(input,offer);});
@@ -11,3 +11,5 @@ test('undocumented or peak-only candidates never become 30 minute references',()
 test('unknown trim produces explicit model-only range',()=>{const r=select({fuel:'electric'},[fact(70),fact(90,{powerKw:200})]);assert.equal(r.method,'same_model_only');assert.deepEqual(r.rangeKw,[70,90]);});
 test('hybrid peak field is not compared to motor or ICE output',()=>{const r=select({fuel:'hybrid',powerHp:500,engineCc:1998},[fact(50,{fuel:'hybrid',engineCc:1998,powerKw:100})]);assert.equal(r.estimatedPower30MinKw,50);assert.ok(!r.references[0].matches.includes('powerKw'));});
 test('annual precedent more than three years away is excluded',()=>{assert.equal(select(offer,[{...fact(),year:2018}]).status,'no_compatible_documented_precedent');});
+
+test("regional name expansion preserves Dolphin/Seagull distinction",()=>{assert.deepEqual(precedentModelKeys("byd:dolphin").keys,["byd:dolphin"]);assert.ok(precedentModelKeys("byd:seagull").keys.includes("byd:dolphinsurf"));assert.ok(precedentModelKeys("nio:es6").regionalNameEvidence.url.startsWith("https://us.nio.com/"));assert.deepEqual(precedentModelKeys("nio:es7").keys,["nio:es7"]);});
