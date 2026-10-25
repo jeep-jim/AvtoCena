@@ -1,0 +1,172 @@
+[
+  {
+    "modelKey": "xpeng:p7",
+    "modelId": "reported:xpeng:p7",
+    "variantId": "p7-rwd-long-range",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 203,
+      "drive": "rwd"
+    },
+    "values": {
+      "power30MinKw": 80
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.autobild.de/artikel/xpeng-p7-rwd-long-range-test-28316449.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_continuous_power",
+        "note": "AUTO BILD own test; continuous output, not original certificate",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "nio:el8",
+    "modelId": "reported:nio:el8",
+    "variantId": "el8-long-range-executive",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 480,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 105
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6478-nio-el8-long-range-executive-inkl-batterie/nio-el8-long-range-executive-inkl-batterie.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "nio:et5touring",
+    "modelId": "reported:nio:et5touring",
+    "variantId": "et5-touring-100kwh",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 360
+    },
+    "values": {
+      "power30MinKw": 100
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6369-nio-et5-touring-100-kwh-inkl-batterie/nio-et5-touring-100-kwh-inkl-batterie.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:seal",
+    "modelId": "reported:byd:seal",
+    "variantId": "seal-design",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 230
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6432-byd-seal-design/byd-seal-design.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:sealu",
+    "modelId": "reported:byd:sealu",
+    "variantId": "seal-u-design",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 160
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6433-byd-seal-u-design/byd-seal-u-design.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:atto2",
+    "modelId": "reported:byd:atto2",
+    "variantId": "atto2-boost",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 130
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6544-byd-atto-2-boost/byd-atto-2-boost.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:dolphinsurf",
+    "modelId": "reported:byd:dolphinsurf",
+    "variantId": "dolphin-surf-boost",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 65
+    },
+    "values": {
+      "power30MinKw": 35
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6528-byd-dolphin-surf-boost/byd-dolphin-surf-boost.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  }
+]
