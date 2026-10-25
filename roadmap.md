@@ -15450,3 +15450,8 @@ Preflight40150692347/job121041458771 SUCCESS: revision de1c9d41-62cb-4a42-93c4-a
 Apply40150951695/job121042213091SUCCESS, skip0. Revision79f7be75-7031-4e7d-8c06-c13fb457f181;15 новых значений(13drive+2icePowerKw),13 существующихвариантов. НезависимыйAPI15/15PASS,433другихстроки2022/2025/2026 неизменны,прежниеполя сохранены. Новыхмоделей/30min/перезаписей0. Candidate49required/35public/3ASTRA и559reuseguard сохранены; queue2423. Остались7annualкандидатов и17неоднозначных2024идентичностей. PR1531merged/CI2526PASS ещёнеустановлен;REGprices40150504235 active,release/repairне запрошены. Следующее: terminalстаройподготовкицен, freshlease/queues и один согласованныйrelease; послеactualscoped-v1 guardedrepair и реальныепубличныецены/JapanAWD.
 
 Дополнительно запрошен read-only preflight последних7 annualкандидатов; фабричныеAllstreet2024иTDI2025PDF доступны,источник2024общейтаблицы найден. Доsource/manual/digest проверки данные этих7не записаны.
+
+
+### 25.10.2026 08:35 UTC+7 — последние 7 annual-кандидатов: подтверждён привод
+
+Preflight40151127192/job121042721959 SUCCESS: revision79f7be75-7031-4e7d-8c06-c13fb457f181, 7 manualEdited=false. Заводские PDF 2024/2025 проверены: Allstreet отдельно, у прочих технически одинаковых Sportback/Sedan привод единогласен. Запрошен CAS apply 7 отсутствующих drive; других полей, кузова и 30min не касается. Следующее: terminal, независимый API7/7, candidate50/36/3. Сохранённые 13/15 не повторяются; REGprices40150504235 ещё работает, deploy/repair не запрошены.

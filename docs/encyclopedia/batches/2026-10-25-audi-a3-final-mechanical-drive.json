@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a3-final-mechanical-drive",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f9a1c0772e502df6eacdff71",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "S-LINE 2.0 TDI 150CV S-TRONIC",
+      "expectedDigest": "5d7557808b15ad76c4174c525c95325c17124afab7896cf569da5e81c2ae777d",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2024/1312/Tarif-A3-Sportback-PHEV-Berline-allstreet-S3-MY25-13122024.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "e4fda819bac3a88bf1ee3718170a82a3dbd38ee33cc8c34eb884f7767436878d",
+        "additionalSources": [
+          {
+            "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2024/1312/Tarif-A3-Sportback-PHEV-Berline-allstreet-S3-MY25-13122024.pdf",
+            "sha256": "e4fda819bac3a88bf1ee3718170a82a3dbd38ee33cc8c34eb884f7767436878d",
+            "pages": [
+              50,
+              53
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические таблицы Audi для 2024 года подтверждают передний привод при данном топливе, объёме, мощности и КПП. Для неуточнённого кузова проверено единогласие Sportback и Sedan; для Allstreet использован его отдельный лист. Добавляется только отсутствующий drive; кузов, исходное имя и прочие значения сохраняются. Полная текущая запись проверена по digest, manualEdited=false. Пиковая и 30-минутная мощность электродвигателя не выводятся из этих таблиц."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7599548d7734d39b4a825a4e",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "allstreet 35 TFSI*Navi*LED*Alu*AHK*PDC*Virtua",
+      "expectedDigest": "24d3fd49325f6061e1c954e549fa71876d10d0b96644ef678f4610182fa83135",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1376/file_en/864b6c93e7afe28d9d0eaca4d8109850b5d6e849/eTD-Audi-A3-allstreet-35-TFSI-S_tronic-110kW-MHEV_240402.pdf?1712049026=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "b0aa541ef8fbfb7019532c8bf8951cde5c5f2f90a16b02cc6f8226cb09f2d029",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1376/file_en/864b6c93e7afe28d9d0eaca4d8109850b5d6e849/eTD-Audi-A3-allstreet-35-TFSI-S_tronic-110kW-MHEV_240402.pdf?1712049026=&disposition=attachment",
+            "sha256": "b0aa541ef8fbfb7019532c8bf8951cde5c5f2f90a16b02cc6f8226cb09f2d029",
+            "pages": [
+              1
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические таблицы Audi для 2024 года подтверждают передний привод при данном топливе, объёме, мощности и КПП. Для неуточнённого кузова проверено единогласие Sportback и Sedan; для Allstreet использован его отдельный лист. Добавляется только отсутствующий drive; кузов, исходное имя и прочие значения сохраняются. Полная текущая запись проверена по digest, manualEdited=false. Пиковая и 30-минутная мощность электродвигателя не выводятся из этих таблиц."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a794e01ca0c2f16bc7199ef0",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "Allstreet 35 TDI Identity Contrast 150CV S-tronic | MATRIX | CAM | PACK LUCI | S LINE INTERIOR",
+      "expectedDigest": "84d2d26d076a5cfb826e9bff9534c3e0dea8c8d579a43b0ecffe9bea74729ec0",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1375/file_en/2459a247c254d0304d18968599335c0283b48248/eTD-Audi-A3-allstreet-35-TDI-S_tronic-110kW_240402.pdf?1712049024=&disposition=attachment",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "8a9c0ee300f508f610e2870b9cbe25eab6e045596df5b3bbd2742b5d1e907bad",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1375/file_en/2459a247c254d0304d18968599335c0283b48248/eTD-Audi-A3-allstreet-35-TDI-S_tronic-110kW_240402.pdf?1712049024=&disposition=attachment",
+            "sha256": "8a9c0ee300f508f610e2870b9cbe25eab6e045596df5b3bbd2742b5d1e907bad",
+            "pages": [
+              1
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические таблицы Audi для 2024 года подтверждают передний привод при данном топливе, объёме, мощности и КПП. Для неуточнённого кузова проверено единогласие Sportback и Sedan; для Allstreet использован его отдельный лист. Добавляется только отсутствующий drive; кузов, исходное имя и прочие значения сохраняются. Полная текущая запись проверена по digest, manualEdited=false. Пиковая и 30-минутная мощность электродвигателя не выводятся из этих таблиц."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ecce2a3c4bfaa7cbe1530243",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "30 2.0 TDI",
+      "expectedDigest": "880237cb21f2a217b7dd717d76654f9393e4d3184d1b80fc769c1c2ff8b008f8",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/276/file_en/bd46610b9594c570478124efddf2315f43230e65/eTD-Audi-A3-Sedan-TDI-85kW_250929.pdf?1759396620=",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "57d534d452abda9b7e585b9a5edb1b633140f1595e93f48d2cbcaf4c0a0d52d1",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/276/file_en/bd46610b9594c570478124efddf2315f43230e65/eTD-Audi-A3-Sedan-TDI-85kW_250929.pdf?1759396620=",
+            "sha256": "57d534d452abda9b7e585b9a5edb1b633140f1595e93f48d2cbcaf4c0a0d52d1",
+            "pages": [
+              1
+            ],
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/260/file_en/796e1a543187e8b116a9e6dc478e2bad707c2ea8/eTD-Audi-A3-Sportback-TDI-85kW_250605.pdf?1749213189=",
+            "sha256": "ba0bccfbdcd6ff5fcf3c09c9f08f6cc27d4d1909ca75d276e34b16829d3d4172",
+            "pages": [
+              1
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические таблицы Audi для 2025 года подтверждают передний привод при данном топливе, объёме, мощности и КПП. Для неуточнённого кузова проверено единогласие Sportback и Sedan; для Allstreet использован его отдельный лист. Добавляется только отсутствующий drive; кузов, исходное имя и прочие значения сохраняются. Полная текущая запись проверена по digest, manualEdited=false. Пиковая и 30-минутная мощность электродвигателя не выводятся из этих таблиц."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a3a6cde4924ac0f5782d9903",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "30 TDI",
+      "expectedDigest": "bbf73ed453256dab79f2a3f4b57f95ba0623145e38cc01eef2146bbb1cc76647",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/276/file_en/bd46610b9594c570478124efddf2315f43230e65/eTD-Audi-A3-Sedan-TDI-85kW_250929.pdf?1759396620=",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "57d534d452abda9b7e585b9a5edb1b633140f1595e93f48d2cbcaf4c0a0d52d1",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/276/file_en/bd46610b9594c570478124efddf2315f43230e65/eTD-Audi-A3-Sedan-TDI-85kW_250929.pdf?1759396620=",
+            "sha256": "57d534d452abda9b7e585b9a5edb1b633140f1595e93f48d2cbcaf4c0a0d52d1",
+            "pages": [
+              1
+            ],
+            "fields": [
+              "drive"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/260/file_en/796e1a543187e8b116a9e6dc478e2bad707c2ea8/eTD-Audi-A3-Sportback-TDI-85kW_250605.pdf?1749213189=",
+            "sha256": "ba0bccfbdcd6ff5fcf3c09c9f08f6cc27d4d1909ca75d276e34b16829d3d4172",
+            "pages": [
+              1
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические таблицы Audi для 2025 года подтверждают передний привод при данном топливе, объёме, мощности и КПП. Для неуточнённого кузова проверено единогласие Sportback и Sedan; для Allstreet использован его отдельный лист. Добавляется только отсутствующий drive; кузов, исходное имя и прочие значения сохраняются. Полная текущая запись проверена по digest, manualEdited=false. Пиковая и 30-минутная мощность электродвигателя не выводятся из этих таблиц."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8e4424394baa8cbbc701cf78",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "35 TDI S line ACC*NAV*ParkAs*RFK*SHZ*elSitz",
+      "expectedDigest": "cbf6c52f7f52e49047100b6507c721de132730bba73f154c8b1a4f6c7f5a3cfa",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+        "additionalSources": [
+          {
+            "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+            "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+            "pages": [
+              49,
+              52
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические таблицы Audi для 2025 года подтверждают передний привод при данном топливе, объёме, мощности и КПП. Для неуточнённого кузова проверено единогласие Sportback и Sedan; для Allstreet использован его отдельный лист. Добавляется только отсутствующий drive; кузов, исходное имя и прочие значения сохраняются. Полная текущая запись проверена по digest, manualEdited=false. Пиковая и 30-минутная мощность электродвигателя не выводятся из этих таблиц."
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2c2df46180f5b4510c8d1fae",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "35 2.0TDI S line ACC*NAV*ParkAs*RFK*SHZ*LED",
+      "expectedDigest": "0de1a66620a1488035d20b654553ef1a6825c47a1a21b524481da775a708c32b",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+        "checkedAt": "2026-10-25",
+        "sourceSha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+        "additionalSources": [
+          {
+            "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+            "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+            "pages": [
+              49,
+              52
+            ],
+            "fields": [
+              "drive"
+            ]
+          }
+        ],
+        "statement": "Заводские технические таблицы Audi для 2025 года подтверждают передний привод при данном топливе, объёме, мощности и КПП. Для неуточнённого кузова проверено единогласие Sportback и Sedan; для Allstreet использован его отдельный лист. Добавляется только отсутствующий drive; кузов, исходное имя и прочие значения сохраняются. Полная текущая запись проверена по digest, manualEdited=false. Пиковая и 30-минутная мощность электродвигателя не выводятся из этих таблиц."
+      }
+    }
+  ]
+}
