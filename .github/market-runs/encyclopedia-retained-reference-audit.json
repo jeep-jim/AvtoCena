@@ -1,13 +1,12 @@
 {
-  "requestedAt": "2026-10-24T23:02:38.861829+00:00",
+  "requestedAt": "2026-10-25T01:37:27.975691+00:00",
   "review": {
     "groups": [
-      "audi/a3",
-      "audi/a4",
-      "audi/a5"
+      "audi/a6",
+      "audi/a7",
+      "audi/a8"
     ],
-    "year": 2024,
-    "afterDigest": "f30b762e2aaa933dea0f086332dc10261186f1ded254715f2649b3731b5e430c"
+    "year": 2024
   },
-  "reason": "Final11 retained2024 Audi A3/A4/A5 rows after256 unique; no collector, no source promotion."
+  "reason": "Next retained technical group after completed267 A3/A4/A5 reference rows and61 annual mechanical candidates; read-only storedfacts, no collector or promotion."
 }
