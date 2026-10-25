@@ -15495,3 +15495,10 @@ A3 текущие61annual-кандидат завершены,17неоднозн
 Healthдо/после8ec0d858,scoped-v1 отсутствует. China/UAE/Europe/Georgia HTTP200;Japan HTTP200,partial/stale,totalnull;KoreaHTTP503. ChinaпервыйLamando1611870руб,UAEA3 3127884руб,EuropeA3 4105050руб — это наблюдение старого выпуска, не publicpriceparity нового. Отчёт docs/encyclopedia/reports/2026-10-25-before-486af-public-markets.json.
 
 Пять уже сохранённых заводскихA6PDF29.08.2024 повторно доступны,SHA256 совпали. Подготовлено8missingdrive на точных1968/120 и2967/180/210 группах с доказанным кузовом либо единогласнымиSedan/Avant. Allroad инеполные неоднозначныеидентичности исключеныизэтойпартии,неизбазы. Запрошен толькоread-onlypreflight8; applyзапрещён доSUCCESSизоляцииprivateindex40151914908. Никакихновыхмоделей/30min/повторногоcollector.
+
+
+### 25.10.2026 08:54 UTC+7 — точная причина остановки выпуска и reviewed continuation fix
+
+Deploy40151914908/job121045139065 terminalFAILURE: assert-release-astra astra_revision_existing_value_changed:icePowerKw. Privateindex461e4883/man71f380a5 успешно создан/readback; все51required batches1090variants1654fields проверены. ASTRAcontinuation не пройдена,build/deploy skipped,live8ec0d858 сохранён. Ни повторногоapply,ниrepair,ниослабленияguard не выполнено.
+
+Подготовлен строгий путь для уже одобренных исправлений непроверенныхнаблюдений: requiredmanufacturerbatch +точныйfull-parentSHA256 +воспроизведение штатногоplanModelResearch +полное совпадение следующейстроки; каждыйизменённыйшаг ancestry проверяется. ДопустимытолькоicePowerKw/fuel/powertrainKind без прежнихmanual/ASTRA/research/reference доказательств. ВсеASTRAassertions всёещётребуют прежнихзначений/источников;30min,модели,год/trim,прочиеполя неразрешеныэтимпутём.38targettestsPASS/webtypecheckPASS; полныйCI/mergeещёпредстоят. Отчёт docs/encyclopedia/reports/2026-10-25-astra-reviewed-correction-gate.json. Следом один исправленныйrelease51/37/3+559reuse после greenCI и свободнойочереди.
