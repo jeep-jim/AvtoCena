@@ -168,5 +168,693 @@
         "originalCertificateReviewed": false
       }
     }
+  },
+  {
+    "modelKey": "byd:e2",
+    "modelId": "reported:byd:e2",
+    "variantId": "aa-dv-reference-0",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 35
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "BYD-1814-TZ-XS-A",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:yuanpro",
+    "modelId": "reported:byd:yuanpro",
+    "variantId": "aa-dv-reference-1",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 35
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "TZ180XSF",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:yuanup",
+    "modelId": "reported:byd:yuanup",
+    "variantId": "aa-dv-reference-2",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 35
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "TZ180XSF",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hongqi:eqm5",
+    "modelId": "reported:hongqi:eqm5",
+    "variantId": "aa-dv-reference-3",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "CAM210PT6",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "xiaomi:su7",
+    "modelId": "reported:xiaomi:su7",
+    "variantId": "aa-dv-reference-4",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 140
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "xiaomi:su7ultra",
+    "modelId": "reported:xiaomi:su7ultra",
+    "variantId": "aa-dv-reference-5",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 490
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "xiaomi:yu7",
+    "modelId": "reported:xiaomi:yu7",
+    "variantId": "aa-dv-reference-6",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 135
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "YS190XY106",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "xiaomi:yu7",
+    "modelId": "reported:xiaomi:yu7",
+    "variantId": "aa-dv-reference-7",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 140
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "YS210XY103",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "zeekr:001",
+    "modelId": "reported:zeekr:001",
+    "variantId": "aa-dv-reference-8",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 165
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "zeekr:001",
+    "modelId": "reported:zeekr:001",
+    "variantId": "aa-dv-reference-9",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 280
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "FR version",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "zeekr:009",
+    "modelId": "reported:zeekr:009",
+    "variantId": "aa-dv-reference-10",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 165
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "aito:m5",
+    "modelId": "reported:aito:m5",
+    "variantId": "aa-dv-reference-11",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 115
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "aito:m9",
+    "modelId": "reported:aito:m9",
+    "variantId": "aa-dv-reference-12",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 114
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinl",
+    "modelId": "reported:byd:qinl",
+    "variantId": "aa-dv-reference-13",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "TZ210XYC",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:tang",
+    "modelId": "reported:byd:tang",
+    "variantId": "aa-dv-reference-14",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 140
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "BYD6490ST6HEV10",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:tang",
+    "modelId": "reported:byd:tang",
+    "variantId": "aa-dv-reference-15",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 105
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "BYD6490ST6HEV3",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:levin",
+    "modelId": "reported:toyota:levin",
+    "variantId": "aa-dv-reference-16",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:levin",
+    "modelId": "reported:toyota:levin",
+    "variantId": "aa-dv-reference-17",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 49
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "ZWE219L",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "voyah:free",
+    "modelId": "reported:voyah:free",
+    "variantId": "aa-dv-reference-18",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 170
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "voyah:free",
+    "modelId": "reported:voyah:free",
+    "variantId": "aa-dv-reference-19",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 150
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "facelift",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil6",
+    "modelId": "reported:liauto:lil6",
+    "variantId": "wersum-l6-135",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 135
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil7",
+    "modelId": "reported:liauto:lil7",
+    "variantId": "wersum-l7-145",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 145
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil7",
+    "modelId": "reported:liauto:lil7",
+    "variantId": "wersum-l7-148",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 148
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil7",
+    "modelId": "reported:liauto:lil7",
+    "variantId": "wersum-l7-168",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 168
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil8",
+    "modelId": "reported:liauto:lil8",
+    "variantId": "wersum-l8-145",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 145
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil8",
+    "modelId": "reported:liauto:lil8",
+    "variantId": "wersum-l8-165",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 165
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil9",
+    "modelId": "reported:liauto:lil9",
+    "variantId": "wersum-l9-145",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 145
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lione",
+    "modelId": "reported:liauto:lione",
+    "variantId": "wersum-one-112",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 96
+    },
+    "values": {
+      "power30MinKw": 112
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
   }
 ]
