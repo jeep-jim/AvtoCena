@@ -1,5 +1,5 @@
 import {DetailReadCache} from "./detail-read-cache";
-import {offerParameterDraft} from "./offer-parameter-draft";
+import {offerPrecedentParameterDraft as offerParameterDraft} from "./power30-precedent";
 import {validateCustomerParameters} from "./customer-parameters";
 import {calculateOfferWithCustomerParametersDetailed} from "./customs-pricing";
 import type {VehicleOffer} from "./types";
@@ -26,7 +26,7 @@ export async function attachSellerDeliveredPreviews<T extends Partial<VehicleOff
      const calculated=await calculateOfferWithCustomerParametersDetailed(full,parameters);
      if(!calculated.ok||!(Number(calculated.calculation.totalRub)>0))return null;
      const c=calculated.calculation;
-     return {totalRub:c.totalRub,currencyRate:c.currencyRate,deliveryPricingBasis:c.deliveryPricingBasis};
+     return {totalRub:c.totalRub,currencyRate:c.currencyRate,deliveryPricingBasis:c.deliveryPricingBasis,power30Precedent:c.power30Precedent};
     });
     if(quote)result[i]={...offer,deliveredCalculationPreview:quote};
    }catch{/* Keep the explicitly labelled seller price when inputs are incomplete. */}
