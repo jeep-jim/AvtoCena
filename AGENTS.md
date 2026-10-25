@@ -145,3 +145,10 @@
 # Owner technical facts priority — 24.10.2026
 
 - Fill calculation facts in bulk by make/model/year and known mechanical attributes (power, displacement, fuel, body, drive), not equipment/marketing trim wording. Do not require identical trim names or European market membership for ordinary technical consensus. Preserve real mechanical conflicts, manual values and per-field provenance. Certified 30-minute power remains a distinct documented measurement; ordinary mechanical fallback must not manufacture it. Japan drive must be available in cards and filtering before pagination, with unknown or conflicting chassis-drive relationships kept explicit.
+
+
+# Owner Japan-only scope — 25.10.2026
+
+- Owner stopped the previous broad encyclopedia/release work and disabled its two background tasks. Do not resume them or research other models without a new request. Address the owner as «бро», not by a personal name.
+- Current authorized scope: Japan missing fuel defaults to petrol (existing and incoming public offers), and Japan drivetrain display/filtering from supplier PRIV or an unambiguous chassis relationship. Preserve known fuel and manual values. Record default fuel internally as owner policy, never as manufacturer/supplier evidence. Conflicting known fuel must not become petrol merely because a safety check rejected it.
+- Japan drive filters must include the supplied drive before pagination/count, matching the value shown on the card. A chassis shared by different drives is not proof of AWD; preserve unknown rather than inventing it.

@@ -14,11 +14,13 @@ export function ajesResultFilter(params:Record<string,unknown>){
  if(powerFrom!==undefined&&powerTo!==undefined&&powerFrom>powerTo)throw new AjesInputError();
  const powerFilter=powerFrom!==undefined||powerTo!==undefined;
  const drive=scalar(params.drive),japanDrive=params.market==='japan'&&Boolean(drive);
+ const fuel=scalar(params.fuel),japanFuel=params.market==='japan'&&Boolean(fuel);
  const body=scalar(params.bodyType||params.body),hasPrice=scalar(params.hasPrice),city=scalar(params.city);
  if(filterSelections(body).some(value=>!['suv','offroad','sedan','hatchback','wagon','minivan','coupe','convertible','pickup','van'].includes(value)))throw new AjesInputError();
  if(hasPrice&&!['yes','no'].includes(hasPrice))throw new AjesInputError();
  const priceFilter=from!==undefined||to!==undefined||Boolean(hasPrice);
- return {active:priceFilter||Boolean(body)||powerFilter||Boolean(params.color)||japanDrive,priceFilter,matches(offer:any){
+ return {active:priceFilter||Boolean(body)||powerFilter||Boolean(params.color)||japanDrive||japanFuel,priceFilter,matches(offer:any){
+  if(japanFuel&&!matchesFilterSelection(offer.fuel,fuel==='electrified'?'hybrid|electric':fuel.replaceAll('electrified','hybrid|electric')))return false;
   if(japanDrive&&!matchesFilterSelection(offer.drive,drive))return false;
   if(!matchesCatalogColor(offer,scalar(params.color)))return false;
   if(powerFilter){

@@ -66,6 +66,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   if(q.color){const colors=[...new Set(values(q.color,'|').flatMap(value=>vehicleColorAliases(value).map(alias=>name(alias)!)))];where.push(`color in (${colors.map(value=>`'${value}'`).join(',')})`);}
   const coded=(value:string|undefined,column:string,map:Record<string,string[]>)=>{if(!value)return;const selected=value.split('|');if(selected.length>20||selected.some(v=>!map[v]))throw new AjesInputError();const codes=[...new Set(selected.flatMap(v=>map[v]))];where.push(`${column} in (${codes.map(v=>`'${v}'`).join(',')})`);};
   coded(q.fuel,'time',{petrol:['P'],diesel:['D'],electric:['E'],electrified:['E','H','HE'],hybrid:['H','HE'],lpg:['L'],cng:['C']});
+  if(!stock&&q.fuel?.split('|').includes('petrol')){const fuelClause=where.pop()!;where.push(`(${fuelClause} or time is null or time='')`);}
   coded(q.transmission,'kpp',{automatic:['AT'],manual:['MT'],cvt:['CVT'],dct:['DCT']});
   if(!stock&&q.drive)where.push(japanDriveSql(q.drive,driveIndex));
   else coded(q.drive,'priv',{fwd:['FF','FWD'],rwd:['FR','RWD'],awd:['4WD','AWD','FULLTIME4WD']});

@@ -1,3 +1,4 @@
+import {applyJapanDefaultFuel} from './japan-default-fuel';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import { restoreSourceModelName } from "./source-model-name";
 import {isGreenCornerOffer} from "./green-corner-contract";
@@ -22,7 +23,7 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
     ['ambiguous', 'conflict'].includes(classifySpecificationEvidence(input, field).state)) : []);
   for (const field of auditedQuoteRejections(input)) rejected.add(field);
   const powerRejected = sanity.suspicious || rejected.has('powerHp') || rejected.has('certifiedPower') || combustionPowerMismatch(input);
-  if (!powerRejected && !rejected.size && !powertrainMismatch) return input;
+  if (!powerRejected && !rejected.size && !powertrainMismatch) return applyJapanDefaultFuel(input);
   // A rejected peak-power observation must not erase independently attested
   // 30-minute power. The attestation must still bind after all rejected power
   // fields are removed; a combined/stale attestation cannot take this path.
@@ -49,7 +50,7 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
     // retain its date instead of dropping inventory before repricing can run.
     && Number.isFinite(date) && date <= Date.now() + 86400000;
   const sellerPriceRub = bound ? Math.round(price * effectiveRate) : undefined;
-  return {
+  return applyJapanDefaultFuel({
     ...input,
     ...(powerRejected ? {powerHp: undefined, powerKw: undefined, icePowerKw: undefined,
       power30MinKw: retainCertifiedPower ? input.power30MinKw : undefined,
@@ -64,11 +65,12 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
     catalogPricingMode: 'seller', sellerPriceRub, calculationStatus: 'needs_data',
     calculationSnapshot: { currencyRate: {...rate}, sourcePriceRub: sellerPriceRub, pricingConfidence: 'unavailable' },
     operational: {...input.operational,
+      ...(rejected.has('fuelPowertrain') && input.fuel && input.fuel!=='unknown' ? {fuelDefaultBlocked:true} : {}),
       ...(powerRejected ? {powerSanity: {rejected:true, reason:input.operational?.powerSanity?.reason || (sanity.suspicious ? sanity.reason : 'unverified_power_evidence'), rejectedPowerHp:input.powerHp ?? input.operational?.powerSanity?.rejectedPowerHp ?? null}} : {}),
       semanticEvidence: {...input.operational?.semanticEvidence,
         ...(powerRejected ? {
         powerHp:{status:'conflict',source:'public_power_safety',rawValues:[]},
         powerKw:{status:'conflict',source:'public_power_safety',rawValues:[]}} : {})},
     },
-  } as T;
+  } as T);
 }
