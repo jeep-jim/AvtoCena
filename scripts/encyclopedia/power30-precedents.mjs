@@ -49,3 +49,12 @@ export function selectPower30Precedent(offer,facts){
   ...(values.length===1?{estimatedPower30MinKw:values[0]}:{}),rangeKw:[values[0],values.at(-1)],candidateCount:best.length,referenceValuesKw:values,
   references:refs};
 }
+
+/** Manufacturer-documented regional names; only candidate discovery, never certification. */
+export const regionalPrecedentFamilies=[
+ {keys:['nio:es6','nio:el6'],url:'https://us.nio.com/news/20250702001',checkedAt:'2026-10-25'},
+ {keys:['nio:es8','nio:el8'],url:'https://us.nio.com/news/20250702001',checkedAt:'2026-10-25'},
+ {keys:['nio:et5t','nio:et5touring'],url:'https://us.nio.com/news/20250702001',checkedAt:'2026-10-25'},
+ {keys:['byd:seagull','byd:dolphinmini','byd:dolphinsurf'],url:'https://www.byd.com/en/news-list/First-BYD-Electric-Vehicle-Rolls-off-the-Line-in-Brazil',checkedAt:'2026-10-25'},
+];
+export function precedentModelKeys(key){const family=regionalPrecedentFamilies.find(f=>f.keys.includes(key));return {keys:family?.keys||[key],...(family?{regionalNameEvidence:{url:family.url,checkedAt:family.checkedAt}}:{})};}
