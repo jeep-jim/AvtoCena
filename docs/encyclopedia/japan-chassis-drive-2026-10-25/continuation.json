@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-10-25T05:36:14.469993+00:00",
-  "commit": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
+  "checkedAt": "2026-10-25T05:39:31.387340+00:00",
+  "commit": "5bfcbb97f5c6f44468689e810238a53c48908bb4",
   "reference": {
-    "runId": 40165932431,
-    "jobId": 121086855555,
+    "runId": 40166164797,
+    "jobId": 121087538978,
     "verified": true,
-    "digest": "9f204b1eb4419fbed31b8286c31f1be6b5da4f5cf403e676409ccab91cc21330",
+    "digest": "4b9f3225824dc3b237ce57929603c92555d8cf7c6e23a1c62adad6f990e953fe",
     "groups": 335,
-    "confirmed": 261,
+    "confirmed": 263,
     "ambiguous": 46,
-    "unresolved": 28
+    "unresolved": 26
   },
   "annualChanges": 95,
   "annualUnfilled": {
@@ -30,10 +30,10 @@
     "step": "Prepare private encyclopedia index"
   },
   "nextSteps": [
-    "Verify both deployment outcomes and exact external health releaseSha; do not launch a duplicate deployment.",
-    "Verify published 55 required / 41 public research batches and existing 3 ASTRA checks.",
-    "Live Japan drive filters previously refused with visitor_restricted; do not bypass supplier restrictions.",
-    "Continue only existing codes in remaining.json; shared chassis require exact source/variant evidence; excluded trucks stay excluded."
+    "Wait for40165188901 and queued40166164858; verify exact external health releaseSHA before claiming263installed. Do not launch duplicate deployment.",
+    "After activation, verify normal Japan AWD/FWD/RWD search; preserve supplier refusals and do not bypass access restrictions.",
+    "Continue9missingprimaryproof and46ambiguous groups from remaining.json; inspect evidence-limit-review.json before repeating research.",
+    "Preserve55required/41publicbatches/3ASTRA and95annualpatches; old automations remain stopped."
   ],
   "automations": "Old broad research automations remain stopped.",
   "preparedReference": {
@@ -43,18 +43,25 @@
     "unresolved": 26,
     "workingScope": 318,
     "missingPrimaryEvidence": 9,
-    "pendingDurableReadback": true
+    "pendingDurableReadback": false
   },
   "replacementDeploy": {
     "runId": 40165188901,
     "commit": "5fc6705650c45459c060b748ac41b609f5d33d89",
     "observedStatus": "in_progress",
-    "step": "Build existing application without production credentials"
+    "step": "Prepare exact price indexes before activating the release"
   },
   "queuedDeploy": {
-    "runId": 40165932441,
-    "commit": "d56d4a266013388c4c65be71fd3536a5cbbe45cb",
+    "runId": 40166164858,
+    "commit": "5bfcbb97f5c6f44468689e810238a53c48908bb4",
     "observedStatus": "pending",
-    "confirmed": 261
+    "confirmed": 263
+  },
+  "verification": {
+    "profileTests": 26,
+    "latestDriveTests": 12,
+    "typecheck": "PASS",
+    "newMappingsExecutedInSql": 17,
+    "latestExternalFilter": "HTTP503 before compact SQL deployment; not verified after"
   }
 }
