@@ -15467,3 +15467,10 @@ Apply40151235233/job121043032216 SUCCESS, skip0; 7 новых drive, revisionb4e
 ### 25.10.2026 08:39 UTC+7 — проверка компонентов A6 PHEV
 
 В новой группе публично прочитаны171 годовых записи A6/A7/A8; выявлены123 кандидата с пробелами(не число полностью нерассчитанных авто; двигатель неприменим к BEV). Для8 Avant PHEV2024 заводские листы29.08.2024 подтверждают ДВС195кВт, систему220/270кВт иAWD; continuous electrical55кВт не принимается за certified30min. Запрошен read-only preflight8 для ручных правок/доказательств перед исправлением ошибочного icePowerKw. Для двух записей без известного кузова перенос отложен. Audit40151380145 читает сохранённыйreference; новых collectors/deploy/repair нет.
+
+
+### 25.10.2026 08:41 UTC+7 — CAS компонентов8 A6 Avant PHEV и точный terminal старых цен
+
+Preflight40151543847/job121043934597 SUCCESS:8 manualEdited=false, старые icePowerKw без research/ASTRA/reference-доказательств. Штатная партия38 assertions:26 отсутствующих значений,7 исправлений(5 icePowerKw, fuel иkind одной записи),5 подтверждений. Для двух195кВт записей системная мощность не выбрана; continuous55 не переносится в30min. Далее terminal иAPI38/38 до включения в candidate51/37/3.
+
+REGprices40150504235/job121040890792 terminalFAILURE01:39UTC на exact existing page prices: China budgetTo3m12 карточек, например d24fa615fb67ae4957a421ba1622231 против1611870. Проверка использовала live8ec0d858; diff main уже содержит исправление PR1519 currentSearchPrices для visiblebudgetcards, но новый release/parity ещё не принят. Повторная read-only lease40149538202 attempt3/job121043957300:01:40:54 writer.active=false,5 selectors valid,старыйgen1792702445675_8c312f85. Не объявлять новый индекс проверенным по старому warmup. После этого apply/readback один coordinatedrelease, без повторного collector.
