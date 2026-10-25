@@ -15382,3 +15382,8 @@ Healthостаётся8ec0d858,scoped-v1нет;China40124551054на послед
 Свежие AGENTS/ночной план/Road и main dac61856120822de883306b548afb12a0a223004 прочитаны. Полный внешний health HTTP200/curl exit0 подтверждает прежние release8ec0d8587d9891757f8cdf019f2c9c55adcaef31/calculationVersion2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07; scoped-v1 отсутствует. Единственный active40124551054/job120972509862 всё ещё выполняет Publish markets through calculation and retention guards; terminal outcome отсутствует. Pending0, четыре исторических queued сохранены.
 
 Новых подтверждённых результатов установки или публичной приёмки нет. Истечение ранее наблюдавшейся lease23:32:31 само по себе не принято за освобождение writer. Apply/deploy/repair/collector/lockreset не дублировались. Следующий шаг: после terminalChina прочитать outcome/точную ошибку при наличии, проверить актуальные lease/generation/selectors/все очереди; основной исполнитель ведёт согласованный выпуск candidate47/33/3 с559reuse. Контроль продолжает публичную приёмку только на фактически установленном совместимом SHA; цены/привод/DBX/globalAJESorder/скорость остаются незакрыты.
+
+
+### 25.10.2026 07:06 UTC+7 — проверка41 сохранённого технического кандидата
+
+Свежие main873da01/AGENTS/Road/план/queue прочитаны. China40124551054 единственныйactive,pending0,4старыхqueuedнетронуты. Выбраны41существующихA3/2022–2026 с известными999/81кВт либо1498/85–110кВт,автоматом/МКПП по заводскимтаблицам; Allstreet и неоднозначные дизельныегруппы отложены. Запрошены boundedpreflight41 и read-onlylease/stagedgeneration/selectors. Проверить источники и ручныеправки доCASapply; savedпока0. Новыхcollectors/deploy/repair/unlock нет.
