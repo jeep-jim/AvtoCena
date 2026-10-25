@@ -15,3 +15,13 @@ test('annual precedent more than three years away is excluded',()=>{assert.equal
 test("regional name expansion preserves Dolphin/Seagull distinction",()=>{assert.deepEqual(precedentModelKeys("byd:dolphin").keys,["byd:dolphin"]);assert.ok(precedentModelKeys("byd:seagull").keys.includes("byd:dolphinsurf"));assert.ok(precedentModelKeys("nio:es6").regionalNameEvidence.url.startsWith("https://us.nio.com/"));assert.deepEqual(precedentModelKeys("nio:es7").keys,["nio:es7"]);});
 
 test('a traceable owner confirmed precedent retains its manual provenance',()=>{const f=fact(30);f.sources.power30MinKw={kind:'manual',url:'https://avtocena.com/cars/autocatalog',batchId:'owner-confirmed-test'};const r=select(offer,[f]);assert.equal(r.certified,false);assert.equal(r.references[0].source.kind,'manual');assert.equal(r.estimatedPower30MinKw,30);});
+
+import {selectWithReportedPrecedents} from '../scripts/encyclopedia/power30-precedents.mjs';
+test('reported tests fill gaps, preserve provenance, and cannot displace documented ambiguity',()=>{
+ const report=fact(80);report.sources.power30MinKw.kind='reported_precedent';
+ const r=selectWithReportedPrecedents(offer,[],[report]);
+ assert.equal(r.estimatedPower30MinKw,80);assert.equal(r.originalCertificateReviewed,false);assert.equal(r.certified,false);
+ assert.deepEqual(selectWithReportedPrecedents(offer,[fact(70),fact(90)],[report]).rangeKw,[70,90]);
+ assert.equal(selectWithReportedPrecedents({...offer,drive:'awd'},[],[report]).status,'no_compatible_documented_precedent');
+ assert.equal(selectWithReportedPrecedents({...offer,power30MinKw:20},[],[report]).status,'existing_value_preserved');
+});
