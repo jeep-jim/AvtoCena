@@ -15422,3 +15422,10 @@ Apply40145557656/job121026002640SUCCESS;41variants/44новыхполей,skip0.
 Read-only40149538202/job121037950634SUCCESS:01:10:24UTC writer.active=false, lockedUntil пустой; активныйgen_1792702445675_8c312f85 сохранён, пятьстарыхv3selectorsvalid. China40124551054 terminalfailure budget_selector_requires_bounded_parts не требует повторногоcollector.
 
 Подготовлено реальное v4-разбиение бюджетных selectors: части<=1000строк и<=4MiB, content-addressed keys, checksum/bytes/generation/market/header/count/order readback и readyпоследним; старыйv3readerсохранён. Runtime и specification backfill читают части, отдельныйnamespacev7 не заменяет livev6. Writeallowlist расширен только на точные derivedchunkpaths, traversal/inventory запрещены. Проверки повреждённых/отсутствующих частей и неделимой сверхбольшой строки проходят, WebtypecheckPASS. Это ограничение размера объектов, не полностью boundedRAM: итоговые компактные массивы остаются. До greenCI/merge/live не считать productionисправленным. Следующее: одинrelease48/34/3+559reuse, затемactualscoped-v1 и одинguardedrepair сpublicprices/JapanAWD.
+
+
+### 25.10.2026 08:27 UTC+7 — независимая партия13 во время существующей подготовки цен
+
+PR1531 merged1ba6dfba/CI40149987618SUCCESS2526. Merge автоматически запустил REGprices40150504235 иoverview40150504278; не отменять и не дублировать. СтарыйYandexprices40150504435 terminalfailure live_encyclopedia_binding_missing на прежнемgen1791597210034, не считать ошибкойREGindex. Release48/34/3 покаНЕзапрошен, preparedmarker не опубликован доразбораактивныхwriters.
+
+Сохранённые заводские таблицы и новые официальные Allstreet2025/2026 подтверждают13существующихA3кандидатов/15пропусков. Публичные2022/2025/2026 записи повторно прочитаны,revisionde1c9d41-62cb-4a42-93c4-a9b95b238201; запрошен только boundedpreflight13 для manual/digest. Источник2024archive404 не обойдён, семанеоднозначныхannualкандидатов и17старыхidentities остаются. ПослеPASS разрешёнCASapply,еслиprivateindexещёнеформируется; иначеотложить. Savedвэтомпроходепока0.
