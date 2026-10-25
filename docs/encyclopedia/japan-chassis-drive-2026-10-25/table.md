@@ -5,17 +5,17 @@
 | Марка | Модель | Код кузова | Привод по источнику | Проверка |
 |---|---|---|---|---|
 | Alfa Romeo | Mito | 955142 | Передний | [Источник](https://www.mlit.go.jp/common/000989174.xls), Alfaromeo, строка 10 |
-| Alfa Romeo | Spider | 939EXB1B 19 | Не подтверждён | Нужен другой источник |
-| Alfa Romeo | Spider | 939EXG2B 28 | Не подтверждён | Нужен другой источник |
+| Alfa Romeo | Spider | 939EXB1B 19 | Передний | [Источник](https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf), PDF pages 231 and 233 / printed 230 and 232, строка 1 |
+| Alfa Romeo | Spider | 939EXG2B 28 | Полный | [Источник](https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf), PDF pages 231 and 233 / printed 230 and 232, строка 1 |
 | Alfa Romeo | Spider | 939EXN1B 57 | Не подтверждён | Нужен другой источник |
 | Alfa Romeo | Stelvio | 949AXA2A | Не подтверждён | Нужен другой источник |
 | Alfa Romeo | Stelvio | 949AXB2A | Не подтверждён | Нужен другой источник |
 | Alfa Romeo | Stelvio | 949AXF2A | Не подтверждён | Нужен другой источник |
 | Alfa Romeo | Stelvio | 949AXH2A | Не подтверждён | Нужен другой источник |
-| Alfa Romeo | Stelvio | 949AXL2A | Не подтверждён | Нужен другой источник |
-| Alfa Romeo | Stelvio | 949AXM2A | Не подтверждён | Нужен другой источник |
-| Alfa Romeo | Stelvio | 949AXN1A | Не подтверждён | Нужен другой источник |
-| Alfa Romeo | Stelvio | 949AXP1A | Не подтверждён | Нужен другой источник |
+| Alfa Romeo | Stelvio | 949AXL2A | Полный | [Источник](https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf), PDF page 291 / printed 299, строка 1 |
+| Alfa Romeo | Stelvio | 949AXM2A | Полный | [Источник](https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf), PDF page 291 / printed 299, строка 1 |
+| Alfa Romeo | Stelvio | 949AXN1A | Задний | [Источник](https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf), PDF page 291 / printed 299, строка 1 |
+| Alfa Romeo | Stelvio | 949AXP1A | Задний | [Источник](https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf), PDF page 291 / printed 299, строка 1 |
 | Alpina | D3 | 3CA-3U40 | Не подтверждён | Нужен другой источник |
 | Alpina | D3 | FDA-3P10 | Не подтверждён | Нужен другой источник |
 | Alpina | D5 | 7CA-5U40 | Не подтверждён | Нужен другой источник |
@@ -172,7 +172,7 @@
 | HONDA | VEZEL | RV4 | Полный | [Источник](https://www.mlit.go.jp/common/001203735.xlsx), （新）1-1【乗・普小】WLTC , строка 32 |
 | HONDA | VEZEL | RV5 | Передний | [Источник](https://www.mlit.go.jp/common/001130182.xlsx), （新）1-6【乗・普小】, строка 9 |
 | Hyundai | Elantra | XD20 | Передний | [Источник](https://www.mlit.go.jp/common/000037074.pdf), PDF page 18, строка 15 |
-| ISUZU | COMO | JVWE25 | Не подтверждён | Нужен другой источник |
+| ISUZU | COMO | JVWE25 | Задний | [Источник](https://www.mlit.go.jp/jidosha/nenpi/nenpikouhyou/dka/isuzu.pdf), PDF page 1, строка 1 |
 | ISUZU | TRUCK | CYJ77A | Не подтверждён | Нужен другой источник |
 | ISUZU | TRUCK | CYJ77B | Не подтверждён | Нужен другой источник |
 | ISUZU | TRUCK | CYJ77BA | Не подтверждён | Нужен другой источник |
@@ -257,7 +257,7 @@
 | PEUGEOT | 3008 | P845G06 | Передний | [Источник](https://www.mlit.go.jp/jidosha/content/001337996.xls), Peugeot, строка 25 |
 | PEUGEOT | 308 | T9AH01 | Передний | [Источник](https://www.mlit.go.jp/common/001178240.xls), Peugeot, строка 14 |
 | Peugeot | 308 | T9HN02 | Передний | [Источник](https://www.mlit.go.jp/common/001084242.xls), Peugeot, строка 23 |
-| PEUGEOT | 408 | P545G06H | Не подтверждён | Нужен другой источник |
+| PEUGEOT | 408 | P545G06H | Передний | [Источник](https://web.peugeot.co.jp/brochures-list/pdf/408.pdf), PDF page 12, строка 1 |
 | PEUGEOT | 408 | P54HN05 | Передний | [Источник](https://www.mlit.go.jp/common/000234291.xlsx), 1-6, строка 13 |
 | PEUGEOT | 5008 | P87AH01 | Передний | [Источник](https://www.mlit.go.jp/common/001225532.xls), Peugeot, строка 27 |
 | Renault | Kangoo | KWK4M | Не подтверждён | Нужен другой источник |

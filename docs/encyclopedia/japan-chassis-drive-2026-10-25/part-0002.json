@@ -1636,10 +1636,26 @@
       2008,
       2009
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Isuzu",
+        "code": "JVWE25",
+        "fullCode": "LDF-JVWE25",
+        "drive": "rwd",
+        "url": "https://www.mlit.go.jp/jidosha/nenpi/nenpikouhyou/dka/isuzu.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 1",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "729fae5ea02df01f0d569cc1a42cb72b06f9b37e2b8db50afa31dcc60236849f",
+        "statement": "MLIT, Como LDF-JVWE25: все три строки MT/AT имеют R в колонке привода. Проверено изображение; соседний JVWME25 с A не смешивается. Допуск грузовиков не меняется."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "ISUZU",

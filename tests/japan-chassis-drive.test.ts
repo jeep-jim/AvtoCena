@@ -33,3 +33,12 @@ test('reviewed CR-V codes enrich saved offers and enter source predicates withou
  assert.match(japanDriveSql('awd'),/not \(/);
  assert.equal(lookupJapanChassisDrive('Honda','ZAA-ZC7'),'rwd');
 });
+
+test('full Alfa variant suffixes and factory drivetrains are preserved in lookup and SQL',()=>{
+ for(const [make,code,drive] of [['Alfa Romeo','939EXB1B 19','fwd'],['Alfa Romeo','939EXG2B 28','awd'],['Alfa Romeo','949AXP1A','rwd'],['Alfa Romeo','949AXN1A','rwd'],['Alfa Romeo','949AXM2A','awd'],['Alfa Romeo','949AXL2A','awd'],['ISUZU','LDF-JVWE25','rwd'],['PEUGEOT','3LA-P545G06H','fwd']] as const){
+  assert.equal(lookupJapanChassisDrive(make,code),drive);
+  assert.equal(enrichJapanDrive({market:'japan',make,chassisCode:code}).drive,drive);
+  assert.ok(japanDriveSql(drive).includes(`'${japanChassisCode(code)}'`));
+ }
+ for(const code of ['939EXB1B','939EXG2B','939EXN1B 57','949AXH2A','949AXA2A']) assert.equal(lookupJapanChassisDrive('Alfa Romeo',code),undefined);
+});

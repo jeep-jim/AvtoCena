@@ -44,10 +44,26 @@
     "years": [
       2008
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alfa Romeo",
+        "code": "939EXB1B 19",
+        "fullCode": "939EXB1B 19",
+        "drive": "fwd",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF pages 231 and 233 / printed 230 and 232",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "2abf7d80ad86f55c2e8b942ffb92f3afd6a38cec125b94beb307eaeeccc8cab4",
+        "statement": "Заводское руководство Spider: таблица кузовов связывает 939EXB1B 19 с 2.2 JTS; таблица TRANSMISSION явно задаёт fwd. Проверены изображения обеих таблиц; пробел и полный суффикс сохранены."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Alfa Romeo",
@@ -58,10 +74,26 @@
       2008,
       2010
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alfa Romeo",
+        "code": "939EXG2B 28",
+        "fullCode": "939EXG2B 28",
+        "drive": "awd",
+        "url": "https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF pages 231 and 233 / printed 230 and 232",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "2abf7d80ad86f55c2e8b942ffb92f3afd6a38cec125b94beb307eaeeccc8cab4",
+        "statement": "Заводское руководство Spider: таблица кузовов связывает 939EXG2B 28 с 3.2 JTS 4x4; таблица TRANSMISSION явно задаёт awd. Проверены изображения обеих таблиц; пробел и полный суффикс сохранены."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Alfa Romeo",
@@ -136,10 +168,26 @@
     "years": [
       2018
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alfa Romeo",
+        "code": "949AXL2A",
+        "fullCode": "949AXL2A",
+        "drive": "awd",
+        "url": "https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 291 / printed 299",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "7f701fcece2aa9bf28881cddb024ce706b4ee73299ac401ae9422d469394e1ea",
+        "statement": "Заводская таблица двигателей и модификаций кузова Stelvio прямо указывает AWD в той же строке, что 949AXL2A. Проверено изображение. Общая таблица трансмиссии не используется для вывода о других кодах."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Alfa Romeo",
@@ -150,10 +198,26 @@
       2018,
       2020
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alfa Romeo",
+        "code": "949AXM2A",
+        "fullCode": "949AXM2A",
+        "drive": "awd",
+        "url": "https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 291 / printed 299",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "7f701fcece2aa9bf28881cddb024ce706b4ee73299ac401ae9422d469394e1ea",
+        "statement": "Заводская таблица двигателей и модификаций кузова Stelvio прямо указывает AWD в той же строке, что 949AXM2A. Проверено изображение. Общая таблица трансмиссии не используется для вывода о других кодах."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Alfa Romeo",
@@ -164,10 +228,26 @@
       2018,
       2020
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alfa Romeo",
+        "code": "949AXN1A",
+        "fullCode": "949AXN1A",
+        "drive": "rwd",
+        "url": "https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 291 / printed 299",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "7f701fcece2aa9bf28881cddb024ce706b4ee73299ac401ae9422d469394e1ea",
+        "statement": "Заводская таблица двигателей и модификаций кузова Stelvio прямо указывает RWD в той же строке, что 949AXN1A. Проверено изображение. Общая таблица трансмиссии не используется для вывода о других кодах."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Alfa Romeo",
@@ -178,10 +258,26 @@
       2018,
       2020
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alfa Romeo",
+        "code": "949AXP1A",
+        "fullCode": "949AXP1A",
+        "drive": "rwd",
+        "url": "https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 291 / printed 299",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "7f701fcece2aa9bf28881cddb024ce706b4ee73299ac401ae9422d469394e1ea",
+        "statement": "Заводская таблица двигателей и модификаций кузова Stelvio прямо указывает RWD в той же строке, что 949AXP1A. Проверено изображение. Общая таблица трансмиссии не используется для вывода о других кодах."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Alpina",

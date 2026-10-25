@@ -2631,10 +2631,26 @@
     "years": [
       2023
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Peugeot",
+        "code": "P545G06H",
+        "fullCode": "3LA-P545G06H",
+        "drive": "fwd",
+        "url": "https://web.peugeot.co.jp/brochures-list/pdf/408.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 12",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "e8e3dfda6aa236c0a6c9efada4e8ef0c8c226b65b0d506bf147655f78137fe1a",
+        "statement": "Заводская брошюра Peugeot 408, редакция 2024.11: 408 GT HYBRID 3LA-P545G06H; общий ряд 駆動方式 — 前輪駆動. Проверено изображение таблицы. Не подменяется более новым типом mild hybrid."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "PEUGEOT",

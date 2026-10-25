@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-25T04:57:38.909304+00:00",
+  "checkedAt": "2026-10-25T05:11:36.154684+00:00",
   "commit": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
   "reference": {
     "runId": 40163645898,
@@ -19,13 +19,15 @@
   "previousDeploy": {
     "runId": 40161739675,
     "commit": "51c72e667390835eedd22368d05f24f25f939918",
-    "observedStatus": "in_progress",
-    "step": "Deploy with rollback and resource measurements"
+    "observedStatus": "success",
+    "step": "Deploy with rollback and resource measurements",
+    "externalHealthVerified": true
   },
   "continuationDeploy": {
     "runId": 40163645953,
     "commit": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
-    "observedStatus": "pending"
+    "observedStatus": "in_progress",
+    "step": "Prepare private encyclopedia index"
   },
   "nextSteps": [
     "Verify both deployment outcomes and exact external health releaseSha; do not launch a duplicate deployment.",
@@ -33,5 +35,14 @@
     "Live Japan drive filters previously refused with visitor_restricted; do not bypass supplier restrictions.",
     "Continue only existing codes in remaining.json; shared chassis require exact source/variant evidence; excluded trucks stay excluded."
   ],
-  "automations": "Old broad research automations remain stopped."
+  "automations": "Old broad research automations remain stopped.",
+  "preparedReference": {
+    "groups": 335,
+    "confirmed": 246,
+    "ambiguous": 46,
+    "unresolved": 43,
+    "workingScope": 318,
+    "missingPrimaryEvidence": 26,
+    "pendingDurableReadback": true
+  }
 }
