@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-25T08:12:51.313262+00:00",
+  "checkedAt": "2026-10-25T08:48:34.574461+00:00",
   "commit": "278a44ff24127527baa6a2c148ca2041ad7a5648",
   "reference": {
     "runId": 40175461901,
@@ -30,10 +30,10 @@
     "step": "Prepare private encyclopedia index"
   },
   "nextSteps": [
-    "Wait for40175461903, expected runtime278a44ff24127527baa6a2c148ca2041ad7a5648. Durable303reference verified. Earlier40174008563 cancelled before activation through one accepted GitHub UI action; do not restart it.",
-    "Porsche:43factory types added,40confirmed and3shared/source conflicts; never infer remaining Porsche types or claim full inventory coverage.",
-    "No new supplier probes after prior visitor_restricted; do not substitute IP or manufacture counts. Saved Porsche0is not a full-feed zero.",
-    "Preserve95annualpatches and55required/41public/3ASTRA guards; original9missing-primaryproof codes remain."
+    "303reference and saved-drive repair installed in278a44ff24127527baa6a2c148ca2041ad7a5648;40175461903SUCCESS. Do not launch duplicate deployment.",
+    "General AWD returnedHTTP200with2AWDcachedcars,partial/stale and no total. Porsche same-client request returned503visitor_restricted; no full live Japan/Porsche success claim. Do not retry around this refusal or change IP.",
+    "Verify the owner browser case separately or resolve provider access through authorized support; a code-to-drive mapping does not manufacture unavailable listings.",
+    "Continue only Japan original9missing-primaryproof and49ambiguous groups if owner requests continuation; no old broad automations/ASTRA restart. Preserve95annualpatches and55/41/3guards."
   ],
   "automations": "Old broad research automations remain stopped.",
   "preparedReference": {
@@ -76,12 +76,38 @@
     "latestDriveTests": 12,
     "typecheck": "PASS",
     "newMappingsExecutedInSql": 17,
-    "latestExternalFilter": {
-      "checkedAt": "2026-10-25T07:30:24.551937+00:00",
+    "latestExternalFilter": "General AWD HTTP200 partial/stale,2/2AWD; Porsche AWD HTTP503visitor_restricted on exact installed278a44f. Owner browser result unknown.",
+    "generalAwdPublic": {
+      "checkedAt": "2026-10-25T08:41:17.695921+00:00",
+      "request": "/api/catalog/search?market=japan&drive=awd&page=1&pageSize=2",
+      "expectedRelease": "278a44ff24127527baa6a2c148ca2041ad7a5648",
+      "http": 200,
+      "ok": true,
+      "error": null,
+      "reason": null,
+      "items": 2,
+      "drives": [
+        "awd",
+        "awd"
+      ],
+      "partial": true,
+      "stale": true,
+      "total": null,
+      "hasMore": false
+    },
+    "porscheAwdPublic": {
+      "checkedAt": "2026-10-25T08:42:55.395154+00:00",
       "request": "/api/catalog/search?market=japan&make=Porsche&drive=awd&page=1&pageSize=2",
-      "status": 503,
+      "expectedRelease": "278a44ff24127527baa6a2c148ca2041ad7a5648",
+      "http": 503,
+      "ok": false,
+      "error": "japan_search_unavailable",
       "reason": "visitor_restricted",
-      "resolved": false
+      "items": 0,
+      "drives": [],
+      "partial": null,
+      "stale": null,
+      "total": null
     }
   },
   "savedFilterRepair": {
@@ -91,13 +117,23 @@
     "auditRunId": 40174008586,
     "auditConclusion": "success",
     "savedRows": 520,
-    "savedPorscheRows": 0
+    "savedPorscheRows": 0,
+    "installedIn": "278a44ff24127527baa6a2c148ca2041ad7a5648"
   },
   "latestDeploy": {
     "runId": 40175461903,
-    "commit": "278a44ff24127527baa6a2c148ca2041ad7a5648",
-    "observedStatus": "in_progress",
     "jobId": 121115309426,
-    "installed": false
+    "commit": "278a44ff24127527baa6a2c148ca2041ad7a5648",
+    "observedStatus": "success",
+    "installed": true,
+    "externalHealthVerified": true,
+    "calculationVersion": "aa0d8ca58c3a82e30ab44118bc33cc9b3f1ace847662a7e9d74d35a740f37208",
+    "publicEncyclopediaVerification": {
+      "groups": 525,
+      "variants": 4851,
+      "fields": 22551,
+      "verified": true,
+      "finishedAt": "2026-10-25T08:45:30.391Z"
+    }
   }
 }
