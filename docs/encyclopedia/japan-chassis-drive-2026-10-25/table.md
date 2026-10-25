@@ -108,8 +108,8 @@
 | CITROEN | BERLINGO | K9CYH01 | Передний | [Источник](https://www.mlit.go.jp/common/001140418.xlsx), 1-7, строка 11 |
 | Citroën | Berlingo | K9CYH01 | Передний | [Источник](https://www.mlit.go.jp/common/001140418.xlsx), 1-7, строка 11 |
 | Citroën | Berlingo | K9CYH01L | Передний | [Источник](https://www.mlit.go.jp/common/001140418.xlsx), 1-7, строка 15 |
-| Citroën | C3 | A55F01 | Не подтверждён | Нужен другой источник |
-| Citroën | C3 | A5HM01 | Не подтверждён | Нужен другой источник |
+| Citroën | C3 | A55F01 | Передний | [Источник](https://web.citroen.jp/press/pdf/130611_New_C3.pdf), PDF page 3, строка 1 |
+| Citroën | C3 | A5HM01 | Передний | [Источник](https://web.citroen.jp/specification/c3_feel.pdf), PDF page 1, строка 1 |
 | Citroën | C3 | A8HN05 | Передний | [Источник](https://www.mlit.go.jp/jidosha/content/001337996.xls), Citroen, строка 11 |
 | CITROEN | C3 | B6HN01 | Передний | [Источник](https://www.mlit.go.jp/common/001225527.xls), Citroen, строка 9 |
 | Citroën | C3 | B6HN01 | Передний | [Источник](https://www.mlit.go.jp/common/001225527.xls), Citroen, строка 9 |

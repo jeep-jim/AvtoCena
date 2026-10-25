@@ -53,7 +53,8 @@
     "docs/encyclopedia/batches/2026-10-25-audi-a6-phev-components.json",
     "docs/encyclopedia/batches/2026-10-25-audi-a6-diesel-drive.json",
     "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0000.json",
-    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0001.json"
+    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0001.json",
+    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0002.json"
   ],
   "publicResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -95,14 +96,15 @@
     "docs/encyclopedia/batches/2026-10-25-audi-a6-phev-components.json",
     "docs/encyclopedia/batches/2026-10-25-audi-a6-diesel-drive.json",
     "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0000.json",
-    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0001.json"
+    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0001.json",
+    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0002.json"
   ],
   "requiredAstraPlanDigests": [
     "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner requested existing Japan chassis drive research: 490 MLIT workbooks plus factory sources, six bounded reference parts saved; 92 exact missing-drive patches applied and read back successfully by40161517645. Deploy chassis resolver and pre-pagination filter; preserve manual/source values and ambiguous codes. Existing52required/38public/3ASTRA checks retained, plus2new drive batches. Cold preparation enabled before unchanged release gates. Supplier visitor_restricted is not bypassed or claimed fixed.",
+  "reason": "Japan chassis continuation: 19 additional exact official/factory drive relationships and one shared Alto code, total238confirmed/46ambiguous/51unresolved. Batch0002 applied3drive-only annual updates and read back by40163441281; cumulative95. Retain54required/40public/3ASTRA, add one verified batch. Source/manual precedence and unknown/ambiguous guards retained. Supplier access restrictions remain; no full-Japan coverage claim. Serial deployment queue preserves current release checks.",
   "ideaReports": [],
-  "requestedAt": "2026-10-25T04:23:38.153063+00:00"
+  "requestedAt": "2026-10-25T04:55:03.327177+00:00"
 }

@@ -1522,10 +1522,26 @@
       2012,
       2013
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Citroen",
+        "code": "A55F01",
+        "fullCode": "ABA-A55F01",
+        "drive": "fwd",
+        "url": "https://web.citroen.jp/press/pdf/130611_New_C3.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 3",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "eec8429ac1680c5d2968a2df1e7b73973f35a2c28414b066b85a9e81d526233a",
+        "statement": "Заводская таблица Citroen C3, ABA-A55F01: передний привод (前輪駆動). Проверены код и строка привода на изображении PDF страницы3."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Citroën",
@@ -1537,10 +1553,26 @@
       2015,
       2017
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Citroen",
+        "code": "A5HM01",
+        "fullCode": "ABA-A5HM01",
+        "drive": "fwd",
+        "url": "https://web.citroen.jp/specification/c3_feel.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 1",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "6acf543cbfa4b64ab1fecbff1eb0100bd5ffc75630240230f2ed1121b7fe5f67",
+        "statement": "Заводская таблица Citroen C3, ABA-A5HM01: передний привод (前輪駆動). Проверены код и строка привода на изображении PDF страницы1."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Citroën",
