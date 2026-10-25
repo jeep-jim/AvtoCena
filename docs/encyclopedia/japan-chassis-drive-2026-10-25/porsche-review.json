@@ -31,6 +31,18 @@
     "No new canonical model or annual variant records. Factory references are independent of whether a current offer is cached.",
     "This is not a complete census of Porsche or all Japanese inventory."
   ],
-  "newDurableSave": "pending",
-  "newDeployment": "pending"
+  "newDurableSave": {
+    "runId": 40175461901,
+    "jobId": 121115041064,
+    "conclusion": "success",
+    "digest": "f1279341ecb316d76ca00d934844332edc370ef194a05f8f0c338cfb1ad4a27d",
+    "parts": 6,
+    "readbackVerified": true
+  },
+  "newDeployment": {
+    "runId": 40175461903,
+    "commit": "278a44ff24127527baa6a2c148ca2041ad7a5648",
+    "status": "in_progress",
+    "installed": false
+  }
 }

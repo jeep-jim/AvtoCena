@@ -26,8 +26,11 @@
   },
   "deployment": {
     "runId": 40174008563,
-    "observedStatus": "in_progress",
-    "installed": false
+    "observedStatus": "cancelled",
+    "activationSkipped": true,
+    "installed": false,
+    "supersededBy": 40175461903,
+    "supersedingCommit": "278a44ff24127527baa6a2c148ca2041ad7a5648"
   },
   "limits": [
     "Saved fallback stays partial/stale and does not claim a full supplier total.",

@@ -1,14 +1,14 @@
 {
-  "checkedAt": "2026-10-25T07:30:24.551937+00:00",
-  "commit": "5bfcbb97f5c6f44468689e810238a53c48908bb4",
+  "checkedAt": "2026-10-25T08:12:51.313262+00:00",
+  "commit": "278a44ff24127527baa6a2c148ca2041ad7a5648",
   "reference": {
-    "runId": 40166164797,
-    "jobId": 121087538978,
+    "runId": 40175461901,
+    "jobId": 121115041064,
     "verified": true,
-    "digest": "4b9f3225824dc3b237ce57929603c92555d8cf7c6e23a1c62adad6f990e953fe",
-    "groups": 335,
-    "confirmed": 263,
-    "ambiguous": 46,
+    "digest": "f1279341ecb316d76ca00d934844332edc370ef194a05f8f0c338cfb1ad4a27d",
+    "groups": 378,
+    "confirmed": 303,
+    "ambiguous": 49,
     "unresolved": 26
   },
   "annualChanges": 95,
@@ -30,7 +30,7 @@
     "step": "Prepare private encyclopedia index"
   },
   "nextSteps": [
-    "Verify new303reference durable save, exact installed SHA and final deploy. The earlier89b97ae release has only263types plus saved-search repair.",
+    "Wait for40175461903, expected runtime278a44ff24127527baa6a2c148ca2041ad7a5648. Durable303reference verified. Earlier40174008563 cancelled before activation through one accepted GitHub UI action; do not restart it.",
     "Porsche:43factory types added,40confirmed and3shared/source conflicts; never infer remaining Porsche types or claim full inventory coverage.",
     "No new supplier probes after prior visitor_restricted; do not substitute IP or manufacture counts. Saved Porsche0is not a full-feed zero.",
     "Preserve95annualpatches and55required/41public/3ASTRA guards; original9missing-primaryproof codes remain."
@@ -44,7 +44,7 @@
     "originalInventoryGroups": 335,
     "additionalFactoryTypes": 43,
     "additionalConfirmedPorsche": 40,
-    "pendingDurableReadback": true
+    "pendingDurableReadback": false
   },
   "replacementDeploy": {
     "runId": 40165188901,
@@ -72,7 +72,7 @@
     "externalHealthVerified": true
   },
   "verification": {
-    "profileTests": 26,
+    "profileTests": 92,
     "latestDriveTests": 12,
     "typecheck": "PASS",
     "newMappingsExecutedInSql": 17,
@@ -87,10 +87,17 @@
   "savedFilterRepair": {
     "commit": "89b97aeda86e5742f34391a7271ed0039ea5cce9",
     "deployRunId": 40174008563,
-    "status": "in_progress",
+    "status": "cancelled_before_activation_superseded",
     "auditRunId": 40174008586,
     "auditConclusion": "success",
     "savedRows": 520,
     "savedPorscheRows": 0
+  },
+  "latestDeploy": {
+    "runId": 40175461903,
+    "commit": "278a44ff24127527baa6a2c148ca2041ad7a5648",
+    "observedStatus": "in_progress",
+    "jobId": 121115309426,
+    "installed": false
   }
 }
