@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import {getJsonStorage} from '../../apps/web/lib/data.ts';
 import {MANIFEST,ROOT} from '../../apps/web/lib/encyclopedia/records.ts';
-import {readCalculationIndex,factFields,token,checksum,modelKey} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
+import {readCalculationIndex,compileModelFacts,factFields,token,checksum,modelKey} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
 import {ASTRA_ROOT,sha,stable} from './astra-bridge.mjs';
 import {validateBatch,planModelResearch,digest as researchDigest} from './research-batch.mjs';
 import {assertResearchBatchMembership} from './release-batch-verification.mjs';
@@ -183,6 +183,8 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
    if(stable(actual)!==stable(expected))throw Error('astra_power30_reference_changed');
   }
   const variants=new Map(current.variants.map(v=>[v.id,v]));
+  const continuedFacts=current.revision!==modelPlan.record.revision
+   ?new Map(compileModelFacts(current).map(f=>[f.variantId,f])):new Map();
   if(variants.size!==current.variants.length)throw Error('required_astra_duplicate_variant_identity');
   for(const variant of variants.values())if(variant.astraEvidence&&!Number.isInteger(variant.year)){
    if(facts.has(`${descriptor.id}:${variant.id}`))throw Error('unknown_astra_model_year_promoted');
@@ -200,7 +202,19 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
     }
     if(!calculationFields.has(field))throw Error('unsupported_astra_release_field:'+field);
     const source=fact.sources[field];
-    if(stable(fact.values[field])!==stable(value)||source?.batchId!==assertion.batchId||source?.kind!=='official_registry'||source?.url!==assertion.sourceUrl)throw Error('required_astra_field_or_provenance_missing:'+identity+':'+field);
+    const originalSource=source?.batchId===assertion.batchId&&source?.kind==='official_registry'&&source?.url===assertion.sourceUrl;
+    // A later exact factory review can repeat an unchanged ordinary fact.
+    // Keep requiring the original registry proof in the immutable history,
+    // and independently recompile the current primary source. Certified power
+    // never uses this exception. An index-only provenance substitution fails.
+    const compiled=continuedFacts.get(assertion.variantId);
+    const retainedOrdinaryProof=field!=='power30MinKw'&&['manufacturer','official_registry'].includes(source?.kind)
+     &&stable(compiled?.values[field])===stable(value)&&stable(compiled?.sources[field])===stable(source)
+     &&(variant.researchEvidenceHistory||[]).some(p=>p.batchId===assertion.batchId&&p.source?.type==='official_registry'
+      &&p.source.url===assertion.sourceUrl&&p.fields?.includes(field)&&stable(p.values?.[field])===stable(value)
+      &&p.checkedIdentity?.make===current.make&&p.checkedIdentity?.model===current.model
+      &&p.checkedIdentity?.year===variant.year&&p.checkedIdentity?.trim===variant.trim);
+    if(stable(fact.values[field])!==stable(value)||!originalSource&&!retainedOrdinaryProof)throw Error('required_astra_field_or_provenance_missing:'+identity+':'+field);
     report.calculationFields++;
    }
   }

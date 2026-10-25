@@ -79,6 +79,26 @@ test('later fill-only revision preserves the applied ASTRA plan and every source
  const report=await assertAstraPlanMembership(args);
  assert.equal(report.models,1);assert.equal(report.annualVariants,1);assert.equal(report.unknownYearVariantsOutsideIndex,1);
 });
+test('repeated ordinary factory fact retains the old registry proof and rejects forged index provenance',async t=>{
+ const f=await fixture(t);
+ const args=await continuedArgs(f,r=>{
+  const v=r.variants[0];
+  v.researchEvidenceHistory=[...(v.researchEvidenceHistory||[]),v.researchEvidence];
+  v.researchEvidence={batchId:'research-repeated-drive',source:{type:'manufacturer',url:'https://example.test/factory'},fields:['drive'],values:{drive:v.drive},checkedIdentity:{make:r.make,model:r.model,year:v.year,trim:v.trim}};
+ });
+ assert.equal(fact(args).sources.drive.kind,'manufacturer');
+ await assertAstraPlanMembership(args);
+ for(const field of ['kind','url','batchId']){
+  const changed={...args,index:structuredClone(args.index)};
+  fact(changed).sources.drive[field]='forged';resealIndex(changed);
+  await assert.rejects(assertAstraPlanMembership(changed),/field_or_provenance_missing/);
+ }
+ const certified=await continuedArgs(f,r=>{
+  const v=r.variants[0];v.researchEvidenceHistory=[...(v.researchEvidenceHistory||[]),v.researchEvidence];
+  v.researchEvidence={batchId:'research-repeat-certified',source:{type:'manufacturer',url:'https://example.test/certificate',certificationDocument:'30 minute'},fields:['power30MinKw'],values:{power30MinKw:v.power30MinKw},checkedIdentity:{make:r.make,model:r.model,year:v.year,trim:v.trim}};
+ });
+ await assert.rejects(assertAstraPlanMembership(certified),/field_or_provenance_missing/);
+});
 test('later revision cannot remove or alter old values, source-only rows, or ancestry',async t=>{
  const cases=[
   [r=>{r.variants[0].engineCc=1590;},/existing_value_changed/],
