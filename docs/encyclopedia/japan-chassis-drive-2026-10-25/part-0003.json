@@ -312,10 +312,32 @@
     "years": [
       2023
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Maserati",
+        "code": "MGR20A",
+        "fullCode": "7AA-MGR20A",
+        "drive": "awd",
+        "url": "https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv",
+        "sourceType": "manufacturer",
+        "sheet": "2022-03-22 technical specifications / TRANSMISSION",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "c9b266a3f9f9f0bccc09ac8f5173f33d4e903bf95d3864815a6c7b8b4124a778",
+        "statement": "Вывод по двум первичным источникам: MLIT относит 7AA-MGR20A к Grecale MY2023–2024; заводская таблица запуска Grecale 22.03.2022 задаёт полный привод всем трём версиям GT, Modena, Trofeo. Сопоставление относится к этому поколению и сохранённому году2023, не к будущим моделям. PDF MLIT недоступен напрямую (404); идентичность проверена по индексированному тексту.",
+        "identitySource": {
+          "url": "https://www.mlit.go.jp/en/jidosha/content/001902263.pdf",
+          "sheet": "PDF page 1, type table",
+          "hashScope": "reviewed_statement",
+          "statement": "Gai-4036 17.06.2025: 7AA-MGR20A,7AA-MGR20C,7BA-MGR30; Grecale MY2023–2024."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "MASERATI",
@@ -325,10 +347,32 @@
     "years": [
       2023
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Maserati",
+        "code": "MGR20C",
+        "fullCode": "7AA-MGR20C",
+        "drive": "awd",
+        "url": "https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv",
+        "sourceType": "manufacturer",
+        "sheet": "2022-03-22 technical specifications / TRANSMISSION",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "c9b266a3f9f9f0bccc09ac8f5173f33d4e903bf95d3864815a6c7b8b4124a778",
+        "statement": "Вывод по двум первичным источникам: MLIT относит 7AA-MGR20C к Grecale MY2023–2024; заводская таблица запуска Grecale 22.03.2022 задаёт полный привод всем трём версиям GT, Modena, Trofeo. Сопоставление относится к этому поколению и сохранённому году2023, не к будущим моделям. PDF MLIT недоступен напрямую (404); идентичность проверена по индексированному тексту.",
+        "identitySource": {
+          "url": "https://www.mlit.go.jp/en/jidosha/content/001902263.pdf",
+          "sheet": "PDF page 1, type table",
+          "hashScope": "reviewed_statement",
+          "statement": "Gai-4036 17.06.2025: 7AA-MGR20A,7AA-MGR20C,7BA-MGR30; Grecale MY2023–2024."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "MASERATI",
@@ -338,10 +382,32 @@
     "years": [
       2023
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Maserati",
+        "code": "MGR30",
+        "fullCode": "7BA-MGR30",
+        "drive": "awd",
+        "url": "https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv",
+        "sourceType": "manufacturer",
+        "sheet": "2022-03-22 technical specifications / TRANSMISSION",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "c9b266a3f9f9f0bccc09ac8f5173f33d4e903bf95d3864815a6c7b8b4124a778",
+        "statement": "Вывод по двум первичным источникам: MLIT относит 7BA-MGR30 к Grecale MY2023–2024; заводская таблица запуска Grecale 22.03.2022 задаёт полный привод всем трём версиям GT, Modena, Trofeo. Сопоставление относится к этому поколению и сохранённому году2023, не к будущим моделям. PDF MLIT недоступен напрямую (404); идентичность проверена по индексированному тексту.",
+        "identitySource": {
+          "url": "https://www.mlit.go.jp/en/jidosha/content/001902263.pdf",
+          "sheet": "PDF page 1, type table",
+          "hashScope": "reviewed_statement",
+          "statement": "Gai-4036 17.06.2025: 7AA-MGR20A,7AA-MGR20C,7BA-MGR30; Grecale MY2023–2024."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "MAZDA",

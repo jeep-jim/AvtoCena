@@ -480,5 +480,171 @@
     "hashScope": "source_bytes",
     "sha256": "e8e3dfda6aa236c0a6c9efada4e8ef0c8c226b65b0d506bf147655f78137fe1a",
     "statement": "Заводская брошюра Peugeot 408, редакция 2024.11: 408 GT HYBRID 3LA-P545G06H; общий ряд 駆動方式 — 前輪駆動. Проверено изображение таблицы. Не подменяется более новым типом mild hybrid."
+  },
+  {
+    "brand": "Alpina",
+    "code": "3U40",
+    "fullCode": "3CA-3U40",
+    "drive": "awd",
+    "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+    "sourceType": "manufacturer",
+    "sheet": "PDF pages 5 and 14",
+    "row": 1,
+    "hashScope": "source_bytes",
+    "sha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+    "statement": "Японская заводская брошюра: точный тип 3CA-3U40 в таблице TECHNISCHE DATEN; раздел 4WD описывает передачу момента на переднюю и заднюю ось. Проверены изображения страниц 5 and 14."
+  },
+  {
+    "brand": "Alpina",
+    "code": "5U40",
+    "fullCode": "7CA-5U40",
+    "drive": "awd",
+    "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D5S.pdf",
+    "sourceType": "manufacturer",
+    "sheet": "PDF pages 13 and 14",
+    "row": 1,
+    "hashScope": "source_bytes",
+    "sha256": "74c6f8f8414a2aa1dcc1688534591a7ceef5838e0227320c33a1cfbff294bb5e",
+    "statement": "Японская заводская брошюра: точный тип 7CA-5U40 в таблице TECHNISCHE DATEN; раздел 4WD описывает передачу момента на переднюю и заднюю ось. Проверены изображения страниц 13 and 14."
+  },
+  {
+    "brand": "Alpina",
+    "code": "5U20",
+    "fullCode": "FDA-5U20",
+    "drive": "awd",
+    "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D5S_BITURBO_PRESS.pdf",
+    "sourceType": "manufacturer",
+    "sheet": "PDF pages 1–2, Japan Premiere",
+    "row": 1,
+    "hashScope": "source_bytes",
+    "sha256": "4aaabdb0aeda79916490f85b0e6859eeb7771dbd207436af20f562d9d4b84a1d",
+    "statement": "Вывод по двум первичным источникам: официальный японский пресс-релиз D5 S Bi-Turbo указывает стандартный 4WD; таблица производителя связывает FDA-5U20 и 3DA-5U20 с D5S. Не распространяется на иные поколения D5.",
+    "identitySource": {
+      "url": "https://alpina.co.jp/services/tokuteiseibi/",
+      "sheet": "D5S type rows",
+      "hashScope": "reviewed_statement",
+      "statement": "D5S: FDA-5U20,3DA-5U20,7CA-5U40."
+    }
+  },
+  {
+    "brand": "Maserati",
+    "code": "MGR20A",
+    "fullCode": "7AA-MGR20A",
+    "drive": "awd",
+    "url": "https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv",
+    "sourceType": "manufacturer",
+    "sheet": "2022-03-22 technical specifications / TRANSMISSION",
+    "row": 1,
+    "hashScope": "source_bytes",
+    "sha256": "c9b266a3f9f9f0bccc09ac8f5173f33d4e903bf95d3864815a6c7b8b4124a778",
+    "statement": "Вывод по двум первичным источникам: MLIT относит 7AA-MGR20A к Grecale MY2023–2024; заводская таблица запуска Grecale 22.03.2022 задаёт полный привод всем трём версиям GT, Modena, Trofeo. Сопоставление относится к этому поколению и сохранённому году2023, не к будущим моделям. PDF MLIT недоступен напрямую (404); идентичность проверена по индексированному тексту.",
+    "identitySource": {
+      "url": "https://www.mlit.go.jp/en/jidosha/content/001902263.pdf",
+      "sheet": "PDF page 1, type table",
+      "hashScope": "reviewed_statement",
+      "statement": "Gai-4036 17.06.2025: 7AA-MGR20A,7AA-MGR20C,7BA-MGR30; Grecale MY2023–2024."
+    }
+  },
+  {
+    "brand": "Maserati",
+    "code": "MGR20C",
+    "fullCode": "7AA-MGR20C",
+    "drive": "awd",
+    "url": "https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv",
+    "sourceType": "manufacturer",
+    "sheet": "2022-03-22 technical specifications / TRANSMISSION",
+    "row": 1,
+    "hashScope": "source_bytes",
+    "sha256": "c9b266a3f9f9f0bccc09ac8f5173f33d4e903bf95d3864815a6c7b8b4124a778",
+    "statement": "Вывод по двум первичным источникам: MLIT относит 7AA-MGR20C к Grecale MY2023–2024; заводская таблица запуска Grecale 22.03.2022 задаёт полный привод всем трём версиям GT, Modena, Trofeo. Сопоставление относится к этому поколению и сохранённому году2023, не к будущим моделям. PDF MLIT недоступен напрямую (404); идентичность проверена по индексированному тексту.",
+    "identitySource": {
+      "url": "https://www.mlit.go.jp/en/jidosha/content/001902263.pdf",
+      "sheet": "PDF page 1, type table",
+      "hashScope": "reviewed_statement",
+      "statement": "Gai-4036 17.06.2025: 7AA-MGR20A,7AA-MGR20C,7BA-MGR30; Grecale MY2023–2024."
+    }
+  },
+  {
+    "brand": "Maserati",
+    "code": "MGR30",
+    "fullCode": "7BA-MGR30",
+    "drive": "awd",
+    "url": "https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv",
+    "sourceType": "manufacturer",
+    "sheet": "2022-03-22 technical specifications / TRANSMISSION",
+    "row": 1,
+    "hashScope": "source_bytes",
+    "sha256": "c9b266a3f9f9f0bccc09ac8f5173f33d4e903bf95d3864815a6c7b8b4124a778",
+    "statement": "Вывод по двум первичным источникам: MLIT относит 7BA-MGR30 к Grecale MY2023–2024; заводская таблица запуска Grecale 22.03.2022 задаёт полный привод всем трём версиям GT, Modena, Trofeo. Сопоставление относится к этому поколению и сохранённому году2023, не к будущим моделям. PDF MLIT недоступен напрямую (404); идентичность проверена по индексированному тексту.",
+    "identitySource": {
+      "url": "https://www.mlit.go.jp/en/jidosha/content/001902263.pdf",
+      "sheet": "PDF page 1, type table",
+      "hashScope": "reviewed_statement",
+      "statement": "Gai-4036 17.06.2025: 7AA-MGR20A,7AA-MGR20C,7BA-MGR30; Grecale MY2023–2024."
+    }
+  },
+  {
+    "brand": "Tesla",
+    "code": "YL1YT",
+    "fullCode": "ZAA-YL1YT",
+    "drive": "rwd",
+    "url": "https://www.cev-pc.or.jp/newest/ev_pop_96.html",
+    "sourceType": "official_registry",
+    "sheet": "Vehicle specifications",
+    "row": 1,
+    "hashScope": "reviewed_statement",
+    "sha256": "f2adc4c412967e0cb62df37efc075ef7eefda38767711e26ae1b000138e42e8a",
+    "statement": "CEV subsidy administrator specifications pair Model Y RWD with exact Japanese type ZAA-YL1YT. Other Model Y types are not inferred."
+  },
+  {
+    "brand": "BMW",
+    "code": "8E20",
+    "fullCode": "DLA-8E20",
+    "drive": "rwd",
+    "url": "https://www.press.bmwgroup.com/usa/article/detail/T0258500EN_US/the-all-new-bmw-330e-iperformance",
+    "sourceType": "manufacturer",
+    "sheet": "2016-03-22 drivetrain description",
+    "row": 1,
+    "hashScope": "reviewed_statement",
+    "sha256": "a0331bb11053e7a3d170d2814c5feb2358247280c64eb5d4dd967251142493f2",
+    "statement": "Cross-source inference: CEV identifies DLA-8E20 as BMW 330e iPerformance; the 2016 manufacturer launch explicitly states that combustion engine and electric motor power reach the rear wheels. Applies to this historical generation, not later 330e xDrive.",
+    "identitySource": {
+      "url": "https://www.cev-pc.or.jp/newest/phv_pop_11.html",
+      "statement": "CEV FY2018: BMW 330e iPerformance, type DLA-8E20.",
+      "hashScope": "reviewed_statement",
+      "sha256": "af877ee1dbdd802da275adbf417906719108a561906a512a935dc33f4bc9010f"
+    }
+  },
+  {
+    "brand": "Lamborghini",
+    "code": "ZLDHU",
+    "fullCode": "ABA-ZLDHU",
+    "drive": "awd",
+    "url": "https://www.lamborghini.com/en-en/history/urus",
+    "sourceType": "manufacturer",
+    "sheet": "Historical Urus / engine and transmission",
+    "row": 1,
+    "hashScope": "reviewed_statement",
+    "sha256": "c1f9dda227eb4006fcf5075999a68514c8e6911c2dd49618445f60c763be20ab",
+    "statement": "Cross-source inference: MLIT identifies ABA-ZLDHU as Urus MY2019–2020. Manufacturer historical Urus page specifies permanent all-wheel drive for the original 650 CV V8 model.",
+    "identitySource": {
+      "url": "https://www.mlit.go.jp/common/001388474.pdf",
+      "statement": "MLIT GAI-3152 21 January 2021 page1: ABA-ZLDHU URUS 2019–2020.",
+      "hashScope": "reviewed_statement",
+      "sha256": "570a10ebc36e964b7fc9473cab7bd1f4936ca6b8aacef6fef6373918d4023681"
+    }
+  },
+  {
+    "brand": "Audi",
+    "code": "8EALT",
+    "fullCode": "GH-8EALT",
+    "drive": "fwd",
+    "url": "https://www.mlit.go.jp/jidosha/nenpi/nenpilist/07-3-11.pdf",
+    "sourceType": "official_registry",
+    "sheet": "PDF page1, A4 Avant 2.0 row",
+    "row": 1,
+    "hashScope": "reviewed_statement",
+    "sha256": "f812a1c8dc7f5601986b9693a5c7e1e7ab2674ef0a191973f0f43d30f694ba37",
+    "statement": "MLIT official fuel-consumption table: GH-8EALT A4 Avant 2.0 has F in drive column. Distinct quattro types in adjacent rows have A. Exact type only; no model-wide extrapolation."
   }
 ]

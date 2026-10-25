@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-10-25T05:11:36.154684+00:00",
+  "checkedAt": "2026-10-25T05:26:14.906800+00:00",
   "commit": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
   "reference": {
-    "runId": 40163645898,
-    "jobId": 121080161656,
+    "runId": 40164717200,
+    "jobId": 121083302475,
     "verified": true,
-    "digest": "a6989d7677805277660ca891186399c2f934880f44ba81ec0d60b5005c890aca",
+    "digest": "35f969725b7ef9c95fd1adab25ffc0a7fb008a5f3553fd1edaf885f97ef4a35d",
     "groups": 335,
-    "confirmed": 238,
+    "confirmed": 246,
     "ambiguous": 46,
-    "unresolved": 51
+    "unresolved": 43
   },
   "annualChanges": 95,
   "annualUnfilled": {
@@ -26,7 +26,7 @@
   "continuationDeploy": {
     "runId": 40163645953,
     "commit": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
-    "observedStatus": "in_progress",
+    "observedStatus": "cancelled",
     "step": "Prepare private encyclopedia index"
   },
   "nextSteps": [
@@ -38,11 +38,16 @@
   "automations": "Old broad research automations remain stopped.",
   "preparedReference": {
     "groups": 335,
-    "confirmed": 246,
+    "confirmed": 256,
     "ambiguous": 46,
-    "unresolved": 43,
+    "unresolved": 33,
     "workingScope": 318,
-    "missingPrimaryEvidence": 26,
+    "missingPrimaryEvidence": 16,
     "pendingDurableReadback": true
+  },
+  "replacementDeploy": {
+    "runId": 40165188901,
+    "commit": "5fc6705650c45459c060b748ac41b609f5d33d89",
+    "observedStatus": "in_progress"
   }
 }

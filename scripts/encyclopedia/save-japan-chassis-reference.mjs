@@ -20,7 +20,7 @@ for(const p of manifest.parts){
  for(const r of rows){
   if(!r.make||!r.chassisCode||!Array.isArray(r.drives)||r.drives.some(d=>!['fwd','rwd','awd'].includes(d)))throw Error('invalid_identity');
   if(r.drives.length&&!r.evidence?.length)throw Error('evidence_required');
-  for(const e of r.evidence||[])if((!['www.mlit.go.jp','www.honda.co.jp','www.bmw.co.jp','web.citroen.jp','www.renault.jp','www.mitsubishi-motors.co.jp','u-catch.daihatsu.co.jp','www.suzuki.co.jp','aftersales.fiat.com','web.peugeot.co.jp'].includes(new URL(e.url).hostname)&&!(e.sourceType==='manufacturer'&&e.statement&&reviewedFactoryArchives.has(e.url)))||!e.sheet||!Number.isInteger(e.row)||!/^[a-f0-9]{64}$/.test(e.sha256))throw Error('invalid_evidence');
+  for(const e of r.evidence||[])if((!['www.mlit.go.jp','www.honda.co.jp','www.bmw.co.jp','web.citroen.jp','www.renault.jp','www.mitsubishi-motors.co.jp','u-catch.daihatsu.co.jp','www.suzuki.co.jp','aftersales.fiat.com','web.peugeot.co.jp','files.alpina.co.jp','www.media.stellantis.com','www.cev-pc.or.jp','www.press.bmwgroup.com','www.lamborghini.com'].includes(new URL(e.url).hostname)&&!(e.sourceType==='manufacturer'&&e.statement&&reviewedFactoryArchives.has(e.url)))||!e.sheet||!Number.isInteger(e.row)||!/^[a-f0-9]{64}$/.test(e.sha256))throw Error('invalid_evidence');
  }
  const key=`${ROOT}/chassis-drive/revisions/${p.sha256}.json`;
  if(!dryRun){

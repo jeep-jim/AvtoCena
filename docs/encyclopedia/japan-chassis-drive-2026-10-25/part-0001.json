@@ -256,10 +256,32 @@
     "years": [
       2017
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "BMW",
+        "code": "8E20",
+        "fullCode": "DLA-8E20",
+        "drive": "rwd",
+        "url": "https://www.press.bmwgroup.com/usa/article/detail/T0258500EN_US/the-all-new-bmw-330e-iperformance",
+        "sourceType": "manufacturer",
+        "sheet": "2016-03-22 drivetrain description",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "a0331bb11053e7a3d170d2814c5feb2358247280c64eb5d4dd967251142493f2",
+        "statement": "Cross-source inference: CEV identifies DLA-8E20 as BMW 330e iPerformance; the 2016 manufacturer launch explicitly states that combustion engine and electric motor power reach the rear wheels. Applies to this historical generation, not later 330e xDrive.",
+        "identitySource": {
+          "url": "https://www.cev-pc.or.jp/newest/phv_pop_11.html",
+          "statement": "CEV FY2018: BMW 330e iPerformance, type DLA-8E20.",
+          "hashScope": "reviewed_statement",
+          "sha256": "af877ee1dbdd802da275adbf417906719108a561906a512a935dc33f4bc9010f"
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "BMW",

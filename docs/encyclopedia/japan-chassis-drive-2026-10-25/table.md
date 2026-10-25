@@ -16,10 +16,10 @@
 | Alfa Romeo | Stelvio | 949AXM2A | Полный | [Источник](https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf), PDF page 291 / printed 299, строка 1 |
 | Alfa Romeo | Stelvio | 949AXN1A | Задний | [Источник](https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf), PDF page 291 / printed 299, строка 1 |
 | Alfa Romeo | Stelvio | 949AXP1A | Задний | [Источник](https://aftersales.fiat.com/eLumData/RU/83/630_STELVIO/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18/83_630_STELVIO_603.93.181_RU_03_10.18_L_LG%23AP_603.93.181_01_09.18.pdf), PDF page 291 / printed 299, строка 1 |
-| Alpina | D3 | 3CA-3U40 | Не подтверждён | Нужен другой источник |
+| Alpina | D3 | 3CA-3U40 | Полный | [Источник](https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf), PDF pages 5 and 14, строка 1 |
 | Alpina | D3 | FDA-3P10 | Не подтверждён | Нужен другой источник |
-| Alpina | D5 | 7CA-5U40 | Не подтверждён | Нужен другой источник |
-| Alpina | D5 | FDA-5U20 | Не подтверждён | Нужен другой источник |
+| Alpina | D5 | 7CA-5U40 | Полный | [Источник](https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D5S.pdf), PDF pages 13 and 14, строка 1 |
+| Alpina | D5 | FDA-5U20 | Полный | [Источник](https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D5S_BITURBO_PRESS.pdf), PDF pages 1–2, Japan Premiere, строка 1 |
 | AUDI | A1 | 8XCAX | Передний | [Источник](https://www.mlit.go.jp/common/000989173.xls), Audi, строка 9 |
 | Audi | A3 | 8PCAX | Передний | [Источник](https://www.mlit.go.jp/common/000989173.xls), Audi, строка 10 |
 | Audi | A3 | 8VCJSF | Полный | [Источник](https://www.mlit.go.jp/common/001031313.xls), Audi, строка 12 |
@@ -31,7 +31,7 @@
 | Audi | A3 | 8VCZPF | Полный | [Источник](https://www.mlit.go.jp/common/001225527.xls), Audi, строка 15 |
 | AUDI | A3 | 8VCZPL | Полный | [Источник](https://www.mlit.go.jp/common/001225527.xls), Audi, строка 12 |
 | Audi | A3 | GYDLA | Передний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), audi, строка 12 |
-| AUDI | A4 | 8EALT | Не подтверждён | Нужен другой источник |
+| AUDI | A4 | 8EALT | Передний | [Источник](https://www.mlit.go.jp/jidosha/nenpi/nenpilist/07-3-11.pdf), PDF page1, A4 Avant 2.0 row, строка 1 |
 | AUDI | A4 | 8KCAB | Передний | [Источник](https://www.mlit.go.jp/common/000037074.pdf), PDF page 10, строка 87 |
 | AUDI | A4 | 8KCDN | Передний | [Источник](https://www.mlit.go.jp/common/000989173.xls), Audi, строка 13 |
 | AUDI | A4 | 8KCDNF | Полный | [Источник](https://www.mlit.go.jp/common/000989173.xls), Audi, строка 14 |
@@ -74,7 +74,7 @@
 | BMW | 3 Series | 8A20 | Полный, Задний | [Источник](https://www.mlit.go.jp/common/001125031.xls), BMW, строка 86 |
 | BMW | 3 Series | 8C20 | Задний | [Источник](https://www.mlit.go.jp/common/001178240.xls), BMW, строка 26 |
 | BMW | 3 SERIES | 8E15 | Задний | [Источник](https://www.mlit.go.jp/common/001178235.xls), BMW, строка 95 |
-| BMW | 3 SERIES | 8E20 | Не подтверждён | Нужен другой источник |
+| BMW | 3 SERIES | 8E20 | Задний | [Источник](https://www.press.bmwgroup.com/usa/article/detail/T0258500EN_US/the-all-new-bmw-330e-iperformance), 2016-03-22 drivetrain description, строка 1 |
 | BMW | 3 Series | PG20 | Задний | [Источник](https://www.mlit.go.jp/common/000989173.xls), BMW, строка 68 |
 | BMW | 3 Series | PH25 | Задний | [Источник](https://www.mlit.go.jp/common/000989173.xls), BMW, строка 73 |
 | BMW | 3 Series | PM35 | Задний | [Источник](https://www.mlit.go.jp/common/000989173.xls), BMW, строка 77 |
@@ -193,7 +193,7 @@
 | JAGUAR | F-TYPE | J608A | Полный, Задний | [Источник](https://www.mlit.go.jp/common/001031313.xls), Jaguar, строка 28 |
 | JAGUAR | F-TYPE | J60MA | Полный, Задний | [Источник](https://www.mlit.go.jp/common/001031313.xls), Jaguar, строка 29 |
 | JAGUAR | F-TYPE | J60MC | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ジャガー, строка 23 |
-| LAMBORGHINI | URUS | ZLDHU | Не подтверждён | Нужен другой источник |
+| LAMBORGHINI | URUS | ZLDHU | Полный | [Источник](https://www.lamborghini.com/en-en/history/urus), Historical Urus / engine and transmission, строка 1 |
 | Lexus | NX | AAZH20 | Передний | [Источник](https://www.mlit.go.jp/jidosha/content/001474447.xls), レクサス, строка 18 |
 | Lexus | NX | AAZH25 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474447.xls), レクサス, строка 23 |
 | Lexus | NX | AGZ10 | Передний | [Источник](https://www.mlit.go.jp/common/001084235.xls), Lexus, строка 28 |
@@ -206,9 +206,9 @@
 | MASERATI | GHIBLI | MG30B | Не подтверждён | Нужен другой источник |
 | MASERATI | GHIBLI | MG30C | Не подтверждён | Нужен другой источник |
 | MASERATI | GHIBLI | MG30D | Не подтверждён | Нужен другой источник |
-| MASERATI | GRECALE | MGR20A | Не подтверждён | Нужен другой источник |
-| MASERATI | GRECALE | MGR20C | Не подтверждён | Нужен другой источник |
-| MASERATI | GRECALE | MGR30 | Не подтверждён | Нужен другой источник |
+| MASERATI | GRECALE | MGR20A | Полный | [Источник](https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv), 2022-03-22 technical specifications / TRANSMISSION, строка 1 |
+| MASERATI | GRECALE | MGR20C | Полный | [Источник](https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv), 2022-03-22 technical specifications / TRANSMISSION, строка 1 |
+| MASERATI | GRECALE | MGR30 | Полный | [Источник](https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv), 2022-03-22 technical specifications / TRANSMISSION, строка 1 |
 | MAZDA | ATENZA SEDAN | GJ2FP | Передний | [Источник](https://www.mlit.go.jp/common/000989176.xls), Mazda, строка 9 |
 | MAZDA | CX-30 | DM8P | Полный, Передний | [Источник](https://www.mlit.go.jp/jidosha/content/001338000.xls), Mazda, строка 38 |
 | MAZDA | CX-30 | DMEJ3R | Полный, Передний | [Источник](https://www.mlit.go.jp/common/000234257.xlsx), 1-6(普通・小型)＜国内＞, строка 14 |
@@ -293,7 +293,7 @@
 | Suzuki | Wagon R | MH85S | Полный, Передний | [Источник](https://www.mlit.go.jp/common/000234311.xlsx), 1-6(軽), строка 17 |
 | Suzuki | Wagon R | MH95S | Полный, Передний | [Источник](https://www.mlit.go.jp/common/000234311.xlsx), 1-6(軽), строка 15 |
 | Suzuki | Xbee | MN71S | Полный, Передний | [Источник](https://www.mlit.go.jp/common/001225521.xls), Suzuki, строка 9 |
-| TESLA | MODELY | YL1YT | Не подтверждён | Нужен другой источник |
+| TESLA | MODELY | YL1YT | Задний | [Источник](https://www.cev-pc.or.jp/newest/ev_pop_96.html), Vehicle specifications, строка 1 |
 | TOYOTA | ALLION | NZT260 | Передний | [Источник](https://www.mlit.go.jp/common/000989168.xls), Toyota, строка 61 |
 | TOYOTA | AQUA | NHP10 | Передний | [Источник](https://www.mlit.go.jp/common/001125027.xls), Toyota, строка 15 |
 | TOYOTA | COROLLA FIELDER | NKE165G | Передний | [Источник](https://www.mlit.go.jp/common/001031309.xls), Toyota, строка 17 |

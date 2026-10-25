@@ -2265,10 +2265,26 @@
     "years": [
       2023
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Tesla",
+        "code": "YL1YT",
+        "fullCode": "ZAA-YL1YT",
+        "drive": "rwd",
+        "url": "https://www.cev-pc.or.jp/newest/ev_pop_96.html",
+        "sourceType": "official_registry",
+        "sheet": "Vehicle specifications",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "f2adc4c412967e0cb62df37efc075ef7eefda38767711e26ae1b000138e42e8a",
+        "statement": "CEV subsidy administrator specifications pair Model Y RWD with exact Japanese type ZAA-YL1YT. Other Model Y types are not inferred."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "TOYOTA",

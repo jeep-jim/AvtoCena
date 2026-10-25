@@ -287,10 +287,26 @@
     "years": [
       2021
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alpina",
+        "code": "3U40",
+        "fullCode": "3CA-3U40",
+        "drive": "awd",
+        "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF pages 5 and 14",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+        "statement": "Японская заводская брошюра: точный тип 3CA-3U40 в таблице TECHNISCHE DATEN; раздел 4WD описывает передачу момента на переднюю и заднюю ось. Проверены изображения страниц 5 and 14."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Alpina",
@@ -314,10 +330,26 @@
     "years": [
       2021
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alpina",
+        "code": "5U40",
+        "fullCode": "7CA-5U40",
+        "drive": "awd",
+        "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D5S.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF pages 13 and 14",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "74c6f8f8414a2aa1dcc1688534591a7ceef5838e0227320c33a1cfbff294bb5e",
+        "statement": "Японская заводская брошюра: точный тип 7CA-5U40 в таблице TECHNISCHE DATEN; раздел 4WD описывает передачу момента на переднюю и заднюю ось. Проверены изображения страниц 13 and 14."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Alpina",
@@ -327,10 +359,32 @@
     "years": [
       2019
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alpina",
+        "code": "5U20",
+        "fullCode": "FDA-5U20",
+        "drive": "awd",
+        "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D5S_BITURBO_PRESS.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF pages 1–2, Japan Premiere",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "4aaabdb0aeda79916490f85b0e6859eeb7771dbd207436af20f562d9d4b84a1d",
+        "statement": "Вывод по двум первичным источникам: официальный японский пресс-релиз D5 S Bi-Turbo указывает стандартный 4WD; таблица производителя связывает FDA-5U20 и 3DA-5U20 с D5S. Не распространяется на иные поколения D5.",
+        "identitySource": {
+          "url": "https://alpina.co.jp/services/tokuteiseibi/",
+          "sheet": "D5S type rows",
+          "hashScope": "reviewed_statement",
+          "statement": "D5S: FDA-5U20,3DA-5U20,7CA-5U40."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "AUDI",
@@ -766,10 +820,26 @@
     "years": [
       2008
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Audi",
+        "code": "8EALT",
+        "fullCode": "GH-8EALT",
+        "drive": "fwd",
+        "url": "https://www.mlit.go.jp/jidosha/nenpi/nenpilist/07-3-11.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page1, A4 Avant 2.0 row",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "f812a1c8dc7f5601986b9693a5c7e1e7ab2674ef0a191973f0f43d30f694ba37",
+        "statement": "MLIT official fuel-consumption table: GH-8EALT A4 Avant 2.0 has F in drive column. Distinct quattro types in adjacent rows have A. Exact type only; no model-wide extrapolation."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "AUDI",

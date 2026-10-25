@@ -2070,10 +2070,32 @@
     "years": [
       2019
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Lamborghini",
+        "code": "ZLDHU",
+        "fullCode": "ABA-ZLDHU",
+        "drive": "awd",
+        "url": "https://www.lamborghini.com/en-en/history/urus",
+        "sourceType": "manufacturer",
+        "sheet": "Historical Urus / engine and transmission",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "c1f9dda227eb4006fcf5075999a68514c8e6911c2dd49618445f60c763be20ab",
+        "statement": "Cross-source inference: MLIT identifies ABA-ZLDHU as Urus MY2019–2020. Manufacturer historical Urus page specifies permanent all-wheel drive for the original 650 CV V8 model.",
+        "identitySource": {
+          "url": "https://www.mlit.go.jp/common/001388474.pdf",
+          "statement": "MLIT GAI-3152 21 January 2021 page1: ABA-ZLDHU URUS 2019–2020.",
+          "hashScope": "reviewed_statement",
+          "sha256": "570a10ebc36e964b7fc9473cab7bd1f4936ca6b8aacef6fef6373918d4023681"
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Lexus",
