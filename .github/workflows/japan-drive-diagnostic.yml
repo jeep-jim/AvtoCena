@@ -1,0 +1,49 @@
+name: Japan drive — read-only query diagnostic
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/japan-drive-diagnostic.json']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Inspect saved release index without supplier requests or writes
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {ajesQuery} from './apps/web/lib/catalog/ajes-query.ts';
+          import {japanDriveGroups} from './apps/web/lib/catalog/japan-drive.ts';
+          const storage=getJsonStorage();
+          const release='51c72e667390835eedd22368d05f24f25f939918';
+          const binding=await storage.readJson('knowledge/encyclopedia/calculation-releases/'+release+'.json',null);
+          if(!binding||!/^knowledge\/encyclopedia\/calculation-indexes\/[a-f0-9]{64}\.json$/.test(binding.key))throw Error('binding_missing');
+          const index=await storage.readJson(binding.key,null);
+          if(index?.digest!==binding.digest)throw Error('index_mismatch');
+          const groups=japanDriveGroups(index);
+          console.log('DRIVE_GROUP_COUNTS',JSON.stringify({groups:groups.length,confirmed:groups.filter(g=>g.drive).length}));
+          for(const drive of [undefined,'awd','fwd','rwd']){
+            const query=ajesQuery({drive},index);
+            console.log('DRIVE_QUERY_SIZE',JSON.stringify({drive:drive||'none',characters:query.sql.length,encodedBytes:new URLSearchParams({sql:query.sql}).toString().length}));
+          }
+          JS
