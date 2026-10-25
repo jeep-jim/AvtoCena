@@ -1,6 +1,6 @@
-# Привод по сохранённым кодам кузова — 25.10.2026
+# Привод по кодам кузова — 25.10.2026
 
-Только имеющиеся коды. Несколько приводов у одного кода требуют дополнительного признака автомобиля. Пустые результаты не заполняются предположением.
+Сохранённые коды и отдельно проверенные заводские типы Porsche. Заводской тип не означает наличие объявления в фиде. Несколько приводов у одного кода требуют дополнительного признака автомобиля; конфликты источников остаются неопределёнными.
 
 | Марка | Модель | Код кузова | Привод по источнику | Проверка |
 |---|---|---|---|---|
@@ -339,3 +339,46 @@
 | Volvo | V60 | FB4164T | Передний | [Источник](https://www.mlit.go.jp/common/000989173.xls), Volvo, строка 24 |
 | Volvo | V60 | FB420 | Полный, Передний | [Источник](https://www.mlit.go.jp/common/001084242.xls), Volvo, строка 26 |
 | Volvo | V70 | BB420W | Передний | [Источник](https://www.mlit.go.jp/common/001084242.xls), Volvo, строка 43 |
+| Porsche | Cayenne | 92ACGE | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001741613.xls), ポルシェ, строка 9 |
+| Porsche | Cayenne | 92ACGEA | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001741613.xls), ポルシェ, строка 10 |
+| Porsche | Cayenne | 92AM48 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001741613.xls), ポルシェ, строка 15 |
+| Porsche | Cayenne | 92AM48A | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001741613.xls), ポルシェ, строка 14 |
+| Porsche | Cayenne | 92AM5502 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001741613.xls), ポルシェ, строка 11 |
+| Porsche | Cayenne | 92AM5502A | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001741613.xls), ポルシェ, строка 12 |
+| Porsche | 718 Boxster / 718 Cayman | 982M20 | Задний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 9 |
+| Porsche | 718 Boxster / 718 Cayman | 982M25 | Задний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 11 |
+| Porsche | 718 Boxster / 718 Cayman | 982NA | Задний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 10 |
+| Porsche | 718 Boxster / 718 Cayman | 982NB | Задний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 12 |
+| Porsche | 911 | 992L30 | Полный, Задний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 15 |
+| Porsche | 911 | 992M38 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 51 |
+| Porsche | 911 | 992NA1 | Задний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 17 |
+| Porsche | 911 | 992NA2 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 30 |
+| Porsche | 911 | 992NE | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 52 |
+| Porsche | Cayenne | E3M40 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 57 |
+| Porsche | Cayenne | E3M40A | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 58 |
+| Porsche | Cayenne | E3MA | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 39 |
+| Porsche | Cayenne | E3MAA | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 41 |
+| Porsche | Cayenne | E3NA | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 40 |
+| Porsche | Cayenne | E3NAA | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 42 |
+| Porsche | Cayenne | E3NB | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 43 |
+| Porsche | Cayenne | E3NBA | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 44 |
+| Porsche | Cayenne | E3NCA | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 61 |
+| Porsche | Cayenne | E3NI | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 59 |
+| Porsche | Cayenne | E3NIA | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 60 |
+| Porsche | Panamera | G2K40A | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 45 |
+| Porsche | Panamera | G2ML1 | Полный, Задний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 21 |
+| Porsche | Panamera | G2ML2 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 13 |
+| Porsche | Panamera | G2MR | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 49 |
+| Porsche | Panamera | G2MS | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 53 |
+| Porsche | Panamera | G2NL1 | Полный, Задний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 22 |
+| Porsche | Panamera | G2NL2 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 14 |
+| Porsche | Panamera | G2NR | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 50 |
+| Porsche | Panamera | G2NS | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 54 |
+| Porsche | Macan | J1K29 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 23 |
+| Porsche | Macan | J1K29A | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 24 |
+| Porsche | Macan | J1K30 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 27 |
+| Porsche | Macan | J1K30A | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 28 |
+| Porsche | Macan | J1M20 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 19 |
+| Porsche | Macan | J1M20A | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), ポルシェ, строка 20 |
+| Porsche | Macan | J1NT | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001741611.xls), ポルシェ, строка 11 |
+| Porsche | Macan | J1NTA | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001741611.xls), ポルシェ, строка 13 |

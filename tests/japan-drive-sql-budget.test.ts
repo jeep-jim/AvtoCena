@@ -6,6 +6,7 @@ import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
 import {heavyVehicleFamilies,heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {ajesErrorResponse} from '../apps/web/lib/catalog/ajes-error-response';
+import {japanChassisDriveRows,lookupJapanChassisDrive} from '../apps/web/lib/encyclopedia/japan-chassis-drive';
 function database(){
  const db=new DatabaseSync(':memory:');
  db.function('regexp',(pattern,value)=>value===null?null:Number(new RegExp(String(pattern),'i').test(String(value))));
@@ -42,6 +43,19 @@ test('compact truck predicate preserves every existing family and separator boun
   const read=(compact:boolean)=>db.prepare('select id from cars where '+heavyVehicleSqlExclusion(legacy,beforeLight,compact)+' order by id').all();
   assert.deepEqual(read(true),read(false));
  }
+ db.close();
+});
+test('every reviewed Porsche type filters without supplier drive, retaining shared types and source conflicts',()=>{
+ const db=database();db.exec('create table cars(id integer,marka_name text,model_name text,year integer,kuzov text,grade text,priv text)');
+ const rows=japanChassisDriveRows().filter(r=>r.make==='Porsche');
+ assert.equal(rows.length,43);assert.equal(rows.filter(r=>r.drives.length===1).length,40);
+ const insert=db.prepare('insert into cars values(?,?,?,?,?,?,?)');
+ rows.forEach((r,i)=>insert.run(i,'PORSCHE','TEST',2023,'3BA-'+r.chassisCode,'',''));
+ for(const drive of ['awd','fwd','rwd']){
+  const selected=db.prepare('select id from cars where '+japanDriveSql(drive)+' order by id').all().map(r=>r.id);
+  assert.deepEqual(selected,rows.flatMap((r,i)=>r.drives.length===1&&r.drives[0]===drive?[i]:[]));
+ }
+ for(const code of ['992L30','G2ML1','G2NL1','35','53','EACA'])assert.equal(lookupJapanChassisDrive('Porsche',code),undefined);
  db.close();
 });
 test('single drivetrain queries remain well below a standard 8 KB request line',()=>{

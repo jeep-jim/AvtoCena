@@ -604,5 +604,1792 @@
       }
     ],
     "sourceRows": 7
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "92ACGE",
+    "originalChassisCode": "92ACGE",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "DAA-92ACGE",
+        "code": "92ACGE",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 9,
+        "column": 4,
+        "driveColumns": [
+          15
+        ],
+        "identity": [
+          "ポルシェ",
+          "",
+          "カイエンSハイブリッド",
+          "DAA-92ACGE",
+          "CGE-EACA",
+          "2.994",
+          "8AT(E/LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741613.xls",
+        "file": "001741613.xls",
+        "sha256": "4625b1e97c56c787d9e1479cd702c470f6afb029fd4d6d47769ccb9bfae2af30",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 9, столбец D содержит тип DAA-92ACGE; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "92ACGEA",
+    "originalChassisCode": "92ACGEA",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "DAA-92ACGEA",
+        "code": "92ACGEA",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 10,
+        "column": 4,
+        "driveColumns": [
+          15
+        ],
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-92ACGEA",
+          "CGE-EACA",
+          "2.994",
+          "8AT(E/LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741613.xls",
+        "file": "001741613.xls",
+        "sha256": "4625b1e97c56c787d9e1479cd702c470f6afb029fd4d6d47769ccb9bfae2af30",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 10, столбец D содержит тип DAA-92ACGEA; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "92AM48",
+    "originalChassisCode": "92AM48",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "ABA-92AM48",
+        "code": "92AM48",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 15,
+        "column": 4,
+        "driveColumns": [
+          15
+        ],
+        "identity": [
+          "",
+          "",
+          "カイエン S",
+          "ABA-92AM48",
+          "M48",
+          "4.806",
+          "8AT(E/LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741613.xls",
+        "file": "001741613.xls",
+        "sha256": "4625b1e97c56c787d9e1479cd702c470f6afb029fd4d6d47769ccb9bfae2af30",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 15, столбец D содержит тип ABA-92AM48; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "92AM48A",
+    "originalChassisCode": "92AM48A",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "ABA-92AM48A",
+        "code": "92AM48A",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 14,
+        "column": 4,
+        "driveColumns": [
+          15
+        ],
+        "identity": [
+          "",
+          "",
+          "カイエン ターボ",
+          "ABA-92AM48A",
+          "M48",
+          "4.806",
+          "8AT(E/LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741613.xls",
+        "file": "001741613.xls",
+        "sha256": "4625b1e97c56c787d9e1479cd702c470f6afb029fd4d6d47769ccb9bfae2af30",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 14, столбец D содержит тип ABA-92AM48A; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "92AM5502",
+    "originalChassisCode": "92AM5502",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "ABA-92AM5502",
+        "code": "92AM5502",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 11,
+        "column": 4,
+        "driveColumns": [
+          15
+        ],
+        "identity": [
+          "",
+          "",
+          "カイエン",
+          "ABA-92AM5502",
+          "M5502",
+          "3.598",
+          "8AT(E/LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741613.xls",
+        "file": "001741613.xls",
+        "sha256": "4625b1e97c56c787d9e1479cd702c470f6afb029fd4d6d47769ccb9bfae2af30",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 11, столбец D содержит тип ABA-92AM5502; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "92AM5502A",
+    "originalChassisCode": "92AM5502A",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "ABA-92AM5502A",
+        "code": "92AM5502A",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 12,
+        "column": 4,
+        "driveColumns": [
+          15
+        ],
+        "identity": [
+          "",
+          "",
+          "",
+          "ABA-92AM5502A",
+          "M5502",
+          "3.598",
+          "8AT(E/LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741613.xls",
+        "file": "001741613.xls",
+        "sha256": "4625b1e97c56c787d9e1479cd702c470f6afb029fd4d6d47769ccb9bfae2af30",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 12, столбец D содержит тип ABA-92AM5502A; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "Porsche",
+    "model": "718 Boxster / 718 Cayman",
+    "chassisCode": "982M20",
+    "originalChassisCode": "982M20",
+    "years": [],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-982M20",
+        "code": "982M20",
+        "drive": "rwd",
+        "sheet": "ポルシェ",
+        "row": 9,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "ポルシェ",
+          "",
+          "718 Boxster / 718 Cayman",
+          "3BA-982M20",
+          "",
+          "DNY",
+          "1.987"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 9, столбец D содержит тип 3BA-982M20; привод rwd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "718 Boxster / 718 Cayman",
+    "chassisCode": "982M25",
+    "originalChassisCode": "982M25",
+    "years": [],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-982M25",
+        "code": "982M25",
+        "drive": "rwd",
+        "sheet": "ポルシェ",
+        "row": 11,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "718 Boxster S / 718 Cayman S",
+          "3BA-982M25",
+          "",
+          "DNZ",
+          "2.497"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 11, столбец D содержит тип 3BA-982M25; привод rwd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "718 Boxster / 718 Cayman",
+    "chassisCode": "982NA",
+    "originalChassisCode": "982NA",
+    "years": [],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-982NA",
+        "code": "982NA",
+        "drive": "rwd",
+        "sheet": "ポルシェ",
+        "row": 10,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "718 Boxster / 718 Cayman / 718 Boxster T/ 718 Cayman T",
+          "3BA-982NA",
+          "",
+          "DNY",
+          "1.987"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 10, столбец D содержит тип 3BA-982NA; привод rwd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "718 Boxster / 718 Cayman",
+    "chassisCode": "982NB",
+    "originalChassisCode": "982NB",
+    "years": [],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-982NB",
+        "code": "982NB",
+        "drive": "rwd",
+        "sheet": "ポルシェ",
+        "row": 12,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "718 Boxster S / 718 Cayman S",
+          "3BA-982NB",
+          "",
+          "DNZ",
+          "2.497"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 12, столбец D содержит тип 3BA-982NB; привод rwd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "911",
+    "chassisCode": "992L30",
+    "originalChassisCode": "992L30",
+    "years": [],
+    "drives": [
+      "awd",
+      "rwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "fullCode": "3BA-992L30",
+        "code": "992L30",
+        "drive": "rwd",
+        "sheet": "ポルシェ",
+        "row": 15,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "911 Carrera S",
+          "3BA-992L30",
+          "1101,1105,1109, 1113,1151,1155,1159,1163,1201,1205,1209,1213,1251,1255,1259,1263",
+          "DKK",
+          "2.981"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 15, столбец D содержит тип 3BA-992L30; привод rwd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      },
+      {
+        "fullCode": "3BA-992L30",
+        "code": "992L30",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 29,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "911 Carrera 4S",
+          "3BA-992L30",
+          "",
+          "DKK",
+          "2.981"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 29, столбец D содержит тип 3BA-992L30; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 7
+  },
+  {
+    "make": "Porsche",
+    "model": "911",
+    "chassisCode": "992M38",
+    "originalChassisCode": "992M38",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-992M38",
+        "code": "992M38",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 51,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "911 Turbo",
+          "3BA-992M38",
+          "",
+          "DKE",
+          "3.745"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 51, столбец D содержит тип 3BA-992M38; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "Porsche",
+    "model": "911",
+    "chassisCode": "992NA1",
+    "originalChassisCode": "992NA1",
+    "years": [],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-992NA1",
+        "code": "992NA1",
+        "drive": "rwd",
+        "sheet": "ポルシェ",
+        "row": 17,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "911 Carrera S",
+          "3BA-992NA1",
+          "2007,2011,2057,2061,2207,2211,2257,2261",
+          "DKK",
+          "2.981"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 17, столбец D содержит тип 3BA-992NA1; привод rwd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 9
+  },
+  {
+    "make": "Porsche",
+    "model": "911",
+    "chassisCode": "992NA2",
+    "originalChassisCode": "992NA2",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-992NA2",
+        "code": "992NA2",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 30,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "911 Carrera 4S",
+          "3BA-992NA2",
+          "",
+          "DKK",
+          "2.981"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 30, столбец D содержит тип 3BA-992NA2; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "Porsche",
+    "model": "911",
+    "chassisCode": "992NE",
+    "originalChassisCode": "992NE",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-992NE",
+        "code": "992NE",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 52,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "911 Turbo",
+          "3BA-992NE",
+          "",
+          "DKE",
+          "3.745"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 52, столбец D содержит тип 3BA-992NE; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3M40",
+    "originalChassisCode": "E3M40",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3M40",
+        "code": "E3M40",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 57,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne GTS",
+          "3BA-E3M40",
+          "",
+          "DCU",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 57, столбец D содержит тип 3BA-E3M40; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3M40A",
+    "originalChassisCode": "E3M40A",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3M40A",
+        "code": "E3M40A",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 58,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne GTS",
+          "3BA-E3M40A",
+          "",
+          "DCU",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 58, столбец D содержит тип 3BA-E3M40A; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3MA",
+    "originalChassisCode": "E3MA",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3MA",
+        "code": "E3MA",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 39,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne",
+          "3BA-E3MA",
+          "",
+          "DCB",
+          "2.994"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 39, столбец D содержит тип 3BA-E3MA; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3MAA",
+    "originalChassisCode": "E3MAA",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3MAA",
+        "code": "E3MAA",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 41,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne",
+          "3BA-E3MAA",
+          "",
+          "DCB",
+          "2.994"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 41, столбец D содержит тип 3BA-E3MAA; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3NA",
+    "originalChassisCode": "E3NA",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3NA",
+        "code": "E3NA",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 40,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne",
+          "3BA-E3NA",
+          "",
+          "DCB",
+          "2.994"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 40, столбец D содержит тип 3BA-E3NA; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3NAA",
+    "originalChassisCode": "E3NAA",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3NAA",
+        "code": "E3NAA",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 42,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne",
+          "3BA-E3NAA",
+          "",
+          "DCB",
+          "2.994"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 42, столбец D содержит тип 3BA-E3NAA; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3NB",
+    "originalChassisCode": "E3NB",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3NB",
+        "code": "E3NB",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 43,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne S",
+          "3BA-E3NB",
+          "",
+          "DCA",
+          "2.893"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 43, столбец D содержит тип 3BA-E3NB; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3NBA",
+    "originalChassisCode": "E3NBA",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3NBA",
+        "code": "E3NBA",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 44,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne S",
+          "3BA-E3NBA",
+          "",
+          "DCA",
+          "2.893"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 44, столбец D содержит тип 3BA-E3NBA; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3NCA",
+    "originalChassisCode": "E3NCA",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3NCA",
+        "code": "E3NCA",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 61,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne Turbo",
+          "3BA-E3NCA",
+          "",
+          "DCU",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 61, столбец D содержит тип 3BA-E3NCA; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3NI",
+    "originalChassisCode": "E3NI",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3NI",
+        "code": "E3NI",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 59,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne GTS",
+          "3BA-E3NI",
+          "",
+          "DCU",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 59, столбец D содержит тип 3BA-E3NI; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "chassisCode": "E3NIA",
+    "originalChassisCode": "E3NIA",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-E3NIA",
+        "code": "E3NIA",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 60,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Cayenne GTS",
+          "3BA-E3NIA",
+          "",
+          "DCU",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 60, столбец D содержит тип 3BA-E3NIA; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "chassisCode": "G2K40A",
+    "originalChassisCode": "G2K40A",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-G2K40A",
+        "code": "G2K40A",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 45,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Panamera GTS",
+          "3BA-G2K40A",
+          "1501~1512\n1601~1512",
+          "CVD",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 45, столбец D содержит тип 3BA-G2K40A; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "chassisCode": "G2ML1",
+    "originalChassisCode": "G2ML1",
+    "years": [],
+    "drives": [
+      "awd",
+      "rwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "fullCode": "3BA-G2ML1",
+        "code": "G2ML1",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 21,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Panamera",
+          "3BA-G2ML1",
+          "",
+          "CSZ",
+          "2.893"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 21, столбец D содержит тип 3BA-G2ML1; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      },
+      {
+        "brand": "Porsche",
+        "code": "G2ML1",
+        "fullCode": "3BA-G2ML1",
+        "drive": "rwd",
+        "sourceType": "manufacturer",
+        "url": "https://newsroom.porsche.com/dam/jcr%3A25dcf3ad-defc-4ed0-acd0-7537d49ba9e7/Base%20Panamera.pdf.PDF",
+        "sheet": "Technical Data — Panamera, page 1",
+        "row": 1,
+        "sha256": "acd9c324aab1d3714d539a85539fdc177cd30dbf5a2422f751b69e415499edf4",
+        "statement": "CONFLICT REVIEW ONLY: Japanese Porsche factory identity list (2025-01-06), page 1 identifies this exact type as base Panamera, separate from Panamera 4. Factory base Panamera technical table states rear wheel drive. MLIT says A for this type; preserve both and leave chassis drive unresolved, never override to AWD or RWD. Both factory PDF pages visually reviewed.",
+        "identitySources": [
+          {
+            "url": "https://files.porsche.com/f/332100/4169ad63fa/porsche-specific-maintenance-vehicles-20250106.pdf",
+            "page": 1,
+            "sha256": "56286527a30d9e44a491fdc0cd93208f3dc01895e486e8a7fc0758833f0a3453"
+          }
+        ]
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "chassisCode": "G2ML2",
+    "originalChassisCode": "G2ML2",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-G2ML2",
+        "code": "G2ML2",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 13,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Panamera 4",
+          "3BA-G2ML2",
+          "",
+          "CSZ",
+          "2.893"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 13, столбец D содержит тип 3BA-G2ML2; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "chassisCode": "G2MR",
+    "originalChassisCode": "G2MR",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-G2MR",
+        "code": "G2MR",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 49,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Panamera GTS",
+          "3BA-G2MR",
+          "",
+          "CVD",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 49, столбец D содержит тип 3BA-G2MR; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "chassisCode": "G2MS",
+    "originalChassisCode": "G2MS",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-G2MS",
+        "code": "G2MS",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 53,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Panamera Turbo S",
+          "3BA-G2MS",
+          "",
+          "DTC",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 53, столбец D содержит тип 3BA-G2MS; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "chassisCode": "G2NL1",
+    "originalChassisCode": "G2NL1",
+    "years": [],
+    "drives": [
+      "awd",
+      "rwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "fullCode": "3BA-G2NL1",
+        "code": "G2NL1",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 22,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Panamera",
+          "3BA-G2NL1",
+          "",
+          "CSZ",
+          "2.893"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 22, столбец D содержит тип 3BA-G2NL1; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      },
+      {
+        "brand": "Porsche",
+        "code": "G2NL1",
+        "fullCode": "3BA-G2NL1",
+        "drive": "rwd",
+        "sourceType": "manufacturer",
+        "url": "https://newsroom.porsche.com/dam/jcr%3A25dcf3ad-defc-4ed0-acd0-7537d49ba9e7/Base%20Panamera.pdf.PDF",
+        "sheet": "Technical Data — Panamera, page 1",
+        "row": 1,
+        "sha256": "acd9c324aab1d3714d539a85539fdc177cd30dbf5a2422f751b69e415499edf4",
+        "statement": "CONFLICT REVIEW ONLY: Japanese Porsche factory identity list (2025-01-06), page 1 identifies this exact type as base Panamera, separate from Panamera 4. Factory base Panamera technical table states rear wheel drive. MLIT says A for this type; preserve both and leave chassis drive unresolved, never override to AWD or RWD. Both factory PDF pages visually reviewed.",
+        "identitySources": [
+          {
+            "url": "https://files.porsche.com/f/332100/4169ad63fa/porsche-specific-maintenance-vehicles-20250106.pdf",
+            "page": 1,
+            "sha256": "56286527a30d9e44a491fdc0cd93208f3dc01895e486e8a7fc0758833f0a3453"
+          }
+        ]
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "chassisCode": "G2NL2",
+    "originalChassisCode": "G2NL2",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-G2NL2",
+        "code": "G2NL2",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 14,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Panamera 4",
+          "3BA-G2NL2",
+          "",
+          "CSZ",
+          "2.893"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 14, столбец D содержит тип 3BA-G2NL2; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "chassisCode": "G2NR",
+    "originalChassisCode": "G2NR",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-G2NR",
+        "code": "G2NR",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 50,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Panamera GTS",
+          "3BA-G2NR",
+          "",
+          "CVD",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 50, столбец D содержит тип 3BA-G2NR; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "chassisCode": "G2NS",
+    "originalChassisCode": "G2NS",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-G2NS",
+        "code": "G2NS",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 54,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Panamera Turbo S",
+          "3BA-G2NS",
+          "",
+          "DTC",
+          "3.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 54, столбец D содержит тип 3BA-G2NS; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "chassisCode": "J1K29",
+    "originalChassisCode": "J1K29",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-J1K29",
+        "code": "J1K29",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 23,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Macan Turbo",
+          "3BA-J1K29",
+          "",
+          "DGR",
+          "2.893"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 23, столбец D содержит тип 3BA-J1K29; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "chassisCode": "J1K29A",
+    "originalChassisCode": "J1K29A",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-J1K29A",
+        "code": "J1K29A",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 24,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-J1K29A",
+          "",
+          "DGR",
+          "2.893"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 24, столбец D содержит тип 3BA-J1K29A; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "chassisCode": "J1K30",
+    "originalChassisCode": "J1K30",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-J1K30",
+        "code": "J1K30",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 27,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Macan S",
+          "3BA-J1K30",
+          "",
+          "DLZ",
+          "2.994"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 27, столбец D содержит тип 3BA-J1K30; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "chassisCode": "J1K30A",
+    "originalChassisCode": "J1K30A",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-J1K30A",
+        "code": "J1K30A",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 28,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-J1K30A",
+          "",
+          "DLZ",
+          "2.994"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 28, столбец D содержит тип 3BA-J1K30A; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "chassisCode": "J1M20",
+    "originalChassisCode": "J1M20",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-J1M20",
+        "code": "J1M20",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 19,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Macan",
+          "3BA-J1M20",
+          "",
+          "DKN",
+          "1.984"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 19, столбец D содержит тип 3BA-J1M20; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "chassisCode": "J1M20A",
+    "originalChassisCode": "J1M20A",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-J1M20A",
+        "code": "J1M20A",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 20,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Macan",
+          "3BA-J1M20A",
+          "",
+          "DKN",
+          "1.984"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "file": "001474453.xls",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 20, столбец D содержит тип 3BA-J1M20A; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "chassisCode": "J1NT",
+    "originalChassisCode": "J1NT",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-J1NT",
+        "code": "J1NT",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 11,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Macan",
+          "3BA-J1NT",
+          "",
+          "DMT",
+          "1.984"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741611.xls",
+        "file": "001741611.xls",
+        "sha256": "e2df83296b5b592f6d8697d3798d62a75c1f6c06ebe9be964a249f265080760b",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 11, столбец D содержит тип 3BA-J1NT; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "chassisCode": "J1NTA",
+    "originalChassisCode": "J1NTA",
+    "years": [],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "fullCode": "3BA-J1NTA",
+        "code": "J1NTA",
+        "drive": "awd",
+        "sheet": "ポルシェ",
+        "row": 13,
+        "column": 4,
+        "driveColumns": [
+          18
+        ],
+        "identity": [
+          "",
+          "",
+          "Macan",
+          "3BA-J1NTA",
+          "",
+          "DMT",
+          "1.984"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741611.xls",
+        "file": "001741611.xls",
+        "sha256": "e2df83296b5b592f6d8697d3798d62a75c1f6c06ebe9be964a249f265080760b",
+        "brand": "Porsche",
+        "sourceType": "official_registry",
+        "statement": "MLIT: лист ポルシェ, строка 13, столбец D содержит тип 3BA-J1NTA; привод awd взят только из столбца с заголовком 駆動形式. Коды двигателя и диапазоны類別区分番号 не являются кодами кузова."
+      }
+    ],
+    "sourceRows": 4
   }
 ]

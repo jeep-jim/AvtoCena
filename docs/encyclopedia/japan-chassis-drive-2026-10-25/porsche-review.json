@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-10-25T08:06:33.083232+00:00",
+  "originalSavedInventoryGroups": 335,
+  "additionalFactoryTypes": 43,
+  "confirmedAdditionalTypes": 40,
+  "ambiguousOrConflicting": [
+    "992L30",
+    "G2ML1",
+    "G2NL1"
+  ],
+  "mlitReviewedRows": 121,
+  "typeColumn": "D, explicitly headed 型式",
+  "rejectedCandidateKinds": [
+    "類別区分番号 ranges such as31-35",
+    "engine code CGE-EACA"
+  ],
+  "sources": [
+    "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+    "https://www.mlit.go.jp/jidosha/content/001474456.xls",
+    "https://www.mlit.go.jp/jidosha/content/001741611.xls",
+    "https://www.mlit.go.jp/jidosha/content/001741613.xls",
+    "https://www.mlit.go.jp/jidosha/content/3.5.G_LD_import_WLTC.xlsx"
+  ],
+  "factoryConflictSources": [
+    "https://files.porsche.com/f/332100/4169ad63fa/porsche-specific-maintenance-vehicles-20250106.pdf",
+    "https://newsroom.porsche.com/dam/jcr%3A25dcf3ad-defc-4ed0-acd0-7537d49ba9e7/Base%20Panamera.pdf.PDF"
+  ],
+  "notes": [
+    "Only Porsche sheet column D; merged cells expanded, drive read solely from 駆動形式. Reproducible extraction matched121saved evidence rows.",
+    "992L30 has R and A in official rows. Base PanameraG2ML1/G2NL1 has MLITA versus factoryRWD; retain conflict, do not choose a drive.",
+    "No new canonical model or annual variant records. Factory references are independent of whether a current offer is cached.",
+    "This is not a complete census of Porsche or all Japanese inventory."
+  ],
+  "newDurableSave": "pending",
+  "newDeployment": "pending"
+}

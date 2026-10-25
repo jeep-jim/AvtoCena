@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Prepare bounded review tables from locally inspected MLIT extraction checkpoints.
-No network, storage writes, chassis guesses, or new model identities.
+No network, storage writes, chassis guesses, or new canonical model identities.
 """
 import argparse,collections,json,pathlib,re,unicodedata,hashlib
 p=argparse.ArgumentParser();p.add_argument('--evidence',required=True);p.add_argument('--inventory',default='reports/japan-chassis');args=p.parse_args()
@@ -19,6 +19,8 @@ supplement=pathlib.Path('docs/encyclopedia/japan-chassis-drive-2026-10-25/manufa
 if supplement.exists():
  for e in json.load(open(supplement)):evidence[(brand(e['brand']),e['code'])].append(e)
 inv=pathlib.Path(args.inventory);groups=[r for f in sorted(inv.glob('codes-*.json')) for r in json.load(open(f))]
+extra=pathlib.Path('docs/encyclopedia/japan-chassis-drive-2026-10-25/additional-factory-codes.json')
+if extra.exists():groups+=json.load(open(extra))
 out=pathlib.Path('docs/encyclopedia/japan-chassis-drive-2026-10-25');out.mkdir(parents=True,exist_ok=True)
 rows=[]
 for g in groups:
@@ -43,7 +45,7 @@ for i in range(0,len(compact),64):
  (runtime/f'part-{i//64:04}.json').write_text(json.dumps(compact[i:i+64],ensure_ascii=False,separators=(',',':'))+'\n')
 (runtime/'manifest.ts').write_text('\n'.join(imports)+"\nexport default ["+','.join(names)+"];\n")
 labels={'fwd':'Передний','rwd':'Задний','awd':'Полный'}
-md=['# Привод по сохранённым кодам кузова — 25.10.2026','','Только имеющиеся коды. Несколько приводов у одного кода требуют дополнительного признака автомобиля. Пустые результаты не заполняются предположением.','','| Марка | Модель | Код кузова | Привод по источнику | Проверка |','|---|---|---|---|---|']
+md=['# Привод по кодам кузова — 25.10.2026','','Сохранённые коды и отдельно проверенные заводские типы Porsche. Заводской тип не означает наличие объявления в фиде. Несколько приводов у одного кода требуют дополнительного признака автомобиля; конфликты источников остаются неопределёнными.','','| Марка | Модель | Код кузова | Привод по источнику | Проверка |','|---|---|---|---|---|']
 for r in rows:
  ds=', '.join(labels[d] for d in r['drives']) or 'Не подтверждён';e=(r['evidence'] or [None])[0];link=f"[Источник]({e['url']}), {e['sheet']}, строка {e['row']}" if e else 'Нужен другой источник'
  md.append(f"| {r['make']} | {r['model']} | {r['originalChassisCode']} | {ds} | {link} |")

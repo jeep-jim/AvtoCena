@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-25",
+  "commit": "89b97aeda86e5742f34391a7271ed0039ea5cce9",
+  "fix": "Use the shared local chassis/annual-index drivetrain resolver in saved Japan search before selecting a page; accept exact model families.",
+  "validation": {
+    "testsPassed": 86,
+    "typecheck": "PASS",
+    "auditRun": 40174008586,
+    "auditJob": 121110694616,
+    "auditConclusion": "success",
+    "providerRequestsInAudit": 0,
+    "existingQuerySlots": 128,
+    "freshSavedListings": 520,
+    "resolvedDrive": 382,
+    "byDrive": {
+      "awd": 107,
+      "fwd": 253,
+      "rwd": 22
+    }
+  },
+  "porsche": {
+    "savedListings": 0,
+    "savedChassisIdentities": [],
+    "liveOwnerRequestResolved": false,
+    "note": "No saved Porsche is not evidence of zero Porsche inventory."
+  },
+  "deployment": {
+    "runId": 40174008563,
+    "observedStatus": "in_progress",
+    "installed": false
+  },
+  "limits": [
+    "Saved fallback stays partial/stale and does not claim a full supplier total.",
+    "Unknown/conflicting chassis remain unknown; no fabricated cars or drivetrain.",
+    "No supplier retry, alternate visitor IP, quota reset or bulk feed copy.",
+    "Does not establish the cause of the owner's browser error or restore all live Japan queries."
+  ]
+}
