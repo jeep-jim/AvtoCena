@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-10-25T05:26:14.906800+00:00",
+  "checkedAt": "2026-10-25T05:32:06.685674+00:00",
   "commit": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
   "reference": {
-    "runId": 40164717200,
-    "jobId": 121083302475,
+    "runId": 40165655451,
+    "jobId": 121086046980,
     "verified": true,
-    "digest": "35f969725b7ef9c95fd1adab25ffc0a7fb008a5f3553fd1edaf885f97ef4a35d",
+    "digest": "bf2c9071a6c27e6328496e1ca33d7fb4aa43ea086cff6bec71cd4db89d67b0fd",
     "groups": 335,
-    "confirmed": 246,
+    "confirmed": 256,
     "ambiguous": 46,
-    "unresolved": 43
+    "unresolved": 33
   },
   "annualChanges": 95,
   "annualUnfilled": {
@@ -38,16 +38,22 @@
   "automations": "Old broad research automations remain stopped.",
   "preparedReference": {
     "groups": 335,
-    "confirmed": 256,
+    "confirmed": 261,
     "ambiguous": 46,
-    "unresolved": 33,
+    "unresolved": 28,
     "workingScope": 318,
-    "missingPrimaryEvidence": 16,
+    "missingPrimaryEvidence": 11,
     "pendingDurableReadback": true
   },
   "replacementDeploy": {
     "runId": 40165188901,
     "commit": "5fc6705650c45459c060b748ac41b609f5d33d89",
     "observedStatus": "in_progress"
+  },
+  "queuedDeploy": {
+    "runId": 40165655503,
+    "commit": "aa673971c39209759786ab82daad49b9913c826c",
+    "observedStatus": "pending",
+    "confirmed": 256
   }
 }

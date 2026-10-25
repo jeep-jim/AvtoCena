@@ -128,7 +128,7 @@
 | Ferrari | 812 | F152BE | Не подтверждён | Нужен другой источник |
 | Fiat | 500 | 31212 | Передний | [Источник](https://www.mlit.go.jp/common/000989174.xls), Fiat, строка 15 |
 | FIAT | 500X | 33414 | Полный, Передний | [Источник](https://www.mlit.go.jp/common/001125031.xls), Fiat, строка 12 |
-| Ford | Explorer | 1FMHK9 | Не подтверждён | Нужен другой источник |
+| Ford | Explorer | 1FMHK9 | Передний | [Источник](https://cdn.dealereprocess.org/cdn/brochures/ford/2014-explorer.pdf), PDF pages13–14, engines and available options, строка 1 |
 | Ford | Fiesta | WF0SFJ | Передний | [Источник](https://autocatalogarchive.com/wp-content/uploads/2016/08/Ford-Fiesta-2014-JP.pdf), Factory brochure, SPECIFICATIONS, строка 1 |
 | Honda | Accord | CL9 | Передний | [Источник](https://www.honda.co.jp/auto-archive/accord/4door/2008/grade-data/), Factory specification, строка 1 |
 | Honda | Accord | CR6 | Передний | [Источник](https://www.mlit.go.jp/common/001031309.xls), Honda, строка 8 |
@@ -201,11 +201,11 @@
 | Lexus | NX | AYZ15 | Полный | [Источник](https://www.mlit.go.jp/common/001084235.xls), Lexus, строка 18 |
 | Lexus | NX | TAZA25 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474447.xls), レクサス, строка 61 |
 | MASERATI | GHIBLI | MG20 | Не подтверждён | Нужен другой источник |
-| MASERATI | GHIBLI | MG30A | Не подтверждён | Нужен другой источник |
-| MASERATI | GHIBLI | MG30AA | Не подтверждён | Нужен другой источник |
+| MASERATI | GHIBLI | MG30A | Задний | [Источник](https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1), MY19 TECHNICAL SPECIFICATIONS / Transmission, строка 1 |
+| MASERATI | GHIBLI | MG30AA | Полный | [Источник](https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1), MY19 TECHNICAL SPECIFICATIONS / Transmission, строка 1 |
 | MASERATI | GHIBLI | MG30B | Не подтверждён | Нужен другой источник |
-| MASERATI | GHIBLI | MG30C | Не подтверждён | Нужен другой источник |
-| MASERATI | GHIBLI | MG30D | Не подтверждён | Нужен другой источник |
+| MASERATI | GHIBLI | MG30C | Задний | [Источник](https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1), MY19 TECHNICAL SPECIFICATIONS / Transmission, строка 1 |
+| MASERATI | GHIBLI | MG30D | Задний | [Источник](https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1), MY19 TECHNICAL SPECIFICATIONS / Transmission, строка 1 |
 | MASERATI | GRECALE | MGR20A | Полный | [Источник](https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv), 2022-03-22 technical specifications / TRANSMISSION, строка 1 |
 | MASERATI | GRECALE | MGR20C | Полный | [Источник](https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv), 2022-03-22 technical specifications / TRANSMISSION, строка 1 |
 | MASERATI | GRECALE | MGR30 | Полный | [Источник](https://www.media.stellantis.com/em-en/maserati/press/grecale-the-new-maserati-suv), 2022-03-22 technical specifications / TRANSMISSION, строка 1 |

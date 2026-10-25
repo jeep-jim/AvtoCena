@@ -243,10 +243,35 @@
       2017,
       2018
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Maserati",
+        "code": "MG30A",
+        "fullCode": "ABA-MG30A",
+        "drive": "rwd",
+        "url": "https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1",
+        "sourceType": "manufacturer",
+        "sheet": "MY19 TECHNICAL SPECIFICATIONS / Transmission",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "b8e2868324c811195abe26c5e39ecd0490480b739514eeb7cd8f5e2c159ed36f",
+        "statement": "Cross-source inference for exact Japanese type: archived original Maserati Japan specification booklet page23/PDF12 maps MG30A to Ghibli S; manufacturer MY19 transmission table assigns rwd to that version. Table column spans checked in original HTML; Japanese type table visually reviewed. No extension to MG30 or MG30B.",
+        "identitySource": {
+          "url": "https://www.kurumacatalog.com/wp-content/uploads/2020/05/2020_Maserati_ghibli_optionlist_jp.pdf",
+          "sheet": "PDF page12 / printed page23",
+          "sourceType": "manufacturer",
+          "archiveReproduction": true,
+          "hashScope": "source_bytes",
+          "sha256": "3b8e60374e87edcd3338985966a00e6965a264d8b65c3be3a1e474b3c66c9104",
+          "statement": "Original factory technical specification booklet reproduced by archive; exact type MG30A under Ghibli S column. Reviewed page image."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "MASERATI",
@@ -257,10 +282,35 @@
       2014,
       2015
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Maserati",
+        "code": "MG30AA",
+        "fullCode": "ABA-MG30AA",
+        "drive": "awd",
+        "url": "https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1",
+        "sourceType": "manufacturer",
+        "sheet": "MY19 TECHNICAL SPECIFICATIONS / Transmission",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "b8e2868324c811195abe26c5e39ecd0490480b739514eeb7cd8f5e2c159ed36f",
+        "statement": "Cross-source inference for exact Japanese type: archived original Maserati Japan specification booklet page23/PDF12 maps MG30AA to Ghibli S Q4; manufacturer MY19 transmission table assigns awd to that version. Table column spans checked in original HTML; Japanese type table visually reviewed. No extension to MG30 or MG30B.",
+        "identitySource": {
+          "url": "https://www.kurumacatalog.com/wp-content/uploads/2020/05/2020_Maserati_ghibli_optionlist_jp.pdf",
+          "sheet": "PDF page12 / printed page23",
+          "sourceType": "manufacturer",
+          "archiveReproduction": true,
+          "hashScope": "source_bytes",
+          "sha256": "3b8e60374e87edcd3338985966a00e6965a264d8b65c3be3a1e474b3c66c9104",
+          "statement": "Original factory technical specification booklet reproduced by archive; exact type MG30AA under Ghibli S Q4 column. Reviewed page image."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "MASERATI",
@@ -286,10 +336,35 @@
       2017,
       2020
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Maserati",
+        "code": "MG30C",
+        "fullCode": "ABA-MG30C",
+        "drive": "rwd",
+        "url": "https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1",
+        "sourceType": "manufacturer",
+        "sheet": "MY19 TECHNICAL SPECIFICATIONS / Transmission",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "b8e2868324c811195abe26c5e39ecd0490480b739514eeb7cd8f5e2c159ed36f",
+        "statement": "Cross-source inference for exact Japanese type: archived original Maserati Japan specification booklet page23/PDF12 maps MG30C to Ghibli; manufacturer MY19 transmission table assigns rwd to that version. Table column spans checked in original HTML; Japanese type table visually reviewed. No extension to MG30 or MG30B.",
+        "identitySource": {
+          "url": "https://www.kurumacatalog.com/wp-content/uploads/2020/05/2020_Maserati_ghibli_optionlist_jp.pdf",
+          "sheet": "PDF page12 / printed page23",
+          "sourceType": "manufacturer",
+          "archiveReproduction": true,
+          "hashScope": "source_bytes",
+          "sha256": "3b8e60374e87edcd3338985966a00e6965a264d8b65c3be3a1e474b3c66c9104",
+          "statement": "Original factory technical specification booklet reproduced by archive; exact type MG30C under Ghibli column. Reviewed page image."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "MASERATI",
@@ -299,10 +374,35 @@
     "years": [
       2016
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Maserati",
+        "code": "MG30D",
+        "fullCode": "FDA-MG30D",
+        "drive": "rwd",
+        "url": "https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1",
+        "sourceType": "manufacturer",
+        "sheet": "MY19 TECHNICAL SPECIFICATIONS / Transmission",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "b8e2868324c811195abe26c5e39ecd0490480b739514eeb7cd8f5e2c159ed36f",
+        "statement": "Cross-source inference for exact Japanese type: archived original Maserati Japan specification booklet page23/PDF12 maps MG30D to Ghibli Diesel; manufacturer MY19 transmission table assigns rwd to that version. Table column spans checked in original HTML; Japanese type table visually reviewed. No extension to MG30 or MG30B.",
+        "identitySource": {
+          "url": "https://www.kurumacatalog.com/wp-content/uploads/2020/05/2020_Maserati_ghibli_optionlist_jp.pdf",
+          "sheet": "PDF page12 / printed page23",
+          "sourceType": "manufacturer",
+          "archiveReproduction": true,
+          "hashScope": "source_bytes",
+          "sha256": "3b8e60374e87edcd3338985966a00e6965a264d8b65c3be3a1e474b3c66c9104",
+          "statement": "Original factory technical specification booklet reproduced by archive; exact type MG30D under Ghibli Diesel column. Reviewed page image."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "MASERATI",

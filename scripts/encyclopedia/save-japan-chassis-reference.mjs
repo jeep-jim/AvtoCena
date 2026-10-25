@@ -10,6 +10,7 @@ const dryRun=process.argv.includes('--dry-run'),parts=[];
 // Explicitly reviewed reproductions of original factory tables, not general
 // permission to accept third-party catalogs as manufacturer evidence.
 const reviewedFactoryArchives=new Set([
+ 'https://cdn.dealereprocess.org/cdn/brochures/ford/2014-explorer.pdf',
  'https://autocatalogarchive.com/wp-content/uploads/2016/08/Ford-Fiesta-2014-JP.pdf',
  'https://www.need.co.jp/wp-content/uploads/2025/04/doc-20200810_01.pdf',
 ]);

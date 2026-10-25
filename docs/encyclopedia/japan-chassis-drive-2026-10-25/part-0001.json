@@ -2442,10 +2442,31 @@
     "years": [
       2014
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Ford",
+        "code": "1FMHK9",
+        "fullCode": "ABA-1FMHK9",
+        "drive": "fwd",
+        "url": "https://cdn.dealereprocess.org/cdn/brochures/ford/2014-explorer.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF pages13–14, engines and available options",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "08d7ce0f572ca3df9b72b398d5de300ccb92680feaf877e2b28f27fa6a3b768e",
+        "statement": "Cross-source inference: MLIT recall GAI2085 identifies ABA-1FMHK9 Explorer as 2.0L. Original Ford2014 brochure specifications PDF13 list 2.0L EcoBoost only FWD; PDF14 explicitly excludes Intelligent4WD with that engine. Original factory brochure is an archived reproduction. Direct download returned403; indexed text and PDF table checked. No extrapolation to 1FMHK8.",
+        "identitySource": {
+          "url": "https://www.mlit.go.jp/common/001058461.pdf",
+          "sheet": "page1 type table",
+          "statement": "GAI2085: ABA-1FMHK9 Explorer2.0L, contrasted with ABA-1FMHK8 3.5L."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Ford",

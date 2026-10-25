@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-10-25",
+  "scope": "Existing unresolved codes and three contradictory MLIT rows; no guessed corrections",
+  "sourceConflicts": [
+    {
+      "code": "DJLFS",
+      "url": "https://www.mlit.go.jp/jidosha/content/001474448.xls",
+      "sheet": "マツダ",
+      "cell": "Q13",
+      "observed": "A",
+      "finding": "The source itself lists6BA-DJLFS with AWD; row11 same type/variant withF. Not a parser error. Retain ambiguity until corrected primary evidence."
+    },
+    {
+      "code": "AHH4B",
+      "url": "https://www.mlit.go.jp/jidosha/content/001337997.xls",
+      "sheet": "Renault",
+      "cell": "Q9",
+      "observed": "F",
+      "finding": "Source itself differs fromR in other years; no automatic override."
+    },
+    {
+      "code": "HE33S",
+      "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+      "sheet": "スズキ",
+      "cell": "R19",
+      "observed": "R",
+      "finding": "Source itself containsR for0601 variant, other documents containA. Shared FWD/AWD code remains ambiguous regardless."
+    }
+  ],
+  "remainingEvidenceLimits": {
+    "939EXN1B 57": "2009 factory manual reproduction identifies1750 and front drive but column layout not independently verified from page image; do not add yet. https://manualzz.com/doc/57122675/alfa-romeo-spider-2009-de-handleiding",
+    "949AXA2A,949AXB2A,949AXF2A,949AXH2A": "Manual type mapping not sufficient to bind drive.2.9V6 manual conflicts with Q4 launch; retain unknown.",
+    "3P10": "Japan factory brochure exacttype found; no explicit drive. Overseas D3 also offeredAWD, cannot assumeJapanRWD.",
+    "F152BE": "MLIT identifies812Superfast2020, laterCompetizionealso usescode; explicit manufacturerdrive evidence stillmissing.",
+    "MG20,MG30B": "Secondary catalog mapping found; exact primary Japanese type-to-version evidence missing.",
+    "DJFS": "Potential malformed code; not silently corrected toDJLFS.",
+    "KWK4M": "Factory recalls identifyKangoo; period-specific primarydrive document stillmissing."
+  }
+}
