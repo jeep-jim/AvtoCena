@@ -19,7 +19,7 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
   return age>=0&&age<7*86400000&&lot?.table==='stats'&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')&&lot.make&&lot.model&&lot.year>=JAPAN_MIN_MODEL_YEAR&&lot.year<=new Date(now).getUTCFullYear()+1
    &&/^sold$/i.test(lot.status||'')&&lot.finalPriceJpy>0&&!knownHeavyVehicleFamily(lot.make,lot.model)
    &&((input.powerFrom===undefined&&input.powerTo===undefined)||(()=>{
-    const values=ajesPowerFilterValues({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:lot.sourcePower}}});
+    const values=ajesPowerFilterValues({...lot,market:'japan',sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:lot.sourcePower,sourceFuel:lot.sourceFuel}}});
     return values.length>0&&values.every(hp=>(input.powerFrom===undefined||hp>=input.powerFrom)&&(input.powerTo===undefined||hp<=input.powerTo));
    })())
    &&(!makes||makes.includes(normalized(lot.make)))

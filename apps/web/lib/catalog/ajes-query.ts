@@ -1,3 +1,4 @@
+import {stepwgnOwnerSql} from './japan-owner-specifications';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
@@ -86,7 +87,8 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
     const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
     if(low>high)throw new AjesInputError();
     // Use the supplier's plain numeric comparison grammar. Validate normalized power again before display.
-    where.push(`pw>=${low}`,`pw<=${high}`);
+    if(stock)where.push(`pw>=${low}`,`pw<=${high}`);
+    else {const owner=stepwgnOwnerSql();where.push(`((${owner} and 150>=${low} and 150<=${high}) or (not ${owner} and pw>=${low} and pw<=${high}))`);}
   }
   if(q.aggregate!==undefined&&!['count','models','makes','colors'].includes(q.aggregate))throw new AjesInputError();
   if(q.aggregate==='count')return {table,empty,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};

@@ -1,3 +1,4 @@
+import {isOwnerStepwgnNonHybrid} from './japan-owner-specifications';
 import type {VehicleOffer} from './types';
 
 /** Owner-authorized starting value for an editable estimate, never a verified specification. */
@@ -13,6 +14,7 @@ export function ajesPowerEstimateHp(offer:Partial<VehicleOffer>):number|undefine
 
 /** Conservative discovery only; never promotes supplier alternatives to exact engine power. */
 export function ajesPowerFilterValues(offer:Partial<VehicleOffer>):number[] {
+ if(isOwnerStepwgnNonHybrid(offer))return [150];
  if(offer.sourceId!=='ajes_japan_feed')return [];
  const raw=offer.operational?.raw as {sourcePower?:unknown}|undefined;
  const value=typeof raw?.sourcePower==='string'?raw.sourcePower.trim():'';

@@ -1,4 +1,4 @@
-import {applyJapanDefaultFuel} from './japan-default-fuel';
+import {applyJapanOwnerSpecifications,isOwnerStepwgnNonHybrid} from './japan-owner-specifications';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import { restoreSourceModelName } from "./source-model-name";
 import {isGreenCornerOffer} from "./green-corner-contract";
@@ -14,6 +14,8 @@ import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-ev
 export function safePublicPricing<T extends Record<string, any>>(input: T): T {
   input = applyUaeManualSpecifications(restoreSourceModelName(withoutRetiredExportCharge(input)));
   if(input.market==='uae')return input;
+  if(isOwnerStepwgnNonHybrid(input))input=applyJapanOwnerSpecifications(input);
+  const ownerPower=isOwnerStepwgnNonHybrid(input)&&input.powerHp===150&&input.powerDataSource==='owner_policy:stepwgn_nonhybrid_150:2026-10-25';
   const namedKind = namedElectrifiedPowertrainKind(input);
   const powertrainMismatch = Boolean(namedKind && input.powertrainKind === 'combustion');
   const sanity = catalogPowerSanity(input);
@@ -22,8 +24,10 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
   const rejected = new Set(!input.cardProjectionVersion && input.operational ? SPECIFICATION_AUDIT_FIELDS.filter(field =>
     ['ambiguous', 'conflict'].includes(classifySpecificationEvidence(input, field).state)) : []);
   for (const field of auditedQuoteRejections(input)) rejected.add(field);
+  // This narrow owner input is not external evidence. Keep all non-power guards.
+  if(ownerPower)rejected.delete('powerHp');
   const powerRejected = sanity.suspicious || rejected.has('powerHp') || rejected.has('certifiedPower') || combustionPowerMismatch(input);
-  if (!powerRejected && !rejected.size && !powertrainMismatch) return applyJapanDefaultFuel(input);
+  if (!powerRejected && !rejected.size && !powertrainMismatch) return applyJapanOwnerSpecifications(input);
   // A rejected peak-power observation must not erase independently attested
   // 30-minute power. The attestation must still bind after all rejected power
   // fields are removed; a combined/stale attestation cannot take this path.
@@ -50,7 +54,7 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
     // retain its date instead of dropping inventory before repricing can run.
     && Number.isFinite(date) && date <= Date.now() + 86400000;
   const sellerPriceRub = bound ? Math.round(price * effectiveRate) : undefined;
-  return applyJapanDefaultFuel({
+  return applyJapanOwnerSpecifications({
     ...input,
     ...(powerRejected ? {powerHp: undefined, powerKw: undefined, icePowerKw: undefined,
       power30MinKw: retainCertifiedPower ? input.power30MinKw : undefined,

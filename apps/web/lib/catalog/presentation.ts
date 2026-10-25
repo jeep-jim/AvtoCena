@@ -1,4 +1,4 @@
-import {applyJapanDefaultFuel} from './japan-default-fuel';
+import {applyJapanOwnerSpecifications} from './japan-owner-specifications';
 import {catalogBodyType} from './pickup-body';
 import {internationalModel} from './international-model';
 import { CATALOG_MARKET_LABELS } from "./runtime-config";
@@ -599,7 +599,7 @@ export function catalogOfferTitle(offer: any) {
 }
 
 export function presentCatalogOffer(offer: any) {
- offer=applyJapanDefaultFuel(offer);
+ offer=applyJapanOwnerSpecifications(offer);
   const images = Array.isArray(offer?.images)
     ? offer.images.map((image: any) => safeCatalogText(image?.url)).filter(Boolean)
     : [];
