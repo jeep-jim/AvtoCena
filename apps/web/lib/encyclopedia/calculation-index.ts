@@ -145,15 +145,22 @@ function applyAnnualEncyclopediaCalculation<T extends Record<string,any>>(offer:
   // Retire only values inserted by the previous index, never later manual edits.
   const fresh:any={...offer,operational:{...offer.operational,semanticEvidence:{...offer.operational?.semanticEvidence}}};
   for(const field of previous.filledFields||[])delete fresh[field];
+  const refinement=offer.operational?.encyclopediaPowertrainRefinement;
+  if(refinement?.indexDigest===previous.indexDigest&&refinement.sourceIdentity===calculationSourceIdentity(offer)&&offer.powertrainKind===refinement.kind){
+   fresh.powertrainKind=refinement.originalKind;
+   delete fresh.operational.encyclopediaPowertrainRefinement;
+  }
   for(const field of Object.keys(previous.values))if(fresh.operational.semanticEvidence[field]?.source===`permanent_encyclopedia:${previous.indexDigest}`){
    const original=fresh.operational.semanticEvidence[field].resolvedSourceEvidence;
    if(original)fresh.operational.semanticEvidence[field]=original;else delete fresh.operational.semanticEvidence[field];
   }
+  if(refinement?.indexDigest===previous.indexDigest&&refinement.sourceIdentity===calculationSourceIdentity(offer)&&refinement.originalFuelEvidence&&!fresh.operational.semanticEvidence.fuel)fresh.operational.semanticEvidence.fuel=refinement.originalFuelEvidence;
   delete fresh.operational.encyclopediaCalculation;delete fresh.encyclopediaCalculation;
   if(previous.filledFields?.some((f:string)=>['engineCc','powerHp','powerKw','icePowerKw','power30MinKw','fuel','powertrainKind','grossVehicleWeightKg'].includes(f))){fresh.totalRub=null;fresh.publicVisibleRub=undefined;fresh.publicSpecificationVerified=false;fresh.calculationSnapshot=undefined;fresh.catalogPricingMode='seller';}
   if(fresh.powerDataSource===`permanent_encyclopedia:${previous.indexDigest}`){delete fresh.powerDataSource;delete fresh.powerDataConfidence;}
   offer=fresh;
  }
+ const refinementBase=offer;if(options.specificationIdentity)offer=refineUnattestedHybridKind(offer,index);const kindRefined=offer!==refinementBase;
  const trim=token(offer.trim);
  const identity={...offer,chassisCode:offer.chassisCode||offer.operational?.chassisCode};
  const annual=(index.models[modelKey(offer.make,offer.model)]||[]).filter(v=>v.year===offer.year);
@@ -220,7 +227,7 @@ function applyAnnualEncyclopediaCalculation<T extends Record<string,any>>(offer:
    candidates=pool;specificationMatch=true;ordinarySpecificationMatch=true;
   }
  }
- if(!candidates.length)return offer;
+ if(!candidates.length)return refinementBase;
  const next:any={...offer},applied:any={},provenance:any={},filledFields:string[]=[],semantic={...offer.operational?.semanticEvidence};
  for(const field of factFields){
   // Certification belongs to an exact modification; a code-only bridge is not sufficient.
@@ -240,13 +247,36 @@ function applyAnnualEncyclopediaCalculation<T extends Record<string,any>>(offer:
   semantic[field]={status:'exact',value:next[field],source:`permanent_encyclopedia:${index.digest}`,provenance:provenance[field],
    ...(ambiguous?{resolvedSourceEvidence:semantic[field]}:{})};
  }
- if(!Object.keys(applied).length)return offer;
+ if(!Object.keys(applied).length||(kindRefined&&!applied.powertrainKind))return refinementBase;
+ if(kindRefined&&!filledFields.includes('powertrainKind'))filledFields.push('powertrainKind');
  if(applied.powerHp||applied.powerKw){next.powerDataSource=`permanent_encyclopedia:${index.digest}`;next.powerDataConfidence=Object.values(provenance).flat().some((s:any)=>s.kind==='owner_reference')?'source_exact':'documented';}
  next.operational={...offer.operational,semanticEvidence:semantic,encyclopediaCalculation:{version:1,indexDigest:index.digest,
   sourceIdentity:calculationSourceIdentity(offer),values:applied,provenance,filledFields,matchMethod:specificationMatch?'specification_consensus':technicalMatch?'technical_identity':'exact_trim'}};
  next.encyclopediaCalculation={version:1,indexDigest:index.digest,sourceIdentity:calculationSourceIdentity(offer),
   values:applied,filledFields};
  return next;
+}
+
+/** Che168's bare hybrid fallback is not evidence of a parallel drivetrain.
+ * Refine only an unattested default against an exact named, mechanically matching,
+ * independently reviewed annual variant. Keep explicit source/manual conflicts. */
+function refineUnattestedHybridKind<T extends Record<string,any>>(offer:T,index:CalculationIndex|null):T {
+ const semantic=offer.operational?.semanticEvidence;
+ if(!index||offer.sourceId!=='autohome_used_china_open'||offer.market!=='china'||offer.fuel!=='hybrid'||offer.powertrainKind!=='other_hybrid'
+  ||!offer.trim||offer.manualEditedAt||/manual|customer_input/i.test(offer.powerDataSource||'')||offer.calculationSnapshot?.modificationScenario
+  ||hasEncyclopediaCalculationEvidence(offer)||semantic?.powertrainKind
+  ||semantic?.fuel?.source!=='auto_api_che168:engine_type'||semantic.fuel.status!=='exact'||semantic.fuel.value!=='hybrid')return offer;
+ const rows=(index.models[modelKey(offer.make,offer.model)]||[]).filter(v=>v.year===offer.year&&v.trims.includes(token(offer.trim))
+  &&Object.entries(v.constraints).every(([f,value])=>f==='powertrainKind'||!exists(offer[f])||same(f,offer[f],value)));
+ if(!rows.length||!rows.every(v=>{
+  const proof=v.sources.powertrainKind,x=v.values;
+  return proof?.batchId&&['manufacturer','official_registry','manual'].includes(proof.kind)&&x.powertrainKind==='series_hybrid'
+   &&['fuel','engineCc','drive'].every(f=>exists(offer[f])&&exists((x as any)[f])&&same(f,offer[f],(x as any)[f]))
+   &&['powerHp','powerKw'].some(f=>exists(offer[f])&&exists((x as any)[f])&&same(f,offer[f],(x as any)[f]));
+ }))return offer;
+ return {...offer,powertrainKind:'series_hybrid',operational:{...offer.operational,encyclopediaPowertrainRefinement:{
+  indexDigest:index.digest,originalKind:offer.powertrainKind,kind:'series_hybrid',
+  sourceIdentity:calculationSourceIdentity(offer),originalFuelEvidence:semantic.fuel,provenance:rows.map(v=>({modelId:v.modelId,variantId:v.variantId,...v.sources.powertrainKind}))}}};
 }
 
 /** Annual facts and immutable ASTRA technical certificates have separate matching rules. */
