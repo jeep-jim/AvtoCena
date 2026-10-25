@@ -13,3 +13,5 @@ test('hybrid peak field is not compared to motor or ICE output',()=>{const r=sel
 test('annual precedent more than three years away is excluded',()=>{assert.equal(select(offer,[{...fact(),year:2018}]).status,'no_compatible_documented_precedent');});
 
 test("regional name expansion preserves Dolphin/Seagull distinction",()=>{assert.deepEqual(precedentModelKeys("byd:dolphin").keys,["byd:dolphin"]);assert.ok(precedentModelKeys("byd:seagull").keys.includes("byd:dolphinsurf"));assert.ok(precedentModelKeys("nio:es6").regionalNameEvidence.url.startsWith("https://us.nio.com/"));assert.deepEqual(precedentModelKeys("nio:es7").keys,["nio:es7"]);});
+
+test('a traceable owner confirmed precedent retains its manual provenance',()=>{const f=fact(30);f.sources.power30MinKw={kind:'manual',url:'https://avtocena.com/cars/autocatalog',batchId:'owner-confirmed-test'};const r=select(offer,[f]);assert.equal(r.certified,false);assert.equal(r.references[0].source.kind,'manual');assert.equal(r.estimatedPower30MinKw,30);});
