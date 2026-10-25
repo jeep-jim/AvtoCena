@@ -9,6 +9,10 @@ import {digest} from './research-batch.mjs';
 const storage=getJsonStorage();if(storage.driver!=='object')throw Error('object_required');storage.writeJson=async()=>{throw Error('read_only');};
 const marker=JSON.parse(await fs.readFile('.github/market-runs/power30-blockers.json','utf8'));
 let indexDigest='11839d1317e7bf5cb55e82bd0cf044ca33e909dd3a28567fa4da47697191db42';
+if(marker.previewIndexDigest){
+ if(marker.inspectRelease||! /^[a-f0-9]{64}$/.test(marker.previewIndexDigest))throw Error('invalid_preview_index');
+ indexDigest=marker.previewIndexDigest;
+}
 async function verifyActiveRelease(){
  if(!marker.inspectRelease)return;
  if(!/^[a-f0-9]{40}$/.test(marker.inspectRelease))throw Error('invalid_release');
