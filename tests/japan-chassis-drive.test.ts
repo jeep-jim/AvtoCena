@@ -11,7 +11,7 @@ test('official type lookup qualifies make, preserves conflicting drive and handl
 });
 import {enrichJapanDrive,japanDriveSql} from '../apps/web/lib/catalog/japan-drive';
 test('older official tables and electric manufacturer types enter the same pre-pagination predicates',()=>{
- for(const [make,code,drive] of [['BMW','ZAA-72AW44','rwd'],['BMW','ABA-VA20','rwd'],['AUDI','ABA-4LBHKS','awd'],['Audi','8KCAB','fwd'],['Honda','RM7','fwd'],['Honda','CL9','fwd'],['Nissan','DBA-E11','fwd']] as const){
+ for(const [make,code,drive] of [['BMW','ZAA-72AW44','rwd'],['BMW','ABA-VA20','rwd'],['AUDI','ABA-4LBHKS','awd'],['Audi','8KCAB','fwd'],['Honda','RM7','fwd'],['Honda','CL9','fwd'],['Nissan','DBA-E11','fwd'],['Ford','ABA-WF0SFJ','fwd'],['Mitsubishi','ZAA-HD4W','rwd'],['Citroën','B75F01S','fwd'],['Renault','DZF4R','fwd']] as const){
   assert.equal(lookupJapanChassisDrive(make,code),drive);
   assert.equal(enrichJapanDrive({market:'japan',make,chassisCode:code}).drive,drive);
   assert.ok(japanDriveSql(drive).includes(`'${japanChassisCode(code)}'`));

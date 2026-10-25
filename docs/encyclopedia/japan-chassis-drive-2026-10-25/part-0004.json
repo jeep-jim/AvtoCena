@@ -20,10 +20,26 @@
     "years": [
       2013
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Renault",
+        "code": "DZF4R",
+        "fullCode": "ABA-DZF4R",
+        "drive": "fwd",
+        "url": "https://www.renault.jp/car_lineup/megane_rs/spec/index.html",
+        "sourceType": "manufacturer",
+        "sheet": "Factory specification",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "01e54d63064e8e222c6591fbe4014221c08571bb267fbe431b78800f067282e3",
+        "statement": "Renault Japan, заводская таблица Megane R.S. 3-door ABA-DZF4R, 6MT: FF. Проверен индексированный текст страницы производителя; прямое открытие вернуло403. Хеш относится к проверенному утверждению."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "RENAULT",

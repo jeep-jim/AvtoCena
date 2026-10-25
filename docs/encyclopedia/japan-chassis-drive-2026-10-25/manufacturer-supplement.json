@@ -297,5 +297,58 @@
     "hashScope": "source_bytes",
     "sha256": "a3cdeeb4b33c87c8aace0a33566aed9450a8347edce2690347bce61e4107bdea",
     "statement": "Заводская таблица Alto 2004: CBA-HA24S имеет FF и full-time 4WD. Один код не определяет привод конкретного автомобиля."
+  },
+  {
+    "brand": "Ford",
+    "code": "WF0SFJ",
+    "fullCode": "ABA-WF0SFJ",
+    "drive": "fwd",
+    "url": "https://autocatalogarchive.com/wp-content/uploads/2016/08/Ford-Fiesta-2014-JP.pdf",
+    "sourceType": "manufacturer",
+    "sheet": "Factory brochure, SPECIFICATIONS",
+    "row": 1,
+    "hashScope": "reviewed_statement",
+    "sha256": "6e225a545ad4fda4077dbef8ee5c249adf872b3c4b060c2c173a3ef83399e0e3",
+    "statement": "Ford Japan, заводская брошюра Fiesta 2014: ABA-WF0SFJ 1.0 EcoBoost, FF. Раздел SPECIFICATIONS/主要諸元; проверен индексированный текст оригинальной брошюры в архиве. Прямое скачивание архива вернуло403; SHA256 относится к этому проверенному утверждению, не байтам PDF."
+  },
+  {
+    "brand": "Mitsubishi",
+    "code": "HD4W",
+    "fullCode": "ZAA-HD4W",
+    "drive": "rwd",
+    "url": "https://www.need.co.jp/wp-content/uploads/2025/04/doc-20200810_01.pdf",
+    "originalUrl": "https://www.mitsubishi-motors.co.jp/lineup/i-miev/spec/pdf/i-miev_spec.pdf",
+    "sourceType": "manufacturer",
+    "sheet": "Reproduced factory table, PDF page 17 / printed 12",
+    "row": 1,
+    "hashScope": "source_bytes",
+    "sha256": "7bc345220edcd3ccfca7d8259396d945ba7a258e3c6645ef6eff3d14f0780384",
+    "statement": "Заводская таблица Mitsubishi i-MiEV: ZAA-HD4W, X, 2WD（後輪駆動） — задний привод. Проверено изображение таблицы производителя, воспроизведённое с указанием исходной ссылки в отчёте NEED, PDF страница17 (печатная12). Исходный URL Mitsubishi вернул403; используется явная архивная репродукция, а не утверждение об успешном скачивании оригинала."
+  },
+  {
+    "brand": "Citroen",
+    "code": "B75F01S",
+    "fullCode": "ABA-B75F01S",
+    "drive": "fwd",
+    "url": "https://web.citroen.jp/press/permitted/document/pdf/C4_Press_Info.pdf",
+    "sourceType": "manufacturer",
+    "sheet": "PDF page 15",
+    "row": 1,
+    "hashScope": "source_bytes",
+    "sha256": "0686f85729d4ad4cd9c618daaf6d1fa54e8103064475f054d7785c13ffd1d91e",
+    "statement": "Заводской пресс-каталог C4, страница15: ABA-B75F01S (Seduction с панорамной крышей), общий ряд 駆動方式 — 前輪駆動 (передний привод). Проверены столбцы изображения PDF."
+  },
+  {
+    "brand": "Renault",
+    "code": "DZF4R",
+    "fullCode": "ABA-DZF4R",
+    "drive": "fwd",
+    "url": "https://www.renault.jp/car_lineup/megane_rs/spec/index.html",
+    "sourceType": "manufacturer",
+    "sheet": "Factory specification",
+    "row": 1,
+    "hashScope": "reviewed_statement",
+    "sha256": "01e54d63064e8e222c6591fbe4014221c08571bb267fbe431b78800f067282e3",
+    "statement": "Renault Japan, заводская таблица Megane R.S. 3-door ABA-DZF4R, 6MT: FF. Проверен индексированный текст страницы производителя; прямое открытие вернуло403. Хеш относится к проверенному утверждению."
   }
 ]

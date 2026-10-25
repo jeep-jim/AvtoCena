@@ -1,0 +1,508 @@
+{
+  "checkedAt": "2026-10-25",
+  "scope": "Existing saved codes only; not supplier inventory census",
+  "unresolved": [
+    {
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "chassisCode": "939EXB1B 19",
+      "years": [
+        2008
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "chassisCode": "939EXG2B 28",
+      "years": [
+        2008,
+        2010
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "chassisCode": "939EXN1B 57",
+      "years": [
+        2010
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "chassisCode": "949AXA2A",
+      "years": [
+        2018
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "chassisCode": "949AXB2A",
+      "years": [
+        2018
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "chassisCode": "949AXF2A",
+      "years": [
+        2018
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "chassisCode": "949AXH2A",
+      "years": [
+        2018
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "chassisCode": "949AXL2A",
+      "years": [
+        2018
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "chassisCode": "949AXM2A",
+      "years": [
+        2018,
+        2020
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "chassisCode": "949AXN1A",
+      "years": [
+        2018,
+        2020
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "chassisCode": "949AXP1A",
+      "years": [
+        2018,
+        2020
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alpina",
+      "model": "D3",
+      "chassisCode": "3U40",
+      "years": [
+        2021
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alpina",
+      "model": "D3",
+      "chassisCode": "3P10",
+      "years": [
+        2016,
+        2018
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alpina",
+      "model": "D5",
+      "chassisCode": "5U40",
+      "years": [
+        2021
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Alpina",
+      "model": "D5",
+      "chassisCode": "5U20",
+      "years": [
+        2019
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "AUDI",
+      "model": "A4",
+      "chassisCode": "8EALT",
+      "years": [
+        2008
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "BMW",
+      "model": "3 SERIES",
+      "chassisCode": "8E20",
+      "years": [
+        2017
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Citroën",
+      "model": "C3",
+      "chassisCode": "A55F01",
+      "years": [
+        2012,
+        2013
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Citroën",
+      "model": "C3",
+      "chassisCode": "A5HM01",
+      "years": [
+        2014,
+        2015,
+        2017
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Dodge",
+      "model": "Charger",
+      "chassisCode": "フメイ",
+      "years": [
+        2010,
+        2011
+      ],
+      "reason": "invalid_unknown_code"
+    },
+    {
+      "make": "Ferrari",
+      "model": "812",
+      "chassisCode": "F152BE",
+      "years": [
+        2020
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Ford",
+      "model": "Explorer",
+      "chassisCode": "1FMHK9",
+      "years": [
+        2014
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "ISUZU",
+      "model": "COMO",
+      "chassisCode": "JVWE25",
+      "years": [
+        2008,
+        2009
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYJ77A",
+      "years": [
+        2014,
+        2015
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYJ77B",
+      "years": [
+        2016
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYJ77BA",
+      "years": [
+        2016
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYJ77C",
+      "years": [
+        2018,
+        2019
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYJ77W8",
+      "years": [
+        2010
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYJ77W8Aカイ",
+      "years": [
+        2010
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYL77A",
+      "years": [
+        2015
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYL77B",
+      "years": [
+        2016
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYL77V8",
+      "years": [
+        2008,
+        2009
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYY77AJ",
+      "years": [
+        2012
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "CYZ77CMQ",
+      "years": [
+        2020
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "EXD52AD",
+      "years": [
+        2014,
+        2016
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "EXD52CD",
+      "years": [
+        2018,
+        2020
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "FRR34S2",
+      "years": [
+        2008
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "FRR90S2",
+      "years": [
+        2008
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "ISUZU",
+      "model": "TRUCK",
+      "chassisCode": "NKR85AD",
+      "years": [
+        2015
+      ],
+      "reason": "truck_excluded"
+    },
+    {
+      "make": "LAMBORGHINI",
+      "model": "URUS",
+      "chassisCode": "ZLDHU",
+      "years": [
+        2019
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MASERATI",
+      "model": "GHIBLI",
+      "chassisCode": "MG20",
+      "years": [
+        2023
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MASERATI",
+      "model": "GHIBLI",
+      "chassisCode": "MG30A",
+      "years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MASERATI",
+      "model": "GHIBLI",
+      "chassisCode": "MG30AA",
+      "years": [
+        2014,
+        2015
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MASERATI",
+      "model": "GHIBLI",
+      "chassisCode": "MG30B",
+      "years": [
+        2014,
+        2015,
+        2016
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MASERATI",
+      "model": "GHIBLI",
+      "chassisCode": "MG30C",
+      "years": [
+        2017,
+        2020
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MASERATI",
+      "model": "GHIBLI",
+      "chassisCode": "MG30D",
+      "years": [
+        2016
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MASERATI",
+      "model": "GRECALE",
+      "chassisCode": "MGR20A",
+      "years": [
+        2023
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MASERATI",
+      "model": "GRECALE",
+      "chassisCode": "MGR20C",
+      "years": [
+        2023
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MASERATI",
+      "model": "GRECALE",
+      "chassisCode": "MGR30",
+      "years": [
+        2023
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA2",
+      "chassisCode": "DJFS",
+      "years": [
+        2020
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "408",
+      "chassisCode": "P545G06H",
+      "years": [
+        2023
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "Renault",
+      "model": "Kangoo",
+      "chassisCode": "KWK4M",
+      "years": [
+        2011
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    },
+    {
+      "make": "TESLA",
+      "model": "MODELY",
+      "chassisCode": "YL1YT",
+      "years": [
+        2023
+      ],
+      "reason": "exact_primary_drive_evidence_missing"
+    }
+  ],
+  "ambiguousGroups": 46,
+  "policy": "No drive guesses or admission of excluded trucks. Need exact primary evidence or per-vehicle source drive."
+}

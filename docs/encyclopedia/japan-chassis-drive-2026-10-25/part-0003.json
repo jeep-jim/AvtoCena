@@ -1613,10 +1613,27 @@
     "years": [
       2019
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Mitsubishi",
+        "code": "HD4W",
+        "fullCode": "ZAA-HD4W",
+        "drive": "rwd",
+        "url": "https://www.need.co.jp/wp-content/uploads/2025/04/doc-20200810_01.pdf",
+        "originalUrl": "https://www.mitsubishi-motors.co.jp/lineup/i-miev/spec/pdf/i-miev_spec.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "Reproduced factory table, PDF page 17 / printed 12",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "7bc345220edcd3ccfca7d8259396d945ba7a258e3c6645ef6eff3d14f0780384",
+        "statement": "Заводская таблица Mitsubishi i-MiEV: ZAA-HD4W, X, 2WD（後輪駆動） — задний привод. Проверено изображение таблицы производителя, воспроизведённое с указанием исходной ссылки в отчёте NEED, PDF страница17 (печатная12). Исходный URL Mitsubishi вернул403; используется явная архивная репродукция, а не утверждение об успешном скачивании оригинала."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Mitsubishi",

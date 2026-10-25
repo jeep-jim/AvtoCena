@@ -115,7 +115,7 @@
 | Citroën | C3 | B6HN01 | Передний | [Источник](https://www.mlit.go.jp/common/001225527.xls), Citroen, строка 9 |
 | Citroën | C3 | B6HN05 | Передний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), シトロエン, строка 9 |
 | Citroën | C3 | C2HN09 | Передний | [Источник](https://www.mlit.go.jp/common/001286997.xlsx), 1-1, строка 9 |
-| Citroën | C4 | B75F01S | Не подтверждён | Нужен другой источник |
+| Citroën | C4 | B75F01S | Передний | [Источник](https://web.citroen.jp/press/permitted/document/pdf/C4_Press_Info.pdf), PDF page 15, строка 1 |
 | DAIHATSU | HIJET VAN | S321V | Задний | [Источник](https://www.mlit.go.jp/common/000989201.xls), Daihatsu, строка 15 |
 | DAIHATSU | MOVE | L175S | Передний | [Источник](https://u-catch.daihatsu.co.jp/catalog/MOVE/MODEL__200610/), Factory specification, строка 1 |
 | DAIHATSU | MOVE | L185S | Полный | [Источник](https://u-catch.daihatsu.co.jp/catalog/MOVE/MODEL__200610/), Factory specification, строка 1 |
@@ -129,7 +129,7 @@
 | Fiat | 500 | 31212 | Передний | [Источник](https://www.mlit.go.jp/common/000989174.xls), Fiat, строка 15 |
 | FIAT | 500X | 33414 | Полный, Передний | [Источник](https://www.mlit.go.jp/common/001125031.xls), Fiat, строка 12 |
 | Ford | Explorer | 1FMHK9 | Не подтверждён | Нужен другой источник |
-| Ford | Fiesta | WF0SFJ | Не подтверждён | Нужен другой источник |
+| Ford | Fiesta | WF0SFJ | Передний | [Источник](https://autocatalogarchive.com/wp-content/uploads/2016/08/Ford-Fiesta-2014-JP.pdf), Factory brochure, SPECIFICATIONS, строка 1 |
 | Honda | Accord | CL9 | Передний | [Источник](https://www.honda.co.jp/auto-archive/accord/4door/2008/grade-data/), Factory specification, строка 1 |
 | Honda | Accord | CR6 | Передний | [Источник](https://www.mlit.go.jp/common/001031309.xls), Honda, строка 8 |
 | Honda | Accord | CR7 | Передний | [Источник](https://www.mlit.go.jp/common/001178228.xls), Honda, строка 41 |
@@ -232,7 +232,7 @@
 | Mercedes-Benz | B-Class | 246242 | Передний | [Источник](https://www.mlit.go.jp/common/000989174.xls), Mercedes, строка 12 |
 | Mitsubishi | EK WAGON | B33W | Передний | [Источник](https://www.mlit.go.jp/common/000234333.xlsx), （新）1-6(軽), строка 9 |
 | Mitsubishi | EK WAGON | H82W | Полный, Передний | [Источник](https://www.mlit.go.jp/common/000989171.xls), Mitsubishi, строка 9 |
-| Mitsubishi | i-MiEV | HD4W | Не подтверждён | Нужен другой источник |
+| Mitsubishi | i-MiEV | HD4W | Задний | [Источник](https://www.need.co.jp/wp-content/uploads/2025/04/doc-20200810_01.pdf), Reproduced factory table, PDF page 17 / printed 12, строка 1 |
 | Mitsubishi | Mirage | A03A | Передний | [Источник](https://www.mlit.go.jp/common/000234300.xlsx), 1-6(乗用・小型)_輸入, строка 9 |
 | Mitsubishi | OUTLANDER PHEV | GG3W | Полный | [Источник](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/spec/pdf/outlander_phev_spec_G_figure.pdf), PDF, строка 1 |
 | Nissan | CUBE | Z12 | Передний | [Источник](https://www.mlit.go.jp/common/000989168.xls), Nissan, строка 13 |
@@ -261,7 +261,7 @@
 | PEUGEOT | 408 | P54HN05 | Передний | [Источник](https://www.mlit.go.jp/common/000234291.xlsx), 1-6, строка 13 |
 | PEUGEOT | 5008 | P87AH01 | Передний | [Источник](https://www.mlit.go.jp/common/001225532.xls), Peugeot, строка 27 |
 | Renault | Kangoo | KWK4M | Не подтверждён | Нужен другой источник |
-| RENAULT | MEGANE | DZF4R | Не подтверждён | Нужен другой источник |
+| RENAULT | MEGANE | DZF4R | Передний | [Источник](https://www.renault.jp/car_lineup/megane_rs/spec/index.html), Factory specification, строка 1 |
 | RENAULT | TWINGO | AHH4B | Передний, Задний | [Источник](https://www.mlit.go.jp/common/001178235.xls), Renault, строка 9 |
 | SUBARU | IMPREZA | GT7 | Полный | [Источник](https://www.mlit.go.jp/common/001178228.xls), Subaru, строка 48 |
 | SUBARU | LEVORG | VM4 | Полный | [Источник](https://www.mlit.go.jp/common/001084235.xls), Subaru, строка 59 |

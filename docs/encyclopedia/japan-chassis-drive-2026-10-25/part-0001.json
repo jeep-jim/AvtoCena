@@ -1803,10 +1803,26 @@
     "years": [
       2013
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Citroen",
+        "code": "B75F01S",
+        "fullCode": "ABA-B75F01S",
+        "drive": "fwd",
+        "url": "https://web.citroen.jp/press/permitted/document/pdf/C4_Press_Info.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 15",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "0686f85729d4ad4cd9c618daaf6d1fa54e8103064475f054d7785c13ffd1d91e",
+        "statement": "Заводской пресс-каталог C4, страница15: ABA-B75F01S (Seduction с панорамной крышей), общий ряд 駆動方式 — 前輪駆動 (передний привод). Проверены столбцы изображения PDF."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "DAIHATSU",
@@ -2385,10 +2401,26 @@
     "years": [
       2014
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Ford",
+        "code": "WF0SFJ",
+        "fullCode": "ABA-WF0SFJ",
+        "drive": "fwd",
+        "url": "https://autocatalogarchive.com/wp-content/uploads/2016/08/Ford-Fiesta-2014-JP.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "Factory brochure, SPECIFICATIONS",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "6e225a545ad4fda4077dbef8ee5c249adf872b3c4b060c2c173a3ef83399e0e3",
+        "statement": "Ford Japan, заводская брошюра Fiesta 2014: ABA-WF0SFJ 1.0 EcoBoost, FF. Раздел SPECIFICATIONS/主要諸元; проверен индексированный текст оригинальной брошюры в архиве. Прямое скачивание архива вернуло403; SHA256 относится к этому проверенному утверждению, не байтам PDF."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Honda",
