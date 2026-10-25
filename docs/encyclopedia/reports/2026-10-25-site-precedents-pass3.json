@@ -1,0 +1,36 @@
+{
+  "runId": 40201543140,
+  "jobId": 121193584012,
+  "key": "knowledge/encyclopedia/power30-precedents/runs/2026-10-25-site-models-03/manifest.json",
+  "summary": {
+    "startedAt": "2026-10-25T14:20:02.992Z",
+    "catalog": {
+      "checked": 83355,
+      "byStatus": {
+        "no_compatible_documented_precedent": 47796,
+        "range_requires_version": 16733,
+        "estimated": 18062,
+        "existing_value_preserved": 764
+      }
+    },
+    "encyclopedia": {
+      "models": 2371,
+      "checked": 21842,
+      "byStatus": {
+        "estimated": 5742,
+        "no_compatible_documented_precedent": 11953,
+        "range_requires_version": 4070,
+        "existing_value_preserved": 77
+      }
+    },
+    "storageWrites": 259,
+    "certifiedFieldWrites": 0,
+    "finishedAt": "2026-10-25T14:30:28.772Z",
+    "bindings": 105197,
+    "resolutions": 1228,
+    "references": 13106,
+    "reusableProfiles": 8193,
+    "activeModelKeys": 2693
+  },
+  "readback": true
+}
