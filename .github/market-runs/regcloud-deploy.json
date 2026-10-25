@@ -54,7 +54,8 @@
     "docs/encyclopedia/batches/2026-10-25-audi-a6-diesel-drive.json",
     "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0000.json",
     "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0001.json",
-    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0002.json"
+    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0002.json",
+    "docs/encyclopedia/batches/2026-10-25-worldwide-electric-reviewed.json"
   ],
   "publicResearchBatches": [
     "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -97,14 +98,15 @@
     "docs/encyclopedia/batches/2026-10-25-audi-a6-diesel-drive.json",
     "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0000.json",
     "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0001.json",
-    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0002.json"
+    "docs/encyclopedia/batches/2026-10-25-japan-chassis-drive-0002.json",
+    "docs/encyclopedia/batches/2026-10-25-worldwide-electric-reviewed.json"
   ],
   "requiredAstraPlanDigests": [
     "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "ASTRA 30-minute follow-up: keep certificate binding valid through the existing Q4 e-tron → Q4 display rename; preserve the original matched identity, id/year/technical input guards and all55/41/3 release guards. Same saved source corpus and matching rules. 135tests+TypeScript PASS.",
+  "reason": "Worldwide EV/HEV verified increment: EV automatic/single-speed candidate compatibility and Mercedes C/E/S reference-family union, retaining unknown/conflicting certificate blockers. Reviewed 11 factory rows applied/read back in run40192424153. Read-only same-snapshot coverage 215→761 documented30 rows,180→720 complete technical sets, not full prices. 50 targeted tests PASS; preserve all prior55/41/3 guards; no claim of complete coverage.",
   "ideaReports": [],
-  "requestedAt": "2026-10-25T11:03:15.859Z"
+  "requestedAt": "2026-10-25T12:18:50.964Z"
 }
