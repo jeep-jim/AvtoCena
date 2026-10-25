@@ -1,3 +1,4 @@
+import {usedPower30Precedent} from './power30-precedent';
 import {hasAstraPower30Evidence} from '../encyclopedia/astra-power30-evidence';
 import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-index';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
@@ -553,7 +554,7 @@ export async function calculateCustomerParameterScenario(input: VehicleOffer, pa
   input=applyUaeManualSpecifications(input);
   const scenario: VehicleOffer = { ...withoutDeliveredPrice(input), ...parameters,
     catalogPricingMode: undefined, sellerPriceRub: undefined, modificationSelection: undefined, recoveryQualification: undefined,
-    powerDataConfidence: "estimated", powerDataSource: "customer_input",
+    powerDataConfidence: "estimated", powerDataSource: usedPower30Precedent(input,parameters)?"model_precedent":"customer_input",
     utilizationPowerKw: undefined, power30MinKwByMotor: undefined, productionDate: parameters.productionDate,
     calculationSnapshot: {}, operational: { ...input.operational, raw: undefined } };
   return requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(scenario, false, undefined, true, true));
@@ -566,7 +567,8 @@ export async function calculateOfferWithCustomerParametersDetailed(input: Vehicl
     const missing = [...new Set<string>([...(snapshot?.missing || []), ...(snapshot?.customs?.missing || [])])];
     return { ok: false as const, error: customerCalculationFailureMessage(missing), missing };
   }
-  return {ok: true as const, calculation: {customsValue:result.calculationSnapshot?.customsValue,deliveryPricingBasis:deliveryPricingBasis(result.calculationSnapshot),deliveryQuote:result.calculationSnapshot?.deliveryQuote,totalRub:result.totalRub,paymentPlan:result.calculationSnapshot?.paymentPlan,currencyRate:result.calculationSnapshot?.currencyRate,breakdown:customerPriceBreakdown(expandCustomsBreakdown(result.calculationSnapshot?.breakdown || [],result.calculationSnapshot?.customs)),rateDate:result.calculationSnapshot?.currencyRate?.rateDate,customs:result.calculationSnapshot?.customs,warnings:result.calculationSnapshot?.warnings}};
+  const precedent=usedPower30Precedent(input,parameters);
+  return {ok: true as const, calculation: {power30Precedent:precedent,customsValue:result.calculationSnapshot?.customsValue,deliveryPricingBasis:deliveryPricingBasis(result.calculationSnapshot),deliveryQuote:result.calculationSnapshot?.deliveryQuote,totalRub:result.totalRub,paymentPlan:result.calculationSnapshot?.paymentPlan,currencyRate:result.calculationSnapshot?.currencyRate,breakdown:customerPriceBreakdown(expandCustomsBreakdown(result.calculationSnapshot?.breakdown || [],result.calculationSnapshot?.customs)),rateDate:result.calculationSnapshot?.currencyRate?.rateDate,customs:result.calculationSnapshot?.customs,warnings:[...(result.calculationSnapshot?.warnings||[]),...(precedent?[`30-минутная мощность ${precedent.kw} кВт подобрана по близкой версии. Стоимость предварительная; мощность нужно подтвердить по документам автомобиля.`]:[])]}};
 }
 
 /** Preserve the nullable contract used by existing integrations. */
