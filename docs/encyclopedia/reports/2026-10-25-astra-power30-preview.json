@@ -1,0 +1,652 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-25T10:14:25.417Z",
+  "manifestDigest": "08b043899a0e14c34cd6ea740174fbac3fff613dadaad3f9a93dce59c317ab30",
+  "modelsRead": 4451,
+  "referenceModels": 425,
+  "referenceRows": 47889,
+  "certifiedValues": 15193,
+  "annual": {
+    "checked": 21874,
+    "existing": 75,
+    "matched": 59,
+    "reasons": {
+      "insufficient_technical_anchors": 8270,
+      "no_model_reference": 11253,
+      "technical_conflict": 1756,
+      "undocumented_candidate": 461,
+      "matched": 59
+    },
+    "examples": [
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2026,
+        "variantId": "c1fc730404274c2c83b7d2e6",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "variantId": "731d06d6500ef82d84ea8295",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "variantId": "7e6eb13b808ebc1cceaee6ec",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "variantId": "f8646240f1c437c770c4bb6b",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2024,
+        "variantId": "67759ad259b4be9c47bea185",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2024,
+        "variantId": "995c43534f2d89e4c685c2df",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2023,
+        "variantId": "f58c940a2afb07f45e130dcb",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2023,
+        "variantId": "845397b1398cd0c5cdd3d0c7",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2023,
+        "variantId": "e83d1d1753663c130faf61d5",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2022,
+        "variantId": "5982ff9c56f29b0c54070422",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2022,
+        "variantId": "c82faf161cb26223bdc628f7",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2022,
+        "variantId": "18cf4dc5da3c8a71e0904636",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "CLA",
+        "year": 2025,
+        "variantId": "9b71b8ea4f4c5cde0de82119",
+        "value": 145,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "CLA",
+        "year": 2025,
+        "variantId": "6a2de0c20f1288f33f24c2d3",
+        "value": 145,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "CLA",
+        "year": 2025,
+        "variantId": "a6cd5818b7ad4e199a667a00",
+        "value": 145,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "variantId": "3c77201b8de008d0206df6ed",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "variantId": "b7f8cfe4c2a14107c150517e",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "variantId": "236bcbae50529a9fe6d9f136",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "variantId": "ce62f46e95b37855a445ab07",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "variantId": "d653565153f18d1e8399d8ac",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "variantId": "e0c14cdc546b33ef049913bf",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "variantId": "3bc404b3a1012be6c5b74d97",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "variantId": "f5a310dc16fc10a26909e633",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2024,
+        "variantId": "cdee0ad23f5a9846c897ad4a",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2024,
+        "variantId": "b0f40aa3c3304a1c2feb1c44",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2024,
+        "variantId": "0fcc4d7c2c176a0b398b94b2",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2024,
+        "variantId": "87345922936a4da89cf5dbaf",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2024,
+        "variantId": "092d58b98b695b1c11c79740",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2023,
+        "variantId": "c94a7ca1d58b275e43974a1f",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2023,
+        "variantId": "cc82c7a97e5e383d90a581e2",
+        "value": 135,
+        "method": "engine_powertrain_consensus"
+      }
+    ]
+  },
+  "catalog": {
+    "checked": 83355,
+    "existing": 0,
+    "matched": 120,
+    "retainedAfterSafety": 120,
+    "byMarket": {
+      "china": 120
+    },
+    "reasons": {
+      "no_model_reference": 50053,
+      "insufficient_technical_anchors": 25359,
+      "technical_conflict": 5910,
+      "undocumented_candidate": 1913,
+      "matched": 120
+    },
+    "examples": [
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2026,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Jcw",
+        "year": 2025,
+        "market": "china",
+        "value": 75,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "CLA",
+        "year": 2025,
+        "market": "china",
+        "value": 145,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "CLA",
+        "year": 2025,
+        "market": "china",
+        "value": 145,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Jcw",
+        "year": 2025,
+        "market": "china",
+        "value": 75,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Aceman",
+        "year": 2026,
+        "market": "china",
+        "value": 65,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2026,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Aceman",
+        "year": 2025,
+        "market": "china",
+        "value": 55,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Aceman",
+        "year": 2024,
+        "market": "china",
+        "value": 65,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Aceman",
+        "year": 2024,
+        "market": "china",
+        "value": 65,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Aceman",
+        "year": 2024,
+        "market": "china",
+        "value": 65,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Aceman",
+        "year": 2024,
+        "market": "china",
+        "value": 65,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Aceman",
+        "year": 2024,
+        "market": "china",
+        "value": 55,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "MINI",
+        "model": "Aceman",
+        "year": 2024,
+        "market": "china",
+        "value": 65,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "year": 2025,
+        "market": "china",
+        "value": 70,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "EQE",
+        "year": 2025,
+        "market": "china",
+        "value": 135,
+        "method": "mechanical_powertrain_consensus",
+        "safetyRetained": true
+      }
+    ]
+  },
+  "japanSaved": {
+    "checked": 470,
+    "matched": 0,
+    "reasons": {
+      "technical_conflict": 35,
+      "no_model_reference": 27,
+      "insufficient_technical_anchors": 26
+    }
+  },
+  "storageWrites": 0,
+  "generationId": "gen_1792702445675_8c312f85"
+}
