@@ -1,5 +1,5 @@
 {
-  "state": "prepared_not_requested",
+  "state": "requested_pending_isolation_and_activation",
   "prerequisites": [
     "PASS: A4apply40128788085 saved17 and public17field readback revisionf5899f27-d233-482b-9c1b-ab2453d7d91e",
     "retained existing v3 selector validation still matches current generation",
@@ -61,7 +61,8 @@
       "docs/encyclopedia/batches/2026-10-25-audi-a3-2025-2026-drive-phev.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a3-mechanical-continuation.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a3-diesel-allstreet-gaps.json",
-      "docs/encyclopedia/batches/2026-10-25-audi-a3-final-mechanical-drive.json"
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-final-mechanical-drive.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a6-phev-components.json"
     ],
     "publicResearchBatches": [
       "docs/encyclopedia/batches/2026-10-23-toyota-astra-yaris-aygox.json",
@@ -99,15 +100,17 @@
       "docs/encyclopedia/batches/2026-10-25-audi-a3-2025-2026-drive-phev.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a3-mechanical-continuation.json",
       "docs/encyclopedia/batches/2026-10-25-audi-a3-diesel-allstreet-gaps.json",
-      "docs/encyclopedia/batches/2026-10-25-audi-a3-final-mechanical-drive.json"
+      "docs/encyclopedia/batches/2026-10-25-audi-a3-final-mechanical-drive.json",
+      "docs/encyclopedia/batches/2026-10-25-audi-a6-phev-components.json"
     ],
     "requiredAstraPlanDigests": [
       "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
       "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
       "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
     ],
-    "reason": "Coordinated activation of all retained required research/ASTRA and verified reuse559, including AudiPHEV50new/8corrected/12attested. Request only after terminalChina and freshfreelease/currentselectors; no duplicate repair. Include verified Audi22 batch27new/1corrected; preserve prior46/32/3. Include verified44 mechanical values in41existingA3; preserve47/33/3. Include15 verified missing values in13 existingA3; preserve previous48/34/3. Include7 confirmed drives; all61 annual mechanical candidates now reviewed and saved. Preserve49/35/3 and559reuse.",
-    "ideaReports": []
+    "reason": "Coordinated release after PR1531 merged/full CI2526PASS; current publication leasefree and5selectorsvalid; terminal oldlive warmup40150504235 failed exact price parity, main includes currentSearchPrices repair. Preserve51required/37public/3ASTRA and559verified reuse. No collector or repeated apply. Install scoped-v1 and bounded selector chunks before one guarded repair; validate actual prices and JapanAWD.",
+    "ideaReports": [],
+    "requestedAt": "2026-10-25T01:45:49.401544+00:00"
   },
   "savedReuseDigest": "71434f2a1fab147277b0dd4daf4c0403f10e000f8af220890ac2425e0e10245e",
   "reuseFields": 559,
@@ -117,5 +120,21 @@
     "one chunked repair with current lease and live AJES Japan preflight",
     "counts/parity/details then pinned pickup-drive-pricing/checkCatalogFeedback and actual prices"
   ],
-  "checkedAt": "2026-10-25T01:37:27.975691+00:00"
+  "checkedAt": "2026-10-25T01:45:49.401544+00:00",
+  "publicationPreflight": {
+    "workflow": 40149538202,
+    "attempt": 3,
+    "job": 121043957300,
+    "checkedAt": "2026-10-25T01:40:54.398Z",
+    "writerActive": false,
+    "generationId": "gen_1792702445675_8c312f85",
+    "selectorMarketsValid": 5
+  },
+  "codeFix": {
+    "pr": 1531,
+    "merge": "1ba6dfba9d09ba7a21b43984c7fcca05c1ae7d55",
+    "ci": 40149987618,
+    "fullTests": 2526,
+    "conclusion": "success"
+  }
 }

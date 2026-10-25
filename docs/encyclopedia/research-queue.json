@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-25T01:37:27.975691+00:00",
+  "updatedAt": "2026-10-25T01:45:49.401544+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-25T01:37:27.975691+00:00",
+    "updatedAt": "2026-10-25T01:45:49.401544+00:00",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -33153,6 +33153,23 @@
         "afterRevision": "b4e2d2b2-826e-4de6-b312-cdba66a55911",
         "apiReadback": true,
         "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-final-mechanical-drive-readback.json"
+      },
+      {
+        "batch": "research-2026-10-25-audi-a6-phev-components",
+        "path": "docs/encyclopedia/batches/2026-10-25-audi-a6-phev-components.json",
+        "sha256": "08b7e854d18b7ef8dab4fd21ec4ea99e4552ed6b7b1a83a23ce079ca5adf010c",
+        "state": "saved_api_readback_pass_pending_next_index",
+        "modelId": "00624e6c77b6541109a32d66",
+        "variants": 8,
+        "fields": 38,
+        "newValues": 26,
+        "correctedValues": 7,
+        "attestedUnchanged": 5,
+        "workflow": 40151670120,
+        "job": 121044304350,
+        "afterRevision": "fcb4d99c-087b-4b2a-bcdf-492158c435e9",
+        "apiReadback": true,
+        "report": "docs/encyclopedia/reports/2026-10-25-audi-a6-phev-components-readback.json"
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
@@ -43270,6 +43287,39 @@
       "afterRevision": "b4e2d2b2-826e-4de6-b312-cdba66a55911",
       "apiReadback": true,
       "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-final-mechanical-drive-readback.json"
+    },
+    "audiA6PhevComponentPass": {
+      "batch": "research-2026-10-25-audi-a6-phev-components",
+      "path": "docs/encyclopedia/batches/2026-10-25-audi-a6-phev-components.json",
+      "sha256": "08b7e854d18b7ef8dab4fd21ec4ea99e4552ed6b7b1a83a23ce079ca5adf010c",
+      "state": "saved_api_readback_pass_pending_next_index",
+      "modelId": "00624e6c77b6541109a32d66",
+      "variants": 8,
+      "fields": 38,
+      "newValues": 26,
+      "correctedValues": 7,
+      "attestedUnchanged": 5,
+      "workflow": 40151670120,
+      "job": 121044304350,
+      "afterRevision": "fcb4d99c-087b-4b2a-bcdf-492158c435e9",
+      "apiReadback": true,
+      "report": "docs/encyclopedia/reports/2026-10-25-audi-a6-phev-components-readback.json"
+    },
+    "boundedSelectorRelease20261025": {
+      "state": "release_requested_not_installed",
+      "pr": 1531,
+      "ci": 40149987618,
+      "publicationWriterActive": false,
+      "requiredBatches": 51,
+      "publicBatches": 37,
+      "astraPlans": 3,
+      "report": "docs/encyclopedia/reports/2026-10-25-bounded-selector-release-checkpoint.json",
+      "next": [
+        "Follow sole deployment; inspect exact logs on failure. No research writes until private snapshot isolated.",
+        "Check index51/37/3 and confirmed559reuse, actual health scoped-v1.",
+        "Only after healthy nonpartial AJES Japan perform one guarded chunked repair; no collector.",
+        "Verify counts/parity/details and pinned pickup-drive-pricing/checkCatalogFeedback including actual search/detail prices on6markets."
+      ]
     }
   },
   "scope": {

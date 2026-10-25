@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-10-25T01:43:29.185105+00:00",
+  "batch": "research-2026-10-25-audi-a6-phev-components",
+  "sha256": "08b7e854d18b7ef8dab4fd21ec4ea99e4552ed6b7b1a83a23ce079ca5adf010c",
+  "modelId": "00624e6c77b6541109a32d66",
+  "afterRevision": "fcb4d99c-087b-4b2a-bcdf-492158c435e9",
+  "apiReadback": true,
+  "fieldsChecked": 38,
+  "variants": 8,
+  "years": [
+    {
+      "year": 2024,
+      "revision": "fcb4d99c-087b-4b2a-bcdf-492158c435e9",
+      "rows": 130,
+      "checkedFields": 38,
+      "otherRowsUnchanged": 122
+    }
+  ],
+  "counts": {
+    "newValues": 26,
+    "correctedValues": 7,
+    "attestedUnchanged": 5
+  },
+  "unknownBodiesPreserved": [],
+  "newModels": 0,
+  "certified30minAdded": 0,
+  "installed": false,
+  "workflow": 40151670120,
+  "job": 121044304350,
+  "preflightWorkflow": 40151543847
+}
