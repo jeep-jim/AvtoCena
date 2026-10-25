@@ -1,3 +1,4 @@
+import {hasAstraPower30Evidence,astraOfferIdentity} from '../encyclopedia/astra-power30-evidence';
 import { restoreSourceModelName } from "./source-model-name";
 import { canonicalCatalogBrand, catalogBrandBySlug, catalogBrandSlug } from "./brands";
 import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
@@ -236,7 +237,7 @@ function hasUnresolvedAsianScript(value: string) {
   return /[\u1100-\u11ff\u3040-\u30ff\u3130-\u318f\u31f0-\u31ff\u3400-\u4dbf\u4e00-\u9fff\ua960-\ua97f\uac00-\ud7af\uf900-\ufaff]/u.test(value);
 }
 
-export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>(offer: T): Promise<T & { encyclopediaDisplayIdentity?: DisplayIdentity }> {
+async function applyDisplayIdentity<T extends DisplayCarrier>(offer: T): Promise<T & { encyclopediaDisplayIdentity?: DisplayIdentity }> {
   const restored = restoreSourceModelName(offer);
   if (restored.model === "Yaris L" && restored.market === "china" && /^Toyota$/i.test(String(restored.make))) return restored;
   const presented = presentCatalogOffer(offer);
@@ -334,6 +335,19 @@ export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>
       match: match.kind,
     },
   };
+}
+
+/** A verified presentation rename retains the same car and technical inputs.
+ * Rebind only here, after the existing display resolver has chosen the name. */
+export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>(offer:T):Promise<T & {encyclopediaDisplayIdentity?:DisplayIdentity}>{
+ const result=await applyDisplayIdentity(offer);
+ if(hasAstraPower30Evidence(offer)&&astraOfferIdentity(result)!==astraOfferIdentity(offer)
+  &&astraOfferIdentity({...result,make:offer.make,model:offer.model})===astraOfferIdentity(offer)){
+  const proof=offer.astraPower30Evidence;
+  const rebound={...result,astraPower30Evidence:{...proof,matchedSourceIdentity:proof.matchedSourceIdentity||proof.sourceIdentity,sourceIdentity:astraOfferIdentity(result)}};
+  if(hasAstraPower30Evidence(rebound))return rebound;
+ }
+ return result;
 }
 
 export async function applyEncyclopediaDisplayIdentityBatch<T extends DisplayCarrier>(offers: T[]) {

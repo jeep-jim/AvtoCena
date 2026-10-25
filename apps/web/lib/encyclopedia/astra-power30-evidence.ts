@@ -1,5 +1,5 @@
 /** Browser-safe, identity-bound proof. Source documents stay in the private index. */
-export type AstraPower30Evidence={version:1;indexDigest:string;sourceIdentity:string;value:number;inputs:Record<string,unknown>};
+export type AstraPower30Evidence={version:1;indexDigest:string;sourceIdentity:string;matchedSourceIdentity?:string;value:number;inputs:Record<string,unknown>};
 export const astraOfferIdentity=(o:any)=>JSON.stringify([o.id,o.year,o.make,o.model,o.chassisCode||o.operational?.chassisCode||o.operational?.modelCode||null,o.astraIdentity||o.typeApprovalIdentity||o.operational?.typeApprovalIdentity||null]);
 export function hasAstraPower30Evidence(o:any):boolean {
  const e=o.astraPower30Evidence;

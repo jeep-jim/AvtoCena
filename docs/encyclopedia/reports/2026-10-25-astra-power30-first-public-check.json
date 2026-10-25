@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-10-25T10:57:45.635794+00:00",
+  "health": {
+    "status": 200,
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "a21c074daef59bca1edac6cc4c1a1f6ddac04a0e",
+    "calculationVersion": "6b373265542ad11701e125a90e009ec54c96430764bcbf502cdd33223dc54ed9"
+  },
+  "catalog": {
+    "status": 200,
+    "ok": true,
+    "total": 175,
+    "items": [
+      {
+        "id": "473d1b3ed389b50a0b65a75e",
+        "make": "Audi",
+        "model": "Q4",
+        "year": 2025,
+        "power30MinKw": 70,
+        "proofIndexDigest": "11839d1317e7bf5cb55e82bd0cf044ca33e909dd3a28567fa4da47697191db42"
+      },
+      {
+        "id": "fd646d85c866c1c8b6edd921",
+        "make": "Audi",
+        "model": "Q4",
+        "year": 2024,
+        "power30MinKw": null,
+        "proofIndexDigest": null
+      },
+      {
+        "id": "5d931b887b8c5dc67372ec07",
+        "make": "Audi",
+        "model": "Q4",
+        "year": 2023,
+        "power30MinKw": 70,
+        "proofIndexDigest": "11839d1317e7bf5cb55e82bd0cf044ca33e909dd3a28567fa4da47697191db42"
+      }
+    ]
+  },
+  "bindingChecks": [
+    {
+      "id": "473d1b3ed389b50a0b65a75e",
+      "model": "Q4",
+      "power30MinKw": 70,
+      "valid": false,
+      "identity": "[\"473d1b3ed389b50a0b65a75e\",2025,\"Audi\",\"Q4\",null,null]",
+      "boundIdentity": "[\"473d1b3ed389b50a0b65a75e\",2025,\"Audi\",\"Q4 e-tron\",null,null]",
+      "changedInputs": []
+    },
+    {
+      "id": "fd646d85c866c1c8b6edd921",
+      "model": "Q4",
+      "valid": false,
+      "identity": "[\"fd646d85c866c1c8b6edd921\",2024,\"Audi\",\"Q4\",null,null]",
+      "changedInputs": []
+    },
+    {
+      "id": "5d931b887b8c5dc67372ec07",
+      "model": "Q4",
+      "power30MinKw": 70,
+      "valid": false,
+      "identity": "[\"5d931b887b8c5dc67372ec07\",2023,\"Audi\",\"Q4\",null,null]",
+      "boundIdentity": "[\"5d931b887b8c5dc67372ec07\",2023,\"Audi\",\"Q4 e-tron\",null,null]",
+      "changedInputs": []
+    }
+  ]
+}

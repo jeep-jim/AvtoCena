@@ -6,7 +6,7 @@ import {invalidateEffectiveMarketsCache} from '../apps/web/lib/effective-market-
 import {applyActiveBusinessPriceBatch} from '../apps/web/lib/catalog/live-business-pricing';
 import {resetCalculationIndexForTests} from '../apps/web/lib/encyclopedia/calculation-index';
 import assert from 'node:assert/strict';
-import {compileAstraPower30Facts,matchAstraPower30,astraPower30Key} from '../apps/web/lib/encyclopedia/astra-power30';
+import {compileAstraPower30Facts,matchAstraPower30,astraPower30Key,applyAstraPower30} from '../apps/web/lib/encyclopedia/astra-power30';
 import {applyEncyclopediaCalculation,modelKey,checksum} from '../apps/web/lib/encyclopedia/calculation-index';
 import {hasAstraPower30Evidence} from '../apps/web/lib/encyclopedia/astra-power30-evidence';
 import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specification-evidence-audit';
@@ -100,4 +100,18 @@ test('code-less consensus needs drive and documented component power; differing 
  const h={...o,...hv,power30MinKw:undefined,powerKw:undefined,motorPeakKw:undefined};
  assert.equal(apply(h,[v]).power30MinKw,37);
  assert.equal(apply({...h,icePowerKw:undefined,powerHp:92},[v]).power30MinKw,undefined);
+});
+
+test('the real display resolver retains the binding when Q4 e-tron is presented as Q4',async()=>{
+ const {applyEncyclopediaDisplayIdentity}=await import('../apps/web/lib/catalog/display-identity');
+ const r={...record([variant()]),make:'Audi',model:'Q4 e-tron'};
+ const before=applyAstraPower30({...offer,make:r.make,model:r.model,market:'china'},compileAstraPower30Facts(r),hash);
+ const first=await applyEncyclopediaDisplayIdentity(before);
+ assert.equal(first.model,'Q4');assert.equal(first.power30MinKw,54);
+ assert.equal(hasAstraPower30Evidence(first),true);
+ assert.equal(first.astraPower30Evidence.matchedSourceIdentity,before.astraPower30Evidence.sourceIdentity);
+ assert.equal(hasAstraPower30Evidence(JSON.parse(JSON.stringify(first))),true);
+ const again=await applyEncyclopediaDisplayIdentity(first);assert.equal(hasAstraPower30Evidence(again),true);
+ assert.equal(hasAstraPower30Evidence({...again,model:'Q5'}),false);
+ const changed=await applyEncyclopediaDisplayIdentity({...before,powerKw:200});assert.equal(hasAstraPower30Evidence(changed),false);
 });
