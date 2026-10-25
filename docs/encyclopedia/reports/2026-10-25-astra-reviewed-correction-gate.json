@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-25T01:54:26.291956+00:00",
+  "failedRelease": 40151914908,
+  "failedJob": 121045139065,
+  "releaseSha": "486af476003314f3631f3b1299bc15cccce57cc1",
+  "installed": false,
+  "stage": "assert-release-astra",
+  "error": "astra_revision_existing_value_changed:icePowerKw",
+  "index": {
+    "digest": "461e4883ab258dc9b02d5a1c67f1c14c856df8883ad63f6279074dc90d65bf5b",
+    "manifestDigest": "71f380a5c48695b970c3e879d82b29a6a3383578441d3b0434c8b3eeac197384",
+    "readback": true,
+    "requiredBatches": 51,
+    "variantsVerified": 1090,
+    "fieldsVerified": 1654,
+    "astraVerificationPassed": false
+  },
+  "fix": "Exact required manufacturer batch replay against each immutable parent variant; only unverified icePowerKw/fuel/powertrainKind corrections. Prior manual/registry/research/reference/certified values and all ASTRA promised facts still immutable.",
+  "tests": {
+    "targeted": 38,
+    "passed": 38,
+    "webTypecheck": true,
+    "fullCI": "pending"
+  },
+  "next": [
+    "Full CI and merge by expected SHA",
+    "Fresh writer/deploy check, one corrected release preserving51/37/3 and559reuse",
+    "Inspect ASTRA verification before build and public acceptance"
+  ]
+}

@@ -1,9 +1,10 @@
 import test from 'node:test';
+import {planModelResearch,digest as researchDigest} from '../scripts/encyclopedia/research-batch.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {assertAstraPlanMembership,assertAstraRecordContinuation,appliedAstraRevisionVerifier} from '../scripts/encyclopedia/assert-release-astra.mjs';
+import {assertAstraPlanMembership,assertAstraRecordContinuation,appliedAstraRevisionVerifier,reviewedResearchCorrectionVerifier} from '../scripts/encyclopedia/assert-release-astra.mjs';
 import {previewAstraImport,applyAstraImport} from '../scripts/encyclopedia/apply-astra-corpus.mjs';
 import {ASTRA_ROOT,sha} from '../scripts/encyclopedia/astra-bridge.mjs';
 import {MANIFEST,ROOT,summarize} from '../apps/web/lib/encyclopedia/records.ts';
@@ -234,4 +235,58 @@ test('a later applied ASTRA pass may update its match summary while old facts an
  assert.throws(()=>appliedAstraRevisionVerifier([{plan:tampered,applied:receipt,expectedPlanDigest:second.planDigest}]),/plan_digest_mismatch/);
  const argsWrongSource=structuredClone(args.index);const fact=Object.values(argsWrongSource.models).flat()[0];fact.sources.icePowerKw.batchId='forged';argsWrongSource.digest=checksum(argsWrongSource.models);
  await assert.rejects(assertAstraPlanMembership({...args,index:argsWrongSource}),/field_or_provenance_missing/);
+});
+
+function correctionFixture(changeBefore=()=>{},patch={icePowerKw:195}){
+ const original={id:'2'.repeat(24),revision:'observed',make:'Audi',model:'A6',variants:[{id:'annual-phev',year:2024,trim:'Avant PHEV',status:'observed',engineCc:1984,powerKw:270,icePowerKw:270,fuel:'petrol',powertrainKind:'combustion'}]};
+ changeBefore(original.variants[0]);
+ const entry={modelId:original.id,variantId:'annual-phev',make:'Audi',model:'A6',year:2024,trim:'Avant PHEV',expectedDigest:researchDigest(original.variants[0]),patch,confirmedFields:Object.keys(patch),source:{type:'manufacturer',url:'https://example.test/factory.pdf',sourceSha256:'a'.repeat(64),certificationDocument:'document',checkedAt:'2026-10-25',statement:'Factory confirms separate combustion component; 30-minute proof remains distinct.'}};
+ const batch={version:1,id:'research-reviewed-component',entries:[entry]};
+ const current=planModelResearch(original,[entry],batch,at).record;
+ current.previousKey=`${ROOT}/revisions/${original.id}/observed.json`;
+ const args={original,current,readRecord:async()=>structuredClone(original),isReviewedResearchCorrection:reviewedResearchCorrectionVerifier([batch])};
+ return {original,current,batch,args};
+}
+test('exact required manufacturer batch corrects an unverified PHEV component and keeps total power',async()=>{
+ const f=correctionFixture(()=>{},{icePowerKw:195,fuel:'hybrid',powertrainKind:'other_hybrid'});
+ await assertAstraRecordContinuation(f.args);
+ assert.equal(f.current.variants[0].powerKw,270);
+ await assert.rejects(assertAstraRecordContinuation({...f.args,isReviewedResearchCorrection:undefined}),/existing_value_changed/);
+ const later=structuredClone(f.current);later.revision='later-fill';later.previousKey=`${ROOT}/revisions/${f.original.id}/${f.current.revision}.json`;later.variants[0].bodyType='wagon';
+ await assertAstraRecordContinuation({...f.args,current:later,readRecord:async k=>structuredClone(k.endsWith('/observed.json')?f.original:f.current)});
+});
+test('reviewed correction cannot excuse forged source, stale parent, unsupported fields or unrelated mutations',async()=>{
+ for(const mutate of [
+  f=>{f.batch.entries[0].expectedDigest='b'.repeat(64);},
+  f=>{f.batch.entries[0].source.sourceSha256=undefined;},
+  f=>{f.current.variants[0].researchEvidence.source.url='https://example.test/forged.pdf';},
+  f=>{f.current.variants[0].powerKw=195;},
+  f=>{f.current.variants[0].researchEvidence.values.icePowerKw=190;},
+  f=>{f.current.variants[0].researchEvidence.checkedIdentity.year=2023;},
+  f=>{f.current.variants[0].notes='forged';},
+ ]){
+  const f=correctionFixture();mutate(f);f.args.isReviewedResearchCorrection=reviewedResearchCorrectionVerifier([f.batch]);
+  await assert.rejects(assertAstraRecordContinuation(f.args),/existing_value_changed/);
+ }
+ const certified=correctionFixture(v=>{v.power30MinKw=30;},{power30MinKw:40});certified.batch.entries[0].source.certificationDocument='document';certified.batch.entries[0].source.statement='30-minute document';
+ await assert.rejects(assertAstraRecordContinuation(certified.args),/existing_value_changed/);
+});
+test('manual, registry, reusable or previously researched facts cannot be overwritten by correction batches',async()=>{
+ for(const mutate of [v=>{v.manualEditedAt=at;},v=>{v.astraEvidence={};},v=>{v.astraIdentity={};},v=>{v.astraMatchEvidence={};},
+  v=>{v.researchEvidence={fields:['icePowerKw'],values:{icePowerKw:270}};},
+  v=>{v.researchEvidenceHistory=[{fields:['icePowerKw'],values:{icePowerKw:270}}];},
+  v=>{v.referenceEvidence=[{values:{icePowerKw:270}}];}]){
+  const f=correctionFixture(mutate);await assert.rejects(assertAstraRecordContinuation(f.args),/existing_value_changed/);
+ }
+});
+test('every changed ancestry step requires its own exact reviewed parent, not final proof labels',async()=>{
+ const f=correctionFixture(),middle=structuredClone(f.original);middle.revision='unreviewed';middle.previousKey=f.current.previousKey;middle.variants[0].icePowerKw=260;
+ f.current.previousKey=`${ROOT}/revisions/${f.original.id}/unreviewed.json`;
+ await assert.rejects(assertAstraRecordContinuation({...f.args,readRecord:async k=>structuredClone(k.endsWith('/observed.json')?f.original:middle)}),/existing_value_changed/);
+});
+
+test('continuation permission never changes the exact facts promised by an ASTRA plan',async t=>{
+ const f=await fixture(t),args=await continuedArgs(f,r=>{r.variants[0].icePowerKw=195;});
+ args.isReviewedResearchCorrection=()=>true;
+ await assert.rejects(assertAstraPlanMembership(args),/saved_field_missing/);
 });

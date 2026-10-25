@@ -4,6 +4,8 @@ import {getJsonStorage} from '../../apps/web/lib/data.ts';
 import {MANIFEST,ROOT} from '../../apps/web/lib/encyclopedia/records.ts';
 import {readCalculationIndex,factFields,token,checksum} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
 import {ASTRA_ROOT,sha,stable} from './astra-bridge.mjs';
+import {validateBatch,planModelResearch,digest as researchDigest} from './research-batch.mjs';
+import {assertResearchBatchMembership} from './release-batch-verification.mjs';
 
 const descriptiveFields=new Set(['motorPeakKw','systemPowerKw','batteryKwh']);
 // Literal Korean four-wheel-drive label, not a change to vehicle layout.
@@ -15,6 +17,43 @@ function reviewedDriveTranslation(original,old,next,field){
   &&old.status==='observed'&&!old.manualEditedAt&&!old.astraEvidence
   &&proof?.source?.type==='manufacturer'&&proof.fields?.includes('drive')&&proof.values?.drive==='awd'
   &&identity?.make===original.make&&identity?.model===original.model&&identity?.year===old.year&&identity?.trim===old.trim;
+}
+// Corrections to unverified observed components must replay an exact reviewed
+// batch against the actual parent row. Evidence labels alone cannot authorize
+// a change. Registry/manual/certified fields keep their existing protections.
+export function reviewedResearchCorrectionVerifier(batches){
+ const required=new Map();
+ for(const input of batches){
+  const batch=validateBatch(input);
+  if(required.has(batch.id))throw Error('required_research_duplicate_batch');
+  required.set(batch.id,batch);
+ }
+ const allowed=new Set(['icePowerKw','fuel','powertrainKind']);
+ return ({beforeRecord,afterRecord,before,after,field})=>{
+  if(!allowed.has(field)||!before||!after||before.manualEditedAt||before.astraEvidence||before.astraIdentity||before.astraMatchEvidence
+    ||!['observed','review'].includes(before.status))return false;
+  const priorProofs=[...(before.researchEvidenceHistory||[]),before.researchEvidence,...(before.referenceEvidence||[])].filter(Boolean);
+  if(priorProofs.some(p=>p.fields?.includes(field)||Object.hasOwn(p.values||{},field)))return false;
+  const batch=required.get(after.researchEvidence?.batchId);
+  const entry=batch?.entries.find(e=>e.modelId===beforeRecord.id&&e.variantId===before.id);
+  if(!entry||entry.operation||entry.source.type!=='manufacturer'||! /^[a-f0-9]{64}$/.test(entry.source.sourceSha256||'')
+    ||!entry.confirmedFields.includes(field)||!Object.hasOwn(entry.patch,field)
+    ||entry.expectedDigest!==researchDigest(before)||beforeRecord.id!==afterRecord.id
+    ||beforeRecord.make!==afterRecord.make||beforeRecord.model!==afterRecord.model)return false;
+  const replay=planModelResearch(beforeRecord,[entry],batch,afterRecord.updatedAt);
+  return replay.changes.length===1&&replay.skipped.length===0
+    &&researchDigest(replay.record.variants.find(v=>v.id===before.id))===researchDigest(after);
+ };
+}
+function reviewedCorrectionChain(original,old,descendants,field,verify){
+ let beforeRecord=original,before=old;
+ for(const step of descendants){
+  const after=step.rows.get(old.id);
+  if(!after)return false;
+  if(stable(before[field])!==stable(after[field])&&!verify({beforeRecord,afterRecord:step.record,before,after,field}))return false;
+  beforeRecord=step.record;before=after;
+ }
+ return true;
 }
 const parallel=async(items,run)=>{let cursor=0;await Promise.all(Array.from({length:Math.min(6,items.length)},async()=>{for(;;){const item=items[cursor++];if(!item)return;await run(item);}}));};
 
@@ -53,10 +92,10 @@ function matchSummaryBoundToProof(record,variant){
   &&identity?.year===variant.year&&identity?.trim===variant.trim;
 }
 
-// Later fill-only research creates a new immutable revision. Require ancestry
-// and preservation of every prior value/proof rather than accepting a revision
-// label alone. Changed values still require a separate reviewed release plan.
-export async function assertAstraRecordContinuation({original,current,readRecord,isAppliedAstraRevision=()=>false}){
+// Later research creates immutable revisions. Require ancestry and preservation
+// of prior values/proofs; exact required batches may correct only unverified
+// observed components. ASTRA assertions are independently checked below.
+export async function assertAstraRecordContinuation({original,current,readRecord,isAppliedAstraRevision=()=>false,isReviewedResearchCorrection=()=>false}){
  if(!current||!Array.isArray(current.variants))throw Error('astra_revision_record_missing');
  const key=record=>`${ROOT}/revisions/${original.id}/${record.revision}.json`;
  let cursor=current;const seen=new Set(),descendants=[];
@@ -92,7 +131,8 @@ export async function assertAstraRecordContinuation({original,current,readRecord
     }
     continue;
    }
-   if(value!==null&&value!==''&&stable(value)!==stable(next[field])&&!reviewedDriveTranslation(original,old,next,field))throw Error('astra_revision_existing_value_changed:'+field);
+   if(value!==null&&value!==''&&stable(value)!==stable(next[field])&&!reviewedDriveTranslation(original,old,next,field)
+     &&!reviewedCorrectionChain(original,old,descendants,field,isReviewedResearchCorrection))throw Error(`astra_revision_existing_value_changed:${field}:${original.id}:${old.id}`);
   }
   if(old.status!==next.status&&!(old.status==='observed'&&next.status==='review'&&next.researchEvidence))throw Error('astra_revision_status_changed');
   if(old.notes&&!(next.notes||'').includes(old.notes))throw Error('astra_revision_notes_removed');
@@ -103,7 +143,7 @@ export async function assertAstraRecordContinuation({original,current,readRecord
 }
 
 /** The release must contain the exact saved plan and every promised annual fact. */
-export async function assertAstraPlanMembership({index,plan,applied,manifest,readPlan,readRecord,expectedPlanDigest,isAppliedAstraRevision}){
+export async function assertAstraPlanMembership({index,plan,applied,manifest,readPlan,readRecord,expectedPlanDigest,isAppliedAstraRevision,isReviewedResearchCorrection}){
  if(!index||!plan||!applied||!Array.isArray(manifest?.models)||!Array.isArray(plan.models))throw Error('required_astra_release_data_missing');
  if(index.version!==1||!index.models||index.digest!==checksum(index.models))throw Error('required_astra_index_digest_invalid');
  if(expectedPlanDigest!==undefined&&plan.planDigest!==expectedPlanDigest)throw Error('required_astra_requested_plan_missing');
@@ -131,7 +171,7 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
   const modelPlan=await readPlan(descriptor.planKey);
   if(!modelPlan||sha(modelPlan)!==descriptor.planChecksum||sha(modelPlan.record)!==descriptor.recordChecksum||modelPlan.id!==descriptor.id||modelPlan.record.id!==descriptor.id||modelPlan.record.revision!==descriptor.afterRevision)throw Error('required_astra_model_plan_changed');
   if(modelPlan.assertions.length!==descriptor.assertions)throw Error('required_astra_assertion_count_mismatch');
-  const current=active.revision===descriptor.afterRevision?modelPlan.record:await assertAstraRecordContinuation({original:modelPlan.record,current:await readRecord(active.key),readRecord,isAppliedAstraRevision});
+  const current=active.revision===descriptor.afterRevision?modelPlan.record:await assertAstraRecordContinuation({original:modelPlan.record,current:await readRecord(active.key),readRecord,isAppliedAstraRevision,isReviewedResearchCorrection});
   if(current.revision!==active.revision)throw Error('required_astra_record_key_not_active:'+descriptor.id);
   const variants=new Map(current.variants.map(v=>[v.id,v]));
   if(variants.size!==current.variants.length)throw Error('required_astra_duplicate_variant_identity');
@@ -160,7 +200,7 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
  return report;
 }
 
-export async function verifyRequiredAstraRelease({storage,index,marker}){
+export async function verifyRequiredAstraRelease({storage,index,marker,readBatch=async path=>JSON.parse(await fs.readFile(path,'utf8'))}){
  const digests=marker.requiredAstraPlanDigests||[];
  if(!Array.isArray(digests)||digests.length>8||new Set(digests).size!==digests.length||digests.some(d=>!/^[a-f0-9]{64}$/.test(d)))throw Error('invalid_required_astra_plans');
  if(!digests.length)throw Error('required_astra_plans_missing');
@@ -171,9 +211,19 @@ export async function verifyRequiredAstraRelease({storage,index,marker}){
   const plan=await storage.readJson(`${prefix}/manifest.json`,null),applied=await storage.readJson(`${prefix}/applied.json`,null);
   requiredPlans.push({plan,applied,expectedPlanDigest:digest});
  }
+ const paths=marker.requiredResearchBatches||[];
+ if(!Array.isArray(paths)||paths.length>64||new Set(paths).size!==paths.length)throw Error('invalid_required_batches');
+ const batches=[];
+ for(const path of paths){
+  if(!/^docs\/encyclopedia\/batches\/[a-z0-9-]+\.json$/.test(path))throw Error('invalid_batch_path');
+  batches.push(await readBatch(path));
+ }
+ // Independently bind authorization to the exact release index and provenance.
+ assertResearchBatchMembership(index,batches,factFields,token);
+ const isReviewedResearchCorrection=reviewedResearchCorrectionVerifier(batches);
  const isAppliedAstraRevision=appliedAstraRevisionVerifier(requiredPlans);
  for(const {plan,applied,expectedPlanDigest} of requiredPlans){
-  const report=await assertAstraPlanMembership({index,plan,applied,manifest,readPlan:key=>storage.readJson(key,null),readRecord:key=>storage.readJson(key,null),expectedPlanDigest,isAppliedAstraRevision});
+  const report=await assertAstraPlanMembership({index,plan,applied,manifest,readPlan:key=>storage.readJson(key,null),readRecord:key=>storage.readJson(key,null),expectedPlanDigest,isAppliedAstraRevision,isReviewedResearchCorrection});
   reports.push({planDigest:expectedPlanDigest,corpusDigest:plan.corpusDigest,...report});
  }
  if(checksum((await storage.readJson(MANIFEST,null)).models.map(m=>[m.id,m.revision,m.key]))!==index.manifestDigest)throw Error('astra_release_manifest_changed_after_verification');
