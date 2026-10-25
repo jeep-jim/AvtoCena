@@ -1,1 +1,4 @@
-{"requestedAt":"2026-10-18T08:17:52.037Z","reason":"Owner-reported Japan outage: bounded read-only error-code and proxy audit; no supplier requests"}
+{
+  "requestedAt": "2026-10-25T02:08:59.308304+00:00",
+  "reason": "Bounded read-only application error-code and proxy audit for persistent partial/stale Japan and Korea503. No supplier requests, no collection, no storage mutation. Coordinate with sole release40153126396 e7f40db5."
+}
