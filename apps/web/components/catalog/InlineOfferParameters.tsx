@@ -129,7 +129,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
  const [savedAt,setSavedAt]=useState(savedCalculation?.savedAt || "");
 
  const [draft,setDraft]=useState(()=>originalDraft),[pending,setPending]=useState(false),[error,setError]=useState("");
- const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:PublicCurrencyRate & {sourcePrice?:number};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(initialScenario?.calculation || savedCalculation?.calculation || null);
+ const [result,setResult]=useState<{totalRub:number;power30Precedent?:{kw:number;method:string;certified:false;requiresConfirmation:true};paymentPlan?:BusinessPaymentPlan;currencyRate?:PublicCurrencyRate & {sourcePrice?:number};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(initialScenario?.calculation || savedCalculation?.calculation || null);
  const revision=useRef(0);
  const [rateRevision,setRateRevision]=useState(0);
  const latestRatesKey=useRef("");
@@ -184,6 +184,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
   },600);
   return ()=>{clearTimeout(timer);controller.abort();};
  },[draft,dirty,offerId,autoCalculate,rateRevision]);
+ const estimated30Active=Number(draft.power30MinKw)>0 && Number(draft.power30MinKw)===Number(result?.power30Precedent?.kw || initial._power30EstimateKw);
  const estimatedPowerActive=Boolean(estimatedPowerHp && !savedCalculation && Number(draft.powerHp)===estimatedPowerHp);
  const deliveryQuote=quoteCityDelivery(draft.deliveryCity,deliveryMarket);
  const showCalculation=dirty || Boolean(result);
@@ -203,12 +204,13 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
  const yearOptions = publicProductionYears();
  return <div data-share-error={error || undefined} data-share-estimate={result && (dirty || initialScenario || estimatedPowerActive) ? encodeShareDraft(draft) : undefined} data-share-year={draft.year} data-share-engine-cc={draft.engineCc} data-share-fuel={draft.fuel} data-share-pending={pending || undefined} className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
   {result ? <div aria-live="polite" aria-busy={pending}>
-   <PriceTrend hideAuctionGrade panel className="ac-offer-price-panel" highlightElectrified={["electric","hybrid"].includes(draft.fuel)} label={draft.deliveryCity ? (estimatedPowerActive ? "Предварительно под ключ" : "Стоимость под ключ") : "Ориентир без доставки"} priceClassName="text-3xl md:text-4xl" offer={{...priceIdentity,totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
+   <PriceTrend hideAuctionGrade panel className="ac-offer-price-panel" highlightElectrified={["electric","hybrid"].includes(draft.fuel)} label={draft.deliveryCity ? ((estimatedPowerActive || estimated30Active) ? "Предварительно под ключ" : "Стоимость под ключ") : "Ориентир без доставки"} priceClassName="text-3xl md:text-4xl" offer={{...priceIdentity,totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
    {priceBadges ? <div className="mt-3 flex justify-end">{priceBadges}</div> : null}
   </div> : !showCalculation || keepSellerPrice ? price : <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4" role="status">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</div>}
   {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <p role="status" className="mt-3 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p> : null}
   {exportWarning ? <p role="note" className={priceStyles.warning}><span className={priceStyles.sanctionsBadge}>Санкции</span>{" "}{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам или у менеджера.</p> : null}
+  {estimated30Active ? <p role="note" data-power30-precedent className="mt-2 text-xs text-[var(--ac-muted)]">30-минутная мощность {Number(draft.power30MinKw).toLocaleString("ru-RU")} кВт подобрана по близкой версии. Расчёт предварительный — подтвердите мощность по документам автомобиля.</p> : null}
   {afterPrice}
   <DeliveryCityPanel value={draft.deliveryCity||""} persistSelection={!localCitySelection&&!canSave&&!initialScenario} syncStored={!privateCity} syncStoredOnMount={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>{setLocalCityEdited(true);change("deliveryCity",city);}} description={deliveryDescription(deliveryQuote)}/>
 
@@ -228,7 +230,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
   {!showCalculation ? originalBreakdown : null}
   {estimatedPowerActive ? <p className="mt-3 text-xs text-[var(--ac-muted)]" data-power-estimate-note>Для предварительного расчёта выбрано первое значение мощности: {estimatedPowerHp} л.с. Проверьте его по документам или измените вручную.</p> : null}
   {result?.customs?.productionReferenceBasis==="new_model_year_scenario"?<p className="mt-3 text-xs text-[var(--ac-muted)]">{draft.year} — модельный год. Расчёт как для нового автомобиля; дату выпуска уточните по документам.</p>:null}
-  <OfferParameterEditors draft={draft} change={change} showCommercial={commercialVisible} isPickup={isPickup} researchContext={researchContext}/>
+  <OfferParameterEditors estimated30Active={estimated30Active} draft={draft} change={change} showCommercial={commercialVisible} isPickup={isPickup} researchContext={researchContext}/>
   {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Применить к расчёту для клиента"}</button></div> : null}
   {copyOffer ? <OfferCopyButton offerId={offerId} title={copyOffer.title} mileageKm={copyOffer.mileageKm} draft={draft} pending={pending || saving}/> : null}
   {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
@@ -245,7 +247,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
 }
 
 /** Shared by saved vehicle cards and the standalone calculator. No network or storage writes. */
-export function OfferParameterEditors({draft,change,showCommercial=false,isPickup=false,researchContext=""}:{draft:ParameterDraft;change:(key:string,value:string)=>void;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function OfferParameterEditors({estimated30Active=false,draft,change,showCommercial=false,isPickup=false,researchContext=""}:{estimated30Active?:boolean;draft:ParameterDraft;change:(key:string,value:string)=>void;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const commercialVisible=showCommercial || isPickup || draft.vehicleCategory === "N1";
  const missingFields=missingCustomerFields(draft,commercialVisible);
  const powerInfo=recyclingPowerInfo({powerHp:draft.powerHp,powerKw:draft.powerKw,fuel:draft.fuel,vehicleCategory:draft.vehicleCategory,powertrainKind:draft.fuel==="hybrid"?draft.hybridKind:draft.fuel==="electric"?"electric":"combustion"});
@@ -303,7 +305,7 @@ export function OfferParameterEditors({draft,change,showCommercial=false,isPicku
       {draft.fuel === "hybrid" && draft.hybridKind !== "series_hybrid" ? <label className="block text-xs font-semibold">Топливо ДВС гибрида<select aria-invalid={missingFields.has("n1IceFuel") || undefined} aria-label="Топливо ДВС гибрида" value={draft.n1IceFuel||""} onChange={e=>change("n1IceFuel",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите</option><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label> : null}
     </> : null}
    </Tile> : null}
-   {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile missing={["hybridKind","power30MinKw","icePowerKw"].some(key=>missingFields.has(key))} wide label="30-минутная мощность" value={draft.fuel==="hybrid" && !draft.hybridKind?"Гибрид: укажите тип и мощность":draft.power30MinKw?`${Number(draft.power30MinKw.replace(",",".")).toLocaleString("ru-RU",{maximumFractionDigits:2})} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<ElectricMotorIcon/>}>
+   {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile missing={["hybridKind","power30MinKw","icePowerKw"].some(key=>missingFields.has(key))} wide label="30-минутная мощность" value={draft.fuel==="hybrid" && !draft.hybridKind?"Гибрид: укажите тип и мощность":draft.power30MinKw?`${estimated30Active?"≈ ":""}${Number(draft.power30MinKw.replace(",",".")).toLocaleString("ru-RU",{maximumFractionDigits:2})} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<ElectricMotorIcon/>}>
     {hybridHelp}
     {draft.fuel==="hybrid" ? <label className={editorStyles.hybridField}>Тип гибрида<select aria-invalid={missingFields.has("hybridKind") || undefined} aria-label="Тип гибрида для расчёта" data-keep-open value={draft.hybridKind||""} onChange={e=>change("hybridKind",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите по документам автомобиля</option><option value="series_hybrid">Последовательный — колёса приводит электромотор</option><option value="other_hybrid">Другой — ДВС тоже может приводить колёса</option></select></label> : null}
     <p className={editorStyles.note}>30-минутная мощность электромоторов — отдельное значение из СБКТС, ЭПТС или подтверждающих документов. Максимальная мощность из рекламы сюда не подходит. Если моторов несколько, нужна подтверждённая сумма их 30-минутных мощностей.</p>
