@@ -1,4 +1,4 @@
-import {inspectCompressedSelectors,publishCompressedSelectors} from './budget-selector-publication';
+import {inspectCompressedSelectors,publishCompressedSelectors,readCompressedSelector,publishSelectorMarket,MAX_PUBLISHED_SELECTOR_BYTES} from './budget-selector-publication';
 import {calculatedCatalogPrice} from './calculated-price';
 import {compactJapanPowerEstimate} from './ajes-power-estimate';
 import {verifyCatalogReadModels} from './verify-read-models';
@@ -11,11 +11,11 @@ import {matchesFilterSelection} from './filter-selections';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {catalogBodyType} from './pickup-body';
 import {BudgetEligibilityCache} from "./budget-eligibility-cache";
-import {compressedBudgetSelectors,verifiedCompressedBudgetSelector,specificationSelectorDirectory,type CompressedBudgetDirectory,type CompressedBudgetSelector} from './budget-selector-codec';
+import {specificationSelectorDirectory,type CompressedBudgetDirectory} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
 import {withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
-import {validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
+import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
@@ -2308,9 +2308,9 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
 const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:14,maxBytes:256*1024*1024,ttlMs:3600_000,concurrency:2});
 const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const packedBudgetDirectoryCache=new DetailReadCache<PackedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
-const compressedBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
+const compressedBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
 const aggregateBudgetIndexes=new WeakMap<CompressedBudgetDirectory,Promise<BudgetCountIndex|null>>();
-const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
+const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
 const specificationSelectorPath=(name:string)=>`${specificationSelectorDirectory(readCalculationIndex()?.digest||null,calculationCacheVersion())}/${name}.json`;
 async function readBudgetCountIndex(generationId:string,market?:string){
  if(!market || market==='any'){
@@ -2332,12 +2332,12 @@ async function readBudgetCountIndex(generationId:string,market?:string){
  if(market && MARKETS.includes(market as CatalogMarket)){
   const specificationDirectory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,specificationSelectorPath('ready'),null)).catch(()=>null);
   if(specificationDirectory?.generationId===generationId && specificationDirectory.encyclopediaDigest===(readCalculationIndex()?.digest||null) && specificationDirectory.markets?.[market]){
-   const rich=await budgetIndexCache.get(`${generationId}:specifications:${market}`,async()=>verifiedCompressedBudgetSelector(specificationDirectory,market,await readIndex<CompressedBudgetSelector|null>(generationId,specificationSelectorPath(market),null))).catch(()=>null);
+   const rich=await budgetIndexCache.get(`${generationId}:specifications:${market}`,async()=>readCompressedSelector(specificationDirectory,market,name=>readIndex(generationId,specificationSelectorPath(name),null))).catch(()=>null);
    if(rich?.specificationFilterVersion===1)return rich;
   }
   const compressedDirectory=await compressedBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v3/ready.json',null)).catch(()=>null);
   if(compressedDirectory?.generationId===generationId && compressedDirectory.markets?.[market]){
-   const compressed=await budgetIndexCache.get(`${generationId}:compressed:${market}`,async()=>verifiedCompressedBudgetSelector(compressedDirectory,market,await readIndex<CompressedBudgetSelector|null>(generationId,`budget-markets-v3/${market}.json`,null))).catch(()=>null);
+   const compressed=await budgetIndexCache.get(`${generationId}:compressed:${market}`,async()=>readCompressedSelector(compressedDirectory,market,name=>readIndex(generationId,`budget-markets-v3/${name}.json`,null))).catch(()=>null);
    if(compressed)return compressed;
   }
   const packedDirectory=await packedBudgetDirectoryCache.get(generationId,()=>readIndex<PackedBudgetDirectory|null>(generationId,'budget-markets-v2/ready.json',null)).catch(()=>null);
@@ -2385,9 +2385,9 @@ export async function backfillBudgetMarketSelectors(){
 export async function backfillBudgetSpecificationSelectors(){
  const manifest=await readManifest();
  const old=await readIndex<CompressedBudgetDirectory|null>(manifest.generationId,specificationSelectorPath('ready'),null);
- const directory:CompressedBudgetDirectory={version:3,generationId:manifest.generationId,markets:{},encyclopediaDigest:readCalculationIndex()?.digest||null};
+ const directory:CompressedBudgetDirectory={version:4,generationId:manifest.generationId,markets:{},encyclopediaDigest:readCalculationIndex()?.digest||null};
  for(const market of MARKETS){
-  const existing=old&&verifiedCompressedBudgetSelector(old,market,await readIndex<CompressedBudgetSelector|null>(manifest.generationId,specificationSelectorPath(market),null));
+  const existing=old?.version===4&&await readCompressedSelector(old,market,name=>readIndex(manifest.generationId,specificationSelectorPath(name),null));
   if(old?.encyclopediaDigest===directory.encyclopediaDigest && existing?.specificationFilterVersion===1 && existing.bodyFilterVersion===1){directory.markets[market]=old!.markets[market];continue;}
   const source=await readBudgetCountIndex(manifest.generationId,market);
   if(!source||source.generationId!==manifest.generationId||source.version!==3)throw Error('budget_specification_source_missing');
@@ -2397,15 +2397,15 @@ export async function backfillBudgetSpecificationSelectors(){
    continue; // Empty markets have no partition; never synthesize inventory.
   }
   const rich=await enrichBudgetSpecifications(source,block=>readIndex(manifest.generationId,`budget-cards-v${source.version}/${block}.json`,{generationId:'',items:[] as CatalogSearchProjection[]}));
-  const compressed=compressedBudgetSelectors(splitPackedBudgetSelectors(rich)),part=compressed.parts.get(market);
+  const part=splitBudgetMarketIndex(rich).parts.get(market);
   if(!part)throw Error('budget_specification_partition_missing');
-  const path=specificationSelectorPath(market);
-  await writeJsonAtomic(generationPath(manifest.generationId,`indexes/${path}`),part);
-  if(!verifiedCompressedBudgetSelector(compressed.directory,market,await readIndex<CompressedBudgetSelector|null>(manifest.generationId,path,null)))throw Error('budget_specification_verification_failed');
-  directory.markets[market]=compressed.directory.markets[market];
+  directory.markets[market]=await publishSelectorMarket(part,market,
+   name=>readIndex(manifest.generationId,specificationSelectorPath(name),null),
+   (name,value)=>writeJsonAtomic(generationPath(manifest.generationId,`indexes/${specificationSelectorPath(name)}`),value));
  }
  const current=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
  if(current.generationId!==manifest.generationId)throw Error('budget_specification_publication_changed');
+ if(Buffer.byteLength(JSON.stringify(directory))>MAX_PUBLISHED_SELECTOR_BYTES)throw Error('budget_selector_directory_too_large');
  await writeJsonAtomic(generationPath(manifest.generationId,`indexes/${specificationSelectorPath('ready')}`),directory);
  resetCatalogReadCachesForTests();return directory;
 }

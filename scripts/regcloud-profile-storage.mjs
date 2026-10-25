@@ -13,12 +13,11 @@ const child=await storage.readJson(detailShardPath(manifest.generationId,hash.sl
 console.log(JSON.stringify({detailProbe:{manifest:manifest.generationId,root:root?.generationId,activeChild:child?.generationId,rows:child?.items?.length,containsId:child?.items?.some(x=>x.id===id)}}));
 const japan=await storage.readJson(japanPreviewInputPath(manifest.generationId),null);
 console.log(JSON.stringify({japanInput:{generationId:japan?.generationId,bytes:Buffer.byteLength(JSON.stringify(japan)),entries:Object.keys(japan?.entries||{}).length,parameters:Object.values(japan?.entries||{}).filter(x=>x.parameters).length}}));
-const {verifiedCompressedBudgetSelector}=await import('../apps/web/lib/catalog/budget-selector-codec.ts');
+const {readCompressedSelector}=await import('../apps/web/lib/catalog/budget-selector-publication.ts');
 const directory=await storage.readJson(`catalog/generations/${manifest.generationId}/indexes/budget-markets-v3/ready.json`,null);
 let combined=0;
 for(const market of ['china','korea','europe','uae','georgia']){
- const wire=await storage.readJson(`catalog/generations/${manifest.generationId}/indexes/budget-markets-v3/${market}.json`,null);
- const index=verifiedCompressedBudgetSelector(directory,market,wire);
+ const index=await readCompressedSelector(directory,market,name=>storage.readJson(`catalog/generations/${manifest.generationId}/indexes/budget-markets-v3/${name}.json`,null));
  if(!index)throw Error('invalid_selector');
  const budgetBytes=Buffer.byteLength(JSON.stringify(index.rows.map(row=>row.slice(0,7))));
  const sortBytes=Buffer.byteLength(JSON.stringify([...index.rows,...index.otherRows].map(row=>row.slice(0,7))));
