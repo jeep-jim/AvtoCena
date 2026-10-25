@@ -1,3 +1,4 @@
+import {applyJapanDefaultFuel} from './japan-default-fuel';
 import {enrichJapanDrive} from './japan-drive';
 import {applyJapanFactoryFuel} from '../encyclopedia/japan-fuel-reference';
 import {newerKoreaDetail} from './ajes-korea-detail-cache';
@@ -47,7 +48,8 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
    const [{enrichOfferWithKnowledgeCore},{normalizeVehicleOfferSpecs}]=await Promise.all([import('./knowledge-core'),import('./spec-normalization')]);
    offer=normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
   }
-  return options.editorial===false?offer:editorialHidden(offer,index)?null:applyCatalogEditorial(offer,index);
+  if(options.editorial!==false&&editorialHidden(offer,index))return null;
+  return applyJapanDefaultFuel(options.editorial===false?offer:applyCatalogEditorial(offer,index));
  }));
  const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,...publicResult}=result;
  return {...publicResult,items:items.filter(offer=>offer&&ajesChinaPriceAllowed(offer)&&catalogInventoryAgeDecision(offer).eligible&&!catalogVehicleExcluded(offer))};
