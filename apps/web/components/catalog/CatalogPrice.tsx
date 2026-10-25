@@ -25,7 +25,8 @@ function CatalogPriceContent({
   priceClassName?: string;
   deliveryCity?: string;showSaleDate?:boolean;
 }) {
-  if (offer.deliveredCalculationPreview && !offer.savedCalculationPreview && !(offer.market === "japan" && !isGreenCornerOffer(offer))) return <PriceTrend offer={offer} label={label} statusLabel="Расчёт под ключ" dense={dense} priceClassName={priceClassName} />;
+  if (offer.deliveredCalculationPreview && !offer.savedCalculationPreview && !(offer.market === "japan" && !isGreenCornerOffer(offer))) return <PriceTrend offer={offer} label={label} statusLabel={offer.deliveredCalculationPreview.power30Precedent ? "Предварительно · мощность по близкой версии" : "Расчёт под ключ"} dense={dense} priceClassName={priceClassName} />;
+  if (offer.savedCalculationPreview?.power30Precedent) return <PriceTrend offer={offer} label={label} statusLabel="Предварительно · мощность по близкой версии" dense={dense} priceClassName={priceClassName} />;
   if (isGreenCornerOffer(offer)) {
     const preview = !offer.savedCalculationPreview && Number(offer.japanDeliveredPreview?.totalRub) > 0 ? offer.japanDeliveredPreview : null;
     if (preview || offer.savedCalculationPreview || !isSellerPricedOffer(offer) && Number(offer.totalRub) > 0) {
