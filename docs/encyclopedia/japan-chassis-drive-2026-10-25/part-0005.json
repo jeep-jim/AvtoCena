@@ -1,0 +1,608 @@
+[
+  {
+    "make": "Volkswagen",
+    "model": "Tiguan",
+    "chassisCode": "5NCTH",
+    "originalChassisCode": "5NCTH",
+    "years": [
+      2013,
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "5NCTH",
+        "fullCode": "DBA-5NCTH",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 30,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "TIGUAN TSI BLUEMOTION TECHNOLOGY(DSG)",
+          "DBA-5NCTH",
+          "CTH",
+          "1.389",
+          "6AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Volkswagen",
+    "model": "Tiguan",
+    "chassisCode": "5NCZD",
+    "originalChassisCode": "5NCZD",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "5NCZD",
+        "fullCode": "ABA-5NCZD",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 33,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "TIGUAN 1.4 / 110KW  (DSG)",
+          "ABA-5NCZD",
+          "―",
+          "CZD",
+          "1.394"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282810.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "b56d58161089a858f567f9e84202deb16999868bf81133ef5cbca0939f835399"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Volkswagen",
+    "model": "Tiguan",
+    "chassisCode": "5NCZE",
+    "originalChassisCode": "5NCZE",
+    "years": [
+      2017,
+      2018
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "5NCZE",
+        "fullCode": "ABA-5NCZE",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 49,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "TIGUAN 1.4 / 110KW  (DSG)",
+          "ABA-5NCZE",
+          "―",
+          "CZE",
+          "1.394"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225527.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "4f1af9cc6a35c59a00ba66178001631315789f6f7b71bdb0587ed816f1e2fe0d"
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Volkswagen",
+    "model": "Tiguan",
+    "chassisCode": "5NDFGF",
+    "originalChassisCode": "5NDFGF",
+    "years": [
+      2018,
+      2019
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "5NDFGF",
+        "fullCode": "LDA-5NDFGF",
+        "drive": "awd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "TIGUAN 2.0TDI / 110KW (DSG)",
+          "LDA-5NDFGF",
+          "―",
+          "DFG",
+          "1.968"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282821.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "3e9e3194e18b422a89a3342e89c416c0c7477d024802bbbf8002047c8842a7b5"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Volkswagen",
+    "model": "Tiguan",
+    "chassisCode": "5NDNFF",
+    "originalChassisCode": "5NDNFF",
+    "years": [
+      2021
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "5NDNFF",
+        "fullCode": "3BA-5NDNFF",
+        "drive": "fwd",
+        "sheet": "フォルクスワーゲン",
+        "brand": "フォルクスワーゲン",
+        "row": 24,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "TIGUAN R 2.0 / 235KW (DSG)",
+          "3BA-5NDNFF",
+          "0001",
+          "DPC",
+          "1.984"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      },
+      {
+        "code": "5NDNFF",
+        "fullCode": "3BA-5NDNFF",
+        "drive": "awd",
+        "sheet": "VW",
+        "brand": "フォルクスワーゲン",
+        "row": 28,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "TIGUAN R 2.0 / 235KW (DSG)",
+          "3BA-5NDNFF",
+          "―",
+          "DNF",
+          "1.984"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/3.5.G_LD_import_WLTC.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_tk10_000048.html",
+        "sha256": "d5f77046ca1962cd550a8c8171fa366b2fce47fe901f20824c5a90f6b8d6957c"
+      }
+    ],
+    "sourceRows": 7
+  },
+  {
+    "make": "Volkswagen",
+    "model": "Tiguan",
+    "chassisCode": "5NDPC",
+    "originalChassisCode": "5NDPC",
+    "years": [
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "5NDPC",
+        "fullCode": "3BA-5NDPC",
+        "drive": "fwd",
+        "sheet": "フォルクスワーゲン",
+        "brand": "フォルクスワーゲン",
+        "row": 22,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "TIGUAN 1.5 / 110KW (DSG)",
+          "3BA-5NDPC",
+          "0001, 1001",
+          "DPC",
+          "1.497"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "VOLKSWAGEN",
+    "model": "UP",
+    "chassisCode": "AACHYW",
+    "originalChassisCode": "AACHYW",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AACHYW",
+        "fullCode": "DBA-AACHYW",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "CROSS UP! (ASG)",
+          "DBA-AACHYW",
+          "CHY",
+          "0.999",
+          "5AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125031.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "11480625b87e6ef13f832f8b0734b71fc5775c3c3183e028e561026e7e052b6a"
+      }
+    ],
+    "sourceRows": 7
+  },
+  {
+    "make": "Volvo",
+    "model": "C30",
+    "chassisCode": "MB4204S",
+    "originalChassisCode": "MB4204S",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "MB4204S",
+        "fullCode": "CBA-MB4204S",
+        "drive": "fwd",
+        "sheet": "Volvo",
+        "brand": "ボルボ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ボルボ",
+          "",
+          "ボルボC30",
+          "CBA-MB4204S",
+          "B4204S",
+          "1.998",
+          "6AT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Volvo",
+    "model": "S60",
+    "chassisCode": "FB4164T",
+    "originalChassisCode": "FB4164T",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "FB4164T",
+        "fullCode": "DBA-FB4164T",
+        "drive": "fwd",
+        "sheet": "Volvo",
+        "brand": "ボルボ",
+        "row": 24,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ボルボS60",
+          "DBA-FB4164T",
+          "B4164T",
+          "1.595",
+          "6AT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 67
+  },
+  {
+    "make": "Volvo",
+    "model": "V40",
+    "chassisCode": "MB4164T",
+    "originalChassisCode": "MB4164T",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "MB4164T",
+        "fullCode": "DBA-MB4164T",
+        "drive": "fwd",
+        "sheet": "Volvo",
+        "brand": "ボルボ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ボルボV40/V40クロスカントリー",
+          "DBA-MB4164T",
+          "B4164T",
+          "1.595",
+          "6AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "Volvo",
+    "model": "V40",
+    "chassisCode": "MD4204T",
+    "originalChassisCode": "MD4204T",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "MD4204T",
+        "fullCode": "LDA-MD4204T",
+        "drive": "fwd",
+        "sheet": "Volvo",
+        "brand": "ボルボ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ボルボ",
+          "",
+          "ボルボV40",
+          "LDA-MD4204T",
+          "D4204T",
+          "1.968",
+          "8AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125035.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "09e2e777140047cf69664e089a1cc7ae4bb8d6edb0a7c48b96c3bfdeba3c3650"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "Volvo",
+    "model": "V50",
+    "chassisCode": "MB4204S",
+    "originalChassisCode": "MB4204S",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "MB4204S",
+        "fullCode": "CBA-MB4204S",
+        "drive": "fwd",
+        "sheet": "Volvo",
+        "brand": "ボルボ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ボルボ",
+          "",
+          "ボルボC30",
+          "CBA-MB4204S",
+          "B4204S",
+          "1.998",
+          "6AT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Volvo",
+    "model": "V60",
+    "chassisCode": "FB4164T",
+    "originalChassisCode": "FB4164T",
+    "years": [
+      2012,
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "FB4164T",
+        "fullCode": "DBA-FB4164T",
+        "drive": "fwd",
+        "sheet": "Volvo",
+        "brand": "ボルボ",
+        "row": 24,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ボルボS60",
+          "DBA-FB4164T",
+          "B4164T",
+          "1.595",
+          "6AT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 67
+  },
+  {
+    "make": "Volvo",
+    "model": "V60",
+    "chassisCode": "FB420",
+    "originalChassisCode": "FB420",
+    "years": [
+      2015
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "FB420",
+        "fullCode": "DBA-FB420",
+        "drive": "fwd",
+        "sheet": "Volvo",
+        "brand": "ボルボ",
+        "row": 26,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ボルボS60",
+          "DBA-FB420",
+          "B420",
+          "1.968",
+          "8AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "bc1fccde912bc570aab681f5ec8767e7178d8b9f8dc2cdbbbeefc3195a140283"
+      },
+      {
+        "code": "FB420",
+        "fullCode": "DBA-FB420",
+        "drive": "awd",
+        "sheet": "Volvo",
+        "brand": "ボルボ",
+        "row": 19,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-FB420",
+          "3351~3354\n3361~3364",
+          "B420",
+          "1.968"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "7019b9282755288e17ae4c4bb099526f8a191e1afdfa9977671b8d77120de54b"
+      }
+    ],
+    "sourceRows": 101
+  },
+  {
+    "make": "Volvo",
+    "model": "V70",
+    "chassisCode": "BB420W",
+    "originalChassisCode": "BB420W",
+    "years": [
+      2015
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "BB420W",
+        "fullCode": "DBA-BB420W",
+        "drive": "fwd",
+        "sheet": "Volvo",
+        "brand": "ボルボ",
+        "row": 43,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ボルボV70",
+          "DBA-BB420W",
+          "B420",
+          "1.968",
+          "8AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "bc1fccde912bc570aab681f5ec8767e7178d8b9f8dc2cdbbbeefc3195a140283"
+      }
+    ],
+    "sourceRows": 7
+  }
+]

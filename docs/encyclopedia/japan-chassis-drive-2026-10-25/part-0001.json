@@ -1,0 +1,2365 @@
+[
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "chassisCode": "5V20",
+    "originalChassisCode": "5V20",
+    "years": [
+      2019,
+      2021,
+      2024
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "5V20",
+        "fullCode": "3DA-5V20",
+        "drive": "awd",
+        "sheet": "1-7 ディーゼル JC08",
+        "brand": "BMW",
+        "row": 69,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW 320D XDRIVE",
+          "3DA-5V20",
+          "4001",
+          "B47D20B",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234341.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "8ccbff9704e9c0ccde6c9426a582d818826821f6d7e9bb1b0cd67c2f31780235"
+      }
+    ],
+    "sourceRows": 74
+  },
+  {
+    "make": "BMW",
+    "model": "3 SERIES",
+    "chassisCode": "6K20",
+    "originalChassisCode": "6K20",
+    "years": [
+      2021,
+      2022
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "6K20",
+        "fullCode": "3BA-6K20",
+        "drive": "rwd",
+        "sheet": "1-6 ガソリン JC08",
+        "brand": "BMW",
+        "row": 98,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW 318I TOURING",
+          "3BA-6K20",
+          "2004,2008",
+          "B48B20A",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234263.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "3358381cba32cdcea1143acc3d1e2af9f5f6628684d0208a6d8c631ee3f9fa10"
+      }
+    ],
+    "sourceRows": 86
+  },
+  {
+    "make": "BMW",
+    "model": "3 SERIES",
+    "chassisCode": "6L20",
+    "originalChassisCode": "6L20",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "6L20",
+        "fullCode": "3DA-6L20",
+        "drive": "awd",
+        "sheet": "1-7 ディーゼル JC08",
+        "brand": "BMW",
+        "row": 79,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW 320D XDRIVE TR.",
+          "3DA-6L20",
+          "4001",
+          "B47D20B",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234341.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "8ccbff9704e9c0ccde6c9426a582d818826821f6d7e9bb1b0cd67c2f31780235"
+      }
+    ],
+    "sourceRows": 100
+  },
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "chassisCode": "8A20",
+    "originalChassisCode": "8A20",
+    "years": [
+      2016,
+      2018
+    ],
+    "drives": [
+      "awd",
+      "rwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "8A20",
+        "fullCode": "DBA-8A20",
+        "drive": "rwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 86,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW 320I",
+          "DBA-8A20",
+          "0001~0002",
+          "B48B20A",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125031.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "11480625b87e6ef13f832f8b0734b71fc5775c3c3183e028e561026e7e052b6a"
+      },
+      {
+        "code": "8A20",
+        "fullCode": "DBA-8A20",
+        "drive": "awd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 88,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-8A20",
+          "0011",
+          "B48B20A",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125031.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "11480625b87e6ef13f832f8b0734b71fc5775c3c3183e028e561026e7e052b6a"
+      }
+    ],
+    "sourceRows": 39
+  },
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "chassisCode": "8C20",
+    "originalChassisCode": "8C20",
+    "years": [
+      2016,
+      2018
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "8C20",
+        "fullCode": "LDA-8C20",
+        "drive": "rwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 26,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "LDA-8C20",
+          "",
+          "B47D20A",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178240.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "928af10cb7d324b956f46e8d9c37e8c83b233c318064945013ab89c1b2a5aadc"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "BMW",
+    "model": "3 SERIES",
+    "chassisCode": "8E15",
+    "originalChassisCode": "8E15",
+    "years": [
+      2017
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "8E15",
+        "fullCode": "DBA-8E15",
+        "drive": "rwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 95,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW 318I",
+          "DBA-8E15",
+          "0001~0002",
+          "B38B15A",
+          "1.498"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "7019b9282755288e17ae4c4bb099526f8a191e1afdfa9977671b8d77120de54b"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "BMW",
+    "model": "3 SERIES",
+    "chassisCode": "8E20",
+    "originalChassisCode": "8E20",
+    "years": [
+      2017
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "chassisCode": "PG20",
+    "originalChassisCode": "PG20",
+    "years": [
+      2011
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "PG20",
+        "fullCode": "LBA-PG20",
+        "drive": "rwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 68,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "LBA-PG20",
+          "N43B20A",
+          "1.995",
+          "6AT(E,LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "chassisCode": "PH25",
+    "originalChassisCode": "PH25",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "PH25",
+        "fullCode": "LBA-PH25",
+        "drive": "rwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 73,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW 325I",
+          "LBA-PH25",
+          "N53B30A",
+          "2.996",
+          "6AT(E,LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "chassisCode": "PM35",
+    "originalChassisCode": "PM35",
+    "years": [
+      2010,
+      2012
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "PM35",
+        "fullCode": "ABA-PM35",
+        "drive": "rwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 77,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW 335I",
+          "ABA-PM35",
+          "N55B30A",
+          "2.979",
+          "6AT(E,LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "chassisCode": "VA20",
+    "originalChassisCode": "VA20",
+    "years": [
+      2009,
+      2010
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "BMW",
+    "model": "3 SERIES",
+    "chassisCode": "VB35",
+    "originalChassisCode": "VB35",
+    "years": [
+      2008
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "chassisCode": "VR20",
+    "originalChassisCode": "VR20",
+    "years": [
+      2009
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "chassisCode": "WL35",
+    "originalChassisCode": "WL35",
+    "years": [
+      2009
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "BMW",
+    "model": "4 SERIES",
+    "chassisCode": "12AV20",
+    "originalChassisCode": "12AV20",
+    "years": [
+      2022
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "12AV20",
+        "fullCode": "3BA-12AV20",
+        "drive": "rwd",
+        "sheet": "1-6 ガソリン JC08",
+        "brand": "BMW",
+        "row": 112,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW 420I グランクーペ",
+          "3BA-12AV20",
+          "1001",
+          "B48B20A",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234263.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "3358381cba32cdcea1143acc3d1e2af9f5f6628684d0208a6d8c631ee3f9fa10"
+      }
+    ],
+    "sourceRows": 34
+  },
+  {
+    "make": "BMW",
+    "model": "5 SERIES",
+    "chassisCode": "JC20",
+    "originalChassisCode": "JC20",
+    "years": [
+      2017
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JC20",
+        "fullCode": "LDA-JC20",
+        "drive": "rwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 35,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW 523D",
+          "LDA-JC20",
+          "",
+          "B47D20A",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225532.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "49c3f90d88c4b90debddf663d44d579fd0c7feb7cc77ba422b24ef0b0efba762"
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "BMW",
+    "model": "I4",
+    "chassisCode": "72AW44",
+    "originalChassisCode": "72AW44",
+    "years": [
+      2022,
+      2023
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "BMW",
+    "model": "MINI",
+    "chassisCode": "42BT20",
+    "originalChassisCode": "42BT20",
+    "years": [
+      2021
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "42BT20",
+        "fullCode": "3DA-42BT20",
+        "drive": "fwd",
+        "sheet": "1-7 ディーゼル JC08",
+        "brand": "MINI",
+        "row": 22,
+        "column": 4,
+        "identity": [
+          "MINI",
+          "",
+          "MINI クーパーD クロスオ-バ-",
+          "3DA-42BT20",
+          "0001,0002",
+          "B47C20B",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234341.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "8ccbff9704e9c0ccde6c9426a582d818826821f6d7e9bb1b0cd67c2f31780235"
+      },
+      {
+        "code": "42BT20",
+        "fullCode": "3DA-42BT20",
+        "drive": "awd",
+        "sheet": "1-7 ディーゼル JC08",
+        "brand": "MINI",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "MINI",
+          "",
+          "MINI クーパーD クロスオ-バ-A4",
+          "3DA-42BT20",
+          "0101,0102",
+          "B47C20B",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234341.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "8ccbff9704e9c0ccde6c9426a582d818826821f6d7e9bb1b0cd67c2f31780235"
+      }
+    ],
+    "sourceRows": 42
+  },
+  {
+    "make": "BMW",
+    "model": "MINI",
+    "chassisCode": "XR20M",
+    "originalChassisCode": "XR20M",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "XR20M",
+        "fullCode": "CBA-XR20M",
+        "drive": "fwd",
+        "sheet": "BMW",
+        "brand": "MINI",
+        "row": 14,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "MINI COOPER S",
+          "CBA-XR20M",
+          "",
+          "B48A20A",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282810.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "b56d58161089a858f567f9e84202deb16999868bf81133ef5cbca0939f835399"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "BMW",
+    "model": "MINI",
+    "chassisCode": "XRJCWMW",
+    "originalChassisCode": "XRJCWMW",
+    "years": [
+      2021
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "XRJCWMW",
+        "fullCode": "3BA-XRJCWMW",
+        "drive": "fwd",
+        "sheet": "1-6 ガソリン JC08",
+        "brand": "MINI",
+        "row": 21,
+        "column": 4,
+        "identity": [
+          "MINI",
+          "",
+          "MINI JCW",
+          "3BA-XRJCWMW",
+          "0001",
+          "B48A20B",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234263.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "3358381cba32cdcea1143acc3d1e2af9f5f6628684d0208a6d8c631ee3f9fa10"
+      }
+    ],
+    "sourceRows": 72
+  },
+  {
+    "make": "BMW",
+    "model": "MINI",
+    "chassisCode": "ZA16",
+    "originalChassisCode": "ZA16",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZA16",
+        "fullCode": "CBA-ZA16",
+        "drive": "fwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 25,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "MINI ONE",
+          "CBA-ZA16",
+          "N16B16A",
+          "1.598",
+          "6AT(E,LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      },
+      {
+        "code": "ZA16",
+        "fullCode": "DBA-ZA16",
+        "drive": "fwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 29,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "MINI ONE",
+          "DBA-ZA16",
+          "N16B16A",
+          "1.598",
+          "6MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 136
+  },
+  {
+    "make": "BMW",
+    "model": "MINI",
+    "chassisCode": "ZC16",
+    "originalChassisCode": "ZC16",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZC16",
+        "fullCode": "DBA-ZC16",
+        "drive": "fwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 33,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "MINI クーパー S",
+          "DBA-ZC16",
+          "N18B16A",
+          "1.598",
+          "6MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 74
+  },
+  {
+    "make": "BMW",
+    "model": "MINI",
+    "chassisCode": "ZG16",
+    "originalChassisCode": "ZG16",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZG16",
+        "fullCode": "DBA-ZG16",
+        "drive": "fwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "MINI COOPER S",
+          "DBA-ZG16",
+          "N18B16A",
+          "1.598",
+          "6MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 15
+  },
+  {
+    "make": "BMW",
+    "model": "X1",
+    "chassisCode": "12EF20",
+    "originalChassisCode": "12EF20",
+    "years": [
+      2026
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "12EF20",
+        "fullCode": "3BA-12EF20",
+        "drive": "awd",
+        "sheet": "1-1 ガソリン WLTC",
+        "brand": "BMW",
+        "row": 224,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW X1 M35I XDRIVE",
+          "3BA-12EF20",
+          "0001",
+          "B48A20H",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/001267467.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "142d30def6123d31f2f130aa6a83503799bd56808c27ddf2e268d6328ae0eee6"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "BMW",
+    "model": "X1",
+    "chassisCode": "42EG20T",
+    "originalChassisCode": "42EG20T",
+    "years": [
+      2025
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "42EG20T",
+        "fullCode": "3CA-42EG20T",
+        "drive": "awd",
+        "sheet": "1-7 ディーゼル JC08",
+        "brand": "BMW",
+        "row": 147,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW X1 XDRIVE20D",
+          "3CA-42EG20T",
+          "0001",
+          "B47C20B-DD0006N0",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234341.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "8ccbff9704e9c0ccde6c9426a582d818826821f6d7e9bb1b0cd67c2f31780235"
+      }
+    ],
+    "sourceRows": 48
+  },
+  {
+    "make": "BMW",
+    "model": "X1",
+    "chassisCode": "AA15",
+    "originalChassisCode": "AA15",
+    "years": [
+      2019,
+      2020
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AA15",
+        "fullCode": "3BA-AA15",
+        "drive": "fwd",
+        "sheet": "1-6 ガソリン JC08",
+        "brand": "BMW",
+        "row": 174,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW X1 SDRIVE 18I",
+          "3BA-AA15",
+          "0001,0003",
+          "B38A15A",
+          "1.498"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234263.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "3358381cba32cdcea1143acc3d1e2af9f5f6628684d0208a6d8c631ee3f9fa10"
+      }
+    ],
+    "sourceRows": 40
+  },
+  {
+    "make": "BMW",
+    "model": "X1",
+    "chassisCode": "AD20",
+    "originalChassisCode": "AD20",
+    "years": [
+      2020
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AD20",
+        "fullCode": "3DA-AD20",
+        "drive": "awd",
+        "sheet": "1-7 ディーゼル JC08",
+        "brand": "BMW",
+        "row": 138,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW X1 XDRIVE18D",
+          "3DA-AD20",
+          "",
+          "B47C20B",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234341.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "8ccbff9704e9c0ccde6c9426a582d818826821f6d7e9bb1b0cd67c2f31780235"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "BMW",
+    "model": "X1",
+    "chassisCode": "HS15",
+    "originalChassisCode": "HS15",
+    "years": [
+      2016,
+      2017
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "HS15",
+        "fullCode": "DBA-HS15",
+        "drive": "fwd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 154,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW X1 SDRIVE 18I",
+          "DBA-HS15",
+          "",
+          "B38A15A",
+          "1.498"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125031.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "11480625b87e6ef13f832f8b0734b71fc5775c3c3183e028e561026e7e052b6a"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "BMW",
+    "model": "X1",
+    "chassisCode": "HS20",
+    "originalChassisCode": "HS20",
+    "years": [
+      2015,
+      2017
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "HS20",
+        "fullCode": "DBA-HS20",
+        "drive": "awd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 156,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW X1 XDRIVE 20I",
+          "DBA-HS20",
+          "0001~0004",
+          "B48A20A",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125031.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "11480625b87e6ef13f832f8b0734b71fc5775c3c3183e028e561026e7e052b6a"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "BMW",
+    "model": "X1",
+    "chassisCode": "HT20",
+    "originalChassisCode": "HT20",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "HT20",
+        "fullCode": "LDA-HT20",
+        "drive": "awd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 31,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW X1 XDRIVE 18D",
+          "LDA-HT20",
+          "",
+          "B47C20A",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178240.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "928af10cb7d324b956f46e8d9c37e8c83b233c318064945013ab89c1b2a5aadc"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "BMW",
+    "model": "X1",
+    "chassisCode": "JG20A",
+    "originalChassisCode": "JG20A",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JG20A",
+        "fullCode": "ABA-JG20A",
+        "drive": "awd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 148,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW X1 XDRIVE 20I",
+          "ABA-JG20A",
+          "0001, 0003",
+          "B48A20A",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282810.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "b56d58161089a858f567f9e84202deb16999868bf81133ef5cbca0939f835399"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "BMW",
+    "model": "X1",
+    "chassisCode": "VM20",
+    "originalChassisCode": "VM20",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "VM20",
+        "fullCode": "DBA-VM20",
+        "drive": "awd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 102,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW X1 XDRIVE 20I",
+          "DBA-VM20",
+          "N20B20A",
+          "1.997",
+          "8AT(E,LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 18
+  },
+  {
+    "make": "BMW",
+    "model": "X2",
+    "chassisCode": "42GM20",
+    "originalChassisCode": "42GM20",
+    "years": [
+      2024
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "42GM20",
+        "fullCode": "3BA-42GM20",
+        "drive": "awd",
+        "sheet": "1-6 ガソリン JC08",
+        "brand": "BMW",
+        "row": 211,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW X2 XDRIVE20I",
+          "3BA-42GM20",
+          "0001",
+          "B48A20P",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234263.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "3358381cba32cdcea1143acc3d1e2af9f5f6628684d0208a6d8c631ee3f9fa10"
+      }
+    ],
+    "sourceRows": 48
+  },
+  {
+    "make": "BMW",
+    "model": "X2",
+    "chassisCode": "YK20",
+    "originalChassisCode": "YK20",
+    "years": [
+      2021
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "YK20",
+        "fullCode": "3DA-YK20",
+        "drive": "awd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 56,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW X2 XDRIVE 18D",
+          "3DA-YK20",
+          "",
+          "B47C20B",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001338001.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "848049b88adacd494817f6c7176a6e8832612173010dee0532a522ecd8f8fe3e"
+      },
+      {
+        "code": "YK20",
+        "fullCode": "LDA-YK20",
+        "drive": "awd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 58,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW X2 XDRIVE 18D",
+          "LDA-YK20",
+          "",
+          "B47C20B",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001338001.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "848049b88adacd494817f6c7176a6e8832612173010dee0532a522ecd8f8fe3e"
+      }
+    ],
+    "sourceRows": 7
+  },
+  {
+    "make": "BMW",
+    "model": "X3",
+    "chassisCode": "TX20",
+    "originalChassisCode": "TX20",
+    "years": [
+      2018,
+      2019
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "TX20",
+        "fullCode": "LDA-TX20",
+        "drive": "awd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 47,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW X3 XDRIVE 20D",
+          "LDA-TX20",
+          "",
+          "B47D20A",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225532.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "49c3f90d88c4b90debddf663d44d579fd0c7feb7cc77ba422b24ef0b0efba762"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "BMW",
+    "model": "X3",
+    "chassisCode": "WY20",
+    "originalChassisCode": "WY20",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "WY20",
+        "fullCode": "LDA-WY20",
+        "drive": "awd",
+        "sheet": "BMW",
+        "brand": "BMW",
+        "row": 17,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "BMW X3 XDRIVE 20D",
+          "LDA-WY20",
+          "N47D20C",
+          "1.995",
+          "8AT(E,LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989190.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "e3fe85454646c432ddc83efd64afcc8bd187a8bc8900421ef78320192f6447fd"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "BMW",
+    "model": "Z4",
+    "chassisCode": "HF20",
+    "originalChassisCode": "HF20",
+    "years": [
+      2023
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "HF20",
+        "fullCode": "3BA-HF20",
+        "drive": "rwd",
+        "sheet": "1-6 ガソリン JC08",
+        "brand": "BMW",
+        "row": 253,
+        "column": 4,
+        "identity": [
+          "BMW",
+          "",
+          "BMW Z4 SDRIVE20I",
+          "3BA-HF20",
+          "0201",
+          "B48B20B",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234263.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "3358381cba32cdcea1143acc3d1e2af9f5f6628684d0208a6d8c631ee3f9fa10"
+      }
+    ],
+    "sourceRows": 26
+  },
+  {
+    "make": "CITROEN",
+    "model": "BERLINGO",
+    "chassisCode": "K9CYH01",
+    "originalChassisCode": "K9CYH01",
+    "years": [
+      2021
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "K9CYH01",
+        "fullCode": "3DA-K9CYH01",
+        "drive": "fwd",
+        "sheet": "1-7",
+        "brand": "シトロエン",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ベルランゴ",
+          "3DA-K9CYH01",
+          "0001, 0002",
+          "YH01",
+          "1.498"
+        ],
+        "url": "https://www.mlit.go.jp/common/001140418.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "7ed8c937cba122dec3e379542e010e44d575b6e5f578e22426d20f442cf66144"
+      }
+    ],
+    "sourceRows": 83
+  },
+  {
+    "make": "Citroën",
+    "model": "Berlingo",
+    "chassisCode": "K9CYH01",
+    "originalChassisCode": "K9CYH01",
+    "years": [
+      2023
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "K9CYH01",
+        "fullCode": "3DA-K9CYH01",
+        "drive": "fwd",
+        "sheet": "1-7",
+        "brand": "シトロエン",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ベルランゴ",
+          "3DA-K9CYH01",
+          "0001, 0002",
+          "YH01",
+          "1.498"
+        ],
+        "url": "https://www.mlit.go.jp/common/001140418.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "7ed8c937cba122dec3e379542e010e44d575b6e5f578e22426d20f442cf66144"
+      }
+    ],
+    "sourceRows": 83
+  },
+  {
+    "make": "Citroën",
+    "model": "Berlingo",
+    "chassisCode": "K9CYH01L",
+    "originalChassisCode": "K9CYH01L",
+    "years": [
+      2023
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "K9CYH01L",
+        "fullCode": "3DA-K9CYH01L",
+        "drive": "fwd",
+        "sheet": "1-7",
+        "brand": "シトロエン",
+        "row": 15,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3DA-K9CYH01L",
+          "1011",
+          "YH01",
+          "1.498"
+        ],
+        "url": "https://www.mlit.go.jp/common/001140418.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "7ed8c937cba122dec3e379542e010e44d575b6e5f578e22426d20f442cf66144"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "Citroën",
+    "model": "C3",
+    "chassisCode": "A55F01",
+    "originalChassisCode": "A55F01",
+    "years": [
+      2012,
+      2013
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Citroën",
+    "model": "C3",
+    "chassisCode": "A5HM01",
+    "originalChassisCode": "A5HM01",
+    "years": [
+      2014,
+      2015,
+      2017
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Citroën",
+    "model": "C3",
+    "chassisCode": "A8HN05",
+    "originalChassisCode": "A8HN05",
+    "years": [
+      2019,
+      2022
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "A8HN05",
+        "fullCode": "3BA-A8HN05",
+        "drive": "fwd",
+        "sheet": "Citroen",
+        "brand": "シトロエン",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "C3 エアクロス",
+          "3BA-A8HN05",
+          "0001",
+          "HN05",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337996.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "31371e2e35d43f98425d63fd1674709eee32668fa47e7a891b9d8ceb93d9f9e9"
+      },
+      {
+        "code": "A8HN05",
+        "fullCode": "5BA-A8HN05",
+        "drive": "fwd",
+        "sheet": "シトロエン",
+        "brand": "シトロエン",
+        "row": 18,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-A8HN05",
+          "0001",
+          "HN05",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      }
+    ],
+    "sourceRows": 37
+  },
+  {
+    "make": "CITROEN",
+    "model": "C3",
+    "chassisCode": "B6HN01",
+    "originalChassisCode": "B6HN01",
+    "years": [
+      2018
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "B6HN01",
+        "fullCode": "ABA-B6HN01",
+        "drive": "fwd",
+        "sheet": "Citroen",
+        "brand": "シトロエン",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "シトロエン",
+          "",
+          "C3",
+          "ABA-B6HN01",
+          "0001, 0003\n0002",
+          "HN01",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225527.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "4f1af9cc6a35c59a00ba66178001631315789f6f7b71bdb0587ed816f1e2fe0d"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "Citroën",
+    "model": "C3",
+    "chassisCode": "B6HN01",
+    "originalChassisCode": "B6HN01",
+    "years": [
+      2017,
+      2018,
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "B6HN01",
+        "fullCode": "ABA-B6HN01",
+        "drive": "fwd",
+        "sheet": "Citroen",
+        "brand": "シトロエン",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "シトロエン",
+          "",
+          "C3",
+          "ABA-B6HN01",
+          "0001, 0003\n0002",
+          "HN01",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225527.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "4f1af9cc6a35c59a00ba66178001631315789f6f7b71bdb0587ed816f1e2fe0d"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "Citroën",
+    "model": "C3",
+    "chassisCode": "B6HN05",
+    "originalChassisCode": "B6HN05",
+    "years": [
+      2020,
+      2021,
+      2024
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "B6HN05",
+        "fullCode": "3BA-B6HN05",
+        "drive": "fwd",
+        "sheet": "シトロエン",
+        "brand": "シトロエン",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "シトロエン",
+          "",
+          "C3",
+          "3BA-B6HN05",
+          "0001",
+          "HN05",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      },
+      {
+        "code": "B6HN05",
+        "fullCode": "5BA-B6HN05",
+        "drive": "fwd",
+        "sheet": "シトロエン",
+        "brand": "シトロエン",
+        "row": 13,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-B6HN05",
+          "0001",
+          "HN05",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      }
+    ],
+    "sourceRows": 31
+  },
+  {
+    "make": "Citroën",
+    "model": "C3",
+    "chassisCode": "C2HN09",
+    "originalChassisCode": "C2HN09",
+    "years": [
+      2025
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "C2HN09",
+        "fullCode": "3AA-C2HN09",
+        "drive": "fwd",
+        "sheet": "1-1",
+        "brand": "シトロエン",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "シトロエン",
+          "",
+          "C3",
+          "3AA-C2HN09",
+          "0001",
+          "HN09-ZA03",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/common/001286997.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "f4d8c64495af1cf375112aa5e1c5360f55b59ae5aaf98a5f1e64fa34e6402be2"
+      },
+      {
+        "code": "C2HN09",
+        "fullCode": "5AA-C2HN09",
+        "drive": "fwd",
+        "sheet": "1-1",
+        "brand": "シトロエン",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "シトロエン",
+          "",
+          "C3",
+          "5AA-C2HN09",
+          "0001",
+          "HN09-ZA03",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/common/001286997.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "f4d8c64495af1cf375112aa5e1c5360f55b59ae5aaf98a5f1e64fa34e6402be2"
+      }
+    ],
+    "sourceRows": 5
+  },
+  {
+    "make": "Citroën",
+    "model": "C4",
+    "chassisCode": "B75F01S",
+    "originalChassisCode": "B75F01S",
+    "years": [
+      2013
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "DAIHATSU",
+    "model": "HIJET VAN",
+    "chassisCode": "S321V",
+    "originalChassisCode": "S321V",
+    "years": [
+      2020
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "S321V",
+        "fullCode": "EBD-S321V",
+        "drive": "rwd",
+        "sheet": "Daihatsu",
+        "brand": "ダイハツ",
+        "row": 15,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "EBD-S321V",
+          "KF",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989201.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "a3b72350ae8b3fdcd12b7c720a2d5504f7832d19036f95589ef2c1697e14ee46"
+      },
+      {
+        "code": "S321V",
+        "fullCode": "GBD-S321V",
+        "drive": "rwd",
+        "sheet": "Daihatsu",
+        "brand": "ダイハツ",
+        "row": 27,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "GBD-S321V",
+          "KF",
+          "0.658",
+          "4AT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989201.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "a3b72350ae8b3fdcd12b7c720a2d5504f7832d19036f95589ef2c1697e14ee46"
+      },
+      {
+        "code": "S321V",
+        "fullCode": "HBD-S321V",
+        "drive": "rwd",
+        "sheet": "Daihatsu",
+        "brand": "ダイハツ",
+        "row": 35,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "HBD-S321V",
+          "KF",
+          "0.658",
+          "4AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125041.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "260a313be0cd0eef0cfb9cdd100684754935d0e4ced78c97873f88c25f577700"
+      },
+      {
+        "code": "S321V",
+        "fullCode": "3BD-S321V",
+        "drive": "rwd",
+        "sheet": "ダイハツ",
+        "brand": "ダイハツ",
+        "row": 13,
+        "column": 4,
+        "identity": [
+          "",
+          "※",
+          "ハイゼット",
+          "3BD-S321V",
+          "KF",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474474.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "25e43104d6040e823df4d6c1811d5fff7304479348ed77aeebcab79d6581b89f"
+      },
+      {
+        "code": "S321V",
+        "fullCode": "5BD-S321V",
+        "drive": "rwd",
+        "sheet": "ダイハツ",
+        "brand": "ダイハツ",
+        "row": 22,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BD-S321V",
+          "KF",
+          "0.658",
+          "4AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474474.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "25e43104d6040e823df4d6c1811d5fff7304479348ed77aeebcab79d6581b89f"
+      }
+    ],
+    "sourceRows": 65
+  },
+  {
+    "make": "DAIHATSU",
+    "model": "MOVE",
+    "chassisCode": "L175S",
+    "originalChassisCode": "L175S",
+    "years": [
+      2008,
+      2009,
+      2010
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Daihatsu",
+        "code": "L175S",
+        "fullCode": "DBA-L175S",
+        "drive": "fwd",
+        "url": "https://u-catch.daihatsu.co.jp/catalog/MOVE/MODEL__200610/",
+        "sourceType": "manufacturer",
+        "sheet": "Factory specification",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "7f3ba5c2e263d6208c3de7b25506eea0b4bf0f666d7217012019f0161110fed7",
+        "statement": "Заводской архив Move 2006–2010: L175S (DBA/CBA) — FF; L185S (DBA/CBA) — полный привод."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "DAIHATSU",
+    "model": "MOVE",
+    "chassisCode": "L185S",
+    "originalChassisCode": "L185S",
+    "years": [
+      2008
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Daihatsu",
+        "code": "L185S",
+        "fullCode": "DBA-L185S",
+        "drive": "awd",
+        "url": "https://u-catch.daihatsu.co.jp/catalog/MOVE/MODEL__200610/",
+        "sourceType": "manufacturer",
+        "sheet": "Factory specification",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "7f3ba5c2e263d6208c3de7b25506eea0b4bf0f666d7217012019f0161110fed7",
+        "statement": "Заводской архив Move 2006–2010: L175S (DBA/CBA) — FF; L185S (DBA/CBA) — полный привод."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "DAIHATSU",
+    "model": "MOVE",
+    "chassisCode": "LA100S",
+    "originalChassisCode": "LA100S",
+    "years": [
+      2010,
+      2011,
+      2013,
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "LA100S",
+        "fullCode": "DBA-LA100S",
+        "drive": "fwd",
+        "sheet": "Daihatsu",
+        "brand": "ダイハツ",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ムーヴ",
+          "DBA-LA100S",
+          "KF",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "DAIHATSU",
+    "model": "MOVE",
+    "chassisCode": "LA110S",
+    "originalChassisCode": "LA110S",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "LA110S",
+        "fullCode": "DBA-LA110S",
+        "drive": "awd",
+        "sheet": "Daihatsu",
+        "brand": "ダイハツ",
+        "row": 13,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-LA110S",
+          "KF",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "DAIHATSU",
+    "model": "MOVE",
+    "chassisCode": "LA150S",
+    "originalChassisCode": "LA150S",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "LA150S",
+        "fullCode": "DBA-LA150S",
+        "drive": "fwd",
+        "sheet": "Daihatsu",
+        "brand": "ダイハツ",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ムーヴ",
+          "DBA-LA150S",
+          "KF",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084239.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "7c57f46a9c21c794dcf4e898596c275e0d1f47a269e1c680c00679b6bac438a6"
+      },
+      {
+        "code": "LA150S",
+        "fullCode": "5BA-LA150S",
+        "drive": "fwd",
+        "sheet": "ダイハツ",
+        "brand": "ダイハツ",
+        "row": 37,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ムーヴ",
+          "5BA-LA150S",
+          "0001,0002,0003,0004,0005,0006,0007,0008,0009,0010,0011,0012,0013,0014,0015,0016,0017,0018",
+          "KF",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "LA150S",
+        "fullCode": "3BA-LA150S",
+        "drive": "fwd",
+        "sheet": "ダイハツ",
+        "brand": "ダイハツ",
+        "row": 39,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-LA150S",
+          "0001,0002,0003,0004,0005,0006,0007,0008,0009,0010,0012",
+          "KF",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "DAIHATSU",
+    "model": "TANTO",
+    "chassisCode": "L375S",
+    "originalChassisCode": "L375S",
+    "years": [
+      2009
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "L375S",
+        "fullCode": "DBA-L375S",
+        "drive": "fwd",
+        "sheet": "Daihatsu",
+        "brand": "ダイハツ",
+        "row": 21,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "タント",
+          "DBA-L375S",
+          "KF",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "DAIHATSU",
+    "model": "TANTO",
+    "chassisCode": "LA600S",
+    "originalChassisCode": "LA600S",
+    "years": [
+      2018
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "LA600S",
+        "fullCode": "DBA-LA600S",
+        "drive": "fwd",
+        "sheet": "Daihatsu",
+        "brand": "ダイハツ",
+        "row": 14,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "タント",
+          "DBA-LA600S",
+          "KF",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031311.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "ef5e8bf7e01f5bdfb9c62970bf9e0e0022ec7bdacbe4d65535eca3b621679a03"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Dodge",
+    "model": "Charger",
+    "chassisCode": "フメイ",
+    "originalChassisCode": "フメイ",
+    "years": [
+      2010,
+      2011
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Ferrari",
+    "model": "812",
+    "chassisCode": "F152BE",
+    "originalChassisCode": "F152BE",
+    "years": [
+      2020
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Fiat",
+    "model": "500",
+    "chassisCode": "31212",
+    "originalChassisCode": "31212",
+    "years": [
+      2010,
+      2023
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "31212",
+        "fullCode": "ABA-31212",
+        "drive": "fwd",
+        "sheet": "Fiat",
+        "brand": "フィアット",
+        "row": 15,
+        "column": 4,
+        "identity": [
+          "フィアット",
+          "500.0",
+          "500.0",
+          "ABA-31212",
+          "169A4",
+          "1.24",
+          "5MT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "7e85221a69324e8c09a0fbd6f34aab98ba9a49dfc45ec0e84236b5fb4f911f2c"
+      },
+      {
+        "code": "31212",
+        "fullCode": "3BA-31212",
+        "drive": "fwd",
+        "sheet": "フィアット",
+        "brand": "フィアット",
+        "row": 25,
+        "column": 4,
+        "identity": [
+          "フィアット",
+          "500, 500C",
+          "500, 500C",
+          "3BA-31212",
+          "0001",
+          "169A4",
+          "1240.0"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      }
+    ],
+    "sourceRows": 92
+  },
+  {
+    "make": "FIAT",
+    "model": "500X",
+    "chassisCode": "33414",
+    "originalChassisCode": "33414",
+    "years": [
+      2017
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "33414",
+        "fullCode": "ABA-33414",
+        "drive": "fwd",
+        "sheet": "Fiat",
+        "brand": "フィアット",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "500X",
+          "500X",
+          "ABA-33414",
+          "55263624.0",
+          "1.368",
+          "6AT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125031.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "11480625b87e6ef13f832f8b0734b71fc5775c3c3183e028e561026e7e052b6a"
+      },
+      {
+        "code": "33414",
+        "fullCode": "ABA-33414",
+        "drive": "awd",
+        "sheet": "Fiat",
+        "brand": "フィアット",
+        "row": 14,
+        "column": 4,
+        "identity": [
+          "",
+          "500X",
+          "500X",
+          "ABA-33414",
+          "55263623.0",
+          "1.368",
+          "9AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125031.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "11480625b87e6ef13f832f8b0734b71fc5775c3c3183e028e561026e7e052b6a"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Ford",
+    "model": "Explorer",
+    "chassisCode": "1FMHK9",
+    "originalChassisCode": "1FMHK9",
+    "years": [
+      2014
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Ford",
+    "model": "Fiesta",
+    "chassisCode": "WF0SFJ",
+    "originalChassisCode": "WF0SFJ",
+    "years": [
+      2014
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Honda",
+    "model": "Accord",
+    "chassisCode": "CL9",
+    "originalChassisCode": "CL9",
+    "years": [
+      2008
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Honda",
+    "model": "Accord",
+    "chassisCode": "CR6",
+    "originalChassisCode": "CR6",
+    "years": [
+      2013,
+      2014,
+      2015
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "CR6",
+        "fullCode": "DAA-CR6",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 8,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "アコード ハイブリッド",
+          "DAA-CR6",
+          "LFA(内燃機関)\n-MF8(電動機)",
+          "1.993",
+          "-"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "e4d5502128dad95f3dadc731c754b612dccf8f6884981eb00c91362c7d0c4c97"
+      }
+    ],
+    "sourceRows": 4
+  }
+]

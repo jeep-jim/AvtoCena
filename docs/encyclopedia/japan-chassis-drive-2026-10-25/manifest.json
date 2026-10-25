@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-25",
+  "groups": 335,
+  "confirmed": 219,
+  "ambiguous": 45,
+  "unresolved": 71,
+  "glossary": "https://www.mlit.go.jp/jidosha/content/001986917.pdf",
+  "parts": [
+    {
+      "path": "part-0000.json",
+      "rows": 64,
+      "sha256": "b42215ab58156d4c9be8ff9a2251caa61ddd03c56197f37c8df1b47528d57514"
+    },
+    {
+      "path": "part-0001.json",
+      "rows": 64,
+      "sha256": "2229578057955ee68146e00a91587b923277d840868210165056a67df286bdbe"
+    },
+    {
+      "path": "part-0002.json",
+      "rows": 64,
+      "sha256": "3d90f34ee0ee1bfa19f179d37108fc6929a2f32ff60994aa0b938935cce33ab6"
+    },
+    {
+      "path": "part-0003.json",
+      "rows": 64,
+      "sha256": "8fa68008870c627758ad8e72858b922b2a736b8faab0a1d3837de729ec417757"
+    },
+    {
+      "path": "part-0004.json",
+      "rows": 64,
+      "sha256": "ca680467be1d4c7c2021bb21c2a00d3ee26fa91ec0c29559b14f6b02eceb6f36"
+    },
+    {
+      "path": "part-0005.json",
+      "rows": 15,
+      "sha256": "7f5c8c7c62fdf9e86cc817e0e761ae885929656c29abb5bfb5a7f7cd7cf576de"
+    }
+  ]
+}

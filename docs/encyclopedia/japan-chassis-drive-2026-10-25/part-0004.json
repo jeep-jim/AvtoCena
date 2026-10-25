@@ -1,0 +1,3524 @@
+[
+  {
+    "make": "Renault",
+    "model": "Kangoo",
+    "chassisCode": "KWK4M",
+    "originalChassisCode": "KWK4M",
+    "years": [
+      2011
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "RENAULT",
+    "model": "MEGANE",
+    "chassisCode": "DZF4R",
+    "originalChassisCode": "DZF4R",
+    "years": [
+      2013
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "RENAULT",
+    "model": "TWINGO",
+    "chassisCode": "AHH4B",
+    "originalChassisCode": "AHH4B",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd",
+      "rwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "AHH4B",
+        "fullCode": "DBA-AHH4B",
+        "drive": "rwd",
+        "sheet": "Renault",
+        "brand": "ルノー",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ルノー",
+          "",
+          "トゥインゴ",
+          "DBA-AHH4B",
+          "-",
+          "H4B",
+          "0.897"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "7019b9282755288e17ae4c4bb099526f8a191e1afdfa9977671b8d77120de54b"
+      },
+      {
+        "code": "AHH4B",
+        "fullCode": "3BA-AHH4B",
+        "drive": "fwd",
+        "sheet": "Renault",
+        "brand": "ルノー",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ルノー",
+          "",
+          "トゥインゴ",
+          "3BA-AHH4B",
+          "0001~0004",
+          "H4B",
+          "0.897"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337997.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "d78cd394336cb9392c4f7e8c34b67637c7ac3f1eeae2d795d0ce4de67cd3e9af"
+      },
+      {
+        "code": "AHH4B",
+        "fullCode": "3BA-AHH4B",
+        "drive": "rwd",
+        "sheet": "ルノー",
+        "brand": "ルノー",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ルノー",
+          "",
+          "トゥインゴ",
+          "3BA-AHH4B",
+          "0001~0004",
+          "H4B",
+          "0.897"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "SUBARU",
+    "model": "IMPREZA",
+    "chassisCode": "GT7",
+    "originalChassisCode": "GT7",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GT7",
+        "fullCode": "DBA-GT7",
+        "drive": "awd",
+        "sheet": "Subaru",
+        "brand": "スバル",
+        "row": 48,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-GT7",
+          "1001、 1002",
+          "FB20",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "567b4853ebe7f9687324927db360ab7e17ef5f08a29952f65c5cf763c58b160a"
+      },
+      {
+        "code": "GT7",
+        "fullCode": "3BA-GT7",
+        "drive": "awd",
+        "sheet": "スバル",
+        "brand": "スバル",
+        "row": 31,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-GT7",
+          "2001~2002",
+          "FB20",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "SUBARU",
+    "model": "LEVORG",
+    "chassisCode": "VM4",
+    "originalChassisCode": "VM4",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "VM4",
+        "fullCode": "DBA-VM4",
+        "drive": "awd",
+        "sheet": "Subaru",
+        "brand": "スバル",
+        "row": 59,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "レヴォーグ",
+          "DBA-VM4",
+          "FB16",
+          "1.599",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "15c8034c69ff968fe8ba199f8b569bc50cae93a2c7ac7facf1384c314d32cdaf"
+      }
+    ],
+    "sourceRows": 9
+  },
+  {
+    "make": "Subaru",
+    "model": "Xv",
+    "chassisCode": "GP7",
+    "originalChassisCode": "GP7",
+    "years": [
+      2012,
+      2013,
+      2014,
+      2015,
+      2016
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GP7",
+        "fullCode": "DBA-GP7",
+        "drive": "awd",
+        "sheet": "Subaru",
+        "brand": "スバル",
+        "row": 51,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-GP7",
+          "FB20",
+          "1.995",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 13
+  },
+  {
+    "make": "Subaru",
+    "model": "Xv",
+    "chassisCode": "GPE",
+    "originalChassisCode": "GPE",
+    "years": [
+      2013,
+      2014
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GPE",
+        "fullCode": "DAA-GPE",
+        "drive": "awd",
+        "sheet": "Subaru",
+        "brand": "スバル",
+        "row": 35,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "インプレッサ",
+          "DAA-GPE",
+          "FB20(内燃機関)\nMA1(電動機)",
+          "1.995",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "e4d5502128dad95f3dadc731c754b612dccf8f6884981eb00c91362c7d0c4c97"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "Subaru",
+    "model": "Xv",
+    "chassisCode": "GT3",
+    "originalChassisCode": "GT3",
+    "years": [
+      2017,
+      2020,
+      2021
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GT3",
+        "fullCode": "DBA-GT3",
+        "drive": "awd",
+        "sheet": "Subaru",
+        "brand": "スバル",
+        "row": 41,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-GT3",
+          "1001~1003",
+          "FB16",
+          "1.599"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "567b4853ebe7f9687324927db360ab7e17ef5f08a29952f65c5cf763c58b160a"
+      },
+      {
+        "code": "GT3",
+        "fullCode": "3BA-GT3",
+        "drive": "awd",
+        "sheet": "スバル",
+        "brand": "スバル",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-GT3",
+          "2005~2009",
+          "FB16",
+          "1.599"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 40
+  },
+  {
+    "make": "Subaru",
+    "model": "Xv",
+    "chassisCode": "GT7",
+    "originalChassisCode": "GT7",
+    "years": [
+      2017,
+      2018,
+      2019
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GT7",
+        "fullCode": "DBA-GT7",
+        "drive": "awd",
+        "sheet": "Subaru",
+        "brand": "スバル",
+        "row": 48,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-GT7",
+          "1001、 1002",
+          "FB20",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "567b4853ebe7f9687324927db360ab7e17ef5f08a29952f65c5cf763c58b160a"
+      },
+      {
+        "code": "GT7",
+        "fullCode": "3BA-GT7",
+        "drive": "awd",
+        "sheet": "スバル",
+        "brand": "スバル",
+        "row": 31,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-GT7",
+          "2001~2002",
+          "FB20",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Subaru",
+    "model": "Xv",
+    "chassisCode": "GTE",
+    "originalChassisCode": "GTE",
+    "years": [
+      2019,
+      2022
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GTE",
+        "fullCode": "5AA-GTE",
+        "drive": "awd",
+        "sheet": "Subaru",
+        "brand": "スバル",
+        "row": 21,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-GTE",
+          "1001~1004",
+          "FB20(内燃機関)\nMA1(電動機)",
+          "1.995"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282806.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "4080f44e8ffbfe7ae7cf623108f1de68dbd529ec91b9ea1fdf976ac0d033e475"
+      }
+    ],
+    "sourceRows": 40
+  },
+  {
+    "make": "Suzuki",
+    "model": "ALTO LAPIN",
+    "chassisCode": "HE33S",
+    "originalChassisCode": "HE33S",
+    "years": [
+      2015
+    ],
+    "drives": [
+      "awd",
+      "fwd",
+      "rwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "HE33S",
+        "fullCode": "DBA-HE33S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 21,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "アルト ラパン",
+          "DBA-HE33S",
+          "0001",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125029.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "d5bde022b580b34c6cd5cd7309ddd5edc2dffead9fc1695605bb9131b76c73ae"
+      },
+      {
+        "code": "HE33S",
+        "fullCode": "DBA-HE33S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 22,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-HE33S",
+          "0601",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125029.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "d5bde022b580b34c6cd5cd7309ddd5edc2dffead9fc1695605bb9131b76c73ae"
+      },
+      {
+        "code": "HE33S",
+        "fullCode": "5BA-HE33S",
+        "drive": "fwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 18,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "アルト ラパン",
+          "5BA-HE33S",
+          "0001",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "HE33S",
+        "fullCode": "5BA-HE33S",
+        "drive": "rwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 19,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-HE33S",
+          "0601",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "HE33S",
+        "fullCode": "5BA-HE33S",
+        "drive": "awd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-HE33S",
+          "0601",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474452.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "140518082e6c2a8d3ee4f321d1384eaf2a7c9208761df5385daff45f1983ba7c"
+      }
+    ],
+    "sourceRows": 40
+  },
+  {
+    "make": "SUZUKI",
+    "model": "ALTO",
+    "chassisCode": "HA24S",
+    "originalChassisCode": "HA24S",
+    "years": [
+      2008
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "SUZUKI",
+    "model": "ALTO",
+    "chassisCode": "HA25S",
+    "originalChassisCode": "HA25S",
+    "years": [
+      2009,
+      2010,
+      2011,
+      2013,
+      2014
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "HA25S",
+        "fullCode": "DBA-HA25S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "スズキ",
+          "",
+          "アルト",
+          "DBA-HA25S",
+          "K6A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      },
+      {
+        "code": "HA25S",
+        "fullCode": "DBA-HA25S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-HA25S",
+          "K6A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      }
+    ],
+    "sourceRows": 18
+  },
+  {
+    "make": "SUZUKI",
+    "model": "ALTO",
+    "chassisCode": "HA36S",
+    "originalChassisCode": "HA36S",
+    "years": [
+      2015,
+      2016,
+      2017,
+      2020,
+      2021
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "HA36S",
+        "fullCode": "DBA-HA36S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "スズキ",
+          "",
+          "アルト",
+          "DBA-HA36S",
+          "R06A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084239.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "7c57f46a9c21c794dcf4e898596c275e0d1f47a269e1c680c00679b6bac438a6"
+      },
+      {
+        "code": "HA36S",
+        "fullCode": "DBA-HA36S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-HA36S",
+          "R06A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084239.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "7c57f46a9c21c794dcf4e898596c275e0d1f47a269e1c680c00679b6bac438a6"
+      },
+      {
+        "code": "HA36S",
+        "fullCode": "5BA-HA36S",
+        "drive": "fwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "スズキ",
+          "",
+          "アルト",
+          "5BA-HA36S",
+          "0001",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "HA36S",
+        "fullCode": "5BA-HA36S",
+        "drive": "awd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-HA36S",
+          "0601",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "HA36S",
+        "fullCode": "4BA-HA36S",
+        "drive": "fwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 13,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "4BA-HA36S",
+          "0001",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "HA36S",
+        "fullCode": "4BA-HA36S",
+        "drive": "awd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 14,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "4BA-HA36S",
+          "0601",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "HA36S",
+        "fullCode": "3BA-HA36S",
+        "drive": "fwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-HA36S",
+          "0001",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "HA36S",
+        "fullCode": "3BA-HA36S",
+        "drive": "awd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 17,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-HA36S",
+          "0601",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      }
+    ],
+    "sourceRows": 88
+  },
+  {
+    "make": "Suzuki",
+    "model": "Alto",
+    "chassisCode": "HA37S",
+    "originalChassisCode": "HA37S",
+    "years": [
+      2022,
+      2023,
+      2025
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "HA37S",
+        "fullCode": "3BA-HA37S",
+        "drive": "fwd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-HA37S",
+          "0003,0004",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      },
+      {
+        "code": "HA37S",
+        "fullCode": "3BA-HA37S",
+        "drive": "awd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-HA37S",
+          "0603,0604",
+          "R06A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      }
+    ],
+    "sourceRows": 20
+  },
+  {
+    "make": "SUZUKI",
+    "model": "ALTO",
+    "chassisCode": "HA97S",
+    "originalChassisCode": "HA97S",
+    "years": [
+      2023,
+      2025
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "HA97S",
+        "fullCode": "5AA-HA97S",
+        "drive": "fwd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "スズキ",
+          "",
+          "アルト",
+          "5AA-HA97S",
+          "0003,0004",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      },
+      {
+        "code": "HA97S",
+        "fullCode": "5AA-HA97S",
+        "drive": "awd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-HA97S",
+          "0603,0604",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      }
+    ],
+    "sourceRows": 20
+  },
+  {
+    "make": "SUZUKI",
+    "model": "EVERY",
+    "chassisCode": "DA17V",
+    "originalChassisCode": "DA17V",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "awd",
+      "rwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "DA17V",
+        "fullCode": "HBD-DA17V",
+        "drive": "rwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 19,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "エブリイ",
+          "HBD-DA17V",
+          "R06A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125041.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "260a313be0cd0eef0cfb9cdd100684754935d0e4ced78c97873f88c25f577700"
+      },
+      {
+        "code": "DA17V",
+        "fullCode": "HBD-DA17V",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "HBD-DA17V",
+          "R06A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125041.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "260a313be0cd0eef0cfb9cdd100684754935d0e4ced78c97873f88c25f577700"
+      },
+      {
+        "code": "DA17V",
+        "fullCode": "EBD-DA17V",
+        "drive": "rwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 25,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "EBD-DA17V",
+          "R06A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125041.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "260a313be0cd0eef0cfb9cdd100684754935d0e4ced78c97873f88c25f577700"
+      },
+      {
+        "code": "DA17V",
+        "fullCode": "EBD-DA17V",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 27,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "EBD-DA17V",
+          "R06A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125041.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "260a313be0cd0eef0cfb9cdd100684754935d0e4ced78c97873f88c25f577700"
+      },
+      {
+        "code": "DA17V",
+        "fullCode": "5BD-DA17V",
+        "drive": "rwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "エブリイ",
+          "5BD-DA17V",
+          "R06A",
+          "0.658",
+          "5AT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741627.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000055.html",
+        "sha256": "d1fe9a3d02f3d2fd14c3e08986828ffce2038e5f1f5e81b5ccc015fb32b50b90"
+      },
+      {
+        "code": "DA17V",
+        "fullCode": "5BD-DA17V",
+        "drive": "awd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 25,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BD-DA17V",
+          "R06A",
+          "0.658",
+          "5AT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741627.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000055.html",
+        "sha256": "d1fe9a3d02f3d2fd14c3e08986828ffce2038e5f1f5e81b5ccc015fb32b50b90"
+      },
+      {
+        "code": "DA17V",
+        "fullCode": "3BD-DA17V",
+        "drive": "rwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 27,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BD-DA17V",
+          "R06A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741627.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000055.html",
+        "sha256": "d1fe9a3d02f3d2fd14c3e08986828ffce2038e5f1f5e81b5ccc015fb32b50b90"
+      },
+      {
+        "code": "DA17V",
+        "fullCode": "3BD-DA17V",
+        "drive": "awd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 28,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BD-DA17V",
+          "R06A",
+          "0.658",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741627.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000055.html",
+        "sha256": "d1fe9a3d02f3d2fd14c3e08986828ffce2038e5f1f5e81b5ccc015fb32b50b90"
+      }
+    ],
+    "sourceRows": 142
+  },
+  {
+    "make": "Suzuki",
+    "model": "Hustler",
+    "chassisCode": "MR41S",
+    "originalChassisCode": "MR41S",
+    "years": [
+      2015,
+      2017,
+      2019
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MR41S",
+        "fullCode": "DAA-MR41S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 53,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ハスラー",
+          "DAA-MR41S",
+          "0001~0004",
+          "R06A\n-WA04A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125029.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "d5bde022b580b34c6cd5cd7309ddd5edc2dffead9fc1695605bb9131b76c73ae"
+      },
+      {
+        "code": "MR41S",
+        "fullCode": "DAA-MR41S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 54,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-MR41S",
+          "0601~0604",
+          "R06A\n-WA04A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125029.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "d5bde022b580b34c6cd5cd7309ddd5edc2dffead9fc1695605bb9131b76c73ae"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "Suzuki",
+    "model": "Hustler",
+    "chassisCode": "MR92S",
+    "originalChassisCode": "MR92S",
+    "years": [
+      2025
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MR92S",
+        "fullCode": "5AA-MR92S",
+        "drive": "fwd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ハスラー",
+          "5AA-MR92S",
+          "0007,0008",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      },
+      {
+        "code": "MR92S",
+        "fullCode": "5AA-MR92S",
+        "drive": "awd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 24,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-MR92S",
+          "0607,0608",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      }
+    ],
+    "sourceRows": 32
+  },
+  {
+    "make": "SUZUKI",
+    "model": "MRWAGON",
+    "chassisCode": "MF33S",
+    "originalChassisCode": "MF33S",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MF33S",
+        "fullCode": "DBA-MF33S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 30,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "MRワゴン",
+          "DBA-MF33S",
+          "R06A",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      },
+      {
+        "code": "MF33S",
+        "fullCode": "DBA-MF33S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 31,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-MF33S",
+          "R06A",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      }
+    ],
+    "sourceRows": 30
+  },
+  {
+    "make": "Suzuki",
+    "model": "Solio",
+    "chassisCode": "MA15S",
+    "originalChassisCode": "MA15S",
+    "years": [
+      2014
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MA15S",
+        "fullCode": "DBA-MA15S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 15,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ソリオ",
+          "DBA-MA15S",
+          "K12B",
+          "1.242",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      },
+      {
+        "code": "MA15S",
+        "fullCode": "DBA-MA15S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 17,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-MA15S",
+          "K12B",
+          "1.242",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 23
+  },
+  {
+    "make": "SUZUKI",
+    "model": "SOLIO",
+    "chassisCode": "MA36S",
+    "originalChassisCode": "MA36S",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MA36S",
+        "fullCode": "DAA-MA36S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ソリオ",
+          "DAA-MA36S",
+          "0001~0003",
+          "K12C\n-WA05A",
+          "1.242"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125027.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "887f08f8ff3c43599c48a5620640c4c4a63576ff476ba4dde169300c9235baa0"
+      },
+      {
+        "code": "MA36S",
+        "fullCode": "DAA-MA36S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 17,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-MA36S",
+          "0601~0603",
+          "K12C\n-WA05A",
+          "1.242"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125027.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "887f08f8ff3c43599c48a5620640c4c4a63576ff476ba4dde169300c9235baa0"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "Suzuki",
+    "model": "Spacia",
+    "chassisCode": "MK32S",
+    "originalChassisCode": "MK32S",
+    "years": [
+      2013,
+      2014
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MK32S",
+        "fullCode": "DBA-MK32S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 37,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "スペーシア",
+          "DBA-MK32S",
+          "R06A",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031311.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "ef5e8bf7e01f5bdfb9c62970bf9e0e0022ec7bdacbe4d65535eca3b621679a03"
+      },
+      {
+        "code": "MK32S",
+        "fullCode": "DBA-MK32S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 39,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-MK32S",
+          "R06A",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031311.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "ef5e8bf7e01f5bdfb9c62970bf9e0e0022ec7bdacbe4d65535eca3b621679a03"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Suzuki",
+    "model": "Spacia",
+    "chassisCode": "MK42S",
+    "originalChassisCode": "MK42S",
+    "years": [
+      2017
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MK42S",
+        "fullCode": "DAA-MK42S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 42,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "スペーシア",
+          "DAA-MK42S",
+          "0001~0002",
+          "R06A\n-WA04A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125029.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "d5bde022b580b34c6cd5cd7309ddd5edc2dffead9fc1695605bb9131b76c73ae"
+      },
+      {
+        "code": "MK42S",
+        "fullCode": "DAA-MK42S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 44,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-MK42S",
+          "0601~0606",
+          "R06A\n-WA04A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125029.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "d5bde022b580b34c6cd5cd7309ddd5edc2dffead9fc1695605bb9131b76c73ae"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "Suzuki",
+    "model": "Spacia",
+    "chassisCode": "MK53S",
+    "originalChassisCode": "MK53S",
+    "years": [
+      2018,
+      2020,
+      2021
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MK53S",
+        "fullCode": "DAA-MK53S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 33,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "スペーシア",
+          "DAA-MK53S",
+          "0001",
+          "R06A\n-WA05A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225524.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "d7e014ca21c53599c40307ad9e5987e473ddad188a66c68d029514885312d13d"
+      },
+      {
+        "code": "MK53S",
+        "fullCode": "DAA-MK53S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 35,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-MK53S",
+          "0601~0609",
+          "R06A\n-WA05A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225524.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "d7e014ca21c53599c40307ad9e5987e473ddad188a66c68d029514885312d13d"
+      },
+      {
+        "code": "MK53S",
+        "fullCode": "5AA-MK53S",
+        "drive": "fwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 38,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "スペーシア",
+          "5AA-MK53S",
+          "0001",
+          "R06A\n-WA05A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "MK53S",
+        "fullCode": "5AA-MK53S",
+        "drive": "awd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 40,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-MK53S",
+          "0601~0612",
+          "R06A\n-WA05A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "MK53S",
+        "fullCode": "4AA-MK53S",
+        "drive": "fwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 41,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "4AA-MK53S",
+          "0001~0012",
+          "R06A\n-WA05A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      },
+      {
+        "code": "MK53S",
+        "fullCode": "4AA-MK53S",
+        "drive": "awd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 42,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "4AA-MK53S",
+          "0601~0612",
+          "R06A\n-WA05A",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474451.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0de9440400c90675439f3957c795f5057103e9f7817ba6fdbb5ef8ef4d6eedfc"
+      }
+    ],
+    "sourceRows": 45
+  },
+  {
+    "make": "SUZUKI",
+    "model": "SPACIA",
+    "chassisCode": "MK94S",
+    "originalChassisCode": "MK94S",
+    "years": [
+      2024
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MK94S",
+        "fullCode": "5AA-MK94S",
+        "drive": "fwd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 27,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "スペーシア",
+          "5AA-MK94S",
+          "0001",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      },
+      {
+        "code": "MK94S",
+        "fullCode": "5AA-MK94S",
+        "drive": "awd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 29,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-MK94S",
+          "0601~0606",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Suzuki",
+    "model": "Swift",
+    "chassisCode": "ZC83S",
+    "originalChassisCode": "ZC83S",
+    "years": [
+      2023
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZC83S",
+        "fullCode": "DBA-ZC83S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 14,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-ZC83S",
+          "0001",
+          "K12C",
+          "1.242"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "567b4853ebe7f9687324927db360ab7e17ef5f08a29952f65c5cf763c58b160a"
+      },
+      {
+        "code": "ZC83S",
+        "fullCode": "5BA-ZC83S",
+        "drive": "fwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 17,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-ZC83S",
+          "0001~0003",
+          "K12C",
+          "1.242"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      },
+      {
+        "code": "ZC83S",
+        "fullCode": "4BA-ZC83S",
+        "drive": "fwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 19,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "4BA-ZC83S",
+          "0001",
+          "K12C",
+          "1.242"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 28
+  },
+  {
+    "make": "SUZUKI",
+    "model": "WAGON R SMILE",
+    "chassisCode": "MX81S",
+    "originalChassisCode": "MX81S",
+    "years": [
+      2021
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MX81S",
+        "fullCode": "5BA-MX81S",
+        "drive": "fwd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 21,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-MX81S",
+          "0003,0004",
+          "R06D",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      },
+      {
+        "code": "MX81S",
+        "fullCode": "5BA-MX81S",
+        "drive": "awd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 22,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-MX81S",
+          "0603,0604",
+          "R06D",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      }
+    ],
+    "sourceRows": 30
+  },
+  {
+    "make": "Suzuki",
+    "model": "Wagon R Smile",
+    "chassisCode": "MX91S",
+    "originalChassisCode": "MX91S",
+    "years": [
+      2023
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MX91S",
+        "fullCode": "5AA-MX91S",
+        "drive": "fwd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 19,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ワゴンR スマイル",
+          "5AA-MX91S",
+          "0003,0004",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      },
+      {
+        "code": "MX91S",
+        "fullCode": "5AA-MX91S",
+        "drive": "awd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 20,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-MX91S",
+          "0603,0604",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Suzuki",
+    "model": "Wagon R",
+    "chassisCode": "MH22S",
+    "originalChassisCode": "MH22S",
+    "years": [
+      2008
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "brand": "Suzuki",
+        "code": "MH22S",
+        "fullCode": "CBA-MH22S",
+        "drive": "fwd",
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/wagonr/69.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "Factory specification",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "ab8fec166bdc7b2532ff548e3e920aca7978a96bc2030eb4524ab4dd2963cef1",
+        "statement": "Заводская таблица Wagon R Stingray 2007: один код MH22S выпускается с передним и полным приводом. По коду без дополнительных признаков выбирать нельзя."
+      },
+      {
+        "brand": "Suzuki",
+        "code": "MH22S",
+        "fullCode": "CBA-MH22S",
+        "drive": "awd",
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/wagonr/69.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "Factory specification",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "ab8fec166bdc7b2532ff548e3e920aca7978a96bc2030eb4524ab4dd2963cef1",
+        "statement": "Заводская таблица Wagon R Stingray 2007: один код MH22S выпускается с передним и полным приводом. По коду без дополнительных признаков выбирать нельзя."
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "Suzuki",
+    "model": "Wagon R",
+    "chassisCode": "MH85S",
+    "originalChassisCode": "MH85S",
+    "years": [
+      2020
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MH85S",
+        "fullCode": "5BA-MH85S",
+        "drive": "fwd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 17,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-MH85S",
+          "0006",
+          "R06D",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      },
+      {
+        "code": "MH85S",
+        "fullCode": "5BA-MH85S",
+        "drive": "awd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 18,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-MH85S",
+          "0606",
+          "R06D",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      }
+    ],
+    "sourceRows": 48
+  },
+  {
+    "make": "Suzuki",
+    "model": "Wagon R",
+    "chassisCode": "MH95S",
+    "originalChassisCode": "MH95S",
+    "years": [
+      2022,
+      2023
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MH95S",
+        "fullCode": "5AA-MH95S",
+        "drive": "fwd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 15,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ワゴンR",
+          "5AA-MH95S",
+          "0006",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      },
+      {
+        "code": "MH95S",
+        "fullCode": "5AA-MH95S",
+        "drive": "awd",
+        "sheet": "1-6(軽)",
+        "brand": "スズキ",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-MH95S",
+          "0606",
+          "R06D\n-WA04C",
+          "0.657"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234311.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "d7228e0fcf0c8c26b751c30509fc59c3c36c78b458351584a395359adb134aa6"
+      }
+    ],
+    "sourceRows": 32
+  },
+  {
+    "make": "Suzuki",
+    "model": "Xbee",
+    "chassisCode": "MN71S",
+    "originalChassisCode": "MN71S",
+    "years": [
+      2018
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "MN71S",
+        "fullCode": "DAA-MN71S",
+        "drive": "fwd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "スズキ",
+          "",
+          "クロスビー",
+          "DAA-MN71S",
+          "0001",
+          "K10C\n-WA05A",
+          "0.996"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225521.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "56d43c41800ab5d224e184ad6690d5179a62e604c3bff267fc817ba10552f1cf"
+      },
+      {
+        "code": "MN71S",
+        "fullCode": "DAA-MN71S",
+        "drive": "awd",
+        "sheet": "Suzuki",
+        "brand": "スズキ",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-MN71S",
+          "0601",
+          "K10C\n-WA05A",
+          "0.996"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225521.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "56d43c41800ab5d224e184ad6690d5179a62e604c3bff267fc817ba10552f1cf"
+      },
+      {
+        "code": "MN71S",
+        "fullCode": "4AA-MN71S",
+        "drive": "fwd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "スズキ",
+          "",
+          "クロスビー",
+          "4AA-MN71S",
+          "0001",
+          "K10C\n-WA05A",
+          "0.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      },
+      {
+        "code": "MN71S",
+        "fullCode": "4AA-MN71S",
+        "drive": "awd",
+        "sheet": "スズキ",
+        "brand": "スズキ",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "4AA-MN71S",
+          "0601",
+          "K10C\n-WA05A",
+          "0.996"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 26
+  },
+  {
+    "make": "TESLA",
+    "model": "MODELY",
+    "chassisCode": "YL1YT",
+    "originalChassisCode": "YL1YT",
+    "years": [
+      2023
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "TOYOTA",
+    "model": "ALLION",
+    "chassisCode": "NZT260",
+    "originalChassisCode": "NZT260",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "NZT260",
+        "fullCode": "DBA-NZT260",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 61,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "プレミオ\nアリオン",
+          "DBA-NZT260",
+          "1NZ",
+          "1.496",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      },
+      {
+        "code": "NZT260",
+        "fullCode": "3BA-NZT260",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 59,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "アリオン\nプレミオ",
+          "3BA-NZT260",
+          "0001,0002",
+          "1NZ",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337994.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "df9ad6656074b9659892fd9ae6b3d055236ec434bef7ca7752eee28c2eb4892c"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "TOYOTA",
+    "model": "AQUA",
+    "chassisCode": "NHP10",
+    "originalChassisCode": "NHP10",
+    "years": [
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "NHP10",
+        "fullCode": "DAA-NHP10",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 15,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-NHP10",
+          "0398~0444,0446~0524",
+          "1NZ\n(内燃機関)\n1LM\n(電動機)",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125027.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "887f08f8ff3c43599c48a5620640c4c4a63576ff476ba4dde169300c9235baa0"
+      },
+      {
+        "code": "NHP10",
+        "fullCode": "6AA-NHP10",
+        "drive": "fwd",
+        "sheet": "toyota",
+        "brand": "トヨタ",
+        "row": 54,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "アクア",
+          "6AA-NHP10",
+          "0001~0004",
+          "1NZ\n(内燃機関)\n1LM\n(電動機)",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/5.1.Gzyouyou_WLTC.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000050.html",
+        "sha256": "87574eb1a9a35730e804de67d4341c859a67cb1f83f75eac14193894b04208cc"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "TOYOTA",
+    "model": "COROLLA FIELDER",
+    "chassisCode": "NKE165G",
+    "originalChassisCode": "NKE165G",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "NKE165G",
+        "fullCode": "DAA-NKE165G",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 17,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "カローラ \nフィールダー",
+          "DAA-NKE165G",
+          "1NZ\n(内燃機関)\n1LM\n(電動機)",
+          "1.496",
+          "CVT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "e4d5502128dad95f3dadc731c754b612dccf8f6884981eb00c91362c7d0c4c97"
+      },
+      {
+        "code": "NKE165G",
+        "fullCode": "6AA-NKE165G",
+        "drive": "fwd",
+        "sheet": "トヨタ",
+        "brand": "トヨタ",
+        "row": 98,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "カローラ フィールダー",
+          "6AA-NKE165G",
+          "0001,0002",
+          "1NZ\n(内燃機関)\n1LM\n(電動機)",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 15
+  },
+  {
+    "make": "Toyota",
+    "model": "Corolla",
+    "chassisCode": "MZEA17",
+    "originalChassisCode": "MZEA17",
+    "years": [
+      2023,
+      2024
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "MZEA17",
+        "fullCode": "5BA-MZEA17",
+        "drive": "fwd",
+        "sheet": "1-1（普通・小型）",
+        "brand": "トヨタ",
+        "row": 66,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-MZEA17",
+          "0004",
+          "M15A",
+          "1.49"
+        ],
+        "url": "https://www.mlit.go.jp/common/001287184.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "472e498e3e5934ef129efdf6ba17a5f4cc275e0f2372af6435479800c9c763e7"
+      }
+    ],
+    "sourceRows": 13
+  },
+  {
+    "make": "Toyota",
+    "model": "Corolla",
+    "chassisCode": "ZRE212",
+    "originalChassisCode": "ZRE212",
+    "years": [
+      2019,
+      2020,
+      2022
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZRE212",
+        "fullCode": "3BA-ZRE212",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 21,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-ZRE212",
+          "0001,0003",
+          "2ZR",
+          "1.797"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337994.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "df9ad6656074b9659892fd9ae6b3d055236ec434bef7ca7752eee28c2eb4892c"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "Toyota",
+    "model": "Corolla",
+    "chassisCode": "ZWE211",
+    "originalChassisCode": "ZWE211",
+    "years": [
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZWE211",
+        "fullCode": "6AA-ZWE211",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 15,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "カローラ",
+          "6AA-ZWE211",
+          "0001,0002,0005,0006",
+          "2ZR\n(内燃機関)\n1NM\n(電動機)",
+          "1.797"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337993.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "a77f9fbd1de369790e55e40e4ea3db8252d8909712f67e0bdff58192236214a2"
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "Toyota",
+    "model": "Corolla",
+    "chassisCode": "ZWE215",
+    "originalChassisCode": "ZWE215",
+    "years": [
+      2022,
+      2023
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZWE215",
+        "fullCode": "6AA-ZWE215",
+        "drive": "awd",
+        "sheet": "1-1（普通・小型）",
+        "brand": "トヨタ",
+        "row": 63,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6AA-ZWE215",
+          "0005",
+          "2ZR\n(内燃機関)\n1VM\n(電動機)\n1WM\n(電動機)",
+          "1.797"
+        ],
+        "url": "https://www.mlit.go.jp/common/001287184.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "472e498e3e5934ef129efdf6ba17a5f4cc275e0f2372af6435479800c9c763e7"
+      }
+    ],
+    "sourceRows": 11
+  },
+  {
+    "make": "Toyota",
+    "model": "Corolla",
+    "chassisCode": "ZWE219",
+    "originalChassisCode": "ZWE219",
+    "years": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZWE219",
+        "fullCode": "6AA-ZWE219",
+        "drive": "fwd",
+        "sheet": "1-1（普通・小型）",
+        "brand": "トヨタ",
+        "row": 60,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "カローラ",
+          "6AA-ZWE219",
+          "0005",
+          "2ZR\n(内燃機関)\n1VM\n(電動機)",
+          "1.797"
+        ],
+        "url": "https://www.mlit.go.jp/common/001287184.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "472e498e3e5934ef129efdf6ba17a5f4cc275e0f2372af6435479800c9c763e7"
+      }
+    ],
+    "sourceRows": 11
+  },
+  {
+    "make": "TOYOTA",
+    "model": "HARRIER",
+    "chassisCode": "ZSU60W",
+    "originalChassisCode": "ZSU60W",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZSU60W",
+        "fullCode": "DBA-ZSU60W",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 45,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-ZSU60W",
+          "3ZR",
+          "1.986",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "e4d5502128dad95f3dadc731c754b612dccf8f6884981eb00c91362c7d0c4c97"
+      }
+    ],
+    "sourceRows": 7
+  },
+  {
+    "make": "TOYOTA",
+    "model": "LAND CRUISER",
+    "chassisCode": "GDJ76W",
+    "originalChassisCode": "GDJ76W",
+    "years": [
+      2024
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GDJ76W",
+        "fullCode": "3DA-GDJ76W",
+        "drive": "awd",
+        "sheet": "1-2",
+        "brand": "トヨタ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3DA-GDJ76W",
+          "0001",
+          "1GD",
+          "2.754"
+        ],
+        "url": "https://www.mlit.go.jp/common/001361207.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "a0d60b0f21a1d2ce3d0caff94cbb2f1e41102b4265862b3fca85918583a7ae73"
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "TOYOTA",
+    "model": "NOAH",
+    "chassisCode": "ZRR70W",
+    "originalChassisCode": "ZRR70W",
+    "years": [
+      2009
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZRR70W",
+        "fullCode": "DBA-ZRR70W",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 101,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-ZRR70W",
+          "3ZR",
+          "1.986",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "TOYOTA",
+    "model": "NOAH",
+    "chassisCode": "ZWR80G",
+    "originalChassisCode": "ZWR80G",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZWR80G",
+        "fullCode": "DAA-ZWR80G",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 30,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ノア\nヴォクシー\nエスクァイア",
+          "DAA-ZWR80G",
+          "2ZR\n(内燃機関)\n5JM\n(電動機)",
+          "1.797",
+          "CVT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "15c8034c69ff968fe8ba199f8b569bc50cae93a2c7ac7facf1384c314d32cdaf"
+      },
+      {
+        "code": "ZWR80G",
+        "fullCode": "6AA-ZWR80G",
+        "drive": "fwd",
+        "sheet": "トヨタ",
+        "brand": "トヨタ",
+        "row": 145,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "エスクァイア\nノア",
+          "6AA-ZWR80G",
+          "0001~0016",
+          "2ZR\n(内燃機関)\n5JM\n(電動機)",
+          "1.797"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "Toyota",
+    "model": "Porte",
+    "chassisCode": "NSP140",
+    "originalChassisCode": "NSP140",
+    "years": [
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "NSP140",
+        "fullCode": "DBA-NSP140",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 45,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-NSP140",
+          "1NR",
+          "1.329",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "TOYOTA",
+    "model": "PRIUS ALPHA",
+    "chassisCode": "ZVW41W",
+    "originalChassisCode": "ZVW41W",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZVW41W",
+        "fullCode": "DAA-ZVW41W",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 14,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-ZVW41W",
+          "2ZR\n(内燃機関)\n5JM\n(電動機)",
+          "1.797",
+          "CVT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      },
+      {
+        "code": "ZVW41W",
+        "fullCode": "6AA-ZVW41W",
+        "drive": "fwd",
+        "sheet": "toyota",
+        "brand": "トヨタ",
+        "row": 110,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6AA-ZVW41W",
+          "0001~0008",
+          "2ZR\n(内燃機関)\n5JM\n(電動機)",
+          "1.797"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/5.1.Gzyouyou_WLTC.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000050.html",
+        "sha256": "87574eb1a9a35730e804de67d4341c859a67cb1f83f75eac14193894b04208cc"
+      }
+    ],
+    "sourceRows": 11
+  },
+  {
+    "make": "TOYOTA",
+    "model": "PRIUS",
+    "chassisCode": "ZVW30",
+    "originalChassisCode": "ZVW30",
+    "years": [
+      2013,
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZVW30",
+        "fullCode": "DAA-ZVW30",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "プリウス",
+          "DAA-ZVW30",
+          "2ZR\n(内燃機関)\n3JM\n(電動機)",
+          "1.797",
+          "CVT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "TOYOTA",
+    "model": "PRIUS",
+    "chassisCode": "ZVW51",
+    "originalChassisCode": "ZVW51",
+    "years": [
+      2020
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZVW51",
+        "fullCode": "DAA-ZVW51",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "トヨタ",
+          "",
+          "プリウス",
+          "DAA-ZVW51",
+          "0001",
+          "2ZR\n(内燃機関)\n1NM\n(電動機)",
+          "1.797"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125027.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "887f08f8ff3c43599c48a5620640c4c4a63576ff476ba4dde169300c9235baa0"
+      },
+      {
+        "code": "ZVW51",
+        "fullCode": "6AA-ZVW51",
+        "drive": "fwd",
+        "sheet": "トヨタ",
+        "brand": "トヨタ",
+        "row": 39,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "プリウス",
+          "6AA-ZVW51",
+          "0017",
+          "2ZR\n(内燃機関)\n1NM\n(電動機)",
+          "1.797"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 22
+  },
+  {
+    "make": "TOYOTA",
+    "model": "SIENTA",
+    "chassisCode": "NCP81G",
+    "originalChassisCode": "NCP81G",
+    "years": [
+      2010
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "NCP81G",
+        "fullCode": "DBA-NCP81G",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 69,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "シエンタ",
+          "DBA-NCP81G",
+          "1NZ",
+          "1.496",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "TOYOTA",
+    "model": "VITZ",
+    "chassisCode": "NCP131",
+    "originalChassisCode": "NCP131",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "NCP131",
+        "fullCode": "DBA-NCP131",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 24,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-NCP131",
+          "1NZ",
+          "1.496",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 23
+  },
+  {
+    "make": "TOYOTA",
+    "model": "VOXY",
+    "chassisCode": "ZRR70W",
+    "originalChassisCode": "ZRR70W",
+    "years": [
+      2008,
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZRR70W",
+        "fullCode": "DBA-ZRR70W",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 101,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-ZRR70W",
+          "3ZR",
+          "1.986",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "TOYOTA",
+    "model": "WISH",
+    "chassisCode": "ZGE20W",
+    "originalChassisCode": "ZGE20W",
+    "years": [
+      2009
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "ZGE20W",
+        "fullCode": "DBA-ZGE20W",
+        "drive": "fwd",
+        "sheet": "Toyota",
+        "brand": "トヨタ",
+        "row": 86,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-ZGE20W",
+          "2ZR",
+          "1.797",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 9
+  },
+  {
+    "make": "Volkswagen",
+    "model": "GOLF TOURAN",
+    "chassisCode": "1TCTH",
+    "originalChassisCode": "1TCTH",
+    "years": [
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "1TCTH",
+        "fullCode": "DBA-1TCTH",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 27,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "GOLF TOURAN TSI COMFORTLINE (DSG)\nGOLF TOURAN TSI HIGHLINE (DSG)",
+          "DBA-1TCTH",
+          "CTH",
+          "1.389",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "VOLKSWAGEN",
+    "model": "GOLF VARIANT",
+    "chassisCode": "1KCAX",
+    "originalChassisCode": "1KCAX",
+    "years": [
+      2009
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "1KCAX",
+        "fullCode": "DBA-1KCAX",
+        "drive": "fwd",
+        "sheet": "VW",
+        "brand": "フォルクスワーゲン",
+        "row": 17,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "GOLF TSI COMFORTLINE (DSG)",
+          "DBA-1KCAX",
+          "CAX",
+          "1.389",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "7e85221a69324e8c09a0fbd6f34aab98ba9a49dfc45ec0e84236b5fb4f911f2c"
+      }
+    ],
+    "sourceRows": 2
+  },
+  {
+    "make": "VOLKSWAGEN",
+    "model": "GOLF VARIANT",
+    "chassisCode": "AUCHP",
+    "originalChassisCode": "AUCHP",
+    "years": [
+      2014,
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AUCHP",
+        "fullCode": "DBA-AUCHP",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "GOLF VARIANT TSI HIGHLINE (DSG)",
+          "DBA-AUCHP",
+          "CHP",
+          "1.394",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      },
+      {
+        "code": "AUCHP",
+        "fullCode": "ABA-AUCHP",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 44,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "NEW GOLF VARIANT 1.4 / 103KW (DSG)",
+          "ABA-AUCHP",
+          "―",
+          "CHP",
+          "1.394"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225527.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "4f1af9cc6a35c59a00ba66178001631315789f6f7b71bdb0587ed816f1e2fe0d"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "VOLKSWAGEN",
+    "model": "GOLF",
+    "chassisCode": "AUCHH",
+    "originalChassisCode": "AUCHH",
+    "years": [
+      2017
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AUCHH",
+        "fullCode": "ABA-AUCHH",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 21,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "GOLF GTI (DSG)",
+          "ABA-AUCHH",
+          "CHH",
+          "1.984",
+          "6AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      }
+    ],
+    "sourceRows": 20
+  },
+  {
+    "make": "VOLKSWAGEN",
+    "model": "GOLF",
+    "chassisCode": "AUCPT",
+    "originalChassisCode": "AUCPT",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AUCPT",
+        "fullCode": "DBA-AUCPT",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 20,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "GOLF TSI HIGHLINE (DSG)",
+          "DBA-AUCPT",
+          "CPT",
+          "1.394",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "VOLKSWAGEN",
+    "model": "PASSAT VARIANT",
+    "chassisCode": "3CCAX",
+    "originalChassisCode": "3CCAX",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "3CCAX",
+        "fullCode": "DBA-3CCAX",
+        "drive": "fwd",
+        "sheet": "VW",
+        "brand": "フォルクスワーゲン",
+        "row": 22,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "PASSAT TSI COMFORTLINE(DSG)\nPASSAT TSI HIGHLINE(DSG)",
+          "DBA-3CCAX",
+          "CAX",
+          "1.389",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 30
+  },
+  {
+    "make": "VOLKSWAGEN",
+    "model": "POLO",
+    "chassisCode": "6RCJZ",
+    "originalChassisCode": "6RCJZ",
+    "years": [
+      2017
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "6RCJZ",
+        "fullCode": "DBA-6RCJZ",
+        "drive": "fwd",
+        "sheet": "Volkswagen",
+        "brand": "フォルクスワーゲン",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "POLO TSI COMFORTLINE(DSG)\nPOLO TSI COMFORTLINE UPGRADE PACKAGE (DSG)",
+          "DBA-6RCJZ",
+          "CJZ",
+          "1.197",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "bc1fccde912bc570aab681f5ec8767e7178d8b9f8dc2cdbbbeefc3195a140283"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "VOLKSWAGEN",
+    "model": "T-ROC",
+    "chassisCode": "A1DFF",
+    "originalChassisCode": "A1DFF",
+    "years": [
+      2024
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "A1DFF",
+        "fullCode": "3DA-A1DFF",
+        "drive": "awd",
+        "sheet": "1-7",
+        "brand": "フォルクスワーゲン",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "T-ROC 2.0 TDI / 110KW (DSG)",
+          "3DA-A1DFF",
+          "1011, 1061",
+          "DXR",
+          "1.968"
+        ],
+        "url": "https://www.mlit.go.jp/common/001208254.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "14b51e2f06530c953115d24a16e142bab6ff83759cff387fc1773f8f4b8bfd01"
+      },
+      {
+        "code": "A1DFF",
+        "fullCode": "3DA-A1DFF",
+        "drive": "fwd",
+        "sheet": "フォルクスワーゲン",
+        "brand": "フォルクスワーゲン",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "T-ROC 2.0 TDI / 110KW (DSG)",
+          "3DA-A1DFF",
+          "―",
+          "DFF",
+          "1.968"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474461.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0894e1baba429ad8e5ff2311d191f6f5f1d68e3245c36d0022af1a395c00f552"
+      }
+    ],
+    "sourceRows": 18
+  },
+  {
+    "make": "Volkswagen",
+    "model": "THE BEETLE",
+    "chassisCode": "16CBZ",
+    "originalChassisCode": "16CBZ",
+    "years": [
+      2013,
+      2017
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "16CBZ",
+        "fullCode": "DBA-16CBZ",
+        "drive": "fwd",
+        "sheet": "VW",
+        "brand": "フォルクスワーゲン",
+        "row": 19,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "THE BEETLE DESIGN (DSG)\nTHE BEETLE DESIGN LEATHER PACKGE (DSG)",
+          "DBA-16CBZ",
+          "CBZ",
+          "1.197",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      }
+    ],
+    "sourceRows": 29
+  },
+  {
+    "make": "Volkswagen",
+    "model": "Tiguan",
+    "chassisCode": "5NCCZ",
+    "originalChassisCode": "5NCCZ",
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2016
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "5NCCZ",
+        "fullCode": "ABA-5NCCZ",
+        "drive": "awd",
+        "sheet": "VW",
+        "brand": "フォルクスワーゲン",
+        "row": 31,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "TIGUAN SPORT & STYLE \nTIGUAN R-LINE (DSG)",
+          "ABA-5NCCZ",
+          "CCZ",
+          "1.984",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "7e85221a69324e8c09a0fbd6f34aab98ba9a49dfc45ec0e84236b5fb4f911f2c"
+      }
+    ],
+    "sourceRows": 16
+  }
+]

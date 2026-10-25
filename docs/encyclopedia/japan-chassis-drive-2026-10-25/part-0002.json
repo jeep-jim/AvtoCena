@@ -1,0 +1,2091 @@
+[
+  {
+    "make": "Honda",
+    "model": "Accord",
+    "chassisCode": "CR7",
+    "originalChassisCode": "CR7",
+    "years": [
+      2016,
+      2017,
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "CR7",
+        "fullCode": "DAA-CR7",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 41,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "アコード",
+          "DAA-CR7",
+          "0001",
+          "LFA(内燃機関)\n-H4(電動機)",
+          "1.993"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "567b4853ebe7f9687324927db360ab7e17ef5f08a29952f65c5cf763c58b160a"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "Honda",
+    "model": "Accord",
+    "chassisCode": "CU1",
+    "originalChassisCode": "CU1",
+    "years": [
+      2011
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "CU1",
+        "fullCode": "DBA-CU1",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 89,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "アコード",
+          "DBA-CU1",
+          "R20A",
+          "1.997",
+          "5AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Honda",
+    "model": "Accord",
+    "chassisCode": "CU2",
+    "originalChassisCode": "CU2",
+    "years": [
+      2009,
+      2010
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "CU2",
+        "fullCode": "DBA-CU2",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 91,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-CU2",
+          "K24A",
+          "2.354",
+          "5AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "Honda",
+    "model": "Accord",
+    "chassisCode": "CV3",
+    "originalChassisCode": "CV3",
+    "years": [
+      2020,
+      2021,
+      2022
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "CV3",
+        "fullCode": "6AA-CV3",
+        "drive": "fwd",
+        "sheet": "ホンダ（タイ）",
+        "brand": "ホンダ",
+        "row": 8,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "アコード",
+          "6AA-CV3",
+          "0001",
+          "LFB(内燃機関)\n-H4(電動機)",
+          "1.993"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "HONDA",
+    "model": "CR-V",
+    "chassisCode": "RE3",
+    "originalChassisCode": "RE3",
+    "years": [
+      2008,
+      2010,
+      2011
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Honda",
+        "code": "RE3",
+        "fullCode": "DBA-RE3",
+        "drive": "fwd",
+        "url": "https://www.honda.co.jp/factbook/auto/CR-V/200610/19.html",
+        "sourceType": "manufacturer",
+        "sheet": "Factory specification",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "f2ab926822b67cc4d212cb78e46dd3c7f147d42e028aa937aa252fce200cc45f",
+        "statement": "Honda CR-V: таблица экологических характеристик сопоставляет DBA-RE3 с FF, DBA-RE4 с 4WD."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "HONDA",
+    "model": "CR-V",
+    "chassisCode": "RE4",
+    "originalChassisCode": "RE4",
+    "years": [
+      2010,
+      2011
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Honda",
+        "code": "RE4",
+        "fullCode": "DBA-RE4",
+        "drive": "awd",
+        "url": "https://www.honda.co.jp/factbook/auto/CR-V/200610/19.html",
+        "sourceType": "manufacturer",
+        "sheet": "Factory specification",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "f2ab926822b67cc4d212cb78e46dd3c7f147d42e028aa937aa252fce200cc45f",
+        "statement": "Honda CR-V: таблица экологических характеристик сопоставляет DBA-RE3 с FF, DBA-RE4 с 4WD."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "HONDA",
+    "model": "CR-V",
+    "chassisCode": "RM1",
+    "originalChassisCode": "RM1",
+    "years": [
+      2011,
+      2012
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RM1",
+        "fullCode": "DBA-RM1",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 79,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "CR-V",
+          "DBA-RM1",
+          "R20A",
+          "1.997",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 9
+  },
+  {
+    "make": "HONDA",
+    "model": "CR-V",
+    "chassisCode": "RM4",
+    "originalChassisCode": "RM4",
+    "years": [
+      2012,
+      2015
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RM4",
+        "fullCode": "DBA-RM4",
+        "drive": "awd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 80,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-RM4",
+          "K24A",
+          "2.354",
+          "5AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 9
+  },
+  {
+    "make": "HONDA",
+    "model": "CR-V",
+    "chassisCode": "RT5",
+    "originalChassisCode": "RT5",
+    "years": [
+      2018,
+      2020,
+      2022
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RT5",
+        "fullCode": "6AA-RT5",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 89,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "CR-V",
+          "6AA-RT5",
+          "0001~0002",
+          "LFB(内燃機関)\n-H4(電動機)",
+          "1.993"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282806.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "4080f44e8ffbfe7ae7cf623108f1de68dbd529ec91b9ea1fdf976ac0d033e475"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "HONDA",
+    "model": "CR-V",
+    "chassisCode": "RT6",
+    "originalChassisCode": "RT6",
+    "years": [
+      2022
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RT6",
+        "fullCode": "6AA-RT6",
+        "drive": "awd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 90,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6AA-RT6",
+          "0001~0002",
+          "LFB(内燃機関)\n-H4(電動機)",
+          "1.993"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282806.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "4080f44e8ffbfe7ae7cf623108f1de68dbd529ec91b9ea1fdf976ac0d033e475"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "HONDA",
+    "model": "CR-V",
+    "chassisCode": "RW2",
+    "originalChassisCode": "RW2",
+    "years": [
+      2020
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RW2",
+        "fullCode": "DBA-RW2",
+        "drive": "awd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 93,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-RW2",
+          "0001~0003",
+          "L15B",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282806.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "4080f44e8ffbfe7ae7cf623108f1de68dbd529ec91b9ea1fdf976ac0d033e475"
+      },
+      {
+        "code": "RW2",
+        "fullCode": "6BA-RW2",
+        "drive": "awd",
+        "sheet": "ホンダ",
+        "brand": "ホンダ",
+        "row": 31,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6BA-RW2",
+          "0001~0002",
+          "L15B",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "Honda",
+    "model": "E",
+    "chassisCode": "ZC7",
+    "originalChassisCode": "ZC7",
+    "years": [
+      2020,
+      2021,
+      2023
+    ],
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Honda",
+        "code": "ZC7",
+        "fullCode": "ZAA-ZC7",
+        "drive": "rwd",
+        "url": "https://www.honda.co.jp/factbook/auto/Honda-e/202008/P32.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "7a9d6278101c6db5fe50704f5bba54048d1fdd597b1b65f3687ac8f1829d5b50",
+        "statement": "Honda e и Advance, код ZAA-ZC7: RR, задний привод. Заводская таблица, печатная страница 33; проверено по изображению PDF."
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Honda",
+    "model": "Elysion",
+    "chassisCode": "RR1",
+    "originalChassisCode": "RR1",
+    "years": [
+      2008
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RR1",
+        "fullCode": "DBA-RR1",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 103,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "エリシオン",
+          "DBA-RR1",
+          "K24A",
+          "2.354",
+          "5AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "Honda",
+    "model": "Elysion",
+    "chassisCode": "RR2",
+    "originalChassisCode": "RR2",
+    "years": [
+      2008
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RR2",
+        "fullCode": "DBA-RR2",
+        "drive": "awd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 105,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-RR2",
+          "K24A",
+          "2.354",
+          "5AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "Honda",
+    "model": "Elysion",
+    "chassisCode": "RR3",
+    "originalChassisCode": "RR3",
+    "years": [
+      2008
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RR3",
+        "fullCode": "DBA-RR3",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 106,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-RR3",
+          "J30A",
+          "2.997",
+          "5AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "Honda",
+    "model": "Elysion",
+    "chassisCode": "RR4",
+    "originalChassisCode": "RR4",
+    "years": [
+      2008
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RR4",
+        "fullCode": "DBA-RR4",
+        "drive": "awd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 107,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-RR4",
+          "J30A",
+          "2.997",
+          "5AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "Honda",
+    "model": "Elysion",
+    "chassisCode": "RR5",
+    "originalChassisCode": "RR5",
+    "years": [
+      2008
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RR5",
+        "fullCode": "DBA-RR5",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 112,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-RR5",
+          "J35A",
+          "3.471",
+          "5AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "Honda",
+    "model": "Elysion",
+    "chassisCode": "RR6",
+    "originalChassisCode": "RR6",
+    "years": [
+      2008
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RR6",
+        "fullCode": "DBA-RR6",
+        "drive": "awd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 114,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-RR6",
+          "J35A",
+          "3.471",
+          "5AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "HONDA",
+    "model": "FIT",
+    "chassisCode": "GK5",
+    "originalChassisCode": "GK5",
+    "years": [
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GK5",
+        "fullCode": "DBA-GK5",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 21,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-GK5",
+          "L15B",
+          "1.496",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "e4d5502128dad95f3dadc731c754b612dccf8f6884981eb00c91362c7d0c4c97"
+      }
+    ],
+    "sourceRows": 21
+  },
+  {
+    "make": "HONDA",
+    "model": "FIT",
+    "chassisCode": "GP5",
+    "originalChassisCode": "GP5",
+    "years": [
+      2015
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GP5",
+        "fullCode": "DAA-GP5",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "フィット",
+          "DAA-GP5",
+          "LEB(内燃機関)\n-H1(電動機)",
+          "1.496",
+          "7AT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "e4d5502128dad95f3dadc731c754b612dccf8f6884981eb00c91362c7d0c4c97"
+      }
+    ],
+    "sourceRows": 21
+  },
+  {
+    "make": "HONDA",
+    "model": "FREED",
+    "chassisCode": "GP3",
+    "originalChassisCode": "GP3",
+    "years": [
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GP3",
+        "fullCode": "DAA-GP3",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 39,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "フリード",
+          "DAA-GP3",
+          "LEA(内燃機関)\n-MF6(電動機)",
+          "1.496",
+          "CVT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 18
+  },
+  {
+    "make": "HONDA",
+    "model": "FREED",
+    "chassisCode": "GT5",
+    "originalChassisCode": "GT5",
+    "years": [
+      2025
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GT5",
+        "fullCode": "6AA-GT5",
+        "drive": "fwd",
+        "sheet": "（新）1-1【乗・普小】WLTC ",
+        "brand": "ホンダ",
+        "row": 82,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6AA-GT5",
+          "0001",
+          "LEB(内燃機関)\n-H5(電動機)",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001203735.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "c4639fecd8949dffa3995b3b8b0d7265a348d4ee01c7528baea36beeb31c5b9f"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "HONDA",
+    "model": "INSIGHT",
+    "chassisCode": "RM7",
+    "originalChassisCode": "RM7",
+    "years": [
+      2026
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "HONDA",
+    "model": "N BOX PLUS",
+    "chassisCode": "JF1",
+    "originalChassisCode": "JF1",
+    "years": [
+      2017
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JF1",
+        "fullCode": "DBA-JF1",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "N BOX",
+          "DBA-JF1",
+          "S07A",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      }
+    ],
+    "sourceRows": 114
+  },
+  {
+    "make": "HONDA",
+    "model": "N BOX",
+    "chassisCode": "JF1",
+    "originalChassisCode": "JF1",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JF1",
+        "fullCode": "DBA-JF1",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "N BOX",
+          "DBA-JF1",
+          "S07A",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      }
+    ],
+    "sourceRows": 114
+  },
+  {
+    "make": "HONDA",
+    "model": "N BOX",
+    "chassisCode": "JF3",
+    "originalChassisCode": "JF3",
+    "years": [
+      2017,
+      2019,
+      2022,
+      2023
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JF3",
+        "fullCode": "DBA-JF3",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 27,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "N-BOX",
+          "DBA-JF3",
+          "0001~0002、0004",
+          "S07B",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225524.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "d7e014ca21c53599c40307ad9e5987e473ddad188a66c68d029514885312d13d"
+      },
+      {
+        "code": "JF3",
+        "fullCode": "6BA-JF3",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 19,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "N-BOX",
+          "6BA-JF3",
+          "0001~0003、0006~0007",
+          "S07B",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001339180.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "c57d236a1207da31d7cd0f4ef048c720ed5a341ec16d2d4715e516812cf1d055"
+      }
+    ],
+    "sourceRows": 49
+  },
+  {
+    "make": "HONDA",
+    "model": "N BOX",
+    "chassisCode": "JF5",
+    "originalChassisCode": "JF5",
+    "years": [
+      2024
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JF5",
+        "fullCode": "6BA-JF5",
+        "drive": "fwd",
+        "sheet": "（新）1-6【乗・軽】",
+        "brand": "ホンダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "N-BOX",
+          "6BA-JF5",
+          "0001",
+          "S07B",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234326.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "12c197650baebf775932e5a4e6799a44de24e12239e28b86249131e83c880bcc"
+      },
+      {
+        "code": "JF5",
+        "fullCode": "5BA-JF5",
+        "drive": "fwd",
+        "sheet": "（新）1-1【乗・軽】WLTC",
+        "brand": "ホンダ",
+        "row": 20,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "N-BOX",
+          "5BA-JF5",
+          "0001",
+          "S07B",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/001296400.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "612e2f74241a4c82bd8c18af3efc8b0db3f7986f4dc31c0ce75ec3692f18deec"
+      }
+    ],
+    "sourceRows": 48
+  },
+  {
+    "make": "HONDA",
+    "model": "N VAN",
+    "chassisCode": "JJ1",
+    "originalChassisCode": "JJ1",
+    "years": [
+      2024
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JJ1",
+        "fullCode": "5BD-JJ1",
+        "drive": "fwd",
+        "sheet": "2-3【貨・軽】",
+        "brand": "ホンダ",
+        "row": 8,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "N-VAN",
+          "5BD-JJ1",
+          "S07B",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234380.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "55b3a743e30204fd5aa55128191b503533211979aded6c3b0ed206960366d4e2"
+      },
+      {
+        "code": "JJ1",
+        "fullCode": "HBD-JJ1",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "N-VAN",
+          "HBD-JJ1",
+          "S07B",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282778.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "b0a6f682402aa9ab405ef46830b94ae1099f082aa2a4a7ef39bcae53a5e5868f"
+      }
+    ],
+    "sourceRows": 45
+  },
+  {
+    "make": "HONDA",
+    "model": "N WGN",
+    "chassisCode": "JH1",
+    "originalChassisCode": "JH1",
+    "years": [
+      2014,
+      2018
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JH1",
+        "fullCode": "DBA-JH1",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 8,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "N-WGN",
+          "DBA-JH1",
+          "S07A",
+          "0.658",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031311.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "ef5e8bf7e01f5bdfb9c62970bf9e0e0022ec7bdacbe4d65535eca3b621679a03"
+      }
+    ],
+    "sourceRows": 30
+  },
+  {
+    "make": "HONDA",
+    "model": "N WGN",
+    "chassisCode": "JH3",
+    "originalChassisCode": "JH3",
+    "years": [
+      2024
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JH3",
+        "fullCode": "5BA-JH3",
+        "drive": "fwd",
+        "sheet": "（新）1-6【乗・軽】",
+        "brand": "ホンダ",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "N-WGN",
+          "5BA-JH3",
+          "0001",
+          "S07B",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234326.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "12c197650baebf775932e5a4e6799a44de24e12239e28b86249131e83c880bcc"
+      },
+      {
+        "code": "JH3",
+        "fullCode": "6BA-JH3",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "N-WGN",
+          "6BA-JH3",
+          "0001~0003",
+          "S07B",
+          "0.658"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001339180.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "c57d236a1207da31d7cd0f4ef048c720ed5a341ec16d2d4715e516812cf1d055"
+      }
+    ],
+    "sourceRows": 59
+  },
+  {
+    "make": "HONDA",
+    "model": "ODYSSEY",
+    "chassisCode": "RB1",
+    "originalChassisCode": "RB1",
+    "years": [
+      2008
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "HONDA",
+    "model": "ODYSSEY",
+    "chassisCode": "RB3",
+    "originalChassisCode": "RB3",
+    "years": [
+      2009,
+      2010,
+      2011,
+      2012,
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RB3",
+        "fullCode": "DBA-RB3",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 98,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "オデッセイ",
+          "DBA-RB3",
+          "K24A",
+          "2.354",
+          "CVT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "HONDA",
+    "model": "ODYSSEY",
+    "chassisCode": "RC1",
+    "originalChassisCode": "RC1",
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RC1",
+        "fullCode": "DBA-RC1",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 100,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "オデッセイ",
+          "DBA-RC1",
+          "K24W",
+          "2.356",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "e4d5502128dad95f3dadc731c754b612dccf8f6884981eb00c91362c7d0c4c97"
+      },
+      {
+        "code": "RC1",
+        "fullCode": "6BA-RC1",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 15,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6BA-RC1",
+          "0011~0016、0018、0020",
+          "K24W",
+          "2.356"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337994.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "df9ad6656074b9659892fd9ae6b3d055236ec434bef7ca7752eee28c2eb4892c"
+      }
+    ],
+    "sourceRows": 44
+  },
+  {
+    "make": "HONDA",
+    "model": "ODYSSEY",
+    "chassisCode": "RC4",
+    "originalChassisCode": "RC4",
+    "years": [
+      2016,
+      2017,
+      2018,
+      2021
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RC4",
+        "fullCode": "DAA-RC4",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 87,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "オデッセイ",
+          "DAA-RC4",
+          "0001、0003、0007~0010",
+          "LFA(内燃機関)\n-H4(電動機)",
+          "1.993"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "567b4853ebe7f9687324927db360ab7e17ef5f08a29952f65c5cf763c58b160a"
+      },
+      {
+        "code": "RC4",
+        "fullCode": "6AA-RC4",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "オデッセイ",
+          "6AA-RC4",
+          "0003~0004",
+          "LFA(内燃機関)\n-H4(電動機)",
+          "1.993"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225520.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "085c8fa0ef6a9b024b90aa18f7c4c6af6e067c9a284463d6d5042083a810b6d5"
+      }
+    ],
+    "sourceRows": 44
+  },
+  {
+    "make": "HONDA",
+    "model": "ODYSSEY",
+    "chassisCode": "RC5",
+    "originalChassisCode": "RC5",
+    "years": [
+      2024
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RC5",
+        "fullCode": "6AA-RC5",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "ODYSSEY",
+          "6AA-RC5",
+          "0001",
+          "LFB11(内燃機関)\n-H4(電動機)",
+          "1.993"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001986950.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_tk10_000050.html",
+        "sha256": "c77ecc50133aa44e17dcc106662821432bc05fa5bb4745c2540ce2c37124aed9"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "HONDA",
+    "model": "STEP WAGON",
+    "chassisCode": "RK5",
+    "originalChassisCode": "RK5",
+    "years": [
+      2010
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RK5",
+        "fullCode": "DBA-RK5",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 66,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ステップワゴン スパーダ",
+          "DBA-RK5",
+          "R20A",
+          "1.997",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 51
+  },
+  {
+    "make": "HONDA",
+    "model": "STREAM",
+    "chassisCode": "RN8",
+    "originalChassisCode": "RN8",
+    "years": [
+      2010
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RN8",
+        "fullCode": "DBA-RN8",
+        "drive": "fwd",
+        "sheet": "Honda",
+        "brand": "ホンダ",
+        "row": 81,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ストリーム",
+          "DBA-RN8",
+          "R20A",
+          "1.997",
+          "CVT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "HONDA",
+    "model": "VEZEL",
+    "chassisCode": "RV4",
+    "originalChassisCode": "RV4",
+    "years": [
+      2023
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RV4",
+        "fullCode": "5BA-RV4",
+        "drive": "awd",
+        "sheet": "（新）1-1【乗・普小】WLTC ",
+        "brand": "ホンダ",
+        "row": 32,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-RV4",
+          "0001",
+          "L15Z",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001203735.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "c4639fecd8949dffa3995b3b8b0d7265a348d4ee01c7528baea36beeb31c5b9f"
+      },
+      {
+        "code": "RV4",
+        "fullCode": "6BA-RV4",
+        "drive": "awd",
+        "sheet": "ホンダ",
+        "brand": "ホンダ",
+        "row": 90,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6BA-RV4",
+          "0001~0002",
+          "L15Z",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "HONDA",
+    "model": "VEZEL",
+    "chassisCode": "RV5",
+    "originalChassisCode": "RV5",
+    "years": [
+      2022
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "RV5",
+        "fullCode": "6AA-RV5",
+        "drive": "fwd",
+        "sheet": "（新）1-6【乗・普小】",
+        "brand": "ホンダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ホンダ",
+          "",
+          "VEZEL",
+          "6AA-RV5",
+          "0001~0004",
+          "LEC(内燃機関)\n-H5(電動機)",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001130182.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "866512fac109c4e80fea237ef324a6ffca6fb9f69d32b9bc96403391c6833543"
+      }
+    ],
+    "sourceRows": 29
+  },
+  {
+    "make": "Hyundai",
+    "model": "Elantra",
+    "chassisCode": "XD20",
+    "originalChassisCode": "XD20",
+    "years": [
+      2021
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "COMO",
+    "chassisCode": "JVWE25",
+    "originalChassisCode": "JVWE25",
+    "years": [
+      2008,
+      2009
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYJ77A",
+    "originalChassisCode": "CYJ77A",
+    "years": [
+      2014,
+      2015
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYJ77B",
+    "originalChassisCode": "CYJ77B",
+    "years": [
+      2016
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYJ77BA",
+    "originalChassisCode": "CYJ77BA",
+    "years": [
+      2016
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYJ77C",
+    "originalChassisCode": "CYJ77C",
+    "years": [
+      2018,
+      2019
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYJ77W8",
+    "originalChassisCode": "CYJ77W8",
+    "years": [
+      2010
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYJ77W8Aカイ",
+    "originalChassisCode": "CYJ77W8Aカイ",
+    "years": [
+      2010
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYL77A",
+    "originalChassisCode": "CYL77A",
+    "years": [
+      2015
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYL77B",
+    "originalChassisCode": "CYL77B",
+    "years": [
+      2016
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYL77V8",
+    "originalChassisCode": "CYL77V8",
+    "years": [
+      2008,
+      2009
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYY77AJ",
+    "originalChassisCode": "CYY77AJ",
+    "years": [
+      2012
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "CYZ77CMQ",
+    "originalChassisCode": "CYZ77CMQ",
+    "years": [
+      2020
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "EXD52AD",
+    "originalChassisCode": "EXD52AD",
+    "years": [
+      2014,
+      2016
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "EXD52CD",
+    "originalChassisCode": "EXD52CD",
+    "years": [
+      2018,
+      2020
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "FRR34S2",
+    "originalChassisCode": "FRR34S2",
+    "years": [
+      2008
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "FRR90S2",
+    "originalChassisCode": "FRR90S2",
+    "years": [
+      2008
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "ISUZU",
+    "model": "TRUCK",
+    "chassisCode": "NKR85AD",
+    "originalChassisCode": "NKR85AD",
+    "years": [
+      2015
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Jaguar",
+    "model": "E-Pace",
+    "chassisCode": "DF2NA",
+    "originalChassisCode": "DF2NA",
+    "years": [
+      2018
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "DF2NA",
+        "fullCode": "LDA-DF2NA",
+        "drive": "awd",
+        "sheet": "jaguar",
+        "brand": "ジャガー",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "E-PACE",
+          "LDA-DF2NA",
+          "0001 ~ 0004",
+          "204DT",
+          "1.999"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282821.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "3e9e3194e18b422a89a3342e89c416c0c7477d024802bbbf8002047c8842a7b5"
+      }
+    ],
+    "sourceRows": 3
+  },
+  {
+    "make": "JAGUAR",
+    "model": "F-TYPE",
+    "chassisCode": "J608A",
+    "originalChassisCode": "J608A",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "awd",
+      "rwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "J608A",
+        "fullCode": "CBA-J608A",
+        "drive": "rwd",
+        "sheet": "Jaguar",
+        "brand": "ジャガー",
+        "row": 28,
+        "column": 4,
+        "identity": [
+          "ジャガー",
+          "",
+          "F-TYPE",
+          "CBA-J608A",
+          "306PS",
+          "2.994",
+          "8AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      },
+      {
+        "code": "J608A",
+        "fullCode": "CBA-J608A",
+        "drive": "awd",
+        "sheet": "Jaguar",
+        "brand": "ジャガー",
+        "row": 37,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "CBA-J608A",
+          "0212, 0214, 0312, 0314",
+          "306PS",
+          "2.994"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225527.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "4f1af9cc6a35c59a00ba66178001631315789f6f7b71bdb0587ed816f1e2fe0d"
+      }
+    ],
+    "sourceRows": 21
+  },
+  {
+    "make": "JAGUAR",
+    "model": "F-TYPE",
+    "chassisCode": "J60MA",
+    "originalChassisCode": "J60MA",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "awd",
+      "rwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "J60MA",
+        "fullCode": "CBA-J60MA",
+        "drive": "rwd",
+        "sheet": "Jaguar",
+        "brand": "ジャガー",
+        "row": 29,
+        "column": 4,
+        "identity": [
+          "ジャガー",
+          "",
+          "F-TYPE",
+          "CBA-J60MA",
+          "508PS",
+          "4.999",
+          "8AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      },
+      {
+        "code": "J60MA",
+        "fullCode": "CBA-J60MA",
+        "drive": "awd",
+        "sheet": "Jaguar",
+        "brand": "ジャガー",
+        "row": 35,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "F-TYPE",
+          "CBA-J60MA",
+          "0104",
+          "508PS",
+          "4.999"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125031.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "11480625b87e6ef13f832f8b0734b71fc5775c3c3183e028e561026e7e052b6a"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "JAGUAR",
+    "model": "F-TYPE",
+    "chassisCode": "J60MC",
+    "originalChassisCode": "J60MC",
+    "years": [
+      2021
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "J60MC",
+        "fullCode": "3BA-J60MC",
+        "drive": "awd",
+        "sheet": "ジャガー",
+        "brand": "ジャガー",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-J60MC",
+          "0001, 0002",
+          "508PS",
+          "4.999"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "LAMBORGHINI",
+    "model": "URUS",
+    "chassisCode": "ZLDHU",
+    "originalChassisCode": "ZLDHU",
+    "years": [
+      2019
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Lexus",
+    "model": "NX",
+    "chassisCode": "AAZH20",
+    "originalChassisCode": "AAZH20",
+    "years": [
+      2023,
+      2024,
+      2025
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AAZH20",
+        "fullCode": "6AA-AAZH20",
+        "drive": "fwd",
+        "sheet": "レクサス",
+        "brand": "レクサス",
+        "row": 18,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "NX350H",
+          "6AA-AAZH20",
+          "0001",
+          "A25A\n(内燃機関)\n5NM\n(電動機)",
+          "2.487"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 39
+  },
+  {
+    "make": "Lexus",
+    "model": "NX",
+    "chassisCode": "AAZH25",
+    "originalChassisCode": "AAZH25",
+    "years": [
+      2023,
+      2026
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AAZH25",
+        "fullCode": "6AA-AAZH25",
+        "drive": "awd",
+        "sheet": "レクサス",
+        "brand": "レクサス",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6AA-AAZH25",
+          "0001",
+          "A25A\n(内燃機関)\n5NM\n(電動機)\n4NM\n(電動機)",
+          "2.487"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 41
+  }
+]

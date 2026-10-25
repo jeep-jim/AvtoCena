@@ -1,0 +1,594 @@
+{
+  "version": 1,
+  "id": "research-japan-chassis-drive-2026-10-25-0001",
+  "entries": [
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "718096f07405254cb23045c3",
+      "expectedDigest": "251ebd2a6a5d42025bab840e96ee6478bff3908c7bdc65c0dc18e3d83346465f",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2019,
+      "trim": "4WD アド Van ス",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001282806.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 5AA-GTE, лист Subaru, строка 21; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "7bbf9dbb93beb1a410614134",
+      "expectedDigest": "a5690b5ecd20cb8a467feee19a04ad283266180bf18b901913e1bb1ecc6edbfc",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2019,
+      "trim": "2.0i-L Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GT7, лист Subaru, строка 48; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "88515c48fe83d690d2d54171",
+      "expectedDigest": "63ea211ca39ae4f5f3d7ee6a4c167b794a3675b732a84658d8ad9c1ec338cd82",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2018,
+      "trim": "4WD 2.0i-L アイサイ",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GT7, лист Subaru, строка 48; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "849fc221ce180e63defae085",
+      "expectedDigest": "c3c1b8083338ad5d637ab98889589b44da1304c8cba89dce62895c4c11babeb0",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2017,
+      "trim": "1.6i-L Eyesite",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GT3, лист Subaru, строка 41; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "c72ca89e0db9060bc2ea9261",
+      "expectedDigest": "53bc182714a8c62d4204c629e24414b6fc97d49295cfda53086694e64c5191d0",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2017,
+      "trim": "2.0i-S Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GT7, лист Subaru, строка 48; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "b94091542b51dccaa34ae98f",
+      "expectedDigest": "40d985e07be97e6c08ad96c52e53b5ace9022a202552518faca3f13bbbe2cb79",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2016,
+      "trim": "4WD 2.0i-L Eyesite",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "70efee5dfa13f3178409b0c1",
+      "expectedDigest": "976bd131a8659699b6df641c903d8afa1cc850607fa0d20dd85669345a372eb2",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2016,
+      "trim": "4WD 2.0i",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "154cab08e3367e7090e21096",
+      "expectedDigest": "2963d504e5737a3e7f307858e00d98f0a154d345447a2f06d8c2c4157f393384",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2016,
+      "trim": "2.0i-L Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "1f75fb37b279d49f80c1a8c6",
+      "expectedDigest": "e64b46b92616c992661a354587a4df2dac2136885067944ea242e563b40f727f",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2016,
+      "trim": "2.0i Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "637a0817032fe90e58b9835b",
+      "expectedDigest": "073c7d15dc6575fec7bb24c3116bac2fa87e6c77b9bdc1ffb39b4232a8775959",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2015,
+      "trim": "2.0i-L Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "d26f3a34ec5dc1503ddb8d52",
+      "expectedDigest": "31339827cb6ba70faf63b0276b1d76f15bc8915075541fe1b00f1ce4c908092b",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2015,
+      "trim": "4WD 2.0i Eyesite プラウド Edition",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "f830cf4c04ed3039d99bc716",
+      "expectedDigest": "ed6ccb13fe0f1f9083439baa6bf1c763ae08457a069d4e2b1fdd116328264de4",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2015,
+      "trim": "4WD 2.0i-L Eyesite",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "ed377d07dd0288991a989211",
+      "expectedDigest": "c11d27f0c40a370c470b2fda5b2bdbbb58caf8e5c3f18920884efac8829062ee",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2014,
+      "trim": "2.0i 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "6c13dc898edd4482706f6c91",
+      "expectedDigest": "66ac9698e4a8303351eec78a446317bcf6932197e9d3edd4125cd31554732f28",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2014,
+      "trim": "2.0i-L Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-GPE, лист Subaru, строка 35; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "a8073cd5dba96f04aaa03954",
+      "expectedDigest": "7794971040a99d154ef3434937ea1cc9d607a73e4b604825fd9a6ca1285c2483",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2013,
+      "trim": "4WD 2.0i-L Eyesite",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "26b8ff336c5c5b12dab544e7",
+      "expectedDigest": "ee448b99ed8615dab5c8f431a107f9c05e7937a5434ec000397bee07c6e7b6b3",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2013,
+      "trim": "2.0i-L Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "0037c304754f1c715b01c7c7",
+      "expectedDigest": "05743fa0e9d1950b174f7b1099e397094d18f78cba8763e854e1fe691584e8bb",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2013,
+      "trim": "2.0i-L Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-GPE, лист Subaru, строка 35; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "ccff155b5eabee73f0e6f76a",
+      "expectedDigest": "30be259c25dbb49d64c14f32249d5a6cbf9c6acdecac2dec8931d977dbfdc1f6",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2013,
+      "trim": "2.0i-L Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-GPE, лист Subaru, строка 35; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "c024f39fde14ecdee607c621",
+      "expectedDigest": "8bcbd3e52e215a69d85189a8644d76a44930d68674be1b66b9d2c77b5554703e",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2012,
+      "trim": "2.0i-L Eyesite 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GP7, лист Subaru, строка 51; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "3af60de91736e2c42a4efabe",
+      "variantId": "5da0a85aef9688b5047b740f",
+      "expectedDigest": "830e7414644ae43575c83ea0450d6bc99d5a5c878b5d9da7a4bf55304a98f2c0",
+      "make": "Toyota",
+      "model": "Corolla",
+      "year": 2023,
+      "trim": "4WD Hybrid G",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001287184.xlsx",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6AA-ZWE215, лист 1-1（普通・小型）, строка 63; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "3af60de91736e2c42a4efabe",
+      "variantId": "c62d14a704aac213b70a1168",
+      "expectedDigest": "70cca3a160836382e3c356c0a087fecf78e636b42ed07da9b491edfb89653578",
+      "make": "Toyota",
+      "model": "Corolla",
+      "year": 2022,
+      "trim": "Hybrid G 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001287184.xlsx",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6AA-ZWE215, лист 1-1（普通・小型）, строка 63; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "dcfc4a6b296e8cd07901f4bd",
+      "variantId": "6a1f5f4dcf48dd6932430fb5",
+      "expectedDigest": "13f42f76fc9b2d8485c7fc471f3c0f7bdfa8d1a7a5c2a33c1fac93d66615166c",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "year": 2019,
+      "trim": "TDI 4モ-ション High Line 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001282821.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код LDA-5NDFGF, лист Volkswagen, строка 11; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "dcfc4a6b296e8cd07901f4bd",
+      "variantId": "d2c48ccc2c89453e1f646c55",
+      "expectedDigest": "93b8ac4200725eb87a2c2d6e7dc162043427b88468c157d54f0b796cb2bba79a",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "year": 2018,
+      "trim": "TDI 4モ-ション High Line 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001282821.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код LDA-5NDFGF, лист Volkswagen, строка 11; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "dcfc4a6b296e8cd07901f4bd",
+      "variantId": "2506e24e199a13c578ec2dd4",
+      "expectedDigest": "df27bca0df04d4628cfa127d20950714673507484863501c2eb23603b9fad608",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "year": 2016,
+      "trim": "R Line 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код ABA-5NCCZ, лист VW, строка 31; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "dcfc4a6b296e8cd07901f4bd",
+      "variantId": "6985ca9951000c33aa9e1123",
+      "expectedDigest": "4161c3f39794a968bce46101ccbbfd39ba1e1a45e9974dff24ab0cb9cb5f4bdb",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "year": 2013,
+      "trim": "ティグアン R Line",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код ABA-5NCCZ, лист VW, строка 31; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "dcfc4a6b296e8cd07901f4bd",
+      "variantId": "8737b010c817f5cdc05b33d8",
+      "expectedDigest": "9d8f267b775362673ee75ad7d0846de0fc40ff01018e12b05511633575aefde6",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "year": 2012,
+      "trim": "Sports & Style 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код ABA-5NCCZ, лист VW, строка 31; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "dcfc4a6b296e8cd07901f4bd",
+      "variantId": "bc4622c67986a3a7a9a34547",
+      "expectedDigest": "e2694c3fbc31b91cbe99770018f2e0bdb4457937d9e7b6d7db7b887c78278048",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "year": 2011,
+      "trim": "4WD Sports & Style",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код ABA-5NCCZ, лист VW, строка 31; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "dcfc4a6b296e8cd07901f4bd",
+      "variantId": "9f04e7d6bcaf14c577e8137f",
+      "expectedDigest": "f1b9fa3af42abf66af87dbd40deca018dde6bd03f9023b99c6e7627cd0a4a16f",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "year": 2010,
+      "trim": "ライス tons 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код ABA-5NCCZ, лист VW, строка 31; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    }
+  ]
+}

@@ -1,0 +1,2701 @@
+[
+  {
+    "make": "Lexus",
+    "model": "NX",
+    "chassisCode": "AGZ10",
+    "originalChassisCode": "AGZ10",
+    "years": [
+      2015,
+      2018,
+      2021
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AGZ10",
+        "fullCode": "DBA-AGZ10",
+        "drive": "fwd",
+        "sheet": "Lexus",
+        "brand": "レクサス",
+        "row": 28,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "NX200T",
+          "DBA-AGZ10",
+          "8AR",
+          "1.998",
+          "6AT\n(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "15c8034c69ff968fe8ba199f8b569bc50cae93a2c7ac7facf1384c314d32cdaf"
+      },
+      {
+        "code": "AGZ10",
+        "fullCode": "3BA-AGZ10",
+        "drive": "fwd",
+        "sheet": "lexus",
+        "brand": "レクサス",
+        "row": 44,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "NX300",
+          "3BA-AGZ10",
+          "0002",
+          "8AR",
+          "1.998"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/5.1.Gzyouyou_WLTC.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000050.html",
+        "sha256": "87574eb1a9a35730e804de67d4341c859a67cb1f83f75eac14193894b04208cc"
+      }
+    ],
+    "sourceRows": 19
+  },
+  {
+    "make": "Lexus",
+    "model": "NX",
+    "chassisCode": "AYZ10",
+    "originalChassisCode": "AYZ10",
+    "years": [
+      2014,
+      2015,
+      2017,
+      2019,
+      2020,
+      2021
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AYZ10",
+        "fullCode": "DAA-AYZ10",
+        "drive": "fwd",
+        "sheet": "Lexus",
+        "brand": "レクサス",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "NX300H",
+          "DAA-AYZ10",
+          "2AR\n(内燃機関)\n2JM\n(電動機)",
+          "2.493",
+          "CVT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "15c8034c69ff968fe8ba199f8b569bc50cae93a2c7ac7facf1384c314d32cdaf"
+      },
+      {
+        "code": "AYZ10",
+        "fullCode": "6AA-AYZ10",
+        "drive": "fwd",
+        "sheet": "lexus",
+        "brand": "レクサス",
+        "row": 18,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "NX300H",
+          "6AA-AYZ10",
+          "0002",
+          "2AR\n(内燃機関)\n2JM\n(電動機)",
+          "2.493"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/5.1.Gzyouyou_WLTC.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000050.html",
+        "sha256": "87574eb1a9a35730e804de67d4341c859a67cb1f83f75eac14193894b04208cc"
+      }
+    ],
+    "sourceRows": 19
+  },
+  {
+    "make": "Lexus",
+    "model": "NX",
+    "chassisCode": "AYZ15",
+    "originalChassisCode": "AYZ15",
+    "years": [
+      2015,
+      2019
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "AYZ15",
+        "fullCode": "DAA-AYZ15",
+        "drive": "awd",
+        "sheet": "Lexus",
+        "brand": "レクサス",
+        "row": 18,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-AYZ15",
+          "2AR\n(内燃機関)\n2JM\n(電動機)\n2FM\n(電動機)",
+          "2.493",
+          "CVT\n(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "15c8034c69ff968fe8ba199f8b569bc50cae93a2c7ac7facf1384c314d32cdaf"
+      },
+      {
+        "code": "AYZ15",
+        "fullCode": "6AA-AYZ15",
+        "drive": "awd",
+        "sheet": "lexus",
+        "brand": "レクサス",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6AA-AYZ15",
+          "0002",
+          "2AR\n(内燃機関)\n2JM\n(電動機)\n2FM\n(電動機)",
+          "2.493"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/5.1.Gzyouyou_WLTC.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000050.html",
+        "sha256": "87574eb1a9a35730e804de67d4341c859a67cb1f83f75eac14193894b04208cc"
+      }
+    ],
+    "sourceRows": 19
+  },
+  {
+    "make": "Lexus",
+    "model": "NX",
+    "chassisCode": "TAZA25",
+    "originalChassisCode": "TAZA25",
+    "years": [
+      2023
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "TAZA25",
+        "fullCode": "5BA-TAZA25",
+        "drive": "awd",
+        "sheet": "レクサス",
+        "brand": "レクサス",
+        "row": 61,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "NX350",
+          "5BA-TAZA25",
+          "0001",
+          "T24A",
+          "2.393"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 23
+  },
+  {
+    "make": "MASERATI",
+    "model": "GHIBLI",
+    "chassisCode": "MG20",
+    "originalChassisCode": "MG20",
+    "years": [
+      2023
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MASERATI",
+    "model": "GHIBLI",
+    "chassisCode": "MG30A",
+    "originalChassisCode": "MG30A",
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MASERATI",
+    "model": "GHIBLI",
+    "chassisCode": "MG30AA",
+    "originalChassisCode": "MG30AA",
+    "years": [
+      2014,
+      2015
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MASERATI",
+    "model": "GHIBLI",
+    "chassisCode": "MG30B",
+    "originalChassisCode": "MG30B",
+    "years": [
+      2014,
+      2015,
+      2016
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MASERATI",
+    "model": "GHIBLI",
+    "chassisCode": "MG30C",
+    "originalChassisCode": "MG30C",
+    "years": [
+      2017,
+      2020
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MASERATI",
+    "model": "GHIBLI",
+    "chassisCode": "MG30D",
+    "originalChassisCode": "MG30D",
+    "years": [
+      2016
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MASERATI",
+    "model": "GRECALE",
+    "chassisCode": "MGR20A",
+    "originalChassisCode": "MGR20A",
+    "years": [
+      2023
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MASERATI",
+    "model": "GRECALE",
+    "chassisCode": "MGR20C",
+    "originalChassisCode": "MGR20C",
+    "years": [
+      2023
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MASERATI",
+    "model": "GRECALE",
+    "chassisCode": "MGR30",
+    "originalChassisCode": "MGR30",
+    "years": [
+      2023
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MAZDA",
+    "model": "ATENZA SEDAN",
+    "chassisCode": "GJ2FP",
+    "originalChassisCode": "GJ2FP",
+    "years": [
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "GJ2FP",
+        "fullCode": "LDA-GJ2FP",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "マツダ",
+          "",
+          "アテンザ",
+          "LDA-GJ2FP",
+          "SH",
+          "2.188",
+          "6MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989176.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "ed076fccd14e93dbe0d2edc7a516763722b7963a31d1b367152baa0aefbfd8af"
+      },
+      {
+        "code": "GJ2FP",
+        "fullCode": "3DA-GJ2FP",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 15,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "アテンザ",
+          "3DA-GJ2FP",
+          "0001,0002",
+          "SH",
+          "2.188"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282819.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "dae56e11c378f34c254b7ff39588b1f5434c7eba3c24176cb2dd26c8c39260f2"
+      }
+    ],
+    "sourceRows": 28
+  },
+  {
+    "make": "MAZDA",
+    "model": "CX-30",
+    "chassisCode": "DM8P",
+    "originalChassisCode": "DM8P",
+    "years": [
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "DM8P",
+        "fullCode": "3DA-DM8P",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 38,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "CX-30",
+          "3DA-DM8P",
+          "0001",
+          "S8",
+          "1.756"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001338000.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "91c6a04367e4a51ee9d1d770443d9b69f846b74ea671cacd846dc1fc3eec980f"
+      },
+      {
+        "code": "DM8P",
+        "fullCode": "3DA-DM8P",
+        "drive": "awd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 39,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3DA-DM8P",
+          "0101",
+          "S8",
+          "1.756"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001338000.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "91c6a04367e4a51ee9d1d770443d9b69f846b74ea671cacd846dc1fc3eec980f"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "MAZDA",
+    "model": "CX-30",
+    "chassisCode": "DMEJ3R",
+    "originalChassisCode": "DMEJ3R",
+    "years": [
+      2023
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "DMEJ3R",
+        "fullCode": "5AA-DMEJ3R",
+        "drive": "fwd",
+        "sheet": "1-6(普通・小型)＜国内＞",
+        "brand": "マツダ",
+        "row": 14,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "MAZDA CX-30",
+          "5AA-DMEJ3R",
+          "0002",
+          "PE-MJ",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234257.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "7c2465f6253f1a533df716ab6cf080ef559a7dc19daa8e82046d10ce3077072c"
+      },
+      {
+        "code": "DMEJ3R",
+        "fullCode": "5AA-DMEJ3R",
+        "drive": "awd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 30,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-DMEJ3R",
+          "0101",
+          "PE-MJ",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001986923.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_tk10_000050.html",
+        "sha256": "c9ea25256a71cadda1bc77823257c8af35fef9c1c828595965c23df8f8dc0d3d"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "MAZDA",
+    "model": "CX-30",
+    "chassisCode": "DMEP",
+    "originalChassisCode": "DMEP",
+    "years": [
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "DMEP",
+        "fullCode": "5BA-DMEP",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 41,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-DMEP",
+          "0001",
+          "PE",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337994.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "df9ad6656074b9659892fd9ae6b3d055236ec434bef7ca7752eee28c2eb4892c"
+      },
+      {
+        "code": "DMEP",
+        "fullCode": "5BA-DMEP",
+        "drive": "awd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 42,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-DMEP",
+          "0101",
+          "PE",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337994.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "df9ad6656074b9659892fd9ae6b3d055236ec434bef7ca7752eee28c2eb4892c"
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "Mazda",
+    "model": "Mazda2",
+    "chassisCode": "DE3FS",
+    "originalChassisCode": "DE3FS",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "DE3FS",
+        "fullCode": "DBA-DE3FS",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-DE3FS",
+          "ZJ",
+          "1.348",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "Mazda",
+    "model": "Mazda2",
+    "chassisCode": "DEJFS",
+    "originalChassisCode": "DEJFS",
+    "years": [
+      2012,
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "DEJFS",
+        "fullCode": "DBA-DEJFS",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "マツダ",
+          "",
+          "デミオ",
+          "DBA-DEJFS",
+          "P3",
+          "1.298",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "MAZDA",
+    "model": "MAZDA2",
+    "chassisCode": "DJ5AS",
+    "originalChassisCode": "DJ5AS",
+    "years": [
+      2020,
+      2021
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "DJ5AS",
+        "fullCode": "LDA-DJ5AS",
+        "drive": "awd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "LDA-DJ5AS",
+          "S5",
+          "1.498",
+          "6AT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084244.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "2463b032a85b0556c2c86bd94bba20729baf3e07452363cd23745e20a6ac76aa"
+      },
+      {
+        "code": "DJ5AS",
+        "fullCode": "3DA-DJ5AS",
+        "drive": "awd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3DA-DJ5AS",
+          "0009,0010,0011,\n0012",
+          "S5",
+          "1.498"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001338000.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "91c6a04367e4a51ee9d1d770443d9b69f846b74ea671cacd846dc1fc3eec980f"
+      }
+    ],
+    "sourceRows": 20
+  },
+  {
+    "make": "MAZDA",
+    "model": "MAZDA2",
+    "chassisCode": "DJFS",
+    "originalChassisCode": "DJFS",
+    "years": [
+      2020
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "MAZDA",
+    "model": "MAZDA2",
+    "chassisCode": "DJLAS",
+    "originalChassisCode": "DJLAS",
+    "years": [
+      2022,
+      2023
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "DJLAS",
+        "fullCode": "5BA-DJLAS",
+        "drive": "awd",
+        "sheet": "1-6(普通・小型)＜国内＞",
+        "brand": "マツダ",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-DJLAS",
+          "0101,0102,0103,0104,\n0105,0106,0107,0108,\n0109,0110,0111,0112,\n0113,0114,0115,0116",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234257.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "7c2465f6253f1a533df716ab6cf080ef559a7dc19daa8e82046d10ce3077072c"
+      },
+      {
+        "code": "DJLAS",
+        "fullCode": "6BA-DJLAS",
+        "drive": "awd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 11,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6BA-DJLAS",
+          "0001,0002,0003,0004,\n0005,0006,0007,0008,\n0009,0010,0011,0012",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282807.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "ce9f06fea99f395bdd1c535e7ac41042443a8ad4ad0bb0480cbc7f9ee8275bbf"
+      }
+    ],
+    "sourceRows": 19
+  },
+  {
+    "make": "MAZDA",
+    "model": "MAZDA2",
+    "chassisCode": "DJLFS",
+    "originalChassisCode": "DJLFS",
+    "years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "DJLFS",
+        "fullCode": "5BA-DJLFS",
+        "drive": "fwd",
+        "sheet": "1-6(普通・小型)＜国内＞",
+        "brand": "マツダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "マツダ",
+          "",
+          "MAZDA 2",
+          "5BA-DJLFS",
+          "0151,0152,0153,0154,\n0155,0156,0157,0158,\n0159,0160,0161,0162,\n0163,0164,0165,0166",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234257.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "7c2465f6253f1a533df716ab6cf080ef559a7dc19daa8e82046d10ce3077072c"
+      },
+      {
+        "code": "DJLFS",
+        "fullCode": "CBA-DJLFS",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 24,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "CBA-DJLFS",
+          "0003,0004",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001125027.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+        "sha256": "887f08f8ff3c43599c48a5620640c4c4a63576ff476ba4dde169300c9235baa0"
+      },
+      {
+        "code": "DJLFS",
+        "fullCode": "3BA-DJLFS",
+        "drive": "fwd",
+        "sheet": "1-1(普通・小型)＜国内＞",
+        "brand": "マツダ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-DJLFS",
+          "0101,0102,0103,0104",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001191059.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "1a470ac4c9ed55980d6942a3feb4942811c1625b88c3a21ca0690fd8f46adbe2"
+      },
+      {
+        "code": "DJLFS",
+        "fullCode": "6BA-DJLFS",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "マツダ",
+          "",
+          "デミオ",
+          "6BA-DJLFS",
+          "0001,0002,0003,0004,\n0005,0006,0007,0008",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001282807.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000039.html",
+        "sha256": "ce9f06fea99f395bdd1c535e7ac41042443a8ad4ad0bb0480cbc7f9ee8275bbf"
+      },
+      {
+        "code": "DJLFS",
+        "fullCode": "6BA-DJLFS",
+        "drive": "awd",
+        "sheet": "マツダ",
+        "brand": "マツダ",
+        "row": 13,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6BA-DJLFS",
+          "0201,0202,0203,0204,\n0205,0206,0207,0208",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474448.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "9940e837fc37448584cbb263a83cc049bc39bf31fd23dfeb99c55f867ec099fd"
+      }
+    ],
+    "sourceRows": 50
+  },
+  {
+    "make": "Mazda",
+    "model": "MAZDA3",
+    "chassisCode": "BP5P",
+    "originalChassisCode": "BP5P",
+    "years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "BP5P",
+        "fullCode": "6BA-BP5P",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 25,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6BA-BP5P",
+          "1001",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337994.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "df9ad6656074b9659892fd9ae6b3d055236ec434bef7ca7752eee28c2eb4892c"
+      },
+      {
+        "code": "BP5P",
+        "fullCode": "6BA-BP5P",
+        "drive": "awd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 28,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6BA-BP5P",
+          "0101,1101",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337994.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "df9ad6656074b9659892fd9ae6b3d055236ec434bef7ca7752eee28c2eb4892c"
+      }
+    ],
+    "sourceRows": 16
+  },
+  {
+    "make": "Mazda",
+    "model": "MAZDA3",
+    "chassisCode": "BP5R",
+    "originalChassisCode": "BP5R",
+    "years": [
+      2023,
+      2024
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "BP5R",
+        "fullCode": "6BA-BP5R",
+        "drive": "fwd",
+        "sheet": "1-1(普通・小型)＜国内＞",
+        "brand": "マツダ",
+        "row": 26,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "6BA-BP5R",
+          "0002",
+          "P5",
+          "1.496"
+        ],
+        "url": "https://www.mlit.go.jp/common/001191059.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "1a470ac4c9ed55980d6942a3feb4942811c1625b88c3a21ca0690fd8f46adbe2"
+      }
+    ],
+    "sourceRows": 5
+  },
+  {
+    "make": "Mazda",
+    "model": "MAZDA3",
+    "chassisCode": "BP8P",
+    "originalChassisCode": "BP8P",
+    "years": [
+      2021,
+      2022
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "BP8P",
+        "fullCode": "3DA-BP8P",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 20,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "MAZDA 3",
+          "3DA-BP8P",
+          "1001",
+          "S8",
+          "1.756"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001338000.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "91c6a04367e4a51ee9d1d770443d9b69f846b74ea671cacd846dc1fc3eec980f"
+      },
+      {
+        "code": "BP8P",
+        "fullCode": "3DA-BP8P",
+        "drive": "awd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 22,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3DA-BP8P",
+          "1101",
+          "S8",
+          "1.756"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001338000.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "91c6a04367e4a51ee9d1d770443d9b69f846b74ea671cacd846dc1fc3eec980f"
+      }
+    ],
+    "sourceRows": 17
+  },
+  {
+    "make": "Mazda",
+    "model": "MAZDA3",
+    "chassisCode": "BP8R",
+    "originalChassisCode": "BP8R",
+    "years": [
+      2023,
+      2025
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "BP8R",
+        "fullCode": "3DA-BP8R",
+        "drive": "fwd",
+        "sheet": "Mazda _WLTC",
+        "brand": "マツダ",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "マツダ",
+          "",
+          "MAZDA 3",
+          "3DA-BP8R",
+          "1051",
+          "S8",
+          "1.756"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001986958.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_tk10_000050.html",
+        "sha256": "bfe7ef2160a1d1ce51036caaacba09e78da08dd853e84bd184a39322c947f6cd"
+      },
+      {
+        "code": "BP8R",
+        "fullCode": "3DA-BP8R",
+        "drive": "awd",
+        "sheet": "Mazda _WLTC",
+        "brand": "マツダ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3DA-BP8R",
+          "0151,0152",
+          "S8",
+          "1.756"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001986958.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_tk10_000050.html",
+        "sha256": "bfe7ef2160a1d1ce51036caaacba09e78da08dd853e84bd184a39322c947f6cd"
+      }
+    ],
+    "sourceRows": 13
+  },
+  {
+    "make": "Mazda",
+    "model": "MAZDA3",
+    "chassisCode": "BPFJ3P",
+    "originalChassisCode": "BPFJ3P",
+    "years": [
+      2022,
+      2023
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "BPFJ3P",
+        "fullCode": "5AA-BPFJ3P",
+        "drive": "fwd",
+        "sheet": "マツダ",
+        "brand": "マツダ",
+        "row": 24,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-BPFJ3P",
+          "0001",
+          "PE-MJ",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741606.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000055.html",
+        "sha256": "05ddda19af9ce686c44d53d8605b7d1bb8148efccf4931729b9a334f13f4147c"
+      },
+      {
+        "code": "BPFJ3P",
+        "fullCode": "5AA-BPFJ3P",
+        "drive": "awd",
+        "sheet": "マツダ",
+        "brand": "マツダ",
+        "row": 27,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-BPFJ3P",
+          "0101,1101",
+          "PE-MJ",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001741606.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000055.html",
+        "sha256": "05ddda19af9ce686c44d53d8605b7d1bb8148efccf4931729b9a334f13f4147c"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "Mazda",
+    "model": "MAZDA3",
+    "chassisCode": "BPFJ3R",
+    "originalChassisCode": "BPFJ3R",
+    "years": [
+      2023,
+      2025
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "BPFJ3R",
+        "fullCode": "5AA-BPFJ3R",
+        "drive": "fwd",
+        "sheet": "1-6(普通・小型)＜国内＞",
+        "brand": "マツダ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-BPFJ3R",
+          "0051,1002",
+          "PE-MJ",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234257.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "7c2465f6253f1a533df716ab6cf080ef559a7dc19daa8e82046d10ce3077072c"
+      },
+      {
+        "code": "BPFJ3R",
+        "fullCode": "5AA-BPFJ3R",
+        "drive": "awd",
+        "sheet": "1-6(普通・小型)＜国内＞",
+        "brand": "マツダ",
+        "row": 13,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5AA-BPFJ3R",
+          "0101",
+          "PE-MJ",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234257.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "7c2465f6253f1a533df716ab6cf080ef559a7dc19daa8e82046d10ce3077072c"
+      }
+    ],
+    "sourceRows": 30
+  },
+  {
+    "make": "Mazda",
+    "model": "MAZDA3",
+    "chassisCode": "BPFP",
+    "originalChassisCode": "BPFP",
+    "years": [
+      2019,
+      2020,
+      2022
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "BPFP",
+        "fullCode": "5BA-BPFP",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 29,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-BPFP",
+          "1001",
+          "PE",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337994.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "df9ad6656074b9659892fd9ae6b3d055236ec434bef7ca7752eee28c2eb4892c"
+      },
+      {
+        "code": "BPFP",
+        "fullCode": "5BA-BPFP",
+        "drive": "awd",
+        "sheet": "マツダ",
+        "brand": "マツダ",
+        "row": 31,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-BPFP",
+          "1101",
+          "PE",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "1986fc0cc1645d8eeb2211fed283481200b64aaa4056e91fca8bb2ef52027da6"
+      }
+    ],
+    "sourceRows": 11
+  },
+  {
+    "make": "Mazda",
+    "model": "Premacy",
+    "chassisCode": "CWEFW",
+    "originalChassisCode": "CWEFW",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "CWEFW",
+        "fullCode": "DBA-CWEFW",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 35,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "プレマシー",
+          "DBA-CWEFW",
+          "LF",
+          "1.998",
+          "5AT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "Mazda",
+    "model": "Premacy",
+    "chassisCode": "CWFFW",
+    "originalChassisCode": "CWFFW",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "CWFFW",
+        "fullCode": "DBA-CWFFW",
+        "drive": "fwd",
+        "sheet": "Mazda",
+        "brand": "マツダ",
+        "row": 35,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "プレマシー",
+          "DBA-CWFFW",
+          "PE",
+          "1.997",
+          "6AT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "e4d5502128dad95f3dadc731c754b612dccf8f6884981eb00c91362c7d0c4c97"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "MERCEDES BENZ",
+    "model": "CLA CLASS",
+    "chassisCode": "117346",
+    "originalChassisCode": "117346",
+    "years": [
+      2014
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "117346",
+        "fullCode": "DBA-117346",
+        "drive": "awd",
+        "sheet": "Mercedes Benz",
+        "brand": "ベンツ",
+        "row": 46,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "CLA250 4MATIC",
+          "DBA-117346",
+          "270M20",
+          "1.991",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Mercedes-Benz",
+    "model": "B-Class",
+    "chassisCode": "246242",
+    "originalChassisCode": "246242",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "246242",
+        "fullCode": "DBA-246242",
+        "drive": "fwd",
+        "sheet": "Mercedes",
+        "brand": "ベンツ",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "B180",
+          "DBA-246242",
+          "270",
+          "1.595",
+          "7AT(E)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "7e85221a69324e8c09a0fbd6f34aab98ba9a49dfc45ec0e84236b5fb4f911f2c"
+      }
+    ],
+    "sourceRows": 118
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "EK WAGON",
+    "chassisCode": "B33W",
+    "originalChassisCode": "B33W",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "B33W",
+        "fullCode": "5BA-B33W",
+        "drive": "fwd",
+        "sheet": "（新）1-6(軽)",
+        "brand": "三菱",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "三菱",
+          "",
+          "EK",
+          "5BA-B33W",
+          "0003~0008",
+          "BR06",
+          "0.659"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234333.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "9aa7f9b9edbac9dc76e10f91a15be94806f748ef786b48f654e391aeeaa928b6"
+      }
+    ],
+    "sourceRows": 39
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "EK WAGON",
+    "chassisCode": "H82W",
+    "originalChassisCode": "H82W",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "H82W",
+        "fullCode": "DBA-H82W",
+        "drive": "fwd",
+        "sheet": "Mitsubishi",
+        "brand": "三菱",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "三菱",
+          "",
+          "EK-WAGON",
+          "DBA-H82W",
+          "3G83",
+          "0.657",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      },
+      {
+        "code": "H82W",
+        "fullCode": "DBA-H82W",
+        "drive": "awd",
+        "sheet": "Mitsubishi",
+        "brand": "三菱",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-H82W",
+          "3G83",
+          "0.657",
+          "5MT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      },
+      {
+        "code": "H82W",
+        "fullCode": "CBA-H82W",
+        "drive": "fwd",
+        "sheet": "Mitsubishi",
+        "brand": "三菱",
+        "row": 19,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "CBA-H82W",
+          "3G83",
+          "0.657",
+          "4AT(LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      },
+      {
+        "code": "H82W",
+        "fullCode": "CBA-H82W",
+        "drive": "awd",
+        "sheet": "Mitsubishi",
+        "brand": "三菱",
+        "row": 20,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "CBA-H82W",
+          "3G83",
+          "0.657",
+          "4AT"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989171.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "560c3566cd53d4c707c4d6b7064ea4ffcc70463b27ccbf1b73b953d7c3bef957"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "i-MiEV",
+    "chassisCode": "HD4W",
+    "originalChassisCode": "HD4W",
+    "years": [
+      2019
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Mirage",
+    "chassisCode": "A03A",
+    "originalChassisCode": "A03A",
+    "years": [
+      2015,
+      2021
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "A03A",
+        "fullCode": "5BA-A03A",
+        "drive": "fwd",
+        "sheet": "1-6(乗用・小型)_輸入",
+        "brand": "三菱",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "三菱",
+          "",
+          "ミラージュ",
+          "5BA-A03A",
+          "0101~0104",
+          "3A92",
+          "1.192"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234300.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "4e7634f861ef80f51e0ba73c0b89bb6cf628bea66247d01d9c2517a98a801ee1"
+      },
+      {
+        "code": "A03A",
+        "fullCode": "DBA-A03A",
+        "drive": "fwd",
+        "sheet": "Mitsubishi",
+        "brand": "三菱",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-A03A",
+          "3A92",
+          "1.192",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "bc1fccde912bc570aab681f5ec8767e7178d8b9f8dc2cdbbbeefc3195a140283"
+      }
+    ],
+    "sourceRows": 19
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "OUTLANDER PHEV",
+    "chassisCode": "GG3W",
+    "originalChassisCode": "GG3W",
+    "years": [
+      2020
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Mitsubishi",
+        "code": "GG3W",
+        "fullCode": "5LA-GG3W",
+        "drive": "awd",
+        "url": "https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/spec/pdf/outlander_phev_spec_G_figure.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "543c0dc23b3dd182f6ff3a2df7da592b9efeca08100703b94e1fc9a163cfa9c7",
+        "statement": "Outlander PHEV GG3W: 4WD. Все комплектации также подтверждены заводской таблицей https://www.mitsubishi-motors.com/jp/newsroom/newsrelease/2020/20201029_1.html"
+      }
+    ],
+    "sourceRows": 1
+  },
+  {
+    "make": "Nissan",
+    "model": "CUBE",
+    "chassisCode": "Z12",
+    "originalChassisCode": "Z12",
+    "years": [
+      2012,
+      2016
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "Z12",
+        "fullCode": "DBA-Z12",
+        "drive": "fwd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 13,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "キューブ",
+          "DBA-Z12",
+          "HR15",
+          "1.498",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 8
+  },
+  {
+    "make": "NISSAN",
+    "model": "DAYZ",
+    "chassisCode": "B21W",
+    "originalChassisCode": "B21W",
+    "years": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2018
+    ],
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "code": "B21W",
+        "fullCode": "DBA-B21W",
+        "drive": "fwd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 13,
+        "column": 4,
+        "identity": [
+          "",
+          "※1",
+          "デイズ",
+          "DBA-B21W",
+          "3B20",
+          "0.659",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031311.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "ef5e8bf7e01f5bdfb9c62970bf9e0e0022ec7bdacbe4d65535eca3b621679a03"
+      },
+      {
+        "code": "B21W",
+        "fullCode": "DBA-B21W",
+        "drive": "awd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 14,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-B21W",
+          "3B20",
+          "0.659",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031311.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "ef5e8bf7e01f5bdfb9c62970bf9e0e0022ec7bdacbe4d65535eca3b621679a03"
+      }
+    ],
+    "sourceRows": 30
+  },
+  {
+    "make": "NISSAN",
+    "model": "DAYZ",
+    "chassisCode": "B43W",
+    "originalChassisCode": "B43W",
+    "years": [
+      2019,
+      2024,
+      2025
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "B43W",
+        "fullCode": "5BA-B43W",
+        "drive": "fwd",
+        "sheet": "（新）1-6 (軽自動車)",
+        "brand": "ニッサン",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-B43W",
+          "0001~0003,\n0004~0006",
+          "BR06",
+          "0.659"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234323.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "324f69f50b4aebe3b152354715e53e7ef52e56cc74d05ae8accd51068466a046"
+      }
+    ],
+    "sourceRows": 31
+  },
+  {
+    "make": "NISSAN",
+    "model": "DAYZ",
+    "chassisCode": "B44W",
+    "originalChassisCode": "B44W",
+    "years": [
+      2022
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "B44W",
+        "fullCode": "5AA-B44W",
+        "drive": "fwd",
+        "sheet": "（新）1-6 (軽自動車)",
+        "brand": "ニッサン",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ニッサン",
+          "※1",
+          "DAYZ",
+          "5AA-B44W",
+          "0001,0005,0007",
+          "BR06-SM21",
+          "0.659"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234323.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "324f69f50b4aebe3b152354715e53e7ef52e56cc74d05ae8accd51068466a046"
+      }
+    ],
+    "sourceRows": 100
+  },
+  {
+    "make": "NISSAN",
+    "model": "DAYZ",
+    "chassisCode": "B46W",
+    "originalChassisCode": "B46W",
+    "years": [
+      2020
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "B46W",
+        "fullCode": "5BA-B46W",
+        "drive": "awd",
+        "sheet": "（新）1-6 (軽自動車)",
+        "brand": "ニッサン",
+        "row": 22,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-B46W",
+          "0001~0003,\n0004~0006",
+          "BR06",
+          "0.659"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234323.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "324f69f50b4aebe3b152354715e53e7ef52e56cc74d05ae8accd51068466a046"
+      }
+    ],
+    "sourceRows": 28
+  },
+  {
+    "make": "NISSAN",
+    "model": "DAYZ",
+    "chassisCode": "B48W",
+    "originalChassisCode": "B48W",
+    "years": [
+      2022
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "B48W",
+        "fullCode": "4AA-B48W",
+        "drive": "awd",
+        "sheet": "（新）1-6 (軽自動車)",
+        "brand": "ニッサン",
+        "row": 26,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "4AA-B48W",
+          "0001~0002,\n0003~0006",
+          "BR06-SM21",
+          "0.659"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234323.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "324f69f50b4aebe3b152354715e53e7ef52e56cc74d05ae8accd51068466a046"
+      }
+    ],
+    "sourceRows": 28
+  },
+  {
+    "make": "Nissan",
+    "model": "Lafesta",
+    "chassisCode": "CWFFWN",
+    "originalChassisCode": "CWFFWN",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "CWFFWN",
+        "fullCode": "DBA-CWFFWN",
+        "drive": "fwd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 58,
+        "column": 4,
+        "identity": [
+          "",
+          "※3",
+          "ラフェスタ",
+          "DBA-CWFFWN",
+          "PE",
+          "1.997",
+          "6AT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "e4d5502128dad95f3dadc731c754b612dccf8f6884981eb00c91362c7d0c4c97"
+      }
+    ],
+    "sourceRows": 10
+  },
+  {
+    "make": "Nissan",
+    "model": "MARCH",
+    "chassisCode": "K13",
+    "originalChassisCode": "K13",
+    "years": [
+      2016
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "K13",
+        "fullCode": "DBA-K13",
+        "drive": "fwd",
+        "sheet": "NissanMT",
+        "brand": "ニッサンMT",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ニッサンMT",
+          "",
+          "マーチ",
+          "DBA-K13",
+          "HR12",
+          "1.198",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "c489f2fb7aade058e9dd3e03d2611786db39a76da45b934f4cbc787fc158797a"
+      },
+      {
+        "code": "K13",
+        "fullCode": "5BA-K13",
+        "drive": "fwd",
+        "sheet": "ニッサンMT",
+        "brand": "ニッサンMT",
+        "row": 10,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "マーチ",
+          "5BA-K13",
+          "0001",
+          "HR12",
+          "1.198"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "Nissan",
+    "model": "Note",
+    "chassisCode": "E11",
+    "originalChassisCode": "E11",
+    "years": [
+      2012
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "Nissan",
+    "model": "Note",
+    "chassisCode": "E12",
+    "originalChassisCode": "E12",
+    "years": [
+      2013,
+      2015
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "E12",
+        "fullCode": "DBA-E12",
+        "drive": "fwd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 9,
+        "column": 4,
+        "identity": [
+          "ニッサン",
+          "",
+          "ノート",
+          "DBA-E12",
+          "HR12",
+          "1.198",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 26
+  },
+  {
+    "make": "Nissan",
+    "model": "Note",
+    "chassisCode": "NE12",
+    "originalChassisCode": "NE12",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "NE12",
+        "fullCode": "DBA-NE12",
+        "drive": "awd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-NE12",
+          "HR12",
+          "1.198",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 7
+  },
+  {
+    "make": "Nissan",
+    "model": "SERENA",
+    "chassisCode": "C26",
+    "originalChassisCode": "C26",
+    "years": [
+      2012
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "C26",
+        "fullCode": "DBA-C26",
+        "drive": "fwd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 37,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-C26",
+          "MR20",
+          "1.997",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 4
+  },
+  {
+    "make": "Nissan",
+    "model": "SERENA",
+    "chassisCode": "HFC26",
+    "originalChassisCode": "HFC26",
+    "years": [
+      2013,
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "HFC26",
+        "fullCode": "DAA-HFC26",
+        "drive": "fwd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 36,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DAA-HFC26",
+          "MR20\n-SM23",
+          "1.997",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 7
+  },
+  {
+    "make": "NISSAN",
+    "model": "TEANA",
+    "chassisCode": "L33",
+    "originalChassisCode": "L33",
+    "years": [
+      2017
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "L33",
+        "fullCode": "DBA-L33",
+        "drive": "fwd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 68,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ティアナ",
+          "DBA-L33",
+          "QR25",
+          "2.488",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "15c8034c69ff968fe8ba199f8b569bc50cae93a2c7ac7facf1384c314d32cdaf"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "Nissan",
+    "model": "WINGROAD",
+    "chassisCode": "JY12",
+    "originalChassisCode": "JY12",
+    "years": [
+      2013
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "JY12",
+        "fullCode": "DBA-JY12",
+        "drive": "fwd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 19,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "DBA-JY12",
+          "MR18",
+          "1.797",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 6
+  },
+  {
+    "make": "Nissan",
+    "model": "WINGROAD",
+    "chassisCode": "Y12",
+    "originalChassisCode": "Y12",
+    "years": [
+      2015
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "Y12",
+        "fullCode": "DBA-Y12",
+        "drive": "fwd",
+        "sheet": "Nissan",
+        "brand": "ニッサン",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "ウィングロード",
+          "DBA-Y12",
+          "HR15",
+          "1.498",
+          "CVT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000010.html",
+        "sha256": "2ff914bc397c8be7d2214b55b1df24e9e92203f8bd58096c28a9de0140f00284"
+      }
+    ],
+    "sourceRows": 15
+  },
+  {
+    "make": "PEUGEOT",
+    "model": "2008",
+    "chassisCode": "A94HN01",
+    "originalChassisCode": "A94HN01",
+    "years": [
+      2017
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "A94HN01",
+        "fullCode": "ABA-A94HN01",
+        "drive": "fwd",
+        "sheet": "Peugeot",
+        "brand": "プジョー",
+        "row": 24,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "ABA-A94HN01",
+          "0001, 0002",
+          "HN01",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178235.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "7019b9282755288e17ae4c4bb099526f8a191e1afdfa9977671b8d77120de54b"
+      }
+    ],
+    "sourceRows": 5
+  },
+  {
+    "make": "PEUGEOT",
+    "model": "2008",
+    "chassisCode": "P24HN05",
+    "originalChassisCode": "P24HN05",
+    "years": [
+      2022
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "P24HN05",
+        "fullCode": "5BA-P24HN05",
+        "drive": "fwd",
+        "sheet": "1-6",
+        "brand": "プジョー",
+        "row": 16,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "2008",
+          "5BA-P24HN05",
+          "0001, 0002, 0003,\n0101, 0102, 0103,\n0201, 0202, 0211, 0212",
+          "HN05",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234291.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "fb44ba5fa8437e6600ffc3deef68c45c42826cdba4a62871e361762e5b2f866c"
+      }
+    ],
+    "sourceRows": 40
+  },
+  {
+    "make": "Peugeot",
+    "model": "208",
+    "chassisCode": "A9HM01",
+    "originalChassisCode": "A9HM01",
+    "years": [
+      2014
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "A9HM01",
+        "fullCode": "ABA-A9HM01",
+        "drive": "fwd",
+        "sheet": "Peugeot",
+        "brand": "プジョー",
+        "row": 12,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "ABA-A9HM01",
+          "HM01",
+          "1.199",
+          "5AT"
+        ],
+        "url": "https://www.mlit.go.jp/common/001031313.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000019.html",
+        "sha256": "a47861328716e31913d6d924ac0f5e9a30728a94ff1b754f9d567953c718b5f4"
+      }
+    ],
+    "sourceRows": 24
+  },
+  {
+    "make": "PEUGEOT",
+    "model": "3008",
+    "chassisCode": "P845G06",
+    "originalChassisCode": "P845G06",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "P845G06",
+        "fullCode": "3BA-P845G06",
+        "drive": "fwd",
+        "sheet": "Peugeot",
+        "brand": "プジョー",
+        "row": 25,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3BA-P845G06",
+          "0001, 0002, 0003\n0004,",
+          "5G06",
+          "1.598"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001337996.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000044.html",
+        "sha256": "31371e2e35d43f98425d63fd1674709eee32668fa47e7a891b9d8ceb93d9f9e9"
+      },
+      {
+        "code": "P845G06",
+        "fullCode": "5BA-P845G06",
+        "drive": "fwd",
+        "sheet": "プジョー",
+        "brand": "プジョー",
+        "row": 39,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "5BA-P845G06",
+          "0001",
+          "5G06",
+          "1.598"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474453.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "df50e516a3b47761d94473a6effd7cd56f8cfa7ce3914ddfee5aec303da6b12e"
+      }
+    ],
+    "sourceRows": 29
+  },
+  {
+    "make": "PEUGEOT",
+    "model": "308",
+    "chassisCode": "T9AH01",
+    "originalChassisCode": "T9AH01",
+    "years": [
+      2019
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "T9AH01",
+        "fullCode": "LDA-T9AH01",
+        "drive": "fwd",
+        "sheet": "Peugeot",
+        "brand": "プジョー",
+        "row": 14,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "LDA-T9AH01",
+          "0001, 0002\n0003, 0004",
+          "AH01",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/common/001178240.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+        "sha256": "928af10cb7d324b956f46e8d9c37e8c83b233c318064945013ab89c1b2a5aadc"
+      },
+      {
+        "code": "T9AH01",
+        "fullCode": "3DA-T9AH01",
+        "drive": "fwd",
+        "sheet": "プジョー",
+        "brand": "プジョー",
+        "row": 28,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3DA-T9AH01",
+          "0001, 0002\n0003, 0004",
+          "AH01",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474461.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0894e1baba429ad8e5ff2311d191f6f5f1d68e3245c36d0022af1a395c00f552"
+      }
+    ],
+    "sourceRows": 20
+  },
+  {
+    "make": "Peugeot",
+    "model": "308",
+    "chassisCode": "T9HN02",
+    "originalChassisCode": "T9HN02",
+    "years": [
+      2015
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "T9HN02",
+        "fullCode": "ABA-T9HN02",
+        "drive": "fwd",
+        "sheet": "Peugeot",
+        "brand": "プジョー",
+        "row": 23,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "ABA-T9HN02",
+          "HN02",
+          "1.199",
+          "6AT(E・LTC)"
+        ],
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+        "sha256": "bc1fccde912bc570aab681f5ec8767e7178d8b9f8dc2cdbbbeefc3195a140283"
+      }
+    ],
+    "sourceRows": 22
+  },
+  {
+    "make": "PEUGEOT",
+    "model": "408",
+    "chassisCode": "P545G06H",
+    "originalChassisCode": "P545G06H",
+    "years": [
+      2023
+    ],
+    "drives": [],
+    "status": "unresolved",
+    "evidence": [],
+    "sourceRows": 0
+  },
+  {
+    "make": "PEUGEOT",
+    "model": "408",
+    "chassisCode": "P54HN05",
+    "originalChassisCode": "P54HN05",
+    "years": [
+      2023
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "P54HN05",
+        "fullCode": "3BA-P54HN05",
+        "drive": "fwd",
+        "sheet": "1-6",
+        "brand": "プジョー",
+        "row": 13,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "408",
+          "3BA-P54HN05",
+          "0001, 0002",
+          "HN05",
+          "1.199"
+        ],
+        "url": "https://www.mlit.go.jp/common/000234291.xlsx",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000013.html",
+        "sha256": "fb44ba5fa8437e6600ffc3deef68c45c42826cdba4a62871e361762e5b2f866c"
+      }
+    ],
+    "sourceRows": 12
+  },
+  {
+    "make": "PEUGEOT",
+    "model": "5008",
+    "chassisCode": "P87AH01",
+    "originalChassisCode": "P87AH01",
+    "years": [
+      2018
+    ],
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "code": "P87AH01",
+        "fullCode": "LDA-P87AH01",
+        "drive": "fwd",
+        "sheet": "Peugeot",
+        "brand": "プジョー",
+        "row": 27,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "5008.0",
+          "LDA-P87AH01",
+          "0001, 0002",
+          "AH01",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/common/001225532.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000035.html",
+        "sha256": "49c3f90d88c4b90debddf663d44d579fd0c7feb7cc77ba422b24ef0b0efba762"
+      },
+      {
+        "code": "P87AH01",
+        "fullCode": "3DA-P87AH01",
+        "drive": "fwd",
+        "sheet": "プジョー",
+        "brand": "プジョー",
+        "row": 46,
+        "column": 4,
+        "identity": [
+          "",
+          "",
+          "",
+          "3DA-P87AH01",
+          "0003, 0004\n0011, 0012",
+          "AH01",
+          "1.997"
+        ],
+        "url": "https://www.mlit.go.jp/jidosha/content/001474461.xls",
+        "page": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000051.html",
+        "sha256": "0894e1baba429ad8e5ff2311d191f6f5f1d68e3245c36d0022af1a395c00f552"
+      }
+    ],
+    "sourceRows": 26
+  }
+]
