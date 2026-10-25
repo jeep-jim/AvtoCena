@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import {stable} from './astra-bridge.mjs';
 const marker=JSON.parse(await fs.readFile('.github/market-runs/regcloud-deploy.json','utf8'));
 const paths=marker.publicResearchBatches||[];
-if(!Array.isArray(paths)||paths.length>32||paths.some(p=>!/^docs\/encyclopedia\/batches\/[a-z0-9-]+\.json$/.test(p)))throw Error('invalid_public_research_batches');
+if(!Array.isArray(paths)||paths.length>64||paths.some(p=>!/^docs\/encyclopedia\/batches\/[a-z0-9-]+\.json$/.test(p)))throw Error('invalid_public_research_batches');
 const checks=[];
 for(const p of paths){const batch=JSON.parse(await fs.readFile(p,'utf8'));for(const e of batch.entries)checks.push({modelId:e.modelId,variantId:e.variantId,year:e.year,fields:e.patch});}
 if(marker.requiredAstraPlanDigests?.length){
