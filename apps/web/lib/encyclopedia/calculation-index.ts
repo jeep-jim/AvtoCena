@@ -1,4 +1,4 @@
-import {applyAstraPower30,astraPower30Key} from './astra-power30';
+import {applyAstraPower30,astraPower30FactsForKey} from './astra-power30';
 import {isOwnerConfirmedEvidence} from './owner-evidence.mjs';
 import {hasEncyclopediaCalculationEvidence,calculationSourceIdentity} from './calculation-evidence';
 export {hasEncyclopediaCalculationEvidence} from './calculation-evidence';
@@ -252,5 +252,5 @@ function applyAnnualEncyclopediaCalculation<T extends Record<string,any>>(offer:
 /** Annual facts and immutable ASTRA technical certificates have separate matching rules. */
 export function applyEncyclopediaCalculation<T extends Record<string,any>>(offer:T,index=readCalculationIndex(),options:{technicalIdentity?:boolean;specificationIdentity?:boolean;ordinarySpecificationIdentity?:boolean}={technicalIdentity:true,specificationIdentity:true}):T {
  const annual=applyAnnualEncyclopediaCalculation(offer,index,options);
- return index?applyAstraPower30(annual,index.models[astraPower30Key(modelKey(offer.make,offer.model))]||[],index.digest):annual;
+ return index?applyAstraPower30(annual,astraPower30FactsForKey(index.models,modelKey(offer.make,offer.model)),index.digest):annual;
 }

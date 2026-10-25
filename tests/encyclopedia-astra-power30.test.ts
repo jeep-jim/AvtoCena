@@ -6,7 +6,7 @@ import {invalidateEffectiveMarketsCache} from '../apps/web/lib/effective-market-
 import {applyActiveBusinessPriceBatch} from '../apps/web/lib/catalog/live-business-pricing';
 import {resetCalculationIndexForTests} from '../apps/web/lib/encyclopedia/calculation-index';
 import assert from 'node:assert/strict';
-import {compileAstraPower30Facts,matchAstraPower30,astraPower30Key,applyAstraPower30} from '../apps/web/lib/encyclopedia/astra-power30';
+import {compileAstraPower30Facts,matchAstraPower30,astraPower30Key,applyAstraPower30,astraPower30FactsForKey} from '../apps/web/lib/encyclopedia/astra-power30';
 import {applyEncyclopediaCalculation,modelKey,checksum} from '../apps/web/lib/encyclopedia/calculation-index';
 import {hasAstraPower30Evidence} from '../apps/web/lib/encyclopedia/astra-power30-evidence';
 import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specification-evidence-audit';
@@ -16,6 +16,33 @@ const record=(variants:any[])=>({id:'model',make:'Test',model:'EV',revision:'r',
 const offer:any={id:'car',make:'Test',model:'EV',year:2024,market:'japan',fuel:'electric',powertrainKind:'electric',powerKw:150,drive:'fwd',engineCode:'EM57'};
 function index(rows:any[]){const models={[astraPower30Key(modelKey('Test','EV'))]:compileAstraPower30Facts(record(rows))};return {version:1 as const,createdAt:'now',manifestDigest:hash,digest:checksum(models),models};}
 const apply=(o:any,rows:any[])=>applyEncyclopediaCalculation(o,index(rows));
+test('generic EV automatic includes reducer without hiding contradictory or undocumented siblings',()=>{
+ const reducer=variant({transmission:'Одноступенчатый редуктор',astraEvidence:{...variant().astraEvidence,values:{...values,transmission:'Одноступенчатый редуктор'}}});
+ const o={...offer,transmission:'automatic'};
+ assert.equal(apply(o,[reducer]).power30MinKw,54);
+ assert.equal(apply(o,[reducer]).transmission,'automatic');
+ assert.equal(apply({...o,transmission:'manual'},[reducer]).power30MinKw,undefined);
+ const unknown=variant({id:'unknown',power30MinKw:undefined,astraEvidence:{...variant().astraEvidence,values:{...values,power30MinKw:undefined}}});
+ assert.equal(apply(o,[reducer,unknown]).power30MinKw,undefined);
+ const other=variant({id:'other',power30MinKw:60,astraEvidence:{...variant().astraEvidence,values:{...values,power30MinKw:60}}});
+ assert.equal(apply(o,[reducer,other]).power30MinKw,undefined);
+});
+test('Mercedes class aliases union registry families and preserve missing sibling blockers',()=>{
+ const facts=compileAstraPower30Facts(record([variant()]));
+ const unknown=compileAstraPower30Facts(record([variant(),variant({id:'unknown',power30MinKw:undefined,astraEvidence:{...variant().astraEvidence,values:{...values,power30MinKw:undefined}}})])).slice(1);
+ const models={
+  [astraPower30Key('mercedesbenz:c')]:facts,
+  [astraPower30Key('mercedesbenz:c300')]:unknown,
+  [astraPower30Key('mercedesbenz:cla')]:facts,
+  [astraPower30Key('mercedesbenz:cle')]:facts,
+  [astraPower30Key('mercedesbenz:e')]:facts,
+ };
+ const selected=astraPower30FactsForKey(models,'mercedesbenz:cclass');
+ assert.equal(selected.length,2);
+ assert.equal(matchAstraPower30(offer,selected).reason,'undocumented_candidate');
+ assert.deepEqual(astraPower30FactsForKey(models,'mercedesbenz:cla'),facts);
+ assert.deepEqual(astraPower30FactsForKey(models,'other:cclass'),[]);
+});
 test('yearless official evidence is compiled without manufacturing a model year or ordinary outputs',()=>{
  const [f]=compileAstraPower30Facts(record([variant()]));assert.equal(f.year,0);assert.deepEqual(f.values,{power30MinKw:54});assert.deepEqual(f.trims,[]);
  const result=apply(offer,[variant()]);assert.equal(result.power30MinKw,54);assert.equal(result.year,2024);assert.equal(result.powerKw,150);assert.equal(result.engineCc,undefined);assert.equal(hasAstraPower30Evidence(result),true);

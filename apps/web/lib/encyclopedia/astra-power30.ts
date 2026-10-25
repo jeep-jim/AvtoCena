@@ -12,6 +12,19 @@ const text=(f:string,v:any)=>{
 };
 const same=(f:string,a:any,b:any)=>['powerKw','icePowerKw','motorPeakKw'].includes(f)?Math.abs(Number(a)-Number(b))<=0.75:f==='powerHp'?Math.abs(Number(a)-Number(b))<=1:['engineCc','batteryKwh'].includes(f)?Number(a)===Number(b):text(f,a)===text(f,b);
 export const astraPower30Key=(modelKey:string)=>'@astra-power30:'+modelKey;
+const referenceFamilies=new WeakMap<object,Map<string,CalculationFact[]>>();
+/** Registry trade names C/C300 and catalog C-Class are one search family.
+ * Union every sibling; mechanical/certificate unanimity still decides matches. */
+export function astraPower30FactsForKey(models:Record<string,CalculationFact[]>,key:string):CalculationFact[]{
+ const family=/^mercedesbenz:([ces])(?:class)?$/.exec(key)?.[1];
+ if(!family)return models[astraPower30Key(key)]||[];
+ let cache=referenceFamilies.get(models);if(!cache){cache=new Map();referenceFamilies.set(models,cache);}
+ if(!cache.has(family)){
+  const pattern=new RegExp('^@astra-power30:mercedesbenz:'+family+'(?:class|[0-9]{3}[a-z]*)?$');
+  cache.set(family,Object.entries(models).filter(([k])=>pattern.test(k)).flatMap(([,v])=>v));
+ }
+ return cache.get(family)!;
+}
 /** Keep undocumented siblings as blockers. year=0 is an internal technical-only
  * sentinel; these records are never offered as model-year facts. */
 export function compileAstraPower30Facts(record:any):CalculationFact[]{
@@ -41,7 +54,10 @@ export function matchAstraPower30(offer:any,facts:CalculationFact[]):{reason:str
  const identity=offer.astraIdentity||offer.typeApprovalIdentity||offer.operational?.typeApprovalIdentity;
  const code=offer.chassisCode||offer.operational?.chassisCode||offer.operational?.modelCode;
  const engine=offer.engineCode;
- const pool=facts.filter(f=>fields.every(k=>!present(offer[k])||!present(f.constraints[k])||same(k,offer[k],f.constraints[k])));
+ const pool=facts.filter(f=>fields.every(k=>!present(offer[k])||!present(f.constraints[k])||same(k,offer[k],f.constraints[k])
+  // An EV feed's generic automatic label includes a single-speed reducer.
+  // This broadens the candidate pool; it never supplies a transmission fact.
+  ||k==='transmission'&&fuel==='electric'&&[text(k,offer[k]),text(k,f.constraints[k])].sort().join(':')==='automatic:singlespeed'));
  if(!pool.length)return {reason:'technical_conflict'};
  // An exact complete homologation identity has no market/year inference.
  const exact=identity&&pool.filter(f=>['approval','type','variant','version'].every(k=>present(identity[k])&&String(identity[k])===String(f.constraints.astraIdentity?.[k])));

@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import {getJsonStorage} from '../../apps/web/lib/data.ts';
 import {MANIFEST} from '../../apps/web/lib/encyclopedia/records.ts';
 import {checksum,modelKey,applyEncyclopediaCalculation} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
-import {astraPower30Key,matchAstraPower30} from '../../apps/web/lib/encyclopedia/astra-power30.ts';
+import {astraPower30Key,matchAstraPower30,astraPower30FactsForKey} from '../../apps/web/lib/encyclopedia/astra-power30.ts';
 import {readCurrentPublicCatalogProjection} from '../../apps/web/lib/catalog/storage.ts';
 import {classifySpecificationEvidence,SPECIFICATION_AUDIT_FIELDS} from '../../apps/web/lib/catalog/specification-evidence-audit.ts';
 import {digest} from './research-batch.mjs';
@@ -18,7 +18,7 @@ const fields=['year','fuel','powertrainKind','engineCc','powerHp','powerKw','ice
 const inc=(o,k)=>o[k]=(o[k]||0)+1;
 for(const o of projection.rows){if(!['electric','hybrid'].includes(o.fuel))continue;totals.checked++;inc(totals.byFuel,o.fuel);
  const key=modelKey(o.make,o.model),g=groups.get(key)||{make:o.make,model:o.model,count:0,fuels:{},markets:{},reasons:{},blockedFields:{},examples:[],completeSpecifications:0,withPower30:0};groups.set(key,g);g.count++;inc(g.fuels,o.fuel);inc(g.markets,o.market);
- const a=applyEncyclopediaCalculation(o,annualIndex),result=applyEncyclopediaCalculation(o,index),match=matchAstraPower30(a,index.models[astraPower30Key(key)]||[]);inc(g.reasons,match.reason);
+ const a=applyEncyclopediaCalculation(o,annualIndex),result=applyEncyclopediaCalculation(o,index),match=matchAstraPower30(a,astraPower30FactsForKey(index.models,key));inc(g.reasons,match.reason);
  const blocked=SPECIFICATION_AUDIT_FIELDS.filter(f=>!['exact','not_applicable'].includes(classifySpecificationEvidence(result,f).state));
  if(!blocked.length){totals.completeSpecifications++;g.completeSpecifications++;}for(const f of blocked){inc(totals.blockedFields,f);inc(g.blockedFields,f);}
  if(result.power30MinKw>0){totals.withPower30++;g.withPower30++;}
