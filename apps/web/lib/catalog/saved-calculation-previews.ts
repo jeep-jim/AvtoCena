@@ -18,7 +18,7 @@ export function savedPreviewEntry(record:SavedOfferCalculation,offer:VehicleOffe
  try {
   const parameters=validateCustomerParameters(record.draft);
   return {market:offer.market,sourceId:offer.sourceId,sourceOfferId:offer.sourceOfferId,identity:record.identity,savedAt:record.savedAt,
-   preview:{depositCostIncluded:record.calculation.breakdown?.some(line=>line.id==="contract-services"),version:record.version,totalRub:record.calculation.totalRub!,parameters,
+   preview:{power30Precedent:record.calculation.power30Precedent,depositCostIncluded:record.calculation.breakdown?.some(line=>line.id==="contract-services"),version:record.version,totalRub:record.calculation.totalRub!,parameters,
     deliveryPricingBasis:record.calculation.deliveryPricingBasis,currencyRate:record.calculation.currencyRate,utilizationPowerKw:record.calculation.customs?.utilizationPowerKw,deliveryCity:record.draft.deliveryCity||""}};
  } catch {return null;}
 }
