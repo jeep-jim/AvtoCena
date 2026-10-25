@@ -50,7 +50,7 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
     // retain its date instead of dropping inventory before repricing can run.
     && Number.isFinite(date) && date <= Date.now() + 86400000;
   const sellerPriceRub = bound ? Math.round(price * effectiveRate) : undefined;
-  return {
+  return applyJapanDefaultFuel({
     ...input,
     ...(powerRejected ? {powerHp: undefined, powerKw: undefined, icePowerKw: undefined,
       power30MinKw: retainCertifiedPower ? input.power30MinKw : undefined,
@@ -72,5 +72,5 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
         powerHp:{status:'conflict',source:'public_power_safety',rawValues:[]},
         powerKw:{status:'conflict',source:'public_power_safety',rawValues:[]}} : {})},
     },
-  } as T;
+  } as T);
 }

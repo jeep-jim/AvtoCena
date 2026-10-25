@@ -46,5 +46,5 @@ export function japanDriveSql(selection:string,index:CalculationIndex|null=null)
  const codes:Record<string,string[]>={fwd:['FF','FWD'],rwd:['FR','RWD'],awd:['4WD','AWD','FULLTIME4WD']};
  const selectedCodes=[...new Set(selected.flatMap(v=>codes[v]))].map(v=>`'${v}'`).join(',');
  const knownCodes=Object.values(codes).flat().map(v=>`'${v}'`).join(',');
- return `(priv in (${selectedCodes}) or ((priv is null or priv not in (${knownCodes})) and (${clauses.join(' or ')})))`; 
+ return `(priv in (${selectedCodes}) or ((priv is null or priv not in (${knownCodes})) and (${clauses.join(' or ')})))`;
 }
