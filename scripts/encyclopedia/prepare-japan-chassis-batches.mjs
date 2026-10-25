@@ -6,6 +6,8 @@ const parts=[],rows=[];
 for(const path of names){const chunk=JSON.parse(await fs.readFile(`${dir}/${path}`,'utf8'));parts.push({path,rows:chunk.length,sha256:digest(chunk)});rows.push(...chunk);}
 const manifest={version:1,checkedAt:'2026-10-25',groups:rows.length,confirmed:rows.filter(r=>r.status==='confirmed').length,ambiguous:rows.filter(r=>r.status==='ambiguous').length,unresolved:rows.filter(r=>r.status==='unresolved').length,glossary:'https://www.mlit.go.jp/jidosha/content/001986917.pdf',parts};
 await fs.writeFile(`${dir}/manifest.json`,JSON.stringify(manifest,null,2)+'\n');
+// Refresh source checkpoints without rewriting already applied immutable batches.
+if(process.argv.includes('--reference-only')){console.log(JSON.stringify({...manifest,parts:parts.length}));process.exit(0);}
 const norm=s=>String(s).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]/g,'');
 const code=s=>String(s).toUpperCase().replace(/^[A-Z0-9]{1,3}-/,'');
 const targets=JSON.parse(await fs.readFile('reports/japan-chassis/targets-0000.json','utf8'));

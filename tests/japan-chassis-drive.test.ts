@@ -10,6 +10,16 @@ test('official type lookup qualifies make, preserves conflicting drive and handl
  assert.equal(japanChassisCode(' LDA-DJ5AS '),'DJ5AS');
 });
 import {enrichJapanDrive,japanDriveSql} from '../apps/web/lib/catalog/japan-drive';
+test('older official tables and electric manufacturer types enter the same pre-pagination predicates',()=>{
+ for(const [make,code,drive] of [['BMW','ZAA-72AW44','rwd'],['BMW','ABA-VA20','rwd'],['AUDI','ABA-4LBHKS','awd'],['Audi','8KCAB','fwd'],['Honda','RM7','fwd'],['Honda','CL9','fwd'],['Nissan','DBA-E11','fwd']] as const){
+  assert.equal(lookupJapanChassisDrive(make,code),drive);
+  assert.equal(enrichJapanDrive({market:'japan',make,chassisCode:code}).drive,drive);
+  assert.ok(japanDriveSql(drive).includes(`'${japanChassisCode(code)}'`));
+ }
+ assert.equal(lookupJapanChassisDrive('Suzuki','CBA-HA24S'),undefined);
+ assert.doesNotMatch(japanDriveSql('awd'),/'HA24S'/);
+ assert.doesNotMatch(japanDriveSql('fwd'),/'HA24S'/);
+});
 test('reviewed CR-V codes enrich saved offers and enter source predicates without guessing shared Alto code',()=>{
  const o={market:'japan',make:'Honda',model:'CR-V',year:2009,chassisCode:'DBA-RE4'};
  assert.equal(enrichJapanDrive(o).drive,'awd');

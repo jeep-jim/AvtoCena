@@ -2060,10 +2060,26 @@
     "years": [
       2012
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Nissan",
+        "code": "E11",
+        "fullCode": "DBA-E11",
+        "drive": "fwd",
+        "url": "https://www.mlit.go.jp/common/000111199.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 9",
+        "row": 13,
+        "hashScope": "source_bytes",
+        "sha256": "09c537c7ab3bd26108adeaabb2a846b603412142a941df870ee6c8f3f02c2aea",
+        "statement": "MLIT: DBA-E11, привод F (передний). Проверена таблица и привязка строки к коду. Год имеющейся записи не исправляется по году справочника."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Nissan",

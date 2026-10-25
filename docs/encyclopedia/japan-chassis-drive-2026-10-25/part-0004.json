@@ -568,10 +568,40 @@
     "years": [
       2008
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd",
+      "fwd"
+    ],
+    "status": "ambiguous",
+    "evidence": [
+      {
+        "brand": "Suzuki",
+        "code": "HA24S",
+        "fullCode": "CBA-HA24S",
+        "drive": "fwd",
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/alto/25.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 1",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "a3cdeeb4b33c87c8aace0a33566aed9450a8347edce2690347bce61e4107bdea",
+        "statement": "Заводская таблица Alto 2004: CBA-HA24S имеет FF и full-time 4WD. Один код не определяет привод конкретного автомобиля."
+      },
+      {
+        "brand": "Suzuki",
+        "code": "HA24S",
+        "fullCode": "CBA-HA24S",
+        "drive": "awd",
+        "url": "https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/alto/25.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 1",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "a3cdeeb4b33c87c8aace0a33566aed9450a8347edce2690347bce61e4107bdea",
+        "statement": "Заводская таблица Alto 2004: CBA-HA24S имеет FF и full-time 4WD. Один код не определяет привод конкретного автомобиля."
+      }
+    ],
+    "sourceRows": 2
   },
   {
     "make": "SUZUKI",

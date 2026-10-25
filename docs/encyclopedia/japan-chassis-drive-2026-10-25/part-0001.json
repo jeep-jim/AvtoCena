@@ -382,10 +382,26 @@
       2009,
       2010
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "BMW",
+        "code": "VA20",
+        "fullCode": "ABA-VA20",
+        "drive": "rwd",
+        "url": "https://www.mlit.go.jp/common/000111205.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 9",
+        "row": 40,
+        "hashScope": "source_bytes",
+        "sha256": "747516fbe3338243f68561aacb4c79f0ccf048ee753549e67028a1d8450ecad5",
+        "statement": "MLIT: ABA-VA20, привод R (задний). Проверена таблица и привязка строки к коду. Год имеющейся записи не исправляется по году справочника."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "BMW",
@@ -395,10 +411,26 @@
     "years": [
       2008
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "BMW",
+        "code": "VB35",
+        "fullCode": "ABA-VB35",
+        "drive": "rwd",
+        "url": "https://www.mlit.go.jp/common/000111205.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 9",
+        "row": 61,
+        "hashScope": "source_bytes",
+        "sha256": "747516fbe3338243f68561aacb4c79f0ccf048ee753549e67028a1d8450ecad5",
+        "statement": "MLIT: ABA-VB35, привод R (задний). Проверена таблица и привязка строки к коду. Год имеющейся записи не исправляется по году справочника."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "BMW",
@@ -408,10 +440,26 @@
     "years": [
       2009
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "BMW",
+        "code": "VR20",
+        "fullCode": "ABA-VR20",
+        "drive": "rwd",
+        "url": "https://www.mlit.go.jp/common/000111205.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 9",
+        "row": 48,
+        "hashScope": "source_bytes",
+        "sha256": "747516fbe3338243f68561aacb4c79f0ccf048ee753549e67028a1d8450ecad5",
+        "statement": "MLIT: ABA-VR20, привод R (задний). Проверена таблица и привязка строки к коду. Год имеющейся записи не исправляется по году справочника."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "BMW",
@@ -421,10 +469,26 @@
     "years": [
       2009
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "BMW",
+        "code": "WL35",
+        "fullCode": "ABA-WL35",
+        "drive": "rwd",
+        "url": "https://www.mlit.go.jp/common/000111205.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 9",
+        "row": 64,
+        "hashScope": "source_bytes",
+        "sha256": "747516fbe3338243f68561aacb4c79f0ccf048ee753549e67028a1d8450ecad5",
+        "statement": "MLIT: ABA-WL35, привод R (задний). Проверена таблица и привязка строки к коду. Год имеющейся записи не исправляется по году справочника."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "BMW",
@@ -509,10 +573,26 @@
       2022,
       2023
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "BMW",
+        "code": "72AW44",
+        "fullCode": "ZAA-72AW44",
+        "drive": "rwd",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/i/i4_EPL_202211V3.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 7",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "834054e29df26b0bd6348ef929d3b8eb6ad8a48de68fe39c0b2f5f0b422fde39",
+        "statement": "BMW i4 eDrive40 ZAA-72AW44: задний привод (後輪駆動). Проверены столбцы заводской таблицы, печатные страницы 12–13; M50 32AW89 относится к другому коду."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "BMW",
@@ -2318,10 +2398,26 @@
     "years": [
       2008
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Honda",
+        "code": "CL9",
+        "fullCode": "ABA-CL9",
+        "drive": "fwd",
+        "url": "https://www.honda.co.jp/auto-archive/accord/4door/2008/grade-data/",
+        "sourceType": "manufacturer",
+        "sheet": "Factory specification",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "31e1cdf66bb8221af475dc59af6572e492cbf9f960fe1550c04ee91583ffba2b",
+        "statement": "Accord 24TL/Type S, ABA-CL9: FF. Архив производителя, модель до ноября 2008."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Honda",

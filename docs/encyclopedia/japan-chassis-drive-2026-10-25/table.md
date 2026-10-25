@@ -32,7 +32,7 @@
 | AUDI | A3 | 8VCZPL | Полный | [Источник](https://www.mlit.go.jp/common/001225527.xls), Audi, строка 12 |
 | Audi | A3 | GYDLA | Передний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), audi, строка 12 |
 | AUDI | A4 | 8EALT | Не подтверждён | Нужен другой источник |
-| AUDI | A4 | 8KCAB | Не подтверждён | Нужен другой источник |
+| AUDI | A4 | 8KCAB | Передний | [Источник](https://www.mlit.go.jp/common/000037074.pdf), PDF page 10, строка 87 |
 | AUDI | A4 | 8KCDN | Передний | [Источник](https://www.mlit.go.jp/common/000989173.xls), Audi, строка 13 |
 | AUDI | A4 | 8KCDNF | Полный | [Источник](https://www.mlit.go.jp/common/000989173.xls), Audi, строка 14 |
 | AUDI | A4 | 8KCNCA | Полный | [Источник](https://www.mlit.go.jp/common/001031313.xls), Audi, строка 15 |
@@ -50,7 +50,7 @@
 | AUDI | Q3 | F3DFGF | Полный | [Источник](https://www.mlit.go.jp/common/001274988.xlsx), 1-7, строка 20 |
 | AUDI | Q3 | F3DFY | Передний | [Источник](https://www.mlit.go.jp/jidosha/content/3.5.G_LD_import_WLTC.xlsx), Audi, строка 29 |
 | AUDI | Q3 | F3DPC | Передний | [Источник](https://www.mlit.go.jp/jidosha/content/001474453.xls), audi, строка 38 |
-| AUDI | Q7 | 4LBHKS | Не подтверждён | Нужен другой источник |
+| AUDI | Q7 | 4LBHKS | Полный | [Источник](https://www.mlit.go.jp/common/000037074.pdf), PDF page 10, строка 265 |
 | AUDI | Q7 | 4LCJTL | Полный | [Источник](https://www.mlit.go.jp/common/000989174.xls), Audi, строка 54 |
 | AUDI | Q7 | 4LCJTS | Полный | [Источник](https://www.mlit.go.jp/common/000989174.xls), Audi, строка 53 |
 | AUDI | Q7 | 4MCREA | Полный | [Источник](https://www.mlit.go.jp/common/001178235.xls), Audi, строка 58 |
@@ -60,7 +60,7 @@
 | AUDI | S3 | 8VDJHF | Полный | [Источник](https://www.mlit.go.jp/common/001225527.xls), Audi, строка 67 |
 | BMW | 1 SERIES | 1R15 | Задний | [Источник](https://www.mlit.go.jp/common/001125031.xls), BMW, строка 69 |
 | BMW | 1 SERIES | 7K15 | Передний | [Источник](https://www.mlit.go.jp/common/000234263.xlsx), 1-6 ガソリン JC08, строка 57 |
-| BMW | 1 SERIES | UE16 | Не подтверждён | Нужен другой источник |
+| BMW | 1 SERIES | UE16 | Задний | [Источник](https://www.mlit.go.jp/common/000111205.pdf), PDF page 9, строка 76 |
 | BMW | 2 SERIES | 1J20 | Задний | [Источник](https://www.mlit.go.jp/common/001084242.xls), BMW, строка 83 |
 | BMW | 2 SERIES | 2C20 | Полный, Передний | [Источник](https://www.mlit.go.jp/common/001125035.xls), BMW, строка 15 |
 | BMW | 2 SERIES | 7K15 | Передний | [Источник](https://www.mlit.go.jp/common/000234263.xlsx), 1-6 ガソリン JC08, строка 57 |
@@ -78,13 +78,13 @@
 | BMW | 3 Series | PG20 | Задний | [Источник](https://www.mlit.go.jp/common/000989173.xls), BMW, строка 68 |
 | BMW | 3 Series | PH25 | Задний | [Источник](https://www.mlit.go.jp/common/000989173.xls), BMW, строка 73 |
 | BMW | 3 Series | PM35 | Задний | [Источник](https://www.mlit.go.jp/common/000989173.xls), BMW, строка 77 |
-| BMW | 3 Series | VA20 | Не подтверждён | Нужен другой источник |
-| BMW | 3 SERIES | VB35 | Не подтверждён | Нужен другой источник |
-| BMW | 3 Series | VR20 | Не подтверждён | Нужен другой источник |
-| BMW | 3 Series | WL35 | Не подтверждён | Нужен другой источник |
+| BMW | 3 Series | VA20 | Задний | [Источник](https://www.mlit.go.jp/common/000111205.pdf), PDF page 9, строка 40 |
+| BMW | 3 SERIES | VB35 | Задний | [Источник](https://www.mlit.go.jp/common/000111205.pdf), PDF page 9, строка 61 |
+| BMW | 3 Series | VR20 | Задний | [Источник](https://www.mlit.go.jp/common/000111205.pdf), PDF page 9, строка 48 |
+| BMW | 3 Series | WL35 | Задний | [Источник](https://www.mlit.go.jp/common/000111205.pdf), PDF page 9, строка 64 |
 | BMW | 4 SERIES | 12AV20 | Задний | [Источник](https://www.mlit.go.jp/common/000234263.xlsx), 1-6 ガソリン JC08, строка 112 |
 | BMW | 5 SERIES | JC20 | Задний | [Источник](https://www.mlit.go.jp/common/001225532.xls), BMW, строка 35 |
-| BMW | I4 | 72AW44 | Не подтверждён | Нужен другой источник |
+| BMW | I4 | 72AW44 | Задний | [Источник](https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/i/i4_EPL_202211V3.pdf), PDF page 7, строка 1 |
 | BMW | MINI | 42BT20 | Полный, Передний | [Источник](https://www.mlit.go.jp/common/000234341.xlsx), 1-7 ディーゼル JC08, строка 22 |
 | BMW | MINI | XR20M | Передний | [Источник](https://www.mlit.go.jp/common/001282810.xls), BMW, строка 14 |
 | BMW | MINI | XRJCWMW | Передний | [Источник](https://www.mlit.go.jp/common/000234263.xlsx), 1-6 ガソリン JC08, строка 21 |
@@ -130,7 +130,7 @@
 | FIAT | 500X | 33414 | Полный, Передний | [Источник](https://www.mlit.go.jp/common/001125031.xls), Fiat, строка 12 |
 | Ford | Explorer | 1FMHK9 | Не подтверждён | Нужен другой источник |
 | Ford | Fiesta | WF0SFJ | Не подтверждён | Нужен другой источник |
-| Honda | Accord | CL9 | Не подтверждён | Нужен другой источник |
+| Honda | Accord | CL9 | Передний | [Источник](https://www.honda.co.jp/auto-archive/accord/4door/2008/grade-data/), Factory specification, строка 1 |
 | Honda | Accord | CR6 | Передний | [Источник](https://www.mlit.go.jp/common/001031309.xls), Honda, строка 8 |
 | Honda | Accord | CR7 | Передний | [Источник](https://www.mlit.go.jp/common/001178228.xls), Honda, строка 41 |
 | Honda | Accord | CU1 | Передний | [Источник](https://www.mlit.go.jp/common/000989168.xls), Honda, строка 89 |
@@ -154,7 +154,7 @@
 | HONDA | FIT | GP5 | Передний | [Источник](https://www.mlit.go.jp/common/001031309.xls), Honda, строка 9 |
 | HONDA | FREED | GP3 | Передний | [Источник](https://www.mlit.go.jp/common/000989168.xls), Honda, строка 39 |
 | HONDA | FREED | GT5 | Передний | [Источник](https://www.mlit.go.jp/common/001203735.xlsx), （新）1-1【乗・普小】WLTC , строка 82 |
-| HONDA | INSIGHT | RM7 | Не подтверждён | Нужен другой источник |
+| HONDA | INSIGHT | RM7 | Передний | [Источник](https://www.honda.co.jp/INSIGHT/common/pdf/insight_spec_list.pdf), PDF page 1, строка 1 |
 | HONDA | N BOX PLUS | JF1 | Передний | [Источник](https://www.mlit.go.jp/common/000989171.xls), Honda, строка 16 |
 | HONDA | N BOX | JF1 | Передний | [Источник](https://www.mlit.go.jp/common/000989171.xls), Honda, строка 16 |
 | HONDA | N BOX | JF3 | Передний | [Источник](https://www.mlit.go.jp/common/001225524.xls), Honda, строка 27 |
@@ -162,7 +162,7 @@
 | HONDA | N VAN | JJ1 | Передний | [Источник](https://www.mlit.go.jp/common/000234380.xlsx), 2-3【貨・軽】, строка 8 |
 | HONDA | N WGN | JH1 | Передний | [Источник](https://www.mlit.go.jp/common/001031311.xls), Honda, строка 8 |
 | HONDA | N WGN | JH3 | Передний | [Источник](https://www.mlit.go.jp/common/000234326.xlsx), （新）1-6【乗・軽】, строка 23 |
-| HONDA | ODYSSEY | RB1 | Не подтверждён | Нужен другой источник |
+| HONDA | ODYSSEY | RB1 | Передний | [Источник](https://www.honda.co.jp/factbook/auto/ODYSSEY/200310/22.html), Factory specification, строка 1 |
 | HONDA | ODYSSEY | RB3 | Передний | [Источник](https://www.mlit.go.jp/common/000989168.xls), Honda, строка 98 |
 | HONDA | ODYSSEY | RC1 | Передний | [Источник](https://www.mlit.go.jp/common/001031309.xls), Honda, строка 100 |
 | HONDA | ODYSSEY | RC4 | Передний | [Источник](https://www.mlit.go.jp/common/001178228.xls), Honda, строка 87 |
@@ -171,7 +171,7 @@
 | HONDA | STREAM | RN8 | Передний | [Источник](https://www.mlit.go.jp/common/000989168.xls), Honda, строка 81 |
 | HONDA | VEZEL | RV4 | Полный | [Источник](https://www.mlit.go.jp/common/001203735.xlsx), （新）1-1【乗・普小】WLTC , строка 32 |
 | HONDA | VEZEL | RV5 | Передний | [Источник](https://www.mlit.go.jp/common/001130182.xlsx), （新）1-6【乗・普小】, строка 9 |
-| Hyundai | Elantra | XD20 | Не подтверждён | Нужен другой источник |
+| Hyundai | Elantra | XD20 | Передний | [Источник](https://www.mlit.go.jp/common/000037074.pdf), PDF page 18, строка 15 |
 | ISUZU | COMO | JVWE25 | Не подтверждён | Нужен другой источник |
 | ISUZU | TRUCK | CYJ77A | Не подтверждён | Нужен другой источник |
 | ISUZU | TRUCK | CYJ77B | Не подтверждён | Нужен другой источник |
@@ -243,7 +243,7 @@
 | NISSAN | DAYZ | B48W | Полный | [Источник](https://www.mlit.go.jp/common/000234323.xlsx), （新）1-6 (軽自動車), строка 26 |
 | Nissan | Lafesta | CWFFWN | Передний | [Источник](https://www.mlit.go.jp/common/001031309.xls), Nissan, строка 58 |
 | Nissan | MARCH | K13 | Передний | [Источник](https://www.mlit.go.jp/common/000989173.xls), NissanMT, строка 9 |
-| Nissan | Note | E11 | Не подтверждён | Нужен другой источник |
+| Nissan | Note | E11 | Передний | [Источник](https://www.mlit.go.jp/common/000111199.pdf), PDF page 9, строка 13 |
 | Nissan | Note | E12 | Передний | [Источник](https://www.mlit.go.jp/common/000989168.xls), Nissan, строка 9 |
 | Nissan | Note | NE12 | Полный | [Источник](https://www.mlit.go.jp/common/000989168.xls), Nissan, строка 12 |
 | Nissan | SERENA | C26 | Передний | [Источник](https://www.mlit.go.jp/common/000989168.xls), Nissan, строка 37 |
@@ -271,7 +271,7 @@
 | Subaru | Xv | GT7 | Полный | [Источник](https://www.mlit.go.jp/common/001178228.xls), Subaru, строка 48 |
 | Subaru | Xv | GTE | Полный | [Источник](https://www.mlit.go.jp/common/001282806.xls), Subaru, строка 21 |
 | Suzuki | ALTO LAPIN | HE33S | Полный, Передний, Задний | [Источник](https://www.mlit.go.jp/common/001125029.xls), Suzuki, строка 21 |
-| SUZUKI | ALTO | HA24S | Не подтверждён | Нужен другой источник |
+| SUZUKI | ALTO | HA24S | Полный, Передний | [Источник](https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/alto/25.pdf), PDF page 1, строка 1 |
 | SUZUKI | ALTO | HA25S | Полный, Передний | [Источник](https://www.mlit.go.jp/common/000989171.xls), Suzuki, строка 9 |
 | SUZUKI | ALTO | HA36S | Полный, Передний | [Источник](https://www.mlit.go.jp/common/001084239.xls), Suzuki, строка 9 |
 | Suzuki | Alto | HA37S | Полный, Передний | [Источник](https://www.mlit.go.jp/common/000234311.xlsx), 1-6(軽), строка 11 |

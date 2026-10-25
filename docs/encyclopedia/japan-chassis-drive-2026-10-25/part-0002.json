@@ -832,10 +832,26 @@
     "years": [
       2026
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Honda",
+        "code": "RM7",
+        "fullCode": "ZAA-RM7",
+        "drive": "fwd",
+        "url": "https://www.honda.co.jp/INSIGHT/common/pdf/insight_spec_list.pdf",
+        "sourceType": "manufacturer",
+        "sheet": "PDF page 1",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "202a7ce4ca005a451f75209ea226b420a73d97e85c37f13b7b9097d9c270470d",
+        "statement": "Honda Insight ZAA-RM7: FF, таблица основных характеристик."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "HONDA",
@@ -1192,10 +1208,26 @@
     "years": [
       2008
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Honda",
+        "code": "RB1",
+        "fullCode": "UA-RB1",
+        "drive": "fwd",
+        "url": "https://www.honda.co.jp/factbook/auto/ODYSSEY/200310/22.html",
+        "sourceType": "manufacturer",
+        "sheet": "Factory specification",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "0f5b838a4a16bea7aaf2a57b6def0cd3b00df8a93094b7c7173b39ff3ccdb0b9",
+        "statement": "Заводская таблица Odyssey: UA-RB1 и LA-RB1 соответствуют FF; RB2 — 4WD. Привод RB2 не переносится на RB1."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "HONDA",
@@ -1574,10 +1606,26 @@
     "years": [
       2021
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Hyundai",
+        "code": "XD20",
+        "fullCode": "GH-XD20",
+        "drive": "fwd",
+        "url": "https://www.mlit.go.jp/common/000037074.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 18",
+        "row": 15,
+        "hashScope": "source_bytes",
+        "sha256": "a18e5576f4287673803e047e73cea0e8c6206dd8af6ef9f4a81d785d5395e857",
+        "statement": "MLIT: GH-XD20, привод F (передний). Проверена таблица и привязка строки к коду. Год имеющейся записи не исправляется по году справочника."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "ISUZU",

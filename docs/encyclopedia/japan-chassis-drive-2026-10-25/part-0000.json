@@ -683,10 +683,26 @@
     "years": [
       2008
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Audi",
+        "code": "8KCAB",
+        "fullCode": "ABA-8KCAB",
+        "drive": "fwd",
+        "url": "https://www.mlit.go.jp/common/000037074.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 10",
+        "row": 87,
+        "hashScope": "source_bytes",
+        "sha256": "a18e5576f4287673803e047e73cea0e8c6206dd8af6ef9f4a81d785d5395e857",
+        "statement": "MLIT: ABA-8KCAB, привод F (передний). Проверена таблица и привязка строки к коду. Год имеющейся записи не исправляется по году справочника."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "AUDI",
@@ -1412,10 +1428,26 @@
       2008,
       2010
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "awd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Audi",
+        "code": "4LBHKS",
+        "fullCode": "ABA-4LBHKS",
+        "drive": "awd",
+        "url": "https://www.mlit.go.jp/common/000037074.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 10",
+        "row": 265,
+        "hashScope": "source_bytes",
+        "sha256": "a18e5576f4287673803e047e73cea0e8c6206dd8af6ef9f4a81d785d5395e857",
+        "statement": "MLIT: ABA-4LBHKS, привод A (полный). Проверена таблица и привязка строки к коду. Год имеющейся записи не исправляется по году справочника."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "AUDI",
@@ -1769,10 +1801,26 @@
     "years": [
       2011
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "BMW",
+        "code": "UE16",
+        "fullCode": "ABA-UE16",
+        "drive": "rwd",
+        "url": "https://www.mlit.go.jp/common/000111205.pdf",
+        "sourceType": "official_registry",
+        "sheet": "PDF page 9",
+        "row": 76,
+        "hashScope": "source_bytes",
+        "sha256": "747516fbe3338243f68561aacb4c79f0ccf048ee753549e67028a1d8450ecad5",
+        "statement": "MLIT: ABA-UE16, привод R (задний). Проверена таблица и привязка строки к коду. Год имеющейся записи не исправляется по году справочника."
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "BMW",
