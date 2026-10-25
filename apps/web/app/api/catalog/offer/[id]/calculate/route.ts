@@ -17,5 +17,5 @@ export async function POST(request: Request, {params}:{params: Promise<{id:strin
   if (!offer) return NextResponse.json({error:"Объявление не найдено"},{status:404,headers});
   const result = await calculateOfferWithCustomerParametersDetailed(offer,parameters);
   if (!result.ok) return NextResponse.json({error:result.error,missing:result.missing},{status:422,headers});
-  return NextResponse.json({...result.calculation,label:"Расчёт по вашим данным",requiresConfirmation:true},{headers});
+  return NextResponse.json({...result.calculation,label:result.calculation.power30Precedent?"Предварительный расчёт по близкой версии":"Расчёт по вашим данным",requiresConfirmation:true},{headers});
 }
