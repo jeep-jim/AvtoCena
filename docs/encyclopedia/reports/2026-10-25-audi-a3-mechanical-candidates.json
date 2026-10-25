@@ -1,133 +1,7 @@
 {
-  "checkedAt": "2026-10-25T00:10:22.537108+00:00",
+  "checkedAt": "2026-10-25T01:33:27.844739+00:00",
   "state": "unverified_candidates",
   "candidates": [
-    {
-      "variantId": "7db8901984bebba4a3236e3a",
-      "year": 2022,
-      "known": {
-        "engineCc": 1968,
-        "powerHp": 116,
-        "powerKw": 85,
-        "fuel": "diesel",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "2ad761bf54afb977ca82264c",
-      "year": 2022,
-      "known": {
-        "engineCc": 1968,
-        "powerHp": 116,
-        "powerKw": 85,
-        "fuel": "diesel",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "78fe46dcde9937bf000a081a",
-      "year": 2022,
-      "known": {
-        "engineCc": 1968,
-        "powerHp": 116,
-        "powerKw": 85,
-        "fuel": "diesel",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "f63e2946eabfad942875a19e",
-      "year": 2022,
-      "known": {
-        "engineCc": 1968,
-        "powerHp": 116,
-        "powerKw": 85,
-        "fuel": "diesel",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "d28a8ff5a0a44d8d9f87fd09",
-      "year": 2022,
-      "known": {
-        "engineCc": 1968,
-        "powerHp": 150,
-        "powerKw": 110,
-        "fuel": "diesel",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "manual",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "0dce12e0f0f6d89392567707",
-      "year": 2022,
-      "known": {
-        "engineCc": 1968,
-        "powerHp": 150,
-        "powerKw": 110,
-        "fuel": "diesel",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "af19476e1304e55f389d5ffb",
-      "year": 2022,
-      "known": {
-        "engineCc": 1968,
-        "powerHp": 200,
-        "powerKw": 147,
-        "fuel": "diesel",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
     {
       "variantId": "f9a1c0772e502df6eacdff71",
       "year": 2024,
@@ -219,24 +93,6 @@
       "state": "unverified_candidate_requires_family_source_and_manual_checks"
     },
     {
-      "variantId": "baba9113b26d8065ea7098c6",
-      "year": 2025,
-      "known": {
-        "engineCc": 1498,
-        "powerHp": 150,
-        "powerKw": 110,
-        "fuel": "petrol",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
       "variantId": "8e4424394baa8cbbc701cf78",
       "year": 2025,
       "known": {
@@ -244,24 +100,6 @@
         "powerHp": 150,
         "powerKw": 110,
         "fuel": "diesel",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "9f545a2fbd74aa163c8d8565",
-      "year": 2025,
-      "known": {
-        "engineCc": 1498,
-        "powerHp": 150,
-        "powerKw": 110,
-        "fuel": "petrol",
         "powertrainKind": "combustion",
         "bodyType": null,
         "transmission": "automatic",
@@ -287,80 +125,6 @@
       },
       "proposedFields": [
         "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "dfc1a8a3504251268baea274",
-      "year": 2025,
-      "known": {
-        "engineCc": 1498,
-        "powerHp": 150,
-        "powerKw": 110,
-        "fuel": "petrol",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "962415bf2c1bdd558f3c2f3f",
-      "year": 2025,
-      "known": {
-        "engineCc": 1498,
-        "powerHp": 150,
-        "powerKw": 110,
-        "fuel": "petrol",
-        "powertrainKind": "combustion",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "9f1f6e858bb37c934852bd42",
-      "year": 2026,
-      "known": {
-        "engineCc": 1498,
-        "powerHp": 150,
-        "powerKw": 110,
-        "fuel": "hybrid",
-        "powertrainKind": "other_hybrid",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive",
-        "icePowerKw"
-      ],
-      "state": "unverified_candidate_requires_family_source_and_manual_checks"
-    },
-    {
-      "variantId": "90bdd3c2748a143a0189eb1a",
-      "year": 2026,
-      "known": {
-        "engineCc": 1498,
-        "powerHp": 150,
-        "powerKw": 110,
-        "fuel": "hybrid",
-        "powertrainKind": "other_hybrid",
-        "bodyType": null,
-        "transmission": "automatic",
-        "drive": null
-      },
-      "proposedFields": [
-        "drive",
-        "icePowerKw"
       ],
       "state": "unverified_candidate_requires_family_source_and_manual_checks"
     }

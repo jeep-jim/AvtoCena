@@ -1,0 +1,378 @@
+{
+  "checkedAt": "2026-10-25T01:33:27.844739+00:00",
+  "saved": {
+    "batch": "research-2026-10-25-audi-a3-diesel-allstreet-gaps",
+    "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-diesel-allstreet-gaps.json",
+    "sha256": "6dfbee246f0753be9a6f33d7d5c7d966e5621a38b590e28ed413d3aa5988d810",
+    "state": "saved_api_readback_pass_pending_next_index",
+    "modelId": "f40e34e905b8ca09f3636eda",
+    "variants": 13,
+    "fields": 15,
+    "newValues": 15,
+    "correctedValues": 0,
+    "workflow": 40150951695,
+    "job": 121042213091,
+    "afterRevision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+    "apiReadback": true,
+    "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-diesel-allstreet-gaps-readback.json"
+  },
+  "apiReadback": {
+    "checkedAt": "2026-10-25T01:32:49.043883+00:00",
+    "batch": "research-2026-10-25-audi-a3-diesel-allstreet-gaps",
+    "sha256": "6dfbee246f0753be9a6f33d7d5c7d966e5621a38b590e28ed413d3aa5988d810",
+    "modelId": "f40e34e905b8ca09f3636eda",
+    "afterRevision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+    "apiReadback": true,
+    "fieldsChecked": 15,
+    "variants": 13,
+    "years": [
+      {
+        "year": 2022,
+        "revision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+        "rows": 201,
+        "checkedFields": 7,
+        "otherRowsUnchanged": 194
+      },
+      {
+        "year": 2025,
+        "revision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+        "rows": 143,
+        "checkedFields": 4,
+        "otherRowsUnchanged": 139
+      },
+      {
+        "year": 2026,
+        "revision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+        "rows": 102,
+        "checkedFields": 4,
+        "otherRowsUnchanged": 100
+      }
+    ],
+    "counts": {
+      "newValues": 15,
+      "correctedValues": 0,
+      "attestedUnchanged": 0
+    },
+    "unknownBodiesPreserved": [],
+    "newModels": 0,
+    "certified30minAdded": 0,
+    "installed": false,
+    "workflow": 40150951695,
+    "job": 121042213091,
+    "preflightWorkflow": 40150692347
+  },
+  "remaining": {
+    "annualCandidates": 7,
+    "unresolved2024Identities": 17,
+    "modelsInQueue": 2423,
+    "wholeCatalogComplete": false
+  },
+  "sources": {
+    "checkedAt": "2026-10-25T01:21:00.572344+00:00",
+    "state": "source_review_only_pending_fresh_preflight_and_CAS",
+    "savedValues": 0,
+    "modelId": "f40e34e905b8ca09f3636eda",
+    "year": 2022,
+    "source": {
+      "type": "manufacturer",
+      "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+      "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+      "pdfPages": [
+        132,
+        133,
+        137,
+        138
+      ]
+    },
+    "findings": "Both Sportback and Sedan manufacturer technical tables agree: 1968cc 85/110kW TDI FWD, 147kW TDI quattro AWD. Manual and S-tronic columns checked. Unknown body remains unknown; equipment names not required. Manual edit and current digest checks still required.",
+    "candidates": [
+      {
+        "variantId": "7db8901984bebba4a3236e3a",
+        "known": {
+          "engineCc": 1968,
+          "powerHp": 116,
+          "powerKw": 85,
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        }
+      },
+      {
+        "variantId": "2ad761bf54afb977ca82264c",
+        "known": {
+          "engineCc": 1968,
+          "powerHp": 116,
+          "powerKw": 85,
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        }
+      },
+      {
+        "variantId": "78fe46dcde9937bf000a081a",
+        "known": {
+          "engineCc": 1968,
+          "powerHp": 116,
+          "powerKw": 85,
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        }
+      },
+      {
+        "variantId": "f63e2946eabfad942875a19e",
+        "known": {
+          "engineCc": 1968,
+          "powerHp": 116,
+          "powerKw": 85,
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        }
+      },
+      {
+        "variantId": "d28a8ff5a0a44d8d9f87fd09",
+        "known": {
+          "engineCc": 1968,
+          "powerHp": 150,
+          "powerKw": 110,
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "manual",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        }
+      },
+      {
+        "variantId": "0dce12e0f0f6d89392567707",
+        "known": {
+          "engineCc": 1968,
+          "powerHp": 150,
+          "powerKw": 110,
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        }
+      },
+      {
+        "variantId": "af19476e1304e55f389d5ffb",
+        "known": {
+          "engineCc": 1968,
+          "powerHp": 200,
+          "powerKw": 147,
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "awd"
+        }
+      }
+    ],
+    "additionalAllstreetCandidates": [
+      {
+        "variantId": "baba9113b26d8065ea7098c6",
+        "year": 2025,
+        "known": {
+          "engineCc": 1498,
+          "powerHp": 150,
+          "powerKw": 110,
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        },
+        "source": {
+          "type": "manufacturer",
+          "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+          "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+          "documentDate": "2025-03-03",
+          "pages": [
+            55
+          ],
+          "findings": "A3 allstreet MY25:1498cc110kW S tronic mild hybrid,1968cc110kW TDI S tronic and1498cc110kW manual all front wheel drive. Body and mass not inferred for target rows."
+        }
+      },
+      {
+        "variantId": "9f545a2fbd74aa163c8d8565",
+        "year": 2025,
+        "known": {
+          "engineCc": 1498,
+          "powerHp": 150,
+          "powerKw": 110,
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        },
+        "source": {
+          "type": "manufacturer",
+          "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+          "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+          "documentDate": "2025-03-03",
+          "pages": [
+            55
+          ],
+          "findings": "A3 allstreet MY25:1498cc110kW S tronic mild hybrid,1968cc110kW TDI S tronic and1498cc110kW manual all front wheel drive. Body and mass not inferred for target rows."
+        }
+      },
+      {
+        "variantId": "dfc1a8a3504251268baea274",
+        "year": 2025,
+        "known": {
+          "engineCc": 1498,
+          "powerHp": 150,
+          "powerKw": 110,
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        },
+        "source": {
+          "type": "manufacturer",
+          "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+          "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+          "documentDate": "2025-03-03",
+          "pages": [
+            55
+          ],
+          "findings": "A3 allstreet MY25:1498cc110kW S tronic mild hybrid,1968cc110kW TDI S tronic and1498cc110kW manual all front wheel drive. Body and mass not inferred for target rows."
+        }
+      },
+      {
+        "variantId": "962415bf2c1bdd558f3c2f3f",
+        "year": 2025,
+        "known": {
+          "engineCc": 1498,
+          "powerHp": 150,
+          "powerKw": 110,
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd"
+        },
+        "source": {
+          "type": "manufacturer",
+          "url": "https://media.audi.com/is/content/audi/country/fr/assets/fr/gamme/tarifs/a3/2025/2703/Tarif-A3-Sportback-et-PHEV-Berline-allstreet-MY25-030325.pdf",
+          "sha256": "f5fdb74df5a0aaaf2e9dc6dd1374133807743cd471a61cc8baabc14bc853ff1d",
+          "documentDate": "2025-03-03",
+          "pages": [
+            55
+          ],
+          "findings": "A3 allstreet MY25:1498cc110kW S tronic mild hybrid,1968cc110kW TDI S tronic and1498cc110kW manual all front wheel drive. Body and mass not inferred for target rows."
+        }
+      },
+      {
+        "variantId": "9f1f6e858bb37c934852bd42",
+        "year": 2026,
+        "known": {
+          "engineCc": 1498,
+          "powerHp": 150,
+          "powerKw": 110,
+          "fuel": "hybrid",
+          "powertrainKind": "other_hybrid",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd",
+          "icePowerKw": 110
+        },
+        "source": {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/1376/file_en/864b6c93e7afe28d9d0eaca4d8109850b5d6e849/eTD-Audi-A3-allstreet-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782830014=&disposition=attachment",
+          "sha256": "3653dee1c00b0423f3a115e7835d78d3ae94164ed71ec6c0529913f193095d86",
+          "bytes": 122540,
+          "type": "manufacturer",
+          "documentDate": "2026-06-30",
+          "pages": [
+            1
+          ],
+          "findings": "A3 allstreet1498cc110kW ICE S tronic MHEV,front-wheel drive;12V3kW is not certified30-minute traction power."
+        }
+      },
+      {
+        "variantId": "90bdd3c2748a143a0189eb1a",
+        "year": 2026,
+        "known": {
+          "engineCc": 1498,
+          "powerHp": 150,
+          "powerKw": 110,
+          "fuel": "hybrid",
+          "powertrainKind": "other_hybrid",
+          "bodyType": null,
+          "transmission": "automatic",
+          "drive": null
+        },
+        "proposedPatch": {
+          "drive": "fwd",
+          "icePowerKw": 110
+        },
+        "source": {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/1376/file_en/864b6c93e7afe28d9d0eaca4d8109850b5d6e849/eTD-Audi-A3-allstreet-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782830014=&disposition=attachment",
+          "sha256": "3653dee1c00b0423f3a115e7835d78d3ae94164ed71ec6c0529913f193095d86",
+          "bytes": 122540,
+          "type": "manufacturer",
+          "documentDate": "2026-06-30",
+          "pages": [
+            1
+          ],
+          "findings": "A3 allstreet1498cc110kW ICE S tronic MHEV,front-wheel drive;12V3kW is not certified30-minute traction power."
+        }
+      }
+    ],
+    "reviewedCandidates": 13,
+    "missingSource2024": {
+      "url": "https://uploads.audi-mediacenter.com/system/production/uploaded_files/30440/file/223df4f35cda8f4c6381305dc331b3636022e460/240409_Basisinfo_Audi_A3_allstreet_EN.pdf?1713160630=&disposition=attachment",
+      "result": "HTTP404;not treated as unavailable vehicle data;no access bypass",
+      "next": "Find exact archived2024 technical table;2025source is not automatically2024 proof"
+    }
+  },
+  "nextAction": "Continue7 annual candidates and17 unresolved2024 identities. PR1531 merged/CI2526PASS; await existingREGprices40150504235 terminal then freshlease and one release49/35/3+559reuse; actualscoped-v1 before guardedrepair and publicprices/JapanAWD."
+}

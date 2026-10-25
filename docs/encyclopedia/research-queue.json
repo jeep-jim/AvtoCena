@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-25T00:10:22.537108+00:00",
+  "updatedAt": "2026-10-25T01:33:27.844739+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-25T00:10:22.537108+00:00",
+    "updatedAt": "2026-10-25T01:33:27.844739+00:00",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -33121,6 +33121,22 @@
         "afterRevision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
         "apiReadback": true,
         "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-continuation-readback.json"
+      },
+      {
+        "batch": "research-2026-10-25-audi-a3-diesel-allstreet-gaps",
+        "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-diesel-allstreet-gaps.json",
+        "sha256": "6dfbee246f0753be9a6f33d7d5c7d966e5621a38b590e28ed413d3aa5988d810",
+        "state": "saved_api_readback_pass_pending_next_index",
+        "modelId": "f40e34e905b8ca09f3636eda",
+        "variants": 13,
+        "fields": 15,
+        "newValues": 15,
+        "correctedValues": 0,
+        "workflow": 40150951695,
+        "job": 121042213091,
+        "afterRevision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+        "apiReadback": true,
+        "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-diesel-allstreet-gaps-readback.json"
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
@@ -40644,7 +40660,7 @@
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-public-parity.json"
       }
     },
-    "latestResearchReview": "docs/encyclopedia/reports/2026-10-25-mechanical-continuation-checkpoint.json",
+    "latestResearchReview": "docs/encyclopedia/reports/2026-10-25-diesel-allstreet-gaps-checkpoint.json",
     "audiA4L2025MassPass": {
       "version": 1,
       "checkedAt": "2026-10-24T05:01:40.762805+00:00",
@@ -42930,7 +42946,7 @@
       "remainingSelectedSourceRows": 0,
       "unresolved2024Identities": 17,
       "annualCandidateReport": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-candidates.json",
-      "annualCandidates": 20
+      "annualCandidates": 7
     },
     "installedAcceptance": {
       "pr": 1522,
@@ -43202,20 +43218,20 @@
       "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-drive-phev-readback.json"
     },
     "audiA3MechanicalContinuationPass": {
-      "batch": "research-2026-10-25-audi-a3-mechanical-continuation",
-      "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-mechanical-continuation.json",
-      "sha256": "458f15c6ca895bc010d56c817867004804c0c6c46e293a7e26a6bb65776f555c",
+      "batch": "research-2026-10-25-audi-a3-diesel-allstreet-gaps",
+      "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-diesel-allstreet-gaps.json",
+      "sha256": "6dfbee246f0753be9a6f33d7d5c7d966e5621a38b590e28ed413d3aa5988d810",
       "state": "saved_api_readback_pass_pending_next_index",
       "modelId": "f40e34e905b8ca09f3636eda",
-      "variants": 41,
-      "fields": 44,
-      "newValues": 44,
+      "variants": 13,
+      "fields": 15,
+      "newValues": 15,
       "correctedValues": 0,
-      "workflow": 40145557656,
-      "job": 121026002640,
-      "afterRevision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+      "workflow": 40150951695,
+      "job": 121042213091,
+      "afterRevision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
       "apiReadback": true,
-      "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-continuation-readback.json"
+      "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-diesel-allstreet-gaps-readback.json"
     }
   },
   "scope": {

@@ -15443,3 +15443,10 @@ REGprices40150504235/job121040890792 IN_PROGRESS на Prepare shared prices on G
 ### 25.10.2026 08:30 UTC+7 — CAS-партия Audi A3: 13 существующих вариантов / 15 отсутствующих значений
 
 Preflight40150692347/job121041458771 SUCCESS: revision de1c9d41-62cb-4a42-93c4-a9b95b238201, все13 manualEdited=false, актуальные full-record digests. Заводские таблицы2022 TDI и2025/2026 allstreet подтверждают13 drive и2 icePowerKw; меняются только отсутствующие значения, новых моделей/версий/30min нет. Опубликован штатный research marker; результат ещё не объявлен сохранённым, далее terminal и независимый API readback15/15. Очередь permanent research свободна, pending0; REG prices40150504235 работает на старом live, release/repair не дублируются.
+
+
+### 25.10.2026 08:33 UTC+7 — Audi13/15 сохранено, API15/15 PASS
+
+Apply40150951695/job121042213091SUCCESS, skip0. Revision79f7be75-7031-4e7d-8c06-c13fb457f181;15 новых значений(13drive+2icePowerKw),13 существующихвариантов. НезависимыйAPI15/15PASS,433другихстроки2022/2025/2026 неизменны,прежниеполя сохранены. Новыхмоделей/30min/перезаписей0. Candidate49required/35public/3ASTRA и559reuseguard сохранены; queue2423. Остались7annualкандидатов и17неоднозначных2024идентичностей. PR1531merged/CI2526PASS ещёнеустановлен;REGprices40150504235 active,release/repairне запрошены. Следующее: terminalстаройподготовкицен, freshlease/queues и один согласованныйrelease; послеactualscoped-v1 guardedrepair и реальныепубличныецены/JapanAWD.
+
+Дополнительно запрошен read-only preflight последних7 annualкандидатов; фабричныеAllstreet2024иTDI2025PDF доступны,источник2024общейтаблицы найден. Доsource/manual/digest проверки данные этих7не записаны.

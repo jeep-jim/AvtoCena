@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-25T00:10:22.537108+00:00",
+  "checkedAt": "2026-10-25T01:33:27.844739+00:00",
   "state": "17_remaining_candidates_after_phev_component_batches",
-  "savedFields": 156,
+  "savedFields": 171,
   "sourceInventoryWorkflow": 40106963530,
   "sourceClassification": "unverified_reference",
   "priority": [
@@ -16,7 +16,7 @@
       "id": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revisionAtReview": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+      "revisionAtReview": "79f7be75-7031-4e7d-8c06-c13fb457f181",
       "year": 2024,
       "sourceModelGroup": "audi/a3",
       "publicRowsChecked": 126,
@@ -324,7 +324,7 @@
   ],
   "totalRowsChecked": 470,
   "candidateRows": 17,
-  "nextAction": "Do not repeat saved41/44 or completed267 retained rows. Continue20 annual candidates (diesel/allstreet/technical ambiguity) and17 unresolved2024 identities. Release48/34/3 only after terminalChina and freshlease/generation/selectors; then installedscoped-v1, one repair and public price/drive acceptance.",
+  "nextAction": "Continue7 annual candidates and17 unresolved2024 identities. PR1531 merged/CI2526PASS; await existingREGprices40150504235 terminal then freshlease and one release49/35/3+559reuse; actualscoped-v1 before guardedrepair and publicprices/JapanAWD.",
   "resolvedCandidates": [
     {
       "variantId": "fc8ef77222122cbe20bfe9af",
@@ -672,7 +672,7 @@
   },
   "additionalAnnualMechanicalCandidates": {
     "rowsChecked": 1093,
-    "remaining": 20,
+    "remaining": 7,
     "path": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-candidates.json",
     "state": "unverified_candidates_not_saved"
   }
