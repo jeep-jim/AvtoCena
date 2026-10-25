@@ -1,6 +1,6 @@
 {
-  "requestedAt": "2026-10-25T00:06:03.112201+00:00",
+  "requestedAt": "2026-10-25T01:06:46.342585+00:00",
   "inspectBudgetSelectors": true,
   "inspectStagedGeneration": true,
-  "reason": "Read-only progress of existing China writer and staged objects; do not reset lock or repeat collection."
+  "reason": "Read actual lease and retained selectors after terminal China bounded-selector failure. No reset or collection."
 }
