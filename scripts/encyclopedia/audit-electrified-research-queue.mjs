@@ -22,11 +22,11 @@ for(const o of projection.rows){if(!['electric','hybrid'].includes(o.fuel))conti
  const blocked=SPECIFICATION_AUDIT_FIELDS.filter(f=>!['exact','not_applicable'].includes(classifySpecificationEvidence(result,f).state));
  if(!blocked.length){totals.completeSpecifications++;g.completeSpecifications++;}for(const f of blocked){inc(totals.blockedFields,f);inc(g.blockedFields,f);}
  if(result.power30MinKw>0){totals.withPower30++;g.withPower30++;}
- if(g.examples.length<3&&blocked.length)g.examples.push({before:Object.fromEntries(fields.filter(k=>o[k]!==undefined).map(k=>[k,o[k]])),after:Object.fromEntries(fields.filter(k=>result[k]!==undefined).map(k=>[k,result[k]])),blocked,reason:match.reason});
+ if(g.examples.length<3&&blocked.length&&o.market==='china')g.examples.push({before:Object.fromEntries(fields.filter(k=>o[k]!==undefined).map(k=>[k,o[k]])),after:Object.fromEntries(fields.filter(k=>result[k]!==undefined).map(k=>[k,result[k]])),blocked,reason:match.reason});
 }
 const sorted=[...groups.values()].sort((a,b)=>b.count-a.count);
-const requested=new Set(['Baojun:Yueye Plus','Infiniti:QX60','BYD:SEAL','Zeekr:MIX','Mercedes-Benz:GLC'].map(s=>{const [m,n]=s.split(':');return modelKey(m,n);}));
-const selected=sorted.filter((g,i)=>i<20||requested.has(modelKey(g.make,g.model))),researchModels=[];
+const requested=new Set(['Baojun:Yueye Plus','Infiniti:QX60','BYD:SEAL','Zeekr:MIX','Mercedes-Benz:GLC','BMW:i4','BMW:iX1','BMW:iX3','Mercedes-Benz:C','Mercedes-Benz:E','Mercedes-Benz:S'].map(s=>{const [m,n]=s.split(':');return modelKey(m,n);}));
+const selected=[...sorted.filter((g,i)=>i<20||requested.has(modelKey(g.make,g.model))),...['i4','iX1','iX3'].map(model=>({make:'BMW',model})),...['C','E','S'].map(model=>({make:'Mercedes-Benz',model}))],researchModels=[];
 for(const g of selected){const summaries=manifest.models.filter(m=>modelKey(m.make,m.model)===modelKey(g.make,g.model));for(const s of summaries){const r=await storage.readJson(s.key,null);if(r?.revision!==s.revision)throw Error('revision_changed');
  const variants=(r.variants||[]).filter(v=>Number.isInteger(v.year)&&['electric','hybrid'].includes(v.fuel)).sort((a,b)=>b.year-a.year);
  researchModels.push({id:r.id,make:r.make,model:r.model,revision:r.revision,annualVariants:variants.length,rows:variants.slice(0,30).map(v=>({variantId:v.id,expectedDigest:digest(v),trim:v.trim,status:v.status,manualEdited:Boolean(v.manualEditedAt),...Object.fromEntries(fields.filter(k=>v[k]!==undefined).map(k=>[k,v[k]]))}))});}}
@@ -36,3 +36,5 @@ await fs.mkdir('reports',{recursive:true});await fs.writeFile('reports/power30-b
 console.log('ELECTRIFIED_RESEARCH_TOTALS',JSON.stringify({...report,groups:undefined,researchModels:undefined}));
 console.log('ELECTRIFIED_RESEARCH_GROUPS',JSON.stringify(sorted.slice(0,60)));
 for(const r of researchModels)console.log('ELECTRIFIED_RESEARCH_MODEL',JSON.stringify(r));
+
+for(const key of [modelKey('BYD','Dolphin'),modelKey('BYD','Han'),modelKey('Tesla','Model Y'),modelKey('Mercedes-Benz','C')]){const facts=index.models[astraPower30Key(key)]||[];const unique=[...new Map(facts.map(f=>[JSON.stringify([f.constraints,f.values]),f])).values()];console.log('ELECTRIFIED_REFERENCE_DETAIL',JSON.stringify({key,total:facts.length,rows:unique.slice(0,30)}));}
