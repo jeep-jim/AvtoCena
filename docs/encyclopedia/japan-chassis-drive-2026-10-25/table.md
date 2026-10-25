@@ -7,7 +7,7 @@
 | Alfa Romeo | Mito | 955142 | Передний | [Источник](https://www.mlit.go.jp/common/000989174.xls), Alfaromeo, строка 10 |
 | Alfa Romeo | Spider | 939EXB1B 19 | Передний | [Источник](https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf), PDF pages 231 and 233 / printed 230 and 232, строка 1 |
 | Alfa Romeo | Spider | 939EXG2B 28 | Полный | [Источник](https://aftersales.fiat.com/eLumData/EN/83/177_BRERASPIDER/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS/83_177_BRERASPIDER_604.31.908_EN_01_08.08_L_LS.pdf), PDF pages 231 and 233 / printed 230 and 232, строка 1 |
-| Alfa Romeo | Spider | 939EXN1B 57 | Не подтверждён | Нужен другой источник |
+| Alfa Romeo | Spider | 939EXN1B 57 | Передний | [Источник](https://www.gebruikershandleiding.com/Alfa-Romeo-spider/preview-handleiding-61730.html?page=0233), Printedpage232; HTML/CSS exact transmission columns, строка 1 |
 | Alfa Romeo | Stelvio | 949AXA2A | Не подтверждён | Нужен другой источник |
 | Alfa Romeo | Stelvio | 949AXB2A | Не подтверждён | Нужен другой источник |
 | Alfa Romeo | Stelvio | 949AXF2A | Не подтверждён | Нужен другой источник |
@@ -200,7 +200,7 @@
 | Lexus | NX | AYZ10 | Передний | [Источник](https://www.mlit.go.jp/common/001084235.xls), Lexus, строка 16 |
 | Lexus | NX | AYZ15 | Полный | [Источник](https://www.mlit.go.jp/common/001084235.xls), Lexus, строка 18 |
 | Lexus | NX | TAZA25 | Полный | [Источник](https://www.mlit.go.jp/jidosha/content/001474447.xls), レクサス, строка 61 |
-| MASERATI | GHIBLI | MG20 | Не подтверждён | Нужен другой источник |
+| MASERATI | GHIBLI | MG20 | Задний | [Источник](https://www.media.stellantis.com/em-en/maserati/press/maserati-my21-ghibli-quattroporte-and-levante), Ghibli TECHNICAL SPECIFICATIONS / Hybrid / Transmission, строка 1 |
 | MASERATI | GHIBLI | MG30A | Задний | [Источник](https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1), MY19 TECHNICAL SPECIFICATIONS / Transmission, строка 1 |
 | MASERATI | GHIBLI | MG30AA | Полный | [Источник](https://www.media.stellantis.com/em-en/maserati/press/maserati-ghibli-my19-press-kit-1), MY19 TECHNICAL SPECIFICATIONS / Transmission, строка 1 |
 | MASERATI | GHIBLI | MG30B | Не подтверждён | Нужен другой источник |

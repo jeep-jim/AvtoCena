@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-10-25T05:32:06.685674+00:00",
+  "checkedAt": "2026-10-25T05:36:14.469993+00:00",
   "commit": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
   "reference": {
-    "runId": 40165655451,
-    "jobId": 121086046980,
+    "runId": 40165932431,
+    "jobId": 121086855555,
     "verified": true,
-    "digest": "bf2c9071a6c27e6328496e1ca33d7fb4aa43ea086cff6bec71cd4db89d67b0fd",
+    "digest": "9f204b1eb4419fbed31b8286c31f1be6b5da4f5cf403e676409ccab91cc21330",
     "groups": 335,
-    "confirmed": 256,
+    "confirmed": 261,
     "ambiguous": 46,
-    "unresolved": 33
+    "unresolved": 28
   },
   "annualChanges": 95,
   "annualUnfilled": {
@@ -38,22 +38,23 @@
   "automations": "Old broad research automations remain stopped.",
   "preparedReference": {
     "groups": 335,
-    "confirmed": 261,
+    "confirmed": 263,
     "ambiguous": 46,
-    "unresolved": 28,
+    "unresolved": 26,
     "workingScope": 318,
-    "missingPrimaryEvidence": 11,
+    "missingPrimaryEvidence": 9,
     "pendingDurableReadback": true
   },
   "replacementDeploy": {
     "runId": 40165188901,
     "commit": "5fc6705650c45459c060b748ac41b609f5d33d89",
-    "observedStatus": "in_progress"
+    "observedStatus": "in_progress",
+    "step": "Build existing application without production credentials"
   },
   "queuedDeploy": {
-    "runId": 40165655503,
-    "commit": "aa673971c39209759786ab82daad49b9913c826c",
+    "runId": 40165932441,
+    "commit": "d56d4a266013388c4c65be71fd3536a5cbbe45cb",
     "observedStatus": "pending",
-    "confirmed": 256
+    "confirmed": 261
   }
 }

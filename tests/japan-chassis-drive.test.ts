@@ -40,11 +40,11 @@ test('full Alfa variant suffixes and factory drivetrains are preserved in lookup
   assert.equal(enrichJapanDrive({market:'japan',make,chassisCode:code}).drive,drive);
   assert.ok(japanDriveSql(drive).includes(japanChassisCode(code)));
  }
- for(const code of ['939EXB1B','939EXG2B','939EXN1B 57','949AXH2A','949AXA2A']) assert.equal(lookupJapanChassisDrive('Alfa Romeo',code),undefined);
+ for(const code of ['939EXB1B','939EXG2B','949AXH2A','949AXA2A']) assert.equal(lookupJapanChassisDrive('Alfa Romeo',code),undefined);
 });
 
 test('new factory and CEV types match display and executable pre-pagination SQL',()=>{
- for(const [make,code,drive] of [['Alpina','3CA-3U40','awd'],['Alpina','5U20','awd'],['Alpina','5U40','awd'],['Maserati','MGR20A','awd'],['Maserati','MGR20C','awd'],['Maserati','MGR30','awd'],['Maserati','MG30A','rwd'],['Maserati','MG30C','rwd'],['Maserati','MG30D','rwd'],['Maserati','MG30AA','awd'],['Ford','ABA-1FMHK9','fwd'],['Tesla','ZAA-YL1YT','rwd'],['BMW','DLA-8E20','rwd'],['Audi','8EALT','fwd'],['Lamborghini','ZLDHU','awd']] as const){
+ for(const [make,code,drive] of [['Alpina','3CA-3U40','awd'],['Alpina','5U20','awd'],['Alpina','5U40','awd'],['Maserati','MGR20A','awd'],['Maserati','MGR20C','awd'],['Maserati','MGR30','awd'],['Alfa Romeo','939EXN1B 57','fwd'],['Maserati','7AA-MG20','rwd'],['Maserati','MG30A','rwd'],['Maserati','MG30C','rwd'],['Maserati','MG30D','rwd'],['Maserati','MG30AA','awd'],['Ford','ABA-1FMHK9','fwd'],['Tesla','ZAA-YL1YT','rwd'],['BMW','DLA-8E20','rwd'],['Audi','8EALT','fwd'],['Lamborghini','ZLDHU','awd']] as const){
   assert.equal(lookupJapanChassisDrive(make,code),drive);
   assert.equal(enrichJapanDrive({market:'japan',make,chassisCode:code}).drive,drive);
   assert.ok(japanDriveSql(drive).includes(japanChassisCode(code)));

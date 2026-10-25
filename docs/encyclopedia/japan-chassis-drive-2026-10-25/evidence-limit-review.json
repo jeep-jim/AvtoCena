@@ -28,12 +28,15 @@
     }
   ],
   "remainingEvidenceLimits": {
-    "939EXN1B 57": "2009 factory manual reproduction identifies1750 and front drive but column layout not independently verified from page image; do not add yet. https://manualzz.com/doc/57122675/alfa-romeo-spider-2009-de-handleiding",
     "949AXA2A,949AXB2A,949AXF2A,949AXH2A": "Manual type mapping not sufficient to bind drive.2.9V6 manual conflicts with Q4 launch; retain unknown.",
     "3P10": "Japan factory brochure exacttype found; no explicit drive. Overseas D3 also offeredAWD, cannot assumeJapanRWD.",
     "F152BE": "MLIT identifies812Superfast2020, laterCompetizionealso usescode; explicit manufacturerdrive evidence stillmissing.",
-    "MG20,MG30B": "Secondary catalog mapping found; exact primary Japanese type-to-version evidence missing.",
     "DJFS": "Potential malformed code; not silently corrected toDJLFS.",
-    "KWK4M": "Factory recalls identifyKangoo; period-specific primarydrive document stillmissing."
+    "KWK4M": "Factory recalls identifyKangoo; period-specific primarydrive document stillmissing.",
+    "MG30B": "Secondary catalog mapping found; exact primary Japanese type-to-version evidence missing."
+  },
+  "resolvedOnContinuation": {
+    "939EXN1B 57": "Original manualHTML/CSS type row andtransmission columns inspected;frontdrive confirmed.",
+    "MG20": "MLIT Gai3928 indexed text plus manufacturer Japanese recall identifiesGhibliMHEV2022–2023;factory transmission table confirmsRWD."
   }
 }

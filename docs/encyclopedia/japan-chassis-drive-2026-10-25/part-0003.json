@@ -226,10 +226,31 @@
     "years": [
       2023
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "rwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Maserati",
+        "code": "MG20",
+        "fullCode": "7AA-MG20",
+        "drive": "rwd",
+        "url": "https://www.media.stellantis.com/em-en/maserati/press/maserati-my21-ghibli-quattroporte-and-levante",
+        "sourceType": "manufacturer",
+        "sheet": "Ghibli TECHNICAL SPECIFICATIONS / Hybrid / Transmission",
+        "row": 1,
+        "hashScope": "reviewed_statement",
+        "sha256": "219dfa3cda59ae046fd1bbbdbd8f0a10618ca4ef78673ff7f3daf3692a127bc9",
+        "statement": "Cross-source inference: MLIT Gai3928 indexed original text identifies7AA-MG20 asGhibliMHEV MY2022–2023; manufacturerJapanese recall3928 also lists7AA-MG20Ghibli andhybridBSG. MaseratiMY21Ghibli technicaltable assigns rear-wheel drive toHybrid. Matches2022Japanese factorybrochureGT330hpL4RWD; do not extend tootherMGcodes. MLITPDFdirect404 recorded.",
+        "identitySource": {
+          "url": "https://www.mlit.go.jp/en/jidosha/content/001885343.pdf",
+          "sheet": "Page1 type table (indexedtext; direct404)",
+          "statement": "Gai3928:7AA-MG20 GhibliMHEV MY2022–2023."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "MASERATI",

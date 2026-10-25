@@ -752,5 +752,44 @@
       "sheet": "page1 type table",
       "statement": "GAI2085: ABA-1FMHK9 Explorer2.0L, contrasted with ABA-1FMHK8 3.5L."
     }
+  },
+  {
+    "brand": "Alfa Romeo",
+    "code": "939EXN1B 57",
+    "fullCode": "939EXN1B 57",
+    "drive": "fwd",
+    "url": "https://www.gebruikershandleiding.com/Alfa-Romeo-spider/preview-handleiding-61730.html?page=0233",
+    "sourceType": "manufacturer",
+    "sheet": "Printedpage232; HTML/CSS exact transmission columns",
+    "row": 1,
+    "hashScope": "source_bytes",
+    "sha256": "5b154746905ad5c1b6d693c8d863e571f3b80082cffaa659d1e176785e46b3cd",
+    "statement": "Original Alfa Romeo Spider manual530.05.014NL, May2009, archived HTML reproduction: printedpage230 maps939EXN1B57(withspace) to1750TurboBenzine. Printedpage232 lists Voor(front drive) under1750/2.0JTD/2.4JTD/3.2JTS4x2, and4x4 under separate3.2JTS4x4 column. Original HTML/CSS positions verified: front x397 vs4x4x714 at same y179;1750headingx237 vs4x4headingx688. No shortened code inference.",
+    "archiveReproduction": true,
+    "identitySource": {
+      "url": "https://www.gebruikershandleiding.com/Alfa-Romeo-spider/preview-handleiding-61730.html?page=0231",
+      "sheet": "Printedpage230",
+      "hashScope": "source_bytes",
+      "sha256": "b42796d853847b986f6fc87baeaf82039f306ae0c1f988e43d23bf7f001f1196",
+      "statement": "1750TurboBenzine/939B1000/939EXN1B57(withspace), same y19b table row."
+    }
+  },
+  {
+    "brand": "Maserati",
+    "code": "MG20",
+    "fullCode": "7AA-MG20",
+    "drive": "rwd",
+    "url": "https://www.media.stellantis.com/em-en/maserati/press/maserati-my21-ghibli-quattroporte-and-levante",
+    "sourceType": "manufacturer",
+    "sheet": "Ghibli TECHNICAL SPECIFICATIONS / Hybrid / Transmission",
+    "row": 1,
+    "hashScope": "reviewed_statement",
+    "sha256": "219dfa3cda59ae046fd1bbbdbd8f0a10618ca4ef78673ff7f3daf3692a127bc9",
+    "statement": "Cross-source inference: MLIT Gai3928 indexed original text identifies7AA-MG20 asGhibliMHEV MY2022–2023; manufacturerJapanese recall3928 also lists7AA-MG20Ghibli andhybridBSG. MaseratiMY21Ghibli technicaltable assigns rear-wheel drive toHybrid. Matches2022Japanese factorybrochureGT330hpL4RWD; do not extend tootherMGcodes. MLITPDFdirect404 recorded.",
+    "identitySource": {
+      "url": "https://www.mlit.go.jp/en/jidosha/content/001885343.pdf",
+      "sheet": "Page1 type table (indexedtext; direct404)",
+      "statement": "Gai3928:7AA-MG20 GhibliMHEV MY2022–2023."
+    }
   }
 ]

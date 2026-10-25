@@ -103,10 +103,34 @@
     "years": [
       2010
     ],
-    "drives": [],
-    "status": "unresolved",
-    "evidence": [],
-    "sourceRows": 0
+    "drives": [
+      "fwd"
+    ],
+    "status": "confirmed",
+    "evidence": [
+      {
+        "brand": "Alfa Romeo",
+        "code": "939EXN1B 57",
+        "fullCode": "939EXN1B 57",
+        "drive": "fwd",
+        "url": "https://www.gebruikershandleiding.com/Alfa-Romeo-spider/preview-handleiding-61730.html?page=0233",
+        "sourceType": "manufacturer",
+        "sheet": "Printedpage232; HTML/CSS exact transmission columns",
+        "row": 1,
+        "hashScope": "source_bytes",
+        "sha256": "5b154746905ad5c1b6d693c8d863e571f3b80082cffaa659d1e176785e46b3cd",
+        "statement": "Original Alfa Romeo Spider manual530.05.014NL, May2009, archived HTML reproduction: printedpage230 maps939EXN1B57(withspace) to1750TurboBenzine. Printedpage232 lists Voor(front drive) under1750/2.0JTD/2.4JTD/3.2JTS4x2, and4x4 under separate3.2JTS4x4 column. Original HTML/CSS positions verified: front x397 vs4x4x714 at same y179;1750headingx237 vs4x4headingx688. No shortened code inference.",
+        "archiveReproduction": true,
+        "identitySource": {
+          "url": "https://www.gebruikershandleiding.com/Alfa-Romeo-spider/preview-handleiding-61730.html?page=0231",
+          "sheet": "Printedpage230",
+          "hashScope": "source_bytes",
+          "sha256": "b42796d853847b986f6fc87baeaf82039f306ae0c1f988e43d23bf7f001f1196",
+          "statement": "1750TurboBenzine/939B1000/939EXN1B57(withspace), same y19b table row."
+        }
+      }
+    ],
+    "sourceRows": 1
   },
   {
     "make": "Alfa Romeo",
