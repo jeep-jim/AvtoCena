@@ -1,0 +1,66 @@
+name: Regcloud — activate prepared Japan release
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-resume-japan.json']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify exact prepared release and completed prerequisites
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PYTHON'
+          import urllib.request,json,os
+          base='https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/40155564837'
+          def read(url):
+              with urllib.request.urlopen(urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'}),timeout=30) as r:return json.load(r)
+          run=read(base);assert run['head_sha']=='a2a25dffc24c92d57b7a8ceb2e9b31b6369ea8a5' and run['status']=='completed'
+          job=next(j for j in read(base+'/jobs')['jobs'] if j['name']=='prepare')
+          steps={s['number']:s for s in job['steps']}
+          assert all(steps[n]['conclusion']=='success' for n in [5,6,7,8,10,11,14])
+          assert steps[15]['conclusion']=='failure'
+          print('Exact image, index, price preparation and parity prerequisites verified')
+          PYTHON
+      - name: Warm and activate the existing prepared image with all original gates
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          release=a2a25dffc24c92d57b7a8ceb2e9b31b6369ea8a5
+          calculator=4688433a9c87f83ffa84e07a636701bb3a9c07fb176ae7081f077998540165a6
+          remote_dir="/opt/avtocena/releases/$release"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$release' '$calculator'" <<'REMOTE'
+          set -euo pipefail
+          release=$1
+          calculator=$2
+          test "$(docker image inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' "avtocena-regcloud:$release")" = "$release"
+          bash "/opt/avtocena/releases/$release/regcloud-deploy-production.sh" "$release" "$calculator" 1
+          REMOTE
+      - name: Verify exact public release
+        run: |
+          python3 - <<'PYTHON'
+          import urllib.request,json
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
+          assert health['ok'] and health['releaseSha']=='a2a25dffc24c92d57b7a8ceb2e9b31b6369ea8a5'
+          assert health['calculationVersion']=='4688433a9c87f83ffa84e07a636701bb3a9c07fb176ae7081f077998540165a6'
+          print('EXACT_JAPAN_RELEASE_ACTIVE',json.dumps(health))
+          PYTHON

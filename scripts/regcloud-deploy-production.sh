@@ -3,6 +3,8 @@ set -euo pipefail
 umask 077
 release=$1
 calculator=$2
+prewarm=${3:-0}
+[[ "$prewarm" = 0 || "$prewarm" = 1 ]]
 [[ "$calculator" =~ ^[a-f0-9]{64}$ ]]
 [[ "$release" =~ ^[a-f0-9]{40}$ ]]
 exec 9>/run/lock/avtocena-runtime-change.lock
@@ -77,7 +79,7 @@ for attempt in $(seq 1 30); do
  if curl -fsS --max-time 2 "http://127.0.0.1:$port/api/health" >/dev/null; then break; fi
  sleep 1
 done
-python3 - "$port" "$release" <<'PY'
+python3 - "$port" "$release" "$prewarm" <<'PY'
 import urllib.request,urllib.error,time,json,sys,re
 base='http://127.0.0.1:'+sys.argv[1]
 for path in ['/api/health','/','/cars','/']:
@@ -92,6 +94,15 @@ for path in ['/api/health','/','/cars','/']:
 # Prepare expensive first requests on the candidate, before visitors can reach it.
 # No background polling: this runs once per authorized release.
 for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/cars?sort=totalRub','/cars?sort=totalRubDesc']:
+ if sys.argv[3]=='1' and path=='/cars?sort=totalRub':
+  # One bounded cold preparation on the isolated candidate. The unchanged
+  # 120-second complete-response gate below must still pass afterwards.
+  print(json.dumps({'coldPreparation':path,'started':True}),flush=True)
+  cold=time.monotonic()
+  with urllib.request.urlopen(base+path,timeout=600) as response:
+   body=response.read();assert response.status==200
+  assert time.monotonic()-cold<=600 and b'</html>' in body and b'$RX(' not in body and len(body)>50000
+  print(json.dumps({'coldPreparation':path,'seconds':round(time.monotonic()-cold,3),'complete':True}),flush=True)
  t=time.monotonic()
  with urllib.request.urlopen(base+path,timeout=120) as r:b=r.read();assert r.status==200
  if path.startswith('/api/'):
