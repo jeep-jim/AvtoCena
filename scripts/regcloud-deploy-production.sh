@@ -115,23 +115,26 @@ for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/ca
 # Require the exact typed reason: generic 503, configuration and supplier failures
 # are NOT accepted by this release check. Keep all HTML/local price/auth gates above.
 for market, source in [('japan','ajes'),('korea','ajes'),('korea','existing'),('china','ajes')]:
- try:
-  with urllib.request.urlopen(base+'/api/catalog/search?market='+market+'&source='+source+'&budgetTo=3000000',timeout=30) as response:
-   value=json.load(response)
-  # China may use the owner-selected local Che168 catalog. AJES IDs must
-  # never pass this branch; its visitor-IP boundary remains mandatory.
-  assert market=='china', 'live source accepted a request without a real visitor IP'
-  assert value.get('ok') is True and value.get('total',0)>0 and value.get('items')
-  assert all(row.get('market')=='china' and re.fullmatch(r'[a-f0-9]{24}',str(row.get('id',''))) for row in value['items'])
-  print(json.dumps({'market':market,'localChe168Catalog':'nonempty_verified'}),flush=True)
-  continue
- except urllib.error.HTTPError as e:
-  value=json.load(e)
-  assert e.code==503, (market,e.code)
-  assert value.get('ok') is False and value.get('error')=='japan_search_unavailable'
-  assert value.get('reason')=='client_ip_missing', (market,value.get('reason'))
-  assert 'total' not in value and 'items' not in value
- print(json.dumps({'market':market,'missingVisitorIp':'rejected_without_supplier_request_or_false_zero'}),flush=True)
+ # The local China budget has a separate exact-price snapshot from sorting.
+ # Warm it once, then repeat the unchanged 30-second source-boundary gate.
+ for cold in ([True,False] if sys.argv[3]=='1' and market=='china' else [False]):
+  try:
+   with urllib.request.urlopen(base+'/api/catalog/search?market='+market+'&source='+source+'&budgetTo=3000000',timeout=600 if cold else 30) as response:
+    value=json.load(response)
+   # China may use the owner-selected local Che168 catalog. AJES IDs must
+   # never pass this branch; its visitor-IP boundary remains mandatory.
+   assert market=='china', 'live source accepted a request without a real visitor IP'
+   assert value.get('ok') is True and value.get('total',0)>0 and value.get('items')
+   assert all(row.get('market')=='china' and re.fullmatch(r'[a-f0-9]{24}',str(row.get('id',''))) for row in value['items'])
+   print(json.dumps({'market':market,'coldPreparation':cold,'localChe168Catalog':'nonempty_verified'}),flush=True)
+   continue
+  except urllib.error.HTTPError as e:
+   value=json.load(e)
+   assert e.code==503, (market,e.code)
+   assert value.get('ok') is False and value.get('error')=='japan_search_unavailable'
+   assert value.get('reason')=='client_ip_missing', (market,value.get('reason'))
+   assert 'total' not in value and 'items' not in value
+  print(json.dumps({'market':market,'missingVisitorIp':'rejected_without_supplier_request_or_false_zero'}),flush=True)
 # Admin resource data must never leak anonymously.
 try:urllib.request.urlopen(base+'/api/crm/server-resources',timeout=15);raise AssertionError('metrics exposed')
 except urllib.error.HTTPError as e:assert e.code in [401,403]
