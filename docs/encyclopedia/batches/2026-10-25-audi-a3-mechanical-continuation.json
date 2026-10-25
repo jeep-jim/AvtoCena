@@ -1,0 +1,1885 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a3-mechanical-continuation",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "280726c3379fa1caaf9c2010",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "|30TFSi|116.000km|2022|Automaat|Garantie|Benzine",
+      "expectedDigest": "fb99714cb91b572822fbbba83b3780ce0c0fbff72ff65940b4dfc83a0bcb6326",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "46afcb3e543a0e9c909fc08f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "✖️ 19' S-LINE | BLACK PACK | TVA ✔️",
+      "expectedDigest": "136b0ade58b08faa5b877533b7c66c5940015f005bb5796642cd1b5dc357cf06",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "eb60f87870f91e6e9c1fa432",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TFSI Business Edition S line S tronic - SHADOW LINE - APP - GPS - CLIM AUTO",
+      "expectedDigest": "c1b5ea5fc0c075aa25a07a91ff4833ef0c7de4d14708194ae4fa09d185269460",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7bb34be46b2308f73819e115",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TFSI S tr. AHK LED NAVI VIRTUAL",
+      "expectedDigest": "282d1594de6290a937098aa961cd4179b6227584e71c011b1a3d784322f2bd41",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "37b5846f706f58fc2b49855f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TFSI Advanced LED Virtual Kam Qi SHZ ACC",
+      "expectedDigest": "e0b521f2b6188dd44b9f86e1743ae50ad15c0aedd1be6e91ee8f090f7f20e7f2",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "3d6b0c22e5563f9b0941cc4e",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 1.0 TFSI advanced DSG LED Navi ACC DAB",
+      "expectedDigest": "5c02ef89cc0f1c12ce8101e9fc14742073d3cfa9157d7dc0a4208be521ccf09a",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f4ab279599fc69dba0ab1649",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 1.0 TSI S line*SOUND*LED*PDC*",
+      "expectedDigest": "8a13a8fcd1afa588d717ca6b3022bd2ed2c6c7404e67020ba5b75eedd7a308d9",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ac72289c38af2975caa209e1",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "✖ S-LINE | BLACK PACK | APPLE CARPLAY | TVA ✔️",
+      "expectedDigest": "3a470f8d9ac2b7922e6aca76dd3ec228419556a1c78fcb3c725dd309630e90dd",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8d6441d1d725dffed43b11a2",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TFSI advanced LED Navi Sitzheizung",
+      "expectedDigest": "bf31c4f27c45ce410a9deb9a0052d0c005ebb51e7674631974a5cf424ec70e24",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4ce99bc09eff732d6f6ba800",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TFSI advanced LED Navi ACC Virtual Cockpit",
+      "expectedDigest": "10d9321175fc1624a3482e89a75b11351f104ef16218760fadf2470e5ce39615",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "76859e99342f798c3c66b025",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "TFSI advanced S-Tronic LED Navi ACC PDC USB",
+      "expectedDigest": "10906bc3659d71c8bce24679a30a3a79ad09e628206d339a9ede85a1eee06cbc",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f05f0df8d934b1453c72125c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "A3 30 TFSI S-Line Business Edition Platinum aut.",
+      "expectedDigest": "eb50c751359bc0fa0a2a06e7937dc3a2debbe6b2386ca4b62825378e04e23b91",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "0acb36c3cef92335d6f348b1",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "35 1.5 TFSI Navi|Bluetooth|DAB|",
+      "expectedDigest": "5ff54920668ad3d058b21fe535dac3bff59bd3dfaa71b23f17e2fedc9b1e6da1",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "641fa1c4c4c6770bfcf28c4b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "SPORTBACK 35 ADVANCED +DSG+KLIMA+HUD+LED+ACC+",
+      "expectedDigest": "5292b3a2ad6245bd75290df7cb0417716cc4e1e55904991965d3e7d59993fafa",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4c905d4f522a5acc31255e0b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Advanced 35 TFSI 110(150) kW(PS) S",
+      "expectedDigest": "b05005b88d1d3d136ed596a24c77f83a399249637678488d3bacb3fd82fbe739",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9fc03caa7959e6af3ec9986f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "S-Line ACC Navi PDC Automa SpurW Virtual Kam.",
+      "expectedDigest": "0a743233d5c5c2a0e7bbfefd67c174b44b116fe3efa8c18b1c829fc59516000c",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f016bea82e4e7d2d1fdd595b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2023,
+      "trim": "Sportback 1.0 TSI S-line S-TRONIC+NAV+VIRT+LE",
+      "expectedDigest": "df7d8323f279349d79215c8fcde2e97383e91c43ee33e61ea209cb86b42993b4",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+            "date": "2023-09-19",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9b2ee3dbc16a9dcd7a3c8b4d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2023,
+      "trim": "Sportback * PDC*GRA*SHZ*NAVI*16 ZOLL LM *",
+      "expectedDigest": "51c4838f9645aa576e09265463504550325d33e0ca5aa622b4b1673852a604e7",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+            "date": "2023-09-19",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4c4a6df464638a48a9fad704",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2023,
+      "trim": "30 TFSI S-tronic S-line *Panorama*ACC*Keyless-Ent",
+      "expectedDigest": "238529290569695de4393c36ec8cec654633e1e21b38fe81406eb87c80a28657",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+            "date": "2023-09-19",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "57c630e5d1158715a92e75ea",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2023,
+      "trim": "S-Line Limousine ACC|Kamera|Panorama|LED|PDC",
+      "expectedDigest": "b14d4a6b5985469e68e11c831e6b24d11a340c94b651809911850d98d810921c",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+            "date": "2023-09-19",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a34c8f5e24e2fe502e1df884",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2023,
+      "trim": "Sportback S line 30 S tronic",
+      "expectedDigest": "9c07dc61664196f49eec5ad09c10ec04df61c835ad32dd108f8aed0390b1a20f",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+            "date": "2023-09-19",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f1558825ea11eb982dc1d965",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "35 TFSI mHEV S Tronic*KeyGo*LED*Navi*DAB",
+      "expectedDigest": "6c61c44f3a95d1519e0f81f2921bc9ba92cc03def31a453c70db9391b042e4e4",
+      "patch": {
+        "drive": "fwd",
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "drive",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-35-TFSI-S_tronic-110kW-MHEV_241018.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-35-TFSI-S_tronic-110kW-MHEV_241018.pdf",
+            "date": "2024-10-18",
+            "pages": [
+              1
+            ],
+            "sha256": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ],
+        "sourceSha256": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f56540b73b1596da41e6dede",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "35 TFSI advanced",
+      "expectedDigest": "587e3f3b051bf2c20772820a4eaac8aabe6ebfc5cd19f625cee6d71107bbdbfb",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-35-TFSI-S_tronic-110kW-MHEV_241018.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-35-TFSI-S_tronic-110kW-MHEV_241018.pdf",
+            "date": "2024-10-18",
+            "pages": [
+              1
+            ],
+            "sha256": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ],
+        "sourceSha256": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "214834800e6f44a3255f11e4",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "S line 35 1.5 TFSI S-tronic",
+      "expectedDigest": "aad6e651bf38ad60db52709058b141cce9a5a746322c5d4a83781bcb54dd2a33",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-35-TFSI-S_tronic-110kW-MHEV_241018.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-35-TFSI-S_tronic-110kW-MHEV_241018.pdf",
+            "date": "2024-10-18",
+            "pages": [
+              1
+            ],
+            "sha256": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ],
+        "sourceSha256": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "6347706adf9e920e6fdee4e2",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "35 TFSI 2xS line Matrix-LED ACC Sid",
+      "expectedDigest": "514631b424b9fef601aa5608cdc306e88bb1c053e32b37a93598f42920f6d23c",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1176/file_en/3000505d34f50bbc9d409c309f9c8c5692e635f8/eTD-Audi-A3-Sportback-35-TFSI-110kW_240424.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1176/file_en/3000505d34f50bbc9d409c309f9c8c5692e635f8/eTD-Audi-A3-Sportback-35-TFSI-110kW_240424.pdf",
+            "date": "2024-04-24",
+            "pages": [
+              1
+            ],
+            "sha256": "bacab513e916165eb9e82286da98c9d890f19b56ca95749833b3a197b08c4a77",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ],
+        "sourceSha256": "bacab513e916165eb9e82286da98c9d890f19b56ca95749833b3a197b08c4a77"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7947ba7714e6245da1d7e445",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "35 TFSI mHEV S Tronic*KeyGo*LED*Navi*DAB",
+      "expectedDigest": "622a25c2760ea46bd4baae53393cafc99c2bbb5826ebd9acb8537d92034b46fb",
+      "patch": {
+        "drive": "fwd",
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "drive",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-35-TFSI-S_tronic-110kW-MHEV_241018.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-35-TFSI-S_tronic-110kW-MHEV_241018.pdf",
+            "date": "2024-10-18",
+            "pages": [
+              1
+            ],
+            "sha256": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ],
+        "sourceSha256": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1c94c61db3f928c3346efc7c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "30 TFSI Advanced S tronic Navi+LED+SHZ+DSP+DA",
+      "expectedDigest": "5b612533ee94bb4b37d64360617723d0effac915b29029bee1494235fd10710e",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4ac3853fba2a72f522e14b68",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "30 TFSI S tronic",
+      "expectedDigest": "0b4c3e916c784b3645a0555d98ff603fd8fc5348310a95b645fd077a1d649e3b",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "acd4ac42fe69ed9f5f33a121",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "SP 1.5 TFSI S line LED ACC AppleCP Sportpaket",
+      "expectedDigest": "129d71d74a1e530c9337ff76178005cdc1db2d26118b43dc34904650a6e23391",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e09e376b5daf439770544384",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "advanced TFSI Stronic Navi LED ACC",
+      "expectedDigest": "c55a5c38490c7b326340ebceb62395c6b53a0d2a1955ab60b26184023d0200be",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "0d3dfee299ae05dc2e427324",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback 1.5TFSI S line Sonos*ACC*HUD*NAV*LM",
+      "expectedDigest": "693f9644f2afb6917746f9d95a9006917c345c33db1e9b339185d89578a44b9f",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "46c442d27300f59f7a014455",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "S line TFSI Stronic Navi LED HuD AC",
+      "expectedDigest": "2c411318415093b5dd634d7862cbee6cff319b2fb3ab3d7e26bc7e9d1a959c70",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b172be6fcb8ce346e28e2965",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "S line 35 TFSI s tronic Cam/Navi/LED+/PhoneBox",
+      "expectedDigest": "dfc9fc441ae51cf3eaec9ab44266385073880bbc3dcae7c84793171c66853d4b",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b1fb36e9010ee8599b81ebb1",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "S line 35 TFSI S tronic Kamera/Navi/LED+",
+      "expectedDigest": "34e581daa3a1c02b504eb4487744e28401b983cd5a1c1bdb4499767999f347ea",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9b24b406852d10cf4a714c76",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "S line 35TFSI Stronic Matrix HUD SO",
+      "expectedDigest": "6aeb95ecd1c6983a7b6523eb8ae1a62bb2712b4d80f65b04c527a847b6b7e7f0",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "323da205d6fbcb00dfbc055b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "IV 2024 Sportback Sportback 1.5 tfsi mhev S line edition 150cv s-tronic",
+      "expectedDigest": "689a021cb18d7741bf1e2fc0460bca6ac732ff6bf81a57deadf7bbbc544e2b19",
+      "patch": {
+        "drive": "fwd",
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "drive",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "sha256": "7c29fd2befa408041affdfa7f20aca47f3fa69c45697898ed826f74d9aa4396c",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7305c2bcbcdde079867f370a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "30 TFSI",
+      "expectedDigest": "f6b1769b99e47ccbb323667c4502f31fb216c2793064d1f42a50d6e3efb2759d",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3513fb55dd3ca9910d8c4f4e57e75ecd8cf77ffc07615435a70f4c944a780589",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "3513fb55dd3ca9910d8c4f4e57e75ecd8cf77ffc07615435a70f4c944a780589"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7a74be3ee1b6d5bb8ae549fd",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "30 TFSI",
+      "expectedDigest": "cda508ecd05da73b03b34a1c098dd07b79f86803dc4b0693adfefd2249df645e",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "9245611522a83c9873d35d9d19b4f9c203b509e54bc3422454bf1239076a5ddd",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ],
+        "sourceSha256": "9245611522a83c9873d35d9d19b4f9c203b509e54bc3422454bf1239076a5ddd"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "29ee23949165f11f7901ba18",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "1.5TFSI S line Sonos*ACC*HUD*NAV*ParkAs*RFK",
+      "expectedDigest": "bf6c5ec8bf3391561fae5eb2e1d7dd39df96781961e9cc64367654904fe821a4",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ad9f400c72a14eb54f12c388",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "S line TFSI S tronic 2x S line/LED/Kamera/Navi+/SH",
+      "expectedDigest": "96d5df74a1aeb05373c88a98129bbe14bb1cf23d023c26d8da61369533344927",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b36d481ba8c97e9d22740def",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "S line TFSI Tech/Int.S/Connect.Pake",
+      "expectedDigest": "ec819201fc4384711c483fd48f6f56c9caeaef8d32db3ecbae449d65eb5795b8",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Повторно проверенная заводскаятаблица соответствующего года: точные сохранённые объём,мощность икоробка определяют переднеприводную техническуюгруппу A3/999см³81кВт либо1498см³85–110кВт. Обычныеназванияоборудования не требуются. Для Sportback иSedan приводобщий; неизвестныйкузов не назначается,массы и опции не переносятся. Добавляются толькоотсутствующиеdrive и,где явноMHEV,icePowerKw110. PreflightmanualEdited=false; прежниеполя,сертифицированная30min,история сохранены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-TFSI-110kW-S_tronic-MHEV_260630.pdf?1782910688=&disposition=attachment",
+            "sha256": "95cf37dea23ae91127165fe90edf11c3f117e1ffcc7c0893ac7c8f8496576049",
+            "fields": [
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "sourceSha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f"
+      }
+    }
+  ]
+}

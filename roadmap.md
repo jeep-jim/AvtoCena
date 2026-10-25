@@ -15387,3 +15387,10 @@ Healthостаётся8ec0d858,scoped-v1нет;China40124551054на послед
 ### 25.10.2026 07:06 UTC+7 — проверка41 сохранённого технического кандидата
 
 Свежие main873da01/AGENTS/Road/план/queue прочитаны. China40124551054 единственныйactive,pending0,4старыхqueuedнетронуты. Выбраны41существующихA3/2022–2026 с известными999/81кВт либо1498/85–110кВт,автоматом/МКПП по заводскимтаблицам; Allstreet и неоднозначные дизельныегруппы отложены. Запрошены boundedpreflight41 и read-onlylease/stagedgeneration/selectors. Проверить источники и ручныеправки доCASapply; savedпока0. Новыхcollectors/deploy/repair/unlock нет.
+
+
+### 25.10.2026 07:08 UTC+7 — CAS44 новых механических значений
+
+Preflight40145403957/job121025539838SUCCESS:41manualEdited=false,точныеdigests. ДевятьзаводскихPDF повторно проверены,SHA256совпали; публичные833строки2022–2026прочитаны,полякандидатовнеизменны. Партия458f15c6ca895bc010d56c817867004804c0c6c46e293a7e26a6bb65776f555c validatePASS:41drive и3icePowerKw,всеотсутствующие. Запрошенодинapply; savedдоterminal/APIне заявлен.
+
+Publication-status40145403963/job121025539597SUCCESS00:07UTC:activeChinafc5b3612heartbeat00:05:03/до00:35:03;5старыхselectorsvalid. Stagedgen1792879052713_70e18ac0 имеетновуюcheckpoint00:05:09,projectionChina00:03:24 иmarketindexes00:04:12; это реальное продвижение,но неактивация. Активныйgenerationпрежний. Release/repair/unlock/collectorне запрошены.
