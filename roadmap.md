@@ -15521,3 +15521,10 @@ PR1532merged99744a8a,CI40152444241/job121046611977SUCCESS2526+productionbuild;38
 ### 25.10.2026 09:08 UTC+7 — исправленный выпуск и диагностика живого Japan
 
 Единственный deploy40153126396 SHAe7f40db59c318b3e7fcead440e9c9f40a0ce2d26: wait-for-astra SUCCESS; prepare121048775646 прошёл matching/security/storage и формирует private index. Установка ещё не подтверждена. Для ранее наблюдавшихся Japan partial/stale и Korea503 запрошен существующий bounded read-only ajes-failure-audit: только безопасные коды ошибок приложения и директивы proxy, безsupplierrequests/collector/storagewrite. Активных конкурирующихwriters нет; старые4queued не тронуты. Researchwrites остаются отложены до изоляции снимка; guardedrepair не запускался.
+
+
+### 25.10.2026 09:14 UTC+7 — подтверждённый отказ AJES, без обхода доступа
+
+Read-only audit40153361000/job121049371622 SUCCESS02:09:37UTC. За ограниченное окно12h/20000строк: visitor_restricted3296, operation_failed79, request_timeout4. Это совокупные AJES ошибки, не доказательство блокировки всех пользователей/всех рынков. Прокси использует remote_addr, не входящий X-Real-IP; real_ip rewrite не обнаружен. Публичная Korea02:12:48UTC HTTP503/reason visitor_restricted; health200/release8ec0d858. Japan ранееpartial/stale/totalnull и теперь не объявлена принятой. Отчёт docs/encyclopedia/reports/2026-10-25-ajes-public-access-blocker.json.
+
+Единственный release40153126396 SHAe7f40db5 продолжает privateindex; проверенные записи56new/7corrected/5attested/API68 уже постоянные, но активация ещё не доказана. Не подменятьIP,не ослаблятьall-six/priceguards; guardedrepair не запускать по одномуcachedcount. Следом завершениеASTRAverification/build/priceprep/health, затем публичная приёмка при разрешённом ответе источника.
