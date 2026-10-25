@@ -15429,3 +15429,12 @@ Read-only40149538202/job121037950634SUCCESS:01:10:24UTC writer.active=false, loc
 PR1531 merged1ba6dfba/CI40149987618SUCCESS2526. Merge автоматически запустил REGprices40150504235 иoverview40150504278; не отменять и не дублировать. СтарыйYandexprices40150504435 terminalfailure live_encyclopedia_binding_missing на прежнемgen1791597210034, не считать ошибкойREGindex. Release48/34/3 покаНЕзапрошен, preparedmarker не опубликован доразбораактивныхwriters.
 
 Сохранённые заводские таблицы и новые официальные Allstreet2025/2026 подтверждают13существующихA3кандидатов/15пропусков. Публичные2022/2025/2026 записи повторно прочитаны,revisionde1c9d41-62cb-4a42-93c4-a9b95b238201; запрошен только boundedpreflight13 для manual/digest. Источник2024archive404 не обойдён, семанеоднозначныхannualкандидатов и17старыхidentities остаются. ПослеPASS разрешёнCASapply,еслиprivateindexещёнеформируется; иначеотложить. Savedвэтомпроходепока0.
+
+
+### 25.10.2026 08:30 UTC+7 — независимый контроль после merge bounded selectors
+
+Прочитаны свежие AGENTS/ночной план/Road/main4c1d394cccc959365e0c89310f72ad0128c99cba. GitHub независимо подтвердил PR1531 merged1ba6dfba9d09ba7a21b43984c7fcca05c1ae7d55 и CI40149987618 SUCCESS. Полный внешний health HTTP200/curl exit0 в01:29UTC по-прежнему release8ec0d8587d9891757f8cdf019f2c9c55adcaef31/calculationVersion2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07; catalogProjectionParts=scoped-v1 отсутствует. Merge не объявлен установкой.
+
+REGprices40150504235/job121040890792 IN_PROGRESS на Prepare shared prices on GitHub and verify cold-instance reuse; предыдущие context/budget gates SUCCESS. В01:29:44UTC active также CRM40150504351 и mobile40150504238; pending0, четыре историческихqueued сохранены. Новый production deploy не обнаружен. Основной исполнитель ведёт очередь и candidate48required/34public/3ASTRA+559reuse; контроль не дублировал код, apply, release, repair, collector или lockreset.
+
+Следующий шаг: получить terminal существующего REGprices и его verified/context результат, сверить freshlease и Road основного исполнителя; после единственного согласованного выпуска проверить actualscoped-v1 и публичные search/detail цены, JapanAWD/pickups/checkCatalogFeedback на установленном SHA. Новые сохранённые значения не объявлены активированными; Китай, DBX, globalAJESorder и скорость не закрыты.
