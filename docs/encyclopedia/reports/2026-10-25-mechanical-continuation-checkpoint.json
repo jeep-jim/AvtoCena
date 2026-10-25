@@ -1,0 +1,199 @@
+{
+  "checkedAt": "2026-10-25T00:10:22.537108+00:00",
+  "saved": {
+    "batch": "research-2026-10-25-audi-a3-mechanical-continuation",
+    "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-mechanical-continuation.json",
+    "sha256": "458f15c6ca895bc010d56c817867004804c0c6c46e293a7e26a6bb65776f555c",
+    "state": "saved_api_readback_pass_pending_next_index",
+    "modelId": "f40e34e905b8ca09f3636eda",
+    "variants": 41,
+    "fields": 44,
+    "newValues": 44,
+    "correctedValues": 0,
+    "workflow": 40145557656,
+    "job": 121026002640,
+    "afterRevision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+    "apiReadback": true,
+    "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-continuation-readback.json"
+  },
+  "apiReadback": {
+    "checkedAt": "2026-10-25T00:10:12.712091+00:00",
+    "batch": "research-2026-10-25-audi-a3-mechanical-continuation",
+    "sha256": "458f15c6ca895bc010d56c817867004804c0c6c46e293a7e26a6bb65776f555c",
+    "modelId": "f40e34e905b8ca09f3636eda",
+    "afterRevision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+    "apiReadback": true,
+    "fieldsChecked": 44,
+    "variants": 41,
+    "years": [
+      {
+        "year": 2022,
+        "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+        "rows": 201,
+        "checkedFields": 16,
+        "otherRowsUnchanged": 185
+      },
+      {
+        "year": 2023,
+        "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+        "rows": 261,
+        "checkedFields": 5,
+        "otherRowsUnchanged": 256
+      },
+      {
+        "year": 2024,
+        "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+        "rows": 126,
+        "checkedFields": 7,
+        "otherRowsUnchanged": 121
+      },
+      {
+        "year": 2025,
+        "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+        "rows": 143,
+        "checkedFields": 11,
+        "otherRowsUnchanged": 133
+      },
+      {
+        "year": 2026,
+        "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+        "rows": 102,
+        "checkedFields": 5,
+        "otherRowsUnchanged": 97
+      }
+    ],
+    "counts": {
+      "newValues": 44,
+      "correctedValues": 0,
+      "attestedUnchanged": 0
+    },
+    "unknownBodiesPreserved": [
+      "280726c3379fa1caaf9c2010",
+      "46afcb3e543a0e9c909fc08f",
+      "eb60f87870f91e6e9c1fa432",
+      "7bb34be46b2308f73819e115",
+      "37b5846f706f58fc2b49855f",
+      "3d6b0c22e5563f9b0941cc4e",
+      "f4ab279599fc69dba0ab1649",
+      "ac72289c38af2975caa209e1",
+      "8d6441d1d725dffed43b11a2",
+      "4ce99bc09eff732d6f6ba800",
+      "76859e99342f798c3c66b025",
+      "f05f0df8d934b1453c72125c",
+      "0acb36c3cef92335d6f348b1",
+      "4c905d4f522a5acc31255e0b",
+      "9fc03caa7959e6af3ec9986f",
+      "4c4a6df464638a48a9fad704",
+      "57c630e5d1158715a92e75ea",
+      "f1558825ea11eb982dc1d965",
+      "f56540b73b1596da41e6dede",
+      "214834800e6f44a3255f11e4",
+      "6347706adf9e920e6fdee4e2",
+      "7947ba7714e6245da1d7e445",
+      "1c94c61db3f928c3346efc7c",
+      "4ac3853fba2a72f522e14b68",
+      "acd4ac42fe69ed9f5f33a121",
+      "e09e376b5daf439770544384",
+      "46c442d27300f59f7a014455",
+      "b172be6fcb8ce346e28e2965",
+      "b1fb36e9010ee8599b81ebb1",
+      "9b24b406852d10cf4a714c76",
+      "7305c2bcbcdde079867f370a",
+      "7a74be3ee1b6d5bb8ae549fd",
+      "29ee23949165f11f7901ba18",
+      "ad9f400c72a14eb54f12c388",
+      "b36d481ba8c97e9d22740def"
+    ],
+    "newModels": 0,
+    "certified30minAdded": 0,
+    "installed": false,
+    "workflow": 40145557656,
+    "job": 121026002640,
+    "preflightWorkflow": 40145403957
+  },
+  "remaining": {
+    "annualCandidates": 20,
+    "unresolved2024Identities": 17,
+    "modelsInQueue": 2423,
+    "wholeCatalogComplete": false
+  },
+  "publication": {
+    "statusWorkflow": 40145403963,
+    "job": 121025539597,
+    "activeWriter": "catalog_v3_publish_china_fc5b3612-769c-4636-84c2-ab810ccaed83",
+    "heartbeat": "2026-10-25T00:05:03.658Z",
+    "lockedUntil": "2026-10-25T00:35:03.656Z",
+    "stagedGeneration": "gen_1792879052713_70e18ac0",
+    "lastCheckpoint": "2026-10-25T00:05:09.501Z",
+    "activeGeneration": "gen_1792702445675_8c312f85",
+    "selectorsValid": true,
+    "health": {
+      "checkedAt": "2026-10-25T00:09:50.834479+00:00",
+      "body": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+        "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+      }
+    },
+    "releaseRequested": false,
+    "repairRequested": false
+  },
+  "sources": [
+    {
+      "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+      "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+      "expected": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+      "hashMatch": true
+    },
+    {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+      "sha256": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57",
+      "expected": "c9907dcbcb4c2ccf53f398bc2842994e2f667cd034e912902a4d6049d3505c57",
+      "hashMatch": true
+    },
+    {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1193/file_en/542cc21d6dfd710f974532f8eb9ba7e11e896550/eTD-Audi-A3-Sportback-35-TFSI-S_tronic-110kW-MHEV_241018.pdf",
+      "sha256": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb",
+      "expected": "6e2fd3fe988a45d5f678e75ca6a4880bbcc861faad1bed70c29573a1fbb67feb",
+      "hashMatch": true
+    },
+    {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1176/file_en/3000505d34f50bbc9d409c309f9c8c5692e635f8/eTD-Audi-A3-Sportback-35-TFSI-110kW_240424.pdf",
+      "sha256": "bacab513e916165eb9e82286da98c9d890f19b56ca95749833b3a197b08c4a77",
+      "expected": "bacab513e916165eb9e82286da98c9d890f19b56ca95749833b3a197b08c4a77",
+      "hashMatch": true
+    },
+    {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+      "sha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b",
+      "expected": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b",
+      "hashMatch": true
+    },
+    {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+      "sha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+      "expected": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+      "hashMatch": true
+    },
+    {
+      "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+      "sha256": "3513fb55dd3ca9910d8c4f4e57e75ecd8cf77ffc07615435a70f4c944a780589",
+      "expected": "3513fb55dd3ca9910d8c4f4e57e75ecd8cf77ffc07615435a70f4c944a780589",
+      "hashMatch": true
+    },
+    {
+      "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+      "sha256": "9245611522a83c9873d35d9d19b4f9c203b509e54bc3422454bf1239076a5ddd",
+      "expected": "9245611522a83c9873d35d9d19b4f9c203b509e54bc3422454bf1239076a5ddd",
+      "hashMatch": true
+    },
+    {
+      "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+      "sha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f",
+      "expected": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f",
+      "hashMatch": true
+    }
+  ],
+  "nextAction": "Do not repeat saved41/44 or completed267 retained rows. Continue20 annual candidates (diesel/allstreet/technical ambiguity) and17 unresolved2024 identities. Release48/34/3 only after terminalChina and freshlease/generation/selectors; then installedscoped-v1, one repair and public price/drive acceptance."
+}

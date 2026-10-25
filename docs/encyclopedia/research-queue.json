@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T23:11:06.022724+00:00",
+  "updatedAt": "2026-10-25T00:10:22.537108+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -32796,7 +32796,7 @@
     }
   ],
   "activePriority": {
-    "updatedAt": "2026-10-24T23:11:06.022724+00:00",
+    "updatedAt": "2026-10-25T00:10:22.537108+00:00",
     "task": "Массовое дополнение существующих годовых технических записей из сохранённого ASTRA, затем только оставшиеся технические группы; названия оборудования не являются критерием совпадения.",
     "state": "bulk_astra_index_prepared_await_activation",
     "preserveManual": true,
@@ -33105,6 +33105,22 @@
         "afterRevision": "dab6a586-2841-47c3-a058-ff736969b27d",
         "apiReadback": true,
         "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-drive-phev-readback.json"
+      },
+      {
+        "batch": "research-2026-10-25-audi-a3-mechanical-continuation",
+        "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-mechanical-continuation.json",
+        "sha256": "458f15c6ca895bc010d56c817867004804c0c6c46e293a7e26a6bb65776f555c",
+        "state": "saved_api_readback_pass_pending_next_index",
+        "modelId": "f40e34e905b8ca09f3636eda",
+        "variants": 41,
+        "fields": 44,
+        "newValues": 44,
+        "correctedValues": 0,
+        "workflow": 40145557656,
+        "job": 121026002640,
+        "afterRevision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+        "apiReadback": true,
+        "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-continuation-readback.json"
       }
     ],
     "lastCompletedPass": "docs/encyclopedia/reports/2026-10-24-audi-a5-2024-drive-mass-body-pass.json",
@@ -40628,7 +40644,7 @@
         "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2026-drive-mass-public-parity.json"
       }
     },
-    "latestResearchReview": "docs/encyclopedia/reports/2026-10-25-drive-phev-and-retained-group-checkpoint.json",
+    "latestResearchReview": "docs/encyclopedia/reports/2026-10-25-mechanical-continuation-checkpoint.json",
     "audiA4L2025MassPass": {
       "version": 1,
       "checkedAt": "2026-10-24T05:01:40.762805+00:00",
@@ -42914,7 +42930,7 @@
       "remainingSelectedSourceRows": 0,
       "unresolved2024Identities": 17,
       "annualCandidateReport": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-candidates.json",
-      "annualCandidates": 61
+      "annualCandidates": 20
     },
     "installedAcceptance": {
       "pr": 1522,
@@ -43184,6 +43200,22 @@
       "afterRevision": "dab6a586-2841-47c3-a058-ff736969b27d",
       "apiReadback": true,
       "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-drive-phev-readback.json"
+    },
+    "audiA3MechanicalContinuationPass": {
+      "batch": "research-2026-10-25-audi-a3-mechanical-continuation",
+      "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-mechanical-continuation.json",
+      "sha256": "458f15c6ca895bc010d56c817867004804c0c6c46e293a7e26a6bb65776f555c",
+      "state": "saved_api_readback_pass_pending_next_index",
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variants": 41,
+      "fields": 44,
+      "newValues": 44,
+      "correctedValues": 0,
+      "workflow": 40145557656,
+      "job": 121026002640,
+      "afterRevision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+      "apiReadback": true,
+      "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-continuation-readback.json"
     }
   },
   "scope": {

@@ -15394,3 +15394,10 @@ Healthостаётся8ec0d858,scoped-v1нет;China40124551054на послед
 Preflight40145403957/job121025539838SUCCESS:41manualEdited=false,точныеdigests. ДевятьзаводскихPDF повторно проверены,SHA256совпали; публичные833строки2022–2026прочитаны,полякандидатовнеизменны. Партия458f15c6ca895bc010d56c817867004804c0c6c46e293a7e26a6bb65776f555c validatePASS:41drive и3icePowerKw,всеотсутствующие. Запрошенодинapply; savedдоterminal/APIне заявлен.
 
 Publication-status40145403963/job121025539597SUCCESS00:07UTC:activeChinafc5b3612heartbeat00:05:03/до00:35:03;5старыхselectorsvalid. Stagedgen1792879052713_70e18ac0 имеетновуюcheckpoint00:05:09,projectionChina00:03:24 иmarketindexes00:04:12; это реальное продвижение,но неактивация. Активныйgenerationпрежний. Release/repair/unlock/collectorне запрошены.
+
+
+### 25.10.2026 07:10 UTC+7 — Audi41/44 сохранено и независимо проверено
+
+Apply40145557656/job121026002640SUCCESS;41variants/44новыхполей,skip0. API44/44PASS,revisionde1c9d41-62cb-4a42-93c4-a9b95b238201; 792остальныхстрок2022–2026неизменны,прежниеполя сохранены. 41manualEdited=false;новыхмоделей/сертифицированной30min/измененийсуществующихзначений0. ДевятьзаводскихPDF hashPASS; поляdrive/icePowerне требуютсовпаденияоборудования. Отчёт docs/encyclopedia/reports/2026-10-25-mechanical-continuation-checkpoint.json.
+
+Курсор61annualкандидатов сокращён до20;17неоднозначных2024идентичностей остаются;267referenceстрок не повторены. Queue2423сохранена,candidate48required/34public/3ASTRA и559reuseguard сохранены. Healthостаётся8ec0d858,scoped-v1нет. China40124551054activeнапоследнейпроверке,фактическаяstagedcheckpoint00:05:09подтверждаетпродвижение,но неустановку. Новыеrelease/repair/collector/unlockне запускались. ДальшеterminalChina+freshlease/selectors/allqueues→одинrelease→actualscoped-v1→одинguardedrepair→публичныецены/JapanAWD.

@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-24T23:11:06.022724+00:00",
+  "checkedAt": "2026-10-25T00:10:22.537108+00:00",
   "state": "17_remaining_candidates_after_phev_component_batches",
-  "savedFields": 112,
+  "savedFields": 156,
   "sourceInventoryWorkflow": 40106963530,
   "sourceClassification": "unverified_reference",
   "priority": [
@@ -16,7 +16,7 @@
       "id": "f40e34e905b8ca09f3636eda",
       "make": "Audi",
       "model": "A3",
-      "revisionAtReview": "dab6a586-2841-47c3-a058-ff736969b27d",
+      "revisionAtReview": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
       "year": 2024,
       "sourceModelGroup": "audi/a3",
       "publicRowsChecked": 126,
@@ -324,7 +324,7 @@
   ],
   "totalRowsChecked": 470,
   "candidateRows": 17,
-  "nextAction": "Do not repeat22variants27new/1correction or completed267 source rows. Continue61 annual mechanical candidates after family/source/manual checks and17 unresolved2024 identities. Next retained group requires explicit bounded cursor selection; all8403 not reviewed. Release waits terminalChina/freshlease; no duplicate collector.",
+  "nextAction": "Do not repeat saved41/44 or completed267 retained rows. Continue20 annual candidates (diesel/allstreet/technical ambiguity) and17 unresolved2024 identities. Release48/34/3 only after terminalChina and freshlease/generation/selectors; then installedscoped-v1, one repair and public price/drive acceptance.",
   "resolvedCandidates": [
     {
       "variantId": "fc8ef77222122cbe20bfe9af",
@@ -672,7 +672,7 @@
   },
   "additionalAnnualMechanicalCandidates": {
     "rowsChecked": 1093,
-    "remaining": 61,
+    "remaining": 20,
     "path": "docs/encyclopedia/reports/2026-10-25-audi-a3-mechanical-candidates.json",
     "state": "unverified_candidates_not_saved"
   }
