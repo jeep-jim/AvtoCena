@@ -1,3 +1,4 @@
+import {hasAstraPower30Evidence} from '../encyclopedia/astra-power30-evidence';
 import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-index';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {applyCatalogEditorialPrice,readCatalogEditorial} from './editorial';
@@ -102,6 +103,7 @@ function hasTrustedPowerProvenance(offer: VehicleOffer) {
 }
 
 function documentedMotorPower(offer: VehicleOffer) {
+  if(hasAstraPower30Evidence(offer))return positive(offer.power30MinKw);
   if (!hasTrustedPowerProvenance(offer)) return 0;
   const byMotor = Array.isArray(offer.power30MinKwByMotor)
     ? offer.power30MinKwByMotor.map(positive).filter(Boolean)

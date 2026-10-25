@@ -1,3 +1,4 @@
+import {compileAstraPower30Facts,astraPower30Key} from '../apps/web/lib/encyclopedia/astra-power30.ts';
 import test from 'node:test';
 import {planModelResearch,digest as researchDigest} from '../scripts/encyclopedia/research-batch.mjs';
 import assert from 'node:assert/strict';
@@ -289,4 +290,12 @@ test('continuation permission never changes the exact facts promised by an ASTRA
  const f=await fixture(t),args=await continuedArgs(f,r=>{r.variants[0].icePowerKw=195;});
  args.isReviewedResearchCorrection=()=>true;
  await assert.rejects(assertAstraPlanMembership(args),/saved_field_missing/);
+});
+
+test('separate source-only 30-minute references are verified without admitting a fake annual fact',async t=>{
+ const f=await fixture(t),args=f.args(),key=astraPower30Key(modelKey(f.saved.make,f.saved.model));
+ args.index.models[key]=compileAstraPower30Facts(f.saved);resealIndex(args);
+ await assertAstraPlanMembership(args);
+ args.index.models[key][0].values.power30MinKw=999;resealIndex(args);
+ await assert.rejects(assertAstraPlanMembership(args),/astra_power30_reference_changed/);
 });

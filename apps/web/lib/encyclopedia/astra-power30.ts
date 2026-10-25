@@ -54,8 +54,8 @@ export function matchAstraPower30(offer:any,facts:CalculationFact[]):{reason:str
   const anchor=(f:CalculationFact,k:string)=>present(offer[k])&&present(f.constraints[k])&&same(k,offer[k],f.constraints[k]);
   const output=(f:CalculationFact)=>Boolean(outputField&&(anchor(f,outputField)
    ||fuel==='electric'&&outputField==='powerHp'&&Number(f.constraints.powerKw)>0&&Math.abs(Number(offer.powerHp)*0.73549875-Number(f.constraints.powerKw))<=0.75));
-  const completeMechanical=(f:CalculationFact)=>anchor(f,'fuel')&&anchor(f,'drive')&&anchor(f,'bodyType')&&anchor(f,'transmission')&&output(f)
-   &&(fuel==='electric'||anchor(f,'engineCc')&&anchor(f,'icePowerKw')&&anchor(f,'motorPeakKw'));
+  const completeMechanical=(f:CalculationFact)=>anchor(f,'fuel')&&anchor(f,'drive')&&output(f)
+   &&(fuel==='electric'||anchor(f,'engineCc')&&(anchor(f,'icePowerKw')||anchor(f,'motorPeakKw')));
   const strong=(f:CalculationFact)=>anchor(f,'fuel')&&anchor(f,'drive')&&output(f)
    &&(fuel==='electric'||anchor(f,'engineCc'))&&(codeMatches(f)||engineMatches(f));
   if(!candidates.some(strong)&&!candidates.some(completeMechanical))return {reason:'insufficient_technical_anchors'};

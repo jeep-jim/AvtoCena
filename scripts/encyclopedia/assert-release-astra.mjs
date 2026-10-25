@@ -1,8 +1,9 @@
+import {compileAstraPower30Facts,astraPower30Key} from '../../apps/web/lib/encyclopedia/astra-power30.ts';
 import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import {getJsonStorage} from '../../apps/web/lib/data.ts';
 import {MANIFEST,ROOT} from '../../apps/web/lib/encyclopedia/records.ts';
-import {readCalculationIndex,factFields,token,checksum} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
+import {readCalculationIndex,factFields,token,checksum,modelKey} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
 import {ASTRA_ROOT,sha,stable} from './astra-bridge.mjs';
 import {validateBatch,planModelResearch,digest as researchDigest} from './research-batch.mjs';
 import {assertResearchBatchMembership} from './release-batch-verification.mjs';
@@ -156,7 +157,7 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
  if(index.manifestDigest!==checksum(manifest.models.map(m=>[m.id,m.revision,m.key])))throw Error('astra_release_manifest_changed');
  const live=new Map(manifest.models.map(m=>[m.id,m]));
  const facts=new Map();
- for(const fact of Object.values(index.models).flat()){
+ for(const fact of Object.entries(index.models).filter(([key])=>!key.startsWith(astraPower30Key(''))).flatMap(([,rows])=>rows)){
   const identity=`${fact.modelId}:${fact.variantId}`;
   if(facts.has(identity))throw Error('required_astra_duplicate_fact_identity:'+identity);
   facts.set(identity,fact);
@@ -173,6 +174,14 @@ export async function assertAstraPlanMembership({index,plan,applied,manifest,rea
   if(modelPlan.assertions.length!==descriptor.assertions)throw Error('required_astra_assertion_count_mismatch');
   const current=active.revision===descriptor.afterRevision?modelPlan.record:await assertAstraRecordContinuation({original:modelPlan.record,current:await readRecord(active.key),readRecord,isAppliedAstraRevision,isReviewedResearchCorrection});
   if(current.revision!==active.revision)throw Error('required_astra_record_key_not_active:'+descriptor.id);
+  // Technical-only references cannot enter annual facts. If bundled, validate
+  // their complete structure against the unchanged official source record.
+  const technical=index.models[astraPower30Key(modelKey(current.make,current.model))];
+  if(technical){
+   const actual=technical.filter(f=>f.modelId===current.id).sort((a,b)=>a.variantId.localeCompare(b.variantId));
+   const expected=compileAstraPower30Facts(current).sort((a,b)=>a.variantId.localeCompare(b.variantId));
+   if(stable(actual)!==stable(expected))throw Error('astra_power30_reference_changed');
+  }
   const variants=new Map(current.variants.map(v=>[v.id,v]));
   if(variants.size!==current.variants.length)throw Error('required_astra_duplicate_variant_identity');
   for(const variant of variants.values())if(variant.astraEvidence&&!Number.isInteger(variant.year)){

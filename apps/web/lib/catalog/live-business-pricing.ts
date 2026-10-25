@@ -1,3 +1,4 @@
+import {hasAstraPower30Evidence} from '../encyclopedia/astra-power30-evidence';
 import {applyEncyclopediaCalculation,hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-index';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {specificationEvidenceComplete} from './modification-matching';
@@ -209,7 +210,7 @@ async function repriceEncyclopediaOffer<T extends Partial<VehicleOffer>>(input:T
  // A completed price does not imply complete display specifications. Enrich
  // every card first, while preserving the existing Japan/calculated-price path.
  if(offer.market==='japan'||(Number(offer.totalRub)>0&&offer.catalogPricingMode!=='seller'))return offer;
- if(!hasEncyclopediaCalculationEvidence(offer)||!specificationEvidenceComplete(offer))return offer;
+ if(!(hasEncyclopediaCalculationEvidence(offer)||hasAstraPower30Evidence(offer))||!specificationEvidenceComplete(offer))return offer;
  const {calculateOfferWithVerifiedSpecifications}=await import('./customs-pricing');
  const result=await calculateOfferWithVerifiedSpecifications(offer as VehicleOffer);
  if(!(Number(result.totalRub)>0)||result.calculationSnapshot?.customs?.status!=='ready')return {...offer,operational:{...offer.operational,encyclopediaCalculationBlocked:{status:result.calculationStatus,missing:result.calculationSnapshot?.missing||result.calculationSnapshot?.customs?.missing||[]}}};
