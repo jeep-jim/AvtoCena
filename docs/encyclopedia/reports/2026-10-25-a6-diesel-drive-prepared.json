@@ -1,0 +1,511 @@
+{
+  "checkedAt": "2026-10-25T01:49:45.793494+00:00",
+  "modelId": "00624e6c77b6541109a32d66",
+  "revision": "fcb4d99c-087b-4b2a-bcdf-492158c435e9",
+  "state": "prepared_not_saved_snapshot_in_progress",
+  "candidates": [
+    {
+      "variantId": "0041f463150f5e34ba8f013e",
+      "year": 2024,
+      "trim": null,
+      "known": {
+        "engineCc": 2967,
+        "powerKw": 210,
+        "fuel": "Diesel",
+        "bodyType": "Passenger car",
+        "powertrainKind": "ICE"
+      },
+      "patch": {
+        "drive": "awd"
+      },
+      "sources": [
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "path": "/tmp/a6drive0800-source-3.pdf",
+          "hashMatch": true
+        },
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/747/file_en/86dc212dfb58ecc0c63b0edf3afbb43b21d381b2/eTD-Audi-A6-Sedan-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "d16913a7248c7ab3d02bc41716a6b4890af63243c05c99916fdac967e981aa6b",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "path": "/tmp/a6drive0800-source-4.pdf",
+          "hashMatch": true
+        }
+      ],
+      "identityReason": "Точные год, дизель, объём и мощность; привод единогласен для совместимых подтверждённых кузовов. Маркетинговое имя не требуется."
+    },
+    {
+      "variantId": "94d5ae7e115d703ca1da8d45",
+      "year": 2024,
+      "trim": null,
+      "known": {
+        "engineCc": 1968,
+        "powerKw": 120,
+        "fuel": "Diesel",
+        "bodyType": "Passenger car",
+        "powertrainKind": "ICE"
+      },
+      "patch": {
+        "drive": "fwd"
+      },
+      "sources": [
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "path": "/tmp/a6drive0800-source-0.pdf",
+          "hashMatch": true
+        },
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "a7d3a4002bf64c00962c61a2bad896d5c86c1f16378011703269dea67210e330",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "path": "/tmp/a6drive0800-source-1.pdf",
+          "hashMatch": true
+        }
+      ],
+      "identityReason": "Точные год, дизель, объём и мощность; привод единогласен для совместимых подтверждённых кузовов. Маркетинговое имя не требуется."
+    },
+    {
+      "variantId": "153820f11b1d486fff307811",
+      "year": 2024,
+      "trim": "advanced Sound*Virtual*ACC*LED*Memory*Panoram",
+      "known": {
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "fuel": "diesel",
+        "bodyType": "wagon",
+        "powertrainKind": "combustion",
+        "transmission": "automatic"
+      },
+      "patch": {
+        "drive": "fwd"
+      },
+      "sources": [
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "path": "/tmp/a6drive0800-source-0.pdf",
+          "hashMatch": true
+        },
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "a7d3a4002bf64c00962c61a2bad896d5c86c1f16378011703269dea67210e330",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "path": "/tmp/a6drive0800-source-1.pdf",
+          "hashMatch": true
+        }
+      ],
+      "identityReason": "Точные год, дизель, объём и мощность; привод единогласен для совместимых подтверждённых кузовов. Маркетинговое имя не требуется."
+    },
+    {
+      "variantId": "786159f984691584b418c190",
+      "year": 2024,
+      "trim": "Facelift ACC/VIRTUAL/MATRIX/HUD/STANDH/AHK/19",
+      "known": {
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "fuel": "diesel",
+        "bodyType": "wagon",
+        "powertrainKind": "combustion",
+        "transmission": "automatic"
+      },
+      "patch": {
+        "drive": "fwd"
+      },
+      "sources": [
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "path": "/tmp/a6drive0800-source-0.pdf",
+          "hashMatch": true
+        },
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "a7d3a4002bf64c00962c61a2bad896d5c86c1f16378011703269dea67210e330",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "path": "/tmp/a6drive0800-source-1.pdf",
+          "hashMatch": true
+        }
+      ],
+      "identityReason": "Точные год, дизель, объём и мощность; привод единогласен для совместимых подтверждённых кузовов. Маркетинговое имя не требуется."
+    },
+    {
+      "variantId": "318c703e7c95986931a74a2a",
+      "year": 2024,
+      "trim": "35 TDI LED StandHZ HuD AHK Kamera ACC Keyless",
+      "known": {
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic"
+      },
+      "patch": {
+        "drive": "fwd"
+      },
+      "sources": [
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/844/file_en/6be667f438cbb55c8d43d667c3069181981a78d4/eTD-Audi-A6-Avant-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "8044ad43971f00885fffbf332e3fd8bdf9f31782ae83aa9ac8ae7d94e5c88e5e",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "path": "/tmp/a6drive0800-source-0.pdf",
+          "hashMatch": true
+        },
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/845/file_en/ae38b62498a199480a77706c91374e73fbcb88b9/eTD-Audi-A6-Sedan-35-TDI-S_tronic-120kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "a7d3a4002bf64c00962c61a2bad896d5c86c1f16378011703269dea67210e330",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive",
+            "grossVehicleWeightKg"
+          ],
+          "path": "/tmp/a6drive0800-source-1.pdf",
+          "hashMatch": true
+        }
+      ],
+      "identityReason": "Точные год, дизель, объём и мощность; привод единогласен для совместимых подтверждённых кузовов. Маркетинговое имя не требуется."
+    },
+    {
+      "variantId": "ecdb862adf2e355a9eb33cc9",
+      "year": 2024,
+      "trim": "Avant 45 3.0 TDI quattro S line T-Leder Navi",
+      "known": {
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "fuel": "diesel",
+        "bodyType": "wagon",
+        "powertrainKind": "combustion",
+        "transmission": "automatic"
+      },
+      "patch": {
+        "drive": "awd"
+      },
+      "sources": [
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/1196/file_en/ba2c11656ff8a75ed4de7e9b09417738f9ce3da8/eTD-Audi-A6-Avant-45-TDI-quattro-S_tronic-180kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "3a713b6efd7175916760a08f432c29089964061721c3721b025fd3f25089eba1",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "path": "/tmp/a6drive0800-source-2.pdf",
+          "hashMatch": true
+        }
+      ],
+      "identityReason": "Точные год, дизель, объём и мощность; привод единогласен для совместимых подтверждённых кузовов. Маркетинговое имя не требуется."
+    },
+    {
+      "variantId": "7c8d7cd743da3e02112087f5",
+      "year": 2024,
+      "trim": "V6 50 TDI Quattro Tiptronic/LED/ACC/Lane/AHK",
+      "known": {
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "fuel": "diesel",
+        "bodyType": "wagon",
+        "powertrainKind": "combustion",
+        "transmission": "automatic"
+      },
+      "patch": {
+        "drive": "awd"
+      },
+      "sources": [
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "path": "/tmp/a6drive0800-source-3.pdf",
+          "hashMatch": true
+        },
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/747/file_en/86dc212dfb58ecc0c63b0edf3afbb43b21d381b2/eTD-Audi-A6-Sedan-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "d16913a7248c7ab3d02bc41716a6b4890af63243c05c99916fdac967e981aa6b",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "path": "/tmp/a6drive0800-source-4.pdf",
+          "hashMatch": true
+        }
+      ],
+      "identityReason": "Точные год, дизель, объём и мощность; привод единогласен для совместимых подтверждённых кузовов. Маркетинговое имя не требуется."
+    },
+    {
+      "variantId": "091fe2978d6068f4b89ef327",
+      "year": 2024,
+      "trim": "Lim. quattro advanced *AHK*B&O*STHZ*MATRIX*SH",
+      "known": {
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "transmission": "automatic"
+      },
+      "patch": {
+        "drive": "awd"
+      },
+      "sources": [
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/309/file_en/9f25efe722c95ac1ca4ac291956b054ac02d7ee5/eTD-Audi-A6-Avant-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "6b0bb9fef5b83fc45e6453198ef96ae8527636f6185fb5c1f9f51c9325cf2495",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "path": "/tmp/a6drive0800-source-3.pdf",
+          "hashMatch": true
+        },
+        {
+          "url": "https://uploads.audi.com/system/production/car_motorizations/747/file_en/86dc212dfb58ecc0c63b0edf3afbb43b21d381b2/eTD-Audi-A6-Sedan-50-TDI-quattro-tiptronic-210kW-MHEV_240829.pdf",
+          "date": "2024-08-29",
+          "pages": [
+            1,
+            2
+          ],
+          "sha256": "d16913a7248c7ab3d02bc41716a6b4890af63243c05c99916fdac967e981aa6b",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ],
+          "path": "/tmp/a6drive0800-source-4.pdf",
+          "hashMatch": true
+        }
+      ],
+      "identityReason": "Точные год, дизель, объём и мощность; привод единогласен для совместимых подтверждённых кузовов. Маркетинговое имя не требуется."
+    }
+  ],
+  "requiredBeforeApply": [
+    "Fresh exact revision/full-record digests and manual-edit preflight",
+    "Private index40151914908 snapshot successfully isolated",
+    "No conflicting writer on the same model"
+  ],
+  "unresolved": [
+    "A6 1968cc150kW and1984cc195kW both FWD/AWD: no consensus drive",
+    "Two explicit allroad210kW rows need allroad-specific retained factory proof",
+    "2967cc180kW Passenger car lacks cross-body manufacturer sheet",
+    "Do not infer certified30min from electrical output3/3.1kW"
+  ]
+}

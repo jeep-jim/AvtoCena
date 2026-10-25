@@ -15488,3 +15488,10 @@ A3 текущие61annual-кандидат завершены,17неоднозн
 ### 25.10.2026 08:47 UTC+7 — выпуск40151914908 и курсор A6/A7/A8
 
 Единственный release40151914908 SHA486af476003314f3631f3b1299bc15cccce57cc1:wait-for-astraSUCCESS, prepare начат. Ни индекс, ни установка ещё не объявлены готовыми; researchwrites отложены до изоляции снимка. Read-only40151380145SUCCESS,artifact12583006308 SHA25608589c254b00bcf04a79ff860dcd0b536b68fc94e8b819697be1b1dda9c29e67 проверен. Первые64A6/A7/A8 строки разобраны,44остаются; точныйкурсор a401a03e1344075a2868961af1bb3eb6fff19df642299c6f773e62c8a3756fc0. Обнаружены реальныеFWD/AWDразличия A6 1984/195 и2994/2995 различия A7: автоматического переноса0. Последняястраница запрошена толькоизсохранённогоreference; checkpoint253pending/redirect_outside_catalog не обойдён. Следующее: privateindex51/37/3+559reuse, build/priceparity/health/scoped-v1, затемguardedrepair и6marketpublicacceptance.
+
+
+### 25.10.2026 08:50 UTC+7 — публичная исходная проверка6рынков и подготовка8A6
+
+Healthдо/после8ec0d858,scoped-v1 отсутствует. China/UAE/Europe/Georgia HTTP200;Japan HTTP200,partial/stale,totalnull;KoreaHTTP503. ChinaпервыйLamando1611870руб,UAEA3 3127884руб,EuropeA3 4105050руб — это наблюдение старого выпуска, не publicpriceparity нового. Отчёт docs/encyclopedia/reports/2026-10-25-before-486af-public-markets.json.
+
+Пять уже сохранённых заводскихA6PDF29.08.2024 повторно доступны,SHA256 совпали. Подготовлено8missingdrive на точных1968/120 и2967/180/210 группах с доказанным кузовом либо единогласнымиSedan/Avant. Allroad инеполные неоднозначныеидентичности исключеныизэтойпартии,неизбазы. Запрошен толькоread-onlypreflight8; applyзапрещён доSUCCESSизоляцииprivateindex40151914908. Никакихновыхмоделей/30min/повторногоcollector.
