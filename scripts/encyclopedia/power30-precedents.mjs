@@ -13,7 +13,7 @@ export function selectPower30Precedent(offer,facts){
  const target=physical(offer),ranked=[];
  for(const f of facts){
   const source=f.sources?.power30MinKw,value=Number(f.values?.power30MinKw);
-  if(!positive(value)||value>2000||!['official_registry','manufacturer'].includes(source?.kind)||!/^https:\/\//.test(source.url||''))continue;
+  if(!positive(value)||value>2000||!['official_registry','manufacturer','manual'].includes(source?.kind)||!/^https:\/\//.test(source.url||''))continue;
   const c=physical(f.constraints||{});
   if(!known(c.fuel)||normal('fuel',c.fuel)!==normal('fuel',offer.fuel))continue;
   // Known incompatible propulsion and generations are not close variants.
