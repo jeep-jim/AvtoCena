@@ -5,7 +5,7 @@ import {isEncyclopediaCar} from '../../apps/web/lib/encyclopedia/scope.ts';
 import {checksum,modelKey,applyEncyclopediaCalculation} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
 import {astraPower30FactsForKey} from '../../apps/web/lib/encyclopedia/astra-power30.ts';
 import {readCurrentPublicCatalogProjection} from '../../apps/web/lib/catalog/storage.ts';
-import {selectWithReportedPrecedents,precedentModelKeys} from './power30-precedents.mjs';
+import {selectWithReportedPrecedents,precedentIdentityKey,precedentModelKeys} from './power30-precedents.mjs';
 const marker=JSON.parse(await fs.readFile('.github/market-runs/power30-precedents.json','utf8'));
 if(!/^[a-f0-9]{64}$/.test(marker.indexDigest)||marker.mode!=='save_estimates'||!/^2026-10-25-[a-z0-9-]+$/.test(marker.runId))throw Error('invalid_marker');
 const storage=getJsonStorage();if(storage.driver!=='object')throw Error('durable_storage_required');
@@ -29,7 +29,7 @@ const inc=(obj,k)=>obj[k]=(obj[k]||0)+1;
 function resolve(o){
  const key=modelKey(o.make,o.model),input=Object.fromEntries(fields.filter(k=>o[k]!==undefined).map(k=>[k,o[k]])),signature=checksum([key,input]);
  if(cache.has(signature))return cache.get(signature);
- const family=precedentModelKeys(key);
+ const family=precedentModelKeys(precedentIdentityKey(key,o.model));
  const facts=family.keys.flatMap(k=>[...(index.models[k]||[]),...astraPower30FactsForKey(index.models,k)]);
  const result=selectWithReportedPrecedents(o,facts,reportedFacts.filter(f=>family.keys.includes(f.modelKey)));
  if(result.references&&family.regionalNameEvidence)result.regionalNameEvidence=family.regionalNameEvidence;
