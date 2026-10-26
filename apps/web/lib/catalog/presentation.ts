@@ -316,8 +316,18 @@ export function safeCatalogText(value: unknown) {
     .trim();
 }
 
+// Only derived display strings live here, never offers, prices or permissions.
+// Bound both entry count and string lengths; arbitrary long descriptions bypass it.
+const translatedTextCache = new Map<string, string>();
 export function translateCatalogText(value: unknown) {
-  let text = safeCatalogText(value).normalize("NFKC");
+  const key = safeCatalogText(value).normalize("NFKC");
+  const cached = translatedTextCache.get(key);
+  if (cached !== undefined) {
+    translatedTextCache.delete(key);
+    translatedTextCache.set(key, cached);
+    return cached;
+  }
+  let text = key;
   for (const [pattern, replacement] of directPhrases) text = text.replace(pattern, replacement);
   text = text
     .replace(/[\u1100-\u11ff\u3040-\u30ff\u3130-\u318f\u31f0-\u31ff\u3400-\u4dbf\u4e00-\u9fff\ua960-\ua97f\uac00-\ud7af\ud7b0-\ud7ff\uf900-\ufaff\uff61-\uff9f]+/gu, " ")
@@ -326,6 +336,12 @@ export function translateCatalogText(value: unknown) {
     .replace(/\s+-\s+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+  if (key.length <= 512 && text.length <= 1024) {
+    if (translatedTextCache.size >= 512) {
+      translatedTextCache.delete(translatedTextCache.keys().next().value!);
+    }
+    translatedTextCache.set(key, text);
+  }
   return text;
 }
 
