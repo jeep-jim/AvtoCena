@@ -3,9 +3,11 @@ import {validateOverviewSourceShard} from './catalog-overview-source-validation.
 // Only derivatives under the captured generation may be changed. A publisher
 // can build another generation concurrently; no shared alias or lease is touched.
 export async function refreshGenerationPages({storage, markets, buildLanding, prepareRows, buildOverview,
-  landingPath, overviewPath, now = () => new Date(), skipReady = false}) {
+  landingPath, overviewPath, now = () => new Date(), skipReady = false, policyNow}) {
   const day = () => new Date(now().getTime() + 7 * 3600000).toISOString().slice(0, 10);
-  const policyDate = day();
+  const capturedDay = day();
+  const policyDate = policyNow ? new Date(policyNow.getTime()+7*3600000).toISOString().slice(0,10) : capturedDay;
+  if(policyNow && (policyDate<capturedDay || policyNow.getTime()-now().getTime()>3*86400000))throw Error("catalog_pages_horizon_invalid");
   const manifest = await storage.readJson('catalog/manifest.json', null);
   const generationId = manifest?.generationId;
   if (!generationId || !/^[a-zA-Z0-9_-]+$/.test(generationId)) throw Error('catalog_pages_manifest_invalid');
@@ -17,7 +19,7 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
   const check = async () => {
     const current = await storage.readJson('catalog/manifest.json', null);
     if (current?.generationId !== generationId) throw Error('catalog_pages_generation_changed_retry');
-    if (day() !== policyDate) throw Error('catalog_pages_date_changed_retry');
+    if (day() !== capturedDay) throw Error('catalog_pages_date_changed_retry');
   };
   const readPrevious = async path => {
     const previous = await storage.readJsonWithMeta(scoped(path), null);

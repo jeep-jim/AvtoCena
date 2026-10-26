@@ -1,3 +1,4 @@
+import {datedCatalogPagePath} from "./dated-pages";
 import {publicationWithdrawn} from "./publication-policy";
 import { readDataJson } from "../data";
 import { protectCatalogCardPhotos } from "./photo-proxy-policy";
@@ -74,7 +75,7 @@ export function buildCatalogOverviewPayload(
   };
 }
 
-let overviewCache: { generationId: string; expiresAt: number; promise: Promise<CatalogOverview | null> } | null = null;
+let overviewCache: { generationId: string; policyDate: string; expiresAt: number; promise: Promise<CatalogOverview | null> } | null = null;
 export function resetCatalogOverviewCache() { overviewCache = null; }
 
 export async function readCatalogOverview(knownGenerationId?: string): Promise<CatalogOverview | null> {
@@ -82,10 +83,15 @@ export async function readCatalogOverview(knownGenerationId?: string): Promise<C
   // directly here bypassed coalescing and made every /cars visit wait for S3.
   const generationId = knownGenerationId || await (await import("./storage")).catalogGenerationId();
   if (!generationId) return null;
-  if (overviewCache?.generationId === generationId && overviewCache.expiresAt > Date.now()) return overviewCache.promise;
-  const entry = { generationId, expiresAt: Date.now() + 60_000, promise: Promise.resolve<CatalogOverview | null>(null) };
+  const policyDate=new Date(Date.now()+7*3600000).toISOString().slice(0,10);
+  if (overviewCache?.generationId === generationId && overviewCache.policyDate===policyDate && overviewCache.expiresAt > Date.now()) return overviewCache.promise;
+  const entry = { generationId, policyDate, expiresAt: Date.now() + 60_000, promise: Promise.resolve<CatalogOverview | null>(null) };
   entry.promise = (async () => {
-    const immutable = await readDataJson<CatalogOverview>(catalogOverviewGenerationPath(generationId), EMPTY_OVERVIEW);
+    let immutable = await readDataJson<CatalogOverview>(catalogOverviewGenerationPath(generationId), EMPTY_OVERVIEW);
+    if(immutable.policyDate!==policyDate){
+      const dated=await readDataJson<CatalogOverview>(datedCatalogPagePath(catalogOverviewGenerationPath(generationId),policyDate),EMPTY_OVERVIEW);
+      if(dated.policyDate===policyDate&&catalogOverviewMatchesGeneration(dated,generationId))immutable=dated;
+    }
     if (catalogOverviewMatchesGeneration(immutable, generationId)) return immutable;
     // Compatibility with generations published before the atomic overview.
     const overview = await readDataJson<CatalogOverview>(CATALOG_OVERVIEW_PATH, EMPTY_OVERVIEW);

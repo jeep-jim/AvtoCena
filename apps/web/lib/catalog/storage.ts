@@ -37,6 +37,7 @@ import { buildJapanPreviewInputIndex, japanPreviewInputPath, matchesJapanPreview
 import {UnavailableReadCache} from "./unavailable-read-cache";
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
 import { compactPricingSnapshot } from "./compact-pricing-snapshot";
+import {datedCatalogPagePath} from "./dated-pages";
 import { readCatalogOverview, catalogOverviewMarketComplete, buildCatalogOverviewPayload, catalogOverviewGenerationPath, CATALOG_OVERVIEW_PATH, resetCatalogOverviewCache } from "./overview";
 import { selectCatalogPublicationMix } from "./china-source-share";
 import { allowedCatalogSourceIds, REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
@@ -477,8 +478,11 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   };
 }
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
+  return projectionCanRenderCardAt(row,new Date());
+}
+function projectionCanRenderCardAt(row: CatalogSearchProjection, now: Date) {
   if(publicationWithdrawn(row))return false;
-  if(!catalogInventoryAgeDecision(row).eligible || catalogVehicleExcluded(row)) return false;
+  if(!catalogInventoryAgeDecision(row,now).eligible || catalogVehicleExcluded(row)) return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
   row = safePublicPricing(row);
   return [1, 2, 3].includes(Number(row.cardProjectionVersion))
@@ -509,6 +513,12 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
     }
   }
   return visible;
+}
+/** Release workers may prepare exact future policy days without changing the
+ * process clock or poisoning the current-day weak caches. */
+export function prepareCatalogProjectionRowsForDate(rows: CatalogSearchProjection[], now: Date) {
+  return rows.map(input=>safePublicPricing(applyEncyclopediaCalculation(applyUaeManualSpecifications(input))))
+    .filter(row=>projectionCanRenderCardAt(row,now)&&!editorialHidden(row)).map(row=>applyCatalogEditorialSpecifications(row));
 }
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
   if(publicationWithdrawn(offer))return false;
@@ -1199,10 +1209,11 @@ function canUseMarketLanding(params: CatalogSearchParams) {
     && (!params.sort || params.sort === "updatedAt")
     && Object.entries(params).every(([key, value]) => ["market", "sort", "page", "pageSize"].includes(key) || !value);
 }
-export async function buildCatalogMarketLanding(generationId: string, market: string, items: CatalogSearchProjection[]): Promise<MarketLanding> {
-  const rows = prepareCatalogProjectionRows(items);
+export async function buildCatalogMarketLanding(generationId: string, market: string, items: CatalogSearchProjection[], options: {now?:Date} = {}): Promise<MarketLanding> {
+  const now=options.now||new Date();
+  const rows = options.now ? prepareCatalogProjectionRowsForDate(items,now) : prepareCatalogProjectionRows(items);
   sortCatalogSearchRows(rows, {market: market as CatalogMarket, sort: "updatedAt"});
-  return {version: 1, policyDate:new Date(Date.now()+7*3600000).toISOString().slice(0,10), generationId, market, duplicatePolicy: REVIEWED_DUPLICATE_POLICY, sourceTotal: items.length, total: rows.length,
+  return {version: 1, policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10), generationId, market, duplicatePolicy: REVIEWED_DUPLICATE_POLICY, sourceTotal: items.length, total: rows.length,
     items: rows.slice(0, MARKET_LANDING_LIMIT), facets: await facetsFromProjection(generationId, rows, {}, false)};
 }
 async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLanding | null> {
@@ -1222,7 +1233,9 @@ async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLan
   }
   try {
     return await marketLandingCache.get(path+new Date(Date.now()+7*3600000).toISOString().slice(0,10), async () => {
-      const value = await readDataJson<MarketLanding | null>(path, null);
+      let value = await readDataJson<MarketLanding | null>(path, null);
+      const day=new Date(Date.now()+7*3600000).toISOString().slice(0,10);
+      if(value?.policyDate!==day)value=await readDataJson<MarketLanding|null>(datedCatalogPagePath(path,day),null);
       if (!value || value.policyDate!==new Date(Date.now()+7*3600000).toISOString().slice(0,10) || (market === "china" && value.duplicatePolicy !== REVIEWED_DUPLICATE_POLICY) || value.version !== 1 || value.generationId !== manifest.generationId || value.market !== market
         || value.sourceTotal !== Number(manifest.markets?.[market]?.count || 0)
         || !Number.isInteger(value.total) || value.total < 0 || value.total > value.sourceTotal
@@ -2686,20 +2699,21 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
   return { generationId: manifest.generationId, total, page, pageSize, items: items.map(publicOffer), usedIndexShards: used.length ? used : [`catalog/generations/${manifest.generationId}/indexes/order-updatedAt.json`] };
 }
 
-function selectHomepageShowcase(rows: CatalogSearchProjection[], limit: number) {
- return selectCatalogShowcaseDiversity(rows.filter(projectionCanRenderCard).sort(compareCatalogDisplayOrder),limit);
+function selectHomepageShowcase(rows: CatalogSearchProjection[], limit: number, now=new Date()) {
+ return selectCatalogShowcaseDiversity(rows.filter(row=>projectionCanRenderCardAt(row,now)).sort(compareCatalogDisplayOrder),limit);
 }
 
-export async function buildCatalogOverviewFromProjections(generationId: string, projections: CatalogSearchProjection[]) {
-  const visible = projections.filter(projectionCanRenderCard);
+export async function buildCatalogOverviewFromProjections(generationId: string, projections: CatalogSearchProjection[], options: {now?:Date} = {}) {
+  const now=options.now||new Date();
+  const visible = projections.filter(row=>projectionCanRenderCardAt(row,now));
   const facets = await facetsFromProjection(generationId, visible, {}, false);
   const markets = Object.fromEntries(MARKETS.map(market => {
     const rows = visible.filter(row => row.market === market);
     catalogSearchProjectionSort(rows, "updatedAt");
     return [market, {sourceTotal: projections.filter(row => row.market === market).length,
-      total: rows.length, items: selectHomepageShowcase(rows, 24).map(publicOfferFromProjection)}];
+      total: rows.length, items: selectHomepageShowcase(rows, 24, now).map(publicOfferFromProjection)}];
   }));
-  return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(Date.now()+7*3600000).toISOString().slice(0,10)};
+  return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10)};
 }
 
 async function readHomeCatalogSnapshotOriginal(perMarket = 6) {

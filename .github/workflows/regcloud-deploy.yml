@@ -176,6 +176,7 @@ jobs:
           await (module.applyChinaFeedCutover||module.default.applyChinaFeedCutover)();
           console.log('China supplier switch applied');
           CUTOVER
+          CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
       - name: Deploy with rollback and resource measurements
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
