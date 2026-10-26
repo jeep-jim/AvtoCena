@@ -1,4 +1,4 @@
 {
-  "at": "2026-10-26T07:12:13.887Z",
-  "reason": "One bounded CPU sample of confirmed post-release 25-second health/home stalls; existing container-loopback sampler closes inspector and does not export heap data"
+  "at": "2026-10-26T08:37:23.906Z",
+  "reason": "One bounded existing loopback CPU sample after d8971a3 release and failed six-route speed acceptance; inspect remaining slow reads without changing runtime or source access."
 }
