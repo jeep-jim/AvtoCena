@@ -137,6 +137,15 @@ try{
   }
   await staffContext.close();
  }
+ // Bright one-line power action appears only for an electrified card, with real Markdown rendering.
+ await fresh.goto('https://autobot.test/cars/offer/electric-fixture');
+ await fresh.evaluate(()=>{const marker=document.createElement('main');marker.dataset.autobotElectrified='true';document.body.append(marker);window.dispatchEvent(new Event('autobot-open'));});
+ const powerAction=fresh.getByRole('button',{name:'← 30 минут',exact:true});await powerAction.waitFor();
+ assert.equal(await powerAction.evaluate(el=>getComputedStyle(el).whiteSpace),'nowrap');
+ await fresh.route('**/api/autobot',route=>route.request().method()==='POST'?route.fulfill({json:{text:'### ⚡ Мощность\n\n**60 кВт**\n\n- Подходящая версия\n- Проверьте документы',cards:[],sources:[]}}):route.fulfill({json:{connected:true}}));
+ await powerAction.click();await fresh.locator('.ab-rich-text strong').getByText('60 кВт',{exact:true}).waitFor();
+ assert.equal(await fresh.locator('.ab-rich-text h3').count(),1);assert.equal(await fresh.locator('.ab-rich-text li').count(),2);
+ await fresh.screenshot({path:out+'/structured-answer-desktop.png'});
  await mobile.close();
  console.log('PASS: reload retains messages and draft, request retains history, new conversation clears, new tab starts empty');
 }finally{await browser.close();}

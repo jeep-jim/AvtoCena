@@ -27,3 +27,11 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/autobot-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/team-assistant.mjs
+
+      - name: Preserve assistant presentation check
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autobot-presentation
+          path: /tmp/avtocena-autobot-session/structured-answer-desktop.png
+          if-no-files-found: ignore
