@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Deploy reviewed performance fixes through PR1547: shared catalog generation pointer and bounded display-label cache, plus earlier compact filtering, sort position reuse, queue/deadline bounds and lazy directory. CI40352333546 passed2600 tests, types and production build. Preserve all evidence, owner switches, exact prices, pre/post activation warm and after-TTL budgets and rollback.",
+  "reason": "Performance release 7: preserve immutable aggregate sorting across 300s; prepare exact current and next two policy days before HTTP acceptance; enforce unchanged budgets before/after activation at warm,35s,305s. CI40380310061 success; no performance ceiling relaxation.",
   "ideaReports": [],
-  "requestedAt": "2026-10-26T17:40:38.431Z"
+  "requestedAt": "2026-10-26T18:50:55.109Z"
 }
