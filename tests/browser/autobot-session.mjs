@@ -140,7 +140,7 @@ try{
  // Bright one-line power action appears only for an electrified card, with real Markdown rendering.
  await fresh.goto('https://autobot.test/cars/offer/electric-fixture');
  await fresh.evaluate(()=>{const marker=document.createElement('main');marker.dataset.autobotElectrified='true';document.body.append(marker);window.dispatchEvent(new Event('autobot-open'));});
- const powerAction=fresh.getByRole('button',{name:'← 30 минут',exact:true});await powerAction.waitFor();
+ const powerAction=fresh.getByRole('button',{name:'← 30 минут',exact:true});try{await powerAction.waitFor();}catch(error){await fresh.screenshot({path:out+'/structured-answer-desktop.png'});throw error;}
  assert.equal(await powerAction.evaluate(el=>getComputedStyle(el).whiteSpace),'nowrap');
  await fresh.route('**/api/autobot',route=>route.request().method()==='POST'?route.fulfill({json:{text:'### ⚡ Мощность\n\n**60 кВт**\n\n- Подходящая версия\n- Проверьте документы',cards:[],sources:[]}}):route.fulfill({json:{connected:true}}));
  await powerAction.click();await fresh.locator('.ab-rich-text strong').getByText('60 кВт',{exact:true}).waitFor();

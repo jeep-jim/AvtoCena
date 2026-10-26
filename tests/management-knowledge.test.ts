@@ -1,7 +1,7 @@
 import test,{mock} from 'node:test';
 import assert from 'node:assert/strict';
 import {LocalJsonStorage} from '../apps/web/lib/data';
-import {managementParameters,managementDraft,rememberManagementCalculation,readManagementKnowledge,MANAGEMENT_KNOWLEDGE_PATH} from '../apps/web/lib/catalog/management-knowledge';
+import {managementParameters,managementDraft,rememberManagementCalculation,readManagementKnowledge,MANAGEMENT_KNOWLEDGE_PATH,attachManagementKnowledge} from '../apps/web/lib/catalog/management-knowledge';
 import {modelKey} from '../apps/web/lib/encyclopedia/calculation-index';
 import {offerPrecedentParameterDraft} from '../apps/web/lib/catalog/power30-precedent';
 import {calculateOfferWithCustomerParametersDetailed} from '../apps/web/lib/catalog/customs-pricing';
@@ -48,6 +48,9 @@ test('confirmed knowledge is durable, revisioned and reaches the actual price en
   const result=await calculateOfferWithCustomerParametersDetailed(enriched,validateCustomerParameters(draft));assert.equal(result.ok,true);
   const later=await calculateOfferWithCustomerParametersDetailed({...enriched,sourcePrice:100000},validateCustomerParameters(draft));assert.ok(result.ok&&later.ok&&later.calculation.totalRub>result.calculation.totalRub);
   assert.equal(target.powerHp,undefined);
+  const stale:any={...target,drive:'awd',operational:{managementKnowledge:{revision:'old',parameters:{powerHp:999}}}};
+  assert.equal((await attachManagementKnowledge([stale]))[0].operational.managementKnowledge,undefined);
+  assert.deepEqual(managementParameters({id:'weak',make:'Honda',model:'Vezel',year:2025,fuel:'petrol',vehicleCategory:'M1'},stored),{});
   await rememberManagementCalculation(donor,{...record,version:'save2',savedAt:'2026-10-26T11:00:00Z',draft:{...record.draft,powerHp:'160'}});
   assert.equal((await readManagementKnowledge()).models[fact.key].donor.values.powerHp,160);assert.equal(map.size,3);
  }finally{read.mock.restore();write.mock.restore();resetCatalogRateCache();}

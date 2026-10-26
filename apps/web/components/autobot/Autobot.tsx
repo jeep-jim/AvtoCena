@@ -43,7 +43,7 @@ export function Autobot(){
  },[opened,settings,accessRetry]);
  history.current=messages;
  const carPage=Boolean(pathname?.startsWith('/cars/offer/'));
- useEffect(()=>{setElectrified(Boolean(document.querySelector('[data-autobot-electrified="true"]')));},[pathname,opened]);
+ useEffect(()=>{const sync=()=>setElectrified(Boolean(document.querySelector('[data-autobot-electrified="true"]')));sync();const observer=new MutationObserver(sync);observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['data-autobot-electrified']});return()=>observer.disconnect();},[pathname]);
  const carQuestions=[
   ...(electrified?[{text:'Какая 30-минутная мощность у этого автомобиля?',label:'← 30 минут'}]:[]),
   {text:'Найди параметры этого автомобиля'},

@@ -29,7 +29,7 @@ export function managementParameters(input:any,index:ManagementKnowledge):Record
    if(known(a)&&known(b)){
     if(!same(field,a,b))return false;
     // Power units and propulsion subtype are not independent anchors.
-    if(!['powertrainKind','icePowerKw','power30MinKw'].includes(field))anchors++;
+    if(!['vehicleCategory','powertrainKind','icePowerKw','power30MinKw','motorPeakKw'].includes(field))anchors++;
    }
   }
   return anchors>=2;
@@ -62,7 +62,7 @@ async function persistManagementFact(fact:ManagementFact){
  const archive='knowledge/management-vehicle-parameters/v1/history/'+createHash('sha256').update(fact.version).digest('hex')+'.json';
  await mutateDataJson<ManagementFact|null>(archive,null,previous=>previous||fact);
  await mutateDataJson<ManagementKnowledge>(MANAGEMENT_KNOWLEDGE_PATH,empty(),current=>{
-  const previous=current.models[fact.key]?.[fact.offerId];
+  const previous=Object.values(current.models).map(rows=>rows[fact.offerId]).filter(Boolean).sort((a,b)=>b.savedAt.localeCompare(a.savedAt))[0];
   if(previous&&previous.savedAt>fact.savedAt)return current;
   // A correction to this offer retires its former model/year relationship.
   const models={...current.models};
@@ -75,7 +75,8 @@ async function persistManagementFact(fact:ManagementFact){
 export async function attachManagementKnowledge<T extends Partial<VehicleOffer>>(offers:T[]):Promise<T[]>{
  if(!offers.length)return offers;
  const index=await readManagementKnowledge().catch(()=>empty());
- return offers.map(offer=>{
+ return offers.map(original=>{
+  const offer={...original,operational:{...original.operational,managementKnowledge:undefined}};
   const parameters=managementParameters(offer,index);
   return Object.keys(parameters).length?{...offer,operational:{...offer.operational,managementKnowledge:{revision:index.revision,parameters}}}:offer;
  });
