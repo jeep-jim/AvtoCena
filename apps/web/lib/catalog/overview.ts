@@ -92,10 +92,10 @@ export async function readCatalogOverview(knownGenerationId?: string): Promise<C
       const dated=await readDataJson<CatalogOverview>(datedCatalogPagePath(catalogOverviewGenerationPath(generationId),policyDate),EMPTY_OVERVIEW);
       if(dated.policyDate===policyDate&&catalogOverviewMatchesGeneration(dated,generationId))immutable=dated;
     }
-    if (catalogOverviewMatchesGeneration(immutable, generationId)) return immutable;
+    if (immutable.policyDate===policyDate && catalogOverviewMatchesGeneration(immutable, generationId)) return immutable;
     // Compatibility with generations published before the atomic overview.
     const overview = await readDataJson<CatalogOverview>(CATALOG_OVERVIEW_PATH, EMPTY_OVERVIEW);
-    return catalogOverviewMatchesGeneration(overview, generationId) ? overview : null;
+    return overview.policyDate===policyDate && catalogOverviewMatchesGeneration(overview, generationId) ? overview : null;
   })().then(value => {
     if (!value && overviewCache === entry) overviewCache = null;
     // Publication workers need not have AUTH_SECRET. Sign stored card URLs in

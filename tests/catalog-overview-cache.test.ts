@@ -34,7 +34,7 @@ test('a stale legacy overview is not accepted or retained as a failed cache entr
   let legacyGeneration = 'old';
   storage.readJsonWithMeta = async <T>(key: string, fallback: T) => ({found: true,
     value: key.includes('/generations/') ? fallback : {version: 1, publicPolicyVersion: 2,
-      generationId: legacyGeneration, facets: {generationId: legacyGeneration}, markets: {}} as T});
+      policyDate:new Date(Date.now()+7*3600000).toISOString().slice(0,10), generationId: legacyGeneration, facets: {generationId: legacyGeneration}, markets: {}} as T});
   resetCatalogOverviewCache();
   try {
     assert.equal(await readCatalogOverview('current'), null);
@@ -58,4 +58,13 @@ test('midnight selects the exact dated overview before the cache TTL expires',as
   assert.equal((await readCatalogOverview('g'))?.markets.korea.total,9);
   assert.equal(reads.length,3);
  }finally{resetCatalogOverviewCache();t.mock.restoreAll();}
+});
+
+test('expired base and alias cannot substitute for a missing current-day derivative',async(t)=>{
+ const storage=getJsonStorage();
+ t.mock.method(storage,'readJsonWithMeta',async()=>({found:true,value:{version:1,publicPolicyVersion:2,
+  generationId:'g',policyDate:'2000-01-01',facets:{generationId:'g'},markets:{}}}));
+ resetCatalogOverviewCache();
+ try{assert.equal(await readCatalogOverview('g'),null);}
+ finally{resetCatalogOverviewCache();t.mock.restoreAll();}
 });
