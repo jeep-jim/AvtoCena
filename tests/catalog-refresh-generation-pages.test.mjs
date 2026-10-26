@@ -61,3 +61,24 @@ test('refuses an alias passed as output path',async()=>{
  const f=fixture(); f.options.overviewPath=()=> 'catalog/public/overview.json';
  await assert.rejects(refreshGenerationPages(f.options),/unscoped_write/);assert.equal(f.writes.length,0);
 });
+
+ test('future derivatives use exact policy date while rollover still fences writes',async()=>{
+  const f=fixture();f.options.policyNow=new Date('2026-10-24T00:00:00Z');
+  const landing=f.options.buildLanding,overview=f.options.buildOverview;
+  f.options.buildLanding=async(...args)=>({...await landing(...args),policyDate:'2026-10-24'});
+  f.options.buildOverview=async(...args)=>({...await overview(...args),policyDate:'2026-10-24'});
+  f.options.landingPath=g=>`catalog/generations/${g}/indexes/market-landing-v1/china.2026-10-24.json`;
+  f.options.overviewPath=g=>`catalog/generations/${g}/indexes/overview.2026-10-24.json`;
+  await refreshGenerationPages(f.options);
+  assert.equal(f.writes.length,2);assert.ok(f.writes.every(w=>w.path.endsWith('.2026-10-24.json')));
+  assert.equal(f.objects.has(f.prefix+'overview.json'),false);
+  f.options.policyNow=new Date('2026-11-01');
+  await assert.rejects(refreshGenerationPages(f.options),/horizon_invalid/);
+ });
+
+test('deployment prepares current and future pages before candidate HTTP acceptance',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const workflow=await readFile(new URL('../.github/workflows/regcloud-deploy.yml',import.meta.url),'utf8');
+ assert.ok(workflow.indexOf('CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs')>workflow.indexOf('npx tsx scripts/regcloud-prepare-prices.mjs'));
+ assert.ok(workflow.indexOf('CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs')<workflow.indexOf('- name: Deploy with rollback'));
+});

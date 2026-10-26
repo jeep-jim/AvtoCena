@@ -6,8 +6,8 @@ const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", im
 const card = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 
 test("homepage prefers safe delivered-price projections before pending inventory", () => {
-  assert.match(storage, /function selectHomepageShowcase\(rows: CatalogSearchProjection\[\], limit: number\)/);
-  assert.match(storage, /selectCatalogShowcaseDiversity\(rows\.filter\(projectionCanRenderCard\)\.sort\(compareCatalogDisplayOrder\),limit\)/);
+  assert.match(storage, /function selectHomepageShowcase\(rows: CatalogSearchProjection\[\], limit: number, now=new Date\(\)\)/);
+  assert.match(storage, /selectCatalogShowcaseDiversity\(rows\.filter\(row=>projectionCanRenderCardAt\(row,now\)\)\.sort\(compareCatalogDisplayOrder\),limit\)/);
   assert.match(storage, /return selectHomepageShowcase\(rows, limit\)\.map\(publicOfferFromProjection\)/);
   assert.match(storage, /const diverse = selectHomepageShowcase\(candidates, limit\)/);
 });

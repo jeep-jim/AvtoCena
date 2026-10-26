@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildCatalogMarketLanding,catalogMarketLandingPath,backfillCatalogMarketLandings,readCatalogFacets,readPublicCatalogMarketCounts,searchOffers,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
+import {buildCatalogOverviewFromProjections,buildCatalogMarketLanding,catalogMarketLandingPath,backfillCatalogMarketLandings,readCatalogFacets,readPublicCatalogMarketCounts,searchOffers,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
 import {getJsonStorage,StorageConflictError} from '../apps/web/lib/data';
 const rows=Array.from({length:220},(_,i)=>({id:`car-${i}`,market:'korea',make:i%2?'Hyundai':'Kia',model:'K5',year:2023,
  cardProjectionVersion:3,cardImageUrl:'https://example.test/car.jpg',fuel:'petrol',powertrainKind:'combustion',bodyType:'sedan',
@@ -138,4 +138,30 @@ test('nested repair landing keeps owner verification and CAS through the write b
   else {await backfillCatalogMarketLandings({refreshDateSensitive:true,repairLease:owner});assert.equal(writes,1);assert.ok(lockReads>=3);}
   t.mock.restoreAll();resetCatalogReadCachesForTests();
  }
+});
+
+test('future landing uses exact age date and cannot poison the current-day cache',async()=>{
+ const today=new Date('2026-10-26T16:59:00Z'),tomorrow=new Date('2026-10-26T17:01:00Z');
+ const source=[{...rows[0],id:'expires',year:2020,inventorySourceDate:'2020-10-26'},
+  {...rows[1],id:'retained',year:2020,inventorySourceDate:'2020-10-27'}];
+ const before=await buildCatalogMarketLanding('test','korea',source,{now:today});
+ const after=await buildCatalogMarketLanding('test','korea',source,{now:tomorrow});
+ assert.equal(before.total,2);assert.equal(after.total,1);assert.equal(after.items[0].id,'retained');
+ assert.equal(after.sourceTotal,2);assert.equal(after.policyDate,'2026-10-27');
+ const overview=await buildCatalogOverviewFromProjections('test',source,{now:tomorrow});
+ assert.equal(overview.policyDate,'2026-10-27');assert.equal(overview.markets.korea.sourceTotal,2);
+ assert.equal(overview.markets.korea.total,1);assert.deepEqual(overview.markets.korea.items.map(row=>row.id),['retained']);
+ assert.equal((await buildCatalogMarketLanding('test','korea',source,{now:today})).total,2);
+});
+test('dated landing replaces expired base without loading full projections',async(t)=>{
+ const valid=await buildCatalogMarketLanding('test','korea',rows);
+ resetCatalogReadCachesForTests();const reads=fixture(t,{...valid,policyDate:'2000-01-01'});
+ const storage=getJsonStorage(),base=storage.readJsonWithMeta.bind(storage);
+ t.mock.method(storage,'readJsonWithMeta',async(file:string,fallback:any)=>{
+  if(file===catalogMarketLandingPath('test','korea').replace('.json',`.${valid.policyDate}.json`))return {found:true,value:valid};
+  return base(file,fallback);
+ });
+ assert.equal((await searchOffers({market:'korea'})).total,valid.total);
+ assert.equal(reads.some(path=>path.includes('/projection/')),false);
+ t.mock.restoreAll();resetCatalogReadCachesForTests();
 });
