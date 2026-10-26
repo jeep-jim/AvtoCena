@@ -41,3 +41,13 @@ test('Tesla source abbreviations share candidates only within the same make and 
  assert.deepEqual(precedentModelKeys('tesla:modelyl').keys,['tesla:modelyl']);
  assert.deepEqual(precedentModelKeys('tesla:cybertruck').keys,['tesla:cybertruck']);
 });
+
+test('Korean regional EV names do not combine hybrid or petrol versions',()=>{
+ for(const key of ['kia:niro','kia:niroev','kia:eniro']){
+  assert.ok(precedentModelKeys(key,'electric').keys.includes('kia:niroev'));
+  for(const fuel of ['hybrid','petrol',undefined])assert.deepEqual(precedentModelKeys(key,fuel).keys,[key]);
+ }
+ assert.ok(precedentModelKeys('hyundai:casper','electric').keys.includes('hyundai:inster'));
+ assert.deepEqual(precedentModelKeys('hyundai:casper','petrol').keys,['hyundai:casper']);
+ assert.deepEqual(precedentModelKeys('kia:niroplus','electric').keys,['kia:niroplus']);
+});

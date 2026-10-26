@@ -11,7 +11,7 @@ const candidates=new WeakMap<CalculationIndex,Map<string,any[]>>();
 /** Re-match immutable model knowledge for every incoming identity; never write certified fields. */
 export function power30Precedent(offer:Partial<VehicleOffer>,index=readCalculationIndex()):Power30Precedent|undefined {
  if(!['electric','hybrid'].includes(offer.fuel||'')||offer.market==='uae')return; // The owner's UAE manual-parameter policy remains in force.
- const family=precedentModelKeys(precedentIdentityKey(modelKey(offer.make,offer.model),offer.model));
+ const family=precedentModelKeys(precedentIdentityKey(modelKey(offer.make,offer.model),offer.model),offer.fuel);
  let facts:any[]=[];
  if(index){
   let keys=candidates.get(index);if(!keys){keys=new Map();candidates.set(index,keys);}

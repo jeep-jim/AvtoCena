@@ -1109,7 +1109,11 @@
     "year": 0,
     "constraints": {
       "fuel": "electric",
-      "powerKw": 150
+      "powerKw": 150,
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "batteryKwh": 64.8,
+      "drive": "fwd"
     },
     "values": {
       "power30MinKw": 50
@@ -1120,7 +1124,7 @@
         "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6251-kia-niro-ev-648-kwh-inspiration/kia-niro-ev-648-kwh-inspiration.pdf",
         "checkedAt": "2026-10-26",
         "measurement": "registration_continuous_power",
-        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year. New generation introduced 2022 per Kia manufacturer release; do not carry this report into earlier e-Niro years.",
         "originalCertificateReviewed": false
       }
     }
@@ -2215,6 +2219,376 @@
         "checkedAt": "2026-10-26",
         "measurement": "importer_reported_document_power",
         "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev5",
+    "modelId": "reported:kia:ev5",
+    "variantId": "ev5-814-fwd-at6614",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 160,
+      "drive": "fwd",
+      "batteryKwh": 81.4
+    },
+    "values": {
+      "power30MinKw": 53
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6614-kia-ev5-814-kwh-gt-line/kia-ev5-814-kwh-gt-line.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own vehicle test; registration continuous output. Nearest model estimate, not a reviewed original certificate. Battery and drive retained to distinguish versions.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev5",
+    "modelId": "reported:kia:ev5",
+    "variantId": "ev5-814-awd-at6614",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 195,
+      "drive": "awd",
+      "batteryKwh": 81.4
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6614-kia-ev5-814-kwh-gt-line/kia-ev5-814-kwh-gt-line.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own vehicle test; registration continuous output. Nearest model estimate, not a reviewed original certificate. Battery and drive retained to distinguish versions.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:kona",
+    "modelId": "reported:hyundai:kona",
+    "variantId": "kona-654-fwd-at6366",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 160,
+      "drive": "fwd",
+      "batteryKwh": 65.4,
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    "values": {
+      "power30MinKw": 53
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6366-hyundai-kona-elektro-654-kwh-prime-paket/hyundai-kona-elektro-654-kwh-prime-paket.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own vehicle test; registration continuous output. Nearest model estimate, not a reviewed original certificate. Battery and drive retained to distinguish versions.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:inster",
+    "modelId": "reported:hyundai:inster",
+    "variantId": "inster-42-fwd-at6496",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 71,
+      "drive": "fwd",
+      "batteryKwh": 42,
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 24
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6496-hyundai-inster-42-kwh-select/hyundai-inster-42-kwh-select.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own vehicle test; registration continuous output. Nearest model estimate, not a reviewed original certificate. Battery and drive retained to distinguish versions.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "bmw:ix1",
+    "modelId": "reported:bmw:ix1",
+    "variantId": "ix1-xdrive30-at6312",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 230,
+      "drive": "awd",
+      "batteryKwh": 64.7
+    },
+    "values": {
+      "power30MinKw": 94
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6312-bmw-ix1-xdrive30/bmw-ix1-xdrive30.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "ADAC own test page 13: registration continuous output for tested AWD version; not the sum of separately rated motors, not an original certificate. Battery is usable capacity.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-250-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 140,
+      "drive": "fwd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 111
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQA/Mercedes-Benz-Preisliste--EQA-H243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-250plus-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 140,
+      "drive": "fwd",
+      "batteryKwh": 70.5
+    },
+    "values": {
+      "power30MinKw": 95
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQA/Mercedes-Benz-Preisliste--EQA-H243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-300-4matic-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168,
+      "drive": "awd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 139
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQA/Mercedes-Benz-Preisliste--EQA-H243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-350-4matic-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 215,
+      "drive": "awd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 139
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQA/Mercedes-Benz-Preisliste--EQA-H243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqb",
+    "modelId": "reported:mercedesbenz:eqb",
+    "variantId": "eqb-250-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 140,
+      "drive": "fwd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 111
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQB/Mercedes-Benz-Preisliste-EQB-X243%20%281%29.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqb",
+    "modelId": "reported:mercedesbenz:eqb",
+    "variantId": "eqb-250plus-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 140,
+      "drive": "fwd",
+      "batteryKwh": 70.5
+    },
+    "values": {
+      "power30MinKw": 95
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQB/Mercedes-Benz-Preisliste-EQB-X243%20%281%29.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqb",
+    "modelId": "reported:mercedesbenz:eqb",
+    "variantId": "eqb-300-4matic-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168,
+      "drive": "awd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 139
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQB/Mercedes-Benz-Preisliste-EQB-X243%20%281%29.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqb",
+    "modelId": "reported:mercedesbenz:eqb",
+    "variantId": "eqb-350-4matic-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 215,
+      "drive": "awd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 139
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQB/Mercedes-Benz-Preisliste-EQB-X243%20%281%29.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-350-4matic-705-oem-202407",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 215,
+      "drive": "awd",
+      "batteryKwh": 70.5,
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 130
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://mbpassion.de/wp-cb4ef-content/uploads/2024/07/mbpassion.de-mercedes-benz-verzichtet-vollstaendig-auf-preislisten-mercedes-benz-preisliste-eqa-h243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original brochure valid 2024-07-11, mirrored copy: revised 350 4MATIC with 70.5 kWh battery and 130 kW continuous output. Kept alongside older 66.5 kWh/139 kW version; no arbitrary conflict replacement. Original certificate not reviewed.",
         "originalCertificateReviewed": false
       }
     }

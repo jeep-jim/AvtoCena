@@ -10,6 +10,20 @@ import {savedPreviewEntry} from '../apps/web/lib/catalog/saved-calculation-previ
 import {offerWithSavedPreview} from '../apps/web/lib/catalog/saved-calculation-preview';
 import {savedOfferIdentity} from '../apps/web/lib/catalog/saved-offer-calculation';
 const offer:any={id:'precedent-p7-test',market:'china',sourceId:'fixture',sourceOfferId:'p7',make:'XPeng',model:'P7',year:2024,fuel:'electric',powertrainKind:'electric',powerHp:276,drive:'rwd',sourcePrice:120000,sourceCurrency:'CNY',catalogPricingMode:'seller'};
+test('priority source records resolve EV names and retain year, drive and battery ambiguity',()=>{
+ const niro={...offer,make:'Kia',model:'Niro',powerHp:undefined,powerKw:150,drive:'fwd',batteryKwh:64.8};
+ assert.equal(power30Precedent(niro,null)?.kw,50);
+ assert.equal(power30Precedent({...niro,year:2020},null),undefined);
+ assert.equal(power30Precedent({...niro,drive:'awd'},null),undefined);
+ assert.equal(power30Precedent({...niro,fuel:'hybrid'},null),undefined);
+ const casper={...niro,make:'Hyundai',model:'Casper',powerKw:71,batteryKwh:42};
+ assert.equal(power30Precedent(casper,null)?.kw,24);
+ assert.equal(power30Precedent({...casper,fuel:'petrol'},null),undefined);
+ const eqa={...niro,make:'Mercedes-Benz',model:'EQA',powerKw:215,drive:'awd',batteryKwh:66.5};
+ assert.equal(power30Precedent(eqa,null)?.kw,139);
+ assert.equal(power30Precedent({...eqa,batteryKwh:70.5},null)?.kw,130);
+ assert.equal(power30Precedent({...eqa,batteryKwh:undefined},null),undefined);
+});
 test('reusable model reference survives listing and price changes, preserves manual values and ambiguity',()=>{
  assert.equal(power30Precedent(offer,null)?.kw,80);
  assert.equal(power30Precedent({...offer,id:'new-feed-id',sourcePrice:150000},null)?.kw,80);

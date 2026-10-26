@@ -47,7 +47,7 @@ const inc=(obj,k)=>obj[k]=(obj[k]||0)+1;
 function resolve(o){
  const key=modelKey(o.make,o.model),input=Object.fromEntries(fields.filter(k=>o[k]!==undefined).map(k=>[k,o[k]])),signature=checksum([key,input]);
  if(cache.has(signature))return cache.get(signature);
- const family=precedentModelKeys(precedentIdentityKey(key,o.model));
+ const family=precedentModelKeys(precedentIdentityKey(key,o.model),o.fuel);
  const facts=family.keys.flatMap(k=>[...(index.models[k]||[]),...astraPower30FactsForKey(index.models,k)]);
  const result=selectWithReportedPrecedents(o,facts,reportedFacts.filter(f=>family.keys.includes(f.modelKey)));
  if(result.references&&family.regionalNameEvidence)result.regionalNameEvidence=family.regionalNameEvidence;

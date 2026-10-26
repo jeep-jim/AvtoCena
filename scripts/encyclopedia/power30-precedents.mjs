@@ -54,16 +54,18 @@ export function selectPower30Precedent(offer,facts){
 
 /** Manufacturer-documented regional names; only candidate discovery, never certification. */
 export const regionalPrecedentFamilies=[
+ {keys:['hyundai:inster','hyundai:casperelectric','hyundai:casper'],fuel:'electric',url:'https://www.hyundai.com/worldwide/en/newsroom/detail/0000000788',checkedAt:'2026-10-26'},
+ {keys:['kia:niro','kia:niroev','kia:eniro'],fuel:'electric',url:'https://press.kia.com/at/at/home/press-releases/2022/dreifach-elektrisch--zweite-runde.html',checkedAt:'2026-10-26'},
  {keys:['nio:es6','nio:el6'],url:'https://us.nio.com/news/20250702001',checkedAt:'2026-10-25'},
  {keys:['nio:es8','nio:el8'],url:'https://us.nio.com/news/20250702001',checkedAt:'2026-10-25'},
  {keys:['nio:et5t','nio:et5touring'],url:'https://us.nio.com/news/20250702001',checkedAt:'2026-10-25'},
  {keys:['byd:seagull','byd:dolphinmini','byd:dolphinsurf'],url:'https://www.byd.com/en/news-list/First-BYD-Electric-Vehicle-Rolls-off-the-Line-in-Brazil',checkedAt:'2026-10-25'},
 ];
-export function precedentModelKeys(key){
+export function precedentModelKeys(key,fuel){
  // Make-scoped feed abbreviations; never merge variants or change source identities.
  const tesla=/^tesla:(?:model)?([3sxy])$/.exec(key);
  if(tesla)return {keys:[`tesla:model${tesla[1]}`,`tesla:${tesla[1]}`]};
- const family=regionalPrecedentFamilies.find(f=>f.keys.includes(key));return {keys:family?.keys||[key],...(family?{regionalNameEvidence:{url:family.url,checkedAt:family.checkedAt}}:{})};}
+ const family=regionalPrecedentFamilies.find(f=>f.keys.includes(key)&&(!f.fuel||f.fuel===fuel));return {keys:family?.keys||[key],...(family?{regionalNameEvidence:{url:family.url,checkedAt:family.checkedAt}}:{})};}
 
 /** Prefer the existing documented corpus; reports fill only otherwise unresolved inputs. */
 export function selectWithReportedPrecedents(offer,facts,reports){
