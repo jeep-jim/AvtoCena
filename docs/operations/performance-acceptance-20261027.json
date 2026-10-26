@@ -1,0 +1,862 @@
+{
+  "release": "e23d9d096935481c4ecddf6a987c574c5c2bbbf9",
+  "acceptanceRun": 40410059228,
+  "recordedAt": "2026-10-26T22:22:38.055748+00:00",
+  "scope": "9 exact routes, complete response, warm + 35s + 305s before and after switch; not universal load or authenticated CRM coverage",
+  "measurements": [
+    {
+      "performanceGate": "warm",
+      "path": "/api/health",
+      "seconds": 0.0053,
+      "ceiling": 0.25,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/",
+      "seconds": 0.3572,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/login",
+      "seconds": 0.3573,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/autocalc",
+      "seconds": 0.0226,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars",
+      "seconds": 0.4222,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 0.0939,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.1129,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?sort=totalRub",
+      "seconds": 0.257,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.0276,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/health",
+      "seconds": 0.011,
+      "ceiling": 0.25,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/",
+      "seconds": 0.7988,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/login",
+      "seconds": 0.3426,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/autocalc",
+      "seconds": 0.0326,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars",
+      "seconds": 0.1959,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 0.0878,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.1152,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?sort=totalRub",
+      "seconds": 0.4098,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.3078,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/health",
+      "seconds": 0.0078,
+      "ceiling": 0.25,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/",
+      "seconds": 1.4492,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/login",
+      "seconds": 0.3624,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/autocalc",
+      "seconds": 0.0251,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars",
+      "seconds": 0.2453,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 1.2042,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 1.3161,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?sort=totalRub",
+      "seconds": 1.0457,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.2311,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "candidate"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/health",
+      "seconds": 0.0027,
+      "ceiling": 0.25,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/",
+      "seconds": 0.2538,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/login",
+      "seconds": 0.3479,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/autocalc",
+      "seconds": 0.013,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars",
+      "seconds": 0.1505,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 0.0598,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.0739,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?sort=totalRub",
+      "seconds": 0.1884,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.018,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/health",
+      "seconds": 0.0032,
+      "ceiling": 0.25,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/",
+      "seconds": 0.2833,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/login",
+      "seconds": 0.3541,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/autocalc",
+      "seconds": 0.0164,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars",
+      "seconds": 0.243,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 0.0509,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.0799,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?sort=totalRub",
+      "seconds": 1.5221,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.2448,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/health",
+      "seconds": 0.0034,
+      "ceiling": 0.25,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/",
+      "seconds": 0.5843,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/login",
+      "seconds": 0.4421,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/autocalc",
+      "seconds": 0.014,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars",
+      "seconds": 0.2469,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 1.1096,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.3895,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?sort=totalRub",
+      "seconds": 1.9637,
+      "ceiling": 2,
+      "passed": true,
+      "stage": "production"
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.381,
+      "ceiling": 1,
+      "passed": true,
+      "stage": "production"
+    }
+  ],
+  "ci": {
+    "run": 40398319888,
+    "testsPassed": 2609,
+    "typecheck": true,
+    "productionBuild": true
+  },
+  "externalRequests": [
+    {
+      "path": "/api/health",
+      "phase": "sequential",
+      "status": 200,
+      "total": 4.976861,
+      "ttfb": 4.976723,
+      "valid": true
+    },
+    {
+      "path": "/",
+      "phase": "sequential",
+      "status": 200,
+      "total": 7.355969,
+      "ttfb": 5.290498,
+      "valid": true
+    },
+    {
+      "path": "/cars",
+      "phase": "sequential",
+      "status": 200,
+      "total": 5.425731,
+      "ttfb": 5.099293,
+      "valid": true
+    },
+    {
+      "path": "/cars?market=china",
+      "phase": "sequential",
+      "status": 200,
+      "total": 5.569924,
+      "ttfb": 5.262548,
+      "valid": true
+    },
+    {
+      "path": "/cars?market=japan",
+      "phase": "sequential",
+      "status": 200,
+      "total": 7.227765,
+      "ttfb": 4.977021,
+      "valid": true
+    },
+    {
+      "path": "/cars?market=korea",
+      "phase": "sequential",
+      "status": 200,
+      "total": 6.090075,
+      "ttfb": 5.624217,
+      "valid": true
+    },
+    {
+      "path": "/cars?market=uae",
+      "phase": "sequential",
+      "status": 200,
+      "total": 6.201857,
+      "ttfb": 5.32269,
+      "valid": true
+    },
+    {
+      "path": "/cars?market=europe",
+      "phase": "sequential",
+      "status": 200,
+      "total": 6.427852,
+      "ttfb": 5.13622,
+      "valid": true
+    },
+    {
+      "path": "/cars?market=georgia",
+      "phase": "sequential",
+      "status": 200,
+      "total": 7.407715,
+      "ttfb": 5.933946,
+      "valid": true
+    },
+    {
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "phase": "sequential",
+      "status": 200,
+      "total": 6.094687,
+      "ttfb": 5.122175,
+      "valid": true
+    },
+    {
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "phase": "sequential",
+      "status": 200,
+      "total": 6.227484,
+      "ttfb": 5.083129,
+      "valid": true
+    },
+    {
+      "path": "/cars?sort=totalRub",
+      "phase": "sequential",
+      "status": 200,
+      "total": 8.014642,
+      "ttfb": 5.73033,
+      "valid": true
+    },
+    {
+      "path": "/cars?market=china&engineTo=2000&powerTo=160",
+      "phase": "sequential",
+      "status": 200,
+      "total": 6.531528,
+      "ttfb": 4.955788,
+      "valid": true
+    },
+    {
+      "path": "/cars/autocatalog",
+      "phase": "sequential",
+      "status": 200,
+      "total": 4.898241,
+      "ttfb": 4.136236,
+      "valid": true
+    },
+    {
+      "path": "/dealers/dealer_topavto",
+      "phase": "sequential",
+      "status": 200,
+      "total": 5.697983,
+      "ttfb": 4.997241,
+      "valid": true
+    },
+    {
+      "path": "/cars/offer/a16de10d1947dac7f01c5662",
+      "phase": "sequential",
+      "status": 308,
+      "total": 5.087765,
+      "ttfb": 5.08768,
+      "valid": false
+    },
+    {
+      "path": "/login",
+      "phase": "sequential",
+      "status": 200,
+      "total": 5.823272,
+      "ttfb": 5.143224,
+      "valid": true
+    },
+    {
+      "path": "/autocalc",
+      "phase": "sequential",
+      "status": 200,
+      "total": 5.539501,
+      "ttfb": 5.538619,
+      "valid": true
+    },
+    {
+      "path": "/favorites",
+      "phase": "sequential",
+      "status": 200,
+      "total": 5.218937,
+      "ttfb": 5.218146,
+      "valid": true
+    },
+    {
+      "path": "/terms",
+      "phase": "sequential",
+      "status": 200,
+      "total": 5.996387,
+      "ttfb": 5.89785,
+      "valid": true
+    },
+    {
+      "path": "/cars",
+      "phase": "after_30s",
+      "status": 200,
+      "total": 7.799959,
+      "ttfb": 5.204185,
+      "valid": true
+    },
+    {
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "phase": "sequential",
+      "status": 200,
+      "total": 6.025529,
+      "ttfb": 5.301836,
+      "valid": true
+    },
+    {
+      "path": "/api/health",
+      "phase": "sequential",
+      "status": 200,
+      "total": 4.80014,
+      "ttfb": 4.799997,
+      "valid": true
+    },
+    {
+      "path": "/cars/offer/bmw-218-gran-coupe-218-gran-coupe-d-grancoupe-m-sport-acc-ahk-hifi-2020--a16de10d1947dac7f01c5662",
+      "phase": "canonical_redirect_followup",
+      "status": 200,
+      "total": 4.222783,
+      "ttfb": 3.616179,
+      "valid": true
+    }
+  ],
+  "publicCardParameters": {
+    "run": 40399710568,
+    "job": 121884603243,
+    "cases": 36,
+    "openings": 168,
+    "passed": true,
+    "formsSubmitted": false
+  },
+  "catalogJourney": {
+    "run": 40314227333,
+    "overallStatus": "failure_due_to_photos",
+    "passingJourneyJobs": [
+      121884593783,
+      121886564369
+    ],
+    "widths": [
+      390,
+      1440
+    ],
+    "initialCards": 24,
+    "afterAppendCards": 48,
+    "scrollRestored": true,
+    "javascriptErrors": []
+  },
+  "limitations": [
+    "Local acceptance covers only nine routes; no concurrent-load or universal LCP/INP guarantee",
+    "All-sort after305s:1.9637s/2s; previous attempt2.3882s failed",
+    "Private CRM not measured; secure sign-in was cancelled by owner",
+    "Korea external photos timed out twice; bounded diagnostic reproduced net::ERR_BLOCKED_BY_ORB in GitHub Chrome while independent browser loaded four320px photos. External response cause unresolved; browser protection retained.",
+    "Korea delivered-budget search16.531/9.143s remains slow; not part of local9-route gate; provider-page versus calculation contribution unmeasured."
+  ],
+  "photoDiagnostic": {
+    "run": 40413170063,
+    "job": 121888746904,
+    "release": "e23d9d096935481c4ecddf6a987c574c5c2bbbf9",
+    "passed": false,
+    "state": [
+      {
+        "host": "9.ajes.com",
+        "complete": false,
+        "width": 0,
+        "loading": "lazy",
+        "top": 2241.40625
+      },
+      {
+        "host": "9.ajes.com",
+        "complete": false,
+        "width": 0,
+        "loading": "lazy",
+        "top": 2241.40625
+      },
+      {
+        "host": "9.ajes.com",
+        "complete": false,
+        "width": 0,
+        "loading": "lazy",
+        "top": 2241.40625
+      },
+      {
+        "host": "9.ajes.com",
+        "complete": false,
+        "width": 0,
+        "loading": "lazy",
+        "top": 2544.90625
+      }
+    ],
+    "events": [
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "avtocena.com",
+        "status": 200
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "host": "9.ajes.com",
+        "error": "net::ERR_BLOCKED_BY_ORB"
+      }
+    ]
+  },
+  "mobileOverlays": {
+    "run": 40399710665,
+    "job": 121884608840,
+    "passed": true,
+    "chromiumFixtureCases": 14,
+    "webkitFixtureCases": 14,
+    "chromiumLiveCases": 14
+  },
+  "liveBudgetSearch": {
+    "run": 40399710665,
+    "query": "budget=2000000&pageSize=24",
+    "japanMs": [
+      1841,
+      1332
+    ],
+    "koreaMs": [
+      16531,
+      9143
+    ],
+    "koreaMatchesOnPage": 0,
+    "koreaHasMore": true,
+    "total": null,
+    "functionalPassed": true,
+    "performanceAccepted": false
+  }
+}
