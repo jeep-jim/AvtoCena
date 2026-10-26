@@ -16122,3 +16122,24 @@ Mobile210/run40341789509: Chromium, multiple models/delivery city/photo upload �
 Следующее исправление PR1547, head c59590f7bcc0b8356d8923a6f94bf9d0ae319760, объединяет общий catalogGenerationId/cache/coalescing вместо прямого manifest-read overview и ограниченный кэш подписей из PR1546. CI40352333546 SUCCESS: 2600/2600 основной suite, типы и production build; green corner, Dubicars и site controls SUCCESS. PR на момент проверки открыт, выпуск с этим исправлением ещё не установлен. Следующий шаг — штатная последовательная установка проверенного кандидата и полная VM-local приёмка warm/after-TTL до и после переключения, корректные непустые результаты и live browser. В этом сеансе новые установки/сборщики не запускались, пороги и цены не менялись. Наблюдение продолжается за PR1547 и его последующим выпуском; общая скорость не принята.
 
 Источники: https://github.com/jeep-jim/AvtoCena/actions/runs/40342053436 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40341789509 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40341789562 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40352333546 ; https://github.com/jeep-jim/AvtoCena/pull/1547 .
+
+
+### 27.10.2026 — контроль без новых результатов выпуска
+
+В 00:22 Красноярск GitHub подтверждает: PR1547 открыт, head c59590f7bcc0b8356d8923a6f94bf9d0ae319760, main остаётся250d5c9b4a3eb2d93a9ac3c91e258aceba5c5541. Нового deploy после306 нет. PR1548 с предыдущим отчётом открыт; его CI40357846311 SUCCESS, что не является приёмкой runtime. Новых существенных результатов производительности нет; установки, сборщики, пороги и данные не менялись. Наблюдение за следующим кандидатом сохранено. Эта дополнительная запись пока локальная, для следующей публикации Road вместе с существенными результатами.
+
+
+### 27.10.2026 — наблюдение за шестым кандидатом, 01:10 Красноярск
+
+PR1547 merged5a2d425605f2caa2bbe7e13cc5eab9c6dbdf559a. Текущий deploy40370963021 SHA4fc627f8ac3a9aca3a7bdb106dc21fc96e77529d проходит Prepare exact price indexes; образ собран, Deploy with rollback pending. Каталог journey40314227333 attempt5 и mobile40341789509 attempt3 in_progress. Новый CRM40370718582: audit/fixture browser SUCCESS, live TimeoutError attached-parameter-dropdowns.mjs:34 (первоначальный API-fetch) на прежнем production; audit-job явно пропустил ожидание новой версии и записал59bd339. Это повтор известного live discovery сбоя, не результат приёмки4fc627f. Main d9a2ee3 содержит усиление теста полного набора9 маршрутов/точных потолков; runtime-кандидат не заменён. Прочитаны фактические GitHub jobs/logs и Road main. Новых установок/сборщиков и повторов tests не запускал; gate текущего кандидата ещё впереди. Запись локальная до следующей публикации Road.
+
+
+### 27.10.2026 — шестой выпуск отклонён, седьмой в подготовке; контроль 02:01 Красноярск
+
+Фактический GitHub40370963021 SHA4fc627f8ac3a9aca3a7bdb106dc21fc96e77529d FAILURE. В prepare/job121741696649 exact prices и specification parity прошли. VM-прогрев: health0,021с, home15,320с, /cars31,251с, повтор home11,054с, Korea0,067с, Japan1,811с. Следующий China HTML assertion провалился примерно через10,47с; лог Release gate failed: old production retained. До performanceGate warm/after-TTL/post-switch не дошло, переключения не было. Диагностика40377400249/job121764106422:3 object_storage_read_deadline и3 GET_unreachable на catalog/generations/gen_1792702445675_8c312f85/indexes/projection/china.json.
+
+Актуальный Road main описывает подтверждённый кодом fallback к полной проекции при несовпадении policyDate и подготовку страниц текущего плюс двух следующих дней в PR1551; PR1550 сохраняет aggregate identity и добавляет обязательную305с фазу. Новый run40381399836 SHA b9499665151dabac5685e9994bfdf480172273a5 in_progress: проверки данных и индекса прошли, Build existing application выполняется. Новый image ещё не принят и не переключён; пороги не повышены.
+
+CRM40381336744 SUCCESS: fixture browser/audit/live завершились. Live/job121781226874:36 cases,168 openings, passed=true (01:59 Красноярск). Audit/job121778049572 явно проверял current release и записал59bd33931fa08c1cf2e4bf539cf0e037b133612b; это положительный результат на старом runtime, не приёмкаb949966. Старые mobile40341789509 attempt3 и catalog journey40314227333 attempt5 FAILURE; новый mobile40381336930 in_progress. Перезапуски/сборщики в этом сеансе не запускались; наблюдение продолжается за40381399836.
+
+Источники: https://github.com/jeep-jim/AvtoCena/actions/runs/40370963021 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40377400249 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381399836 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381336744 .
