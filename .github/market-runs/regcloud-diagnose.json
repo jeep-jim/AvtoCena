@@ -1,6 +1,6 @@
 {
-  "reason": "Bounded isolated candidate-only comparison of China price sorting versus all markets; stop candidate afterwards; never switch production",
-  "at": "2026-10-26T12:24:49.231128+00:00",
-  "failedRelease": "1c3d603c66de3b22f3f561251b198c0d6184c769",
-  "probeSingleMarket": true
+  "failedRelease": "214b17294542baf35321d9cf0128b4c69182980c",
+  "probeSingleMarket": false,
+  "requestedAt": "2026-10-26T13:25:12.827Z",
+  "reason": "Inspect stopped candidate after price-sort exceeded full-response gate after 35-second cache expiry; preserve old production."
 }
