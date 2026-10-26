@@ -56,6 +56,10 @@ test('manual edits survive publication, hide before pagination and keep counts, 
   assert.equal((await readCatalogBrandCounts({market:'korea'})).counts.Hyundai,2);
   assert.equal((await readCatalogBrandModelCounts('Hyundai')).models.reduce((s,m)=>s+m.count,0),2);
   assert.deepEqual((await readCatalogFacets({market:'korea',yearFrom:2022})).makes,['Hyundai']);
+  reads.length=0;
+  const allFacets=await readCatalogFacets({});
+  assert.deepEqual(allFacets.makes,['Hyundai']);
+  assert.equal(reads.some(path=>path.includes('/projection/')),false,'hidden offers must not force full-market reads for navigation facets');
   const home=await readHomeCatalogSnapshot(2);assert.equal(home.marketCounts.korea,2);assert.equal(home.items.some(r=>r.id===victim.id),false);
   const stale:any={markets:{korea:{total:3,items:rows}},generationId};
   const overview=await applyEditorialOverview(stale);
