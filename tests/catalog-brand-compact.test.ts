@@ -6,7 +6,7 @@ import {searchOffers,searchOffersWithoutBudgetIndexForTests,resetCatalogReadCach
 
 test('default brand/model browsing preserves projection order and reads only visible card blocks',async()=>{
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
- const input=Array.from({length:84},(_,i)=>({...base,id:`car-${i}`,make:i>=80?'Kia':'Hyundai',model:i%3?'Avante':'Avante N',powerHp:i%4?123:200,sourceGroup:i%2?'new':'used',updatedAt:`2026-10-${String(1+i%20).padStart(2,'0')}T00:00:00Z`,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
+ const input=Array.from({length:300},(_,i)=>({...base,id:`car-${i}`,color:i%2?'white':'black',make:i>=80?'Kia':'Hyundai',model:i%3?'Avante':'Avante N',powerHp:i%4?123:200,sourceGroup:i%2?'new':'used',updatedAt:`2026-10-${String(1+i%20).padStart(2,'0')}T00:00:00Z`,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
  input.push({...base,id:'seller-affordable',totalRub:null,catalogPricingMode:'seller',sellerPriceRub:800000} as any);
  input.push({...base,id:'seller-expensive',totalRub:null,catalogPricingMode:'seller',sellerPriceRub:20_000_000} as any);
  input.push({...base,id:'unknown',totalRub:null,catalogPricingMode:'seller'} as any);
@@ -21,13 +21,14 @@ test('default brand/model browsing preserves projection order and reads only vis
   else if(key==='catalog/manifest.json')value={generationId,markets:{korea:{count:rows.length}}};
   else if(key==='catalog-editorial/current.json'){if(editorial)value=editorial;else return {found:false,value:fallback};}
   else if(key.endsWith('/budget-count-v3.json'))value=index;
+  else if(key.endsWith('/colors-v1.json'))value={generationId,rows:rows.map((r:any)=>[r.id,r.market,r.color])};
   else if(key.includes('/budget-cards-v3/')){const block=Number(key.split('/').at(-1)!.replace('.json',''));value={generationId,items:rows.slice(block*8,block*8+8)};}
   else if(key.includes('/projection-brand/')){assert.ok(allowProjection,'ordinary brand browsing must not download full brand projection');value={generationId,items:rows.filter(row=>row.make==='Hyundai')};}
   else assert.fail('unexpected storage read: '+key);
   return {found:true,value:value as T};
  };
  try{
-  const queries=[{make:'Hyundai'},{make:'Hyundai',model:'Avante'},{make:'Hyundai',market:'korea'},{make:'Hyundai',model:'Avante',powerTo:160},{make:'Hyundai',yearFrom:2024}];
+  const queries=[{make:'Hyundai'},{make:'Hyundai',model:'Avante'},{make:'Hyundai',market:'korea'},{make:'Hyundai',model:'Avante',powerTo:160},{make:'Hyundai',yearFrom:2024},{make:'Hyundai',bodyType:'sedan'},{make:'Hyundai',bodyType:'suv'},{make:'Hyundai',color:'Белый'}];
   for(const query of queries){
    resetCatalogReadCachesForTests();allowProjection=true;
    const expected=await searchOffersWithoutBudgetIndexForTests({...query,pageSize:120},120);
