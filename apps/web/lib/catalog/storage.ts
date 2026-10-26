@@ -2306,8 +2306,9 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
   });
   if(fingerprints.length){
    const after=await Promise.all(markets.map(budgetPricingFingerprint));
-   const afterKey=JSON.stringify([after,after.some(value=>value===null)?Math.floor(Date.now()/30_000):null]);
-   if(afterKey!==pricing){state.prices=undefined;state.sellerPrices=undefined;state.orders.clear();throw Error('catalog_sort_context_changed');}
+   // A short TTL boundary invalidates the next lookup, not an otherwise exact
+   // in-flight calculation. Only a real input change invalidates this result.
+   if(JSON.stringify(after)!==JSON.stringify(fingerprints)){state.prices=undefined;state.sellerPrices=undefined;state.orders.clear();throw Error('catalog_sort_context_changed');}
   }
   state.orders.set(mode,order);
  }
