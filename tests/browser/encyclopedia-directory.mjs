@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import http from 'node:http';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+import {build} from 'esbuild';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const out=path.resolve('artifacts/encyclopedia-directory');fs.mkdirSync(out,{recursive:true});
+const plugin={name:'next-fixture',setup(b){
+ b.onResolve({filter:/^next\/(navigation|link)$/},a=>({path:a.path,namespace:'fixture'}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path.endsWith('navigation')?`export const usePathname=()=>'/cars/autocatalog';export const useSearchParams=()=>new URLSearchParams(typeof location==='undefined'?'':location.search);export const useRouter=()=>({push(){}});`:`import React from 'react';export default function Link({href,children,...p}){return React.createElement('a',{href,...p},children);}`,loader:'jsx',resolveDir:process.cwd()}));
+}};
+const common={bundle:true,jsx:'automatic',plugins:[plugin],loader:{'.css':'empty'},define:{'process.env.NODE_ENV':'"production"'}};
+await build({...common,entryPoints:['tests/browser/encyclopedia-directory-fixture.tsx'],platform:'node',format:'cjs',external:['react','react/jsx-runtime'],outfile:out+'/ssr.cjs'});
+const require=createRequire(import.meta.url);const {Fixture}=require(out+'/ssr.cjs');const React=require('react');const {renderToStaticMarkup}=require('react-dom/server');
+const markup=renderToStaticMarkup(React.createElement(Fixture));
+assert.equal((markup.match(/class="ac-knowledge-model"/g)||[]).length,0,'closed brands must not server-render thousands of hidden model rows');
+assert.ok(Buffer.byteLength(markup)<100000,'initial directory markup stays bounded by brands, not 4000 models');
+await build({...common,stdin:{contents:`import React from 'react';import {createRoot} from 'react-dom/client';import {Fixture} from './tests/browser/encyclopedia-directory-fixture';createRoot(document.getElementById('root')).render(<Fixture/>);`,resolveDir:process.cwd(),loader:'tsx'},platform:'browser',format:'iife',outfile:out+'/fixture.js'});
+const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHeader('Content-Type','text/javascript');res.end(fs.readFileSync(out+'/fixture.js'));}else{res.setHeader('Content-Type','text/html');res.end('<!doctype html><html><body><div id="root"></div><script src="/fixture.js"></script></body></html>');}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
+const results=[];
+try{for(const width of [390,1440]){
+ const page=await browser.newPage({viewport:{width,height:900}});const errors=[];let reads=0;
+ page.on('pageerror',e=>errors.push(String(e)));
+ await page.route('**/api/encyclopedia/**',route=>{reads++;return route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'fixture',updatedAt:'2026-10-26',variants:[]}});});
+ await page.goto(`http://127.0.0.1:${server.address().port}`);
+ const brands=page.locator('.ac-knowledge-brand');await brands.last().waitFor();assert.equal(await brands.count(),20);
+ assert.equal(await page.locator('.ac-knowledge-model').count(),0);assert.equal(reads,0);
+ const initialElements=await page.locator('*').count();assert.ok(initialElements<1000);
+ await brands.nth(0).locator(':scope > summary').click();await brands.nth(0).locator('.ac-knowledge-model').last().waitFor();
+ assert.equal(await brands.nth(0).locator('.ac-knowledge-model').count(),200);
+ const model=brands.nth(0).locator('.ac-knowledge-model').first();await model.locator(':scope > summary').click();
+ await model.locator('.ac-knowledge-workspace').waitFor();await page.waitForFunction(()=>!document.querySelector('.ac-knowledge-workspace [role="status"]'));
+ assert.equal(reads,1);
+ await brands.nth(1).locator(':scope > summary').click();await brands.nth(1).locator('.ac-knowledge-model').last().waitFor();
+ assert.equal(await page.locator('.ac-knowledge-model').count(),400);assert.equal(await brands.nth(0).evaluate(e=>e.open),true);assert.equal(await model.evaluate(e=>e.open),true);
+ await brands.nth(0).locator(':scope > summary').click();await brands.nth(0).locator(':scope > summary').click();
+ assert.equal(await model.evaluate(e=>e.open),true);assert.equal(reads,1,'reopening must preserve the loaded model workspace');
+ await page.getByRole('button',{name:'Плитка',exact:true}).click();assert.equal(await brands.nth(0).evaluate(e=>e.open),true);assert.equal(await model.evaluate(e=>e.open),true);assert.equal(reads,1);assert.deepEqual(errors,[]);
+ results.push({width,initialElements,initialModels:0,expandedModels:400,modelReads:reads});await page.close();
+}}finally{await browser.close();await new Promise(r=>server.close(r));}
+console.log(JSON.stringify({passed:true,models:4000,ssrBytes:Buffer.byteLength(markup),results}));

@@ -1,0 +1,32 @@
+name: Verify encyclopedia directory performance
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/encyclopedia/**'
+      - 'tests/browser/encyclopedia-directory*'
+      - '.github/workflows/verify-encyclopedia-directory-performance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/components/encyclopedia/**'
+      - 'tests/browser/encyclopedia-directory*'
+      - '.github/workflows/verify-encyclopedia-directory-performance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm install --prefix "$RUNNER_TEMP/directory-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Bound initial markup and preserve expanded workspaces
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/directory-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/encyclopedia-directory.mjs
