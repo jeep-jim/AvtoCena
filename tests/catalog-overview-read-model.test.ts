@@ -13,7 +13,8 @@ test("overview alias is accepted only for the active manifest generation", () =>
   assert.match(overview, /publicPolicyVersion === 2/);
   assert.match(overview, /overview\.generationId === generationId/);
   assert.match(overview, /overview\.facets\?\.generationId === generationId/);
-  assert.match(overview, /readDataJson<\{ generationId: string \}>\("catalog\/manifest\.json"/);
+  assert.match(overview, /import\("\.\/storage"\)\)\.catalogGenerationId\(\)/);
+  assert.doesNotMatch(overview, /readDataJson[^;]*"catalog\/manifest\.json"/);
 });
 
 test("unfiltered catalog landing alone uses the compact overview with a fallback", () => {
