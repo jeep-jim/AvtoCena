@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Performance release 8: preserve immutable metadata-only selection identity after 30 seconds so facet/order caches remain valid. PR1552 CI40389758514 passed. Preserve exact prices, day/editorial invalidation, current/next two day pages, 57/43/3 evidence sets and unchanged warm/35s/305s pre/post activation gates.",
+  "reason": "Performance release 9: use existing compact display-order metadata for default hidden-market pages instead of rereading complete UAE/Europe projections on five-minute expiry. PR1553 CI40398319888 passed2609 tests/types/build. Preserve manual price/legacy fallback, all evidence and unchanged nine-route warm/35s/305s gates before/after activation.",
   "ideaReports": [],
-  "requestedAt": "2026-10-26T19:56:12.514Z"
+  "requestedAt": "2026-10-26T20:54:10.376Z"
 }
