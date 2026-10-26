@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { getJsonStorage } from '../apps/web/lib/data';
-import { buildCatalogOverviewPayload, catalogOverviewMarketComplete } from '../apps/web/lib/catalog/overview';
+import { buildCatalogOverviewPayload, catalogOverviewMarketComplete, readCatalogOverview } from '../apps/web/lib/catalog/overview';
 import { readHomeCatalogSnapshot, resetCatalogReadCachesForTests } from '../apps/web/lib/catalog/storage';
 
 test('homepage uses a complete compact snapshot when policy hides a few records', async () => {
@@ -46,4 +46,34 @@ test('compact completeness gate rejects missing source counts, short samples and
   assert.equal(catalogOverviewMarketComplete({total: 0, sourceTotal: 10, items: []}, 10, 6), false);
   assert.equal(catalogOverviewMarketComplete({total: 10, items}, 10, 6), true);
   assert.equal(catalogOverviewMarketComplete({total: 0, items: []}, 0, 6), true);
+});
+
+
+test('overview and search share one generation read, and switch together after pointer expiry', async () => {
+  const storage = getJsonStorage(), original = storage.readJsonWithMeta, clock = Date.now;
+  let now = clock(), generation = 'overview-a';
+  const reads: string[] = [];
+  Date.now = () => now;
+  storage.readJsonWithMeta = async <T>(key: string, fallback: T) => {
+    reads.push(key);
+    if (key === 'catalog/manifest.json') return {found: true, value: {generationId: generation, markets: {}} as T};
+    assert.equal(key, `catalog/generations/${generation}/indexes/overview.json`);
+    return {found: true, value: buildCatalogOverviewPayload(generation, {generationId: generation} as any, {}) as T};
+  };
+  try {
+    resetCatalogReadCachesForTests();
+    const {catalogGenerationId} = await import('../apps/web/lib/catalog/storage');
+    const [left, right, pointer] = await Promise.all([readCatalogOverview(), readCatalogOverview(), catalogGenerationId()]);
+    assert.equal(left?.generationId, 'overview-a'); assert.equal(right, left); assert.equal(pointer, 'overview-a');
+    await readCatalogOverview();
+    assert.equal(reads.filter(key => key === 'catalog/manifest.json').length, 1);
+    assert.equal(reads.length, 2);
+    generation = 'overview-b';
+    now += 60_001;
+    assert.equal((await readCatalogOverview())?.generationId, 'overview-b');
+    assert.equal(await catalogGenerationId(), 'overview-b');
+    assert.equal(reads.filter(key => key === 'catalog/manifest.json').length, 2);
+  } finally {
+    Date.now = clock; storage.readJsonWithMeta = original; resetCatalogReadCachesForTests();
+  }
 });
