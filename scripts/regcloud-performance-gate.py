@@ -15,6 +15,9 @@ ROUTES=[
  ('/api/catalog/search?market=europe&make=BMW&page=2',1.0,'search'),
 ]
 
+# Cover both short selections and the five-minute directory refresh.
+PHASE_DELAYS=[('warm',0),('after_ttl',35),('after_directory_ttl',305)]
+
 def validate(path,kind,status,body,release):
  if status!=200:raise AssertionError('performance_http:'+path+':'+str(status))
  if kind=='html':
@@ -39,8 +42,8 @@ def main():
  parser=argparse.ArgumentParser();parser.add_argument('base');parser.add_argument('release');args=parser.parse_args()
  # Explicit preparation, then measurements. No swallowed timeouts/empty states.
  for path,limit,kind in ROUTES:sample(args.base,path,kind,args.release)
- for phase in ['warm','after_ttl']:
-  if phase=='after_ttl':time.sleep(35)
+ for phase,delay in PHASE_DELAYS:
+  if delay:time.sleep(delay)
   for path,limit,kind in ROUTES:
    elapsed=sample(args.base,path,kind,args.release)
    print(json.dumps({'performanceGate':phase,'path':path,'seconds':round(elapsed,4),'ceiling':limit,'passed':elapsed<=limit}),flush=True)
