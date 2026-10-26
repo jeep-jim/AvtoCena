@@ -10,8 +10,8 @@ info=json.loads(subprocess.check_output(['docker','inspect',name]))[0]
 if info['Config']['Image']!='avtocena-regcloud:'+release:raise ValueError('wrong_image')
 state=info['State']
 if state['Running']:raise ValueError('candidate_must_be_stopped')
-if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl']:
- ttl_probe=sys.argv[2]=='--probe-ttl'
+if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog']:
+ ttl_probe=sys.argv[2] in ['--probe-ttl','--probe-catalog']
  lock=open('/run/lock/avtocena-runtime-change.lock','w')
  fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
  ports=info['HostConfig']['PortBindings']['3000/tcp']
@@ -29,6 +29,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl']:
    except OSError:time.sleep(1)
   if not ready:raise ValueError('candidate_not_ready')
   paths=['/cars?sort=totalRub','/cars?sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub'] if ttl_probe else ['/cars?market=china&sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub']
+  if sys.argv[2]=='--probe-catalog':paths=['/cars']*4
   for number,path in enumerate(paths):
    if ttl_probe and number==2:time.sleep(35)
    profile=None

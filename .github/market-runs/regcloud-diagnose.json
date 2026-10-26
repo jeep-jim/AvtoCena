@@ -1,6 +1,6 @@
 {
-  "failedRelease": "214b17294542baf35321d9cf0128b4c69182980c",
-  "probeTTL": true,
-  "requestedAt": "2026-10-26T13:29:48.529529+00:00",
-  "reason": "Isolate cache-expiry China sort and all-market sort; sample CPU only inside stopped loopback candidate, never switch production."
+  "failedRelease": "0958567c2cabd7e17e6e4a726f33289397c8056d",
+  "probeCatalog": true,
+  "requestedAt": "2026-10-26T14:49:56.845064+00:00",
+  "reason": "Profile ordinary catalog cold, warm and after35s in stopped loopback candidate; no production traffic or configuration changes."
 }

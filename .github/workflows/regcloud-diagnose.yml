@@ -32,7 +32,7 @@ jobs:
             remote_script="/opt/avtocena/releases/$failed_release/failed-release-diagnostic.py"
             scp "${ssh_opts[@]}" scripts/regcloud-failed-release-diagnostic.py "root@151.248.113.177:$remote_script"
             scp "${ssh_opts[@]}" scripts/regcloud-cpu-sample.mjs "root@151.248.113.177:/opt/avtocena/releases/$failed_release/cpu-sample.mjs"
-            probe=$(python3 -c 'import json;v=json.load(open(".github/market-runs/regcloud-diagnose.json"));print("--probe-ttl" if v.get("probeTTL") is True else "--probe" if v.get("probeSingleMarket") is True else "")')
+            probe=$(python3 -c 'import json;v=json.load(open(".github/market-runs/regcloud-diagnose.json"));print("--probe-catalog" if v.get("probeCatalog") is True else "--probe-ttl" if v.get("probeTTL") is True else "--probe" if v.get("probeSingleMarket") is True else "")')
             ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 '$remote_script' '$failed_release' '$probe'"
             exit 0
           fi
