@@ -1,6 +1,5 @@
 {
-  "requestedAt": "2026-10-26T19:36:30.738Z",
-  "failedRelease": "b9499665151dabac5685e9994bfdf480172273a5",
-  "probeTTL": true,
-  "reason": "Profile remaining all-market sort after 35s: release7 warm1.927s afterTTL4.645s; ordinary catalog0.145/0.174s. Candidate must be stopped and isolated; production unchanged."
+  "failedRelease": "ed3e613705bf3d406ba0511115741678b06a8dce",
+  "requestedAt": "2026-10-26T20:39:17.647Z",
+  "reason": "Read-only failed candidate logs after homepage stalled on five-minute acceptance. Do not start container or change traffic."
 }
