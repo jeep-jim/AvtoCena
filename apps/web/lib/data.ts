@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import {gzipSync} from "node:zlib";
 import {readCatalogProjectionParts, writeCatalogProjectionParts} from "./catalog-projection-parts";
 
 export const DEFAULT_MAX_RECORDS_PER_CHUNK = 500;
@@ -29,7 +30,7 @@ export type StorageMultipartUpload = { key: string; uploadId: string; initiated?
 // Catalog JSON is machine-read. Pretty printing multiplies large projections
 // and can exceed V8's single-string limit before an object-store request starts.
 export function serializeStorageJson(relativePath: string, value: unknown) {
-  try { return JSON.stringify(value, null, relativePath.startsWith("catalog/") ? undefined : 2); }
+  try { return JSON.stringify(value, null, (relativePath.startsWith("catalog/") || relativePath.startsWith("knowledge/encyclopedia/calculation-indexes/")) ? undefined : 2); }
   catch (error) {
     throw new Error(`storage_json_serialize_failed:path=${relativePath}:${error instanceof Error ? error.message : String(error)}`, {cause:error});
   }
@@ -267,7 +268,12 @@ export class ObjectJsonStorage implements JsonStorage {
     return {found: true, etag: cleanEtag(res.headers.get("etag"))};
   }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
-  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { if (await writeCatalogProjectionParts(this, relativePath, value, condition)) return; const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, serializeStorageJson(relativePath, value), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
+  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { if (await writeCatalogProjectionParts(this, relativePath, value, condition)) return; const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const json = serializeStorageJson(relativePath, value);
+    // Standard HTTP content encoding keeps existing fetch readers compatible.
+    // Scope compression to immutable calculation indexes; retain conditional writes.
+    const compressed = relativePath.startsWith("knowledge/encyclopedia/calculation-indexes/") && Buffer.byteLength(json) >= 1024 * 1024;
+    if (compressed) headers["content-encoding"] = "gzip";
+    const res = await this.request("PUT", relativePath, compressed ? gzipSync(json) : json, headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
   async head(relativePath: string) { const res = await this.request("HEAD", relativePath); if (res.status === 404) return false; if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_head_${res.status}`); return true; }
   async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": contentType }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, data, headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_binary_write_${res.status}`); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }

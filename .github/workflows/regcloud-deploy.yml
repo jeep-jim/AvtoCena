@@ -58,7 +58,7 @@ jobs:
       - name: Verify production dependency security
         run: npm audit --omit=dev --audit-level=high
       - name: Verify catalog storage and bounded projection integrity
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-projection-parts.test.ts tests/catalog-storage-serialization.test.ts tests/regcloud-storage-compatibility.test.ts tests/storage.test.ts
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-projection-parts.test.ts tests/catalog-storage-serialization.test.ts tests/encyclopedia-index-transport.test.ts tests/regcloud-storage-compatibility.test.ts tests/storage.test.ts
       - name: Prepare private encyclopedia index for this release
         env:
           JSON_STORAGE_DRIVER: object

@@ -856,5 +856,370 @@
         "originalCertificateReviewed": false
       }
     }
+  },
+  {
+    "modelKey": "tesla:model3",
+    "modelId": "reported:tesla:model3",
+    "variantId": "model3-rwd-at6207",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 208,
+      "drive": "rwd"
+    },
+    "values": {
+      "power30MinKw": 100
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6207-tesla-model-3/tesla-model-3.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "tesla:modely",
+    "modelId": "reported:tesla:modely",
+    "variantId": "modely-rwd-maximum-range-at6542",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 220,
+      "drive": "rwd"
+    },
+    "values": {
+      "power30MinKw": 114
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6542-tesla-model-y-maximum-range/tesla-model-y-maximum-range.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "tesla:modely",
+    "modelId": "reported:tesla:modely",
+    "variantId": "modely-awd-maximum-range-at6259",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 378,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 153
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6259-tesla-model-y-maximum-range-awd/tesla-model-y-maximum-range-awd.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:eny1",
+    "modelId": "reported:honda:eny1",
+    "variantId": "eny1-at6395",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 150
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6395-honda-eny1/honda-eny1.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:e",
+    "modelId": "reported:honda:e",
+    "variantId": "e-advance-at6073",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 113
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6073-honda-e-advance-paket-17-zoll-bereifung/honda-e-advance-paket-17-zoll-bereifung.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mazda:mx30",
+    "modelId": "reported:mazda:mx30",
+    "variantId": "mx30-electric-adac",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 107
+    },
+    "values": {
+      "power30MinKw": 81
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/v1614584304/ADAC-eV/KOR/Text/PDF/ADAC_Autotest_Mazda_MX_30_e_SKYACTIV_zusuaj.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mazda:6e",
+    "modelId": "reported:mazda:6e",
+    "variantId": "6e-258-at6546",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 190
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6546-mazda-6e-258-takumi-plus/mazda-6e-258-takumi-plus.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev6",
+    "modelId": "reported:kia:ev6",
+    "variantId": "ev6-84-earth-at6472",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168
+    },
+    "values": {
+      "power30MinKw": 56
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6472-kia-ev6-84-kwh-earth/kia-ev6-84-kwh-earth.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev9",
+    "modelId": "reported:kia:ev9",
+    "variantId": "ev9-gt-line-awd-at6383",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 283,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 113
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6383-kia-ev9-gt-line-awd-6-sitzer/kia-ev9-gt-line-awd-6-sitzer.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev3",
+    "modelId": "reported:kia:ev3",
+    "variantId": "ev3-58-earth-at6480",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 150
+    },
+    "values": {
+      "power30MinKw": 50
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6480-kia-ev3-583-kwh-earth/kia-ev3-583-kwh-earth.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:niroev",
+    "modelId": "reported:kia:niroev",
+    "variantId": "niro-ev-648-at6251",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 150
+    },
+    "values": {
+      "power30MinKw": 50
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6251-kia-niro-ev-648-kwh-inspiration/kia-niro-ev-648-kwh-inspiration.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:ioniq5",
+    "modelId": "reported:hyundai:ioniq5",
+    "variantId": "ioniq5-84-at6502",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168
+    },
+    "values": {
+      "power30MinKw": 56
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6502-hyundai-ioniq-5-84-kwh-uniq-2wd/hyundai-ioniq-5-84-kwh-uniq-2wd.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:ioniq5",
+    "modelId": "reported:hyundai:ioniq5",
+    "variantId": "ioniq5-726-at6147",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 160
+    },
+    "values": {
+      "power30MinKw": 53
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6147-hyundai-ioniq-5-726-kwh-techniq-paket-2wd/hyundai-ioniq-5-726-kwh-techniq-paket-2wd.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:ioniq5n",
+    "modelId": "reported:hyundai:ioniq5n",
+    "variantId": "ioniq5n-at6426",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 448
+    },
+    "values": {
+      "power30MinKw": 159
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6426-hyundai-ioniq-5-n/hyundai-ioniq-5-n.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:ioniq6",
+    "modelId": "reported:hyundai:ioniq6",
+    "variantId": "ioniq6-84-at6631",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168,
+      "drive": "rwd"
+    },
+    "values": {
+      "power30MinKw": 56
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6631-hyundai-ioniq-6-84-kwh-centriq/hyundai-ioniq-6-84-kwh-centriq.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
   }
 ]
