@@ -209,6 +209,7 @@ try{
   assert.equal(await page.getByText('Скрытый банк',{exact:true}).count(),0);
   assert.ok(!(await page.locator('body').innerText()).includes('40802810926710009905'));
   await page.getByRole('button',{name:/Открыть логотип/}).click();await page.locator('.dealer-logo-dialog[open]').waitFor();await page.getByText('Проверенный дилер',{exact:true}).waitFor();await page.getByRole('button',{name:'Закрыть логотип'}).click();await page.waitForFunction(()=>!history.state?.acOverlayStep);
+  if(width<768){
   await page.locator('.dealer-dock').getByRole('button',{name:'Адреса',exact:true}).click();
   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();await page.locator('dialog[open] .dealer-about-logo').waitFor();
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.locator('dialog[open]').waitFor({state:'detached'});await page.goBack();await page.locator('.ac-public-sheet').waitFor({state:'detached'});
@@ -219,6 +220,20 @@ try{
   await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();await page.getByRole('heading',{name:'Отзывы о ТопАвто',exact:true}).waitFor();
   await page.screenshot({path:`${out}/${width}-${theme}-public-reviews.png`,fullPage:true});
   await page.goBack();await page.locator('.dealer-dock button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
+  }else{
+   assert.equal(await page.locator('.dealer-dock').isVisible(),false);
+   await page.evaluate(()=>{location.hash='#about';});
+   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();
+   await page.locator('dialog[open] .dealer-about-logo').waitFor();
+   await page.getByRole('button',{name:'Закрыть информацию',exact:true}).click();
+   await page.waitForFunction(()=>!history.state?.acOverlayStep);
+   await page.getByLabel('Адрес офиса в профиле',{exact:true}).waitFor();
+   await page.screenshot({path:`${out}/${width}-${theme}-public-contacts.png`,fullPage:true});
+   await page.locator('.dealer-profile-metrics button').first().click();
+   await page.getByRole('heading',{name:'Отзывы о ТопАвто',exact:true}).waitFor();
+   await page.screenshot({path:`${out}/${width}-${theme}-public-reviews.png`,fullPage:true});
+   await page.evaluate(()=>{location.hash='#cars';});
+  }
   await page.getByRole('button',{name:/Открыть логотип/}).click();
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);
   await page.evaluate(()=>{history.pushState({},'', '/request?dealer=dealer_topavto');document.querySelector('dialog[open]').close();});
