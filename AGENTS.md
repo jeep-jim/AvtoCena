@@ -156,3 +156,8 @@
 # Owner Japan chassis research — 25.10.2026
 
 - Owner now explicitly authorizes researching drive for all existing chassis codes, preparing a source-backed summary table, saving confirmed relationships permanently in the encyclopedia and using them in Japan cards and drive filters. This supersedes the earlier stop only for this scope. Use bounded chunks and checkpoints. Preserve ambiguous 2WD/4WD relationships, manual values and source evidence; 2WD alone does not distinguish FWD from RWD. No unrelated encyclopedia research, feed bulk copy or reactivation of old automations.
+
+# Owner management learning and public assistant — 26.10.2026
+
+- Confirmed saves by the TopAvto management team contribute permanent model knowledge for all markets and future offers. Fill only missing compatible values: same make/model/year, at least two independent matching technical attributes, no known mechanical conflicts. Preserve explicit saved calculations and all filled source/manual values; contradictory donor values remain unresolved. Use separate staff provenance and current recipient prices, never donor prices/cities or fabricated certification.
+- Public Autobot may use the full private encyclopedia, registry-derived power data and staff knowledge. Do not expose ASTRA/internal suppliers, links or provenance. Distinguish exact card values, nearby versions and ambiguous ranges. Give concise structured Markdown answers; bright contextual questions and a one-line left-arrow “30 минут” action on electric/hybrid cards. Do not link visitors to the separate auto-calculation page.

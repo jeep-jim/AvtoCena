@@ -1,5 +1,6 @@
 import type { VehicleOffer } from "./types";
 export type SavedCalculationPreview = {
+ managementLearned?:boolean;
  power30Precedent?:{kw:number;method:string;certified:false;requiresConfirmation:true};
  depositCostIncluded?:boolean;
  version:string; totalRub:number; deliveryCity:string;
@@ -14,6 +15,6 @@ export function offerWithSavedPreview(offer:any) {
  if(!preview || !savedCalculationPreviewRub(preview))return offer;
  return {...offer,...preview.parameters,...(preview.currencyRate?.currency && preview.currencyRate?.sourcePrice ? {sourcePrice:preview.currencyRate.sourcePrice,sourceCurrency:preview.currencyRate.currency} : {}),power30MinKwByMotor:undefined,utilizationPowerKw:preview.utilizationPowerKw,totalRub:preview.totalRub,
   previousTotalRub:null,priceDeltaRub:null,japanDeliveredPreview:undefined,
-  modificationSelection:undefined,powerDataConfidence:preview.power30Precedent?"estimated":"verified",powerDataSource:preview.power30Precedent?"model_precedent_saved":"manager_saved",
+  modificationSelection:undefined,powerDataConfidence:preview.power30Precedent||preview.managementLearned?"estimated":"verified",powerDataSource:preview.managementLearned?"management_model_memory":preview.power30Precedent?"model_precedent_saved":"manager_saved",
   calculationSnapshot:{currencyRate:preview.currencyRate,deliveryPricingBasis:preview.deliveryPricingBasis},savedCalculationPreview:preview};
 }

@@ -1,3 +1,6 @@
+import {revalidatePath} from 'next/cache';
+import {isPlatformTeam} from '@/lib/platform-access';
+import {rememberManagementCalculation} from '@/lib/catalog/management-knowledge';
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
 import { NextResponse } from "next/server";
@@ -27,8 +30,14 @@ export async function POST(request:Request,{params}:{params: Promise<{id:string}
   try {
     const previous=await getSavedOfferCalculation(offer);
     const saved=await saveOfferCalculation(offer,draft,result.calculation,user.id,expectedVersion,user.displayName);
+    let knowledgeSaved=false;
+    if(isPlatformTeam(user)){
+      try{await rememberManagementCalculation(offer,saved);knowledgeSaved=true;}
+      catch(error){console.error("management_knowledge_save_failed",error);}
+    }
     await recordCrmActivity(user,{id:`calculation_${saved.version}`,type:"calculation_saved",title:"Изменены параметры и стоимость автомобиля",entityType:"offer",entityId:offer.id,entityLabel:[offer.make,offer.model,offer.year].filter(Boolean).join(" "),href:`/cars/offer/${encodeURIComponent(offer.id)}?calculation=${encodeURIComponent(saved.version)}`,changes:[...activityChanges(previous?.draft||{},saved.draft,{year:"Год",engineCc:"Объём, см³",powerHp:"Мощность, л.с.",powerKw:"Мощность, кВт",fuel:"Топливо",hybridKind:"Тип гибрида",power30MinKw:"30-минутная мощность",deliveryCity:"Город доставки"}),{label:"Стоимость, ₽",before:String(previous?.calculation?.totalRub||offer.totalRub||""),after:String(saved.calculation.totalRub)}]});
-    return NextResponse.json({version:saved.version,savedAt:saved.savedAt,savedByName:user.displayName,draft:saved.draft,calculation:saved.calculation},{headers});
+    revalidatePath('/cars','layout');
+    return NextResponse.json({knowledgeSaved,knowledgeWarning:isPlatformTeam(user)&&!knowledgeSaved?"Расчёт сохранён. Общую память обновить не удалось; повторите сохранение.":undefined,version:saved.version,savedAt:saved.savedAt,savedByName:user.displayName,draft:saved.draft,calculation:saved.calculation},{headers});
   } catch(error) {
     if(error instanceof SavedCalculationConflict)return NextResponse.json({error:error.message},{status:409,headers});
     console.error("offer_calculation_save_failed",error);

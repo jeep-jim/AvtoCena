@@ -1,3 +1,4 @@
+import {publicAnswerText,publicAnswerSources} from '@/lib/autobot/public-answer';
 import {createHash} from 'node:crypto';
 import {readAutobotConfig,configReady} from '@/lib/autobot/config';
 import {regReply} from '@/lib/autobot/provider';
@@ -14,6 +15,6 @@ export async function POST(request:Request){
  try{
   if(!request.headers.get('content-type')?.startsWith('application/json'))throw Error('Отправьте текстовый вопрос.');
   const reader=request.body?.getReader();let text='',size=0;const d=new TextDecoder();if(reader)try{while(true){const c=await reader.read();if(c.done)break;size+=c.value.byteLength;if(size>40000)throw Error('Сообщение слишком длинное.');text+=d.decode(c.value,{stream:true});}text+=d.decode();}finally{await reader.cancel().catch(()=>{});}
-  const body=JSON.parse(text);const result=await runPublicAutobot(body,request,regReply);return Response.json(result,{headers});
+  const body=JSON.parse(text);const result=await runPublicAutobot(body,request,regReply);return Response.json({...result,text:publicAnswerText(result.text),sources:publicAnswerSources(result.sources||[])},{headers});
  }catch(e){const message=e instanceof Error?e.message:'';return Response.json({error:/^[А-ЯЁ]/.test(message)?message:'Не удалось ответить. Попробуйте ещё раз.'},{status:503,headers});}finally{entry.busy=false;}
 }

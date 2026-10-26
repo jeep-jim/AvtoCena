@@ -54,7 +54,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Verify exact encyclopedia matching
-        run: node --import tsx --test tests/encyclopedia-hybrid-default.test.ts tests/power30-precedent-calculation.test.ts tests/encyclopedia-power30-precedents.test.mjs tests/japan-preview-consistency.test.ts tests/encyclopedia-release-batch-verification.test.mjs tests/encyclopedia-spec-consensus.test.ts tests/encyclopedia-technical-match.test.ts tests/catalog-power-normalization.test.ts tests/encyclopedia-public-release.test.mjs tests/encyclopedia-presentation.test.ts tests/permanent-encyclopedia.test.ts tests/encyclopedia-astra-release.test.mjs tests/catalog-independent-certified-power.test.ts tests/encyclopedia-owner-evidence.test.ts tests/encyclopedia-calculation-index.test.ts tests/encyclopedia-astra-power30.test.ts tests/encyclopedia-ambiguous-body.test.ts tests/encyclopedia-reference-reuse.test.ts tests/encyclopedia-reference-publication.test.ts tests/encyclopedia-release-index.test.ts tests/encyclopedia-coverage.test.ts tests/catalog-budget-specifications.test.ts tests/catalog-budget-runtime.test.ts tests/green-corner-page-budget.test.ts tests/green-corner-filters.test.ts tests/catalog-japan-filter-rail.test.ts tests/japan-drive-sql-budget.test.ts tests/japan-drive.test.ts tests/japan-chassis-drive.test.ts tests/japan-default-fuel.test.ts tests/ajes-japan-feed.test.ts
+        run: node --import tsx --test tests/management-knowledge.test.ts tests/autobot-format.test.ts tests/autobot-knowledge.test.ts tests/autobot-public-answer.test.ts tests/autobot.test.ts tests/encyclopedia-hybrid-default.test.ts tests/power30-precedent-calculation.test.ts tests/encyclopedia-power30-precedents.test.mjs tests/japan-preview-consistency.test.ts tests/encyclopedia-release-batch-verification.test.mjs tests/encyclopedia-spec-consensus.test.ts tests/encyclopedia-technical-match.test.ts tests/catalog-power-normalization.test.ts tests/encyclopedia-public-release.test.mjs tests/encyclopedia-presentation.test.ts tests/permanent-encyclopedia.test.ts tests/encyclopedia-astra-release.test.mjs tests/catalog-independent-certified-power.test.ts tests/encyclopedia-owner-evidence.test.ts tests/encyclopedia-calculation-index.test.ts tests/encyclopedia-astra-power30.test.ts tests/encyclopedia-ambiguous-body.test.ts tests/encyclopedia-reference-reuse.test.ts tests/encyclopedia-reference-publication.test.ts tests/encyclopedia-release-index.test.ts tests/encyclopedia-coverage.test.ts tests/catalog-budget-specifications.test.ts tests/catalog-budget-runtime.test.ts tests/green-corner-page-budget.test.ts tests/green-corner-filters.test.ts tests/catalog-japan-filter-rail.test.ts tests/japan-drive-sql-budget.test.ts tests/japan-drive.test.ts tests/japan-chassis-drive.test.ts tests/japan-default-fuel.test.ts tests/ajes-japan-feed.test.ts
       - name: Verify production dependency security
         run: npm audit --omit=dev --audit-level=high
       - name: Verify catalog storage and bounded projection integrity
@@ -103,7 +103,7 @@ jobs:
           trap 'rm -f "$key_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           remote_dir="/opt/avtocena/staging/incoming/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'; test \$(df --output=avail -k / | tail -1) -gt 8388608"
           scp "${ssh_opts[@]}" "$RUNNER_TEMP/avtocena-image.tar.gz" "$RUNNER_TEMP/avtocena-image.tar.gz.sha256" "root@151.248.113.177:$remote_dir/"
@@ -181,7 +181,7 @@ jobs:
           trap 'rm -f "$key_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           remote_dir="/opt/avtocena/releases/$GITHUB_SHA"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
@@ -206,7 +206,7 @@ jobs:
           trap 'rm -f "$key_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 - --apply' < scripts/regcloud-release-retention.py
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 - --apply' < scripts/regcloud-release-retention.py
       - name: Publish GPT completion notes for this installed release
         env:
           JSON_STORAGE_DRIVER: object

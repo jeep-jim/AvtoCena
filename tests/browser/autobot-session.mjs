@@ -5,7 +5,7 @@ import {createRequire} from 'node:module';
 import postcss from 'postcss';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
-const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||createRequire(import.meta.url).resolve('playwright'));
+const playwright=await import(process.env.PLAYWRIGHT_MODULE||createRequire(import.meta.url).resolve('playwright'));const {chromium}=playwright.default||playwright;
 const out='/tmp/avtocena-autobot-session';fs.mkdirSync(out,{recursive:true});
 await build({stdin:{contents:`import React from 'react';import {createRoot} from 'react-dom/client';import {Autobot} from './apps/web/components/autobot/Autobot';createRoot(document.getElementById('root')).render(<Autobot/>);`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,external:['/autobot/*'],platform:'browser',jsx:'automatic',outfile:out+'/app.js',define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'navigation',setup(b){b.onResolve({filter:/^next\/(navigation|link)$/},a=>({path:a.path,namespace:'mock'}));b.onLoad({filter:/.*/,namespace:'mock'},a=>({resolveDir:process.cwd(),contents:a.path==='next/link'?`import React from 'react';export default function Link({children,...props}){return React.createElement('a',props,children);}`:`export const usePathname=()=>location.pathname;export const useRouter=()=>({push:()=>{},back:()=>{},refresh:()=>{}});`}));}}]});
 const utilities=await postcss([tailwindcss({content:['apps/web/components/autocalc/AutoCalcPage.tsx','apps/web/components/home/CitySelector.tsx','apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/autocalc/KnowledgeSuggestions.tsx']}),autoprefixer]).process('@tailwind base;@tailwind components;@tailwind utilities;:root{--ac-surface:#202b38;--ac-surface-2:#2c3849;--ac-border:#ffffff22;--ac-text:#fff;--ac-muted:#abb5c3}',{from:undefined});
@@ -32,7 +32,7 @@ try{
  await fresh.getByRole('button',{name:'Найди параметры этого автомобиля'}).click();
  await fresh.getByRole('button',{name:'Отправить вопрос'}).waitFor();
  assert.equal(await fresh.getByRole('button',{name:'Найди параметры этого автомобиля'}).count(),0);
- assert.equal(await fresh.locator('.ab-car-questions button').count(),3);assert.equal(await fresh.locator('.ab-car-questions button svg').count(),0);assert.equal(await fresh.locator('.ab-car-questions button').last().evaluate(el=>Math.abs(el.getBoundingClientRect().width-el.parentElement.getBoundingClientRect().width)<1),true);assert.equal(await fresh.locator('.ab-car-questions button').first().evaluate(el=>getComputedStyle(el).borderTopWidth),'0px');
+ assert.equal(await fresh.locator('.ab-car-questions button').count(),3);assert.equal(await fresh.locator('.ab-car-questions button svg').count(),0);assert.equal(await fresh.locator('.ab-car-questions button').last().evaluate(el=>Math.abs(el.getBoundingClientRect().width-el.parentElement.getBoundingClientRect().width)<1),true);assert.equal(await fresh.locator('.ab-car-questions button').first().evaluate(el=>getComputedStyle(el).borderTopWidth),'1px');
  await fresh.reload();await fresh.locator('.ab-car-questions').waitFor();assert.equal(await fresh.locator('.ab-car-questions button').count(),3);
  // A touch click must send exactly once and release the keyboard focus.
  const mobile=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});

@@ -1,3 +1,4 @@
+import {managementDraft} from './management-knowledge';
 import {modelKey,readCalculationIndex,type CalculationIndex} from '../encyclopedia/calculation-index';
 import {astraPower30FactsForKey} from '../encyclopedia/astra-power30';
 import {precedentIdentityKey,precedentModelKeys,selectWithReportedPrecedents} from '../../../../scripts/encyclopedia/power30-precedents.mjs';
@@ -23,7 +24,7 @@ export function power30Precedent(offer:Partial<VehicleOffer>,index=readCalculati
  return {kw:result.estimatedPower30MinKw,method:result.method,certified:false,requiresConfirmation:true};
 }
 export function offerPrecedentParameterDraft(offer:VehicleOffer,raw:VehicleOffer=offer):Record<string,string>{
- const draft=offerParameterDraft(offer,raw);
+ const draft=managementDraft(offer,offerParameterDraft(offer,raw));
  if(draft.power30MinKw)return draft;
  const estimate=power30Precedent(offer);
  return estimate?completePowerUnitDraft({...draft,power30MinKw:String(estimate.kw),_power30EstimateKw:String(estimate.kw)}):draft;

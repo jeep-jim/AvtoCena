@@ -78,3 +78,15 @@
  .ab-car-questions{grid-template-columns:1fr;gap:6px}
  .ab-car-questions button{width:100%;min-height:40px;padding:9px 12px;align-items:center;font-size:13px;line-height:1.35}
 }
+
+.ab-panel .ab-rich-text{white-space:normal;font-size:14px;line-height:1.65;overflow-wrap:anywhere}
+.ab-rich-text p{margin:0 0 12px;white-space:pre-line}.ab-rich-text p:last-child{margin-bottom:0}
+.ab-rich-text h3{font-size:16px;line-height:1.4;font-weight:750;margin:18px 0 10px}.ab-rich-text h3:first-child{margin-top:0}
+.ab-rich-text strong{font-weight:750;color:var(--ta-text)}
+.ab-rich-text ul,.ab-rich-text ol{margin:8px 0 14px;padding-left:22px;list-style-position:outside}.ab-rich-text ul{list-style-type:disc}.ab-rich-text ol{list-style-type:decimal}.ab-rich-text li{margin:6px 0}
+.ab-rich-text hr{border:0;border-top:1px solid var(--ta-border);margin:18px 0}
+.ab-panel .ab-car-questions{grid-template-columns:1fr;gap:8px}
+.ab-panel .ab-car-questions button,.ab-panel .ta-suggestions button{min-height:44px;padding:11px 14px;border:1px solid #ff353d66;background:color-mix(in srgb,#ff353d 10%,var(--ta-surface));border-radius:12px;font-weight:650;line-height:1.4;color:var(--ta-text);align-items:center;cursor:pointer}
+.ab-panel .ab-car-questions button:hover,.ab-panel .ta-suggestions button:hover{border-color:#ff353d;background:color-mix(in srgb,#ff353d 18%,var(--ta-surface))}
+.ab-panel .ab-car-questions .ab-power-question{background:#ff353d;color:white;border-color:#ff353d;white-space:nowrap;font-size:15px;min-height:44px}
+.ab-panel .ab-car-questions button:disabled{opacity:.55;cursor:wait}

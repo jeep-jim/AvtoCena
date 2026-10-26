@@ -5,7 +5,7 @@ import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 async function load(entry:string,state:any,mocks:Record<string,string>={}){
  (globalThis as any).__ab=state;process.env.AUTH_SECRET='autobot-test-only';
- mocks={'display-identity':`export const applyEncyclopediaDisplayIdentity=async x=>x;`,data:`const s=globalThis.__ab;export const readDataJson=async(k,f)=>s.files.get(k)??f;export const mutateDataJson=async(k,f,fn)=>{const n=fn(s.files.get(k)??f);s.files.set(k,n);return n;};`,...mocks};
+ mocks={'display-identity':`export const applyEncyclopediaDisplayIdentity=async x=>x;`,data:`const s=globalThis.__ab;export const getDataRoot=()=>'/tmp/avtocena-autobot-no-private-index';export const readDataJson=async(k,f)=>s.files.get(k)??f;export const mutateDataJson=async(k,f,fn)=>{const n=fn(s.files.get(k)??f);s.files.set(k,n);return n;};`,...mocks};
  const b=await build({entryPoints:[entry],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',plugins:[{name:'mocks',setup(b){b.onResolve({filter:/.*/},a=>{const n=a.path.split('/').at(-1)!;if(mocks[n])return {path:n,namespace:'mocks'};});b.onLoad({filter:/.*/,namespace:'mocks'},a=>({contents:mocks[a.path],loader:'js'}));}}]});const m={exports:{} as any};new Function('require','module','exports',b.outputFiles[0].text)(require,m,m.exports);return m.exports;
 }
 test('key encrypted at rest, redacted on reads, hostile endpoints rejected',async()=>{

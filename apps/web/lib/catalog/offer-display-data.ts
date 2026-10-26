@@ -53,5 +53,7 @@ export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeReq
       : 0;
   const modificationRub = selectedModification ? conditionalModificationRub(selectedModification) : 0;
   const visibleRub = modificationRub || customerScenarioRub || catalogOfferVisibleRub(raw);
-  return {offer,sellerPricing,selectionRequired,selectedModification,enrichedOffer,normalizedEnrichedOffer,initialPublic,pricedOffer,raw,visibleRub};
+  const learned=(offer.operational as any)?.managementKnowledge?.parameters||{};
+  const displayFields=Object.fromEntries(Object.entries(learned).filter(([key])=>['drive','bodyType','transmission'].includes(key)&&!(offer as any)[key]));
+  return {offer:{...offer,...displayFields},sellerPricing,selectionRequired,selectedModification,enrichedOffer,normalizedEnrichedOffer,initialPublic,pricedOffer,raw,visibleRub};
 });

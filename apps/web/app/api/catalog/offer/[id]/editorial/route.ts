@@ -1,3 +1,4 @@
+import {rememberManagementEditorial} from '@/lib/catalog/management-knowledge';
 import {revalidatePath} from 'next/cache';
 import {getCurrentUser} from '@/lib/auth';
 import {canEditCatalog} from '@/lib/catalog/editorial-access';
@@ -30,6 +31,7 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
   }
   const offer=current||{...previous!,images:previous!.originalPhoto?[{url:previous!.originalPhoto}]:[]};
   const saved=await saveCatalogEditorial(offer,input,user!,current?catalogOfferTitle(current):previous!.originalTitle);
+  if(current&&saved.specifications)await rememberManagementEditorial(current,saved);
   revalidatePath('/', 'layout');
   return Response.json({entry:saved},{headers});
  }catch(error){

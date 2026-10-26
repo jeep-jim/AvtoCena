@@ -147,6 +147,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
  },[offerId]);
  // Empty optional values equal omitted values, so returning to today restores the original scenario.
  const dirty=Object.keys({...originalDraft,...draft}).some(key=>(draft[key]??"")!==(originalDraft[key]??""));
+ const [knowledgeRetry,setKnowledgeRetry]=useState(false);
  const saveDirty=Object.keys({...savedDraft,...draft}).some(key=>(savedDraft[key]??"")!==(draft[key]??""));
  async function save(){
   const version=revision.current;
@@ -157,10 +158,10 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
    if(!response.ok)throw Error(data.error || "Не удалось сохранить");
    const page=document.querySelector<HTMLElement>("[data-offer-id]");
    if(page)page.dataset.offerSavedVersion=data.version;
-   setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedByName(data.savedByName || "Сотрудник");setSavedDraft(completePowerUnitDraft(data.draft));
+   setSaveMessage(data.knowledgeWarning || (data.knowledgeSaved?"Сохранено. Пустые параметры совместимых автомобилей будут заполнены на всех рынках.":"Расчёт сохранён."));setKnowledgeRetry(Boolean(data.knowledgeWarning));setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedByName(data.savedByName || "Сотрудник");setSavedDraft(completePowerUnitDraft(data.draft));
    if(version===revision.current){setResult(data.calculation);setUserEdited(false);}
    invalidateSavedCalculationPreviews();
-   setSaveMessage("Сохранено. Отправьте ссылку кнопкой «Поделиться» или сохраните PDF.");
+
   }catch(error){setSaveMessage(error instanceof Error?error.message:"Не удалось сохранить");}
   finally{setSaving(false);}
  }
@@ -231,12 +232,12 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
   {estimatedPowerActive ? <p className="mt-3 text-xs text-[var(--ac-muted)]" data-power-estimate-note>Для предварительного расчёта выбрано первое значение мощности: {estimatedPowerHp} л.с. Проверьте его по документам или измените вручную.</p> : null}
   {result?.customs?.productionReferenceBasis==="new_model_year_scenario"?<p className="mt-3 text-xs text-[var(--ac-muted)]">{draft.year} — модельный год. Расчёт как для нового автомобиля; дату выпуска уточните по документам.</p>:null}
   <OfferParameterEditors estimated30Active={estimated30Active} draft={draft} change={change} showCommercial={commercialVisible} isPickup={isPickup} researchContext={researchContext}/>
-  {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Применить к расчёту для клиента"}</button></div> : null}
+  {canSave && ((userEdited && saveDirty)||knowledgeRetry) ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Сохранить характеристики"}</button></div> : null}
   {copyOffer ? <OfferCopyButton offerId={offerId} title={copyOffer.title} mileageKm={copyOffer.mileageKm} draft={draft} pending={pending || saving}/> : null}
   {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
   {canSave ? <dialog ref={saveDialog} aria-labelledby="save-calculation-title" className="m-auto w-[min(440px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/60">
    <h2 id="save-calculation-title" className="text-lg font-bold">Подтверждаете изменение характеристик?</h2>
-   <p className="mt-3 text-sm">Характеристики увидят все пользователи. Город доставки сохранится только в ссылке на этот расчёт и в PDF.</p>
+   <p className="mt-3 text-sm">Пустые параметры совместимых автомобилей этой модели и года будут заполняться на всех рынках, в том числе у новых объявлений. Уже заполненные значения не изменятся. Город доставки сохранится только в ссылке на этот расчёт и в PDF.</p>
    <div className="mt-5 flex gap-3"><button type="button" onClick={()=>{saveDialog.current?.close();void save();}} className="min-h-11 flex-1 rounded-xl bg-red-500 px-4 font-bold text-white">Да</button><button type="button" autoFocus onClick={()=>saveDialog.current?.close()} className="min-h-11 flex-1 rounded-xl bg-[var(--ac-surface-2)] px-4 font-bold">Нет</button></div>
   </dialog> : null}
   {canSave && saveMessage ? <p role="status" className="mt-2 text-sm text-[var(--ac-text)]">{saveMessage}</p> : null}

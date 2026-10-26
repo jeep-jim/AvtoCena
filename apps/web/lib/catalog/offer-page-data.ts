@@ -1,3 +1,4 @@
+import {attachManagementKnowledge} from './management-knowledge';
 import {CollectionDisabledError} from './collection-controls';
 import {AjesUnavailable} from './ajes-client';
 import {readCatalogEditorial,editorialHidden,applyCatalogEditorial} from "./editorial";
@@ -35,7 +36,7 @@ async function resilientOfferLookup(id: string) {
 // Metadata and the page render also share the lookup inside one request.
 export const getOfferForPage = cache(async (id: string) => {
  const [offer,index]=await Promise.all([resilientOfferLookup(id),readCatalogEditorial()]);
- return offer&&!editorialHidden(offer,index)?applyCatalogEditorial(offer,index):null;
+ return offer&&!editorialHidden(offer,index)?(await attachManagementKnowledge([applyCatalogEditorial(offer,index)]))[0]:null;
 });
 
 // The same authoritative record feeds the page and its share preview.
@@ -47,7 +48,7 @@ export const getOfferDetailRecord = cache(async (id:string)=>{
   // New auction IDs are hashes, so their market cannot be inferred from the ID.
   if (storedOffer?.market === "japan" && !isJapanCatalogOfferId(id)) storedOffer = await getOfferFromCurrentShard(id) || storedOffer;
   const editorial=await readCatalogEditorial();
-  return storedOffer&&!editorialHidden(storedOffer,editorial)?applyCatalogEditorial(storedOffer,editorial):null;
+  return storedOffer&&!editorialHidden(storedOffer,editorial)?(await attachManagementKnowledge([applyCatalogEditorial(storedOffer,editorial)]))[0]:null;
 });
 
 /** Never treat a provider refusal as a sold car or an application-wide crash. */
