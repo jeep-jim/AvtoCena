@@ -10,7 +10,8 @@ info=json.loads(subprocess.check_output(['docker','inspect',name]))[0]
 if info['Config']['Image']!='avtocena-regcloud:'+release:raise ValueError('wrong_image')
 state=info['State']
 if state['Running']:raise ValueError('candidate_must_be_stopped')
-if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog']:
+if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog','--probe-gate']:
+ gate_probe=sys.argv[2]=='--probe-gate'
  ttl_probe=sys.argv[2] in ['--probe-ttl','--probe-catalog']
  lock=open('/run/lock/avtocena-runtime-change.lock','w')
  fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
@@ -30,10 +31,13 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
   if not ready:raise ValueError('candidate_not_ready')
   paths=['/cars?sort=totalRub','/cars?sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub'] if ttl_probe else ['/cars?market=china&sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub']
   if sys.argv[2]=='--probe-catalog':paths=['/cars']*4
+  if gate_probe:
+   routes=['/api/health','/','/login','/autocalc','/cars','/cars?market=china&make=Volkswagen&page=2','/cars?market=europe&make=BMW&page=2','/cars?sort=totalRub','/api/catalog/search?market=europe&make=BMW&page=2']
+   paths=['/','/cars','/','/cars?sort=totalRub','/cars?market=china','/cars?market=china']+routes+routes[:5]+['/cars']
+  profile=None
   for number,path in enumerate(paths):
    if ttl_probe and number==2:time.sleep(35)
-   profile=None
-   if ttl_probe and number>=2:
+   if (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6):
     subprocess.run(['docker','kill','--signal=USR1',name],check=True,capture_output=True)
     time.sleep(1)
     profile=subprocess.Popen(['docker','exec','-i',name,'node','--input-type=module'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
@@ -44,14 +48,14 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
     with urllib.request.urlopen(base+path,timeout=90) as response:body=response.read(20*1024*1024+1);status=response.status
     print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'status':status,'bytes':len(body),'complete':b'</html>' in body,'streamError':b'$RX(' in body}),flush=True)
    except Exception as error:print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'errorType':type(error).__name__}),flush=True)
-   if profile:
+   if profile and (not gate_probe or number==len(paths)-1):
     try:
      output,_=profile.communicate(timeout=20)
      for line in output.splitlines():
       if line.startswith('CPU_SAMPLE '):print('CANDIDATE_CPU '+json.dumps({'path':path,'profile':json.loads(line[len('CPU_SAMPLE '):])}),flush=True)
     except subprocess.TimeoutExpired:
      profile.kill();profile.communicate();print(json.dumps({'candidateProfileError':'timeout'}),flush=True)
-   if ttl_probe:
+   if ttl_probe or (gate_probe and number==len(paths)-1):
     stats=subprocess.check_output(['docker','stats','--no-stream','--format','{{.MemUsage}} / CPU {{.CPUPerc}}',name],text=True).strip()
     print(json.dumps({'candidateResources':stats,'after':path}),flush=True)
  finally:subprocess.run(['docker','stop','--time','20',name],check=True,capture_output=True)

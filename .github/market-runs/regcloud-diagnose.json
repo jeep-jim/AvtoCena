@@ -1,6 +1,6 @@
 {
-  "failedRelease": "0958567c2cabd7e17e6e4a726f33289397c8056d",
-  "probeCatalog": true,
-  "requestedAt": "2026-10-26T14:49:56.845064+00:00",
-  "reason": "Profile ordinary catalog cold, warm and after35s in stopped loopback candidate; no production traffic or configuration changes."
+  "failedRelease": "ba5a88055f1a37c4615f14b188a5381541958208",
+  "probeGate": true,
+  "requestedAt": "2026-10-26T15:25:30.268492+00:00",
+  "reason": "Replay candidate acceptance route order, then sample warm catalog CPU and category-only Undici timings. No URLs, queries, headers, bodies or credentials are emitted; stopped loopback candidate only."
 }
