@@ -226,13 +226,16 @@ try{
    await page.getByRole('button',{name:'Информация о компании',exact:true}).click();
    await page.locator('dialog[open] .dealer-about-logo').waitFor();
    await page.getByRole('button',{name:'Закрыть информацию',exact:true}).click();
-   await page.waitForFunction(()=>!history.state?.acOverlayStep);
+   await page.locator('.dealer-info-dialog[open]').waitFor({state:'hidden'});
    await page.getByLabel('Адрес офиса в профиле',{exact:true}).waitFor();
    await page.screenshot({path:`${out}/${width}-${theme}-public-contacts.png`,fullPage:true});
+   await page.getByRole('button',{name:'Закрыть адреса',exact:true}).click();
+   await page.waitForFunction(()=>!history.state?.acOverlayStep);
    await page.locator('.dealer-profile-metrics button').first().click();
    await page.getByRole('heading',{name:'Отзывы о ТопАвто',exact:true}).waitFor();
    await page.screenshot({path:`${out}/${width}-${theme}-public-reviews.png`,fullPage:true});
-   await page.evaluate(()=>{location.hash='#cars';});
+   await page.getByRole('button',{name:'Закрыть отзывы',exact:true}).click();
+   await page.waitForFunction(()=>!history.state?.acOverlayStep);
   }
   await page.getByRole('button',{name:/Открыть логотип/}).click();
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);
