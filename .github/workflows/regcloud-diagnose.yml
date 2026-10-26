@@ -28,7 +28,7 @@ jobs:
           failed_release=$(python3 -c 'import json;print(json.load(open(".github/market-runs/regcloud-diagnose.json")).get("failedRelease", ""))')
           if [ -n "$failed_release" ]; then
             [[ "$failed_release" =~ ^[a-f0-9]{40}$ ]]
-            ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+            ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
             remote_script="/opt/avtocena/releases/$failed_release/failed-release-diagnostic.py"
             scp "${ssh_opts[@]}" scripts/regcloud-failed-release-diagnostic.py "root@151.248.113.177:$remote_script"
             scp "${ssh_opts[@]}" scripts/regcloud-cpu-sample.mjs "root@151.248.113.177:/opt/avtocena/releases/$failed_release/cpu-sample.mjs"
@@ -36,7 +36,7 @@ jobs:
             ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 '$remote_script' '$failed_release' '$probe'"
             exit 0
           fi
-          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'bash -s' <<'REMOTE'
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'bash -s' <<'REMOTE'
           set -euo pipefail
           umask 077
           exec 9>/run/lock/avtocena-runtime-change.lock

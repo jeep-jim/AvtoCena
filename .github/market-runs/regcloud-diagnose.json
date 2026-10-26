@@ -1,6 +1,6 @@
 {
   "failedRelease": "e23d9d096935481c4ecddf6a987c574c5c2bbbf9",
   "probeLong": true,
-  "requestedAt": "2026-10-26T21:44:19.176991+00:00",
-  "reason": "Isolated stopped candidate only: repeat real route sequence at warm/35s/305s and sample CPU plus category-only network for final all-sort. No production traffic or acceptance threshold change; 600-second diagnostic deadline and stop in finally."
+  "requestedAt": "2026-10-26T21:53:34.259965+00:00",
+  "reason": "Repeat isolated long profile after SSH idle connection broke before305s; add keepalive and signal cleanup. No traffic switch or threshold change."
 }

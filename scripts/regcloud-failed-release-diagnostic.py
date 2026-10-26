@@ -2,7 +2,7 @@
 """One-shot inspection of a selected failed candidate; optional isolated HTTP probe.
 Never print raw application logs, environment, customer data or credentials.
 """
-import collections,json,re,subprocess,sys,time,urllib.request,fcntl,pathlib
+import collections,json,re,subprocess,sys,time,urllib.request,fcntl,pathlib,signal
 release=sys.argv[1]
 if not re.fullmatch('[a-f0-9]{40}',release):raise ValueError('invalid_release')
 name='avtocena-release-'+release[:12]
@@ -21,6 +21,8 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
  if len(ports)!=1 or ports[0]['HostIp']!='127.0.0.1':raise ValueError('loopback_required')
  if '127.0.0.1:'+ports[0]['HostPort'] in pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf').read_text():raise ValueError('candidate_must_not_receive_production_traffic')
  base='http://127.0.0.1:'+ports[0]['HostPort']
+ def interrupted(signum,frame):raise InterruptedError('diagnostic_interrupted')
+ for sig in [signal.SIGHUP,signal.SIGTERM]:signal.signal(sig,interrupted)
  try:
   subprocess.run(['docker','start',name],check=True,capture_output=True)
   ready=False
