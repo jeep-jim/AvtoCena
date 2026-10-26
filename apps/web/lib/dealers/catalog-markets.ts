@@ -1,5 +1,5 @@
 export const DEALER_MARKETS = [
- {id:'japan',label:'Япония',flag:'🇯🇵'}, {id:'china',label:'Китай',flag:'🇨🇳'},
+ {id:'china',label:'Китай',flag:'🇨🇳'}, {id:'japan',label:'Япония',flag:'🇯🇵'},
  {id:'korea',label:'Корея',flag:'🇰🇷'}, {id:'uae',label:'ОАЭ',flag:'🇦🇪'},
  {id:'europe',label:'Европа',flag:'🇪🇺'}, {id:'georgia',label:'Грузия',flag:'🇬🇪'},
 ] as const;
