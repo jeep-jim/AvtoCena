@@ -1,0 +1,141 @@
+{
+  "runId": "2026-10-26-priority-makes-05",
+  "indexDigest": "df6bdaaded2ee9b3180a93227ca926992b7097d4d43df13e8b931f8bf6e04e08",
+  "manifestDigest": "fae4accdebf0ee080199b445a0939372e9f843a9afa293f89f12e1e81741f565",
+  "generationId": "gen_1792702445675_8c312f85",
+  "reportedSourcesDigest": "2e10f543f053b06a125d58f8a0ac5e0fb38076e866946352189806cd03aed633",
+  "scope": "models_in_retained_site_catalog",
+  "summary": {
+    "startedAt": "2026-10-26T03:17:08.106Z",
+    "catalog": {
+      "checked": 83355,
+      "byStatus": {
+        "no_compatible_documented_precedent": 40613,
+        "range_requires_version": 19367,
+        "estimated": 22611,
+        "existing_value_preserved": 764
+      }
+    },
+    "encyclopedia": {
+      "models": 2371,
+      "checked": 21842,
+      "byStatus": {
+        "estimated": 6328,
+        "no_compatible_documented_precedent": 10877,
+        "range_requires_version": 4560,
+        "existing_value_preserved": 77
+      }
+    },
+    "storageWrites": 259,
+    "certifiedFieldWrites": 0,
+    "finishedAt": "2026-10-26T03:25:42.560Z",
+    "bindings": 105197,
+    "resolutions": 1312,
+    "references": 13154,
+    "reusableProfiles": 8957,
+    "activeModelKeys": 2693
+  },
+  "prioritySummary": [
+    {
+      "make": "Tesla",
+      "models": 8,
+      "catalog": {
+        "range_requires_version": 6225,
+        "no_compatible_documented_precedent": 170,
+        "estimated": 1330
+      }
+    },
+    {
+      "make": "Toyota",
+      "models": 49,
+      "catalog": {
+        "no_compatible_documented_precedent": 2128,
+        "range_requires_version": 1483,
+        "estimated": 816,
+        "existing_value_preserved": 32
+      }
+    },
+    {
+      "make": "Honda",
+      "models": 26,
+      "catalog": {
+        "no_compatible_documented_precedent": 819,
+        "range_requires_version": 129,
+        "estimated": 76,
+        "existing_value_preserved": 3
+      }
+    },
+    {
+      "make": "Mazda",
+      "models": 13,
+      "catalog": {
+        "no_compatible_documented_precedent": 124,
+        "estimated": 47,
+        "range_requires_version": 2
+      }
+    },
+    {
+      "make": "Lexus",
+      "models": 16,
+      "catalog": {
+        "no_compatible_documented_precedent": 571,
+        "estimated": 765,
+        "range_requires_version": 212
+      }
+    },
+    {
+      "make": "Kia",
+      "models": 28,
+      "catalog": {
+        "no_compatible_documented_precedent": 401,
+        "range_requires_version": 377,
+        "estimated": 188
+      }
+    },
+    {
+      "make": "Hyundai",
+      "models": 21,
+      "catalog": {
+        "no_compatible_documented_precedent": 446,
+        "range_requires_version": 390,
+        "estimated": 156
+      }
+    },
+    {
+      "make": "Mercedes-Benz",
+      "models": 38,
+      "catalog": {
+        "estimated": 3675,
+        "range_requires_version": 2484,
+        "no_compatible_documented_precedent": 1547,
+        "existing_value_preserved": 59
+      }
+    },
+    {
+      "make": "BMW",
+      "models": 52,
+      "catalog": {
+        "range_requires_version": 1370,
+        "no_compatible_documented_precedent": 973,
+        "estimated": 1109,
+        "existing_value_preserved": 5
+      }
+    }
+  ],
+  "readback": true,
+  "workflowRun": 40263197141,
+  "workflowJob": 121379791232,
+  "allFuelInventoryModels": 2693,
+  "allFuelRetainedRows": 324253,
+  "inventoryScope": "retained projection, all fuels; missing raw fields are not proof of missing runtime calculations",
+  "deltaVsPass4": {
+    "estimated": 138,
+    "range_requires_version": 483,
+    "no_compatible_documented_precedent": -621,
+    "existing_value_preserved": 0
+  },
+  "newSingleEstimatesInPriorityMakes": 279,
+  "previousP7EstimatesRemoved": 141,
+  "note": "Historical retained generation, not live listing count, new prices or number of certificates. Current runner also preserves P7/P7+ distinction introduced after pass4. Reference set in this run has 85 entries; newer additions are not included.",
+  "complete": false
+}

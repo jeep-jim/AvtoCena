@@ -24,6 +24,17 @@ test('priority source records resolve EV names and retain year, drive and batter
  assert.equal(power30Precedent({...eqa,batteryKwh:70.5},null)?.kw,130);
  assert.equal(power30Precedent({...eqa,batteryKwh:undefined},null),undefined);
 });
+test('Chinese hybrid references retain alternative documents and regional mechanical constraints',()=>{
+ const q={...offer,make:'BYD',model:'QIN PLUS',fuel:'hybrid',powertrainKind:'other_hybrid',engineCc:1498,drive:'fwd',icePowerKw:70};
+ assert.equal(power30Precedent(q,null)?.kw,55);
+ assert.equal(power30Precedent({...q,year:2022,icePowerKw:78},null),undefined);
+ assert.equal(power30Precedent({...q,fuel:'electric',powertrainKind:'electric',icePowerKw:undefined,engineCc:undefined},null),undefined);
+ assert.equal(power30Precedent({...q,model:'Han',engineCc:1497,icePowerKw:96},null),undefined);
+ const m={...q,make:'AITO',model:'M7',engineCc:1499,drive:'awd',icePowerKw:85.32,motorPeakKw:322.88,batteryKwh:40};
+ assert.ok(Math.abs(power30Precedent(m,null)!.kw-138.27)<0.005);
+ assert.equal(power30Precedent({...m,drive:'rwd'},null),undefined);
+ assert.equal(power30Precedent({...m,icePowerKw:112},null),undefined);
+});
 test('reusable model reference survives listing and price changes, preserves manual values and ambiguity',()=>{
  assert.equal(power30Precedent(offer,null)?.kw,80);
  assert.equal(power30Precedent({...offer,id:'new-feed-id',sourcePrice:150000},null)?.kw,80);

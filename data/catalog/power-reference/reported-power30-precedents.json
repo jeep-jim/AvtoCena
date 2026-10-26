@@ -2592,5 +2592,512 @@
         "originalCertificateReviewed": false
       }
     }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-dmi-2021-2022-60",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "engineCc": 1498,
+      "icePowerKw": 78,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-dmi-2021-2022-70",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "engineCc": 1498,
+      "icePowerKw": 78,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-dmi-2023plus-55",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "engineCc": 1498,
+      "icePowerKw": 70,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 55
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-ev-45",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 45
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source peak range 100–150 kW is not replaced with an invented exact peak.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-ev-65",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source peak range 100–150 kW is not replaced with an invented exact peak.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmi-fwd-60",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "engineCc": 1497,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source table says 60/70 and its later paragraph includes 90; ambiguity retained. ICE range 96–102 is not asserted as one exact output.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmi-fwd-70",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "engineCc": 1497,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source table says 60/70 and its later paragraph includes 90; ambiguity retained. ICE range 96–102 is not asserted as one exact output.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmi-fwd-90",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "engineCc": 1497,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 90
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source table says 60/70 and its later paragraph includes 90; ambiguity retained. ICE range 96–102 is not asserted as one exact output.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmp-awd-110",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 110
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source specifies 1.5T and ICE 96–102 kW without exact displacement/output; these are not invented.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmp-awd-140",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 140
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source specifies 1.5T and ICE 96–102 kW without exact displacement/output; these are not invented.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmp-awd-165",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 165
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source specifies 1.5T and ICE 96–102 kW without exact displacement/output; these are not invented.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-early-dm-awd-55",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "icePowerKw": 141,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 55
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-early-dm-awd-60",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "icePowerKw": 141,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-early-dm-awd-70",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "icePowerKw": 141,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-ev-fwd-65",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-ev-awd-125",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 125
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-ev-awd-171",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 171
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-ev-awd-200",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 200
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "aito:m7",
+    "modelId": "reported:aito:m7",
+    "variantId": "m7-regional-seres-awd-188ps-138p27376",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "drive": "awd",
+      "icePowerKw": 85.31785,
+      "motorPeakKw": 322.88395,
+      "batteryKwh": 40
+    },
+    "values": {
+      "power30MinKw": 138.27376
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://seres.ru/media-link/aito-seres-m7-pricelist",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "SERES M7 Pro/Max regional model precedent for AITO M7, not exact Chinese homologation. Official distributor brochure states 188 metric hp 30-minute total, 439 metric hp peak, 116 metric hp ICE, AWD, 40 kWh. Values converted with 0.73549875 kW/metric hp; stated hp are rounded. Regional differences retained and known mechanical conflicts rejected; original certificate not reviewed.",
+        "originalCertificateReviewed": false
+      }
+    }
   }
 ]
