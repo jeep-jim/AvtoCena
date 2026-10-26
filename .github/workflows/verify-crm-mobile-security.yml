@@ -6,6 +6,7 @@ on:
       - 'apps/web/app/(crm)/**'
       - 'apps/web/lib/crm-permissions.ts'
       - 'tests/browser/crm-mobile*'
+      - 'tests/browser/attached-parameter*'
       - '.github/workflows/verify-crm-mobile-security.yml'
   push:
     branches: [feat/crm-unified-team-20260926, fix/catalog-read-concurrency-20260926, feat/crm-activity-reminders-20260926, fix/crm-client-documents-20260925, fix/catalog-filter-continuity-20260921, fix/crm-mobile-security-20260921, fix/photos-offer-push-20260921, fix/offer-layout-localized-20260921, main]
@@ -14,6 +15,7 @@ on:
       - 'package-lock.json'
       - 'package.json'
       - 'tests/browser/crm-mobile*'
+      - 'tests/browser/attached-parameter*'
       - 'tests/security-response-policy.test.ts'
       - 'tests/crm-contracts.test.ts'
       - 'scripts/security-photo-audit.mjs'
