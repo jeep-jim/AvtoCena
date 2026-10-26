@@ -10,6 +10,7 @@ import {parseCatalogSort,compareCatalogTerms,compareSortNumbers,sortNumber} from
 import {matchesFilterSelection} from './filter-selections';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {catalogBodyType} from './pickup-body';
+import {filterBudgetRows} from "./budget-selection-filter";
 import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {specificationSelectorDirectory,type CompressedBudgetDirectory} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
@@ -2151,12 +2152,16 @@ async function readBudgetSelection(params:CatalogSearchParams){
    return !editorialHidden({id:row[5].id,market:row[0]}) && catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogVehicleExcluded(row[5]);
   });
   const compactModelKeys=params.model?await projectionModelKeys(params):null;
-  let candidates=sourceRows.map(editedRow).filter(row=>
+  // Safety normalization never changes make. Apply editorial values first, then
+  // reject unrelated makes before the expensive model/specification matcher.
+  const wantedMakes=params.make?new Set(catalogMakeFilterValues(params.make).map(make=>cleanFacet(make).toLocaleLowerCase('ru-RU'))):null;
+  let candidates=await filterBudgetRows(sourceRows,editedRow,row=>
+   (!wantedMakes || wantedMakes.has(cleanFacet(row[5].make).toLocaleLowerCase('ru-RU'))) &&
    ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
-   eligible.has(row[5].id) && matchesCatalogColor({...row[5],market:row[0]},params.color) &&
+   eligible.has(row[5].id) && (!params.color || matchesCatalogColor({...row[5],market:row[0]},params.color)) &&
    (!params.market || params.market==='any' || same(row[0],params.market))
    && matchesFuelFilter(row[5].fuel,params.fuel)
-   && matchesFilterSelection(catalogBodyType(row[5]),params.bodyType)
+   && (!params.bodyType || matchesFilterSelection(catalogBodyType(row[5]),params.bodyType))
    && matchesFilterSelection(row[5].transmission,params.transmission)
    && matchesFilterSelection(row[5].drive,params.drive) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
