@@ -48,10 +48,10 @@ jobs:
           tail -n 3000 /var/log/nginx/error.log | python3 -c 'import sys,json; start=sys.argv[1]; lines=[line for line in sys.stdin if line[:19]>=start]; s="".join(lines); print("NGINX_ERRORS_SINCE_RUNTIME_START",json.dumps({"sinceServerTime":start,"boundedLines":len(lines),"categories":{p:s.count(p) for p in ["upstream timed out","upstream prematurely closed","upstream sent too big header","connect() failed"]}}))' "$started"
           docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,json; s=sys.stdin.read(); print("RUNTIME_FATAL_CATEGORIES",json.dumps({p:s.count(p) for p in ["heap out of memory", "Reached heap limit", "FATAL ERROR", "Killed", "ENOMEM"]}))'
 
-          # Four bounded public reads from the server distinguish app latency from the client network.
+          # Six bounded public reads from the server distinguish app latency from the client network.
           python3 - <<'PROBE'
           import urllib.request,time,json
-          for path in ['/api/health','/api/catalog/home','/','/cars']:
+          for path in ['/api/health','/api/catalog/home','/','/cars','/cars?market=china&make=Volkswagen&page=2','/cars?market=europe&make=BMW&page=2']:
               start=time.monotonic();status=None;timing=None;headers_seconds=None;size=0
               try:
                   with urllib.request.urlopen(urllib.request.Request('https://avtocena.com'+path,headers={'User-Agent':'Mozilla/5.0 Chrome/131.0.0.0 Safari/537.36','Accept-Encoding':'gzip'}),timeout=25) as response:
