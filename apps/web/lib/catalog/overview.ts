@@ -78,7 +78,9 @@ let overviewCache: { generationId: string; expiresAt: number; promise: Promise<C
 export function resetCatalogOverviewCache() { overviewCache = null; }
 
 export async function readCatalogOverview(knownGenerationId?: string): Promise<CatalogOverview | null> {
-  const generationId = knownGenerationId || (await readDataJson<{ generationId: string }>("catalog/manifest.json", { generationId: "" })).generationId;
+  // Share the same short-lived generation pointer as search/home. Reading it
+  // directly here bypassed coalescing and made every /cars visit wait for S3.
+  const generationId = knownGenerationId || await (await import("./storage")).catalogGenerationId();
   if (!generationId) return null;
   if (overviewCache?.generationId === generationId && overviewCache.expiresAt > Date.now()) return overviewCache.promise;
   const entry = { generationId, expiresAt: Date.now() + 60_000, promise: Promise.resolve<CatalogOverview | null>(null) };
