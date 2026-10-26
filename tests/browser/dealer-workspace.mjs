@@ -145,6 +145,8 @@ try{
 
    await page.getByLabel('Проверенный дилер',{exact:true}).waitFor();
    await page.getByText(stock?'Адрес автомобиля':'Офис дилера',{exact:true}).waitFor();
+   assert.equal(await page.locator('.dealer-offer-identity iframe').count(),0,'map stays unloaded until requested');
+   await page.locator('.dealer-offer-identity').getByRole('button',{name:'Показать на карте',exact:true}).click();
    await page.locator('.dealer-offer-identity iframe').waitFor();
    if(!stock){
     const basePrice=await page.locator('.ac-offer-price-panel .ac-price').innerText();
