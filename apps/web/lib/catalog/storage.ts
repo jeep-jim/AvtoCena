@@ -1,3 +1,4 @@
+import {budgetSourceRows,resetBudgetSourceIndexes} from './budget-source-index';
 import {inspectCompressedSelectors,publishCompressedSelectors,readCompressedSelector,publishSelectorMarket,MAX_PUBLISHED_SELECTOR_BYTES} from './budget-selector-publication';
 import {calculatedCatalogPrice} from './calculated-price';
 import {compactJapanPowerEstimate} from './ajes-power-estimate';
@@ -605,6 +606,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  resetBudgetSourceIndexes();
   unavailableReadCache.clear();
   previousLocationCache.clear();
   previousOfferChunkCache.clear();
@@ -2135,26 +2137,27 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const quotes=(hasBudget||params.engineFrom||params.engineTo)&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
   // Narrow on compact year/mileage metadata before reading card blocks.
   // Older indexes keep the exact card matcher until the derived index is rebuilt.
-  const costs=await currentDepositCosts();
-  const pricedIndex={...index,rows:index.rows.map(row=>{
+  const costs=hasBudget?await currentDepositCosts():{};
+  const pricedIndex=hasBudget?{...index,rows:index.rows.map(row=>{
    if(index.pricingChunks?.[row[0]] || row[7] || row[4] || !(row[1]>0))return row;
    const deposit=costs[row[0]]||0;
    return [row[0],row[1]+deposit-(row[6]||0),row[2],row[3],row[4],row[5],deposit,row[7]] as typeof row;
-  })};
+  })}:index;
   // Never discard an old expensive row before replay: a lower current rate may
   // move it into budget. Non-price metadata can still narrow block reads first.
-  const sourceRows=hasBudget?[...pricedIndex.rows,...(index.otherRows||[])]:[...index.rows,...index.otherRows!];
+  const wantedMakes=params.make?new Set(catalogMakeFilterValues(params.make).map(make=>cleanFacet(make).toLocaleLowerCase('ru-RU'))):null;
+  const sourceRows=await budgetSourceRows(index,wantedMakes,make=>cleanFacet(make).toLocaleLowerCase('ru-RU'));
   const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
   const editedRow=(row:BudgetCountIndex['rows'][number])=>{const metadata=applyCatalogEditorialSpecifications(row[5]);if(metadata===row[5])return row;const edited:typeof row=[...row];edited[5]=metadata;return edited;};
   const eligibilityContext=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10)]);
-  const eligible=budgetEligibility.get(index,eligibilityContext,original=>{
+  const eligible=await budgetEligibility.get(index,eligibilityContext,original=>{
    const row=editedRow(original);
    return !editorialHidden({id:row[5].id,market:row[0]}) && catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogVehicleExcluded(row[5]);
   });
   const compactModelKeys=params.model?await projectionModelKeys(params):null;
   // Safety normalization never changes make. Apply editorial values first, then
   // reject unrelated makes before the expensive model/specification matcher.
-  const wantedMakes=params.make?new Set(catalogMakeFilterValues(params.make).map(make=>cleanFacet(make).toLocaleLowerCase('ru-RU'))):null;
+
   let candidates=await filterBudgetRows(sourceRows,editedRow,row=>
    (!wantedMakes || wantedMakes.has(cleanFacet(row[5].make).toLocaleLowerCase('ru-RU'))) &&
    ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&

@@ -1,3 +1,5 @@
+import {BuyerGallery} from '@/components/home/BuyerGallery';
+import {SpecialRail} from '@/components/dealers/SpecialRail';
 import {withAjesCount} from '@/lib/catalog/ajes-catalog';
 import {Suspense} from 'react';
 import {AjesRail} from '@/components/catalog/AjesRail';
@@ -45,21 +47,29 @@ export async function generateMetadata({ searchParams }: { searchParams?: Promis
   };
 }
 
+async function DealerGallery({dealer}:{dealer:ReturnType<typeof readShowcase>}){
+ const value=await dealer;
+ return <BuyerGallery images={value?.buyersEnabled?value.buyerPhotos.map(p=>p.url):[]}/>;
+}
+async function DealerSpecials({dealer,city}:{dealer:ReturnType<typeof readShowcase>;city:string}){
+ const value=await dealer;
+ const rail=await homeSpecialRail(city,value).catch(error=>{console.error("home_specials_failed",error);return null;});
+ if(!rail)return null;
+ return <SpecialRail {...rail} desktopSplit/>;
+}
+
 export default async function HomePage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
   const cookieStore = await cookies();
   const fromQuery = cleanCity(first(params.city));
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
-  const [catalog, green, dealerData] = await Promise.all([
+  const dealer=readShowcase("dealer_topavto").catch(error=>{console.error("home_dealer_failed",error);return null;});
+  const [catalog, green] = await Promise.all([
     readHomeCatalogSnapshot(10).then(value=>withAjesCount(value)).catch((error) => {
       console.error("home_initial_catalog_failed", error);
       return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
     }),
     readGreenCorner().catch(() => null),
-    readShowcase("dealer_topavto").then(async dealer => ({
-      dealer,
-      specialRail: await homeSpecialRail(fromQuery || fromCookie, dealer),
-    })),
   ]);
   const [greenItems, pricedItems] = await Promise.all([
     applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer)),
@@ -69,15 +79,14 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
       return catalog.items;
     }),
   ]);
-  const {dealer, specialRail} = dealerData;
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(WEBSITE_SCHEMA)}}/>
     <DealerCitySync/>
     <div className={styles.scope}>
       <HomePageClient
         japanAuctions={<Suspense fallback={null}><AjesRail/></Suspense>}
-        dealerGallery={dealer ? (dealer.buyersEnabled ? dealer.buyerPhotos.map(p=>p.url) : []) : undefined}
-        specialRail={specialRail}
+        dealerGallerySlot={<Suspense fallback={<div className="min-h-[160px]" aria-busy="true"/>}><DealerGallery dealer={dealer}/></Suspense>}
+        specialRailSlot={<Suspense fallback={null}><DealerSpecials dealer={dealer} city={fromQuery || fromCookie}/></Suspense>}
         initialGreen={{items:greenItems,total:green?.items.length || 0}}
         initialCity={fromQuery || fromCookie}
         initialOffers={pricedItems}

@@ -42,7 +42,7 @@ assert all(m['Destination']=='/run/avtocena-metrics' and not m['RW'] for m in d[
 bind=d['HostConfig']['PortBindings']['3000/tcp'];assert len(bind)==1 and bind[0]['HostIp']=='127.0.0.1'
 port=int(bind[0]['HostPort']);assert port in [3000,3001]
 (p/'old-port').write_text(str(port));(p/'new-port').write_text(str(6001-port))
-overrides={'AVTOCENA_CALCULATION_VERSION':sys.argv[3],'AVTOCENA_RELEASE_SHA':sys.argv[2],'NODE_OPTIONS':'--max-old-space-size=6144','CATALOG_STORAGE_TIMING':'1','CATALOG_RATE_TIMEOUT_MS':'2500'}
+overrides={'AVTOCENA_CALCULATION_VERSION':sys.argv[3],'AVTOCENA_RELEASE_SHA':sys.argv[2],'NODE_OPTIONS':'--max-old-space-size=6144','CATALOG_STORAGE_TIMING':'1','CATALOG_RATE_TIMEOUT_MS':'2500','AVTOCENA_INTERACTIVE_READ_BUDGET_MS':'10000'}
 env=[e for e in d['Config']['Env'] if e.split('=',1)[0] not in overrides]
 env += [k+'='+v for k,v in overrides.items()]
 assert all('\n' not in e and '\r' not in e for e in env)
@@ -77,7 +77,7 @@ if docker inspect "$candidate" >/dev/null 2>&1; then
 fi
 ! docker inspect "$backup" >/dev/null 2>&1
 docker run -d --name "$candidate" --label avtocena.role=production --restart unless-stopped \
- --memory 10g --cpus 6 --pids-limit 512 --log-opt max-size=10m --log-opt max-file=3 \
+ --memory 8g --cpus 2 --pids-limit 512 --log-opt max-size=10m --log-opt max-file=3 \
  --env-file "$runtime/runtime.env" -v /opt/avtocena/metrics:/run/avtocena-metrics:ro \
  -p "127.0.0.1:$port:3000" "avtocena-regcloud:$release" >/dev/null
 switched=0
@@ -155,6 +155,9 @@ for market, source in [('japan','ajes'),('korea','ajes'),('korea','existing'),('
 try:urllib.request.urlopen(base+'/api/crm/server-resources',timeout=15);raise AssertionError('metrics exposed')
 except urllib.error.HTTPError as e:assert e.code in [401,403]
 PY
+# Candidate preparation has a smaller CPU budget than the serving process.
+# Acceptance runs before switching and again after the old process is stopped.
+python3 "$runtime/regcloud-performance-gate.py" "http://127.0.0.1:$port" "$release"
 python3 - "$config" "$old_port" "$port" <<'PY'
 import pathlib,sys
 p=pathlib.Path(sys.argv[1]);s=p.read_text();old='127.0.0.1:'+sys.argv[2];assert s.count(old)==1
@@ -195,6 +198,8 @@ for attempt in 1 2 3; do
 done
 test "$ready" = 1
 docker stop --time 30 "$old" >/dev/null
+docker update --cpus 6 --memory 10g "$candidate" >/dev/null
+python3 "$runtime/regcloud-performance-gate.py" "http://127.0.0.1:$port" "$release"
 docker rename "$old" "$backup"
 docker rename "$candidate" "$old"
 committed=1

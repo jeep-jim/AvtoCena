@@ -32,7 +32,7 @@ jobs:
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           release=6de99ab6a8486859dd40e1e43788d61a345e6626
           remote_dir="/opt/avtocena/releases/$release"
-          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh "root@151.248.113.177:$remote_dir/"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py "root@151.248.113.177:$remote_dir/"
           ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
           set -euo pipefail
           release=6de99ab6a8486859dd40e1e43788d61a345e6626

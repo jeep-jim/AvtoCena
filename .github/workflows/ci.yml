@@ -20,6 +20,8 @@ jobs:
       - run: npm ci
       - name: Audit production dependencies before merge
         run: npm audit --omit=dev --audit-level=high
+      - name: Enforce performance release budgets
+        run: python3 tests/regcloud-performance-gate.test.py
       - name: Complete regression suite
         run: npm test
       - name: Customs tests

@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import {staleJapanPreviewObjects} from "./lib/catalog-runtime-cleanup.mjs";
+import {staleJapanPreviewObjects,stalePriceSnapshotObjects} from "./lib/catalog-runtime-cleanup.mjs";
 import { readProtectedImageReferences } from "./lib/catalog-cleanup-image-references.mjs";
 import { planInternalChunkCleanup } from "./lib/catalog-internal-cleanup.mjs";
 const { catalogCandidateObjectExpired } = await import("../apps/web/lib/catalog/refresh-policy.ts");
@@ -185,7 +185,7 @@ if (!publicGeneration || !generationIds.length) {
     const modifiedAt = objectAge(object.lastModified);
     return object.key && modifiedAt > 0 && modifiedAt < stagingCutoff;
   });
-  const staleRuntimeObjects = staleJapanPreviewObjects(catalogObjects, protectedGenerations, cutoff);
+  const staleRuntimeObjects = [...staleJapanPreviewObjects(catalogObjects, protectedGenerations, cutoff),...stalePriceSnapshotObjects(catalogObjects)];
   const allDeleteObjects = [...generationDeleteObjects, ...internalDeleteObjects, ...imageDeleteObjects, ...staleSourceCandidateObjects, ...staleBrandProjectionObjects, ...staleRuntimeObjects];
   const plannedDeletes = allDeleteObjects.length;
   const plannedBytes = objectBytes(allDeleteObjects);

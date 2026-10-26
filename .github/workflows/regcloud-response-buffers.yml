@@ -28,7 +28,7 @@ jobs:
           unset SSH_PRIVATE_KEY
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           remote=/opt/avtocena/response-buffers-${GITHUB_SHA}.sh
-          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh "root@151.248.113.177:$remote"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py "root@151.248.113.177:$remote"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$remote'" <<'REMOTE'
           set -euo pipefail
           umask 077

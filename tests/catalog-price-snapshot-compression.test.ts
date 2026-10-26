@@ -15,7 +15,7 @@ test('large shared snapshots reduce transferred JSON and retain exact prices, id
  const load=async()=>{calls++;return compact;};
  try{
   resetSharedBudgetPriceCache();const result=await sharedBudgetPrices(index,'korea','stable',load,async()=>'stable');
-  assert.equal(saved.encoding,'gzip-base64');assert.equal(writtenPath,'catalog/runtime-budget-prices-v2/korea.json');
+  assert.equal(saved.encoding,'gzip-base64');assert.match(writtenPath,/^catalog\/runtime-budget-prices-v3\/korea\/[a-f0-9]{64}\.json$/);
   const wireBytes=Buffer.byteLength(JSON.stringify(saved));
   const referenceBytes=Buffer.byteLength(JSON.stringify(index.rows.map(row=>[row[5].id,row[1],row[2],row[4],row[6]??null])));
   assert.ok(wireBytes<referenceBytes*0.6,`${wireBytes}/${referenceBytes}`);

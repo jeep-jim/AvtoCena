@@ -59,6 +59,7 @@ jobs:
         run: |
           node scripts/check-runtime-streams.mjs
           python3 tests/regcloud-response-buffers.test.py
+          python3 tests/regcloud-performance-gate.test.py
       - name: Verify production dependency security
         run: npm audit --omit=dev --audit-level=high
       - name: Verify catalog storage and bounded projection integrity
@@ -188,7 +189,7 @@ jobs:
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           remote_dir="/opt/avtocena/releases/$GITHUB_SHA"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
-          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$GITHUB_SHA' '$(node scripts/catalog-calculation-version.mjs)' 1"
       - name: Verify published encyclopedia fields against this exact release
         run: node --import tsx scripts/encyclopedia/verify-public-release.mjs

@@ -299,10 +299,12 @@ function RoutePreloaderInner(){
   const cancelWarm=()=>{if(warmTimer!==null)clearTimeout(warmTimer);warmTimer=null;warmingRoute="";};
   const anchorFor=(event:Event)=>event.target instanceof Element?event.target.closest<HTMLAnchorElement>("a[href]"):null;
   const warm=(event:Event)=>{
+   if(document.visibilityState!=="visible"||(navigator as Navigator & {connection?:{saveData?:boolean}}).connection?.saveData)return;
    const anchor=anchorFor(event);
    if(!anchor||anchor.dataset.noRouteLoader==="true"||anchor.dataset.intentPrefetch==="true"||anchor.target==="_blank"||anchor.hasAttribute("download"))return;
    const url=new URL(anchor.href,window.location.href);
    if(url.origin!==window.location.origin||sameDocumentHashNavigation(anchor,url))return;
+   if(url.pathname==="/cars"&&url.search)return;
    const route=`${url.pathname}${url.search}`;
    if(route===`${window.location.pathname}${window.location.search}`||warmedRoutesRef.current.has(route))return;
    const run=()=>{cancelWarm();warmedRoutesRef.current.add(route);if(warmedRoutesRef.current.size>64)warmedRoutesRef.current.delete(warmedRoutesRef.current.values().next().value!);router.prefetch(route);};
