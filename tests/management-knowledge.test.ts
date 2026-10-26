@@ -24,7 +24,7 @@ test('known values, year, mechanical conflicts, weak matches and model identitie
  assert.deepEqual(managementParameters({id:'new',make:'Honda',model:'Vezel',year:2025,fuel:'petrol'},index),{});
  const conflict=structuredClone(index);conflict.models[fact.key].second={...fact,offerId:'second',values:{...donor,powerHp:180}};
  assert.equal(managementParameters({...donor,id:'new',powerHp:undefined},conflict).powerHp,undefined);
- const draft=managementDraft({operational:{managementKnowledge:{parameters:{powerHp:150}}}},{powerHp:'170'});
+ const draft=managementDraft({powerHp:170,operational:{managementKnowledge:{parameters:{powerHp:150}}}},{powerHp:'170'});
  assert.equal(draft.powerHp,'170');
 });
 test('confirmed knowledge is durable, revisioned and reaches the actual price engine with a new seller price',async()=>{
@@ -45,6 +45,8 @@ test('confirmed knowledge is durable, revisioned and reaches the actual price en
   const target:any={...donor,id:'fresh',market:'china',sourceId:'fixture',sourceOfferId:'fresh',sourcePrice:80000,sourceCurrency:'CNY',powerHp:undefined,catalogPricingMode:'seller'};
   const parameters=managementParameters(target,stored);const enriched={...target,operational:{managementKnowledge:{revision:stored.revision,parameters}}};
   const draft=offerPrecedentParameterDraft(enriched);assert.equal(draft.powerHp,'150');
+  const japan={...enriched,id:'ajes-stats-fixture',market:'japan',sourceId:'ajes_japan_feed',operational:{...enriched.operational,raw:{sourcePower:'100,150'}}};
+  assert.equal(offerPrecedentParameterDraft(japan).powerHp,'150','confirmed compatible input beats the first unconfirmed supplier alternative');
   const result=await calculateOfferWithCustomerParametersDetailed(enriched,validateCustomerParameters(draft));assert.equal(result.ok,true);
   const later=await calculateOfferWithCustomerParametersDetailed({...enriched,sourcePrice:100000},validateCustomerParameters(draft));assert.ok(result.ok&&later.ok&&later.calculation.totalRub>result.calculation.totalRub);
   assert.equal(target.powerHp,undefined);

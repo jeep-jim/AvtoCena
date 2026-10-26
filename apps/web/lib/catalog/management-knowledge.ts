@@ -87,7 +87,9 @@ export function managementDraft(offer:any,draft:Record<string,string>){
  const result={...draft};
  for(const [field,value] of Object.entries(parameters)){
   const key=field==='powertrainKind'?'hybridKind':field;
-  if(!result[key]||result[key]==='unknown')result[key]=String(value);
+  // This is the initial draft, before the visitor edits it. A supplied
+  // alternative/estimate must not mask an empty actual vehicle field.
+  if(!known(offer[field])||!result[key]||result[key]==='unknown')result[key]=String(value);
  }
  return result;
 }
