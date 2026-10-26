@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-authorized complete performance rollout: exact Japan quote context and batched ordered membership; PR1538–1545 passed CI; unchanged warm and after-TTL acceptance, rollback and source evidence requirements.",
+  "reason": "Deploy reviewed performance fixes through PR1547: shared catalog generation pointer and bounded display-label cache, plus earlier compact filtering, sort position reuse, queue/deadline bounds and lazy directory. CI40352333546 passed2600 tests, types and production build. Preserve all evidence, owner switches, exact prices, pre/post activation warm and after-TTL budgets and rollback.",
   "ideaReports": [],
-  "requestedAt": "2026-10-26T14:41:56.229Z"
+  "requestedAt": "2026-10-26T17:40:38.431Z"
 }
