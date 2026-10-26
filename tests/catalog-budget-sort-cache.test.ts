@@ -32,3 +32,13 @@ test('clearing a cache during async byte measurement cannot repopulate the clear
  const first=c.get('a',async()=>{calls++;return 'old';});await new Promise(r=>setImmediate(r));c.clear();release(1);assert.equal(await first,'old');
  assert.equal(await c.get('a',async()=>{calls++;return 'new';}),'new');assert.equal(calls,2);
 });
+
+test('membership hashing preserves exact IDs and order across batch boundaries',async()=>{
+ const c=new BudgetSortOrderCache();let calls=0;
+ const ctx:BudgetSortContext={generation:'g',index:1,revision:'r',day:'d',city:'',mode:'year',pricing:[]};
+ const rows=Array.from({length:600},(_,i)=>row(`id-${i}\n"🚗`));
+ const load=async()=>{calls++;return Uint32Array.from([0]);};
+ await c.get(ctx,rows,load);await c.get(ctx,rows.map(r=>row(r[5].id)),load);assert.equal(calls,1);
+ const changed=rows.map(r=>row(r[5].id));changed[257]=row('different');await c.get(ctx,changed,load);assert.equal(calls,2);
+ const reordered=[...rows];[reordered[255],reordered[256]]=[reordered[256],reordered[255]];await c.get(ctx,reordered,load);assert.equal(calls,3);
+});
