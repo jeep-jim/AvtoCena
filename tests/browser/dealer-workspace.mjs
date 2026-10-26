@@ -283,9 +283,9 @@ try{
   const missing=page.locator('.dealer-editor-main [aria-invalid=true]');
   assert.ok(await missing.count()>0,'unfilled required fields are marked');
   for(const field of await missing.all())assert.equal(await field.evaluate(el=>getComputedStyle(el).borderTopColor),'rgb(239, 68, 68)','required border stays red in '+theme);
-  await page.getByLabel('Коробка передач',{exact:true}).fill('Автомат');
-  assert.equal(await page.getByLabel('Коробка передач',{exact:true}).getAttribute('aria-invalid'),null);
-  await page.getByLabel('Коробка передач',{exact:true}).fill('');
+  await page.getByRole('combobox',{name:/^Коробка передач/}).selectOption('Автомат (АКПП)');
+  assert.equal(await page.getByRole('combobox',{name:/^Коробка передач/}).getAttribute('aria-invalid'),null);
+  await page.getByRole('combobox',{name:/^Коробка передач/}).selectOption('');
   await page.getByRole('button',{name:'Цвет',exact:true}).click();
   const palette=page.getByRole('dialog',{name:'Цвет автомобиля'});await palette.waitFor();
   assert.equal(await palette.locator('button[aria-pressed]').count(),20);
@@ -296,7 +296,7 @@ try{
   assert.match(await page.getByRole('button',{name:'Цвет',exact:true}).innerText(),/Синий/);
   await page.getByRole('button',{name:'Цвет',exact:true}).click();await palette.getByRole('button',{name:'Белый',exact:true}).click();
   await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('Белый'));
-  if(width<761){const pair=await page.locator('.dealer-power-pair').boundingBox();for(const name of ['Объём, см³','30-мин. мощность, кВт','Коробка передач','Привод','Кузов','Цвет','Пробег, км']){const box=await page.getByLabel(name,{exact:true}).boundingBox();assert.ok(Math.abs(box.x-pair.x)<2&&Math.abs(box.width-pair.width)<2,'mobile field uses full row: '+name);}}
+  if(width<761){const pair=await page.locator('.dealer-power-pair').boundingBox();for(const name of ['Объём, см³','30-мин. мощность, кВт','Коробка передач','Привод','Кузов','Цвет','Пробег, км']){const field=['Объём, см³','Коробка передач','Привод','Кузов'].includes(name)?page.getByRole('combobox',{name:new RegExp('^'+name)}):page.getByLabel(name,{exact:true});const box=await field.boundingBox();assert.ok(Math.abs(box.x-pair.x)<2&&Math.abs(box.width-pair.width)<2,'mobile field uses full row: '+name);}}
   const fold=page.locator('.dealer-offer-fields > details').last();await page.getByLabel('Таможня сверх цены, ₽',{exact:true}).scrollIntoViewIfNeeded();const summary=await fold.locator(':scope > summary').boundingBox();assert.ok(summary.y>=0&&summary.y<180,'collapse header remains visible');
   await page.getByLabel('Статус автомобиля',{exact:true}).selectOption('published');assert.equal(await page.getByLabel('Статус',{exact:true}).inputValue(),'draft');await page.getByText(/Для публикации Toyota RAV4 заполните:/).waitFor();
   await page.getByRole('switch',{name:'Подзаголовок',exact:true}).click();await page.getByLabel('Подзаголовок ленты',{exact:true}).fill('От 5 дней — автомобиль у вас дома');assert.equal(await page.getByLabel('Подзаголовок ленты',{exact:true}).getAttribute('maxlength'),'70');await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.specialSubtitleEnabled,true);
