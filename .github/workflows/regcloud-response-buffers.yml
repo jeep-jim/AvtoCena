@@ -1,0 +1,67 @@
+name: Regcloud — repair response header buffers
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-response-buffers.json']
+permissions:
+  contents: read
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python3 tests/regcloud-response-buffers.test.py
+      - name: Apply tested buffers with rollback and browser response checks
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote=/opt/avtocena/response-buffers-${GITHUB_SHA}.sh
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh "root@151.248.113.177:$remote"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$remote'" <<'REMOTE'
+          set -euo pipefail
+          umask 077
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -w 300 9
+          config=/etc/nginx/conf.d/avtocena-prepare.conf
+          backup=$(mktemp)
+          cp -a "$config" "$backup"
+          success=0
+          cleanup(){
+            if [ "$success" != 1 ]; then cp -a "$backup" "$config"; nginx -t && systemctl reload nginx; fi
+            rm -f "$backup" "$1"
+          }
+          script=$1
+          trap 'cleanup "$script"' EXIT
+          bash "$script" --configure-response-buffers "$config"
+          nginx -t
+          systemctl reload nginx
+          python3 - <<'VERIFY'
+          import urllib.request,time,json,gzip
+          for kind,ua in [('desktop','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36'),('mobile','Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1')]:
+              for path in ['/','/cars','/api/health']:
+                  start=time.monotonic()
+                  req=urllib.request.Request('https://avtocena.com'+path,headers={'User-Agent':ua,'Accept-Encoding':'gzip','Cache-Control':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=35) as response:
+                      headers=time.monotonic()-start
+                      wire=response.read()
+                      body=gzip.decompress(wire) if response.headers.get('Content-Encoding')=='gzip' else wire
+                      assert response.status==200
+                      if path!='/api/health':assert b'</html>' in body and b'$RX(' not in body and len(body)>50000
+                      else:assert json.loads(body)['ok'] is True
+                  print('BROWSER_RESPONSE',json.dumps(dict(kind=kind,path=path,status=200,headersSeconds=round(headers,3),totalSeconds=round(time.monotonic()-start,3),wireBytes=len(wire))),flush=True)
+          VERIFY
+          success=1
+          echo RESPONSE_BUFFERS_APPLIED_AND_VERIFIED
+          REMOTE

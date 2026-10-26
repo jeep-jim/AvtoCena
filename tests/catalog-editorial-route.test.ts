@@ -7,6 +7,7 @@ test('editorial API rejects unauthorized writes, foreign origins, missing photos
  const state:any={actor:{id:'owner',role:'owner',companyId:'dealer_topavto',displayName:'Owner'},offer:{id:'one',market:'korea',sourceId:'s',sourceOfferId:'1',make:'Hyundai',model:'Avante',images:[{url:'https://example.com/car-a.jpg'},{url:'https://example.com/car-b.jpg'}]},index:{revision:'0',entries:{}},writes:0};
  (globalThis as any).__catalogEditorialRoute=state;
  const sources:Record<string,string>={
+  '@/lib/catalog/management-knowledge':`export const rememberManagementEditorial=async()=>{};`,
   'next/cache':`export const revalidatePath=(path,type)=>{globalThis.__catalogEditorialRoute.revalidated=[path,type];};`,
   '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__catalogEditorialRoute.actor;`,
   '@/lib/catalog/storage':`export const getOfferFromCurrentShard=async()=>globalThis.__catalogEditorialRoute.offer;`,
