@@ -1,6 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 umask 077
+# Shared by normal releases and the one-time gateway repair. No app restart.
+if [[ "${1:-}" = --configure-response-buffers ]]; then
+  python3 - "$2" <<'BUFFERS'
+import pathlib,re,sys
+p=pathlib.Path(sys.argv[1]);s=p.read_text()
+blocks=list(re.finditer(r'(?ms)^  location / \{\n.*?^  \}',s))
+assert len(blocks)==1, 'expected_one_application_location'
+m=blocks[0];block=m.group()
+assert len(re.findall(r'proxy_pass http://127\.0\.0\.1:\d+;',block))==1
+block=re.sub(r'(?m)^    proxy_(?:buffer_size|buffers|busy_buffers_size)\s+[^;]+;\n','',block)
+policy='    proxy_buffer_size 32k;\n    proxy_buffers 8 32k;\n    proxy_busy_buffers_size 64k;\n'
+block=block.replace('    proxy_pass ',policy+'    proxy_pass ',1)
+p.write_text(s[:m.start()]+block+s[m.end():])
+BUFFERS
+  exit 0
+fi
 release=$1
 calculator=$2
 prewarm=${3:-0}
@@ -169,6 +185,7 @@ if '# AvtoCena bounded social previews' not in s:
 p.write_text(s)
 PY
 switched=1
+bash "$0" --configure-response-buffers "$config"
 nginx -t
 systemctl reload nginx
 ready=0
