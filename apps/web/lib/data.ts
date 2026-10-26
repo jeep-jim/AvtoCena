@@ -198,10 +198,14 @@ export class ObjectJsonStorage implements JsonStorage {
       extraHeaders = { ...extraHeaders, "if-match": extraHeaders["if-match"].slice(1, -1) };
     }
     const payloadHash = sha256(body ?? "");
-    const attempts = Math.max(3, Number(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS || 6));
+    const readBudget=Number(process.env.AVTOCENA_INTERACTIVE_READ_BUDGET_MS||0);
+    const boundedRead=(method==='GET'||method==='HEAD')&&Number.isFinite(readBudget)&&readBudget>0;
+    const deadline=boundedRead?Date.now()+readBudget:Infinity;
+    const attempts = boundedRead?2:Math.max(3, Number(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS || 6));
     const timeoutMs = objectStorageRequestTimeoutMs(Buffer.byteLength(body ?? ""));
     let lastError: unknown;
     for (let attempt = 0; attempt < attempts; attempt++) {
+      if(Date.now()>=deadline){lastError=new Error('object_storage_read_deadline');break;}
       const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, "");
       const date = amzDate.slice(0, 8);
       const headers: Record<string, string> = { host: url.host, "x-amz-content-sha256": payloadHash, "x-amz-date": amzDate, ...extraHeaders };
@@ -214,17 +218,17 @@ export class ObjectJsonStorage implements JsonStorage {
       const signingKey = hmac(hmac(hmac(hmac(`AWS4${cfg.secretAccessKey}`, date), cfg.region), "s3"), "aws4_request");
       headers.authorization = `AWS4-HMAC-SHA256 Credential=${cfg.accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${crypto.createHmac("sha256", signingKey).update(stringToSign).digest("hex")}`;
       const controller = new AbortController();
-      const headerTimeout = setTimeout(() => controller.abort(), timeoutMs);
+      const headerTimeout = setTimeout(() => controller.abort(), Math.min(timeoutMs,deadline-Date.now()));
       let response: Response;
       try {
         response = await fetch(url, { method, headers, body: body as any, signal: controller.signal });
         clearTimeout(headerTimeout);
         if (response.body && method !== "HEAD") {
-          const responseBytes = await readObjectStorageResponseBody(response, timeoutMs, controller);
+          const responseBytes = await readObjectStorageResponseBody(response, Math.min(timeoutMs,Math.max(1,deadline-Date.now())), controller);
           objectStorageResponseBodies.set(response, responseBytes);
         }
       }
-      catch (error) { lastError = error; if (attempt + 1 >= attempts) break; await sleep(Math.min(5_000, 250 * 2 ** attempt)); continue; }
+      catch (error) { lastError = error; if (attempt + 1 >= attempts) break; await sleep(Math.max(0,Math.min(5_000, 250 * 2 ** attempt,deadline-Date.now()))); continue; }
       finally { clearTimeout(headerTimeout); }
       if (response.ok || response.status === 304 || response.status === 404 || response.status === 412 || response.status === 409) return response;
       if (!TRANSIENT_STATUS.has(response.status)) {
@@ -235,7 +239,7 @@ export class ObjectJsonStorage implements JsonStorage {
     }
       lastError = new Error(`object_storage_${method}_${response.status}`);
       if (response.body) await response.body.cancel().catch(() => undefined);
-      if (attempt + 1 < attempts) await sleep(Math.min(5_000, 250 * 2 ** attempt));
+      if (attempt + 1 < attempts) await sleep(Math.max(0,Math.min(5_000, 250 * 2 ** attempt,deadline-Date.now())));
     }
     const detail = lastError instanceof Error ? lastError.message : String(lastError || "unknown");
     throw new Error(`object_storage_${method}_unreachable:${detail}`);

@@ -31,6 +31,8 @@ type Option = { value: string; label: string; min?: number; max?: number };
 type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string; fuel?: string };
 type Props = {
   dealerGallery?: string[];
+  dealerGallerySlot?:ReactNode;
+  specialRailSlot?:ReactNode;
   specialRail?: {heading:string;items:SpecialRailItem[]};
   japanAuctions?: ReactNode;
   initialGreen?: {items:any[];total:number};
@@ -226,7 +228,7 @@ function CatalogLoadingSkeleton() {
   </div>;
 }
 
-export default function HomePageClient({ japanAuctions, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount, initialCountIncomplete=false, initialMarketCountInfo={} }: Props) {
+export default function HomePageClient({ japanAuctions, dealerGallerySlot, specialRailSlot, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount, initialCountIncomplete=false, initialMarketCountInfo={} }: Props) {
   const [marketCountInfo,setMarketCountInfo]=useState(initialMarketCountInfo);
 
   const router = useRouter();
@@ -344,9 +346,9 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
         <div className="ab-home-intro"><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p></div>
         <div className="ab-budget-desktop">{budgetPanel}</div>
       </section>
-      <div className="ac-home-hero-gallery -mt-2 lg:mt-0"><BuyerGallery images={dealerGallery} /></div>
+      <div className="ac-home-hero-gallery -mt-2 lg:mt-0">{dealerGallerySlot ?? <BuyerGallery images={dealerGallery} />}</div>
       </div>
-      {specialRail && <SpecialRail {...specialRail} desktopSplit/>}
+      {specialRailSlot ?? (specialRail && <SpecialRail {...specialRail} desktopSplit/>)}
       <div className="ac-home-services mt-4 hidden gap-4 lg:grid lg:grid-cols-1 lg:items-stretch">
         <section className="ac-home-finance grid min-h-[206px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">
           <a href={AUTOCREDIT_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} aria-label="Подобрать автокредит в ВТБ" className="ac-executor-block relative block min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6 transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35c932] active:scale-[.995]">

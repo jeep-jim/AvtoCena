@@ -78,7 +78,9 @@ test("offer navigation stays visibly pending and warms only the intended offer",
 test("REG production retains bounded resources and warms the candidate before activation", () => {
   assert.match(deploy, /regcloud-deploy-production\.sh/);
   assert.match(deployRuntime, /--restart unless-stopped/);
-  assert.match(deployRuntime, /--memory 10g --cpus 6 --pids-limit 512/);
+  assert.match(deployRuntime, /--memory 8g --cpus 2 --pids-limit 512/);
+  assert.match(deployRuntime, /docker update --cpus 6 --memory 10g/);
+  assert.match(deployRuntime, /regcloud-performance-gate\.py/);
   assert.match(deployRuntime, /for path in \['\/api\/health','\/','\/cars','\/'\]/);
   assert.match(deployRuntime, /releaseSha/);
 });

@@ -68,6 +68,10 @@ export async function saveShowcase(id:string,raw:any){
 }
 export type PublicFeatures = { accountAppearance?:AccountAppearance; siteControls?:SiteControls; version: number; affiliatesEnabled: boolean; knowledgeEnabled?:boolean; partnersEnabled?:boolean };
 const publicFeaturesCache = new DetailReadCache<PublicFeatures>({maxEntries:1,maxBytes:256*1024,ttlMs:2000,concurrency:2});
+// Only the root presentation uses SWR. Server permissions and page admission
+// continue to call readPublicFeatures and its strict freshness policy.
+const publicDisplayCache = new DetailReadCache<PublicFeatures>({maxEntries:1,maxBytes:256*1024,ttlMs:2000,concurrency:1,staleWhileRevalidateMs:60_000});
+export function readPublicDisplayFeatures(){return publicDisplayCache.get("display",readPublicFeatures);}
 export async function readPublicFeatures() {
   const features=await publicFeaturesCache.get("features",()=>readDataJson<PublicFeatures>("settings/public-features.json", {
     version: 0,
@@ -95,5 +99,7 @@ export async function savePublicFeatures(raw: PublicFeatures) {
   return saved;
     },
   );
+  publicFeaturesCache.clear();
+  publicDisplayCache.clear();
   return saved;
 }

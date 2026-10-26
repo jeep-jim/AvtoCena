@@ -47,7 +47,7 @@ jobs:
           release=a2a25dffc24c92d57b7a8ceb2e9b31b6369ea8a5
           calculator=4688433a9c87f83ffa84e07a636701bb3a9c07fb176ae7081f077998540165a6
           remote_dir="/opt/avtocena/releases/$release"
-          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$release' '$calculator'" <<'REMOTE'
           set -euo pipefail
           release=$1

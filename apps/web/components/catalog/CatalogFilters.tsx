@@ -8,7 +8,7 @@ import {normalizedCatalogSort} from "@/lib/catalog/catalog-sort";
 import {filterSelections} from '@/lib/catalog/filter-selections';
 import {CHINA_MIN_MODEL_YEAR} from "@/lib/catalog/china-year-policy";
 import {JAPAN_MIN_MODEL_YEAR} from "@/lib/catalog/japan-year-policy";
-import {rememberFilterScroll,restoreFilterScroll} from "@/lib/catalog/filter-scroll";
+import {rememberFilterScroll,restoreFilterScroll,lockFilterScrollAnchor} from "@/lib/catalog/filter-scroll";
 import {SELECTION_EVENT,OPEN_SELECTION_FILTERS} from "@/lib/dealers/selection-share";
 import {SelectedFilterChip} from "./SelectedFilterChip";
 import {CatalogDesktopSelection} from "./CatalogSelectionContext";
@@ -114,7 +114,11 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
   const selected=filterSelections(value);
   const active=options.find(item=>item.value===value);
   const chosen=(item:string)=>item?selected.includes(item):!selected.length;
-  const choose=(next:string)=>{if(multiple){onChange(!next?"":selected.includes(next)?selected.filter(v=>v!==next).join("|"):[...selected,next].join("|"));}else{onChange(next);close();}};
+  const choose=(next:string)=>{
+    // Green Corner is a separate stock route, not an additional source market.
+    if(name==="market"&&(next==="green"||selected.includes("green"))){onChange(next===value?"":next);return;}
+    if(multiple){onChange(!next?"":selected.includes(next)?selected.filter(v=>v!==next).join("|"):[...selected,next].join("|"));}else{onChange(next);close();}
+  };
   const title=multiple&&selected.length?selected.map(v=>options.find(o=>o.value===v)?.label||v).join(", "):active?.label||placeholder;
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"} ${className}`}>
     <input type="hidden" name={name} value={value} />
@@ -383,6 +387,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     const body = document.body;
     const html = document.documentElement;
     const scrollY = window.scrollY;
+    const releaseAnchor=lockFilterScrollAnchor();
     const saved = { overflow: body.style.overflow, position: body.style.position, top: body.style.top, width: body.style.width, htmlOverflow: html.style.overflow, scrollBehavior: html.style.scrollBehavior };
     const escape = (event: KeyboardEvent) => { if (event.key === "Escape") setMobileOpen(false); };
     // Fixed body also stops background scrolling in mobile Safari.
@@ -398,6 +403,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       html.style.overflow = saved.htmlOverflow;
       html.style.scrollBehavior = "auto";
       window.scrollTo({top:scrollY,behavior:"instant"});
+      releaseAnchor();
       restoreFilterScroll();
       html.style.scrollBehavior = saved.scrollBehavior;
       window.removeEventListener("keydown", escape);

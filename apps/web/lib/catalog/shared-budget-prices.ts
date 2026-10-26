@@ -1,7 +1,9 @@
 import {readCalculationIndex} from '../encyclopedia/calculation-index';
 import {readCatalogEditorial} from './editorial';
 import {createHash} from 'node:crypto';
-import {gzipSync,gunzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync,gzip,gunzip} from 'node:zlib';
+import {promisify} from 'node:util';
+const gzipAsync=promisify(gzip),gunzipAsync=promisify(gunzip);
 import {getJsonStorage} from '../data';
 import {getEffectiveMarketVersion} from '../effective-market-settings';
 import {catalogRateFingerprintInputs} from './rates';
@@ -39,6 +41,15 @@ const MAX_SNAPSHOT_BYTES=64*1024*1024;
 export function encodeBudgetSnapshot(snapshot:Snapshot):SnapshotWire{
  const json=JSON.stringify(snapshot);
  return Buffer.byteLength(json)<65536 ? snapshot : {encoding:'gzip-base64',payload:gzipSync(json,{level:6}).toString('base64')};
+}
+async function decodeBudgetSnapshotAsync(value:any):Promise<any>{
+ if(value?.encoding!=='gzip-base64')return value;
+ if(typeof value.payload!=='string'||value.payload.length>MAX_SNAPSHOT_BYTES*2)return null;
+ try{const bytes=Buffer.from(value.payload,'base64');if(bytes.toString('base64')!==value.payload)return null;return JSON.parse((await gunzipAsync(bytes,{maxOutputLength:MAX_SNAPSHOT_BYTES})).toString('utf8'));}catch{return null;}
+}
+async function encodeBudgetSnapshotAsync(snapshot:Snapshot):Promise<SnapshotWire>{
+ const json=JSON.stringify(snapshot);
+ return Buffer.byteLength(json)<65536?snapshot:{encoding:'gzip-base64',payload:(await gzipAsync(json,{level:6})).toString('base64')};
 }
 function decodeBudgetSnapshot(value:any):any{
  if(value?.encoding!=='gzip-base64')return value;
@@ -88,9 +99,9 @@ export async function sharedBudgetPrices(index:BudgetCountIndex,market:string,fi
  return cache.get(key,async()=>{
   const storage=getJsonStorage();
   // A separate namespace preserves plain v1 snapshots for an old instance or rollback.
-  const path=`catalog/${displayPrices?"runtime-sort-prices-v2":"runtime-budget-prices-v2"}/${market}.json`;
+  const path=`catalog/${displayPrices?"runtime-sort-prices-v3":"runtime-budget-prices-v3"}/${market}/${key}.json`;
   const stored=await storage.readJson<SnapshotWire|null>(path,null).catch(()=>null);
-  const restored=restoreBudgetPrices(stored,key,source);
+  const restored=restoreBudgetPrices(await decodeBudgetSnapshotAsync(stored),key,source);
   if(restored)return restored;
   const rows=await load();
   // Rates/settings/anchors can change while a large market is being repriced.
@@ -99,9 +110,9 @@ export async function sharedBudgetPrices(index:BudgetCountIndex,market:string,fi
   const prices:Price[]=rows.map(row=>[row[5].id,row[1],row[2],row[4],row[6]??null]);
   const snapshot:Snapshot={version:1,key,sourceIds,createdAt:Date.now(),prices,checksum:hash(prices)};
   if(!restoreBudgetPrices(snapshot,key,source))throw new Error('catalog_budget_snapshot_invalid');
-  // Atomic object replacement; racing instances can only replace with another
-  // fully validated version. A reader checks the key, never just the path.
-  await storage.writeJson(path,encodeBudgetSnapshot(snapshot)).catch(()=>undefined);
+  // Different releases/generations/rates write different objects. A candidate
+  // can never evict the active release snapshot during blue/green preparation.
+  await storage.writeJson(path,await encodeBudgetSnapshotAsync(snapshot)).catch(()=>undefined);
   return rows;
  });
 }

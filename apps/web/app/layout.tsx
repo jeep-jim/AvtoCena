@@ -1,6 +1,6 @@
 import {siteVisibilityCss} from '@/lib/site-controls';
 import {SitePageAccess} from '@/components/site/SitePageAccess';
-import {readPublicFeatures} from "@/lib/dealers/showcase-store";
+import {readPublicDisplayFeatures} from "@/lib/dealers/showcase-store";
 import "../components/telegram/telegram-miniapp.css";
 import {TelegramMiniApp} from "../components/telegram/TelegramMiniApp";
 import {miniAppBootstrap} from "../lib/telegram-miniapp";
@@ -297,7 +297,7 @@ import {Autobot} from '@/components/autobot/Autobot';
 export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const features = await readPublicFeatures();
+  const features = await readPublicDisplayFeatures();
   return (
     <html lang="ru" data-finance-hidden={features.affiliatesEnabled ? undefined : "true"} suppressHydrationWarning>
       <head>

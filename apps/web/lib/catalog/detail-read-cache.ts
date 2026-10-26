@@ -10,6 +10,9 @@ export class DetailReadCache<T> {
   constructor(private readonly options: {
     maxEntries: number; maxBytes: number; ttlMs: number; concurrency: number;
     now?: () => number;
+    maxQueued?: number; queueTimeoutMs?: number;
+    /** Display-only data. Never enable for prices, permissions or source admission. */
+    staleWhileRevalidateMs?: number;
     sizeOf?: (value: T) => number | undefined;
     shouldCache?: (value: T) => boolean;
   }) {}
@@ -30,22 +33,33 @@ export class DetailReadCache<T> {
   get(key: string, load: () => Promise<T>, pendingKey = key): Promise<T> {
     const now = this.options.now || Date.now;
     for (const [id, entry] of this.entries) {
-      if (entry.expiresAt <= now()) this.remove(id);
+      if (entry.expiresAt + (this.options.staleWhileRevalidateMs || 0) <= now()) this.remove(id);
     }
     const cached = this.entries.get(key);
-    if (cached) {
+    if (cached && cached.expiresAt > now()) {
       this.entries.delete(key);
       this.entries.set(key, cached);
       return Promise.resolve(cached.value);
     }
     const pending = this.pending.get(pendingKey);
-    if (pending) return pending;
+    if (pending) return cached ? Promise.resolve(cached.value) : pending;
+    if (this.active >= this.options.concurrency && this.waiters.length >= (this.options.maxQueued ?? 256)) {
+      return cached ? Promise.resolve(cached.value) : Promise.reject(new Error("detail_cache_queue_full"));
+    }
     const epoch = this.epoch;
     const promise = (async () => {
       // Reserve a slot before any I/O; simultaneous card/price lookups must not
       // parse dozens of multi-megabyte blocks at once.
       if (this.active >= this.options.concurrency) {
-        await new Promise<void>(resolve => this.waiters.push(resolve));
+        await new Promise<void>((resolve,reject) => {
+          const next=()=>{clearTimeout(timer);resolve();};
+          const timer=setTimeout(()=>{
+            const position=this.waiters.indexOf(next);
+            if(position>=0)this.waiters.splice(position,1);
+            reject(new Error("detail_cache_queue_timeout"));
+          },this.options.queueTimeoutMs ?? 5_000);
+          this.waiters.push(next);
+        });
       } else {
         this.active++;
       }
@@ -88,6 +102,6 @@ export class DetailReadCache<T> {
     }, () => {
       if (this.pending.get(pendingKey) === promise) this.pending.delete(pendingKey);
     });
-    return promise;
+    return cached ? Promise.resolve(cached.value) : promise;
   }
 }

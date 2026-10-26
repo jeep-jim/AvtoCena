@@ -161,3 +161,12 @@
 
 - Confirmed saves by the TopAvto management team contribute permanent model knowledge for all markets and future offers. Fill only missing compatible values: same make/model/year, at least two independent matching technical attributes, no known mechanical conflicts. Preserve explicit saved calculations and all filled source/manual values; contradictory donor values remain unresolved. Use separate staff provenance and current recipient prices, never donor prices/cities or fabricated certification.
 - Public Autobot may use the full private encyclopedia, registry-derived power data and staff knowledge. Do not expose ASTRA/internal suppliers, links or provenance. Distinguish exact card values, nearby versions and ambiguous ranges. Give concise structured Markdown answers; bright contextual questions and a one-line left-arrow “30 минут” action on electric/hybrid cards. Do not link visitors to the separate auto-calculation page.
+
+# Owner performance requirement — 26.10.2026
+
+- Performance is an acceptance condition, not optional polish. Do not reintroduce whole-market work, unbounded queues/retries, or provider calls into a shared page shell. Preserve truthful prices, admission, manual edits, city and certified-power evidence.
+- Immutable price snapshots must be addressed by the complete validated calculation context. Candidate/old releases must not overwrite one another's reusable snapshots. A stale or mismatched price is never a performance fallback.
+- Changes to search, pricing, storage, global layout, prefetch, media or deployment require correctness tests plus the VM-local performance gate before activation and after switching. Failed gates retain/restore the previous release. HTTP 200, an early streaming shell or an empty result is not a passing page.
+- `scripts/regcloud-performance-gate.py` enforces full-response ceilings: health 250 ms, local search API 1 s, HTML 1–2 s, including a repeat after cache TTL expiry. Do not increase thresholds, skip routes, suppress failure or disable the gate without new explicit owner approval and recorded measurements.
+- Keep the single candidate preparation CPU budget separate from serving traffic. Never solve a regression by disabling evidence checks, discarding inventory, hiding a market, inventing specs, or deleting ASTRA.
+- Keep diagnostics manual/release-triggered. Do not add recurring collectors or probes. Record exact release SHA, tests, measured timing and remaining limitations in roadmap.md; never claim stability from a merged PR alone.
