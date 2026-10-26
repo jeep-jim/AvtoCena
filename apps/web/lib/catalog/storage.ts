@@ -2239,7 +2239,14 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
  const mode=params.sort||"year";
  const terms=parseCatalogSort(mode);if(!terms?.length)return null;
  const markets=[...new Set(selected.rows.map(row=>row[0]))];
- const fingerprints=terms.some(term=>term.startsWith('totalRub'))?await Promise.all(markets.map(budgetPricingFingerprint)):[];
+ const priceFingerprint=async(market:string)=>{
+  if(market==='japan'){
+   const {japanSearchContext}=await import('./japan-delivered-preview');
+   return (await japanSearchContext(selected.generationId))?.key??null;
+  }
+  return budgetPricingFingerprint(market);
+ };
+ const fingerprints=terms.some(term=>term.startsWith('totalRub'))?await Promise.all(markets.map(priceFingerprint)):[];
  // Unversioned markets retain the existing short freshness bound.
  const pricing=JSON.stringify([fingerprints,fingerprints.some(value=>value===null)?Math.floor(Date.now()/30_000):null]);
  let cache=compactSortCache.get(selected.rows);
@@ -2305,7 +2312,7 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
    return selected.rows[a][5].id.localeCompare(selected.rows[b][5].id);
   });
   if(fingerprints.length){
-   const after=await Promise.all(markets.map(budgetPricingFingerprint));
+   const after=await Promise.all(markets.map(priceFingerprint));
    // A short TTL boundary invalidates the next lookup, not an otherwise exact
    // in-flight calculation. Only a real input change invalidates this result.
    if(JSON.stringify(after)!==JSON.stringify(fingerprints)){state.prices=undefined;state.sellerPrices=undefined;state.orders.clear();throw Error('catalog_sort_context_changed');}

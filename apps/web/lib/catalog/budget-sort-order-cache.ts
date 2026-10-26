@@ -15,7 +15,12 @@ export class BudgetSortOrderCache{
   let membership=this.memberships.get(rows);
   if(!membership){membership=(async()=>{
    const hash=createHash('sha256');
-   for(let i=0;i<rows.length;i++){hash.update(JSON.stringify(rows[i][5].id));hash.update('\n');if((i+1)%256===0)await new Promise<void>(resolve=>setImmediate(resolve));}
+   for(let offset=0;offset<rows.length;offset+=256){
+    // Fixed-size JSON batches preserve unambiguous ordered membership while
+    // avoiding two native hash updates for every offer in a large catalog.
+    hash.update(JSON.stringify(rows.slice(offset,offset+256).map(row=>row[5].id)));
+    if(offset+256<rows.length)await new Promise<void>(resolve=>setImmediate(resolve));
+   }
    return hash.digest('hex');
   })();this.memberships.set(rows,membership);}
   const key=createHash('sha256').update(JSON.stringify([context,await membership])).digest('hex');
