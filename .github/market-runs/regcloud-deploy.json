@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Bound compact catalog filtering to 256-row batches, reject unrelated makes after editorial overlays and skip unused body/color work. Preserve UI fixes from PR1536, exact order/count/price parity, all evidence and supplier safeguards, serialized release and rollback.",
+  "reason": "Deploy PR1538: bounded catalog work, per-make index, immutable price snapshots, limited read queues/deadlines, independent homepage blocks and mobile scroll/Green Corner fixes. Enforce VM-local full-response performance gates before and after activation with rollback; preserve all exact ASTRA/evidence requirements, inventory and pricing rules.",
   "ideaReports": [],
-  "requestedAt": "2026-10-26T08:55:53.638678+00:00"
+  "requestedAt": "2026-10-26T11:19:57.106Z"
 }
