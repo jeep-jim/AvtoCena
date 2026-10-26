@@ -9,7 +9,7 @@ test("save endpoint checks session, role, origin and input; recalculates server-
  const state:any={user:null,offer:{id:"lot",market:"korea"},calculations:0,saves:0};
  (globalThis as any).__savedRouteTest=state;
  const sources:Record<string,string>={
- "next/cache":`export const revalidatePath=(...args)=>{globalThis.__savedRouteTest.revalidated=args;};`,
+ "next/cache":`export const unstable_cache=fn=>fn;export const revalidatePath=(...args)=>{globalThis.__savedRouteTest.revalidated=args;};`,
  "@/lib/catalog/editorial":`export const readCatalogEditorial=async()=>({entries:{}});export const applyCatalogEditorial=offer=>offer;`,
  "@/lib/catalog/management-knowledge":`export const rememberManagementCalculation=async()=>{};`,
  "@/lib/crm-activity":`export const recordCrmActivity=async()=>{};export const activityPerson=u=>({id:u.id,name:u.displayName});export const activityChanges=()=>[];`,
