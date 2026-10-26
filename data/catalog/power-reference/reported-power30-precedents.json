@@ -1221,5 +1221,1002 @@
         "originalCertificateReviewed": false
       }
     }
+  },
+  {
+    "modelKey": "toyota:corolla",
+    "modelId": "reported:toyota:corolla",
+    "variantId": "corolla18-before-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1798,
+      "icePowerKw": 72,
+      "motorPeakKw": 53,
+      "drive": "fwd",
+      "yearFrom": 2019,
+      "yearTo": 2023
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corolla",
+    "modelId": "reported:toyota:corolla",
+    "variantId": "corolla18-after-49",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1798,
+      "icePowerKw": 72,
+      "motorPeakKw": 70,
+      "drive": "fwd",
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 49
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. May 2023 transition; year-only 2023 can remain ambiguous.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:rav4",
+    "modelId": "reported:toyota:rav4",
+    "variantId": "rav4-fwd-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-rav4",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:rav4",
+    "modelId": "reported:toyota:rav4",
+    "variantId": "rav4-awd-59",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 128,
+      "drive": "awd",
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    "values": {
+      "power30MinKw": 59
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-rav4",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:wildlander",
+    "modelId": "reported:toyota:wildlander",
+    "variantId": "wildlander-fwd-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-wildlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:wildlander",
+    "modelId": "reported:toyota:wildlander",
+    "variantId": "wildlander-awd-59",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 128,
+      "drive": "awd",
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 59
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-wildlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:harrier",
+    "modelId": "reported:toyota:harrier",
+    "variantId": "harrier-fwd-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-harrier",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:harrier",
+    "modelId": "reported:toyota:harrier",
+    "variantId": "harrier-awd-59",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 128,
+      "drive": "awd",
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 59
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-harrier",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:rav4",
+    "modelId": "reported:toyota:rav4",
+    "variantId": "rav4-20-new-58",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 58
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-rav4",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:rav4",
+    "modelId": "reported:toyota:rav4",
+    "variantId": "rav4-phev-75",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 132,
+      "motorPeakKw": 174,
+      "drive": "awd",
+      "batteryKwh": 15.98,
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    "values": {
+      "power30MinKw": 75
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-rav4",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:wildlander",
+    "modelId": "reported:toyota:wildlander",
+    "variantId": "wildlander-phev-75",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 132,
+      "motorPeakKw": 174,
+      "drive": "awd",
+      "batteryKwh": 15.98,
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    "values": {
+      "power30MinKw": 75
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-wildlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:highlander",
+    "modelId": "reported:toyota:highlander",
+    "variantId": "highlander-awd-51",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 141,
+      "motorPeakKw": 174,
+      "drive": "awd",
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 51
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-highlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:highlander",
+    "modelId": "reported:toyota:highlander",
+    "variantId": "highlander-fwd-40",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 141,
+      "motorPeakKw": 134,
+      "drive": "fwd",
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 40
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-highlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corollacross",
+    "modelId": "reported:toyota:corollacross",
+    "variantId": "corollacross-20-42",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 42
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Importer reports 58 for own car and 42 for other documents; retain both.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corollacross",
+    "modelId": "reported:toyota:corollacross",
+    "variantId": "corollacross-20-58",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 58
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Importer reports 58 for own car and 42 for other documents; retain both.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:frontlander",
+    "modelId": "reported:toyota:frontlander",
+    "variantId": "frontlander-20-42",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 42
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Importer reports 58 for own car and 42 for other documents; retain both.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:frontlander",
+    "modelId": "reported:toyota:frontlander",
+    "variantId": "frontlander-20-58",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 58
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Importer reports 58 for own car and 42 for other documents; retain both.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corollacross",
+    "modelId": "reported:toyota:corollacross",
+    "variantId": "cross18-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1798,
+      "icePowerKw": 72,
+      "motorPeakKw": 53,
+      "drive": "fwd",
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corollacross",
+    "modelId": "reported:toyota:corollacross",
+    "variantId": "cross18-38",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1798,
+      "icePowerKw": 72,
+      "motorPeakKw": 53,
+      "drive": "fwd",
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    "values": {
+      "power30MinKw": 38
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry20-xv80-58",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 58
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry25-xv80-64",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "icePowerKw": 136,
+      "motorPeakKw": 100,
+      "drive": "fwd",
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 64
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry25-xv70-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2023
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Source reports 37–53; bounds retained, not an invented average.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry25-xv70-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2023
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Source reports 37–53; bounds retained, not an invented average.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry25-xv70-53",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2023
+    },
+    "values": {
+      "power30MinKw": 53
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Source reports 37–53; bounds retained, not an invented average.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:bz3x",
+    "modelId": "reported:toyota:bz3x",
+    "variantId": "bz3x-own-document-45",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 150,
+      "drive": "fwd",
+      "engineCode": "TZ175XSAY501",
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 45
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-bz3x",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:bz3x",
+    "modelId": "reported:toyota:bz3x",
+    "variantId": "bz3x-other-documents-67.5",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "drive": "fwd",
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 67.5
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-bz3x",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Other versions lack motor/peak identity in source; retain both bounds.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:bz3x",
+    "modelId": "reported:toyota:bz3x",
+    "variantId": "bz3x-other-documents-74.25",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "drive": "fwd",
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 74.25
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-bz3x",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Other versions lack motor/peak identity in source; retain both bounds.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-old-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2494,
+      "icePowerKw": 118,
+      "drive": "fwd",
+      "yearFrom": 2012,
+      "yearTo": 2018
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-new-29",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 29
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. All four published alternative document values retained.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-new-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. All four published alternative document values retained.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-new-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. All four published alternative document values retained.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-new-88",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 88
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. All four published alternative document values retained.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:breeze",
+    "modelId": "reported:honda:breeze",
+    "variantId": "breeze-hev-65",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "motorPeakKw": 135,
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/honda-breeze",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:breeze",
+    "modelId": "reported:honda:breeze",
+    "variantId": "breeze-hev-67.5",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "motorPeakKw": 135,
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 67.5
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/honda-breeze",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:breezephev",
+    "modelId": "reported:honda:breezephev",
+    "variantId": "breeze-phev-67.5",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "motorPeakKw": 135,
+      "drive": "fwd",
+      "batteryKwh": 17.7,
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 67.5
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/honda-breeze",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
   }
 ]

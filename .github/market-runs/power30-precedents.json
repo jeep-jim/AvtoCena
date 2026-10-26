@@ -1,8 +1,20 @@
 {
   "version": 2,
   "mode": "save_estimates",
-  "runId": "2026-10-25-site-models-04",
-  "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
-  "requestedAt": "2026-10-25",
-  "reason": "Apply additional explicitly reported importer precedents to current site models only; retain provenance, version ranges and reusable profiles."
+  "runId": "2026-10-26-priority-makes-05",
+  "indexDigest": "df6bdaaded2ee9b3180a93227ca926992b7097d4d43df13e8b931f8bf6e04e08",
+  "requestedAt": "2026-10-26",
+  "reason": "One-time priority pass on the exact recovering index. 15 ADAC reports plus 35 importer references/range bounds, source year windows, Tesla abbreviations, full retained inventory gap report. No certified field writes.",
+  "priorityMakes": [
+    "Tesla",
+    "Toyota",
+    "Honda",
+    "Mazda",
+    "Lexus",
+    "Kia",
+    "Hyundai",
+    "Mercedes-Benz",
+    "BMW"
+  ],
+  "waitForPreparedIndexSeconds": 600
 }

@@ -7,9 +7,17 @@ import {astraPower30FactsForKey} from '../../apps/web/lib/encyclopedia/astra-pow
 import {readCurrentPublicCatalogProjection} from '../../apps/web/lib/catalog/storage.ts';
 import {selectWithReportedPrecedents,precedentIdentityKey,precedentModelKeys} from './power30-precedents.mjs';
 const marker=JSON.parse(await fs.readFile('.github/market-runs/power30-precedents.json','utf8'));
-if(!/^[a-f0-9]{64}$/.test(marker.indexDigest)||marker.mode!=='save_estimates'||!/^2026-10-25-[a-z0-9-]+$/.test(marker.runId))throw Error('invalid_marker');
+if(!/^[a-f0-9]{64}$/.test(marker.indexDigest)||marker.mode!=='save_estimates'||!/^20[0-9]{2}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+$/.test(marker.runId))throw Error('invalid_marker');
 const storage=getJsonStorage();if(storage.driver!=='object')throw Error('durable_storage_required');
-const index=await storage.readJson(`knowledge/encyclopedia/calculation-indexes/${marker.indexDigest}.json`,null);
+const waitSeconds=marker.waitForPreparedIndexSeconds||0;
+if(!Number.isInteger(waitSeconds)||waitSeconds<0||waitSeconds>600)throw Error('invalid_index_wait');
+let index=null;const indexDeadline=Date.now()+waitSeconds*1000;
+for(;;){
+ index=await storage.readJson(`knowledge/encyclopedia/calculation-indexes/${marker.indexDigest}.json`,null);
+ if(index||Date.now()>=indexDeadline)break;
+ console.log('POWER30_WAIT_FOR_EXACT_PREPARED_INDEX',marker.indexDigest);
+ await new Promise(resolve=>setTimeout(resolve,10000));
+}
 if(index?.digest!==marker.indexDigest||checksum(index.models)!==index.digest)throw Error('index_checksum');
 const manifest=await storage.readJson(MANIFEST,null);
 const manifestDigest=m=>checksum(m.models.map(x=>[x.id,x.revision,x.key]));
@@ -21,6 +29,16 @@ const previous=await storage.readJson(`${root}/manifest.json`,null);
 if(previous){if(previous.indexDigest!==index.digest||previous.generationId!==projection.generationId)throw Error('existing_run_different_inputs');console.log('POWER30_PRECEDENTS_ALREADY_SAVED',JSON.stringify(previous.summary));process.exit(0);}
 const fields=['year','fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw','motorPeakKw','drive','bodyType','engineCode','chassisCode','generation','batteryKwh','power30MinKw','power30MinKwByMotor','powerDataSource','manualEditedAt','calculationSnapshot'];
 const reportedFacts=JSON.parse(await fs.readFile('data/catalog/power-reference/reported-power30-precedents.json','utf8'));
+const priorityMakes=marker.priorityMakes||[];
+if(!Array.isArray(priorityMakes)||priorityMakes.some(m=>typeof m!=='string'||m.length>80))throw Error('invalid_priority_makes');
+const priority=make=>{const i=priorityMakes.findIndex(m=>m.toLowerCase()===String(make).toLowerCase());return i<0?priorityMakes.length:i;};
+const inventory=new Map();
+for(const o of projection.rows){
+ const key=modelKey(o.make,o.model),g=inventory.get(key)||{make:o.make,model:o.model,count:0,fuels:{},missing:{}};inventory.set(key,g);g.count++;
+ g.fuels[o.fuel||'unknown']=(g.fuels[o.fuel||'unknown']||0)+1;
+ for(const f of ['year','fuel','engineCc','drive','bodyType'])if(!o[f]&&!(f==='engineCc'&&o.fuel==='electric'))g.missing[f]=(g.missing[f]||0)+1;
+ if(!(o.powerHp>0)&&!(o.powerKw>0))g.missing.power=(g.missing.power||0)+1;
+}
 const profiles=new Map();
 const activeModelKeys=new Set(projection.rows.map(o=>modelKey(o.make,o.model)));
 const references=new Map(),resolutions=new Map(),cache=new Map(),bindings=[],perModel=new Map();
@@ -76,7 +94,10 @@ const result={version:2,runId:marker.runId,indexDigest:index.digest,manifestDige
 await save(`${root}/manifest.json`,result);
 // The pointer identifies this explicit run only; no production calculation index is changed.
 await storage.writeJson(`knowledge/encyclopedia/power30-precedents/checkpoints/${marker.runId}.json`,{key:`${root}/manifest.json`,sha256:checksum(result)},{ifNoneMatch:'*'});
-const report={...result,groups:[...perModel.values()].sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b))),readback:true};
+const groups=[...perModel.values()].sort((a,b)=>priority(a.make)-priority(b.make)||Object.values(b.catalog).reduce((x,y)=>x+y,0)-Object.values(a.catalog).reduce((x,y)=>x+y,0)||JSON.stringify(a).localeCompare(JSON.stringify(b)));
+const prioritySummary=priorityMakes.map(make=>{const catalog={},matching=groups.filter(g=>g.make.toLowerCase()===make.toLowerCase());for(const g of matching)for(const [status,count]of Object.entries(g.catalog))catalog[status]=(catalog[status]||0)+count;return{make,models:matching.length,catalog};});
+const report={...result,groups,prioritySummary,inventoryScope:'retained projection, all fuels; missing raw fields are not proof of missing runtime calculations',inventory:[...inventory.values()].sort((a,b)=>priority(a.make)-priority(b.make)||b.count-a.count),readback:true};
 await fs.mkdir('reports',{recursive:true});await fs.writeFile('reports/power30-precedents.json',JSON.stringify(report,null,2));
 console.log('POWER30_PRECEDENTS_COMPLETE',JSON.stringify({key:`${root}/manifest.json`,summary,readback:true}));
+console.log('POWER30_PRIORITY_SUMMARY',JSON.stringify(prioritySummary));
 console.log('POWER30_PRECEDENTS_GROUPS',JSON.stringify(report.groups.filter(g=>g.catalog.estimated||g.catalog.range_requires_version).slice(0,50)));

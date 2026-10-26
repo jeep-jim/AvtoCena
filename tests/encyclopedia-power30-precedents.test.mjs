@@ -25,3 +25,19 @@ test('reported tests fill gaps, preserve provenance, and cannot displace documen
  assert.equal(selectWithReportedPrecedents({...offer,drive:'awd'},[],[report]).status,'no_compatible_documented_precedent');
  assert.equal(selectWithReportedPrecedents({...offer,power30MinKw:20},[],[report]).status,'existing_value_preserved');
 });
+
+test('reported production windows reject wrong years while retaining transition ambiguity',()=>{
+ const older=fact(37,{yearFrom:2019,yearTo:2023}),newer=fact(49,{yearFrom:2023,yearTo:2026});
+ assert.equal(select({...offer,year:2022},[older,newer]).estimatedPower30MinKw,37);
+ assert.deepEqual(select({...offer,year:2023},[older,newer]).rangeKw,[37,49]);
+ assert.equal(select({...offer,year:2025},[older,newer]).estimatedPower30MinKw,49);
+ assert.equal(select({...offer,year:undefined},[older,newer]).status,'no_compatible_documented_precedent');
+ assert.equal(select({...offer,year:2018},[older,newer]).status,'no_compatible_documented_precedent');
+});
+
+test('Tesla source abbreviations share candidates only within the same make and model',()=>{
+ for(const name of ['3','s','x','y'])assert.deepEqual(precedentModelKeys('tesla:'+name).keys,precedentModelKeys('tesla:model'+name).keys);
+ assert.deepEqual(precedentModelKeys('bmw:3').keys,['bmw:3']);
+ assert.deepEqual(precedentModelKeys('tesla:modelyl').keys,['tesla:modelyl']);
+ assert.deepEqual(precedentModelKeys('tesla:cybertruck').keys,['tesla:cybertruck']);
+});

@@ -15,6 +15,8 @@ export function selectPower30Precedent(offer,facts){
   const source=f.sources?.power30MinKw,value=Number(f.values?.power30MinKw);
   if(!positive(value)||value>2000||!['official_registry','manufacturer','manual','reported_precedent'].includes(source?.kind)||!/^https:\/\//.test(source.url||''))continue;
   const c=physical(f.constraints||{});
+  // Explicit source production windows are hard bounds, not nearest-year hints.
+  if((c.yearFrom||c.yearTo)&&(!Number.isInteger(offer.year)||offer.year<(c.yearFrom||1900)||offer.year>(c.yearTo||9999)))continue;
   if(!known(c.fuel)||normal('fuel',c.fuel)!==normal('fuel',offer.fuel))continue;
   // Known incompatible propulsion and generations are not close variants.
   if(['powertrainKind','drive',...codeFields].some(k=>known(target[k])&&known(c[k])&&(k==='chassisCode'?code(target[k])!==code(c[k]):normal(k,target[k])!==normal(k,c[k]))))continue;
@@ -57,7 +59,11 @@ export const regionalPrecedentFamilies=[
  {keys:['nio:et5t','nio:et5touring'],url:'https://us.nio.com/news/20250702001',checkedAt:'2026-10-25'},
  {keys:['byd:seagull','byd:dolphinmini','byd:dolphinsurf'],url:'https://www.byd.com/en/news-list/First-BYD-Electric-Vehicle-Rolls-off-the-Line-in-Brazil',checkedAt:'2026-10-25'},
 ];
-export function precedentModelKeys(key){const family=regionalPrecedentFamilies.find(f=>f.keys.includes(key));return {keys:family?.keys||[key],...(family?{regionalNameEvidence:{url:family.url,checkedAt:family.checkedAt}}:{})};}
+export function precedentModelKeys(key){
+ // Make-scoped feed abbreviations; never merge variants or change source identities.
+ const tesla=/^tesla:(?:model)?([3sxy])$/.exec(key);
+ if(tesla)return {keys:[`tesla:model${tesla[1]}`,`tesla:${tesla[1]}`]};
+ const family=regionalPrecedentFamilies.find(f=>f.keys.includes(key));return {keys:family?.keys||[key],...(family?{regionalNameEvidence:{url:family.url,checkedAt:family.checkedAt}}:{})};}
 
 /** Prefer the existing documented corpus; reports fill only otherwise unresolved inputs. */
 export function selectWithReportedPrecedents(offer,facts,reports){

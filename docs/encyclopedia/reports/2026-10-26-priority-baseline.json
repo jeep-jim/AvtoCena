@@ -1,0 +1,197 @@
+{
+  "checkedAt": "2026-10-26",
+  "baselineRun": 40201727938,
+  "scope": "Historical EV/HEV snapshot, not current live count or full delivered prices",
+  "priority": [
+    {
+      "make": "Tesla",
+      "models": 8,
+      "catalog": {
+        "no_compatible_documented_precedent": 327,
+        "range_requires_version": 6068,
+        "estimated": 1330
+      }
+    },
+    {
+      "make": "Toyota",
+      "models": 49,
+      "catalog": {
+        "no_compatible_documented_precedent": 2600,
+        "existing_value_preserved": 32,
+        "range_requires_version": 1195,
+        "estimated": 632
+      }
+    },
+    {
+      "make": "Honda",
+      "models": 26,
+      "catalog": {
+        "no_compatible_documented_precedent": 864,
+        "estimated": 56,
+        "range_requires_version": 104,
+        "existing_value_preserved": 3
+      }
+    },
+    {
+      "make": "Mazda",
+      "models": 13,
+      "catalog": {
+        "estimated": 39,
+        "no_compatible_documented_precedent": 132,
+        "range_requires_version": 2
+      }
+    },
+    {
+      "make": "Lexus",
+      "models": 16,
+      "catalog": {
+        "no_compatible_documented_precedent": 571,
+        "range_requires_version": 212,
+        "estimated": 765
+      }
+    },
+    {
+      "make": "Kia",
+      "models": 28,
+      "catalog": {
+        "no_compatible_documented_precedent": 468,
+        "estimated": 121,
+        "range_requires_version": 377
+      }
+    },
+    {
+      "make": "Hyundai",
+      "models": 21,
+      "catalog": {
+        "no_compatible_documented_precedent": 459,
+        "estimated": 156,
+        "range_requires_version": 377
+      }
+    },
+    {
+      "make": "Mercedes-Benz",
+      "models": 38,
+      "catalog": {
+        "no_compatible_documented_precedent": 1547,
+        "range_requires_version": 2484,
+        "estimated": 3675,
+        "existing_value_preserved": 59
+      }
+    },
+    {
+      "make": "BMW",
+      "models": 52,
+      "catalog": {
+        "estimated": 1109,
+        "no_compatible_documented_precedent": 973,
+        "range_requires_version": 1370,
+        "existing_value_preserved": 5
+      }
+    }
+  ],
+  "teslaGroups": [
+    {
+      "make": "Tesla",
+      "model": "3",
+      "catalog": {
+        "no_compatible_documented_precedent": 67
+      },
+      "encyclopedia": {
+        "no_compatible_documented_precedent": 17
+      }
+    },
+    {
+      "make": "Tesla",
+      "model": "Cybertruck",
+      "catalog": {
+        "no_compatible_documented_precedent": 5
+      },
+      "encyclopedia": {
+        "no_compatible_documented_precedent": 3
+      }
+    },
+    {
+      "make": "Tesla",
+      "model": "Model 3",
+      "catalog": {
+        "range_requires_version": 1550,
+        "no_compatible_documented_precedent": 12,
+        "estimated": 1307
+      },
+      "encyclopedia": {
+        "range_requires_version": 91,
+        "estimated": 80,
+        "no_compatible_documented_precedent": 4
+      }
+    },
+    {
+      "make": "Tesla",
+      "model": "Model S",
+      "catalog": {
+        "range_requires_version": 56,
+        "estimated": 4,
+        "no_compatible_documented_precedent": 48
+      },
+      "encyclopedia": {
+        "range_requires_version": 10,
+        "estimated": 4,
+        "no_compatible_documented_precedent": 1
+      }
+    },
+    {
+      "make": "Tesla",
+      "model": "Model X",
+      "catalog": {
+        "range_requires_version": 195,
+        "no_compatible_documented_precedent": 41,
+        "estimated": 19
+      },
+      "encyclopedia": {
+        "range_requires_version": 19,
+        "estimated": 7,
+        "no_compatible_documented_precedent": 5
+      }
+    },
+    {
+      "make": "Tesla",
+      "model": "Model Y",
+      "catalog": {
+        "range_requires_version": 4267,
+        "no_compatible_documented_precedent": 54
+      },
+      "encyclopedia": {
+        "range_requires_version": 168,
+        "no_compatible_documented_precedent": 10
+      }
+    },
+    {
+      "make": "Tesla",
+      "model": "S",
+      "catalog": {
+        "no_compatible_documented_precedent": 3
+      },
+      "encyclopedia": {
+        "no_compatible_documented_precedent": 3
+      }
+    },
+    {
+      "make": "Tesla",
+      "model": "Y",
+      "catalog": {
+        "no_compatible_documented_precedent": 97
+      },
+      "encyclopedia": {
+        "no_compatible_documented_precedent": 18
+      }
+    }
+  ],
+  "newSources": {
+    "adacReports": 15,
+    "importerReferencesAndRangeBounds": 35,
+    "originalCertificatesReviewed": false
+  },
+  "activeReleaseAtMorningCheck": "f12fb5867f4db1bb838968af4df8f7ab36c8bee1",
+  "recoveryRelease": "c2d64cd6b2abe5e9ed8e1c6d072612a95114fd59",
+  "recoveryRun": 40262485184,
+  "publicCompletion": false
+}
