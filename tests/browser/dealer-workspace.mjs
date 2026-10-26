@@ -171,8 +171,8 @@ try{
     assert.ok(await slot.evaluate(n=>n.getBoundingClientRect().top<document.querySelector('.dealer-offer-identity').getBoundingClientRect().top),'request precedes dealer identity');
     const y=await slot.evaluate(n=>n.getBoundingClientRect().top+scrollY);
     await page.evaluate(y=>scrollTo({top:y+120,behavior:'instant'}),y);await page.waitForTimeout(150);
-    assert.equal(await slot.getAttribute('data-stuck'),'true');assert.ok(await slot.locator('.ac-offer-contact-thumbnail').isVisible());
-    const button=slot.locator('button');assert.ok(await button.evaluate(n=>{const r=n.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===n;}));
+    assert.equal(await slot.getAttribute('data-stuck'),'true');assert.ok(await page.locator('.ac-offer-contact-floating .ac-offer-contact-thumbnail').isVisible());
+    const button=page.locator('.ac-offer-contact-floating').getByRole('button',{name:'Оставить заявку',exact:true});assert.ok(await button.evaluate(n=>{const r=n.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===n;}));
     if(width<768){const dock=page.locator('.dealer-context-dock');assert.equal(await dock.locator('a').first().evaluate(n=>getComputedStyle(n).color),await dock.evaluate(n=>getComputedStyle(n).getPropertyValue('--ac-text').trim().startsWith('#')?getComputedStyle(n).color:''));}
     await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.waitForTimeout(150);assert.equal(await slot.getAttribute('data-stuck'),'false');
    }
