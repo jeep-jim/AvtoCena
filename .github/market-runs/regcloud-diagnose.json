@@ -1,5 +1,6 @@
 {
-  "failedRelease": "ed3e613705bf3d406ba0511115741678b06a8dce",
-  "requestedAt": "2026-10-26T20:39:17.647Z",
-  "reason": "Read-only failed candidate logs after homepage stalled on five-minute acceptance. Do not start container or change traffic."
+  "failedRelease": "e23d9d096935481c4ecddf6a987c574c5c2bbbf9",
+  "probeLong": true,
+  "requestedAt": "2026-10-26T21:44:19.176991+00:00",
+  "reason": "Isolated stopped candidate only: repeat real route sequence at warm/35s/305s and sample CPU plus category-only network for final all-sort. No production traffic or acceptance threshold change; 600-second diagnostic deadline and stop in finally."
 }
