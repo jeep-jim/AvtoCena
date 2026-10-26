@@ -114,7 +114,11 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
   const selected=filterSelections(value);
   const active=options.find(item=>item.value===value);
   const chosen=(item:string)=>item?selected.includes(item):!selected.length;
-  const choose=(next:string)=>{if(multiple){onChange(!next?"":selected.includes(next)?selected.filter(v=>v!==next).join("|"):[...selected,next].join("|"));}else{onChange(next);close();}};
+  const choose=(next:string)=>{
+    // Green Corner is a separate stock route, not an additional source market.
+    if(name==="market"&&(next==="green"||selected.includes("green"))){onChange(next===value?"":next);return;}
+    if(multiple){onChange(!next?"":selected.includes(next)?selected.filter(v=>v!==next).join("|"):[...selected,next].join("|"));}else{onChange(next);close();}
+  };
   const title=multiple&&selected.length?selected.map(v=>options.find(o=>o.value===v)?.label||v).join(", "):active?.label||placeholder;
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"} ${className}`}>
     <input type="hidden" name={name} value={value} />

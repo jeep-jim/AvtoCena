@@ -50,7 +50,7 @@ try{
   await page.waitForFunction(()=>location.pathname==='/cars/green');
   const query=new URL(page.url()).searchParams;assert.equal(query.get('market'),'japan');assert.equal(query.get('stock'),'green');assert.equal(query.get('model'),'Corolla Cross');assert.equal(query.get('yearFrom'),'2024');assert.equal(query.get('mileageTo'),'9000');
   if(width<1024)await scope.getByRole('button',{name:'Применить фильтры',exact:true}).click();
-  await page.evaluate(()=>scrollTo(0,1100));const bar=page.getByRole('navigation',{name:'Выбранные фильтры и сортировка',exact:true});await bar.waitFor();
+  await page.evaluate(()=>scrollTo({top:1100,behavior:'instant'}));const bar=page.getByRole('navigation',{name:'Выбранные фильтры и сортировка',exact:true});await bar.waitFor();
   assert.equal(await bar.getByRole('button',{name:'Очистить',exact:true}).count(),0);assert.ok(await bar.getByRole('button',{name:'Убрать Corolla Cross',exact:true}).isVisible());
   const styles=await page.evaluate(()=>{
    const pick=(el,props)=>Object.fromEntries(props.map(p=>[p,getComputedStyle(el)[p]]));
@@ -63,7 +63,7 @@ try{
   assert.deepEqual(styles.bar,styles.header,'Pinned surface must match the header');
   assert.deepEqual(styles.sticky,styles.original,'Pinned chips must match existing selected chips');
   const rect=await bar.boundingBox(),header=await page.locator('.ac-public-header').boundingBox();assert.ok(Math.abs(rect.y-(header.y+header.height))<2);assert.ok(rect.width<=width);
-  await bar.getByRole('button',{name:'Сортировка автомобилей',exact:true}).click();await bar.getByRole('button',{name:'Дороже',exact:true}).click();await page.waitForFunction(()=>new URLSearchParams(location.search).get('sort')==='totalRubDesc');
+  await bar.getByRole('button',{name:/^Сортировка:/}).click();await bar.getByRole('button',{name:'Сначала дороже',exact:true}).click();await bar.getByRole('button',{name:'Готово',exact:true}).click();await page.waitForFunction(()=>new URLSearchParams(location.search).get('sort')==='totalRubDesc');
   assert.equal(new URL(page.url()).searchParams.get('stock'),'green');
   await page.screenshot({path:`${out}/${width}-${theme}.png`});
   await bar.getByRole('button',{name:'Убрать Corolla Cross',exact:true}).click();await page.waitForFunction(()=>!new URLSearchParams(location.search).has('model'));
@@ -74,7 +74,9 @@ try{
    await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
    const emptySheet=page.locator('.ac-mobile-filter-sheet');
    assert.equal(await emptySheet.getByRole('button',{name:'Закрыть',exact:true}).innerText(),'×');
-   await emptySheet.getByRole('button',{name:'Дешевле',exact:true}).click();
+   await emptySheet.getByRole('button',{name:/^Сортировка:/}).click();
+   await emptySheet.getByRole('button',{name:'Сначала дешевле',exact:true}).click();
+   await emptySheet.getByRole('button',{name:'Готово',exact:true}).click();
    await emptySheet.getByRole('button',{name:'Применить фильтры',exact:true}).click();
    await page.waitForFunction(()=>new URLSearchParams(location.search).get('sort')==='totalRub');
    assert.equal(await page.locator('.ac-mobile-filter-sheet').count(),0);
