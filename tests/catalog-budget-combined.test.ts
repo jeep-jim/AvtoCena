@@ -20,6 +20,7 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
   reads.push(key);let value:unknown;
   if(key==='markets/markets.json')value=[{id:'korea',versions:[{id:'fixture',status:'active',securityDepositRub:110000}]}];
   else if(key==='fees/exchange-rates.json')value={};
+  else if(key==='catalog/public/brand-summary.json')value={generationId,brands:{hyundai:{make:'Hyundai',count:rows.length,marketCounts:{korea:rows.length},models:[{model:'Avante',count:rows.length,marketCounts:{korea:rows.length}}]}}};
   else if(key==='catalog/manifest.json')value={generationId,markets:{korea:{count:rows.length}}};
   else if(key.includes('/market-landing-'))return {found:false,value:fallback};
   else if(key.endsWith('/budget-count-v3.json'))return {found:false,value:fallback};
@@ -56,7 +57,7 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
    assert.deepEqual(brands.counts,rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).length?{Hyundai:rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).length}:{});
   assert.equal(count.total,2);assert.deepEqual(facets.makes,['Hyundai']);
   assert.equal(reads.filter(key=>key.includes('budget-cards-v2')).length,4,'price predicates replay only metadata candidates, shared by count and facets');
-  for(const params of [{bodyType:'sedan'},{bodyType:'suv'},{fuel:'petrol',transmission:'automatic',drive:'fwd'},{yearFrom:2022,mileageTo:50000}]){
+  for(const params of [{make:'Hyundai'},{make:'Hyundai',model:'Avante'},{make:'Hyundai',yearFrom:2022},{bodyType:'sedan'},{bodyType:'suv'},{fuel:'petrol',transmission:'automatic',drive:'fwd'},{yearFrom:2022,mileageTo:50000}]){
    resetCatalogReadCachesForTests();reads.length=0;
    const expected=rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).map(row=>row.id).sort();
    const [count,facets,brands]=await Promise.all([countCatalogOffers(params),readCatalogFacets(params),readCatalogBrandCounts(params)]);
