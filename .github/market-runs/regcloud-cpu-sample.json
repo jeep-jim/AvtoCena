@@ -1,4 +1,4 @@
 {
-  "reason": "One finite sample of confirmed server-render stall over 90 seconds",
-  "at": "2026-10-12T12:51:46.810Z"
+  "at": "2026-10-26T07:12:13.887Z",
+  "reason": "One bounded CPU sample of confirmed post-release 25-second health/home stalls; existing container-loopback sampler closes inspector and does not export heap data"
 }
