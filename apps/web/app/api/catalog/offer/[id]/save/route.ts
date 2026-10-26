@@ -1,3 +1,4 @@
+import {applyCatalogEditorial,readCatalogEditorial} from '@/lib/catalog/editorial';
 import {revalidatePath} from 'next/cache';
 import {isPlatformTeam} from '@/lib/platform-access';
 import {rememberManagementCalculation} from '@/lib/catalog/management-knowledge';
@@ -23,7 +24,8 @@ export async function POST(request:Request,{params}:{params: Promise<{id:string}
   try { const input=JSON.parse(body); draft=cleanSavedDraft(input.draft); expectedVersion=typeof input.version==="string"?input.version:null; }
   catch(error){return NextResponse.json({error:error instanceof Error?error.message:"Проверьте параметры"},{status:400,headers});}
   // Authoritative current inventory: never save or resurrect an expired offer from a cached page.
-  const offer=await getOfferFromCurrentShard((await params).id);
+  const current=await getOfferFromCurrentShard((await params).id);
+  const offer=current?applyCatalogEditorial(current,await readCatalogEditorial()):null;
   if(!offer)return NextResponse.json({error:"Объявление больше недоступно"},{status:404,headers});
   const result=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));
   if(!result.ok)return NextResponse.json({error:result.error},{status:422,headers});
