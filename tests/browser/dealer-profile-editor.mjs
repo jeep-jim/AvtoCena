@@ -127,7 +127,7 @@ try {
   await page.getByRole('heading',{name:'Наши фото и Автовыдачи',exact:true}).waitFor();
   await page.screenshot({path:`${out}/profile-${width}-${theme}-${verified?'verified':'regular'}.png`});
   await page.getByRole('button',{name:/Открыть логотип/}).click();await page.locator('.dealer-logo-dialog[open]').waitFor();assert.equal(await page.locator('.dealer-logo-dialog .dealer-logo-verified').count(),verified?1:0);await page.screenshot({path:`${out}/logo-${width}-${theme}-${verified}.png`});await page.getByRole('button',{name:'Закрыть логотип'}).click();
-  await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();assert.ok(await page.getByText('Оценку и отзыв можно оставить после подтверждения подписанного договора.',{exact:true}).isVisible());assert.equal(await page.getByRole('link',{name:'Перейти в личный кабинет →'}).getAttribute('href'),'/account');
+  if(width<768)await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();else await page.locator('.dealer-profile-metrics button').first().click();assert.ok(await page.getByText('Оценку и отзыв можно оставить после подтверждения подписанного договора.',{exact:true}).isVisible());assert.equal(await page.getByRole('link',{name:'Перейти в личный кабинет →'}).getAttribute('href'),'/account');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.close();
  }
  if(!process.env.EDITOR_ONLY)for(const theme of ['light','dark']){
@@ -161,8 +161,8 @@ try {
   await page.getByRole('button',{name:'Показать все марки'}).click();await page.getByRole('dialog',{name:'Все марки автомобилей'}).waitFor();await page.waitForTimeout(250);await page.screenshot({path:`${out}/brands-${width}-${theme}.png`});await page.keyboard.press('Escape');await page.locator('.ac-public-sheet').waitFor({state:'detached'});
   await page.getByRole('button',{name:'Открыть курс: Японская иена (JPY)'}).click();await page.getByRole('dialog',{name:'Курсы валют'}).waitFor();await page.keyboard.press('Escape');await page.locator('.ac-public-sheet').waitFor({state:'detached'});
   await page.locator('.dealer-profile-metrics button').nth(1).click();assert.equal(await page.locator('.dealer-car').count(),0);assert.equal(await page.locator('.dealer-main-offers a').count(),1);
-  await page.locator('.dealer-dock').getByRole('button',{name:'Каталог',exact:true}).click();await page.waitForFunction(()=>scrollY<5);
-  const tools=page.locator('.ac-public-footer-tools');assert.equal(await tools.getByRole('button',{name:'База знаний',exact:true}).isDisabled(),true);assert.equal(await tools.getByRole('button',{name:'АвтоРасчёт',exact:true}).count(),0);await tools.scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/footer-${width}-${theme}.png`});await page.goto(origin+'?view=profile&interactive=1&knowledge=1');await page.locator('.ac-public-footer-tools').getByRole('link',{name:'База знаний',exact:true}).waitFor();
+  if(width<768){await page.locator('.dealer-dock').getByRole('button',{name:'Каталог',exact:true}).click();await page.waitForFunction(()=>scrollY<5);}else assert.equal(await page.locator('.dealer-dock').isVisible(),false);
+  const tools=page.locator('.ac-public-footer-tools');assert.equal(await page.locator('.ac-public-legal-footer a[href="/knowledge"]').count(),0);assert.equal(await tools.getByRole('button',{name:'АвтоРасчёт',exact:true}).count(),0);await tools.scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/footer-${width}-${theme}.png`});await page.goto(origin+'?view=profile&interactive=1&knowledge=1');await page.locator('.ac-public-legal-footer a[href="/knowledge"]').waitFor({state:'attached'});
   assert.deepEqual(errors,[]);await page.close();console.log(width,theme,'subscriptions, favorites, failure recovery, touch/wheel rails and shared sheets OK');
  }
  for(const width of [390,1440])for(const theme of ['light','dark']){
@@ -188,7 +188,7 @@ try {
   await page.screenshot({path:`${out}/editor-offices-${width}-${theme}.png`});
   await page.getByRole('button',{name:'Реквизиты',exact:true}).click();await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('ООО Новые реквизиты');await preview.locator('.dealer-contact-sheet').getByText('ООО Новые реквизиты',{exact:true}).waitFor();await page.getByLabel('Банк',{exact:true}).fill('Закрытый банк');assert.equal(await preview.getByText('Закрытый банк',{exact:true}).count(),0);
   await page.screenshot({path:`${out}/editor-requisites-${width}-${theme}.png`});
-  await page.getByRole('button',{name:'Каталог и рынки',exact:true}).click();await page.getByRole('checkbox').first().uncheck();assert.equal(await preview.locator('.dealer-contact-sheet .dealer-city-chips').getByText('Япония',{exact:true}).count(),0);await page.screenshot({path:`${out}/editor-markets-${width}-${theme}.png`});
+  await page.getByRole('button',{name:'Каталог и рынки',exact:true}).click();await page.getByRole('checkbox',{name:/Япония$/}).uncheck();assert.equal(await preview.locator('.dealer-contact-sheet .dealer-city-chips').getByText('Япония',{exact:true}).count(),0);await page.screenshot({path:`${out}/editor-markets-${width}-${theme}.png`});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));assert.deepEqual(errors,[]);console.log(`${width} ${theme}: profile geometry, live updates, two banners, reload, privacy and no overflow OK`);await page.close();
  }
 } finally {await browser.close();server.close();}

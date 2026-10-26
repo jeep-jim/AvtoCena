@@ -88,7 +88,7 @@ try{
  formMode=false;const beforeAuto=sendCount;const autoRequest=phone.waitForRequest(r=>r.url().endsWith('/api/autobot')&&r.method()==='POST');await phone.getByRole('button',{name:'Открыть АвтоБота',exact:true}).tap();await autoRequest;await phone.locator('.ab-thinking').waitFor({state:'hidden'});assert.equal(sendCount,beforeAuto+1);
  const widths=await phone.locator('.ab-car-questions button').evaluateAll(els=>els.map(el=>({width:el.getBoundingClientRect().width,parent:el.parentElement.getBoundingClientRect().width,height:el.getBoundingClientRect().height})));assert.ok(widths.length);assert.ok(widths.every(x=>Math.abs(x.width-x.parent)<1&&x.height<60));
  await phone.getByRole('button',{name:'Закрыть АвтоБота',exact:true}).click();await phone.getByRole('button',{name:'Открыть АвтоБота',exact:true}).tap();await phone.waitForTimeout(300);assert.equal(sendCount,beforeAuto+1);
- // Real settings controls: permissions are independent of chat-history availability.
+ // Public bot never reads or changes team controls, including for the owner.
  for(const scenario of [
   {name:'owner',status:200,owner:true,control:true},
   {name:'admin-default',status:200,owner:false,control:false},
@@ -100,10 +100,10 @@ try{
   {name:'temporary-error',status:503,control:false},
  ]){
   const staffContext=await browser.newContext({viewport:{width:390,height:844}});
-  let permissionStatus=scenario.status,historyUnavailable=true,savedSetting,pageControl=false;
+  let permissionStatus=scenario.status,historyUnavailable=true,savedSetting,pageControl=false,controlRequests=0;
   await staffContext.route('https://autobot.test/**',route=>{
    const u=new URL(route.request().url());
-   if(u.pathname==='/api/crm/assistant'){
+   if(u.pathname==='/api/crm/assistant'){controlRequests++;
     if(u.searchParams.has('capabilities'))return route.fulfill({status:permissionStatus,json:{owner:scenario.owner,canControlPage:scenario.control}});
     if(route.request().method()==='POST'){savedSetting=route.request().postDataJSON();pageControl=savedSetting.enabled;return route.fulfill({json:{pageControl}});}
     return route.fulfill(historyUnavailable?{status:503,json:{}}:{json:{revision:'settings-1',canControlPage:scenario.control,pageControl}});
@@ -117,24 +117,10 @@ try{
   const staffPage=await staffContext.newPage();await staffPage.goto('https://autobot.test/cars');
   await staffPage.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click();
   await staffPage.getByRole('button',{name:'Настройки АвтоБота',exact:true}).click();
-  const retry=staffPage.getByRole('button',{name:'Проверить доступ снова',exact:true});await retry.waitFor();
-  const control=staffPage.getByRole('switch',{name:'Управление сайтом',exact:true});
-  assert.equal(await control.count(),scenario.control?1:0,scenario.name);
-  if(scenario.control){
-   historyUnavailable=false;
-   await staffPage.evaluate(()=>window.addEventListener('team-assistant-open',()=>window.__teamOpened=true));
-   await control.click();await staffPage.waitForFunction(()=>window.__teamOpened===true);
-   assert.deepEqual(savedSetting,{op:'page_control',enabled:true,revision:'settings-1'});
-   await staffPage.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click();
-   await control.waitFor();assert.equal(await control.isChecked(),true,'enabled preference survives reopening');
-   await staffPage.evaluate(()=>window.__teamOpened=false);
-   await control.click();await staffPage.waitForFunction(()=>!document.querySelector('[role="switch"]').checked);
-   assert.deepEqual(savedSetting,{op:'page_control',enabled:false,revision:'settings-1'});
-   assert.equal(await staffPage.evaluate(()=>window.__teamOpened),false,'disabling retains ordinary chat');
-  }else if(scenario.status===503){
-   permissionStatus=200;historyUnavailable=false;await retry.click();await retry.waitFor({state:'hidden'});
-   assert.equal(await control.count(),0,'retry never grants page control to a manager');
-  }
+  assert.equal(await staffPage.getByRole('switch',{name:'Управление сайтом',exact:true}).count(),0,scenario.name);
+  assert.equal(await staffPage.getByText('Рабочий чат команды →',{exact:true}).count(),0);
+  assert.equal(controlRequests,0,'public chat must not call team control API');
+  assert.equal(savedSetting,undefined);
   await staffContext.close();
  }
  // Bright one-line power action appears only for an electrified card, with real Markdown rendering.

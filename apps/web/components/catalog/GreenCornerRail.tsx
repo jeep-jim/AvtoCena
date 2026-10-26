@@ -1,3 +1,7 @@
+import {publicationWithdrawn} from '@/lib/catalog/publication-policy';
+import {catalogOfferVisibleRub} from '@/lib/catalog/public-priority';
+import {isSellerPricedOffer} from '@/lib/catalog/seller-price-contract';
+import {hasModificationSelection} from '@/lib/catalog/modification-contract';
 import {MARKET_RAIL_CLASS} from './market-rail-layout';
 import {MarketResultCount} from './MarketResultCount';
 import { CatalogMarketFlag } from "./CatalogMarketFlag";
@@ -7,6 +11,6 @@ export function GreenCornerRail({items,total,href="/cars/green"}:{items:any[];to
  if(!total)return null;
  return <section className="mt-8 min-w-0" aria-label="Зелёный угол">
   <div className="mb-4 flex items-end justify-between gap-3"><div><p className="mb-2 text-xs font-bold ac-green-heading">Зелёный угол · без торгов</p><h3 className="ac-green-heading flex flex-wrap items-center gap-2 text-2xl font-black tracking-tight md:text-4xl"><CatalogMarketFlag market="japan" className="h-5 w-7 md:h-6 md:w-9" /><span>В наличии</span> <MarketResultCount total={total}>{total.toLocaleString("ru-RU")}</MarketResultCount></h3></div><Link href={href} className="ac-market-all-link ac-green-button shrink-0 text-sm font-black">Все →</Link></div>
-  <div className={MARKET_RAIL_CLASS}>{items.slice(0,6).map(offer=><div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense /></div>)}</div>
+  <div className={MARKET_RAIL_CLASS}>{items.filter(offer=>!publicationWithdrawn(offer)&&(catalogOfferVisibleRub(offer)>0||isSellerPricedOffer(offer)||hasModificationSelection(offer))).slice(0,6).map(offer=><div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense /></div>)}</div>
  </section>;
 }
