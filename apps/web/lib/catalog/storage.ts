@@ -1299,7 +1299,11 @@ async function readCatalogFacetsUncached(input: CatalogSearchParams = {}): Promi
   // prepared market facets and loaded every full country projection.
   const params:CatalogSearchParams=filters.budgetFrom||filters.budgetTo||filters.hasPrice
     ? filters : {...filters,city:undefined};
-  const budget=await readBudgetSelection(params);
+  // Hidden listings invalidate prepared facet counts, not the compact metadata.
+  // Force metadata selection for an otherwise unfiltered directory so one hidden
+  // offer cannot trigger full-country projection downloads on every cache expiry.
+  const budget=await readBudgetSelection(editorialHasHidden(params.market)
+    ? {...params,sort:"year"} : params);
   if(budget){
     const cached=budgetFacetCache.get(budget.rows);
     if(cached)return cached;
