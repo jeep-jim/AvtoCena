@@ -14,7 +14,7 @@ import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {specificationSelectorDirectory,type CompressedBudgetDirectory} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
-import {withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
+import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
@@ -2117,14 +2117,18 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
  const metadataFields=['color','make','model','yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive','powerFrom','powerTo','engineFrom','engineTo'];
  const metadataQuery=(hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
- if((params.make || params.model) && (!params.sort || params.sort==="updatedAt"))return null;
+ const defaultBrandQuery=Boolean((params.make || params.model) && (!params.sort || params.sort==="updatedAt"));
+ if(defaultBrandQuery && hasBudget)return null;
  if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
  const {page:_page,pageSize:_pageSize,sort:_sort,...filters}=params;
- const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
+ const key=JSON.stringify([defaultBrandQuery?"default-brand":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
  return filteredBudgetSelectionCache.get(key,async()=>{
   const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
   if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
+  // Older selectors cannot distinguish seller-only display prices in default
+  // ranking. Keep their authoritative fallback until enriched selectors exist.
+  if(defaultBrandQuery && index.displayOrderVersion!==1)return null;
   const cardVersion=index.version;
   const {japanSearchQuotes,attachJapanSearchValues}=await import("./japan-delivered-preview");
   const quotes=(hasBudget||params.engineFrom||params.engineTo)&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
@@ -2172,6 +2176,8 @@ async function readBudgetSelection(params:CatalogSearchParams){
   }
 
   candidates=candidates.map(editedRow);
+  // A newly edited seller price invalidates its stored ranking inputs.
+  if(defaultBrandQuery && candidates.some(row=>matchingEditorial({id:row[5].id,market:row[0]})?.sellerPrice))return null;
   const specificationQuery=Boolean(params.engineFrom||params.engineTo||params.powerFrom||params.powerTo);
   if(index.specificationFilterVersion===1 && specificationQuery){
    candidates=candidates.filter(row=>{
@@ -2292,7 +2298,12 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  if(params.sort && params.sort!=="updatedAt")return searchSortedBudgetSelection(selected,params,internalPageLimit);
  let rows=budgetSelectionOrder.get(selected.rows);
  if(!rows){
-  rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata])=>({...metadata,market,totalRub,catalogPricingMode:seller?"seller" as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis}})) as OrderedBudgetRow[];
+  const useDisplayKeys=Boolean((params.make || params.model) && !(params.budgetFrom || params.budgetTo));
+  rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata])=>({...metadata,market,
+   totalRub:!useDisplayKeys || metadata.displayOrderCalculated===undefined?totalRub:metadata.displayOrderCalculated?metadata.displayOrderPriceRub:null,
+   sellerPriceRub:useDisplayKeys?metadata.displayOrderPriceRub:undefined,
+   catalogPricingMode:!useDisplayKeys || metadata.displayOrderCalculated===undefined?(seller?"seller" as const:undefined):(metadata.displayOrderCalculated?undefined:"seller" as const),
+   calculationSnapshot:{deliveryPricingBasis:basis}})) as OrderedBudgetRow[];
   sortCatalogSearchRows(rows,params);
   budgetSelectionOrder.set(selected.rows,rows);
  }
@@ -2324,7 +2335,7 @@ async function readBudgetCountIndex(generationId:string,market?:string){
     const parts=await mapWithConcurrency(Object.keys(directory.markets),2,name=>readBudgetCountIndex(generationId,name));
     if(parts.some(part=>!part || part.bodyFilterVersion!==1))return null;
     const valid=parts as BudgetCountIndex[];
-    return {...valid[0],sourceRows:valid.reduce((n,part)=>n+part.sourceRows,0),rows:valid.flatMap(part=>part.rows),otherRows:valid.flatMap(part=>part.otherRows||[]),pricingChunks:Object.assign({},...valid.map(part=>part.pricingChunks||{}))};
+    return {...valid[0],displayOrderVersion:valid.every(part=>part.displayOrderVersion===1)?1 as const:undefined,sourceRows:valid.reduce((n,part)=>n+part.sourceRows,0),rows:valid.flatMap(part=>part.rows),otherRows:valid.flatMap(part=>part.otherRows||[]),pricingChunks:Object.assign({},...valid.map(part=>part.pricingChunks||{}))};
    })().catch(()=>null);aggregateBudgetIndexes.set(directory,pending);}
    const merged=await pending;
    if(merged)return merged;
@@ -2391,7 +2402,7 @@ export async function backfillBudgetSpecificationSelectors(){
  const directory:CompressedBudgetDirectory={version:4,generationId:manifest.generationId,markets:{},encyclopediaDigest:readCalculationIndex()?.digest||null};
  for(const market of MARKETS){
   const existing=old?.version===4&&await readCompressedSelector(old,market,name=>readIndex(manifest.generationId,specificationSelectorPath(name),null));
-  if(old?.encyclopediaDigest===directory.encyclopediaDigest && existing?.specificationFilterVersion===1 && existing.bodyFilterVersion===1){directory.markets[market]=old!.markets[market];continue;}
+  if(old?.encyclopediaDigest===directory.encyclopediaDigest && existing?.specificationFilterVersion===1 && existing.bodyFilterVersion===1 && existing.displayOrderVersion===1){directory.markets[market]=old!.markets[market];continue;}
   const source=await readBudgetCountIndex(manifest.generationId,market);
   if(!source||source.generationId!==manifest.generationId||source.version!==3)throw Error('budget_specification_source_missing');
   const hasMarketRows=[...source.rows,...(source.otherRows||[])].some(row=>row[0]===market);

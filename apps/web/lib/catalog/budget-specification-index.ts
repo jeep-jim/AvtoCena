@@ -3,12 +3,14 @@ import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {catalogBodyType} from './pickup-body';
 import type {BudgetCountIndex, BudgetMetadata} from './budget-count-index';
 import type {CatalogSearchProjection} from './storage';
+import {catalogDisplayPrice} from './display-order';
+import {calculatedCatalogPrice} from './calculated-price';
 import {safePublicPricing} from './safe-public-pricing';
 
 /** Same admitted public specifications as card matching; never fabricate power or displacement. */
 export function budgetSpecifications(input:CatalogSearchProjection){
  const row:CatalogSearchProjection & {engineCode?:string;chassisCode?:string}=safePublicPricing(applyEncyclopediaCalculation(applyUaeManualSpecifications(input)));
- return {trim:row.trim,engineCode:row.engineCode,chassisCode:row.chassisCode,drive:row.drive,transmission:row.transmission,bodyType:catalogBodyType(row),engineCc:row.engineCc,utilizationPowerKw:row.utilizationPowerKw,powertrainKind:row.powertrainKind,powerHp:row.powerHp,fuel:row.fuel};
+ return {displayOrderPriceRub:catalogDisplayPrice(row),displayOrderCalculated:calculatedCatalogPrice(row)>0,trim:row.trim,engineCode:row.engineCode,chassisCode:row.chassisCode,drive:row.drive,transmission:row.transmission,bodyType:catalogBodyType(row),engineCc:row.engineCc,utilizationPowerKw:row.utilizationPowerKw,powertrainKind:row.powertrainKind,powerHp:row.powerHp,fuel:row.fuel};
 }
 export async function enrichBudgetSpecifications(index:BudgetCountIndex,read:(block:number)=>Promise<{generationId:string;items:CatalogSearchProjection[]}>){
  const rows=[...index.rows,...(index.otherRows||[])];
@@ -29,5 +31,5 @@ export async function enrichBudgetSpecifications(index:BudgetCountIndex,read:(bl
  }));
  if(metadata.size!==wanted.size)throw Error('budget_specification_incomplete');
  const attach=(row:BudgetCountIndex['rows'][number])=>{const next:typeof row=[...row];next[5]=metadata.get(row[5].id)!;return next;};
- return {...index,specificationFilterVersion:1 as const,bodyFilterVersion:1 as const,rows:index.rows.map(attach),otherRows:index.otherRows?.map(attach)};
+ return {...index,displayOrderVersion:1 as const,specificationFilterVersion:1 as const,bodyFilterVersion:1 as const,rows:index.rows.map(attach),otherRows:index.otherRows?.map(attach)};
 }

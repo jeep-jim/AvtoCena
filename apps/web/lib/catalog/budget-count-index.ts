@@ -8,9 +8,9 @@ import type {CatalogSearchParams} from './types';
 import type {CatalogSearchProjection} from './storage';
 import {budgetSpecifications} from './budget-specification-index';
 type JapanIdentity={id:string;updatedAt?:string;sourcePrice:number|null;sourceCurrency:string|null};
-export type BudgetMetadata=Pick<CatalogSearchProjection,'trim'|'engineCc'|'utilizationPowerKw'|'powertrainKind'|'inventorySourceDate'|'grossVehicleWeightKg'|'vehicleCategory'|'powerHp'|'publicSpecificationVerified'|'id'|'make'|'model'|'year'|'mileageKm'|'bodyType'|'fuel'|'transmission'|'drive'|'sourceGroup'|'auctionDate'|'sourcePublishedAt'|'firstSeenAt'|'updatedAt'> & {block:number;engineCode?:string;chassisCode?:string};
+export type BudgetMetadata=Pick<CatalogSearchProjection,'trim'|'engineCc'|'utilizationPowerKw'|'powertrainKind'|'inventorySourceDate'|'grossVehicleWeightKg'|'vehicleCategory'|'powerHp'|'publicSpecificationVerified'|'id'|'make'|'model'|'year'|'mileageKm'|'bodyType'|'fuel'|'transmission'|'drive'|'sourceGroup'|'auctionDate'|'sourcePublishedAt'|'firstSeenAt'|'updatedAt'> & {block:number;engineCode?:string;chassisCode?:string;displayOrderPriceRub?:number;displayOrderCalculated?:boolean};
 export type BudgetCountRow=[market:string,totalRub:number,basis:DeliveryPricingBasis|null,japan:JapanIdentity|null,seller:boolean,metadata:BudgetMetadata,depositCostRub?:number,replay?:Partial<CatalogSearchProjection>];
-export type BudgetCountIndex={version:1|2|3;filterVersion?:1;specificationFilterVersion?:1;bodyFilterVersion?:1;inventoryPolicyVersion?:1;generationId:string;sourceRows:number;rows:BudgetCountRow[];otherRows?:BudgetCountRow[];pricingChunks?:Record<string,string[]>};
+export type BudgetCountIndex={version:1|2|3;displayOrderVersion?:1;filterVersion?:1;specificationFilterVersion?:1;bodyFilterVersion?:1;inventoryPolicyVersion?:1;generationId:string;sourceRows:number;rows:BudgetCountRow[];otherRows?:BudgetCountRow[];pricingChunks?:Record<string,string[]>};
 /** Price-only inputs: no photographs, full ledger, descriptions or raw source data. */
 export function budgetPriceReplay(row:CatalogSearchProjection):Partial<CatalogSearchProjection>|undefined {
  if(row.market==='japan' || hasModificationSelection(row) || !(Number(row.totalRub)>0))return undefined;
@@ -47,7 +47,7 @@ export function buildBudgetCountIndex(generationId:string,rows:CatalogSearchProj
    row.market==='japan'?{id:row.id,updatedAt:row.updatedAt,sourcePrice:row.sourcePrice??null,sourceCurrency:row.sourceCurrency??null}:null,row.catalogPricingMode==='seller'&&!calculatedCatalogPrice(row), {inventorySourceDate:row.inventorySourceDate,grossVehicleWeightKg:row.grossVehicleWeightKg,vehicleCategory:row.vehicleCategory,powerHp:row.powerHp,publicSpecificationVerified:row.publicSpecificationVerified,id:row.id,make:row.make,model:row.model,year:row.year,mileageKm:row.mileageKm,bodyType:row.bodyType,fuel:row.fuel,transmission:row.transmission,drive:row.drive,sourceGroup:row.sourceGroup,auctionDate:row.auctionDate,sourcePublishedAt:row.sourcePublishedAt,firstSeenAt:row.firstSeenAt,updatedAt:row.updatedAt,block:blocks.get(row.id)??0},includedDepositCost(row.calculationSnapshot),version===3 ? budgetPriceReplay(row) : undefined]);
   Object.assign(target[target.length-1][5],budgetSpecifications(row));
  }
- return {version,filterVersion:1,specificationFilterVersion:1,bodyFilterVersion:1,inventoryPolicyVersion:1,generationId,sourceRows:rows.length,rows:compact,otherRows};
+ return {version,displayOrderVersion:1,filterVersion:1,specificationFilterVersion:1,bodyFilterVersion:1,inventoryPolicyVersion:1,generationId,sourceRows:rows.length,rows:compact,otherRows};
 }
 export type BudgetReplayChunk={generationId:string;market:string;entries:Array<[string,Partial<CatalogSearchProjection>]>};
 /** Bounded price inputs; the shared selector stays small even as markets grow. */
