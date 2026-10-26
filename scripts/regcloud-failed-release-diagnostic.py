@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""One-shot, read-only inspection of an explicitly selected failed candidate.
+"""One-shot inspection of a selected failed candidate; optional isolated HTTP probe.
 Never print raw application logs, environment, customer data or credentials.
 """
-import collections,json,re,subprocess,sys
+import collections,json,re,subprocess,sys,time,urllib.request,fcntl,pathlib
 release=sys.argv[1]
 if not re.fullmatch('[a-f0-9]{40}',release):raise ValueError('invalid_release')
 name='avtocena-release-'+release[:12]
@@ -10,6 +10,31 @@ info=json.loads(subprocess.check_output(['docker','inspect',name]))[0]
 if info['Config']['Image']!='avtocena-regcloud:'+release:raise ValueError('wrong_image')
 state=info['State']
 if state['Running']:raise ValueError('candidate_must_be_stopped')
+if len(sys.argv)>2 and sys.argv[2]=='--probe':
+ lock=open('/run/lock/avtocena-runtime-change.lock','w')
+ fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+ ports=info['HostConfig']['PortBindings']['3000/tcp']
+ if len(ports)!=1 or ports[0]['HostIp']!='127.0.0.1':raise ValueError('loopback_required')
+ if '127.0.0.1:'+ports[0]['HostPort'] in pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf').read_text():raise ValueError('candidate_must_not_receive_production_traffic')
+ base='http://127.0.0.1:'+ports[0]['HostPort']
+ try:
+  subprocess.run(['docker','start',name],check=True,capture_output=True)
+  ready=False
+  for attempt in range(20):
+   try:
+    with urllib.request.urlopen(base+'/api/health',timeout=2) as response:value=json.load(response)
+    if value.get('releaseSha')!=release:raise ValueError('wrong_release')
+    ready=True;break
+   except OSError:time.sleep(1)
+  if not ready:raise ValueError('candidate_not_ready')
+  for path in ['/cars?market=china&sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub']:
+   start=time.monotonic()
+   try:
+    with urllib.request.urlopen(base+path,timeout=90) as response:body=response.read(20*1024*1024+1);status=response.status
+    print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'status':status,'bytes':len(body),'complete':b'</html>' in body,'streamError':b'$RX(' in body}),flush=True)
+   except Exception as error:print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'errorType':type(error).__name__}),flush=True)
+ finally:subprocess.run(['docker','stop','--time','20',name],check=True,capture_output=True)
+ state=json.loads(subprocess.check_output(['docker','inspect',name]))[0]['State']
 print(json.dumps({'release':release,'state':{k:state.get(k) for k in ['Status','OOMKilled','ExitCode','StartedAt','FinishedAt']},'memoryLimit':info['HostConfig']['Memory'],'nanoCpus':info['HostConfig']['NanoCpus']}))
 logs=subprocess.run(['docker','logs','--tail','2000',name],capture_output=True,text=True,check=True)
 text=logs.stdout+'\n'+logs.stderr

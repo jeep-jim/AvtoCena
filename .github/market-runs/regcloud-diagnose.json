@@ -1,5 +1,6 @@
 {
-  "reason": "Read sanitized error codes from the stopped candidate after failed cold price-sort acceptance; no production configuration or traffic changes",
-  "at": "2026-10-26T12:17:36.024355+00:00",
-  "failedRelease": "1c3d603c66de3b22f3f561251b198c0d6184c769"
+  "reason": "Bounded isolated candidate-only comparison of China price sorting versus all markets; stop candidate afterwards; never switch production",
+  "at": "2026-10-26T12:24:49.231128+00:00",
+  "failedRelease": "1c3d603c66de3b22f3f561251b198c0d6184c769",
+  "probeSingleMarket": true
 }
