@@ -9,9 +9,13 @@ class GateTests(unittest.TestCase):
   with self.assertRaises(AssertionError):gate.validate('/health','health',200,b'{"ok":true,"releaseSha":"old"}','new')
  def test_budgets_and_activation_are_mandatory(self):
   limits={p:budget for p,budget,k in gate.ROUTES}
-  self.assertEqual(limits['/api/health'],.25)
-  self.assertEqual(limits['/api/catalog/search?market=europe&make=BMW&page=2'],1)
-  self.assertTrue(all(v<=2 for v in limits.values()))
+  self.assertEqual(limits, {
+   '/api/health': .25, '/': 2, '/login': 1, '/autocalc': 1,
+   '/cars': 2, '/cars?market=china&make=Volkswagen&page=2': 2,
+   '/cars?market=europe&make=BMW&page=2': 2, '/cars?sort=totalRub': 2,
+   '/api/catalog/search?market=europe&make=BMW&page=2': 1,
+  }, 'Removing a route or changing a ceiling requires explicit owner approval')
+  self.assertEqual(len(gate.ROUTES), len(limits), 'Duplicate routes must not hide missing coverage')
   script=pathlib.Path('scripts/regcloud-deploy-production.sh').read_text()
   calls=[i for i in range(len(script)) if script.startswith('python3 "$runtime/regcloud-performance-gate.py"',i)]
   self.assertEqual(len(calls),2)
