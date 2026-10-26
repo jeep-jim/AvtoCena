@@ -1,4 +1,4 @@
 {
-  "at": "2026-10-26T05:55:26.453Z",
-  "reason": "Owner requested diagnosis of recurring stalls; bounded read-only error/resource and local public-route checks, no restart or collection."
+  "at": "2026-10-26T05:57:29.885Z",
+  "reason": "Check nginx oversized response headers and browser User-Agent after external 502 versus successful server reads"
 }
