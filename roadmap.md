@@ -15918,3 +15918,10 @@ VerifyAutobot40270291294/job121401441591 SUCCESS на4382abc:51серверны�
 
 ### 26.10.2026 — Приоритет общей памяти над стартовой альтернативой Японии
 В начальном draft (до любых пользовательских правок) подтверждённый совместимый параметр теперь заменяет стартовую неподтверждённую альтернативу поставщика, если само поле автомобиля пусто. Пример теста: sourcePower='100,150', actual powerHp пусто, сохранённый совместимый150 → draft150,а не первая100. Уже заполненное поле и последующие пользовательские правки сохраняются.3теста памятиPASS. Следующий ожидающий маркер обновлён; текущая установка4382abc не прерывалась. Общая задача ограничена ручным обучением/АвтоБотом, не сбором новых фидов.
+
+
+### 2026-10-26 — management learning and Autobot final verification checkpoint
+
+Final feature release: `651735ccc4f473550b4a6b46a7b1a7d2422dd125`. Exact deployment test profile passed 309/309; web and engine TypeScript checks passed. Chromium presentation/context checks passed in run 40270291294. Local worktree code matches the published release; only TypeScript generated cache differs. No synthetic management facts were written to production.
+
+Deployment is NOT yet verified complete: active predecessor run 40270291504 is preparing exact price indexes; final run 40271143133 is pending in the production deployment concurrency queue. Last public health still reports b8639192401ea219e95d4bbd1a390c7a46f5754a. Resume by checking those runs, then require the final release SHA in /api/health and verify a real electrified offer and public Autobot answer. Do not label queued deployment as installed. Cards/calculation previews use persistent management knowledge on read; global budget/specification filter indexes are not rebuilt by each management save.
