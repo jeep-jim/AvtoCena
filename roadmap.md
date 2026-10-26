@@ -16143,3 +16143,16 @@ PR1547 merged5a2d425605f2caa2bbe7e13cc5eab9c6dbdf559a. Текущий deploy4037
 CRM40381336744 SUCCESS: fixture browser/audit/live завершились. Live/job121781226874:36 cases,168 openings, passed=true (01:59 Красноярск). Audit/job121778049572 явно проверял current release и записал59bd33931fa08c1cf2e4bf539cf0e037b133612b; это положительный результат на старом runtime, не приёмкаb949966. Старые mobile40341789509 attempt3 и catalog journey40314227333 attempt5 FAILURE; новый mobile40381336930 in_progress. Перезапуски/сборщики в этом сеансе не запускались; наблюдение продолжается за40381399836.
 
 Источники: https://github.com/jeep-jim/AvtoCena/actions/runs/40370963021 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40377400249 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381399836 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381336744 .
+
+
+### 27.10.2026 — итог седьмого выпуска: warm PASS, сортировка после35с FAIL
+
+Проверено27.10 в02:36 Красноярск по GitHub40381399836/job121778677240. Кандидатb9499665151dabac5685e9994bfdf480172273a5 завершился FAILURE02:35. Все9 VM-local warm маршрутов PASS:health0,0039с,home0,2830с,login0,3328с,autocalc0,0139с,/cars0,1451с,China Volkswagen page2 0,0667с,Europe BMW page2 0,0715с,totalRub1,927с,search API0,0198с. После35с:health0,0113с,home0,6544с,login0,2529с,autocalc0,0171с,/cars0,1738с,China0,0690с,Europe0,3046с PASS; /cars?sort=totalRub4,645с при2с FAIL, performance_budget_exceeded. До следующего API,305с фазы и post-switch не дошло. Лог old production retained; переключения не было, возврат после переключения не выполнялся. Свежий публичный health вернул59bd33931fa08c1cf2e4bf539cf0e037b133612b.
+
+Cold preparation не является SLA:home30,862с,/cars0,437с,повтор home0,217с,Korea0,037с,Japan1,237с,China0,174с,totalRub27,074с complete=true,повтор0,642с,totalRubDesc4,222с. Исправление смены даты позволило пройти China HTML, но итоговая скорость сортировки послеTTL не принята. Причина оставшихся4,645с из этих логов не установлена: нельзя без профиля объявить это CPU, сеть или промах кэша.
+
+Mobile40381336930: FAILURE в Published budget continuity из-за Production release or verified descendant not confirmed. CRM40381336744 прежний PASS36cases168openings относится к старой версии, неb949966. Нового performance-кандидата/установки в доступном актуальном списке GitHub нет;40388091688 — подготовка shared budget prices, не новый deploy. Все текущие кандидаты завершились неудачно. Наблюдение за этой серией останавливается после итогового отчёта.
+
+Следующий необходимый шаг: ограниченная диагностика именно totalRub в остановленномb949966 с воспроизведением штатного порядка запросов и35с паузы; измерить cache hit/miss/причины инвалидации точного контекста сортировки, отдельно CPU и ожидание object storage. Исправлять подтверждённый повторный расчёт/чтение без ослабления freshness/generation/price fences, затем повторить неизменённые warm/35с/305с gates до/после переключения и live browser. В этом сеансе новая установка, сборщик или server probe не запускались; цены, данные и лимиты не менялись.
+
+Источники: https://github.com/jeep-jim/AvtoCena/actions/runs/40381399836 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381336930 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381336744 .
