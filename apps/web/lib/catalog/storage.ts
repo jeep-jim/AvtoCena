@@ -934,7 +934,10 @@ async function projectionModelKeys(params: CatalogSearchParams) {
 }
 async function readProjectionRows(manifest: CatalogManifest, params: CatalogSearchParams) {
   const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
-  return (await mapWithConcurrency(markets, Math.min(7, markets.length || 1), async (market) => {
+  // The projection cache already permits one large read at a time. Submit the
+  // next market only after that read finishes; otherwise a single bulk snapshot
+  // fills the interactive queue and expires its own siblings during slow I/O.
+  return (await mapWithConcurrency(markets, 1, async (market) => {
     const projection = await readSearchProjection(manifest.generationId, market);
     if ((projection.items || []).length || Number(manifest.markets?.[market]?.count || 0) === 0) {
       return (projection.items || []).map(safePublicPricing).filter(projectionCanRenderCard);
