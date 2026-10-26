@@ -28,7 +28,16 @@ jobs:
       - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/offer-share.test.ts tests/short-share.test.ts tests/staff-avatar-presence-url.test.ts tests/offer-navigation-performance.test.ts tests/catalog-card-contract.test.ts tests/catalog-editable-power-scenario.test.ts
       - run: node node_modules/typescript/bin/tsc --project apps/web/tsconfig.json --noEmit --incremental false
       - run: npm install --prefix "$RUNNER_TEMP/share-browser" --no-package-lock --ignore-scripts playwright@1.55.0
-      - run: node "$RUNNER_TEMP/share-browser/node_modules/playwright/cli.js" install --with-deps webkit
+      - name: Install WebKit from the official Ubuntu archive
+        run: |
+          # Reuse the signed-package mirror policy of verify-mobile-filter-overlays.
+          # The runner Azure mirror repeatedly exhausted the job before tests ran.
+          for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources; do
+            if [ -f "$source" ]; then
+              sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' "$source"
+            fi
+          done
+          node "$RUNNER_TEMP/share-browser/node_modules/playwright/cli.js" install --with-deps webkit
       - name: Check native sharing, clipboard and mini-app
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
