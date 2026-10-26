@@ -1,3 +1,4 @@
+import {AggregateBudgetIndexCache} from './aggregate-budget-index-cache';
 import {budgetSelectionBytes,resetBudgetRowSizes} from './budget-row-size';
 import {BudgetSortOrderCache} from './budget-sort-order-cache';
 import {budgetSourceRows,resetBudgetSourceIndexes} from './budget-source-index';
@@ -627,6 +628,7 @@ export function resetCatalogReadCachesForTests() {
   specificationBudgetDirectoryCache.clear();
   packedBudgetDirectoryCache.clear();
   budgetIndexCache.clear();
+  aggregateBudgetIndexCache.clear();
   liveBudgetBlockCache.clear();
   liveBudgetReplayCache.clear();
   japanBudgetReplayCache.clear();
@@ -2363,6 +2365,7 @@ const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:14
 const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const packedBudgetDirectoryCache=new DetailReadCache<PackedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const compressedBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
+const aggregateBudgetIndexCache=new AggregateBudgetIndexCache();
 const aggregateBudgetIndexes=new WeakMap<CompressedBudgetDirectory,Promise<BudgetCountIndex|null>>();
 const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
 const specificationSelectorPath=(name:string)=>`${specificationSelectorDirectory(readCalculationIndex()?.digest||null,calculationCacheVersion())}/${name}.json`;
@@ -2373,9 +2376,7 @@ async function readBudgetCountIndex(generationId:string,market?:string){
    let pending=aggregateBudgetIndexes.get(directory);
    if(!pending){pending=(async()=>{
     const parts=await mapWithConcurrency(Object.keys(directory.markets),2,name=>readBudgetCountIndex(generationId,name));
-    if(parts.some(part=>!part || part.bodyFilterVersion!==1))return null;
-    const valid=parts as BudgetCountIndex[];
-    return {...valid[0],displayOrderVersion:valid.every(part=>part.displayOrderVersion===1)?1 as const:undefined,sourceRows:valid.reduce((n,part)=>n+part.sourceRows,0),rows:valid.flatMap(part=>part.rows),otherRows:valid.flatMap(part=>part.otherRows||[]),pricingChunks:Object.assign({},...valid.map(part=>part.pricingChunks||{}))};
+    return aggregateBudgetIndexCache.merge(parts);
    })().catch(()=>null);aggregateBudgetIndexes.set(directory,pending);}
    const merged=await pending;
    if(merged)return merged;
