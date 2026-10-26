@@ -1,3 +1,5 @@
+import {budgetSelectionBytes,resetBudgetRowSizes} from './budget-row-size';
+import {BudgetSortOrderCache} from './budget-sort-order-cache';
 import {budgetSourceRows,resetBudgetSourceIndexes} from './budget-source-index';
 import {inspectCompressedSelectors,publishCompressedSelectors,readCompressedSelector,publishSelectorMarket,MAX_PUBLISHED_SELECTOR_BYTES} from './budget-selector-publication';
 import {calculatedCatalogPrice} from './calculated-price';
@@ -613,7 +615,7 @@ export function resetCatalogReadCachesForTests() {
   resetCatalogEditorialCache();
   resetSharedBudgetPriceCache();
   budgetEligibility.clear();
-  budgetSelectionOrder=new WeakMap();compactSortCache=new WeakMap();
+  budgetSelectionOrder=new WeakMap();compactSortCache=new WeakMap();compactSortOrders.clear();resetBudgetRowSizes();
   marketLandingCache.clear();
   editorialLandingCache.clear();
   editorialSummaryCache.clear();
@@ -2122,7 +2124,7 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
  return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}:${displayPrices}:${editorialRevision()}`,load);
 }
 const budgetEligibility=new BudgetEligibilityCache();
-const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4});
+const filteredBudgetSelectionCache = new DetailReadCache<CompactSelection|null>({maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4,sizeOf:budgetSelectionBytes});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
  const metadataFields=['color','make','model','yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive','powerFrom','powerTo','engineFrom','engineTo'];
@@ -2204,7 +2206,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
     return !(params.powerFrom||params.powerTo)||Boolean(hp&&(!params.powerFrom||hp>=params.powerFrom)&&(!params.powerTo||hp<=params.powerTo+0.01));
    });
   }
-  if(metadataQuery && (!specificationQuery||index.specificationFilterVersion===1) && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,rows:candidates};
+  if(metadataQuery && (!specificationQuery||index.specificationFilterVersion===1) && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];
   const modelKeys=await projectionModelKeys(params);
@@ -2220,7 +2222,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    for(const row of prepared)if(catalogSearchProjectionMatches(row,params,modelKeys))matched.add(row.id);
   });
   if(incomplete || seen.size!==ids.size)return null;
-  return {generationId:manifest.generationId,cardVersion,rows:candidates.filter(row=>matched.has(row[5].id))};
+  return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates.filter(row=>matched.has(row[5].id))};
  });
 }
 // Selection rows already expire after 30s and are keyed by generation/day/filters.
@@ -2230,20 +2232,27 @@ type OrderedBudgetRow=CatalogSearchProjection & {block:number};
 let budgetSelectionOrder=new WeakMap<BudgetCountIndex['rows'],OrderedBudgetRow[]>();
 // Sort compact identities, not full card payloads. A direction toggle shares the
 // same price pass. Weak ownership cannot outlive the existing bounded selection cache.
-type CompactSelection={generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']};
-let compactSortCache=new WeakMap<BudgetCountIndex['rows'],{prices?:Promise<Float64Array|null>;sellerPrices?:Float64Array;orders:Map<string,Uint32Array>}>();
+type CompactSelection={generationId:string;cardVersion:1|2|3;indexKey:number;rows:BudgetCountIndex['rows']};
+const compactSortOrders=new BudgetSortOrderCache();
+let compactSortCache=new WeakMap<BudgetCountIndex['rows'],{context:string;prices?:Promise<Float64Array|null>;sellerPrices?:Float64Array;orders:Map<string,Uint32Array>}>();
 async function searchSortedBudgetSelection(selected:CompactSelection,params:CatalogSearchParams,internalPageLimit:number){
  const mode=params.sort||"year";
  const terms=parseCatalogSort(mode);if(!terms?.length)return null;
+ const markets=[...new Set(selected.rows.map(row=>row[0]))];
+ const fingerprints=terms.some(term=>term.startsWith('totalRub'))?await Promise.all(markets.map(budgetPricingFingerprint)):[];
+ // Unversioned markets retain the existing short freshness bound.
+ const pricing=JSON.stringify([fingerprints,fingerprints.some(value=>value===null)?Math.floor(Date.now()/30_000):null]);
  let cache=compactSortCache.get(selected.rows);
- if(!cache){cache={orders:new Map()};compactSortCache.set(selected.rows,cache);}
- let order=cache.orders.get(mode);
+ if(!cache||cache.context!==pricing){cache={context:pricing,orders:new Map()};compactSortCache.set(selected.rows,cache);}
+ const state=cache;
+ const order=await compactSortOrders.get({generation:selected.generationId,index:selected.indexKey,revision:editorialRevision(),day:new Date(Date.now()+7*3600000).toISOString().slice(0,10),city:params.city||'',mode,pricing},selected.rows,async()=>{
+ let order=state.orders.get(mode);
  if(!order){
   let keys:Float64Array;
   if(terms.some(term=>term.startsWith("totalRub"))){
-   if(!cache.prices)cache.prices=(async()=>{
+   if(!state.prices)state.prices=(async()=>{
     const values=new Float64Array(selected.rows.length);values.fill(NaN);
-    const sellerValues=new Float64Array(selected.rows.length);sellerValues.fill(NaN);cache!.sellerPrices=sellerValues;
+    const sellerValues=new Float64Array(selected.rows.length);sellerValues.fill(NaN);state!.sellerPrices=sellerValues;
     // V3 already has bounded price-only replay and a validated shared snapshot.
     // Sorting must not fetch every full card (including images and ledgers).
     const index=selected.cardVersion===3?await readBudgetCountIndex(selected.generationId,params.market):null;
@@ -2283,20 +2292,29 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
      }
     });
     return incomplete||seen!==selected.rows.length?null:values;
-   })().catch(error=>{cache!.prices=undefined;throw error;});
-   const prices=await cache.prices;if(!prices)return null;keys=prices;
+   })().catch(error=>{state!.prices=undefined;throw error;});
+   const prices=await state.prices;if(!prices)return null;keys=prices;
   }else keys=new Float64Array(0);
   order=Uint32Array.from(selected.rows,(_,index)=>index);
   order.sort((a,b)=>{
    for(const term of terms){
     const value=(index:number)=>term.startsWith('totalRub')?keys[index]:term.startsWith('mileage')?sortNumber(selected.rows[index][5].mileageKm,true):sortNumber(selected.rows[index][5].year);
     const delta=compareSortNumbers(value(a),value(b),term);if(delta)return delta;
-    if(term.startsWith("totalRub")&&!Number.isFinite(keys[a])&&!Number.isFinite(keys[b])){const seller=compareSortNumbers(cache!.sellerPrices?.[a]??NaN,cache!.sellerPrices?.[b]??NaN,term);if(seller)return seller;}
+    if(term.startsWith("totalRub")&&!Number.isFinite(keys[a])&&!Number.isFinite(keys[b])){const seller=compareSortNumbers(state!.sellerPrices?.[a]??NaN,state!.sellerPrices?.[b]??NaN,term);if(seller)return seller;}
    }
    return selected.rows[a][5].id.localeCompare(selected.rows[b][5].id);
   });
-  cache.orders.set(mode,order);
+  if(fingerprints.length){
+   const after=await Promise.all(markets.map(budgetPricingFingerprint));
+   // A short TTL boundary invalidates the next lookup, not an otherwise exact
+   // in-flight calculation. Only a real input change invalidates this result.
+   if(JSON.stringify(after)!==JSON.stringify(fingerprints)){state.prices=undefined;state.sellerPrices=undefined;state.orders.clear();throw Error('catalog_sort_context_changed');}
+  }
+  state.orders.set(mode,order);
  }
+ return order;
+ });
+ if(!order)return null;
  const page=Math.max(1,Number(params.page||1));
  const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
  const visible=Array.from(order.slice((page-1)*pageSize,page*pageSize),position=>selected.rows[position][5]);
