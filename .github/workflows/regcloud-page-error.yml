@@ -37,10 +37,12 @@ jobs:
           docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
           docker inspect --format 'started={{.State.StartedAt}} finished={{.State.FinishedAt}} exit={{.State.ExitCode}} memoryLimit={{.HostConfig.Memory}}' avtocena-production
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          docker exec avtocena-production node --version
+          nginx -T 2>&1 | python3 -c 'import sys,re; print("NGINX_TRANSPORT", "\\n".join(x.strip() for x in sys.stdin if re.match(r"^\\s*(?:proxy_buffer|proxy_busy|proxy_read_timeout|gzip|http2|listen .*443)",x)))'
           free -m
           uptime
           # Only aggregate categories: do not print addresses, URLs or customer requests.
-          tail -n 3000 /var/log/nginx/error.log | python3 -c 'import sys,json; s=sys.stdin.read(); print("NGINX_ERROR_CATEGORIES_LAST_3000",json.dumps({p:s.count(p) for p in ["connect() failed", "Connection refused", "upstream timed out", "upstream prematurely closed", "no live upstreams", "worker_connections are not enough"]}))'
+          tail -n 3000 /var/log/nginx/error.log | python3 -c 'import sys,json; s=sys.stdin.read(); print("NGINX_ERROR_CATEGORIES_LAST_3000",json.dumps({p:s.count(p) for p in ["connect() failed", "Connection refused", "upstream timed out", "upstream prematurely closed", "no live upstreams", "worker_connections are not enough", "upstream sent too big header", "SSL_do_handshake() failed"]}))'
           docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,json; s=sys.stdin.read(); print("RUNTIME_FATAL_CATEGORIES",json.dumps({p:s.count(p) for p in ["heap out of memory", "Reached heap limit", "FATAL ERROR", "Killed", "ENOMEM"]}))'
 
           # Three bounded public reads from the server distinguish app latency from the client network.
@@ -49,7 +51,7 @@ jobs:
           for path in ['/api/health','/api/catalog/home','/']:
               start=time.monotonic();status=None;timing=None;size=0
               try:
-                  with urllib.request.urlopen('https://avtocena.com'+path,timeout=25) as response:
+                  with urllib.request.urlopen(urllib.request.Request('https://avtocena.com'+path,headers={'User-Agent':'Mozilla/5.0 Chrome/131.0.0.0 Safari/537.36','Accept-Encoding':'gzip'}),timeout=25) as response:
                       status=response.status;timing=response.headers.get('Server-Timing')
                       while True:
                           chunk=response.read(65536)
