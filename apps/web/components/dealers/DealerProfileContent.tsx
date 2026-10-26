@@ -46,7 +46,9 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
  useEffect(()=>{
   if(editorSection)return;
   const navigate=(scroll:boolean)=>{const hash=location.hash;const value=hash==='#offices'?'about':hash.slice(1);if(['','cars','photos','about','specials','reviews'].includes(value)){setTab((value==='specials'?'cars':value||'cars') as Tab);if(scroll&&value==='specials')requestAnimationFrame(()=>specialSection.current?.scrollIntoView({block:'start'}));}};
-  navigate(false);window.dispatchEvent(new Event(CITY_CHANGED_EVENT));const initial=requestAnimationFrame(()=>{if(location.hash==='#catalog')document.getElementById('catalog')?.scrollIntoView({block:'start'});});
+  navigate(false);window.dispatchEvent(new Event(CITY_CHANGED_EVENT));let initial=0;
+  // Allow the selected-city/selection layout effects to settle before aligning a deep link.
+  initial=requestAnimationFrame(()=>{initial=requestAnimationFrame(()=>{if(location.hash==='#catalog')document.getElementById('catalog')?.scrollIntoView({block:'start',behavior:'instant'});});});
   const changed=()=>navigate(true);window.addEventListener('hashchange',changed);return()=>{cancelAnimationFrame(initial);window.removeEventListener('hashchange',changed);};
  },[s.dealerId,editorSection]);
  useEffect(()=>{const el=top.current;if(!el)return;const header=el.ownerDocument.querySelector('.ac-public-header');if(!header)return;const measure=()=>el.style.setProperty('--dealer-header-height',`${header.getBoundingClientRect().height}px`);measure();const observer=new ResizeObserver(measure);observer.observe(header);return()=>observer.disconnect();},[]);

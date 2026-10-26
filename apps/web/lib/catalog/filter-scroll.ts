@@ -2,7 +2,14 @@
 let pending:{target:string;from:string;y:number;anchorTop:number|null;dispose:()=>void}|null=null;
 function key(value:string){const u=new URL(value,location.origin);u.searchParams.sort();return u.pathname+u.search;}
 function position(){return document.body.style.position==='fixed'?Math.max(0,-parseFloat(document.body.style.top)||0):window.scrollY;}
-function catalogTop(){const node=document.querySelector('#catalog');return node?node.getBoundingClientRect().top+position():null;}
+let lockedAnchor:{top:number|null}|null=null;
+/** Fixed-body mobile sheets change layout geometry. Retain the document anchor
+ * measured before locking, not the sheet's temporary bounding rectangle. */
+export function lockFilterScrollAnchor(){
+ const previous=lockedAnchor;const entry={top:catalogTop()};lockedAnchor=entry;
+ return ()=>{if(lockedAnchor===entry)lockedAnchor=previous;};
+}
+function catalogTop(){if(document.body.style.position==='fixed'&&lockedAnchor)return lockedAnchor.top;const node=document.querySelector('#catalog');return node?node.getBoundingClientRect().top+position():null;}
 export function rememberFilterScroll(href:string){
  pending?.dispose();
  const entry={target:key(href),from:key(location.href),y:position(),anchorTop:catalogTop(),dispose:()=>{}};

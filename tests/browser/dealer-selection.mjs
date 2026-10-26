@@ -94,7 +94,8 @@ try{for(const width of [390,1440]){
  const intro=await page.locator('.dealer-intro').evaluate(el=>({height:el.getBoundingClientRect().height,line:parseFloat(getComputedStyle(el).lineHeight)}));
  assert.ok(intro.height<=intro.line*2+1,JSON.stringify(intro));
  const home=page.locator('.ac-footer-dealer-home');assert.equal(await home.getAttribute('href'),'/');assert.equal(await home.innerText(),'АвтоЦена');
- await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
+ // Fixture setup must finish before measuring geometry; global CSS uses smooth scroll.
+ await page.evaluate(()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:"instant"}));
  const footerBox=await home.boundingBox(),panelBox=await page.locator('[data-selection-dock]').boundingBox();assert.ok(footerBox&&panelBox&&footerBox.y+footerBox.height<=panelBox.y,JSON.stringify({footerBox,panelBox}));
  await page.getByRole('textbox',{name:'Название подборки',exact:true}).fill('');
  await page.evaluate(()=>window.calls.pop());
@@ -105,7 +106,7 @@ try{for(const width of [390,1440]){
   if(method==='button')await page.getByRole('button',{name:'Применить фильтры',exact:true}).click();else await page.goBack();
   await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor({state:'hidden'});await page.waitForFunction(y=>Math.abs(scrollY-y)<3,beforeClose);console.log(`close ${method}: restored ${beforeClose}px`);
  }}
- await page.evaluate(()=>window.scrollTo(0,900));await openFilters(page,width);
+ await page.evaluate(()=>window.scrollTo({top:900,behavior:"instant"}));await openFilters(page,width);
  const filterForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
  await filterForm.waitFor({state:'visible'});if(width===390){await send.waitFor({state:'hidden'});assert.equal(await send.isVisible(),false);}
  const budget=filterForm.getByRole('textbox',{name:'Цена: до',exact:true});await budget.fill('3000000');await budget.press('Tab');
@@ -168,7 +169,9 @@ try{for(const width of [390,1440]){
  assert.equal(new URL(page.url()).searchParams.get('fuel'),'petrol|diesel');
  assert.equal(new URL(page.url()).searchParams.get('bodyType'),'sedan|hatchback');
  assert.equal(new URL(page.url()).searchParams.get('drive'),'fwd|awd');
- await marketRoot.locator('button.ac-filter-control').click();
+ // Market is now multi-select: it stays open and a switch requires clearing the previous choice.
+ if(await marketRoot.locator('button.ac-filter-control').getAttribute('aria-expanded')!=='true')await marketRoot.locator('button.ac-filter-control').click();
+ await marketRoot.getByRole('button',{name:'Все рынки',exact:true}).click();
  await marketRoot.getByRole('button',{name:'Китай',exact:true}).click();
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('market')==='china');
  assert.equal(new URL(page.url()).searchParams.has('transmission'),false);
@@ -179,7 +182,7 @@ try{for(const width of [390,1440]){
   await page.goto(origin+'/test/cabinet');
   await page.evaluate(()=>{history.pushState({},'', '/test/dealer?canonical=1&make=Audi&selection=1#catalog');});
   await page.reload();await page.locator('#catalog').waitFor();
-  await page.evaluate(()=>{window.fixtureDelay=700;window.scrollTo(0,900);});
+  await page.evaluate(()=>{window.fixtureDelay=700;window.scrollTo({top:900,behavior:"instant"});});
   await openFilters(page,width);
   const canonicalForm=page.getByRole('dialog',{name:'Фильтры каталога'});await canonicalForm.waitFor();
   await canonicalForm.getByRole('textbox',{name:'Цена: до',exact:true}).fill('2700000');
@@ -193,5 +196,5 @@ try{for(const width of [390,1440]){
   await page.screenshot({path:`${out}/canonical-selection.png`});
  }
  await page.goto(origin+'/test/dealer?visitor=1&make=Audi&city=Новокузнецк&selection=1#catalog');await page.locator('#catalog').waitFor();assert.equal(await send.count(),0);assert.equal(await page.locator('[data-city]').textContent(),'Новокузнецк');assert.ok((await page.evaluate(()=>document.cookie)).includes(encodeURIComponent('Москва')));assert.deepEqual(errors,[]);console.log(`${width}: share, filters, city, anchor, dismissal, stale request and visitor visibility OK`);
- }catch(error){await page.screenshot({path:`${out}/failure-${width}.png`,fullPage:true});console.error(await page.evaluate(()=>({scrollY,scrollHeight:document.documentElement.scrollHeight,viewport:innerHeight,body:document.body.style.cssText,restoration:history.scrollRestoration})));console.error((await page.locator('body').innerText()).slice(-3000));throw error;}finally{await page.close();}
+ }catch(error){await page.screenshot({path:`${out}/failure-${width}.png`,fullPage:true});console.error(await page.evaluate(()=>({scrollY,scrollHeight:document.documentElement.scrollHeight,viewport:innerHeight,body:document.body.style.cssText,restoration:history.scrollRestoration,catalogTop:document.getElementById('catalog')?.getBoundingClientRect().top,margin:getComputedStyle(document.getElementById('catalog')).scrollMarginTop,scrollMode:getComputedStyle(document.documentElement).scrollBehavior})));console.error((await page.locator('body').innerText()).slice(-3000));throw error;}finally{await page.close();}
 }}finally{await browser.close();server.close();}
