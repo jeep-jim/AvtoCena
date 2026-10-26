@@ -13,7 +13,7 @@ export class DetailReadCache<T> {
     maxQueued?: number; queueTimeoutMs?: number;
     /** Display-only data. Never enable for prices, permissions or source admission. */
     staleWhileRevalidateMs?: number;
-    sizeOf?: (value: T) => number | undefined;
+    sizeOf?: (value: T) => number | undefined | Promise<number | undefined>;
     shouldCache?: (value: T) => boolean;
   }) {}
 
@@ -70,7 +70,7 @@ export class DetailReadCache<T> {
         // Leave substantial heap headroom for parsed objects and request work.
         let bytes: number;
         try {
-          const measured = this.options.sizeOf?.(value);
+          const measured = this.options.sizeOf ? await this.options.sizeOf(value) : undefined;
           bytes = measured !== undefined && Number.isFinite(measured) && measured >= 0
             ? measured : Buffer.byteLength(JSON.stringify(value), 'utf8');
         }
@@ -80,6 +80,7 @@ export class DetailReadCache<T> {
           if (error instanceof RangeError && error.message === 'Invalid string length') return value;
           throw error;
         }
+        if (epoch !== this.epoch) return value;
         if (bytes <= this.options.maxBytes) {
           while (this.entries.size >= this.options.maxEntries || this.bytes + bytes > this.options.maxBytes) {
             const oldest = this.entries.keys().next().value;
