@@ -31,7 +31,8 @@ jobs:
             ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
             remote_script="/opt/avtocena/releases/$failed_release/failed-release-diagnostic.py"
             scp "${ssh_opts[@]}" scripts/regcloud-failed-release-diagnostic.py "root@151.248.113.177:$remote_script"
-            probe=$(python3 -c 'import json;print("--probe" if json.load(open(".github/market-runs/regcloud-diagnose.json")).get("probeSingleMarket") is True else "")')
+            scp "${ssh_opts[@]}" scripts/regcloud-cpu-sample.mjs "root@151.248.113.177:/opt/avtocena/releases/$failed_release/cpu-sample.mjs"
+            probe=$(python3 -c 'import json;v=json.load(open(".github/market-runs/regcloud-diagnose.json"));print("--probe-ttl" if v.get("probeTTL") is True else "--probe" if v.get("probeSingleMarket") is True else "")')
             ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 '$remote_script' '$failed_release' '$probe'"
             exit 0
           fi

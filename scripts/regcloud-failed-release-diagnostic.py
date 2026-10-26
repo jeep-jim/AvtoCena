@@ -10,7 +10,8 @@ info=json.loads(subprocess.check_output(['docker','inspect',name]))[0]
 if info['Config']['Image']!='avtocena-regcloud:'+release:raise ValueError('wrong_image')
 state=info['State']
 if state['Running']:raise ValueError('candidate_must_be_stopped')
-if len(sys.argv)>2 and sys.argv[2]=='--probe':
+if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl']:
+ ttl_probe=sys.argv[2]=='--probe-ttl'
  lock=open('/run/lock/avtocena-runtime-change.lock','w')
  fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
  ports=info['HostConfig']['PortBindings']['3000/tcp']
@@ -27,12 +28,31 @@ if len(sys.argv)>2 and sys.argv[2]=='--probe':
     ready=True;break
    except OSError:time.sleep(1)
   if not ready:raise ValueError('candidate_not_ready')
-  for path in ['/cars?market=china&sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub']:
+  paths=['/cars?sort=totalRub','/cars?sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub'] if ttl_probe else ['/cars?market=china&sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub']
+  for number,path in enumerate(paths):
+   if ttl_probe and number==2:time.sleep(35)
+   profile=None
+   if ttl_probe and number>=2:
+    subprocess.run(['docker','kill','--signal=USR1',name],check=True,capture_output=True)
+    time.sleep(1)
+    profile=subprocess.Popen(['docker','exec','-i',name,'node','--input-type=module'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+    profile.stdin.write(pathlib.Path(__file__).with_name('cpu-sample.mjs').read_text());profile.stdin.close();profile.stdin=None
+    time.sleep(1)
    start=time.monotonic()
    try:
     with urllib.request.urlopen(base+path,timeout=90) as response:body=response.read(20*1024*1024+1);status=response.status
     print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'status':status,'bytes':len(body),'complete':b'</html>' in body,'streamError':b'$RX(' in body}),flush=True)
    except Exception as error:print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'errorType':type(error).__name__}),flush=True)
+   if profile:
+    try:
+     output,_=profile.communicate(timeout=20)
+     for line in output.splitlines():
+      if line.startswith('CPU_SAMPLE '):print('CANDIDATE_CPU '+json.dumps({'path':path,'profile':json.loads(line[len('CPU_SAMPLE '):])}),flush=True)
+    except subprocess.TimeoutExpired:
+     profile.kill();profile.communicate();print(json.dumps({'candidateProfileError':'timeout'}),flush=True)
+   if ttl_probe:
+    stats=subprocess.check_output(['docker','stats','--no-stream','--format','{{.MemUsage}} / CPU {{.CPUPerc}}',name],text=True).strip()
+    print(json.dumps({'candidateResources':stats,'after':path}),flush=True)
  finally:subprocess.run(['docker','stop','--time','20',name],check=True,capture_output=True)
  state=json.loads(subprocess.check_output(['docker','inspect',name]))[0]['State']
 print(json.dumps({'release':release,'state':{k:state.get(k) for k in ['Status','OOMKilled','ExitCode','StartedAt','FinishedAt']},'memoryLimit':info['HostConfig']['Memory'],'nanoCpus':info['HostConfig']['NanoCpus']}))
