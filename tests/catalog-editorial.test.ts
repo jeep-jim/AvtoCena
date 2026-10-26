@@ -21,7 +21,7 @@ test('catalog editing is tenant-scoped, rejects invalid input and never accepts 
  assert.deepEqual(input({specifications:{bodyType:'suv',drive:'awd',transmission:'cvt',color:' Синий '}}).specifications,{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Синий'});
 });
 
-test('manual edits survive publication, hide before pagination and keep counts, facets, homepage and restore consistent',async()=>{
+test('manual edits survive publication, hide before pagination and keep counts, facets, homepage and restore consistent',async(t)=>{
  const storage=getJsonStorage(),oldRead=storage.readJsonWithMeta,oldWrite=storage.writeJson;
  const records=new Map<string,{value:any;etag:string}>();let sequence=0,generationId='editorial-a';
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,totalRub:1500000,sourceId:'fixture',sourceOfferId:'1',sourcePrice:1000000,sourceCurrency:'RUB',mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',images:[{url:'https://example.com/car.jpg'}],cardProjectionVersion:3,publicVisibleRub:1500000,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
@@ -60,6 +60,9 @@ test('manual edits survive publication, hide before pagination and keep counts, 
   const allFacets=await readCatalogFacets({});
   assert.deepEqual(allFacets.makes,['Hyundai']);
   assert.equal(reads.some(path=>path.includes('/projection/')),false,'hidden offers must not force full-market reads for navigation facets');
+  const clock=Date.now;t.mock.method(Date,'now',()=>clock()+31_000);
+  try{assert.equal(await readCatalogFacets({}),allFacets,'unchanged metadata must reuse derived facets after request TTL');}
+  finally{t.mock.restoreAll();}
   const home=await readHomeCatalogSnapshot(2);assert.equal(home.marketCounts.korea,2);assert.equal(home.items.some(r=>r.id===victim.id),false);
   const stale:any={markets:{korea:{total:3,items:rows}},generationId};
   const overview=await applyEditorialOverview(stale);

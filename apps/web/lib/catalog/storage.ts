@@ -1,3 +1,4 @@
+import {StableBudgetSelectionCache} from "./stable-budget-selection";
 import {AggregateBudgetIndexCache} from './aggregate-budget-index-cache';
 import {budgetSelectionBytes,resetBudgetRowSizes} from './budget-row-size';
 import {BudgetSortOrderCache} from './budget-sort-order-cache';
@@ -625,7 +626,7 @@ export function resetCatalogReadCachesForTests() {
   previousOfferChunkCache.clear();
   resetCatalogEditorialCache();
   resetSharedBudgetPriceCache();
-  budgetEligibility.clear();
+  budgetEligibility.clear();stableBudgetSelections.clear();
   budgetSelectionOrder=new WeakMap();compactSortCache=new WeakMap();compactSortOrders.clear();resetBudgetRowSizes();
   marketLandingCache.clear();
   editorialLandingCache.clear();
@@ -2139,6 +2140,7 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
  return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}:${displayPrices}:${editorialRevision()}`,load);
 }
 const budgetEligibility=new BudgetEligibilityCache();
+const stableBudgetSelections=new StableBudgetSelectionCache();
 const filteredBudgetSelectionCache = new DetailReadCache<CompactSelection|null>({maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4,sizeOf:budgetSelectionBytes});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
@@ -2178,6 +2180,15 @@ async function readBudgetSelection(params:CatalogSearchParams){
    const row=editedRow(original);
    return !editorialHidden({id:row[5].id,market:row[0]}) && catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogVehicleExcluded(row[5]);
   });
+  // No price/specification filter participates in this membership. Its only
+  // authorities are the immutable index, current policy day and editorial
+  // revision. Reusing rows also preserves the weak facet/order caches.
+  if(!hasBudget && !metadataFields.some(key=>Boolean((params as any)[key]))){
+   const market=!params.market||params.market==='any'?'any':params.market;
+   const rows=await stableBudgetSelections.get(index,eligibilityContext,market,()=>
+    filterBudgetRows(sourceRows,editedRow,row=>eligible.has(row[5].id)&&(market==='any'||same(row[0],market))));
+   return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows};
+  }
   const compactModelKeys=params.model?await projectionModelKeys(params):null;
   // Safety normalization never changes make. Apply editorial values first, then
   // reject unrelated makes before the expensive model/specification matcher.
@@ -2498,7 +2509,7 @@ export async function backfillCatalogBudgetCountIndex(){
  const stored=await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v3.json",null);
  if(stored?.version!==3 || stored.generationId!==generationId || stored.filterVersion!==1 || !Array.isArray(stored.otherRows)
   || stored.rows.length!==index.rows.length || stored.otherRows.length!==index.otherRows!.length)throw Error("catalog_compact_index_v3_not_verified");
- budgetIndexCache.clear();filteredBudgetSelectionCache.clear();liveBudgetReplayCache.clear();liveBudgetBlockCache.clear();
+ budgetIndexCache.clear();stableBudgetSelections.clear();filteredBudgetSelectionCache.clear();liveBudgetReplayCache.clear();liveBudgetBlockCache.clear();
  return {generationId,version:stored.version,verified:true,sourceRows:stored.sourceRows,rows:stored.rows.length,otherRows:stored.otherRows.length,bytes:Buffer.byteLength(JSON.stringify(stored))};
 }
 const catalogCountCache = new DetailReadCache<{generationId: string; total: number}>({maxEntries:128,maxBytes:128*1024,ttlMs:30_000,concurrency:4});
