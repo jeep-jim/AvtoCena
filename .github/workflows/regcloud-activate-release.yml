@@ -13,13 +13,13 @@ jobs:
   activate:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     environment: regcloud-staging
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Activate verified existing image with corrected access gate
+      - name: Accept prepared image with unchanged pre-switch and post-switch gates
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
@@ -29,13 +29,14 @@ jobs:
           trap 'rm -f "$key_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
-          release=6de99ab6a8486859dd40e1e43788d61a345e6626
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          release=$(python3 -c 'import json,re;v=json.load(open(".github/market-runs/regcloud-activate-release.json"))["release"];assert re.fullmatch(r"[a-f0-9]{40}",v);print(v)')
           remote_dir="/opt/avtocena/releases/$release"
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py "root@151.248.113.177:$remote_dir/"
-          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- $release" <<'REMOTE'
           set -euo pipefail
-          release=6de99ab6a8486859dd40e1e43788d61a345e6626
+          release=$1
+          [[ "$release" =~ ^[a-f0-9]{40}$ ]]
           runtime="/opt/avtocena/releases/$release"
           test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "avtocena-regcloud:$release")" = "$release"
           calculator=$(python3 - "$runtime/runtime.env" <<'PY'
@@ -43,5 +44,5 @@ jobs:
           print(next(x.split('=',1)[1] for x in pathlib.Path(sys.argv[1]).read_text().splitlines() if x.startswith('AVTOCENA_CALCULATION_VERSION=')))
           PY
           )
-          bash "$runtime/regcloud-deploy-production.sh" "$release" "$calculator"
+          bash "$runtime/regcloud-deploy-production.sh" "$release" "$calculator" 1
           REMOTE

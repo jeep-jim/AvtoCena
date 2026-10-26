@@ -1,1 +1,4 @@
-{"release":"6de99ab6a8486859dd40e1e43788d61a345e6626","reason":"Verify nonempty local Che168 response while preserving strict visitor IP gates for AJES"}
+{
+  "release": "e23d9d096935481c4ecddf6a987c574c5c2bbbf9",
+  "reason": "Reaccept prepared CI-verified image after long-idle profile: unchanged 54 warm/35s/305s full-response gates; rollback retained"
+}
