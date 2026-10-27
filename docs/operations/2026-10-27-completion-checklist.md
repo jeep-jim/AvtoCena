@@ -20,3 +20,6 @@
 | Учёт и последовательность | PR1561 merged49e2389d после10 SUCCESS. Readonly baseline40462904526 на actuale23d; новый deploy ещё не запускался | Дождаться baseline; сохранить54строки истории1548, один штатный release, exact/live acceptance. Не закрывать наблюдение до последнего кандидата |
 
 Проверенные источники: PR1561; CI40461968047; failure browser40461967870; report browser40461967780; saved schema40462904544. Ни пороги, ни цены/данные, ни права/источники не ослаблены.
+
+
+Обновление13:53: baseline40462904526 завершился FAILURE на SSH Broken pipe в305с паузе; browser skipped. Korea budget17,665с/0карточек, Japan11,896с, ChinaVW5,828с, China+city11,051с/complete=false. PR1564 merged764512f добавляет только SSH keepalive и повторяет bounded baseline. PR1563 остаётся draft до результатов повторного замера; новый deploy ещё не запущен.
