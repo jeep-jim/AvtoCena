@@ -44,7 +44,7 @@ function ModelRow({model,canEdit}:{model:Summary;canEdit:boolean}){
 export function KnowledgeDirectory({models,canEdit,pagination}:{models:Summary[];canEdit:boolean;pagination?:{page:number;total:number}}){
  const params=useSearchParams(),router=useRouter();
  const [page,setPage]=useState(1);
- useEffect(()=>{setPage(1);},[params]);
+ useEffect(()=>{setPage(1);},[params.toString()]);
  const ordered=useMemo(()=>[...models].sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru',{numeric:true})),[models]);
  const total=pagination?.total??ordered.length,pages=Math.max(1,Math.ceil(total/40)),current=Math.min(pagination?.page??page,pages);
  const changePage=(next:number)=>{if(pagination){const query=new URLSearchParams(params);query.set("page",String(next));router.push(`/cars/autocatalog?${query}`,{scroll:false});}else setPage(next);};

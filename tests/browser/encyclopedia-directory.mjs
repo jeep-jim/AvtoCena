@@ -35,7 +35,7 @@ try{for(const width of [390,1440]){
  await rows.nth(1).getByRole('button',{name:'Параметры',exact:true}).click();
  await rows.nth(1).locator('.ac-ency-model-editor').waitFor();assert.equal(reads,2);
  assert.equal(await rows.first().locator('.ac-ency-model-editor').count(),1,'opening another model preserves the first workspace');
- await page.getByRole('button',{name:'Далее',exact:true}).click();assert.equal(await rows.count(),40);assert.equal(reads,2,'pagination does not fetch model records');
+ await page.getByRole('button',{name:'Далее',exact:true}).click();assert.equal(await rows.count(),40);assert.equal(reads,2,'pagination does not fetch model records');assert.ok((await rows.first().textContent()).includes('Brand 0 Model 40'),'next page actually changes model rows');
  await page.getByRole('button',{name:'Назад',exact:true}).click();
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
  await page.screenshot({path:out+`/directory-${width}.png`,fullPage:true});

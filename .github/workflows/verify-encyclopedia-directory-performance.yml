@@ -30,3 +30,10 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/directory-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/encyclopedia-directory.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compact-encyclopedia-screenshots
+          path: artifacts/encyclopedia-directory/*.png
+          if-no-files-found: ignore
