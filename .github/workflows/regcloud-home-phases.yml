@@ -1,0 +1,99 @@
+name: Regcloud — isolated home phases
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-home-phases.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read immutable diagnostic target
+        id: target
+        run: |
+          python3 - <<'PY'
+          import json,os,re
+          m=json.load(open('.github/market-runs/regcloud-home-phases.json'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+            for key in ['source','baseline','production']:
+              assert re.fullmatch('[a-f0-9]{40}',m[key])
+              f.write(key+'='+m[key]+'\n')
+          PY
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.target.outputs.source }}
+          path: source
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - name: Verify unchanged runtime except phase instrumentation
+        env:
+          BASELINE: ${{ steps.target.outputs.baseline }}
+        run: |
+          python3 - <<'PY'
+          import os,subprocess
+          files=subprocess.check_output(['git','diff','--name-only',os.environ['BASELINE'],'HEAD','--','apps','packages','data','Dockerfile','package.json','package-lock.json'],cwd='source',text=True).splitlines()
+          assert set(files)=={'apps/web/app/(public)/page.tsx','apps/web/lib/catalog/home-phase-timing.ts'}, files
+          PY
+          cd source
+          node --test tests/home-phase-timing.test.ts
+      - name: Build one instrumented image and measure without activation
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          SOURCE: ${{ steps.target.outputs.source }}
+          BASELINE: ${{ steps.target.outputs.baseline }}
+          PRODUCTION: ${{ steps.target.outputs.production }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/staging/home-phases/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          calculator=$(cd source && node scripts/catalog-calculation-version.mjs)
+          [[ "$calculator" =~ ^[a-f0-9]{64}$ ]]
+          cleanup() {
+            ssh "${ssh_opts[@]}" root@151.248.113.177 "rm -f '$remote_dir/calculation-v1.json' '$remote_dir/image-index.json' '$remote_dir/runtime.env' '$remote_dir/image.tar.gz' '$remote_dir/image.tar.gz.sha256'" || true
+            rm -f "$key_file" source/data/knowledge/encyclopedia/calculation-v1.json
+          }
+          trap cleanup EXIT
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'; test \$(df --output=avail -k / | tail -1) -gt 8388608"
+          scp "${ssh_opts[@]}" scripts/regcloud-home-phases.py "root@151.248.113.177:$remote_dir/probe.py"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 '$remote_dir/probe.py' export '$BASELINE' '$SOURCE' '$calculator' '$remote_dir' '$PRODUCTION'"
+          mkdir -p source/data/knowledge/encyclopedia
+          scp "${ssh_opts[@]}" "root@151.248.113.177:$remote_dir/calculation-v1.json" source/data/knowledge/encyclopedia/calculation-v1.json
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import {createHash} from 'node:crypto';
+          const i=JSON.parse(fs.readFileSync('source/data/knowledge/encyclopedia/calculation-v1.json','utf8'));
+          if(i.version!==1||!Object.keys(i.models||{}).length||createHash('sha256').update(JSON.stringify(i.models)).digest('hex')!==i.digest||!/^[a-f0-9]{64}$/.test(i.manifestDigest))throw Error('invalid_private_index');
+          console.log(JSON.stringify({privateIndexDigest:i.digest,manifestDigest:i.manifestDigest}));
+          JS
+          docker build --label "org.opencontainers.image.revision=$SOURCE" -t "avtocena-home-phases:$SOURCE" source
+          docker save "avtocena-home-phases:$SOURCE" | gzip -1 > "$RUNNER_TEMP/image.tar.gz"
+          (cd "$RUNNER_TEMP" && sha256sum image.tar.gz > image.tar.gz.sha256)
+          scp "${ssh_opts[@]}" "$RUNNER_TEMP/image.tar.gz" "$RUNNER_TEMP/image.tar.gz.sha256" "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$remote_dir' '$SOURCE'" <<'REMOTE'
+          set -euo pipefail
+          exec 9>/run/lock/avtocena-staging-prepare.lock
+          flock -n 9
+          cd "$1"
+          sha256sum -c image.tar.gz.sha256
+          gzip -dc image.tar.gz | docker load
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "avtocena-home-phases:$2")" = "$2"
+          rm image.tar.gz image.tar.gz.sha256
+          REMOTE
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 '$remote_dir/probe.py' probe '$BASELINE' '$SOURCE' '$calculator' '$remote_dir' '$PRODUCTION'"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "docker image rm 'avtocena-home-phases:$SOURCE' >/dev/null"
