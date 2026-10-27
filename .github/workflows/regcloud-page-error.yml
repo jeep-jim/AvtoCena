@@ -27,6 +27,11 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          failed_release=$(python3 -c 'import json,re;v=json.load(open(".github/market-runs/regcloud-page-error.json")).get("failedRelease","");assert not v or re.fullmatch(r"[a-f0-9]{40}",v);print(v)')
+          if [ -n "$failed_release" ]; then
+            ssh "${ssh_opts[@]}" root@151.248.113.177 python3 - "$failed_release" < scripts/regcloud-cutover-evidence.py
+            exit 0
+          fi
           logs_only=$(python3 -c 'import json;v=json.load(open(".github/market-runs/regcloud-page-error.json")).get("logsOnly",False);assert isinstance(v,bool);print(str(v).lower())')
           ssh "${ssh_opts[@]}" root@151.248.113.177 bash -s -- "$logs_only" <<'REMOTE' 
           set -euo pipefail
