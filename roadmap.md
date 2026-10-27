@@ -16548,3 +16548,10 @@ PR1574 reviewed и merged81b786f3132ba3560202fcee15241657672b3f4c: все8checks
 Repair40477667096 SUCCESS:433цепочки восстановлены,1152проверены, originalsPreserved:true. Новый index8f3cef04eb7d74be257ede3cb26deec94e99cae86dc52685b5df84727fce6916 содержит5277внутреннихмоделей,85570годовыхfacts,47889ASTRAreferences/15193power30values. Requiredresearch57/1209variants/1832fields/15identityFields PASS; все requiredASTRAplans PASS; calculationaudit PASS. Неизвестные параметры остались неизвестными; audit не означает полное заполнение всех карточек. CI40477663680 SUCCESS, проверка сборки успешна.
 
 PR1579 merged f27c2e803b0627ebbaaf22eab7f0332b1c9a310b, единственный новый deploy40479673544 запущен. Включает compact1567, make-only1573 и localfilters1574. Marker сохраняет все research/ASTRA и пустыеideaReports. Production последний подтверждённый e23d9d0; установка ещё не заявляется. Далее preparation/build/exactpriceindexes,66VMsamples и live390/1440. Нерешённые прежние задачи/полная межрыночная матрица остаются открытыми.
+
+
+### 27.10.2026, 16:59 Красноярск — выпуск f27 остановлен скоростным ограничением до переключения
+
+Deploy40479673544 exactf27c2e803b0627ebbaaf22eab7f0332b1c9a310b FAILURE, job122106857175. Индекс/research/ASTRA/audit, Dockerbuild и точные priceindexes SUCCESS. Все11warm и11after35s PASS, включая encyclopedia1,3016/0,7193с. После305с China+Новокузнецк0,1299сPASS, VWpage2 0,887сPASS (прежнийfail2,1105с); globalprices1,9828сPASS. EuropeBMWAPIpage2 1,1612с при потолке1сFAIL, до последнего encyclopedia305sample и доswitch. Новая версия не установлена, oldproductionretained; последний внешнийhealth e23d9d096935481c4ecddf6a987c574c5c2bbbf9. Нельзя считать эти результаты полной приёмкой66samples.
+
+Запущена одна bounded диагностика остановленного f27:40485209721, все11маршрутов/warm35/305, Server-Timing и CPUprofile именно APIEuropeBMWpage2. Рабочийtraffic не переключается; candidatefinallystop. Пороги не изменены. Livebrowsermarkers по-прежнему не запускались. Скрипт browserprofile дополнен фактической проверкой сохранения карточек и отсутствия headerloader приpending; синтаксисPASS, liveрезультат ещё не получен.
