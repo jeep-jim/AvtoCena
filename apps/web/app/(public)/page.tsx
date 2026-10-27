@@ -1,8 +1,9 @@
+import {createHomePhaseTiming} from "@/lib/catalog/home-phase-timing";
 import {BuyerGallery} from '@/components/home/BuyerGallery';
 import {SpecialRail} from '@/components/dealers/SpecialRail';
 import {withAjesCount} from '@/lib/catalog/ajes-catalog';
 import {Suspense} from 'react';
-import {AjesRail} from '@/components/catalog/AjesRail';
+import {AjesRail,readAjesRailData} from '@/components/catalog/AjesRail';
 import {WEBSITE_SCHEMA} from '@/lib/catalog/search-metadata';
 import {DealerCitySync} from "@/components/dealers/DealerCitySync";
 import {readShowcase} from "@/lib/dealers/showcase-store";
@@ -47,33 +48,37 @@ export async function generateMetadata({ searchParams }: { searchParams?: Promis
   };
 }
 
+function HomeJapanRail({timing}:{timing:ReturnType<typeof createHomePhaseTiming>}){
+ return <AjesRail prepared={timing.measure("japanRail",()=>readAjesRailData("japan"))}/>;
+}
 async function DealerGallery({dealer}:{dealer:ReturnType<typeof readShowcase>}){
  const value=await dealer;
  return <BuyerGallery images={value?.buyersEnabled?value.buyerPhotos.map(p=>p.url):[]}/>;
 }
-async function DealerSpecials({dealer,city}:{dealer:ReturnType<typeof readShowcase>;city:string}){
+async function DealerSpecials({dealer,city,timing}:{dealer:ReturnType<typeof readShowcase>;city:string;timing:ReturnType<typeof createHomePhaseTiming>}){
  const value=await dealer;
- const rail=await homeSpecialRail(city,value).catch(error=>{console.error("home_specials_failed",error);return null;});
+ const rail=await timing.measure("dealerRail",()=>homeSpecialRail(city,value)).catch(error=>{console.error("home_specials_failed",error);return null;});
  if(!rail)return null;
  return <SpecialRail {...rail} desktopSplit/>;
 }
 
 export default async function HomePage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
+  const timing=createHomePhaseTiming();
   const params = (await searchParams) || {};
   const cookieStore = await cookies();
   const fromQuery = cleanCity(first(params.city));
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
-  const dealer=readShowcase("dealer_topavto").catch(error=>{console.error("home_dealer_failed",error);return null;});
+  const dealer=timing.measure("dealer",()=>readShowcase("dealer_topavto")).catch(error=>{console.error("home_dealer_failed",error);return null;});
   const [catalog, green] = await Promise.all([
-    readHomeCatalogSnapshot(10).then(value=>withAjesCount(value)).catch((error) => {
+    timing.measure("snapshot",()=>readHomeCatalogSnapshot(10)).then(value=>{timing.setGeneration(value.generationId);return timing.measure("counts",()=>withAjesCount(value));}).catch((error) => {
       console.error("home_initial_catalog_failed", error);
       return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
     }),
-    readGreenCorner().catch(() => null),
+    timing.measure("green",()=>readGreenCorner()).catch(() => null),
   ]);
   const [greenItems, pricedItems] = await Promise.all([
-    applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer)),
-    applyActiveBusinessPricingBatch(catalog.items).catch((error) => {
+    timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer))),
+    timing.measure("catalogPricing",()=>applyActiveBusinessPricingBatch(catalog.items)).catch((error) => {
       console.error("home_initial_pricing_failed", error);
       // Preserve the last audited quote if settings storage is temporarily down.
       return catalog.items;
@@ -84,9 +89,9 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     <DealerCitySync/>
     <div className={styles.scope}>
       <HomePageClient
-        japanAuctions={<Suspense fallback={null}><AjesRail/></Suspense>}
+        japanAuctions={<Suspense fallback={null}><HomeJapanRail timing={timing}/></Suspense>}
         dealerGallerySlot={<Suspense fallback={<div className="min-h-[160px]" aria-busy="true"/>}><DealerGallery dealer={dealer}/></Suspense>}
-        specialRailSlot={<Suspense fallback={null}><DealerSpecials dealer={dealer} city={fromQuery || fromCookie}/></Suspense>}
+        specialRailSlot={<Suspense fallback={null}><DealerSpecials dealer={dealer} city={fromQuery || fromCookie} timing={timing}/></Suspense>}
         initialGreen={{items:greenItems,total:green?.items.length || 0}}
         initialCity={fromQuery || fromCookie}
         initialOffers={pricedItems}
