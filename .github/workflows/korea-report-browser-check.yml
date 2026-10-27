@@ -1,8 +1,6 @@
 name: Selected Korea report browser diagnosis
 on:
-  push:
-    branches: [feat/korea-history-disclosure]
-    paths: ['scripts/korea-report-browser-check.mjs']
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
