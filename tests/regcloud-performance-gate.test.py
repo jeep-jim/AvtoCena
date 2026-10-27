@@ -13,7 +13,11 @@ class GateTests(unittest.TestCase):
    with self.assertRaises(AssertionError):gate.validate('/cars','catalog',200,body,'x')
   gate.validate('/cars','catalog',200,b'<html><article class="ac-catalog-card"><a href="/cars/offer/real">Car</a></article></html>','x')
   for path,_,kind in gate.ROUTES:
-   if path.startswith('/cars'):self.assertEqual(kind,'catalog')
+   if path.startswith('/cars') and path!='/cars/autocatalog':self.assertEqual(kind,'catalog')
+ def test_encyclopedia_requires_real_bounded_rows(self):
+  for body in [b'<html>Preparing</html>',b'<html><script>const fake="<article class=ac-model-list-item>"</script></html>',b'<html>'+b'<article class="ac-model-list-item"></article>'*41+b'</html>']:
+   with self.assertRaises(AssertionError):gate.validate('/cars/autocatalog','encyclopedia',200,body,'x')
+  gate.validate('/cars/autocatalog','encyclopedia',200,b'<html><article class="ac-model-list-item"></article></html>','x')
  def test_budgets_and_activation_are_mandatory(self):
   self.assertEqual(gate.PHASE_DELAYS,[('warm',0),('after_ttl',35),('after_directory_ttl',305)])
   limits={p:budget for p,budget,k in gate.ROUTES}
@@ -22,7 +26,7 @@ class GateTests(unittest.TestCase):
    '/cars': 2, '/cars?market=china&make=Volkswagen&page=2': 2,
    '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA': 2,
    '/cars?market=europe&make=BMW&page=2': 2, '/cars?sort=totalRub': 2,
-   '/api/catalog/search?market=europe&make=BMW&page=2': 1,
+   '/api/catalog/search?market=europe&make=BMW&page=2': 1, '/cars/autocatalog': 2,
   }, 'Removing a route or changing a ceiling requires explicit owner approval')
   self.assertEqual(len(gate.ROUTES), len(limits), 'Duplicate routes must not hide missing coverage')
   script=pathlib.Path('scripts/regcloud-deploy-production.sh').read_text()

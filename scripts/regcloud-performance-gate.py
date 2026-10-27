@@ -15,6 +15,7 @@ ROUTES=[
  ('/cars?market=europe&make=BMW&page=2',2.0,'catalog'),
  ('/cars?sort=totalRub',2.0,'catalog'),
  ('/api/catalog/search?market=europe&make=BMW&page=2',1.0,'search'),
+ ('/cars/autocatalog',2.0,'encyclopedia'),
 ]
 
 # Cover both short selections and the five-minute directory refresh.
@@ -34,10 +35,18 @@ class CatalogCards(HTMLParser):
    if self.in_card and self.has_link:self.count+=1
    self.in_card=False;self.has_link=False
 
+class EncyclopediaRows(HTMLParser):
+ def __init__(self):super().__init__();self.count=0
+ def handle_starttag(self,tag,attrs):
+  if tag=='article' and 'ac-model-list-item' in dict(attrs).get('class','').split():self.count+=1
+
 def validate(path,kind,status,body,release):
  if status!=200:raise AssertionError('performance_http:'+path+':'+str(status))
- if kind in ('html','catalog'):
+ if kind in ('html','catalog','encyclopedia'):
   if b'</html>' not in body or b'$RX(' in body:raise AssertionError('performance_incomplete_html:'+path)
+  if kind=='encyclopedia':
+   rows=EncyclopediaRows();rows.feed(body.decode('utf8','replace'))
+   if not 1<=rows.count<=40:raise AssertionError('performance_invalid_encyclopedia:'+path)
   if kind=='catalog':
    cards=CatalogCards();cards.feed(body.decode('utf8','replace'))
    if not cards.count:raise AssertionError('performance_empty_catalog:'+path)
