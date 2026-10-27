@@ -16788,3 +16788,15 @@ CPU5секунд вокруг последнего GET:2406samples,2243idle,8GC.
 ProductionSHAдо/после совпалd4184b5d2acb88264eef114bb5f9e013997d99c8. Кандидатостановлен00:52:28.943,Statusexited/ExitCode0/OOMKilledfalse; лимит2CPU/8GiB, observedmemory0.64–1.06GiB. Ниактивации,ниотката,ниновойустановкинебыло. Нельзяобъявлятьготовность592поудачномуизолированному0.894s.
 
 Следующий минимальный шаг: фазовые timings именно холоднойhomepage и cached metadata/count/pricing/dealer dependencies с сопоставлением policyDate/generation, затем устранение подтверждённойлишнейработы; не запускатьтотжепрофильилиdeployпо кругу. Необязательныйcount outerwithAjesCount пока остаётсякодовойзависимостью, анеустановленнойпричиной2.1896s. Сохраняютсявсеоткрытыеlive/1599/1600/AWD/canonical/insuranceзадачи. Наблюдениенеотключено.
+
+
+### 28.10.2026, 02:25 Красноярск — подготовлены отдельные тайминги этапов главной, ещё не установлены
+
+Новых release/main runtime изменений послеf5da833 нет; завершённую40553637289 не повторяли. Для локализации холодных8.467с подготовлена отдельная draft-ветка с выключенной по умолчанию CATALOG_HOME_PHASE_TIMING=1 диагностикой: snapshot,counts,green,greenPricing,catalogPricing,dealer,dealerRail,japanRail. На один render случайный trace, duration/outcome, policyDate вначале/конце, валидированный generation; безrecords/URL/IP/cookie/ошибочного текста. Порядок ожиданий, Promise.all, Suspense, возвращаемые данные/ошибки и расчётные правила сохранены; новыхfetch нет. Ошибкалогирования не меняет ответ.
+
+Локальный тест на Node24 PASS: disabledmode молчит, результат сохраняетidentity, ошибка сохраняетidentity, параллельная быстраяфаза не ждётмедленную, loggerfailure не ломаетзначение/ошибку, traceразделяетзапросы, invalidgeneration/секретныйтекст невыводятся. Полные CI/types/build ожидаются вPR; это подготовка измерения, НЕисправленнаяскорость иНЕ productionустановка. Next: послеCI собрать один согласованный кандидат/использоватьизолированныйобразсфлагом, затем определить slowphase иисправитьеё; не включатьфлагнаproductionбезнеобходимости. Всеостальныеоткрытыепункты остаются.
+
+
+### 28.10.2026, 03:15 Красноярск — исправлен контракт теста фазовой диагностики PR1601
+
+CI40568699585/job122416772359 завершился2648PASS/1FAIL: tests/home-initial-catalog.test.ts ожидал буквальную цепочку readHomeCatalogSnapshot(10).then(value=>withAjesCount(value)).catch. Добавленный timing.measure изменил форму этой строки, сохранив ограниченныйsnapshot, передачутогожезначенияcounts иcatch. Проверка обновлена подточнуюинструментированнуюцепочку; лимит10, recoveryfallback, city,prices/countprops, sharedindexes иодинbackgroundfetch продолжаютпроверяться. Ценовые/временныепороги иruntimeкод вэтойпоправкенеизменены. Локально4/4(homecontract+telemetry)PASS. НовыйfullCIобязателен: предыдущийне дошёлдоtypes/build, нельзяназыватьихпройденными. Dubicars40568699531,site40568699532,green40568699609 исходногоheadSUCCESS. Merge/deploy/повторнаяproductionдиагностика не выполнялись; production не обновлён. Следующийшаг прежний: послеchecks изолированныйобразсфазовымиtimings, затем адресноеустранениедоказаннойзадержки.
