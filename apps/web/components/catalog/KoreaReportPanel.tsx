@@ -1,6 +1,7 @@
 "use client";
 
 import {useEffect, useId, useRef, useState} from 'react';
+import {KoreaInspectionBody} from './KoreaInspectionBody';
 import {ChevronDown, ExternalLink} from 'lucide-react';
 import {validKoreaReportLink, type KoreaReportLink, type KoreaSourceReportKind} from '../../lib/catalog/korea-report-types';
 
@@ -27,7 +28,7 @@ function ReportSection({offerId,lot,kind,title}:{offerId:string;lot:string;kind:
    })
    .catch(()=>{if(mounted)setError('unavailable');})
    .finally(()=>clearTimeout(timer));
-  // Closing the disclosure preserves its single pending request and loaded frame.
+  // Closing the disclosure preserves its single pending request and loaded report.
   return ()=>{mounted=false;clearTimeout(timer);controller.abort();requested.current=false;};
  },[offerId,lot,kind,attempt,started]);
  return <section className="mt-4 min-w-0 overflow-hidden rounded-xl border border-[var(--ac-border)]" data-korea-report-section={kind}>
@@ -38,9 +39,14 @@ function ReportSection({offerId,lot,kind,title}:{offerId:string;lot:string;kind:
    {started&&!report&&!error?<p role="status" className="text-sm text-[var(--ac-muted)]">Загружаем отчёт…</p>:null}
    {error?<div className="text-sm"><p role="status">{error==='missing'?'Для этого автомобиля ссылка на отчёт не предоставлена.':'Не удалось загрузить отчёт. Попробуйте ещё раз позже.'}</p><button type="button" className="mt-3 rounded-xl bg-[var(--ac-surface-2)] px-4 py-2 font-bold outline-none focus-visible:ring-2 focus-visible:ring-red-400" onClick={()=>{requested.current=false;setAttempt(value=>value+1);}}>Повторить</button></div>:null}
    {report?<>
-    {report.document?.lot===lot&&report.document.kind===kind&&report.document.fields.length>0?<>
-     <dl className="divide-y divide-[var(--ac-border)]" data-korea-russian-facts>{report.document.fields.map(field=><div key={field.key} className="flex flex-wrap justify-between gap-2 py-3 text-sm"><dt>{field.label}</dt><dd className="font-semibold">{field.value}</dd></div>)}</dl>
-     <p className="my-3 text-xs leading-5 text-[var(--ac-muted)]">Переведены доступные текстовые поля осмотра. Схема повреждений и сведения со сканов пока не расшифрованы. Это не полный отчёт и не подтверждение отсутствия ДТП.</p>
+    {report.document?.lot===lot&&report.document.kind===kind&&(report.document.fields.length>0||report.document.body)?<>
+     <dl className="divide-y divide-[var(--ac-border)]" data-korea-russian-facts>{report.document.fields.filter(field=>!field.group).map(field=><div key={field.key} className="flex flex-wrap justify-between gap-2 py-3 text-sm"><dt>{field.label}</dt><dd className="font-semibold">{field.value}</dd></div>)}</dl>
+     {report.document.body&&<KoreaInspectionBody body={report.document.body}/>}
+     {[...new Set(report.document.fields.map(f=>f.group).filter(Boolean))].map(group=><details key={group} className="mt-3 rounded-xl border border-[var(--ac-border)] p-3" data-korea-mechanical>
+      <summary className="cursor-pointer text-sm font-bold">{group}</summary>
+      <dl className="mt-2 divide-y divide-[var(--ac-border)]">{report.document!.fields.filter(f=>f.group===group).map(field=><div key={field.key} className="flex flex-wrap justify-between gap-2 py-3 text-sm"><dt>{field.label}</dt><dd className="font-semibold">{field.value}</dd></div>)}</dl>
+     </details>)}
+     <p className="my-3 text-xs leading-5 text-[var(--ac-muted)]">Сведения переведены из документа осмотра и относятся к моменту его составления. {report.document.body?'':'Схема повреждений и сведения со сканов пока не расшифрованы. '}Осмотр не заменяет страховую историю и не подтверждает отсутствие ДТП. Свободные комментарии и сканы переведены не полностью.</p>
     </>:<p role="status" className="mb-3 text-sm leading-6">{kind==='history'?'Страховые случаи пока не удалось загрузить в русскую форму. Это не означает, что страховых случаев не было.':'Текст осмотра пока недоступен для перевода. Сведения могут быть представлены только сканами.'}</p>}
     <a href={report.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[var(--ac-surface-2)] px-4 py-2 text-sm font-bold outline-none focus-visible:ring-2 focus-visible:ring-red-400">Оригинал отчёта<ExternalLink aria-hidden="true" className="h-4 w-4 shrink-0"/></a>
    </>:null}
@@ -50,7 +56,7 @@ function ReportSection({offerId,lot,kind,title}:{offerId:string;lot:string;kind:
 export default function KoreaReportPanel({offerId,lot,active}:{offerId:string;lot:string;active:boolean}) {
  return <section aria-label="История и состояние" className="min-w-0 rounded-2xl border border-[var(--ac-border)] p-4 text-[var(--ac-text)] sm:p-5" data-korea-report-panel data-active={active}>
   <h2 className="text-lg font-bold">История и состояние</h2>
-  <p className="mt-2 text-sm leading-6 text-[var(--ac-muted)]">Выберите отчёт. Доступные сведения осмотра показаны на русском. Оригинал можно открыть отдельно.</p>
+  <p className="mt-2 text-sm leading-6 text-[var(--ac-muted)]">Выберите отчёт. Состояние автомобиля и доступные отметки осмотра — на русском, прямо здесь.</p>
   <p className="mt-2 text-xs leading-5 text-[var(--ac-muted)]">Отсутствие сведений не подтверждает отсутствие повреждений. Перед покупкой состояние автомобиля нужно проверить.</p>
   <ReportSection key={`${offerId}:${lot}:history`} offerId={offerId} lot={lot} kind="history" title="Страховая история" />
   <ReportSection key={`${offerId}:${lot}:inspection`} offerId={offerId} lot={lot} kind="inspection" title="Осмотр автомобиля" />
