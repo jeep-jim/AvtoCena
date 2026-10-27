@@ -1,17 +1,10 @@
 'use client';
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight} from 'lucide-react';
-import Link from 'next/link';
 import {useRouter,useSearchParams} from 'next/navigation';
-import {CatalogChevron} from '@/components/catalog/CatalogChevron';
-import {CatalogViewIcon} from '@/components/catalog/CatalogViewIcon';
-import {BrandLogoVisual} from '@/components/catalog/BrandLogoRail';
-import '@/components/catalog/catalog-sidebar.css';
 import {ModelEditor} from './ModelEditor';
 import {EncyclopediaPhoto} from './Photo';
-import {counted,modelHref,type ModelSummary,type ModelRecord} from '@/lib/encyclopedia/schema';
+import {counted,type ModelSummary,type ModelRecord} from '@/lib/encyclopedia/schema';
 type Summary=Omit<ModelSummary,'key'>;
-const letter=(s:string)=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').match(/^[A-Za-zА-Яа-я]/)?.[0]?.toUpperCase()||'#';
 export function ModelWorkspace({model,canEdit,standalone=false}:{model:Summary;canEdit:boolean;standalone?:boolean}){
  const params=useSearchParams(),filterYear=params.get('year');
  const years=[...model.years].sort((a,b)=>b-a).map(String);if(model.hasUnknownYear||!years.length)years.push('unknown');
@@ -27,38 +20,39 @@ export function ModelWorkspace({model,canEdit,standalone=false}:{model:Summary;c
  },[model.id,year]);
  useEffect(()=>{setRecord(null);void load().catch(()=>{});return()=>controller.current?.abort();},[load]);
  return <section className="ac-knowledge-workspace" aria-label={`${model.make} ${model.model}: модификации`}>
-  <div className="ac-knowledge-workspace-bar"><div className="ac-knowledge-years" role="group" aria-label={`Год ${model.model}`}>{years.map(y=><button key={y} aria-pressed={year===y} disabled={editing} onClick={()=>setYear(y)}>{y==='unknown'?'Без года':y}</button>)}</div>{!standalone&&<Link className="ac-knowledge-link" href={modelHref(model.id)}>Страница модели<ArrowRight size={16} aria-hidden/></Link>}</div>
+  <div className="ac-knowledge-workspace-bar"><div className="ac-knowledge-years" role="group" aria-label={`Год ${model.model}`}>{years.map(y=><button key={y} aria-pressed={year===y} disabled={editing} onClick={()=>setYear(y)}>{y==='unknown'?'Без года':y}</button>)}</div></div>
   {error?<p role="alert">{error} <button className="ac-ency-button" onClick={()=>void load().catch(()=>{})}>Повторить</button></p>:record?<ModelEditor record={record} canEdit={canEdit} defaultYear={year==='unknown'?undefined:Number(year)} onSaved={load} onEditingChange={setEditing} filterFuel={params.get('fuel')||''} onlyMissing30={params.has('missing30')}/>:<p className="ac-ency-muted" role="status">Загружаем модификации…</p>}
  </section>;
 }
 function ModelRow({model,canEdit}:{model:Summary;canEdit:boolean}){
- const [opened,setOpened]=useState(false);
- return <details data-ac-preserve-open className="ac-knowledge-model" onToggle={e=>{if(e.target===e.currentTarget)if(e.currentTarget.open)setOpened(true);}}><summary><div className="ac-knowledge-photo"><EncyclopediaPhoto src={model.photo} alt={`${model.make} ${model.model}`}/></div><strong>{model.model}</strong><span className="ac-knowledge-model-meta">{model.years.length?`${Math.min(...model.years)}–${Math.max(...model.years)}`:'Без года'} · {counted(model.variants,'variant')}</span><CatalogChevron className="ac-knowledge-chevron"/></summary>{opened&&<ModelWorkspace model={model} canEdit={canEdit}/>}</details>;
+ const params=useSearchParams(),[open,setOpen]=useState(false);
+ const specs=(params.get('year')?model.compact?.years[params.get('year')!]:model.compact?.all)||{};
+ return <article className="ac-model-list-item">
+  <div className="ac-model-list-row">
+   <div className="ac-model-list-photo"><EncyclopediaPhoto src={model.photo} alt={`${model.make} ${model.model}`}/></div>
+   <div><strong>{model.make} {model.model}</strong><small>{model.years.length===1?model.years[0]:model.years.length?`${Math.min(...model.years)}–${Math.max(...model.years)}`:'Год не указан'}</small></div>
+   <div data-label="Кузов">{specs.bodyType||'—'}<small>{specs.chassisCode||'—'}</small></div>
+   <div data-label="Двигатель">{specs.fuel||'—'}<small>{specs.engineCc||'—'} см³ · {specs.powerHp||'—'} л.с.</small></div>
+   <div data-label="Привод / КПП">{specs.drive||'—'}<small>{specs.transmission||'—'}</small></div>
+   <div data-label="30 мин., кВт">{specs.power30MinKw||'—'}</div>
+   <div data-label="В каталоге" title={model.directorySnapshot?`Снимок каталога: ${new Date(model.directorySnapshot.capturedAt).toLocaleString('ru-RU')}`:'Количество ещё не проверено'}>{model.directorySnapshot?.count===undefined?'—':`${model.directorySnapshot.upperBound?'до ':''}${model.directorySnapshot.count.toLocaleString('ru-RU')}`}</div>
+   <button className="ac-ency-button" aria-expanded={open} onClick={()=>setOpen(!open)}>{open?'Свернуть':canEdit?'Изменить':'Параметры'}</button>
+  </div>
+  {open&&<ModelWorkspace model={model} canEdit={canEdit}/>}
+ </article>;
 }
-function BrandGroup({make,rows,canEdit,choose}:{make:string;rows:Summary[];canEdit:boolean;choose:(make:string)=>void}){
- const [opened,setOpened]=useState(false);
- const ordered=useMemo(()=>opened?[...rows].sort((a,b)=>a.model.localeCompare(b.model,'ru',{numeric:true})):[],[opened,rows]);
- // Keep mounted workspaces after first expansion, so closing another brand or
- // switching the view cannot discard model edits or independent open states.
- return <details data-ac-preserve-open className="ac-knowledge-brand" onToggle={e=>{if(e.target===e.currentTarget&&e.currentTarget.open)setOpened(true);}}><summary><BrandLogoVisual brand={make}/><strong>{make}</strong><span>{counted(rows.length,'model')}</span><CatalogChevron className="ac-knowledge-chevron"/></summary>{opened&&<div className="ac-knowledge-brand-content"><div className="ac-knowledge-brand-bar"><button className="ac-knowledge-link" onClick={()=>choose(make)}>Все модели {make}<ArrowRight size={16} aria-hidden/></button></div>{ordered.map(m=><ModelRow key={m.id} model={m} canEdit={canEdit}/>)}</div>}</details>;
-}
-export function KnowledgeDirectory({models,canEdit}:{models:Summary[];canEdit:boolean}){
- const router=useRouter(),params=useSearchParams(),selected=params.get('make')||'';
- const [view,setView]=useState<'list'|'grid'>('list'),[activeLetter,setActiveLetter]=useState('');
- const returnPosition=useRef(0);
- useEffect(()=>{try{if(sessionStorage.getItem('encyclopedia-view')==='grid')setView('grid');}catch{}},[]);
- useEffect(()=>{setActiveLetter('');},[selected]);
- const brands=useMemo(()=>{
-  const groups=new Map<string,Summary[]>();
-  for(const model of models){let rows=groups.get(model.make);if(!rows){rows=[];groups.set(model.make,rows);}rows.push(model);}
-  return [...groups].sort(([a],[b])=>a.localeCompare(b,'ru',{numeric:true}));
- },[models]);
- const letters=[...new Set((selected?models.map(m=>m.model):brands.map(([make])=>make)).map(letter))].sort();
- const choose=(make:string)=>{if(make)returnPosition.current=window.scrollY;const q=new URLSearchParams(params);q.delete('page');q.delete('market');q.delete('q');if(make)q.set('make',make);else q.delete('make');router.push(`/cars/autocatalog${q.size?'?'+q:''}`,{scroll:false});if(!make)requestAnimationFrame(()=>window.scrollTo(0,returnPosition.current));};
- return <section className={`ac-knowledge ac-knowledge--${view}`} aria-label="Марки, модели и годы">
-  {selected&&<button className="ac-ency-button" onClick={()=>choose('')}><ArrowLeft size={16} aria-hidden/>Назад к маркам</button>}
-  <div className="ac-knowledge-toolbar"><div className="ac-catalog-view-toggle ac-knowledge-switch" role="group" aria-label="Вид каталога">{(['grid','list'] as const).map(v=><button key={v} aria-label={v==='grid'?'Плитка':'Список'} title={v==='grid'?'Плитка':'Список'} aria-pressed={view===v} onClick={()=>{setView(v);try{sessionStorage.setItem('encyclopedia-view',v);}catch{}}}><CatalogViewIcon mode={v}/></button>)}</div><nav className="ac-knowledge-alphabet" aria-label={selected?'Алфавит моделей':'Алфавит марок'}><button aria-pressed={!activeLetter} onClick={()=>setActiveLetter('')}>Все</button>{letters.map(l=><button key={l} aria-pressed={activeLetter===l} onClick={()=>setActiveLetter(l)}>{l}</button>)}</nav></div>
-  {selected?<><h2 className="ac-knowledge-heading"><BrandLogoVisual brand={selected}/>{selected}</h2><div className="ac-knowledge-models">{models.filter(m=>!activeLetter||letter(m.model)===activeLetter).sort((a,b)=>a.model.localeCompare(b.model,'ru',{numeric:true})).map(m=><ModelRow key={m.id} model={m} canEdit={canEdit}/>)}</div></>:<div className="ac-knowledge-brands">{brands.filter(([make])=>!activeLetter||letter(make)===activeLetter).map(([make,rows])=><BrandGroup key={make} make={make} rows={rows} canEdit={canEdit} choose={choose}/>)}</div>}
+export function KnowledgeDirectory({models,canEdit,pagination}:{models:Summary[];canEdit:boolean;pagination?:{page:number;total:number}}){
+ const params=useSearchParams(),router=useRouter();
+ const [page,setPage]=useState(1);
+ useEffect(()=>{setPage(1);},[params.toString()]);
+ const ordered=useMemo(()=>[...models].sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru',{numeric:true})),[models]);
+ const total=pagination?.total??ordered.length,pages=Math.max(1,Math.ceil(total/40)),current=Math.min(pagination?.page??page,pages);
+ const changePage=(next:number)=>{if(pagination){const query=new URLSearchParams(params);query.set("page",String(next));router.push(`/cars/autocatalog?${query}`,{scroll:false});}else setPage(next);};
+ return <section className="ac-model-list" aria-label="Модели автомобилей">
+  <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span>Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span><span/></div>
+  {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map(model=><ModelRow key={model.id} model={model} canEdit={canEdit}/>)}
   {!models.length&&<p>По выбранным параметрам моделей не найдено.</p>}
+  <p className="ac-ency-muted">* Количество на {models.find(m=>m.directorySnapshot)?.directorySnapshot?.capturedAt?new Date(models.find(m=>m.directorySnapshot)!.directorySnapshot!.capturedAt).toLocaleDateString('ru-RU'):'дату сохранения'}. «До» — верхняя граница количества.</p>
+  {pages>1&&<nav className="ac-ency-pagination" aria-label="Страницы моделей"><button className="ac-ency-button" disabled={current===1} onClick={()=>changePage(current-1)}>Назад</button><span>{current} / {pages} · {counted(total,'model')}</span><button className="ac-ency-button" disabled={current===pages} onClick={()=>changePage(current+1)}>Далее</button></nav>}
  </section>;
 }

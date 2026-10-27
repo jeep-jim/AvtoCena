@@ -21,8 +21,6 @@ const BUTTON_CATALOG = "📚 Каталог";
 const BUTTON_REQUEST = "📝 Оставить заявку";
 const BUTTON_SUBSCRIPTIONS = "🔔 Подписки";
 const BUTTON_FAVORITES = "❤️ Избранное";
-const BUTTON_OSAGO = "🛡 ОСАГО";
-const BUTTON_CREDIT = "💳 Автокредит";
 const BUTTON_SITE = "🌐 АвтоЦена";
 
 let botProfileConfiguredAt = 0;
@@ -608,8 +606,6 @@ export async function handlePublicBotUpdate(update: any, token: string) {
     BUTTON_REQUEST,
     BUTTON_SUBSCRIPTIONS,
     BUTTON_FAVORITES,
-    BUTTON_OSAGO,
-    BUTTON_CREDIT,
     BUTTON_SITE,
   ].includes(text);
   const typedBudget = parseBudgetText(text);
@@ -644,17 +640,13 @@ export async function handlePublicBotUpdate(update: any, token: string) {
     [BUTTON_CATALOG]: `${SITE_URL}/cars?utm_source=telegram&utm_medium=bot`,
     [BUTTON_REQUEST]: requestSiteUrl(),
     [BUTTON_FAVORITES]: `${SITE_URL}/favorites?utm_source=telegram&utm_medium=bot`,
-    [BUTTON_OSAGO]: `${SITE_URL}/osago?utm_source=telegram&utm_medium=bot`,
-    [BUTTON_CREDIT]: `${SITE_URL}/autocredit?utm_source=telegram&utm_medium=bot`,
     [BUTTON_SITE]: `${SITE_URL}/?utm_source=telegram&utm_medium=bot`,
   };
   const url = siteCommand ? `${SITE_URL}/?utm_source=telegram&utm_medium=bot` : urlByText[text];
   if (url) {
     await telegramCall(token, "sendMessage", {
       chat_id: chatId,
-      text: text === BUTTON_OSAGO || text === BUTTON_CREDIT
-        ? "Этот раздел открывается на сайте АвтоЦены. Партнёрские предложения внутри Telegram не размещаются."
-        : "Открыть на АвтоЦене:",
+      text: "Открыть на АвтоЦене:",
       reply_markup: {
         inline_keyboard: [[{
           text: text.replace(/^[^\p{L}\p{N}]+/u, "") || "Открыть сайт",

@@ -176,7 +176,7 @@ test("offer actions retain stable page slots when the mobile contact floats", ()
   const carsLayout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/layout.tsx", import.meta.url), "utf8");
   assert.match(page, /<OfferDesktopActions position="below" offerId=/);
   assert.match(page, /<OfferMobileActions offerId=/);
-  assert.match(page, /<OfferCreditCalculator \/>/);
+  assert.doesNotMatch(page, /OfferCreditCalculator|OfferFinanceCards/, "retired finance widgets must not mount observers or page slots");
   // Scroll positioning is covered in entrance-flow.mjs; the SSR slot must stay mounted.
   assert.match(actions, /ref=\{anchor\} className="ac-offer-contact-anchor"/);
   assert.match(actions, /\{!floating&&bar\}/);

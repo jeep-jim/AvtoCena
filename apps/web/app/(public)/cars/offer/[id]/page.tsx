@@ -32,7 +32,6 @@ import { PUBLIC_CATALOG_MARKETS, CATALOG_MARKET_LABELS } from "@/lib/catalog/run
 import { isGreenCornerOffer } from "@/lib/catalog/green-corner-contract";
 import { OfferUpdatedStatus } from "@/components/catalog/OfferUpdatedStatus";
 import { protectedPhotoUrl } from "@/lib/catalog/photo-proxy-policy";
-import { OfferFinanceCards } from "@/components/catalog/OfferFinanceCards";
 import { readCrmUsers } from "@/lib/crm-users";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
 import { getSavedOfferCalculation } from "@/lib/catalog/saved-offer-calculation";
@@ -66,13 +65,12 @@ import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 
 import { VehicleResearchLink } from "@/components/catalog/VehicleResearchLink";
-import { OfferContactActionsStyles, OfferCreditCalculator, OfferDesktopActions, OfferMobileActions } from "@/components/catalog/OfferContactActions";
+import { OfferContactActionsStyles, OfferDesktopActions, OfferMobileActions } from "@/components/catalog/OfferContactActions";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { AuctionResultPrice, PriceTrend } from "@/components/catalog/PriceTrend";
 import { VehicleGallery } from "@/components/catalog/VehicleGallery";
 import { PublicHeader } from "@/components/layout/PublicHeader";
-import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 import { catalogBrandSlug } from "@/lib/catalog/brands";
 import { enrichOfferForDisplay } from "@/lib/catalog/display-enrichment";
 import { rankedCatalogImageUrls, catalogAuctionSheetUrls } from "@/lib/catalog/image-quality";
@@ -407,8 +405,6 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery editor={canEditCatalog(currentUser)?<CatalogEditorialEditor offerId={o.id} originalTitle={o.title} sourcePrice={editorialSource?.sourcePrice} sourceCurrency={editorialSource?.sourceCurrency} sourcePhotos={rankedCatalogImageUrls(editorialSource)} sourceSpecifications={{bodyType:editorialSource?.bodyType,drive:editorialSource?.drive,transmission:editorialSource?.transmission,color:editorialSource?.color}} initial={(await readCatalogEditorial()).entries[o.id]||null}/>:undefined} images={o.images} title={o.title} offerId={o.id} snapshot={snapshot} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
           <OfferSpecificationsDisclosure historyOfferId={historyOfferId} historyLot={String(offer.lotNumber || "")} groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus || updatedStatus} />
           {!retro&&<OfferDesktopActions position="below" offerId={o.id} snapshot={snapshot} />}
-          {!retro && !selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
-          {!retro&&<OfferFinanceCards />}
         </div>
 
         <StickyOfferColumn>

@@ -299,10 +299,9 @@ export const dynamic = "force-dynamic";
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const features = await readPublicDisplayFeatures();
   return (
-    <html lang="ru" data-finance-hidden={features.affiliatesEnabled ? undefined : "true"} suppressHydrationWarning>
+    <html lang="ru" suppressHydrationWarning>
       <head>
         <style>{siteVisibilityCss(features)}</style>
-        {!features.affiliatesEnabled && <style>{`html[data-finance-hidden="true"] body :is(#ac-finance-disabled,.ac-home-finance,.ac-public-footer-affiliates,.ac-offer-finance-cards,.ac-credit-calculator-mock,[data-offer-credit-host],[data-offer-finance-cards-host],a[href^="https://affid.ru/"],a[href="/autocredit"],a[href="/osago"]){display:none!important}`}</style>}
         <meta name="mitgo-verification" content="e4fe0a6f-d7e2-4232-97cb-b46956026c1d" />
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
         <script dangerouslySetInnerHTML={{ __html: miniAppBootstrap }} />

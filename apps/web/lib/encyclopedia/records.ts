@@ -1,3 +1,4 @@
+import {compactModel} from './compact';
 import {isEncyclopediaCar} from './scope';
 import {createHash,randomUUID} from 'node:crypto';
 import type {AuthUser} from '../auth';
@@ -11,7 +12,7 @@ export const hash=(s:string)=>createHash('sha256').update(s).digest('hex').slice
 export const token=(v:unknown)=>cleanText(v).normalize('NFKC').toLowerCase().replace(/ё/g,'е').replace(/[^\p{L}\p{N}]/gu,'');
 export const modelId=(make:string,model:string)=>hash(`${token(make)}:${token(model)}`);
 export function variantSignature(row:Partial<Variant>){return JSON.stringify([...textFields.filter(x=>!['notes','sourceUrl'].includes(x)).map(x=>token(row[x])),...numberFields.map(x=>row[x]??null)]);}
-export function summarize(record:ModelRecord,key:string):ModelSummary{return {id:record.id,make:record.make,model:record.model,photo:record.photo,photoMarket:record.photoMarket,hasUnknownYear:record.variants.some(v=>!v.year),years:[...new Set(record.variants.flatMap(v=>v.year?[v.year]:[]))].sort((a,b)=>b-a),fuels:[...new Set(record.variants.flatMap(v=>v.fuel?[fuelFilterKey(v.fuel)]:[]))],markets:[...new Set(record.variants.flatMap(v=>v.markets))],variants:record.variants.length,verified:record.variants.filter(v=>v.status==='verified').length,power30:record.variants.filter(v=>v.power30MinKw!==undefined).length,needs30:record.variants.filter(v=>/electric|hybrid|hev/i.test((v.fuel||'')+' '+(v.powertrainKind||''))&&v.power30MinKw===undefined).length,key,revision:record.revision,updatedAt:record.updatedAt};}
+export function summarize(record:ModelRecord,key:string):ModelSummary{return {directorySnapshot:record.directorySnapshot,manualCreated:Boolean(record.manualCreated),compact:compactModel(record),id:record.id,make:record.make,model:record.model,photo:record.photo,photoMarket:record.photoMarket,hasUnknownYear:record.variants.some(v=>!v.year),years:[...new Set(record.variants.flatMap(v=>v.year?[v.year]:[]))].sort((a,b)=>b-a),fuels:[...new Set(record.variants.flatMap(v=>v.fuel?[fuelFilterKey(v.fuel)]:[]))],markets:[...new Set(record.variants.flatMap(v=>v.markets))],variants:record.variants.length,verified:record.variants.filter(v=>v.status==='verified').length,power30:record.variants.filter(v=>v.power30MinKw!==undefined).length,needs30:record.variants.filter(v=>/electric|hybrid|hev/i.test((v.fuel||'')+' '+(v.powertrainKind||''))&&v.power30MinKw===undefined).length,key,revision:record.revision,updatedAt:record.updatedAt};}
 export const readEncyclopedia=async()=>{const manifest=await getJsonStorage().readJson<EncyclopediaManifest|null>(MANIFEST,null);return manifest?{...manifest,models:manifest.models.filter(isEncyclopediaCar)}:null;};
 export async function readModel(id:string,manifest?:EncyclopediaManifest|null){if(!/^[a-f0-9]{24}$/.test(id))return null;const m=manifest===undefined?await readEncyclopedia():manifest;const summary=m?.models.find(x=>x.id===id);return summary?getJsonStorage().readJson<ModelRecord|null>(summary.key,null):null;}
 export class EncyclopediaConflict extends Error{}
@@ -20,7 +21,7 @@ export async function editModel(id:string,input:Record<string,unknown>,user:Auth
  const manifest=await readEncyclopedia();const current=await readModel(id,manifest);
  if(!manifest||!current)throw new EncyclopediaInputError('Модель не найдена.');
  if(input.revision!==current.revision)throw new EncyclopediaConflict('Запись уже изменена. Обновите страницу перед сохранением.');
- const next:ModelRecord={...current,variants:current.variants.map(v=>({...v})),revision:randomUUID(),updatedAt:new Date().toISOString(),editedBy:user.id,previousKey:manifest.models.find(x=>x.id===id)!.key};
+ const next:ModelRecord={...current,directorySnapshot:manifest.models.find(x=>x.id===id)?.directorySnapshot||current.directorySnapshot,variants:current.variants.map(v=>({...v})),revision:randomUUID(),updatedAt:new Date().toISOString(),editedBy:user.id,previousKey:manifest.models.find(x=>x.id===id)!.key};
  if(input.action==='model'){
   const make=cleanText(input.make,80),model=cleanText(input.model,100);if(!make||!model)throw new EncyclopediaInputError('Укажите марку и модель.');
  if(!isEncyclopediaCar({make,model}))throw new EncyclopediaInputError('В энциклопедию можно добавлять только автомобили.');
@@ -47,7 +48,7 @@ export async function createModel(input:Record<string,unknown>,user:AuthUser){
  const make=cleanText(input.make,80),model=cleanText(input.model,100);if(!make||!model)throw new EncyclopediaInputError('Укажите марку и модель.');
  if(!isEncyclopediaCar({make,model}))throw new EncyclopediaInputError('В энциклопедию можно добавлять только автомобили.');
  const photo=safeUrl(input.photo);if(input.photo&&!photo)throw new EncyclopediaInputError('Проверьте ссылку на фото.');
- const id=modelId(make,model),now=new Date().toISOString(),record:ModelRecord={id,make,model,photo,updatedAt:now,revision:randomUUID(),variants:[],editedBy:user.id};
+ const id=modelId(make,model),now=new Date().toISOString(),record:ModelRecord={manualCreated:true,id,make,model,photo,updatedAt:now,revision:randomUUID(),variants:[],editedBy:user.id};
  const key=`${ROOT}/revisions/${id}/${record.revision}.json`;await getJsonStorage().writeJson(key,record,{ifNoneMatch:'*'});
  await mutateDataJson<EncyclopediaManifest|null>(MANIFEST,null,m=>{if(!m)throw new EncyclopediaInputError('Дождитесь первого снимка энциклопедии.');if(m.models.some(x=>x.id===id||token(x.make)===token(make)&&token(x.model)===token(model)))throw new EncyclopediaInputError('Такая модель уже есть в энциклопедии.');return {...m,updatedAt:now,models:[...m.models,summarize(record,key)].sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru'))};});return record;
 }

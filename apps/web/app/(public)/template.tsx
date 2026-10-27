@@ -195,12 +195,6 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
         }
       }
 
-      document.querySelectorAll<HTMLImageElement>('img[src="/home/credit-mascot.webp"], img[src="/home/credit-mascot.png"]').forEach((image) => {
-        image.setAttribute("src", "/home/credit-mascot-card.png");
-      });
-      document.querySelectorAll<HTMLImageElement>('img[src="/home/osago-mascot.webp"], img[src="/home/osago-mascot.png"]').forEach((image) => {
-        image.setAttribute("src", "/home/osago-mascot-card.png");
-      });
     };
 
     const pointerDown = (event: PointerEvent) => {

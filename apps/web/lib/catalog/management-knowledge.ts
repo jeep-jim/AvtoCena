@@ -9,7 +9,7 @@ import type {VehicleOffer} from './types';
 
 export const MANAGEMENT_KNOWLEDGE_PATH='knowledge/management-vehicle-parameters/v1/current.json';
 export type ManagementFact={offerId:string;version:string;savedAt:string;savedBy:string;key:string;year:number;values:Record<string,any>};
-export type ManagementKnowledge={version:1;revision:string;models:Record<string,Record<string,ManagementFact>>};
+export type ManagementKnowledge={encyclopediaRevisions?:Record<string,string>;version:1;revision:string;models:Record<string,Record<string,ManagementFact>>};
 const empty=():ManagementKnowledge=>({version:1,revision:'empty',models:{}});
 const cache=new DetailReadCache<ManagementKnowledge>({maxEntries:1,maxBytes:16*1024*1024,ttlMs:5000,concurrency:1});
 export const readManagementKnowledge=()=>cache.get('current',()=>readDataJson(MANAGEMENT_KNOWLEDGE_PATH,empty()));
@@ -68,7 +68,7 @@ async function persistManagementFact(fact:ManagementFact){
   const models={...current.models};
   for(const [key,rows] of Object.entries(models))if(rows[fact.offerId]){models[key]={...rows};delete models[key][fact.offerId];}
   models[fact.key]={...models[fact.key],[fact.offerId]:fact};
-  return {version:1,revision:fact.version,models};
+  return {...current,version:1,revision:fact.version,models};
  });
  cache.clear();
 }
@@ -92,4 +92,34 @@ export function managementDraft(offer:any,draft:Record<string,string>){
   if(!known(offer[field])||!result[key]||result[key]==='unknown')result[key]=String(value);
  }
  return result;
+}
+
+/** Confirmed encyclopedia edits use the same missing-only compatibility rules as cards.
+ * Replace this model's contributions atomically, so clearing/renaming retires old facts.
+ * This is staff knowledge, not a claim of manufacturer certification. */
+export async function rememberEncyclopediaModel(record:import('../encyclopedia/schema').ModelRecord){
+ const prefix=`encyclopedia:${record.id}:`,key=modelKey(record.make,record.model);
+ const facts=record.variants.filter(v=>v.manualEditedAt&&v.year).map(v=>({
+  offerId:prefix+v.id,key,year:v.year!,version:record.revision,savedAt:record.updatedAt,savedBy:record.editedBy||'',
+  values:Object.fromEntries(fields.filter(f=>known((v as any)[f])).map(f=>[f,(v as any)[f]])),
+ }));
+ await mutateDataJson<ManagementKnowledge>(MANAGEMENT_KNOWLEDGE_PATH,empty(),current=>{
+  if((current.encyclopediaRevisions?.[record.id]||'')>record.updatedAt)return current;
+  const previous=Object.values(current.models).flatMap(Object.values).filter(f=>f.offerId.startsWith(prefix));
+  if(previous.some(f=>f.savedAt>record.updatedAt))return current;
+  const models=Object.fromEntries(Object.entries(current.models).map(([k,rows])=>[k,Object.fromEntries(Object.entries(rows).filter(([id])=>!id.startsWith(prefix)))]));
+  for(const fact of facts)models[key]={...models[key],[fact.offerId]:fact};
+  return {...current,version:1,revision:record.revision,models,encyclopediaRevisions:{...current.encyclopediaRevisions,[record.id]:record.updatedAt}};
+ });
+ cache.clear();
+}
+
+export function encyclopediaWithManagement(record:import('../encyclopedia/schema').ModelRecord,index:ManagementKnowledge){
+ const variants=record.variants.map(v=>({...v,...managementParameters({...v,id:`encyclopedia:${record.id}:${v.id}`,make:record.make,model:record.model},index)}));
+ const contributions=Object.values(index.models[modelKey(record.make,record.model)]||{}).filter(f=>!f.offerId.startsWith('encyclopedia:'));
+ for(const fact of contributions){
+  if(variants.some(v=>v.year===fact.year&&Object.entries(fact.values).every(([k,value])=>!known(value)||known((v as any)[k])&&same(k,(v as any)[k],value))))continue;
+  variants.push({...fact.values,id:`staff:${createHash('sha256').update(fact.offerId).digest('hex').slice(0,24)}`,year:fact.year,markets:[],status:'review',observedCount:0,manualEditedAt:fact.savedAt});
+ }
+ return {...record,variants};
 }

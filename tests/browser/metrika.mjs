@@ -118,7 +118,7 @@ try{
   assert.equal(await page.locator('#yandex-metrika-112098062').count(),0);
   const noticeBox=await page.locator('.ac-analytics-choice').boundingBox();if(width<768){assert.ok(Math.abs(noticeBox.y+noticeBox.height-page.viewportSize().height+10)<2,'notice floats 10px above viewport bottom');assert.ok(noticeBox.height<150,'compact mobile notice');}
   await page.screenshot({path:out+'/notice-'+width+'-'+theme+'.png'});
-  await page.getByRole('button',{name:'Хорошо',exact:true}).click();
+  await page.getByRole('button',{name:/^Хорошо$/i}).click();
   await page.waitForFunction(()=>window.__ymCalls?.some(c=>c[1]==='init'));
   const calls=await page.evaluate(()=>window.__ymCalls);
   assert.equal(calls.filter(c=>c[1]==='init').length,1);
@@ -156,14 +156,14 @@ try{
   await context.close();
  }
  // Settings allow a first-visit refusal without loading the counter.
- const choices=await browser.newContext({viewport:{width:390,height:844}});const choicePage=await choices.newPage();await choicePage.goto(origin);await choicePage.getByRole('button',{name:'Настроить',exact:true}).click();await choicePage.getByRole('button',{name:'Продолжить без аналитики',exact:true}).click();assert.equal(await choicePage.locator('#yandex-metrika-112098062').count(),0);await choicePage.reload();assert.equal(await choicePage.locator('.ac-analytics-choice').count(),0);await choices.close();
+ const choices=await browser.newContext({viewport:{width:390,height:844}});const choicePage=await choices.newPage();await choicePage.goto(origin);await choicePage.getByRole('button',{name:'Настройки',exact:true}).click();await choicePage.getByRole('switch',{name:'Разрешить аналитику Яндекс Метрики',exact:true}).click();await choicePage.getByRole('button',{name:'Продолжить без аналитики',exact:true}).click();assert.equal(await choicePage.locator('#yandex-metrika-112098062').count(),0);await choicePage.reload();assert.equal(await choicePage.locator('.ac-analytics-choice').count(),0);await choices.close();
  // Refusal while tag.js is downloading must clear pending initialization.
  const slow=await browser.newContext();let release;
  const gate=new Promise(resolve=>{release=resolve;});
  await slow.route('https://mc.yandex.ru/**',async route=>{await gate;await route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=window.ym?.a||[];`});});
  const p=await slow.newPage();await p.goto(origin,{waitUntil:'domcontentloaded'});
  assert.equal(await p.locator('.ac-city-notice').count(),0);
- await p.getByRole('button',{name:'Хорошо',exact:true}).click();
+ await p.getByRole('button',{name:/^Хорошо$/i}).click();
  await p.getByRole('button',{name:'Настройки cookie',exact:true}).click();
  await p.getByRole('button',{name:'Отключить аналитику',exact:true}).click();
  release();await p.waitForFunction(()=>Array.isArray(window.__ymCalls));
@@ -174,17 +174,17 @@ try{
  await delayed.route('https://mc.yandex.ru/**',route=>{attempts++;if(attempts===1)return route.abort('failed');return route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=[];var q=window.ym?.a||[];window.ym=(...args)=>window.__ymCalls.push(args);for(var args of q)window.ym(...args);`});});
  const late=await delayed.newPage();
  await late.goto(origin+'/?utm_source=yandex&utm_medium=cpc&yclid=789&phone=secret');
- await late.getByRole('button',{name:'Хорошо',exact:true}).waitFor();
+ await late.getByRole('button',{name:/^Хорошо$/i}).waitFor();
  await late.evaluate(()=>{history.pushState({},'', '/cars');window.dispatchEvent(new Event('avtocena:metrika-page'));});
  assert.equal(attempts,0);assert.equal(await late.evaluate(()=>sessionStorage.getItem('ac_yclid')),null);
- await late.getByRole('button',{name:'Хорошо',exact:true}).click();
+ await late.getByRole('button',{name:/^Хорошо$/i}).click();
  await late.waitForFunction(()=>window.__ymCalls?.some(c=>c[1]==='init'));
  const recovered=await late.evaluate(()=>window.__ymCalls.filter(c=>c[1]==='init'));
  assert.equal(attempts,2);assert.equal(recovered.length,1);
  assert.equal(recovered[0][2].url,origin+'/cars?utm_source=yandex&utm_medium=cpc&yclid=789');
  assert.equal(await late.evaluate(()=>sessionStorage.getItem('ac_yclid')),'789');
  await late.reload();await late.getByRole('button',{name:'Настройки cookie',exact:true}).waitFor();
- assert.equal(await late.getByRole('button',{name:'Хорошо',exact:true}).count(),0,'saved consent does not prompt again');
+ assert.equal(await late.getByRole('button',{name:/^Хорошо$/i}).count(),0,'saved consent does not prompt again');
  await delayed.close();results.push({delayedConsentAttribution:true,loadRetry:true,savedChoice:true});
  console.log(JSON.stringify(results));
 }finally{await browser.close();server.close();}

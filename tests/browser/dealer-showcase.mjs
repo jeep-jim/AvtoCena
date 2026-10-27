@@ -182,17 +182,8 @@ try {
       path: `${out}/editor-${width}-${theme}.png`,
       fullPage: true,
     });
-    await page
-      .getByRole("button", { name: "ОСАГО и кредит", exact: true })
-      .click();
-    await page
-      .getByRole("switch", { name: "Показывать ОСАГО и кредит" })
-      .uncheck();
-    await page
-      .getByRole("button", { name: "Сохранить видимость сервисов" })
-      .click();
-    await page.getByRole("status").filter({hasText:/^Настройки сохранены$/}).waitFor();
-    assert.equal(writes[2].body.affiliatesEnabled, false);
+    assert.equal(await page.getByRole("switch", { name: "Показывать ОСАГО и кредит" }).count(), 0);
+    assert.equal(await page.getByRole("button", { name: "ОСАГО и кредит", exact: true }).count(), 0);
     const rail = page.getByRole("heading", { name: /СПЕЦ ПРЕДЛОЖЕНИЕ/ });
     await rail.scrollIntoViewIfNeeded();
     await page.screenshot({ path: `${out}/rail-${width}-${theme}.png` });

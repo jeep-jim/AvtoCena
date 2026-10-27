@@ -1,5 +1,4 @@
 "use client";
-import {GameButtons} from '../games/GamesHub';
 import {BrandMarkMono} from "../brand/BrandMarkMono";
 
 import {enablePageAnalytics,setAnalyticsChoice} from "@/lib/privacy-consent";
@@ -11,7 +10,6 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { CatalogFooterStop } from "./CatalogFooterStop";
-import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 
 
 
@@ -44,25 +42,6 @@ function FooterLinkGroup({ title, links }: { title: string; links: Array<{ href:
         {links.map((link) => <Link key={link.href} href={link.href} className="ac-public-footer-nav-link w-fit">{link.label}</Link>)}
       </div>
     </nav>
-  );
-}
-
-function CreditIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="3.25" y="5.25" width="17.5" height="13.5" rx="2.75" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M3.8 9.4H20.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M7 14H11" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function InsuranceIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M12 3.2 19 6v5.2c0 4.4-2.7 7.6-7 9.6-4.3-2-7-5.2-7-9.6V6l7-2.8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-      <path d="m8.8 12.1 2.1 2.1 4.5-4.6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
 
@@ -102,29 +81,7 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
               <Link href="/" className="ac-footer-dealer-home"><BrandMarkMono/>АвтоЦена</Link>
             </div>
 
-            <GameButtons/><div className="ac-public-footer-affiliates mt-4 grid gap-2">
-              <a
-                href={AUTOCREDIT_AFFILIATE_URL}
-                target="_blank"
-                rel={AFFILIATE_LINK_REL}
-                className="ac-public-footer-credit relative flex h-12 w-full items-center justify-center rounded-xl bg-[#0d1117] px-10 text-center text-[12px] font-black leading-tight text-white transition-[filter,transform] hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[.99] sm:px-12 sm:text-sm"
-                style={{ backgroundColor: "#0d1117", color: "#ffffff", WebkitTextFillColor: "#ffffff" }}
-              >
-                <span className="absolute left-4 text-white"><CreditIcon /></span>
-                <span className="text-center">Кредитный калькулятор</span>
-              </a>
 
-              <a
-                href={OSAGO_AFFILIATE_URL}
-                target="_blank"
-                rel={AFFILIATE_LINK_REL}
-                className="ac-public-footer-osago relative flex h-12 w-full items-center justify-center rounded-xl bg-[#FFD400] px-10 text-center text-[12px] font-black leading-tight text-[#111111] transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFD400] active:scale-[.99] sm:px-12 sm:text-sm"
-                style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}
-              >
-                <span className="absolute left-4 text-[#111111]"><InsuranceIcon /></span>
-                <span className="text-center">Рассчитать полис ОСАГО</span>
-              </a>
-            </div>
           </div>
 
           <FooterLinkGroup title="По странам" links={marketLinks} />
