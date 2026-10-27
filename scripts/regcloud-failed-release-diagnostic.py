@@ -10,7 +10,8 @@ info=json.loads(subprocess.check_output(['docker','inspect',name]))[0]
 if info['Config']['Image']!='avtocena-regcloud:'+release:raise ValueError('wrong_image')
 state=info['State']
 if state['Running']:raise ValueError('candidate_must_be_stopped')
-if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog','--probe-gate','--probe-long']:
+if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog','--probe-gate','--probe-long','--probe-home']:
+ home_probe=sys.argv[2]=='--probe-home'
  gate_probe=sys.argv[2]=='--probe-gate'
  long_probe=sys.argv[2]=='--probe-long'
  deadline=time.monotonic()+600
@@ -23,6 +24,13 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
  base='http://127.0.0.1:'+ports[0]['HostPort']
  def interrupted(signum,frame):raise InterruptedError('diagnostic_interrupted')
  for sig in [signal.SIGHUP,signal.SIGTERM]:signal.signal(sig,interrupted)
+ production_before=None
+ def production_health():
+  port=subprocess.check_output(['docker','inspect','--format','{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}','avtocena-production'],text=True).strip()
+  with urllib.request.urlopen('http://127.0.0.1:'+port+'/api/health',timeout=15) as response:value=json.load(response)
+  if not value.get('ok') or not re.fullmatch('[a-f0-9]{40}',value.get('releaseSha','')):raise ValueError('production_health_invalid')
+  return value['releaseSha']
+ if home_probe:production_before=production_health()
  try:
   subprocess.run(['docker','start',name],check=True,capture_output=True)
   ready=False
@@ -39,12 +47,15 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
    routes=['/api/health','/','/login','/autocalc','/cars','/cars?market=china&make=Volkswagen&page=2','/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA','/cars?market=europe&make=BMW&page=2','/cars?sort=totalRub','/api/catalog/search?market=europe&make=BMW&page=2','/cars/autocatalog']
    paths=['/','/cars','/','/cars?sort=totalRub','/cars?market=china','/cars?market=china']+routes+routes[:5]+['/cars']
    if long_probe:paths=['/','/cars','/','/cars?sort=totalRub']+routes+routes+routes+routes
+  if home_probe:paths=['/']*4
   profile=None
   for number,path in enumerate(paths):
+   if home_probe and number in [2,3]:time.sleep(35 if number==2 else 305)
+   if home_probe and time.monotonic()>=deadline:raise TimeoutError('diagnostic_deadline')
    if long_probe and number in [4+2*len(routes),4+3*len(routes)]:time.sleep(35 if number==4+2*len(routes) else 305)
    if long_probe and time.monotonic()>=deadline:raise TimeoutError('diagnostic_deadline')
    if ttl_probe and number==2:time.sleep(35)
-   if (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6) or (long_probe and number==4+3*len(routes)+9):
+   if (home_probe and number==3) or (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6) or (long_probe and number==4+3*len(routes)+9):
     subprocess.run(['docker','kill','--signal=USR1',name],check=True,capture_output=True)
     time.sleep(1)
     profile=subprocess.Popen(['docker','exec','-i',name,'node','--input-type=module'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
@@ -52,8 +63,8 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
     time.sleep(1)
    start=time.monotonic()
    try:
-    with urllib.request.urlopen(base+path,timeout=min(90,max(1,deadline-time.monotonic())) if long_probe else 90) as response:body=response.read(20*1024*1024+1);status=response.status;timing=response.headers.get('Server-Timing')
-    print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'status':status,'serverTiming':timing,'bytes':len(body),'complete':b'</html>' in body,'streamError':b'$RX(' in body}),flush=True)
+    with urllib.request.urlopen(base+path,timeout=min(90,max(1,deadline-time.monotonic())) if (long_probe or home_probe) else 90) as response:body=response.read(20*1024*1024+1);status=response.status;timing=response.headers.get('Server-Timing')
+    print(json.dumps({'phase':(['cold','warm','after35','after305'][number] if home_probe else None),'checkedAt':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'status':status,'serverTiming':timing,'bytes':len(body),'complete':b'</html>' in body,'streamError':b'$RX(' in body}),flush=True)
    except Exception as error:print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'errorType':type(error).__name__}),flush=True)
    if profile and ((not gate_probe and not long_probe) or number==len(paths)-1 or (long_probe and number==4+3*len(routes)+9)):
     try:
@@ -63,10 +74,15 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
     except subprocess.TimeoutExpired:
      profile.kill();profile.communicate();print(json.dumps({'candidateProfileError':'timeout'}),flush=True)
     profile=None
-   if ttl_probe or ((gate_probe or long_probe) and number==len(paths)-1):
+   if home_probe or ttl_probe or ((gate_probe or long_probe) and number==len(paths)-1):
     stats=subprocess.check_output(['docker','stats','--no-stream','--format','{{.MemUsage}} / CPU {{.CPUPerc}}',name],text=True).strip()
     print(json.dumps({'candidateResources':stats,'after':path}),flush=True)
- finally:subprocess.run(['docker','stop','--time','20',name],check=True,capture_output=True)
+ finally:
+  subprocess.run(['docker','stop','--time','20',name],check=True,capture_output=True)
+  if home_probe:
+   production_after=production_health()
+   print(json.dumps({'productionBefore':production_before,'productionAfter':production_after,'unchanged':production_before==production_after}),flush=True)
+   if production_before!=production_after:raise ValueError('production_release_changed')
  state=json.loads(subprocess.check_output(['docker','inspect',name]))[0]['State']
 print(json.dumps({'release':release,'state':{k:state.get(k) for k in ['Status','OOMKilled','ExitCode','StartedAt','FinishedAt']},'memoryLimit':info['HostConfig']['Memory'],'nanoCpus':info['HostConfig']['NanoCpus']}))
 logs=subprocess.run(['docker','logs','--tail','2000',name],capture_output=True,text=True,check=True)

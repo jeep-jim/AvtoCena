@@ -1,1 +1,5 @@
-{"failedRelease":"f27c2e803b0627ebbaaf22eab7f0332b1c9a310b","probeLong":true,"purpose":"One bounded diagnostic of failed Europe BMW API after305s; all11routes, Server-Timing and CPU sample on exact failed API. No activation or changed limits."}
+{
+  "failedRelease": "592debdccff24387fbc05979d08ed501b198889d",
+  "probeHome": true,
+  "note": "One isolated home warm/35/305 CPU measurement; no deploy"
+}
