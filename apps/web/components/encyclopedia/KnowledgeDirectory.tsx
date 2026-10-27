@@ -30,7 +30,7 @@ function ModelRow({model,canEdit}:{model:Summary;canEdit:boolean}){
  return <article className="ac-model-list-item">
   <div className="ac-model-list-row">
    <div className="ac-model-list-photo"><EncyclopediaPhoto src={model.photo} alt={`${model.make} ${model.model}`}/></div>
-   <div><strong>{model.make} {model.model}</strong><small>{model.years.length?`${Math.min(...model.years)}–${Math.max(...model.years)}`:'Год не указан'}</small></div>
+   <div><strong>{model.make} {model.model}</strong><small>{model.years.length===1?model.years[0]:model.years.length?`${Math.min(...model.years)}–${Math.max(...model.years)}`:'Год не указан'}</small></div>
    <div data-label="Кузов">{specs.bodyType||'—'}<small>{specs.chassisCode||'—'}</small></div>
    <div data-label="Двигатель">{specs.fuel||'—'}<small>{specs.engineCc||'—'} см³ · {specs.powerHp||'—'} л.с.</small></div>
    <div data-label="Привод / КПП">{specs.drive||'—'}<small>{specs.transmission||'—'}</small></div>
@@ -52,7 +52,7 @@ export function KnowledgeDirectory({models,canEdit,pagination}:{models:Summary[]
   <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span>Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span><span/></div>
   {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map(model=><ModelRow key={model.id} model={model} canEdit={canEdit}/>)}
   {!models.length&&<p>По выбранным параметрам моделей не найдено.</p>}
-  <p className="ac-ency-muted">* Количество на дату сохранённого снимка. Дата — при наведении на число.</p>
+  <p className="ac-ency-muted">* Количество на {models.find(m=>m.directorySnapshot)?.directorySnapshot?.capturedAt?new Date(models.find(m=>m.directorySnapshot)!.directorySnapshot!.capturedAt).toLocaleDateString('ru-RU'):'дату сохранения'}. «До» — верхняя граница количества.</p>
   {pages>1&&<nav className="ac-ency-pagination" aria-label="Страницы моделей"><button className="ac-ency-button" disabled={current===1} onClick={()=>changePage(current-1)}>Назад</button><span>{current} / {pages} · {counted(total,'model')}</span><button className="ac-ency-button" disabled={current===pages} onClick={()=>changePage(current+1)}>Далее</button></nav>}
  </section>;
 }

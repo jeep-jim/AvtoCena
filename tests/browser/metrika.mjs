@@ -156,7 +156,7 @@ try{
   await context.close();
  }
  // Settings allow a first-visit refusal without loading the counter.
- const choices=await browser.newContext({viewport:{width:390,height:844}});const choicePage=await choices.newPage();await choicePage.goto(origin);await choicePage.getByRole('button',{name:'Настроить',exact:true}).click();await choicePage.getByRole('button',{name:'Продолжить без аналитики',exact:true}).click();assert.equal(await choicePage.locator('#yandex-metrika-112098062').count(),0);await choicePage.reload();assert.equal(await choicePage.locator('.ac-analytics-choice').count(),0);await choices.close();
+ const choices=await browser.newContext({viewport:{width:390,height:844}});const choicePage=await choices.newPage();await choicePage.goto(origin);await choicePage.getByRole('button',{name:'Настройки',exact:true}).click();await choicePage.getByRole('switch',{name:'Разрешить аналитику Яндекс Метрики',exact:true}).click();await choicePage.getByRole('button',{name:'Продолжить без аналитики',exact:true}).click();assert.equal(await choicePage.locator('#yandex-metrika-112098062').count(),0);await choicePage.reload();assert.equal(await choicePage.locator('.ac-analytics-choice').count(),0);await choices.close();
  // Refusal while tag.js is downloading must clear pending initialization.
  const slow=await browser.newContext();let release;
  const gate=new Promise(resolve=>{release=resolve;});

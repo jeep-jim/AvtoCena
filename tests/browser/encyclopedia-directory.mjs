@@ -27,6 +27,7 @@ try{for(const width of [390,1440]){
  await page.route('**/api/encyclopedia/**',route=>{reads++;return route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'fixture',updatedAt:'2026-10-26',variants:[]}});});
  await page.goto(`http://127.0.0.1:${server.address().port}`);
  const rows=page.locator('.ac-model-list-item');await rows.last().waitFor();assert.equal(await rows.count(),40);assert.equal(reads,0);
+ await rows.first().getByRole('button',{name:'Увеличить фото Brand 0 Model 0'}).click();await page.getByRole('dialog').waitFor();await page.keyboard.press('Escape');assert.equal(await page.getByRole('dialog').count(),0);assert.equal(reads,0,'photo enlargement does not fetch model data');
  const initialElements=await page.locator('*').count();assert.ok(initialElements<1800);
  assert.equal(await page.locator('a[href*="/cars/offer/"]').count(),0);
  assert.equal(await page.locator('a[href*="/cars/autocatalog/"]').count(),0);
