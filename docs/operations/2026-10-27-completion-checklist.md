@@ -1,5 +1,7 @@
 # Сверка обязательств из чата — 27.10.2026
 
+> 28.10, 00:10 Красноярск: deploy40539715156 exact592debd FAILURE ДО switch: warm11/11 и35s11/11 PASS;305s health PASS, главная2.1896s>2s FAIL (23PASS+1FAIL; остальные42 не достигнуты). Production exactd418 подтверждён свежимhealth, rollback не требовался.1599/1600 НЕ установлены. Publishedjourney40535167389 не дождалсяruntime, liveшагиSKIPPED. Следующий шаг — измерить главную послеTTL/на смене policyDate; новый deploy без исправления не запускать.
+
 > 27.10, 23:20 Красноярск: production exactd418 установлен66/66+verifier. Единственныйdeploy40539715156 exact592debd выполняется послеfinalCI2648/2648; switch ещёНЕподтверждён. Live d418: mobileHyundai7.835s — скорость не принята.
 
 > 27.10,21:48 Красноярск:1594 merged44fba180(all8PASS),1598 mergedd6f9395(CI2644/2644+types/build и2browserPASS). Единственный releasePR1597 включает обаисправления+1587/1592,готовкзапуску; exactSHA/gates/публикацияещёнеподтверждены. Фактический436послеrollback6fdb. Русскийосмотр/схема готовывкоде,полнаястраховаятаблица/OCRискоростнаяliveприёмканезавершены.
@@ -91,3 +93,18 @@
 
 
 23:20: PR1600 merged592debd, final9da CI40538052257+3checksSUCCESS. Единственныйdeploy40539715156 идёт. PR1599 integrationcityretrySUCCESS. Liveafterinstall требуетactual592,обаwidths,acceptance:true; networktraceтеперьсохраняетactualnavigationtimings бездобавочныхзапросов. Japan reference378rows→370unique keys,295single/49ambiguous/26unknown,0missing/drivediff. Canonicalfilledpropagation/полнотаdrive/fullinsurance/all-marketliveНЕзакрыты.
+
+
+### 28.10.2026, 00:10 Красноярск — выпуск592 не активирован: главная после305с превысила2с
+
+Проверены фактические jobs и полный журнал [deploy40539715156](https://github.com/jeep-jim/AvtoCena/actions/runs/40539715156), prepare122314956089. Exact кандидат592debdccff24387fbc05979d08ed501b198889d успешно прошёл research/coverage/security/storage, Docker build/image и подготовку exact price indexes. В шаге Deploy with rollback and resource measurements до переключения: warm11/11 PASS, after35s11/11 PASS, after305s health0.0058s PASS, затем главная /2.1896s при2.0000s FAIL. Итого23PASS+1FAIL из обязательных66; оставшиеся9 pre-switch и все33 post-switch не выполнены. Ошибка performance_budget_exceeded:/ в scripts/regcloud-performance-gate.py:78. В00:02:02.721 Красноярск журнал явно сообщает «Release gate failed: old production retained». Переключения и отката с592 не было; final public verifier не запускался.
+
+Свежий публичный /api/health после отказа подтверждает exactd4184b5d2acb88264eef114bb5f9e013997d99c8. Поэтому1599/1600 (локальный переход «Все», честная неполная пагинация, независимый count, management-preview reuse) пока НЕ установлены. Установленныйd418 и его прежние66/66 сохраняются; его mobileHyundai7.835s остаётся незакрытой live-проблемой, результаты старого live не повторялись.
+
+Подтверждённые VM времена кандидата: / warm0.2314s,35s0.9072s,305s2.1896s; /cars warm0.1493s/35s0.1695s; ChinaVWpage2 warm0.0815s/35s0.0618s; China+Новокузнецк0.0648s/0.0683s; autocatalog1.1474s/0.2722s. Холодная подготовка отдельно: home10.431s,repeat0.345s,totalRub24.007s. Эти замеры не доказывают скорость пользовательских действий и не заменяют отсутствующие post-switch/live.
+
+[Published journey40535167389](https://github.com/jeep-jim/AvtoCena/actions/runs/40535167389), job122298340892 завершился FAILURE в23:52:52 на Wait for exact published release: Production release or verified descendant not confirmed после3600s. Ожидалсяd6ba6cc или подтверждённый потомок; основные mobile/desktop шаги SKIPPED. Это отсутствие установки ожидаемой версии, не падение браузерного сценария на592. Повтор не запущен. На проверке GitHub нет in_progress workflows; новые deploy/repair/сборщики/диагностики этой сессией не запускались.
+
+Следующее исправление требует изолированного разбора главной на exact592 после305с с фазами snapshot/overview, counts, pricing, dealer/rail и фактическими storage/CPU timings. Временная граница существенна: warm/35s были27.10 23:56,305s —28.10 00:01–00:02. Нужно проверить и expiry, и переход policyDate, а не объявлять любой из них причиной без трассы. В exact592 homepage всё ещё ждёт withAjesCount; эта функция ждёт count/page по активным AJES рынкам, тогда как1599 снял count-await внутри readAjesCatalogPage. Это подтверждённая зависимость кода, но вклад именно в2.1896s не измерен. Предыдущий dated overview reader уже поддерживает текущую дату: нельзя без доказательства объявлять её отсутствующей. Пороги, числоURL, цены, данные и guards не менялись; слепой rerun установки не выполнялся.
+
+Открыты: liveRexton «Все»,JapanAWD2страницы/append и полнота доказанных кузовов, все рынки/фильтры/цены/город/back/photos, русские страховые события/суммы и liveосмотр, revision-linked распространение исправлений заполненных фактов энциклопедии. Наблюдение сохранено; это отчёт о неуспешной установке последнего кандидата, не итоговая приёмка всего поручения. Локальные worktrees сохранены без reset/discard; их прежний общий gitparent сейчас отсутствует, поэтому документы читаются/публикуются по GitHub API с expected-parent CAS.
