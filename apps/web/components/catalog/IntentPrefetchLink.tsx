@@ -42,6 +42,8 @@ export function IntentPrefetchLink({ href, className, children, eager = false }:
     onBlur={cancel}
     onFocus={prefetch}
 
-    onPointerDown={prefetch}
+    // A finger touching a card is usually the start of a scroll, not navigation.
+    // Do not start detail reads for every card touched during a mobile fling.
+    onPointerDown={event => { if (event.pointerType === "mouse") prefetch(); }}
   >{children}</Link>;
 }

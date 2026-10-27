@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 function setImportant(element: HTMLElement, property: string, value: string) {
+  if (element.style.getPropertyValue(property) === value && element.style.getPropertyPriority(property) === "important") return;
   element.style.setProperty(property, value, "important");
 }
 
@@ -349,26 +350,32 @@ function decorateCatalogCounts() {
 export function CatalogFilterUiEnhancer() {
   useEffect(() => {
     let frame = 0;
+    let menuFrame = 0;
+    // Scrolling can move an open desktop dropdown, but cannot change field
+    // values, choices or clear controls. Keep decoration out of the scroll path.
+    const positionDesktopMenus = () => {
+      menuFrame = 0;
+      if (!window.matchMedia("(min-width: 1024px)").matches) return;
+      document.querySelectorAll<HTMLElement>(".ac-catalog-sidebar .ac-filter-dropdown").forEach(menu => {
+        if (!menu.getClientRects().length) return;
+        const sidebar = menu.closest<HTMLElement>(".ac-catalog-sidebar")!;
+        const bounds = sidebar.getBoundingClientRect();
+        const anchor = menu.parentElement!.getBoundingClientRect();
+        const below = Math.max(0, Math.min(bounds.bottom, window.innerHeight) - anchor.bottom - 8);
+        const above = Math.max(0, anchor.top - Math.max(bounds.top, 0) - 8);
+        const up = below < Math.min(400, menu.scrollHeight) && above > below;
+        menu.classList.toggle("is-up", up);
+        setImportant(menu, "max-height", `${Math.min(400, up ? above : below)}px`);
+        setImportant(menu, "overflow-y", menu.querySelector(":scope > .ac-hide-scrollbar") ? "hidden" : "auto");
+      });
+    };
     const refresh = () => {
       frame = 0;
       compactRangeCopy();
       decorateRangeControls();
       decorateFieldStates();
       ensureClearControls();
-      if (window.matchMedia("(min-width: 1024px)").matches) {
-        document.querySelectorAll<HTMLElement>(".ac-catalog-sidebar .ac-filter-dropdown").forEach(menu=>{
-          if (!menu.getClientRects().length) return;
-          const sidebar=menu.closest<HTMLElement>(".ac-catalog-sidebar")!;
-          const bounds=sidebar.getBoundingClientRect();
-          const anchor=menu.parentElement!.getBoundingClientRect();
-          const below=Math.max(0,Math.min(bounds.bottom,window.innerHeight)-anchor.bottom-8);
-          const above=Math.max(0,anchor.top-Math.max(bounds.top,0)-8);
-          const up=below<Math.min(400,menu.scrollHeight)&&above>below;
-          menu.classList.toggle("is-up",up);
-          setImportant(menu,"max-height",`${Math.min(400,up?above:below)}px`);
-          setImportant(menu,"overflow-y",menu.querySelector(":scope > .ac-hide-scrollbar")?"hidden":"auto");
-        });
-      }
+      positionDesktopMenus();
     };
     const requestRefresh = () => {
       if (frame) return;
@@ -382,7 +389,9 @@ export function CatalogFilterUiEnhancer() {
 
     const closeOnSheetScroll = (event: Event) => {
       const target = event.target;
-      requestRefresh();
+      if (!menuFrame && window.matchMedia("(min-width: 1024px)").matches && document.querySelector(".ac-catalog-sidebar .ac-filter-dropdown")) {
+        menuFrame = window.requestAnimationFrame(positionDesktopMenus);
+      }
       if (target instanceof Element && target.closest(".ac-mobile-filter-sheet, .ac-catalog-sidebar") && !target.closest(".ac-range-value-menu")) closeRangeMenus();
     };
     const closeOnViewportChange = () => closeRangeMenus();
@@ -417,6 +426,7 @@ export function CatalogFilterUiEnhancer() {
       document.removeEventListener("pointerdown", closeMenus, true);
       window.removeEventListener("resize", requestRefresh);
       if (frame) window.cancelAnimationFrame(frame);
+      if (menuFrame) window.cancelAnimationFrame(menuFrame);
     };
   }, []);
 
