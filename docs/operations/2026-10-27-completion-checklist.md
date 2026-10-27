@@ -45,3 +45,6 @@
 
 
 Текущий единый выпуск:40474031727 exact7d40825041e2d642829d4f4dfa0884be5eec27b8; prepare/storage integrity выполняется, switch не подтверждён. После PR1572 обязателен также /cars/autocatalog≤2с с1–40реальными строками: всего66samples, прежние10URL/потолки не ослаблены. PR1574 локальных фильтров в этот SHA НЕ входит; отдельную параллельную установку не запускать. Local52 filter/sort/budget/supplier tests PASS, ownerUI40474025276 наc014f77 PASS390/1440; окончательный head/полный sidebar browser и liveещё требуют проверки.
+
+
+Срез15:54:7d408 FAILURE до build/switch на required_field_or_provenance_missing:3672547816a45e92b0f925f3:bodyType; production exacte23d. Snapshot40472087718 SUCCESS; repair40475679501 послеPR1577 ещё выполняется. PR1574 head3846316: CI2628+types/build и6browser/verify SUCCESS, city40475112653 отменён при установке браузера и повторён отдельно;merge/live пока нет. Полосу убрать в коде удалось, устранение задержек рабочего сайта не подтверждено.
