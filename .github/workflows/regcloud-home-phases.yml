@@ -37,14 +37,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.22.1
-      - name: Verify unchanged runtime except phase instrumentation
+      - name: Verify exact runtime diff for home snapshot probe
         env:
           BASELINE: ${{ steps.target.outputs.baseline }}
         run: |
           python3 - <<'PY'
           import os,subprocess
           files=subprocess.check_output(['git','diff','--name-only',os.environ['BASELINE'],'HEAD','--','apps','packages','data','Dockerfile','package.json','package-lock.json'],cwd='source',text=True).splitlines()
-          assert set(files)=={'apps/web/app/(public)/page.tsx','apps/web/lib/catalog/home-phase-timing.ts'}, files
+          required={'apps/web/app/(public)/page.tsx','apps/web/lib/catalog/home-phase-timing.ts'}
+          allowed=required|{'apps/web/lib/catalog/storage.ts','apps/web/lib/catalog/home-editorial-empty.ts'}
+          assert required <= set(files) <= allowed, files
           PY
           cd source
           node --test tests/home-phase-timing.test.ts

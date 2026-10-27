@@ -14,7 +14,8 @@ import urllib.request
 
 INDEX = '/app/data/knowledge/encyclopedia/calculation-v1.json'
 CONFIG = pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf')
-PHASES = {'snapshot', 'counts', 'green', 'greenPricing', 'catalogPricing', 'dealer', 'dealerRail', 'japanRail'}
+CORE_PHASES = {'snapshot', 'counts', 'green', 'greenPricing', 'catalogPricing', 'dealer', 'dealerRail', 'japanRail'}
+PHASES = CORE_PHASES | {'snapshotContext','snapshotBody','snapshotPrepared','snapshotManifest','snapshotOverview','snapshotProjection'} | {'snapshotEditorial:'+market for market in ['china','japan','korea','uae','europe','georgia']}
 
 def command(*args):
     return subprocess.check_output(args, text=True, stderr=subprocess.PIPE).strip()
@@ -156,8 +157,9 @@ def probe(base_release, release, calculator, directory, expected_production):
         if not unchanged:
             raise ValueError('production_changed_during_probe')
     if finished:
-        traces = {row['trace'] for row in rows}
-        if len(rows) != 32 or len(traces) != 4 or any({row['phase'] for row in rows if row['trace'] == trace} != PHASES for trace in traces):
+        core = [row for row in rows if row['phase'] in CORE_PHASES]
+        traces = {row['trace'] for row in core}
+        if len(core) != 32 or len(traces) != 4 or any({row['phase'] for row in core if row['trace'] == trace} != CORE_PHASES for trace in traces):
             raise ValueError('incomplete_phase_measurements')
 
 def main():

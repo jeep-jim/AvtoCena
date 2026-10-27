@@ -25,6 +25,9 @@ class SafetyTests(unittest.TestCase):
         for key,bad in [('phase','secret'),('trace','secret'),('ms',float('nan')),('ok','yes'),('policyDate','secret')]:
             self.assertIsNone(home.phase_row('home_phase '+json.dumps({**row,key:bad})))
         self.assertIsNone(home.phase_row('raw application secret'))
+        for phase in ['snapshotOverview','snapshotEditorial:uae']:
+            self.assertEqual(home.phase_row('home_phase '+json.dumps({**row,'phase':phase}))['phase'],phase)
+        self.assertIsNone(home.phase_row('home_phase '+json.dumps({**row,'phase':'snapshotEditorial:private'})))
 
     def test_environment_preserves_guards(self):
         result=home.runtime_env(['SECRET=preserved','CATALOG_RATE_TIMEOUT_MS=2500','AVTOCENA_RELEASE_SHA=old'], 'a'*40,'b'*64)
