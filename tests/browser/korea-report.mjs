@@ -6,9 +6,13 @@ import postcss from 'postcss';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const parser=await build({entryPoints:['apps/web/lib/catalog/korea-report-document.ts'],bundle:true,platform:'node',format:'esm',write:false});
+const {parseKoreaInspectionDocument}=await import('data:text/javascript;base64,'+Buffer.from(parser.outputFiles[0].text).toString('base64'));
+const inspectionDoc=parseKoreaInspectionDocument(fs.readFileSync('tests/fixtures/korea-inspection-structured.html','utf8'),'43015054');
+assert.equal(inspectionDoc.body.parts.find(p=>p.key==='frontFenderLeft').conditions[0],'CHANGE');
 const out='artifacts/korea-report';fs.mkdirSync(out,{recursive:true});
 await build({entryPoints:['tests/browser/korea-report-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:out+'/app.js',loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'}});
-const css=await postcss([tailwindcss({content:['apps/web/components/catalog/OfferSpecificationsDisclosure.tsx','apps/web/components/catalog/OfferUpdatedStatus.tsx','apps/web/components/catalog/KoreaReportPanel.tsx','tests/browser/korea-report-fixture.tsx']}),autoprefixer]).process('@tailwind base;@tailwind components;@tailwind utilities;:root{--ac-border:#d8dce5;--ac-surface:#fff;--ac-surface-2:#f3f5f8;--ac-text:#121826;--ac-muted:#677186;font-family:Arial}body{background:var(--ac-surface);color:var(--ac-text)}.dark{--ac-border:#3b4352;--ac-surface:#191f28;--ac-surface-2:#283342;--ac-text:#fff;--ac-muted:#b1bdcd}',{from:undefined});
+const css=await postcss([tailwindcss({content:['apps/web/components/catalog/OfferSpecificationsDisclosure.tsx','apps/web/components/catalog/OfferUpdatedStatus.tsx','apps/web/components/catalog/KoreaReportPanel.tsx','apps/web/components/catalog/KoreaInspectionBody.tsx','tests/browser/korea-report-fixture.tsx']}),autoprefixer]).process('@tailwind base;@tailwind components;@tailwind utilities;:root{--ac-border:#d8dce5;--ac-surface:#fff;--ac-surface-2:#f3f5f8;--ac-text:#121826;--ac-muted:#677186;font-family:Arial}body{background:var(--ac-surface);color:var(--ac-text)}.dark{--ac-border:#3b4352;--ac-surface:#191f28;--ac-surface-2:#283342;--ac-text:#fff;--ac-muted:#b1bdcd}',{from:undefined});
 const server=http.createServer((req,res)=>{if(req.url==='/app.js'){res.setHeader('Content-Type','text/javascript');res.end(fs.readFileSync(out+'/app.js'));return;}if(req.url==='/app.css'){res.setHeader('Content-Type','text/css');res.end(css.css);return;}res.setHeader('Content-Type','text/html');res.end('<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><div id="root"></div><script src="/app.js"></script>');});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
@@ -17,7 +21,7 @@ try{
   const page=await browser.newPage({viewport:{width,height:1000}}),errors=[];
   page.on('pageerror',e=>errors.push(String(e)));
   const calls={history:0,inspection:0};let frames=0,resolveReport;const held=new Promise(r=>resolveReport=r);
-  const lot='43014653';
+  const lot='43015054';
   const originalHref=kind=>kind==='history'?`https://fem.encar.com/cars/report/accident/${lot}`:`https://www.encar.com/md/sl/mdsl_regcar.do?method=inspectionViewNew&carid=${lot}`;
   const wrapper=kind=>`https://tru.ru/korea/fixture_${kind}_abcdefghijklmnopqrstuv`;
   await page.route('https://tru.ru/**',async route=>{frames++;if(route.request().url().includes('fixture_inspection')){await route.abort('failed');return;}await route.fulfill({contentType:'text/html',body:'<html lang="ko"><body>외부 보고서 — fixture</body></html>'});});
@@ -26,7 +30,7 @@ try{
    assert.equal(p.get('lot'),lot);assert.equal(p.get('id'),'ajes-korea-fixture');calls[kind]++;
    if(kind==='history'&&calls.history===1){await held;await route.fulfill({status:503,json:{error:'unavailable'}});return;}
    if(kind==='inspection'&&calls.inspection===1){await route.fulfill({status:404,json:{error:'report_missing'}});return;}
-   await route.fulfill({json:{version:2,offerId:'ajes-korea-fixture',lot,kind,href:wrapper(kind),originalHref:originalHref(kind),document:kind==='inspection'?{version:1,lot,kind,partial:true,fields:[{key:'structuralDamage',label:'Повреждения силовых элементов по осмотру',value:'Отмечены'}]}:null}});
+   await route.fulfill({json:{version:2,offerId:'ajes-korea-fixture',lot,kind,href:wrapper(kind),originalHref:originalHref(kind),document:kind==='inspection'?inspectionDoc:null}});
   });
   await page.goto('http://127.0.0.1:'+server.address().port);await page.evaluate(t=>document.documentElement.className=t,theme);
   const trigger=page.locator('[data-korea-report-trigger]:visible');await trigger.waitFor();await page.waitForTimeout(150);
@@ -53,12 +57,22 @@ try{
   assert.equal(await page.getByText('Страховых случаев нет',{exact:true}).count(),0);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'no horizontal overflow');
   if(width>1280){const box=await trigger.boundingBox(),spec=await page.getByRole('button',{name:'Все характеристики',exact:true}).boundingBox();assert.ok(Math.abs(box.y-spec.y)<2&&box.x>spec.x,'history sits beside specifications');}
-  // Even a frame failure leaves a usable new-tab link and the other section.
+  // A failed history remains independent of the translated structured inspection.
   await inspection.locator('[data-korea-russian-facts]').scrollIntoViewIfNeeded();
   await page.waitForFunction(()=>document.querySelectorAll('[data-korea-report-panel] a[target="_blank"]').length===2);
+  await inspection.locator('[data-korea-body]').waitFor();
+  assert.equal(await inspection.locator('[data-body-part=frontFenderLeft]').getAttribute('data-marked'),'true');
+  await inspection.getByText('Переднее левое крыло',{exact:true}).waitFor();
+  await inspection.getByText('Замена',{exact:true}).waitFor();
+  assert.equal(await inspection.getByText('83045 км',{exact:true}).count(),1);
+  const engine=inspection.locator('[data-korea-mechanical]').filter({has:page.locator('summary',{hasText:/^Двигатель$/})});
+  await engine.locator('summary').click();await engine.getByText('Утечка масла · Головка блока / прокладка',{exact:true}).waitFor();
+  assert.equal(await inspection.getByText('Сцепление',{exact:true}).count(),0);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  await history.scrollIntoViewIfNeeded();
   assert.equal(await newTab.isVisible(),true);assert.equal(await inspection.getByRole('link',{name:'Оригинал отчёта'}).isVisible(),true);
   assert.equal(await inspection.getByText('Повреждения силовых элементов по осмотру',{exact:true}).isVisible(),true);assert.equal(frames,0,'never loads foreign pages automatically');
   await page.screenshot({path:`${out}/${width}-${theme}.png`,fullPage:true});assert.deepEqual(errors,[]);await page.close();
  }
- console.log('PASS: desktop/mobile light/dark; no initial requests/frames; per-section lazy load; pending reuse; isolated missing/failure/retry; exact supplier link; Russian facts, honest unavailable insurance, original secondary link, no Korean iframe; no overflow');
+ console.log('PASS: desktop/mobile light/dark; no initial requests/frames; per-section lazy load; pending reuse; isolated missing/failure/retry; exact supplier link; Russian structured facts and body diagram, correct selected flags, honest unavailable insurance, original secondary link, no Korean iframe; no overflow');
 }finally{await browser.close();await new Promise(r=>server.close(r));}

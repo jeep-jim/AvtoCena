@@ -200,3 +200,10 @@
 
 - Filter changes, sorting and reset keep existing cards visible while the selected query is pending. Feedback belongs beside the controls, including when results stream; do not activate the header page loader for filter form submits. Load-more keeps its lower striped button. Removing an indicator is not evidence of faster results.
 - Global navigation helpers must not prefetch ordinary detail links on touch/pen scroll starts or rescan the whole document on unrelated card/photo mutations. Verify desktop/mobile interactions and the installed release as well as isolated fixtures.
+
+
+# Owner Russian Korea reports — 27.10.2026
+
+- The owner requires translated facts and body condition inside the offer, not a Korean iframe as the primary report. Retain the existing trigger position and independent lazy sections; the original is a secondary reference.
+- Read only accessible supplier-approved, exact-LOT documents with bounded work. Never solve CAPTCHA automatically, bypass a refusal or substitute another visitor identity. Unknown insurance data is not a clean history. An inspection finding is not an insurance incident.
+- Selected source flags and body marks must be preserved precisely. Empty/unrecognised fields stay unknown; scan-only documents do not acquire invented structured facts. Report values do not overwrite catalog specifications or calculations.
