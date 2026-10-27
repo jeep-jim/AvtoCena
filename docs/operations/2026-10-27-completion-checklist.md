@@ -84,4 +84,7 @@
 22:40: PR1599 draft finala9473e2, CI40532904410/browser40532904260 pending. Original368b183 12browser/verify SUCCESS, локально2647/2647+types. Runtime d4184b5/40524826437 выполняет Deploy with rollback; switch/66samples не подтверждены. Эти документы не новый runtime. Следить за обоими кандидатами; полнота AWD и canonical propagation заполненных карточек остаются открытыми.
 
 
-22:50: exactd418 установлен, deploy40524826437 SUCCESS,66/66VM+final verifier PASS; rollback не понадобился. PR1599 merged d6ba6cc после13SUCCESSruntimea947, integration6adb отличается толькоRoad/checklist; ещё НЕ установлен. Следующий bounded live d418: phasebrowser,widths390/1440,acceptance:true. Полная live скорость/полнота Japan AWD/обновления заполненных canonical facts/insurance events НЕ приняты.
+23:00: d418 exactinstalled,66/66VM/publicverifierPASS. Live40535343374:390 category1.618s/filter7.835s,1440category1.849/filter0.827;24correctcards/noheader/retention/noJS PASS, общий strict2sFAIL. Подготовлен один следующий runtime с1599; приёмка толькопосле установки. Canonical filled-field propagation,полнотаAWD иinsurance cases/sumsНЕготовы.
+
+
+23:09: в ещёНЕзапущенный1600 добавлен management preview fullAJESrecord reuse (24→0 redundant detail reads,8targeted+typesPASS); финальныйCIдоmerge. ЯпонскийownerURLнаd418воспроизведён24cards+ложныйконец/6.660s,1599fixпокаНЕустановлен. Cityintegrationcancelledдоbrowserнаpackageinstall;повторёнтолькоjob.
