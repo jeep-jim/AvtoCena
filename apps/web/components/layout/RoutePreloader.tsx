@@ -300,6 +300,9 @@ function RoutePreloaderInner(){
   const anchorFor=(event:Event)=>event.target instanceof Element?event.target.closest<HTMLAnchorElement>("a[href]"):null;
   const warm=(event:Event)=>{
    if(document.visibilityState!=="visible"||(navigator as Navigator & {connection?:{saveData?:boolean}}).connection?.saveData)return;
+   // A touch/pen pointerdown is also the start of a scroll. Only an intentional
+   // mouse interaction or keyboard focus should warm an unowned link.
+   if(event.type.startsWith("pointer")&&(event as PointerEvent).pointerType!=="mouse")return;
    const anchor=anchorFor(event);
    if(!anchor||anchor.dataset.noRouteLoader==="true"||anchor.dataset.intentPrefetch==="true"||anchor.target==="_blank"||anchor.hasAttribute("download"))return;
    const url=new URL(anchor.href,window.location.href);
@@ -318,9 +321,14 @@ function RoutePreloaderInner(){
  },[router]);
  useEffect(()=>{
   setMounted(true);
-  const sync=()=>setCatalogPending(Boolean(document.querySelector('[data-catalog-pending="true"], [data-catalog-stream-pending="true"]')));
-  sync();const observer=new MutationObserver(sync);
-  observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['data-catalog-pending','data-catalog-stream-pending']});
+  const marker='[data-catalog-stream-pending], [data-catalog-filter-pending]';
+  const sync=()=>setCatalogPending(!document.querySelector('[data-catalog-filter-pending="true"]')&&Boolean(document.querySelector('[data-catalog-stream-pending="true"]')));
+  // Images, inputs and card updates must not cause a document-wide search.
+  const containsMarker=(node:Node)=>node instanceof Element&&(node.matches(marker)||Boolean(node.querySelector(marker)));
+  sync();const observer=new MutationObserver(records=>{
+   if(records.some(record=>record.type==='attributes'||[...record.addedNodes,...record.removedNodes].some(containsMarker)))sync();
+  });
+  observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['data-catalog-stream-pending','data-catalog-filter-pending']});
   return()=>observer.disconnect();
  },[]);
  useLayoutEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;hide()},[routeKey]);

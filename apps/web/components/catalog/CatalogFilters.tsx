@@ -512,9 +512,9 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     setSortDirection(direction);
   };
 
-  return <><CatalogFilterUiEnhancer /><span role="status" className="sr-only">{pending ? "Обновляем результаты" : ""}</span>
+  return <><CatalogFilterUiEnhancer />
     <CatalogFilterPending pending={updating}/>
-    <form aria-busy={updating} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
+    <form data-no-route-loader="true" aria-busy={updating} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="mb-2.5"><CatalogCityFilter onChange={changeCity} /></div>
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
@@ -529,13 +529,14 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       </div>
       <section className="ac-advanced-fields mt-3"><AdvancedFields sourceModels={sourceModels} auctionResults={auctionResults} draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includeFuel /></section>
       <CatalogDesktopSelection><FilterChips chips={chips} onRemove={removeFilter} /></CatalogDesktopSelection>
+      <p aria-hidden="true" className="h-4 text-xs text-[var(--ac-muted)]">{updating ? "Обновляем результаты…" : ""}</p>
     </form>
 
-    <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>Фильтры</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
+    <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>{updating ? "Обновляем…" : "Фильтры"}</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
 
     <StickyCatalogControls showAuctionDate={draft.market==="japan"&&draft.stock!=="green"} onOpenFilters={()=>{if(window.matchMedia("(max-width:1023px)").matches)setMobileOpen(true);else document.querySelector(".ac-catalog-filter-panel")?.scrollIntoView({block:"start",behavior:"smooth"});}} hidePrice={false} chips={chips} onRemove={removeFilter} sort={sortParam(sortKey,sortDirection)} onSort={value=>{const next=initialSort(value);setSortKey(next.key);setSortDirection(next.direction);}} hidden={mobileOpen}/>
 
-    {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
+    {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form data-no-route-loader="true" aria-busy={updating} method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
       <div className="ac-mobile-filter-header shrink-0 px-4 pt-1"><div className="mx-auto h-1 w-10 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-2 py-2"><div className="min-w-0 flex items-center gap-2" role="status" aria-live="polite" aria-busy={updating}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span className="text-sm font-black tabular-nums">{updating ? "Обновляем…" : typeof resultCount === "number" ? `Найдено: ${resultCount.toLocaleString("ru-RU")}` : "Каталог"}</span></div><button type="button" data-ac-react-close="1" data-ac-mobile-close="1" onClick={() => setMobileOpen(false)} className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl ${chips.length || sortKey ? "ac-mobile-apply" : ""}`} aria-label={chips.length || sortKey ? "Применить фильтры" : "Закрыть"}>{chips.length || sortKey ? "ОК" : "×"}</button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         <section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>
