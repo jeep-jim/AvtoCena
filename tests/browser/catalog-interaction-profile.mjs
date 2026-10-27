@@ -21,13 +21,24 @@ try{for(const width of widths){
   await scope.waitFor({state:'visible'});
   await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();
   const brand=scope.locator('.ac-brand-options [data-facet-value="HYUNDAI" i]');await brand.waitFor();
+  await page.waitForFunction(()=>!document.querySelector('.ac-route-loader[aria-hidden="false"]'));
+  await page.evaluate(()=>{
+   window.__filterEvidence={samples:0,emptyCards:false,headerVisible:false};
+   const sample=()=>{if(document.querySelector('[data-catalog-filter-pending="true"]')){const e=window.__filterEvidence;e.samples++;e.emptyCards ||= !document.querySelector('[data-catalog-batch] article');e.headerVisible ||= Boolean(document.querySelector('.ac-route-loader[aria-hidden="false"]'));}};
+   window.__filterObserver=new MutationObserver(sample);window.__filterObserver.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['data-catalog-filter-pending','aria-hidden']});
+  });
   const filterStart=Date.now(),filterRequestStart=requests.length;await brand.click();
   if(width<1024)await scope.getByRole('button',{name:/Показать/}).last().click();
   await page.waitForURL(u=>/hyundai/i.test(u.searchParams.get('make')||''),{timeout:60000});
   await page.waitForFunction(()=>{const cards=[...document.querySelectorAll('[data-catalog-batch] article')];return cards.length>0&&cards.every(c=>/hyundai|х[её]нд[аэ]й/i.test(c.innerText));},{},{timeout:60000});
-  const filterMs=Date.now()-filterStart;assert.equal(await page.locator('[data-catalog-unavailable]').count(),0);assert.deepEqual(errors,[]);
+  const filterMs=Date.now()-filterStart;
+  const feedback=await page.evaluate(()=>{window.__filterObserver.disconnect();return window.__filterEvidence;});
+  assert.ok(feedback.samples>0,'actual filter pending state was observed');
+  assert.equal(feedback.emptyCards,false,'previous cards stay visible while filtering');
+  assert.equal(feedback.headerVisible,false,'filtering does not activate the header loader');
+  assert.equal(await page.locator('[data-catalog-unavailable]').count(),0);assert.deepEqual(errors,[]);
   const api=await context.request.get(origin+'/api/catalog/search?market=korea&make=HYUNDAI&pageSize=24',{timeout:60000});const data=await api.json();assert.ok(api.ok()&&data.ok&&data.items.length);assert.ok(data.items.every(x=>/hyundai/i.test(x.make)));
-  const row={width,release:expected,categoryMs,categoryRequests,filterMs,filterRequests:requests.length-filterRequestStart,cards:data.items.length,apiServerTiming:api.headers()['server-timing']||null,withinTarget:{category:categoryMs<=2000,filter:filterMs<=2000},errors};results.push(row);fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));console.log('CATALOG_INTERACTION',JSON.stringify(row));
+  const row={width,release:expected,categoryMs,categoryRequests,filterMs,feedback,filterRequests:requests.length-filterRequestStart,cards:data.items.length,apiServerTiming:api.headers()['server-timing']||null,withinTarget:{category:categoryMs<=2000,filter:filterMs<=2000},errors};results.push(row);fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));console.log('CATALOG_INTERACTION',JSON.stringify(row));
   await page.screenshot({path:`${out}/${width}.png`});
   assert.equal((await (await context.request.get(origin+'/api/health')).json()).releaseSha,expected);
  }catch(error){await page.screenshot({path:`${out}/${width}-failure.png`});console.log('CATALOG_INTERACTION_FAILURE',JSON.stringify({width,error:String(error),errors}));throw error;}finally{await context.close();}
