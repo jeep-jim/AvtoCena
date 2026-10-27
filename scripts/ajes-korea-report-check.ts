@@ -22,22 +22,19 @@ async function main(){
   const url=new URL('http://87.242.72.57/api/');url.search=new URLSearchParams({ip,json:'',code:password,sql,...(kind?{[kind]:''}:{})}).toString();
   const r=await body(url);if(r.status!==200)throw Error('supplier_status');return JSON.parse(r.text);
  }
- const rows=await supplier('select * from korea order by auction_date desc limit 1');
- const id=rows?.[0]?.ID,lot=String(rows?.[0]?.LOT||'');if(!/^[A-Za-z0-9_-]{1,64}$/.test(id)||!/^\d{6,10}$/.test(lot))throw Error('identity');
- console.log('KOREA_CURRENT_ID',JSON.stringify({id,lot}));
+ const samples=[{id:'6izlwQxlgi4gkA',lot:'43015054'},{id:'6izlQCNqaLZtTq',lot:'43015007'}];
  function shape(v:any,d=0):any{return d>7?'...':Array.isArray(v)?{length:v.length,sample:v.slice(0,2).map(x=>shape(x,d+1))}:v&&typeof v==='object'?Object.fromEntries(Object.entries(v).slice(0,100).map(([k,x])=>[k,shape(x,d+1)])):typeof v==='string'?`string(${v.length})`:v;}
+ for(const {id,lot} of samples){
+ const current=await supplier(`select * from korea where id='${id}'`);
+ if(current?.length!==1||current[0]?.ID!==id||String(current[0]?.LOT)!==lot)throw Error('identity');
+ console.log('KOREA_CURRENT_ID',JSON.stringify({id,lot,fields:Object.keys(current[0]),statusPresent:typeof current[0].STATUS==='string'&&current[0].STATUS.length>0}));
  for(const kind of ['history','inspection','ajax']){
   const value=await supplier(`select * from korea where id='${id}'`,kind);
-  await storage.writeJson(`integrations/ajes/report-current-${kind}.json`,{id,lot,observedAt:new Date().toISOString(),body:JSON.stringify(value)});
+  await storage.writeJson(`integrations/ajes/report-current-${id}-${kind}.json`,{id,lot,observedAt:new Date().toISOString(),body:JSON.stringify(value)});
   console.log('KOREA_CURRENT_REPORT',JSON.stringify({kind,shape:shape(value),removed:kind==='ajax'?value?.[0]?.INFO==='LOT REMOVED':undefined}));
  }
- // Public report routes used by the pages the supplier links. No credentials or bypass.
- for(const [kind,path] of [['history',`/v1/readside/record/vehicle/${lot}/summary`],['inspection',`/v1/readside/inspection/vehicle/${lot}`]]){
-  const r=await body(new URL(path,'https://api.encar.com'));
-  if([401,403,429].includes(r.status)){console.log('KOREA_PUBLIC_REFUSED',{kind,status:r.status});break;}
-  await storage.writeJson(`integrations/ajes/report-current-public-${kind}.json`,{id,lot,observedAt:new Date().toISOString(),status:r.status,body:r.text});
-  let value:any;try{value=JSON.parse(r.text);}catch{value=null;}
-  console.log('KOREA_PUBLIC_REPORT',JSON.stringify({kind,status:r.status,bytes:r.text.length,shape:shape(value)}));
  }
+ // Encar denied automated access in the browser. Do not probe alternate routes.
+
 }
 main().catch(()=>{console.log('KOREA_REPORT_CHECK_FAILED');process.exitCode=1;});
