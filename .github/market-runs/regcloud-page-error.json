@@ -1,5 +1,6 @@
 {
-  "at": "2026-10-27T10:56:00Z",
   "logsOnly": true,
-  "reason": "Owner recurring production outage and Korean Rexton page error. Read existing bounded errors/resource counters only; no HTTP probes, installations, repairs or collectors."
+  "failedRelease": "6fdbb5af759aabf79826154f99be550094a14a3e",
+  "reason": "One read-only closed-interval evidence read after post-switch health389.1ms failure and verified rollback. Inspect stopped candidate and serving runtime. No start/restart/HTTP probes/repair/collectors.",
+  "requestedAt": "2026-10-27T14:05:00Z"
 }
