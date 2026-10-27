@@ -1,0 +1,20 @@
+name: Selected Korea report browser diagnosis
+on:
+  push:
+    branches: [feat/korea-history-disclosure]
+    paths: ['scripts/korea-report-browser-check.mjs']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm install --prefix "$RUNNER_TEMP/report-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - env:
+          CHROME_BIN: /usr/bin/google-chrome
+        run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/report-browser/node_modules/playwright/index.mjs" node scripts/korea-report-browser-check.mjs
