@@ -41,9 +41,9 @@ export const ajesClient=createAjesClient({
   saveAggregateEvidence:(kind,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${kind}-last.json`,value),
   saveEvidence:(table,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${table}-last-detail.json`,value),
   // Bounded list and count pools; exact hashes prevent unrelated cache hits.
-  readQuery:async sql=>{
+  readQuery:sql=>readAjesQueryCache(getJsonStorage(),sql),
+  readLegacyQuery:async sql=>{
     const read=(key:string)=>readAjesQueryCache(getJsonStorage(),key);
-    const current=await read(sql);if(current)return current;
     // Carry only rows across this selection fix, never an inaccurate old count.
     if(!sql.startsWith('select * from'))return null;
     const priorTrucks=await readPreviousTruckPolicyRows(sql,read);if(priorTrucks)return priorTrucks;

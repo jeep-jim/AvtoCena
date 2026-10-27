@@ -1,0 +1,45 @@
+import postcss from 'postcss';import tailwindcss from 'tailwindcss';import autoprefixer from 'autoprefixer';
+import fs from 'node:fs';import http from 'node:http';import assert from 'node:assert/strict';import {build} from 'esbuild';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const out='artifacts/catalog-resilience';fs.mkdirSync(out,{recursive:true});
+await build({entryPoints:['tests/browser/catalog-resilience-fixture.tsx'],bundle:true,format:'iife',jsx:'automatic',outfile:out+'/app.js',plugins:[{name:'fixture',setup(b){
+ b.onResolve({filter:/next\/navigation|DealerBrowsingContext$/},a=>({path:a.path,namespace:'mock'}));
+ b.onLoad({filter:/.*/,namespace:'mock'},a=>({loader:'jsx',resolveDir:process.cwd(),contents:a.path.includes('navigation')?'export const useRouter=()=>({refresh:()=>window.retry()});':`import React from 'react';export const useDealerBrowsing=()=>null;export const DealerLink=({prefetch,...props})=><a {...props}/>;`}));
+}}]});
+const css=await postcss([tailwindcss({content:['apps/web/components/catalog/CatalogUnavailable.tsx','apps/web/components/catalog/CatalogHelpForm.tsx','apps/web/components/leads/PhoneInput.tsx','apps/web/components/legal/ConsentCheckbox.tsx']}),autoprefixer]).process('@tailwind base;@tailwind components;@tailwind utilities;:root{--ac-border:#d8dce5;--ac-surface:#fff;--ac-surface-2:#f3f5f8;--ac-text:#121826;--ac-muted:#677186;font-family:Arial}body{max-width:960px;margin:auto;padding:16px}button,select{padding:8px}',{from:undefined});
+const server=http.createServer((req,res)=>{if(req.url==='/app.css'){res.setHeader('Content-Type','text/css');res.end(css.css);return;}res.setHeader('Content-Type',req.url==='/app.js'?'text/javascript':'text/html');res.end(req.url==='/app.js'?fs.readFileSync(out+'/app.js'):'<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><div id="root"></div><script src="/app.js"></script>');});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN});
+try{for(const width of [390,1440]){
+ const page=await browser.newPage({viewport:{width,height:900}});const errors=[],posts=[];
+ await page.route('**/api/leads',async route=>{posts.push(route.request().postDataJSON());await route.fulfill({status:posts.length===1?503:200,json:{ok:posts.length>1}});});page.on('pageerror',e=>errors.push(String(e)));
+ await page.clock.install();await page.goto('http://127.0.0.1:'+server.address().port);
+ await page.getByText('Машина 1',{exact:false}).waitFor();await page.getByRole('button',{name:'Выбрать',exact:true}).click();
+ await page.getByLabel('Марка').selectOption('Hyundai');await page.getByRole('button',{name:'Повторить'}).waitFor();
+ assert.equal(await page.getByLabel('Марка').inputValue(),'Hyundai');assert.equal(await page.locator('article').count(),1);
+ await page.getByText('Выбрано',{exact:true}).waitFor();assert.ok((await page.getByRole('status').innerText()).includes('не соответствует новым условиям'));
+ assert.equal(await page.locator('.ac-pagination').isVisible(),false);assert.equal(await page.locator('.ac-catalog-more').isVisible(),false);
+ assert.equal(await page.getByRole('link',{name:'Другой раздел'}).getAttribute('href'),'/other');
+ assert.equal(await page.getByRole('link',{name:'Оставить заявку'}).getAttribute('href'),'/request');
+ await page.screenshot({path:`${out}/${width}-retained.png`});
+ await page.getByRole('button',{name:'Повторить'}).click();await page.getByText('Машина 2',{exact:false}).waitFor();assert.equal(await page.locator('[data-catalog-unavailable]').count(),0);
+ await page.getByLabel('Марка').selectOption('Все');await page.getByRole('button',{name:'Повторить'}).waitFor();await page.clock.fastForward(120001);
+ assert.equal(await page.locator('article').count(),0);await page.getByRole('heading',{name:'Каталог временно недоступен'}).waitFor();
+ const help=page.locator('[data-catalog-help-form]');await help.getByRole('heading',{name:'Подберём автомобиль вручную'}).waitFor();
+ assert.equal(posts.length,0,'never submit a lead automatically');
+ assert.equal(await page.getByRole('link',{name:'На главную',exact:true}).getAttribute('href'),'/');
+ assert.equal(await page.getByRole('link',{name:'Перейти в каталог',exact:true}).getAttribute('href'),'/cars');
+ assert.equal(await page.getByText('Сайт обновляется',{exact:true}).count(),0);
+ await help.getByLabel('Имя',{exact:true}).fill('Тест');await help.getByRole('textbox',{name:'Номер телефона, код страны +7'}).fill('9991112233');
+ await help.locator('.ac-consent-mark').click();assert.equal(await help.getByRole('checkbox').isChecked(),true);await help.getByRole('button',{name:'Перезвоните мне',exact:true}).click();
+ await help.getByRole('alert').waitFor();assert.equal(await help.getByLabel('Имя',{exact:true}).inputValue(),'Тест');
+ assert.equal(await help.getByRole('textbox',{name:'Номер телефона, код страны +7'}).inputValue(),'9991112233');
+ assert.equal(posts[0].requestMode,'generic');assert.equal(posts[0].offerId,undefined);assert.equal(posts[0].selectedOfferIds,undefined);assert.equal(posts[0].personalDataConsent,true);
+ await help.getByRole('button',{name:'Перезвоните мне',exact:true}).click();await help.getByText('Заявка отправлена.',{exact:false}).waitFor();
+ assert.equal(posts.length,2);assert.equal(posts[0].operationId,posts[1].operationId,'same pending lead operation prevents duplicate on retry');
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ await page.screenshot({path:`${out}/${width}-catalog-unavailable.png`});
+ await page.getByRole('button',{name:'Повторить'}).click();await page.getByText('Машина 2',{exact:false}).waitFor();
+ await page.getByRole('button',{name:'Другой каталог'}).click();assert.equal(await page.locator('article').count(),0,'never show another catalog or dealer snapshot');
+ await page.getByRole('button',{name:'Пустой успешный поиск'}).click();await page.getByText('Совпадений нет',{exact:false}).waitFor();assert.equal(await page.locator('[data-catalog-unavailable]').count(),0);
+ assert.deepEqual(errors,[]);await page.screenshot({path:`${out}/${width}-empty.png`});await page.close();
+}console.log('Catalog failure/retry, selected filters, retained state, expiry, scope isolation and real empty results; independent generic lead form, retry/idempotency and home/catalog links PASS desktop/mobile');}finally{await browser.close();server.close();}

@@ -92,3 +92,32 @@ test('Rexton Sports keeps pickup identity when presentation shortens its model n
  const suv=ajesOffer(ajesLot({...row,MARKA_NAME:'SSANGYONG',MODEL_NAME:'REXTON'},'korea',true)!,{rateSource:'cbr',currency:'KRW',sourcePrice:17400000,effectiveRate:0.06} as any,'2026-10-24');
  assert.notEqual(catalogBodyType(suv),'pickup');
 });
+
+test('opening an already listed Korea car keeps a supplied source URL without extra requests',async()=>{
+ let calls=0;
+ const url='https://www.encar.com/dc/dc_cardetailview.do?carid=43015007';
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async input=>{
+  calls++;const detail=new URL(String(input)).searchParams.has('ajax');
+  return Response.json([{...row,LOT:'43015007',STATUS:detail?'':url,FINISH:detail?'17500000':row.FINISH}]);
+ }});
+ await client.read({table:'korea'},'203.0.113.1');
+ const detail=await client.read({table:'korea',id:row.ID},'203.0.113.1');
+ assert.equal(detail.items[0].status,url);assert.equal(detail.items[0].sourcePrice,17500000);assert.equal(calls,2);
+ const cached=await client.read({table:'korea',id:row.ID},'203.0.113.1');
+ assert.equal(cached.items[0].status,url);assert.equal(calls,2);
+});
+
+test('historical compatibility reads occur only after supplier failure, preserving bounded fallback',async()=>{
+ let legacyReads=0,requests=0;const lot=ajesLot(row,'korea',false)!;
+ const fallback={schemaVersion:0,items:[lot],page:1,pageSize:24,observedAt:new Date().toISOString(),partial:true};
+ const deps={password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>null,
+ readLegacyQuery:async()=>{legacyReads++;return fallback;}};
+ const healthy=createAjesClient({...deps,fetcher:async()=>{requests++;return Response.json([row]);}});
+ const fresh=await healthy.read({table:'korea'},'203.0.113.1');assert.equal(fresh.stale,false);assert.equal(legacyReads,0);assert.equal(requests,1);
+ const failed=createAjesClient({...deps,fetcher:async()=>new Response('',{status:503})});
+ const retained=await failed.read({table:'korea'},'203.0.113.1');assert.equal(retained.stale,true);assert.equal(retained.partial,true);assert.deepEqual(retained.items,[lot]);assert.equal(legacyReads,1);
+ for(const change of [{page:2},{pageSize:48},{observedAt:'2000-01-01'},{items:[{...lot,table:'china'}]}]){
+  const invalid=createAjesClient({...deps,readLegacyQuery:async()=>({...fallback,...change}),fetcher:async()=>new Response('',{status:503})});
+  await assert.rejects(()=>invalid.read({table:'korea'},'203.0.113.1'),/http_503/);
+ }
+});

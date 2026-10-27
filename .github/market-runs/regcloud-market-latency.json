@@ -1,5 +1,5 @@
 {
-  "release": "c54f625328437f5925184e24e4eb95b23fa67fa1",
-  "reason": "Final bounded recheck of previously stalled country pages after short caches expire",
-  "at": "2026-10-12T13:12:20.949Z"
+  "release": "e23d9d096935481c4ecddf6a987c574c5c2bbbf9",
+  "reason": "Owner-requested bounded baseline of retained production after 5c3abcd failed the pre-switch 305s gate; no restart or collectors",
+  "at": "2026-10-27T06:20:00Z"
 }

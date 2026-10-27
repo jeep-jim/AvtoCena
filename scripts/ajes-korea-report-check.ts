@@ -23,7 +23,16 @@ async function main(){
   const r=await body(url);if(r.status!==200)throw Error('supplier_status');return JSON.parse(r.text);
  }
  const samples=[{id:'6izlwQxlgi4gkA',lot:'43015054'},{id:'6izlQCNqaLZtTq',lot:'43015007'}];
- function shape(v:any,d=0):any{return d>7?'...':Array.isArray(v)?{length:v.length,sample:v.slice(0,2).map(x=>shape(x,d+1))}:v&&typeof v==='object'?Object.fromEntries(Object.entries(v).slice(0,100).map(([k,x])=>[k,shape(x,d+1)])):typeof v==='string'?`string(${v.length})`:v;}
+ function shape(v:any,d=0):any{return d>7?'...':Array.isArray(v)?{length:v.length,sample:v.slice(0,2).map(x=>shape(x,d+1))}:v&&typeof v==='object'?Object.fromEntries(Object.entries(v).slice(0,100).map(([k,x])=>[k,shape(x,d+1)])):typeof v==='string'?(/^https?:\/\//.test(v)?{type:'url',host:new URL(v).hostname}:`string(${v.length})`):v;}
+ if(process.env.AJES_REPORT_SAVED_ONLY==='1'){
+  for(const {id,lot} of samples)for(const kind of ['history','inspection','ajax']){
+   const saved=await storage.readJson<any>(`integrations/ajes/report-current-${id}-${kind}.json`,null);
+   if(saved?.id!==id||saved?.lot!==lot||typeof saved.body!=='string')throw Error('saved_identity');
+   const value=JSON.parse(saved.body),info=value?.[0]?.INFO;
+   console.log('KOREA_SAVED_REPORT',JSON.stringify({id,lot,kind,observedAt:saved.observedAt,shape:shape(value),description:kind==='ajax'?(info==='LOT REMOVED'?'removed':typeof info==='string'&&/^(?:NO[ _-]?INFO|NO[ _-]?DATA|NOT[ _-]?FOUND|INFO[ _-]?ERROR)[ !.]*$/i.test(info)?'unavailable':typeof info==='string'&&info.trim()?'present_unclassified':'empty'):undefined}));
+  }
+  return;
+ }
  for(const {id,lot} of samples){
  const current=await supplier(`select * from korea where id='${id}'`);
  if(current?.length!==1||current[0]?.ID!==id||String(current[0]?.LOT)!==lot)throw Error('identity');

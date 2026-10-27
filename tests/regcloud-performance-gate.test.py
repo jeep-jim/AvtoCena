@@ -8,12 +8,19 @@ class GateTests(unittest.TestCase):
   for body in [{'items':[],'total':100},{'items':[{}],'total':0}]:
    with self.assertRaises(AssertionError):gate.validate('/search','search',200,json.dumps(body).encode(),'x')
   with self.assertRaises(AssertionError):gate.validate('/health','health',200,b'{"ok":true,"releaseSha":"old"}','new')
+ def test_catalog_error_page_cannot_pass_as_fast_html(self):
+  for body in [b'<html>Catalog unavailable</html>',b'<html><article>News</article></html>',b'<html><article class="ac-catalog-card"></article></html>',b'<html><script>const fake="<article class=\'ac-catalog-card\'><a href=\'/cars/offer/fake\'>fake</a></article>";</script></html>']:
+   with self.assertRaises(AssertionError):gate.validate('/cars','catalog',200,body,'x')
+  gate.validate('/cars','catalog',200,b'<html><article class="ac-catalog-card"><a href="/cars/offer/real">Car</a></article></html>','x')
+  for path,_,kind in gate.ROUTES:
+   if path.startswith('/cars'):self.assertEqual(kind,'catalog')
  def test_budgets_and_activation_are_mandatory(self):
   self.assertEqual(gate.PHASE_DELAYS,[('warm',0),('after_ttl',35),('after_directory_ttl',305)])
   limits={p:budget for p,budget,k in gate.ROUTES}
   self.assertEqual(limits, {
    '/api/health': .25, '/': 2, '/login': 1, '/autocalc': 1,
    '/cars': 2, '/cars?market=china&make=Volkswagen&page=2': 2,
+   '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA': 2,
    '/cars?market=europe&make=BMW&page=2': 2, '/cars?sort=totalRub': 2,
    '/api/catalog/search?market=europe&make=BMW&page=2': 1,
   }, 'Removing a route or changing a ceiling requires explicit owner approval')

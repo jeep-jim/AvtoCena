@@ -56,9 +56,9 @@ test('public market counts use validated landings and preserve exact fallback to
  }
  resetCatalogReadCachesForTests();
 });
-test('later pages, filters, custom sorting and city requests retain full-search behavior',async(t)=>{
+test('later pages, filters and custom sorting retain full-search behavior',async(t)=>{
  const landing=await buildCatalogMarketLanding('test','korea',rows);
- for(const query of [{page:9},{make:'Kia'},{sort:'totalRub'},{city:'Кемерово'}]){
+ for(const query of [{page:9},{make:'Kia'},{sort:'totalRub'}]){
   resetCatalogReadCachesForTests();const reads=fixture(t,landing);
   await searchOffers({market:'korea',...query} as any);
   assert.ok(reads.some(p=>p.includes('/projection/')),JSON.stringify(query));t.mock.restoreAll();
@@ -164,4 +164,20 @@ test('dated landing replaces expired base without loading full projections',asyn
  assert.equal((await searchOffers({market:'korea'})).total,valid.total);
  assert.equal(reads.some(path=>path.includes('/projection/')),false);
  t.mock.restoreAll();resetCatalogReadCachesForTests();
+});
+
+
+test('selected city alone keeps exact first-page inventory on the prepared path',async(t)=>{
+ const landing=await buildCatalogMarketLanding('test','korea',rows);
+ for(const city of ['Новокузнецк','Уссурийск','Москва'])for(const page of [1,8]){
+  resetCatalogReadCachesForTests();fixture(t,null);
+  const expected=await searchOffers({market:'korea',city,page});
+  t.mock.restoreAll();resetCatalogReadCachesForTests();const reads=fixture(t,landing);
+  const actual=await searchOffers({market:'korea',city,page});
+  assert.deepEqual(actual.items,expected.items,`exact identity/order/prices for ${city}, page ${page}`);
+  assert.equal(actual.total,expected.total);
+  assert.equal(reads.some(path=>path.includes('/projection/')),false,'city-only navigation must not download a whole market');
+  t.mock.restoreAll();
+ }
+ resetCatalogReadCachesForTests();
 });

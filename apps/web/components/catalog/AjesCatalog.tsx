@@ -34,7 +34,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  return <Container className={`ac-catalog-page ac-page-copy ac-ajes-catalog ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>
  {!embedded&&<PublicHeader backHref="/" backLabel="На главную"/>}
  <section className={embedded?'ac-catalog-shell w-full py-5':'ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10'}>
- <CatalogSidebar filters={<CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>} header={<>
+ <CatalogSidebar resultScope={`ajes:${market}:${embedded}`} resultError={error||undefined} filters={<CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>} header={<>
 
 
  <nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)]"><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>
@@ -42,7 +42,6 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
 
  </>}>
  {makes.length>0&&<BrandLogoRail initial={initial} brands={makes.filter(make=>(!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))&&((makeDirectory?.makes||[]).some(row=>row.make===make&&row.total>0)||(result?.items||[]).some(row=>row.make===make)))} resultCount={displayTotal??undefined}/>}
- {error&&<p role="status" className="my-6 rounded-2xl bg-[var(--ac-surface)] p-5">{error} <Link className="underline" href={`/cars?market=${market}&source=ajes`}>Сбросить условия</Link></p>}
  <div className="mb-4 mt-8 flex flex-wrap items-center justify-between gap-3 md:mt-9">
  <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><MarketResultCount total={displayTotal??undefined}>{ajesCountText(sourceTotal)}</MarketResultCount></h2>
  {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
