@@ -60,3 +60,16 @@ test('hourly preparation skips only a fresh verified identical calculation conte
  assert.equal(budgetAlreadyReady(saved,key,now+20*3600000),false);
  assert.equal(budgetAlreadyReady({...saved,at:now+1},key,now),false);
 });
+
+
+test('cold replay audit distinguishes the shared v3 snapshot from per-generation price shards',()=>{
+ const source=fs.readFileSync(new URL('../scripts/catalog-budget-shared-warmup.mjs',import.meta.url),'utf8');
+ const check=source.split('assert.equal(reads.some(')[1]?.split(',false,')[0];
+ assert.ok(check);
+ const rebuildRead=new Function('row',`return (${check.slice(0,-1)})(row)`);
+ const digest='a'.repeat(64);
+ assert.equal(rebuildRead({path:`catalog/runtime-budget-prices-v3/china/${digest}.json`}),false,'reading the prepared shared cache is allowed');
+ assert.equal(rebuildRead({path:`catalog/runtime-sort-prices-v3/china/${digest}.json`}),false);
+ for(const market of ['china','korea','europe'])assert.equal(rebuildRead({path:`catalog/generations/gen_test/indexes/budget-prices-v3/${market}/0.json`}),true,'per-generation replay still fails the cold-cache audit');
+ assert.equal(rebuildRead({path:'catalog/generations/gen_test/indexes/budget-count-v3.json'}),false,'all-market selector has a separate assertion');
+});

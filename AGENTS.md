@@ -170,3 +170,11 @@
 - `scripts/regcloud-performance-gate.py` enforces full-response ceilings: health 250 ms, local search API 1 s, HTML 1–2 s, including repeats after short-cache expiry and the five-minute directory deadline. Do not increase thresholds, skip routes, suppress failure or disable the gate without new explicit owner approval and recorded measurements.
 - Keep the single candidate preparation CPU budget separate from serving traffic. Never solve a regression by disabling evidence checks, discarding inventory, hiding a market, inventing specs, or deleting ASTRA.
 - Keep diagnostics manual/release-triggered. Do not add recurring collectors or probes. Record exact release SHA, tests, measured timing and remaining limitations in roadmap.md; never claim stability from a merged PR alone.
+
+
+# Owner interaction performance requirement — 27.10.2026
+
+- Performance acceptance covers the whole interaction: filter selection or pagination click to correct visible cards, not only HTTP status, a streamed shell, or VM response time. Existing server ceilings remain mandatory.
+- Changes to catalog navigation, filtering, pagination, rendering, images, shared layout or caches must include before/after evidence for affected desktop/mobile interactions, request counts, preserved filters/city/history and cold/warm/expired-cache behavior. Do not call these accepted from isolated fixtures alone.
+- Do not merge/release a known slowdown to these interactions. First remove redundant work or propose measured alternatives to the owner; changing a ceiling or accepting a regression needs the owner's explicit decision. Never trade away current prices, inventory, permissions or evidence.
+- Load-more feedback belongs in the bottom button: preserve its striped animation and reduced-motion behavior, existing cards and retry. Do not replace it with the header page loader. Numbered navigation must use client transitions after hydration and retain usable URLs without JavaScript; do not automatically prefetch every catalog page.

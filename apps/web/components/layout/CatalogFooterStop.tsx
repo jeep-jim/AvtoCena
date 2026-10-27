@@ -15,12 +15,18 @@ export function CatalogFooterStop() {
     const mobile = window.matchMedia("(max-width: 767px) and (pointer: coarse)");
     let armed = false;
     let lastY = 0;
+    let boundary = Infinity;
+    let nearFooter = false;
+    let moveAttached = false;
+    let movePassive = true;
     const release = () => {setVisible(false); armed = false; root.classList.remove("ac-catalog-footer-stop");};
     releaseStop.current = release;
-    const limit = () => marker.current ? marker.current.getBoundingClientRect().bottom + window.scrollY - window.innerHeight : Infinity;
+    // Geometry changes on layout/resize, not on every animation frame of a fling.
+    const measure = () => {
+      boundary = marker.current ? marker.current.getBoundingClientRect().bottom + window.scrollY - window.innerHeight : Infinity;
+    };
     const stop = () => {
       if (!armed || !mobile.matches) return;
-      const boundary = limit();
       if (boundary > 0 && window.scrollY >= boundary - 1) {setVisible(true); if(window.scrollY > boundary) window.scrollTo({top:boundary, behavior:"instant"});}
       else setVisible(false);
     };
@@ -31,12 +37,19 @@ export function CatalogFooterStop() {
       lastY = nextY;
       if (delta < 0) {release(); return;}
       if (!armed || delta === 0) return;
-      const boundary = limit();
       if (boundary > 0 && window.scrollY + delta >= boundary) {
         setVisible(true);
-        if (event.cancelable) event.preventDefault();
+        if (!movePassive && event.cancelable) event.preventDefault();
         window.scrollTo({top:boundary, behavior:"instant"});
       }
+    };
+    const bindMove = () => {
+      const passive = !nearFooter;
+      if (moveAttached && mobile.matches && movePassive === passive) return;
+      if (moveAttached) document.removeEventListener("touchmove", move);
+      moveAttached = mobile.matches;
+      movePassive = passive;
+      if (moveAttached) document.addEventListener("touchmove", move, {passive});
     };
     const start = (event: TouchEvent) => {
       const target = event.target as Element;
@@ -53,26 +66,43 @@ export function CatalogFooterStop() {
         if (/auto|scroll/.test(style.overflowX) && element.scrollWidth > element.clientWidth + 1) return;
       }
       // Already at or past the line: this gesture is permission to enter footer.
-      const bottom = marker.current.getBoundingClientRect().bottom;
+      measure();
+      const bottom = boundary + window.innerHeight - window.scrollY;
       if (bottom > window.innerHeight + 8) {armed = true; root.classList.add("ac-catalog-footer-stop");}
     };
     const click = (event: MouseEvent) => {if(!marker.current?.contains(event.target as Node))release();};
+    const resize = () => {measure(); bindMove();};
+    const mediaChange = () => {release(); resize();};
+    const geometry = new ResizeObserver(measure);
+    geometry.observe(document.body);
+    if (marker.current) geometry.observe(marker.current);
+    // Only the pagination boundary needs to cancel a gesture. The rest of the
+    // catalog must remain compositor-scrollable without waiting for JavaScript.
+    const proximity = new IntersectionObserver(([entry]) => {
+      nearFooter = entry.isIntersecting;
+      bindMove();
+    }, {rootMargin:"1000px 0px"});
+    if (marker.current) proximity.observe(marker.current);
+    resize();
     document.addEventListener("touchstart", start, {passive:true});
-    document.addEventListener("touchmove", move, {passive:false});
     window.addEventListener("scroll", stop, {passive:true});
+    window.addEventListener("resize", resize, {passive:true});
     document.addEventListener("keydown", release);
     document.addEventListener("click", click, true);
     window.addEventListener("popstate", release);
-    mobile.addEventListener("change", release);
+    mobile.addEventListener("change", mediaChange);
     return () => {
       release();
       document.removeEventListener("touchstart", start);
       document.removeEventListener("touchmove", move);
       window.removeEventListener("scroll", stop);
+      window.removeEventListener("resize", resize);
+      geometry.disconnect();
+      proximity.disconnect();
       document.removeEventListener("keydown", release);
       document.removeEventListener("click", click, true);
       window.removeEventListener("popstate", release);
-      mobile.removeEventListener("change", release);
+      mobile.removeEventListener("change", mediaChange);
       releaseStop.current = () => {};
     };
   }, []);

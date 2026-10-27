@@ -13,7 +13,19 @@ const results=[];const browserErrors=[];
 try {
  for(const width of [320,390,767,1280]) {
   const page=await browser.newPage({viewport:{width,height:800},isMobile:width<768,hasTouch:width<768,reducedMotion:'reduce'});
-  page.on('pageerror',e=>{browserErrors.push(e.message);console.error(e.message);});
+  await page.addInitScript(() => {
+   window.__footerTouchListeners = new Map();
+   const add = EventTarget.prototype.addEventListener, remove = EventTarget.prototype.removeEventListener;
+   EventTarget.prototype.addEventListener = function(type, listener, options) {
+    if (this === document && type === 'touchmove') window.__footerTouchListeners.set(listener, options?.passive === true);
+    return add.call(this, type, listener, options);
+   };
+   EventTarget.prototype.removeEventListener = function(type, listener, options) {
+    if (this === document && type === 'touchmove') window.__footerTouchListeners.delete(listener);
+    return remove.call(this, type, listener, options);
+   };
+  });
+  page.on('pageerror' ,e=>{browserErrors.push(e.message);console.error(e.message);});
   await page.goto(`http://127.0.0.1:${server.address().port}`);
   for(const pageNumber of [3,10,18]) {
    await page.goto(`http://127.0.0.1:${server.address().port}/?page=${pageNumber}`);
@@ -23,6 +35,7 @@ try {
    assert.ok(boxes.every(x=>x.left>=0&&x.right<=width),`pagination overflow ${width}/${pageNumber}`);
   }
   const marker=page.locator('.ac-catalog-footer-boundary');await marker.waitFor({state:'attached'});
+  assert.equal(await page.evaluate(()=>[...window.__footerTouchListeners.values()].some(passive=>!passive)),false,'ordinary catalog scroll must have no blocking document touchmove');
   if(width>=768){assert.equal(await marker.isVisible(),false);assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollSnapType),'none');results.push({width,desktopUnaffected:true});await page.close();continue;}
   const arrow=page.getByRole('button',{name:'Перейти к информации внизу страницы',includeHidden:true});
   assert.equal(await arrow.isVisible(),false,'arrow hidden until stop');

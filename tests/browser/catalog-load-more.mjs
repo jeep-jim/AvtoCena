@@ -32,9 +32,10 @@ try{
   await page.getByRole('button',{name:'Показать ещё'}).click();
   const loading=page.getByRole('button',{name:'Загружаем варианты'});
   await loading.waitFor();assert.equal(await loading.getAttribute('aria-busy'),'true');
-  const indicator=page.locator('.ac-route-loader[aria-hidden="false"]');await indicator.waitFor({state:'visible'});
+  const indicator=loading.locator('.ac-catalog-more__candy');await indicator.waitFor({state:'visible'});
+  assert.equal(await page.locator('.ac-route-loader[aria-hidden="false"]').count(),0,'append must use the button, not the header');
   assert.equal(await indicator.count(),1);
-  assert.match(await indicator.locator('.ac-route-loader__candy').evaluate(el=>getComputedStyle(el).backgroundImage),/linear-gradient/);
+  assert.match(await indicator.evaluate(el=>getComputedStyle(el).backgroundImage),/linear-gradient/);
   await page.screenshot({path:out+'/'+width+'-loading.png'});
   await page.getByText('Показано 48 из 60').waitFor();assert.equal(await page.locator('article').count(),48);assert.equal(await pages.locator('[aria-current=page]').innerText(),'2');
   await page.getByRole('button',{name:'Показать ещё'}).click();await page.getByRole('alert').waitFor();assert.equal(await page.locator('article').count(),48);
