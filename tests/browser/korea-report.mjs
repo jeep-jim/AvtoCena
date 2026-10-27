@@ -20,7 +20,7 @@ try{
   const lot='43014653';
   const originalHref=kind=>kind==='history'?`https://fem.encar.com/cars/report/accident/${lot}`:`https://www.encar.com/md/sl/mdsl_regcar.do?method=inspectionViewNew&carid=${lot}`;
   const wrapper=kind=>`https://tru.ru/korea/fixture_${kind}_abcdefghijklmnopqrstuv`;
-  await page.route('https://tru.ru/**',async route=>{frames++;await route.fulfill({contentType:'text/html',body:'<html lang="ko"><body>외부 보고서 — fixture</body></html>'});});
+  await page.route('https://tru.ru/**',async route=>{frames++;if(route.request().url().includes('fixture_inspection')){await route.abort('failed');return;}await route.fulfill({contentType:'text/html',body:'<html lang="ko"><body>외부 보고서 — fixture</body></html>'});});
   await page.route('**/api/catalog/korea-report?*',async route=>{
    const p=new URL(route.request().url()).searchParams,kind=p.get('kind');
    assert.equal(p.get('lot'),lot);assert.equal(p.get('id'),'ajes-korea-fixture');calls[kind]++;
@@ -54,8 +54,10 @@ try{
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'no horizontal overflow');
   if(width>1280){const box=await trigger.boundingBox(),spec=await page.getByRole('button',{name:'Все характеристики',exact:true}).boundingBox();assert.ok(Math.abs(box.y-spec.y)<2&&box.x>spec.x,'history sits beside specifications');}
   // Even a frame failure leaves a usable new-tab link and the other section.
-  await history.locator('iframe').dispatchEvent('error');await history.getByText('Отчёт не удалось показать внутри страницы.',{exact:false}).waitFor();
-  assert.equal(await newTab.isVisible(),true);assert.equal(await inspection.locator('iframe').isVisible(),true);
+  await inspection.locator('iframe').scrollIntoViewIfNeeded();
+  await page.waitForFunction(()=>document.querySelectorAll('[data-korea-report-panel] a[target="_blank"]').length===2);
+  assert.equal(await newTab.isVisible(),true);assert.equal(await inspection.getByRole('link',{name:'Открыть в новой вкладке'}).isVisible(),true);
+  assert.equal(await inspection.getByText('Если отчёт не появился',{exact:false}).isVisible(),true);
   await page.screenshot({path:`${out}/${width}-${theme}.png`,fullPage:true});assert.deepEqual(errors,[]);await page.close();
  }
  console.log('PASS: desktop/mobile light/dark; no initial requests/frames; per-section lazy load; pending reuse; isolated missing/failure/retry; exact supplier link; frame failure leaves new-tab fallback; no overflow');

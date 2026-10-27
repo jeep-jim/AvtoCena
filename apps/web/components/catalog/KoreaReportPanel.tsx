@@ -8,7 +8,7 @@ function ReportSection({offerId,lot,kind,title}:{offerId:string;lot:string;kind:
  const [open,setOpen] = useState(false), [started,setStarted] = useState(false);
  const [report,setReport] = useState<KoreaReportLink|null>(null);
  const [error,setError] = useState<'missing'|'unavailable'|null>(null);
- const [attempt,setAttempt] = useState(0), [frameError,setFrameError] = useState(false);
+ const [attempt,setAttempt] = useState(0);
  const requested = useRef(false), contentId = useId();
  useEffect(()=>{
   if (!started || requested.current) return;
@@ -40,8 +40,7 @@ function ReportSection({offerId,lot,kind,title}:{offerId:string;lot:string;kind:
    {report?<>
     <a href={report.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[var(--ac-surface-2)] px-4 py-2 text-sm font-bold outline-none focus-visible:ring-2 focus-visible:ring-red-400">Открыть в новой вкладке<ExternalLink aria-hidden="true" className="h-4 w-4 shrink-0"/></a>
     <p className="mb-3 mt-3 text-xs leading-5 text-[var(--ac-muted)]">Если отчёт не появился или проверку не удаётся пройти здесь, откройте его в новой вкладке.</p>
-    {frameError?<p role="status" className="text-sm text-[var(--ac-muted)]">Отчёт не удалось показать внутри страницы. Откройте его по ссылке выше.</p>:null}
-    <iframe src={report.href} title={`${title} автомобиля — оригинал`} loading="lazy" referrerPolicy="no-referrer" sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" onError={()=>setFrameError(true)} className="block h-[65dvh] min-h-[360px] max-h-[800px] w-full rounded-lg border border-[var(--ac-border)] bg-white" />
+    <iframe src={report.href} title={`${title} автомобиля — оригинал`} loading="lazy" referrerPolicy="no-referrer" sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" className="block h-[65dvh] min-h-[360px] max-h-[800px] w-full rounded-lg border border-[var(--ac-border)] bg-white" />
    </>:null}
   </div>
  </section>;
