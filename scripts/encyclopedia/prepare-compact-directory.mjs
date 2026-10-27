@@ -26,10 +26,11 @@ const controls=await readCollectionControls();
 // Exact cached aggregate queries only. A partial page is never a complete model list.
 for(const [table,market] of [['stats','japan'],['korea','korea']]){
  if(controls.markets[market]?.enabled===false||controls.sources[`ajes_${market}_feed`]?.enabled===false)continue;
+ const dedicated=await store.readJson(`catalog/partner-cache/ajes/compact-directory/${market}.json`,null);
  let complete=false;const seen=new Set();
  for(let page=1;page<=10;page++){
   const query=ajesQuery({table,aggregate:'models',page});
-  const saved=await readAjesQueryCache(store,query.sql);
+  const saved=dedicated?.complete&&dedicated.pages?.[page-1]?.sql===query.sql?dedicated.pages[page-1].value:await readAjesQueryCache(store,query.sql);
   if(!saved||saved.partial||saved.stale||!Array.isArray(saved.models)||!Number.isInteger(saved.received)||Date.now()-Date.parse(saved.observedAt)>86400000||!Number.isFinite(Date.parse(saved.observedAt)))throw Error(`fresh_complete_saved_directory_required:${market}:${page}`);
   for(const row of saved.models){const key=JSON.stringify([row.make,row.model]);if(seen.has(key)||!Number.isSafeInteger(row.total)||row.total<0)throw Error('invalid_directory_count');seen.add(key);add(row,row.total,true);}
   if(saved.received<500){complete=true;break;}

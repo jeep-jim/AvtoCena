@@ -30,5 +30,22 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Bundle diagnostic without production secrets
+        run: |
+          node --input-type=module <<'JS'
+          import {build} from 'esbuild';
+          await build({entryPoints:['scripts/encyclopedia/refresh-compact-directories.ts'],outfile:'/tmp/compact-directories.cjs',bundle:true,platform:'node',format:'cjs',external:['next/*'],plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
+          JS
+      - name: Bounded requests using supplier-approved genuine server address
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file" /tmp/compact-directories.cjs' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'set -eu; server_ip=$(curl -4 -fsS --max-time 15 https://api.ipify.org); printf "AJES_SERVER_EGRESS %s\\n" "$server_ip"; test "$server_ip" = 151.248.113.177; docker exec -i -e AJES_DIAG_IP="$server_ip" avtocena-production node' < /tmp/compact-directories.cjs
       - name: Capture current models without replacing technical records
         run: node --import tsx scripts/encyclopedia/prepare-compact-directory.mjs
