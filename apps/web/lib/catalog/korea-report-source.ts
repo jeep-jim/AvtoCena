@@ -1,19 +1,19 @@
 import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
-export type KoreaSourceReportKind='history'|'inspection';
+import {exactKoreaReportUrl, koreaWrapperUrl, type KoreaSourceReportKind} from './korea-report-types';
+export type {KoreaSourceReportKind} from './korea-report-types';
 export class KoreaReportUnavailable extends Error {constructor(readonly reason:string){super(reason);}}
 
-/** Only exact, identity-bound report links returned by the purchased feed are accepted. */
+/** The opaque wrapper is accepted only alongside an exact LOT/kind URL in the same paid-feed response. */
+export function koreaReportLinks(value: unknown, lot: string, kind: KoreaSourceReportKind): {href:string; originalHref:string} | null {
+ if (!Array.isArray(value) || value.length > 4) return null;
+ const originalHref = value.map(item => exactKoreaReportUrl(item, lot, kind)).find(Boolean);
+ if (!originalHref) return null;
+ const wrapper = value.map(koreaWrapperUrl).find(Boolean);
+ return {href: wrapper || originalHref, originalHref};
+}
 export function koreaReportLink(value:unknown,lot:string,kind:KoreaSourceReportKind):string|null {
- if(!/^\d{6,10}$/.test(lot)||!Array.isArray(value)||value.length>4)return null;
- for(const raw of value){
-  if(typeof raw!=='string'||raw.length>2048)continue;
-  let u:URL;try{u=new URL(raw);}catch{continue;}
-  if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash)continue;
-  if(kind==='history'&&u.hostname==='fem.encar.com'&&u.pathname===`/cars/report/accident/${lot}`&&!u.search)return u.href;
-  if(kind==='inspection'&&u.hostname==='www.encar.com'&&u.pathname==='/md/sl/mdsl_regcar.do'&&u.searchParams.get('method')==='inspectionViewNew'&&u.searchParams.get('carid')===lot&&[...u.searchParams.keys()].length===2)return u.href;
- }
- return null;
+ return koreaReportLinks(value,lot,kind)?.href || null;
 }
 export async function readKoreaReportResponse(response:Response):Promise<unknown>{
  if(!response.ok){await response.body?.cancel();throw new KoreaReportUnavailable([401,403,429].includes(response.status)?'refused':'upstream');}
@@ -26,12 +26,16 @@ export async function readKoreaReportResponse(response:Response):Promise<unknown
  if(/^\s*(?:bot|ban)\d*(?:\s|$)/i.test(text))throw new KoreaReportUnavailable('refused');
  try{return JSON.parse(text);}catch{throw new KoreaReportUnavailable('invalid');}
 }
-export async function requestKoreaReportLink(input:{id:string;lot:string;kind:KoreaSourceReportKind;ip:string},deps:{password:()=>Promise<string|undefined>;assertEnabled:()=>Promise<void>;reserve:()=>Promise<void>;endpoint:(ip:string)=>string;fetcher?:typeof fetch}){
+export async function requestKoreaReportLinks(input:{id:string;lot:string;kind:KoreaSourceReportKind;ip:string},deps:{password:()=>Promise<string|undefined>;assertEnabled:()=>Promise<void>;reserve:()=>Promise<void>;endpoint:(ip:string)=>string;fetcher?:typeof fetch}){
  if(!/^[A-Za-z0-9_-]{1,64}$/.test(input.id)||!/^\d{6,10}$/.test(input.lot)||!['history','inspection'].includes(input.kind)||!isIP(input.ip))throw new KoreaReportUnavailable('input');
  await deps.assertEnabled();const password=await deps.password();if(!password)throw new KoreaReportUnavailable('configuration');
  await deps.reserve();
  const url=new URL(deps.endpoint(input.ip));url.search=new URLSearchParams({ip:input.ip,json:'',code:password,sql:`select * from korea where id='${input.id}'`,[input.kind]:''}).toString();
  const response=await (deps.fetcher||fetch)(url,{signal:AbortSignal.timeout(20000),redirect:'error',cache:'no-store'});
- const value=await readKoreaReportResponse(response);const link=koreaReportLink(value,input.lot,input.kind);
+ const value=await readKoreaReportResponse(response);const link=koreaReportLinks(value,input.lot,input.kind);
  if(!link)throw new KoreaReportUnavailable('report_missing');return link;
+}
+
+export async function requestKoreaReportLink(...args: Parameters<typeof requestKoreaReportLinks>) {
+ return (await requestKoreaReportLinks(...args)).href;
 }

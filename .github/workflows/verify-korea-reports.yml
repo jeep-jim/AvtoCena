@@ -25,7 +25,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm install --prefix "$RUNNER_TEMP/korea-browser" --no-package-lock --ignore-scripts playwright@1.55.0
-      - name: Verify lazy Russian report disclosure
+      - name: Verify lazy report links and Russian controls
         env:
           CHROME_BIN: /usr/bin/google-chrome
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/korea-browser/node_modules/playwright/index.mjs" node tests/browser/korea-report.mjs

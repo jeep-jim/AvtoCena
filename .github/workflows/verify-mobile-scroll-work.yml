@@ -1,0 +1,47 @@
+name: Verify mobile scroll work
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/CatalogFilterUiEnhancer.tsx'
+      - 'apps/web/components/catalog/IntentPrefetchLink.tsx'
+      - 'tests/browser/mobile-scroll-work*'
+      - '.github/workflows/verify-mobile-scroll-work.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm install --prefix "$RUNNER_TEMP/scroll-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Compare mobile gestures and preserve input behavior
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/scroll-browser/node_modules/playwright/index.mjs
+          SCROLL_BASE_REF: ${{ github.event.pull_request.base.sha }}
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/mobile-scroll-work.mjs
+      - name: Bounded read-only published mobile profile
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/scroll-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/mobile-live-profile.mjs
+      - name: Verify complete filter interactions
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/scroll-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-sidebar-check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-scroll-work
+          path: |
+            artifacts/mobile-profile
+            artifacts/mobile-scroll-work
+            artifacts/mobile-filter-local-chromium
+          retention-days: 7

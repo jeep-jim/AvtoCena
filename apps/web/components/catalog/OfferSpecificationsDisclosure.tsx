@@ -9,15 +9,15 @@ import type { SourceSpecificationSnapshot } from "../../lib/catalog/source-speci
 
 const KoreaReportPanel = lazy(() => import("./KoreaReportPanel"));
 
-type Props = { groups: SourceSpecificationSnapshot["groups"]; title: string; mode: "desktop" | "mobile"; sourceUrl?: string; headerAside?: ReactNode; defaultOpen?: boolean; historyOfferId?: string };
+type Props = { groups: SourceSpecificationSnapshot["groups"]; title: string; mode: "desktop" | "mobile"; sourceUrl?: string; headerAside?: ReactNode; defaultOpen?: boolean; historyOfferId?: string; historyLot?: string };
 
-export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, headerAside, defaultOpen = false, historyOfferId }: Props) {
+export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, headerAside, defaultOpen = false, historyOfferId, historyLot }: Props) {
   const [open, setOpen] = useState(defaultOpen && mode === "desktop");
   const [historyOpen, setHistoryOpen] = useState(false);
   const [historyStarted, setHistoryStarted] = useState(false);
   const historyId = useId();
   const historyButton = historyOfferId ? <button type="button" aria-expanded={historyOpen} aria-controls={historyId} onClick={()=>{setHistoryStarted(true);setHistoryOpen(value=>!value);}} className="flex min-h-12 min-w-0 w-full items-center justify-between gap-2 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3 text-left text-sm font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400 xl:min-h-14" data-korea-report-trigger><span className="flex items-center gap-2"><ClipboardList aria-hidden="true" className="h-4 w-4 shrink-0"/>История и состояние</span><ChevronDown aria-hidden="true" className={`h-4 w-4 shrink-0 transition-transform ${historyOpen ? "rotate-180" : ""}`}/></button> : null;
-  const historyPanel = historyOfferId && historyStarted ? <div id={historyId} hidden={!historyOpen} className="min-w-0 pt-4"><Suspense fallback={<p role="status" className="p-4 text-sm">Загружаем историю и осмотр автомобиля…</p>}><KoreaReportPanel key={historyOfferId} offerId={historyOfferId} active={historyOpen}/></Suspense></div> : null;
+  const historyPanel = historyOfferId && historyStarted ? <div id={historyId} hidden={!historyOpen} className="min-w-0 pt-4"><Suspense fallback={<p role="status" className="p-4 text-sm">Загружаем историю и осмотр автомобиля…</p>}><KoreaReportPanel key={historyOfferId} offerId={historyOfferId} lot={historyLot || ""} active={historyOpen}/></Suspense></div> : null;
   const [dragY, setDragY] = useState(0);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);

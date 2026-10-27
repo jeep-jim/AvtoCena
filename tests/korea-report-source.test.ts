@@ -24,3 +24,19 @@ test('source switch precedes request and secrets remain server-only; no retries'
  await assert.rejects(requestKoreaReportLink({...input,id:"bad' SQL"},deps),/input/);assert.equal(calls,1);
  await assert.rejects(requestKoreaReportLink(input,{...deps,fetcher:async()=>{calls++;return new Response('refusal',{status:403});}}),/refused/);assert.equal(calls,2);
 });
+
+test('prefer supplier anonymous wrapper only with exact LOT and report kind in the same response',async()=>{
+ const {koreaReportLinks}=await import('../apps/web/lib/catalog/korea-report-source');
+ const wrapper='https://tru.ru/korea/v9LnRTiIYGJEJVDE6muNCtoRrd8skq6xWaqkSuFUVtbgo0cKL8s3NjAnqFYZjiE61cNQHqu';
+ assert.deepEqual(koreaReportLinks([link,wrapper],lot,'history'),{href:wrapper,originalHref:link});
+ assert.equal(koreaReportLinks([wrapper],lot,'history'),null);
+ assert.equal(koreaReportLinks([link.replace(lot,'99999999'),wrapper],lot,'history'),null);
+ assert.equal(koreaReportLinks([link,wrapper],lot,'inspection'),null);
+ for(const bad of [wrapper.replace('tru.ru','tru.ru.evil.test'),wrapper+'?redirect=https://evil.test',wrapper+'#x',wrapper.replace('https:','http:'),wrapper.replace('tru.ru','user:password@tru.ru')])assert.equal(koreaReportLinks([link,bad],lot,'history')?.href,link);
+});
+test('browser rejects mismatched identity and untrusted URLs',async()=>{
+ const {validKoreaReportLink}=await import('../apps/web/lib/catalog/korea-report-types');
+ const value={version:2,offerId:'ajes-korea-selectedID',lot,kind:'history',href:link,originalHref:link};
+ assert.equal(validKoreaReportLink(value,value.offerId,lot,'history'),true);
+ for(const wrong of [{lot:'12345678'},{offerId:'ajes-korea-another'},{kind:'inspection'},{href:'javascript:alert(1)'},{originalHref:link.replace(lot,'12345678')}])assert.equal(validKoreaReportLink({...value,...wrong},value.offerId,lot,'history'),false);
+});
