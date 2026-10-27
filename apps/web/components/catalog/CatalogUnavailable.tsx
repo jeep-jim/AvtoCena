@@ -2,6 +2,7 @@
 import {useTransition} from 'react';
 import {useRouter} from 'next/navigation';
 import {DealerLink, useDealerBrowsing} from '@/components/dealers/DealerBrowsingContext';
+import {CatalogHelpForm} from './CatalogHelpForm';
 import {TOPAVTO_DEALER} from '@/lib/topavto-dealer';
 
 export function CatalogUnavailable({retained=false,message,reset}:{retained?:boolean;message?:string;reset?:()=>void}) {
@@ -13,8 +14,10 @@ export function CatalogUnavailable({retained=false,message,reset}:{retained?:boo
   {message&&<p className="mt-2 text-sm">{message}</p>}
   <div className="mt-4 flex flex-wrap items-center gap-4 text-sm font-bold">
    <button type="button" disabled={pending} aria-busy={pending} className="rounded-xl bg-red-500 px-5 py-3 text-white disabled:opacity-60" onClick={()=>startTransition(()=>{if(reset)reset();else router.refresh();})}>{pending?'Обновляем…':'Повторить'}</button>
+   {!retained&&<><DealerLink href="/cars" prefetch={false} className="underline">Перейти в каталог</DealerLink><DealerLink href="/" prefetch={false} className="underline">На главную</DealerLink></>}
    <DealerLink href="/request" prefetch={false} className="underline">Оставить заявку</DealerLink>
    {dealer?<DealerLink href={dealer.href.split('#')[0]+'#about'} prefetch={false} className="underline">Контакты компании</DealerLink>:<a href={TOPAVTO_DEALER.website} className="underline" target="_blank" rel="noopener noreferrer">Связаться с TOP AVTO</a>}
   </div>
+  {!retained&&<CatalogHelpForm/>}
  </section>;
 }

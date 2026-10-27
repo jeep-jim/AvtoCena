@@ -22,3 +22,10 @@
 
 
 27.10,13:20: deploy40455077192 failed before switch (China Volkswagen page2 after305s2.1047s>2s); production remains exact e23d9d096935481c4ecddf6a987c574c5c2bbbf9. Baseline marker now requires that installed SHA, never mislabels it as5c3abcd. Supplier answered: report URLs work in ordinary browsers, tru.ru is the supported anonymous wrapper. PR1557 implements independent lazy original viewers/new tabs; Russian document translation remains unfinished. Earlier statement that an answer/source is missing is superseded by this evidence.
+
+
+## Повторные скрины владельца — 27.10,13:26
+
+- [ ] Опубликована и live-проверена кнопка «История и состояние» между «Все характеристики» и «Обновлено» под фото (на mobile под характеристиками). Код PR1557 и fixture40460134180 PASS; установка ещё не подтверждена.
+- [ ] Опубликован экран ошибки каталога/карточки с работающей шапкой, честным сообщением, retry, каталогом/главной, контактами и inline-формой имени/телефона с согласием. CatalogHelpForm добавлен в PR1561; mock503→200/idempotency и восстановление фильтров проверяются новым browser run. При отказе только фильтра предыдущие карточки и параметры сохраняются с пояснением.
+- [ ] После успешной установки подтвердить оба пункта на реальном SHA и mobile/desktop. Не считать их закрытыми по fixture. Русский перевод оригинала отчёта остаётся незавершённым отдельно от работающего просмотра ссылок.

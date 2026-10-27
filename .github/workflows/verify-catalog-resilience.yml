@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'apps/web/components/catalog/CatalogUnavailable.tsx'
+      - 'apps/web/components/catalog/CatalogHelpForm.tsx'
       - 'apps/web/components/catalog/RetainedCatalogResults.tsx'
       - 'apps/web/components/catalog/CatalogSidebar.tsx'
       - 'apps/web/components/catalog/CatalogContent.tsx'
