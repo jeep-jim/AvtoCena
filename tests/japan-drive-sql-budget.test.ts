@@ -71,3 +71,16 @@ test('supplier URI limit is classified without leaking its response or credentia
  let failure:unknown;try{await client.read({drive:'awd'},'127.0.0.1');}catch(error){failure=error;}
  assert.deepEqual(ajesErrorResponse(failure),{status:503,body:{ok:false,error:'japan_search_unavailable',reason:'query_too_large'}});
 });
+
+test('all saved chassis groups agree between displayed drive and SQL before LIMIT/count',()=>{
+ const db=database();db.exec('create table cars(id integer,marka_name text,model_name text,year integer,kuzov text,grade text,priv text)');
+ const rows=japanChassisDriveRows();const insert=db.prepare('insert into cars values(?,?,?,?,?,?,?)');
+ rows.forEach((r,i)=>insert.run(i,r.make.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace('MERCEDES-BENZ','MERCEDES BENZ'),'TEST',2023,'DBA-'+r.chassisCode,'',''));
+ for(const selection of ['awd','fwd','rwd','awd|fwd|rwd']){
+  const expected=rows.flatMap((r,i)=>{const drive=lookupJapanChassisDrive(r.make,r.chassisCode);return drive&&selection.split('|').includes(drive)?[i]:[];});
+  const query=' from cars where '+japanDriveSql(selection);
+  assert.equal(db.prepare('select count(*) as n'+query).get()!.n,expected.length);
+  assert.deepEqual(db.prepare('select id'+query+' order by id limit 24 offset 24').all().map(r=>r.id),expected.slice(24,48));
+ }
+ assert.ok(rows.length>300);db.close();
+});

@@ -10,22 +10,22 @@ import { loadMoreGreenCorner } from "./green-corner-load-more-action";
 import { loadMoreCatalog } from "./catalog-load-more-action";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
 
-type Batch = {cursor?:string; nextCursor?:string|null;hasMore?:boolean;page: number; cards: ReactNode; count: number};
+type Batch = {incomplete?:boolean;cursor?:string; nextCursor?:string|null;hasMore?:boolean;page: number; cards: ReactNode; count: number};
 type Saved = {batches: Batch[]; total: number|null; scrollY: number; savedAt: number};
 // React nodes remain in this tab, never serialized into cookies or sent back to
 // the server. Returning from a detail page restores already fetched batches.
 const visits = new Map<string, Saved>();
 const TTL = 30 * 60_000;
 
-export function CatalogLoadMore({query, initialPage, initialTotal, initialCount, initialCards, greenQuery, initialHasMore, initialNextCursor, resultCountLabel}: {
-  resultCountLabel?:string;
+export function CatalogLoadMore({query, initialPage, initialTotal, initialCount, initialCards, greenQuery, initialHasMore, initialNextCursor, resultCountLabel, initialIncomplete=false}: {
+  resultCountLabel?:string; initialIncomplete?:boolean;
   initialNextCursor?:string|null; initialHasMore?:boolean; greenQuery?: Record<string,string|undefined>; query: CatalogSearchParams; initialPage: number; initialTotal: number|null; initialCount: number; initialCards: ReactNode;
 }) {
   const dealer=useDealerBrowsing();
   const green = greenQuery !== undefined;
   const basePath = green ? "/cars/green" : "/cars";
   const key = JSON.stringify([dealer?.id,basePath, greenQuery, Object.entries(query).sort(([a],[b])=>a.localeCompare(b)), initialPage]);
-  const [batches, setBatches] = useState<Batch[]>([{page: initialPage, cards: initialCards, count: initialCount, hasMore:initialHasMore, cursor:query.after, nextCursor:initialNextCursor}]);
+  const [batches, setBatches] = useState<Batch[]>([{incomplete:initialIncomplete,page: initialPage, cards: initialCards, count: initialCount, hasMore:initialHasMore, cursor:query.after, nextCursor:initialNextCursor}]);
   const [total, setTotal] = useState(initialTotal);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -89,7 +89,8 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     }
     return dealerBrowsingHref(`${basePath}?${params}`,dealer);
   }
-  const more = total===null ? page<pageCount : page * 24 < total && batches[batches.length - 1].count > 0;
+  const incomplete=Boolean(batches.at(-1)!.incomplete);
+  const more = batches.at(-1)!.hasMore ?? (total===null ? page<pageCount : page * 24 < total && batches[batches.length - 1].count > 0);
   function prepareNext() {
     if (prepared.current?.key === key && prepared.current.page === page + 1 && Date.now()-prepared.current.at<60_000) return prepared.current.promise;
     const promise = green ? loadMoreGreenCorner(greenQuery, page + 1) : loadMoreCatalog(query, page + 1, nextCursor);
@@ -107,13 +108,15 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     const timer=window.setTimeout(()=>{void prepareNext().catch(()=>{});},350);
     return ()=>window.clearTimeout(timer);
   },[key,page,more]);
-  async function load() {
+  async function load(retry=false) {
     if (lock.current) return;
     lock.current = true; setBusy(true); setError("");
     try {
-      const result = await prepareNext();
+      const last=batches.at(-1)!;
+      const result = retry ? await loadMoreCatalog(query,last.page,last.cursor) : await prepareNext();
       if (!mounted.current || activeKey.current !== key) return;
-      setBatches(current => [...current, {cursor:nextCursor??undefined, nextCursor:"nextCursor" in result && typeof result.nextCursor === "string" ? result.nextCursor : "nextCursor" in result && result.nextCursor === null ? null : undefined, page: result.page, cards: result.cards, count: result.ids.length, hasMore:"hasMore" in result && typeof result.hasMore === "boolean" ? result.hasMore : undefined}]);
+      if(retry&&"incomplete" in result&&result.incomplete&&!result.ids.length)throw Error("incomplete_empty_retry");
+      setBatches(current => [...(retry?current.slice(0,-1):current), {incomplete:"incomplete" in result&&Boolean(result.incomplete),cursor:retry?last.cursor:nextCursor??undefined, nextCursor:"nextCursor" in result && typeof result.nextCursor === "string" ? result.nextCursor : "nextCursor" in result && result.nextCursor === null ? null : undefined, page: result.page, cards: result.cards, count: result.ids.length, hasMore:"hasMore" in result && typeof result.hasMore === "boolean" ? result.hasMore : undefined}]);
       setTotal(result.total);
     } catch {
       if (mounted.current && activeKey.current===key) setError("Не удалось загрузить автомобили. Попробуйте ещё раз — список сохранён.");
@@ -132,7 +135,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
         </Fragment>)}
         {page < pageCount ? <Link prefetch={false} href={pageHref(page+1)} aria-label="Следующая страница"><ChevronRight size={20}/></Link> : <span aria-disabled="true"><ChevronRight size={20}/></span>}
       </nav> : null}
-      {more ? <a href={pageHref(page+1)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)] rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Загружаем варианты</span></> : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">{"Вы посмотрели все доступные предложения"}</p>}
+      {more ? <a href={pageHref(page+1)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)] rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Загружаем варианты</span></> : "Показать ещё"}</a> : incomplete ? <div className="max-w-md text-center text-sm text-[var(--ac-muted)]"><p role="status">Показаны сохранённые автомобили. Полный список пока недоступен.</p><button type="button" data-no-route-loader="true" disabled={busy} aria-busy={busy} onClick={()=>void load(true)} className="ac-catalog-more relative mt-3 rounded-2xl bg-red-500 px-8 py-3 font-black text-white">{busy?<><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Обновляем список</span></>:"Повторить"}</button></div> : <p className="text-sm text-[var(--ac-muted)]">{"Вы посмотрели все доступные предложения"}</p>}
       {error ? <p role="alert" className="max-w-md text-center text-sm text-[var(--ac-text)]">{error}</p> : null}
     </div>
   </div>;

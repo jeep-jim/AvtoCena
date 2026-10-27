@@ -207,3 +207,11 @@
 - The owner requires translated facts and body condition inside the offer, not a Korean iframe as the primary report. Retain the existing trigger position and independent lazy sections; the original is a secondary reference.
 - Read only accessible supplier-approved, exact-LOT documents with bounded work. Never solve CAPTCHA automatically, bypass a refusal or substitute another visitor identity. Unknown insurance data is not a clean history. An inspection finding is not an insurance incident.
 - Selected source flags and body marks must be preserved precisely. Empty/unrecognised fields stay unknown; scan-only documents do not acquire invented structured facts. Report values do not overwrite catalog specifications or calculations.
+
+# Owner catalog and canonical model follow-through — 27.10.2026 evening
+
+- Related-market «Все» is a catalog transition, distinct from bottom «Показать ещё». Both require local pending feedback; do not cover the header for streamed catalog sections. Keep useful no-JS URLs, city/dealer context, previous cards and exact pagination cursors.
+- A saved partial/stale selection is not the full inventory and must never display «all offers viewed». Preserve it on retry failures and label incompleteness honestly.
+- Treat manually confirmed encyclopedia facts as the canonical default ahead of older card contributions for compatible missing fields. Preserve filled/manual recipient facts and mechanical/certification conflicts. The owner additionally requires revision-linked propagation to already-filled compatible cards; do not claim the existing missing-only path fulfils that unfinished requirement.
+- Continue source-backed Japan chassis coverage with explicit ambiguous/unknown groups. A 24-row page or saved sample is not a count of all AWD vehicles.
+- Record every task/status in roadmap.md, with code/installed/live-accepted separated. Local encyclopedia calculations still need listing identity, current seller price, availability and appropriate technical identifiers from the feed; do not drop these to claim only photos/prices are needed.

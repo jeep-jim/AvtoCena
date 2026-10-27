@@ -1,21 +1,26 @@
 "use client";
-import {createContext,useContext,useMemo,type ReactNode, type ComponentProps} from 'react';
+import {createContext,useContext,useMemo,useTransition,type ReactNode, type ComponentProps} from 'react';
 import {rememberFilterScroll} from "@/lib/catalog/filter-scroll";
 import Link from 'next/link';
 import {useSelectedCity} from '@/lib/location/selected-city';
-import {usePathname} from 'next/navigation';
+import {usePathname,useRouter} from 'next/navigation';
 import {Star,Car,Images,MapPin,MessageCircle} from 'lucide-react';
 import {dealerBrowsingHref,type DealerBrowsingContext} from '@/lib/dealers/browsing-context';
 const Context=createContext<DealerBrowsingContext|null>(null);
 export const useDealerBrowsing=()=>useContext(Context);
-export function DealerLink({href,onClick,scroll,...props}:ComponentProps<typeof Link>){
- const dealer=useDealerBrowsing();const city=useSelectedCity();
+export function DealerLink({href,onClick,scroll,children,...props}:ComponentProps<typeof Link>){
+ const dealer=useDealerBrowsing();const city=useSelectedCity();const router=useRouter();const [pending,startTransition]=useTransition();
  const target=typeof href==='string'?dealerBrowsingHref(href,dealer,city):href;
  const catalog=typeof href==='string' && (href.split('?')[0]==='/cars'||href.split('?')[0]==='/cars/green');
- return <Link {...props} href={target} scroll={scroll??(catalog?false:undefined)} onClick={event=>{
+ return <Link {...props} href={target} prefetch={catalog?false:props.prefetch} data-no-route-loader={catalog?"true":undefined} aria-busy={catalog&&pending||undefined} scroll={scroll??(catalog?false:undefined)} onClick={event=>{
   onClick?.(event);
-  if(catalog&&!event.defaultPrevented&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey&&event.button===0&&typeof target==='string')rememberFilterScroll(target);
- }}/>;
+  if(catalog&&!event.defaultPrevented&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey&&event.button===0&&props.target!=='_blank'&&typeof target==='string'){
+   event.preventDefault();if(pending)return;
+   const fromCatalog=location.pathname==='/cars'||location.pathname==='/cars/green';
+   if(fromCatalog)rememberFilterScroll(target);
+   startTransition(()=>{router.push(target,{scroll:scroll??!fromCatalog});});
+  }
+ }}>{children}{catalog&&pending&&<span role="status" className="ml-2 text-xs">Открываем…</span>}</Link>;
 }
 export function DealerBrowsingProvider({dealer,children,profile=false}:{dealer:DealerBrowsingContext|null;children:ReactNode;profile?:boolean}){
  const pathname=usePathname();

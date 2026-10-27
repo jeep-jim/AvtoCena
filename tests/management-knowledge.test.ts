@@ -79,3 +79,15 @@ test('encyclopedia changes feed the same compatibility engine, retract cleared f
   assert.equal(encyclopediaWithManagement({...record,variants:[]},learned).variants.length,1);
  }finally{read.mock.restore();write.mock.restore();}
 });
+
+test('canonical encyclopedia corrections outrank older card defaults without changing filled recipient facts',()=>{
+ const canonical={...fact,offerId:'encyclopedia:model:variant',values:{...donor,powerHp:160}};
+ const knowledge:any={...index,models:{[fact.key]:{donor:fact,[canonical.offerId]:canonical}}};
+ const recipient={...donor,id:'recipient',powerHp:undefined,sourcePrice:3200000};
+ assert.equal(managementParameters(recipient,knowledge).powerHp,160);
+ assert.equal(recipient.sourcePrice,3200000);
+ assert.deepEqual(managementParameters({...recipient,powerHp:150},knowledge),{});
+ assert.deepEqual(managementParameters({...recipient,drive:'awd'},knowledge),{});
+ knowledge.models[fact.key]['encyclopedia:model:other']={...canonical,offerId:'encyclopedia:model:other',values:{...donor,powerHp:170}};
+ assert.equal(managementParameters(recipient,knowledge).powerHp,undefined);
+});

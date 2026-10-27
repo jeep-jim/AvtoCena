@@ -37,7 +37,13 @@ export function managementParameters(input:any,index:ManagementKnowledge):Record
  const parameters:Record<string,any>={};
  for(const field of fields){
   if(known(offer[field])||field==='power30MinKw'&&offer.power30MinKwByMotor?.some((v:any)=>Number(v)>0))continue;
-  const values=matches.filter(r=>known(r.values[field])).map(r=>r.values[field]);
+  const available=matches.filter(r=>known(r.values[field]));
+  // Explicit encyclopedia edits are the canonical default for a compatible
+  // model. Older card contributions must not veto its corrected missing facts.
+  // Filled recipient/manual values and conflicting mechanical identities above
+  // remain protected; contradictory encyclopedia variants remain unresolved.
+  const canonical=available.filter(r=>r.offerId.startsWith('encyclopedia:'));
+  const values=(canonical.length?canonical:available).map(r=>r.values[field]);
   if(values.length&&values.every(v=>same(field,v,values[0])))parameters[field]=values[0];
  }
  if(parameters.powerHp&&!known(offer.powerKw))parameters.powerKw=parameters.powerHp*0.73549875;

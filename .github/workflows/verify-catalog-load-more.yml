@@ -5,6 +5,7 @@ on:
       - 'apps/web/components/catalog/CatalogLoadMore.tsx'
       - 'apps/web/components/catalog/catalog-load-more-action.tsx'
       - 'tests/browser/catalog-load-more*'
+      - 'tests/browser/catalog-navigation-recovery*'
       - 'apps/web/app/(public)/api/catalog/search/route.ts'
       - '.github/workflows/verify-catalog-load-more.yml'
   push:
@@ -37,9 +38,15 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-load-more-feedback.mjs
+      - name: Verify partial Japan results and related-market navigation
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-load-more
-          path: artifacts/catalog-load-more*
+          path: |
+            artifacts/catalog-load-more*
+            artifacts/catalog-navigation-recovery
           retention-days: 3
