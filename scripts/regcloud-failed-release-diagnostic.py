@@ -36,7 +36,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
   paths=['/cars?sort=totalRub','/cars?sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub'] if ttl_probe else ['/cars?market=china&sort=totalRub','/cars?market=china&sort=totalRub','/cars?sort=totalRub']
   if sys.argv[2]=='--probe-catalog':paths=['/cars']*4
   if gate_probe or long_probe:
-   routes=['/api/health','/','/login','/autocalc','/cars','/cars?market=china&make=Volkswagen&page=2','/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA','/cars?market=europe&make=BMW&page=2','/cars?sort=totalRub','/api/catalog/search?market=europe&make=BMW&page=2']
+   routes=['/api/health','/','/login','/autocalc','/cars','/cars?market=china&make=Volkswagen&page=2','/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA','/cars?market=europe&make=BMW&page=2','/cars?sort=totalRub','/api/catalog/search?market=europe&make=BMW&page=2','/cars/autocatalog']
    paths=['/','/cars','/','/cars?sort=totalRub','/cars?market=china','/cars?market=china']+routes+routes[:5]+['/cars']
    if long_probe:paths=['/','/cars','/','/cars?sort=totalRub']+routes+routes+routes+routes
   profile=None
@@ -44,7 +44,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
    if long_probe and number in [4+2*len(routes),4+3*len(routes)]:time.sleep(35 if number==4+2*len(routes) else 305)
    if long_probe and time.monotonic()>=deadline:raise TimeoutError('diagnostic_deadline')
    if ttl_probe and number==2:time.sleep(35)
-   if (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6) or (long_probe and number==4+3*len(routes)+5):
+   if (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6) or (long_probe and number==4+3*len(routes)+9):
     subprocess.run(['docker','kill','--signal=USR1',name],check=True,capture_output=True)
     time.sleep(1)
     profile=subprocess.Popen(['docker','exec','-i',name,'node','--input-type=module'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
@@ -52,10 +52,10 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
     time.sleep(1)
    start=time.monotonic()
    try:
-    with urllib.request.urlopen(base+path,timeout=min(90,max(1,deadline-time.monotonic())) if long_probe else 90) as response:body=response.read(20*1024*1024+1);status=response.status
-    print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'status':status,'bytes':len(body),'complete':b'</html>' in body,'streamError':b'$RX(' in body}),flush=True)
+    with urllib.request.urlopen(base+path,timeout=min(90,max(1,deadline-time.monotonic())) if long_probe else 90) as response:body=response.read(20*1024*1024+1);status=response.status;timing=response.headers.get('Server-Timing')
+    print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'status':status,'serverTiming':timing,'bytes':len(body),'complete':b'</html>' in body,'streamError':b'$RX(' in body}),flush=True)
    except Exception as error:print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'errorType':type(error).__name__}),flush=True)
-   if profile and ((not gate_probe and not long_probe) or number==len(paths)-1 or (long_probe and number==4+3*len(routes)+5)):
+   if profile and ((not gate_probe and not long_probe) or number==len(paths)-1 or (long_probe and number==4+3*len(routes)+9)):
     try:
      output,_=profile.communicate(timeout=20)
      for line in output.splitlines():
