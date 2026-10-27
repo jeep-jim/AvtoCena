@@ -16351,6 +16351,73 @@ VM gate усилен: прежние9 URL и потолки неизменны, 
 Offer error boundary также использует шапку/контакты/inline callback и generic intake без чтения каталога. Browser формы ранее остановился на клике скрытого checkbox; исправлен реальный пользовательский клик видимой отметки согласия, контракт и серверное согласие не ослаблены. PR1557 head197754c CI40460134155 и все7 browser workflows SUCCESS, включая40460134180; оригиналы ещё не опубликованы, русский перевод содержимого отдельно не выполнен. Чтобы не плодить установки, код1557,1561 и исправление city собираются в одном следующем кандидате PR1561 с обеими историями Road. Текущий5c не установлен, production e23d; сначала readonly baseline действующегоe23d, затем один штатный release и60/60 измерений, live category/filter/append/report. Новые combined CI/browser ещё ожидаются. Постоянные требования дополнены в AGENTS.md.
 
 
+### 27.10.2026, 13:48 Красноярск — объединённый кандидат проверен; подготовка одного следующего выпуска
+
+PR1561 head99f802ee7cdde5dc368cfdf76ddb03a72d0be2ca прошёл все10 workflows: CI40461968047 SUCCESS (основной suite2623, дополнительные suites, typecheck и production build); failure isolation40461967870, Korea reports40461967780, load-more40461967857, city40461967844, owner polish40461967809, QR40461967787, green40461967863, Dubicars40461967935, site controls40461968164 SUCCESS. PR объединён49e2389dba07186d5895336576629015a3f2565f. Это подтверждает код/fixture, не установленную версию и не всю live-скорость.
+
+Saved-only40462904544 SUCCESS: оба сохранённых ID6izlwQxlgi4gkA/LOT43015054 и6izlQCNqaLZtTq/LOT43015007 имеют history [fem.encar.com,tru.ru], inspection [www.encar.com,tru.ru]. Новых provider requests не было. INFO первого removed, второго present_unclassified; это не структурированное русское описание/история и не основание удалить карточки. Поставщик подтвердил работоспособность оригиналов людям; viewer и постоянная новая вкладка реализованы, перевод содержимого отдельно остаётся открытым.
+
+Read-only baseline40462904526 запущен автоматически единственным маркером1561 для фактически установленногоe23d9d096935481c4ecddf6a987c574c5c2bbbf9: VM Korea/China+city/VW, повтор после305с и реальные category/filter desktop/mobile. На момент подготовки этой записи выполняется; следующий release запрещено объединять до завершения и чтения результатов.5c3abcd не установлен: прошлый gate отклонил ChinaVW page2 после305с2,1047с>2с, old production retained, post-switch не выполнялся. Новые статусы вписаны в completion-checklist; fixture не выдаётся за production.
+
+Подготовлен один release marker для всего объединённого кода, без дублирования1557/1561 и без запуска сборщиков. Все required/public research batches и3 ASTRA digests сохранены побайтно по значениям; ideaReports пуст. Прежние9 потолков и warm/35с/305с до/после не ослаблены,10-я China+city≤2с и непустые linked cards дают60 обязательных samples. Ошибка gate удерживает/возвращает прежний release. Ни merge этого кода, ни будущая подготовка image не означают активацию.
+
+Ниже сохранены все54 добавленные строки исторической ветки docs/release306-report/PR1548 (head049d384). Они описывают соответствующее прошлое время; поздний статус этой сессии выше и последующие записи имеют приоритет. Обе истории Road сохранены, без переноса старого runtime поверх main.
+
+
+### 26.10.2026 — контроль deploy306 и следующего исправления PR1547
+
+GitHub run40342053436 (deploy306), SHA ba5a88055f1a37c4615f14b188a5381541958208: FAILURE 22:19 Красноярск, этап Deploy with rollback and resource measurements. VM-local warm: health 0,0035с, главная 0,3356с, login 0,3050с, autocalc 0,0144с PASS; /cars 2,3821с при потолке 2с FAIL (performance_budget_exceeded:/cars). Лог: Release gate failed: old production retained. Переключения не было; after-TTL и post-switch gates не достигнуты, успешный rollback после переключения не заявляется. Свежий публичный /api/health всё ещё возвращает 59bd33931fa08c1cf2e4bf539cf0e037b133612b. Это подтверждает версию, не скорость и не полную исправность.
+
+Mobile210/run40341789509: Chromium, multiple models/delivery city/photo upload и WebKit PASS; Published budget continuity остановлен ожиданием установленной версии: Production release or verified descendant not confirmed. Published catalog обеих тем/mobile+desktop SKIPPED. CRM690/run40341789562: audit и fixture browser PASS; live FAIL по TimeoutError в attached-parameter-dropdowns.mjs:34 на первоначальном API-fetch до проверки карточки. Это не прежнее ожидание кнопки сохранения; конкретный market запроса в логе не указан. Полная браузерная приёмка production не состоялась.
+
+Следующее исправление PR1547, head c59590f7bcc0b8356d8923a6f94bf9d0ae319760, объединяет общий catalogGenerationId/cache/coalescing вместо прямого manifest-read overview и ограниченный кэш подписей из PR1546. CI40352333546 SUCCESS: 2600/2600 основной suite, типы и production build; green corner, Dubicars и site controls SUCCESS. PR на момент проверки открыт, выпуск с этим исправлением ещё не установлен. Следующий шаг — штатная последовательная установка проверенного кандидата и полная VM-local приёмка warm/after-TTL до и после переключения, корректные непустые результаты и live browser. В этом сеансе новые установки/сборщики не запускались, пороги и цены не менялись. Наблюдение продолжается за PR1547 и его последующим выпуском; общая скорость не принята.
+
+Источники: https://github.com/jeep-jim/AvtoCena/actions/runs/40342053436 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40341789509 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40341789562 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40352333546 ; https://github.com/jeep-jim/AvtoCena/pull/1547 .
+
+
+### 27.10.2026 — контроль без новых результатов выпуска
+
+В 00:22 Красноярск GitHub подтверждает: PR1547 открыт, head c59590f7bcc0b8356d8923a6f94bf9d0ae319760, main остаётся250d5c9b4a3eb2d93a9ac3c91e258aceba5c5541. Нового deploy после306 нет. PR1548 с предыдущим отчётом открыт; его CI40357846311 SUCCESS, что не является приёмкой runtime. Новых существенных результатов производительности нет; установки, сборщики, пороги и данные не менялись. Наблюдение за следующим кандидатом сохранено. Эта дополнительная запись пока локальная, для следующей публикации Road вместе с существенными результатами.
+
+
+### 27.10.2026 — наблюдение за шестым кандидатом, 01:10 Красноярск
+
+PR1547 merged5a2d425605f2caa2bbe7e13cc5eab9c6dbdf559a. Текущий deploy40370963021 SHA4fc627f8ac3a9aca3a7bdb106dc21fc96e77529d проходит Prepare exact price indexes; образ собран, Deploy with rollback pending. Каталог journey40314227333 attempt5 и mobile40341789509 attempt3 in_progress. Новый CRM40370718582: audit/fixture browser SUCCESS, live TimeoutError attached-parameter-dropdowns.mjs:34 (первоначальный API-fetch) на прежнем production; audit-job явно пропустил ожидание новой версии и записал59bd339. Это повтор известного live discovery сбоя, не результат приёмки4fc627f. Main d9a2ee3 содержит усиление теста полного набора9 маршрутов/точных потолков; runtime-кандидат не заменён. Прочитаны фактические GitHub jobs/logs и Road main. Новых установок/сборщиков и повторов tests не запускал; gate текущего кандидата ещё впереди. Запись локальная до следующей публикации Road.
+
+
+### 27.10.2026 — шестой выпуск отклонён, седьмой в подготовке; контроль 02:01 Красноярск
+
+Фактический GitHub40370963021 SHA4fc627f8ac3a9aca3a7bdb106dc21fc96e77529d FAILURE. В prepare/job121741696649 exact prices и specification parity прошли. VM-прогрев: health0,021с, home15,320с, /cars31,251с, повтор home11,054с, Korea0,067с, Japan1,811с. Следующий China HTML assertion провалился примерно через10,47с; лог Release gate failed: old production retained. До performanceGate warm/after-TTL/post-switch не дошло, переключения не было. Диагностика40377400249/job121764106422:3 object_storage_read_deadline и3 GET_unreachable на catalog/generations/gen_1792702445675_8c312f85/indexes/projection/china.json.
+
+Актуальный Road main описывает подтверждённый кодом fallback к полной проекции при несовпадении policyDate и подготовку страниц текущего плюс двух следующих дней в PR1551; PR1550 сохраняет aggregate identity и добавляет обязательную305с фазу. Новый run40381399836 SHA b9499665151dabac5685e9994bfdf480172273a5 in_progress: проверки данных и индекса прошли, Build existing application выполняется. Новый image ещё не принят и не переключён; пороги не повышены.
+
+CRM40381336744 SUCCESS: fixture browser/audit/live завершились. Live/job121781226874:36 cases,168 openings, passed=true (01:59 Красноярск). Audit/job121778049572 явно проверял current release и записал59bd33931fa08c1cf2e4bf539cf0e037b133612b; это положительный результат на старом runtime, не приёмкаb949966. Старые mobile40341789509 attempt3 и catalog journey40314227333 attempt5 FAILURE; новый mobile40381336930 in_progress. Перезапуски/сборщики в этом сеансе не запускались; наблюдение продолжается за40381399836.
+
+Источники: https://github.com/jeep-jim/AvtoCena/actions/runs/40370963021 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40377400249 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381399836 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381336744 .
+
+
+### 27.10.2026 — итог седьмого выпуска: warm PASS, сортировка после35с FAIL
+
+Проверено27.10 в02:36 Красноярск по GitHub40381399836/job121778677240. Кандидатb9499665151dabac5685e9994bfdf480172273a5 завершился FAILURE02:35. Все9 VM-local warm маршрутов PASS:health0,0039с,home0,2830с,login0,3328с,autocalc0,0139с,/cars0,1451с,China Volkswagen page2 0,0667с,Europe BMW page2 0,0715с,totalRub1,927с,search API0,0198с. После35с:health0,0113с,home0,6544с,login0,2529с,autocalc0,0171с,/cars0,1738с,China0,0690с,Europe0,3046с PASS; /cars?sort=totalRub4,645с при2с FAIL, performance_budget_exceeded. До следующего API,305с фазы и post-switch не дошло. Лог old production retained; переключения не было, возврат после переключения не выполнялся. Свежий публичный health вернул59bd33931fa08c1cf2e4bf539cf0e037b133612b.
+
+Cold preparation не является SLA:home30,862с,/cars0,437с,повтор home0,217с,Korea0,037с,Japan1,237с,China0,174с,totalRub27,074с complete=true,повтор0,642с,totalRubDesc4,222с. Исправление смены даты позволило пройти China HTML, но итоговая скорость сортировки послеTTL не принята. Причина оставшихся4,645с из этих логов не установлена: нельзя без профиля объявить это CPU, сеть или промах кэша.
+
+Mobile40381336930: FAILURE в Published budget continuity из-за Production release or verified descendant not confirmed. CRM40381336744 прежний PASS36cases168openings относится к старой версии, неb949966. Нового performance-кандидата/установки в доступном актуальном списке GitHub нет;40388091688 — подготовка shared budget prices, не новый deploy. Все текущие кандидаты завершились неудачно. Наблюдение за этой серией останавливается после итогового отчёта.
+
+Следующий необходимый шаг: ограниченная диагностика именно totalRub в остановленномb949966 с воспроизведением штатного порядка запросов и35с паузы; измерить cache hit/miss/причины инвалидации точного контекста сортировки, отдельно CPU и ожидание object storage. Исправлять подтверждённый повторный расчёт/чтение без ослабления freshness/generation/price fences, затем повторить неизменённые warm/35с/305с gates до/после переключения и live browser. В этом сеансе новая установка, сборщик или server probe не запускались; цены, данные и лимиты не менялись.
+
+Источники: https://github.com/jeep-jim/AvtoCena/actions/runs/40381399836 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381336930 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40381336744 .
+
+
+### 27.10.2026 — повторная проверка по поручению владельца «ну так выясняй»
+
+Ночной отчёт выше описывает состояние02:35, а не текущее. Повторно проверены GitHub/code/logs: PR1552 fcadcb883b718cb6ac27e5a57e6e51d0923d2b39 исправляет потерю идентичности rows после30с request-cache, которая обнуляла эффективность WeakMap кэша facets/order даже при неизменном immutable index. Диагностика40388272729/job121802201906:1083/2387 idle, активные стеки повторной фильтрации и пересборки facets, OOM=false, storage error paths пусты. StableBudgetSelectionCache сохраняет неизменную выборку по index/day/editorial context, ограничивает8 scopes; price/specification фильтры обходят этот кэш, актуальные цены продолжают проверяться. PR1553 4601873 устраняет отдельный300с путь главной со скрытыми объявлениями через полные проекции, используя компактный индекс с сохранением authoritative fallback при ручной цене/старом индексе. Это подтверждённые лишние работы в коде, а не установленная нехватка мощности или вина исходного файла данных. Точный исходный коммит, впервые вызвавший наблюдаемое владельцем ухудшение несколько дней назад, в этом сеансе не локализован.
+
+Выпуск e23d9d096935481c4ecddf6a987c574c5c2bbbf9 уже установлен другой продолжающейся работой проекта: свежий /api/health подтвердил точный SHA. Независимо перечитан activate40410059228/job121878171559 SUCCESS:54/54 полных VM-local ответа до/после переключения. После переключения home0,2538/0,2833/0,5843с, /cars0,1505/0,2430/0,2469с, sort0,1884/1,5221/1,9637с (warm/35с/305с). Пороги прежние; последний sort близок к2с, абсолютная стабильность/нагрузочная способность не заявлены.
+
+Актуальный Road main также сохраняет открытые ограничения: Korea budget поиск16,531/9,143с, внешние фото net::ERR_BLOCKED_BY_ORB в GitHub Chrome при успехе независимого браузера, закрытая CRM не измерена. Это не маскируется общими54 PASS. В этом сеансе выполнены сверка актуального выпуска, чтение профиля и diff исправлений, обновление Road; новых изменений runtime и повторных установок не потребовалось для уже исправленного35с сценария. Источники: https://github.com/jeep-jim/AvtoCena/pull/1552 ; https://github.com/jeep-jim/AvtoCena/pull/1553 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40388272729 ; https://github.com/jeep-jim/AvtoCena/actions/runs/40410059228 .
+
+
 ### 27.10.2026, 13:52 Красноярск — исходный замер завершился обрывом SSH, приёмка не состоялась
 
 Read-only40462904526/job122051429472 на exacte23d9d096935481c4ecddf6a987c574c5c2bbbf9: health0,011с; Korea HTML0,717с complete; Korea API24карточки0,095с; Hyundai API24карточки1,586с; Korea budget2000000 API17,665с,0карточек,hasMore=true — HTTP200/ok не означает непустой успешный поиск. Japan полный HTML11,896с; ChinaVWpage2 полный HTML5,828с; China+Новокузнецк11,051с,133049байт,complete=false. Это VM-local полные ответы на старом runtime, не результат исправленного кандидата и не внешние браузерные тайминги.
