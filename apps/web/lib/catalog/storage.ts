@@ -1,3 +1,5 @@
+import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
+import {createHomePhaseTiming} from "./home-phase-timing";
 import {StableBudgetSelectionCache} from "./stable-budget-selection";
 import {AggregateBudgetIndexCache} from './aggregate-budget-index-cache';
 import {budgetSelectionBytes,resetBudgetRowSizes} from './budget-row-size';
@@ -2745,10 +2747,11 @@ export async function buildCatalogOverviewFromProjections(generationId: string, 
   return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10)};
 }
 
-async function readHomeCatalogSnapshotOriginal(perMarket = 6) {
-  const manifest = await readManifest();
+async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: ReturnType<typeof createHomePhaseTiming>) {
+  const manifest = await timing.measure("snapshotManifest",()=>readManifest());
+  timing.setGeneration(manifest.generationId);
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
-  const overview = await readCatalogOverview(manifest.generationId).catch(() => null);
+  const overview = await timing.measure("snapshotOverview",()=>readCatalogOverview(manifest.generationId)).catch(() => null);
   if ((overview as any)?.policyDate===new Date(Date.now()+7*3600000).toISOString().slice(0,10) && overview?.generationId === manifest.generationId && MARKETS.every(market => {
     if(market === "japan")return true;
     const count = Number(manifest.markets?.[market]?.count || 0);
@@ -2760,7 +2763,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket = 6) {
       total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
       items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
   }
-  const currentProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION);
+  const currentProjection = await timing.measure("snapshotProjection",()=>readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION));
   if (currentProjection.generationId === manifest.generationId) {
     const rawProjectionRows = currentProjection.items || [];
     // Current read models are replaced independently from the immutable public
@@ -2993,17 +2996,20 @@ async function readEditorialBrandSummary(){
  });
 }
 
-export async function readHomeCatalogSnapshot(perMarket=6){return withCatalogEditorial(async()=>{
- const snapshot=await readHomeCatalogSnapshotOriginal(perMarket);
+export async function readHomeCatalogSnapshot(perMarket=6){
+ const timing=createHomePhaseTiming();
+ return timing.measure("snapshotContext",()=>withCatalogEditorial(()=>timing.measure("snapshotBody",async()=>{
+ const snapshot=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
  const marketCounts={...snapshot.marketCounts};
  let items=snapshot.items.map(item=>applyCatalogEditorial(item));
  for(const market of MARKETS){
   if(!editorialHasHidden(market))continue;
-  const result=await searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'});
+  if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
+  const result=await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}));
   marketCounts[market]=result.total;
   items=[...items.filter(item=>item.market!==market),...result.items];
  }
  return {...snapshot,items:items.sort(compareCatalogDisplayOrder),marketCounts,total:Object.values(marketCounts).reduce((a,b)=>a+b,0)};
-});}
+} )));}
 
 export async function getOffer(id:string){return withCatalogEditorial(async()=>{const offer=await getOfferWithoutEditorial(id);return offer&&!editorialHidden(offer)?applyCatalogEditorial(offer):null;});}
