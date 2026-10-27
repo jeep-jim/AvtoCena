@@ -1,6 +1,6 @@
 # Сверка обязательств из чата — 27.10.2026
 
-Статус после объединения PR1561 (49e2389d), до следующей установки. Код и fixture-проверки не равны приёмке production.
+Срез27.10,14:08 Красноярск. Единственный deploy40464735786 готовит exact6aa0df21e6faa8f54323f01c35261108547b416f, переключение не подтверждено. Production baseline exact e23d9d0. Код, fixture и успешное завершение диагностического скрипта не равны приёмке скорости.
 
 | Обязательство | Подтверждено | Осталось до закрытия |
 |---|---|---|
@@ -8,7 +8,7 @@
 | Вход «Все» в Китай с выбранным городом | Diagnostic40461122324: digest3776365000 — timeout полной projection/china.json. City ошибочно отключал prepared landing. В1561 исправлен выбор пути;26 targeted tests, RED→GREEN, паритет карточек/цен для3городов и2страниц | Установить и проверить реальное действие с Новокузнецком. Новый URL обязателен в gate≤2с; все каталоги требуют реальные linked cards |
 | Нижний полосатый loader | Код1554 уже в main, browser load-more PASS;5c с ним не установлен | Live append точного нового SHA, сохранение карточек, анимация снизу, retry |
 | Mobile scroll | Код убирает scroll decoration/touch prefetch; footer passive вне зоны пагинации; fixtures320–1440px PASS | Установка, live mobile scroll/переходы; не выдавать headless fixture за измерение FPS физического телефона |
-| Медленные категории/фильтры Кореи |1561 переносит historical SQL cache reads после supplier failure и добавляет Server-Timing | Baseline e23d, затем реальные desktop/mobile category/filter, cold/warm/expired, корректные марки/цены, stage timings |
+| Медленные категории/фильтры Кореи |1561 переносит historical SQL cache reads после supplier failure и добавляет Server-Timing | Baseline e23d завершён: mobile35,748с category/20,537с filter; desktop11,167с/12,427с; все выше2с. После установки повторить реальные действия и stage timings, включая budget0items/36,996с |
 | Ошибка фильтра сохраняет карточки/параметры | Browser40461967870 PASS:2мин удержания, честная пометка, scope/expiry/empty/retry; новая форма503→200 сохраняет поля и operation ID | Live на установленном SHA. Полный hard RSC/unmount не гарантирует сохранение дерева предыдущей страницы |
 | Полный отказ каталога/карточки | Шапка, каталог/главная, контакты, retry и независимая inline-форма с согласием; generic lead не читает отказавшую карточку. Desktop/mobile fixture PASS | Установка и реальная проверка интерфейса; фиктивные заявки в production не отправлять |
 | Честная ошибка | «Каталог временно недоступен», без ложного «сайт обновляется» | Не объявлять все старые тексты проверенными |
@@ -17,9 +17,9 @@
 | Место кнопки | Между «Все характеристики» и «Обновлено» desktop, под характеристиками mobile; browser40461967780 PASS | Подтвердить опубликованный layout |
 | Независимые блоки/фото | История и осмотр не запрашиваются до выбора, отказ одного не ломает второй/карточку; fixture PASS | Внешние фото ERR_BLOCKED_BY_ORB в GitHub Chrome остаются ограничением; независимый браузер ранее загружал |
 | Запрет регрессий | AGENTS закрепляет whole-action приёмку, неизменные ceilings/rollback, city path, nonempty gate.2623 основной suite+дополнительные suites, types/build и9 browser workflows99f802 PASS | Продолжать обязательную проверку каждого затрагивающего скорость изменения; абсолютной гарантии отсутствия любых будущих регрессий нет |
-| Учёт и последовательность | PR1561 merged49e2389d после10 SUCCESS. Readonly baseline40462904526 на actuale23d; новый deploy ещё не запускался | Дождаться baseline; сохранить54строки истории1548, один штатный release, exact/live acceptance. Не закрывать наблюдение до последнего кандидата |
+| Учёт и последовательность | PR1561 merged49e2389d после10 SUCCESS; PR1563 CI40463723945 SUCCESS, merged6aa0df; один deploy40464735786 идёт. PR1548 merged, обе истории сохранены | Дождаться60/60gate и exact runtime, затем live category/filter/append/reports и сравнение с baseline. Не закрывать наблюдение до итоговой проверки |
 
 Проверенные источники: PR1561; CI40461968047; failure browser40461967870; report browser40461967780; saved schema40462904544. Ни пороги, ни цены/данные, ни права/источники не ослаблены.
 
 
-Обновление13:53: baseline40462904526 завершился FAILURE на SSH Broken pipe в305с паузе; browser skipped. Korea budget17,665с/0карточек, Japan11,896с, ChinaVW5,828с, China+city11,051с/complete=false. PR1564 merged764512f добавляет только SSH keepalive и повторяет bounded baseline. PR1563 остаётся draft до результатов повторного замера; новый deploy ещё не запущен.
+Исходные замеры текущего e23d: VM/305с40463668481, mobile из того жеrun, исправленныйdesktop40465066921. VM Korea budget36,996с/0items/hasMore=true; China+город12,280с/error HTML; ChinaVW после305с3,641с. Desktop диагностический workflow SUCCESS означает завершение измерения, withinTarget=false для category/filter. Первый40462904526 оборвалсяSSH;1564 исправилkeepalive. Desktop locator исправлен1565, VM не повторялся. Новая6aa0df пока не измерена и не объявлена установленной.
