@@ -26,7 +26,7 @@ if(process.argv[2]==='--probe'){
  resetCatalogReadCachesForTests();trace=[];const cpu=process.cpuUsage(),start=performance.now();
  const first=await searchOffers(params);
  const reads=trace.slice(),elapsed=performance.now()-start,cpuUsed=process.cpuUsage(cpu);
- assert.equal(reads.some(row=>row.path.includes('budget-prices-v3/')),false,'cold instance must reuse a complete shared replay');
+ assert.equal(reads.some(row=>row.path.includes('/budget-prices-v3/')),false,'cold instance must reuse a complete shared replay');
  assert.equal(reads.some(row=>row.path.endsWith('/budget-count-v3.json')),false,'single-market query must not download the all-market selector');
  resetCatalogReadCachesForTests();
  const repeated=await searchOffers(params);

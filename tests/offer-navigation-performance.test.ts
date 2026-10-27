@@ -61,7 +61,9 @@ test("offer navigation stays visibly pending and warms only the intended offer",
   assert.match(intentLink, /onPointerLeave=\{cancel\}/);
   assert.match(intentLink, /data-intent-prefetch="true"/);
   assert.match(preloader, /anchor.dataset.intentPrefetch==="true"/);
-  assert.match(intentLink, /onPointerDown=\{prefetch\}/);
+  assert.match(intentLink, /onPointerDown=\{event => \{ if \(event\.pointerType === "mouse"\) prefetch\(\); \}\}/);
+  assert.match(intentLink, /onFocus=\{prefetch\}/);
+  assert.doesNotMatch(intentLink, /onTouchStart=/);
   assert.doesNotMatch(intentLink, /EAGER_PREFETCH_DELAY_MS/);
   assert.match(intentLink, /setTimeout\(prefetch, 180\)/);
   assert.match(catalogPage, /eagerPrefetch=\{marketIndex === 0 && index < 4\}/);
