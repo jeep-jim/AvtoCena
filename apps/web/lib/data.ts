@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import {gzipSync} from "node:zlib";
+import {setImmediate as yieldToEventLoop} from "node:timers/promises";
 import {readCatalogProjectionParts, writeCatalogProjectionParts} from "./catalog-projection-parts";
 
 export const DEFAULT_MAX_RECORDS_PER_CHUNK = 500;
@@ -158,6 +159,7 @@ export async function readObjectStorageResponseBody(
     const consume = async () => {
       const chunks: Uint8Array[] = [];
       let total = 0;
+      let sliceBytes = 0;
       while (true) {
         const { done, value } = await reader.read();
         if (done) {
@@ -167,6 +169,15 @@ export async function readObjectStorageResponseBody(
         if (!value?.byteLength) continue;
         chunks.push(value);
         total += value.byteLength;
+        sliceBytes += value.byteLength;
+        // Already-buffered chunks resolve read() in microtasks. Under parallel
+        // catalog traffic, give socket/timer callbacks a turn between batches;
+        // an await on read() alone does not guarantee event-loop fairness.
+        if (sliceBytes >= 1024 * 1024) {
+          sliceBytes = 0;
+          await yieldToEventLoop();
+          if (timedOut) throw new Error("object_storage_response_timeout");
+        }
       }
       return Buffer.concat(chunks, total);
     };
