@@ -7,7 +7,7 @@ const client = fs.readFileSync("apps/web/components/home/HomePageClient.tsx", "u
 const homeRoute = fs.readFileSync("apps/web/app/api/catalog/home/route.ts", "utf8");
 
 test("home page supplies a bounded server snapshot and recovers from storage errors", () => {
-  assert.match(page, /readHomeCatalogSnapshot\(10\)\.then\(value=>withAjesCount\(value\)\)\.catch/);
+  assert.match(page, /timing\.measure\("snapshot",\(\)=>readHomeCatalogSnapshot\(10\)\)\.then\(value=>\{timing\.setGeneration\(value\.generationId\);return timing\.measure\("counts",\(\)=>withAjesCount\(value\)\);\}\)\.catch/);
   assert.match(page, /return \{ items: \[\], marketCounts: \{\}, total: 0, countIncomplete:true, marketCountInfo:\{\} \}/);
   assert.match(page, /initialCity=\{fromQuery \|\| fromCookie\}/);
   assert.match(page, /initialOffers=\{pricedItems\}/);
