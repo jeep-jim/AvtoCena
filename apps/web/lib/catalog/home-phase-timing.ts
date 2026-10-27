@@ -1,6 +1,7 @@
+import type {CatalogMarket} from "./types";
 import { randomUUID } from "node:crypto";
 
-type HomePhase = "dealer" | "snapshot" | "counts" | "green" | "greenPricing" | "catalogPricing" | "dealerRail" | "japanRail";
+type HomePhase = "dealer" | "snapshot" | "counts" | "green" | "greenPricing" | "catalogPricing" | "dealerRail" | "japanRail" | "snapshotContext" | "snapshotBody" | "snapshotPrepared" | "snapshotManifest" | "snapshotOverview" | "snapshotProjection" | `snapshotEditorial:${CatalogMarket}`;
 export function createHomePhaseTiming() {
   const enabled = process.env.CATALOG_HOME_PHASE_TIMING === "1";
   const trace = enabled ? randomUUID() : "";
