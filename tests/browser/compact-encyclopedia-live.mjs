@@ -24,7 +24,8 @@ try{for(const width of [390,1440]){
   const firstName=await rows.first().locator('.ac-model-list-row strong').innerText(),pagination=page.getByRole('navigation',{name:'Страницы моделей'});
   const nextAt=Date.now();await pagination.getByRole('button',{name:'Далее',exact:true}).click();
   await page.waitForURL(u=>u.searchParams.get('page')==='2');await page.waitForFunction(name=>{const e=document.querySelector('.ac-model-list-row strong');return Boolean(e&&e.textContent!==name);},firstName);const nextMs=Date.now()-nextAt;
-  const year=page.getByLabel('Год',{exact:true}),years=await year.locator('option').evaluateAll(options=>options.map(o=>o.value).filter(Boolean));assert.ok(years.length);
+  const year=page.locator('.ac-ency-filters select').nth(1);await year.waitFor({state:'visible'});
+  const years=await year.locator('option').evaluateAll(options=>options.map(o=>o.value).filter(Boolean));assert.ok(years.length);
   const selected=years.includes('2025')?'2025':years[0],filterAt=Date.now();await year.selectOption(selected);
   await page.waitForURL(u=>u.searchParams.get('year')===selected&&!u.searchParams.has('page'));await page.waitForFunction(()=>document.querySelector('.ac-ency-filters')?.getAttribute('aria-busy')==='false');await rows.first().waitFor();const yearMs=Date.now()-filterAt;
   assert.ok(await rows.count()>0&&await rows.count()<=40);
@@ -33,3 +34,6 @@ try{for(const width of [390,1440]){
   const result={width,release:expected,rowsMs,openMs,nextMs,yearMs,photoOpened,rows:await rows.count(),year:selected,withinTarget:{open:openMs<=2000,next:nextMs<=2000,year:yearMs<=2000},errors};results.push(result);console.log('COMPACT_LIVE',JSON.stringify(result));fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));
  }catch(error){await page.screenshot({path:`${out}/${width}-failure.png`});throw error;}finally{await context.close();}
 }}finally{await browser.close();}
+
+assert.equal(results.length,2,'both mobile and desktop must finish');
+assert.ok(results.every(r=>Object.values(r.withinTarget).every(Boolean)),'live_interaction_budget_exceeded');
