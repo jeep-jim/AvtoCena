@@ -1,5 +1,5 @@
 import {commitDirectorySnapshot} from '../../apps/web/lib/encyclopedia/directory-plan.ts';
-import {mechanicalFields} from '../../apps/web/lib/encyclopedia/compact.ts';
+import {appendMissingObservations} from '../../apps/web/lib/encyclopedia/observations.ts';
 // Manual, saved-data-only migration. Never fetch cars or scan inventory on page requests.
 import {randomUUID} from 'node:crypto';
 import {getJsonStorage,mutateDataJson} from '../../apps/web/lib/data.ts';
@@ -44,14 +44,13 @@ const builder=createSnapshotBuilder(at);
 for(const row of projection.rows)builder.add({...row,...identity(row)});
 const existing=new Map(manifest.models.map(m=>[modelId(m.make,m.model),m]));
 const prepared=new Map(),additions=[];
-const signature=v=>JSON.stringify(mechanicalFields.map(f=>v[f]??null));
 for(const [id,entry] of scope){
  const summary=existing.get(id),record=summary?await store.readJson(summary.key,null):builder.models.get(id)||{id,...entry,photo:'',revision:randomUUID(),updatedAt:at,variants:[]};
  if(!record||summary&&record.revision!==summary.revision)throw Error('encyclopedia_revision_mismatch');
  const snapshot={capturedAt:at,count:entry.count,upperBound:entry.upperBound};
  if(summary){
-  const keys=new Set(record.variants.map(signature));
-  const extra=(builder.models.get(id)?.variants||[]).filter(v=>{const key=signature(v);if(keys.has(key))return false;keys.add(key);return true;});
+  const merged=appendMissingObservations(record.variants,builder.models.get(id)?.variants||[]);
+  const extra=merged.slice(record.variants.length);
   let next=record,key=summary.key;
   if(extra.length){next={...record,variants:[...record.variants,...extra],revision:randomUUID(),updatedAt:at,previousKey:summary.key,directorySnapshot:snapshot};key=`${ROOT}/revisions/${record.id}/${next.revision}.json`;await store.writeJson(key,next,{ifNoneMatch:'*'});}
   prepared.set(summary.id,{...summarize(next,key),directorySnapshot:snapshot});

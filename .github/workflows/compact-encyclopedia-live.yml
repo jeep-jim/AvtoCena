@@ -1,0 +1,32 @@
+name: Verify compact encyclopedia live
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/compact-encyclopedia-live.json']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact installed release
+        run: |
+          python3 - <<'PY'
+          import json,re,os
+          release=json.load(open('.github/market-runs/compact-encyclopedia-live.json'))['release']
+          assert re.fullmatch('[a-f0-9]{40}',release)
+          with open(os.environ['GITHUB_ENV'],'a') as f:f.write('EXPECTED_RELEASE='+release+'\n')
+          PY
+      - name: Verify actual mobile and desktop interactions
+        run: |
+          npm install --prefix "$RUNNER_TEMP/compact-live" --no-package-lock --ignore-scripts playwright@1.55.0
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/compact-live/node_modules/playwright/index.mjs" CHROME_BIN="$(command -v google-chrome)" node tests/browser/compact-encyclopedia-live.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compact-encyclopedia-live
+          path: artifacts/compact-encyclopedia-live
+          retention-days: 7
