@@ -1,4 +1,4 @@
-import {mechanicalRows} from '@/lib/encyclopedia/compact';
+import {yearVariants} from '@/lib/encyclopedia/compact';
 import {rememberEncyclopediaModel,encyclopediaWithManagement,readManagementKnowledge} from '@/lib/catalog/management-knowledge';
 import {publicEncyclopediaRecord} from '@/lib/encyclopedia/public-record';
 import {getCurrentUser} from '@/lib/auth';
@@ -22,12 +22,13 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
 }
 
 export async function GET(request:Request,{params}:{params:Promise<{id:string}>}){
+ const query=new URL(request.url).searchParams,year=query.get('year'),records=query.get('records');
+ if(year===null||!(year==='unknown'||/^\d{4}$/.test(year)))return Response.json({error:'Выберите год.'},{status:400,headers});
+ if(records!==null&&records!=='1')return Response.json({error:'Неверный запрос.'},{status:400,headers});
  const {id}=await params,stored=await readModel(id);if(!stored)return Response.json({error:'Модель не найдена.'},{status:404,headers});
  const record=encyclopediaWithManagement(stored,await readManagementKnowledge());
- const year=new URL(request.url).searchParams.get('year');
- if(year===null)return Response.json({error:'Выберите год.'},{status:400,headers});
  const {editedBy,previousKey,...publicRecord}=record;
- publicRecord.variants=mechanicalRows(record.variants.filter(v=>year==='unknown'?!v.year:v.year===Number(year)));
+ publicRecord.variants=yearVariants(record.variants,year,records==='1');
  const user=await getCurrentUser();
  return Response.json(canEditEncyclopedia(user)?publicRecord:publicEncyclopediaRecord(publicRecord),{headers});
 }

@@ -1,6 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mechanicalRows,compactSpecs} from '../apps/web/lib/encyclopedia/compact';
+import {mechanicalRows,compactSpecs,yearVariants} from '../apps/web/lib/encyclopedia/compact';
+import {publicEncyclopediaRecord} from '../apps/web/lib/encyclopedia/public-record';
+test('exact year view preserves reviewed equipment IDs while compact UI and public privacy stay intact',()=>{
+ const base:any={id:'reviewed-launch',year:2021,engineCc:1490,power30MinKw:37,markets:['korea'],status:'review',observedCount:1,sourceUrl:'private-evidence',notes:'private-notes'};
+ const variants=[{...base,id:'trend'},base,{...base,id:'other-year',year:2022},{...base,id:'unknown',year:undefined},{...base,id:'different-power',power30MinKw:38}];
+ const before=JSON.stringify(variants);
+ assert.deepEqual(yearVariants(variants,'2021').map(v=>v.id),['trend','different-power']);
+ const exact=yearVariants(variants,'2021',true);
+ assert.deepEqual(exact.map(v=>v.id),['trend','reviewed-launch','different-power']);
+ assert.equal(exact.find(v=>v.id==='reviewed-launch')?.power30MinKw,37);
+ assert.deepEqual(yearVariants(variants,'unknown',true).map(v=>v.id),['unknown']);
+ const publicRecord=publicEncyclopediaRecord({id:'model',make:'Toyota',model:'Yaris',photo:'',revision:'r',updatedAt:'now',variants:exact});
+ assert.equal(publicRecord.variants.length,3);
+ assert.doesNotMatch(JSON.stringify(publicRecord),/private-evidence|private-notes|sourceUrl|notes/);
+ assert.equal(JSON.stringify(variants),before);
+});
 test('equipment names collapse without merging different engines, years or certification values',()=>{
  const base:any={id:'a',year:2025,engineCc:1500,powerHp:150,fuel:'petrol',drive:'fwd',markets:[],status:'observed',observedCount:1};
  const rows=[base,{...base,id:'b',trim:'Luxury'}, {...base,id:'c',drive:'awd'}, {...base,id:'d',year:2024},{...base,id:'e',powerHp:160},{...base,id:'f',power30MinKw:54}];

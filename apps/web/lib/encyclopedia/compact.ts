@@ -11,6 +11,12 @@ export function mechanicalRows(variants:Variant[]):Variant[]{
  }
  return [...groups.values()].sort((a,b)=>(b.year||0)-(a.year||0)||(a.engineCc||0)-(b.engineCc||0)||(a.powerHp||0)-(b.powerHp||0));
 }
+// The directory groups equipment trims; exact-record consumers must retain every ID.
+// Both views are scoped to one selected year and use the same public projection later.
+export function yearVariants(variants:Variant[],year:string,exactRecords=false):Variant[]{
+ const selected=variants.filter(v=>year==='unknown'?!v.year:v.year===Number(year));
+ return exactRecords?selected:mechanicalRows(selected);
+}
 export type CompactSpecs=Partial<Record<'bodyType'|'chassisCode'|'fuel'|'engineCc'|'powerHp'|'drive'|'transmission'|'power30MinKw',string>>;
 export function compactSpecs(variants:Variant[]):CompactSpecs{
  const result:CompactSpecs={};

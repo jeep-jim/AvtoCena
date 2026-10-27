@@ -18,7 +18,7 @@ if(checks.length){
  const groups=new Map();for(const c of checks){const key=c.modelId+':'+c.year;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(c);}
  const result={version:1,release,startedAt:new Date().toISOString(),groups:0,variants:0,fields:0,verified:false};
  const jobs=[...groups.values()];let cursor=0;
- await Promise.all(Array.from({length:3},async()=>{for(;;){const group=jobs[cursor++];if(!group)return;const c=group[0],record=await get(`/api/encyclopedia/${c.modelId}?year=${c.year}`);if(record.id!==c.modelId)throw Error('public_model_mismatch');
+ await Promise.all(Array.from({length:3},async()=>{for(;;){const group=jobs[cursor++];if(!group)return;const c=group[0],record=await get(`/api/encyclopedia/${c.modelId}?year=${c.year}&records=1`);if(record.id!==c.modelId)throw Error('public_model_mismatch');
   for(const c of group){const v=record.variants.find(v=>v.id===c.variantId);if(!v||v.year!==c.year)throw Error('public_variant_missing:'+c.variantId);for(const [f,value] of Object.entries(c.fields)){if(stable(v[f])!==stable(value))throw Error('public_field_mismatch:'+c.variantId+':'+f);result.fields++;}result.variants++;}result.groups++;
  }}));
  if((await get('/api/health')).releaseSha!==release)throw Error('public_release_changed');
