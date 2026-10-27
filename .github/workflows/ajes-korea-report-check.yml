@@ -2,7 +2,7 @@ name: AJ System — selected Korea report schema
 on:
   workflow_dispatch:
   push:
-    branches: [feat/korea-reports]
+    branches: [main]
     paths: ['scripts/ajes-korea-report-check.ts']
 permissions:
   contents: read
