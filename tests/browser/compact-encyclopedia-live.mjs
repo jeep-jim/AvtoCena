@@ -10,7 +10,10 @@ try{for(const width of [390,1440]){
  const health=async()=>assert.equal((await (await context.request.get(origin+'/api/health')).json()).releaseSha,expected);
  try{
   await health();const start=Date.now();await page.goto(origin+'/cars/autocatalog',{waitUntil:'domcontentloaded',timeout:60000});
-  const rows=page.locator('.ac-model-list-item');await rows.first().waitFor({timeout:60000});const openMs=Date.now()-start;
+  const rows=page.locator('.ac-model-list-item');await rows.first().waitFor({timeout:60000});const rowsMs=Date.now()-start;
+  // This marker only exists after the client has mounted. Count readiness in
+  // the opening duration; a server-rendered button alone is not interactive.
+  await page.locator('.ac-route-loader').waitFor({state:'attached',timeout:60000});const openMs=Date.now()-start;
   const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});if(await cookie.isVisible())await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
   assert.equal(await rows.count(),40);assert.equal(await page.locator('.ac-model-list a[href*="/cars/offer/"]').count(),0);
   assert.equal(requests.filter(p=>p.startsWith('/api/encyclopedia/')).length,0);
@@ -27,6 +30,6 @@ try{for(const width of [390,1440]){
   assert.ok(await rows.count()>0&&await rows.count()<=40);
   await rows.first().getByRole('button',{name:'Параметры',exact:true}).click();await rows.first().locator('.ac-ency-model-editor').waitFor({timeout:30000});assert.equal(await rows.first().locator('[role="alert"]').count(),0);
   assert.ok(requests.some(p=>p.startsWith('/api/encyclopedia/')));assert.deepEqual(errors,[]);await health();
-  const result={width,release:expected,openMs,nextMs,yearMs,photoOpened,rows:await rows.count(),year:selected,withinTarget:{open:openMs<=2000,next:nextMs<=2000,year:yearMs<=2000},errors};results.push(result);console.log('COMPACT_LIVE',JSON.stringify(result));fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));
+  const result={width,release:expected,rowsMs,openMs,nextMs,yearMs,photoOpened,rows:await rows.count(),year:selected,withinTarget:{open:openMs<=2000,next:nextMs<=2000,year:yearMs<=2000},errors};results.push(result);console.log('COMPACT_LIVE',JSON.stringify(result));fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));
  }catch(error){await page.screenshot({path:`${out}/${width}-failure.png`});throw error;}finally{await context.close();}
 }}finally{await browser.close();}
