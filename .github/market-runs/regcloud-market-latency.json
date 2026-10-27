@@ -1,10 +1,1 @@
-{
-  "release": "e23d9d096935481c4ecddf6a987c574c5c2bbbf9",
-  "phase": "browser",
-  "widths": [
-    1440
-  ],
-  "vmBaselineRun": 40463668481,
-  "reason": "Complete only desktop baseline after hidden mobile-button locator defect. Full VM/305s and mobile measurements already recorded in40463668481; no deploy, no VM repeat, no gate changes.",
-  "requestedAt": "2026-10-27T07:05:17.775Z"
-}
+{"release":"43614d97d82cb64a2f8ccd61187125bfd784bd23","phase":"browser","widths":[390,1440]}
