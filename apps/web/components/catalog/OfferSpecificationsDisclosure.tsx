@@ -1,16 +1,23 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type ReactNode, type PointerEvent } from "react";
+import { useEffect, useId, useRef, useState, lazy, Suspense, type ReactNode, type PointerEvent } from "react";
 import { createPortal } from "react-dom";
-import { ChevronDown, ChevronRight, CarFront, X } from "lucide-react";
+import { ChevronDown, ChevronRight, CarFront, ClipboardList, X } from "lucide-react";
 import { OfferAllSpecifications } from "./OfferAllSpecifications";
 import { useTapActivation } from "./useTapActivation";
 import type { SourceSpecificationSnapshot } from "../../lib/catalog/source-specifications";
 
-type Props = { groups: SourceSpecificationSnapshot["groups"]; title: string; mode: "desktop" | "mobile"; sourceUrl?: string; headerAside?: ReactNode; defaultOpen?: boolean };
+const KoreaReportPanel = lazy(() => import("./KoreaReportPanel"));
 
-export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, headerAside, defaultOpen = false }: Props) {
+type Props = { groups: SourceSpecificationSnapshot["groups"]; title: string; mode: "desktop" | "mobile"; sourceUrl?: string; headerAside?: ReactNode; defaultOpen?: boolean; historyOfferId?: string };
+
+export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, headerAside, defaultOpen = false, historyOfferId }: Props) {
   const [open, setOpen] = useState(defaultOpen && mode === "desktop");
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [historyStarted, setHistoryStarted] = useState(false);
+  const historyId = useId();
+  const historyButton = historyOfferId ? <button type="button" aria-expanded={historyOpen} aria-controls={historyId} onClick={()=>{setHistoryStarted(true);setHistoryOpen(value=>!value);}} className="flex min-h-12 min-w-0 w-full items-center justify-between gap-2 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3 text-left text-sm font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400 xl:min-h-14" data-korea-report-trigger><span className="flex items-center gap-2"><ClipboardList aria-hidden="true" className="h-4 w-4 shrink-0"/>История и состояние</span><ChevronDown aria-hidden="true" className={`h-4 w-4 shrink-0 transition-transform ${historyOpen ? "rotate-180" : ""}`}/></button> : null;
+  const historyPanel = historyOfferId && historyStarted ? <div id={historyId} hidden={!historyOpen} className="min-w-0 pt-4"><Suspense fallback={<p role="status" className="p-4 text-sm">Загружаем историю и осмотр автомобиля…</p>}><KoreaReportPanel key={historyOfferId} offerId={historyOfferId} active={historyOpen}/></Suspense></div> : null;
   const [dragY, setDragY] = useState(0);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -64,13 +71,15 @@ export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, 
   const content = <OfferAllSpecifications groups={groups} showHeading={false} sourceUrl={sourceUrl} />;
 
   if (mode === "desktop") return <div data-spec-desktop data-open={open} className="mt-6 hidden min-w-0 scroll-mt-20 xl:block">
-    <div className={`ac-specifications-header grid gap-3 ${open ? "sticky top-[72px] z-30" : ""} ${headerAside ? "grid-cols-[minmax(240px,.7fr)_minmax(0,1.3fr)]" : ""}`}>
+    <div className={`ac-specifications-header grid gap-3 ${open ? "sticky top-[72px] z-30" : ""} ${historyOfferId ? "grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.2fr)]" : headerAside ? "grid-cols-[minmax(240px,.7fr)_minmax(0,1.3fr)]" : ""}`}>
     <button type="button" aria-expanded={open} aria-controls={headingId} onClick={()=>{ if(open && triggerRef.current && triggerRef.current.getBoundingClientRect().top < 90) triggerRef.current.parentElement?.parentElement?.scrollIntoView({block:"start"}); setOpen(!open); }} ref={triggerRef} className={`ac-specifications-trigger ${open ? "shadow-sm" : ""} flex min-h-14 cursor-pointer items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 text-sm font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400`}>
       <span className="flex items-center gap-2.5"><CarFront className="h-5 w-5 text-[var(--ac-muted)]" aria-hidden="true" />{open ? "Скрыть характеристики" : "Все характеристики"}</span>
       <ChevronDown className={`h-5 w-5 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden="true" />
     </button>
+    {historyButton}
     {headerAside}
     </div>
+    {historyPanel}
     {open ? <div id={headingId} className="col-span-full min-w-0 px-1 pb-5 pt-4">{content}</div> : null}
   </div>;
 
@@ -79,6 +88,7 @@ export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, 
       className="ac-offer-spec-tile flex min-h-12 w-full items-center justify-between gap-3 rounded-[1.1rem] bg-[var(--ac-surface-2)] px-4 text-left text-sm font-bold text-[var(--ac-text)] outline-none transition hover:bg-[var(--ac-surface-2)] focus-visible:ring-2 focus-visible:ring-red-400 xl:hidden">
       <span className="flex items-center gap-2.5"><CarFront className="h-4 w-4 text-[var(--ac-muted)]" aria-hidden="true" />Все характеристики</span><ChevronRight className="h-4 w-4" aria-hidden="true" />
     </button>
+    {historyOfferId ? <div className="mt-3 min-w-0 xl:hidden">{historyButton}{historyPanel}</div> : null}
     {open && typeof document !== "undefined" ? createPortal(<dialog ref={dialogRef} aria-labelledby={headingId} onCancel={(event) => { event.preventDefault(); close(); }}
       className="fixed inset-0 m-0 h-[100dvh] max-h-none w-screen max-w-none overflow-hidden border-0 bg-transparent p-0 text-[var(--ac-text)] outline-none backdrop:bg-black/65 backdrop:backdrop-blur-md">
       <div className="flex h-full items-end" {...tap} onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
