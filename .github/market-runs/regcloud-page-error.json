@@ -1,4 +1,5 @@
 {
-  "at": "2026-10-27T06:30:00Z",
-  "reason": "Owner China category incident with city Novokuznetsk; reproduced RSC digest 3776365000 on retained e23d9d0. Read bounded existing logs only; no installation or collectors."
+  "at": "2026-10-27T10:56:00Z",
+  "logsOnly": true,
+  "reason": "Owner recurring production outage and Korean Rexton page error. Read existing bounded errors/resource counters only; no HTTP probes, installations, repairs or collectors."
 }

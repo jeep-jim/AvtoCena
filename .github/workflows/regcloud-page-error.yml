@@ -27,7 +27,8 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
-          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          logs_only=$(python3 -c 'import json;v=json.load(open(".github/market-runs/regcloud-page-error.json")).get("logsOnly",False);assert isinstance(v,bool);print(str(v).lower())')
+          ssh "${ssh_opts[@]}" root@151.248.113.177 bash -s -- "$logs_only" <<'REMOTE' 
           set -euo pipefail
           docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,re,collections,json; s=sys.stdin.read(); print("ERROR_CATEGORIES",json.dumps(collections.Counter(re.findall(r"(?:Error: |code: [\"\x27])([a-zA-Z][a-zA-Z0-9_]{3,80})",s)))); print("DIGESTS",json.dumps(collections.Counter(re.findall(r"digest: [\"\x27]([0-9]{4,20})",s)))); print("COUNTS",{p:s.count(p) for p in ["TypeError","object_storage_response_timeout","home_initial_catalog_failed","home_initial_pricing_failed","green_invalid_snapshot","ETIMEDOUT","ECONNRESET","fetch failed","Failed to find Server Action","ChunkLoadError"]})'
           docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,re,json; s=sys.stdin.read(); lines=s.splitlines(); out=[]; patterns=["Cannot", "digest:"]; [(out.append(re.sub(r"https?://[^ \n]+", "[url]", line)[:300])) for line in lines if any(p in line for p in patterns) and " at " not in line]; print("ERROR_DETAILS",json.dumps(out[-25:]))'
@@ -47,6 +48,8 @@ jobs:
           started=$(date -d "$(docker inspect --format '{{.State.StartedAt}}' avtocena-production)" '+%Y/%m/%d %H:%M:%S')
           tail -n 3000 /var/log/nginx/error.log | python3 -c 'import sys,json; start=sys.argv[1]; lines=[line for line in sys.stdin if line[:19]>=start]; s="".join(lines); print("NGINX_ERRORS_SINCE_RUNTIME_START",json.dumps({"sinceServerTime":start,"boundedLines":len(lines),"categories":{p:s.count(p) for p in ["upstream timed out","upstream prematurely closed","upstream sent too big header","connect() failed"]}}))' "$started"
           docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,json; s=sys.stdin.read(); print("RUNTIME_FATAL_CATEGORIES",json.dumps({p:s.count(p) for p in ["heap out of memory", "Reached heap limit", "FATAL ERROR", "Killed", "ENOMEM"]}))'
+
+          if [ "${1:-false}" = true ]; then exit 0; fi
 
           # Six bounded public reads from the server distinguish app latency from the client network.
           python3 - <<'PROBE'
