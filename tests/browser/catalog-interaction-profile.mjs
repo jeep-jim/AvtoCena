@@ -1,3 +1,4 @@
+import {assertInteractionAcceptance} from './catalog-interaction-acceptance.mjs';
 import assert from 'node:assert/strict';import fs from 'node:fs';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const expected=process.env.EXPECTED_RELEASE;if(!/^[a-f0-9]{40}$/.test(expected||''))throw Error('exact release required');
@@ -42,4 +43,4 @@ try{for(const width of widths){
   await page.screenshot({path:`${out}/${width}.png`});
   assert.equal((await (await context.request.get(origin+'/api/health')).json()).releaseSha,expected);
  }catch(error){await page.screenshot({path:`${out}/${width}-failure.png`});console.log('CATALOG_INTERACTION_FAILURE',JSON.stringify({width,error:String(error),errors}));throw error;}finally{await context.close();}
-}fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));}finally{await browser.close();}
+}fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));if(process.env.CATALOG_PROFILE_ACCEPTANCE==='true')assertInteractionAcceptance(results,expected);}finally{await browser.close();}
