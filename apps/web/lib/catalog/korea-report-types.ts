@@ -1,5 +1,6 @@
+import type {KoreaReportDocument} from './korea-report-document';
 export type KoreaSourceReportKind = 'history' | 'inspection';
-export type KoreaReportLink = {version: 2; offerId: string; lot: string; kind: KoreaSourceReportKind; href: string; originalHref: string};
+export type KoreaReportLink = {version: 2; offerId: string; lot: string; kind: KoreaSourceReportKind; href: string; originalHref: string; document?: KoreaReportDocument | null};
 
 /** Shared validation: only supplier report URLs, never arbitrary frames or redirects. */
 export function exactKoreaReportUrl(value: unknown, lot: string, kind: KoreaSourceReportKind): string | null {
