@@ -834,6 +834,13 @@ function projectionUtilizationPowerHp(row: Pick<CatalogSearchProjection,'utiliza
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   if(editorialHidden(row))return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
+  // A make-only membership test has no price or specification input. Keep the
+  // same withdrawal/editorial/alias rules without normalizing engines per row.
+  if(params.make && Object.entries(params).every(([key,value])=>key==='make'||value===undefined)){
+    const identity=applyCatalogEditorialSpecifications(row);
+    const make=cleanFacet(identity.make).toLocaleLowerCase("ru-RU");
+    return catalogMakeFilterValues(params.make).some(value=>cleanFacet(value).toLocaleLowerCase("ru-RU")===make);
+  }
   row = applyCatalogEditorialSpecifications(preparedProjectionRows.get(row) || safePublicPricing(row));
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
