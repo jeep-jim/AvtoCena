@@ -35,12 +35,14 @@ function ReportSection({offerId,lot,kind,title}:{offerId:string;lot:string;kind:
    {title}<ChevronDown aria-hidden="true" className={`h-4 w-4 shrink-0 transition-transform ${open?'rotate-180':''}`}/>
   </button>
   <div id={contentId} hidden={!open} className="min-w-0 border-t border-[var(--ac-border)] p-3 sm:p-4">
-   {started&&!report&&!error?<p role="status" className="text-sm text-[var(--ac-muted)]">Загружаем ссылку на отчёт…</p>:null}
-   {error?<div className="text-sm"><p role="status">{error==='missing'?'Для этого автомобиля ссылка на отчёт не предоставлена.':'Не удалось получить ссылку на отчёт. Попробуйте ещё раз позже.'}</p><button type="button" className="mt-3 rounded-xl bg-[var(--ac-surface-2)] px-4 py-2 font-bold outline-none focus-visible:ring-2 focus-visible:ring-red-400" onClick={()=>{requested.current=false;setAttempt(value=>value+1);}}>Повторить</button></div>:null}
+   {started&&!report&&!error?<p role="status" className="text-sm text-[var(--ac-muted)]">Загружаем отчёт…</p>:null}
+   {error?<div className="text-sm"><p role="status">{error==='missing'?'Для этого автомобиля ссылка на отчёт не предоставлена.':'Не удалось загрузить отчёт. Попробуйте ещё раз позже.'}</p><button type="button" className="mt-3 rounded-xl bg-[var(--ac-surface-2)] px-4 py-2 font-bold outline-none focus-visible:ring-2 focus-visible:ring-red-400" onClick={()=>{requested.current=false;setAttempt(value=>value+1);}}>Повторить</button></div>:null}
    {report?<>
-    <a href={report.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[var(--ac-surface-2)] px-4 py-2 text-sm font-bold outline-none focus-visible:ring-2 focus-visible:ring-red-400">Открыть в новой вкладке<ExternalLink aria-hidden="true" className="h-4 w-4 shrink-0"/></a>
-    <p className="mb-3 mt-3 text-xs leading-5 text-[var(--ac-muted)]">Если отчёт не появился или проверку не удаётся пройти здесь, откройте его в новой вкладке.</p>
-    <iframe src={report.href} title={`${title} автомобиля — оригинал`} loading="lazy" referrerPolicy="no-referrer" sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" className="block h-[65dvh] min-h-[360px] max-h-[800px] w-full rounded-lg border border-[var(--ac-border)] bg-white" />
+    {report.document?.lot===lot&&report.document.kind===kind&&report.document.fields.length>0?<>
+     <dl className="divide-y divide-[var(--ac-border)]" data-korea-russian-facts>{report.document.fields.map(field=><div key={field.key} className="flex flex-wrap justify-between gap-2 py-3 text-sm"><dt>{field.label}</dt><dd className="font-semibold">{field.value}</dd></div>)}</dl>
+     <p className="my-3 text-xs leading-5 text-[var(--ac-muted)]">Переведены доступные текстовые поля осмотра. Схема повреждений и сведения со сканов пока не расшифрованы. Это не полный отчёт и не подтверждение отсутствия ДТП.</p>
+    </>:<p role="status" className="mb-3 text-sm leading-6">{kind==='history'?'Страховые случаи пока не удалось загрузить в русскую форму. Это не означает, что страховых случаев не было.':'Текст осмотра пока недоступен для перевода. Сведения могут быть представлены только сканами.'}</p>}
+    <a href={report.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[var(--ac-surface-2)] px-4 py-2 text-sm font-bold outline-none focus-visible:ring-2 focus-visible:ring-red-400">Оригинал отчёта<ExternalLink aria-hidden="true" className="h-4 w-4 shrink-0"/></a>
    </>:null}
   </div>
  </section>;
@@ -48,7 +50,7 @@ function ReportSection({offerId,lot,kind,title}:{offerId:string;lot:string;kind:
 export default function KoreaReportPanel({offerId,lot,active}:{offerId:string;lot:string;active:boolean}) {
  return <section aria-label="История и состояние" className="min-w-0 rounded-2xl border border-[var(--ac-border)] p-4 text-[var(--ac-text)] sm:p-5" data-korea-report-panel data-active={active}>
   <h2 className="text-lg font-bold">История и состояние</h2>
-  <p className="mt-2 text-sm leading-6 text-[var(--ac-muted)]">Выберите отчёт. Оригиналы предоставлены на корейском языке. Для просмотра может потребоваться проверка «Я не робот».</p>
+  <p className="mt-2 text-sm leading-6 text-[var(--ac-muted)]">Выберите отчёт. Доступные сведения осмотра показаны на русском. Оригинал можно открыть отдельно.</p>
   <p className="mt-2 text-xs leading-5 text-[var(--ac-muted)]">Отсутствие сведений не подтверждает отсутствие повреждений. Перед покупкой состояние автомобиля нужно проверить.</p>
   <ReportSection key={`${offerId}:${lot}:history`} offerId={offerId} lot={lot} kind="history" title="Страховая история" />
   <ReportSection key={`${offerId}:${lot}:inspection`} offerId={offerId} lot={lot} kind="inspection" title="Осмотр автомобиля" />

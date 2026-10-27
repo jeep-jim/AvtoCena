@@ -1,9 +1,10 @@
+import {readKoreaInspectionDocument} from './korea-report-document';
 import {isIP} from 'node:net';
 import {DetailReadCache} from './detail-read-cache';
 import {requestKoreaReportLinks, KoreaReportUnavailable} from './korea-report-source';
 import type {KoreaReportLink, KoreaSourceReportKind} from './korea-report-types';
 
-type Dependencies = Parameters<typeof requestKoreaReportLinks>[1] & {now?: () => number};
+type Dependencies = Parameters<typeof requestKoreaReportLinks>[1] & {now?: () => number; documentFetcher?: typeof fetch};
 /** Visitor-bound coalescing: never reuse another visitor's success to evade a refusal. */
 export function createKoreaReportService(deps: Dependencies) {
  const now = deps.now || Date.now;
@@ -20,7 +21,9 @@ export function createKoreaReportService(deps: Dependencies) {
    try {
     const links = await requestKoreaReportLinks({id:match[1],lot:input.lot,kind:input.kind,ip:input.ip}, deps);
     await deps.assertEnabled();
-    return {version:2,offerId:input.offerId,lot:input.lot,kind:input.kind,...links};
+    const document=input.kind==='inspection'&&deps.documentFetcher?await readKoreaInspectionDocument(links.originalHref,input.lot,deps.documentFetcher):null;
+    await deps.assertEnabled();
+    return {...(deps.documentFetcher?{document}:{}),version:2,offerId:input.offerId,lot:input.lot,kind:input.kind,...links};
    } catch (error) {
     // A missing report must not prevent opening the other section. Refusals stop both.
     if (!(error instanceof KoreaReportUnavailable) || error.reason !== 'report_missing') {

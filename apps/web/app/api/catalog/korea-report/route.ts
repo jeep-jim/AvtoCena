@@ -10,7 +10,7 @@ import {KoreaReportUnavailable} from '@/lib/catalog/korea-report-source';
 import type {KoreaSourceReportKind} from '@/lib/catalog/korea-report-types';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
-const readReport = createKoreaReportService({password:ajesPassword,endpoint:ajesEndpoint,assertEnabled:()=>assertCollectionEnabled('ajes_korea_feed'),reserve:()=>reserveAjesRequest(getJsonStorage(),'korea')});
+const readReport = createKoreaReportService({documentFetcher:fetch,password:ajesPassword,endpoint:ajesEndpoint,assertEnabled:()=>assertCollectionEnabled('ajes_korea_feed'),reserve:()=>reserveAjesRequest(getJsonStorage(),'korea')});
 const responseHeaders = {'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'};
 export async function GET(request: Request) {
  const p = new URL(request.url).searchParams;

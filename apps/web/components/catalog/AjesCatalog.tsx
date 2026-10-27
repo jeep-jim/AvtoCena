@@ -1,3 +1,4 @@
+import {Suspense} from 'react';
 import {MarketResultCount} from './MarketResultCount';
 import {CatalogSidebar} from './CatalogSidebar';
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
@@ -8,27 +9,21 @@ import {CatalogLoadMore} from './CatalogLoadMore';
 import {BrandLogoRail} from './BrandLogoRail';
 import {JapanSectionTabs} from './JapanSectionTabs';
 import {CatalogMarketFlag} from './CatalogMarketFlag';
-import {readAjesCatalogPage,readAjesCountSummary,readAjesMakes,readAjesDirectory,AjesFilterUnavailable} from '@/lib/catalog/ajes-catalog';
+import {readAjesCatalogPage,readAjesCountSummary,readAjesMakes,AjesFilterUnavailable} from '@/lib/catalog/ajes-catalog';
 import {AjesInputError} from '@/lib/catalog/ajes-query';
-import {readSavedAjesFacets} from '@/lib/catalog/ajes-runtime';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {ajesCountText,exactAjesCount,ajesPaginationCountText} from '@/lib/catalog/ajes-count-display';
 type Params=Record<string,string|string[]|undefined>;
 export async function AjesCatalog({params,embedded=false}:{params:Params;embedded?:boolean}){
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));const market=initial.market==='china'?'china':initial.market==='korea'?'korea':'japan';const label=market==='china'?'Китай':market==='korea'?'Корея':'Япония';initial.market=market;if(market!=='japan')initial.source='ajes';if(!initial.make&&initial.brand)initial.make=initial.brand;
  let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='';
- const countPromise=readAjesCountSummary(JSON.stringify(initial)).catch(()=>null);
- const makesPromise=readAjesMakes(JSON.stringify(initial)).catch(()=>null);
- const directoryPromise=initial.make?readAjesDirectory({market,make:initial.make}).catch(()=>null):Promise.resolve(null);
  try{result=await readAjesCatalogPage(initial);}catch(e){error=e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
- const directory=await directoryPromise;
- // Count is independently verified; a partial or failed list must not erase it.
- const sourceTotal=result?.countSummary??await countPromise;
+ // Complete brand/model directories are optional navigation metadata. The
+ // controls already fetch them on opening; never hold visible cards behind them.
+ const sourceTotal=result?.countSummary;
  const displayTotal=exactAjesCount(sourceTotal);
- const makeDirectory=await makesPromise;
- const savedFacets=market==='japan'&&(!makeDirectory||(Boolean(initial.make)&&!directory))?await readSavedAjesFacets().catch(()=>({makes:[],models:[]})):{makes:[],models:[]};
- const models=directory?.models||[...savedFacets.models,...new Map((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];
- const makes=[...new Set([...(makeDirectory?.makes.map(m=>m.make)||savedFacets.makes),...models.map(m=>m.make),...(initial.make||'').split(',').filter(Boolean)])];
+ const models=[...new Map<string,{make:string;model:string;total:number}>((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];
+ const makes=[...new Set([...models.map(m=>m.make),...(initial.make||'').split(',').filter(Boolean)])];
  const facets={makes,models,markets:[market],bodyTypes:[],fuels:['petrol','diesel','hybrid','electric','lpg'],transmissions:['automatic','manual','cvt','dct'],drives:['fwd','rwd','awd']};
  const Container=embedded?'div':'main';
  return <Container className={`ac-catalog-page ac-page-copy ac-ajes-catalog ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>
@@ -41,9 +36,11 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{embedded?"Авто под заказ":"Каталог автомобилей"}</h1>
 
  </>}>
- {makes.length>0&&<BrandLogoRail initial={initial} brands={makes.filter(make=>(!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))&&((makeDirectory?.makes||[]).some(row=>row.make===make&&row.total>0)||(result?.items||[]).some(row=>row.make===make)))} resultCount={displayTotal??undefined}/>}
+ <Suspense fallback={<BrandLogoRail initial={initial} brands={makes.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={displayTotal??undefined}/>}>
+  <AjesBrandRail initial={initial} fallbackBrands={makes} resultCount={displayTotal??undefined}/>
+ </Suspense>
  <div className="mb-4 mt-8 flex flex-wrap items-center justify-between gap-3 md:mt-9">
- <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><MarketResultCount total={displayTotal??undefined}>{ajesCountText(sourceTotal)}</MarketResultCount></h2>
+ <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={<MarketResultCount>{ajesCountText(sourceTotal)}</MarketResultCount>}>{result?<MarketResultCount total={displayTotal??undefined}>{ajesCountText(sourceTotal)}</MarketResultCount>:<AjesIndependentCount initial={initial}/>}</Suspense></h2>
  {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
  </div>
  {result&&<div>
@@ -55,4 +52,15 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  </section>
  <style dangerouslySetInnerHTML={{__html:'html body .ac-catalog-page.ac-ajes-catalog{background:var(--ac-page-bg)!important;background-image:none!important}'}}/>
  </Container>;
+}
+
+async function AjesBrandRail({initial,fallbackBrands,resultCount}:{initial:Record<string,string>;fallbackBrands:string[];resultCount?:number}){
+ const directory=await readAjesMakes(JSON.stringify(initial)).catch(()=>null);
+ const brands=directory?directory.makes.filter(row=>row.total>0).map(row=>row.make):fallbackBrands;
+ return <BrandLogoRail initial={initial} brands={brands.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={resultCount}/>;
+}
+
+async function AjesIndependentCount({initial}:{initial:Record<string,string>}){
+ const summary=await readAjesCountSummary(JSON.stringify(initial)).catch(()=>null);
+ return <MarketResultCount total={exactAjesCount(summary)??undefined}>{ajesCountText(summary)}</MarketResultCount>;
 }
