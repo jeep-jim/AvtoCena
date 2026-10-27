@@ -79,3 +79,6 @@
 - [ ] Энциклопедия главная: canonical missing-field priority подготовлен; durable card↔knowledge↔encyclopedia tests PASS. Распространение исправления уже заполненного значения/инвалидизация индексов по точной технической связи пока НЕ готово.
 - [ ] Технические факты локально, feed для актуальных listing/price/photo/withdrawal и идентичности: найти/устранить повторные detail reads, без удаления ценовых/источниковых guards.
 - [ ] Дождаться единственного40524826437/d418,66VM+live; новая fix/catalog-navigation-drive-20261027 ветка требует своих checks и следующего согласованного выпуска.
+
+
+22:40: PR1599 draft finala9473e2, CI40532904410/browser40532904260 pending. Original368b183 12browser/verify SUCCESS, локально2647/2647+types. Runtime d4184b5/40524826437 выполняет Deploy with rollback; switch/66samples не подтверждены. Эти документы не новый runtime. Следить за обоими кандидатами; полнота AWD и canonical propagation заполненных карточек остаются открытыми.
