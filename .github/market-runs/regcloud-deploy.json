@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Performance release 9: use existing compact display-order metadata for default hidden-market pages instead of rereading complete UAE/Europe projections on five-minute expiry. PR1553 CI40398319888 passed2609 tests/types/build. Preserve manual price/legacy fallback, all evidence and unchanged nine-route warm/35s/305s gates before/after activation.",
+  "reason": "Install PR1554 after CI40453922337 and all eight browser workflows succeeded: passive mobile scrolling away from pagination, no filter decoration or touch prefetch during swipes, striped bottom load-more and client pagination. Correct shared-cache probe namespace classification. Preserve all prices/data/evidence and unchanged 9-route warm/35s/305s gates before/after switch with rollback.",
   "ideaReports": [],
-  "requestedAt": "2026-10-26T20:54:10.376Z"
+  "requestedAt": "2026-10-27T05:23:22.067Z"
 }
