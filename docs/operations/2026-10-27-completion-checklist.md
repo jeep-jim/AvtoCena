@@ -1,6 +1,6 @@
 # Сверка обязательств из чата — 27.10.2026
 
-> 27.10,21:50 Красноярск: единственныйdeploy40524826437 in_progress, exactd4184b5d2acb88264eef114bb5f9e013997d99c8 (PR1597). Включает1594русскийосмотр/схему,1598fairness,1587/1592. Build/indexes/switch/66gates/liveнеподтверждены; последняяproduction436. Все runtimechecksдоreleasePASS;операционныйCI40524722437идёт. Полнаястраховаятаблица/суммы/OCR искоростнаяliveприёмкаостаютсяоткрытыми.
+> 27.10, 23:20 Красноярск: production exactd418 установлен66/66+verifier. Единственныйdeploy40539715156 exact592debd выполняется послеfinalCI2648/2648; switch ещёНЕподтверждён. Live d418: mobileHyundai7.835s — скорость не принята.
 
 > 27.10,21:48 Красноярск:1594 merged44fba180(all8PASS),1598 mergedd6f9395(CI2644/2644+types/build и2browserPASS). Единственный releasePR1597 включает обаисправления+1587/1592,готовкзапуску; exactSHA/gates/публикацияещёнеподтверждены. Фактический436послеrollback6fdb. Русскийосмотр/схема готовывкоде,полнаястраховаятаблица/OCRискоростнаяliveприёмканезавершены.
 
@@ -88,3 +88,6 @@
 
 
 23:09: в ещёНЕзапущенный1600 добавлен management preview fullAJESrecord reuse (24→0 redundant detail reads,8targeted+typesPASS); финальныйCIдоmerge. ЯпонскийownerURLнаd418воспроизведён24cards+ложныйконец/6.660s,1599fixпокаНЕустановлен. Cityintegrationcancelledдоbrowserнаpackageinstall;повторёнтолькоjob.
+
+
+23:20: PR1600 merged592debd, final9da CI40538052257+3checksSUCCESS. Единственныйdeploy40539715156 идёт. PR1599 integrationcityretrySUCCESS. Liveafterinstall требуетactual592,обаwidths,acceptance:true; networktraceтеперьсохраняетactualnavigationtimings бездобавочныхзапросов. Japan reference378rows→370unique keys,295single/49ambiguous/26unknown,0missing/drivediff. Canonicalfilledpropagation/полнотаdrive/fullinsurance/all-marketliveНЕзакрыты.
