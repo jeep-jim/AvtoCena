@@ -85,3 +85,6 @@
 
 
 23:00: d418 exactinstalled,66/66VM/publicverifierPASS. Live40535343374:390 category1.618s/filter7.835s,1440category1.849/filter0.827;24correctcards/noheader/retention/noJS PASS, общий strict2sFAIL. Подготовлен один следующий runtime с1599; приёмка толькопосле установки. Canonical filled-field propagation,полнотаAWD иinsurance cases/sumsНЕготовы.
+
+
+23:09: в ещёНЕзапущенный1600 добавлен management preview fullAJESrecord reuse (24→0 redundant detail reads,8targeted+typesPASS); финальныйCIдоmerge. ЯпонскийownerURLнаd418воспроизведён24cards+ложныйконец/6.660s,1599fixпокаНЕустановлен. Cityintegrationcancelledдоbrowserнаpackageinstall;повторёнтолькоjob.
