@@ -19,3 +19,6 @@
 | Учёт работ | Датированные Road записи и этот перечень; PR1548 исторические наблюдения остаются отдельной историей | Сохранить обе истории при интеграции; обновить каждый статус после фактического выпуска |
 
 Нельзя считать пустую выдачу, HTTP200, merge или локальную синтетику приёмкой скорости. Данные/цены/адмиссия/приватность и текущие пороги неизменны.
+
+
+27.10,13:20: deploy40455077192 failed before switch (China Volkswagen page2 after305s2.1047s>2s); production remains exact e23d9d096935481c4ecddf6a987c574c5c2bbbf9. Baseline marker now requires that installed SHA, never mislabels it as5c3abcd. Supplier answered: report URLs work in ordinary browsers, tru.ru is the supported anonymous wrapper. PR1557 implements independent lazy original viewers/new tabs; Russian document translation remains unfinished. Earlier statement that an answer/source is missing is superseded by this evidence.
