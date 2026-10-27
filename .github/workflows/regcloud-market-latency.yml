@@ -19,9 +19,17 @@ jobs:
         run: |
           python3 - <<'PY'
           import json,re,os
-          release=json.load(open('.github/market-runs/regcloud-market-latency.json'))['release']
+          request=json.load(open('.github/market-runs/regcloud-market-latency.json'))
+          release=request['release']
+          phase=request.get('phase','full')
+          widths=request.get('widths',[390,1440])
+          assert phase in ('full','browser')
+          assert widths and len(widths)<=2 and all(x in (390,1440) for x in widths)
           assert re.fullmatch('[a-f0-9]{40}',release)
-          with open(os.environ['GITHUB_ENV'],'a') as f:f.write('EXPECTED_RELEASE='+release+'\n')
+          with open(os.environ['GITHUB_ENV'],'a') as f:
+              f.write('EXPECTED_RELEASE='+release+'\n')
+              f.write('BASELINE_PHASE='+phase+'\n')
+              f.write('CATALOG_PROFILE_WIDTHS='+','.join(map(str,widths))+'\n')
           PY
       - name: Wait for this exact runtime without starting or changing it
         run: |
@@ -37,6 +45,7 @@ jobs:
               time.sleep(30)
           PY
       - name: Measure bounded VM requests after activation releases its lock
+        if: env.BASELINE_PHASE != 'browser'
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
