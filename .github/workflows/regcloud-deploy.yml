@@ -75,7 +75,7 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
         run: |
-          node --import tsx scripts/encyclopedia/assert-compact-directory.mjs
+          node --import tsx scripts/encyclopedia/assert-compact-directory.mjs --wait
           node --import tsx scripts/encyclopedia/prepare-calculation-index.mjs
           node --import tsx scripts/encyclopedia/assert-release-batches.mjs
           node --import tsx scripts/encyclopedia/assert-release-astra.mjs
