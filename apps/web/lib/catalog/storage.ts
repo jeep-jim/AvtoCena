@@ -2162,7 +2162,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
  if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
  const {page:_page,pageSize:_pageSize,sort:_sort,...filters}=params;
- const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
+ const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined&&v!=='').sort(([a],[b])=>a.localeCompare(b))]);
  return filteredBudgetSelectionCache.get(key,async()=>{
   const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
   if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
@@ -2556,7 +2556,11 @@ async function countCatalogOffersEditorial(params: CatalogSearchParams) {
 const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:6});
 async function searchOffersEditorial(params: CatalogSearchParams, internalPageLimit = 48) {
   const manifest=await readManifest();
-  const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,internalPageLimit,Object.entries(params).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
+  // HTML supplies empty controls and explicit defaults; the API omits them.
+  // Both select identical rows. Share that work without changing any caller's
+  // filters, current-day/editorial fence, or bounded cache lifetime.
+  const cacheParams={...params,page:params.page||1,pageSize:params.pageSize||24,sort:params.sort||'updatedAt'};
+  const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,internalPageLimit,Object.entries(cacheParams).filter(([,v])=>v!==undefined&&v!=='').sort(([a],[b])=>a.localeCompare(b))]);
   return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit));
 }
 async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {

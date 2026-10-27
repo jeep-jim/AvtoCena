@@ -121,3 +121,33 @@ test('brand searches reuse a warm full snapshot without downloading duplicate br
   assert.equal(changed.items[0].id,'updated');assert.equal(brandReads.length,1);
  } finally {t.mock.restoreAll();resetCatalogReadCachesForTests();}
 });
+
+test('HTML and API defaults share one search result without merging distinct filters or generations',async(t)=>{
+ resetCatalogReadCachesForTests();
+ let generationId='equivalent-defaults',now=Date.now();
+ t.mock.method(Date,'now',()=>now);
+ t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string)=>{
+  if(file==='catalog-editorial/current.json')return {found:false,value:{revision:'0',entries:{}}};
+  if(file==='catalog/manifest.json')return {found:true,value:{generationId,markets:{europe:{count:2}}}};
+  if(file.includes('/projection-brand/'))return {found:true,value:{generationId,items:[
+   {...row(),id:generationId+'-1',market:'europe',make:'BMW',model:'X1',bodyType:'suv'},
+   {...row(),id:generationId+'-2',market:'europe',make:'BMW',model:'X2',bodyType:'suv'},
+  ]}};
+  throw Error(`Unexpected read: ${file}`);
+ });
+ try {
+  const html={market:'europe',make:'BMW',model:'',city:'',fuel:'',bodyType:'',hasPrice:'',sort:'updatedAt',page:1,pageSize:24};
+  const first=await searchOffers(html);
+  const api=await searchOffers({market:'europe',make:'BMW'});
+  assert.equal(first.total,2);assert.strictEqual(api,first,'equivalent real callers must not repeat selection/materialization');
+  assert.notStrictEqual(await searchOffers({...html,page:2}),first);
+  assert.notStrictEqual(await searchOffers({...html,city:'Новокузнецк'}),first);
+  assert.notStrictEqual(await searchOffers({...html,pageSize:1}),first);
+  assert.notStrictEqual(await searchOffers({...html,sort:'year'}),first);
+  const model=await searchOffers({...html,model:'X1'});assert.equal(model.total,1);
+  assert.equal(model.items[0].model,'X1');
+  generationId='next-defaults';now+=61000;
+  const changed=await searchOffers(html);assert.notStrictEqual(changed,first);
+  assert.equal(changed.items[0].id.startsWith('next-defaults'),true);
+ }finally{t.mock.restoreAll();resetCatalogReadCachesForTests();}
+});
