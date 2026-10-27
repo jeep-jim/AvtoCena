@@ -106,3 +106,18 @@ test('opening an already listed Korea car keeps a supplied source URL without ex
  const cached=await client.read({table:'korea',id:row.ID},'203.0.113.1');
  assert.equal(cached.items[0].status,url);assert.equal(calls,2);
 });
+
+test('historical compatibility reads occur only after supplier failure, preserving bounded fallback',async()=>{
+ let legacyReads=0,requests=0;const lot=ajesLot(row,'korea',false)!;
+ const fallback={schemaVersion:0,items:[lot],page:1,pageSize:24,observedAt:new Date().toISOString(),partial:true};
+ const deps={password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>null,
+ readLegacyQuery:async()=>{legacyReads++;return fallback;}};
+ const healthy=createAjesClient({...deps,fetcher:async()=>{requests++;return Response.json([row]);}});
+ const fresh=await healthy.read({table:'korea'},'203.0.113.1');assert.equal(fresh.stale,false);assert.equal(legacyReads,0);assert.equal(requests,1);
+ const failed=createAjesClient({...deps,fetcher:async()=>new Response('',{status:503})});
+ const retained=await failed.read({table:'korea'},'203.0.113.1');assert.equal(retained.stale,true);assert.equal(retained.partial,true);assert.deepEqual(retained.items,[lot]);assert.equal(legacyReads,1);
+ for(const change of [{page:2},{pageSize:48},{observedAt:'2000-01-01'},{items:[{...lot,table:'china'}]}]){
+  const invalid=createAjesClient({...deps,readLegacyQuery:async()=>({...fallback,...change}),fetcher:async()=>new Response('',{status:503})});
+  await assert.rejects(()=>invalid.read({table:'korea'},'203.0.113.1'),/http_503/);
+ }
+});
