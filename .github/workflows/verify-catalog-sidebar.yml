@@ -1,6 +1,13 @@
 name: Verify catalog sidebar and search
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/CatalogFilters.tsx'
+      - 'apps/web/components/catalog/CatalogFilterPending.tsx'
+      - 'apps/web/components/layout/RoutePreloader.tsx'
+      - 'tests/browser/catalog-sidebar*'
+      - '.github/workflows/verify-catalog-sidebar.yml'
   push:
     branches: [main]
     paths: ['tests/browser/catalog-sidebar-check.mjs', 'apps/web/components/catalog/catalog-sidebar.css']
