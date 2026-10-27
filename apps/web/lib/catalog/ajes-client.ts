@@ -156,6 +156,12 @@ export function createAjesClient(deps:Dependencies) {
         if(snapshot?.stale||!(age>=0&&age<30*60000)||snapshot.items?.length!==1)return value;
         const item=preserveKoreaListingLink(value.items[0],snapshot.items[0]);
         return item===value.items[0]?value:{...value,items:[item]};
+      }).catch(error=>{
+        // Admission queue rejection happens outside the provider try/catch.
+        // Treat only these bounded local failures as recoverable unavailability;
+        // never turn programming/data errors into an empty successful response.
+        if(error instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(error.message))throw new AjesUnavailable('local_busy');
+        throw error;
       });
     },
   };

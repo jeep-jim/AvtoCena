@@ -22,7 +22,7 @@ export async function readFilteredAjesPage<T>(options:{
  while(reads<8&&(reads===0||now()-started<8000)){
   let result:SourcePage<T>;
   try{result=await read(sourcePage);}catch(error){
-   const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|visitor_restricted|quota_exhausted|quota_busy|request_failed|request_timeout|connect_timeout|invalid_response|empty_response)$/.test(error.reason));
+   const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|visitor_restricted|quota_exhausted|quota_busy|local_busy|request_failed|request_timeout|connect_timeout|invalid_response|empty_response)$/.test(error.reason));
    if(!reads||!recoverable)throw error;
    // Keep successful rows and retry this exact source page on explicit continuation.
    interrupted=true;break;
