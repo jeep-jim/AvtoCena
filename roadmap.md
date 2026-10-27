@@ -16562,3 +16562,8 @@ Deploy40479673544 exactf27c2e803b0627ebbaaf22eab7f0332b1c9a310b FAILURE, job1221
 Diagnostic40485209721 SUCCESS, candidatefinallystopped. APIafter305с0,427с, ServerTimingread165мс/pricing70,5мс; это не отменяет failedgate1,1612с. CPUprofile показывает повторное создание/сортировку budgetselection и159GCsamples, дваstorageGET59/58мс. Encyclopediaafter305с0,394с; остальные diagnosticroutes также отданы, но это не приёмка deploy.
 
 Воспроизведено разбиение одного запроса HTML/API на разные ключи: HTML передаёт пустыеcontrols/explicitupdatedAt/pageSize24, APIundefined. PR1583 headdb16cceec163adb22c41911095981b31332dcd99 удаляет пустые значения из cachekeys и уравнивает только searchdefaults. Фильтры/city/page/size/sort/internalLimit/day/editorialRevision/generation и TTL сохраняются, параметры самого поиска не переписываются. Новыйintegrationtest FAIL доисправления, PASSпосле;17targetedPASS, final8PASS послеупрощенияdefaults, tscPASS. CI40486350529 и3проверки ещё выполняются. На сайт изменение не установлено, следующее переключение требует прежних66VMsamples.
+
+
+### 27.10.2026, 17:16 Красноярск — повторный выпуск с общим кешем HTML/API
+
+PR1583 exactdb16cceec163adb22c41911095981b31332dcd99: CI40486350529, Dubicars40486350605, sitecontrols40486350721,greenbudget40486350602 SUCCESS. Merged5d0c2d64ab5d9c060bab9c9473fe01402b5a4f08. ReleasePR1584 merged43614d97d82cb64a2f8ccd61187125bfd784bd23; единственный новый deploy40487179302 выполняется. Все57requiredresearch/ASTRA, прежние66samples/потолки сохранены; markerideaReportsпуст. Production покаe23d; новая установка/liveприёмка ещё не подтверждены.
