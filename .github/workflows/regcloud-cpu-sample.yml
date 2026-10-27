@@ -28,10 +28,15 @@ jobs:
           unset SSH_PRIVATE_KEY
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           scp "${ssh_opts[@]}" scripts/regcloud-cpu-sample.mjs root@151.248.113.177:/opt/avtocena/cpu-sample-once.mjs
-          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          expected=$(python3 -c 'import json,re;v=json.load(open(".github/market-runs/regcloud-cpu-sample.json"))["release"];assert re.fullmatch(r"[a-f0-9]{40}",v);print(v)')
+          ssh "${ssh_opts[@]}" root@151.248.113.177 bash -s -- "$expected" <<'REMOTE'
           set -euo pipefail
           exec 9>/run/lock/avtocena-runtime-change.lock
           flock -w 30 9
+          expected=$1
+          actual=$(docker exec avtocena-production node -e 'console.log(process.env.AVTOCENA_RELEASE_SHA)')
+          test "$actual" = "$expected"
+          printf 'PROFILE_EXACT_RELEASE %s\n' "$actual"
           test "$(docker inspect --format '{{index .Config.Labels "avtocena.role"}}' avtocena-production)" = production
           # The inspector uses loopback inside the container, with no published port.
           docker inspect --format '{{json .HostConfig.PortBindings}}' avtocena-production | python3 -c 'import json,sys; p=json.load(sys.stdin);assert set(p)=={"3000/tcp"};assert p["3000/tcp"][0]["HostIp"]=="127.0.0.1"'
@@ -42,6 +47,7 @@ jobs:
           docker exec avtocena-production node -e 'fetch("http://127.0.0.1:9229/json/list").then(()=>{console.error("INSPECTOR_STILL_OPEN");process.exit(1)},()=>console.log("INSPECTOR_CLOSED"))'
           port=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}' avtocena-production)
           curl -sS --max-time 8 -o /dev/null -w 'HEALTH %{http_code} %{time_total}\n' "http://127.0.0.1:$port/api/health" || true
+          test "$(docker exec avtocena-production node -e 'console.log(process.env.AVTOCENA_RELEASE_SHA)')" = "$expected"
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
           docker logs --since 20m --tail 10000 avtocena-production 2>&1 | python3 -c 'import sys,json,collections;rows=[];errors=collections.Counter()
           for line in sys.stdin:
