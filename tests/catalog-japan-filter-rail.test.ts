@@ -9,14 +9,14 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  'ajes-catalog':`export const withAjesCount=async x=>x;`,
  'green-corner-search':`export const filterGreenCorner=(items,params)=>items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));export const greenCornerFacets=()=>({makes:[],models:[],bodyTypes:[],fuels:[],transmissions:[],drives:[]});`,
  'green-corner':`export const readGreenCorner=async()=>({items:[{id:'match',make:'Volkswagen',powerHp:150},{id:'too-powerful',make:'Volkswagen',powerHp:200},{id:'wrong-brand',make:'Toyota',powerHp:100}]});export const publicGreenOffer=x=>x;export const readGreenCornerPage=async(items,params,clampPage,pageSize)=>{if(pageSize!==6)throw Error('preview must price six cards');const rows=items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));return {items:rows,total:rows.length}};`,
- 'storage':`export const readCatalogFacets=async()=>({});export const searchOffers=async()=>({total:0,items:[],page:1,pageSize:10});`,
+ 'storage':`export const readCatalogFacets=async()=>{if(globalThis.__catalogFixtureFail)throw Error('fixture outage');return {}};export const searchOffers=async()=>({total:0,items:[],page:1,pageSize:10});`,
  'market-facets':`export const readGroupedCatalogFacets=async()=>({});`,
  'overview':`export const readCatalogOverview=async()=>null;`,
  'market-page':`export const readCatalogMarketPage=async()=>({total:0,items:[]});export const balanceBusinessRows=x=>x;export const businessOrder=()=>0;export const sortCatalogRows=x=>x;`,
  'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,
  'offer-quality':`export const isRenderablePublicCatalogOffer=()=>true;`,
- 'DealerBrowsingContext':`export const DealerLink=({children})=>children;`,
- 'navigation':`export const redirect=()=>{throw Error('unexpected redirect')};`,
+ 'DealerBrowsingContext':`export const DealerLink=({children})=>children;export const useDealerBrowsing=()=>null;`,
+ 'navigation':`export const redirect=()=>{throw Error('unexpected redirect')};export const useRouter=()=>({refresh:()=>{}});`,
  };
  const ui=['GreenCornerCatalog','AjesCatalog','AjesRail','JapanSectionTabs','GreenCornerRail','PublicHeader','BrandLogoRail','CatalogLoadMore','CatalogCard','CatalogMarketFlag','CatalogFilters','CurrencyRatesStrip'];
  for(const name of ui)mocks[name]=`export function ${name}(){return null;}`;
@@ -30,4 +30,13 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  assert.equal(rails.length,3);assert.deepEqual(rails.find(x=>!x.props.market).props.params,params);
  const green=elements.find(x=>x.type?.name==='GreenCornerRail');assert.equal(green.props.total,1);assert.equal(green.props.items[0].id,'match');
  const link=new URL(green.props.href,'https://avtocena.com');for(const [key,value] of Object.entries(params))assert.equal(link.searchParams.get(key),value);assert.equal(link.searchParams.get('stock'),'green');
+ (globalThis as any).__catalogFixtureFail=true;
+ try{
+  const failed=await m.exports.CatalogContent({params});elements.length=0;walk(failed);
+  const sidebar=elements.find(x=>x.type?.name==='CatalogSidebar');
+  assert.match(sidebar.props.resultError,/Выбранные условия сохранены/);
+  assert.deepEqual(sidebar.props.filters.props.initial,params);
+  assert.ok(elements.some(x=>x.type?.name==='PublicHeader'),'catalog outage retains navigation');
+ }finally{delete (globalThis as any).__catalogFixtureFail;}
+
 });

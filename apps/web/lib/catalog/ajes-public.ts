@@ -22,9 +22,10 @@ export async function cappedAjesQuery(query:AjesQuery):Promise<AjesQuery>{
  if(!rate)throw Error('ajes_currency_unavailable');
  return {...query,sourcePriceTo:ajesChinaSourceCeiling(rate.effectiveRate)};
 }
-export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean}={}){
+export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean;measure?:(stage:string,ms:number)=>void}={}){
  query=await cappedAjesQuery(query);
  const ip=(await headers()).get('x-real-ip')||'';
+ const sourceStart=performance.now();
  const result=await ajesClient.read(query,ip).catch(error=>{
   // Fixed local error codes only: never log visitor IPs, SQL, URLs or supplier bodies.
   const allowed=new Set(['client_ip_missing','not_configured','invalid_response','visitor_restricted','request_failed','request_timeout','connect_timeout','response_too_large','empty_response','identity_mismatch','quota_invalid','quota_exhausted','quota_busy','query_too_large']);
@@ -32,12 +33,16 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   console.warn('AJES_PUBLIC_FAILURE',reason);
   throw error;
  });
- const index=await readCatalogEditorial();
+ options.measure?.('supplier-read',performance.now()-sourceStart);
+ const indexStart=performance.now();const index=await readCatalogEditorial();options.measure?.('editorial-read',performance.now()-indexStart);
  const items=await Promise.all(result.items.map(async(lot:NonNullable<ReturnType<typeof ajesLot>>)=>{
+  const detailStart=performance.now();
   if(lot.table==='korea'&&!query.id){
    const saved=await openedKoreaDetails.get(lot.id,()=>getJsonStorage().readJson('catalog/partner-cache/ajes/korea/'+lot.id+'.json',null)).catch(()=>null);
    lot=newerKoreaDetail(lot,result.observedAt,saved);
   }
+  options.measure?.('detail-cache-sum',performance.now()-detailStart);
+  const enrichStart=performance.now();
   const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
   if(!rate)throw Error('ajes_currency_unavailable');
   let offer=ajesOffer(lot,rate,result.observedAt);
@@ -48,6 +53,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
    const [{enrichOfferWithKnowledgeCore},{normalizeVehicleOfferSpecs}]=await Promise.all([import('./knowledge-core'),import('./spec-normalization')]);
    offer=normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
   }
+  options.measure?.('enrichment-sum',performance.now()-enrichStart);
   if(options.editorial!==false&&editorialHidden(offer,index))return null;
   return applyJapanOwnerSpecifications(options.editorial===false?offer:applyCatalogEditorial(offer,index));
  }));

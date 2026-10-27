@@ -58,13 +58,17 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
  const ip=(await headers()).get('x-real-ip')||'',key=JSON.stringify(q);
  return directories.get(key,async()=>readAjesModelDirectory(ajesClient,await cappedAjesQuery(q),ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;
 }
-export async function readAjesCatalogPage(params:Record<string,unknown>){
+export async function readAjesCatalogPage(params:Record<string,unknown>,measure?:(stage:string,ms:number)=>void){
+ const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
  const query=await resolvedCatalogQuery(JSON.stringify(params));
+ measure?.('query-resolution',performance.now()-resolveStarted);
  const startedAt=Date.now();
- const totalPromise=readAjesCountSummary(JSON.stringify(params)).catch(()=>null);
+ const countStarted=performance.now();
+ const totalPromise=readAjesCountSummary(JSON.stringify(params)).catch(()=>null).finally(()=>measure?.('count',performance.now()-countStarted));
  const read=async(sourcePage:number)=>{
-  const page=await readAjesPublic({...query,page:sourcePage});
+  const page=await readAjesPublic({...query,page:sourcePage},{measure});
+  const pricingStarted=performance.now();
   let priced=page.items;
   if(query.table==='china'||query.table==='korea'||filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);
   else {
@@ -73,6 +77,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>){
    const matched=page.items.filter(v=>{if(hasEncyclopediaCalculationEvidence(v))return true;try{japanPreviewParameters(v);return true;}catch{return false;}});
    if(matched.length){const updated=new Map((await applyActiveBusinessPricingBatch(matched)).map(v=>[v.id,v]));priced=page.items.map(v=>updated.get(v.id)||v);}
   }
+  measure?.('pricing',performance.now()-pricingStarted);
   return {...page,items:priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v))};
  };
  const firstPromise=params.after?null:read(query.page||1);

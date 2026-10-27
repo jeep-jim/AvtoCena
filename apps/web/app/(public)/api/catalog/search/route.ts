@@ -36,10 +36,12 @@ export async function GET(request: Request) {
   if(p.get('stock')==='green'&&(!p.get('market')||p.get('market')==='japan'))return greenSearch(request);
   if(await usesAjesMarket(p.get('market'),p.get('source'))&&!(p.get('market')==='japan'&&p.get('stock')==='green')){
     try{
+      const phases=new Map<string,number>();
+      const measure=(stage:string,ms:number)=>{if(Number.isFinite(ms)&&ms>=0)phases.set(stage,(phases.get(stage)||0)+ms);};
       const params=Object.fromEntries(p);
       const summary=p.get('countOnly')==='1'?await readAjesCountSummary(JSON.stringify(params)):null;
-      const result=summary?{total:exactAjesCount(summary)??null,countSummary:summary,countIncomplete:exactAjesCount(summary)===undefined,items:[]}:await readAjesCatalogPage(params);
-      return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, max-age=15, stale-while-revalidate=30'}});
+      const result=summary?{total:exactAjesCount(summary)??null,countSummary:summary,countIncomplete:exactAjesCount(summary)===undefined,items:[]}:await readAjesCatalogPage(params,measure);
+      return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, max-age=15, stale-while-revalidate=30','Server-Timing':[`catalog-total;dur=${(performance.now()-started).toFixed(1)}`,...[...phases].map(([phase,ms])=>`${phase};dur=${ms.toFixed(1)}`)].join(', ')}});
     }catch(e){const failure=ajesErrorResponse(e);return NextResponse.json(failure.body,{status:failure.status,headers:{'Cache-Control':'no-store'}});}
   }
   const query: Parameters<typeof searchOffers>[0] = {

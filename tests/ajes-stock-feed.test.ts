@@ -92,3 +92,17 @@ test('Rexton Sports keeps pickup identity when presentation shortens its model n
  const suv=ajesOffer(ajesLot({...row,MARKA_NAME:'SSANGYONG',MODEL_NAME:'REXTON'},'korea',true)!,{rateSource:'cbr',currency:'KRW',sourcePrice:17400000,effectiveRate:0.06} as any,'2026-10-24');
  assert.notEqual(catalogBodyType(suv),'pickup');
 });
+
+test('opening an already listed Korea car keeps a supplied source URL without extra requests',async()=>{
+ let calls=0;
+ const url='https://www.encar.com/dc/dc_cardetailview.do?carid=43015007';
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async input=>{
+  calls++;const detail=new URL(String(input)).searchParams.has('ajax');
+  return Response.json([{...row,LOT:'43015007',STATUS:detail?'':url,FINISH:detail?'17500000':row.FINISH}]);
+ }});
+ await client.read({table:'korea'},'203.0.113.1');
+ const detail=await client.read({table:'korea',id:row.ID},'203.0.113.1');
+ assert.equal(detail.items[0].status,url);assert.equal(detail.items[0].sourcePrice,17500000);assert.equal(calls,2);
+ const cached=await client.read({table:'korea',id:row.ID},'203.0.113.1');
+ assert.equal(cached.items[0].status,url);assert.equal(calls,2);
+});

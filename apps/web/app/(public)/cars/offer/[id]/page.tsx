@@ -392,7 +392,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   </div> : null;
 
   const editorialSource = canEditCatalog(currentUser) ? await getOfferFromCurrentShard(o.id) : null;
-  const updatedStatus = <OfferUpdatedStatus date={updatedDate} time={updatedTime} sourceUrl={sourceUrl} />;
+  const updatedStatus = <OfferUpdatedStatus sourceUnavailable={enrichedOffer.market==="korea"&&!sourceUrl} date={updatedDate} time={updatedTime} sourceUrl={sourceUrl} />;
 
   return <main data-autobot-electrified={offer.fuel==='hybrid'||offer.fuel==='electric'?'true':'false'} data-autobot-missing={JSON.stringify(missingElectrifiedSpecifications(offer))} data-offer-id={o.id} data-offer-share-name={o.title} data-offer-share-year={directScenario?.draft.year || savedCalculation?.draft.year || offer.year} data-offer-share-engine-cc={directScenario?.draft.engineCc || savedCalculation?.draft.engineCc || offer.engineCc} data-offer-share-fuel={offer.fuel} data-offer-saved-version={clientScenario?.version} data-offer-price-rub={retro ? undefined : directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || (sellerPricing ? offer.sellerPriceRub : visibleRub || undefined)} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],fuel:offer.fuel,powertrainKind:offer.powertrainKind,year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />

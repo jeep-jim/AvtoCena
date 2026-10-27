@@ -1,3 +1,4 @@
+import {preserveKoreaListingLink} from './ajes-korea-detail-cache';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
@@ -16,7 +17,7 @@ export function createAjesClient(deps:Dependencies) {
   const failures=new Map<string,{reason:string;until:number}>();
   const remember=(value:any)=>{
     for(const lot of value.items||[]){
-      const key=lot.table+':'+lot.id,snapshot={schemaVersion:value.schemaVersion,items:[lot],page:1,pageSize:1,observedAt:value.observedAt,partial:true};
+      const key=lot.table+':'+lot.id,snapshot={schemaVersion:value.schemaVersion,items:[lot],page:1,pageSize:1,observedAt:value.observedAt,partial:true,stale:Boolean(value.stale)};
       const bytes=Buffer.byteLength(JSON.stringify(snapshot));if(bytes>64*1024)continue;
       listedBytes-=listed.get(key)?.bytes||0;listed.delete(key);listed.set(key,{value:snapshot,bytes});listedBytes+=bytes;
       while(listed.size>600||listedBytes>4*1024*1024){const oldest=listed.keys().next().value!;listedBytes-=listed.get(oldest)!.bytes;listed.delete(oldest);}
@@ -141,7 +142,14 @@ export function createAjesClient(deps:Dependencies) {
           const reason=controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed';
           throw new AjesUnavailable(reason);
         }finally{clearTimeout(timer);}
-      }),visitorKey);
+      }),visitorKey).then(value=>{
+        if(query.table!=='korea'||query.kind!=='detail'||value.stale||value.items?.length!==1)return value;
+        const snapshot=listed.get('korea:'+query.id)?.value;
+        const age=Date.now()-Date.parse(snapshot?.observedAt||'');
+        if(snapshot?.stale||!(age>=0&&age<30*60000)||snapshot.items?.length!==1)return value;
+        const item=preserveKoreaListingLink(value.items[0],snapshot.items[0]);
+        return item===value.items[0]?value:{...value,items:[item]};
+      });
     },
   };
 }
