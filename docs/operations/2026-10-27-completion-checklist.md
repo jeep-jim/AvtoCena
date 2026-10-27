@@ -82,3 +82,6 @@
 
 
 22:40: PR1599 draft finala9473e2, CI40532904410/browser40532904260 pending. Original368b183 12browser/verify SUCCESS, локально2647/2647+types. Runtime d4184b5/40524826437 выполняет Deploy with rollback; switch/66samples не подтверждены. Эти документы не новый runtime. Следить за обоими кандидатами; полнота AWD и canonical propagation заполненных карточек остаются открытыми.
+
+
+22:50: exactd418 установлен, deploy40524826437 SUCCESS,66/66VM+final verifier PASS; rollback не понадобился. PR1599 merged d6ba6cc после13SUCCESSruntimea947, integration6adb отличается толькоRoad/checklist; ещё НЕ установлен. Следующий bounded live d418: phasebrowser,widths390/1440,acceptance:true. Полная live скорость/полнота Japan AWD/обновления заполненных canonical facts/insurance events НЕ приняты.
