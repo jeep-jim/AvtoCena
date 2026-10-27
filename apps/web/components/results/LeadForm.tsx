@@ -1,5 +1,4 @@
 "use client";
-import {LeadSuccessGames} from '../games/GamesHub';
 import {ConsentCheckbox} from "@/components/legal/ConsentCheckbox";
 import {leadFetch} from "@/lib/lead-submit-client";
 import {PhoneInput} from "@/components/leads/PhoneInput";
@@ -203,7 +202,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
                     <div className="text-xl font-black text-green-200">Заявка отправлена</div>
                     <p className="mt-2 text-sm font-bold leading-6 text-white/58">
                       Менеджер TopAvto свяжется с вами в ближайшее время.
-                    </p><LeadSuccessGames/>
+                    </p><a href="/account" className="inline-block mt-3">Войти в кабинет</a>
                     <button
                       type="button"
                       onClick={() => setOpen(false)}

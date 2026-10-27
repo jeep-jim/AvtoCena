@@ -1,5 +1,4 @@
 "use client";
-import {LeadSuccessGames} from '../games/GamesHub';
 import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
 import {ConsentLinks,ConsentMark} from "@/components/legal/ConsentCheckbox";
 import {leadFetch} from "@/lib/lead-submit-client";
@@ -101,7 +100,7 @@ export default function RequestPage() {
           {status === "success" ? (
             <div className="mt-7 rounded-2xl bg-emerald-500/12 p-5">
               <div className="text-lg font-black text-emerald-500">✓ Заявка отправлена</div>
-              <p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)]">{message}</p><LeadSuccessGames/>
+              <p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)]">{message}</p><a href="/account" className="inline-block mt-3">Войти в кабинет</a>
               <div className="mt-5 grid gap-2 sm:grid-cols-2">
                 <Link href="/cars" className="ac-colored-button flex min-h-12 items-center justify-center rounded-xl bg-red-500 px-4 text-sm font-black text-white">Смотреть каталог</Link>
                 <Link href="/" className="flex min-h-12 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] px-4 text-sm font-black text-[var(--ac-text)]">На главную</Link>

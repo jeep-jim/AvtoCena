@@ -402,20 +402,7 @@ export function DealerEditor({
           </section>
         )}
         {(tab === "offers" || tab === "pricing") && <DealerSpecialsEditor section={tab==='pricing'?'pricing':'offers'} s={s} patch={patch} pricing={pricing} updateOffer={updateOffer} activeId={active?.id||''} setActiveId={setActiveId} mode={offerMode} setMode={setOfferMode}/>}
-        {platformOwner && tab === "services" && (
-          <>
-            <h2 className="text-xl font-black">Сервисы на всём сайте</h2>
-            <Toggle
-              label="Показывать ОСАГО и кредит"
-              value={f.affiliatesEnabled}
-              onChange={(v) => setF({ ...f, affiliatesEnabled: v })}
-            />
-            <p className="text-sm text-[var(--ac-muted)]">
-              Один переключатель управляет кнопками и ссылками на главной, в
-              карточках автомобилей и в подвале, включая мобильную версию.
-            </p>
-          </>
-        )}
+
       </fieldset>
        {tab==='offers'&&<aside className="dealer-offer-aside" aria-label="Действия и предпросмотр автомобиля">
         <section className="dealer-editor-panel dealer-offer-actions">

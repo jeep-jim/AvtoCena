@@ -57,3 +57,25 @@ test('confirmed knowledge is durable, revisioned and reaches the actual price en
   assert.equal((await readManagementKnowledge()).models[fact.key].donor.values.powerHp,160);assert.equal(map.size,3);
  }finally{read.mock.restore();write.mock.restore();resetCatalogRateCache();}
 });
+
+test('encyclopedia changes feed the same compatibility engine, retract cleared facts and expose card learning',async()=>{
+ const {rememberEncyclopediaModel,encyclopediaWithManagement}=await import('../apps/web/lib/catalog/management-knowledge');
+ const map=new Map<string,any>();
+ const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string,fallback:any)=>({found:map.has(key),etag:map.has(key)?'etag':undefined,value:structuredClone(map.get(key)??fallback)}));
+ const write=mock.method(LocalJsonStorage.prototype,'writeJson',async(key:string,value:any)=>{map.set(key,structuredClone(value));});
+ const record:any={id:'model',make:'Honda',model:'Vezel',photo:'',revision:'ency-1',updatedAt:'2026-10-27T10:00:00Z',editedBy:'owner',variants:[{id:'v1',year:2025,engineCc:1496,fuel:'petrol',drive:'fwd',powerHp:150,manualEditedAt:'now',markets:[],status:'review',observedCount:0}]};
+ try{
+  await rememberEncyclopediaModel(record);
+  const first=await readManagementKnowledge();
+  assert.equal(managementParameters({id:'target',make:'Honda',model:'Vezel',year:2025,engineCc:1496,fuel:'petrol',drive:'fwd'},first).powerHp,150);
+  assert.equal(managementParameters({id:'target',make:'Honda',model:'Vezel',year:2025,engineCc:1496,fuel:'petrol',drive:'awd'},first).powerHp,undefined);
+  assert.equal(managementParameters({id:'target',make:'Honda',model:'Vezel',year:2025,engineCc:1496,fuel:'petrol',powerHp:151},first).powerHp,undefined);
+  await rememberEncyclopediaModel({...record,revision:'ency-2',updatedAt:'2026-10-27T11:00:00Z',variants:[]});
+  assert.equal(managementParameters({id:'target',make:'Honda',model:'Vezel',year:2025,engineCc:1496,fuel:'petrol'},await readManagementKnowledge()).powerHp,undefined);
+  await rememberEncyclopediaModel(record);assert.equal(managementParameters({id:'target',make:'Honda',model:'Vezel',year:2025,engineCc:1496,fuel:'petrol'},await readManagementKnowledge()).powerHp,undefined,'an older save cannot resurrect cleared facts');
+  const learned:any={version:1,revision:'card',models:{'honda:vezel':{donor:{offerId:'donor',key:'honda:vezel',year:2025,values:{engineCc:1496,fuel:'petrol',powerHp:150},savedAt:'2026-10-27',savedBy:'owner',version:'card'}}}};
+  const viewed=encyclopediaWithManagement({...record,variants:[{...record.variants[0],powerHp:undefined}]},learned);
+  assert.equal(viewed.variants[0].powerHp,150);assert.equal(record.variants[0].powerHp,150);
+  assert.equal(encyclopediaWithManagement({...record,variants:[]},learned).variants.length,1);
+ }finally{read.mock.restore();write.mock.restore();}
+});

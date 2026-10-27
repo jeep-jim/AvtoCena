@@ -185,3 +185,12 @@
 - Performance acceptance must cover the owner's China + Novokuznetsk category URL in addition to existing routes at unchanged ceilings, warm/35s/305s before and after switch. Catalog HTML must contain actual linked vehicle cards: a fast error page, empty placeholder, HTTP200 or completed HTML shell is not success.
 - Preserve navigation, contact options and an independent generic callback form if catalog/offer rendering fails. Do not call an outage an update unless an update is actually known. Keep previous results/filters on recoverable filter errors and label previous results honestly.
 - Korea report controls stay between specifications and updated status on desktop, below specifications on mobile. Fetch each report only when selected; external report failure must not break the vehicle page. Supplier-approved tru.ru originals are supported, with a manual visitor challenge and permanent new-tab link; never label Korean documents as translated Russian data.
+
+
+# Owner compact encyclopedia and retired services — 27.10.2026
+
+- Owner replaces the brand/trim accordion directory with a compact, paginated model list, grouped by make, top year filters, shared column headings, thumbnail enlargement, in-place parameter editing and manual model creation. No car-offer links in the directory. This supersedes earlier brand/grid/accordion presentation requirements.
+- Freeze the current catalog model scope once from complete saved catalog/directory evidence. Preserve technical records, revisions, reviewed power evidence and manual edits. Do not reconstruct thousands of equipment trims as distinct visible rows. Real mechanical differences remain separate. Snapshot counters must disclose their capture date and supplier upper-bound status. Never label cached sample counts as full inventory.
+- Confirmed encyclopedia edits must contribute to the same missing-only, compatible management knowledge used by card edits. Preserve existing values, conflicting identities, per-recipient prices and evidence. Report a partial save/application failure honestly and permit retry.
+- Remove credit/insurance services, switches, links and post-lead game prompts. Game engines may remain if not loaded/running on ordinary pages; do not claim RAM savings without measurements.
+- Coordinate with the active performance release. Do not activate this redesign before its saved directory migration, correctness checks, desktop/mobile verification and unchanged production performance gates pass.

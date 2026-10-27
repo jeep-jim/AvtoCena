@@ -19,7 +19,6 @@ import {SpecialRail, type SpecialRailItem} from "@/components/dealers/SpecialRai
 import { BuyerGallery } from "@/components/home/BuyerGallery";
 import { CitySelector } from "@/components/home/CitySelector";
 import { PublicHeader } from "@/components/layout/PublicHeader";
-import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 import { appendAttributionToSearchParams } from "@/lib/attribution";
 import { canonicalCatalogBrand } from "@/lib/catalog/brands";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
@@ -349,30 +348,6 @@ export default function HomePageClient({ japanAuctions, dealerGallerySlot, speci
       <div className="ac-home-hero-gallery -mt-2 lg:mt-0">{dealerGallerySlot ?? <BuyerGallery images={dealerGallery} />}</div>
       </div>
       {specialRailSlot ?? (specialRail && <SpecialRail {...specialRail} desktopSplit/>)}
-      <div className="ac-home-services mt-4 hidden gap-4 lg:grid lg:grid-cols-1 lg:items-stretch">
-        <section className="ac-home-finance grid min-h-[206px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">
-          <a href={AUTOCREDIT_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} aria-label="Подобрать автокредит в ВТБ" className="ac-executor-block relative block min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6 transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35c932] active:scale-[.995]">
-            <div className="relative z-10 h-full min-h-[158px] pr-[205px]">
-              <div className="flex items-start gap-7">
-                <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#35c932]" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="7" y="5" width="34" height="38" rx="4" stroke="currentColor" strokeWidth="3.5"/><path d="M14 13h20M15 23h6M18 20v6M28 20l6 6M34 20l-6 6M15 34h6M28 34h6" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/></svg></div>
-                <h3 className="min-w-0 pt-0.5 text-[23px] font-black leading-[1.08] text-[var(--ac-text)]">Кредитный<br />калькулятор</h3>
-              </div>
-              <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Рассчитайте платёж и подберите<br className="hidden xl:block" /> удобные условия покупки автомобиля.</p>
-            </div>
-            <img src="/home/credit-mascot-card.png" alt="" className="pointer-events-none absolute bottom-[-2px] right-3 h-[194px] w-[194px] object-contain object-bottom xl:right-4 xl:h-[202px] xl:w-[202px]" aria-hidden="true" />
-          </a>
-          <a href={OSAGO_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} aria-label="Рассчитать полис ОСАГО на Банки.ру" className="ac-executor-block relative block min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6 transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd21f] active:scale-[.995]">
-            <div className="relative z-10 h-full min-h-[158px] pr-[215px]">
-              <div className="flex items-start gap-7">
-                <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#ffd21f]" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><path d="M24 5 38 10v10.5c0 9-5.7 16.4-14 20.5-8.3-4.1-14-11.5-14-20.5V10l14-5Z" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round"/><path d="m17 23 5 5 10-10" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-                <h3 className="min-w-0 pt-0.5 text-[23px] font-black leading-[1.08] text-[var(--ac-text)]">Страховой полис<br />ОСАГО</h3>
-              </div>
-              <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса<br className="hidden xl:block" /> для выбранного автомобиля.</p>
-            </div>
-            <img src="/home/osago-mascot-card.png" alt="" className="pointer-events-none absolute bottom-[-3px] right-1 h-[202px] w-[202px] object-contain object-bottom xl:right-2 xl:h-[210px] xl:w-[210px]" aria-hidden="true" />
-          </a>
-        </section>
-      </div>
       <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black normal-case tracking-normal text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl">Авто под заказ</h2></div></div>
         {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { if(group.id === "japan")return !catalogMake && !electricOnly ? <div key="japan" className="space-y-8">{japanAuctions}<GreenCornerRail {...initialGreen} /></div> : null; const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <div key={group.id}><section><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 flex-wrap items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><MarketResultCount>{(["china","korea"].includes(group.id)&&Object.prototype.hasOwnProperty.call(marketCountInfo,group.id)) ? (electricOnly ? `показано ${formatCatalogCount(group.total)}` : ajesCountText(marketCountInfo[group.id])) : formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</MarketResultCount></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-5 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className="min-w-0"><StableCatalogCard offer={item.raw} dense /></div>)}</div></section></div>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
         <BrandLogoRail brands={electricOnly ? availableItems.map((item) => item.make) : knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make)} />
