@@ -16673,3 +16673,10 @@ Exact5877cd68a283b85cff98f4533fee51ea683e24b0 прошёл8checks: CI40517255725
 - Внесён ограниченный yield после каждого1MiB полученныхбайт. Timeout/abort, retries,содержимое/порядокбайт,ETag/CAS,размеры/TTLкешей,цены/данные/порогипроизводительности не меняются. Мелкие ответы не получают дополнительную паузу. Исправление не заменяет последующую серверную приёмку.
 - RED→GREEN;25 storage/projection/transport/REGtests PASS; корневой `npm run typecheck` PASS. Ошибочный первоначальный вызов workspace:typecheck не нашёл script, затем выполнен правильный корневой скрипт. Regression также включён в предустановочный storage guard. CI новой правки ещё ожидается, она не установлена.
 - PR1594 merged44fba180 после8/8SUCCESS exact41c24a9. City40519280841 attempt2/job122249091086 PASSChromium+WebKit; первоначальныйtimeout только установки пакетов. Единственный releasePR1597 подготовлен, но НЕ merged: сначала включить эту проверенную правку, затем один deploy. Production остаётся43614d9; все66gates+реальные390/1440 обязательны.
+
+
+## 27.10.2026, 21:48 Красноярск — русский осмотр и fairness готовы к одному выпуску
+
+- PR1594 merged44fba180: русский осмотр/локальнаясхема, final41c24a9 all8SUCCESS. PR1598 mergedd6f9395a4ef40c09b424f3bc5dab5221b1fdd762: fairness чтенияstorage, CI40523306776SUCCESS2644/2644+допsuites/types/build;site40523306150/green40523306096SUCCESS. Local25storage/projection/transporttestsPASS. Полнаястраховаятаблица/суммы/OCRнеготовы.
+- ReleasePR1597 интегрирован поверхd6f9395: runtime-код строго тот же проверенныйmain; меняются толькоrelease marker,Road,checklist. Все57research/ASTRAспискиперенесеныбезизменений; marker меняеттолькоreason/requestedAt. Единственныйследующийdeploy запускаетсяэтимPR,другихactiveустановокнет. Послеmerge нужныегоexactSHA/run иполнаяприёмка66samples+390/1440; доэтогоactual436/rollback6fdbостаётсяпоследнимподтверждённым.
+- Previous6fdb послеswitchоткатилсянаhealth35s0,3891>0,250; новыйfairnessдефектдоказанRED→GREEN,ноегоэффектвproductionещёнеизмерен. Ниодинпорогнеповышен. ПрофильилиHTTP200неподменяютприёмку.
