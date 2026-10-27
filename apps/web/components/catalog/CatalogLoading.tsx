@@ -1,5 +1,5 @@
 import './catalog-loading.css';
-/** Streamed sections signal the single page loader without duplicating its UI. */
+/** Each streamed section owns its feedback; it never covers the header. */
 export function CatalogSectionLoading({active=false}:{active?:boolean}) {
- return <span hidden data-catalog-stream-pending={active?'true':'false'}/>;
+ return active?<p role="status" data-catalog-stream-pending="true" className="py-4 text-sm text-[var(--ac-muted)]">Загружаем автомобили…</p>:null;
 }

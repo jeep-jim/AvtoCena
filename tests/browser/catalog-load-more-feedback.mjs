@@ -37,12 +37,13 @@ try{
   const scope=page.locator(width<1024?'.ac-mobile-filter-sheet':'.ac-catalog-filter-panel');
   const checkbox=scope.locator('.ac-electric-filter input[type=checkbox]');await checkbox.check();
   assert.equal(await checkbox.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 210, 31)');
-  const loading=page.locator('.ac-route-loader[aria-hidden="false"]');await loading.waitFor({state:'visible'});
+  const loading=page.locator('[data-catalog-filter-pending="true"]');await loading.waitFor({state:'attached'});
+  assert.equal(await page.locator('.ac-route-loader[aria-hidden="false"]').count(),0);
   // Real request remains unacknowledged; advancing time must not hide the loader.
-  if(width===390&&theme==='dark'){await page.clock.install();await page.clock.runFor(16000);assert.ok(await loading.isVisible());}
+  if(width===390&&theme==='dark'){await page.clock.install();await page.clock.runFor(16000);assert.equal(await loading.count(),1);}
   await page.waitForURL(/fuel=electrified/);
   if(width<1024)await scope.getByRole('button',{name:'Применить фильтры',exact:true}).click();
-  await page.locator('#ack').click();await loading.waitFor({state:'hidden'});
+  await page.locator('#ack').click();await loading.waitFor({state:'detached'});
   assert.deepEqual(searches,[],'electric toggle must not send a duplicate catalog search');assert.deepEqual(errors,[]);
   await page.screenshot({path:`${out}/${width}-${theme}.png`});results.push({width,theme,geometry,passed:true});await page.close();
  }

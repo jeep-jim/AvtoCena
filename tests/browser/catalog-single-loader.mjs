@@ -31,8 +31,9 @@ try {
   await page.evaluate(()=>{for(let i=0;i<100;i++){const row=document.createElement('span');row.textContent='photo '+i;document.getElementById('unrelated-updates').append(row)}});
   await page.waitForTimeout(150);assert.equal(await page.evaluate(()=>window.__loaderQueries),scans,'unrelated cards/photos must not rescan document');
   await page.getByText('Filter',{exact:true}).click();
-  await page.waitForFunction(()=>document.querySelector('.ac-route-loader[aria-hidden="false"]'));
-  assert.equal(await visible(),1,'initial streamed page still has one loader');
+  await page.waitForTimeout(150);
+  assert.equal(await visible(),0,'streamed catalogs keep feedback next to results');
+  assert.equal(await page.locator('[data-catalog-stream-pending="true"]:visible').count(),2);
   await page.getByText('Stream',{exact:true}).click();
   await page.waitForFunction(()=>document.querySelector('.ac-route-loader[aria-hidden="true"]'));
   const link=page.getByText('Plain car link',{exact:true});

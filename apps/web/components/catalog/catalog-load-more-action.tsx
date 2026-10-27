@@ -12,5 +12,5 @@ export async function loadMoreCatalog(query: CatalogSearchParams, page: number, 
   if (!response.ok) throw new Error(`catalog_page_http_${response.status}`);
   const result = await response.json();
   if (result.page !== page || !Array.isArray(result.items) || !(Number.isSafeInteger(result.total)||result.total===null)) throw new Error("invalid_catalog_page");
-  return {cards: result.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />), ids: result.items.map((offer: any) => offer.id), total: result.total, page, generationId: result.generationId, nextCursor: typeof result.nextCursor === "string" ? result.nextCursor : result.nextCursor === null ? null : undefined, hasMore: typeof result.hasMore === "boolean" ? result.hasMore : undefined};
+  return {incomplete:Boolean(result.partial||result.stale),cards: result.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />), ids: result.items.map((offer: any) => offer.id), total: result.total, page, generationId: result.generationId, nextCursor: typeof result.nextCursor === "string" ? result.nextCursor : result.nextCursor === null ? null : undefined, hasMore: typeof result.hasMore === "boolean" ? result.hasMore : undefined};
 }
