@@ -68,7 +68,28 @@ function pageHref(params: Record<string, string | string[] | undefined>, page: n
   return suffix ? `/cars?${suffix}` : "/cars";
 }
 
-export async function CatalogContent({params={},dealer=null,embedded=false}:{params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean}) {
+type CatalogContentProps={params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean};
+export async function CatalogContent(props:CatalogContentProps){
+ try{return await ReadCatalogContent(props);}catch(error){
+  // Redirects and framework navigation signals must retain their semantics.
+  if(error&&typeof error==='object'&&'digest' in error&&String(error.digest).startsWith('NEXT_'))throw error;
+  console.error('catalog_page_unavailable');
+  const {params={},dealer=null,embedded=false}=props;
+  const initial=Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)]));
+  const Container=embedded?'div':'main';
+  return <Container className={`ac-catalog-page ac-page-copy ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>
+   {!embedded&&<PublicHeader backHref="/" backLabel="На главную"/>}
+   <script type="application/ld+json" dangerouslySetInnerHTML={{__html:'{}'}}/>
+   <section className={embedded?'ac-catalog-shell w-full py-5':'ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10'}>
+    <CatalogSidebar resultScope={catalogResultScope(params,dealer)} resultError="Выбранные условия сохранены. Попробуйте обновить подборку."
+     header={<h1 className="text-3xl font-black">Каталог автомобилей</h1>} filters={<CatalogFilters initial={initial}/>}>{null}</CatalogSidebar>
+   </section>
+  </Container>;
+ }
+}
+function catalogResultScope(params:Record<string,string|string[]|undefined>,dealer:DealerBrowsingContext|null){return JSON.stringify([dealer?.id||'public',Boolean(dealer?.preview),first(params.market),first(params.stock)]);}
+
+async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean}) {
   params={...params,...(params.make?{make:catalogBrandFilter(first(params.make))}:{}),...(params.brand?{brand:catalogBrandFilter(first(params.brand))}:{})};
   if(first(params.stock)==="green"&&(!dealer||dealer.markets.includes("japan")))return <GreenCornerCatalog params={{...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),dealer:dealer?.id}} embedded={embedded}/>;
   const [liveChina,liveKorea]=await Promise.all([usesAjesMarket('china'),usesAjesMarket('korea')]);
@@ -204,7 +225,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     {!embedded&&<PublicHeader backHref="/" backLabel="На главную" />}
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }} />
     <section className={embedded?"ac-catalog-shell w-full py-5":"ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10"}>
-      <CatalogSidebar filters={<CatalogFilters initial={initial} facets={facets} resultCount={countIncomplete?undefined:total} />} header={<>
+      <CatalogSidebar resultScope={catalogResultScope(params,dealer)} filters={<CatalogFilters initial={initial} facets={facets} resultCount={countIncomplete?undefined:total} />} header={<>
       <div className="max-w-4xl">
         {selectedMarket === "japan" ? <JapanSectionTabs active={japanAll ? "all" : "auction"} params={Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)]))} /> : null}
         <CatalogBreadcrumbs items={breadcrumbItems}/>
