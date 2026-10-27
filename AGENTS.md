@@ -194,3 +194,9 @@
 - Confirmed encyclopedia edits must contribute to the same missing-only, compatible management knowledge used by card edits. Preserve existing values, conflicting identities, per-recipient prices and evidence. Report a partial save/application failure honestly and permit retry.
 - Remove credit/insurance services, switches, links and post-lead game prompts. Game engines may remain if not loaded/running on ordinary pages; do not claim RAM savings without measurements.
 - Coordinate with the active performance release. Do not activate this redesign before its saved directory migration, correctness checks, desktop/mobile verification and unchanged production performance gates pass.
+
+
+# Owner local filter feedback — 27.10.2026
+
+- Filter changes, sorting and reset keep existing cards visible while the selected query is pending. Feedback belongs beside the controls, including when results stream; do not activate the header page loader for filter form submits. Load-more keeps its lower striped button. Removing an indicator is not evidence of faster results.
+- Global navigation helpers must not prefetch ordinary detail links on touch/pen scroll starts or rescan the whole document on unrelated card/photo mutations. Verify desktop/mobile interactions and the installed release as well as isolated fixtures.
