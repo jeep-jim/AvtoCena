@@ -127,6 +127,8 @@ try{
   if(width<1024)await page.getByRole('button',{name:/Показать/}).last().click();
   await page.waitForTimeout(400);
   assert.equal(new URL(page.url()).searchParams.get('powerTo'),'160');
+  assert.equal(await page.locator('.ac-route-loader[aria-hidden="false"]').count(),0,'real CatalogFilters must not activate the header loader');
+  assert.equal(await page.locator('.ac-catalog-card').count(),6,'previous cards remain while the selected filter is pending');
   assert.equal(new URL(page.url()).searchParams.get('market'),'japan');
   await page.screenshot({path:out+'/japan-power-'+width+'.png'});
   await context.close();

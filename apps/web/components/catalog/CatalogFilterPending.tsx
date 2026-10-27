@@ -1,5 +1,5 @@
 "use client";
-/** The global loader observes this state; filters never mount a second loader. */
+/** Filter feedback stays local; changing parameters is not a page navigation. */
 export function CatalogFilterPending({pending}:{pending:boolean}){
- return <span hidden data-catalog-pending={pending?'true':'false'}/>;
+ return <span className="sr-only" role="status" data-catalog-filter-pending={pending?'true':'false'}>{pending?'Обновляем результаты':''}</span>;
 }
