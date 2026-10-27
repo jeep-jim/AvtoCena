@@ -1205,10 +1205,12 @@ export function catalogMarketLandingPath(generationId: string, market: string) {
 }
 const editorialLandingCache = new DetailReadCache<MarketLanding>({maxEntries:8,maxBytes:12_000_000,ttlMs:300_000,concurrency:2});
 const marketLandingCache = new DetailReadCache<MarketLanding>({maxEntries: 8, maxBytes: 12_000_000, ttlMs: 300_000, concurrency: 4});
+// City is delivery context, not an inventory predicate. Budget/price sorting
+// still fail this guard and retain their exact city-aware search path.
 function canUseMarketLanding(params: CatalogSearchParams) {
   return isActivePublicCatalogMarket(params.market)
     && (!params.sort || params.sort === "updatedAt")
-    && Object.entries(params).every(([key, value]) => ["market", "sort", "page", "pageSize"].includes(key) || !value);
+    && Object.entries(params).every(([key, value]) => ["market", "sort", "page", "pageSize", "city"].includes(key) || !value);
 }
 export async function buildCatalogMarketLanding(generationId: string, market: string, items: CatalogSearchProjection[], options: {now?:Date} = {}): Promise<MarketLanding> {
   const now=options.now||new Date();

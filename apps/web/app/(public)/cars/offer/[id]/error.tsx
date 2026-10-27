@@ -1,2 +1,9 @@
 "use client";
-export default function OfferError({reset}:{reset:()=>void}){return <main className="mx-auto max-w-3xl px-4 py-12"><h1 className="text-2xl font-bold">Не удалось открыть автомобиль</h1><p className="my-4">Данные временно недоступны. Попробуйте ещё раз чуть позже.</p><button onClick={()=>window.location.reload()} className="rounded-lg border px-4 py-2">Повторить</button><a href="/cars" className="ml-5 underline">К каталогу</a></main>;}
+import {PublicHeader} from '@/components/layout/PublicHeader';
+import {CatalogUnavailable} from '@/components/catalog/CatalogUnavailable';
+export default function OfferError({reset}:{reset:()=>void}) {
+ return <main className="ac-catalog-page min-h-screen text-[var(--ac-text)]">
+  <PublicHeader backHref="/cars" backLabel="К каталогу"/>
+  <div className="mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8"><CatalogUnavailable reset={reset} message="Не удалось открыть данные автомобиля. Мы поможем проверить его наличие."/></div>
+ </main>;
+}

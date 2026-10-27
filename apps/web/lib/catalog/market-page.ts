@@ -114,7 +114,8 @@ export async function readCatalogMarketPage(query: CatalogSearchParams) {
   const key = JSON.stringify([(await readCatalogEditorial()).revision,Object.entries(normalized).sort(([a],[b])=>a.localeCompare(b))]);
   return pages.get(key, async () => {
     const {market, page, pageSize, sort, ...filters} = normalized;
-    const hasFilters = Object.values(filters).some(Boolean);
+    // A chosen delivery city must not turn a category click into full-market search.
+    const hasFilters = Object.entries(filters).some(([key,value])=>key!=="city"&&Boolean(value));
     const customSort = Boolean(sort && sort !== "updatedAt");
     const result = !hasFilters && !customSort
       ? await readDiverseDefaultMarketPage(String(market), page)

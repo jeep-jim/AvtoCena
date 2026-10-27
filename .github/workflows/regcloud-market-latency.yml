@@ -66,7 +66,7 @@ jobs:
                   print('MARKET_HTTP',json.dumps({'path':path,'status':r.status,'firstSeconds':round(first,3),'totalSeconds':round(time.monotonic()-start,3),'bytes':len(body),'timing':r.headers.get('Server-Timing'),'items':len(value.get('items',[])) if value else None,'hasMore':value.get('hasMore') if value else None,'complete':bool(value.get('ok')) if value else b'</html>' in body and b'$RX(' not in body}),flush=True)
                   return value
           assert read('/api/health')['releaseSha']==sys.argv[2]
-          for path in ['/cars?market=korea','/api/catalog/search?market=korea&pageSize=24','/api/catalog/search?market=korea&make=HYUNDAI&pageSize=24','/api/catalog/search?market=korea&budget=2000000&pageSize=24','/cars?market=japan','/cars?market=china&make=Volkswagen&page=2']:
+          for path in ['/cars?market=korea','/api/catalog/search?market=korea&pageSize=24','/api/catalog/search?market=korea&make=HYUNDAI&pageSize=24','/api/catalog/search?market=korea&budget=2000000&pageSize=24','/cars?market=japan','/cars?market=china&make=Volkswagen&page=2','/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA']:
               read(path)
           print('MARKET_HTTP_WAIT',json.dumps({'seconds':305,'reason':'bounded China directory-expiry observation; not a release gate'}),flush=True)
           time.sleep(305)

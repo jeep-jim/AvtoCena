@@ -30,7 +30,7 @@ try{for(const width of [390,1440]){
  assert.equal(await page.getByRole('link',{name:'Перейти в каталог',exact:true}).getAttribute('href'),'/cars');
  assert.equal(await page.getByText('Сайт обновляется',{exact:true}).count(),0);
  await help.getByLabel('Имя',{exact:true}).fill('Тест');await help.getByRole('textbox',{name:'Номер телефона, код страны +7'}).fill('9991112233');
- await help.getByRole('checkbox').check();await help.getByRole('button',{name:'Перезвоните мне',exact:true}).click();
+ await help.locator('.ac-consent-mark').click();assert.equal(await help.getByRole('checkbox').isChecked(),true);await help.getByRole('button',{name:'Перезвоните мне',exact:true}).click();
  await help.getByRole('alert').waitFor();assert.equal(await help.getByLabel('Имя',{exact:true}).inputValue(),'Тест');
  assert.equal(await help.getByRole('textbox',{name:'Номер телефона, код страны +7'}).inputValue(),'9991112233');
  assert.equal(posts[0].requestMode,'generic');assert.equal(posts[0].offerId,undefined);assert.equal(posts[0].selectedOfferIds,undefined);assert.equal(posts[0].personalDataConsent,true);
