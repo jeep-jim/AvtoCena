@@ -16680,3 +16680,11 @@ Exact5877cd68a283b85cff98f4533fee51ea683e24b0 прошёл8checks: CI40517255725
 - PR1594 merged44fba180: русский осмотр/локальнаясхема, final41c24a9 all8SUCCESS. PR1598 mergedd6f9395a4ef40c09b424f3bc5dab5221b1fdd762: fairness чтенияstorage, CI40523306776SUCCESS2644/2644+допsuites/types/build;site40523306150/green40523306096SUCCESS. Local25storage/projection/transporttestsPASS. Полнаястраховаятаблица/суммы/OCRнеготовы.
 - ReleasePR1597 интегрирован поверхd6f9395: runtime-код строго тот же проверенныйmain; меняются толькоrelease marker,Road,checklist. Все57research/ASTRAспискиперенесеныбезизменений; marker меняеттолькоreason/requestedAt. Единственныйследующийdeploy запускаетсяэтимPR,другихactiveустановокнет. Послеmerge нужныегоexactSHA/run иполнаяприёмка66samples+390/1440; доэтогоactual436/rollback6fdbостаётсяпоследнимподтверждённым.
 - Previous6fdb послеswitchоткатилсянаhealth35s0,3891>0,250; новыйfairnessдефектдоказанRED→GREEN,ноегоэффектвproductionещёнеизмерен. Ниодинпорогнеповышен. ПрофильилиHTTP200неподменяютприёмку.
+
+
+## 27.10.2026, 21:50 Красноярск — запущен единственный release1597
+
+- PR1597 merged d4184b5d2acb88264eef114bb5f9e013997d99c8; штатный deploy40524826437 in_progress. Exact runtime-кандидат d4184b5d2acb88264eef114bb5f9e013997d99c8, не любой последующий docs-main. Включены русский осмотр/схема1594, storagefairness1598, queuefix1587 иreadycards1592. Активной второй установки нет.
+- Runtime-код принятогоd6f9395 не менялся: GitHubcompare finalreleasehead53af4ef подтвердил только3файла marker/Road/checklist; массивыresearch/ASTRA неизменны. CI1598 40523306776 SUCCESS2644/2644+допsuites/types/build, site/greenPASS;1594all8PASS. ДополнительныйCIreleasehead40524722437 идёт и тоже должен быть проверен, но не является новым runtimeизменением.
+- Production последнимhealth21:40 подтверждён43614d97d82cb64a2f8ccd61187125bfd784bd23. Новыйrelease ещё НЕустановлен: build/priceindexes/switch/66samples/live390/1440неподтверждены. Наблюдение сохранено доитоговойприёмки; не запускать duplicateinstall/repair/diagnostics.
+- Полнаястраховаяистория(случаи/суммы),OCRсканов/полныйпереводкомментариев остаютсяоткрытыми. Русскийструктурированныйосмотр внутрикарточки — отдельныйподтверждённыйкод, не подмена страхования.
