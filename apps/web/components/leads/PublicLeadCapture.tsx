@@ -341,7 +341,7 @@ function LeadDialog({
 
             <div className="grid gap-3 md:grid-cols-2">
               <div className="block min-w-0"><FieldLabel>Ваш город</FieldLabel><LeadCityField value={form.city} onChange={city => setField("city", city)} /></div>
-              <label className="block min-w-0"><FieldLabel>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>
+              <label className="block min-w-0"><FieldLabel>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="ym-disable-keys soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>
             </div>
 
             {isFavorites ? (
@@ -362,7 +362,7 @@ function LeadDialog({
                     <button type="button" onClick={() => setMessenger("max")} className={`rounded-xl text-sm font-black ${messenger === "max" ? "bg-[#7B61FF] text-white" : "text-[var(--ac-muted)]"}`}>MAX</button>
                   </div>
                 </div>
-                <label className="block min-w-0"><FieldLabel>{messenger === "telegram" ? "Telegram" : "MAX"}</FieldLabel><input value={messengerContact} onChange={(event) => setMessengerContact(event.target.value)} placeholder={messenger === "telegram" ? "@username или номер" : "Имя/номер в MAX"} className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>
+                <label className="block min-w-0"><FieldLabel>{messenger === "telegram" ? "Telegram" : "MAX"}</FieldLabel><input value={messengerContact} onChange={(event) => setMessengerContact(event.target.value)} placeholder={messenger === "telegram" ? "@username или номер" : "Имя/номер в MAX"} className="ym-disable-keys soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>
               </div>
             ) : (
               <label className="block min-w-0"><FieldLabel>Телефон</FieldLabel><PhoneInput value={form.phone} onChange={value => setField("phone", value)} /></label>
@@ -378,7 +378,7 @@ function LeadDialog({
                     onFocus={() => setCarFocused(true)}
                     onBlur={() => window.setTimeout(() => setCarFocused(false), 120)}
                     placeholder="Например, Toyota RAV4"
-                    className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none"
+                    className="ym-disable-keys soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none"
                     autoComplete="off"
                   />
                   {carFocused && suggestions.length ? <div className="absolute left-0 right-0 top-[calc(100%+7px)] z-30 max-h-56 overflow-y-auto rounded-2xl bg-[var(--ac-surface-3)] p-2 shadow-2xl">{suggestions.map((item, index) => {
@@ -387,13 +387,13 @@ function LeadDialog({
                   })}</div> : null}
                   <span className="mt-1.5 block text-[11px] font-semibold leading-4 text-[var(--ac-muted)]">Можно выбрать подсказку или написать любую марку и модель вручную.</span>
                 </label>
-                <label className="block min-w-0"><FieldLabel>Бюджет</FieldLabel><div className="relative"><input value={formatBudgetInput(form.budget)} onChange={(event) => setField("budget", event.target.value.replace(/\D/g, ""))} inputMode="numeric" placeholder="Например, 3 000 000" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 pr-10 outline-none" /><span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-black text-[var(--ac-muted)]">₽</span></div></label>
+                <label className="block min-w-0"><FieldLabel>Бюджет</FieldLabel><div className="relative"><input value={formatBudgetInput(form.budget)} onChange={(event) => setField("budget", event.target.value.replace(/\D/g, ""))} inputMode="numeric" placeholder="Например, 3 000 000" className="ym-disable-keys soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 pr-10 outline-none" /><span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-black text-[var(--ac-muted)]">₽</span></div></label>
               </div>
             ) : null}
 
             {isOffer ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><div className="text-[11px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Интересующее авто</div><div className="mt-1.5 text-sm font-black text-[var(--ac-text)]">{cleanText(form.car) || "Автомобиль из открытой карточки"}</div></div> : null}
 
-            <label className="block min-w-0"><FieldLabel>Комментарий</FieldLabel><textarea value={form.comment} onChange={(event) => setField("comment", event.target.value)} rows={3} placeholder="Например: нужен полный привод, светлый салон или срок покупки" className="soft-input w-full resize-none rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 outline-none" /></label>
+            <label className="block min-w-0"><FieldLabel>Комментарий</FieldLabel><textarea value={form.comment} onChange={(event) => setField("comment", event.target.value)} rows={3} placeholder="Например: нужен полный привод, светлый салон или срок покупки" className="ym-disable-keys soft-input w-full resize-none rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 outline-none" /></label>
 
             <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4">
               <label className="flex cursor-pointer items-start gap-5">

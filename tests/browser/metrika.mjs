@@ -13,6 +13,7 @@ fs.mkdirSync(out, { recursive: true });
 await build({
   entryPoints: ["tests/browser/metrika-fixture.tsx"],
   bundle: true,
+  external: ["/autobot/*"],
   splitting: true,
   format: "esm",
   platform: "browser",
@@ -24,6 +25,8 @@ await build({
     {
       name: "next",
       setup(b) {
+        b.onResolve({filter:/AutoCalcPage$/},args=>({path:args.path,namespace:'calculation'}));
+        b.onLoad({filter:/.*/,namespace:'calculation'},()=>({contents:'export const AutoCalcPage=()=>null;',loader:'jsx'}));
         b.onResolve({ filter: /^next\/(link|navigation)$/ }, (args) => ({
           path: args.path,
           namespace: "mock",
@@ -75,7 +78,7 @@ const server = http.createServer((req, res) => {
     res.end(html);
     return;
   }
-  const base = /^\/(buyers|pdf-flags|brands|avatars|logo)\//.test(u.pathname)
+  const base = /^\/(autobot|buyers|pdf-flags|brands|avatars|logo)\//.test(u.pathname)
     ? path.resolve("apps/web/public")
     : path.resolve(out);
   const file = path.resolve(base, "." + u.pathname);
@@ -109,19 +112,24 @@ const results=[];
 try{
  for(const [width,theme] of [[320,'light'],[390,'light'],[390,'dark'],[1440,'light'],[1440,'dark']]){
   const context=await browser.newContext({viewport:{width,height:900}});
+  if(width===390&&theme==='dark')await context.addInitScript(()=>localStorage.setItem('avtocena.autobot.position.v1',JSON.stringify({x:320,y:10})));
   await context.route('https://mc.yandex.ru/**',route=>route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=window.__ymCalls||[];var q=window.ym?.a||[];window.ym=(...args)=>{window.__ymCalls.push(args);if(args[1]==='getClientID')args[2]('1234567890123456789');};for(var args of q)window.ym(...args);`}));
   const submitted=[];await context.route('**/api/leads',route=>{submitted.push(route.request().postDataJSON());return route.fulfill({json:{ok:true}});});
+  await context.route('**/api/autobot',route=>route.fulfill({json:{connected:false}}));
   const page=await context.newPage();
   await page.goto(origin+'/?utm_source=yandex&utm_campaign=987&yclid=123&phone=secret');
   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await page.getByRole('complementary',{name:'Выбор аналитики'}).waitFor();
   assert.equal(await page.locator('#yandex-metrika-112098062').count(),0);
-  const noticeBox=await page.locator('.ac-analytics-choice').boundingBox();if(width<768){assert.ok(Math.abs(noticeBox.y+noticeBox.height-page.viewportSize().height+10)<2,'notice floats 10px above viewport bottom');assert.ok(noticeBox.height<150,'compact mobile notice');}
+  const noticeBox=await page.locator('.ac-analytics-choice').boundingBox();if(width<768){assert.ok(Math.abs(noticeBox.y-10)<2,'mobile notice floats 10px below viewport top');assert.ok(noticeBox.height<150,'compact mobile notice');}
+  for(const button of ['.ac-analytics-accept','.ac-analytics-settings'])assert.equal(await page.locator(button).evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}),true,'consent controls are not covered by assistant');
+  assert.equal(await page.locator('input[type=tel]').evaluate(el=>el.classList.contains('ym-disable-keys')),true);
   await page.screenshot({path:out+'/notice-'+width+'-'+theme+'.png'});
   await page.getByRole('button',{name:/^Хорошо$/i}).click();
   await page.waitForFunction(()=>window.__ymCalls?.some(c=>c[1]==='init'));
   const calls=await page.evaluate(()=>window.__ymCalls);
   assert.equal(calls.filter(c=>c[1]==='init').length,1);
+  assert.equal(calls.find(c=>c[1]==='init')[2].webvisor,true);
   assert.match(calls[0][2].url,/utm_source=yandex/);assert.match(calls[0][2].url,/yclid=123/);assert.doesNotMatch(calls[0][2].url,/phone|secret/);
   assert.equal(await page.locator('.ac-cookie-banner').count(),0);
   assert.equal(await page.locator('[role=dialog]').count(),0);
@@ -148,6 +156,9 @@ try{
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avtocena_analytics_choice_v1')).allowed),true);
   await page.evaluate(()=>{history.pushState({},'','/cars');window.dispatchEvent(new Event('avtocena:metrika-page'));window.dispatchEvent(new Event('avtocena:metrika-page'));});
   assert.equal(await page.evaluate(()=>window.__ymCalls.filter(c=>c[1]==='hit').length),1);
+  await page.evaluate(()=>{history.pushState({},'','/account');window.dispatchEvent(new Event('avtocena:metrika-page'));});
+  assert.equal(await page.evaluate(()=>window.__ymCalls.at(-1)[1]),'destruct');
+  await page.evaluate(()=>{history.pushState({},'','/cars');window.dispatchEvent(new Event('avtocena:metrika-page'));});
   await page.evaluate(()=>{history.pushState({},'','/privacy/request');window.dispatchEvent(new Event('avtocena:metrika-page'));});
   assert.equal(await page.evaluate(()=>window.__ymCalls.at(-1)[1]),'destruct');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));

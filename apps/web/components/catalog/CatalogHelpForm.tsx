@@ -34,7 +34,7 @@ export function CatalogHelpForm() {
  return <div className="mt-6 max-w-xl rounded-2xl bg-[var(--ac-surface-2)] p-4 sm:p-5" data-catalog-help-form>
   <h3 className="text-base font-bold">Подберём автомобиль вручную</h3>
   {state==='success'?<p role="status" className="mt-3 text-sm leading-6">{message}</p>:<form onSubmit={submit} data-private="true" className="mt-4 grid gap-3">
-   <label className="grid gap-2 text-sm font-semibold">Имя<input name="name" autoComplete="name" required maxLength={100} value={name} onChange={e=>setName(e.target.value)} placeholder="Как к вам обращаться" className="min-h-12 min-w-0 rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-4 text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400" /></label>
+   <label className="grid gap-2 text-sm font-semibold">Имя<input name="name" autoComplete="name" required maxLength={100} value={name} onChange={e=>setName(e.target.value)} placeholder="Как к вам обращаться" className="ym-disable-keys min-h-12 min-w-0 rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-4 text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400" /></label>
    <label className="grid gap-2 text-sm font-semibold">Телефон<PhoneInput value={phone} onChange={setPhone} required /></label>
    <ConsentCheckbox checked={consent} onChange={setConsent}/>
    {state==='error'?<p role="alert" className="text-sm leading-6">{message}</p>:null}
