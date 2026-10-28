@@ -80,7 +80,16 @@ function* compileSearch(data:ModelSearchData){
 }
 
 export function createModelSuggestionSearch(data:ModelSearchData){const compiler=compileSearch(data);let step=compiler.next();while(!step.done)step=compiler.next();return step.value;}
-export async function prepareModelSuggestionSearch(data:ModelSearchData){const compiler=compileSearch(data);let step=compiler.next();while(!step.done){await new Promise<void>(resolve=>setTimeout(resolve,0));step=compiler.next();}return step.value;}
+export async function prepareModelSuggestionSearch(data:ModelSearchData){
+ const compiler=compileSearch(data);let sliceStarted=performance.now(),step=compiler.next();
+ while(!step.done){
+  // Yield by elapsed work, not every 200 rows: nested browser timers otherwise
+  // add hundreds of milliseconds even on a fast device. Keep input responsive.
+  if(performance.now()-sliceStarted>=8){await new Promise<void>(resolve=>setTimeout(resolve,0));sliceStarted=performance.now();}
+  step=compiler.next();
+ }
+ return step.value;
+}
 
 /** Exact live inventory names must remain selectable even when absent from knowledge. */
 export function mergeModelSuggestions(inventory:ModelSuggestion[], directory:ModelSuggestion[], query:string):ModelSuggestion[]{
