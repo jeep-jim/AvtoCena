@@ -3,7 +3,7 @@ import {japanPreviewParameters} from './japan-preview-parameters';
 import {readFilteredAjesPage} from './ajes-filtered-page';
 import {resolveAjesMakeNames} from './ajes-make-resolution';
 import 'server-only';
-import {resolveAjesModelSelection} from './ajes-model-resolution';
+import {resolveAjesQueryModels} from './ajes-model-resolution';
 import {ajesResultFilter} from './ajes-result-filter';
 import {applyActiveBusinessPricingBatch} from './live-business-pricing';
 import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-evidence';
@@ -12,7 +12,7 @@ import {headers} from 'next/headers';
 import {cache} from 'react';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesClient} from './ajes-runtime';
-import {readAjesModelDirectory,readAjesMakeDirectory} from './ajes-client';
+import {AjesUnavailable,readAjesModelDirectory,readAjesMakeDirectory} from './ajes-client';
 import {ajesChinaPriceAllowed} from './ajes-price-policy';
 import {readAjesPublic,cappedAjesQuery} from './ajes-public';
 import {ajesCatalogQuery} from './ajes-query';
@@ -30,18 +30,13 @@ async function resolveMake(query:ReturnType<typeof ajesCatalogQuery>){
 }
 const resolvedCatalogQuery=cache(async(key:string)=>{
  const params=JSON.parse(key),query=await resolveMake(ajesCatalogQuery(params));
- if(query.model&&query.make){
-  const directory=await readAjesDirectory({market:params.market,make:query.make});
-  const selection=resolveAjesModelSelection(query.model,directory.models,query.make);
-  delete query.model;Object.assign(query,selection);
- }else if(query.model){
-  query.modelFamilies=query.model;
- }
- return query;
+ return resolveAjesQueryModels(query,()=>readAjesDirectory({market:params.market,make:query.make}));
 });
 export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary>=>{
  const params=JSON.parse(key),filter=ajesResultFilter(params);
- const q={...await resolvedCatalogQuery(key)};delete q.page;delete q.pageSize;delete q.sort;
+ const resolved=await resolvedCatalogQuery(key);
+ if(resolved.modelDirectoryUnavailable)throw new AjesUnavailable('directory_unavailable');
+ const q={...resolved.query};delete q.page;delete q.pageSize;delete q.sort;
  const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
  return {total:result.total,stale:Boolean(result.stale),observedAt:result.observedAt,upperBound:q.table==='china'||filter.active};
@@ -61,7 +56,7 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
 export async function readAjesCatalogPage(params:Record<string,unknown>,measure?:(stage:string,ms:number)=>void){
  const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
- const query=await resolvedCatalogQuery(JSON.stringify(params));
+ const {query,modelDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
  measure?.('query-resolution',performance.now()-resolveStarted);
  const startedAt=Date.now();
  const countStarted=performance.now();
@@ -70,7 +65,9 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  // of ready cards; a pending count must never occupy the list's critical path.
  void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
  const read=async(sourcePage:number)=>{
-  const page=await readAjesPublic({...query,page:sourcePage},{measure});
+  const received=await readAjesPublic({...query,page:sourcePage},{measure});
+  if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
+  const page=modelDirectoryUnavailable?{...received,partial:true}:received;
   const pricingStarted=performance.now();
   let priced=page.items;
   if(query.table==='china'||query.table==='korea'||filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);

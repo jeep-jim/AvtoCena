@@ -99,5 +99,16 @@ export function mergeModelSuggestions(inventory:ModelSuggestion[], directory:Mod
 /** Commit only the names entered by the user; never substitute the first fuzzy result. */
 export function typedModelSelection(query:string, items:{model:string;aliases?:string[]}[], multiple:boolean){
  const names=(multiple?query.split(","):[query]).map(value=>value.replace(/\s+/g," ").trim()).filter(Boolean);
- return [...new Set(names.map(name=>items.find(item=>[item.model,...(item.aliases||[])].some(alias=>suggestionKey(alias)===suggestionKey(name)))?.model||name))].join(multiple?"|":"");
+ return [...new Set(names.map(name=>items.find(item=>[item.model,...(item.aliases||[])].some(alias=>suggestionKey(alias).replace(/\s/g,'')===suggestionKey(name).replace(/\s/g,'')))?.model||name))].join(multiple?"|":"");
+}
+
+/** Infer a make only when every exact typed selection identifies the same brand. */
+export function typedModelMake(selection:string,items:ModelSuggestion[]):string{
+ const makes=new Set<string>();
+ for(const model of selection.split('|').filter(Boolean)){
+  const matches=items.filter(item=>[item.model,...item.aliases].some(name=>suggestionKey(name).replace(/\s/g,'')===suggestionKey(model).replace(/\s/g,'')));
+  if(!matches.length)return '';
+  for(const match of matches)makes.add(canonicalCatalogBrand(match.make));
+ }
+ return makes.size===1?[...makes][0]:'';
 }

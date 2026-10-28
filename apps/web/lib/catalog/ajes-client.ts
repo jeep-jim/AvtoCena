@@ -170,6 +170,11 @@ export function createAjesClient(deps:Dependencies) {
             await deps.assertEnabled(query.table);
             let saved:any=null;try{saved=await deps.readQuery?.(query.sql);}catch{}
             const fallback=await listFallback(saved);if(fallback)return fallback;
+          }else if(query.kind==='models'||query.kind==='makes'){
+            // Retained directory pages are names, not a fresh inventory count.
+            await deps.assertEnabled(query.table);
+            let saved:any=null;try{saved=await deps.readQuery?.(query.sql);}catch{}
+            if(isUsable(saved)){await deps.assertEnabled(query.table);return {...saved,stale:true};}
           }
           throw new AjesUnavailable('local_busy');
         }

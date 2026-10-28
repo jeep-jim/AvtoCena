@@ -3,7 +3,7 @@ import {groupFilterModels} from "@/lib/catalog/model-filter-options";
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal, flushSync } from "react-dom";
-import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection} from "@/lib/catalog/model-suggestion-search";
+import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection, typedModelMake} from "@/lib/catalog/model-suggestion-search";
 import {canonicalCatalogBrand} from "@/lib/catalog/brands";
 import {loadModelSuggestions} from "@/lib/catalog/model-suggestion-loader";
 
@@ -182,12 +182,14 @@ export function VehicleModelSearch({
   const [inventoryLoading,setInventoryLoading]=useState(false);
   const [directoryError,setDirectoryError]=useState(false),[retry,setRetry]=useState(0);
   const searchQuery = multiple ? query.split(",").at(-1)?.trim() || "" : query;
+  const sourceStock=new URLSearchParams(contextQuery||'').get('stock')||'';
+  const sourceOnly=Boolean(sourceItems)&&sourceStock==='green';
   const sourceSearch=useMemo(()=>sourceItems?createModelSuggestionSearch({version:1,brands:[],models:sourceItems.map(item=>[item.make,item.model,item.aliases||[],1])}):null,[sourceItems]);
   const items=useMemo(()=>{
-    const local=sourceSearch?mergeModelSuggestions(inventory?.(searchQuery,make)||[],sourceSearch(searchQuery,make),searchQuery):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems.map(item=>({...item,aliases:item.aliases||[]}));
+    const local=sourceSearch?mergeModelSuggestions(inventory?.(searchQuery,make)||[],mergeModelSuggestions(sourceSearch(searchQuery,make),sourceOnly?[]:directory?.(searchQuery,make)||[],searchQuery),searchQuery):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems.map(item=>({...item,aliases:item.aliases||[]}));
     const merged=mergeModelSuggestions(supplierSearches.flatMap(search=>search(searchQuery,make)),local,searchQuery);
     return contextual?groupFilterModels(merged):merged;
-  },[sourceSearch,contextual,inventory,directory,searchQuery,make,remoteItems,supplierSearches]);
+  },[sourceSearch,sourceOnly,contextual,inventory,directory,searchQuery,make,remoteItems,supplierSearches]);
   useEffect(()=>setVisibleCount(60),[searchQuery,make]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -233,7 +235,6 @@ export function VehicleModelSearch({
   }, [open,mobile]);
 
   const sourceMarket=new URLSearchParams(contextQuery||'').get('market')||'';
-  const sourceStock=new URLSearchParams(contextQuery||'').get('stock')||'';
   useEffect(()=>{
     setSupplierSearches([]);setSupplierError(false);setSupplierLoading(0);
     if(!contextual||!open||sourceStock==='green')return;
@@ -247,11 +248,11 @@ export function VehicleModelSearch({
   },[Boolean(sourceItems),contextual,sourceMarket,sourceStock,make,open,retry]);
 
   useEffect(()=>{
-    if(sourceItems||!contextual||!open||directory)return;
+    if(sourceOnly||!contextual||!open||directory)return;
     let cancelled=false;setLoading(true);setDirectoryError(false);
     loadModelSuggestions().then(search=>{if(!cancelled){setLoading(false);setDirectory(()=>search);}}).catch(()=>{if(!cancelled)setDirectoryError(true);}).finally(()=>{if(!cancelled)setLoading(false);});
     return()=>{cancelled=true;};
-  },[sourceItems,contextual,open,directory,retry]);
+  },[sourceOnly,contextual,open,directory,retry]);
 
   useEffect(()=>{
     if(sourceItems||!contextual||!open)return;
@@ -340,6 +341,7 @@ export function VehicleModelSearch({
   const applyTypedModel = () => {
     const typed=typedModelSelection(query, items, multiple);
     const next=mobile&&multiple?[...new Set([...selectedModels,...typed.split("|").filter(Boolean)])].join("|"):typed;
+    if(!make){const inferred=typedModelMake(next,items);if(inferred)onMakeChange?.(inferred);}
     onValueChange?.(next);
     setQuery(multiple ? next.split("|").join(", ") : next);
     setOpen(false);
