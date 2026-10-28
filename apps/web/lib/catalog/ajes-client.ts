@@ -37,15 +37,28 @@ export function createAjesClient(deps:Dependencies) {
       if(query.kind!=='detail'&&query.empty)return {schemaVersion:2,items:[],total:0,colors:query.kind==='colors'?[]:undefined,models:query.kind==='models'?[]:undefined,makes:query.kind==='makes'?[]:undefined,page:query.page,pageSize:query.pageSize,received:0,rejected:0,stale:false,observedAt:new Date().toISOString()};
       const visitorKey=clientIp+"\0"+query.sql;
       const quotaKey='quota:'+query.table+((query.kind==='count'||query.kind==='makes')?':count':'');
+      const isUsable=(saved:any)=>{const age=Date.now()-Date.parse(saved?.observedAt||'');return age>=0&&age<7*24*60*60*1000&&Array.isArray(saved?.items)&&saved.items.length<=query.pageSize
+          &&saved.page===query.page&&saved.pageSize===query.pageSize
+          &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='colors'?Array.isArray(saved.colors):query.kind==='makes'?Array.isArray(saved.makes):query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
+          &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));};
+      const listFallback=async(saved:any)=>{
+        const usable=isUsable(saved);
+        if(usable&&saved.items.length){await deps.assertEnabled(query.table);return remember({...saved,stale:true});}
+        if(!usable&&deps.readLegacyQuery){
+          let fallback:any=null;try{fallback=await deps.readLegacyQuery(query.sql);}catch{}
+          if(isUsable(fallback)&&fallback.items.length){await deps.assertEnabled(query.table);return remember({...fallback,stale:true});}
+        }
+        if(query.page===1&&deps.readSavedSearch){
+          let fallback:any=null;try{fallback=await deps.readSavedSearch(input as AjesQuery);}catch{}
+          if(fallback?.partial&&isUsable(fallback)&&fallback.items.length){await deps.assertEnabled(query.table);return remember({...fallback,stale:true});}
+        }
+        return null;
+      };
       return cache.get(query.sql,()=>visitorCache.get(visitorKey,async()=>{
         await deps.assertEnabled(query.table); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
         let saved:any=null;
         try {saved=query.kind==='detail'?await deps.readDetail?.(query.table,query.id!):await deps.readQuery?.(query.sql);}catch{}
-        const isUsable=(saved:any)=>{const age=Date.now()-Date.parse(saved?.observedAt||'');return age>=0&&age<7*24*60*60*1000&&Array.isArray(saved?.items)&&saved.items.length<=query.pageSize
-          &&saved.page===query.page&&saved.pageSize===query.pageSize
-          &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='colors'?Array.isArray(saved.colors):query.kind==='makes'?Array.isArray(saved.makes):query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
-          &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));};
         const age=Date.now()-Date.parse(saved?.observedAt||'');
         const usable=isUsable(saved);
         const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'||saved?.schemaVersion===2&&(query.table!=='korea'||query.kind!=='detail'||saved?.fullInformation===true);
@@ -132,18 +145,8 @@ export function createAjesClient(deps:Dependencies) {
             const fallbackAge=Date.now()-Date.parse(fallback?.observedAt||'');
             if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled(query.table);return {...fallback,partial:true,stale:true};}
           }
-          if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors')&&recoverable){await deps.assertEnabled(query.table);return query.kind==='list'?remember({...saved,stale:true}):{...saved,stale:true};}
-          // Historical SQL compatibility is a failure fallback. Reading several
-          // old object keys before a successful supplier reply only adds latency.
-          if(query.kind==='list'&&!usable&&recoverable&&deps.readLegacyQuery){
-            let fallback:any=null;try{fallback=await deps.readLegacyQuery(query.sql);}catch{}
-            if(isUsable(fallback)&&fallback.items.length){await deps.assertEnabled(query.table);return remember({...fallback,stale:true});}
-          }
-          if(query.kind==='list'&&query.page===1&&recoverable&&deps.readSavedSearch){
-            let fallback:any=null;
-            try{fallback=await deps.readSavedSearch(input as AjesQuery);}catch{}
-            if(fallback?.partial&&fallback.items?.length){await deps.assertEnabled(query.table);return remember({...fallback,stale:true});}
-          }
+          if(query.kind==='list'&&recoverable){const fallback=await listFallback(saved);if(fallback)return fallback;}
+          if(query.kind!=='list'&&usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors')&&recoverable){await deps.assertEnabled(query.table);return {...saved,stale:true};}
           if(error instanceof AjesUnavailable)throw error;
           const code=(error as any)?.cause?.code;
           const reason=controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed';
@@ -156,11 +159,20 @@ export function createAjesClient(deps:Dependencies) {
         if(snapshot?.stale||!(age>=0&&age<30*60000)||snapshot.items?.length!==1)return value;
         const item=preserveKoreaListingLink(value.items[0],snapshot.items[0]);
         return item===value.items[0]?value:{...value,items:[item]};
-      }).catch(error=>{
+      }).catch(async error=>{
         // Admission queue rejection happens outside the provider try/catch.
         // Treat only these bounded local failures as recoverable unavailability;
         // never turn programming/data errors into an empty successful response.
-        if(error instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(error.message))throw new AjesUnavailable('local_busy');
+        if(error instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(error.message)){
+          // Queue admission failed before persisted rows were read. Recover only
+          // bounded saved lists, never call the supplier outside its queue.
+          if(query.kind==='list'){
+            await deps.assertEnabled(query.table);
+            let saved:any=null;try{saved=await deps.readQuery?.(query.sql);}catch{}
+            const fallback=await listFallback(saved);if(fallback)return fallback;
+          }
+          throw new AjesUnavailable('local_busy');
+        }
         throw error;
       });
     },
