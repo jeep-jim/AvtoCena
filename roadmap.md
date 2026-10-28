@@ -17326,3 +17326,20 @@ Runtime перед новым запросом всё ещё683abbe; единс�
 Дополнительно3/3новыхтестаPASS: реальныйclientpage1/2/3+bot7безутечкиключа, неблокирующаядиагностика, реальныйCRMGET403доstorageдляневладельца/owner200private-no-storeбезsupplierзапроса.
 
 Уточнениеаудита: visitorcooldownобщий дляIP после любого bot/ban, включаяcount/models; поэтому listможет бытьостановленпослепредыдущегоотказа вспомогательногозапроса. Это подтверждённоеповедениекода, не установленнаяпричинаownertrace. Диагностика охватывает ВСЕkindреальныхsupplierзапросов, сохраняетkind/page и не перезаписывает исходныйотказ cooldownпопыткой. Защита/пауза сохранена.
+
+## 28.10.2026, 22:50 Красноярск — белые превью установлены; новый live-сбой множественного выбора
+
+Свежий health подтвердил exactc4811dbfdc667890ac4551b3bdd49165508b61a5, calculationVersion8ec9392133671cbb6be3dd661d7c5dd6681cb56ac2c6cbc3651f0a075ed8cf69. Deploy40709717778/job122906050302: encyclopedia/build/prices и Deploy with rollback SUCCESS; Verify published encyclopedia fields IN_PROGRESS, итог всего выпуска ещё не подтверждён. PR1613 установлен, но66samples/скоростные значения этой сверкой из незавершённого журнала не получены. PR1614/release40715191870 exactde60156844995e771bd7850b2cf385b6b13a7fe0 всё ещё PENDING. Не запускать новый выпуск или повтор.
+
+Mobile40715045710/job122910319257 FINALFAIL22:44:49 на установленномc481 (exactSHA подтверждён22:40:08 и22:41:28). Chromium14/WebKit14 fixturesPASS. Фактический failure: page.waitForFunction Timeout30000ms, mobile-filter-overlays.mjs:102:16. Прочитан исходник exact8e7593b: выбор «Кроссовер» и ожидание URLbodyType=suv уже прошли; после второго выбора «Седан» input содержит sedan|suv, но ожидание sedan в location.search не завершилось за30с. Это новый конкретный live/navigation failure; он отличается от прежнего ожидания первого suv/load на154f. Причина отсутствия второго значения в URL не доказана, артефакт визуально не просмотрен. Не blindrerun; оформление фильтров ещё не установлено, ему этот failure не приписывается.
+
+CRM40715045814/live122914263172 SUCCESS22:30:10:36cases168openings. Лог этого livejob не фиксирует точный productionSHA; не приписывать результатc481/новымфильтрам и не считать авторизованным кабинетом. Publishedjourney40715045859 остаётся активным, не дублирован.
+
+Основная работа открыла PR1615 exact11dba0153fe0b2a137aa002222bd08e9d74038dd: ограниченное приватное сохранение исходного отказавшего AJES-запроса и owner-only чтение. Прочитан обновлённый korea-page3-incident: общий visitorcooldown после count/models способен остановить list; это кодовая зависимость, НЕ доказанная причина запроса владельца. Диагностика сохраняет исходный kind/page, cooldown не перезаписывает его; supplier guards/пауза/маршрут сохранены. Новые CI40719601605/CRM40719610419 и другие checks идут; PR не merged/не installed и НЕ исправленная пагинация. Параллельный repair/diagnostic/browser не создавался.
+
+Свежие Road/checklist/system-audit/interaction-audit-followup прочитаны. Весь остаток Hilux/counts/models/полные JapanKorea filters/pages/photos/dealercabinet/scroll/canonical/CamryICE/insurance/AWD/subsecond открыт. Изменены только документы, наблюдение включено.
+
+
+## 28.10.2026 — проверки PR1615 и сохранение параллельного журнала
+
+144/144 AJES-тестов, web/engine typecheck, production build и все семь выполняемых проверок exact11dba0153fe0b2a137aa002222bd08e9d74038dd PASS (audit штатно skipped). Конфликт с новым main затронул только append roadmap; обе записи сохранены. Диагностика пока не установлена; живая пагинация Кореи остаётся открытой. Белые карточки release40709717778 SUCCESS, фильтры40715191870 IN_PROGRESS.
