@@ -485,7 +485,8 @@ html body .ac-page-copy .ac-japan-sections .ac-japan-tab[aria-current="page"] {b
 html body .ac-page-copy .ac-japan-sections .ac-japan-tab-auction[aria-current="page"] {background:#b91c1c!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
 html body .ac-page-copy .ac-japan-sections .ac-japan-tab-green[aria-current="page"] {background:var(--ac-stock-accent)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
 
-html[data-theme="light"] .ac-offer-updated { background:#fff!important; border:1px solid var(--ac-border); }
+html[data-theme="light"] .ac-offer-updated,
+html[data-theme="light"] [data-korea-report-trigger] { background:#fff!important; border:1px solid var(--ac-border); }
 
 .ac-green-intro{display:grid;gap:24px;align-items:start}
 .ac-green-delivery{position:relative;display:flex;align-items:center;gap:20px;min-height:174px;padding:28px 155px 28px 24px;border-radius:22px;background:var(--ac-surface-2);color:var(--ac-text)}
