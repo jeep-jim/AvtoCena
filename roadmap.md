@@ -17348,3 +17348,16 @@ CRM40715045814/live122914263172 SUCCESS22:30:10:36cases168openings. Лог эт�
 ## 28.10.2026 — публикация диагностики реального отказа Korea, PR1615
 
 PR1615 merged2312d36da882de7f97cbd59936a6dad2b9a3daa8. Все семь выполняемых проверок runtime11dba015 PASS; последующее слияние1b1c205 меняло только документы, сохранены обе параллельные записи. 144/144AJES tests и types PASS. Запрошен штатный выпуск после уже активного40715191870, отмен нет. Блокер самой пагинации сохраняется: отсутствует точный исходный сбой запроса владельца; код поставщика не доказательство его вины. Этот выпуск исправляет потерю диагностики, а не объявляет живую page3 работающей.
+
+
+## 29.10.2026, 00:12 Красноярск — оформление фильтров установлено; диагностика Кореи проходит следующую установку
+
+Freshhealth exactde60156844995e771bd7850b2cf385b6b13a7fe0/calculationVersion8ec9392133671cbb6be3dd661d7c5dd6681cb56ac2c6cbc3651f0a075ed8cf69. PR1614 уже установлен. Deploy40715191870/job122930875266 FINAL SUCCESS; журнал pre33/post33 functionalPASS, slowSamples0/0 и performanceAccepted=true в обоих блоках. Release active28.10 23:40:16, publicverifier23:48:18:532groups/4888variants/22635fields/3724groupedVariants/2privateDescriptionsPASS. Это результат66серверных образцов, НЕ полная browser/subsecond-приёмка всех фильтров и рынков.
+
+Предыдущий белый-preview выпуск40709717778/job122906050302 также FINAL SUCCESS28.10 22:54:34. Его66functionalPASS сопровождались3advisoryslow: pre305home2.5112s, post35EuropeBMWpage2 4.7477s, post35totalRub12.2443s; performanceAccepted=false, безrollback. Новый успешный набор не отменяет исторические задержки и не доказывает устранение их причины.
+
+Journey40715045859/job122910318627 FINALFAIL28.10 23:21:49 на Wait for exact published release:3600s не дождался8e7593b29b0cb42da013eaadc025810951b5b9a4/verifieddescendant. Живые шаги не исполнялись; это НЕ browserfailure новогоde601, НЕ его acceptance. Запуск не повторялся. Предыдущий mobileFAIL выбораsedan наc481 остаётся открытым, установленное оформление само по себе не доказало исправление.
+
+PR1615 merged2312d36da882de7f97cbd59936a6dad2b9a3daa8, finalhead1b1c205a6a846a0e5ea343d57317a51bc5789e39: свежиеchecks7SUCCESS/1auditSKIPPED. Road сохраняет обе истории docs-only integration. Единственный active deploy40721810417 exactb394d0ee4f34bcad83c89c981418af386f30eb67, prepare122962359038: encyclopedia/coverage/build/imageSUCCESS, exactpricesIN_PROGRESS, switch/verifierPENDING. Диагностика ещё НЕinstalled; runtimehealth остаётсяde601. Это сохранение точного исходного отказа, НЕ подтверждённое восстановлениеKoreapage3. Не запускать parallelPR/repair/diag/deploy/browser и не повторять supplierrefusal.
+
+Прочитаны актуальные Road/checklist/system-audit/interaction-audit-followup/korea-page3-incident. Полные JapanKorea модели/фильтры/страницы/фото, Hilux/counts, dealer cabinet, scroll/canonical/CamryICE/insurance/AWD/subsecond остаются открытыми. Эта сверка толькоdocs; основная работа владеетживойочередью, наблюдение включено.
