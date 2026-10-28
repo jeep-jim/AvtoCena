@@ -17254,3 +17254,10 @@ Runtime перед новым запросом всё ещё683abbe; единс�
 Предшествующий budget шаг на154f: Japan24matches/page, first8557ms/repeat1223ms; Korea matchesOnPage0, hasMoretrue, totalnull, candidateUpperBound89027, first8364/repeat4943ms. Верхняя оценка не полное подтверждённое количество; нулевой matchesOnPage не объявлен отсутствием всех машин. detail-cache-sum45922.5/49817.5ms — сумма перекрывающихся чтений, не wall time. Положительный статус отдельного budget шага не означает полную функциональность Кореи. CRM40680436236/live122792095270 SUCCESS36cases/168openings в18:37:53, до установки538; не приёмка нового runtime или авторизованного кабинета.
 
 Полные Japan/Korea модели/фильтры/страницы/фото, Hilux saved→related live, dealer cabinet, scroll-top, canonical/CamryICE, insurance/AWD и subsecond остаются открытыми. Все прежние ограничения supplier/identity/prices/security сохранены. Записаны только документы; наблюдение включено.
+
+
+## 28.10.2026, 20:50 Красноярск — короткая ссылка ошибочно запускает Telegram
+
+Владелец сообщил /s/MSv0E5fUgDYlZF4I (KiaK3 2023). Ответ страницы подтвердил mini=true/web=false и ссылку t.me как automatic target. Причина в ShortShareRedirect: флаг режима отправителя ошибочно определял приложение получателя. ?open=web подтверждён HTTP200, ссылка ведёт на ту же карточку с исходными estimate/dealer/share.
+
+Исправление всегда открывает проверенный локальный path; старые токены/хранилище не переписываются, Telegram startapp продолжает разрешать тот же путь, параметры расчёта и передача города подборки сохранены. Regression на исходном компоненте RED (t.me вместо локального пути), после правки17/17тестов short-share/offer-share/dealer-selection PASS. Typecheck/CI/публикация проверяются отдельно; установленным пока не объявлять.
