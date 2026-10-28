@@ -164,3 +164,12 @@ PR1602 merged 00799e55bd4a8294e0518076665d64cc29816a64 после exact4c0ab527 
 
 
 28.10.2026 06:45 Красноярск: запущен [единственный isolated home-phases40604129004](https://github.com/jeep-jim/AvtoCena/actions/runs/40604129004), job122539279137 in_progress. Immutable target прочитан; checkout source выполняется. Source00799, expectedproductiond418. Build и измерения пока не подтверждены; это не production deploy. Не запускать дубликат; дождаться журнала вложенных фаз и cleanup.
+
+
+### 28.10.2026 07:28 Красноярск — вложенные фазы00799: задержка в двух последовательных editorial searches
+
+[40604129004](https://github.com/jeep-jim/AvtoCena/actions/runs/40604129004), job122539279137 SUCCESS06:55:49. Exact00799: cold8.4240s,warm0.2967s,35s0.5350s,305s1.1053s; четыре полных HTML~834KB безRX. Все60phase rows ok (32core+28nested), generationgen_1793052425373_c710a778/day28.10 одинаковы. Cold manifest85.8ms/overview136.2ms/prepared224ms; editorial UAE4316.9ms затемEurope2615ms; Body7157.6ms,Context7294.4ms,outerSnapshot7294.6ms. Counts30ms,catalogPricing625.5ms,greenPricing825.5ms. Ни Japan editorial search, ни fallback snapshotProjection не исполнялись. Холодные UAE+Europe6.9319s составляют измеренную основную задержку snapshot. Нельзя считать всю разницу с прежним9.9081s результатом skip: calculationVersion/момент запуска различаются.
+
+После305s: manifest60.2ms,overview133.7ms,UAE125.5ms,Europe3.2ms,snapshot455.2ms. Контейнер exited0/OOMfalse; удаление контейнера/образа и workflowcleanup завершены; productionbefore/after exactd418/nginxunchanged. Свежий health07:26 такжеd418. Ни switch, ни rollback; исходный592gate2.1896s не отменён, midnight/11URL/liveприёмка не воспроизводились. Повтор этого завершённого замера не запущен.
+
+Следующее адресное изменение: ограниченно параллельные независимые editorial searches (максимум2), применение результатов в прежнем порядке. Это устраняет измеренную последовательную зависимость, но не убирает саму стоимость4.3s/2.6s и не обещает cold<=2s. Точный total/карточки/скрытия/ошибки и число запросов сохраняются. Необходимы CI, изолированное сравнение ресурса/времени и неизменные66gates до установки; весь незакрытый AWD/canonical/insurance/live scope остаётся.
