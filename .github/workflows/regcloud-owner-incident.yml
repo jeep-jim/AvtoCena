@@ -1,0 +1,33 @@
+name: Regcloud — closed owner catalog incident
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-owner-incident.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read closed production log window without catalog probes
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          mapfile -t args < <(python3 -c 'import json,re;v=json.load(open(".github/market-runs/regcloud-owner-incident.json"));assert re.fullmatch("[a-f0-9]{40}",v["production"]);assert all(re.fullmatch("[0-9TZ:-]{20}",v[k]) for k in ["since","until"]);print(v["production"]);print(v["since"]);print(v["until"])')
+          test "${#args[@]}" = 3
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 "flock -n /run/lock/avtocena-runtime-change.lock python3 - '${args[0]}' '${args[1]}' '${args[2]}'" < scripts/regcloud-owner-incident.py
