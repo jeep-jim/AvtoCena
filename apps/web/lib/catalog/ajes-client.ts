@@ -20,6 +20,14 @@ export function createAjesClient(deps:Dependencies) {
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
   const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});
+  // Persistence is a best-effort cache of requested responses, not the supplier
+  // transaction. A slow storage write must not delay ready cars or hold the two
+  // supplier slots. Bound both concurrent writes and retained waiting payloads.
+  const persistence=new DetailReadCache<null>({maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,maxQueued:16,queueTimeoutMs:5000,shouldCache:()=>false});
+  let persistenceSequence=0,persistenceWarningAt=0;
+  const persist=(save:()=>Promise<unknown>)=>{void persistence.get(String(++persistenceSequence),async()=>{await save();return null;}).catch(()=>{
+    if(Date.now()-persistenceWarningAt>=60000){persistenceWarningAt=Date.now();console.warn('AJES_PERSISTENCE_UNAVAILABLE');}
+  });};
   // Bounded snapshots of rows the visitor already saw, not fabricated full details.
   const listed=new Map<string,{value:any;bytes:number}>();let listedBytes=0;
   const failures=new Map<string,{reason:string;until:number}>();
@@ -99,7 +107,8 @@ export function createAjesClient(deps:Dependencies) {
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'){
             const first=Array.isArray(rows)?rows[0]:rows;
-            try{await deps.saveAggregateEvidence?.(query.kind,{observedAt:new Date().toISOString(),array:Array.isArray(rows),length:Array.isArray(rows)?rows.length:null,fields:first&&typeof first==='object'?Object.keys(first).slice(0,30):[],numeric:first&&typeof first==='object'?Object.fromEntries(Object.entries(first).filter(([k,v])=>/^(?:total|count(?:\(\*\))?|tag[012])$/i.test(k)&&/^\d+$/.test(String(v)))):{}});}catch{}
+            const aggregateEvidence={observedAt:new Date().toISOString(),array:Array.isArray(rows),length:Array.isArray(rows)?rows.length:null,fields:first&&typeof first==='object'?Object.keys(first).slice(0,30):[],numeric:first&&typeof first==='object'?Object.fromEntries(Object.entries(first).filter(([k,v])=>/^(?:total|count(?:\(\*\))?|tag[012])$/i.test(k)&&/^\d+$/.test(String(v)))):{}};
+            if(deps.saveAggregateEvidence)persist(()=>deps.saveAggregateEvidence!(query.kind,aggregateEvidence));
           }
           if(!Array.isArray(rows)||rows.length>query.pageSize||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new AjesUnavailable('invalid_response');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
@@ -111,7 +120,7 @@ export function createAjesClient(deps:Dependencies) {
             if(makes?.some(m=>!m.make))throw new AjesUnavailable('invalid_response');
             const colors=query.kind==='colors'?rows.map(r=>({color:String(r.COLOR??r.color??'').trim(),total:totalOf(r)})).filter(r=>r.color):undefined;
             const result={items:[],models,makes,colors,total:query.kind==='count'?totalOf(rows[0]):undefined,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
-            try{await deps.saveQuery?.(query.sql,result);}catch{}
+            if(deps.saveQuery)persist(()=>deps.saveQuery!(query.sql,result));
             return result;
           }
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
@@ -124,7 +133,7 @@ export function createAjesClient(deps:Dependencies) {
             // No visitor IP, request URL, password, INFO or frame number is copied.
             const sourceEvidence={id:query.id,observedAt:result.observedAt,fields:['ENG_V','PW','TIME','FUEL'].filter(key=>Object.prototype.hasOwnProperty.call(row,key)),values:Object.fromEntries(['ENG_V','PW','TIME','FUEL'].map(key=>[key,row[key]??null]))};
             if(Buffer.byteLength(JSON.stringify(sourceEvidence))<=4096)(result as any).sourceEvidence=sourceEvidence;
-            try{if(Buffer.byteLength(JSON.stringify(evidence))<=64*1024)await deps.saveEvidence?.(query.table,evidence);}catch{}
+            if(deps.saveEvidence&&Buffer.byteLength(JSON.stringify(evidence))<=64*1024)persist(()=>deps.saveEvidence!(query.table,evidence));
           }
           if(query.kind==='list'){
             const accepted=new Set(items.map((lot:any)=>lot.id));
@@ -132,10 +141,8 @@ export function createAjesClient(deps:Dependencies) {
             if(Buffer.byteLength(JSON.stringify(sourceEvidenceById))<=32*1024)(result as any).sourceEvidenceById=sourceEvidenceById;
           }
           // A cache storage outage must not discard a successful provider response.
-          try {
-            if(query.kind==='detail'&&items.length===1)await deps.saveDetail?.(query.table,query.id!,result);
-            if(query.kind==='list')await deps.saveQuery?.(query.sql,result);
-          }catch{}
+          if(query.kind==='detail'&&items.length===1&&deps.saveDetail)persist(()=>deps.saveDetail!(query.table,query.id!,result));
+          if(query.kind==='list'&&deps.saveQuery)persist(()=>deps.saveQuery!(query.sql,result));
 
           return query.kind==='list'?remember(result):result;
         }catch(error){
