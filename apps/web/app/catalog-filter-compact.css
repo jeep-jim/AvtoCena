@@ -16,7 +16,7 @@ html body .ac-catalog-filter-panel {
 
 html[data-theme="light"] body :is(.ac-catalog-filter-panel, .ac-mobile-filter-sheet)
   :is(.ac-filter-control, .ac-range-input-box, .ac-sort-control, .ac-filter-settings) {
-  background: #fff !important;
+  background: #f8f9fb !important;
   border: 1px solid #dce1e8 !important;
   box-shadow: none !important;
 }
@@ -585,3 +585,17 @@ html[data-theme="light"] .ac-range-value-option {
 }
 
 @media(max-width:1023px){.ac-mobile-filter-sheet>.ac-mobile-filter-header{padding-top:4px!important}.ac-mobile-filter-header>div:nth-child(2){padding-top:4px!important;padding-bottom:6px!important;min-height:50px}.ac-mobile-filter-header .ac-filter-clear--mobile{margin-right:0!important}}
+
+/* Shared filter geometry; theme colors are changed only by the light rule above. */
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) :is(.ac-filter-control,.ac-filter-option,.ac-filter-search,.ac-range-input-box input,.ac-range-card label,.ac-power-copy span) {font-weight:500!important}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) button.ac-filter-control {padding-right:15px!important}
+.ac-filter-leading-icon {flex:none;width:17px;height:17px}
+.ac-filter-color-spectrum {flex:none;width:18px;height:18px;border-radius:50%;background:conic-gradient(red,#ff0,#0f0,#0ff,#00f,#f0f,red)}
+.ac-model-filter-icon {position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none;z-index:1;color:var(--ac-muted)}
+html body .ac-model-filter-icon + input {padding-left:41px!important;font-weight:500!important}
+@media(min-width:1024px){
+ html body .ac-catalog-filter-panel button.ac-filter-control {padding-right:8.5px!important}
+ html body .ac-catalog-filter-panel .ac-electric-filter {padding-right:8.5px!important}
+ html body .ac-catalog-filter-panel .ac-electric-filter>button {width:14px!important}
+ html body .ac-catalog-filter-panel .ac-catalog-city-filter>button {padding-right:6.5px!important}
+}

@@ -16,7 +16,7 @@ export function CatalogColorSelect({value,market,stock,onChange}:{value:string;m
  const choose=(color:string)=>{onChange(color);setOpen(false);};
  return <div ref={root} className={`ac-color-select relative min-w-0 ${open?'z-[240]':'z-0'}`}>
   <input type="hidden" name="color" value={value}/>
-  <button type="button" aria-label={`Цвет: ${value||'Любой цвет'}`} aria-expanded={open} onClick={()=>setOpen(!open)} className="ac-filter-control flex h-13 w-full items-center gap-3 rounded-[15px] px-4 text-left text-sm font-black"><Swatch value={value}/><span className="min-w-0 flex-1 truncate">{value||'Любой цвет'}</span><svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="m5 7 4 4 4-4" stroke="currentColor" strokeWidth="1.8"/></svg></button>
+  <button type="button" aria-label={`Цвет: ${value||'Любой цвет'}`} aria-expanded={open} onClick={()=>setOpen(!open)} className="ac-filter-control flex h-13 w-full items-center gap-3 rounded-[15px] px-4 text-left text-sm font-black">{value?<Swatch value={value}/>:<span aria-hidden="true" className="ac-filter-color-spectrum"/>}<span className="min-w-0 flex-1 truncate">{value||'Цвет'}</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.8"/></svg></button>
   {open&&<div className="ac-filter-dropdown absolute bottom-[calc(100%+7px)] left-0 right-0 overflow-hidden rounded-2xl p-2">
    <div className="ac-hide-scrollbar max-h-64 overflow-y-auto" role="group" aria-label="Цвет автомобиля">
     <button type="button" aria-pressed={!value} onClick={()=>choose('')} className="ac-filter-option flex min-h-11 w-full items-center rounded-xl px-3 py-2 text-left text-sm font-bold">Любой цвет</button>
