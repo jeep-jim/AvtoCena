@@ -17302,3 +17302,16 @@ Runtime перед новым запросом всё ещё683abbe; единс�
 ### 28.10.2026 — фильтры PR1614 проверены и отправлены на установку
 
 Все10checks точногоheadb457b48062f10d6b22f4a6f2466b0730bb266312SUCCESS, включая полныйCI/productionbuild, WebKit иdealer/modelbrowserchecks. Merged8e7593b29b0cb42da013eaadc025810951b5b9a4. Запрошен штатный последовательныйrelease после белыхпревью40709717778; всеresearch/ASTRAdependenciesсохранены, ideaReportsпуст. Установка/liveacceptance ещё ожидаются, sourceпагинация не объявлена исправленной.
+
+
+## 28.10.2026, 22:28 Красноярск — ссылки установлены; белые превью и фильтры в последовательной очереди
+
+Свежий health подтвердил exact241edec4bdd30868d76e122aa36be0457d47f78a/calculationVersion8ec9392133671cbb6be3dd661d7c5dd6681cb56ac2c6cbc3651f0a075ed8cf69. Deploy40705147068/job122875594448 FINAL SUCCESS22:13:18. Фактический журнал: pre33/post33 functional PASS; три advisory slow: prewarm/login1.7272s, post35/login1.0543s и post35/totalRub2.2561s; performanceAccepted=false, rollback не было. Public verifier22:13:07:532groups/4888variants/22635fields/3724groupedVariants/2privateDescriptions PASS. PR1612 с исправлением коротких ссылок и светлой кнопки истории установлен; отдельная полная browser-приёмка этих изменений этой сверкой не выполнялась.
+
+Основная работа mergedPR1613/2d6d45dca38cac65e12b1d7d84563345c07b0a59 (белые превью), затем PR1614/8e7593b29b0cb42da013eaadc025810951b5b9a4 (оформление фильтров). Exacthead1614 b457b48062f10d6b22f4a6f2466b0730bb266312: фактически10/10checksSUCCESS; CI40713461300/job122904666917 web/engine types и production build56/56PASS. CI не выдан за live. Mainde60156844995e771bd7850b2cf385b6b13a7fe0 уже содержит запрос основной работы на последовательный выпуск фильтров.
+
+Единственный выполняющийся deploy40709717778 exactc4811dbfdc667890ac4551b3bdd49165508b61a5/job122906050302: encyclopediaindex и coverageSUCCESS, BuildIN_PROGRESS, prices/switch/verifierPENDING. Следующий40715191870 exactde60156844995e771bd7850b2cf385b6b13a7fe0 имеет statusPENDING. Ни белые превью, ни новые фильтры ещё не подтверждены установленными. Existing mobile40715045710/CRM40715045814/journey40715045859 и budget40713748612 не дублированы.
+
+Прочитаны свежие Road/checklist, system-audit, interaction-audit-followup и korea-page3-incident. Основная работа уже повторно подтвердила на538: Korea24→48→ошибка третьей страницы; один API503 visitor_restricted5.716930s относится к проверяющему подключению, не ownertrace и не доказанная неисправность поставщика. Старую исправленную cachecollision не объявлять новым решением. Эта сверка не повторяла браузер/запрос отказавшего источника; поставщику сообщения не отправлялись.
+
+Весь остаток Hilux/counts/models/fullJapanKoreafilters/pages/photos/dealercabinet/scroll/canonical/CamryICE/insurance/AWD/subsecond остаётся открытым. В этой сверке изменены только Road/checklist; runtime/markers/workflows не запускались. Владение живой очередью у основной работы, наблюдение включено.
