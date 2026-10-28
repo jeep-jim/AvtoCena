@@ -1,4 +1,6 @@
 "use client";
+import {CatalogChevron as Chevron} from "./CatalogChevron";
+import {CatalogFilterIcon} from "./CatalogFilterIcon";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
@@ -57,9 +59,7 @@ function modelCountLabel(value: number) {
   return `${n} ${word}`;
 }
 
-function Chevron({ open }: { open: boolean }) {
-  return <svg className={`shrink-0 transition ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
-}
+
 
 export function CatalogBrandMultiSelect({
   value,
@@ -139,7 +139,7 @@ export function CatalogBrandMultiSelect({
   };
 
   const triggerLabel = selected.length === 0
-    ? "Любая марка"
+    ? "Марка"
     : selected.length === 1
       ? selected[0]
       : `Выбрано марок: ${selected.length}`;
@@ -147,7 +147,7 @@ export function CatalogBrandMultiSelect({
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[245]" : "z-0"} ${className}`}>
     <input type="hidden" name="make" value={value} />
     <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black" aria-expanded={open} aria-label="Выбрать марки автомобилей">
-      <span className="truncate">{triggerLabel}</span><Chevron open={open} />
+      <span className="flex min-w-0 items-center gap-2"><CatalogFilterIcon name="make"/><span className="truncate">{triggerLabel}</span></span><Chevron open={open} />
     </button>
     {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
       <p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Можно выбрать несколько марок</p>

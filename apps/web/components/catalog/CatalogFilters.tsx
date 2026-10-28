@@ -1,4 +1,5 @@
 "use client";
+import {CatalogFilterIcon} from "./CatalogFilterIcon";
 import {CatalogFilterPending} from './CatalogFilterPending';
 import {AUCTION_SALE_PERIODS} from "@/lib/catalog/auction-sale-period";
 import {CatalogChevron as Chevron} from "./CatalogChevron";
@@ -122,7 +123,7 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
   const title=multiple&&selected.length?selected.map(v=>options.find(o=>o.value===v)?.label||v).join(", "):active?.label||placeholder;
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"} ${className}`}>
     <input type="hidden" name={name} value={value} />
-    <button type="button" onClick={() => setOpen((current) => !current)} className={`${name === "auctionGrade" && value ? `ac-japan-badge ${auctionGradeColorClass(value)}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`} aria-expanded={open}><span className="flex min-w-0 items-center gap-2 truncate">{name==="market"&&value&&selected.length===1&&<span aria-hidden="true"><CatalogMarketFlag market={value} className="h-4 w-6 shrink-0"/></span>}{title}</span><Chevron open={open} /></button>
+    <button type="button" onClick={() => setOpen((current) => !current)} className={`${name === "auctionGrade" && value ? `ac-japan-badge ${auctionGradeColorClass(value)}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`} aria-label={title} aria-expanded={open}><span className="flex min-w-0 items-center gap-2 truncate">{name==="market"&&value&&selected.length===1&&<span aria-hidden="true"><CatalogMarketFlag market={value} className="h-4 w-6 shrink-0"/></span>}{!(name==="market"&&value&&selected.length===1)&&<CatalogFilterIcon name={name}/>}<span className="truncate">{!value?({market:"Рынок",bodyType:"Кузов",transmission:"Трансмиссия",fuel:"Топливо",drive:"Привод"}[name]||title):title}</span></span><Chevron open={open} /></button>
     {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2"><div className="ac-hide-scrollbar max-h-64 overflow-y-auto">{options.map((item) => <button key={item.value || "any"} type="button" onClick={() => choose(item.value)} aria-label={item.label} aria-pressed={chosen(item.value)} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${chosen(item.value) ? "is-active" : ""}`}><span className="flex items-center gap-2">{name==="market"&&item.value&&<span aria-hidden="true"><CatalogMarketFlag market={item.value} className="h-4 w-6 shrink-0"/></span>}{item.label}</span>{chosen(item.value) ? <span>✓</span> : null}</button>)}</div></div> : null}
   </div>;
 }
@@ -596,5 +597,5 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
 
 function CatalogCityFilter({onChange}:{onChange:(city:string)=>void}) {
  const city=useSelectedCity(),[open,setOpen]=useState(false);
- return <div className="ac-catalog-city-filter min-w-0"><button type="button" className="ac-filter-control flex h-13 w-full min-w-0 items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black" aria-label={`Выбрать город. Сейчас: ${city || "не выбран"}`} aria-haspopup="dialog" aria-expanded={open} onClick={()=>setOpen(true)}><span className="flex min-w-0 items-center gap-2"><LocationIcon className="h-5 w-5 shrink-0 text-[#ff353d]"/><span className="truncate">{city || "Выбрать город"}</span></span><Chevron /></button>{open&&<CityPickerDialog persistSelection={false} onChange={onChange} onClose={()=>setOpen(false)}/>}</div>;
+ return <div className="ac-catalog-city-filter min-w-0"><button type="button" className="ac-filter-control flex h-13 w-full min-w-0 items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black" aria-label={`Выбрать город. Сейчас: ${city || "не выбран"}`} aria-haspopup="dialog" aria-expanded={open} onClick={()=>setOpen(true)}><span className="truncate">{city || "Город"}</span><LocationIcon className="ac-filter-location h-[18px] w-[18px] shrink-0 text-[#ff353d]"/></button>{open&&<CityPickerDialog persistSelection={false} onChange={onChange} onClose={()=>setOpen(false)}/>}</div>;
 }
