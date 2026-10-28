@@ -16964,3 +16964,10 @@ PR1605 merged ef538d508dda08b9c91238c8d24f83cb1884c7eb после exact head4b68
 ### 28.10.2026 12:12 Красноярск — ID единственного выпуска
 
 [Regcloud deploy40636411536](https://github.com/jeep-jim/AvtoCena/actions/runs/40636411536) запущен для exactd1ba21202b43579abfc2ee69160f5801cfe798ea. Первый job122644288390 wait-for-astra in_progress: checkout/setup завершены, npm ci выполняется; ASTRA gate, build/image,66server gates и switch ещё не подтверждены. Не запускать второй release/repair/diagnostic. Следующая проверка — фактический результат этого run, затем exact health и одна очередь live только после установки. Все ограничения записи12:10 сохраняются.
+
+
+### 28.10.2026 12:32 Красноярск — единственный выпуск дошёл до подготовки цен
+
+Проверен [deploy40636411536](https://github.com/jeep-jim/AvtoCena/actions/runs/40636411536), exactd1ba21202b43579abfc2ee69160f5801cfe798ea. Wait-for-astra122644288390 SUCCESS. Prepare122644516013: private encyclopedia index/coverage, production build без production credentials и загрузка образа без старта приложения SUCCESS. Сейчас выполняется Prepare exact price indexes before activating the release; deploy/switch/66server gates и published verifier ещё не исполнены.
+
+Активный [shared budget preparation40638129844](https://github.com/jeep-jim/AvtoCena/actions/runs/40638129844), job122649750763, выполняет Prepare shared prices on GitHub and verify cold-instance reuse. Это наблюдаемый процесс подготовки, не подтверждение активации. Свежий health по-прежнему exactd4184b5d2acb88264eef114bb5f9e013997d99c8. Новых runtime PR после1605 при этой проверке нет. Исправление справочника Korea/ix35 и недопустимой внешней ссылки закреплено за основной интерактивной работой и не входит в текущий d1ba. Наблюдение не создавало параллельного PR/repair/deploy/diagnostic/collector, live до exact installed SHA не запускалось. Наблюдение включено; все открытые требования предыдущих записей сохранены.
