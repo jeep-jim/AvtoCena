@@ -3002,7 +3002,7 @@ export async function readHomeCatalogSnapshot(perMarket=6){
  const snapshot=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
  const marketCounts={...snapshot.marketCounts};
  let items=snapshot.items.map(item=>applyCatalogEditorial(item));
- const markets=[];
+ const markets=MARKETS.slice(0,0);
  for(const market of MARKETS){
   if(!editorialHasHidden(market))continue;
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
