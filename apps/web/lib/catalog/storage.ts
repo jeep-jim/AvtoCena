@@ -3002,10 +3002,15 @@ export async function readHomeCatalogSnapshot(perMarket=6){
  const snapshot=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
  const marketCounts={...snapshot.marketCounts};
  let items=snapshot.items.map(item=>applyCatalogEditorial(item));
+ const markets=[];
  for(const market of MARKETS){
   if(!editorialHasHidden(market))continue;
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
-  const result=await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}));
+  markets.push(market);
+ }
+ const refreshed=await mapWithConcurrency(markets,2,async market=>({market,
+  result:await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}))}));
+ for(const {market,result} of refreshed){
   marketCounts[market]=result.total;
   items=[...items.filter(item=>item.market!==market),...result.items];
  }
