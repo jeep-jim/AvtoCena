@@ -5,6 +5,9 @@ on:
     paths: ['apps/web/components/layout/OverlayBackHistory.tsx', 'apps/web/components/catalog/CatalogFilters.tsx', 'tests/browser/dealer-selection-nested-navigation.mjs', 'tests/browser/dealer-selection.mjs', 'apps/web/components/dealers/DealerSelectionShare.tsx', 'tests/offer-share.test.ts', '.github/workflows/verify-dealer-selection.yml']
   pull_request:
     paths:
+      - 'apps/web/components/catalog/VehicleModelSearch.tsx'
+      - 'apps/web/lib/catalog/model-suggestion-*.ts'
+      - 'apps/web/lib/catalog/market-selection.ts'
       - 'apps/web/components/catalog/*Share*'
       - 'apps/web/lib/catalog/*share*'
       - 'apps/web/lib/catalog/offer-metadata.ts'

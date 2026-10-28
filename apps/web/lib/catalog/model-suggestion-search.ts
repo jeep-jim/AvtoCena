@@ -21,12 +21,15 @@ function nearModelWord(query:string, word:string){
 const brandKey=(make:string)=>suggestionKey(canonicalCatalogBrand(make));
 // Explicit owner spelling examples are discovery aliases, never identities for
 // specification matching. Rank the intended Corolla ahead of nearby Corsa.
-function discoveryAliases(make:string,model:string):string[]{
- return brandKey(make)==='toiota'&&suggestionKey(model)==='korola'?['колрла']:[];
+function discoveryAliases(brand:string,model:string):string[]{
+ return brand==='toiota'&&suggestionKey(model)==='korola'?['колрла']:[];
 }
 function* compileSearch(data:ModelSearchData){
  const brandAliases=new Map<string,string>();
- for(const [make] of data.models)brandAliases.set(suggestionKey(make),brandKey(make));
+ const makeKeys=new Map<string,string>();
+ for(const [make] of data.models)if(!makeKeys.has(make)){
+  const key=brandKey(make);makeKeys.set(make,key);brandAliases.set(suggestionKey(make),key);
+ }
  for(const [make,aliases] of data.brands)for(const alias of [make,...aliases])brandAliases.set(suggestionKey(alias),brandKey(make));
  const fragmentRows=new Map<string,number[]>(),makeRows=new Map<string,number[]>();
  const rows:{make:string;model:string;aliases:string[];canonical:number;brand:string;names:string[]}[]=[];
@@ -37,7 +40,8 @@ function* compileSearch(data:ModelSearchData){
   // is always searchable and is not subject to this directory-only display guard.
   if(!suggestionKey(model)||(!canonical&&/[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/u.test(model)))continue;
   const index=rows.length;
-  const row={make,model,aliases,canonical,brand:brandKey(make),names:[...new Set([model,...aliases,...discoveryAliases(make,model)].map(suggestionKey).filter(Boolean))]};rows.push(row);
+  const brand=makeKeys.get(make)!;
+  const row={make,model,aliases,canonical,brand,names:[...new Set([model,...aliases,...discoveryAliases(brand,model)].map(suggestionKey).filter(Boolean))]};rows.push(row);
   const keys=new Set<string>();for(const name of row.names)for(let n=0;n<name.length-1;n++)keys.add(name.slice(n,n+2));
   for(const key of keys){const list=fragmentRows.get(key)||[];list.push(index);fragmentRows.set(key,list);}
   const list=makeRows.get(row.brand)||[];list.push(index);makeRows.set(row.brand,list);
