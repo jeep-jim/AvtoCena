@@ -218,7 +218,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
                         value={form.name}
                         onChange={(event) => update("name", event.target.value)}
                         placeholder="Ваше имя"
-                        className="soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
+                        className="ym-disable-keys soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
                       />
                       <PhoneInput value={form.phone} onChange={value => update("phone", value)} />
                       <input
@@ -226,14 +226,14 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
                         onChange={(event) => update("city", event.target.value)}
                         placeholder="Город"
                         autoComplete="address-level2"
-                        className="soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
+                        className="ym-disable-keys soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
                       />
                       <textarea
                         value={form.comment}
                         onChange={(event) => update("comment", event.target.value)}
                         placeholder="Комментарий"
                         rows={3}
-                        className="soft-input w-full resize-none rounded-2xl px-4 py-3.5 text-sm font-bold"
+                        className="ym-disable-keys soft-input w-full resize-none rounded-2xl px-4 py-3.5 text-sm font-bold"
                       />
                     </div>
 

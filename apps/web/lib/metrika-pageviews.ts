@@ -8,7 +8,7 @@ const campaignKeys=['utm_source','utm_medium','utm_campaign','utm_content','utm_
 export function metrikaPageUrl(href:string):string {
  try {
   const url=new URL(href);
-  if(!['http:','https:'].includes(url.protocol)||!isPublicPagePath(url.pathname)||url.pathname.startsWith('/privacy/request'))return '';
+  if(!['http:','https:'].includes(url.protocol)||!isPublicPagePath(url.pathname)||(url.pathname.startsWith('/privacy/request')||/^\/account(?:\/|$)/.test(url.pathname)))return '';
   const clean=new URL(url.origin+url.pathname);
   for(const key of campaignKeys){
    const value=url.searchParams.get(key);
@@ -58,7 +58,7 @@ export function createMetrikaPageTracker(adapter:Adapter){
    }
    adapter.send(METRIKA_COUNTER_ID,'init',{
     ssr:true,clickmap:false,trackLinks:false,disableYtm:true,
-    webvisor:false,ecommerce:false,accurateTrackBounce:15000,
+    webvisor:true,ecommerce:false,accurateTrackBounce:15000,
     url:firstUrl,referrer:metrikaPageUrl(adapter.referrer()),
    });
    started=true;active=true;previous=url;return;

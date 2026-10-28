@@ -32,7 +32,7 @@ test('advertising URLs preserve UTM and yclid but discard arbitrary query and ha
  const url=metrikaPageUrl('https://avtocena.com/cars?phone=79999999999&token=secret&tgWebAppData=secret&utm_source=yandex&utm_campaign=123&yclid=987#contact');
  assert.equal(url,'https://avtocena.com/cars?utm_source=yandex&utm_campaign=123&yclid=987');
  assert.equal(metrikaPageUrl('https://avtocena.com/?utm_source=a%40b.ru&yclid=bad'), 'https://avtocena.com/');
- for(const path of ['/crm/leads/123','/login','/privacy/request','/api/leads'])assert.equal(metrikaPageUrl('https://avtocena.com'+path),'');
+ for(const path of ['/crm/leads/123','/login','/privacy/request','/api/leads','/account','/account/messages'])assert.equal(metrikaPageUrl('https://avtocena.com'+path),'');
  assert.equal(metrikaPageUrl('javascript:alert(1)'),'');
 });
 test('immediate first hit, 15-second bounce tracking and SPA hits without duplicate initialization',()=>{
@@ -41,7 +41,7 @@ test('immediate first hit, 15-second bounce tracking and SPA hits without duplic
  const tracker=createMetrikaPageTracker({href:()=>href,allowed:()=>allowed,referrer:()=> 'https://yandex.ru/?secret=removed',send:(...args)=>calls.push(args),load:()=>{},disable:v=>disabled.push(v)});
  tracker.sync();tracker.sync();
  assert.equal(calls.length,1);assert.equal(calls[0][1],'init');
- assert.equal((calls[0][2] as any).accurateTrackBounce,15000);assert.equal((calls[0][2] as any).webvisor,false);
+ assert.equal((calls[0][2] as any).accurateTrackBounce,15000);assert.equal((calls[0][2] as any).webvisor,true);
  assert.equal((calls[0][2] as any).url,href);assert.equal((calls[0][2] as any).referrer,'https://yandex.ru/');
  href='https://avtocena.com/cars';tracker.sync();tracker.sync();assert.equal(calls.length,2);assert.equal(calls[1][1],'hit');
  allowed=false;tracker.sync();assert.equal(calls.at(-1)?.[1],'destruct');assert.equal(disabled.at(-1),true);
