@@ -91,3 +91,13 @@ test('unreviewed localized document headings do not enter the public dictionary;
  assert.deepEqual(find('X4'),[]);
  assert.equal(find('Corolla')[0].related,undefined);
  });
+
+test('spaced exact ix35 uses its real name and infers only an unambiguous make',async()=>{
+ const {typedModelSelection,typedModelMake}=await import('../apps/web/lib/catalog/model-suggestion-search');
+ const find=createModelSuggestionSearch({version:1,brands:[],models:[['Hyundai','ix35',[],1],['Hyundai','Tucson',[],1],['Other','ix350',[],1]]});
+ const rows=find('ix 35');assert.equal(rows[0].model,'ix35');
+ assert.equal(typedModelSelection('ix 35',rows,true),'ix35');assert.equal(typedModelMake('ix35',rows),'Hyundai');
+ assert.equal(typedModelSelection('ix 35',find('Tucson'),true),'ix 35','never substitute a successor or a fuzzy suggestion');
+ assert.equal(typedModelMake('Unknown',rows),'');
+ assert.equal(typedModelMake('ix35',[...rows,{make:'Other',model:'ix35',aliases:[]}]),'');
+});

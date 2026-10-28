@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 
-import {catalogBrandMatches} from "@/lib/catalog/brands";
+import {CATALOG_BRANDS,catalogBrandMatches} from "@/lib/catalog/brands";
 
 type Option = { value: string; label: string };
 type BrandStats = {
@@ -30,7 +30,8 @@ function loadBrandStats(query: string) {
   const cached = REQUESTS.get(key);
   if (cached && now - cached.at < REQUEST_CACHE_MS) return cached.promise;
   const suffix = query ? `?${query}` : "";
-  const promise = fetch(`/api/catalog/brand-counts${suffix}`, { cache: "no-store" })
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);
+  const promise = fetch(`/api/catalog/brand-counts${suffix}`, { cache: "no-store", signal:controller.signal })
     .then(async (response) => {
       if (!response.ok) throw new Error(`catalog_brand_stats_http_${response.status}`);
       const payload = await response.json();
@@ -43,7 +44,7 @@ function loadBrandStats(query: string) {
     .catch((error) => {
       REQUESTS.delete(key);
       throw error;
-    });
+    }).finally(()=>clearTimeout(timeout));
   REQUESTS.set(key, { at: now, promise });
   return promise;
 }
@@ -76,6 +77,7 @@ export function CatalogBrandMultiSelect({
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [stats, setStats] = useState<BrandStats>(EMPTY_STATS);
+  const [statsUnavailable,setStatsUnavailable]=useState(false);
   const root = useRef<HTMLDivElement>(null);
   const selected = useMemo(() => splitMakes(value), [value]);
   const selectedKey = selected.length === 1 ? selected[0].toLocaleLowerCase("ru-RU") : "";
@@ -83,9 +85,10 @@ export function CatalogBrandMultiSelect({
   useEffect(() => {
     if (!open) return;
     let cancelled = false;
+    setStats(EMPTY_STATS);setStatsUnavailable(false);
     loadBrandStats(contextQuery)
       .then((next) => { if (!cancelled) setStats(next); })
-      .catch(() => { if (!cancelled) setStats(EMPTY_STATS); });
+      .catch(() => { if (!cancelled) {setStats(EMPTY_STATS);setStatsUnavailable(true);} });
     return () => { cancelled = true; };
   }, [contextQuery, open]);
 
@@ -114,17 +117,20 @@ export function CatalogBrandMultiSelect({
   const brands = useMemo(() => {
     const optionLabels = new Map(options.filter((option) => option.value).map((option) => [option.value.toLocaleLowerCase("ru-RU"), option.label]));
     const liveMakes = Object.keys(stats.counts).filter((make) => Number(stats.counts[make] || 0) > 0);
-    const source = [...liveMakes, ...options.map((option) => option.value), ...selected];
+    const needle = query.trim().toLocaleLowerCase("ru-RU");
+    // Known brand names remain searchable during an inventory metadata outage;
+    // they carry no invented availability/count. Green stock remains source-only.
+    const known=statsUnavailable&&needle.length>=2&&new URLSearchParams(contextQuery).get('stock')!=='green'?CATALOG_BRANDS.map(brand=>brand.name):[];
+    const source = [...liveMakes, ...options.map((option) => option.value), ...selected, ...known];
     const seen = new Map<string, Option>();
     for (const make of source.map(clean).filter(Boolean)) {
       const key = make.toLocaleLowerCase("ru-RU");
       if (!seen.has(key)) seen.set(key, { value: make, label: optionLabels.get(key) || make });
     }
-    const needle = query.trim().toLocaleLowerCase("ru-RU");
     return [...seen.values()]
       .filter((option) => catalogBrandMatches(option.label,needle))
       .sort((left, right) => Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===right.value.toLocaleLowerCase("ru-RU")))-Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===left.value.toLocaleLowerCase("ru-RU"))) || left.label.localeCompare(right.label, "ru"));
-  }, [options, query, selected, stats.counts]);
+  }, [options, query, selected, stats.counts,statsUnavailable,contextQuery]);
 
   const choose = (make: string) => {
     setOpen(false);
