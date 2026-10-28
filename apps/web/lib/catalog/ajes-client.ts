@@ -6,11 +6,19 @@ import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable,type AjesQuery} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
+// Release supplier admission before consulting historical
+// storage. Shared callers recover once; stale results never enter the fresh cache.
+class AjesSavedRecovery {
+  private pending?:Promise<any>;
+  constructor(private readonly load:()=>Promise<any>){}
+  read(){return this.pending??=(this.load());}
+}
 type Dependencies={calculationIndex?:()=>CalculationIndex|null;password:()=>string|undefined|Promise<string|undefined>; assertEnabled:(table?:AjesTable)=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; endpoint?:(ip:string)=>string|Promise<string>; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; readLegacyQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
-  // Refusals may retain an old card for this visitor, but must not poison others.
+  // Stored recovery has its own bounded queue. It must neither occupy supplier
+  // admission nor promote a visitor's stale result into the shared fresh cache.
   const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});
   // Bounded snapshots of rows the visitor already saw, not fabricated full details.
   const listed=new Map<string,{value:any;bytes:number}>();let listedBytes=0;
@@ -54,7 +62,7 @@ export function createAjesClient(deps:Dependencies) {
         }
         return null;
       };
-      return cache.get(query.sql,()=>visitorCache.get(visitorKey,async()=>{
+      return cache.get(query.sql,async()=>{
         await deps.assertEnabled(query.table); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
         let saved:any=null;
@@ -139,20 +147,25 @@ export function createAjesClient(deps:Dependencies) {
             if(!cooling(key))failures.set(key,{reason:error.reason,until:Date.now()+(error.reason==='visitor_restricted'?300000:30000)});
             while(failures.size>500)failures.delete(failures.keys().next().value!);
           }
-          if(query.kind==='detail'&&!usable&&recoverable){
-            let fallback=listed.get(query.table+':'+query.id)?.value;
-            if(!fallback)try{fallback=await deps.readListedDetail?.(query.table,query.id!);}catch{}
-            const fallbackAge=Date.now()-Date.parse(fallback?.observedAt||'');
-            if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled(query.table);return {...fallback,partial:true,stale:true};}
-          }
-          if(query.kind==='list'&&recoverable){const fallback=await listFallback(saved);if(fallback)return fallback;}
-          if(query.kind!=='list'&&usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors')&&recoverable){await deps.assertEnabled(query.table);return {...saved,stale:true};}
-          if(error instanceof AjesUnavailable)throw error;
           const code=(error as any)?.cause?.code;
-          const reason=controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed';
-          throw new AjesUnavailable(reason);
+          const failure=error instanceof AjesUnavailable?error:new AjesUnavailable(controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed');
+          if(!recoverable)throw failure;
+          // Recovery can scan bounded saved pages or read a stored detail. None
+          // of that work uses the supplier; holding its two slots here would
+          // reject unrelated visitors while the source itself is idle.
+          throw new AjesSavedRecovery(async()=>{
+            if(query.kind==='detail'&&!usable){
+              let fallback=listed.get(query.table+':'+query.id)?.value;
+              if(!fallback)try{fallback=await deps.readListedDetail?.(query.table,query.id!);}catch{}
+              const fallbackAge=Date.now()-Date.parse(fallback?.observedAt||'');
+              if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled(query.table);return {...fallback,partial:true,stale:true};}
+            }
+            if(query.kind==='list'){const fallback=await listFallback(saved);if(fallback)return fallback;}
+            if(query.kind!=='list'&&usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors')){await deps.assertEnabled(query.table);return {...saved,stale:true};}
+            throw failure;
+          });
         }finally{clearTimeout(timer);}
-      }),visitorKey).then(value=>{
+      },visitorKey).then(value=>{
         if(query.table!=='korea'||query.kind!=='detail'||value.stale||value.items?.length!==1)return value;
         const snapshot=listed.get('korea:'+query.id)?.value;
         const age=Date.now()-Date.parse(snapshot?.observedAt||'');
@@ -160,6 +173,10 @@ export function createAjesClient(deps:Dependencies) {
         const item=preserveKoreaListingLink(value.items[0],snapshot.items[0]);
         return item===value.items[0]?value:{...value,items:[item]};
       }).catch(async error=>{
+        if(error instanceof AjesSavedRecovery)return visitorCache.get(visitorKey,()=>error.read()).catch(recoveryError=>{
+          if(recoveryError instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(recoveryError.message))throw new AjesUnavailable('local_busy');
+          throw recoveryError;
+        });
         // Admission queue rejection happens outside the provider try/catch.
         // Treat only these bounded local failures as recoverable unavailability;
         // never turn programming/data errors into an empty successful response.

@@ -1,7 +1,7 @@
 import {readCalculationIndex} from '../encyclopedia/calculation-index';
 import 'server-only';
 import {ajesEndpoint} from './ajes-routing';
-import {readAjesQueryCache,readPreviousTruckPolicyRows,readExpandedJapanRows,readUncappedChinaRows,saveAjesQueryCache} from './ajes-query-cache';
+import {readAjesQueryCache,readPreviousTruckPolicyRows,readExpandedJapanRows,readUncappedChinaRows,saveAjesQueryCache,retainedAjesQueryEntries} from './ajes-query-cache';
 import {ajesPassword} from './ajes-settings';
 import {getJsonStorage} from '../data';
 import {assertCollectionEnabled} from './collection-controls';
@@ -19,9 +19,9 @@ async function readSavedListIndex(){
   const result:Record<string,any>={};
   for(let start=0;start<128;start+=8){
    const slots=await Promise.all(Array.from({length:8},(_,i)=>getJsonStorage().readJson<any>(`catalog/partner-cache/ajes/queries/${start+i}.json`,null).catch(()=>null)));
-   for(const slot of slots)for(const lot of slot?.value?.items||[]){
-    const key=lot.table+':'+lot.id,at=slot.value.observedAt;
-    if(!result[key]||Date.parse(result[key].observedAt)<Date.parse(at))result[key]={schemaVersion:slot.value.schemaVersion,items:[lot],page:1,pageSize:1,observedAt:at,partial:true};
+   for(const slot of slots)for(const {value} of retainedAjesQueryEntries(slot))for(const lot of value?.items||[]){
+    const key=lot.table+':'+lot.id,at=value.observedAt;
+    if(!result[key]||Date.parse(result[key].observedAt)<Date.parse(at))result[key]={schemaVersion:value.schemaVersion,items:[lot],page:1,pageSize:1,observedAt:at,partial:true};
    }
   }
   return result;
