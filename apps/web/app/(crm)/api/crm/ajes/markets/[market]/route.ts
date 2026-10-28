@@ -1,3 +1,5 @@
+import {getJsonStorage} from '@/lib/data';
+import type {AjesRequestDiagnostic} from '@/lib/catalog/ajes-request-diagnostic';
 import {NextResponse} from 'next/server';
 import {getCurrentUser} from '@/lib/auth';
 import {isPlatformOwner} from '@/lib/platform-access';
@@ -10,7 +12,7 @@ const response=(body:unknown,status=200)=>NextResponse.json(body,{status,headers
 type Context={params:Promise<{market:string}>};
 export async function GET(_req:Request,context:Context){
  if(!isPlatformOwner(await getCurrentUser()))return response({error:'Доступ запрещён'},403);
- try{const market=ajesPreviewMarket((await context.params).market);return response({market,configured:Boolean(await ajesPassword()),diagnostic:await readAjesPreviewDiagnostic(market),publicationReady:true});}
+ try{const market=ajesPreviewMarket((await context.params).market);return response({market,configured:Boolean(await ajesPassword()),diagnostic:await readAjesPreviewDiagnostic(market),catalogDiagnostic:await getJsonStorage().readJson<AjesRequestDiagnostic|null>(`integrations/ajes/catalog-failure-${market}.json`,null).catch(()=>null),publicationReady:true});}
  catch{return response({error:'Не удалось прочитать подключение'},503);}
 }
 export async function POST(req:Request,context:Context){

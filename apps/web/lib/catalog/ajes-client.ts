@@ -1,3 +1,4 @@
+import type {AjesRequestDiagnostic} from './ajes-request-diagnostic';
 import {preserveKoreaListingLink} from './ajes-korea-detail-cache';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {isIP} from 'node:net';
@@ -13,7 +14,7 @@ class AjesSavedRecovery {
   constructor(private readonly load:()=>Promise<any>){}
   read(){return this.pending??=(this.load());}
 }
-type Dependencies={calculationIndex?:()=>CalculationIndex|null;password:()=>string|undefined|Promise<string|undefined>; assertEnabled:(table?:AjesTable)=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; endpoint?:(ip:string)=>string|Promise<string>; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; readLegacyQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
+type Dependencies={saveRequestFailure?:(value:AjesRequestDiagnostic)=>Promise<unknown>;calculationIndex?:()=>CalculationIndex|null;password:()=>string|undefined|Promise<string|undefined>; assertEnabled:(table?:AjesTable)=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; endpoint?:(ip:string)=>string|Promise<string>; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; readLegacyQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
@@ -25,6 +26,7 @@ export function createAjesClient(deps:Dependencies) {
   // supplier slots. Bound both concurrent writes and retained waiting payloads.
   const persistence=new DetailReadCache<null>({maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,maxQueued:16,queueTimeoutMs:5000,shouldCache:()=>false});
   let persistenceSequence=0,persistenceWarningAt=0;
+  const lastFailureSaved=new Map<string,number>();
   const persist=(save:()=>Promise<unknown>)=>{void persistence.get(String(++persistenceSequence),async()=>{await save();return null;}).catch(()=>{
     if(Date.now()-persistenceWarningAt>=60000){persistenceWarningAt=Date.now();console.warn('AJES_PERSISTENCE_UNAVAILABLE');}
   });};
@@ -81,12 +83,16 @@ export function createAjesClient(deps:Dependencies) {
         if(usable&&currentSchema&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
         const url=new URL(await deps.endpoint?.(clientIp)||'http://87.242.72.57/api/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql,...(query.table==='korea'&&query.kind==='detail'?{ajax:''}:{})}).toString();
+        let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
+        const startedAt=new Date().toISOString();
         const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),query.table==='korea'&&query.kind==='detail'?45000:20000);
         try {
           const cooldown=cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey);
           if(cooldown)throw new AjesUnavailable(cooldown);
           await deps.reserve(query.table,query.kind);
+          requestStarted=true;
           const response=await (deps.fetcher??fetch)(url,{signal:controller.signal,redirect:'error',cache:'no-store'});
+          httpStatus=response.status;
           if(!response.ok)throw new AjesUnavailable(response.status===414?'query_too_large':`http_${response.status}`);
           if(Number(response.headers.get('content-length'))>2*1024*1024)throw new AjesUnavailable('response_too_large');
           const reader=response.body?.getReader();
@@ -102,7 +108,8 @@ export function createAjesClient(deps:Dependencies) {
             // The provider returns a short plaintext bot refusal containing the
             // API password for some visitor addresses. Classify it without ever
             // retaining/logging its contents or replacing the visitor address.
-            if(decoded.length<=256&&/^\s*(?:bot|ban)\d*(?:\s|$)/i.test(decoded.toString('utf8')))throw new AjesUnavailable('visitor_restricted');
+            const refusal=decoded.length<=256?decoded.toString('utf8').match(/^\s*((?:bot|ban)\d*)(?:\s|$)/i):null;
+            if(refusal){providerCode=refusal[1].length<=16?refusal[1].toLowerCase():null;throw new AjesUnavailable('visitor_restricted');}
             rows=JSON.parse(decoded.toString('utf8'));
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'){
@@ -156,6 +163,13 @@ export function createAjesClient(deps:Dependencies) {
           }
           const code=(error as any)?.cause?.code;
           const failure=error instanceof AjesUnavailable?error:new AjesUnavailable(controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed');
+          // Keep one private diagnostic per table, at most once per minute. A
+          // cooldown/cache hit must not replace the actual failed request.
+          if(requestStarted&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(query.table)??0)>=60000){
+            lastFailureSaved.set(query.table,Date.now());
+            const diagnostic:AjesRequestDiagnostic={table:query.table,kind:query.kind,page:query.page,pageSize:query.pageSize,startedAt,finishedAt:new Date().toISOString(),clientIp,sql:query.sql,endpoint:url.origin+url.pathname,httpStatus,providerCode,outcome:failure.reason};
+            if(Buffer.byteLength(JSON.stringify(diagnostic))<=64*1024)persist(()=>deps.saveRequestFailure!(diagnostic));
+          }
           if(!recoverable)throw failure;
           // Recovery can scan bounded saved pages or read a stored detail. None
           // of that work uses the supplier; holding its two slots here would

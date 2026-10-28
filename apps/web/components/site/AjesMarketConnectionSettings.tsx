@@ -1,11 +1,13 @@
 'use client';
+import type {AjesRequestDiagnostic} from '@/lib/catalog/ajes-request-diagnostic';
 import {useEffect,useState} from 'react';
 import type {AjesMarketPreview,AjesPreviewMarket,AjesPreviewDiagnostic} from '@/lib/catalog/ajes-market-preview';
 export function AjesMarketConnectionSettings({market}:{market:AjesPreviewMarket}){
  const [configured,setConfigured]=useState<boolean|null>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[preview,setPreview]=useState<AjesMarketPreview|null>(null);
  const endpoint=`/api/crm/ajes/markets/${market}`;
+ const [catalogDiagnostic,setCatalogDiagnostic]=useState<AjesRequestDiagnostic|null>(null);
  const [diagnostic,setDiagnostic]=useState<AjesPreviewDiagnostic|null>(null);
- useEffect(()=>{fetch(endpoint,{cache:'no-store'}).then(async r=>{if(!r.ok)throw Error();const b=await r.json();setConfigured(b.configured===true);setDiagnostic(b.diagnostic||null);}).catch(()=>setMessage('Не удалось прочитать подключение'));},[endpoint]);
+ useEffect(()=>{fetch(endpoint,{cache:'no-store'}).then(async r=>{if(!r.ok)throw Error();const b=await r.json();setConfigured(b.configured===true);setCatalogDiagnostic(b.catalogDiagnostic||null);setDiagnostic(b.diagnostic||null);}).catch(()=>setMessage('Не удалось прочитать подключение'));},[endpoint]);
  async function check(){setBusy(true);setMessage('');setPreview(null);try{const r=await fetch(endpoint,{method:'POST'}),b=await r.json();setDiagnostic(b.diagnostic||null);if(!r.ok)throw Error(b.error);setPreview(b.preview);setMessage(b.preview.received?'Образец получен. Доступ к источнику работает.':'Таблица ответила без записей. Готовность каталога не подтверждена.');}catch(e){setMessage(e instanceof Error?e.message:'Проверка не выполнена');}finally{setBusy(false);}}
  return <section className="my-3 space-y-2 rounded-lg border border-[var(--ac-border)] p-3">
   <p className="font-semibold">AJ System · подключение фида</p>
@@ -22,6 +24,13 @@ export function AjesMarketConnectionSettings({market}:{market:AjesPreviewMarket}
     `Адрес API: ${diagnostic.endpoint}`,`SQL: ${diagnostic.sql}`,`IP посетителя: ${diagnostic.clientIp}`,
     `Запрос начат: ${diagnostic.requestStarted?'да':'нет'}`,`HTTP: ${diagnostic.httpStatus??'ответ не получен'}`,
     `Код поставщика: ${diagnostic.providerCode??'не получен'}`,`Результат проверки: ${diagnostic.outcome}`,
+   ].join('\n')}/>
+  </details>}
+  {catalogDiagnostic&&<details className="text-sm"><summary className="cursor-pointer underline">Сохранённый сбой запроса каталога</summary>
+   <p className="mt-2">Реальный запрос списка, счётчика, справочника или карточки, отдельно от проверки пяти автомобилей. Код отказа сам по себе не устанавливает, на чьей стороне ошибка.</p>
+   <textarea aria-label="Диагностика страницы каталога" readOnly rows={10} className="mt-2 w-full rounded border border-[var(--ac-border)] bg-transparent p-2 text-xs" value={[
+    `Таблица: ${catalogDiagnostic.table}; тип: ${catalogDiagnostic.kind}`,`Страница: ${catalogDiagnostic.page}; размер: ${catalogDiagnostic.pageSize}`,`Начало UTC: ${catalogDiagnostic.startedAt}`,`Завершение UTC: ${catalogDiagnostic.finishedAt}`,
+    `Адрес API: ${catalogDiagnostic.endpoint}`,`SQL: ${catalogDiagnostic.sql}`,`IP посетителя: ${catalogDiagnostic.clientIp}`,`HTTP: ${catalogDiagnostic.httpStatus??'ответ не получен'}`,`Код ответа: ${catalogDiagnostic.providerCode??'не получен'}`,`Результат: ${catalogDiagnostic.outcome}`,
    ].join('\n')}/>
   </details>}
   {preview&&<details className="text-sm"><summary className="cursor-pointer underline">Образец · {preview.received} записей</summary><p className="mt-2">Получен {new Date(preview.observedAt).toLocaleString('ru-RU',{timeZone:'Asia/Krasnoyarsk'})}</p><p className="break-words">Поля ответа: {preview.fields.join(', ')}</p><div className="mt-2 space-y-3">{preview.rows.map((row,i)=><dl key={i} className="rounded border p-2">{Object.entries(row).map(([key,value])=><div key={key} className="break-words"><dt className="inline font-semibold">{key}: </dt><dd className="inline">{value===null||value===''?'Не заполнено':String(value)}</dd></div>)}</dl>)}</div></details>}
