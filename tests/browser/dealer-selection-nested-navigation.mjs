@@ -55,7 +55,7 @@ async function openFilters(page,width){if(width===390)await page.evaluate(()=>wi
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
 try {
  const page=await browser.newPage({viewport:{width:390,height:900},isMobile:true,hasTouch:true});
- await page.addInitScript(()=>{window.rewinds=[];const go=history.go.bind(history);history.go=(delta)=>{window.rewinds.push(delta);go(delta);};});
+ await page.addInitScript(()=>{window.routePops=[];window.addEventListener('popstate',event=>window.routePops.push({href:location.href,tree:event.state?.__PRIVATE_NEXTJS_INTERNALS_TREE?.route}));window.rewinds=[];const go=history.go.bind(history);history.go=(delta)=>{window.rewinds.push(delta);go(delta);};});
  await page.goto(origin+'/test/dealer?make=Audi&budget=2500000&city=Новокузнецк&selection=1#catalog');
  await page.getByRole('button',{name:'Поделиться подборкой',exact:true}).waitFor();
  await openFilters(page,390);
@@ -75,6 +75,21 @@ try {
  await page.evaluate(()=>{window.layerScans=0;const query=document.querySelectorAll.bind(document);document.querySelectorAll=(selector)=>{if(selector.includes('[data-back-layer]'))window.layerScans++;return query(selector);};});
  for(let i=0;i<10;i++){await page.evaluate(()=>{const card=document.createElement('div');card.className='photo-loaded';document.body.append(card);card.style.opacity='0.9';card.remove();});}
  assert.equal(await page.evaluate(()=>window.layerScans),0,'unrelated card mutations must not rescan all overlays');
- console.log('nested selection navigation, outer Back and unrelated DOM updates passed');
+ for(const closePickerFirst of [true,false]){
+  await page.goto(origin+'/test/dealer?make=Audi&budget=2500000&selection=1');
+  await page.getByRole('button',{name:'Поделиться подборкой',exact:true}).waitFor();
+  await openFilters(page,390);
+  await sheet.getByRole('searchbox',{name:'Модель автомобиля',exact:true}).click();await models.waitFor();
+  await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:catalog-navigation',{detail:{href:'/test/dealer?make=Audi&model=Q5&budget=2500000&selection=1'}})));
+  if(closePickerFirst){await models.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();await models.waitFor({state:'hidden'});}
+  await page.evaluate(()=>{history.pushState({__NA:true,__PRIVATE_NEXTJS_INTERNALS_TREE:{route:'applied-filter'}},'', '/test/dealer?make=Audi&model=Q5&budget=2500000&selection=1');window.dispatchEvent(new Event('fixture:navigate'));window.routePops=[];});
+  await page.evaluate(()=>history.back());
+  if(!closePickerFirst){await models.waitFor({state:'hidden'});assert.equal(await sheet.isVisible(),true);await page.evaluate(()=>history.back());}
+  await sheet.waitFor({state:'hidden'});
+  const applied=new URL(page.url());assert.equal(applied.searchParams.get('model'),'Q5');assert.equal(applied.searchParams.get('budget'),'2500000');assert.equal(applied.searchParams.get('selection'),'1');
+  const pops=await page.evaluate(()=>window.routePops);assert.equal(pops.length,closePickerFirst?1:2);for(const pop of pops){assert.equal(new URL(pop.href).searchParams.get('model'),'Q5','an earlier router listener must see the applied query');assert.equal(pop.tree,'applied-filter','an earlier router listener must see the matching router tree');}
+  assert.equal(await page.evaluate(()=>history.state.__PRIVATE_NEXTJS_INTERNALS_TREE?.route),'applied-filter');
+ }
+ console.log('pending/applied nested selection, outer Back, preserved router state and unrelated DOM updates passed');
  await page.close();
 }finally{await browser.close();server.close();}
