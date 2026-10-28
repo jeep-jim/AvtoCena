@@ -463,7 +463,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     if (draft.market === "japan") auctionGradeSelections(draft.auctionGrade).forEach(grade => rows.push({key: `auctionGrade:${grade}`, label: `Оценка ${grade}`, grade}));
     if (draft.market === "japan" && draft.stock === "green") rows.push({key:"stock",label:"В наличии · Зелёный угол"});
     draft.model.split("|").filter(Boolean).forEach(model => rows.push({key:`model:${model}`,label:model}));
-    if (draft.market && draft.stock!=="green") rows.push({ key: "market", label: filterSelections(draft.market).map(m=>optionLabel(markets,m)).join(", ") });
+    if (draft.stock!=="green") filterSelections(draft.market).forEach(market => rows.push({ key: `market:${market}`, label: optionLabel(markets, market) }));
     if (draft.bodyType) rows.push({ key: "bodyType", label: optionLabel(bodies, draft.bodyType) });
     if (draft.transmission) rows.push({ key: "transmission", label: optionLabel(transmissions, draft.transmission) });
     if (draft.fuel) rows.push({ key: "fuel", label: optionLabel(fuels, draft.fuel) });
@@ -477,6 +477,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   }, [draft]);
 
   const removeFilter = (key: string) => {
+    if (key.startsWith("market:")) return setField("market", filterSelections(draft.market).filter(market => market !== key.slice(7)).join("|"));
     if (key.startsWith("model:")) return setDraft(current => ({...current,model:current.model.split("|").filter(model => model !== key.slice(6)).join("|")}));
     if (key.startsWith("auctionGrade:")) return setDraft(current => ({...current, auctionGrade: auctionGradeSelections(current.auctionGrade).filter(grade => grade !== key.slice(13)).join("|")}));
     if (key.startsWith("make:")) {

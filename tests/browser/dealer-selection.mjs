@@ -156,6 +156,21 @@ try{for(const width of [390,1440]){
  assert.equal(await reloadedMulti.getByRole('button',{name:'Вариатор',exact:true}).count()>=1,true);
  if(width===390)await reloadedMulti.getByRole('button',{name:'Применить фильтры',exact:true}).click();
  await page.screenshot({path:`${out}/multiselect-${width}.png`});
+ // Each chosen market has its own removable chip and keeps the other choice.
+ await openFilters(page,width);
+ const chipForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
+ const chipMarket=chipForm.locator('input[name="market"]').locator('..');
+ await chipMarket.locator('button.ac-filter-control').click();
+ await chipMarket.getByRole('button',{name:'Китай',exact:true}).click();
+ await chipMarket.getByRole('button',{name:'Япония · Аукционы',exact:true}).click();
+ await chipMarket.locator('button.ac-filter-control').click();
+ const chipScope=width===390?chipForm:page.locator('.ac-catalog-selection');
+ await chipScope.getByRole('button',{name:'Убрать Китай',exact:true}).waitFor();
+ await chipScope.getByRole('button',{name:'Убрать Япония · Аукционы',exact:true}).click();
+ await page.waitForFunction(()=>new URLSearchParams(location.search).get('market')==='china');
+ assert.equal(await chipScope.getByRole('button',{name:'Убрать Китай',exact:true}).count(),1);
+ assert.equal(new URL(page.url()).pathname,'/test/dealer');
+ if(width===390)await chipForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
  // Green Corner's source gearbox codes cannot be reused as another market's types.
  const switchForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
  if(width===390)await openFilters(page,width);

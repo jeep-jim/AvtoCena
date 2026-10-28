@@ -75,3 +75,11 @@ test('KCar image/jpg is accepted; HTML is rejected; incompatible Mobile.de stays
  const mobile='https://img.classistatic.de/api/v1/mo-prod/images/example?rule=mo-1600';
  assert.equal(photoProxyEligible(mobile,'europe'),false);assert.equal(protectedPhotoUrl(mobile,'europe'),mobile);
 });
+
+// A broken image must not take every other car on the same CDN offline.
+test('an invalid individual photo does not block healthy photos on its host',async()=>{
+ const cache=new PhotoMemoryCache();
+ await assert.rejects(cache.read('https://one.test/missing',async()=>{throw Error('photo_invalid');}));
+ const healthy=await cache.read('https://one.test/healthy',async()=>({data:Buffer.from('ok'),type:'image/webp'}));
+ assert.equal(healthy.data.toString(),'ok');
+});

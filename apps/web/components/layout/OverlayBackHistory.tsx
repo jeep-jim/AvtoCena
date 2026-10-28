@@ -40,7 +40,8 @@ export function OverlayBackHistory(){
   history.pushState=push;history.replaceState=replace;
   let travelling=false,disposed=false,closing:HTMLElement|null=null;
   let restoreAfterPop:Step|null=null;
-  const visible=()=>Array.from(document.querySelectorAll<HTMLElement>('dialog[open],[role="dialog"][aria-modal="true"],[data-back-layer],.ac-mobile-filter-sheet')).filter(el=>el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden');
+  const layerSelector='dialog[open],[role="dialog"][aria-modal="true"],[data-back-layer],.ac-mobile-filter-sheet';
+  const visible=()=>Array.from(document.querySelectorAll<HTMLElement>(layerSelector)).filter(el=>el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden');
   const close=(element:HTMLElement)=>{
    const native=element instanceof HTMLDialogElement?element:element.closest('dialog');
    if(native){if(native.dispatchEvent(new Event('cancel',{cancelable:true})))native.close();return;}
@@ -58,10 +59,19 @@ export function OverlayBackHistory(){
     // A picker can change the query and start navigation before its overlay
     // closes. Promote that changed URL to a route entry; rewinding here would
     // cancel the pending Next navigation and restore stale filter parameters.
-    if(removed.length===steps.length && replacementUrl===location.href){
+    if(replacementUrl===location.href){
+     // A nested model picker can close before the outer filter sheet.
+     // Rewinding even one step dispatches popstate to Next and cancels its
+     // in-flight selection update. Retain the current route and outer layer.
+     const remaining=steps.filter(step=>elements.includes(step.element));
+     // The previous history entry already has the old outer token. Give the
+     // retained layer a new token so one real Back still closes it.
+     if(remaining.length)remaining[remaining.length-1]={...remaining.at(-1)!,token:crypto.randomUUID()};
      const {acOverlayStep,...state}=history.state||{};
-     originalReplace.call(history,state,'',location.href);
-     steps.splice(0);replacementUrl=null;restorePosition(removed[0]);return;
+     originalReplace.call(history,{...state,...(remaining.length?{acOverlayStep:remaining.at(-1)!.token}:{})},'',location.href);
+     steps.splice(0,steps.length,...remaining);
+     if(!steps.length)replacementUrl=null;
+     restorePosition(removed[0]);return;
     }
     const top=steps.at(-1);
     if(top?.url===location.href&&history.state?.acOverlayStep===top.token){
@@ -98,7 +108,14 @@ export function OverlayBackHistory(){
    if(steps.length&&href&&new URL(href,location.origin).origin===location.origin)replacementUrl=location.href;
   };
   window.addEventListener('avtocena:catalog-navigation',navigating);
-  const observer=new MutationObserver(sync);
+  const containsLayer=(node:Node)=>node instanceof Element&&(node.matches(layerSelector)||Boolean(node.querySelector(layerSelector)));
+  const observer=new MutationObserver(records=>{
+   // Photo/card updates must not repeatedly scan and measure every dialog in
+   // the document. Only layer changes and visibility of their ancestors matter.
+   if(records.some(record=>record.type==='childList'
+    ? [...record.addedNodes,...record.removedNodes].some(containsLayer)
+    : record.target instanceof Element&&(record.target.matches(layerSelector)||steps.some(step=>record.target instanceof Element&&record.target.contains(step.element))||Boolean(record.target.querySelector(layerSelector)))))sync();
+  });
   observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['open','hidden','aria-modal','data-back-layer','class','style']});
   window.addEventListener('popstate',pop);sync();
   return()=>{disposed=true;window.removeEventListener('avtocena:catalog-navigation',navigating);cancelAnimationFrame(restoreFrame);cancelAnimationFrame(restoreSecond);history.scrollRestoration=originalRestoration;observer.disconnect();window.removeEventListener('popstate',pop);if(history.pushState===push)history.pushState=originalPush;if(history.replaceState===replace)history.replaceState=originalReplace;};

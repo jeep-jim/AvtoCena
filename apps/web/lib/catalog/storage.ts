@@ -2410,6 +2410,13 @@ const aggregateBudgetIndexes=new WeakMap<CompressedBudgetDirectory,Promise<Budge
 const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
 const specificationSelectorPath=(name:string)=>`${specificationSelectorDirectory(readCalculationIndex()?.digest||null,calculationCacheVersion())}/${name}.json`;
 async function readBudgetCountIndex(generationId:string,market?:string){
+ if(market && MARKETS.includes(market as CatalogMarket)){
+  const manifest=await readManifest();
+  // An explicitly empty partition has no selector. Falling through to the
+  // legacy all-market object here turns an empty market into a massive read.
+  // Missing/unknown counts are not evidence of emptiness.
+  if(manifest.generationId===generationId && manifest.markets?.[market as CatalogMarket]?.count===0)return null;
+ }
  if(!market || market==='any'){
   const directory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,specificationSelectorPath('ready'),null)).catch(()=>null);
   if(directory?.generationId===generationId && directory.encyclopediaDigest===(readCalculationIndex()?.digest||null) && Object.keys(directory.markets).length){
@@ -2482,6 +2489,7 @@ export async function backfillBudgetSpecificationSelectors(){
  const old=await readIndex<CompressedBudgetDirectory|null>(manifest.generationId,specificationSelectorPath('ready'),null);
  const directory:CompressedBudgetDirectory={version:4,generationId:manifest.generationId,markets:{},encyclopediaDigest:readCalculationIndex()?.digest||null};
  for(const market of MARKETS){
+  if(manifest.markets?.[market]?.count===0)continue;
   const existing=old?.version===4&&await readCompressedSelector(old,market,name=>readIndex(manifest.generationId,specificationSelectorPath(name),null));
   if(old?.encyclopediaDigest===directory.encyclopediaDigest && existing?.specificationFilterVersion===1 && existing.bodyFilterVersion===1 && existing.displayOrderVersion===1){directory.markets[market]=old!.markets[market];continue;}
   const source=await readBudgetCountIndex(manifest.generationId,market);

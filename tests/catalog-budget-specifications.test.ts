@@ -85,3 +85,26 @@ test('derived selectors retain exact identity and enriched drive/transmission fo
  assert.equal(recovered.encyclopediaCalculation?.indexDigest,encyclopedia.digest);
  assert.equal(raw.engineCc,null);
 });
+
+
+test('prepared populated partitions do not read the whole catalog for explicitly empty Japan',async()=>{
+ const {getJsonStorage}=await import('../apps/web/lib/data');
+ const {compressedBudgetSelectors,splitPackedBudgetSelectors}=await import('../apps/web/lib/catalog/budget-selector-codec');
+ const {backfillBudgetSpecificationSelectors,resetCatalogReadCachesForTests}=await import('../apps/web/lib/catalog/storage');
+ const markets=['china','korea','uae','europe','georgia'];
+ const generationId='empty-japan-no-global';
+ const offers:any[]=markets.map(market=>({id:market,market,make:'Test',model:'Car',engineCc:1600,totalRub:1000000}));
+ const index=buildBudgetCountIndex(generationId,offers,new Map(offers.map(o=>[o.id,0])),3);
+ const packed=compressedBudgetSelectors(splitPackedBudgetSelectors(index));
+ const root=`catalog/generations/${generationId}/indexes/`;
+ const values=new Map<string,any>([['catalog/manifest.json',{generationId,markets:{...Object.fromEntries(markets.map(m=>[m,{count:1}])),japan:{count:0}}}],[root+'budget-markets-v3/ready.json',packed.directory],[root+'budget-cards-v3/0.json',{generationId,items:offers}]]);
+ for(const [market,part] of packed.parts)values.set(root+`budget-markets-v3/${market}.json`,part);
+ const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
+ let fullReads=0;
+ const load=(key:string,fallback:any)=>{if(/budget-count-v[123]\.json$/.test(key)){fullReads++;throw Error('unexpected_whole_catalog');}return values.has(key)?values.get(key):fallback;};
+ storage.readJson=async(key,fallback)=>load(key,fallback);
+ storage.readJsonWithMeta=async(key,fallback)=>({found:values.has(key),value:load(key,fallback)});
+ storage.writeJson=async(key,value)=>{values.set(key,value);};
+ try{resetCatalogReadCachesForTests();const ready=await backfillBudgetSpecificationSelectors();assert.deepEqual(Object.keys(ready.markets).sort(),markets.sort());assert.equal(fullReads,0);}
+ finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;resetCatalogReadCachesForTests();}
+});

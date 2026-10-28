@@ -4,6 +4,7 @@ export class PhotoMemoryCache {
   private bytes = 0;
   private pending = new Map<string, Promise<{data: Buffer; type: string}>>();
   private active = 0;
+  private failed = new Map<string, {until: number; reason: string}>();
   private hosts = new Map<string, {next: number; blocked: number; active: number}>();
   constructor(private maxBytes = 256 * 1024 * 1024, private ttl = 6 * 3600_000) {}
   get size() { return this.bytes; }
@@ -14,6 +15,9 @@ export class PhotoMemoryCache {
     const cached = this.entries.get(key);
     if (cached) { this.entries.delete(key); this.entries.set(key, cached); return cached; }
     const existing = this.pending.get(key); if (existing) return existing;
+    const failure = this.failed.get(key);
+    if (failure && failure.until > Date.now()) throw new Error(failure.reason);
+    this.failed.delete(key);
     const host = new URL(url).hostname;
     const state = this.hosts.get(host) || {next: 0, blocked: 0, active: 0};
     this.hosts.set(host, state);
@@ -36,7 +40,15 @@ export class PhotoMemoryCache {
         this.entries.set(key, {...result, at: Date.now()}); this.bytes += result.data.length;
         return result;
       } catch (error) {
-        if (!(error instanceof Error && error.message === "photo_busy")) state.blocked = Date.now() + (error instanceof Error && error.message === "photo_blocked" ? 30 * 60_000 : 10_000);
+        const reason = error instanceof Error ? error.message : "photo_fetch_failed";
+        if (["photo_invalid", "photo_empty", "photo_size"].includes(reason)) {
+          // Missing/corrupt/oversized files are URL failures, not CDN outages.
+          // Keep retries bounded without suppressing unrelated cars' photos.
+          while (this.failed.size >= 128) this.failed.delete(this.failed.keys().next().value!);
+          this.failed.set(key, {until: Date.now() + 10_000, reason});
+        } else if (reason !== "photo_busy") {
+          state.blocked = Date.now() + (reason === "photo_blocked" ? 30 * 60_000 : 10_000);
+        }
         throw error;
       } finally { if (acquired) { state.active--; this.active--; } this.pending.delete(key); }
     })();
