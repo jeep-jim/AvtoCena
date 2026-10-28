@@ -5,6 +5,7 @@ import {isGreenCornerOffer} from "../../lib/catalog/green-corner-contract";
 import {invalidateSavedCalculationPreviews} from "./useSavedCalculationPreview";
 import { OfferCopyButton } from "./OfferCopyButton";
 import { OfferPdfButton } from "./OfferPdfButton";
+import { parameterErrorText } from "../../lib/catalog/parameter-error-text";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 
 import type { SavedOfferCalculation } from "../../lib/catalog/saved-offer-calculation";
@@ -28,16 +29,8 @@ import { validateCustomerParameters } from "../../lib/catalog/customer-parameter
 import { completePowerUnitDraft, powerUnitPatch, hybridResearchQuery, electricResearchQuery } from "../../lib/catalog/power-parameter-draft";
 export type ParameterDraft = Record<string,string>;
 const fuels = [["petrol","Бензин"],["diesel","Дизель"],["lpg","Газ LPG"],["cng","Газ CNG"],["electric","Электро"],["hybrid","Гибрид"]];
-const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",productionDay:"день выпуска",transportToBorderRub:"стоимость доставки до границы",engineCc:"объём двигателя",powerHp:"мощность",powerKw:"мощность в кВт",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС",grossVehicleWeightKg:"полную разрешённую массу (до 3500 кг)"};
 import { visibleBreakdownNote } from "../../lib/catalog/customs-age-label";
-function parameterErrorText(error: unknown, draft: ParameterDraft) {
- const message=error instanceof Error?error.message:"Проверьте параметры";
- const key=message.match(/^Проверьте поле (\w+)$/)?.[1];
- if(!key)return message;
- const tile=({powerHp:"Мощность",powerKw:"Мощность",power30MinKw:"30-минутная мощность",icePowerKw:"30-минутная мощность",year:"Дата выпуска",productionMonth:"Дата выпуска",productionDay:"Дата выпуска",engineCc:"Объём двигателя"} as Record<string,string>)[key];
- const missing=draft[key]==null || String(draft[key]).trim()==="";
- return `${missing?"Для расчёта под ключ заполните":"Проверьте"} ${names[key]||key}${tile?` в поле «${tile}»`:""}.`;
-}
+
 function Field({missing=false,label,caption,value,change,options=[],min,max,searchQuery}:{missing?:boolean;label:string;caption?:string;value:string;change:(v:string)=>void;options?:number[];min?:number;max?:number;searchQuery?:string}) {
  const id=useId();
  const [choosing,setChoosing]=useState(false);
@@ -211,7 +204,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
   {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <p role="status" className="mt-3 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p> : null}
   {exportWarning ? <p role="note" className={priceStyles.warning}><span className={priceStyles.sanctionsBadge}>Санкции</span>{" "}{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам или у менеджера.</p> : null}
-  {estimated30Active ? <p role="note" data-power30-precedent className="mt-2 text-xs text-[var(--ac-muted)]">30-минутная мощность {Number(draft.power30MinKw).toLocaleString("ru-RU")} кВт подобрана по близкой версии. Расчёт предварительный — подтвердите мощность по документам автомобиля.</p> : null}
+  {estimated30Active ? <p role="note" data-power30-precedent className="mt-2 text-xs text-[var(--ac-muted)]">30-минутная мощность {Number(draft.power30MinKw).toLocaleString("ru-RU")} кВт — оценка по близкой версии, не подтверждённая характеристика этой машины. Расчёт предварительный — подтвердите мощность по документам автомобиля.</p> : null}
   {afterPrice}
   <DeliveryCityPanel value={draft.deliveryCity||""} persistSelection={!localCitySelection&&!canSave&&!initialScenario} syncStored={!privateCity} syncStoredOnMount={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>{setLocalCityEdited(true);change("deliveryCity",city);}} description={deliveryDescription(deliveryQuote)}/>
 
@@ -306,12 +299,12 @@ export function OfferParameterEditors({estimated30Active=false,draft,change,show
       {draft.fuel === "hybrid" && draft.hybridKind !== "series_hybrid" ? <label className="block text-xs font-semibold">Топливо ДВС гибрида<select aria-invalid={missingFields.has("n1IceFuel") || undefined} aria-label="Топливо ДВС гибрида" value={draft.n1IceFuel||""} onChange={e=>change("n1IceFuel",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите</option><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label> : null}
     </> : null}
    </Tile> : null}
-   {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile missing={["hybridKind","power30MinKw","icePowerKw"].some(key=>missingFields.has(key))} wide label="30-минутная мощность" value={draft.fuel==="hybrid" && !draft.hybridKind?"Гибрид: укажите тип и мощность":draft.power30MinKw?`${estimated30Active?"≈ ":""}${Number(draft.power30MinKw.replace(",",".")).toLocaleString("ru-RU",{maximumFractionDigits:2})} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<ElectricMotorIcon/>}>
+   {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile missing={["hybridKind","power30MinKw","icePowerKw"].some(key=>missingFields.has(key))} wide label={draft.fuel==="hybrid"?"Мощность гибрида":"30-минутная мощность"} value={draft.fuel==="hybrid" && !draft.hybridKind?"Гибрид: укажите тип и мощность":draft.power30MinKw?`${estimated30Active?"≈ ":""}${Number(draft.power30MinKw.replace(",",".")).toLocaleString("ru-RU",{maximumFractionDigits:2})} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<ElectricMotorIcon/>}>
     {hybridHelp}
     {draft.fuel==="hybrid" ? <label className={editorStyles.hybridField}>Тип гибрида<select aria-invalid={missingFields.has("hybridKind") || undefined} aria-label="Тип гибрида для расчёта" data-keep-open value={draft.hybridKind||""} onChange={e=>change("hybridKind",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите по документам автомобиля</option><option value="series_hybrid">Последовательный — колёса приводит электромотор</option><option value="other_hybrid">Другой — ДВС тоже может приводить колёса</option></select></label> : null}
     <p className={editorStyles.note}>30-минутная мощность электромоторов — отдельное значение из СБКТС, ЭПТС или подтверждающих документов. Максимальная мощность из рекламы сюда не подходит. Если моторов несколько, нужна подтверждённая сумма их 30-минутных мощностей.</p>
     <div className={editorStyles.twoColumns}>{field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000,undefined,"30 минут, кВт")}{field("power30MinHp","30-минутная мощность, л.с.",[],0.1,2720,undefined,"30 минут, л.с.")}</div>
-    {draft.fuel==="hybrid" ? <><p className={editorStyles.note}>Мощность ДВС — только бензинового или дизельного двигателя, без электромоторов.</p><div className={editorStyles.twoColumns}>{field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000,undefined,"ДВС, кВт")}{field("icePowerHp","Мощность ДВС, л.с.",[],0.1,2720,undefined,"ДВС, л.с.")}</div></> : null}
+    {draft.fuel==="hybrid" ? <><p className={editorStyles.note}>Мощность ДВС — только бензинового или дизельного двигателя, без электромоторов. Общая мощность гибридной установки не заменяет это значение.</p><div className={editorStyles.twoColumns}>{field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000,undefined,"ДВС, кВт")}{field("icePowerHp","Мощность ДВС, л.с.",[],0.1,2720,undefined,"ДВС, л.с.")}</div></> : null}
     {!draft.power30MinKw ? <p role="status" className={editorStyles.note}>Оставьте мощность пустой до подтверждения по документам. Полный расчёт недоступен; не вводите случайное значение.</p> : null}
     <p className={editorStyles.note}>Введите кВт или л.с. — второе поле заполнится автоматически. Когда обязательные поля заполнены, цена пересчитается сама. Ответ Алисы сверяйте с документами именно этой модификации.</p>
    </Tile>:null}
