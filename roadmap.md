@@ -17295,3 +17295,10 @@ Runtime перед новым запросом всё ещё683abbe; единс�
 ## 28.10.2026 — оформление фильтров по двум скриншотам владельца
 
 Сокращены видимые пустые подписи марки/модели/рынка/кузова/трансмиссии/топлива/привода/цвета/сортировки. Добавлены существующие lucide-иконки, топливоDroplet, сортировкаArrowDownUp; цвет — круг с существующей conic-gradient палитрой. Геометка города перенесена вправо вместоChevron; dialog/обработчики сохранены. Chevron14px с геометрией диапазонов; desktopправыйотступ выровнен под31px range-toggle. Font-weight500 дляконтролов, dropdownoptions иrangeinputs. Только lightплашки#f8f9fb (прежнийфонпревью); darkцвета не меняются. Values/URL/filterlogic не меняются; accessibilitylabels сохранены. TypecheckPASS;13targetedfiltertestsPASS. Existingbrowserfixture запущен отдельно; публикация/liveприёмка ожидаются.
+
+Дополнение к оформлению фильтров: Chromiumfixture14/14PASS, светлая/тёмная темы320–1280px, раскрытие меню/нормализацияобъёма/сохранениебюджета. Светлый mobileскриншот просмотрен. PR1614 exactb457b48062f10d6b22f4a6f2466b0730bb266312:9checksSUCCESS, финальныйCI выполняется; установка после его успеха. Предыдущий выпуск40705147068SUCCESS; белыепревью40709717778IN_PROGRESS.
+
+
+### 28.10.2026 — фильтры PR1614 проверены и отправлены на установку
+
+Все10checks точногоheadb457b48062f10d6b22f4a6f2466b0730bb266312SUCCESS, включая полныйCI/productionbuild, WebKit иdealer/modelbrowserchecks. Merged8e7593b29b0cb42da013eaadc025810951b5b9a4. Запрошен штатный последовательныйrelease после белыхпревью40709717778; всеresearch/ASTRAdependenciesсохранены, ideaReportsпуст. Установка/liveacceptance ещё ожидаются, sourceпагинация не объявлена исправленной.
