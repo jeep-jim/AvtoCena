@@ -91,3 +91,60 @@ test('canonical encyclopedia corrections outrank older card defaults without cha
  knowledge.models[fact.key]['encyclopedia:model:other']={...canonical,offerId:'encyclopedia:model:other',values:{...donor,powerHp:170}};
  assert.equal(managementParameters(recipient,knowledge).powerHp,undefined);
 });
+
+
+test('saved Hilux N1 mass reaches a compatible sibling and its real calculation',async()=>{
+ const map=new Map<string,any>();const today=new Date().toISOString().slice(0,10);
+ const original=LocalJsonStorage.prototype.readJsonWithMeta;
+ const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async function(this:LocalJsonStorage,key:string,fallback:any){
+  if(key.startsWith('knowledge/management-vehicle-parameters/')||key.startsWith('offer-calculation-scenarios/'))return {found:map.has(key),value:structuredClone(map.get(key)??fallback)};
+  if(key==='fees/exchange-rates.json')return {found:true,value:{updatedAt:today,USD:{currency:'USD',cbrRate:90,nominal:1,rateDate:today,rateSource:'cbr'},JPY:{currency:'JPY',cbrRate:60,nominal:100,rateDate:today,rateSource:'cbr'},EUR:{currency:'EUR',cbrRate:100,nominal:1,rateDate:today,rateSource:'cbr'}}};
+  return original.call(this,key,fallback);
+ });
+ const write=mock.method(LocalJsonStorage.prototype,'writeJson',async(key:string,value:any)=>{map.set(key,structuredClone(value));});
+ resetCatalogRateCache();
+ try{
+  const source:any={id:'hilux-donor',make:'Toyota',model:'Hilux',trim:'Z GR Sports 4WD',year:2024,fuel:'petrol',engineCc:2400,drive:'awd',bodyType:'pickup'};
+  await rememberManagementCalculation(source,{version:'hilux-save',savedAt:'2026-10-28T10:39:00Z',savedBy:'staff',draft:{year:'2024',fuel:'petrol',engineCc:'2400',powerHp:'150',vehicleCategory:'N1',grossVehicleWeightKg:'2400',deliveryCity:'Новокузнецк'}});
+  const target:any={...source,id:'ajes-stats-sibling',sourceId:'ajes_japan_feed',sourceOfferId:'sibling',market:'japan',sourcePrice:2000000,sourceCurrency:'JPY',catalogPricingMode:'seller'};
+  const [enriched]=await attachManagementKnowledge([target]);
+  const draft=offerPrecedentParameterDraft(enriched);
+  assert.equal(draft.grossVehicleWeightKg,'2400');
+  assert.equal(draft.vehicleCategory,'N1');assert.equal(draft.deliveryCity,undefined);
+  const result=await calculateOfferWithCustomerParametersDetailed(enriched,validateCustomerParameters(draft));
+  assert.equal(result.ok,true,JSON.stringify(result));if(result.ok)assert.ok(result.calculation.totalRub>0);
+  assert.equal(target.grossVehicleWeightKg,undefined);
+  const current=await readManagementKnowledge();
+  assert.deepEqual(managementParameters({...target,grossVehicleWeightKg:3000},current),{},'known conflicting mass must not be replaced');
+  assert.deepEqual(managementParameters({...target,year:2023},current),{});
+  const passenger=structuredClone(current),passengerKey=modelKey('Toyota','Hilux');
+  passenger.models[passengerKey][source.id].values.vehicleCategory='M1';
+  assert.equal(managementParameters({...target,vehicleCategory:'M1',grossVehicleWeightKg:3000},passenger).powerHp,150,'N1-specific recovery must not change ordinary M1 matching');
+  // Emulate an existing pre-fix contribution: the mass was omitted from memory,
+  // but is still present in the exact immutable scenario confirmed by staff.
+  const version='11111111-2222-4333-8444-555555555555';
+  const legacyDraft={year:'2024',fuel:'petrol',engineCc:'2400',powerHp:'150',vehicleCategory:'N1',grossVehicleWeightKg:'2400',deliveryCity:'Новокузнецк'};
+  await rememberManagementCalculation(source,{version,savedAt:'2026-10-28T10:40:00Z',savedBy:'staff',draft:legacyDraft});
+  const stored=map.get(MANAGEMENT_KNOWLEDGE_PATH);const old=stored.models[modelKey('Toyota','Hilux')][source.id];
+  delete old.calculationFieldsVersion;delete old.values.grossVehicleWeightKg;
+  const {createHash}=await import('node:crypto');
+  const path=`offer-calculation-scenarios/${createHash('sha256').update(source.id).digest('hex')}/${version}.json`;
+  map.set(path,{offerId:source.id,version,draft:legacyDraft});
+  const [restored]=await attachManagementKnowledge([target]);
+  assert.equal(offerPrecedentParameterDraft(restored).grossVehicleWeightKg,'2400','old save works without re-entry');
+  assert.equal(map.get(MANAGEMENT_KNOWLEDGE_PATH).models[modelKey('Toyota','Hilux')][source.id].values.grossVehicleWeightKg,undefined,'read recovery does not rewrite history');
+  const restoredResult=await calculateOfferWithCustomerParametersDetailed(restored,validateCustomerParameters(offerPrecedentParameterDraft(restored)));
+  assert.equal(restoredResult.ok,true,JSON.stringify(restoredResult));
+  const {readSavedScenarioDraft}=await import('../apps/web/lib/catalog/saved-calculation-input');
+  map.set(path,{offerId:'another-offer',version,draft:legacyDraft});
+  assert.equal(await readSavedScenarioDraft(source.id,version),null,'wrong archived identity is never inherited');
+  map.set(path,{offerId:source.id,version:'different-version',draft:legacyDraft});
+  assert.equal(await readSavedScenarioDraft(source.id,version),null,'wrong archived revision is never inherited');
+  const conflict=structuredClone(current),key=modelKey('Toyota','Hilux');
+  conflict.models[key].other={...conflict.models[key][source.id],offerId:'other',values:{...conflict.models[key][source.id].values,grossVehicleWeightKg:3000}};
+  assert.equal(managementParameters(target,conflict).grossVehicleWeightKg,undefined,'disagreeing donors leave mass unresolved');
+  assert.deepEqual(managementParameters({id:'weak',make:'Toyota',model:'Hilux',year:2024,fuel:'petrol',vehicleCategory:'N1',grossVehicleWeightKg:2400},current),{},'mass/category do not substitute for independent matching attributes');
+
+
+ }finally{read.mock.restore();write.mock.restore();resetCatalogRateCache();}
+});

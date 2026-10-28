@@ -20,12 +20,14 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  };
  const ui=['GreenCornerCatalog','AjesCatalog','AjesRail','JapanSectionTabs','GreenCornerRail','PublicHeader','BrandLogoRail','CatalogLoadMore','CatalogCard','CatalogMarketFlag','CatalogFilters','CurrencyRatesStrip'];
  for(const name of ui)mocks[name]=`export function ${name}(){return null;}`;
- mocks.AjesRail+=`export const readAjesRailData=async()=>({total:1,items:[]});export function CatalogEmptyResults(){return null;}`;
+ mocks.AjesRail+=`export const readAjesRailData=async()=>({count:null,items:[{id:"one"}]});export const readAjesRailCount=async(market,params)=>{if(params.make!=="Volkswagen"||params.city!=="Новокузнецк")throw Error("lost filter");return {total:market==="japan"?10:market==="korea"?20:30,stale:false,upperBound:market==="china",observedAt:"now"};};export function CatalogEmptyResults(){return null;}`;
  const output=await build({entryPoints:['apps/web/components/catalog/CatalogContent.tsx'],bundle:true,platform:'node',format:'cjs',write:false,loader:{'.css':'empty'},jsx:'automatic',packages:'external',plugins:[{name:'fixtures',setup(b){b.onResolve({filter:/.*/},a=>{const n=a.path.split('/').at(-1)!;if(mocks[n])return {path:n,namespace:'fixtures'};});b.onLoad({filter:/.*/,namespace:'fixtures'},a=>({contents:mocks[a.path],loader:'js'}));}}]});
  const m={exports:{} as any};new Function('require','module','exports',output.outputFiles[0].text)(require,m,m.exports);
  const params={make:'Volkswagen',powerTo:'160',sort:'totalRub',city:'Новокузнецк'};
  const tree=await m.exports.CatalogContent({params});const elements:any[]=[];
- const walk=(node:any)=>{if(Array.isArray(node)){node.forEach(walk);return;}if(!node||typeof node!=='object')return;elements.push(node);walk(node.props?.children);};walk(tree);
+ const walk=(node:any)=>{if(Array.isArray(node)){node.forEach(walk);return;}if(!node||typeof node!=='object')return;elements.push(node);walk(node.props?.children);walk(node.props?.header);};walk(tree);
+ const counter=elements.find(x=>x.type?.name==='ResolvedCatalogCount');
+ const summary=await counter.props.summary;assert.deepEqual(summary,{total:32,countIncomplete:true});
  const rails=elements.filter(x=>x.type?.name==='AjesRail');
  assert.equal(rails.length,3);assert.deepEqual(rails.find(x=>!x.props.market).props.params,params);
  const green=elements.find(x=>x.type?.name==='GreenCornerRail');assert.equal(green.props.total,1);assert.equal(green.props.items[0].id,'match');

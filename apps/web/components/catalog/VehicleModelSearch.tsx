@@ -6,6 +6,7 @@ import { createPortal, flushSync } from "react-dom";
 import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection, typedModelMake} from "@/lib/catalog/model-suggestion-search";
 import {canonicalCatalogBrand} from "@/lib/catalog/brands";
 import {loadModelSuggestions} from "@/lib/catalog/model-suggestion-loader";
+import {modelDirectoryMarkets} from "@/lib/catalog/market-selection";
 
 type ModelSuggestion = {
   id?: string;
@@ -238,7 +239,7 @@ export function VehicleModelSearch({
   useEffect(()=>{
     setSupplierSearches([]);setSupplierError(false);setSupplierLoading(0);
     if(!contextual||!open||sourceStock==='green')return;
-    const markets=sourceMarket?(['korea','japan'].includes(sourceMarket)?[sourceMarket]:sourceItems&&sourceMarket==='china'?['china']:[]):make?['korea','japan']:[];
+    const markets=modelDirectoryMarkets(sourceMarket,make,Boolean(sourceItems));
     let cancelled=false;setSupplierLoading(markets.length);
     // Each directory can extend the picker immediately, independently of peers.
     for(const market of markets)loadModelSuggestions(true,{market,make}).then(search=>{

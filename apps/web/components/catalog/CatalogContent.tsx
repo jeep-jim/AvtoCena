@@ -8,9 +8,9 @@ import {normalizedCatalogSort} from '@/lib/catalog/catalog-sort';
 import {CatalogSidebar} from './CatalogSidebar';
 import {GreenCornerCatalog} from "./GreenCornerCatalog";
 import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
-import {withAjesCount} from '@/lib/catalog/ajes-catalog';
+import {exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {AjesCatalog} from './AjesCatalog';
-import {AjesRail,readAjesRailData,CatalogEmptyResults} from './AjesRail';
+import {AjesRail,readAjesRailData,readAjesRailCount,CatalogEmptyResults} from './AjesRail';
 import {Suspense} from 'react';
 import { JapanSectionTabs } from "@/components/catalog/JapanSectionTabs";
 import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
@@ -190,7 +190,15 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   }
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0 || liveMarket(market.id) || market.id === "japan");
   const localTotal=groupedMarkets.reduce((sum, market) => sum + market.total, 0) + ((japanAll || !selectedMarket) ? greenTotal : 0);
-  const countSummary=overviewEligible&&(!dealer||dealer.markets.includes('japan'))?withAjesCount({total:localTotal,marketCounts:Object.fromEntries(groupedMarkets.map(m=>[m.id,m.total]))}):{total:localTotal,countIncomplete:groupedMarkets.some(m=>liveMarket(m.id)||m.id==='japan')};
+  const countSummary=Promise.all([...railReads].map(async([market,read])=>{
+    const rail=await read;if(rail.disabled)return {total:0,incomplete:false};
+    const count=rail.count||await readAjesRailCount(market as 'japan'|'china'|'korea',params);
+    const exact=exactAjesCount(count);
+    return {total:exact??rail.items.length,incomplete:exact===undefined};
+  })).then(counts=>({
+    total:localTotal-groupedMarkets.filter(m=>railReads.has(m.id)).reduce((sum,m)=>sum+m.total,0)+counts.reduce((sum,c)=>sum+c.total,0),
+    countIncomplete:counts.some(c=>c.incomplete),
+  }));
   const total=localTotal,countIncomplete=overviewEligible||groupedMarkets.some(m=>liveMarket(m.id)||m.id==='japan');
 
   const initialKeys = ["salePeriod","color","source", "stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];

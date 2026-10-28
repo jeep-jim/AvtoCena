@@ -1,21 +1,28 @@
+import {Suspense} from 'react';
 import {MARKET_RAIL_CLASS} from './market-rail-layout';
 import {CatalogSectionLoading} from './CatalogLoading';
 import {MarketResultCount} from './MarketResultCount';
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
 import {AjesFilterUnavailable} from '@/lib/catalog/ajes-query';
-import {readAjesCatalogPage} from '@/lib/catalog/ajes-catalog';
+import {readAjesCatalogPage,readAjesCountSummary} from '@/lib/catalog/ajes-catalog';
 import {ajesCountText,exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {assertCollectionEnabled} from '@/lib/catalog/collection-controls';
 import {publicOffer} from '@/lib/catalog/storage';
 import {CatalogCard} from './CatalogCard';
 import {CatalogMarketFlag} from './CatalogMarketFlag';
 
+function railQuery(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return {...params,market,page:'1',pageSize:market==='japan'?'12':'6'};}
+export function readAjesRailCount(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return readAjesCountSummary(JSON.stringify(railQuery(market,params))).catch(()=>null);}
+async function RailCount({market,params}:{market:'japan'|'china'|'korea';params:Record<string,string|string[]|undefined>}){
+ const count=await readAjesRailCount(market,params);
+ return <MarketResultCount total={exactAjesCount(count)??undefined}>{ajesCountText(count)}</MarketResultCount>;
+}
 export async function readAjesRailData(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>={}){
  try{await assertCollectionEnabled(`ajes_${market}_feed`);}catch{return {disabled:true,items:[],count:null,unavailable:false,unsupported:false,partial:false,stale:false,filteredByPage:false,hasMore:false};}
  try{
   // A supplier page may contain rejected rows. One bounded extra row of candidates
   // fills the six-card preview without pagination scans or bypassing admission.
-  const page=await readAjesCatalogPage({...params,market,page:'1',pageSize:market==='japan'?'12':'6'});
+  const page=await readAjesCatalogPage(railQuery(market,params));
   return {disabled:false,items:page.items.slice(0,6),count:page.countSummary,unavailable:false,unsupported:false,partial:Boolean(page.partial),stale:Boolean(page.stale),filteredByPage:page.filteredByPage,hasMore:page.hasMore};
  }catch(error){return {disabled:false,items:[],count:null,unavailable:true,unsupported:error instanceof AjesFilterUnavailable,partial:false,stale:false,filteredByPage:false,hasMore:false};}
 }
@@ -29,7 +36,7 @@ export async function AjesRail({market='japan',params={},prepared}:{market?:'jap
  const total=exactAjesCount(count);
  return <section aria-label={label} className="min-w-0">
   <div className="mb-3 flex items-end justify-between gap-3">
-   <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><MarketResultCount total={total??undefined}>{ajesCountText(count)}</MarketResultCount></h2>
+   <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{count||unavailable?<MarketResultCount total={total??undefined}>{ajesCountText(count)}</MarketResultCount>:<Suspense fallback={<MarketResultCount>{ajesCountText(null)}</MarketResultCount>}><RailCount market={market} params={params}/></Suspense>}</h2>
    <Link href={href} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
   </div>
 
