@@ -17219,3 +17219,12 @@ LIVE_PHOTOS Korea1440:4/4первых изображения loaded/naturalWidth
 Открыто: живая установка/проверка Hilux, источниковые отказы и стабильностьJapan, dealer cabinet с авторизованной сессией, холодные/тёплые/просроченные все рынки/фото/карточки, subsecond. N+1чтения сохранённыхKorea-details остаются в критическом пути: удалять их нельзя без сохранения точных новых фактов. Энциклопедия уже применяется локальным индексом; следующий шаг — компактные точные проекции по модели/году/технической идентичности, сохраняя ручные изменения, конфликты, текущие цены/наличие/фото из фидов. Полная приёмка не объявлена.
 
 Дополнение: финальная production build после нормализации марки PASS (56static pages). Полный прогон2683:2682PASS/1FAIL только тестовый обход header, адресный исправленный повторPASS; новый late-count тест отдельноPASS. Полный benchmark18389моделей: исходная331/274/233мс, новая116/104/92мс, выдача совпадает; это Node, не целевая browser latency. Полный отчёт/открытая приёмка — docs/operations/2026-10-28-interaction-audit-followup.md. CI дилерских подборок расширен на изменения поиска моделей.
+
+
+### 28.10.2026 — PR1611 принят; последовательный выпуск исправлений
+
+PR1611 merged ed52ce6ed0663389eb5daed7e61c047394a91813. Все10checks точного head91f9e89b5a022d7f3cb4d8066860365a9da94106 SUCCESS. CI40679591581/job122786588915: общий набор2684/2684PASS, web/engine types и production buildPASS. Dealer selection40679591595:390/1440 share/filters/city/dismissal/stale-request/visitor visibility; pending/applied nested model, outerBack, routerstatePASS. Models40679591580:6рынков×390/1440, восстановление источника и смена маркиPASS; inventory-only/pickup/retry/deadlinePASS. QR/gallery и остальные7checksPASS. Это fixtures/CI, не полная живая приёмка.
+
+Runtime перед новым запросом всё ещё683abbe; единственный предыдущий выпуск40675269802/154f в Deploy with rollback and resource measurements. Новый marker ставит исправление ПОСЛЕ него в существующую очередь regcloud-production-release/cancel-in-progress:false; параллельная установка и отмена предыдущего выпуска не выполняются. Все requiredResearchBatches/publicResearchBatches/requiredAstraPlanDigests сохранены без изменений. Разрешение публикации владельца действует. Последующий health/Hilux/счётчики и фактический click-to-result ещё нужны.
+
+Открытие /account в рабочем браузере приводит на /login?next=%2Faccount: авторизованной дилерской сессии нет. Данные входа не запрашивались/не подставлялись; проверкиfixtures не выданы за проверку кабинета владельца.
