@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Mandatory one-shot release acceptance, not a scheduled collector.
+"""Mandatory functional release acceptance with advisory speed measurements.
 Run on the VM: network/proxy latency from the audit environment is excluded.
 """
 import argparse,json,time,urllib.request
 from html.parser import HTMLParser
 
-# Raising these ceilings requires the owner's explicit approval and before/after
-# evidence. Cold preparation is separate and cannot count as a passing sample.
+# Owner decision 28.10.2026: speed targets are advisory, never a rollback trigger.
+# Keep raw evidence and all routes; slow does not mean performance accepted.
+# A bounded network deadline still detects unavailable/hung responses.
+REQUEST_TIMEOUT_SECONDS=90
 ROUTES=[
  ('/api/health',0.25,'health'),
  ('/',2.0,'html'),('/login',1.0,'html'),('/autocalc',1.0,'html'),
@@ -59,7 +61,7 @@ def validate(path,kind,status,body,release):
 def sample(base,path,kind,release):
  start=time.monotonic()
  req=urllib.request.Request(base+path,headers={'User-Agent':'AvtoCena-release-acceptance/1.0','Connection':'close'})
- with urllib.request.urlopen(req,timeout=15) as response:
+ with urllib.request.urlopen(req,timeout=REQUEST_TIMEOUT_SECONDS) as response:
   body=response.read(20*1024*1024+1);status=response.status
  elapsed=time.monotonic()-start
  if len(body)>20*1024*1024:raise AssertionError('performance_response_too_large:'+path)
@@ -70,10 +72,14 @@ def main():
  parser=argparse.ArgumentParser();parser.add_argument('base');parser.add_argument('release');args=parser.parse_args()
  # Explicit preparation, then measurements. No swallowed timeouts/empty states.
  for path,limit,kind in ROUTES:sample(args.base,path,kind,args.release)
+ slow=0
  for phase,delay in PHASE_DELAYS:
   if delay:time.sleep(delay)
   for path,limit,kind in ROUTES:
    elapsed=sample(args.base,path,kind,args.release)
-   print(json.dumps({'performanceGate':phase,'path':path,'seconds':round(elapsed,4),'ceiling':limit,'passed':elapsed<=limit}),flush=True)
-   if elapsed>limit:raise AssertionError('performance_budget_exceeded:'+path)
+   print(json.dumps({'performanceGate':phase,'path':path,'seconds':round(elapsed,4),'ceiling':limit,'passed':elapsed<=limit,'functionalPassed':True,'latencyBlocking':False}),flush=True)
+   if elapsed>limit:
+    slow+=1
+    print('::warning::Slow response (advisory): '+phase+' '+path+' '+str(round(elapsed,4))+'s; target '+str(limit)+'s. Functional checks passed.',flush=True)
+ print(json.dumps({'performanceGate':'summary','samples':len(ROUTES)*len(PHASE_DELAYS),'slowSamples':slow,'functionalPassed':True,'performanceAccepted':slow==0,'latencyBlocking':False}),flush=True)
 if __name__=='__main__':main()

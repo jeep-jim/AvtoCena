@@ -215,3 +215,11 @@
 - Treat manually confirmed encyclopedia facts as the canonical default ahead of older card contributions for compatible missing fields. Preserve filled/manual recipient facts and mechanical/certification conflicts. The owner additionally requires revision-linked propagation to already-filled compatible cards; do not claim the existing missing-only path fulfils that unfinished requirement.
 - Continue source-backed Japan chassis coverage with explicit ambiguous/unknown groups. A 24-row page or saved sample is not a count of all AWD vehicles.
 - Record every task/status in roadmap.md, with code/installed/live-accepted separated. Local encyclopedia calculations still need listing identity, current seller price, availability and appropriate technical identifiers from the feed; do not drop these to claim only photos/prices are needed.
+
+
+# Owner release policy — 28.10.2026
+
+- Owner explicitly supersedes the earlier latency-based release rejection rule: a correct but slow response must not fail the build, block activation or cause rollback solely because it exceeds a performance target. Preserve timings, route coverage, warm/expired measurements and visible warnings; never label slow measurements performance accepted. Browser functional acceptance follows the same rule.
+- Keep functional failures blocking: unavailable responses, HTTP failures, incomplete/error streams, empty error pages, wrong release identity, invalid prices/data, publication/security guards. Bounded network and process deadlines prevent indefinite hangs; they are availability safeguards, not 1–2 second performance targets.
+- Install accumulated tested functional corrections and then improve remaining slow paths separately. Keep one coordinated release and record code/installed/live verification separately.
+- New page navigation should start at the top, except agreed explicit anchors (including dealer pages). Audit this across markets and page types. Preserve Back restoration, append position and in-place interactions; do not implement a blanket scroll reset on every render. This navigation task is recorded, not yet implemented.

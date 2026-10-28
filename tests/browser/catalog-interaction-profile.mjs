@@ -52,4 +52,9 @@ try{for(const width of widths){
   await page.screenshot({path:`${out}/${width}.png`});
   assert.equal((await (await context.request.get(origin+'/api/health')).json()).releaseSha,expected);
  }catch(error){await page.screenshot({path:`${out}/${width}-failure.png`});console.log('CATALOG_INTERACTION_FAILURE',JSON.stringify({width,error:String(error),errors}));throw error;}finally{saveNetwork();await context.close();}
-}fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));if(process.env.CATALOG_PROFILE_ACCEPTANCE==='true')assertInteractionAcceptance(results,expected);}finally{await browser.close();}
+}fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));if(process.env.CATALOG_PROFILE_ACCEPTANCE==='true'){
+ const acceptance=assertInteractionAcceptance(results,expected);
+ fs.writeFileSync(out+'/acceptance.json',JSON.stringify(acceptance,null,2));
+ console.log('CATALOG_ACCEPTANCE',JSON.stringify(acceptance));
+ if(!acceptance.performanceAccepted)console.warn('::warning::Catalog interactions are functionally correct; speed targets remain unresolved.');
+}}finally{await browser.close();}
