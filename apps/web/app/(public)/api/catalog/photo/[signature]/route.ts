@@ -20,7 +20,7 @@ export async function GET(request: Request, {params: routeParams}: {params: Prom
       const reader = response.body?.getReader(); if (!reader) throw new Error("photo_empty");
       const chunks: Buffer[] = []; let total = 0;
       try { while (true) { const {done, value} = await reader.read(); if (done) break; total += value.length; if (total > 8 * 1024 * 1024) throw new Error("photo_size"); chunks.push(Buffer.from(value)); } } finally { await reader.cancel().catch(()=>{}); }
-      const data = await (social?renderSocialPhoto(Buffer.concat(chunks)):renderCatalogPhoto(Buffer.concat(chunks), card));
+      const data = await (social?renderSocialPhoto(Buffer.concat(chunks)):renderCatalogPhoto(Buffer.concat(chunks), card)).catch(() => { throw new Error("photo_invalid"); });
       return {data, type: social?"image/jpeg":"image/webp"};
     }, social?"social-jpeg":card ? "card" : "full");
     const etag = `"${crypto.createHash("sha256").update(image.data).digest("hex")}"`;

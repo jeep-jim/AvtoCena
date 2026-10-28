@@ -2,7 +2,7 @@ name: Verify dealer selection sharing
 on:
   push:
     branches: [main]
-    paths: ['tests/browser/dealer-selection.mjs', 'apps/web/components/dealers/DealerSelectionShare.tsx', 'tests/offer-share.test.ts', '.github/workflows/verify-dealer-selection.yml']
+    paths: ['apps/web/components/layout/OverlayBackHistory.tsx', 'apps/web/components/catalog/CatalogFilters.tsx', 'tests/browser/dealer-selection-nested-navigation.mjs', 'tests/browser/dealer-selection.mjs', 'apps/web/components/dealers/DealerSelectionShare.tsx', 'tests/offer-share.test.ts', '.github/workflows/verify-dealer-selection.yml']
   pull_request:
     paths:
       - 'apps/web/components/catalog/*Share*'
@@ -18,6 +18,8 @@ on:
       - 'apps/web/lib/catalog/photo-rendition.ts'
       - 'tests/*share*'
       - 'tests/browser/dealer-selection*'
+      - 'apps/web/components/layout/OverlayBackHistory.tsx'
+      - 'apps/web/components/catalog/CatalogFilters.tsx'
       - 'tests/browser/offer-share*'
       - '.github/workflows/verify-dealer-selection.yml'
   workflow_dispatch:
@@ -51,7 +53,9 @@ jobs:
       - name: Check dealer selection on phone and desktop
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
-        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
+        run: |
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection-nested-navigation.mjs
       - name: Check native sharing, clipboard and mini-app
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
