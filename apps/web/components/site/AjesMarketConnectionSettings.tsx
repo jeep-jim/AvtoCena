@@ -26,10 +26,10 @@ export function AjesMarketConnectionSettings({market}:{market:AjesPreviewMarket}
     `Код поставщика: ${diagnostic.providerCode??'не получен'}`,`Результат проверки: ${diagnostic.outcome}`,
    ].join('\n')}/>
   </details>}
-  {catalogDiagnostic&&<details className="text-sm"><summary className="cursor-pointer underline">Последний сбой страницы каталога</summary>
-   <p className="mt-2">Реальный запрос каталога, отдельно от проверки пяти автомобилей. Код отказа сам по себе не устанавливает, на чьей стороне ошибка.</p>
+  {catalogDiagnostic&&<details className="text-sm"><summary className="cursor-pointer underline">Сохранённый сбой запроса каталога</summary>
+   <p className="mt-2">Реальный запрос списка, счётчика, справочника или карточки, отдельно от проверки пяти автомобилей. Код отказа сам по себе не устанавливает, на чьей стороне ошибка.</p>
    <textarea aria-label="Диагностика страницы каталога" readOnly rows={10} className="mt-2 w-full rounded border border-[var(--ac-border)] bg-transparent p-2 text-xs" value={[
-    `Таблица: ${catalogDiagnostic.table}`,`Страница: ${catalogDiagnostic.page}; размер: ${catalogDiagnostic.pageSize}`,`Начало UTC: ${catalogDiagnostic.startedAt}`,`Завершение UTC: ${catalogDiagnostic.finishedAt}`,
+    `Таблица: ${catalogDiagnostic.table}; тип: ${catalogDiagnostic.kind}`,`Страница: ${catalogDiagnostic.page}; размер: ${catalogDiagnostic.pageSize}`,`Начало UTC: ${catalogDiagnostic.startedAt}`,`Завершение UTC: ${catalogDiagnostic.finishedAt}`,
     `Адрес API: ${catalogDiagnostic.endpoint}`,`SQL: ${catalogDiagnostic.sql}`,`IP посетителя: ${catalogDiagnostic.clientIp}`,`HTTP: ${catalogDiagnostic.httpStatus??'ответ не получен'}`,`Код ответа: ${catalogDiagnostic.providerCode??'не получен'}`,`Результат: ${catalogDiagnostic.outcome}`,
    ].join('\n')}/>
   </details>}

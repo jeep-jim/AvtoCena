@@ -165,9 +165,9 @@ export function createAjesClient(deps:Dependencies) {
           const failure=error instanceof AjesUnavailable?error:new AjesUnavailable(controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed');
           // Keep one private diagnostic per table, at most once per minute. A
           // cooldown/cache hit must not replace the actual failed request.
-          if(requestStarted&&query.kind==='list'&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(query.table)??0)>=60000){
+          if(requestStarted&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(query.table)??0)>=60000){
             lastFailureSaved.set(query.table,Date.now());
-            const diagnostic:AjesRequestDiagnostic={table:query.table,kind:'list',page:query.page,pageSize:query.pageSize,startedAt,finishedAt:new Date().toISOString(),clientIp,sql:query.sql,endpoint:url.origin+url.pathname,httpStatus,providerCode,outcome:failure.reason};
+            const diagnostic:AjesRequestDiagnostic={table:query.table,kind:query.kind,page:query.page,pageSize:query.pageSize,startedAt,finishedAt:new Date().toISOString(),clientIp,sql:query.sql,endpoint:url.origin+url.pathname,httpStatus,providerCode,outcome:failure.reason};
             if(Buffer.byteLength(JSON.stringify(diagnostic))<=64*1024)persist(()=>deps.saveRequestFailure!(diagnostic));
           }
           if(!recoverable)throw failure;

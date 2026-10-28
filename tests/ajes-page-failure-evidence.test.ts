@@ -46,3 +46,11 @@ test('real CRM GET keeps page evidence owner-only and never makes a supplier req
  state.owner=true;const allowed=await mod.exports.GET(request,context);assert.equal(allowed.status,200);assert.equal(allowed.headers.get('cache-control'),'private, no-store');assert.equal((await allowed.json()).catalogDiagnostic.page,3);assert.equal(state.reads,1);
  }finally{delete (globalThis as any).__ajesDiagnosticAuth;}
 });
+
+test('a refused count keeps its true origin when it subsequently pauses a page request',async()=>{
+ const records:any[]=[];let requests=0;
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},saveRequestFailure:async v=>{records.push(v);},fetcher:async()=>{requests++;return new Response('bot2 fixture');}});
+ await assert.rejects(client.read({table:'korea',aggregate:'count'},'203.0.113.23'),/visitor_restricted/);
+ await assert.rejects(client.read({table:'korea',page:3},'203.0.113.23'),/visitor_restricted/);
+ assert.equal(requests,1);assert.equal(records.length,1);assert.equal(records[0].kind,'count');assert.equal(records[0].providerCode,'bot2');assert.match(records[0].sql,/^select count\(\*\)/);
+});
