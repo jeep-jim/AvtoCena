@@ -1,3 +1,4 @@
+import {scenarioPath} from './saved-calculation-input';
 import { createHash, randomUUID } from "node:crypto";
 import { cache } from "react";
 import { mutateDataJson, readDataJson } from "../data";
@@ -30,9 +31,6 @@ export function matchingSavedCalculation(record: SavedOfferCalculation | null, o
 // Request-only cache: a save is visible on the very next request, never waits for a web deploy.
 const readRecord = (id:string)=>readDataJson<SavedOfferCalculation|null>(storagePath(id),null);
 const readSavedRecord = typeof cache === "function" ? cache(readRecord) : readRecord;
-function scenarioPath(id:string,version:string) {
-  return `offer-calculation-scenarios/${createHash("sha256").update(id).digest("hex")}/${version}.json`;
-}
 export async function saveClientCalculation(offer:VehicleOffer,draft:Record<string,string>,calculation:SavedCalculationResult,userId:string,savedByName?:string) {
   const record:SavedOfferCalculation={offerId:offer.id,identity:savedOfferIdentity(offer),version:randomUUID(),savedAt:new Date().toISOString(),savedBy:userId,savedByName,draft:cleanSavedDraft(draft),calculation};
   await mutateDataJson<SavedOfferCalculation|null>(scenarioPath(offer.id,record.version),null,current=>current || record);
