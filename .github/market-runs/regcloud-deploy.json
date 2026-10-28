@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-authorized sequential release of PR1611 merged ed52ce6ed0663389eb5daed7e61c047394a91813. All 10 checks passed on exact head 91f9e89b5a022d7f3cb4d8066860365a9da94106, CI 40679591581: 2684/2684 tests plus production build/typechecks. Restore related N1 mass including archived saves; finish late rail and filtered aggregate counts; search all selected source markets; reduce model compilation. Dealer selection 390/1440 nested pending/applied Back and all six market model fixtures passed. Queue behind active release 40675269802 using existing regcloud-production-release concurrency; do not cancel or parallelize installations. Preserve research/ASTRA/price/admission guards. Subsecond production, source availability and authenticated cabinet acceptance remain open.",
+  "reason": "Owner-authorized release PR1612 merged 12071a503f140a6ecd58404c79c8210a3afc9181: keep shared links in recipient browser and unify Korea history control in light theme. All 8 checks passed on exact head 52d00c74a0a7f033b7ffc240dc1c7f9b43c7be7e. Preserve all research/ASTRA dependencies and functional gates. Korea pagination incident remains open, not claimed fixed by this release.",
   "ideaReports": [],
-  "requestedAt": "2026-10-28T11:31:24.907984+00:00"
+  "requestedAt": "2026-10-28T14:21:10.165232+00:00"
 }
