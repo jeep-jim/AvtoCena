@@ -1,6 +1,6 @@
 {
   "logsOnly": true,
-  "failedRelease": "6fdbb5af759aabf79826154f99be550094a14a3e",
-  "reason": "One read-only closed-interval evidence read after post-switch health389.1ms failure and verified rollback. Inspect stopped candidate and serving runtime. No start/restart/HTTP probes/repair/collectors.",
-  "requestedAt": "2026-10-27T14:05:00Z"
+  "failedRelease": "",
+  "reason": "Owner-requested global audit: one bounded read-only production error/resource summary while release683abbe preparation failed on encyclopedia object-storage response timeout and is retried once. No HTTP probes, restart, source request, data edit or collector action.",
+  "requestedAt": "2026-10-28T09:43:46.735Z"
 }
