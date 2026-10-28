@@ -16867,3 +16867,13 @@ PR1602 merged 00799e55bd4a8294e0518076665d64cc29816a64 после exact4c0ab527 
 После305s: manifest60.2ms,overview133.7ms,UAE125.5ms,Europe3.2ms,snapshot455.2ms. Контейнер exited0/OOMfalse; удаление контейнера/образа и workflowcleanup завершены; productionbefore/after exactd418/nginxunchanged. Свежий health07:26 такжеd418. Ни switch, ни rollback; исходный592gate2.1896s не отменён, midnight/11URL/liveприёмка не воспроизводились. Повтор этого завершённого замера не запущен.
 
 Следующее адресное изменение: ограниченно параллельные независимые editorial searches (максимум2), применение результатов в прежнем порядке. Это устраняет измеренную последовательную зависимость, но не убирает саму стоимость4.3s/2.6s и не обещает cold<=2s. Точный total/карточки/скрытия/ошибки и число запросов сохраняются. Необходимы CI, изолированное сравнение ресурса/времени и неизменные66gates до установки; весь незакрытый AWD/canonical/insurance/live scope остаётся.
+
+
+### 28.10.2026 07:29 Красноярск — bounded parallel editorial reconciliation, код подготовлен
+
+В wrapper readHomeCatalogSnapshot выбранные непустые editorial рынки обрабатываются существующим mapWithConcurrency с пределом2; результаты применяются после завершения в исходном порядке рынков. Точные данные/число поисков/фильтры/страницы/ошибки сохранены; skip подтверждённо пустого рынка остаётся. Новая regression исполняет настоящий wrapper и настоящий concurrency helper: пик2, три рынка, завершение не по порядку не меняет порядок результата, исходный snapshot не мутирует, отказ search остаётся отказом. Прежний последовательный wrapper даёт1FAIL→новыйPASS. Локально8/8 home initial/empty/telemetry tests PASS. Полный CI/types/build ещё ожидаются. Production не менялся, runtime/deploy/diagnostic markers не тронуты. Это не заявление о решённых8.42s; стоимость поисков остаётся и требует дальнейшего сокращения/подготовленного revision-bound результата.
+
+
+### 28.10.2026 08:47 Красноярск — PR1603: исправлен тип массива рынков
+
+CI40609009122/job122555640203:2653/2653 tests и дополнительные suites PASS, затем web typecheck FAILURE TS2345 storage.ts3012: snapshotEditorial:${any} не совместим с HomePhase. Dubicars40609009185/job122555640086 отказал на том же typecheck, до своей последующей проверки. Engine types/build в основном CI не достигнуты. Site40609009106 иgreen40609009156 SUCCESS. Причина: новый пустой массив markets вывел слишком широкий тип для generic worker. Инициализация через пустой MARKETS.slice(0,0) сохраняет CatalogMarket[] без изменения значений/запросов/порядка/предела2. Типы и tests не ослаблены. Локально8/8 целевых tests PASS; новый fullCI нужен до merge. Production/deploy/diagnostic markers не менялись, новая установка не запускалась.
