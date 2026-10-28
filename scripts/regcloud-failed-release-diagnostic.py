@@ -30,8 +30,13 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
   with urllib.request.urlopen('http://127.0.0.1:'+port+'/api/health',timeout=15) as response:value=json.load(response)
   if not value.get('ok') or not re.fullmatch('[a-f0-9]{40}',value.get('releaseSha','')):raise ValueError('production_health_invalid')
   return value['releaseSha']
- if home_probe:production_before=production_health()
+ if home_probe or long_probe:production_before=production_health()
+ config_before=pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf').read_bytes()
+ resource_changed=False
  try:
+  if long_probe:
+   subprocess.run(['docker','update','--cpus','2','--memory','8g',name],check=True,capture_output=True)
+   resource_changed=True
   subprocess.run(['docker','start',name],check=True,capture_output=True)
   ready=False
   for attempt in range(20):
@@ -55,7 +60,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
    if long_probe and number in [4+2*len(routes),4+3*len(routes)]:time.sleep(35 if number==4+2*len(routes) else 305)
    if long_probe and time.monotonic()>=deadline:raise TimeoutError('diagnostic_deadline')
    if ttl_probe and number==2:time.sleep(35)
-   if (home_probe and number==3) or (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6) or (long_probe and number==4+3*len(routes)+9):
+   if (home_probe and number==3) or (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6) or (long_probe and number==4+3*len(routes)+8):
     subprocess.run(['docker','kill','--signal=USR1',name],check=True,capture_output=True)
     time.sleep(1)
     profile=subprocess.Popen(['docker','exec','-i',name,'node','--input-type=module'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
@@ -66,7 +71,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
     with urllib.request.urlopen(base+path,timeout=min(90,max(1,deadline-time.monotonic())) if (long_probe or home_probe) else 90) as response:body=response.read(20*1024*1024+1);status=response.status;timing=response.headers.get('Server-Timing')
     print(json.dumps({'phase':(['cold','warm','after35','after305'][number] if home_probe else None),'checkedAt':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'status':status,'serverTiming':timing,'bytes':len(body),'complete':b'</html>' in body,'streamError':b'$RX(' in body}),flush=True)
    except Exception as error:print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'errorType':type(error).__name__}),flush=True)
-   if profile and ((not gate_probe and not long_probe) or number==len(paths)-1 or (long_probe and number==4+3*len(routes)+9)):
+   if profile and ((not gate_probe and not long_probe) or number==len(paths)-1 or (long_probe and number==4+3*len(routes)+8)):
     try:
      output,_=profile.communicate(timeout=20)
      for line in output.splitlines():
@@ -79,7 +84,10 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
     print(json.dumps({'candidateResources':stats,'after':path}),flush=True)
  finally:
   subprocess.run(['docker','stop','--time','20',name],check=True,capture_output=True)
-  if home_probe:
+  if resource_changed:
+   subprocess.run(['docker','update','--cpus',str(info['HostConfig']['NanoCpus']/1_000_000_000),'--memory',str(info['HostConfig']['Memory']),name],check=True,capture_output=True)
+  if pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf').read_bytes()!=config_before:raise ValueError('nginx_config_changed')
+  if home_probe or long_probe:
    production_after=production_health()
    print(json.dumps({'productionBefore':production_before,'productionAfter':production_after,'unchanged':production_before==production_after}),flush=True)
    if production_before!=production_after:raise ValueError('production_release_changed')
