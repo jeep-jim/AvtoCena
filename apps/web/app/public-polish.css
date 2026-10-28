@@ -180,6 +180,14 @@ html[data-theme="light"] .ac-favorites-card {
   box-shadow: 0 12px 34px rgba(38,43,57,.09) !important;
 }
 
+/* Vehicle previews share a pure white surface in the light theme. */
+html[data-theme="light"] .ac-catalog-card,
+html[data-theme="light"] .ac-favorites-card,
+html[data-theme="light"] [data-catalog-view="list"] .ac-catalog-market-rail,
+html[data-theme="light"] [data-catalog-view="list"] [data-catalog-batch] {
+  background: #fff !important;
+}
+
 html[data-theme="light"] .ac-filter-input,
 html[data-theme="light"] .ac-native-select,
 html[data-theme="light"] .ac-search-select,
