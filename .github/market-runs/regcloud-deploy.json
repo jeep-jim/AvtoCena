@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-authorized release PR1612 merged 12071a503f140a6ecd58404c79c8210a3afc9181: keep shared links in recipient browser and unify Korea history control in light theme. All 8 checks passed on exact head 52d00c74a0a7f033b7ffc240dc1c7f9b43c7be7e. Preserve all research/ASTRA dependencies and functional gates. Korea pagination incident remains open, not claimed fixed by this release.",
+  "reason": "Owner-authorized release PR1613 merged 2d6d45dca38cac65e12b1d7d84563345c07b0a59. All 3 checks passed on exact head cb9411e99c1d0200c1e58c9202c4089b3ed935e3. Pure white vehicle preview backgrounds in light theme: grid, favorites, list rails and pagination batches. Background-only change; no added borders. Queue after active release 40705147068 through existing regcloud-production-release concurrency, no cancellation or parallel activation. Preserve all research/ASTRA dependencies and functional checks. Korea pagination refusal remains unresolved.",
   "ideaReports": [],
-  "requestedAt": "2026-10-28T14:21:10.165232+00:00"
+  "requestedAt": "2026-10-28T14:48:43.972565+00:00"
 }
