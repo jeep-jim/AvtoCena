@@ -34,6 +34,7 @@ async function readListedDetail(table:string,id:string){
 }
 export const ajesClient=createAjesClient({
  calculationIndex:readCalculationIndex,
+ saveRequestFailure:value=>getJsonStorage().writeJson(`integrations/ajes/catalog-failure-${value.table}.json`,value),
   password:ajesPassword,
   endpoint:ajesEndpoint,
   readListedDetail,

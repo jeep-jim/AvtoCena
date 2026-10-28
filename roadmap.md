@@ -17315,3 +17315,12 @@ Runtime перед новым запросом всё ещё683abbe; единс�
 Прочитаны свежие Road/checklist, system-audit, interaction-audit-followup и korea-page3-incident. Основная работа уже повторно подтвердила на538: Korea24→48→ошибка третьей страницы; один API503 visitor_restricted5.716930s относится к проверяющему подключению, не ownertrace и не доказанная неисправность поставщика. Старую исправленную cachecollision не объявлять новым решением. Эта сверка не повторяла браузер/запрос отказавшего источника; поставщику сообщения не отправлялись.
 
 Весь остаток Hilux/counts/models/fullJapanKoreafilters/pages/photos/dealercabinet/scroll/canonical/CamryICE/insurance/AWD/subsecond остаётся открытым. В этой сверке изменены только Road/checklist; runtime/markers/workflows не запускались. Владение живой очередью у основной работы, наблюдение включено.
+
+
+## 28.10.2026 — повторный аудит Korea против Japan и диагностика реальной страницы
+
+По поручению владельца пройден UI→GETsearch→catalog→public→client→SQL. См.дополнение docs/operations/2026-10-28-korea-page3-incident.md. Koreaoffsets0/24/48 и clientIP проверены actualclientfixture. Japan541021640 исправлял наполнение/курсор послеотсева; это не лечение bot/ban. Общиеcache/queue/persistenceпоправки ужеесть уобоих рынков.142/142AJEStests иweb/enginetypesPASS.
+
+Исправлена потеря точного кода и контекста runtimeсбоя: приватная boundedдиагностика реальнойстраницы, отдельно от5-carpreview; CRMчтениеowner-only, безпароля/body, ≤1запись/мин/table, неблокирующая. Подготовлено кпубликации. LiveKoreapage3 НЕисправленной/НЕпринятой объявлятьнельзя до фактического подтверждения. Точная причина отказа владельцу пока не установлена; источнику сообщенийнет.
+
+Дополнительно3/3новыхтестаPASS: реальныйclientpage1/2/3+bot7безутечкиключа, неблокирующаядиагностика, реальныйCRMGET403доstorageдляневладельца/owner200private-no-storeбезsupplierзапроса.
