@@ -125,11 +125,13 @@ try{
    await page.waitForFunction(()=>new URLSearchParams(location.search).get('fuel')==='diesel');
    assert.match(await status.textContent(),/Было: 321/);
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{initial:{fuel:'diesel'},count:{queryKey:'{}',text:'999'}}})));
-   await page.waitForFunction(()=>!document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('999'));
-   const requestCount=requests.length;
+   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Количество уточняется'));
+   assert.equal((await status.textContent()).includes('999'),false);
+   const requestCount=requests.length;const viewRenders=await page.locator('[data-view-render-count]').getAttribute('data-view-render-count');
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{count:{queryKey:JSON.stringify({fuel:'diesel'}),text:'17'}}})));
    await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Найдено: 17'));
    assert.equal(requests.length,requestCount,'streamed count must not issue another request');
+   assert.equal(await page.locator('[data-view-render-count]').getAttribute('data-view-render-count'),viewRenders,'count-only updates must not rerender view consumers');
    await close.click();await sheet.waitFor({state:'hidden'});await openSheet(page);
    assert.equal(await sheet.locator('input[name="fuel"]').inputValue(),'diesel');assert.match(await status.textContent(),/Найдено: 17/);
    await page.screenshot({path:`${out}/counter-collapse-light.png`,fullPage:true});
