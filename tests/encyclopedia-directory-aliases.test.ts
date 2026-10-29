@@ -18,7 +18,7 @@ test('cursor page totals expose the aggregate rather than just the first 24 card
  const s={total:577000,stale:false,upperBound:false,observedAt:'now'};
  assert.match(ajesPaginationCountText(s),/577.*000/);
  assert.match(ajesPaginationCountText(s),/24.*042/);
- assert.match(ajesPaginationCountText({...s,upperBound:true}),/Найдено до/);
+ assert.equal(ajesPaginationCountText({...s,upperBound:true}),'Количество уточняется');
  assert.match(ajesPaginationCountText({...s,stale:true}),/последним данным/);
  assert.equal(ajesPaginationCountText(null),'Количество уточняется');
 });
