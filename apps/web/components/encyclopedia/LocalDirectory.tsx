@@ -12,7 +12,7 @@ export function LocalDirectory({data,canEdit}:{data:DirectoryWire;canEdit:boolea
  const navigationModels=useMemo(()=>{const query=Object.fromEntries(params.entries());delete query.make;delete query.letter;return filterModels(models,query);},[models,params]);
  const makes=useMemo(()=>[...new Set(navigationModels.map(m=>m.make))],[navigationModels]);
  const letters=useMemo(()=>[...new Set(makes.map(directoryLetter))].filter(Boolean),[makes]);
- const jump=(make:string)=>{const index=navigationModels.findIndex(m=>m.make===make);if(index<0)return;pending.current=make;const query=new URLSearchParams(params);query.delete('make');query.delete('letter');query.set('page',String(Math.floor(index/40)+1));if(query.toString()===params.toString()){pending.current=undefined;[...root.current!.querySelectorAll<HTMLElement>('[data-ency-make]')].find(h=>h.dataset.encyMake===make)?.scrollIntoView({block:'start'});}else window.history.pushState(null,'',`/cars/autocatalog?${query}`);setActive(make);};
+ const jump=(make:string)=>{const index=navigationModels.findIndex(m=>m.make===make);if(index<0)return;pending.current=make;const query=new URLSearchParams(params);query.delete('make');query.delete('letter');query.set('page',String(Math.floor(index/40)+1));if(query.toString()===params.toString()){pending.current=undefined;[...root.current!.querySelectorAll<HTMLElement>('[data-ency-make]')].find(h=>h.dataset.encyMake===make)?.scrollIntoView({block:'start',behavior:'instant'});}else window.history.pushState(null,'',`/cars/autocatalog?${query}`);setActive(make);};
  useEffect(()=>{
   const node=root.current;if(!node)return;
   const header=document.querySelector<HTMLElement>('.ac-public-header');
@@ -23,9 +23,9 @@ export function LocalDirectory({data,canEdit}:{data:DirectoryWire;canEdit:boolea
  useEffect(()=>{
   const node=root.current;if(!node)return;
   const headings=[...node.querySelectorAll<HTMLElement>('[data-ency-make]')];
-  if(pending.current){const target=headings.find(h=>h.dataset.encyMake===pending.current);pending.current=undefined;target?.scrollIntoView({block:'start'});}
+  if(pending.current){const target=headings.find(h=>h.dataset.encyMake===pending.current);pending.current=undefined;target?.scrollIntoView({block:'start',behavior:'instant'});}
   let frame=0;
-  const update=()=>{frame=0;const top=(document.querySelector('.ac-public-header')?.getBoundingClientRect().bottom||68)+64;const visible=headings.filter(h=>h.getBoundingClientRect().top<=top);setActive((visible.at(-1)||headings[0])?.dataset.encyMake||'');};
+  const update=()=>{frame=0;const top=(headings[0]?parseFloat(getComputedStyle(headings[0]).scrollMarginTop):0)||((document.querySelector('.ac-public-header')?.getBoundingClientRect().bottom||68)+64);const visible=headings.filter(h=>h.getBoundingClientRect().top<=top+1);setActive((visible.at(-1)||headings[0])?.dataset.encyMake||'');};
   const scroll=()=>{if(!frame)frame=requestAnimationFrame(update);};update();window.addEventListener('scroll',scroll,{passive:true});
   return()=>{window.removeEventListener('scroll',scroll);cancelAnimationFrame(frame);};
  },[filtered,params]);

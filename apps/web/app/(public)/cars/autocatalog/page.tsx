@@ -4,7 +4,7 @@ import {protectedPhotoUrl} from '@/lib/catalog/photo-proxy-policy';
 import type {Metadata} from 'next';
 import {CatalogBreadcrumbs} from '@/components/catalog/CatalogBreadcrumbs';
 import {Suspense} from 'react';
-import {PublicHeader} from '@/components/layout/PublicHeader';
+import {EditorialHeader} from '@/components/layout/EditorialHeader';
 import {DirectoryFilters,DirectoryAlphabet} from '@/components/encyclopedia/DirectoryFilters';
 import {getCurrentUser} from '@/lib/auth';
 import {CreateModel} from '@/components/encyclopedia/CreateModel';
@@ -22,7 +22,7 @@ export default async function EncyclopediaPage({searchParams}:{searchParams:Prom
  models.sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru',{numeric:true}));
  const data=packDirectory(models.map(m=>({id:m.id,make:m.make,model:m.model,photo:protectedPhotoUrl(m.photo,m.photoMarket||''),years:m.years,fuels:m.fuels,needs30:m.needs30,hasUnknownYear:m.hasUnknownYear,directorySnapshot:m.directorySnapshot,manualCreated:m.manualCreated,compact:m.compact})));
  const makes=[...new Set(models.map(m=>m.make))].sort((a,b)=>a.localeCompare(b,'ru')),years=[...new Set(models.flatMap(m=>m.years))].sort((a,b)=>b-a),fuels=[...new Set(models.flatMap(m=>m.fuels.map(fuelFilterKey)))].sort();
- return <main className="ac-ency-page ac-page-copy"><PublicHeader backHref="/cars" backLabel="В каталог"/><div className="ac-ency-container">
+ return <main className="ac-ency-page ac-page-copy"><EditorialHeader backHref="/cars" backLabel="В каталог"/><div className="ac-ency-container">
   <CatalogBreadcrumbs items={[{label:'Главная',href:'/'},{label:'Каталог автомобилей',href:'/cars'},{label:'Энциклопедия',href:'/cars/autocatalog'},...(p.make?[{label:p.make,href:`/cars/autocatalog?make=${encodeURIComponent(p.make)}`}]:[])]}/>
   <header className="ac-ency-intro"><div><h1>Энциклопедия автомобилей</h1><div className="ac-ency-count"><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span>{counted(models.length,'model')} · {counted(makes.length,'make')}</div></div></header>
   <div className="ac-knowledge-toolbar">{canEditEncyclopedia(user)&&<CreateModel/>}<Suspense><DirectoryAlphabet makes={makes}/></Suspense></div>
