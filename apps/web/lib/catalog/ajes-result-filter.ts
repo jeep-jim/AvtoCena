@@ -1,4 +1,5 @@
 import {ajesPowerFilterValues} from './ajes-power-estimate';
+import {offerWithSavedPreview} from './saved-calculation-preview';
 import {matchesCatalogColor} from './catalog-color-index';
 import {filterSelections,matchesFilterSelection} from './filter-selections';
 import {AjesInputError} from './ajes-query';
@@ -24,8 +25,9 @@ export function ajesResultFilter(params:Record<string,unknown>){
   if(japanDrive&&!matchesFilterSelection(offer.drive,drive))return false;
   if(!matchesCatalogColor(offer,scalar(params.color)))return false;
   if(powerFilter){
-   const exact=Number(offer.powerHp);
-   const values=Number.isFinite(exact)&&exact>0?[exact]:ajesPowerFilterValues(offer);
+   const displayed=offerWithSavedPreview(offer);
+   const exact=Number(displayed.powerHp);
+   const values=Number.isFinite(exact)&&exact>0?[exact]:ajesPowerFilterValues(displayed);
    if(!values.length||values.some(hp=>(powerFrom!==undefined&&hp<powerFrom)||(powerTo!==undefined&&hp>powerTo)))return false;
   }
   if(!matchesFilterSelection(catalogBodyType(offer),body))return false;

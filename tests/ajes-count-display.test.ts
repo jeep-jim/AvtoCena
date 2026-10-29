@@ -10,7 +10,7 @@ test('independent counts retain zero, unavailable and stale semantics',()=>{
  assert.equal(ajesCountText(null),'Количество уточняется');
  assert.equal(ajesCountText({...fresh,stale:true}),'147\u00a0867 · по последним данным');
  assert.equal(exactAjesCount({...fresh,stale:true}),undefined);
- assert.equal(ajesCountText({...fresh,upperBound:true}),'до 147\u00a0867');
+ assert.equal(ajesCountText({...fresh,upperBound:true}),'Количество уточняется');
  assert.equal(exactAjesCount({...fresh,upperBound:true}),undefined);
 });
 test('stock power selection uses numeric nonempty evidence in lists and aggregates',()=>{
@@ -98,6 +98,15 @@ test('power results keep the source 111 hp match and reject empty, malformed and
  const filter=ajesResultFilter({powerTo:'160'});
  assert.equal(filter.matches({powerHp:111}),true);assert.equal(filter.matches({powerHp:160}),true);
  for(const powerHp of [undefined,null,'',0,200,'111,200','unknown'])assert.equal(filter.matches({powerHp}),false);
+});
+test('power filter uses the saved horsepower shown on the card without changing source evidence',async()=>{
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
+ const filter=ajesResultFilter({market:'korea',powerTo:'160'});
+ const offer={powerHp:150,savedCalculationPreview:{totalRub:4309204,parameters:{powerHp:186,powerKw:136.8027675}}};
+ assert.equal(filter.matches(offer),false);
+ assert.equal(offer.powerHp,150);
+ assert.equal(filter.matches({...offer,savedCalculationPreview:{totalRub:4309204,parameters:{powerHp:160}}}),true);
+ assert.equal(filter.matches({...offer,savedCalculationPreview:{totalRub:0,parameters:{powerHp:186}}}),true);
 });
 test('power search recovers only matching already received cars without requiring a model',async()=>{
  const {findSavedAjesStockSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
