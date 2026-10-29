@@ -11,9 +11,9 @@ export function catalogFailureDiagnostic(error: unknown) {
     'Maximum call stack size exceeded': 'call_stack_exceeded',
     'This operation was aborted': 'operation_aborted',
   };
-  const rawCode = value && 'code' in value ? String(value.code) : '';
+  const rawCode = value && 'code' in value && typeof value.code === 'string' ? value.code : '';
   const network = /^(ECONNRESET|ETIMEDOUT|EPIPE|ENOMEM|UND_ERR_CONNECT_TIMEOUT|UND_ERR_SOCKET)$/.test(rawCode) ? rawCode : undefined;
-  const code = prefix?.slice(0, 96) || known[message] || network || 'unclassified';
+  const code = prefix?.slice(0, 96) || (Object.hasOwn(known, message) ? known[message] : undefined) || network || 'unclassified';
   const locations = (value?.stack?.match(/\.next\/server\/[A-Za-z0-9_./()\[\]-]+\.js:\d+:\d+/g) || []).slice(0, 6);
   return {name, code, locations};
 }

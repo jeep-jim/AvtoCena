@@ -17,4 +17,6 @@ test('unknown messages and arbitrary thrown values are not published', () => {
   error.stack = 'Error: Customer name';
   assert.deepEqual(catalogFailureDiagnostic(error), {name:'Error',code:'unclassified',locations:[]});
   assert.deepEqual(catalogFailureDiagnostic('token=private'), {name:'UnknownError',code:'unclassified',locations:[]});
+  assert.equal(catalogFailureDiagnostic(new Error('__proto__')).code, 'unclassified');
+  assert.equal(catalogFailureDiagnostic(Object.assign(new Error('private text'), {code:{toString(){throw new Error('must not run');}}})).code, 'unclassified');
 });
