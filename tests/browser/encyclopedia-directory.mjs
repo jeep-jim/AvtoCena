@@ -21,11 +21,12 @@ const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHe
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[];
-try{for(const width of [390,1440]){
+try{for(const theme of ['dark','light'])for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:900}});const errors=[];let reads=0;
  page.on('pageerror',e=>errors.push(String(e)));
  await page.route('**/api/encyclopedia/**',route=>{reads++;return route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'fixture',updatedAt:'2026-10-26',variants:[]}});});
  await page.goto(`http://127.0.0.1:${server.address().port}`);
+ await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;if(theme==='light')for(const [key,value] of Object.entries({'--ac-bg':'#fff','--ac-surface':'#f8f9fb','--ac-surface-2':'#f8f9fb','--ac-border':'#ddd','--ac-muted':'#606975','--ac-text':'#171e28'}))document.documentElement.style.setProperty(key,value);},theme);
  const rows=page.locator('.ac-model-list-item');await rows.last().waitFor();assert.equal(await rows.count(),40);assert.equal(reads,0);
  await rows.first().getByRole('button',{name:'Увеличить фото Brand 0 Model 0'}).click();await page.getByRole('dialog').waitFor();await page.keyboard.press('Escape');assert.equal(await page.getByRole('dialog').count(),0);assert.equal(reads,0,'photo enlargement does not fetch model data');
  const initialElements=await page.locator('*').count();assert.ok(initialElements<1800);
@@ -43,7 +44,7 @@ try{for(const width of [390,1440]){
  await page.getByText('По выбранным параметрам моделей не найдено.').waitFor();assert.equal(new URL(page.url()).searchParams.get('letter'),'T');
  await page.getByRole('button',{name:'Сбросить',exact:true}).click();await rows.last().waitFor();assert.equal(await rows.count(),40);
  assert.equal(await page.getByRole('heading',{name:'Brand 0',exact:true}).count(),1);
- await page.screenshot({path:out+`/directory-${width}.png`,fullPage:false});
- assert.deepEqual(errors,[]);results.push({width,initialElements,initialModels:40,modelReads:reads});await page.close();
+ await page.screenshot({path:out+`/directory-${theme}-${width}.png`,fullPage:false});
+ assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();
 }}finally{await browser.close();await new Promise(r=>server.close(r));}
 console.log(JSON.stringify({passed:true,models:4000,ssrBytes:Buffer.byteLength(markup),results}));
