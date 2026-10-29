@@ -54,13 +54,13 @@ try{
   assert.equal(await page.getByRole('checkbox',{name:'Оценка 4.5',exact:true}).isChecked(),true);
   await page.screenshot({path:`${out}/grade-multi-${width}-${theme}.png`});
   await page.getByRole('button',{name:'Готово',exact:true}).click();
-  if(width<500)await page.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+  if(width<500)await page.locator('button[data-ac-mobile-close="1"]').click();
   await page.waitForFunction(()=>new URLSearchParams(location.search).get('auctionGrade')==='4.5|4|5');
   await page.reload();if(width<500)await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
   await page.getByRole('button',{name:'Аукционные оценки',exact:true}).filter({visible:true}).click();
   for(const grade of ['4','4.5','5'])assert.equal(await page.getByRole('checkbox',{name:`Оценка ${grade}`,exact:true}).isChecked(),true);
   await page.getByRole('checkbox',{name:'Оценка 4',exact:true}).uncheck();
-  await page.getByRole('button',{name:'Готово',exact:true}).click();if(width<500)await page.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+  await page.getByRole('button',{name:'Готово',exact:true}).click();if(width<500)await page.locator('button[data-ac-mobile-close="1"]').click();
   await page.waitForFunction(()=>new URLSearchParams(location.search).get('auctionGrade')==='4.5|5');
   await context.close();
  }

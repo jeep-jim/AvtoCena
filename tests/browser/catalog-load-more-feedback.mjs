@@ -42,7 +42,7 @@ try{
   // Real request remains unacknowledged; advancing time must not hide the loader.
   if(width===390&&theme==='dark'){await page.clock.install();await page.clock.runFor(16000);assert.equal(await loading.count(),1);}
   await page.waitForURL(/fuel=electrified/);
-  if(width<1024)await scope.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+  if(width<1024)await scope.locator('button[data-ac-mobile-close="1"]').click();
   await page.locator('#ack').click();await loading.waitFor({state:'detached'});
   assert.deepEqual(searches,[],'electric toggle must not send a duplicate catalog search');assert.deepEqual(errors,[]);
   await page.screenshot({path:`${out}/${width}-${theme}.png`});results.push({width,theme,geometry,passed:true});await page.close();

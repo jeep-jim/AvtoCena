@@ -81,7 +81,7 @@ try{for(const width of [390,1440]){
  await colorForm.getByRole('button',{name:'Белый',exact:true}).click();
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('color')==='Белый');
  assert.equal(await page.evaluate(()=>window.selectionDocumentToken),'same-document');
- if(width===390)await colorForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+ if(width===390)await colorForm.locator('button[data-ac-mobile-close="1"]').click();
  assert.equal(await page.getByRole('textbox',{name:'Название подборки',exact:true}).inputValue(),custom);
  await send.click();await page.waitForFunction(()=>window.calls.length===3);
  assert.equal(new URL(shares.at(-1).path,origin).searchParams.get('color'),'Белый');assert.equal(shares.at(-1).title,custom);
@@ -103,7 +103,7 @@ try{for(const width of [390,1440]){
  if(width===390){for(const method of ['button','back']){
   const beforeClose=await page.evaluate(()=>{window.scrollTo({top:900,behavior:'instant'});return window.scrollY;});assert.ok(beforeClose>500);await openFilters(page,width);await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor();
   await page.waitForFunction(()=>Boolean(history.state?.acOverlayStep));
-  if(method==='button')await page.getByRole('button',{name:'Применить фильтры',exact:true}).click();else await page.goBack();
+  if(method==='button')await page.locator('button[data-ac-mobile-close="1"]').click();else await page.goBack();
   await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor({state:'hidden'});await page.waitForFunction(y=>Math.abs(scrollY-y)<3,beforeClose);console.log(`close ${method}: restored ${beforeClose}px`);
  }}
  await page.evaluate(()=>window.scrollTo({top:900,behavior:"instant"}));await openFilters(page,width);
@@ -118,7 +118,7 @@ try{for(const width of [390,1440]){
   await openFilters(page,width);
   const sheet=page.getByRole('dialog',{name:'Фильтры каталога'});await sheet.waitFor();
   await sheet.getByRole('textbox',{name:'Цена: до',exact:true}).fill('3100000');await sheet.getByRole('textbox',{name:'Цена: до',exact:true}).press('Tab');
-  await page.waitForTimeout(250);await sheet.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+  await page.waitForTimeout(250);await sheet.locator('button[data-ac-mobile-close="1"]').click();
   await page.waitForFunction(()=>new URLSearchParams(location.search).get('budget')==='3100000');
   await page.waitForFunction(y=>Math.abs(scrollY-y)<3,y);console.log(`delayed response after close: restored ${y}px`);
   await page.evaluate(()=>window.fixtureDelay=0);
@@ -145,7 +145,7 @@ try{for(const width of [390,1440]){
   for(const name of names)assert.equal(await multiForm.getByRole('button',{name,exact:true}).getAttribute('aria-pressed'),'true');
   await multiForm.getByRole('button',{name:names.join(', '),exact:true}).click();
  }
- if(width===390)await multiForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+ if(width===390)await multiForm.locator('button[data-ac-mobile-close="1"]').click();
  await page.reload();await page.locator('#catalog').waitFor();
  for(const [key,value] of [['transmission','automatic|cvt'],['fuel','petrol|diesel'],['bodyType','sedan|hatchback'],['drive','fwd|awd']])assert.equal(new URL(page.url()).searchParams.get(key),value);
  await openFilters(page,width);
@@ -154,7 +154,7 @@ try{for(const width of [390,1440]){
  await reloadedMulti.getByRole('button',{name:'Автомат',exact:true}).click();
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('transmission')==='cvt');
  assert.equal(await reloadedMulti.getByRole('button',{name:'Вариатор',exact:true}).count()>=1,true);
- if(width===390)await reloadedMulti.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+ if(width===390)await reloadedMulti.locator('button[data-ac-mobile-close="1"]').click();
  await page.screenshot({path:`${out}/multiselect-${width}.png`});
  // Each chosen market has its own removable chip and keeps the other choice.
  await openFilters(page,width);
@@ -170,7 +170,7 @@ try{for(const width of [390,1440]){
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('market')==='china');
  assert.equal(await chipScope.getByRole('button',{name:'Убрать Китай',exact:true}).count(),1);
  assert.equal(new URL(page.url()).pathname,'/test/dealer');
- if(width===390)await chipForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+ if(width===390)await chipForm.locator('button[data-ac-mobile-close="1"]').click();
  // Green Corner's source gearbox codes cannot be reused as another market's types.
  const switchForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
  if(width===390)await openFilters(page,width);
@@ -191,7 +191,7 @@ try{for(const width of [390,1440]){
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('market')==='china');
  assert.equal(new URL(page.url()).searchParams.has('transmission'),false);
  assert.equal(new URL(page.url()).searchParams.get('selection'),'1');
- if(width===390)await switchForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+ if(width===390)await switchForm.locator('button[data-ac-mobile-close="1"]').click();
  if(width===390){
   // Keep the original profile pathname instead of remounting via the canonical alias.
   await page.goto(origin+'/test/cabinet');
@@ -202,7 +202,7 @@ try{for(const width of [390,1440]){
   const canonicalForm=page.getByRole('dialog',{name:'Фильтры каталога'});await canonicalForm.waitFor();
   await canonicalForm.getByRole('textbox',{name:'Цена: до',exact:true}).fill('2700000');
   await page.waitForTimeout(240); // navigation intent sent, delayed route still pending
-  await canonicalForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+  await canonicalForm.locator('button[data-ac-mobile-close="1"]').click();
   await page.waitForFunction(()=>new URLSearchParams(location.search).get('budget')==='2700000');
   await page.waitForTimeout(800);
   assert.equal(new URL(page.url()).pathname,'/test/dealer');
