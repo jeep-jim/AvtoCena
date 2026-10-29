@@ -73,7 +73,7 @@ try{
    await page.goto(`${origin}/cars?theme=${theme}&empty=1`);
    await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
    const emptySheet=page.locator('.ac-mobile-filter-sheet');
-   assert.equal(await emptySheet.getByRole('button',{name:'Закрыть',exact:true}).innerText(),'×');
+   if(!live){assert.equal(await emptySheet.getByRole('button',{name:'Свернуть фильтры',exact:true}).innerText(),'');assert.equal(await emptySheet.locator('button[data-ac-mobile-close="1"] svg').count(),1);}
    await emptySheet.getByRole('button',{name:/^Сортировка:/}).click();
    await emptySheet.getByRole('button',{name:'Сначала дешевле',exact:true}).click();
    await emptySheet.getByRole('button',{name:'Готово',exact:true}).click();
