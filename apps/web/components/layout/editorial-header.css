@@ -1,3 +1,4 @@
+.ac-editorial-header-space{height:65px;flex:none}
 /* Keep the established inner-page header compact for staff and visitors. */
 @media(max-width:767px){
  .ac-public-header.ac-editorial-header>div{gap:4px!important;padding-inline:8px!important}
