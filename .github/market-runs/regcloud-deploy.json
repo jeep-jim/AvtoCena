@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-requested notification tray and customer registration corrections: show only unread notices without deleting history; require a valid name before registration on client and server; registered customer name/phone search, list/grid and pagination. Preserve existing account permissions and recovery, research dependencies and production functional guards. Local41 account regressions and web typecheck passed; CI and browser checks required before merge. Previous catalog performance work remains open.",
+  "reason": "Owner-requested registered customer sorting before pagination, equal-height search/view controls, visible light-theme icons, staff menu alignment to the offer column, and equal-height encyclopedia alphabet/add-model controls. Preserve account permissions, current catalog calculation logic, research dependencies and all functional verification. Prior encyclopedia public verifier incident remains separately open.",
   "ideaReports": [],
-  "requestedAt": "2026-10-29T06:08:14.158332+00:00"
+  "requestedAt": "2026-10-29T07:23:57.138012+00:00"
 }
