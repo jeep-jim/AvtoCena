@@ -1,6 +1,7 @@
-import {BadgeCheck, Car, CarFront, Globe, Settings2, Route, Droplet, ArrowDownUp} from "lucide-react";
-const icons = {make: BadgeCheck, model: CarFront, market: Globe, bodyType: Car, transmission: Settings2, drive: Route, fuel: Droplet, sort: ArrowDownUp};
+import {ArrowDownUp} from "lucide-react";
+import {SpecIcon, type SpecIconName} from "./OfferSpecTile";
+const icons:Record<string,SpecIconName>={bodyType:"body",transmission:"transmission",drive:"drive",fuel:"fuel"};
 export function CatalogFilterIcon({name}:{name:string}) {
- const Icon=icons[name as keyof typeof icons];
- return Icon ? <Icon className="ac-filter-leading-icon" size={17} strokeWidth={1.7} aria-hidden="true"/> : null;
+ if(name==="sort")return <ArrowDownUp className="ac-filter-leading-icon" size={17} strokeWidth={1.7} aria-hidden="true"/>;
+ return icons[name]?<SpecIcon name={icons[name]} className="ac-filter-leading-icon"/>:null;
 }

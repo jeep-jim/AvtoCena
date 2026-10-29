@@ -4,7 +4,7 @@ export type SpecIconName = "year" | "mileage" | "engine" | "fuel" | "power" | "t
 
 export type SpecItem = { label: string; value: string; icon: SpecIconName; info?: string };
 
-function SpecIcon({ name }: { name: SpecIconName }) {
+export function SpecIcon({ name, className = "h-5 w-5 shrink-0 text-[var(--ac-text)] opacity-50" }: { name: SpecIconName; className?: string }) {
   const common = {
     fill: "none",
     stroke: "currentColor",
@@ -24,7 +24,7 @@ function SpecIcon({ name }: { name: SpecIconName }) {
     electricMotor: <><rect x="3.5" y="6" width="15" height="12" rx="3" /><path d="M18.5 10h2v4h-2M7.5 10h6M7.5 14h4" /><path d="m13 8.6-3.3 4.2h2.2l-.6 3 3.8-4.8h-2.2z" fill="currentColor" stroke="none" /></>,
     thirtyMinute: <><rect x="3.5" y="6" width="12" height="12" rx="2.5" /><path d="M15.5 10h2v4h-2M7.5 9.5h4M7.5 14.5h4" /><circle cx="18" cy="18" r="4" fill="var(--ac-surface, #11141c)" /><path d="M18 15.8V18l1.4 1" /></>,
   };
-  return <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[var(--ac-text)] opacity-50" aria-hidden="true" {...common}>{paths[name]}</svg>;
+  return <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...common}>{paths[name]}</svg>;
 }
 
 export function SpecTile({ label, value, icon, info, fullWidth = false, showLabel = false }: SpecItem & { fullWidth?: boolean; showLabel?: boolean }) {

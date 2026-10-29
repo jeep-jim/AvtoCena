@@ -14,6 +14,7 @@ test('ready cards do not wait for optional brand/model directories; exact select
     if(args.path.endsWith('/ajes-client'))return {contents:'export class AjesUnavailable extends Error {}'};
     if(args.path.endsWith('/ajes-query'))return {contents:'export class AjesInputError extends Error {}'};
     if(args.path.endsWith('/ajes-count-display'))return {contents:'export const exactAjesCount=s=>s?.total;export const ajesCountText=s=>String(s?.total??"unknown");export const ajesPaginationCountText=ajesCountText;'};
+    if(args.path.endsWith('/CatalogSelectionContext'))return {contents:'export const CatalogResultCountUpdate=props=>null;'};
     if(args.path.endsWith('/ajes-runtime'))return {contents:'export const readSavedAjesFacets=()=>new Promise(()=>{});'};
     const name=args.path.split('/').pop();const exported=name==='DealerBrowsingContext'?'DealerLink':name;
     return {contents:`export const ${exported}=props=>null;`};
@@ -25,6 +26,7 @@ test('ready cards do not wait for optional brand/model directories; exact select
   assert.equal(calls,0,'metadata must begin in a separate streamed boundary, not ahead of list');
   const walk=(node:any):any[]=>!node||typeof node!=='object'?[]:[node,...Object.values(node.props||{}).flatMap(v=>Array.isArray(v)?v.flatMap(walk):walk(v))];
   const nodes=walk(root),filters=nodes.find(n=>n.props?.auctionResults);
+  assert.ok(nodes.some(n=>n.props?.queryKey===JSON.stringify(filters.props.initial)&&n.props?.text==='1'),'ready aggregate is shared under the exact filter query');
   assert.equal(filters.props.initial.city,'Новокузнецк');assert.equal(filters.props.initial.make,'SsangYong');
   assert.ok(filters.props.facets.makes.includes('SsangYong'));assert.ok(nodes.some(n=>n.props?.initialCount===1));
  }finally{delete (globalThis as any).__ajesTest;}

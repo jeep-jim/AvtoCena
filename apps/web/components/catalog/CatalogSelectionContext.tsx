@@ -2,6 +2,7 @@
 import {CatalogViewIcon} from './CatalogViewIcon';
 import {createContext,useContext,useState,useEffect,type ReactNode} from 'react';
 import {createPortal} from 'react-dom';
+type ResultCount={queryKey:string;text:string};
 type SelectionContext={target:HTMLDivElement|null;setTarget:(target:HTMLDivElement|null)=>void;view:"grid"|"list";setView:(view:"grid"|"list")=>void};
 const Context=createContext<SelectionContext|null>(null);
 export function CatalogSelectionProvider({children}:{children:ReactNode}){
@@ -18,7 +19,7 @@ export function CatalogSelectionProvider({children}:{children:ReactNode}){
  },[]);
  const effectiveView=desktop?view:"grid";
  const value={target,setTarget,view:effectiveView,setView:chooseView};
- return <Context.Provider value={value}><div className="ac-catalog-view" data-catalog-view={effectiveView}>{children}</div></Context.Provider>;
+ return <Context.Provider value={value}><ResultCountProvider><div className="ac-catalog-view" data-catalog-view={effectiveView}>{children}</div></ResultCountProvider></Context.Provider>;
 }
 export function CatalogSelectionOutlet(){
  const context=useContext(Context);
@@ -30,3 +31,18 @@ export function CatalogDesktopSelection({children}:{children:ReactNode}){
 }
 
 export function useCatalogView(){return useContext(Context)?.view || "grid";}
+
+// Keep count updates separate from view/selection consumers (including cards).
+const ResultCountContext=createContext<{value:ResultCount|null;set:(count:ResultCount)=>void}|null>(null);
+function ResultCountProvider({children}:{children:ReactNode}){
+ const [value,set]=useState<ResultCount|null>(null);
+ return <ResultCountContext.Provider value={{value,set}}>{children}</ResultCountContext.Provider>;
+}
+// Share the already streamed server aggregate with the open filter sheet.
+// Query identity prevents retained/older results from becoming the current count.
+export function CatalogResultCountUpdate({queryKey,text}:ResultCount){
+ const set=useContext(ResultCountContext)?.set;
+ useEffect(()=>{set?.({queryKey,text});},[set,queryKey,text]);
+ return null;
+}
+export function useCatalogResultCount(){return useContext(ResultCountContext)?.value;}
