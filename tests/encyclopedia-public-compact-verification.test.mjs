@@ -25,3 +25,25 @@ test('an exact public variant still checks every supplied field',()=>{
  assert.deepEqual(assertPublicVariant(check,{...record,variants:[original]}),{grouped:false,privateDescriptions:0});
  assert.throws(()=>assertPublicVariant(check,{...record,variants:[{...original,power30MinKw:99}]}),/public_field_mismatch/);
 });
+
+test('distinct generations and certification identities do not create false ambiguity',()=>{
+ const other={...representative,id:'different-approval',astraIdentity:{approval:'OTHER'}};
+ assert.deepEqual(assertPublicVariant(check,{...record,variants:[representative,other]},{...source,variants:[original,representative,other]}),{grouped:true,privateDescriptions:1});
+ assert.throws(()=>assertPublicVariant(check,{...record,variants:[other]},{...source,variants:[original,representative,other]}),/public_mechanical_group_missing_or_ambiguous/);
+});
+test('documented presentation aliases preserve original reviewed values',()=>{
+ const alias={...representative,drive:'Передний'};
+ assert.deepEqual(assertPublicVariant(check,{...record,variants:[alias]},{...source,variants:[original,alias]}),{grouped:true,privateDescriptions:1});
+ assert.throws(()=>assertPublicVariant(check,{...record,variants:[{...alias,drive:'Полный'}]},{...source,variants:[original,alias]}),/public_mechanical_group_missing_or_ambiguous/);
+});
+test('a unique fuller representative is accepted only through the actual presentation grouping',()=>{
+ const partial={...original,engineCc:1400,fuel:'hybrid',bodyType:'hatchback',status:'observed'};
+ const full={...partial,id:'fuller',transmission:'automatic'};
+ const c={variantId:partial.id,year:2021,fields:{bodyType:'hatchback',power30MinKw:37}};
+ const s={...source,variants:[partial,full]},r={...record,variants:[full]};
+ assert.deepEqual(assertPublicVariant(c,r,s),{grouped:true,privateDescriptions:0});
+ for(const extra of [{manualEditedAt:'now'},{status:'verified'}])assert.throws(()=>assertPublicVariant(c,r,{...s,variants:[{...partial,...extra},full]}),/public_mechanical_group_missing_or_ambiguous/);
+ const alternative={...full,id:'other',transmission:'manual'};
+ assert.throws(()=>assertPublicVariant(c,{...r,variants:[full,alternative]},{...s,variants:[partial,full,alternative]}),/public_mechanical_group_missing_or_ambiguous/);
+ assert.throws(()=>assertPublicVariant(c,{...r,variants:[{...full,power30MinKw:38}]},s),/public_mechanical_group_missing_or_ambiguous/);
+});
