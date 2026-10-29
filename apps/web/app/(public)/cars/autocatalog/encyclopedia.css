@@ -115,3 +115,4 @@ html[data-theme="light"] .ac-ency-page input:not([type=checkbox]),html[data-them
 .ac-ency-missing-fields{display:block;font-size:12px;color:var(--ac-muted);margin-top:6px}
 .ac-knowledge-toolbar>.ac-ency-button{flex-shrink:0}
 @media(max-width:600px){.ac-knowledge-toolbar{flex-wrap:wrap}.ac-knowledge-toolbar>.ac-knowledge-alphabet{flex-basis:100%}}
+.ac-model-list-row>.ac-ency-button{white-space:nowrap;padding-inline:8px}
