@@ -4,8 +4,8 @@ import json
 import re
 import subprocess
 
-START = '2026-10-29T10:18:00Z'
-END = '2026-10-29T10:24:00Z'
+START = '2026-10-29T12:14:00Z'
+END = '2026-10-29T12:17:00Z'
 result = subprocess.run(
     ['docker', 'logs', '--timestamps', '--since', START, '--until', END,
      '--tail', '5000', 'avtocena-production'],
