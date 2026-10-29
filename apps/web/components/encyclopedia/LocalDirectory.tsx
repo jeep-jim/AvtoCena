@@ -25,9 +25,26 @@ export function LocalDirectory({data,canEdit}:{data:DirectoryWire;canEdit:boolea
   const headings=[...node.querySelectorAll<HTMLElement>('[data-ency-make]')];
   if(pending.current){const target=headings.find(h=>h.dataset.encyMake===pending.current);pending.current=undefined;target?.scrollIntoView({block:'start',behavior:'instant'});}
   let frame=0;
-  const update=()=>{frame=0;const top=(headings[0]?parseFloat(getComputedStyle(headings[0]).scrollMarginTop):0)||((document.querySelector('.ac-public-header')?.getBoundingClientRect().bottom||68)+64);const visible=headings.filter(h=>h.getBoundingClientRect().top<=top+1);setActive((visible.at(-1)||headings[0])?.dataset.encyMake||'');};
-  const scroll=()=>{if(!frame)frame=requestAnimationFrame(update);};update();window.addEventListener('scroll',scroll,{passive:true});
-  return()=>{window.removeEventListener('scroll',scroll);cancelAnimationFrame(frame);};
+  const rail=node.querySelector<HTMLElement>('.ac-directory-rail'),list=node.querySelector<HTMLElement>('.ac-model-list');
+  const update=()=>{
+   frame=0;
+   if(rail&&list){
+    if(matchMedia('(min-width:1101px)').matches){
+     const railTop=parseFloat(getComputedStyle(rail).top)||124;
+     // Shrink above the end of the model list instead of letting sticky push
+     // the whole rail (including the active letter) behind the fixed header.
+     const height=Math.max(0,Math.min(innerHeight-railTop-16,list.getBoundingClientRect().bottom-railTop));
+     rail.style.height=`${height}px`;
+     for(const column of rail.querySelectorAll<HTMLElement>('.ac-directory-rail-column')){
+      const item=column.querySelector<HTMLElement>('[aria-current="true"]');
+      if(item&&column.clientHeight&&(item.offsetTop<column.scrollTop||item.offsetTop+item.offsetHeight>column.scrollTop+column.clientHeight))column.scrollTop=Math.max(0,item.offsetTop-(column.clientHeight-item.offsetHeight)/2);
+     }
+    }else rail.style.removeProperty('height');
+   }
+   const top=(headings[0]?parseFloat(getComputedStyle(headings[0]).scrollMarginTop):0)||((document.querySelector('.ac-public-header')?.getBoundingClientRect().bottom||68)+64);const visible=headings.filter(h=>h.getBoundingClientRect().top<=top+1);setActive((visible.at(-1)||headings[0])?.dataset.encyMake||'');
+  };
+  const scroll=()=>{if(!frame)frame=requestAnimationFrame(update);};update();window.addEventListener('scroll',scroll,{passive:true});window.addEventListener('resize',scroll);
+  return()=>{window.removeEventListener('scroll',scroll);window.removeEventListener('resize',scroll);cancelAnimationFrame(frame);};
  },[filtered,params]);
  useEffect(()=>{for(const column of root.current?.querySelectorAll<HTMLElement>('.ac-directory-rail-column')||[]){const item=column.querySelector<HTMLElement>('[aria-current="true"]');if(item)column.scrollTo({top:Math.max(0,item.offsetTop-column.clientHeight/2+item.clientHeight/2),left:Math.max(0,item.offsetLeft-column.clientWidth/2+item.clientWidth/2),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}},[active]);
  const page=Math.min(Math.max(1,Math.floor(Number(params.get('page'))||1)),Math.max(1,Math.ceil(filtered.length/40)));
