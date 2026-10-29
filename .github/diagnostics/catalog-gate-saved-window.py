@@ -18,7 +18,7 @@ timings = {}
 for index, line in enumerate(lines):
     # Only fixed error codes and generated bundle locations leave the VM.
     # No messages, object keys, request URLs, addresses or vehicle/customer IDs.
-    found = re.findall(r'\b(?:object_storage_[A-Za-z_]+|detail_cache_queue_[a-z_]+|catalog_[a-z_]+|ajes_[a-z_]+|ETIMEDOUT|ECONNRESET|ENOMEM|TypeError)\b', line)
+    found = re.findall(r'\b(?:object_storage_[A-Za-z_]+|detail_cache_queue_[a-z_]+|catalog_[a-z_]+|ajes_[a-z_]+|green_[a-z_]+|japan_[a-z_]+|currency_[a-z_]+|rates_[a-z_]+|ETIMEDOUT|ECONNRESET|ENOMEM|TypeError|RangeError|SyntaxError|AbortError|TimeoutError)\b', line)
     codes.update(found)
     if 'catalog_storage_read ' in line:
         try:
@@ -34,6 +34,7 @@ for index, line in enumerate(lines):
         context = '\n'.join(lines[index:index + 7])
         events.append({'at': stamp.group() if stamp else None, 'codes': significant,
                        'locations': re.findall(r'\.next/server/[A-Za-z0-9_./()\[\]-]+\.js:\d+:\d+', context)[:5]})
-print(json.dumps({'window': [START, END], 'lines': len(lines),
+known = {message: sum(message in line for line in lines) for message in ['Invalid string length','Maximum call stack size exceeded','Cannot read properties of undefined','Cannot read properties of null','fetch failed','array buffer allocation failed','out of memory','detail_cache_queue_timeout','detail_cache_queue_full','catalog_budget_context_changed','catalog_budget_snapshot_invalid']}
+print(json.dumps({'knownErrors': known, 'window': [START, END], 'lines': len(lines),
                   'categories': dict(codes), 'events': events[-40:],
                   'slowStorage': {key: {'reads': len(values), 'maxMs': max(values)} for key, values in timings.items()}}))
