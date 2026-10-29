@@ -32,6 +32,7 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 const results=[];
 try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  const page=await browser.newPage({viewport:{width,height:900}});const errors=[];let reads=0;
+ try{
  page.on('pageerror',e=>errors.push(String(e)));
  await page.route('**/api/**',route=>route.fulfill({json:route.request().url().includes('/auth/me')?{user:{id:'owner',role:'owner',displayName:'Owner',avatarUrl:''}}:{ok:true,leads:[],pending:[],recent:[],counts:{}}}));
  await page.route('**/api/encyclopedia/**',route=>{reads++;return route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'fixture',updatedAt:'2026-10-26',variants:[]}});});
@@ -48,7 +49,7 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  await rows.nth(1).locator('.ac-ency-model-editor').waitFor();assert.equal(reads,2);
  assert.equal(await rows.first().locator('.ac-ency-model-editor').count(),1,'opening another model preserves the first workspace');
  await page.getByRole('button',{name:'Далее',exact:true}).click();assert.equal(await rows.count(),40);assert.equal(reads,2,'pagination does not fetch model records');assert.ok((await rows.first().textContent()).includes('Brand 2 Model 0'),'next page actually changes model rows');
- await page.getByRole('button',{name:'Назад',exact:true}).click();
+ await page.getByRole('navigation',{name:'Страницы моделей'}).getByRole('button',{name:'Назад',exact:true}).click();
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
  await page.getByRole('navigation',{name:'Алфавит марок'}).getByRole('button',{name:'T',exact:true}).click();
  await page.getByText('По выбранным параметрам моделей не найдено.').waitFor();assert.equal(new URL(page.url()).searchParams.get('letter'),'T');
@@ -70,6 +71,6 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  await page.screenshot({path:out+`/directory-${theme}-${width}.png`,fullPage:false});
  if(width>1100){await page.locator('[data-ency-make="Brand 1"]').evaluate(e=>e.scrollIntoView({block:'start'}));await page.waitForFunction(()=>document.querySelector('.ac-directory-rail-brands [aria-current="true"]')?.getAttribute('aria-label')==='Brand 1');await page.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight));const railEnd=await page.locator('.ac-directory-rail').boundingBox(),footer=await page.locator('[data-fixture-footer]').boundingBox();assert.ok(railEnd.y+railEnd.height<=footer.y+1,'rail stops before footer');}
  await page.goto(`http://127.0.0.1:${server.address().port}/?blog=1`);await page.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();assert.ok(await headerFits(),'blog staff header fits');assert.equal(await page.getByRole('link',{name:'Написать статью',exact:true}).getAttribute('href'),'/crm/blog?new=1');await page.screenshot({path:out+`/blog-${theme}-${width}.png`});
- assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();
+ assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();}catch(error){await page.screenshot({path:out+`/failure-${theme}-${width}.png`});throw error;}
 }}finally{await browser.close();await new Promise(r=>server.close(r));}
 console.log(JSON.stringify({passed:true,models:4000,ssrBytes:Buffer.byteLength(markup),results}));
