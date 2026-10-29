@@ -9,7 +9,7 @@ test('customer names accept 2–60 Cyrillic or Latin letters and reject spaces, 
 test('profile endpoint rejects invalid names without modifying the account',async()=>{
  process.env.AUTH_SECRET='isolated-profile-test-secret';const harness=await customerAuthHarness();
  const request=(path:string,body:any,cookie='')=>new Request('https://avtocena.com'+path,{method:'POST',headers:{origin:'https://avtocena.com','content-type':'application/json',cookie},body:JSON.stringify(body)});
- const registered=await harness.handle(request('/api/account/auth',{action:'register',phone:'+79990007733',password:'secure-test-password',passwordConfirm:'secure-test-password',consent:true}));
+ const registered=await harness.handle(request('/api/account/auth',{action:'register',name:'Иван',phone:'+79990007733',password:'secure-test-password',passwordConfirm:'secure-test-password',consent:true}));
  assert.equal(registered.status,200);const cookie=registered.headers.get('set-cookie')!.split(';')[0];
  for(const name of [' ','Я','Ан тон','A'.repeat(61),'sex','а,4']){const r=await harness.handle(request('/api/account/profile',{name,avatarId:'key'},cookie));assert.equal(r.status,400,name);}
  const saved=await harness.handle(request('/api/account/profile',{name:'Ян',avatarId:'key'},cookie));assert.equal(saved.status,200);assert.equal((await saved.json()).account.name,'Ян');

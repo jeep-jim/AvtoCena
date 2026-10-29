@@ -8,3 +8,8 @@ export function customerNameError(value: unknown): string | null {
     return 'Введите ваше имя.';
   return null;
 }
+
+export function registrationNameError(value:unknown):string|null {
+ if(typeof value!=='string'||!value.trim()||/^(покупатель|пользователь)$/iu.test(value.trim()))return 'Укажите ваше имя.';
+ return customerNameError(value);
+}

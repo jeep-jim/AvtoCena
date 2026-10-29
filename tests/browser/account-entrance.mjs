@@ -31,7 +31,7 @@ const browser = await chromium.launch({executablePath: process.env.CHROME_BIN ||
 try {
   for (const width of [390, 1440]) for (const theme of ['light', 'dark']) {
     const page = await browser.newPage({viewport: {width, height: 1000}}); let sent = 0;
-    await page.route('**/api/account/auth', route => {if(route.request().method()==='POST')sent++; return route.fulfill({status: 400, json: {error: 'Проверка формы'}});});
+    await page.route('**/api/account/auth', route => {if(route.request().method()==='POST'){sent++;if(route.request().postDataJSON().action==='register')assert.equal(route.request().postDataJSON().name,'Иван');} return route.fulfill({status: 400, json: {error: 'Проверка формы'}});});
     await page.goto(origin + '/login'); await page.evaluate(t => document.documentElement.setAttribute('data-theme', t), theme);
     assert.equal(await page.getByText(/Вход для команды|Покупателю достаточно/).count(), 0);
     assert.equal(await page.locator('.account-selected-title h2').innerText(),'Пользователь');assert.equal(await page.locator('.account-selected-icon img').getAttribute('src'),'/api/site-media/'+'5'.repeat(64));
@@ -63,6 +63,9 @@ try {
     assert.equal(await page.getByRole('button',{name:'Забыли пароль?',exact:true}).evaluate(el=>el===document.activeElement),true);
     await page.getByRole('button', {name: 'Регистрация', exact: true}).click();
     assert.equal(await page.locator('input[name="customer-password-confirmation"]').count(), 0);
+    await page.getByRole('button', {name: 'Создать кабинет', exact: true}).click();
+    await page.getByRole('alert').filter({hasText: 'Укажите ваше имя.'}).waitFor(); assert.equal(sent,0);
+    await page.getByLabel('Имя',{exact:true}).fill('Иван');
     await page.locator('input[name="customer-phone"]').fill('+79991234567'); await page.locator('input[name="customer-password"]').fill('a-secure-password');
     await page.getByRole('button', {name: 'Показать пароль: Пароль', exact: true}).click(); assert.equal(await page.locator('input[name="customer-password"]').getAttribute('type'), 'text');
     await page.getByRole('button', {name: 'Скрыть пароль: Пароль', exact: true}).click();

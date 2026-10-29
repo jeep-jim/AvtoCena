@@ -14,7 +14,7 @@ test('public support request is durable, private, rate limited and never resets 
  const {handle,state}=await customerAuthHarness();
  state.records.set('auth/users.json',[owner,restricted,{...owner,id:'external',companyId:'dealer_other'}]);
  const request=(body:any,route='recovery-request',origin='https://avtocena.com')=>handle(new Request('https://avtocena.com/api/account/'+route,{method:'POST',headers:{origin,'content-type':'application/json','x-forwarded-for':'192.0.2.80'},body:JSON.stringify(body)}));
- const phone='+79991234567';const registered=await request({action:'register',phone,password:'original-test-password',consent:true},'auth');assert.equal(registered.status,200);
+ const phone='+79991234567';const registered=await request({action:'register',name:'Иван',phone,password:'original-test-password',consent:true},'auth');assert.equal(registered.status,200);
  const {account}=await registered.json(),key=accountPath(account.id),before=structuredClone(state.records.get(key));
  assert.equal((await request({phone,email:'owner@example.com',consent:true},'recovery-request','https://untrusted.example')).status,403);
  assert.equal((await request({phone,email:'owner@example.com'})).status,400);

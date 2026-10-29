@@ -1,5 +1,6 @@
 'use client';
 
+import {registrationNameError} from '@/lib/account/profile-name';
 import {useEffect} from 'react';
 import {phoneNational} from '@/lib/ru-phone';
 import {accountPhoneError} from '@/lib/account/phone';
@@ -58,6 +59,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
   const RoleIcon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[role];
   const [mode, setMode] = useState<Mode>('login');
   useEffect(()=>{if(new URLSearchParams(window.location.search).get('mode')==='register')setMode('register');},[]);
+  const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
@@ -87,6 +89,9 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
     if (busy) return;
     const form = event.currentTarget;
     const fields = new FormData(form);
+    const enteredName = String(fields.get('customer-name') || '').trim();
+    const nameError=mode==='register'?registrationNameError(enteredName):null;
+    if(nameError){setError(nameError);form.querySelector<HTMLInputElement>('[name="customer-name"]')?.focus();return;}
     const enteredPhone = String(fields.get('customer-phone') || '');
     const enteredPassword = String(fields.get('customer-password') || '');
     const repeatedPassword = String(fields.get('customer-password-confirmation') || '');
@@ -104,7 +109,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
       const response = await fetch('/api/account/auth', {
         method: 'POST', credentials: 'same-origin',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({action: mode, phone: enteredPhone, password: enteredPassword, consent: agreed}),
+        body: JSON.stringify({action: mode, name: enteredName, phone: enteredPhone, password: enteredPassword, consent: agreed}),
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.ok) throw Error(data.error || 'Не удалось войти. Попробуйте ещё раз.');
@@ -155,6 +160,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
             <button disabled={busy} aria-pressed={mode === 'register'} onClick={() => changeMode('register')}>Регистрация</button>
           </div>
           <form data-no-route-loader="true" key={mode} autoComplete={mode === 'register' ? 'off' : 'on'} id={`customer-${mode}`} name={`customer-${mode}`} action="/api/account/auth" method="post" onSubmit={submit} noValidate>
+            {mode === 'register' && <label>Имя<input name="customer-name" value={name} onChange={e=>setName(e.target.value)} autoComplete="given-name" maxLength={60} required placeholder="Как вас зовут"/></label>}
             <label>Телефон<input id="customer-phone" type="tel" inputMode="tel" name="customer-phone" value={phone} onChange={event => setPhone(`+7${phoneNational(event.target.value)}`)} onPaste={event=>{event.preventDefault();setPhone(`+7${phoneNational(event.clipboardData.getData("text"))}`);}} onBlur={event => {setPhone(event.currentTarget.value);setTouched(current=>({...current,phone:true}));}} autoComplete="section-customer tel" autoCapitalize="none" autoCorrect="off" spellCheck={false} aria-label="Телефон" aria-invalid={!!phoneError} aria-describedby={phoneError?'customer-phone-error':undefined} maxLength={12} placeholder="+7 (___) ___-__-__" required/>{phoneError && <span id="customer-phone-error" role="alert" className="account-error">{phoneError}</span>}</label>
             <PasswordField key={mode} label="Пароль" name="customer-password" value={password} onChange={setPassword} autoComplete={mode === 'login' ? 'section-customer current-password' : 'section-customer new-password'} error={passwordError} onBlur={()=>setTouched(current=>({...current,password:true}))} minLength={mode === 'login' ? 1 : 10} placeholder={mode === 'login' ? 'Введите пароль' : 'Придумайте пароль'}/>
             {mode === 'register' && password.length > 0 && <>

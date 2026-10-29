@@ -43,6 +43,9 @@ try{
   const page=await context.newPage(),errors=[];page.on('pageerror',error=>errors.push(error.message));
   await page.goto(origin+'/login?scenes');await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
   await page.getByRole('button',{name:'Регистрация',exact:true}).click();
+  await page.getByRole('button',{name:'Создать кабинет',exact:true}).click();
+  await page.getByRole('alert').filter({hasText:'Укажите ваше имя.'}).waitFor();
+  await page.getByLabel('Имя',{exact:true}).fill('Иван');
   const phone=page.locator('[name=customer-phone]'),password=page.locator('[name=customer-password]');
   // Simulate a password manager changing the DOM without input/change events.
   await phone.evaluate(input=>input.value='staff-login');
@@ -64,7 +67,7 @@ try{
   await repeat.fill('isolated-test-password');assert.equal(await page.getByRole('alert').filter({hasText:'Пароли не совпадают'}).count(),0);
   await page.getByRole('checkbox').check();await page.screenshot({path:`${out}/register-${width}-${theme}.png`,fullPage:true});
   await page.getByRole('button',{name:'Создать кабинет',exact:true}).click();
-  await page.waitForURL(origin+'/account');await page.getByRole('heading',{name:'Здравствуйте!'}).waitFor();
+  await page.waitForURL(origin+'/account');await page.getByRole('heading',{name:'Здравствуйте, Иван!'}).waitFor();
   await page.getByRole('heading',{name:'Ваш профиль'}).waitFor();
   await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;localStorage.setItem('avtocena_theme',theme);},theme);
   assert.equal(await page.locator('.account-avatar-quadrants button').count(),24);
@@ -75,13 +78,13 @@ try{
   await page.getByRole('button',{name:'Закрыть уведомления'}).click();
   await page.getByRole('heading',{name:'Восстановление доступа'}).waitFor();
   await page.getByRole('button',{name:'Подключить Telegram',exact:true}).waitFor();
-  assert.equal(await page.getByLabel('Как к вам обращаться').inputValue(),'');
+  assert.equal(await page.getByLabel('Как к вам обращаться').inputValue(),'Иван');
   assert.equal(await page.locator('.account-profile-identity .account-logout-button').count(),1);
   const avatar=page.locator('.account-profile-identity>img');await avatar.evaluate(img=>img.decode());assert.ok(await avatar.evaluate(img=>img.naturalWidth>0));
   if(theme==='dark')assert.equal(await page.locator('.account-cabinet-page').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(26, 32, 41)');
   assert.equal(await page.locator('.customer-profile').evaluate(el=>getComputedStyle(el).borderTopWidth),'0px');
   const name=page.getByLabel('Как к вам обращаться');assert.equal(await name.getAttribute('maxlength'),'60');
-  for(const invalid of ['а','  ','Ан тон','а4','хуй_на','sex']){await name.fill(invalid);await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();assert.equal(await page.getByRole('heading',{name:'Здравствуйте!'}).count(),1);}
+  for(const invalid of ['а','  ','Ан тон','а4','хуй_на','sex']){await name.fill(invalid);await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();assert.equal(await page.getByRole('heading',{name:'Здравствуйте, Иван!'}).count(),1);}
   await name.fill('Ян');await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();await page.getByRole('heading',{name:'Здравствуйте, Ян!'}).waitFor();
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   const logout=await page.getByRole('button',{name:'Выйти',exact:true}).boundingBox();assert.ok(logout.x>=0&&logout.x+logout.width<=width);
