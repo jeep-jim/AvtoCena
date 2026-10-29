@@ -8,7 +8,7 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const out=path.resolve('artifacts/encyclopedia-directory');fs.mkdirSync(out,{recursive:true});
 const plugin={name:'next-fixture',setup(b){
  b.onResolve({filter:/^next\/(navigation|link)$/},a=>({path:a.path,namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path.endsWith('navigation')?`export const usePathname=()=>'/cars/autocatalog';export const useSearchParams=()=>new URLSearchParams(typeof location==='undefined'?'':location.search);export const useRouter=()=>({push(){},refresh(){}});`:`import React from 'react';export default function Link({href,children,...p}){return React.createElement('a',{href,...p},children);}`,loader:'jsx',resolveDir:process.cwd()}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path.endsWith('navigation')?`import {useSyncExternalStore,useMemo} from 'react';const sub=cb=>{addEventListener('popstate',cb);return()=>removeEventListener('popstate',cb);};export const usePathname=()=>'/cars/autocatalog';export const useSearchParams=()=>{const q=useSyncExternalStore(sub,()=>location.search,()=> '');return useMemo(()=>new URLSearchParams(q),[q]);};const go=url=>{history.pushState(null,'',url);dispatchEvent(new Event('popstate'));};export const useRouter=()=>({push:go,replace:go,refresh(){}});`:`import React from 'react';export default function Link({href,children,...p}){return React.createElement('a',{href,...p},children);}`,loader:'jsx',resolveDir:process.cwd()}));
 }};
 const common={bundle:true,jsx:'automatic',plugins:[plugin],loader:{'.css':'empty'},define:{'process.env.NODE_ENV':'"production"'}};
 await build({...common,entryPoints:['tests/browser/encyclopedia-directory-fixture.tsx'],platform:'node',format:'cjs',external:['react','react/jsx-runtime'],outfile:out+'/ssr.cjs'});
@@ -17,15 +17,16 @@ const markup=renderToStaticMarkup(React.createElement(Fixture));
 assert.equal((markup.match(/class="ac-model-list-item"/g)||[]).length,40,'only one bounded page is rendered');
 assert.ok(Buffer.byteLength(markup)<100000,'initial directory markup stays bounded by one page, not 4000 models');
 await build({...common,stdin:{contents:`import React from 'react';import {createRoot} from 'react-dom/client';import {Fixture} from './tests/browser/encyclopedia-directory-fixture';createRoot(document.getElementById('root')).render(<Fixture/>);`,resolveDir:process.cwd(),loader:'tsx'},platform:'browser',format:'iife',outfile:out+'/fixture.js'});
-const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHeader('Content-Type','text/javascript');res.end(fs.readFileSync(out+'/fixture.js'));}else{res.setHeader('Content-Type','text/html');res.end('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>:root{--ac-bg:#171e28;--ac-surface:#202a36;--ac-surface-2:#242e3b;--ac-border:#354050;--ac-muted:#a7b0bd;--ac-text:#fff}body{background:var(--ac-bg);color:var(--ac-text);font-family:Arial;margin:20px}*{box-sizing:border-box}button{color:inherit}</style><style>'+fs.readFileSync('apps/web/app/(public)/cars/autocatalog/encyclopedia.css','utf8')+'</style></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>');}});
+const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHeader('Content-Type','text/javascript');res.end(fs.readFileSync(out+'/fixture.js'));}else{res.setHeader('Content-Type','text/html');res.end('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>:root{--ac-bg:#171e28;--ac-surface:#202a36;--ac-surface-2:#242e3b;--ac-border:#354050;--ac-muted:#a7b0bd;--ac-text:#fff}body{background:var(--ac-bg);color:var(--ac-text);font-family:Arial;margin:20px}*{box-sizing:border-box}button,input,select{font-family:inherit}button{color:inherit}</style><style>'+fs.readFileSync('apps/web/app/(public)/cars/autocatalog/encyclopedia.css','utf8')+'</style></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>');}});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[];
-try{for(const width of [390,1440]){
+try{for(const theme of ['dark','light'])for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:900}});const errors=[];let reads=0;
  page.on('pageerror',e=>errors.push(String(e)));
  await page.route('**/api/encyclopedia/**',route=>{reads++;return route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'fixture',updatedAt:'2026-10-26',variants:[]}});});
  await page.goto(`http://127.0.0.1:${server.address().port}`);
+ await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;if(theme==='light')for(const [key,value] of Object.entries({'--ac-bg':'#fff','--ac-surface':'#f8f9fb','--ac-surface-2':'#f8f9fb','--ac-border':'#ddd','--ac-muted':'#606975','--ac-text':'#171e28'}))document.documentElement.style.setProperty(key,value);},theme);
  const rows=page.locator('.ac-model-list-item');await rows.last().waitFor();assert.equal(await rows.count(),40);assert.equal(reads,0);
  await rows.first().getByRole('button',{name:'Увеличить фото Brand 0 Model 0'}).click();await page.getByRole('dialog').waitFor();await page.keyboard.press('Escape');assert.equal(await page.getByRole('dialog').count(),0);assert.equal(reads,0,'photo enlargement does not fetch model data');
  const initialElements=await page.locator('*').count();assert.ok(initialElements<1800);
@@ -39,7 +40,11 @@ try{for(const width of [390,1440]){
  await page.getByRole('button',{name:'Далее',exact:true}).click();assert.equal(await rows.count(),40);assert.equal(reads,2,'pagination does not fetch model records');assert.ok((await rows.first().textContent()).includes('Brand 0 Model 40'),'next page actually changes model rows');
  await page.getByRole('button',{name:'Назад',exact:true}).click();
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
- await page.screenshot({path:out+`/directory-${width}.png`,fullPage:true});
- assert.deepEqual(errors,[]);results.push({width,initialElements,initialModels:40,modelReads:reads});await page.close();
+ await page.getByRole('navigation',{name:'Алфавит марок'}).getByRole('button',{name:'T',exact:true}).click();
+ await page.getByText('По выбранным параметрам моделей не найдено.').waitFor();assert.equal(new URL(page.url()).searchParams.get('letter'),'T');
+ await page.getByRole('button',{name:'Сбросить',exact:true}).click();await rows.last().waitFor();assert.equal(await rows.count(),40);
+ assert.equal(await page.getByRole('heading',{name:'Brand 0',exact:true}).count(),1);
+ await page.screenshot({path:out+`/directory-${theme}-${width}.png`,fullPage:false});
+ assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();
 }}finally{await browser.close();await new Promise(r=>server.close(r));}
 console.log(JSON.stringify({passed:true,models:4000,ssrBytes:Buffer.byteLength(markup),results}));
