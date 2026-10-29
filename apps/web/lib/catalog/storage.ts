@@ -2157,10 +2157,13 @@ const filteredBudgetSelectionCache = new DetailReadCache<CompactSelection|null>(
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
  const metadataFields=['color','make','model','yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive','powerFrom','powerTo','engineFrom','engineTo'];
- const editorialDefaultQuery=canUseMarketLanding(params)&&editorialHasHidden(params.market);
- const metadataQuery=(editorialDefaultQuery || hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
+ // The prepared landing covers only the first 192 rows. Deep category pages
+ // must use the same verified compact display order rather than reading the
+ // complete market projection. Keep first-page reads on the small landing.
+ const compactDefaultQuery=canUseMarketLanding(params)&&(editorialHasHidden(params.market)||Number(params.page||1)*Number(params.pageSize||24)>MARKET_LANDING_LIMIT);
+ const metadataQuery=(compactDefaultQuery || hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
  const defaultBrandQuery=Boolean((params.make || params.model) && (!params.sort || params.sort==="updatedAt"));
- const defaultDisplayQuery=defaultBrandQuery||editorialDefaultQuery;
+ const defaultDisplayQuery=defaultBrandQuery||compactDefaultQuery;
  if(defaultBrandQuery && hasBudget)return null;
  if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
@@ -2200,7 +2203,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    const market=!params.market||params.market==='any'?'any':params.market;
    // Manual seller prices invalidate stored display ranking. Keep the existing
    // authoritative path for that exceptional case, never reuse an old rank.
-   if(editorialDefaultQuery&&editorialEntries().some(entry=>entry.status==='visible'&&entry.sellerPrice&&(market==='any'||entry.market===market)))return null;
+   if(compactDefaultQuery&&editorialEntries().some(entry=>entry.status==='visible'&&entry.sellerPrice&&(market==='any'||entry.market===market)))return null;
    const rows=await stableBudgetSelections.get(index,eligibilityContext,market,()=>
     filterBudgetRows(sourceRows,editedRow,row=>eligible.has(row[5].id)&&(market==='any'||same(row[0],market))));
    return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows};
@@ -2380,7 +2383,7 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  if(params.sort && params.sort!=="updatedAt")return searchSortedBudgetSelection(selected,params,internalPageLimit);
  let rows=budgetSelectionOrder.get(selected.rows);
  if(!rows){
-  const useDisplayKeys=Boolean((params.make || params.model || (canUseMarketLanding(params)&&editorialHasHidden(params.market))) && !(params.budgetFrom || params.budgetTo));
+  const useDisplayKeys=Boolean((params.make || params.model || canUseMarketLanding(params)) && !(params.budgetFrom || params.budgetTo));
   rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata])=>({...metadata,market,
    totalRub:!useDisplayKeys || metadata.displayOrderCalculated===undefined?totalRub:metadata.displayOrderCalculated?metadata.displayOrderPriceRub:null,
    sellerPriceRub:useDisplayKeys?metadata.displayOrderPriceRub:undefined,
