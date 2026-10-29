@@ -19,4 +19,7 @@ test('unknown messages and arbitrary thrown values are not published', () => {
   assert.deepEqual(catalogFailureDiagnostic('token=private'), {name:'UnknownError',code:'unclassified',locations:[]});
   assert.equal(catalogFailureDiagnostic(new Error('__proto__')).code, 'unclassified');
   assert.equal(catalogFailureDiagnostic(Object.assign(new Error('private text'), {code:{toString(){throw new Error('must not run');}}})).code, 'unclassified');
+  const inaccessible = new Error('private text');
+  Object.defineProperty(inaccessible, 'name', {get(){throw new Error('must not escape diagnostics');}});
+  assert.deepEqual(catalogFailureDiagnostic(inaccessible), {name:'UnknownError',code:'unclassified',locations:[]});
 });

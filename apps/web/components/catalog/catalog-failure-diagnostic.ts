@@ -1,5 +1,6 @@
 /** Only fixed error classes/codes and generated-code locations may enter public logs. */
 export function catalogFailureDiagnostic(error: unknown) {
+  try {
   const value = error instanceof Error ? error : null;
   const names = new Set(['Error', 'TypeError', 'RangeError', 'SyntaxError', 'AbortError', 'TimeoutError']);
   const name = value && names.has(value.name) ? value.name : 'UnknownError';
@@ -16,4 +17,8 @@ export function catalogFailureDiagnostic(error: unknown) {
   const code = prefix?.slice(0, 96) || (Object.hasOwn(known, message) ? known[message] : undefined) || network || 'unclassified';
   const locations = (value?.stack?.match(/\.next\/server\/[A-Za-z0-9_./()\[\]-]+\.js:\d+:\d+/g) || []).slice(0, 6);
   return {name, code, locations};
+  } catch {
+    // Diagnostics must never replace the original page fallback with a new error.
+    return {name:'UnknownError', code:'unclassified', locations:[] as string[]};
+  }
 }
