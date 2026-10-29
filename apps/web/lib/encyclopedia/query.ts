@@ -12,4 +12,5 @@ export function canonicalDirectoryModels<T extends {make:string}>(models:T[]):T[
   return {...m,make:names.get(key)!,...(presentation.conversion&&model?{model:`${model} (${presentation.conversion})`}:{})};
  });
 }
-export function filterModels(models:ModelSummary[],p:Record<string,string|undefined>){const q=(p.q||'').toLocaleLowerCase('ru').trim();return models.filter(m=>(!q||`${m.make} ${m.model}`.toLocaleLowerCase('ru').includes(q))&&(!p.make||brandKey(m.make)===brandKey(p.make))&&(!p.fuel||m.fuels.some(f=>fuelFilterKey(f)===fuelFilterKey(p.fuel)))&&(!p.year||m.years.includes(Number(p.year)))&&(!p.missing30||m.needs30>0));}
+export function directoryLetter(make:string){const first=catalogBrandPresentation(make).name.trim().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLocaleUpperCase('ru')[0]||'';return /[0-9]/.test(first)?'0–9':first;}
+export function filterModels(models:ModelSummary[],p:Record<string,string|undefined>){const q=(p.q||'').toLocaleLowerCase('ru').trim();return models.filter(m=>(!q||`${m.make} ${m.model}`.toLocaleLowerCase('ru').includes(q))&&(!p.letter||directoryLetter(m.make)===p.letter)&&(!p.make||brandKey(m.make)===brandKey(p.make))&&(!p.fuel||m.fuels.some(f=>fuelFilterKey(f)===fuelFilterKey(p.fuel)))&&(!p.year||m.years.includes(Number(p.year)))&&(!p.missing30||m.needs30>0));}

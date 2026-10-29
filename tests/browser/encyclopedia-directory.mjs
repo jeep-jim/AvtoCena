@@ -8,7 +8,7 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const out=path.resolve('artifacts/encyclopedia-directory');fs.mkdirSync(out,{recursive:true});
 const plugin={name:'next-fixture',setup(b){
  b.onResolve({filter:/^next\/(navigation|link)$/},a=>({path:a.path,namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path.endsWith('navigation')?`export const usePathname=()=>'/cars/autocatalog';export const useSearchParams=()=>new URLSearchParams(typeof location==='undefined'?'':location.search);export const useRouter=()=>({push(){},refresh(){}});`:`import React from 'react';export default function Link({href,children,...p}){return React.createElement('a',{href,...p},children);}`,loader:'jsx',resolveDir:process.cwd()}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path.endsWith('navigation')?`import {useSyncExternalStore,useMemo} from 'react';const sub=cb=>{addEventListener('popstate',cb);return()=>removeEventListener('popstate',cb);};export const usePathname=()=>'/cars/autocatalog';export const useSearchParams=()=>{const q=useSyncExternalStore(sub,()=>location.search,()=> '');return useMemo(()=>new URLSearchParams(q),[q]);};const go=url=>{history.pushState(null,'',url);dispatchEvent(new Event('popstate'));};export const useRouter=()=>({push:go,replace:go,refresh(){}});`:`import React from 'react';export default function Link({href,children,...p}){return React.createElement('a',{href,...p},children);}`,loader:'jsx',resolveDir:process.cwd()}));
 }};
 const common={bundle:true,jsx:'automatic',plugins:[plugin],loader:{'.css':'empty'},define:{'process.env.NODE_ENV':'"production"'}};
 await build({...common,entryPoints:['tests/browser/encyclopedia-directory-fixture.tsx'],platform:'node',format:'cjs',external:['react','react/jsx-runtime'],outfile:out+'/ssr.cjs'});
@@ -39,7 +39,11 @@ try{for(const width of [390,1440]){
  await page.getByRole('button',{name:'Далее',exact:true}).click();assert.equal(await rows.count(),40);assert.equal(reads,2,'pagination does not fetch model records');assert.ok((await rows.first().textContent()).includes('Brand 0 Model 40'),'next page actually changes model rows');
  await page.getByRole('button',{name:'Назад',exact:true}).click();
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
- await page.screenshot({path:out+`/directory-${width}.png`,fullPage:true});
+ await page.getByRole('navigation',{name:'Алфавит марок'}).getByRole('button',{name:'T',exact:true}).click();
+ await page.getByText('По выбранным параметрам моделей не найдено.').waitFor();assert.equal(new URL(page.url()).searchParams.get('letter'),'T');
+ await page.getByRole('button',{name:'Сбросить',exact:true}).click();await rows.last().waitFor();assert.equal(await rows.count(),40);
+ assert.equal(await page.getByRole('heading',{name:'Brand 0',exact:true}).count(),1);
+ await page.screenshot({path:out+`/directory-${width}.png`,fullPage:false});
  assert.deepEqual(errors,[]);results.push({width,initialElements,initialModels:40,modelReads:reads});await page.close();
 }}finally{await browser.close();await new Promise(r=>server.close(r));}
 console.log(JSON.stringify({passed:true,models:4000,ssrBytes:Buffer.byteLength(markup),results}));

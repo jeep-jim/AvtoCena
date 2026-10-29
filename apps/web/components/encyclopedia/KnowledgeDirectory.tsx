@@ -1,5 +1,5 @@
 'use client';
-import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
+import {Fragment,useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {useRouter,useSearchParams} from 'next/navigation';
 import {ModelEditor} from './ModelEditor';
 import {EncyclopediaPhoto} from './Photo';
@@ -50,7 +50,7 @@ export function KnowledgeDirectory({models,canEdit,pagination}:{models:Summary[]
  const changePage=(next:number)=>{if(pagination){const query=new URLSearchParams(params);query.set("page",String(next));router.push(`/cars/autocatalog?${query}`,{scroll:false});}else setPage(next);};
  return <section className="ac-model-list" aria-label="Модели автомобилей">
   <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span>Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span><span/></div>
-  {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map(model=><ModelRow key={model.id} model={model} canEdit={canEdit}/>)}
+  {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map((model,index,visible)=><Fragment key={model.id}>{(index===0||visible[index-1].make!==model.make)&&<h2 className="ac-model-make-heading">{model.make}</h2>}<ModelRow model={model} canEdit={canEdit}/></Fragment>)}
   {!models.length&&<p>По выбранным параметрам моделей не найдено.</p>}
   <p className="ac-ency-muted">* Количество на {models.find(m=>m.directorySnapshot)?.directorySnapshot?.capturedAt?new Date(models.find(m=>m.directorySnapshot)!.directorySnapshot!.capturedAt).toLocaleDateString('ru-RU'):'дату сохранения'}. «До» — верхняя граница количества.</p>
   {pages>1&&<nav className="ac-ency-pagination" aria-label="Страницы моделей"><button className="ac-ency-button" disabled={current===1} onClick={()=>changePage(current-1)}>Назад</button><span>{current} / {pages} · {counted(total,'model')}</span><button className="ac-ency-button" disabled={current===pages} onClick={()=>changePage(current+1)}>Далее</button></nav>}
