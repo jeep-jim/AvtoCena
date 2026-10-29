@@ -1,9 +1,18 @@
 import {getJsonStorage} from '../apps/web/lib/data';
 import {isIP} from 'node:net';
+import {ajesQuery,ajesCatalogQuery} from '../apps/web/lib/catalog/ajes-query';
+import {readAjesQueryCache} from '../apps/web/lib/catalog/ajes-query-cache';
 // Read four fixed private records only. Never call AJES, print SQL/IP/body or write data.
 const kinds=['list','detail','count','models','makes','colors'];
 async function main(){
  const storage=getJsonStorage();
+ // Six exact cache keys, no directory scan and no upstream client import.
+ for(const market of ['korea','japan'])for(const page of [1,2,3]){
+  const query=ajesQuery(ajesCatalogQuery({market,page:String(page)}));
+  const v:any=await readAjesQueryCache(storage,query.sql);
+  const at=Date.parse(v?.observedAt||''),age=Number.isFinite(at)?Math.max(0,Math.round((Date.now()-at)/1000)):null;
+  console.log('AJES_SAVED_PAGE',JSON.stringify({market,page,found:!!v,items:Array.isArray(v?.items)?v.items.length:null,received:Number.isSafeInteger(v?.received)?v.received:null,ageSeconds:age,observedAt:Number.isFinite(at)?new Date(at).toISOString():null,schemaVersion:Number.isSafeInteger(v?.schemaVersion)?v.schemaVersion:null,stale:v?.stale===true,partial:v?.partial===true}));
+ }
  for(const table of ['main','stats','korea','china']){
   const v:any=await storage.readJson(`integrations/ajes/catalog-failure-${table}.json`,null);
   if(!v){console.log('AJES_SAVED_FAILURE',JSON.stringify({table,present:false}));continue;}
