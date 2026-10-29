@@ -8,7 +8,7 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const out=path.resolve('artifacts/encyclopedia-directory');fs.mkdirSync(out,{recursive:true});
 const plugin={name:'next-fixture',setup(b){
  b.onResolve({filter:/^next\/(navigation|link)$/},a=>({path:a.path,namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path.endsWith('navigation')?`import {useSyncExternalStore,useMemo} from 'react';const sub=cb=>{addEventListener('popstate',cb);return()=>removeEventListener('popstate',cb);};export const usePathname=()=>'/cars/autocatalog';export const useSearchParams=()=>{const q=useSyncExternalStore(sub,()=>location.search,()=> '');return useMemo(()=>new URLSearchParams(q),[q]);};const go=url=>{history.pushState(null,'',url);dispatchEvent(new Event('popstate'));};export const useRouter=()=>({push:go,replace:go,refresh(){}});`:`import React from 'react';export default function Link({href,children,...p}){return React.createElement('a',{href,...p},children);}`,loader:'jsx',resolveDir:process.cwd()}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path.endsWith('navigation')?`import {useSyncExternalStore,useMemo} from 'react';const sub=cb=>{addEventListener('popstate',cb);return()=>removeEventListener('popstate',cb);};export const usePathname=()=>'/cars/autocatalog';export const useSearchParams=()=>{const q=useSyncExternalStore(sub,()=>location.search,()=> '');return useMemo(()=>new URLSearchParams(q),[q]);};if(typeof window!=='undefined'&&!window.__historyFixture){window.__historyFixture=true;for(const method of ['pushState','replaceState']){const original=history[method].bind(history);history[method]=(...args)=>{original(...args);dispatchEvent(new Event('popstate'));};}}const go=url=>history.pushState(null,'',url);export const useRouter=()=>({push:go,replace:go,refresh(){}});`:`import React from 'react';export default function Link({href,children,...p}){return React.createElement('a',{href,...p},children);}`,loader:'jsx',resolveDir:process.cwd()}));
 }};
 const common={bundle:true,jsx:'automatic',plugins:[plugin],loader:{'.css':'empty'},define:{'process.env.NODE_ENV':'"production"'}};
 await build({...common,entryPoints:['tests/browser/encyclopedia-directory-fixture.tsx'],platform:'node',format:'cjs',external:['react','react/jsx-runtime'],outfile:out+'/ssr.cjs'});
@@ -43,7 +43,9 @@ try{for(const theme of ['dark','light'])for(const width of [390,1440]){
  await page.getByRole('navigation',{name:'Алфавит марок'}).getByRole('button',{name:'T',exact:true}).click();
  await page.getByText('По выбранным параметрам моделей не найдено.').waitFor();assert.equal(new URL(page.url()).searchParams.get('letter'),'T');
  await page.getByRole('button',{name:'Сбросить',exact:true}).click();await rows.last().waitFor();assert.equal(await rows.count(),40);
- assert.equal(await page.getByRole('heading',{name:'Brand 0',exact:true}).count(),1);
+ assert.equal(await page.locator('.ac-model-make-heading').filter({hasText:'Brand 0'}).count(),1);
+ const heights=await page.locator('.ac-knowledge-toolbar').evaluate(el=>[el.querySelector('.ac-ency-button').getBoundingClientRect().height,el.querySelector('nav button').getBoundingClientRect().height]);assert.equal(heights[0],heights[1]);
+ if(width>1100){await page.evaluate(()=>scrollTo(0,500));const box=await page.locator('.ac-model-list-head').boundingBox(),head=await page.locator('.ac-public-header').boundingBox();assert.ok(Math.abs(box.y-(head.y+head.height))<2,'column labels stay below sticky header');await page.evaluate(()=>scrollTo(0,0));}
  await page.screenshot({path:out+`/directory-${theme}-${width}.png`,fullPage:false});
  assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();
 }}finally{await browser.close();await new Promise(r=>server.close(r));}

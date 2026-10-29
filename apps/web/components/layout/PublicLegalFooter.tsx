@@ -91,13 +91,14 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
             { href: "/cars", label: "Каталог автомобилей" },
             { href: "/favorites", label: "Избранные автомобили" },
             { href: "/cars/autocatalog", label: "Автокаталог" },
+            { href: "/blog", label: "Автоблог" },
             ...(partnersEnabled?[{href:"/partners",label:"Партнёрам"}]:[]),
             ...(knowledgeEnabled?[{href:"/knowledge",label:"База знаний"}]:[]),
           ]} />
         </div>
 
         <section data-nosnippet="" aria-label="Реквизиты дилера TOP AVTO" className="ac-public-footer-operator mb-5 grid gap-4 border-t border-[var(--ac-border)] pt-5 text-sm lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-8">
-          <div className="flex items-center gap-10"><div><p className="font-bold"><Link href="/login" prefetch={false} style={{ color: "inherit", textDecoration: "none", cursor: "text" }}>Дилер</Link>{TOPAVTO_DEALER.label.slice("Дилер".length)} — <a href="/dealers/dealer_topavto" className="underline underline-offset-4">{TOPAVTO_DEALER.name}</a></p><p className="mt-1 text-xs text-[var(--ac-muted)]">Подбор автомобиля, сопровождение покупки и организация доставки.</p></div><img src="/brands/topavto-logo.png" alt="TOP AVTO" className="hidden h-auto w-[160px] shrink-0 object-contain lg:block" /></div>
+          <div className="flex items-center gap-10"><div><p className="font-bold"><Link href="/login" prefetch={false} style={{ color: "inherit", textDecoration: "none", cursor: "text" }}>Дилер</Link>{TOPAVTO_DEALER.label.slice("Дилер".length)} — <a href="/dealers/dealer_topavto" className="underline underline-offset-4">{TOPAVTO_DEALER.name}</a></p><p className="mt-1 text-xs text-[var(--ac-muted)]">Подбор автомобиля, сопровождение покупки и организация доставки.</p></div></div>
           <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs text-[var(--ac-muted)] lg:flex-col lg:items-end"><span>ИНН {TOPAVTO_DEALER.inn}</span><span>ОГРНИП {TOPAVTO_DEALER.ogrnip}</span></div>
         </section>
 

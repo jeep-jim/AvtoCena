@@ -1,3 +1,4 @@
+import {blogIndex} from '@/lib/blog/records';
 import {SEARCH_MARKETS} from '@/lib/catalog/search-metadata';
 import { readCatalogBrandDirectory } from "@/lib/catalog/catalog-brand-directory";
 
@@ -24,9 +25,11 @@ function urlEntry(url: string, changefreq: string, priority: number) {
 
 export async function GET() {
   const baseUrl = "https://avtocena.com";
-  const brands = await readCatalogBrandDirectory();
+  const [brands,posts] = await Promise.all([readCatalogBrandDirectory(),blogIndex()]);
   const entries = [
     urlEntry(baseUrl, "daily", 1),
+    urlEntry(`${baseUrl}/blog`, "daily", 0.7),
+    ...posts.map(post=>urlEntry(`${baseUrl}/blog/${post.slug}`,"weekly",0.6)),
     ...["privacy","consent","cookies","requisites","terms"].map(path=>urlEntry(`${baseUrl}/${path}`,"monthly",0.3)),
     urlEntry(`${baseUrl}/cars`, "hourly", 0.95),
     ...Object.keys(SEARCH_MARKETS).map(market=>urlEntry(`${baseUrl}/cars/${market}`,"daily",0.9)),

@@ -1,0 +1,1 @@
+export function BlogBody({body}:{body:string}){return <div className="ac-blog-body">{body.split(/\n\s*\n/).map((part,i)=>part.startsWith('## ')?<h2 key={i}>{part.slice(3)}</h2>:part.startsWith('> ')?<blockquote key={i}>{part.slice(2)}</blockquote>:<p key={i}>{part}</p>)}</div>;}
