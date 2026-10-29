@@ -1,6 +1,6 @@
 {
-  "production": "e0b0367ade16e36ccc50fea870f6c104b873a845",
-  "since": "2026-10-28T08:02:00Z",
-  "until": "2026-10-28T08:08:00Z",
-  "purpose": "One closed Japan/Korea pagination incident after release e0b; no catalog/provider requests"
+  "production": "d79f662d6b15b90751176173ef5a825c5271da0d",
+  "since": "2026-10-29T10:18:00Z",
+  "until": "2026-10-29T10:24:00Z",
+  "purpose": "Owner-requested China page10187 failure: one closed read-only error-category window after installed PR1621. No catalog/provider calls, restart or data edits."
 }
