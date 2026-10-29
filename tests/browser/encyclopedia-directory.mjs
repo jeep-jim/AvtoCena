@@ -64,6 +64,7 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  assert.equal(new URL(page.url()).searchParams.get('page'),'3');assert.equal(reads,2,'rail navigation uses local directory');
  await page.waitForFunction(()=>document.querySelector('.ac-directory-rail-brands [aria-current="true"]')?.getAttribute('aria-label')==='Brand 5',{},{timeout:5000});
  assert.equal(await rail.getByRole('button',{name:'Brand 5',exact:true}).getAttribute('aria-current'),'true');
+ const activeMarker=await rail.getByRole('button',{name:'Brand 5',exact:true}).evaluate(e=>{const s=getComputedStyle(e,'::after');return {width:s.width,color:s.backgroundColor,content:s.content};});assert.deepEqual(activeMarker,{width:'3px',color:'rgb(255, 53, 61)',content:'""'},'current make has a visible marker under production flat styles');
  await page.goBack();await page.waitForFunction(()=>document.querySelector('.ac-model-list-item')?.textContent.includes('Brand 0 Model 0'));
  await page.getByRole('navigation',{name:'Буквы марок'}).getByRole('button',{name:'Марки на B',exact:true}).click();
  assert.equal(await rows.count(),40);assert.equal(reads,2);
