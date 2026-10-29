@@ -1,4 +1,5 @@
 import {catalogBrandFilter} from '@/lib/catalog/brands';
+import {catalogFailureDiagnostic} from './catalog-failure-diagnostic';
 import {MARKET_RAIL_CLASS} from './market-rail-layout';
 import {filterSelections} from "@/lib/catalog/filter-selections";
 import {CatalogBreadcrumbs} from "./CatalogBreadcrumbs";
@@ -73,7 +74,7 @@ export async function CatalogContent(props:CatalogContentProps){
  try{return await ReadCatalogContent(props);}catch(error){
   // Redirects and framework navigation signals must retain their semantics.
   if(error&&typeof error==='object'&&'digest' in error&&String(error.digest).startsWith('NEXT_'))throw error;
-  console.error('catalog_page_unavailable');
+  console.error('catalog_page_unavailable', catalogFailureDiagnostic(error));
   const {params={},dealer=null,embedded=false}=props;
   const initial=Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)]));
   const Container=embedded?'div':'main';
