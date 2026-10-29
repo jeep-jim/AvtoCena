@@ -62,6 +62,7 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  await rail.getByRole('button',{name:'Brand 5',exact:true}).click();
  await page.waitForFunction(()=>[...document.querySelectorAll('[data-ency-make]')].some(e=>e.dataset.encyMake==='Brand 5'));
  assert.equal(new URL(page.url()).searchParams.get('page'),'3');assert.equal(reads,2,'rail navigation uses local directory');
+ await page.waitForFunction(()=>document.querySelector('.ac-directory-rail-brands [aria-current="true"]')?.getAttribute('aria-label')==='Brand 5',{},{timeout:5000});
  assert.equal(await rail.getByRole('button',{name:'Brand 5',exact:true}).getAttribute('aria-current'),'true');
  await page.goBack();await page.waitForFunction(()=>document.querySelector('.ac-model-list-item')?.textContent.includes('Brand 0 Model 0'));
  await page.getByRole('navigation',{name:'Буквы марок'}).getByRole('button',{name:'Марки на B',exact:true}).click();
