@@ -106,5 +106,36 @@ try{
    if(!live)assert.deepEqual(errors,[]);results.push({theme,width,menus:checks,noLayoutShift:true,rangeOverlays:true,selection:true,pageErrors:errors});save();
   }catch(e){fs.writeFileSync(`${out}/failure.json`,JSON.stringify({...current,error:String(e),pageErrors:errors},null,2));await page.screenshot({path:`${out}/failure.png`,fullPage:true});throw e;}finally{await c.close();}
  }
+ if(!live){
+  const c=await contextFor(390),page=await c.newPage();const requests=[];page.on('request',r=>{if(r.url().includes('/api/'))requests.push(r.url());});
+  try{
+   await page.goto(`${origin}/cars?theme=light`);const sheet=await openSheet(page);
+   const status=sheet.locator('.ac-mobile-filter-header [role="status"]');
+   await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{count:{queryKey:'{}',text:'321'}}})));
+   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Найдено: 321'));
+   assert.equal(await sheet.locator('input[name="make"]').locator('..').locator(':scope > button svg.ac-filter-leading-icon').count(),0);
+   assert.equal(await sheet.locator('.ac-model-filter-icon').count(),0);
+   const fuel=sheet.locator('input[name="fuel"]').locator('..');
+   assert.ok(await fuel.locator(':scope > button svg path').first().getAttribute('d').then(d=>d.startsWith('M6 20V5.5')),'reuse the offer fuel pump');
+   assert.ok(Number(await fuel.locator(':scope > button').evaluate(el=>getComputedStyle(el).fontWeight))>=700,'restore bold controls');
+   const close=sheet.getByRole('button',{name:'Свернуть фильтры',exact:true});
+   assert.equal(await close.textContent(),'');assert.equal(await close.locator('svg').count(),1);
+   assert.notEqual(await close.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 53, 61)');
+   await fuel.locator(':scope > button').click();await fuel.getByRole('button',{name:'Дизель',exact:true}).click();
+   await page.waitForFunction(()=>new URLSearchParams(location.search).get('fuel')==='diesel');
+   assert.match(await status.textContent(),/Было: 321/);
+   await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{initial:{fuel:'diesel'},count:{queryKey:'{}',text:'999'}}})));
+   await page.waitForFunction(()=>!document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('999'));
+   const requestCount=requests.length;
+   await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{count:{queryKey:JSON.stringify({fuel:'diesel'}),text:'17'}}})));
+   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Найдено: 17'));
+   assert.equal(requests.length,requestCount,'streamed count must not issue another request');
+   await close.click();await sheet.waitFor({state:'hidden'});await openSheet(page);
+   assert.equal(await sheet.locator('input[name="fuel"]').inputValue(),'diesel');assert.match(await status.textContent(),/Найдено: 17/);
+   await page.screenshot({path:`${out}/counter-collapse-light.png`,fullPage:true});
+   await page.evaluate(()=>document.documentElement.dataset.theme='dark');await page.screenshot({path:`${out}/counter-collapse-dark.png`,fullPage:true});
+   results.push({streamedCounter:true,staleQueryIgnored:true,extraCountRequests:0,collapsePreservesFilters:true,offerIcons:true,boldRestored:true});save();
+  }finally{await c.close();}
+ }
  console.log(JSON.stringify({passed:true,mode:live?'live':'fixture',browser:browserName,cases:results.length}));
 }finally{save();await browser.close();if(server)await new Promise(r=>server.close(r));}

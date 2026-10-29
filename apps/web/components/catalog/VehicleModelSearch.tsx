@@ -1,5 +1,4 @@
 "use client";
-import {CatalogFilterIcon} from "./CatalogFilterIcon";
 import {groupFilterModels} from "@/lib/catalog/model-filter-options";
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
@@ -146,7 +145,7 @@ function useCatalogFilterDependentUi(enabled = true) {
 export function VehicleModelSearch({
   value,
   make,
-  placeholder = "Модель",
+  placeholder = "Любая модель",
   onMakeChange,
   onValueChange,
   onSubmit,
@@ -384,7 +383,6 @@ export function VehicleModelSearch({
 
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[235]" : "z-0"} ${className}`}>
     {multiple && <input type="hidden" name="model" value={value} />}
-    {inputClassName.includes("ac-filter-control")&&<span className="ac-model-filter-icon"><CatalogFilterIcon name="model"/></span>}
     <input
       ref={input}
       type="search"

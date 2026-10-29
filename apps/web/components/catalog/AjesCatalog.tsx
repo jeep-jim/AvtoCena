@@ -1,4 +1,5 @@
 import {Suspense} from 'react';
+import {CatalogResultCountUpdate} from './CatalogSelectionContext';
 import {MarketResultCount} from './MarketResultCount';
 import {CatalogSidebar} from './CatalogSidebar';
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
@@ -40,7 +41,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
   <AjesBrandRail initial={initial} fallbackBrands={makes} resultCount={displayTotal??undefined}/>
  </Suspense>
  <div className="mb-4 mt-8 flex flex-wrap items-center justify-between gap-3 md:mt-9">
- <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={<MarketResultCount>{ajesCountText(sourceTotal)}</MarketResultCount>}>{sourceTotal?<MarketResultCount total={displayTotal??undefined}>{ajesCountText(sourceTotal)}</MarketResultCount>:<AjesIndependentCount initial={initial}/>}</Suspense></h2>
+ <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={<MarketResultCount>{ajesCountText(sourceTotal)}</MarketResultCount>}>{sourceTotal?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={ajesCountText(sourceTotal)}/><MarketResultCount total={displayTotal??undefined}>{ajesCountText(sourceTotal)}</MarketResultCount></>:<AjesIndependentCount initial={initial}/>}</Suspense></h2>
  {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
  </div>
  {result&&<div>
@@ -62,5 +63,5 @@ async function AjesBrandRail({initial,fallbackBrands,resultCount}:{initial:Recor
 
 async function AjesIndependentCount({initial}:{initial:Record<string,string>}){
  const summary=await readAjesCountSummary(JSON.stringify(initial)).catch(()=>null);
- return <MarketResultCount total={exactAjesCount(summary)??undefined}>{ajesCountText(summary)}</MarketResultCount>;
+ return <><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={ajesCountText(summary)}/><MarketResultCount total={exactAjesCount(summary)??undefined}>{ajesCountText(summary)}</MarketResultCount></>;
 }
