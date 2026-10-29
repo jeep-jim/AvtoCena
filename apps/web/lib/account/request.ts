@@ -1,7 +1,6 @@
 /** Bound decoded request bodies as well as declared Content-Length. */
-export async function readAccountJson(request:Request):Promise<Record<string,any>> {
+export async function readAccountJson(request:Request,limit=8192):Promise<Record<string,any>> {
  if(!request.headers.get('content-type')?.toLowerCase().startsWith('application/json'))throw Error('Отправьте данные формы ещё раз.');
- const limit=8192;
  if(Number(request.headers.get('content-length'))>limit)throw Error('Слишком большой запрос.');
  const reader=request.body?.getReader();if(!reader)throw Error('Форма не заполнена.');
  const chunks:Uint8Array[]=[];let size=0;

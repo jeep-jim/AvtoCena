@@ -118,3 +118,6 @@ html[data-theme="light"] .ac-ency-page input:not([type=checkbox]),html[data-them
 .ac-model-list-row>.ac-ency-button{white-space:nowrap;padding-inline:8px}
 /* Match the add action and every alphabet control in both themes. */
 .ac-knowledge-toolbar>.ac-ency-button,.ac-knowledge-toolbar>.ac-knowledge-alphabet button{box-sizing:border-box;height:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center;padding-block:0;line-height:20px}
+
+.ac-model-make-heading{display:flex;align-items:center;gap:12px}
+@media(min-width:1101px){.ac-model-list-head{position:sticky;top:var(--ency-header-height,68px);z-index:20;box-shadow:0 1px 0 var(--ac-border)}}

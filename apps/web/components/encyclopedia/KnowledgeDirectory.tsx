@@ -1,10 +1,12 @@
 'use client';
 import {Fragment,useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {useRouter,useSearchParams} from 'next/navigation';
+import {BrandLogoVisual} from '@/components/catalog/BrandLogoRail';
 import {ModelEditor} from './ModelEditor';
 import {EncyclopediaPhoto} from './Photo';
 import {counted,type ModelSummary,type ModelRecord} from '@/lib/encyclopedia/schema';
-type Summary=Omit<ModelSummary,'key'>;
+import type {DirectoryModel} from '@/lib/encyclopedia/directory-wire';
+type Summary=DirectoryModel;
 export function ModelWorkspace({model,canEdit,standalone=false}:{model:Summary;canEdit:boolean;standalone?:boolean}){
  const params=useSearchParams(),filterYear=params.get('year');
  const years=[...model.years].sort((a,b)=>b-a).map(String);if(model.hasUnknownYear||!years.length)years.push('unknown');
@@ -43,14 +45,16 @@ function ModelRow({model,canEdit}:{model:Summary;canEdit:boolean}){
 }
 export function KnowledgeDirectory({models,canEdit,pagination}:{models:Summary[];canEdit:boolean;pagination?:{page:number;total:number}}){
  const params=useSearchParams(),router=useRouter();
+ const list=useRef<HTMLElement>(null);
+ useEffect(()=>{const header=document.querySelector<HTMLElement>('.ac-public-header');if(!header)return;const sync=()=>list.current?.style.setProperty('--ency-header-height',`${header.getBoundingClientRect().height}px`);sync();const observer=new ResizeObserver(sync);observer.observe(header);return()=>observer.disconnect();},[]);
  const [page,setPage]=useState(1);
  useEffect(()=>{setPage(1);},[params.toString()]);
  const ordered=useMemo(()=>[...models].sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru',{numeric:true})),[models]);
  const total=pagination?.total??ordered.length,pages=Math.max(1,Math.ceil(total/40)),current=Math.min(pagination?.page??page,pages);
- const changePage=(next:number)=>{if(pagination){const query=new URLSearchParams(params);query.set("page",String(next));router.push(`/cars/autocatalog?${query}`,{scroll:false});}else setPage(next);};
- return <section className="ac-model-list" aria-label="Модели автомобилей">
+ const changePage=(next:number)=>{if(pagination){const query=new URLSearchParams(params);query.set("page",String(next));window.history.pushState(null,'',`/cars/autocatalog?${query}`);}else setPage(next);};
+ return <section ref={list} className="ac-model-list" aria-label="Модели автомобилей">
   <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span>Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span><span/></div>
-  {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map((model,index,visible)=><Fragment key={model.id}>{(index===0||visible[index-1].make!==model.make)&&<h2 className="ac-model-make-heading">{model.make}</h2>}<ModelRow model={model} canEdit={canEdit}/></Fragment>)}
+  {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map((model,index,visible)=><Fragment key={model.id}>{(index===0||visible[index-1].make!==model.make)&&<h2 className="ac-model-make-heading"><BrandLogoVisual brand={model.make}/><span>{model.make}</span></h2>}<ModelRow model={model} canEdit={canEdit}/></Fragment>)}
   {!models.length&&<p>По выбранным параметрам моделей не найдено.</p>}
   <p className="ac-ency-muted">* Количество на {models.find(m=>m.directorySnapshot)?.directorySnapshot?.capturedAt?new Date(models.find(m=>m.directorySnapshot)!.directorySnapshot!.capturedAt).toLocaleDateString('ru-RU'):'дату сохранения'}. «До» — верхняя граница количества.</p>
   {pages>1&&<nav className="ac-ency-pagination" aria-label="Страницы моделей"><button className="ac-ency-button" disabled={current===1} onClick={()=>changePage(current-1)}>Назад</button><span>{current} / {pages} · {counted(total,'model')}</span><button className="ac-ency-button" disabled={current===pages} onClick={()=>changePage(current+1)}>Далее</button></nav>}
