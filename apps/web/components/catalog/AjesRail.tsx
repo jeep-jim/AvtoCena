@@ -22,7 +22,10 @@ export async function readAjesRailData(market:'japan'|'china'|'korea',params:Rec
  try{
   // A supplier page may contain rejected rows. One bounded extra row of candidates
   // fills the six-card preview without pagination scans or bypassing admission.
-  const page=await readAjesCatalogPage(railQuery(market,params));
+  // The overview starts Japan and Korea together. Their two optional counts
+  // must not take both supplier slots before the visible lists can run.
+  // RailCount and the overview total already read counts after these rows.
+  const page=await readAjesCatalogPage(railQuery(market,params),undefined,{includeCount:false});
   return {disabled:false,items:page.items.slice(0,6),count:page.countSummary,unavailable:false,unsupported:false,partial:Boolean(page.partial),stale:Boolean(page.stale),filteredByPage:page.filteredByPage,hasMore:page.hasMore};
  }catch(error){return {disabled:false,items:[],count:null,unavailable:true,unsupported:error instanceof AjesFilterUnavailable,partial:false,stale:false,filteredByPage:false,hasMore:false};}
 }

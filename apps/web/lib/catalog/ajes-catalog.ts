@@ -53,7 +53,7 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
  const ip=(await headers()).get('x-real-ip')||'',key=JSON.stringify(q);
  return directories.get(key,async()=>readAjesModelDirectory(ajesClient,await cappedAjesQuery(q),ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;
 }
-export async function readAjesCatalogPage(params:Record<string,unknown>,measure?:(stage:string,ms:number)=>void){
+export async function readAjesCatalogPage(params:Record<string,unknown>,measure?:(stage:string,ms:number)=>void,options:{includeCount?:boolean}={}){
  const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
  const {query,modelDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
@@ -63,7 +63,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  let readyCount:AjesCountSummary|null=null;
  // Counts are optional metadata. Keep their bounded, shared request independent
  // of ready cards; a pending count must never occupy the list's critical path.
- void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
+ if(options.includeCount!==false)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');

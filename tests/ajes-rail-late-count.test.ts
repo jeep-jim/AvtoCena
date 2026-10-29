@@ -5,10 +5,10 @@ import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 test('market cards remain ready and their late count resolves with exactly the same filtered query',async()=>{
  let resolveCount:(v:any)=>void=()=>{};
- const state={queries:[] as any[],countKeys:[] as string[],count:new Promise(resolve=>{resolveCount=resolve;})};
+ const state={queries:[] as any[],options:[] as any[],countKeys:[] as string[],count:new Promise(resolve=>{resolveCount=resolve;})};
  (globalThis as any).__railFixture=state;
  const mocks:Record<string,string>={
-  'ajes-catalog':`export const readAjesCatalogPage=async q=>{globalThis.__railFixture.queries.push(q);return {items:[{id:'car'}],countSummary:null,hasMore:true};};export const readAjesCountSummary=key=>{globalThis.__railFixture.countKeys.push(key);return globalThis.__railFixture.count;};`,
+  'ajes-catalog':`export const readAjesCatalogPage=async(q,measure,options)=>{globalThis.__railFixture.queries.push(q);globalThis.__railFixture.options.push(options);return {items:[{id:'car'}],countSummary:null,hasMore:true};};export const readAjesCountSummary=key=>{globalThis.__railFixture.countKeys.push(key);return globalThis.__railFixture.count;};`,
   'ajes-query':`export class AjesFilterUnavailable extends Error{}`,
   'collection-controls':`export const assertCollectionEnabled=async()=>{};`,
   'storage':`export const publicOffer=x=>x;`,
@@ -21,6 +21,7 @@ test('market cards remain ready and their late count resolves with exactly the s
   for(const market of ['korea','japan','china']){
    const params={make:'Hyundai',model:'TUCSON',city:'Новокузнецк',market:'korea|japan'};
    const tree=await mod.exports.AjesRail({market,params});
+   assert.deepEqual(state.options.at(-1),{includeCount:false});
    const nodes:any[]=[];function walk(node:any){if(Array.isArray(node))return node.forEach(walk);if(!node||typeof node!=='object')return;nodes.push(node);walk(node.props?.children);}walk(tree);
    assert.equal(nodes.filter(x=>x.type?.name==='CatalogCard').length,1);
    const late=nodes.find(x=>x.type?.name==='RailCount');assert.ok(late,'late count remains mounted after cards returned');
