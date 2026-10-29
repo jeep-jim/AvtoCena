@@ -7,9 +7,10 @@ process.env.AUTH_SECRET='isolated-account-flow-test-secret';
 test('registration, session, logout and login remain independent from employee credentials',async()=>{
  const {handle,state}=await customerAuthHarness();
  const request=(body:any,cookie='avtocena_session=staff-session')=>new Request('https://avtocena.com/api/account/auth',{method:'POST',headers:{origin:'https://avtocena.com',cookie,'content-type':'application/json'},body:JSON.stringify(body)});
- const body={action:'register',phone:'+79990001234',password:'isolated-test-password',consent:true};
+ const body={action:'register',name:'Иван',phone:'+79990001234',password:'isolated-test-password',consent:true};
  let response=await handle(request({...body,phone:'+79990'}));assert.equal(response.status,400);assert.match((await response.json()).error,/не хватает/);
  response=await handle(request({...body,phone:'staff-login'}));assert.equal(response.status,400);
+ response=await handle(request({...body,name:'  '}));assert.equal(response.status,400);assert.equal(response.headers.get('set-cookie'),null);
  response=await handle(request(body));assert.equal(response.status,200);const account=(await response.json()).account;assert.equal(account.phone,body.phone);assert.equal(account.passwordHash,undefined);
  const cookie=response.headers.get('set-cookie');assert.match(cookie,/avtocena_customer=/);assert.match(cookie,/HttpOnly/i);assert.match(cookie,/SameSite=lax/i);assert.doesNotMatch(cookie,/avtocena_session=/);
  const sessionCookie='avtocena_session=staff-session; '+cookie.split(';')[0];
@@ -29,7 +30,7 @@ test('registration, session, logout and login remain independent from employee c
 test('temporary password permits one login, expires, and changes only with current credential',async()=>{
  const {handle,state}=await customerAuthHarness();
  const request=(body:any,cookie='',route='auth')=>new Request('https://avtocena.com/api/account/'+route,{method:'POST',headers:{origin:'https://avtocena.com',cookie,'content-type':'application/json'},body:JSON.stringify(body)});
- const phone='+79990009876';let response=await handle(request({action:'register',phone,password:'initial-password',consent:true}));const account=(await response.json()).account;
+ const phone='+79990009876';let response=await handle(request({action:'register',name:'Иван',phone,password:'initial-password',consent:true}));const account=(await response.json()).account;
  const stored=state.records.get(`accounts/users/${account.id}.json`);stored.passwordHash=await passwordDigest('temporary-test-password');stored.passwordTemporaryUntil=Date.now()+600000;stored.passwordTemporaryUsed=false;
  response=await handle(request({action:'login',phone,password:'temporary-test-password'}));assert.equal(response.status,200);const cookie=response.headers.get('set-cookie')!.split(';')[0];assert.equal((await response.json()).account.passwordChangeRequired,true);
  assert.equal((await handle(request({action:'login',phone,password:'temporary-test-password'}))).status,400);

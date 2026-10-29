@@ -19,7 +19,7 @@ test('email recovery requires the registered phone and previously verified email
       method: 'POST', headers: {origin: 'https://avtocena.com', 'content-type': 'application/json', 'x-forwarded-for': `192.0.2.${++sequence}`}, body: JSON.stringify(body),
     }));
     const phone = '+79990004567';
-    const registered = await request({action: 'register', phone, password: 'old-test-password', consent: true}, 'auth');
+    const registered = await request({action: 'register', name: 'Иван', phone, password: 'old-test-password', consent: true}, 'auth');
     assert.equal(registered.status, 200);
     const account = (await registered.json()).account;
     const stored = state.records.get(`accounts/users/${account.id}.json`);

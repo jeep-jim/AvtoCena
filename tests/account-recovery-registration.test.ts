@@ -12,7 +12,7 @@ const manager:any={...owner,id:'manager',role:'manager',permissions:{activityAll
 async function isolated(run:()=>Promise<void>){const cwd=process.cwd(),tmp=fs.mkdtempSync(path.join(os.tmpdir(),'account-fixes-'));fs.mkdirSync(path.join(tmp,'data'));const old=process.env.JSON_STORAGE_DRIVER;process.chdir(tmp);process.env.JSON_STORAGE_DRIVER='local';resetJsonStorageForTests();try{await writeDataJson('auth/users.json',[owner,manager,{...owner,id:'dealer',companyId:'dealer_other'},{...owner,id:'disabled',status:'disabled'}]);await run();}finally{process.chdir(cwd);if(old===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=old;resetJsonStorageForTests();fs.rmSync(tmp,{recursive:true,force:true});}}
 test('registration appears once in common feed and notices, external dealers excluded',()=>isolated(async()=>{
  process.env.AUTH_SECRET='isolated-registration-secret';
- const account=await registerAccount('+79995550123','valid-test-password','Покупатель');await recordCustomerRegistration(account);
+ const account=await registerAccount('+79995550123','valid-test-password','Иван');await recordCustomerRegistration(account);
  const rows=await readChunkedDataJson<any>('activity/feed.json',[]);assert.equal(rows.length,1);assert.equal(rows[0].type,'customer_registered');
  const notices=await readChunkedDataJson<any>('crm/notifications.json',[]);assert.equal(notices.length,1);assert.deepEqual(notices[0].recipientIds.sort(),['manager','owner']);
  assert.equal((await readCrmActivity(manager)).some(x=>x.id===rows[0].id),true);
@@ -37,3 +37,7 @@ test('mail reset sends only to a previously verified matching address; binding a
   const bind=await createEmailChallenge(a,'new@example.com','bind'),bindCode=sent[1].text.match(/\b\d{6}\b/)[0];await assert.rejects(consumeEmailChallenge(bind,bindCode,'bind','wrong'));assert.equal((await consumeEmailChallenge(bind,bindCode,'bind',a.id)).email,'new@example.com');
  }finally{(nodemailer as any).createTransport=original;for(const k of vars){if(before[k]===undefined)delete process.env[k];else process.env[k]=before[k];}}
 }));
+
+test('registration rejects missing and placeholder names before creating an account',async()=>{
+ for(const name of ['', '   ', 'Покупатель', 'Пользователь', '123'])await assert.rejects(registerAccount('+79995550124','valid-test-password',name),/имя|Имя/);
+});
