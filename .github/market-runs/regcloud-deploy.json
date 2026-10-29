@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-authorized PR1615 diagnostic repair merged 2312d36da882de7f97cbd59936a6dad2b9a3daa8. All seven executing checks passed for runtime head 11dba0153fe0b2a137aa002222bd08e9d74038dd; later merge changed only documentation. Retain bounded private original AJES failure context including request kind and provider code; owner-only read; no supplier retries, routing or cooldown changes. 144 AJES tests and web/engine typechecks passed. This fixes missing incident evidence, NOT verified Korea pagination recovery. Queue after active filters release40715191870 without cancellation; retain all functional gates and dependencies.",
+  "reason": "Owner-authorized PR1616 merged038355eed98067ce3db0de4ddda233e943cb0794; all12 exact-head100faea8ef321167bfb6a29a3ad8e750bfc10c7e checks passed. Restore requested filter icon scope using existing offer SVGs, fuel pump, original bold text and primary labels; neutral mobile collapse preserves selections. Share already streamed AJES count with query identity; zero extra count requests and no view-consumer rerender in fixture. 15 Chromium cases,22 filter and144 AJES tests passed. Korea pagination remains unresolved with saved bot refusals; this release does not claim access recovery. Preserve functional gates and all research dependencies.",
   "ideaReports": [],
-  "requestedAt": "2026-10-28T16:00:40.338751+00:00"
+  "requestedAt": "2026-10-29T03:24:13.407906+00:00"
 }
