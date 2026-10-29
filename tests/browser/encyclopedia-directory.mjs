@@ -44,8 +44,16 @@ try{for(const theme of ['dark','light'])for(const width of [390,1440]){
  await page.getByText('По выбранным параметрам моделей не найдено.').waitFor();assert.equal(new URL(page.url()).searchParams.get('letter'),'T');
  await page.getByRole('button',{name:'Сбросить',exact:true}).click();await rows.last().waitFor();assert.equal(await rows.count(),40);
  assert.equal(await page.locator('.ac-model-make-heading').filter({hasText:'Brand 0'}).count(),1);
+ const rail=page.getByRole('navigation',{name:'Логотипы марок'});
+ await rail.getByRole('button',{name:'Brand 5',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelector('.ac-model-list-item')?.textContent.includes('Brand 5 Model 0'));
+ assert.equal(new URL(page.url()).searchParams.get('page'),'26');assert.equal(reads,2,'rail navigation uses local directory');
+ assert.equal(await rail.getByRole('button',{name:'Brand 5',exact:true}).getAttribute('aria-current'),'true');
+ await page.goBack();await page.waitForFunction(()=>document.querySelector('.ac-model-list-item')?.textContent.includes('Brand 0 Model 0'));
+ await page.getByRole('navigation',{name:'Буквы марок'}).getByRole('button',{name:'Марки на B',exact:true}).click();
+ assert.equal(await rows.count(),40);assert.equal(reads,2);
  const heights=await page.locator('.ac-knowledge-toolbar').evaluate(el=>[el.querySelector('.ac-ency-button').getBoundingClientRect().height,el.querySelector('nav button').getBoundingClientRect().height]);assert.equal(heights[0],heights[1]);
- if(width>1100){await page.evaluate(()=>scrollTo(0,500));const box=await page.locator('.ac-model-list-head').boundingBox(),head=await page.locator('.ac-public-header').boundingBox();assert.ok(Math.abs(box.y-(head.y+head.height))<2,'column labels stay below sticky header');await page.evaluate(()=>scrollTo(0,0));}
+ if(width>1100){await page.evaluate(()=>scrollTo(0,500));const box=await page.locator('.ac-model-list-head').boundingBox(),head=await page.locator('.ac-public-header').boundingBox();assert.ok(Math.abs(box.y-(head.y+head.height))<2,'column labels stay below sticky header');const railBox=await page.locator('.ac-directory-rail').boundingBox();assert.ok(railBox.y>=head.y+head.height&&railBox.y<160,'right rail stays below header');assert.ok(railBox.x>=box.x+box.width,'rail does not cover edit controls');await page.evaluate(()=>scrollTo(0,0));}
  await page.screenshot({path:out+`/directory-${theme}-${width}.png`,fullPage:false});
  assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();
 }}finally{await browser.close();await new Promise(r=>server.close(r));}

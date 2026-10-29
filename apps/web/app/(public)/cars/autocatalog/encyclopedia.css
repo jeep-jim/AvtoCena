@@ -121,3 +121,18 @@ html[data-theme="light"] .ac-ency-page input:not([type=checkbox]),html[data-them
 
 .ac-model-make-heading{display:flex;align-items:center;gap:12px}
 @media(min-width:1101px){.ac-model-list-head{position:sticky;top:var(--ency-header-height,68px);z-index:20;box-shadow:0 1px 0 var(--ac-border)}}
+
+/* Two independent rails keep the current letter and make within reach. */
+.ac-directory-with-rail{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:16px;align-items:start}
+.ac-directory-with-rail>.ac-model-list{min-width:0}
+.ac-directory-rail{position:sticky;top:calc(var(--ency-header-height,68px) + 56px);display:grid;grid-template-columns:36px 64px;gap:10px;max-height:calc(100dvh - var(--ency-header-height,68px) - 72px)}
+.ac-directory-rail-column{position:relative;display:flex;flex-direction:column;gap:6px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;min-height:0;padding:2px}
+.ac-directory-rail button{display:flex;align-items:center;justify-content:center;flex-shrink:0;min-height:34px;border:0;border-radius:8px;background:var(--ac-surface);color:var(--ac-text);font:inherit;font-size:13px;cursor:pointer}
+.ac-directory-rail-brands button{height:48px;padding:6px}
+.ac-directory-rail button[aria-current=true]{background:var(--ac-surface-2);box-shadow:inset 3px 0 #ff353d;color:var(--ac-text);font-weight:700}
+.ac-directory-rail button:focus-visible{outline:2px solid #ff353d;outline-offset:1px}
+.ac-directory-rail-brands button>span{max-width:46px;overflow:hidden}
+.ac-directory-rail-brands img,.ac-directory-rail-brands svg{max-width:46px;max-height:34px;object-fit:contain}
+.ac-directory-with-rail .ac-model-make-heading{scroll-margin-top:calc(var(--ency-header-height,68px) + 64px)}
+@media(min-width:1101px){.ac-directory-with-rail .ac-model-list-head,.ac-directory-with-rail .ac-model-list-row{grid-template-columns:64px minmax(115px,1.7fr) minmax(75px,1fr) minmax(100px,1.3fr) minmax(75px,1fr) 65px 70px 88px;gap:10px;padding:12px}.ac-directory-with-rail .ac-model-list-photo{width:64px;height:58px}}
+@media(max-width:1100px){.ac-directory-with-rail{display:flex;flex-direction:column;gap:12px}.ac-directory-with-rail>.ac-model-list{width:100%}.ac-directory-rail{order:-1;top:var(--ency-header-height,68px);z-index:21;display:flex;flex-direction:column;gap:4px;width:100%;max-height:none;background:var(--ac-bg,var(--ac-surface));padding-block:4px}.ac-directory-rail-column{flex-direction:row;overflow-x:auto;overflow-y:hidden;max-width:100%;padding:2px}.ac-directory-rail-letters button{min-width:34px}.ac-directory-rail-brands button{min-width:52px;height:42px}.ac-directory-with-rail .ac-model-make-heading{scroll-margin-top:calc(var(--ency-header-height,68px) + 106px)}}
