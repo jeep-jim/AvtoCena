@@ -27,6 +27,7 @@ class GateTests(unittest.TestCase):
    '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA': 2,
    '/cars?market=europe&make=BMW&page=2': 2, '/cars?sort=totalRub': 2,
    '/api/catalog/search?market=europe&make=BMW&page=2': 1, '/cars/autocatalog': 2,
+   '/api/catalog/search?market=china&marketPage=1&page=9': 1,
   }, 'Owner made speed targets advisory; route coverage and honest measurements remain')
   self.assertEqual(len(gate.ROUTES), len(limits), 'Duplicate routes must not hide missing coverage')
   script=pathlib.Path('scripts/regcloud-deploy-production.sh').read_text()
@@ -50,9 +51,9 @@ class GateTests(unittest.TestCase):
   self.assertEqual(sample.call_count,len(gate.ROUTES)*4)
   rows=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')]
   measured=[r for r in rows if r.get('performanceGate')!='summary']
-  self.assertEqual(len(measured),33)
+  self.assertEqual(len(measured),36)
   self.assertTrue(all(r['functionalPassed'] and not r['passed'] for r in measured))
-  self.assertEqual(rows[-1]['slowSamples'],33)
+  self.assertEqual(rows[-1]['slowSamples'],36)
   self.assertFalse(rows[-1]['performanceAccepted'])
   self.assertIn('::warning::',output.getvalue())
  def test_functional_failure_and_unavailable_response_still_abort(self):

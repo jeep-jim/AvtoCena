@@ -17,6 +17,8 @@ ROUTES=[
  ('/cars?market=europe&make=BMW&page=2',2.0,'catalog'),
  ('/cars?sort=totalRub',2.0,'catalog'),
  ('/api/catalog/search?market=europe&make=BMW&page=2',1.0,'search'),
+ # Page nine is the first page beyond the 192-card prepared category landing.
+ ('/api/catalog/search?market=china&marketPage=1&page=9',1.0,'search'),
  ('/cars/autocatalog',2.0,'encyclopedia'),
 ]
 

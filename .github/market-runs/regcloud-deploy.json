@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Fix reproduced overview queue starvation: Japan/Korea lists no longer launch optional counts into both supplier slots; existing streamed counts follow visible rows. Preserve the two-call limit, query semantics, visitor identity, source refusal handling and functional release guards. This is not a claim that Korea page3 or all Japan filtered refusals are resolved.",
+  "reason": "Fix reproduced deep unfiltered market pages loading entire projections: use verified compact display-order indexes and only visible card blocks beyond the prepared landing. Preserve inventory/order/current-day/editorial guards and authoritative fallback for legacy indexes or edited seller prices. Includes prior PR1626 queue fix; Korea/Japan live recovery remains unverified.",
   "ideaReports": [],
-  "requestedAt": "2026-10-29T10:13:27.047481+00:00"
+  "requestedAt": "2026-10-29T10:38:26.337436+00:00"
 }
