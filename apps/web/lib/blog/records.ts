@@ -17,7 +17,7 @@ export async function readBlogPost(slug:string,includeDrafts=false){
 export async function saveBlogPost(input:Record<string,unknown>){
  const clean=cleanBlogPost(input),old=await readBlogPost(clean.slug,true);
  if(old&&old.revision!==input.revision||!old&&input.revision)throw new BlogConflict('Статья уже изменена. Обновите страницу.');
- const now=new Date().toISOString(),post:BlogPost={...clean,revision:randomUUID(),updatedAt:now,publishedAt:old?.publishedAt||now};
+ const now=new Date().toISOString(),post:BlogPost={...clean,revision:randomUUID(),updatedAt:now,publishedAt:old?.publishedAt||(clean.status==='published'?now:'')};
  const key=`content/blog/v1/posts/${post.slug}/${post.revision}.json`;
  await getJsonStorage().writeJson(key,post,{ifNoneMatch:'*'});
  const {body,sources,related,...summary}=post;

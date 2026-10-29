@@ -9,6 +9,7 @@ export function cleanBlogPost(input:Record<string,unknown>):Omit<BlogPost,'revis
  if(cover&&(!blogUrl(cover)||!coverCredit))throw new BlogInputError('Укажите HTTPS-адрес фотографии и её источник / права.');
  const links=(key:string,internal:boolean)=>{const raw=input[key];if(!Array.isArray(raw)||raw.length>20)throw new BlogInputError('Проверьте ссылки.');return raw.map(v=>{if(!v||typeof v!=='object')throw new BlogInputError('Проверьте ссылки.');const title=String(v.title||'').trim().slice(0,180),url=blogUrl(v.url,internal);if(!title||!url)throw new BlogInputError('Проверьте названия и адреса ссылок.');return {title,url};});};
  const sources=links('sources',false),related=links('related',true),status=input.status==='published'?'published':'draft';
+ if(status==='published'&&!cover)throw new BlogInputError('Добавьте обложку и укажите права на фотографию.');
  if(status==='published'&&!sources.length)throw new BlogInputError('Добавьте первоисточники перед публикацией.');
  return {slug,title,description,body,cover,coverCredit,sources,related,status};
 }
