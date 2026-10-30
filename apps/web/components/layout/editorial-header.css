@@ -1,14 +1,1 @@
 .ac-editorial-header-space{height:65px;flex:none}
-/* Keep the established inner-page header compact for staff and visitors. */
-@media(max-width:767px){
- .ac-public-header.ac-editorial-header>div{gap:4px!important;padding-inline:8px!important}
- .ac-public-header.ac-editorial-header>div>div:first-child{gap:4px;flex-shrink:1}
- .ac-public-header.ac-editorial-header button[aria-label="Назад"]{width:28px;min-width:28px;padding:0;flex:none;justify-content:center}
- .ac-public-header.ac-editorial-header button[aria-label="Назад"]>span{display:none}
- .ac-public-header.ac-editorial-header a[href="/"]{gap:4px!important;flex-shrink:0}
- .ac-public-header.ac-editorial-header a[href="/"]>svg{width:28px;height:32px}
- .ac-public-header.ac-editorial-header a[href="/"]>div>div:first-child{display:grid!important;font-size:14px!important;line-height:.95!important;white-space:normal!important}
- .ac-public-header.ac-editorial-header a[href="/"]>div>div:last-child{display:none!important}
- .ac-public-header.ac-editorial-header>div>div:last-child,.ac-public-header.ac-editorial-header .ac-staff-tools,.ac-public-header.ac-editorial-header .customer-header-tools{gap:4px!important;flex-shrink:0}
- .ac-public-header.ac-editorial-header .ac-icon-button,.ac-public-header.ac-editorial-header .ac-favorite-nav,.ac-public-header.ac-editorial-header .ac-staff-account,.ac-public-header.ac-editorial-header .customer-header-icon,.ac-public-header.ac-editorial-header .customer-header-tools>a,.ac-public-header.ac-editorial-header a[aria-label="Личный кабинет"]{width:32px!important;min-width:32px!important;flex-shrink:0}
-}

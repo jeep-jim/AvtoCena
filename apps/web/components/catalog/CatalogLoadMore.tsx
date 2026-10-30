@@ -4,8 +4,8 @@ import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Fragment } from "react";
+import {CatalogPagination} from "./CatalogPagination";
+
 import { loadMoreGreenCorner } from "./green-corner-load-more-action";
 import { loadMoreCatalog } from "./catalog-load-more-action";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
@@ -127,14 +127,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     <div className="mx-auto mt-7 flex w-full flex-col items-center gap-3">
       <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} {total!==null?`из ${total.toLocaleString("ru-RU")}`:""}</p>
       {total===null&&resultCountLabel&&<p className="text-xs font-bold text-[var(--ac-muted)]">{resultCountLabel}</p>}
-      {pageCount > 1 ? <nav aria-label="Страницы каталога" className="ac-pagination">
-        {page > 1 && (!cursorPaging||page===2||batches.some(batch=>batch.page===page-1)) ? <Link prefetch={false} href={pageHref(page-1)} aria-label="Предыдущая страница"><ChevronLeft size={20}/></Link> : <span aria-disabled="true"><ChevronLeft size={20}/></span>}
-        {numberedPages.map((number,index)=><Fragment key={number}>
-          {index > 0 && number-numberedPages[index-1]>1 ? <span aria-hidden="true">…</span> : null}
-          <Link prefetch={false} href={pageHref(number)} aria-label={`Страница ${number}`} aria-current={number===page?"page":undefined} className={number!==1 && number!==pageCount && Math.abs(number-page)>1 ? "ac-page-extra" : undefined}>{number}</Link>
-        </Fragment>)}
-        {page < pageCount ? <Link prefetch={false} href={pageHref(page+1)} aria-label="Следующая страница"><ChevronRight size={20}/></Link> : <span aria-disabled="true"><ChevronRight size={20}/></span>}
-      </nav> : null}
+      {pageCount > 1 ? <CatalogPagination page={page} pageCount={pageCount} links={numberedPages.map(number=>({page:number,href:pageHref(number)}))} previousHref={page>1&&(!cursorPaging||page===2||batches.some(batch=>batch.page===page-1))?pageHref(page-1):undefined} nextHref={page<pageCount?pageHref(page+1):undefined}/> : null}
       {more ? <a href={pageHref(page+1)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)] rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Загружаем варианты</span></> : "Показать ещё"}</a> : incomplete ? <div className="max-w-md text-center text-sm text-[var(--ac-muted)]"><p role="status">Показаны сохранённые автомобили. Полный список пока недоступен.</p><button type="button" data-no-route-loader="true" disabled={busy} aria-busy={busy} onClick={()=>void load(true)} className="ac-catalog-more relative mt-3 rounded-2xl bg-red-500 px-8 py-3 font-black text-white">{busy?<><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Обновляем список</span></>:"Повторить"}</button></div> : <p className="text-sm text-[var(--ac-muted)]">{"Вы посмотрели все доступные предложения"}</p>}
       {error ? <p role="alert" className="max-w-md text-center text-sm text-[var(--ac-text)]">{error}</p> : null}
     </div>
