@@ -1,4 +1,4 @@
-import type {AjesRequestDiagnostic} from './ajes-request-diagnostic';
+import {ajesFailureSlot,type AjesRequestDiagnostic} from './ajes-request-diagnostic';
 import {preserveKoreaListingLink} from './ajes-korea-detail-cache';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {isIP} from 'node:net';
@@ -163,10 +163,11 @@ export function createAjesClient(deps:Dependencies) {
           }
           const code=(error as any)?.cause?.code;
           const failure=error instanceof AjesUnavailable?error:new AjesUnavailable(controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed');
-          // Keep one private diagnostic per table, at most once per minute. A
-          // cooldown/cache hit must not replace the actual failed request.
-          if(requestStarted&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(query.table)??0)>=60000){
-            lastFailureSaved.set(query.table,Date.now());
+          // Throttle fixed page/kind slots independently: a first-page failure
+          // must not suppress continuation evidence. Cooldown is not a request.
+          const failureSlot=ajesFailureSlot(query);
+          if(requestStarted&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(failureSlot)??0)>=60000){
+            lastFailureSaved.set(failureSlot,Date.now());
             const diagnostic:AjesRequestDiagnostic={table:query.table,kind:query.kind,page:query.page,pageSize:query.pageSize,startedAt,finishedAt:new Date().toISOString(),clientIp,sql:query.sql,endpoint:url.origin+url.pathname,httpStatus,providerCode,outcome:failure.reason};
             if(Buffer.byteLength(JSON.stringify(diagnostic))<=64*1024)persist(()=>deps.saveRequestFailure!(diagnostic));
           }
