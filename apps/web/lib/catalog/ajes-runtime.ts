@@ -1,4 +1,5 @@
 import {readCalculationIndex} from '../encyclopedia/calculation-index';
+import {saveAjesRequestFailure} from './ajes-request-diagnostic';
 import 'server-only';
 import {ajesEndpoint} from './ajes-routing';
 import {readAjesQueryCache,readPreviousTruckPolicyRows,readExpandedJapanRows,readUncappedChinaRows,saveAjesQueryCache,retainedAjesQueryEntries} from './ajes-query-cache';
@@ -34,7 +35,7 @@ async function readListedDetail(table:string,id:string){
 }
 export const ajesClient=createAjesClient({
  calculationIndex:readCalculationIndex,
- saveRequestFailure:value=>getJsonStorage().writeJson(`integrations/ajes/catalog-failure-${value.table}.json`,value),
+ saveRequestFailure:value=>saveAjesRequestFailure(getJsonStorage(),value),
   password:ajesPassword,
   endpoint:ajesEndpoint,
   readListedDetail,
