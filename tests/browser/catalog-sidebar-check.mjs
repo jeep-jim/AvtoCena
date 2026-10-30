@@ -92,7 +92,7 @@ try{
   const context=await contextFor(width),page=await context.newPage();
   await page.goto(origin+'/cars?marketPreview=1');
   const count=page.locator('.ac-market-result-count').first();await count.waitFor();
-  assert.equal(await count.locator('span.hidden').isVisible(),width>=768);
+  assert.match(await count.innerText(),/614\s?583/);assert.doesNotMatch(await count.innerText(),/Найдено/);
   assert.equal(await count.evaluate(el=>getComputedStyle(el).fontWeight),'400');
   const visible=await page.locator('.ac-catalog-market-rail > div').evaluateAll(els=>els.filter(el=>getComputedStyle(el).display!=='none').length);
   assert.equal(visible,width<768?6:5);
@@ -109,7 +109,7 @@ try{
   const context=await contextFor(width),page=await context.newPage();
   await page.goto(origin+'/cars?marketPreview=1&sidebar=1');
   await page.locator('[data-test-overall-count]').waitFor();
-  assert.equal(await page.locator('[data-test-overall-count]').getByText('Найдено:',{exact:true}).isVisible(),true);
+  assert.match(await page.locator('[data-test-overall-count]').innerText(),/895\s?838/);assert.doesNotMatch(await page.locator('[data-test-overall-count]').innerText(),/Найдено/);
   assert.equal(await page.locator('.ac-catalog-card:visible').count(),6);
   const tops=await page.locator('.ac-catalog-card:visible').evaluateAll(els=>els.map(el=>Math.round(el.getBoundingClientRect().top)));
   assert.equal(new Set(tops).size,width>=1024?2:1);
