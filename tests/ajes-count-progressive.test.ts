@@ -26,7 +26,7 @@ test('ready Korea/Japan cards return while the independent count is still pendin
   for(const market of ['korea','japan']){
    let timer:ReturnType<typeof setTimeout>;
    const page:any=await Promise.race([mod.exports.readAjesCatalogPage({market,drive:market==='japan'?'awd':undefined,city:'Новокузнецк'}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('ready cards blocked by count')),300);})]).finally(()=>clearTimeout(timer!));
-   assert.equal(page.items.length,24);assert.equal(page.total,null);assert.equal(page.hasMore,true);assert.equal(page.items[0].id,'car0');
+   assert.equal(page.items.length,24);assert.equal(page.total,null);assert.equal(page.hasMore,true);assert.equal(page.items[0].id,'car0');assert.equal(page.nextCursor,undefined,'unfiltered source pages keep numbered offsets');
   }
   assert.equal(state.counts,2);assert.equal(state.lists,2);
  }finally{delete (globalThis as any).__countFixture;}

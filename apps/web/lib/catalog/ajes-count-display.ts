@@ -13,5 +13,5 @@ export function exactAjesCount(summary?:AjesCountSummary|null):number|undefined 
  * a cursor's eventual page count is an upper bound, never an exact last link. */
 export function ajesPaginationCountText(summary?:AjesCountSummary|null,pageSize=24):string {
  if(!summary||summary.upperBound||!Number.isSafeInteger(summary.total)||summary.total<0||!Number.isSafeInteger(pageSize)||pageSize<1)return 'Количество уточняется';
- return `Найдено ${ajesCountText(summary)} · ${formatCatalogCount(Math.ceil(summary.total/pageSize))} стр.`;
+ return `${ajesCountText(summary)} · ${formatCatalogCount(Math.ceil(summary.total/pageSize))} стр.`;
 }

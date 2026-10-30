@@ -2,7 +2,7 @@
 import {CatalogViewIcon} from './CatalogViewIcon';
 import {createContext,useContext,useState,useEffect,type ReactNode} from 'react';
 import {createPortal} from 'react-dom';
-type ResultCount={queryKey:string;text:string};
+type ResultCount={queryKey:string;text:string;total?:number};
 type SelectionContext={target:HTMLDivElement|null;setTarget:(target:HTMLDivElement|null)=>void;view:"grid"|"list";setView:(view:"grid"|"list")=>void};
 const Context=createContext<SelectionContext|null>(null);
 export function CatalogSelectionProvider({children}:{children:ReactNode}){
@@ -40,9 +40,9 @@ function ResultCountProvider({children}:{children:ReactNode}){
 }
 // Share the already streamed server aggregate with the open filter sheet.
 // Query identity prevents retained/older results from becoming the current count.
-export function CatalogResultCountUpdate({queryKey,text}:ResultCount){
+export function CatalogResultCountUpdate({queryKey,text,total}:ResultCount){
  const set=useContext(ResultCountContext)?.set;
- useEffect(()=>{set?.({queryKey,text});},[set,queryKey,text]);
+ useEffect(()=>{set?.({queryKey,text,total});},[set,queryKey,text,total]);
  return null;
 }
 export function useCatalogResultCount(){return useContext(ResultCountContext)?.value;}
