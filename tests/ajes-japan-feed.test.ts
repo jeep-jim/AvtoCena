@@ -383,14 +383,20 @@ test('a refused visitor cannot pin missing parameters for a different allowed vi
 });
 
 test('simultaneous requests from different visitors do not share a supplier refusal',async()=>{
- let release!:()=>void;const wait=new Promise<void>(resolve=>{release=resolve;});let calls=0;
+ let release!:()=>void,started!:()=>void;const wait=new Promise<void>(resolve=>{release=resolve;});const firstStarted=new Promise<void>(resolve=>{started=resolve;});let calls=0;
  const old={schemaVersion:2,items:[ajesLot({...row,TIME:'',PW:''},'stats',true)],page:1,pageSize:1,observedAt:new Date(Date.now()-3600000).toISOString()};
  const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>old,fetcher:async input=>{
   calls++;const ip=new URL(String(input)).searchParams.get('ip');
-  if(ip==='203.0.113.1'){await wait;return new Response('bot2 test');}
+  if(ip==='203.0.113.1'){started();await wait;return new Response('bot2 test');}
   release();return new Response(JSON.stringify([{...row,TIME:'D',PW:'200'}]));
  }});
- const result=await Promise.all([client.read({table:'stats',id:row.ID},'203.0.113.1'),client.read({table:'stats',id:row.ID},'203.0.113.2')]);
+ const first=client.read({table:'stats',id:row.ID},'203.0.113.1');
+ await firstStarted;
+ const second=client.read({table:'stats',id:row.ID},'203.0.113.2');
+ // Concurrent callers retain separate visitor outcomes even when detail source
+ // admission is serial. The first request must not depend on the second starting.
+ release();
+ const result=await Promise.all([first,second]);
  assert.equal(calls,2);assert.equal(result[0].stale,true);assert.equal(result[1].stale,false);assert.equal(result[1].items[0].sourceFuel,'D');
 });
 

@@ -17,7 +17,9 @@ class AjesSavedRecovery {
 type Dependencies={saveRequestFailure?:(value:AjesRequestDiagnostic)=>Promise<unknown>;calculationIndex?:()=>CalculationIndex|null;password:()=>string|undefined|Promise<string|undefined>; assertEnabled:(table?:AjesTable)=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; endpoint?:(ip:string)=>string|Promise<string>; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; readLegacyQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
-  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
+  // A slow detail may use one slot; lists and filter directories retain the other.
+  // Keep the total supplier concurrency at two, including all request kinds.
+  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,groupConcurrency:{detail:1},shouldCache:value=>!value.stale});
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
   const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});
@@ -187,7 +189,7 @@ export function createAjesClient(deps:Dependencies) {
             throw failure;
           });
         }finally{clearTimeout(timer);}
-      },visitorKey).then(value=>{
+      },visitorKey,query.kind==='detail'?'detail':'').then(value=>{
         if(query.table!=='korea'||query.kind!=='detail'||value.stale||value.items?.length!==1)return value;
         const snapshot=listed.get('korea:'+query.id)?.value;
         const age=Date.now()-Date.parse(snapshot?.observedAt||'');

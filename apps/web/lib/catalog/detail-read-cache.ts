@@ -4,13 +4,16 @@ export class DetailReadCache<T> {
   private pending = new Map<string, Promise<T>>();
   private bytes = 0;
   private active = 0;
-  private waiters: Array<() => void> = [];
+  private waiters: Array<{canStart: () => boolean; run: () => void}> = [];
+  private activeGroups = new Map<string, number>();
   private epoch = 0;
 
   constructor(private readonly options: {
     maxEntries: number; maxBytes: number; ttlMs: number; concurrency: number;
     now?: () => number;
     maxQueued?: number; queueTimeoutMs?: number;
+    /** Reserve shared capacity for other work without raising total concurrency. */
+    groupConcurrency?: Record<string, number>;
     /** Display-only data. Never enable for prices, permissions or source admission. */
     staleWhileRevalidateMs?: number;
     sizeOf?: (value: T) => number | undefined | Promise<number | undefined>;
@@ -30,7 +33,7 @@ export class DetailReadCache<T> {
     this.entries.delete(key);
   }
 
-  get(key: string, load: () => Promise<T>, pendingKey = key): Promise<T> {
+  get(key: string, load: () => Promise<T>, pendingKey = key, admissionGroup = ''): Promise<T> {
     const now = this.options.now || Date.now;
     for (const [id, entry] of this.entries) {
       if (entry.expiresAt + (this.options.staleWhileRevalidateMs || 0) <= now()) this.remove(id);
@@ -43,16 +46,24 @@ export class DetailReadCache<T> {
     }
     const pending = this.pending.get(pendingKey);
     if (pending) return cached ? Promise.resolve(cached.value) : pending;
-    if (this.active >= this.options.concurrency && this.waiters.length >= (this.options.maxQueued ?? 256)) {
+    const canStart = () => this.active < this.options.concurrency && (
+      !admissionGroup || (this.activeGroups.get(admissionGroup) || 0) <
+        (this.options.groupConcurrency?.[admissionGroup] ?? this.options.concurrency)
+    );
+    const reserve = () => {
+      this.active++;
+      if (admissionGroup) this.activeGroups.set(admissionGroup, (this.activeGroups.get(admissionGroup) || 0) + 1);
+    };
+    if (!canStart() && this.waiters.length >= (this.options.maxQueued ?? 256)) {
       return cached ? Promise.resolve(cached.value) : Promise.reject(new Error("detail_cache_queue_full"));
     }
     const epoch = this.epoch;
     const promise = (async () => {
       // Reserve a slot before any I/O; simultaneous card/price lookups must not
       // parse dozens of multi-megabyte blocks at once.
-      if (this.active >= this.options.concurrency) {
+      if (!canStart()) {
         await new Promise<void>((resolve,reject) => {
-          const next=()=>{clearTimeout(timer);resolve();};
+          const next={canStart,run:()=>{clearTimeout(timer);reserve();resolve();}};
           const timer=setTimeout(()=>{
             const position=this.waiters.indexOf(next);
             if(position>=0)this.waiters.splice(position,1);
@@ -60,9 +71,7 @@ export class DetailReadCache<T> {
           },this.options.queueTimeoutMs ?? 5_000);
           this.waiters.push(next);
         });
-      } else {
-        this.active++;
-      }
+      } else reserve();
       try {
         const value = await load();
         if (epoch !== this.epoch || this.options.shouldCache?.(value) === false) return value;
@@ -92,9 +101,19 @@ export class DetailReadCache<T> {
         }
         return value;
       } finally {
-        const next = this.waiters.shift();
-        if (next) next();
-        else this.active--;
+        this.active--;
+        if (admissionGroup) {
+          const left = (this.activeGroups.get(admissionGroup) || 1) - 1;
+          if (left) this.activeGroups.set(admissionGroup, left);
+          else this.activeGroups.delete(admissionGroup);
+        }
+        // A waiting detail must not prevent an eligible list from using the
+        // reserved capacity. Admission reserves synchronously before resuming.
+        while (this.active < this.options.concurrency) {
+          const position = this.waiters.findIndex(waiter => waiter.canStart());
+          if (position < 0) break;
+          this.waiters.splice(position,1)[0].run();
+        }
       }
     })();
     this.pending.set(pendingKey, promise);
