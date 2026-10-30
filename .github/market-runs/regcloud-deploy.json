@@ -108,7 +108,7 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Install verified PR1657: reserve list/filter admission during slow AJES details, bounded detail queue waiting, and offline price-parity storage deadline. Includes pending PR1656 catalog recovery controls. Previous deployment 41062110787 failed before activation on China projection read; all functional gates retained.",
+  "reason": "Install PR1658 verified resumable encyclopedia preparation with bounded offline storage reads, together with pending PR1656/1657 Korea catalog fixes. All revision, price, ASTRA and functional activation gates retained.",
   "ideaReports": [],
-  "requestedAt": "2026-10-30T14:53:04.879091Z"
+  "requestedAt": "2026-10-30T15:48:08.164725Z"
 }
