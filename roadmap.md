@@ -18157,3 +18157,12 @@ Fresh Road/checklist прочитаны; AGENTS/owner-handoff/runtime-review/о�
 Дополнительно по OfferPageContent подтверждено: экран SupplierUnavailableOffer формируется сразу после readOfferDetailForPage, до рендера history panel. В текущем клиенте history/inspection запускаются только после выбора секции, exceptions локальны; это не доказывает отсутствие косвенного влияния дополнительных запросов через общий доступ поставщика. Для нового скриншота не установлены точный ID, IP/trace и код отказа.
 
 Единственный deploy41039055715 прошёл index/build/image и готовит exact price indexes; live fixed/accepted не заявлять. Отдельно найдено для последующей оптимизации: scripts/catalog-calculation-version.mjs включает все apps/web/lib,packages,data,scripts, поэтому диагностические server/script changes меняют fingerprint; безопасное сужение зависимостей в этой сессии не делалось. Изменения отчётов, очистка, обходы отказов, новый app deploy и сообщения поставщику не выполнялись.
+
+
+## 30.10.2026, 17:59 Красноярск — PR1655 активирован, контрольный page6 остаётся503
+
+Health подтвердил releaseSha5e45cd9478a7d38a6c57adc7d81061e475055cf9; post-switch gates41039055715 ещё выполняются. Один контрольный запрос на установленной версии /api/catalog/search?market=korea&source=ajes&marketPage=1&page=6 начат10:59:39.462UTC, HTTP503 за5.313s, visitor_restricted,0items. Это проверяющее подключение, не trace владельца. Никакой подмены IP/endpoint, обхода cooldown или автоматического цикла повторов. Подготовлено saved-only чтение нового page6 slot; это следующая фаза существующего расследования, не новый supplier request.
+
+Сравнение фактического генератора запросов на main986255742c12d450a9fbbd855f4b11c475f5ccd6 (23.10,16:57:36UTC) с текущим: один и тот же URL нормализуется table=korea,page6,pageSize24,limit120,24. SQL5129→5351bytes; единственное отличие обычного запроса без фильтров — дополнительные исключения Dyna/Toyoace. История/осмотр не участвуют в этом query. Это offline сравнение, не доказательство принятия SQL сервером поставщика. Не откатывать исключение грузовиков без основания.
+
+Однократный read-publication-lock41042728266 SUCCESS на10:43:11UTC подтвердил writer.active=false; блокировка не удерживала текущую установку. Подготовка цен затем завершилась и выпуск перешёл к activation gates. Подробный финальный deploylog ещё не получен.
