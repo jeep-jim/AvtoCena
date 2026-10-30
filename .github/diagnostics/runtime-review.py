@@ -3,6 +3,7 @@ import collections
 import json
 import re
 import subprocess
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -26,6 +27,8 @@ def read(path):
             data = json.loads(body)
             return data, {'seconds': round(time.monotonic() - start, 4), 'status': response.status,
                           'bytes': len(body), 'serverTiming': response.headers.get('Server-Timing')}
+    except urllib.error.HTTPError as error:
+        return None, {'seconds': round(time.monotonic() - start, 4), 'error': 'HTTPError', 'status': error.code}
     except Exception as error:
         return None, {'seconds': round(time.monotonic() - start, 4), 'error': type(error).__name__}
 
@@ -37,9 +40,11 @@ assert isinstance(release, str) and re.fullmatch('[a-f0-9]{40}', release)
 print('AUDIT_RELEASE', release, flush=True)
 paths = ['/api/catalog/search?market=' + market + '&marketPage=1&page=2' for market in ['china', 'uae', 'europe', 'georgia']]
 paths += ['/api/catalog/search?market=' + market + '&marketPage=1&yearFrom=2021&page=1' for market in ['china', 'uae', 'europe', 'georgia']]
+if '--logs-only' in sys.argv:
+    paths = []
 failed = set()
 for phase, delay in [('first_observed', 0), ('repeat_after_35s', 35)]:
-    if delay:
+    if delay and paths:
         time.sleep(delay)
     for path in paths:
         if path in failed:
@@ -73,4 +78,6 @@ for line in (logs.stdout + logs.stderr).splitlines():
         except (ValueError, KeyError, TypeError):
             pass
 print('RECENT_AJES_LOG_COUNTS', json.dumps(counts))
+codes = ['detail_cache_queue_timeout', 'detail_cache_queue_full', 'object_storage_response_timeout', 'object_storage_request_failed', 'read_deadline', 'ETIMEDOUT', 'ECONNRESET', 'TypeError', 'heap out of memory', 'FATAL ERROR', 'ENOMEM', 'catalog_page_unavailable']
+print('RECENT_ERROR_COUNTS', json.dumps({code: (logs.stdout + logs.stderr).count(code) for code in codes}))
 print('SLOW_STORAGE_AGGREGATES', json.dumps({key: {'count': len(values), 'maxMs': max(values), 'sumMsOverlapping': sum(values)} for key, values in storage.items()}))
