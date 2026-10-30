@@ -3,8 +3,8 @@ import fs from 'node:fs';import http from 'node:http';import assert from 'node:a
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const out='artifacts/catalog-resilience';fs.mkdirSync(out,{recursive:true});
 await build({entryPoints:['tests/browser/catalog-resilience-fixture.tsx'],bundle:true,format:'iife',jsx:'automatic',outfile:out+'/app.js',plugins:[{name:'fixture',setup(b){
- b.onResolve({filter:/next\/navigation|DealerBrowsingContext$/},a=>({path:a.path,namespace:'mock'}));
- b.onLoad({filter:/.*/,namespace:'mock'},a=>({loader:'jsx',resolveDir:process.cwd(),contents:a.path.includes('navigation')?'export const useRouter=()=>({refresh:()=>window.retry()});':`import React from 'react';export const useDealerBrowsing=()=>null;export const DealerLink=({prefetch,...props})=><a {...props}/>;`}));
+ b.onResolve({filter:/next\/(navigation|link)|DealerBrowsingContext$/},a=>({path:a.path,namespace:'mock'}));
+ b.onLoad({filter:/.*/,namespace:'mock'},a=>({loader:'jsx',resolveDir:process.cwd(),contents:a.path.includes('navigation')?'export const useRouter=()=>({refresh:()=>window.retry()});export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);':a.path==='next/link'?`import React from 'react';export default function Link({prefetch,...props}){return <a {...props}/>;}`:`import React from 'react';export const useDealerBrowsing=()=>null;export const DealerLink=({prefetch,...props})=><a {...props}/>;`}));
 }}]});
 const css=await postcss([tailwindcss({content:['apps/web/components/catalog/CatalogUnavailable.tsx','apps/web/components/catalog/CatalogHelpForm.tsx','apps/web/components/leads/PhoneInput.tsx','apps/web/components/legal/ConsentCheckbox.tsx']}),autoprefixer]).process('@tailwind base;@tailwind components;@tailwind utilities;:root{--ac-border:#d8dce5;--ac-surface:#fff;--ac-surface-2:#f3f5f8;--ac-text:#121826;--ac-muted:#677186;font-family:Arial}body{max-width:960px;margin:auto;padding:16px}button,select{padding:8px}',{from:undefined});
 const server=http.createServer((req,res)=>{if(req.url==='/app.css'){res.setHeader('Content-Type','text/css');res.end(css.css);return;}res.setHeader('Content-Type',req.url==='/app.js'?'text/javascript':'text/html');res.end(req.url==='/app.js'?fs.readFileSync(out+'/app.js'):'<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><div id="root"></div><script src="/app.js"></script>');});
@@ -12,18 +12,19 @@ await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromiu
 try{for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:900}});const errors=[],posts=[];
  await page.route('**/api/leads',async route=>{posts.push(route.request().postDataJSON());await route.fulfill({status:posts.length===1?503:200,json:{ok:posts.length>1}});});page.on('pageerror',e=>errors.push(String(e)));
- await page.clock.install();await page.goto('http://127.0.0.1:'+server.address().port);
+ await page.clock.install();await page.goto('http://127.0.0.1:'+server.address().port+'/?market=korea&page=5&city=Новокузнецк&dealer=example');
  await page.getByText('Машина 1',{exact:false}).waitFor();await page.getByRole('button',{name:'Выбрать',exact:true}).click();
- await page.getByLabel('Марка').selectOption('Hyundai');await page.getByRole('button',{name:'Повторить'}).waitFor();
+ await page.getByLabel('Марка').selectOption('Hyundai');await page.getByRole('button',{name:'Повторить',exact:true}).waitFor();
  assert.equal(await page.getByLabel('Марка').inputValue(),'Hyundai');assert.equal(await page.locator('article').count(),1);
  await page.getByText('Выбрано',{exact:true}).waitFor();assert.ok((await page.getByRole('status').innerText()).includes('не соответствует новым условиям'));
  assert.equal(await page.locator('.ac-pagination').isVisible(),false);assert.equal(await page.locator('.ac-catalog-more').isVisible(),false);
+ const recovery=page.getByRole('navigation',{name:'Восстановление страницы каталога'});assert.ok(await recovery.isVisible());const back=new URL(await recovery.getByRole('link').getAttribute('href'),'http://local');assert.equal(back.searchParams.get('page'),'4');assert.equal(back.searchParams.get('city'),'Новокузнецк');assert.equal(back.searchParams.get('dealer'),'example');assert.ok(await recovery.getByRole('button',{name:'Повторить загрузку',exact:true}).isVisible());
  assert.equal(await page.getByRole('link',{name:'Другой раздел'}).getAttribute('href'),'/other');
  assert.equal(await page.getByRole('link',{name:'Оставить заявку'}).count(),0,'retained state is a compact retry notice, not a lead form');
  assert.ok((await page.getByRole('status').boundingBox()).height<180,'retained notice stays compact');
  await page.screenshot({path:`${out}/${width}-retained.png`});
- await page.getByRole('button',{name:'Повторить'}).click();await page.getByText('Машина 2',{exact:false}).waitFor();assert.equal(await page.locator('[data-catalog-unavailable]').count(),0);
- await page.getByLabel('Марка').selectOption('Все');await page.getByRole('button',{name:'Повторить'}).waitFor();await page.clock.fastForward(120001);
+ await recovery.getByRole('button',{name:'Повторить загрузку',exact:true}).click();await page.getByText('Машина 2',{exact:false}).waitFor();assert.equal(await page.locator('[data-catalog-unavailable]').count(),0);
+ await page.getByLabel('Марка').selectOption('Все');await page.getByRole('button',{name:'Повторить',exact:true}).waitFor();await page.clock.fastForward(120001);
  assert.equal(await page.locator('article').count(),0);await page.getByRole('heading',{name:'Не удалось загрузить эту страницу'}).waitFor();
  assert.equal(await page.locator('[data-catalog-help-form]').count(),0,'callback is opt-in, not an error takeover');
  assert.equal(await page.locator('a[href*="topavto"]').count(),0,'public catalog failure must not promote another domain');
@@ -45,7 +46,7 @@ try{for(const width of [390,1440]){
  assert.equal(posts.length,2);assert.equal(posts[0].operationId,posts[1].operationId,'same pending lead operation prevents duplicate on retry');
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
  await page.screenshot({path:`${out}/${width}-catalog-unavailable.png`});
- await page.getByRole('button',{name:'Повторить'}).click();await page.getByText('Машина 2',{exact:false}).waitFor();
+ await page.getByRole('button',{name:'Повторить',exact:true}).click();await page.getByText('Машина 2',{exact:false}).waitFor();
  await page.getByRole('button',{name:'Другой каталог'}).click();assert.equal(await page.locator('article').count(),0,'never show another catalog or dealer snapshot');
  await page.getByRole('button',{name:'Пустой успешный поиск'}).click();await page.getByText('Совпадений нет',{exact:false}).waitFor();assert.equal(await page.locator('[data-catalog-unavailable]').count(),0);
  assert.deepEqual(errors,[]);await page.screenshot({path:`${out}/${width}-empty.png`});await page.close();

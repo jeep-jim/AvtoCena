@@ -1,4 +1,5 @@
 "use client";
+import {catalogPageErrorMessage} from "./page-request-error";
 import Link from 'next/link';
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
@@ -123,8 +124,8 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
       if(retry&&"incomplete" in result&&result.incomplete&&!result.ids.length)throw Error("incomplete_empty_retry");
       setBatches(current => [...(retry?current.slice(0,-1):current), {incomplete:"incomplete" in result&&Boolean(result.incomplete),cursor:retry?last.cursor:nextCursor??undefined, nextCursor:"nextCursor" in result && typeof result.nextCursor === "string" ? result.nextCursor : "nextCursor" in result && result.nextCursor === null ? null : undefined, page: result.page, cards: result.cards, count: result.ids.length, hasMore:"hasMore" in result && typeof result.hasMore === "boolean" ? result.hasMore : undefined}]);
       setTotal(result.total);
-    } catch {
-      if (mounted.current && activeKey.current===key) setError("Не удалось загрузить автомобили. Попробуйте ещё раз — список сохранён.");
+    } catch (error) {
+      if (mounted.current && activeKey.current===key) setError(catalogPageErrorMessage(error));
     } finally {lock.current = false; if (mounted.current && activeKey.current===key) setBusy(false);}
   }
   return <div ref={list}>

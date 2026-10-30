@@ -1,6 +1,7 @@
 'use client';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {useDealerBrowsing} from '@/components/dealers/DealerBrowsingContext';
+import {CatalogPageRecovery} from './CatalogPageRecovery';
 import {CatalogUnavailable} from './CatalogUnavailable';
 // Only this mounted results area holds one successful render, never a shared
 // server cache or another dealer/market. It is display-only after a failure.
@@ -24,6 +25,7 @@ export function RetainedCatalogResults({scope,error,children}:{scope:string;erro
   <div data-catalog-retained={saved?'true':undefined}>
    {error?saved?.children:children}
   </div>
+  {saved&&<CatalogPageRecovery/>}
   <style>{'[data-catalog-retained="true"] .ac-pagination,[data-catalog-retained="true"] .ac-catalog-more{display:none!important}'}</style>
  </>;
 }
