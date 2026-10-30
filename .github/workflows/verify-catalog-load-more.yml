@@ -42,6 +42,10 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
+      - name: Verify delayed Japan and Korea counts and cursor isolation
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/ajes-pagination.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
