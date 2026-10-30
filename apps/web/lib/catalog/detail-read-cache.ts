@@ -14,6 +14,8 @@ export class DetailReadCache<T> {
     maxQueued?: number; queueTimeoutMs?: number;
     /** Reserve shared capacity for other work without raising total concurrency. */
     groupConcurrency?: Record<string, number>;
+    /** A serialized slow group may wait for its predecessor within a bounded deadline. */
+    groupQueueTimeoutMs?: Record<string, number>;
     /** Display-only data. Never enable for prices, permissions or source admission. */
     staleWhileRevalidateMs?: number;
     sizeOf?: (value: T) => number | undefined | Promise<number | undefined>;
@@ -68,7 +70,7 @@ export class DetailReadCache<T> {
             const position=this.waiters.indexOf(next);
             if(position>=0)this.waiters.splice(position,1);
             reject(new Error("detail_cache_queue_timeout"));
-          },this.options.queueTimeoutMs ?? 5_000);
+          },this.options.groupQueueTimeoutMs?.[admissionGroup] ?? this.options.queueTimeoutMs ?? 5_000);
           this.waiters.push(next);
         });
       } else reserve();

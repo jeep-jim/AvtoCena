@@ -19,7 +19,9 @@ export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
   // A slow detail may use one slot; lists and filter directories retain the other.
   // Keep the total supplier concurrency at two, including all request kinds.
-  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,groupConcurrency:{detail:1},shouldCache:value=>!value.stale});
+  // A queued detail may wait for the preceding 45-second read instead of failing
+  // at the ordinary five-second queue deadline solely due to serialization.
+  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale});
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
   const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});

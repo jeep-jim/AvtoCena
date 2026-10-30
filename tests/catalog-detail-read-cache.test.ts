@@ -112,3 +112,17 @@ test('group queue remains bounded, timed out entries release no capacity, failur
   release(); await firstFailure;
   assert.equal(await cache.get('b', async () => 'retry', 'b', 'detail'), 'retry');
 });
+
+test('serialized details can wait for their predecessor without extending list queue deadlines', async t => {
+  t.mock.timers.enable({apis: ['setTimeout']});
+  const cache = new DetailReadCache<string>({maxEntries: 8, maxBytes: 1000, ttlMs: 10000, concurrency: 2, groupConcurrency: {detail: 1}, queueTimeoutMs: 5000, groupQueueTimeoutMs: {detail: 50000}});
+  let releaseDetail!: () => void, releaseList!: () => void;
+  const first = cache.get('a', async () => {await new Promise<void>(r => releaseDetail = r); return 'a';}, 'a', 'detail');
+  const second = cache.get('b', async () => 'b', 'b', 'detail');
+  const list = cache.get('list', async () => {await new Promise<void>(r => releaseList = r); return 'list';});
+  const excess = assert.rejects(cache.get('another-list', async () => 'must not run'), /detail_cache_queue_timeout/);
+  t.mock.timers.tick(5001); await excess;
+  t.mock.timers.tick(39999); releaseDetail(); await first;
+  assert.equal(await second, 'b');
+  releaseList(); await list;
+});
