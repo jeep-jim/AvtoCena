@@ -66,6 +66,8 @@ jobs:
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-projection-serial-read.test.ts tests/catalog-projection-parts.test.ts tests/catalog-storage-serialization.test.ts tests/encyclopedia-index-transport.test.ts tests/regcloud-storage-compatibility.test.ts tests/storage.test.ts tests/storage-read-fairness.test.ts
       - name: Prepare private encyclopedia index for this release
         env:
+          # Offline preparation reads immutable history; visitor deadlines stay unchanged.
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
           YC_OBJECT_STORAGE_REGION: us-east-1
