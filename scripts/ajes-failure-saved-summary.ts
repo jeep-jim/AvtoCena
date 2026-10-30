@@ -6,6 +6,10 @@ import {readAjesQueryCache} from '../apps/web/lib/catalog/ajes-query-cache';
 const kinds=['list','detail','count','models','makes','colors'];
 async function main(){
  const storage=getJsonStorage();
+ // Configuration chronology only: never print or decrypt the saved credential.
+ const config:any=await storage.readJson('integrations/ajes/config.json',null);
+ const configAt=Date.parse(typeof config?.updatedAt==='string'?config.updatedAt:'');
+ console.log('AJES_CONFIGURATION_METADATA',JSON.stringify({source:config?'saved':process.env.AJES_API_PASSWORD?'environment':'missing',updatedAt:Number.isFinite(configAt)?new Date(configAt).toISOString():null}));
  // Fixed continuation slots cannot be replaced by a later page-one failure.
  for(const table of ['korea','stats'])for(const page of [1,3,5,6]){
   const v:any=await storage.readJson(`integrations/ajes/catalog-failure-pages/${table}-list-${page}.json`,null);
