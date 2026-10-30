@@ -223,3 +223,8 @@
 - Keep functional failures blocking: unavailable responses, HTTP failures, incomplete/error streams, empty error pages, wrong release identity, invalid prices/data, publication/security guards. Bounded network and process deadlines prevent indefinite hangs; they are availability safeguards, not 1–2 second performance targets.
 - Install accumulated tested functional corrections and then improve remaining slow paths separately. Keep one coordinated release and record code/installed/live verification separately.
 - New page navigation should start at the top, except agreed explicit anchors (including dealer pages). Audit this across markets and page types. Preserve Back restoration, append position and in-place interactions; do not implement a blanket scroll reset on every render. This navigation task is recorded, not yet implemented.
+
+
+# Owner China schedule update — 30.10.2026
+
+- China refresh now starts daily at 21:00 Asia/Novokuznetsk (14:00 UTC), three hours earlier than the previous midnight start. This supersedes the 24.10 midnight rule for China only. Preserve all other market schedules, source switches, cadence guards, publication locks and active runs.
