@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Measure local inventory routes and read aggregate diagnostics
+      - name: Read existing error categories without more catalog requests
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
@@ -25,4 +25,4 @@ jobs:
           trap 'rm -f "$key_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' < .github/diagnostics/runtime-review.py
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 - --logs-only' < .github/diagnostics/runtime-review.py
