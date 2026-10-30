@@ -170,7 +170,9 @@ jobs:
           YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 npx tsx scripts/archive-runtime-reference-sources.mjs
           export AVTOCENA_CALCULATION_VERSION=$(node scripts/catalog-calculation-version.mjs)
           npx tsx scripts/regcloud-verify-conditional-read.ts
-          npx tsx scripts/regcloud-prepare-prices.mjs
+          # Offline authoritative parity reads full market projections; keep a bounded
+          # two-minute storage deadline here, without changing visitor request budgets.
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 npx tsx scripts/regcloud-prepare-prices.mjs
           npx tsx scripts/prepare-catalog-colors.mjs
           node --import tsx --input-type=module <<'CUTOVER'
           const module=await import('./apps/web/lib/catalog/china-feed-cutover.ts');
