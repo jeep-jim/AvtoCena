@@ -37,7 +37,8 @@ test('ready cards do not wait for optional brand/model directories; exact select
   const lateNodes=walk(lateRoot),late=lateNodes.find(n=>n.type?.name==='AjesIndependentCount');assert.ok(late);
   countResult=Promise.resolve({total:42});
   const counterNodes=walk(await late.type(late.props));
-  assert.ok(counterNodes.some(n=>n.props?.text==='42'));
+  assert.ok(counterNodes.some(n=>n.props?.text==='42'&&n.props?.total===42),'late aggregate includes the numeric pagination value');
+  assert.ok(lateNodes.some(n=>n.props?.resultQueryKey===countKey),'pagination and independent aggregate use the identical query identity');
   assert.deepEqual(JSON.parse(countKey),lateNodes.find(n=>n.props?.auctionResults).props.initial);
  }finally{delete (globalThis as any).__ajesTest;}
 });
