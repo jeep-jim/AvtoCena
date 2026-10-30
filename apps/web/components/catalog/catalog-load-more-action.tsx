@@ -1,4 +1,4 @@
-import {CatalogPageRequestError,CATALOG_PAGE_REQUEST_TIMEOUT_MS} from "@/lib/catalog/page-request-error";
+import {CatalogPageRequestError,CATALOG_PAGE_REQUEST_TIMEOUT_MS} from "./page-request-error";
 import { CatalogCard } from "./CatalogCard";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
 

@@ -1,5 +1,5 @@
 "use client";
-import {catalogPageErrorMessage} from "@/lib/catalog/page-request-error";
+import {catalogPageErrorMessage} from "./page-request-error";
 import Link from 'next/link';
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
