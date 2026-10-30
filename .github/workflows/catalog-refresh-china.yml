@@ -2,8 +2,8 @@ name: Catalog refresh china
 on:
   workflow_dispatch:
   schedule:
-    # 00:00 Asia/Novokuznetsk (UTC+7); existing source/cadence guards remain.
-    - cron: "0 17 * * *"
+    # 21:00 Asia/Novokuznetsk (UTC+7), three hours earlier by owner request 30.10.2026.
+    - cron: "0 14 * * *"
   push:
     branches: [main]
     paths: ['.github/market-runs/china-refresh.json']
