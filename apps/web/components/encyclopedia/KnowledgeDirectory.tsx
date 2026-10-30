@@ -1,4 +1,5 @@
 'use client';
+import {CatalogPagination,catalogPageNumbers} from '@/components/catalog/CatalogPagination';
 import {Fragment,useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {useRouter,useSearchParams} from 'next/navigation';
 import {BrandLogoVisual} from '@/components/catalog/BrandLogoRail';
@@ -51,12 +52,13 @@ export function KnowledgeDirectory({models,canEdit,pagination}:{models:Summary[]
  useEffect(()=>{setPage(1);},[params.toString()]);
  const ordered=useMemo(()=>[...models].sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru',{numeric:true})),[models]);
  const total=pagination?.total??ordered.length,pages=Math.max(1,Math.ceil(total/40)),current=Math.min(pagination?.page??page,pages);
+ const pageHref=(next:number)=>{const query=new URLSearchParams(params);query.set('page',String(next));return `/cars/autocatalog?${query}`;};
  const changePage=(next:number)=>{if(pagination){const query=new URLSearchParams(params);query.set("page",String(next));window.history.pushState(null,'',`/cars/autocatalog?${query}`);}else setPage(next);};
  return <section ref={list} className="ac-model-list" aria-label="Модели автомобилей">
   <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span>Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span><span/></div>
   {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map((model,index,visible)=><Fragment key={model.id}>{(index===0||visible[index-1].make!==model.make)&&<h2 className="ac-model-make-heading" data-ency-make={model.make}><BrandLogoVisual brand={model.make}/><span>{model.make}</span></h2>}<ModelRow model={model} canEdit={canEdit}/></Fragment>)}
   {!models.length&&<p>По выбранным параметрам моделей не найдено.</p>}
   <p className="ac-ency-muted">* Количество на {models.find(m=>m.directorySnapshot)?.directorySnapshot?.capturedAt?new Date(models.find(m=>m.directorySnapshot)!.directorySnapshot!.capturedAt).toLocaleDateString('ru-RU'):'дату сохранения'}. «До» — верхняя граница количества.</p>
-  {pages>1&&<nav className="ac-ency-pagination" aria-label="Страницы моделей"><button className="ac-ency-button" disabled={current===1} onClick={()=>changePage(current-1)}>Назад</button><span>{current} / {pages} · {counted(total,'model')}</span><button className="ac-ency-button" disabled={current===pages} onClick={()=>changePage(current+1)}>Далее</button></nav>}
+  {pages>1&&<div className="ac-ency-pagination"><CatalogPagination page={current} pageCount={pages} label="Страницы моделей" links={catalogPageNumbers(current,pages).map(page=>({page,href:pageHref(page)}))} previousHref={current>1?pageHref(current-1):undefined} nextHref={current<pages?pageHref(current+1):undefined} onNavigate={changePage}/></div>}
  </section>;
 }
