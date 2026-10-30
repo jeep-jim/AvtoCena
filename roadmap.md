@@ -17993,3 +17993,14 @@ PR1647merged6c2eb79: VM-localbounded audit41002932206/job123891254826SUCCESS к�
 PR1648merged5b628f1 перевёлдиагностикувlogs-only безновыхcatalog/providerзапросов.41003396747/job123892720701SUCCESS:203detail_cache_queue_timeout,13catalog_page_unavailable в≤30мин/10000строк;object_storage_response_timeout/OOM/FATAL/TypeError0. CPUвторогоснимка122,4%,memory5,994GiB. Не приписыватьвсеошибкиконкретнымпробам. Обнаруженытысячимедленныхbudget/catalogreads;метрикаreadJsonWithMeta включаетклиентскийразбор/ожидание,нечистуюlatencyS3.
 
 Подробныйразбориочередностьисправленийвdocs/operations/2026-10-30-runtime-review.md. Изученобщийgenerationwriter, broadcalculationfingerprint, local/AJESпути, RAMphoto-cache. Сравненыисходникис23октября9862557;этонеустановленныйдоказаннорабочийbaseline. Очистка, новаяархитектура,увеличениелимитов,отключениеguards не выполнялись. Следитьзаединственнымповторнымrelease, затемживойблог; общаяскоростьиКореянеприняты.
+
+
+## 30.10.2026, 11:55 Красноярск — подтверждён шестичасовой лимит Китая; уточнён план ревизии
+
+В Annotations запуска China40958959817 подтверждена причина отмены publish123758079331: The job has exceeded the maximum execution time of 6h0m0s. Collect SUCCESS; publish29.10 21:59:49UTC–30.10 04:00:25UTC. Создание scheduled run21:34:40UTC позже прежнего cron17UTC; причина задержки самого старта не установлена. Это дополняет прежние записи с неизвестной причиной отмены, не отменяет историю. Перенос Китая на14UTC/21:00 уже сохранён; таймаут и safeguards не увеличивались.
+
+Отчёт docs/operations/2026-10-30-runtime-review.md дополнен понятной таблицей проблем/следующих действий/приёмки. Код readBudgetCountIndex при временных ошибках современного селектора может пробовать более старые форматы вплоть до общего индекса; вклад в live queue timeouts пока не измерен. Это кандидат адресного разбора, не объявленная корневая причина всех ошибок.
+
+Прочитан cleanup wrapper: catalog-storage-maintenance.mjs принудительно выполняет preview, затем apply независимо от входного DRY_RUN; его нельзя запускать как read-only пробу. Прямой clean-object-storage соблюдает dry-run, но читает все актуальные internal chunks ради image references. Следующий безопасный план generations/internal — metadata и manifests отдельно, без чтения всех объявлений/удаления/lock; фотографии требуют отдельного подтверждения ссылок. На REG очистка не запускалась.
+
+CI PR1647/1648/1649 SUCCESS подтверждены. Единственный deploy40992650658 attempt2/job123889598900 продолжает Prepare exact price indexes; build/index/image SUCCESS, переключения ещё нет. Индексы характеристик уже выведены в журнале; идёт warmup цен. Новые deploy/collect не запущены; факт установки и живой блог нужно записать после завершения. Корея и общая скорость не приняты.
