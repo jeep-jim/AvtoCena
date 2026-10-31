@@ -38,7 +38,7 @@ await Promise.all(Array.from({length:4},async()=>{for(;;){
  if(summary&&(!record||record.revision!==summary.revision))throw Error('encyclopedia_revision_mismatch');
  const variants=appendMissingObservations(record?.variants||[],observed.variants),added=variants.length-(record?.variants.length||0);checkedModels++;
  if(!added)continue;
- const next=record?{...record,variants,revision:randomUUID(),updatedAt:at,previousKey:summary.key,directorySnapshot:summary.directorySnapshot||record.directorySnapshot}: {...observed,variants};
+ const next=record?{...record,variants,revision:randomUUID(),updatedAt:at,previousKey:summary.key,directorySnapshot:summary.directorySnapshot||record.directorySnapshot}: {...observed,variants,manualCreated:true};
  const key=`${ROOT}/revisions/${next.id}/${next.revision}.json`;
  if(apply)await store.writeJson(key,next,{ifNoneMatch:'*'});
  const updated=summarize(next,key);if(summary)prepared.set(summary.id,updated);else additions.push(updated);

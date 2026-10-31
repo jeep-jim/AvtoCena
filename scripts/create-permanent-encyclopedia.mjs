@@ -9,6 +9,9 @@ import {ajesDetailValues,ajesSourceDetails} from '../apps/web/lib/catalog/ajes-s
 import {catalogVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission.ts';
 const storage=getJsonStorage();if(storage.driver!=='object')throw Error('durable_object_storage_required');
 const marker=JSON.parse(await fs.readFile('.github/market-runs/encyclopedia-snapshot.json','utf8'));
+if(marker.operation==='publish-owner-requested-models'){
+ await import('./encyclopedia/publish-owner-requested-models.mjs');process.exit(0);
+}
 if(marker.operation==='repair-saved-model-metadata'){
  await import('./encyclopedia/repair-saved-model-metadata.mjs');process.exit(0);
 }
