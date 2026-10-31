@@ -79,7 +79,7 @@
 .ac-ency-editor-body,.ac-ency-field-group{border:0;padding:0;margin:0;min-width:0}
 .ac-ency-field-group+.ac-ency-field-group{margin-top:20px}
 .ac-ency-field-group legend{font-size:13px;font-weight:800;margin-bottom:10px}
-.ac-ency-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ac-ency-fields{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.ac-ency-record-details{display:block}.ac-ency-record-details .ac-ency-read-grid{grid-template-columns:repeat(5,minmax(0,1fr));margin:0 0 12px}.ac-ency-fields input,.ac-ency-fields select{width:100%;min-height:42px}.ac-ency-fields label{padding:8px;border:1px solid var(--ac-border);border-radius:10px;background:var(--ac-surface-2)}
 .ac-ency-field-wide{grid-column:1/-1}
 .ac-ency-verification{max-width:320px;margin-top:20px}
 .ac-ency-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;margin:16px 0;font-size:12px}
@@ -164,3 +164,6 @@ html[data-theme="light"] .ac-ency-page input:not([type=checkbox]),html[data-them
 .ac-model-row-toggle:focus-visible{outline:2px solid #ff353d;outline-offset:-2px}
 .ac-model-list-photo{position:relative;z-index:1}
 .ac-directory-rail-column::-webkit-scrollbar{display:none}
+
+@media(max-width:1100px){.ac-ency-record-details .ac-ency-read-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.ac-ency-record-details .ac-ency-read-grid{grid-template-columns:1fr}}
