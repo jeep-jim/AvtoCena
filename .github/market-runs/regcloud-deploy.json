@@ -108,9 +108,9 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-authorized PR1668 encyclopedia UI polish only: hide rail scrollbars, widen alphabet, replace Edit column with accessible whole-row disclosure. All five head workflows passed, including dark/light 320/390/1440 browser fixture. Preserve existing catalog/calculation/provider/synchronization logic and all release guards.",
+  "reason": "Owner-authorized PR1669 encyclopedia compact inline editing grid. Five final-head checks passed, including full regression/typecheck/build and desktop/mobile dark/light save fixture. Saved-variant reconciliation is independently running as workflow 41207575163; no catalog, calculation, provider, cache, schedule or release-guard logic changes.",
   "ideaReports": [],
-  "requestedAt": "2026-10-31T09:49:46.374Z",
+  "requestedAt": "2026-10-31T14:04:38.807Z",
   "preparationMarkets": [
     "china",
     "korea",
