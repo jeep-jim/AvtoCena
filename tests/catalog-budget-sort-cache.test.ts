@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {BudgetSortOrderCache,type BudgetSortContext} from '../apps/web/lib/catalog/budget-sort-order-cache';
-import {budgetRowsBytes,budgetSelectionBytes,resetBudgetRowSizes} from '../apps/web/lib/catalog/budget-row-size';
+import {budgetRowsBytes,budgetSelectionBytes,budgetIndexBytes,resetBudgetRowSizes} from '../apps/web/lib/catalog/budget-row-size';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 const row=(id:string):any=>['china',123,null,null,false,{id,make:'Example',block:0}];
 test('reuses positions after short selection TTL only with identical membership and every current context input',async()=>{
@@ -24,6 +24,7 @@ test('immutable tuple byte counts are exact, reused across selections and measur
  const expected=Buffer.byteLength(JSON.stringify([a]));reads=0;
  assert.equal(await budgetRowsBytes([a]),expected);assert.equal(await budgetRowsBytes([a]),expected);assert.equal(reads,1);
  const value={generationId:'g',cardVersion:3,indexKey:1,rows:[a]};assert.equal(await budgetSelectionBytes(value),Buffer.byteLength(JSON.stringify(value)));
+ for(const index of [value,{...value,otherRows:[]},{...value,otherRows:[row('unpriced')]}])assert.equal(await budgetIndexBytes(index),Buffer.byteLength(JSON.stringify(index)));
  const rows=Array.from({length:2000},(_,i)=>row(String(i)));setImmediate(()=>{yielded=true;});await budgetRowsBytes(rows);assert.equal(yielded,true);
 });
 test('clearing a cache during async byte measurement cannot repopulate the cleared epoch',async()=>{

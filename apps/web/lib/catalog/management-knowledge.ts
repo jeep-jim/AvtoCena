@@ -153,9 +153,10 @@ export async function rememberEncyclopediaModel(record:import('../encyclopedia/s
  cache.clear();
 }
 
-export function encyclopediaWithManagement(record:import('../encyclopedia/schema').ModelRecord,index:ManagementKnowledge){
- const variants=record.variants.map(v=>({...v,...managementParameters({...v,id:`encyclopedia:${record.id}:${v.id}`,make:record.make,model:record.model},index)}));
- const contributions=Object.values(index.models[modelKey(record.make,record.model)]||{}).filter(f=>!f.offerId.startsWith('encyclopedia:'));
+export function encyclopediaWithManagement(record:import('../encyclopedia/schema').ModelRecord,index:ManagementKnowledge,year?:number|null){
+ const selected=(value:number|undefined)=>year===undefined||(year===null?!value:value===year);
+ const variants=record.variants.filter(v=>selected(v.year)).map(v=>({...v,...managementParameters({...v,id:`encyclopedia:${record.id}:${v.id}`,make:record.make,model:record.model},index)}));
+ const contributions=Object.values(index.models[modelKey(record.make,record.model)]||{}).filter(f=>selected(f.year)&&!f.offerId.startsWith('encyclopedia:'));
  for(const fact of contributions){
   if(variants.some(v=>v.year===fact.year&&Object.entries(fact.values).every(([k,value])=>!known(value)||known((v as any)[k])&&same(k,(v as any)[k],value))))continue;
   variants.push({...fact.values,id:`staff:${createHash('sha256').update(fact.offerId).digest('hex').slice(0,24)}`,year:fact.year,markets:[],status:'review',observedCount:0,manualEditedAt:fact.savedAt});

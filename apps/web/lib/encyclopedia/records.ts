@@ -1,9 +1,10 @@
+import {DetailReadCache} from '../catalog/detail-read-cache';
 import {compactModel} from './compact';
 import {isEncyclopediaCar} from './scope';
 import {createHash,randomUUID} from 'node:crypto';
 import type {AuthUser} from '../auth';
 import {isPlatformTeam} from '../platform-access';
-import {getJsonStorage,mutateDataJson} from '../data';
+import {getJsonStorage,mutateDataJson,jsonReadByteLength} from '../data';
 import {fuelFilterKey,EncyclopediaInputError,cleanText,cleanVariant,numberFields,textFields,safeUrl,type Variant,type ModelRecord,type ModelSummary,type EncyclopediaManifest} from './schema';
 export const ROOT='knowledge/encyclopedia/v1';
 export const MANIFEST=`${ROOT}/manifest.json`;
@@ -13,8 +14,22 @@ export const token=(v:unknown)=>cleanText(v).normalize('NFKC').toLowerCase().rep
 export const modelId=(make:string,model:string)=>hash(`${token(make)}:${token(model)}`);
 export function variantSignature(row:Partial<Variant>){return JSON.stringify([...textFields.filter(x=>!['notes','sourceUrl'].includes(x)).map(x=>token(row[x])),...numberFields.map(x=>row[x]??null)]);}
 export function summarize(record:ModelRecord,key:string):ModelSummary{return {directorySnapshot:record.directorySnapshot,manualCreated:Boolean(record.manualCreated),compact:compactModel(record),id:record.id,make:record.make,model:record.model,photo:record.photo,photoMarket:record.photoMarket,hasUnknownYear:record.variants.some(v=>!v.year),years:[...new Set(record.variants.flatMap(v=>v.year?[v.year]:[]))].sort((a,b)=>b-a),fuels:[...new Set(record.variants.flatMap(v=>v.fuel?[fuelFilterKey(v.fuel)]:[]))],markets:[...new Set(record.variants.flatMap(v=>v.markets))],variants:record.variants.length,verified:record.variants.filter(v=>v.status==='verified').length,power30:record.variants.filter(v=>v.power30MinKw!==undefined).length,needs30:record.variants.filter(v=>/electric|hybrid|hev/i.test((v.fuel||'')+' '+(v.powertrainKind||''))&&v.power30MinKw===undefined).length,key,revision:record.revision,updatedAt:record.updatedAt};}
-export const readEncyclopedia=async()=>{const manifest=await getJsonStorage().readJson<EncyclopediaManifest|null>(MANIFEST,null);return manifest?{...manifest,models:manifest.models.filter(isEncyclopediaCar)}:null;};
-export async function readModel(id:string,manifest?:EncyclopediaManifest|null){if(!/^[a-f0-9]{24}$/.test(id))return null;const m=manifest===undefined?await readEncyclopedia():manifest;const summary=m?.models.find(x=>x.id===id);return summary?getJsonStorage().readJson<ModelRecord|null>(summary.key,null):null;}
+let manifestRead:Promise<EncyclopediaManifest|null>|undefined;
+export function readEncyclopedia(){
+ // Coalesce concurrent reads only; a later request still resolves fresh state.
+ if(!manifestRead)manifestRead=getJsonStorage().readJson<EncyclopediaManifest|null>(MANIFEST,null).then(manifest=>manifest?{...manifest,models:manifest.models.filter(isEncyclopediaCar)}:null).finally(()=>{manifestRead=undefined;});
+ return manifestRead;
+}
+const revisionCache=new DetailReadCache<ModelRecord|null>({maxEntries:32,maxBytes:64*1024*1024,ttlMs:3600_000,concurrency:2,sizeOf:jsonReadByteLength,shouldCache:value=>value!==null});
+export async function readModel(id:string,manifest?:EncyclopediaManifest|null){
+ if(!/^[a-f0-9]{24}$/.test(id))return null;
+ // Always resolve the current revision first. Immutable bodies can be reused;
+ // the mutable manifest and edit conflict checks are never served stale.
+ const m=manifest===undefined?await readEncyclopedia():manifest,summary=m?.models.find(x=>x.id===id);
+ if(!summary)return null;
+ const read=()=>getJsonStorage().readJson<ModelRecord|null>(summary.key,null);
+ return summary.key.startsWith(`${ROOT}/revisions/${id}/`)?revisionCache.get(summary.key,read):read();
+}
 export class EncyclopediaConflict extends Error{}
 export async function editModel(id:string,input:Record<string,unknown>,user:AuthUser){
  if(!canEditEncyclopedia(user))throw new EncyclopediaInputError('Доступ запрещён.');

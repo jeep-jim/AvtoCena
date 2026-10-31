@@ -19,3 +19,11 @@ export async function budgetSelectionBytes(value:{rows:BudgetCountRow[];[key:str
  if(!value)return 4;
  return Buffer.byteLength(JSON.stringify({...value,rows:[]}))-2+await budgetRowsBytes(value.rows);
 }
+/** Restored selectors have no original JSON byte count. Measure in bounded
+ * batches instead of allocating a second full-market JSON string. */
+export async function budgetIndexBytes(value:{rows:BudgetCountRow[];otherRows?:BudgetCountRow[];[key:string]:unknown}|null){
+ if(!value)return 4;
+ const header={...value,rows:[],...(value.otherRows?{otherRows:[]}: {})};
+ return Buffer.byteLength(JSON.stringify(header))-2+await budgetRowsBytes(value.rows)
+  +(value.otherRows?await budgetRowsBytes(value.otherRows)-2:0);
+}

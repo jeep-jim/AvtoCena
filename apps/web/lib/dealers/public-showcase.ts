@@ -15,11 +15,12 @@ import {
 } from "./showcase-model";
 export {publicRail} from './public-rail';
 import {publicRail} from './public-rail';
-export async function getSpecialOffer(value: string, preview = false) {
+export async function getSpecialOffer(value: string, preview = false, selectedOnly = false) {
   const parsed = parseSpecialId(value);
   if (!parsed) return null;
   const stored = await readShowcase(parsed.dealerId);
-  const showcase = stored ? await withDealerRate(preview?stored:await availableShowcase(stored)) : null;
+  const available=stored?(preview?stored:await availableShowcase(stored)):null;
+  const showcase = available ? await withDealerRate(selectedOnly?{...available,offers:available.offers.filter(o=>o.id===parsed.id)}:available) : null;
   if (!showcase) return null;
   const offer = showcase.offers.find(
     (o) => o.id === parsed.id && (preview || (o.status === "published" && offerSectionEnabled(showcase,o))),

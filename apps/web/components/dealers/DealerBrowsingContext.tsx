@@ -12,7 +12,7 @@ export function DealerLink({href,onClick,scroll,children,...props}:ComponentProp
  const dealer=useDealerBrowsing();const city=useSelectedCity();const router=useRouter();const [pending,startTransition]=useTransition();
  const target=typeof href==='string'?dealerBrowsingHref(href,dealer,city):href;
  const catalog=typeof href==='string' && (href.split('?')[0]==='/cars'||href.split('?')[0]==='/cars/green');
- return <Link {...props} href={target} prefetch={catalog?false:props.prefetch} data-no-route-loader={catalog?"true":props["data-no-route-loader"]} aria-busy={catalog&&pending||undefined} scroll={scroll??(catalog?false:undefined)} onClick={event=>{
+ return <Link {...props} style={catalog&&pending?{...props.style,boxShadow:"inset 0 -2px currentColor",opacity:0.7}:props.style} href={target} prefetch={catalog?false:props.prefetch} data-no-route-loader={catalog?"true":props["data-no-route-loader"]} aria-busy={catalog&&pending||undefined} scroll={scroll??(catalog?false:undefined)} onClick={event=>{
   onClick?.(event);
   if(catalog&&!event.defaultPrevented&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey&&event.button===0&&(!props.target||props.target==='_self')&&!props.download&&typeof target==='string'){
    event.preventDefault();if(pending)return;
@@ -20,7 +20,7 @@ export function DealerLink({href,onClick,scroll,children,...props}:ComponentProp
    if(fromCatalog)rememberFilterScroll(target);
    startTransition(()=>{router.push(target,{scroll:scroll??!fromCatalog});});
   }
- }}>{children}{catalog&&pending&&<span role="status" className="ml-2 text-xs">Открываем…</span>}</Link>;
+ }}>{children}{catalog&&pending&&<span role="status" className="sr-only">Открываем…</span>}</Link>;
 }
 export function DealerBrowsingProvider({dealer,children,profile=false}:{dealer:DealerBrowsingContext|null;children:ReactNode;profile?:boolean}){
  const pathname=usePathname();

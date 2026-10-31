@@ -1,8 +1,6 @@
 name: One-off navigation CPU diagnosis
 on:
-  push:
-    branches: [main]
-    paths: [.github/workflows/navigation-diagnosis.yml]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
