@@ -20,6 +20,15 @@ fi
 release=$1
 calculator=$2
 prewarm=${3:-0}
+export AVTOCENA_RELEASE_MARKETS="${4:-}"
+python3 - "$AVTOCENA_RELEASE_MARKETS" <<'SCOPE'
+import sys
+scope=sys.argv[1]
+if scope:
+ markets=scope.split(',')
+ assert len(markets)==len(set(markets)) and all(m in ['china','korea','japan','europe','uae','georgia'] for m in markets), 'release_market_scope_invalid'
+print('Activation market scope:',scope or 'all')
+SCOPE
 [[ "$prewarm" = 0 || "$prewarm" = 1 ]]
 [[ "$calculator" =~ ^[a-f0-9]{64}$ ]]
 [[ "$release" =~ ^[a-f0-9]{40}$ ]]
@@ -96,9 +105,10 @@ for attempt in $(seq 1 30); do
  sleep 1
 done
 python3 - "$port" "$release" "$prewarm" <<'PY'
-import urllib.request,urllib.error,time,json,sys,re
+import urllib.request,urllib.error,time,json,sys,re,os
+markets=os.environ.get("AVTOCENA_RELEASE_MARKETS", "").split(",") if os.environ.get("AVTOCENA_RELEASE_MARKETS") else []
 base='http://127.0.0.1:'+sys.argv[1]
-for path in ['/api/health','/','/cars','/']:
+for path in (['/api/health','/login','/autocalc'] if markets else ['/api/health','/','/cars','/']):
  t=time.monotonic()
  with urllib.request.urlopen(base+path,timeout=90) as r:b=r.read();assert r.status==200
  elapsed=time.monotonic()-t
@@ -109,7 +119,7 @@ for path in ['/api/health','/','/cars','/']:
  print(json.dumps({'path':path,'seconds':round(elapsed,3),'bytes':len(b)}),flush=True)
 # Prepare expensive first requests on the candidate, before visitors can reach it.
 # No background polling: this runs once per authorized release.
-for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/cars?sort=totalRub','/cars?sort=totalRubDesc']:
+for path in (['/cars?market='+m for m in markets] if markets else ['/cars?market=korea','/cars?market=japan','/cars?market=china','/cars?sort=totalRub','/cars?sort=totalRubDesc']):
  if sys.argv[3]=='1' and path=='/cars?sort=totalRub':
   # One bounded cold preparation on the isolated candidate. The unchanged
   # 120-second complete-response gate below must still pass afterwards.
@@ -131,6 +141,7 @@ for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/ca
 # Require the exact typed reason: generic 503, configuration and supplier failures
 # are NOT accepted by this release check. Keep all HTML/local price/auth gates above.
 for market, source in [('japan','ajes'),('korea','ajes'),('korea','existing'),('china','ajes')]:
+ if markets and market not in markets:continue
  # The local China budget has a separate exact-price snapshot from sorting.
  # Warm it once, then repeat the unchanged 30-second source-boundary gate.
  for cold in ([True,False] if sys.argv[3]=='1' and market=='china' else [False]):
