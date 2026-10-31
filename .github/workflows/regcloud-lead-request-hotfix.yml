@@ -1,0 +1,40 @@
+name: Regcloud — repair lead request proxy
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-lead-request-hotfix.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  repair:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit
+      - name: Reproduce private-state failure and verify corrected intake
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/lead-route-request.test.ts tests/lead-antispam.test.ts tests/lead-followups.test.ts tests/miniapp-lead-parity.test.ts tests/miniapp-lead-source.test.ts
+      - name: Apply exact-handler repair with rollback and HTTP validation
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'flock -w 30 /run/lock/avtocena-runtime-change.lock python3 -' < scripts/regcloud-lead-request-hotfix.py
