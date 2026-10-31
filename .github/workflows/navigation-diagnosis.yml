@@ -1,7 +1,7 @@
 name: One-off navigation diagnosis
 on:
   push:
-    branches: [diag/navigation-20261031]
+    branches: [main]
     paths: [.github/workflows/navigation-diagnosis.yml]
 permissions:
   contents: read
