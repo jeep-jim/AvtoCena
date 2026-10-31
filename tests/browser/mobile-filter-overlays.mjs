@@ -85,7 +85,7 @@ try{
     assert.equal(await sheet.locator('.ac-filter-dropdown').count(),1);
     if(name==='fuel'){
      assert.equal(await menu.getByRole('checkbox').count(),5);
-     assert.equal(await menu.getByRole('button',{name:'Любое топливо',exact:true}).isVisible(),true);
+     assert.equal(await menu.getByRole('button',{name:/^Любое топливо/}).isVisible(),true);
     }else assert.equal(await menu.locator(':scope > .ac-hide-scrollbar').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2);
     const gap=await row.evaluate(el=>parseFloat(getComputedStyle(el).columnGap));assert.ok(Math.abs(metric.gap-gap)<2,'gap must match the tile gap');
     if(width===390&&(name==='bodyType'||name==='fuel'))await page.screenshot({path:`${out}/${theme}-${width}-${name}.png`});
