@@ -1219,3 +1219,14 @@ Fresh main cdd4eef0cb889060115e4112a8924a1f5b2e16ba не изменился по
 Один bounded health01:29 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это текущий ответ прежнего выпуска, не приёмка публикации Китая или всех пользовательских сценариев.
 
 Все исторические failures, primary атрибуции, Green487/семь конфликтов, Direct green_feed_empty и sharedbudget binding failure сохранены. OWNERFREEZE вне прямой задачи сохраняется; authenticated save/fullsync и прочие остатки открыты. PR1641/drafts, REG capacity и старый China log не тронуты. Только Road/checklist append-only expected-parentCAS; наблюдение включено, следующий шаг — итог существующей публикации и новые primary результаты.
+
+
+## 01.11.2026, 03:04 Красноярск — Китай ещё публикуется; health не получен из-за Proxy CONNECT timeout
+
+Свежие main e5789b0df1a41498b6a67734e8432c30c2032af7 и Road/checklist прочитаны. AGENTS03336196, system-market-audit и связанные operations не изменились; новых primary результатов и PR после1673 нет, app deploy отсутствует.
+
+Единственный IN_PROGRESS workflow — existing China41223091606/publish124601674990. Шаг Publish markets through calculation and retention guards выполняется с00:17:45; plan SUCCESS,collect SKIPPED. Итоговый журнал, новый manifest и опубликованные количества пока не подтверждены. Длительность сама по себе не доказывает зависание, отказ или успех; новых запусков/отмен и повторного чтения старых журналов не было.
+
+Единственный bounded watch health03:03–03:04 завершился curl28:Proxy CONNECT aborted due to timeout. HTTP-ответ и payload не получены: это не HTTP502, не curl0 и не доказательство отказа приложения. Новые releaseSha/calculationVersion этим запросом не установлены; последний сохранённый успешный health01:29 имел dfaabde705030a1cd4c78c0afc6251379b276aa2 и4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Запрос не повторялся.
+
+OWNERFREEZE вне прямой задачи, все прежние failures/primary атрибуции и открытые цели сохранены. Authenticated save/fullsync не приняты; PR1641/drafts, REG capacity и старый China log не тронуты. Только Road/checklist append-only expected-parentCAS; наблюдение остаётся включённым. Далее — итог существующей China publication и новые primary результаты без runtime/deploy/repair/diagnostics/browser/provider/cleanup.
