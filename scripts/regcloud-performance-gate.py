@@ -2,7 +2,7 @@
 """Mandatory functional release acceptance with advisory speed measurements.
 Run on the VM: network/proxy latency from the audit environment is excluded.
 """
-import argparse,json,time,urllib.request,urllib.error,os,urllib.parse
+import argparse,json,time,urllib.request,urllib.error,os,urllib.parse,ipaddress
 from html.parser import HTMLParser
 
 # Owner decision 28.10.2026: speed targets are advisory, never a rollback trigger.
@@ -79,9 +79,25 @@ def validate(path,kind,status,body,release):
    if not value.get('ok') or value.get('releaseSha')!=release:raise AssertionError('performance_wrong_release')
   elif not value.get('items') or not value.get('total',0)>0:raise AssertionError('performance_empty_search')
 
+def probe_headers(base,path,kind):
+ headers={'User-Agent':'AvtoCena-release-acceptance/1.0','Connection':'close','Content-Type':'application/json','Origin':'https://avtocena.com'}
+ market=urllib.parse.parse_qs(urllib.parse.urlsplit(path).query).get('market',[''])[0]
+ if kind=='catalog' and market in ('korea','japan'):
+  # SSH is the authenticated proxy for this runner-initiated candidate visit.
+  # Use only its observed TCP peer, never a chosen/server/borrowed address.
+  if urllib.parse.urlsplit(base).hostname not in ('127.0.0.1','::1'):
+   return headers # Public nginx supplies the real network peer itself.
+  connection=os.environ.get('SSH_CONNECTION','').split()
+  if len(connection)!=4:raise AssertionError('release_probe_ssh_peer_missing')
+  try:peer=ipaddress.ip_address(connection[0])
+  except ValueError:raise AssertionError('release_probe_ssh_peer_invalid')
+  if not peer.is_global:raise AssertionError('release_probe_ssh_peer_not_public')
+  headers['X-Real-IP']=str(peer)
+ return headers
+
 def sample(base,path,kind,release):
  start=time.monotonic()
- req=urllib.request.Request(base+path,data=b'{}' if kind=='lead_validation' else None,headers={'User-Agent':'AvtoCena-release-acceptance/1.0','Connection':'close','Content-Type':'application/json','Origin':'https://avtocena.com'})
+ req=urllib.request.Request(base+path,data=b'{}' if kind=='lead_validation' else None,headers=probe_headers(base,path,kind))
  try:
   response=urllib.request.urlopen(req,timeout=REQUEST_TIMEOUT_SECONDS)
  except urllib.error.HTTPError as error:

@@ -6,6 +6,7 @@ on:
     paths: ['.github/market-runs/regcloud-activate-release.json']
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: regcloud-production-release
   cancel-in-progress: false
@@ -19,6 +20,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Verify scoped preparation and activation checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tests/regcloud-performance-gate.test.py
+          python3 - <<'VERIFY'
+          import json,subprocess
+          marker=json.load(open('.github/market-runs/regcloud-activate-release.json'))
+          if marker.get('preparationMarkets'):
+            run_id=marker['preparedRun'];assert isinstance(run_id,int)
+            api=lambda path:json.loads(subprocess.check_output(['gh','api','repos/jeep-jim/AvtoCena/'+path]))
+            run=api(f'actions/runs/{run_id}')
+            assert run['head_sha']==marker['release'] and run['status']=='completed'
+            jobs=api(f'actions/runs/{run_id}/jobs')['jobs']
+            assert any(j['name']=='wait-for-astra' and j['conclusion']=='success' for j in jobs)
+            steps=next(j for j in jobs if j['name']=='prepare')['steps']
+            for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
+              assert any(s['name']==name and s['conclusion']=='success' for s in steps),name
+            assert marker['preparationMarkets']==['korea']
+          print('Prepared release evidence verified')
+          VERIFY
       - name: Accept prepared image with unchanged pre-switch and post-switch gates
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -31,11 +53,18 @@ jobs:
           unset SSH_PRIVATE_KEY
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           release=$(python3 -c 'import json,re;v=json.load(open(".github/market-runs/regcloud-activate-release.json"))["release"];assert re.fullmatch(r"[a-f0-9]{40}",v);print(v)')
+          markets=$(python3 -c 'import json;v=json.load(open(".github/market-runs/regcloud-activate-release.json")).get("preparationMarkets",[]);assert v in ([],["korea"]);print(",".join(v))')
+          previous=$(python3 -c 'import json,re;v=json.load(open(".github/market-runs/regcloud-activate-release.json")).get("previousRelease","");assert not v or re.fullmatch(r"[a-f0-9]{40}",v);print(v)')
           remote_dir="/opt/avtocena/releases/$release"
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py "root@151.248.113.177:$remote_dir/"
-          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- $release" <<'REMOTE'
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$release' '$markets' '$previous'" <<'REMOTE'
           set -euo pipefail
           release=$1
+          markets=$2
+          previous=$3
+          if test -n "$previous"; then
+            test "$(docker inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' avtocena-production)" = "$previous"
+          fi
           [[ "$release" =~ ^[a-f0-9]{40}$ ]]
           runtime="/opt/avtocena/releases/$release"
           test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "avtocena-regcloud:$release")" = "$release"
@@ -44,5 +73,5 @@ jobs:
           print(next(x.split('=',1)[1] for x in pathlib.Path(sys.argv[1]).read_text().splitlines() if x.startswith('AVTOCENA_CALCULATION_VERSION=')))
           PY
           )
-          bash "$runtime/regcloud-deploy-production.sh" "$release" "$calculator" 1
+          bash "$runtime/regcloud-deploy-production.sh" "$release" "$calculator" 1 "$markets"
           REMOTE

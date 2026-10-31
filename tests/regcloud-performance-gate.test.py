@@ -2,6 +2,14 @@ import importlib.util,json,pathlib,unittest,io,contextlib,sys
 from unittest.mock import patch
 spec=importlib.util.spec_from_file_location('gate','scripts/regcloud-performance-gate.py');gate=importlib.util.module_from_spec(spec);spec.loader.exec_module(gate)
 class GateTests(unittest.TestCase):
+ def test_live_candidate_uses_observed_ssh_peer_without_invented_ip(self):
+  with patch.dict(gate.os.environ,{'SSH_CONNECTION':'8.8.4.4 54321 151.248.113.177 22'}):
+   self.assertEqual(gate.probe_headers('http://127.0.0.1:3001','/cars?market=korea','catalog')['X-Real-IP'],'8.8.4.4')
+   self.assertNotIn('X-Real-IP',gate.probe_headers('https://avtocena.com','/cars?market=korea','catalog'))
+   self.assertNotIn('X-Real-IP',gate.probe_headers('http://127.0.0.1:3001','/api/health','health'))
+  for connection in ['', '127.0.0.1 123 127.0.0.1 22','invalid 123 151.248.113.177 22']:
+   with patch.dict(gate.os.environ,{'SSH_CONNECTION':connection}):
+    with self.assertRaises(AssertionError):gate.probe_headers('http://127.0.0.1:3001','/cars?market=korea','catalog')
  def test_lead_validation_posts_empty_body_and_rejects_crashes(self):
   gate.validate('/api/leads','lead_validation',400,b'{"error":"personal_data_consent_required"}','x')
   for status,body in [(500,b''),(200,b'{"ok":true}'),(403,b'{"error":"origin_forbidden"}'),(400,b'{"error":"other"}')]:
