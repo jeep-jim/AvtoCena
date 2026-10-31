@@ -69,4 +69,22 @@ class GateTests(unittest.TestCase):
   for failure in [AssertionError('performance_empty_catalog:/cars'),TimeoutError('unavailable')]:
    with patch.object(sys,'argv',['gate','http://127.0.0.1','release']),patch.object(gate,'sample',side_effect=failure),patch.object(gate.time,'sleep'):
     with self.assertRaises(type(failure)):gate.main()
+
+class MarketScopeTests(unittest.TestCase):
+ def test_korea_does_not_probe_china_and_still_rejects_empty_catalog(self):
+  routes=gate.release_routes('korea')
+  self.assertIn(('/cars?market=korea',2.0,'catalog'),routes)
+  self.assertIn(('/api/health',.25,'health'),routes)
+  self.assertFalse(any('china' in p or p in ['/','/cars','/cars?sort=totalRub'] for p,_,_ in routes))
+  with self.assertRaises(AssertionError):gate.validate('/cars?market=korea','catalog',200,b'<html>Unavailable</html>','x')
+ def test_invalid_scope_fails_closed(self):
+  for scope in ['all','korea,','korea,korea','bad','Korea']:
+   with self.assertRaises(ValueError):gate.release_routes(scope)
+  self.assertEqual(gate.release_routes(''),gate.ROUTES)
+ def test_selected_routes_run_before_and_after_expiry_without_other_markets(self):
+  with patch.dict(gate.os.environ,{'AVTOCENA_RELEASE_MARKETS':'korea'}),patch.object(sys,'argv',['gate','http://127.0.0.1','release']),patch.object(gate,'sample',return_value=.001) as sample,patch.object(gate.time,'sleep'),contextlib.redirect_stdout(io.StringIO()):
+   gate.main()
+  self.assertEqual(sample.call_count,len(gate.release_routes('korea'))*4)
+  self.assertTrue(all('china' not in call.args[1] for call in sample.call_args_list))
+
 if __name__=='__main__':unittest.main()

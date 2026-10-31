@@ -82,3 +82,12 @@ test('deployment prepares current and future pages before candidate HTTP accepta
  assert.ok(workflow.indexOf('CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs')>workflow.indexOf('npx tsx scripts/regcloud-prepare-prices.mjs'));
  assert.ok(workflow.indexOf('CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs')<workflow.indexOf('- name: Deploy with rollback'));
 });
+
+test('market-only preparation never reads or replaces a global overview',async()=>{
+ const f=fixture();f.options.landingsOnly=true;
+ f.options.overviewPath=()=>{throw Error('unrelated_overview');};
+ f.options.buildOverview=()=>{throw Error('partial_overview_forbidden');};
+ const result=await refreshGenerationPages(f.options);
+ assert.equal(result.landingsOnly,true);
+ assert.equal(f.writes.length,1);
+});

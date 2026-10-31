@@ -2,7 +2,7 @@
 """Mandatory functional release acceptance with advisory speed measurements.
 Run on the VM: network/proxy latency from the audit environment is excluded.
 """
-import argparse,json,time,urllib.request,urllib.error
+import argparse,json,time,urllib.request,urllib.error,os,urllib.parse
 from html.parser import HTMLParser
 
 # Owner decision 28.10.2026: speed targets are advisory, never a rollback trigger.
@@ -23,6 +23,20 @@ ROUTES=[
  ('/api/catalog/search?market=china&marketPage=1&page=9',1.0,'search'),
  ('/cars/autocatalog',2.0,'encyclopedia'),
 ]
+
+# Owner instruction 31.10.2026: a targeted market release must not depend on
+# another market's availability. Full releases keep their original route set.
+def release_routes(scope=''):
+ if not scope:return ROUTES
+ markets=scope.split(',')
+ if len(markets)!=len(set(markets)) or any(m not in ['china','korea','japan','europe','uae','georgia'] for m in markets):
+  raise ValueError('release_market_scope_invalid')
+ common=[r for r in ROUTES if r[0] in ['/api/health','/api/leads','/login','/autocalc','/cars/autocatalog']]
+ selected=[r for r in ROUTES if urllib.parse.parse_qs(urllib.parse.urlsplit(r[0]).query).get('market',[''])[0] in markets]
+ for market in markets:
+  route=('/cars?market='+market,2.0,'catalog')
+  if route not in selected:selected.append(route)
+ return common+selected
 
 # Cover both short selections and the five-minute directory refresh.
 PHASE_DELAYS=[('warm',0),('after_ttl',35),('after_directory_ttl',305)]
@@ -83,15 +97,16 @@ def sample(base,path,kind,release):
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('base');parser.add_argument('release');args=parser.parse_args()
  # Explicit preparation, then measurements. No swallowed timeouts/empty states.
- for path,limit,kind in ROUTES:sample(args.base,path,kind,args.release)
+ routes=release_routes(os.environ.get('AVTOCENA_RELEASE_MARKETS',''))
+ for path,limit,kind in routes:sample(args.base,path,kind,args.release)
  slow=0
  for phase,delay in PHASE_DELAYS:
   if delay:time.sleep(delay)
-  for path,limit,kind in ROUTES:
+  for path,limit,kind in routes:
    elapsed=sample(args.base,path,kind,args.release)
    print(json.dumps({'performanceGate':phase,'path':path,'seconds':round(elapsed,4),'ceiling':limit,'passed':elapsed<=limit,'functionalPassed':True,'latencyBlocking':False}),flush=True)
    if elapsed>limit:
     slow+=1
     print('::warning::Slow response (advisory): '+phase+' '+path+' '+str(round(elapsed,4))+'s; target '+str(limit)+'s. Functional checks passed.',flush=True)
- print(json.dumps({'performanceGate':'summary','samples':len(ROUTES)*len(PHASE_DELAYS),'slowSamples':slow,'functionalPassed':True,'performanceAccepted':slow==0,'latencyBlocking':False}),flush=True)
+ print(json.dumps({'performanceGate':'summary','marketScope':os.environ.get('AVTOCENA_RELEASE_MARKETS','all'),'routes':[r[0] for r in routes],'samples':len(routes)*len(PHASE_DELAYS),'slowSamples':slow,'functionalPassed':True,'performanceAccepted':slow==0,'latencyBlocking':False}),flush=True)
 if __name__=='__main__':main()
