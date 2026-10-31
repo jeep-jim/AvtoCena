@@ -1,11 +1,10 @@
 import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
 const guardedRequest=async (...args)=>{await assertCollectionEnabled('akebono_green');return fetch(...args);};
 await assertCollectionEnabled('akebono_green');
-import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission.ts';
-import {collectGreenCorner,assertGreenPublication,collectGreenInvoiceTerms} from './lib/akebono-green-source.mjs';
+import {collectGreenCorner,collectGreenInvoiceTerms} from './lib/akebono-green-source.mjs';
+import {prepareGreenRefresh} from './lib/green-refresh-snapshot.mjs';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
 import {convertToRub} from '../apps/web/lib/catalog/rates.ts';
-import {normalizeGreenCorner} from '../apps/web/lib/catalog/green-corner-normalize.ts';
 import fs from 'node:fs/promises';
 const storage=getJsonStorage(),key='catalog/green-corner/current.json';
 // Read the baseline BEFORE collection; an older run may never overwrite a newer publication.
@@ -15,16 +14,13 @@ const terms=await collectGreenInvoiceTerms(guardedRequest);
 const source=await collectGreenCorner({request:guardedRequest});
 const rate=await convertToRub(1,'JPY');
 const now=new Date().toISOString();
-const previousById=new Map((baseline.value?.items||[]).map(row=>[row.id,row]));
-const normalized=source.items.map(row=>{const offer=normalizeGreenCorner({...row,...terms},rate,now);return {...offer,firstSeenAt:previousById.get(offer.id)?.firstSeenAt||now};});
-// Price affects presentation only; Japan inventory starts at 2008 (owner update 17.10.2026).
-const items=normalized.filter(row=>catalogInventoryAgeDecision(row).eligible&&!catalogHeavyVehicleExcluded(row)).sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
-assertGreenPublication(baseline.value?.items?.length||0,items.length,source.total);
+const {items,missingPhotos,reusedPhotos,outsideInventoryPolicy}=prepareGreenRefresh(source,baseline.value?.items||[],terms,rate,now);
 const snapshot={version:1,updatedAt:now,sourceCount:source.total,invoiceTerms:terms,items};
+if(baseline.found)await storage.writeJson(`catalog/green-corner/history/${now.replace(/[:.]/g,'-')}.json`,baseline.value,{ifNoneMatch:'*'});
 await storage.writeJson(key,snapshot,baseline.found?{ifMatch:baseline.etag}:{ifNoneMatch:'*'});
 const verified=await storage.readJson(key,null);
 if(verified?.updatedAt!==now||verified.items?.length!==items.length)throw Error('green_publication_verification_failed');
-const report={status:'published',priceBasis:'CIF',freightJpy:terms.cifFreightJpy,paymentQuote:terms.paymentQuote,example:items.filter(row=>row.sourceOfferId==='709602').map(row=>({id:row.id,invoiceJpy:row.sourcePrice,invoiceRub:row.sellerPriceRub})),lastCollectionSuccess:now,lastPublicationSuccess:now,publishedAt:now,sourceCount:source.total,publishedCount:items.length,outsideInventoryPolicy:normalized.length-items.length};
+const report={status:'published',priceBasis:'CIF',freightJpy:terms.cifFreightJpy,paymentQuote:terms.paymentQuote,example:items.filter(row=>row.sourceOfferId==='709602').map(row=>({id:row.id,invoiceJpy:row.sourcePrice,invoiceRub:row.sellerPriceRub})),lastCollectionSuccess:now,lastPublicationSuccess:now,publishedAt:now,sourceCount:source.total,publishedCount:items.length,outsideInventoryPolicy,missingPhotos,reusedPhotos,previousCount:baseline.value?.items?.length||0};
 await storage.writeJson('catalog/operations/markets/green.json',report);
 await fs.writeFile('catalog-green-report.json',JSON.stringify(report,null,2));
 console.log(JSON.stringify(report));
