@@ -1,5 +1,6 @@
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from '../apps/web/lib/catalog/dubicars-owner-policy.ts';
 import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
+import {startPublicationHeartbeat} from './lib/publication-heartbeat.mjs';
 import {isCompletedChe168Delta,isCompletedDubicarsDelta} from './lib/auto-api-che168-client.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
@@ -69,6 +70,7 @@ const publishLockHeartbeatMs = Math.max(
   Math.min(Math.floor(publishLockTtlMs / 3), Number(process.env.CATALOG_PUBLISH_LOCK_HEARTBEAT_MS || 5 * 60_000)),
 );
 let publishLockHeld = false;
+let independentHeartbeat = null;
 let publishLockHeartbeatTimer = null;
 let publishLockHeartbeatPromise = Promise.resolve();
 
@@ -107,6 +109,7 @@ async function acquirePublishLock() {
         };
       });
       publishLockHeld = true;
+      independentHeartbeat = await startPublicationHeartbeat({key:publishLockPath,operationId:publishOperationId,ttlMs:publishLockTtlMs,intervalMs:publishLockHeartbeatMs});
       publishLockHeartbeatTimer = setInterval(() => {
         publishLockHeartbeatPromise = publishLockHeartbeatPromise.then(async () => {
           if (!publishLockHeld) return;
@@ -144,6 +147,7 @@ async function releasePublishLock() {
     publishLockHeartbeatTimer = null;
   }
   await publishLockHeartbeatPromise;
+  await independentHeartbeat?.stop();
   await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => current?.operationId === publishOperationId
     ? { operationId: publishOperationId, operationType: `catalog_v3_publish_${market}`, lockedUntil: "", finishedAt: new Date().toISOString() }
     : current);
@@ -740,6 +744,7 @@ if (regressionBlocked) {
       productionRefreshMarket: market,
       expectedBaseGenerationId,
       async beforeManifestCommit() {
+        independentHeartbeat?.assertHealthy();
         await publishLockHeartbeatPromise;
         await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => {
           if (current?.operationId !== publishOperationId || Date.parse(current.lockedUntil) <= Date.now()) throw new Error("catalog_publish_lock_lost");
