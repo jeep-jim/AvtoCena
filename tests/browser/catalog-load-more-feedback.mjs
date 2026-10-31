@@ -37,7 +37,7 @@ try{
   const scope=page.locator(width<1024?'.ac-mobile-filter-sheet':'.ac-catalog-filter-panel');
   await scope.getByRole('button',{name:'Топливо',exact:true}).click();
   const checkbox=scope.getByRole('checkbox',{name:'Электро',exact:true});await checkbox.check();
-  assert.equal(await checkbox.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 210, 31)');
+  assert.equal(await checkbox.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 53, 61)');
   const loading=page.locator('[data-catalog-filter-pending="true"]');await loading.waitFor({state:'attached'});
   assert.equal(await page.locator('.ac-route-loader[aria-hidden="false"]').count(),0);
   // Real request remains unacknowledged; advancing time must not hide the loader.

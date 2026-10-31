@@ -44,7 +44,7 @@ try{
  report.colors={};for(const theme of ['dark','light']){
   await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
   report.colors[theme]=await electric.evaluate(el=>getComputedStyle(el).backgroundColor);
-  assert.equal(report.colors[theme],'rgb(255, 210, 31)');
+  assert.equal(report.colors[theme],'rgb(255, 53, 61)');
   await page.screenshot({path:`${out}/electric-${theme}.png`});
  }
  report.duplicateSearches=extraSearches.length;assert.equal(extraSearches.length,0);assert.deepEqual(errors,[]);
