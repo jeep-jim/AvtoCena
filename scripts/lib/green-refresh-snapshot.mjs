@@ -6,7 +6,7 @@ import {assertGreenPublication} from './akebono-green-source.mjs';
 // not a reason to freeze prices and availability for every other vehicle.
 export function prepareGreenRefresh(source, previousItems, terms, rate, now) {
  const previous=new Map(previousItems.map(row=>[row.id,row]));
- const items=[], missingPhotos=[], reusedPhotos=[];
+ const items=[], missingPhotos=[], reusedPhotos=[], identityConflicts=[];
  let outsideInventoryPolicy=0;
  for(const row of source.items){
   const old=previous.get(`green-${row.id}`);
@@ -20,8 +20,13 @@ export function prepareGreenRefresh(source, previousItems, terms, rate, now) {
    fresh=normalizeGreenCorner({...row,...terms,media:old.images.map(image=>image.url)},rate,now);
    reusedPhotos.push(String(row.id));
   }
-  if(old && (old.sourceId!==fresh.sourceId || old.sourceOfferId!==fresh.sourceOfferId
-    || old.make!==fresh.make || old.model!==fresh.model || old.year!==fresh.year))throw Error('green_existing_identity_changed:'+JSON.stringify({id:old.id,previous:{make:old.make,model:old.model,year:old.year},incoming:{make:fresh.make,model:fresh.model,year:fresh.year}}));
+  if(old && (old.sourceId!==fresh.sourceId || old.sourceOfferId!==fresh.sourceOfferId))throw Error('green_existing_identity_changed');
+  if(old && (old.make!==fresh.make || old.model!==fresh.model || old.year!==fresh.year)) {
+   identityConflicts.push({id:old.id,previous:{make:old.make,model:old.model,year:old.year},incoming:{make:fresh.make,model:fresh.model,year:fresh.year}});
+   // The lot remains present, but neither its identity, price nor freshness
+   // is changed until the conflicting source identity is reviewed.
+   items.push(old);continue;
+  }
   // Routine refresh is price/availability only. Preserve technical facts,
   // provenance, images and manual values for existing identities.
   const offer=old?{...old,sourcePrice:fresh.sourcePrice,sourceCurrency:fresh.sourceCurrency,
@@ -33,5 +38,5 @@ export function prepareGreenRefresh(source, previousItems, terms, rate, now) {
  }
  items.sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
  assertGreenPublication(previousItems.length,items.length,source.total);
- return {items,missingPhotos,reusedPhotos,outsideInventoryPolicy};
+ return {items,missingPhotos,reusedPhotos,identityConflicts,outsideInventoryPolicy};
 }
