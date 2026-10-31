@@ -1,7 +1,5 @@
 {
-  "operation": "owner-stale-green-recovery-20261101",
-  "requestedAt": "2026-10-31T17:01:20.606Z",
-  "market": "japan",
-  "publish": true,
-  "reason": "Continue authorized Green refresh after isolated offline test storage fix. Previous run stopped before collection or publication; all data guards retained."
+  "operation": "owner-green-identity-check-20261101",
+  "requestedAt": "2026-10-31T17:03:32.293Z",
+  "reason": "Inspect exact existing lot identity conflict; previous attempt stopped before publication. Keep identity, full scan and all publication safeguards."
 }
