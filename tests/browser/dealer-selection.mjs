@@ -139,11 +139,17 @@ try{for(const width of [390,1440]){
   ['Любой кузов',['Седан','Хэтчбек'],'bodyType','sedan|hatchback'],
   ['Любой привод',['Передний','Полный'],'drive','fwd|awd']
  ]){
-  await multiForm.getByRole('button',{name:placeholder,exact:true}).click();
-  for(const name of names)await multiForm.getByRole('button',{name,exact:true}).click();
+  await multiForm.getByRole('button',{name:key==='fuel'?'Топливо':placeholder,exact:true}).click();
+  for(const name of names){
+   if(key==='fuel')await multiForm.getByRole('checkbox',{name,exact:true}).check();
+   else await multiForm.getByRole('button',{name,exact:true}).click();
+  }
   await page.waitForFunction(([key,value])=>new URLSearchParams(location.search).get(key)===value,[key,values]);
-  for(const name of names)assert.equal(await multiForm.getByRole('button',{name,exact:true}).getAttribute('aria-pressed'),'true');
-  await multiForm.getByRole('button',{name:names.join(', '),exact:true}).click();
+  for(const name of names){
+   if(key==='fuel')assert.equal(await multiForm.getByRole('checkbox',{name,exact:true}).isChecked(),true);
+   else assert.equal(await multiForm.getByRole('button',{name,exact:true}).getAttribute('aria-pressed'),'true');
+  }
+  await multiForm.getByRole('button',{name:key==='fuel'?'Топливо':names.join(', '),exact:true}).click();
  }
  if(width===390)await multiForm.locator('button[data-ac-mobile-close="1"]').click();
  await page.reload();await page.locator('#catalog').waitFor();
