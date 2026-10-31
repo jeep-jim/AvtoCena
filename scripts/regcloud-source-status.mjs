@@ -38,6 +38,6 @@ if(marker.inspectJobIds){
   const body=await response.text();
   // Existing masked workflow logs only; retain bounded operational failure lines.
   const lines=body.split('\n').filter(line=>!line.includes('\u001b')&&/\[publish-lock\]|catalog_publish_lock_lost|object_storage_.*(?:timeout|failed|unreachable)|"stage":|publicationError|##\[error\]/.test(line)).map(line=>line.slice(0,1000)).slice(-100);
-  console.log('JOB_FAILURE_DIGEST',JSON.stringify({id,lines}));
+  for(const line of lines)console.log('JOB_FAILURE_BASE64',id,Buffer.from(line).toString('base64'));
  }
 }
