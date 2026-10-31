@@ -7,6 +7,7 @@ for fail in (False,True):
   calls=[];posts=[]
   def command(args,**kw):
    calls.append(args)
+   if args[:2]==('docker','inspect'):return json.dumps({"3000/tcp":[{"HostIp":"127.0.0.1","HostPort":"3001"}]})
    if args[:2]==('docker','cp') and args[2].startswith('avtocena-production:/app'):
     pathlib.Path(args[3]).write_text('async function q(a,c){return new Request(a,{headers:c})}')
    return ''

@@ -7,8 +7,11 @@ EXPECTED='5e45cd9478a7d38a6c57adc7d81061e475055cf9'
 ROUTE='/app/apps/web/.next/server/app/(public)/api/leads/route.js'
 BACKUP=pathlib.Path('/opt/avtocena/incidents/lead-request-20261031')
 def run(*args): return subprocess.check_output(args,text=True,timeout=60).strip()
+bindings=json.loads(run('docker','inspect','--format','{{json .NetworkSettings.Ports}}','avtocena-production'))['3000/tcp']
+assert len(bindings)==1 and bindings[0]['HostIp']=='127.0.0.1'
+port=int(bindings[0]['HostPort']);assert port in (3000,3001)
 def request(path,body=None,origin='https://avtocena.com'):
-    req=urllib.request.Request('http://127.0.0.1:3000'+path,data=json.dumps(body).encode() if body is not None else None,headers={'Host':'avtocena.com','Origin':origin,'Content-Type':'application/json'})
+    req=urllib.request.Request(f'http://127.0.0.1:{port}'+path,data=json.dumps(body).encode() if body is not None else None,headers={'Host':'avtocena.com','Origin':origin,'Content-Type':'application/json'})
     try:
         with urllib.request.urlopen(req,timeout=25) as r:return r.status,json.loads(r.read())
     except urllib.error.HTTPError as e:
