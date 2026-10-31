@@ -20,3 +20,10 @@ test('one collection every 72 hours across month/year/leap-day boundaries', () =
   assert.equal(catalogRefreshDue(new Date(start + 24 * 3600000)), false);
   assert.equal(catalogRefreshDue(new Date('invalid')), false);
 });
+
+test('midnight UTC+7 wake-up and delayed starts select the same three-day cycle',()=>{
+ for(let day=0;day<30;day++){
+  const planned=Date.parse('2026-11-01T17:00:00Z')+day*86400000;
+  for(const delayHours of [0,1,4,13,23])assert.equal(catalogRefreshDue(new Date(planned+delayHours*3600000)),day%3===0);
+ }
+});
