@@ -1,5 +1,5 @@
 {
-  "operation": "owner-green-identity-check-20261101",
-  "requestedAt": "2026-10-31T17:03:32.293Z",
-  "reason": "Inspect exact existing lot identity conflict; previous attempt stopped before publication. Keep identity, full scan and all publication safeguards."
+  "operation": "owner-green-refresh-preserve-conflicts-20261101",
+  "requestedAt": "2026-10-31T17:07:57.854Z",
+  "reason": "Owner-authorized overdue refresh. Preserve conflicting existing lots unchanged and report separately; retain full scan, collapse and conditional-write safeguards."
 }
