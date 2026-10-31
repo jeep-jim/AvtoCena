@@ -17,7 +17,9 @@ try{
  await page.waitForFunction(()=>document.querySelector('.ac-filter-settings')?.disabled===false,null,{timeout:30000});
  report.initialMs=Date.now()-started;
  const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});if(await cookie.isVisible())await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
- const filter=page.locator('.ac-catalog-filter-panel'),electric=filter.locator('.ac-electric-filter input[type=checkbox]');
+ const filter=page.locator('.ac-catalog-filter-panel');
+ await filter.getByRole('button',{name:'Топливо',exact:true}).click();
+ const electric=filter.getByRole('checkbox',{name:'Электро',exact:true});
  const extraSearches=[];page.on('request',r=>{if(new URL(r.url()).pathname==='/api/catalog/search')extraSearches.push(r.url());});
  await page.evaluate(()=>{
   window.__catalogLoaderProbe={max:0,seen:false};
@@ -31,7 +33,7 @@ try{
  const selectedAt=Date.now();await electric.check();
  report.checkedAfterClick=await electric.isChecked();
  report.loaderVisible=await page.locator('.ac-route-loader[aria-hidden="false"]').waitFor({state:'visible',timeout:1000}).then(()=>true,()=>false);
- await page.waitForFunction(()=>new URLSearchParams(location.search).get('fuel')==='electrified'&&document.querySelector('.ac-catalog-filter-panel')?.getAttribute('aria-busy')==='false',null,{timeout:30000});
+ await page.waitForFunction(()=>new URLSearchParams(location.search).get('fuel')==='electric'&&document.querySelector('.ac-catalog-filter-panel')?.getAttribute('aria-busy')==='false',null,{timeout:30000});
  report.filterAcknowledgedMs=Date.now()-selectedAt;
  await page.waitForFunction(()=>![...document.querySelectorAll('.ac-catalog-section-loading.is-active')].some(el=>el.getClientRects().length),null,{timeout:30000});
  report.filterCompleteMs=Date.now()-selectedAt;report.withinTwoSeconds=report.filterCompleteMs<=2000;
@@ -48,5 +50,5 @@ try{
  report.duplicateSearches=extraSearches.length;assert.equal(extraSearches.length,0);assert.deepEqual(errors,[]);
  const after=await page.request.get('https://avtocena.com/api/health');report.healthAfter=await after.json();assert.equal(report.healthAfter.releaseSha,marker.expectedRelease);
  report.passed=true;
-}catch(error){report.failure=String(error);report.failureState=await page.evaluate(()=>({url:location.href,checked:document.querySelector('.ac-electric-filter input')?.checked,busy:document.querySelector('.ac-catalog-filter-panel')?.getAttribute('aria-busy'),ready:document.querySelector('.ac-filter-settings')?.disabled===false}));process.exitCode=1;await page.screenshot({path:`${out}/electric-failure.png`}).catch(()=>{});}
+}catch(error){report.failure=String(error);report.failureState=await page.evaluate(()=>({url:location.href,fuel:document.querySelector('.ac-catalog-filter-panel input[name=fuel]')?.value,busy:document.querySelector('.ac-catalog-filter-panel')?.getAttribute('aria-busy'),ready:document.querySelector('.ac-filter-settings')?.disabled===false}));process.exitCode=1;await page.screenshot({path:`${out}/electric-failure.png`}).catch(()=>{});}
 finally{report.errors=errors;fs.writeFileSync(`${out}/feedback.json`,JSON.stringify(report,null,2));console.log(JSON.stringify(report));await browser.close();}

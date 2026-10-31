@@ -35,13 +35,14 @@ try{
   assert.equal(new Set(geometry.tops).size,1,`${width}/${theme}: pagination wraps`);assert.ok(geometry.overflow<=1,JSON.stringify(geometry));assert.ok(geometry.viewport<=1,JSON.stringify(geometry));
   if(width<1024)await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
   const scope=page.locator(width<1024?'.ac-mobile-filter-sheet':'.ac-catalog-filter-panel');
-  const checkbox=scope.locator('.ac-electric-filter input[type=checkbox]');await checkbox.check();
+  await scope.getByRole('button',{name:'Топливо',exact:true}).click();
+  const checkbox=scope.getByRole('checkbox',{name:'Электро',exact:true});await checkbox.check();
   assert.equal(await checkbox.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 210, 31)');
   const loading=page.locator('[data-catalog-filter-pending="true"]');await loading.waitFor({state:'attached'});
   assert.equal(await page.locator('.ac-route-loader[aria-hidden="false"]').count(),0);
   // Real request remains unacknowledged; advancing time must not hide the loader.
   if(width===390&&theme==='dark'){await page.clock.install();await page.clock.runFor(16000);assert.equal(await loading.count(),1);}
-  await page.waitForURL(/fuel=electrified/);
+  await page.waitForURL(/fuel=electric/);
   if(width<1024)await scope.locator('button[data-ac-mobile-close="1"]').click();
   await page.locator('#ack').click();await loading.waitFor({state:'detached'});
   assert.deepEqual(searches,[],'electric toggle must not send a duplicate catalog search');assert.deepEqual(errors,[]);
