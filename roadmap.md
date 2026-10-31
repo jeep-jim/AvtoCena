@@ -18956,3 +18956,16 @@ Fresh main9b530b70fd25ea0cc260f10ffe7c86734e2fab99 и Road/checklist прочи�
 Единственный bounded watch health05:08 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Старый Proxy CONNECT timeout не объяснён; health не подтверждает завершение публикации, authenticated save или полный sync.
 
 OWNERFREEZE вне прямой задачи, все истории и остатки сохранены. PR1641/drafts/REG capacity/старый China log не тронуты. Watch не запускал/не отменял runtime/deploy/repair/collectors/diagnostics/browser/provider/cleanup. Только Road/checklist append-only expected-parentCAS; наблюдение включено. Далее — итог существующей China publication и новые primary результаты.
+
+
+## 01.11.2026, 06:06 Красноярск — повторная публикация Китая завершилась отказом; причина пока не прочитана
+
+Fresh main442e3d0de76de82c06203cf2df1749046c363a5b и Road/checklist прочитаны. AGENTS03336196, system-market-audit и связанные operations unchanged; новых primary результатов и PR после1673 нет, app deploy отсутствует.
+
+Existing China recovery41223091606/publish124601674990 теперь FINAL FAILURE05:33:35. Publish markets through calculation and retention guards завершился FAILURE05:33:28; Record collection and publication outcome even after failure — FAILURE05:33:31. Это окончательные run/job metadata, прежний IN_PROGRESS перекрыт. Итоговый журнал watch запросил впервые, но fetch_workflow_job_logs вернул Transport closed: журнал НЕ прочитан. Причина, publicationStatus, новый manifest и количества не установлены; нельзя приписывать catalog_publish_lock_lost, storage timeout, лимит времени, rollback или потерю inventory по одному статусу. Старый China41111109988 log не перечитывался.
+
+Единственный текущий IN_PROGRESS — отдельный existing scheduled China41227716152, создан01.11 01:05:57 Красноярска на head cdd4eef0cb889060115e4112a8924a1f5b2e16ba. Plan124677533792 SUCCESS; collect124677694988 выполняет Sync Che168 from the complete CSV and then only committed changes с05:34:54. Это плановый сбор, не продолжение прежнего reuse-only job и не запуск watch. Причина промежутка между созданием и исполнением не установлена. Завершение сбора/публикации не подтверждено; watch не дублировал и не отменял задачу.
+
+Единственный bounded health06:05–06:06 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это доступность прежнего приложения, не приёмка публикации Китая и не объяснение старого Proxy CONNECT timeout.
+
+Следующая сверка — существующий итоговый журнал124601674990 при доступности инструмента и состояние уже запущенного scheduled41227716152; исправление причины до её чтения не выдумывается. Прочитанные translation_http_403/green_feed_empty/binding/deferral журналы не повторялись. OWNERFREEZE вне прямой задачи, authenticated save/fullsync, все истории/остатки, PR1641/drafts/REG capacity сохранены. Только Road/checklist append-only expected-parentCAS; наблюдение включено, без runtime/deploy/repair/diagnostics/browser/provider/cleanup и новых запусков.
