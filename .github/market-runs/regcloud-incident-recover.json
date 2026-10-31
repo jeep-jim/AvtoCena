@@ -1,4 +1,4 @@
 {
-  "reason": "Owner reported nginx 504; confirmed local health 30s timeout with available RAM and disk; conditional one-time restart",
-  "at": "2026-10-12T10:02:09.936873+00:00"
+  "reason": "Owner reported site-wide nginx 502; public homepage independently confirmed HTTP 502. Run existing guarded direct-health inspection and conditional single restart of current production container.",
+  "at": "2026-10-31T08:27:30Z"
 }
