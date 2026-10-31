@@ -24,7 +24,7 @@ test('same current lot retains its images and facts while refreshing price',()=>
 test('invalid price, currency, identity and collapse still block publication',()=>{
  assert.throws(()=>prepareGreenRefresh({total:1,items:[{...lot,priceInJapanCurrency:'USD'}]},[],terms,rate,now),/invalid_listing/);
  assert.throws(()=>prepareGreenRefresh({total:1,items:[lot]},[],terms,{...rate,rateDate:'2020-01-01'},now),/invalid_currency/);
- assert.throws(()=>prepareGreenRefresh({total:1,items:[{...lot,model:'CIVIC'}]},[old()],terms,rate,now),/identity_changed/);
+ assert.throws(()=>prepareGreenRefresh({total:1,items:[lot]},[{...old(),sourceOfferId:'different'}],terms,rate,now),/identity_changed/);
  assert.throws(()=>prepareGreenRefresh({total:1,items:[lot]},Array.from({length:20},(_,i)=>({...old(),id:`green-${i+1}`})),terms,rate,now),/collapse/);
  assert.throws(()=>prepareGreenRefresh({total:1,items:[{...lot,media:[]}]},[],terms,rate,now),/empty/);
 });
@@ -34,4 +34,12 @@ test('confirmed absence from complete scan removes an old lot; newcomers retain 
  const result=prepareGreenRefresh({total:10,items:rows},previous,terms,rate,now);
  assert.equal(result.items.length,10);assert.ok(!result.items.some(x=>x.id==='green-1'));
  assert.equal(result.items.find(x=>x.id==='green-11')?.powerHp,110);
+});
+
+test('conflicting model retains exact old record without claiming fresh prices',()=>{
+ const previous=old();
+ const result=prepareGreenRefresh({total:2,items:[{...lot,model:'CIVIC',priceInJapan:2000000},{...lot,id:2}]},[previous],terms,rate,'2026-11-01T00:00:00Z');
+ assert.deepEqual(result.items.find(x=>x.id===previous.id),previous);
+ assert.equal(result.identityConflicts.length,1);
+ assert.equal(result.items.length,2);
 });
