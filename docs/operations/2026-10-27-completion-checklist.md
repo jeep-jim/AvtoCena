@@ -1230,3 +1230,20 @@ Fresh main cdd4eef0cb889060115e4112a8924a1f5b2e16ba не изменился по
 Единственный bounded watch health03:03–03:04 завершился curl28:Proxy CONNECT aborted due to timeout. HTTP-ответ и payload не получены: это не HTTP502, не curl0 и не доказательство отказа приложения. Новые releaseSha/calculationVersion этим запросом не установлены; последний сохранённый успешный health01:29 имел dfaabde705030a1cd4c78c0afc6251379b276aa2 и4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Запрос не повторялся.
 
 OWNERFREEZE вне прямой задачи, все прежние failures/primary атрибуции и открытые цели сохранены. Authenticated save/fullsync не приняты; PR1641/drafts, REG capacity и старый China log не тронуты. Только Road/checklist append-only expected-parentCAS; наблюдение остаётся включённым. Далее — итог существующей China publication и новые primary результаты без runtime/deploy/repair/diagnostics/browser/provider/cleanup.
+
+
+## 01.11.2026, 03:28 Красноярск — Китай в работе; новые фоновые подготовки различаются по причине отказа
+
+Fresh main666a76827e06a987fed9cdb398e61f7feda1d0f3, Road/checklist прочитаны. AGENTS03336196, system-market-audit и связанные operations unchanged; новых primary результатов и PR после1673 нет. Owner freeze вне прямой задачи сохраняется, app deploy отсутствует.
+
+Existing China41223091606/publish124601674990 по-прежнему IN_PROGRESS на Publish markets through calculation and retention guards с00:17:45; plan SUCCESS,collect SKIPPED. Финальный журнал/manifest/числа не подтверждены, длительность не доказывает зависание или успех. Старый China log не перечитывался.
+
+Появились штатные schedule/workflow_run задачи, watch их не запускал и не отменял. На чтении IN_PROGRESS также Regcloud shared41238936117, overview41238873768, compact counts41238868438, Russian descriptions41238834780 и Direct41238579480; их итоговые журналы не прочитаны. Direct41238868400 pending; cancelled41238888965/41238834857 — только metadata, причины не установлены. Current pages41238868407/41238834703 SUCCESS metadataonly, не полная приёмка. Georgia41238815153 SUCCESS означает plan124648170891 SUCCESS при collect/publish SKIPPED, не новую публикацию рынка.
+
+Впервые прочитан Regcloud shared41238853127/job124648365178:03:26:52.768 release dfaabde705030a1cd4c78c0afc6251379b276aa2,generation gen_1793323223905_c6da006e,skipped=true,verified=false,reason publication_in_progress,error budget_preparation_deferred_active_publisher,exit1. Это отложенная подготовка при активном publisher, не доказательство отказа публикации Китая. Offline12/12 PASS не заменяет live verification.
+
+Впервые прочитан shared41238868435/job124648457855:03:27:15.127 тот же runtime,старый generation gen_1791597210034_5b83bc90,skipped=false,verified=false,error live_encyclopedia_binding_missing,exit1;offline12/12 PASS. Этот отказ учитывается отдельно от Regcloud active-publisher deferral и прежней ошибки фида. Новая причина старого binding mismatch watch не установлена; прежняя атрибуция YC относится к primary анализу.
+
+Единственный bounded watch health03:27 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это новый ответ, не восстановление отсутствующего payload03:03–03:04 и не объяснение Proxy CONNECT timeout. Полная приёмка, authenticated save и revision-linked заполненных карточек остаются открыты.
+
+Все истории/ограничения сохранены; PR1641/drafts/REG capacity не тронуты. Только два документа append-only expected-parentCAS; наблюдение включено. Далее — существующая China publication и новые primary результаты без runtime/deploy/repair/diagnostics/browser/provider/cleanup и повторов старых logs.
