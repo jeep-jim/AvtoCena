@@ -16,6 +16,8 @@ storage.writeJson=async(path,value,condition)=>{
  if(current?.generationId!==manifest.generationId)throw Error('publication_changed');
  return write(path,value,condition);
 };
+// Full releases retain legacy selector migration; targeted releases never inspect other partitions.
+if(!markets)await backfillBudgetMarketSelectors();
 const results=[];
 for(const market of markets||RELEASE_MARKETS){
  try{
