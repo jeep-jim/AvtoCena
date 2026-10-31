@@ -1,0 +1,5 @@
+{
+  "expectedRelease": "5e45cd9478a7d38a6c57adc7d81061e475055cf9",
+  "reason": "Owner emergency: restore public lead intake after reproduced Node 24 Request Proxy HTTP500; PR1660 merged, 14 targeted tests and types passed. Exact handler only, rollback, durable synthetic CRM readback. Installer now discovers the active blue-green port; prior run stopped before any mutation.",
+  "requestedAt": "2026-10-31T02:47:00Z"
+}

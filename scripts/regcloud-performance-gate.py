@@ -2,7 +2,7 @@
 """Mandatory functional release acceptance with advisory speed measurements.
 Run on the VM: network/proxy latency from the audit environment is excluded.
 """
-import argparse,json,time,urllib.request,os,urllib.parse
+import argparse,json,time,urllib.request,urllib.error,os,urllib.parse
 from html.parser import HTMLParser
 
 # Owner decision 28.10.2026: speed targets are advisory, never a rollback trigger.
@@ -11,6 +11,8 @@ from html.parser import HTMLParser
 REQUEST_TIMEOUT_SECONDS=90
 ROUTES=[
  ('/api/health',0.25,'health'),
+ # Empty POST must reach consent validation without creating a customer or lead.
+ ('/api/leads',1.0,'lead_validation'),
  ('/',2.0,'html'),('/login',1.0,'html'),('/autocalc',1.0,'html'),
  ('/cars',2.0,'catalog'),('/cars?market=china&make=Volkswagen&page=2',2.0,'catalog'),
  ('/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA',2.0,'catalog'),
@@ -29,7 +31,7 @@ def release_routes(scope=''):
  markets=scope.split(',')
  if len(markets)!=len(set(markets)) or any(m not in ['china','korea','japan','europe','uae','georgia'] for m in markets):
   raise ValueError('release_market_scope_invalid')
- common=[r for r in ROUTES if r[0] in ['/api/health','/login','/autocalc','/cars/autocatalog']]
+ common=[r for r in ROUTES if r[0] in ['/api/health','/api/leads','/login','/autocalc','/cars/autocatalog']]
  selected=[r for r in ROUTES if urllib.parse.parse_qs(urllib.parse.urlsplit(r[0]).query).get('market',[''])[0] in markets]
  for market in markets:
   route=('/cars?market='+market,2.0,'catalog')
@@ -59,6 +61,9 @@ class EncyclopediaRows(HTMLParser):
   if tag=='article' and 'ac-model-list-item' in dict(attrs).get('class','').split():self.count+=1
 
 def validate(path,kind,status,body,release):
+ if kind=='lead_validation':
+  if status!=400 or json.loads(body).get('error')!='personal_data_consent_required':raise AssertionError('release_lead_intake_unavailable')
+  return
  if status!=200:raise AssertionError('performance_http:'+path+':'+str(status))
  if kind in ('html','catalog','encyclopedia'):
   if b'</html>' not in body or b'$RX(' in body:raise AssertionError('performance_incomplete_html:'+path)
@@ -76,8 +81,13 @@ def validate(path,kind,status,body,release):
 
 def sample(base,path,kind,release):
  start=time.monotonic()
- req=urllib.request.Request(base+path,headers={'User-Agent':'AvtoCena-release-acceptance/1.0','Connection':'close'})
- with urllib.request.urlopen(req,timeout=REQUEST_TIMEOUT_SECONDS) as response:
+ req=urllib.request.Request(base+path,data=b'{}' if kind=='lead_validation' else None,headers={'User-Agent':'AvtoCena-release-acceptance/1.0','Connection':'close','Content-Type':'application/json','Origin':'https://avtocena.com'})
+ try:
+  response=urllib.request.urlopen(req,timeout=REQUEST_TIMEOUT_SECONDS)
+ except urllib.error.HTTPError as error:
+  if kind!='lead_validation':raise
+  response=error
+ with response:
   body=response.read(20*1024*1024+1);status=response.status
  elapsed=time.monotonic()-start
  if len(body)>20*1024*1024:raise AssertionError('performance_response_too_large:'+path)
