@@ -18771,3 +18771,22 @@ Existing одноразовый перенос41207575163/job124555694712, marke
 Код исправления 816b0e36abd67f08367932757ce408d2c22f9f69, целевые тесты 4/4 PASS. Ремонт #41209245248/job124560576363 SUCCESS: metadataRepaired29, excluded2, existingValuesPreserved=true. Итог после ремонта: +29 моделей и +9197 автомобильных технических вариантов, всего3321 модель. Ранее записанные +31/+9199 относятся к первому переносу до исключения спецтехники. Проверки выпуска не ослаблялись, код каталога/расчётов/поставщиков не изменён.
 
 Новый выпуск запущен штатным маркером dfaabde705030a1cd4c78c0afc6251379b276aa2. На момент записи установка ещё не завершена. UI совпадает с проверенным PR1669; исправление касается только одноразовых скриптов и тестов.
+
+
+## 31.10.2026, 21:51 Красноярск — сохранённые варианты перенесены; два отказа до установки, третья попытка готовит цены
+
+Fresh main569f50d82d7b1133b9506e935b717c0579562f72, Road/checklist и AGENTS03336196 прочитаны; связанные operations не изменились. Новых PR после1669 нет. Owner freeze вне новой прямой задачи Энциклопедии сохраняется. Старые CI/fixture журналы1669 повторно не читались.
+
+Перенос41207575163/job124555694712 FINAL SUCCESS21:10:30, итоговый журнал впервые прочитан watch. applied=true;321467 projectionRows,10747 savedObjects,13698 cachedRows,3023 checkedModels;addedModels31/updatedModels1142/addedVariants9199,existingValuesPreserved=true,supplierRequests0. Для Honda Vezel добавлено113 вариантов по всем годам. Scope — текущая сохранённая проекция и retained Japan/Korea query/detail caches, не полный невидимый inventory поставщиков. Эти числа относятся к первому переносу до последующего исключения спецтехники.
+
+Первый deploy41208446960/job124558393611 FINAL FAILURE21:10:49, журнал прочитан:21:10:45 astra_release_manifest_changed в prepare private index, exit1. Primary связывает смену манифеста с завершавшимся переносом. Build/image/prices/switch/verifier не достигнуты; это отказ ДО установки, не rollback. Второй deploy41208966140/job124559960693 FINAL FAILURE21:13:05, журнал прочитан:21:13:03 compact_directory_invalid, exit1, также ДО build/switch. Проверка требует корректный directorySnapshot.count; primary установил отсутствие count у31 новой модели. Защита не обходилась.
+
+Primary исправление816b0e36abd67f08367932757ce408d2c22f9f69 ограничивает ремонт нетронутыми записями этого переноса и убирает directorySnapshot при неизвестном счётчике, не выдумывает count. Авторские целевые4/4 PASS — отдельная атрибуция, не новый полный CI watch. Existing repair41209245248/job124560576363 FINAL SUCCESS21:15:51, журнал прочитан:metadataRepaired29,excluded KOMATSU WHEELLOADER/HITACHI OTHER,existingValuesPreserved=true. По primary Road итог после исправления:+29 моделей/+9197 автомобильных вариантов, всего3321 модель; исходные ревизии и backup сохранены. Watch ремонт не запускал/не повторял и данные не менял.
+
+Primary Road отдельно сообщает read-only проверку Vezel2016:12 вариантов вместо3, включая3 hybrid RU3/RU4; JSON прежних вариантов поid не изменился. Это результат основной работы, watch API не повторял. Неизвестная мощность остаётся неизвестной; наличие гибрида не подтверждает сертифицированные30минкВт, полную двустороннюю синхронизацию или authenticated save acceptance.
+
+Единственный active deploy41209363609 exact dfaabde705030a1cd4c78c0afc6251379b276aa2: wait124560922427 SUCCESS21:17:09; prepare124561074347 IN_PROGRESS. Index/coverage/build/image SUCCESS metadata; prices IN_PROGRESS с21:35:28, switch/gates/public verifier PENDING. Новый редактор1669 ещё не объявлен установленным. Итоговый active журнал не прочитан; watch не создавал/не отменял/не дублировал запуски.
+
+Единственный fresh bounded health21:50–21:51 завершился curl0:ok=true,releaseSha797e9ec4f6182df991d30a6504ee9c39a51960d0,calculationVersion12f722ab3c7f8d872538347e35e7707b39d24997290565a95b792804a887d5f0. Это новый сохранённый ответ, не восстановление потерянного вывода21:07 и не отмена старого Proxy CONNECT timeout/первого UI отказа. Изменение постоянных данных и установка UI учитываются отдельно.
+
+Далее — итог существующего третьего deploy и новые primary UI/save результаты. Все исторические failures/ограничения/остатки сохраняются, включая exit139/500/502, Journey photos и отсутствие полной live-приёмки. PR1641/drafts, REG capacity и China unread log не тронуты. Только два документа append-only expected-parentCAS, обе истории сохранены, наблюдение включено.
