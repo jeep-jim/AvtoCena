@@ -144,3 +144,16 @@ html[data-theme="light"] .ac-ency-page input:not([type=checkbox]),html[data-them
 
 .ac-directory-rail button[aria-current=true]::after{content:"";position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:3px;background:#ff353d;pointer-events:none}
 .ac-directory-rail-letters button[aria-current=true]{color:#ff353d!important}
+
+/* Compact knowledge rows; green means parameters exist, not source certification. */
+.ac-model-has-parameters>.ac-model-list-row{background:rgba(16,185,129,.055)}
+.ac-model-has-parameters .ac-model-list-row strong::before{content:"✓ ";color:#10b981}
+.ac-ency-table .ac-ency-row-filled>td{background:rgba(16,185,129,.055)}
+.ac-ency-extra-fields{margin-top:12px}
+.ac-ency-extra-fields>summary{cursor:pointer;font-weight:600;padding:8px 0}
+@media(min-width:1101px){
+ .ac-model-list-row{min-height:58px;font-size:12px}
+ .ac-directory-with-rail .ac-model-list-row{padding:6px 10px}
+ .ac-directory-with-rail .ac-model-list-photo{height:40px;width:52px}
+ .ac-model-list-row small{font-size:11px;margin-top:2px}
+}

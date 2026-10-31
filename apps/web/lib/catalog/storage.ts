@@ -3,7 +3,7 @@ import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
 import {createHomePhaseTiming} from "./home-phase-timing";
 import {StableBudgetSelectionCache} from "./stable-budget-selection";
 import {AggregateBudgetIndexCache} from './aggregate-budget-index-cache';
-import {budgetSelectionBytes,resetBudgetRowSizes} from './budget-row-size';
+import {budgetSelectionBytes,budgetIndexBytes,resetBudgetRowSizes} from './budget-row-size';
 import {BudgetSortOrderCache} from './budget-sort-order-cache';
 import {budgetSourceRows,resetBudgetSourceIndexes} from './budget-source-index';
 import {inspectCompressedSelectors,publishCompressedSelectors,readCompressedSelector,publishSelectorMarket,MAX_PUBLISHED_SELECTOR_BYTES} from './budget-selector-publication';
@@ -15,7 +15,7 @@ import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {applyEncyclopediaCalculation,readCalculationIndex} from '../encyclopedia/calculation-index';
 import {buildCatalogColorIndex,withCatalogColorFilter,matchesCatalogColor} from './catalog-color-index';
 import {parseCatalogSort,compareCatalogTerms,compareSortNumbers,sortNumber} from './catalog-sort';
-import {matchesFilterSelection} from './filter-selections';
+import {matchesFilterSelection,compileFilterSelection} from './filter-selections';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {catalogBodyType} from './pickup-body';
 import {filterBudgetRows} from "./budget-selection-filter";
@@ -36,7 +36,7 @@ import {splitBudgetReplayIndex,type BudgetReplayChunk,budgetReplayOffer,buildBud
 import { getGreenCornerOffer } from "./green-corner";
 import { priceCardForCity } from "./card-city-delivery";
 import { protectedPhotoUrl } from "./photo-proxy-policy";
-import { matchesFuelFilter } from "./fuel-filter";
+import { matchesFuelFilter, compileFuelFilter } from "./fuel-filter";
 import { buildJapanPreviewInputIndex, japanPreviewInputPath, matchesJapanPreviewInput } from "./japan-preview-inputs";
 import {UnavailableReadCache} from "./unavailable-read-cache";
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
@@ -630,7 +630,7 @@ export function resetCatalogReadCachesForTests() {
   resetCatalogEditorialCache();
   resetSharedBudgetPriceCache();
   budgetEligibility.clear();stableBudgetSelections.clear();
-  budgetSelectionOrder=new WeakMap();compactSortCache=new WeakMap();compactSortOrders.clear();resetBudgetRowSizes();
+  compactSortCache=new WeakMap();compactSortOrders.clear();resetBudgetRowSizes();
   marketLandingCache.clear();
   editorialLandingCache.clear();
   editorialSummaryCache.clear();
@@ -2212,15 +2212,20 @@ async function readBudgetSelection(params:CatalogSearchParams){
   // Safety normalization never changes make. Apply editorial values first, then
   // reject unrelated makes before the expensive model/specification matcher.
 
+  const fuelMatches=compileFuelFilter(params.fuel);
+  const bodyMatches=compileFilterSelection(params.bodyType);
+  const transmissionMatches=compileFilterSelection(params.transmission);
+  const driveMatches=compileFilterSelection(params.drive);
+  const marketKey=params.market&&params.market!=='any'?cleanFacet(params.market).toLocaleLowerCase('ru-RU'):null;
   let candidates=await filterBudgetRows(sourceRows,editedRow,row=>
    (!wantedMakes || wantedMakes.has(cleanFacet(row[5].make).toLocaleLowerCase('ru-RU'))) &&
    ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
    eligible.has(row[5].id) && (!params.color || matchesCatalogColor({...row[5],market:row[0]},params.color)) &&
-   (!params.market || params.market==='any' || same(row[0],params.market))
-   && matchesFuelFilter(row[5].fuel,params.fuel)
-   && (!params.bodyType || matchesFilterSelection(catalogBodyType(row[5]),params.bodyType))
-   && matchesFilterSelection(row[5].transmission,params.transmission)
-   && matchesFilterSelection(row[5].drive,params.drive) &&
+   (!marketKey || cleanFacet(row[0]).toLocaleLowerCase('ru-RU')===marketKey)
+   && fuelMatches(row[5].fuel)
+   && (!params.bodyType || bodyMatches(catalogBodyType(row[5])))
+   && transmissionMatches(row[5].transmission)
+   && driveMatches(row[5].drive) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
   if(hasBudget && index.version===3){
@@ -2237,7 +2242,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    candidates=matchingBudgetIndex({...index,rows:liveRows},params,quotes);
   }
 
-  candidates=candidates.map(editedRow);
+  if(hasBudget)candidates=candidates.map(editedRow);
   // A newly edited seller price invalidates its stored ranking inputs.
   if(defaultBrandQuery && candidates.some(row=>matchingEditorial({id:row[5].id,market:row[0]})?.sellerPrice))return null;
   const specificationQuery=Boolean(params.engineFrom||params.engineTo||params.powerFrom||params.powerTo);
@@ -2274,7 +2279,6 @@ async function readBudgetSelection(params:CatalogSearchParams){
 // Their identity changes on refresh. Reuse only the order across pagination,
 // without extending the price freshness window or retaining old selections.
 type OrderedBudgetRow=CatalogSearchProjection & {block:number};
-let budgetSelectionOrder=new WeakMap<BudgetCountIndex['rows'],OrderedBudgetRow[]>();
 // Sort compact identities, not full card payloads. A direction toggle shares the
 // same price pass. Weak ownership cannot outlive the existing bounded selection cache.
 type CompactSelection={generationId:string;cardVersion:1|2|3;indexKey:number;rows:BudgetCountIndex['rows']};
@@ -2381,20 +2385,28 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
 async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:number){
  const selected=await readBudgetSelection(params);if(!selected)return null;
  if(params.sort && params.sort!=="updatedAt")return searchSortedBudgetSelection(selected,params,internalPageLimit);
- let rows=budgetSelectionOrder.get(selected.rows);
- if(!rows){
-  const useDisplayKeys=Boolean((params.make || params.model || canUseMarketLanding(params)) && !(params.budgetFrom || params.budgetTo));
-  rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata])=>({...metadata,market,
-   totalRub:!useDisplayKeys || metadata.displayOrderCalculated===undefined?totalRub:metadata.displayOrderCalculated?metadata.displayOrderPriceRub:null,
-   sellerPriceRub:useDisplayKeys?metadata.displayOrderPriceRub:undefined,
-   catalogPricingMode:!useDisplayKeys || metadata.displayOrderCalculated===undefined?(seller?"seller" as const:undefined):(metadata.displayOrderCalculated?undefined:"seller" as const),
-   calculationSnapshot:{deliveryPricingBasis:basis}})) as OrderedBudgetRow[];
+ const useDisplayKeys=Boolean((params.make || params.model || canUseMarketLanding(params)) && !(params.budgetFrom || params.budgetTo));
+ // Keep positions across short filter-cache expiry. The immutable selector,
+ // exact membership, editorial revision and policy date fence the order.
+ // Do not retain a second expanded object for every matching vehicle.
+ const buildOrder=async()=>{
+  const positions=new WeakMap<object,number>();
+  const rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata],position)=>{
+   const row={...metadata,market,
+    totalRub:!useDisplayKeys || metadata.displayOrderCalculated===undefined?totalRub:metadata.displayOrderCalculated?metadata.displayOrderPriceRub:null,
+    sellerPriceRub:useDisplayKeys?metadata.displayOrderPriceRub:undefined,
+    catalogPricingMode:!useDisplayKeys || metadata.displayOrderCalculated===undefined?(seller?"seller" as const:undefined):(metadata.displayOrderCalculated?undefined:"seller" as const),
+    calculationSnapshot:{deliveryPricingBasis:basis}} as OrderedBudgetRow;
+   positions.set(row,position);return row;
+  });
   sortCatalogSearchRows(rows,params);
-  budgetSelectionOrder.set(selected.rows,rows);
- }
+  return Uint32Array.from(rows,row=>positions.get(row)!);
+ };
+ const order=params.budgetFrom||params.budgetTo?await buildOrder():await compactSortOrders.get({generation:selected.generationId,index:selected.indexKey,revision:editorialRevision(),day:new Date(Date.now()+7*3600000).toISOString().slice(0,10),city:params.city||'',mode:`default:${params.market||'any'}:${useDisplayKeys}`,pricing:null},selected.rows,buildOrder);
+ if(!order)return null;
  const page=Math.max(1,Number(params.page||1));
  const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
- const visible=rows.slice((page-1)*pageSize,page*pageSize);
+ const visible=Array.from(order.slice((page-1)*pageSize,page*pageSize),position=>selected.rows[position][5]);
  const blocks=[...new Set(visible.map(row=>row.block))];
  const parts=await mapWithConcurrency(blocks,6,block=>budgetCardCache.get(`${selected.generationId}:v${selected.cardVersion}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v${selected.cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]})));
  if(parts.some(part=>part.generationId!==selected.generationId))return null;
@@ -2402,9 +2414,9 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  if(visible.some(row=>!byId.has(row.id)))return null;
  const visibleCards=visible.map(row=>byId.get(row.id)!);
  const cards=params.budgetFrom || params.budgetTo ? await currentSearchPrices(prepareCatalogProjectionRows(visibleCards),selected.generationId) : visibleCards;
- return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
+ return {generationId:selected.generationId,total:selected.rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
 }
-const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:14,maxBytes:256*1024*1024,ttlMs:3600_000,concurrency:2});
+const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:14,maxBytes:256*1024*1024,ttlMs:3600_000,concurrency:2,sizeOf:value=>jsonReadByteLength(value)??budgetIndexBytes(value)});
 const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const packedBudgetDirectoryCache=new DetailReadCache<PackedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const compressedBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});

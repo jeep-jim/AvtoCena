@@ -7,3 +7,10 @@ export function matchesFilterSelection(actual:unknown,selected:unknown):boolean{
  const key=(value:unknown)=>String(value??'').trim().toLocaleLowerCase('ru-RU');
  return values.some(value=>key(value)===key(actual));
 }
+/** Compile the request once, rather than allocating a Set for every vehicle. */
+export function compileFilterSelection(selected:unknown):(actual:unknown)=>boolean{
+ const values=filterSelections(selected).map(value=>value.trim().toLocaleLowerCase('ru-RU'));
+ if(!values.length)return ()=>true;
+ const allowed=new Set(values);
+ return actual=>allowed.has(String(actual??'').trim().toLocaleLowerCase('ru-RU'));
+}

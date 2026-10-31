@@ -15,6 +15,8 @@ try {
   const page=await browser.newPage({viewport:{width,height:800},isMobile:width<768,hasTouch:width<768,reducedMotion:'reduce'});
   await page.addInitScript(() => {
    window.__footerTouchListeners = new Map();
+   window.__footerScrollSamples=[];
+   window.addEventListener('scroll',()=>window.__footerScrollSamples.push(scrollY),{passive:true});
    const add = EventTarget.prototype.addEventListener, remove = EventTarget.prototype.removeEventListener;
    EventTarget.prototype.addEventListener = function(type, listener, options) {
     if (this === document && type === 'touchmove') window.__footerTouchListeners.set(listener, options?.passive === true);
@@ -48,8 +50,22 @@ try {
    await page.waitForTimeout(1300);
   };
   const stop=await boundary();
+  await page.evaluate(()=>scrollTo(0,0));
+  await client.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:190,y:650}]});
+  await page.waitForTimeout(100);
+  assert.ok(await page.evaluate(()=>scrollY)<3,'touching the page must not jump to pagination');
+  await client.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:190,y:610}]});
+  await page.waitForTimeout(200);
+  await client.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+  await page.waitForTimeout(400);
+  assert.ok(await page.evaluate(()=>scrollY)<stop-400,'ordinary swipe must not jump to pagination');
   await page.evaluate(y=>scrollTo(0,y),stop-300);
+  await page.evaluate(()=>window.__footerScrollSamples=[]);
   await swipe();
+  const samples=await page.evaluate(()=>window.__footerScrollSamples);
+  const directions=samples.slice(1).map((y,i)=>y-samples[i]).filter(d=>Math.abs(d)>2).map(Math.sign);
+  const reversals=directions.slice(1).filter((d,i)=>d!==directions[i]).length;
+  assert.ok(reversals<=1,`a single fling must not oscillate at pagination: ${JSON.stringify(samples)}`);
   const first=await page.evaluate(()=>scrollY);
   assert.ok(Math.abs(first-stop)<=3,`first fling must stop at pagination: ${width} ${first} / ${stop}`);
   assert.equal(await arrow.isVisible(),true,'arrow appears at stop');

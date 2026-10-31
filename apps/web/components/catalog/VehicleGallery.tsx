@@ -4,7 +4,7 @@ import {ajesImageUrl} from '@/lib/catalog/ajes-query';
 import {offerImages} from '@/lib/catalog/offer-images';
 import { PhotoBrowser } from "./PhotoBrowser";
 import type { FavoriteSnapshot } from "./FavoriteToggle";
-import { retryProtectedPhoto } from "./protected-photo-retry";
+import { retryProtectedPhoto, cancelProtectedPhotoRetry } from "./protected-photo-retry";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { AuctionSheetHelp } from "./AuctionSheetHelp";
@@ -27,7 +27,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
   const isSheet = auctionSheetUrls.includes(cleanImages[activeIndex]);
   const touchStartX = useRef<number | null>(null);
   const didSwipe = useRef(false);
-  const activeSideThumb = useRef<HTMLButtonElement | null>(null);
+  const galleryRoot = useRef<HTMLDivElement | null>(null);
   const mainImageButton = useRef<HTMLButtonElement | null>(null);
   const desktopThumbnailRail = useRef<HTMLDivElement | null>(null);
   const fullscreenRoot = useRef<HTMLDivElement | null>(null);
@@ -42,7 +42,22 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
   }, [images.join("|")]);
 
   useEffect(() => {
-    activeSideThumb.current?.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+    const image=mainImageButton.current?.querySelector('img');
+    return ()=>{if(image)cancelProtectedPhotoRetry(image);};
+  },[activeIndex,photoRequested]);
+
+  useEffect(() => {
+    // Move only the visible thumbnail rail. scrollIntoView also scrolls the
+    // document and used to pull the whole offer around on every photo change.
+    for (const rail of galleryRoot.current?.querySelectorAll<HTMLElement>('[data-gallery-thumbnail-rail]') || []) {
+      if (!rail.clientWidth || !rail.clientHeight) continue;
+      const active=rail.querySelector<HTMLElement>('button[aria-pressed="true"]');
+      if (!active) continue;
+      const box=rail.getBoundingClientRect(), thumb=active.getBoundingClientRect();
+      const dx=thumb.left<box.left?thumb.left-box.left:thumb.right>box.right?thumb.right-box.right:0;
+      const dy=thumb.top<box.top?thumb.top-box.top:thumb.bottom>box.bottom?thumb.bottom-box.bottom:0;
+      if(dx || dy)rail.scrollBy({left:dx,top:dy,behavior:'instant'});
+    }
   }, [activeIndex]);
 
   useEffect(() => {
@@ -160,7 +175,6 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
 
   const image = (
     <img onError={retryProtectedPhoto}
-      key={cleanImages[activeIndex]}
       src={photoRequested?(ajesImageUrl(cleanImages[activeIndex],'original')||cleanImages[activeIndex]):cleanImages[activeIndex]}
       alt={`${title}, фото ${activeIndex + 1}`}
       className={`block h-full w-full max-w-full select-none ${isSheet ? "object-contain" : "object-cover"}`}
@@ -174,7 +188,6 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
   const thumbButton = (thumbnail: string, index: number, mode: "side" | "mobile" | "desktop") => (
     <button
       key={`${mode}-${thumbnail}-${index}`}
-      ref={(mode === "side" || mode === "desktop") && index === activeIndex ? activeSideThumb : undefined}
       type="button"
       onClick={() => {setPhotoRequested(true);setActiveIndex(index);}}
       className={`relative w-full shrink-0 cursor-pointer overflow-hidden rounded-xl transition-opacity duration-200 ${
@@ -284,7 +297,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
 
   return (
     <>
-      <div className="min-w-0 max-w-full overflow-hidden">
+      <div ref={galleryRoot} className="min-w-0 max-w-full overflow-hidden">
         <div className={`min-w-0 ${cleanImages.length > 1 ? "md:grid md:grid-cols-[minmax(0,1fr)_104px] md:gap-3 xl:block" : ""}`}>
           <div className="relative min-w-0">
           <button
@@ -308,18 +321,18 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
           </div>
 
           {cleanImages.length > 1 ? (
-            <div className="ac-vehicle-side-thumbnails ac-hide-scrollbar hidden h-[520px] min-w-0 flex-col gap-2 overflow-y-auto py-1 pr-1 md:flex xl:hidden">
+            <div data-gallery-thumbnail-rail className="ac-vehicle-side-thumbnails ac-hide-scrollbar hidden h-[520px] min-w-0 flex-col gap-2 overflow-y-auto py-1 pr-1 md:flex xl:hidden">
               {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "side"))}
             </div>
           ) : null}
         </div>
 
         {cleanImages.length > 1 ? <>
-          <div className="ac-vehicle-thumbnails ac-hide-scrollbar -mr-4 mt-3 grid max-w-[calc(100%+1rem)] grid-flow-col auto-cols-[3.75rem] gap-2 overflow-x-auto p-1 pb-2 pr-4 sm:auto-cols-[4.5rem] md:hidden">
+          <div data-gallery-thumbnail-rail className="ac-vehicle-thumbnails ac-hide-scrollbar -mr-4 mt-3 grid max-w-[calc(100%+1rem)] grid-flow-col auto-cols-[3.75rem] gap-2 overflow-x-auto p-1 pb-2 pr-4 sm:auto-cols-[4.5rem] md:hidden">
             {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "mobile"))}
           </div>
           <div className="relative mt-3 hidden xl:block">
-            <div ref={desktopThumbnailRail} className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1">
+            <div data-gallery-thumbnail-rail ref={desktopThumbnailRail} className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1">
               {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "desktop"))}
             </div>
           </div>

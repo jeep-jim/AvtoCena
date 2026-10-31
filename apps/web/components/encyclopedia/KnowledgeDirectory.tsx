@@ -30,7 +30,8 @@ export function ModelWorkspace({model,canEdit,standalone=false}:{model:Summary;c
 function ModelRow({model,canEdit}:{model:Summary;canEdit:boolean}){
  const params=useSearchParams(),[open,setOpen]=useState(false);
  const specs=(params.get('year')?model.compact?.years[params.get('year')!]:model.compact?.all)||{};
- return <article className="ac-model-list-item">
+ const hasParameters=Object.values(specs).some(value=>value&&value!=='—');
+ return <article className={`ac-model-list-item${hasParameters?' ac-model-has-parameters':''}`}>
   <div className="ac-model-list-row">
    <div className="ac-model-list-photo"><EncyclopediaPhoto src={model.photo} alt={`${model.make} ${model.model}`}/></div>
    <div><strong>{model.make} {model.model}</strong><small>{model.years.length===1?model.years[0]:model.years.length?`${Math.min(...model.years)}–${Math.max(...model.years)}`:'Год не указан'}</small></div>
@@ -55,7 +56,7 @@ export function KnowledgeDirectory({models,canEdit,pagination}:{models:Summary[]
  const pageHref=(next:number)=>{const query=new URLSearchParams(params);query.set('page',String(next));return `/cars/autocatalog?${query}`;};
  const changePage=(next:number)=>{if(pagination){const query=new URLSearchParams(params);query.set("page",String(next));window.history.pushState(null,'',`/cars/autocatalog?${query}`);}else setPage(next);};
  return <section ref={list} className="ac-model-list" aria-label="Модели автомобилей">
-  <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span>Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span><span/></div>
+  <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span title="Зелёная строка с галочкой: параметры есть в базе">Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span><span/></div>
   {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map((model,index,visible)=><Fragment key={model.id}>{(index===0||visible[index-1].make!==model.make)&&<h2 className="ac-model-make-heading" data-ency-make={model.make}><BrandLogoVisual brand={model.make}/><span>{model.make}</span></h2>}<ModelRow model={model} canEdit={canEdit}/></Fragment>)}
   {!models.length&&<p>По выбранным параметрам моделей не найдено.</p>}
   <p className="ac-ency-muted">* Количество на {models.find(m=>m.directorySnapshot)?.directorySnapshot?.capturedAt?new Date(models.find(m=>m.directorySnapshot)!.directorySnapshot!.capturedAt).toLocaleDateString('ru-RU'):'дату сохранения'}. «До» — верхняя граница количества.</p>

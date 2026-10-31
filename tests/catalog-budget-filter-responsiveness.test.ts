@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {filterBudgetRows} from '../apps/web/lib/catalog/budget-selection-filter';
+import {compileFilterSelection,matchesFilterSelection} from '../apps/web/lib/catalog/filter-selections';
+import {compileFuelFilter,matchesFuelFilter} from '../apps/web/lib/catalog/fuel-filter';
+
+test('compiled categorical predicates preserve empty, multiselect, case and electrified semantics',()=>{
+ for(const selected of [undefined,'','petrol','electric|hybrid','electrified','Electrified',' | ','petrol|petrol',' ПОЛНЫЙ | fwd ']){
+  const fuel=compileFuelFilter(selected),category=compileFilterSelection(selected);
+  for(const actual of [undefined,null,'','petrol','PETROL','electric','hybrid','electrified','fwd',' полный ']){
+   assert.equal(fuel(actual),matchesFuelFilter(actual,selected),`fuel ${selected}/${actual}`);
+   assert.equal(category(actual),matchesFilterSelection(actual,selected),`category ${selected}/${actual}`);
+  }
+ }
+});
 
 test('large compact selections let an unrelated callback run before completion and retain edited order',async()=>{
  const rows:any[]=Array.from({length:1025},(_,i)=>['china',i,null,null,false,{id:String(i),year:2024,block:0}]);
