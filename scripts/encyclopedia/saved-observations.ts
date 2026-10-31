@@ -1,6 +1,6 @@
-import {ajesDetailValues,ajesSourceDetails} from '../catalog/ajes-source-details';
-import {namedElectrifiedPowertrainKind} from '../catalog/powertrain-safety';
-import {retainedAjesQueryEntries} from '../catalog/ajes-query-cache';
+import {ajesDetailValues,ajesSourceDetails} from '../../apps/web/lib/catalog/ajes-source-details';
+import {namedElectrifiedPowertrainKind} from '../../apps/web/lib/catalog/powertrain-safety';
+import {retainedAjesQueryEntries} from '../../apps/web/lib/catalog/ajes-query-cache';
 
 /** Read already viewed lots, including retained query collisions. Never call a supplier. */
 export function savedAjesLots(saved:any):any[]{

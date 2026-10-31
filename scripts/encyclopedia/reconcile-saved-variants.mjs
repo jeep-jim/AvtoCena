@@ -8,7 +8,7 @@ import {MANIFEST,ROOT,modelId,summarize} from '../../apps/web/lib/encyclopedia/r
 import {isEncyclopediaCar} from '../../apps/web/lib/encyclopedia/scope.ts';
 import {createSnapshotBuilder} from '../../apps/web/lib/encyclopedia/snapshot.ts';
 import {appendMissingObservations} from '../../apps/web/lib/encyclopedia/observations.ts';
-import {savedAjesLots,savedAjesObservation} from '../../apps/web/lib/encyclopedia/saved-observations.ts';
+import {savedAjesLots,savedAjesObservation} from './saved-observations.ts';
 
 // Explicit one-shot reconciliation, never a request-time or scheduled inventory scan.
 const apply=process.argv.includes('--apply'),store=getJsonStorage();

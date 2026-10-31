@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {savedAjesLots,savedAjesObservation} from '../apps/web/lib/encyclopedia/saved-observations';
+import {savedAjesLots,savedAjesObservation} from '../scripts/encyclopedia/saved-observations';
 import {createSnapshotBuilder} from '../apps/web/lib/encyclopedia/snapshot';
 import {appendMissingObservations} from '../apps/web/lib/encyclopedia/observations';
 const lot={id:'visited-vezel',table:'stats',make:'Honda',model:'Vezel',trim:'Hybrid Z',year:2016,chassisCode:'RU3',engineCc:1500,sourceFuel:'',sourcePower:'132',sourceDrive:'FF',sourceTransmission:'AT'};
