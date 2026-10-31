@@ -83,7 +83,7 @@ test("REG production retains bounded resources and warms the candidate before ac
   assert.match(deployRuntime, /--memory 8g --cpus 2 --pids-limit 512/);
   assert.match(deployRuntime, /docker update --cpus 6 --memory 10g/);
   assert.match(deployRuntime, /regcloud-performance-gate\.py/);
-  assert.match(deployRuntime, /for path in \['\/api\/health','\/','\/cars','\/'\]/);
+  assert.match(deployRuntime, /if markets else \['\/api\/health','\/','\/cars','\/'\]/);
   assert.match(deployRuntime, /releaseSha/);
 });
 
