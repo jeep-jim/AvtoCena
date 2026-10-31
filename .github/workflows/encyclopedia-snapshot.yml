@@ -30,5 +30,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Freeze currently saved vehicle specifications once
+      - name: Capture or reconcile saved vehicle specifications
         run: node --import tsx scripts/create-permanent-encyclopedia.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: encyclopedia-saved-variants-report
+          path: artifacts/encyclopedia-saved-variants.json
+          if-no-files-found: ignore

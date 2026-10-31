@@ -78,7 +78,7 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  const headerGeometry=()=>page.locator('.ac-public-header').evaluate(h=>[...h.querySelectorAll('button,a[href="/"],a[aria-label="Открыть каталог"]')].filter(e=>e.getBoundingClientRect().width).map(e=>{const b=e.getBoundingClientRect();return [Math.round(b.x),Math.round(b.y),Math.round(b.width),Math.round(b.height)];}));const editorialGeometry=await headerGeometry();await page.goto(`http://127.0.0.1:${server.address().port}/?catalog=1`);await page.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();assert.deepEqual(await headerGeometry(),editorialGeometry,'editorial header geometry matches the existing catalog exactly');await page.goto(`http://127.0.0.1:${server.address().port}/?edit=1`);
  await page.route('**/api/encyclopedia/**',route=>route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'fixture',updatedAt:'2026-10-31',variants:[{id:'v1',year:2024,fuel:'petrol',engineCc:1500,powerHp:150,drive:'fwd',bodyType:'sedan',transmission:'automatic',status:'review',markets:[],observedCount:0,sourceUrl:'https://example.com/specs',notes:'Сохранённое примечание'}]}}));
  await page.locator('.ac-model-list-item').first().getByRole('button',{name:/^Раскрыть /}).click();
- await page.locator('.ac-ency-row-edit').first().click();
+ await page.locator('.ac-ency-row-toggle').first().click();
  const editor=page.getByRole('form',{name:'Редактирование модификации'});
  await editor.getByLabel('Мощность, л.с.',{exact:true}).fill('155');
  assert.equal(await editor.getByLabel('Источник характеристик',{exact:true}).isVisible(),false);
@@ -86,7 +86,17 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  assert.equal(await editor.getByLabel('Источник характеристик',{exact:true}).inputValue(),'https://example.com/specs');
  assert.equal(await editor.getByRole('textbox',{name:/^Примечание/}).inputValue(),'Сохранённое примечание');
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'compact editor has no horizontal overflow');
+
+ assert.equal(await editor.getByLabel('Топливо',{exact:true}).inputValue(),'petrol');
+ await editor.getByLabel('Привод',{exact:true}).selectOption('awd');
+ let submitted;
+ await page.route('**/api/encyclopedia/model-0',async route=>{if(route.request().method()==='POST'){submitted=route.request().postDataJSON();return route.fulfill({json:{knowledgeUpdated:true}});}return route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'after',variants:[]}});});
  await page.screenshot({path:out+`/editor-${theme}-${width}.png`});
+ await editor.getByRole('button',{name:'Сохранить',exact:true}).click();
+ await page.getByRole('status').filter({hasText:'Изменения сохранены'}).waitFor();
+ assert.equal(submitted.variant.powerHp,'155');assert.equal(submitted.variant.drive,'awd');
+ assert.equal(submitted.variant.sourceUrl,'https://example.com/specs');assert.equal(submitted.variant.notes,'Сохранённое примечание');assert.equal(submitted.revision,'fixture');
+
  assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();}catch(error){await page.screenshot({path:out+`/failure-${theme}-${width}.png`});throw error;}
 }}finally{await browser.close();await new Promise(r=>server.close(r));}
 console.log(JSON.stringify({passed:true,models:4000,ssrBytes:Buffer.byteLength(markup),results}));

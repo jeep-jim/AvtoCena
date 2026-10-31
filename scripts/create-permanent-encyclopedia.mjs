@@ -9,6 +9,10 @@ import {ajesDetailValues,ajesSourceDetails} from '../apps/web/lib/catalog/ajes-s
 import {catalogVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission.ts';
 const storage=getJsonStorage();if(storage.driver!=='object')throw Error('durable_object_storage_required');
 const marker=JSON.parse(await fs.readFile('.github/market-runs/encyclopedia-snapshot.json','utf8'));
+if(marker.operation==='reconcile-saved-variants'){
+ if(marker.apply===true)process.argv.push('--apply');
+ await import('./encyclopedia/reconcile-saved-variants.mjs');process.exit(0);
+}
 if(marker.operation==='refresh-summary-labels'){
  const manifest=await storage.readJson(MANIFEST,null);if(!manifest)throw Error('encyclopedia_missing');const refreshed=new Map();
  for(let start=0;start<manifest.models.length;start+=8)await Promise.all(manifest.models.slice(start,start+8).map(async old=>{const record=await storage.readJson(old.key,null);if(!record||record.revision!==old.revision)throw Error('encyclopedia_revision_mismatch');refreshed.set(old.id,summarize(record,old.key));}));

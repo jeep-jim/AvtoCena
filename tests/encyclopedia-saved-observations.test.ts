@@ -1,0 +1,25 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {savedAjesLots,savedAjesObservation} from '../apps/web/lib/encyclopedia/saved-observations';
+import {createSnapshotBuilder} from '../apps/web/lib/encyclopedia/snapshot';
+import {appendMissingObservations} from '../apps/web/lib/encyclopedia/observations';
+const lot={id:'visited-vezel',table:'stats',make:'Honda',model:'Vezel',trim:'Hybrid Z',year:2016,chassisCode:'RU3',engineCc:1500,sourceFuel:'',sourcePower:'132',sourceDrive:'FF',sourceTransmission:'AT'};
+test('visited Japan Hybrid variant survives reconciliation with petrol variants and unknown powers',()=>{
+ const builder=createSnapshotBuilder('2026-10-31T12:00:00Z');builder.add(savedAjesObservation(lot));
+ const observed=[...builder.models.values()][0].variants;
+ assert.equal(observed[0].fuel,'hybrid');assert.equal(observed[0].powerHp,undefined);assert.equal(observed[0].power30MinKw,undefined);assert.equal(observed[0].icePowerKw,undefined);
+ const manual:any={id:'staff',year:2016,fuel:'petrol',engineCc:1498,powerHp:131,manualEditedAt:'saved',status:'verified',markets:[],observedCount:0};
+ const before=structuredClone(manual),merged=appendMissingObservations([manual],observed);
+ assert.equal(merged.length,2);assert.deepEqual(merged[0],before);
+ assert.deepEqual(appendMissingObservations(merged,observed),merged,'repeat adds no duplicates');
+});
+test('both detail and all retained query responses contribute saved variants, never count-only directories',()=>{
+ const response={items:[lot]};assert.deepEqual(savedAjesLots(response),[lot]);
+ assert.equal(savedAjesLots({hash:'a'.repeat(64),value:{models:[{make:'Honda',model:'Vezel'}]},previous:[{hash:'b'.repeat(64),value:response}]}).length,1);
+ assert.deepEqual(savedAjesLots({models:[lot]}),[]);
+});
+test('source fuel and unknown drive are not overwritten by guesses',()=>{
+ assert.equal(savedAjesObservation({...lot,sourceFuel:'P'}).fuel,'petrol');
+ assert.equal(savedAjesObservation({...lot,trim:'Z',sourceDrive:'2WD'}).drive,undefined);
+ assert.equal(savedAjesObservation({...lot,trim:'Z'}).fuel,undefined);
+});
