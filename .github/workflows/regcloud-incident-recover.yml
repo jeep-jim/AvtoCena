@@ -32,7 +32,7 @@ jobs:
           flock -w 30 9
           test -e /opt/avtocena/PRODUCTION_ACTIVE
           test "$(docker inspect --format '{{index .Config.Labels "avtocena.role"}}' avtocena-production)" = production
-          port=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}' avtocena-production)
+          port=$(docker inspect --format '{{(index (index .HostConfig.PortBindings "3000/tcp") 0).HostPort}}' avtocena-production)
           [[ "$port" = 3000 || "$port" = 3001 ]]
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
           docker logs --since 40m --tail 5000 avtocena-production 2>&1 | python3 -c 'import sys,json; rows=[];errors=0
