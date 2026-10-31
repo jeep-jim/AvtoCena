@@ -2,6 +2,15 @@ import importlib.util,json,pathlib,unittest,io,contextlib,sys
 from unittest.mock import patch
 spec=importlib.util.spec_from_file_location('gate','scripts/regcloud-performance-gate.py');gate=importlib.util.module_from_spec(spec);spec.loader.exec_module(gate)
 class GateTests(unittest.TestCase):
+ def test_lead_validation_posts_empty_body_and_rejects_crashes(self):
+  gate.validate('/api/leads','lead_validation',400,b'{"error":"personal_data_consent_required"}','x')
+  for status,body in [(500,b''),(200,b'{"ok":true}'),(403,b'{"error":"origin_forbidden"}'),(400,b'{"error":"other"}')]:
+   with self.assertRaises(AssertionError):gate.validate('/api/leads','lead_validation',status,body,'x')
+  response=gate.urllib.error.HTTPError('http://local/api/leads',400,'',{},io.BytesIO(b'{"error":"personal_data_consent_required"}'))
+  with patch.object(gate.urllib.request,'urlopen',side_effect=response) as open_request:
+   gate.sample('http://local','/api/leads','lead_validation','x')
+  req=open_request.call_args.args[0]
+  self.assertEqual(req.get_method(),'POST');self.assertEqual(req.data,b'{}')
  def test_rejects_partial_stream_and_false_success(self):
   for status,body in [(503,b'</html>'),(200,b'loading'),(200,b'$RX(error)</html>')]:
    with self.assertRaises(AssertionError):gate.validate('/','html',status,body,'x')
@@ -22,7 +31,7 @@ class GateTests(unittest.TestCase):
   self.assertEqual(gate.PHASE_DELAYS,[('warm',0),('after_ttl',35),('after_directory_ttl',305)])
   limits={p:budget for p,budget,k in gate.ROUTES}
   self.assertEqual(limits, {
-   '/api/health': .25, '/': 2, '/login': 1, '/autocalc': 1,
+   '/api/health': .25, '/api/leads': 1, '/': 2, '/login': 1, '/autocalc': 1,
    '/cars': 2, '/cars?market=china&make=Volkswagen&page=2': 2,
    '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA': 2,
    '/cars?market=europe&make=BMW&page=2': 2, '/cars?sort=totalRub': 2,
@@ -51,9 +60,9 @@ class GateTests(unittest.TestCase):
   self.assertEqual(sample.call_count,len(gate.ROUTES)*4)
   rows=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')]
   measured=[r for r in rows if r.get('performanceGate')!='summary']
-  self.assertEqual(len(measured),36)
+  self.assertEqual(len(measured),39)
   self.assertTrue(all(r['functionalPassed'] and not r['passed'] for r in measured))
-  self.assertEqual(rows[-1]['slowSamples'],36)
+  self.assertEqual(rows[-1]['slowSamples'],39)
   self.assertFalse(rows[-1]['performanceAccepted'])
   self.assertIn('::warning::',output.getvalue())
  def test_functional_failure_and_unavailable_response_still_abort(self):
