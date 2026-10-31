@@ -1,7 +1,7 @@
 {
-  "operation": "owner-stale-green-recovery-20261031",
-  "requestedAt": "2026-10-31T17:00:07.736Z",
+  "operation": "owner-stale-green-recovery-20261101",
+  "requestedAt": "2026-10-31T17:01:20.606Z",
   "market": "japan",
   "publish": true,
-  "reason": "Owner requested overdue Green Corner refresh. Last saved snapshot 9 October, scheduled collection failed green_missing_photos. PR1670 CI passed; preserve saved vehicle facts, full-scan/currency/collapse/CAS guards and archive previous snapshot. Data-only update; no app deployment."
+  "reason": "Continue authorized Green refresh after isolated offline test storage fix. Previous run stopped before collection or publication; all data guards retained."
 }
