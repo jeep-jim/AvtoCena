@@ -21,7 +21,7 @@ export function prepareGreenRefresh(source, previousItems, terms, rate, now) {
    reusedPhotos.push(String(row.id));
   }
   if(old && (old.sourceId!==fresh.sourceId || old.sourceOfferId!==fresh.sourceOfferId
-    || old.make!==fresh.make || old.model!==fresh.model || old.year!==fresh.year))throw Error('green_existing_identity_changed');
+    || old.make!==fresh.make || old.model!==fresh.model || old.year!==fresh.year))throw Error('green_existing_identity_changed:'+JSON.stringify({id:old.id,previous:{make:old.make,model:old.model,year:old.year},incoming:{make:fresh.make,model:fresh.model,year:fresh.year}}));
   // Routine refresh is price/availability only. Preserve technical facts,
   // provenance, images and manual values for existing identities.
   const offer=old?{...old,sourcePrice:fresh.sourcePrice,sourceCurrency:fresh.sourceCurrency,
