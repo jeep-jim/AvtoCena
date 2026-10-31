@@ -1247,3 +1247,18 @@ Existing China41223091606/publish124601674990 по-прежнему IN_PROGRESS 
 Единственный bounded watch health03:27 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это новый ответ, не восстановление отсутствующего payload03:03–03:04 и не объяснение Proxy CONNECT timeout. Полная приёмка, authenticated save и revision-linked заполненных карточек остаются открыты.
 
 Все истории/ограничения сохранены; PR1641/drafts/REG capacity не тронуты. Только два документа append-only expected-parentCAS; наблюдение включено. Далее — существующая China publication и новые primary результаты без runtime/deploy/repair/diagnostics/browser/provider/cleanup и повторов старых logs.
+
+
+## 01.11.2026, 05:09 Красноярск — Китай ещё в работе; фоновый перевод завершился HTTP403
+
+Fresh main9b530b70fd25ea0cc260f10ffe7c86734e2fab99 и Road/checklist прочитаны. AGENTS03336196, system-market-audit и связанные operations unchanged; новых primary результатов и PR после1673 нет. Единственный IN_PROGRESS — China41223091606/publish124601674990, Publish markets through calculation and retention guards с00:17:45; plan SUCCESS,collect SKIPPED. Итоговый журнал/manifest/числа не подтверждены; длительность не доказывает зависание или успех. App deploy отсутствует.
+
+Прочитан ранее незавершённый Catalog Russian descriptions41238834780/job124648226898:FINAL FAILURE03:40:36. В03:40:34.096 отчёт offers254397,unique34521,translated0,rejected0,characters0,pending34521,samples[],error translation_http_403,exit1. Это счётчики данного задания, не полный действующий inventory; причина403/права или конфигурация этим отчётом не установлены. Watch перевод/доступ к провайдеру не повторял и отказ не обходил. Следующий адресный разбор основной работы — сохранённый403 и конфигурация этого задания, без объявления переводов готовыми.
+
+Впервые прочитаны existing Direct41238579480/job124647440307 и41238868400/job124648936274:FINAL FAILURE03:28:32/03:35:27;green_feed_empty03:28:30.543/03:35:25.641,exit1. Поздние штатные попытки не исправили рекламный фид; это не доказательство rollback Green487 или потери inventory. Старые прочитанные журналы не повторялись.
+
+Впервые прочитан existing Regcloud shared41238936117/job124648576481:FINAL FAILURE03:27:48;03:27:45.684 exact runtime dfaabde705030a1cd4c78c0afc6251379b276aa2,generation gen_1793323223905_c6da006e,skipped=true,verified=false,reason publication_in_progress,error budget_preparation_deferred_active_publisher,exit1. Сохранено отдельно от legacy binding failure и результата Китая. Compact counts41238868438/job124648450673 SUCCESS03:27:32 и overview41238873768/job124648347420 SUCCESS03:27:51 — только metadata, журналы не прочитаны; текущая база/все probes этим не приняты.
+
+Единственный bounded watch health05:08 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Старый Proxy CONNECT timeout не объяснён; health не подтверждает завершение публикации, authenticated save или полный sync.
+
+OWNERFREEZE вне прямой задачи, все истории и остатки сохранены. PR1641/drafts/REG capacity/старый China log не тронуты. Watch не запускал/не отменял runtime/deploy/repair/collectors/diagnostics/browser/provider/cleanup. Только Road/checklist append-only expected-parentCAS; наблюдение включено. Далее — итог существующей China publication и новые primary результаты.
