@@ -9,6 +9,7 @@ import {isEncyclopediaCar} from '../../apps/web/lib/encyclopedia/scope.ts';
 import {createSnapshotBuilder} from '../../apps/web/lib/encyclopedia/snapshot.ts';
 import {appendMissingObservations} from '../../apps/web/lib/encyclopedia/observations.ts';
 import {savedAjesLots,savedAjesObservation} from './saved-observations.ts';
+import {savedPassengerModel} from './saved-model-metadata.ts';
 
 // Explicit one-shot reconciliation, never a request-time or scheduled inventory scan.
 const apply=process.argv.includes('--apply'),store=getJsonStorage();
@@ -20,7 +21,7 @@ if(projection.generationId!==generation||!projection.rows.length)throw Error('cu
 const builder=createSnapshotBuilder(at);
 const add=row=>{
  const match=resolver?.resolve(row),name={make:match?.brandId?match.canonicalMake:row.make,model:match?.modelId?match.canonicalModel:row.model};
- if(!name.make||!name.model||!isEncyclopediaCar(name)||catalogVehicleExcluded({...row,...name}))return;
+ if(!name.make||!name.model||!savedPassengerModel(name)||!isEncyclopediaCar(name)||catalogVehicleExcluded({...row,...name}))return;
  builder.add({...row,...name,chassisCode:row.chassisCode||row.operational?.chassisCode});
 };
 for(const row of projection.rows)add(row);
@@ -37,7 +38,7 @@ await Promise.all(Array.from({length:4},async()=>{for(;;){
  if(summary&&(!record||record.revision!==summary.revision))throw Error('encyclopedia_revision_mismatch');
  const variants=appendMissingObservations(record?.variants||[],observed.variants),added=variants.length-(record?.variants.length||0);checkedModels++;
  if(!added)continue;
- const next=record?{...record,variants,revision:randomUUID(),updatedAt:at,previousKey:summary.key,directorySnapshot:summary.directorySnapshot||record.directorySnapshot}: {...observed,variants,directorySnapshot:{capturedAt:at}};
+ const next=record?{...record,variants,revision:randomUUID(),updatedAt:at,previousKey:summary.key,directorySnapshot:summary.directorySnapshot||record.directorySnapshot}: {...observed,variants};
  const key=`${ROOT}/revisions/${next.id}/${next.revision}.json`;
  if(apply)await store.writeJson(key,next,{ifNoneMatch:'*'});
  const updated=summarize(next,key);if(summary)prepared.set(summary.id,updated);else additions.push(updated);

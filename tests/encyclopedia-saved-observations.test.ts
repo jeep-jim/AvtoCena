@@ -3,7 +3,16 @@ import assert from 'node:assert/strict';
 import {savedAjesLots,savedAjesObservation} from '../scripts/encyclopedia/saved-observations';
 import {createSnapshotBuilder} from '../apps/web/lib/encyclopedia/snapshot';
 import {appendMissingObservations} from '../apps/web/lib/encyclopedia/observations';
+import {repairSavedModelMetadata,savedPassengerModel} from '../scripts/encyclopedia/saved-model-metadata';
 const lot={id:'visited-vezel',table:'stats',make:'Honda',model:'Vezel',trim:'Hybrid Z',year:2016,chassisCode:'RU3',engineCc:1500,sourceFuel:'',sourcePower:'132',sourceDrive:'FF',sourceTransmission:'AT'};
+test('unknown inventory count has no captured snapshot; repair preserves facts and refuses manual changes',()=>{
+ const at='2026-10-31T13:53:42.224Z';const row:any={id:'new',make:'Honda',model:'New',revision:'r',updatedAt:at,variants:[{id:'v',status:'observed',year:2016}],directorySnapshot:{capturedAt:at}};
+ const fixed=repairSavedModelMetadata(row,at)!;assert.equal(fixed.record.directorySnapshot,undefined);assert.deepEqual(fixed.record.variants,row.variants);assert.equal(fixed.exclude,false);
+ assert.equal(repairSavedModelMetadata({...row,directorySnapshot:{capturedAt:at,count:0}},at),null);
+ assert.throws(()=>repairSavedModelMetadata({...row,editedBy:'owner'},at),/was_edited/);
+ assert.equal(repairSavedModelMetadata({...row,make:'KOMATSU'},at)!.exclude,true);
+ assert.equal(savedPassengerModel({make:'HITACHI'}),false);assert.equal(savedPassengerModel({make:'Honda'}),true);
+});
 test('visited Japan Hybrid variant survives reconciliation with petrol variants and unknown powers',()=>{
  const builder=createSnapshotBuilder('2026-10-31T12:00:00Z');builder.add(savedAjesObservation(lot));
  const observed=[...builder.models.values()][0].variants;
