@@ -6,6 +6,9 @@ import {withCatalogEditorial} from '../apps/web/lib/catalog/editorial';
 import {buildCatalogMarketLanding,buildCatalogOverviewFromProjections,prepareCatalogProjectionRows,readHomeCatalogSnapshot,searchOffers,searchOffersWithoutBudgetIndexForTests,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
 
 test('hidden market homepage and pagination retain exact display order after five minutes without full projections',async(t)=>{
+ // Cache-expiry coverage stays within one policy day; rollover has its own tests.
+ const clock=Date.parse('2026-10-31T12:00:00Z');
+ t.mock.timers.enable({apis:['Date'],now:clock});
  const generationId='hidden-market';
  const base:any={market:'europe',make:'BMW',model:'X3',year:2024,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'suv',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
  const input=Array.from({length:250},(_,i)=>({...base,id:`car-${i}`,make:i%2?'BMW':'Audi',model:i%2?'X3':'A4',powerHp:i%4?123:220,sourceGroup:i%2?'new':'used',updatedAt:`2026-10-${String(1+i%20).padStart(2,'0')}T00:00:00Z`,totalRub:1_000_000+i*100_000,publicVisibleRub:1_000_000+i*100_000}));
@@ -32,9 +35,9 @@ test('hidden market homepage and pagination retain exact display order after fiv
   allowProjection=true;
   const expectedFull=await searchOffersWithoutBudgetIndexForTests({market:'europe',pageSize:384},384);
   resetCatalogReadCachesForTests();allowProjection=false;
-  const realNow=Date.now;let elapsed=0;t.mock.method(Date,'now',()=>realNow()+elapsed);
+
   for(const expiry of [0,31_000,306_000]){
-   elapsed=expiry;reads.length=0;
+   t.mock.timers.setTime(clock+expiry);reads.length=0;
    const page=await searchOffers({market:'europe',page:2,pageSize:7});
    assert.equal(page.total,rows.length-1);assert.deepEqual(page.items.map(r=>r.id),expected.items.slice(7,14).map(r=>r.id));
    assert.ok(reads.filter(key=>key.includes('/budget-cards-')).length<=7);
@@ -44,7 +47,7 @@ test('hidden market homepage and pagination retain exact display order after fiv
    assert.deepEqual(tail.items.map(r=>r.id),expectedFull.items.slice((Math.ceil(page.total/7)-1)*7).map(r=>r.id),'seller/unknown tail keeps authoritative ordering');
    assert.equal(reads.some(key=>key.includes('/projection/')),false,'no full reads after short or five-minute expiry');
   }
-  t.mock.restoreAll();
+  t.mock.timers.setTime(clock);
   // Restoring the hidden car changes membership immediately; another hidden ID
   // keeps this query on the compact editorial path.
   editorial={revision:'hidden-2',entries:{'car-1':{id:'car-1',market:'europe',status:'visible'},'car-2':{id:'car-2',market:'europe',status:'hidden'}}};
@@ -63,5 +66,5 @@ test('hidden market homepage and pagination retain exact display order after fiv
    assert.ok(reads.some(key=>key.includes('/projection/')));
    delete editorial.entries['seller-affordable'];
   }
- }finally{t.mock.restoreAll();storage.readJsonWithMeta=oldRead;resetCatalogReadCachesForTests();}
+ }finally{t.mock.timers.reset();t.mock.restoreAll();storage.readJsonWithMeta=oldRead;resetCatalogReadCachesForTests();}
 });
