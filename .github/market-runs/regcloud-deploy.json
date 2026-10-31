@@ -108,9 +108,9 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-authorized PR1669 encyclopedia compact inline editing grid. Five final-head checks passed, including full regression/typecheck/build and desktop/mobile dark/light save fixture. Saved-variant reconciliation is independently running as workflow 41207575163; no catalog, calculation, provider, cache, schedule or release-guard logic changes.",
+  "reason": "Owner-authorized PR1669 encyclopedia inline grid; all final-head tests passed. Saved-data reconciliation 41207575163 succeeded: +31 models, +9199 variants, existing values preserved. Retry after prior run correctly stopped on astra_release_manifest_changed during concurrent reconciliation. Data manifest is now committed; retain every release/data guard.",
   "ideaReports": [],
-  "requestedAt": "2026-10-31T14:04:38.807Z",
+  "requestedAt": "2026-10-31T14:11:15.817Z",
   "preparationMarkets": [
     "china",
     "korea",
