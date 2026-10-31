@@ -1,0 +1,55 @@
+name: One-off navigation diagnosis
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/navigation-diagnosis.yml]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read current service timings and error categories
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
+          import subprocess,json,time,urllib.request,urllib.error,re
+          info=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
+          port=info['NetworkSettings']['Ports']['3000/tcp'][0]['HostPort']
+          print('RUNTIME',json.dumps({'started':info['State']['StartedAt'],'restarts':info['RestartCount'],'memoryLimit':info['HostConfig']['Memory'],'cpuLimit':info['HostConfig']['NanoCpus']}),flush=True)
+          paths=['/api/health','/','/cars/offer/special_dealer_topavto__f7579564-ecc5-4c74-bb0e-fdf824f598d5','/cars?city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA','/api/catalog/search?market=china&fuel=petrol&pageSize=6','/api/encyclopedia/1d2dfca4e510626f5daec218?year=2026']
+          for path in paths:
+              started=time.monotonic()
+              try:
+                  req=urllib.request.Request('http://127.0.0.1:'+port+path,headers={'Host':'avtocena.com','X-Forwarded-Proto':'https','X-Forwarded-For':'151.248.113.177'})
+                  with urllib.request.urlopen(req,timeout=35) as r:
+                      ttfb=time.monotonic()-started
+                      body=r.read()
+                      result={'path':path,'status':r.status,'ttfb':round(ttfb,3),'total':round(time.monotonic()-started,3),'bytes':len(body),'timing':r.headers.get('Server-Timing')}
+                      if path=='/api/health':result['health']=json.loads(body)
+                      if path.startswith('/cars') or path=='/':result.update(streamError=b'$RX(' in body,cards=body.count(b'/cars/offer/'))
+                      print('MEASURE',json.dumps(result),flush=True)
+              except Exception as e:print('MEASURE_ERROR',json.dumps({'path':path,'seconds':round(time.monotonic()-started,3),'kind':type(e).__name__,'status':getattr(e,'code',None)}),flush=True)
+          logs=subprocess.run(['docker','logs','--since','20m','--tail','3000','avtocena-production'],capture_output=True,text=True)
+          text=logs.stdout+'\n'+logs.stderr
+          # Print only error categories, storage namespaces and source locations.
+          categories=['catalog_page_unavailable','catalog_overview_read_failed','home_initial_catalog_failed','home_initial_pricing_failed','detail_cache_queue_timeout','detail_cache_queue_full','Invalid string length','JavaScript heap out of memory','TimeoutError','AbortError','RangeError','TypeError','Error:']
+          print('ERROR_COUNTS',json.dumps({x:text.count(x) for x in categories}),flush=True)
+          for line in text.splitlines():
+              if any(x in line for x in categories):
+                  safe=re.findall(r'(?:[A-Za-z_][A-Za-z_0-9]*(?:Error|_failed|_timeout|_unavailable|_full)|[A-Za-z_][A-Za-z_0-9]*:[0-9]+:[0-9]+|catalog/[A-Za-z0-9_./-]+|knowledge/[A-Za-z0-9_./-]+|Invalid string length)',line)
+                  if safe:print('ERROR_CATEGORY',json.dumps(safe[:8]),flush=True)
+          print(subprocess.check_output(['docker','stats','--no-stream','--format','memory={{.MemUsage}} cpu={{.CPUPerc}}','avtocena-production'],text=True),flush=True)
+          PY
