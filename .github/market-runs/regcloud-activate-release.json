@@ -1,4 +1,10 @@
 {
-  "release": "e23d9d096935481c4ecddf6a987c574c5c2bbbf9",
-  "reason": "Reaccept prepared CI-verified image after long-idle profile: unchanged 54 warm/35s/305s full-response gates; rollback retained"
+  "release": "addbacf7861b7e4b7a70f390f6c399fc4eb990b1",
+  "preparationMarkets": [
+    "korea"
+  ],
+  "preparedRun": 41162033658,
+  "previousRelease": "5e45cd9478a7d38a6c57adc7d81061e475055cf9",
+  "requestedAt": "2026-10-31T03:16:06.640Z",
+  "reason": "Resume verified Korea-only preparation using the existing image; PR1661 forwards the observed initiating SSH peer for nonempty live catalog gates. Preserve all functional checks and rollback."
 }
