@@ -2422,7 +2422,9 @@ async function readBudgetCountIndex(generationId:string,market?:string){
  }
  if(!market || market==='any'){
   const directory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,specificationSelectorPath('ready'),null)).catch(()=>null);
-  if(directory?.generationId===generationId && directory.encyclopediaDigest===(readCalculationIndex()?.digest||null) && Object.keys(directory.markets).length){
+  const manifest=await readManifest();
+  const required=MARKETS.filter(m=>Number(manifest.markets?.[m]?.count)>0);
+  if(directory?.generationId===generationId && directory.encyclopediaDigest===(readCalculationIndex()?.digest||null) && required.length && required.every(m=>directory.markets?.[m])){
    let pending=aggregateBudgetIndexes.get(directory);
    if(!pending){pending=(async()=>{
     const parts=await mapWithConcurrency(Object.keys(directory.markets),2,name=>readBudgetCountIndex(generationId,name));
@@ -2475,7 +2477,17 @@ export async function inspectBudgetMarketSelectors(){
  return result;
 }
 /** Append disposable selectors to the existing generation, never rewrite cards or manifest. */
-export async function backfillBudgetMarketSelectors(){
+export async function backfillBudgetMarketSelectors(markets?:CatalogMarket[]){
+ if(markets){
+  const selected=preparationMarkets(markets),manifest=await readManifest();
+  const directory=await readIndex<CompressedBudgetDirectory|null>(manifest.generationId,'budget-markets-v3/ready.json',null);
+  for(const market of selected){
+   if(manifest.markets?.[market]?.count===0)continue;
+   const part=directory?.generationId===manifest.generationId && await readCompressedSelector(directory,market,name=>readIndex(manifest.generationId,`budget-markets-v3/${name}.json`,null));
+   if(!part || part.generationId!==manifest.generationId || !part.sourceRows)throw Error('budget_market_partition_not_ready:'+market);
+  }
+  return directory;
+ }
  const inspected=await inspectBudgetMarketSelectors();
  if(inspected.valid)return inspected.directory!;
  const index=await readIndex<BudgetCountIndex|null>(inspected.generationId,'budget-count-v3.json',null);
@@ -2486,12 +2498,30 @@ export async function backfillBudgetMarketSelectors(){
  resetCatalogReadCachesForTests();
  return directory;
 }
+function preparationMarkets(markets:CatalogMarket[]){
+ if(!Array.isArray(markets)||!markets.length||markets.some(m=>!MARKETS.includes(m))||new Set(markets).size!==markets.length)throw Error('preparation_markets_invalid');
+ return markets;
+}
+/** Merge only completed selected partitions. Concurrent markets never erase each other. */
+async function mergeSpecificationReadiness(manifest:CatalogManifest,directory:CompressedBudgetDirectory){
+ const storage=getJsonStorage(),path=generationPath(manifest.generationId,`indexes/${specificationSelectorPath('ready')}`);
+ for(let attempt=0;attempt<4;attempt++){
+  const previous=await storage.readJsonWithMeta<CompressedBudgetDirectory|null>(path,null);
+  if(previous.found && (!previous.etag || previous.value?.version!==4 || previous.value.generationId!==manifest.generationId || previous.value.encyclopediaDigest!==directory.encyclopediaDigest))throw Error('budget_specification_readiness_invalid');
+  const merged={...directory,markets:{...previous.value?.markets,...directory.markets}};
+  if(Buffer.byteLength(JSON.stringify(merged))>MAX_PUBLISHED_SELECTOR_BYTES)throw Error('budget_selector_directory_too_large');
+  if((await storage.readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest)).generationId!==manifest.generationId)throw Error('budget_specification_publication_changed');
+  try{await storage.writeJson(path,merged,previous.found?{ifMatch:previous.etag}:{ifNoneMatch:'*'});return merged;}
+  catch(error){if(!(error instanceof StorageConflictError))throw error;}
+ }
+ throw Error('budget_specification_readiness_conflict');
+}
 /** Backfill compact specifications without changing inventory or older selectors. */
-export async function backfillBudgetSpecificationSelectors(){
+export async function backfillBudgetSpecificationSelectors(markets?:CatalogMarket[]){
  const manifest=await readManifest();
  const old=await readIndex<CompressedBudgetDirectory|null>(manifest.generationId,specificationSelectorPath('ready'),null);
  const directory:CompressedBudgetDirectory={version:4,generationId:manifest.generationId,markets:{},encyclopediaDigest:readCalculationIndex()?.digest||null};
- for(const market of MARKETS){
+ for(const market of markets?preparationMarkets(markets):MARKETS){
   if(manifest.markets?.[market]?.count===0)continue;
   const existing=old?.version===4&&await readCompressedSelector(old,market,name=>readIndex(manifest.generationId,specificationSelectorPath(name),null));
   if(old?.encyclopediaDigest===directory.encyclopediaDigest && existing?.specificationFilterVersion===1 && existing.bodyFilterVersion===1 && existing.displayOrderVersion===1){directory.markets[market]=old!.markets[market];continue;}
@@ -2512,13 +2542,14 @@ export async function backfillBudgetSpecificationSelectors(){
  const current=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
  if(current.generationId!==manifest.generationId)throw Error('budget_specification_publication_changed');
  if(Buffer.byteLength(JSON.stringify(directory))>MAX_PUBLISHED_SELECTOR_BYTES)throw Error('budget_selector_directory_too_large');
- await writeJsonAtomic(generationPath(manifest.generationId,`indexes/${specificationSelectorPath('ready')}`),directory);
- resetCatalogReadCachesForTests();return directory;
+ const ready=markets?await mergeSpecificationReadiness(manifest,directory):directory;
+ if(!markets)await writeJsonAtomic(generationPath(manifest.generationId,`indexes/${specificationSelectorPath('ready')}`),directory);
+ resetCatalogReadCachesForTests();return ready;
 }
 /** Background warmup shares the same dependency checks and exact calculator as requests. */
-export async function warmBudgetPriceCaches(){
+export async function warmBudgetPriceCaches(markets?:CatalogMarket[]){
  const manifest=await readManifest(),results=[];
- for(const market of MARKETS.filter(market=>market!=='japan')){
+ for(const market of (markets?preparationMarkets(markets):MARKETS).filter(market=>market!=='japan')){
   const index=await readBudgetCountIndex(manifest.generationId,market);
   if(!index || index.version!==3 || index.generationId!==manifest.generationId)continue;
   const start=performance.now(),rows=await currentBudgetReplay(index,market);

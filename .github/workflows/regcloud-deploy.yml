@@ -142,6 +142,15 @@ jobs:
           node-version: 24.22.1
           cache: npm
       - run: npm ci
+      - name: Read explicitly requested market scope
+        run: |
+          node --input-type=module <<'SCOPE'
+          import {appendFileSync} from 'node:fs';
+          import {markerMarkets} from './scripts/lib/release-market-scope.mjs';
+          const markets=markerMarkets('.github/market-runs/regcloud-deploy.json');
+          appendFileSync(process.env.GITHUB_ENV,`RELEASE_PREPARATION_MARKETS=${markets?.join(',')||''}\n`);
+          console.log('Preparation scope:',markets||'all markets');
+          SCOPE
       - name: Prepare exact price indexes before activating the release
         env:
           JSON_STORAGE_DRIVER: object
@@ -155,6 +164,8 @@ jobs:
           AVTOCENA_RELEASE_SHA: ${{ github.sha }}
         run: |
           node --import tsx --input-type=module <<'WAIT'
+          // Market-scoped derivatives do not change publication aliases or need its lease.
+          if(process.env.RELEASE_PREPARATION_MARKETS){console.log('Scoped preparation uses generation fences');process.exit(0);}
           const data=await import('./apps/web/lib/data.ts');
           const getJsonStorage=data.getJsonStorage||data.default?.getJsonStorage;
           if(typeof getJsonStorage!=='function')throw Error('storage_module_unavailable');
@@ -175,13 +186,18 @@ jobs:
           # Offline authoritative parity reads full market projections; keep a bounded
           # two-minute storage deadline here, without changing visitor request budgets.
           YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 npx tsx scripts/regcloud-prepare-prices.mjs
-          npx tsx scripts/prepare-catalog-colors.mjs
-          node --import tsx --input-type=module <<'CUTOVER'
-          const module=await import('./apps/web/lib/catalog/china-feed-cutover.ts');
-          await (module.applyChinaFeedCutover||module.default.applyChinaFeedCutover)();
-          console.log('China supplier switch applied');
-          CUTOVER
+          if test -z "$RELEASE_PREPARATION_MARKETS"; then
+            npx tsx scripts/prepare-catalog-colors.mjs
+          fi
+          # Supplier switching belongs to collection operations, never to an app release.
           CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
+      - name: Preserve individual market preparation results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-market-preparation
+          path: release-market-preparation.json
+          if-no-files-found: ignore
       - name: Deploy with rollback and resource measurements
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}

@@ -3,7 +3,7 @@ import {validateOverviewSourceShard} from './catalog-overview-source-validation.
 // Only derivatives under the captured generation may be changed. A publisher
 // can build another generation concurrently; no shared alias or lease is touched.
 export async function refreshGenerationPages({storage, markets, buildLanding, prepareRows, buildOverview,
-  landingPath, overviewPath, now = () => new Date(), skipReady = false, policyNow}) {
+  landingPath, overviewPath, now = () => new Date(), skipReady = false, policyNow, landingsOnly = false}) {
   const day = () => new Date(now().getTime() + 7 * 3600000).toISOString().slice(0, 10);
   const capturedDay = day();
   const policyDate = policyNow ? new Date(policyNow.getTime()+7*3600000).toISOString().slice(0,10) : capturedDay;
@@ -30,8 +30,8 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
     await check();
     await storage.writeJson(scoped(path), payload, previous.found ? {ifMatch: previous.etag} : {ifNoneMatch: '*'});
   };
-  const path = overviewPath(generationId);
-  const previousOverview = await readPrevious(path);
+  const path = landingsOnly ? null : overviewPath(generationId);
+  const previousOverview = landingsOnly ? {value:null} : await readPrevious(path);
   const previous = previousOverview.value;
   if (skipReady && previous?.generationId === generationId && previous.policyDate === policyDate
       && previous.dailyLandingsVersion === 1 && previous.facets?.generationId === generationId) {
@@ -55,6 +55,7 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
     counts[market] = count;
     results.push({market, sourceTotal: count, total: landing.total});
   }
+  if(landingsOnly){await check();return {generationId,policyDate,markets:results,generationScopedOnly:true,landingsOnly:true};}
   const overview = await buildOverview(generationId, rows);
   if (overview.generationId !== generationId || overview.facets?.generationId !== generationId
       || overview.policyDate !== policyDate) throw Error('catalog_pages_overview_invalid');

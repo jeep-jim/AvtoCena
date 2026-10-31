@@ -1,3 +1,5 @@
+import {releaseMarkets} from './lib/release-market-scope.mjs';
+const selectedMarkets=releaseMarkets(process.env.RELEASE_PREPARATION_MARKETS);
 import {refreshGenerationPages} from './lib/catalog-refresh-generation-pages.mjs';
 const {getJsonStorage} = await import('../apps/web/lib/data.ts');
 const {buildCatalogMarketLanding, prepareCatalogProjectionRowsForDate, buildCatalogOverviewFromProjections,
@@ -11,7 +13,7 @@ for(let offset=0;offset<3;offset++){
   const now=new Date(captured.getTime()+offset*86400000);
   const day=new Date(now.getTime()+7*3600000).toISOString().slice(0,10);
   const dated=path=>offset ? datedCatalogPagePath(path,day) : path;
-  console.log(JSON.stringify(await refreshGenerationPages({storage:getJsonStorage(),markets:PUBLIC_CATALOG_MARKETS,
+  console.log(JSON.stringify(await refreshGenerationPages({storage:getJsonStorage(),markets:selectedMarkets||PUBLIC_CATALOG_MARKETS,landingsOnly:!!selectedMarkets,
     buildLanding:(g,m,rows)=>buildCatalogMarketLanding(g,m,rows,{now}),
     prepareRows:rows=>prepareCatalogProjectionRowsForDate(rows,now),
     buildOverview:(g,rows)=>buildCatalogOverviewFromProjections(g,rows,{now}),
