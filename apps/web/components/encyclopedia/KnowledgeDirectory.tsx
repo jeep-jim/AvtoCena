@@ -40,7 +40,7 @@ function ModelRow({model,canEdit}:{model:Summary;canEdit:boolean}){
    <div data-label="Привод / КПП">{specs.drive||'—'}<small>{specs.transmission||'—'}</small></div>
    <div data-label="30 мин., кВт">{specs.power30MinKw||'—'}</div>
    <div data-label="В каталоге" title={model.directorySnapshot?`Снимок каталога: ${new Date(model.directorySnapshot.capturedAt).toLocaleString('ru-RU')}`:'Количество ещё не проверено'}>{model.directorySnapshot?.count===undefined?'—':`${model.directorySnapshot.upperBound?'до ':''}${model.directorySnapshot.count.toLocaleString('ru-RU')}`}</div>
-   <button className="ac-ency-button" aria-expanded={open} onClick={()=>setOpen(!open)}>{open?'Свернуть':canEdit?'Изменить':'Параметры'}</button>
+   <button type="button" className="ac-model-row-toggle" aria-label={`${open?'Свернуть':'Раскрыть'} ${model.make} ${model.model}`} aria-expanded={open} onClick={()=>setOpen(!open)}/>
   </div>
   {open&&<ModelWorkspace model={model} canEdit={canEdit}/>}
  </article>;
@@ -56,7 +56,7 @@ export function KnowledgeDirectory({models,canEdit,pagination}:{models:Summary[]
  const pageHref=(next:number)=>{const query=new URLSearchParams(params);query.set('page',String(next));return `/cars/autocatalog?${query}`;};
  const changePage=(next:number)=>{if(pagination){const query=new URLSearchParams(params);query.set("page",String(next));window.history.pushState(null,'',`/cars/autocatalog?${query}`);}else setPage(next);};
  return <section ref={list} className="ac-model-list" aria-label="Модели автомобилей">
-  <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span title="Зелёная строка с галочкой: параметры есть в базе">Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span><span/></div>
+  <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span title="Зелёная строка с галочкой: параметры есть в базе">Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span></div>
   {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map((model,index,visible)=><Fragment key={model.id}>{(index===0||visible[index-1].make!==model.make)&&<h2 className="ac-model-make-heading" data-ency-make={model.make}><BrandLogoVisual brand={model.make}/><span>{model.make}</span></h2>}<ModelRow model={model} canEdit={canEdit}/></Fragment>)}
   {!models.length&&<p>По выбранным параметрам моделей не найдено.</p>}
   <p className="ac-ency-muted">* Количество на {models.find(m=>m.directorySnapshot)?.directorySnapshot?.capturedAt?new Date(models.find(m=>m.directorySnapshot)!.directorySnapshot!.capturedAt).toLocaleDateString('ru-RU'):'дату сохранения'}. «До» — верхняя граница количества.</p>
