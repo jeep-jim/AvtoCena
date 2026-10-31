@@ -45,6 +45,8 @@ jobs:
       # CIF migration is already installed. Data-only refreshes must not wait
       # for their marker commit to become a new application release.
       - name: Verify safe Green Corner refresh
+        env:
+          JSON_STORAGE_DRIVER: local
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/green-refresh-snapshot.test.ts tests/green-corner.test.ts
       - if: steps.plan.outputs.run == 'true'
         run: node --import tsx scripts/catalog-refresh-green-corner.mjs
