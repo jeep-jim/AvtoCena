@@ -18902,3 +18902,14 @@ Primary новая браузерная проверка /cars/green подтв�
 Единственный bounded health00:54 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Прежний установленный PR1669 сохранён. Authenticated save, revision-linked заполненных карточек и полная приёмка всех целей остаются открыты; health не стирает500/exit139/502/Proxy CONNECT/первый UI отказ.
 
 Далее — итог существующей China publication и новые primary результаты, без новых запусков/repair/deploy/diagnostics/browser/provider/cleanup и повторов старых logs. PR1641/drafts и обе истории сохранены. Только Road/checklist append-only expected-parentCAS; наблюдение включено.
+
+
+## 01.11.2026, 01:29 Красноярск — публикация Китая остаётся в работе
+
+Fresh main cdd4eef0cb889060115e4112a8924a1f5b2e16ba не изменился после предыдущей записи; Road/checklist прочитаны заново. AGENTS03336196, новый system-market-audit и остальные operations не изменены. Новых primary результатов и PR после1673 нет; app deploy отсутствует.
+
+Единственный IN_PROGRESS — existing China41223091606/publish124601674990, шаг Publish markets through calculation and retention guards всё ещё выполняется с00:17:45. Plan SUCCESS,collect SKIPPED. Финальный журнал/manifest/число опубликованных машин пока не получены; длительность шага сама по себе не доказывает зависание, отказ или успешную публикацию. Повторное чтение старых журналов, новый запуск/отмена/диагностика не выполнялись.
+
+Один bounded health01:29 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это текущий ответ прежнего выпуска, не приёмка публикации Китая или всех пользовательских сценариев.
+
+Все исторические failures, primary атрибуции, Green487/семь конфликтов, Direct green_feed_empty и sharedbudget binding failure сохранены. OWNERFREEZE вне прямой задачи сохраняется; authenticated save/fullsync и прочие остатки открыты. PR1641/drafts, REG capacity и старый China log не тронуты. Только Road/checklist append-only expected-parentCAS; наблюдение включено, следующий шаг — итог существующей публикации и новые primary результаты.
