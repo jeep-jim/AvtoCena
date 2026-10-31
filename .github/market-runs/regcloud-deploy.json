@@ -108,9 +108,9 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-authorized PR1669 encyclopedia inline grid; all final-head tests passed. Saved-data reconciliation 41207575163 succeeded: +31 models, +9199 variants, existing values preserved. Retry after prior run correctly stopped on astra_release_manifest_changed during concurrent reconciliation. Data manifest is now committed; retain every release/data guard.",
+  "reason": "Owner-authorized encyclopedia grid PR1669 and completed saved-data reconciliation. Corrective offline metadata repair 41209245248 succeeded after compact_directory_invalid: unknown counts have no captured-count snapshot, 2 newly imported machinery entries excluded with archives preserved. Existing vehicle facts unchanged. Four focused repair tests pass; UI remains the five-check-tested bb797bb7 version. Retain every release/data guard.",
   "ideaReports": [],
-  "requestedAt": "2026-10-31T14:11:15.817Z",
+  "requestedAt": "2026-10-31T14:16:25.903Z",
   "preparationMarkets": [
     "china",
     "korea",
