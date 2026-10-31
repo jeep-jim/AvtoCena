@@ -45,9 +45,9 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  const initialElements=await page.locator('*').count();assert.ok(initialElements<1800);
  assert.equal(await page.locator('a[href*="/cars/offer/"]').count(),0);
  assert.equal(await page.locator('a[href*="/cars/autocatalog/"]').count(),0);
- await rows.first().getByRole('button',{name:'Параметры',exact:true}).click();
+ await rows.first().getByRole('button',{name:/^Раскрыть /}).click();
  await rows.first().locator('.ac-ency-model-editor').waitFor();assert.equal(reads,1);
- await rows.nth(1).getByRole('button',{name:'Параметры',exact:true}).click();
+ await rows.nth(1).getByRole('button',{name:/^Раскрыть /}).click();
  await rows.nth(1).locator('.ac-ency-model-editor').waitFor();assert.equal(reads,2);
  assert.equal(await rows.first().locator('.ac-ency-model-editor').count(),1,'opening another model preserves the first workspace');
  await page.getByRole('link',{name:'Следующая страница',exact:true}).click();assert.equal(await rows.count(),40);assert.equal(reads,2,'pagination does not fetch model records');assert.ok((await rows.first().textContent()).includes('Brand 2 Model 0'),'next page actually changes model rows');
